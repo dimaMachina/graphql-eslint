@@ -1,5 +1,6 @@
 import { GraphQLESlintRuleContext } from "./rule";
-import { GraphQLSchema } from 'graphql';
+import { Kind, GraphQLSchema } from 'graphql';
+import { GraphQLESTree } from "./estree-ast"; 
 
 export function requireGraphQLSchemaFromContext(
   context: GraphQLESlintRuleContext
@@ -13,4 +14,45 @@ export function requireGraphQLSchemaFromContext(
   }
 
   return context.parserServices.schema;
+}
+
+export default function keyValMap<T, V>(
+  list: ReadonlyArray<T>,
+  keyFn: (item: T) => string,
+  valFn: (item: T) => V,
+): Record<string, V> {
+  return list.reduce((map, item) => {
+    map[keyFn(item)] = valFn(item);
+    return map;
+  }, Object.create(null));
+}
+
+export function valueFromNode(
+  valueNode: GraphQLESTree.ValueNode,
+  variables?: Record<string, any>,
+): any {
+  switch (valueNode.type) {
+    case Kind.NULL:
+      return null;
+    case Kind.INT:
+      return parseInt(valueNode.value, 10);
+    case Kind.FLOAT:
+      return parseFloat(valueNode.value);
+    case Kind.STRING:
+    case Kind.ENUM:
+    case Kind.BOOLEAN:
+      return valueNode.value;
+    case Kind.LIST:
+      return valueNode.values.map((node) =>
+        valueFromNode(node, variables),
+      );
+    case Kind.OBJECT:
+      return keyValMap(
+        valueNode.fields,
+        (field) => field.name.value,
+        (field) => valueFromNode(field.value, variables),
+      );
+    case Kind.VARIABLE:
+      return variables?.[valueNode.name.value];
+  }
 }
