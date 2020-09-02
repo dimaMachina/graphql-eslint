@@ -1,0 +1,12 @@
+{
+  "parser": "@graphql-eslint/parser",
+  "parserOptions": {
+    "schemaPath": "./**/schema.graphql"
+  },
+  "plugins": ["@graphql-eslint"],
+  "rules": {
+    "@graphql-eslint/validate-against-schema": "error",
+    "@graphql-eslint/no-anonymous-operations": "error",
+    "@graphql-eslint/no-operation-name-suffix": "error"
+  }
+}

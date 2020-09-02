@@ -1,0 +1,45 @@
+{
+  "name": "@graphql-eslint/parser",
+  "version": "0.0.1",
+  "repository": "https://github.com/dotansimha/graphql-eslint",
+  "author": "Dotan Simha <dotansimha@gmail.com>",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  },
+  "scripts": {
+    "test": "jest",
+    "prepack": "bob prepack"
+  },
+  "dependencies": {
+    "@graphql-eslint/types": "0.0.1",
+    "@graphql-tools/load": "~6.0.0",
+    "@graphql-tools/graphql-file-loader": "~6.0.0",
+    "@graphql-tools/json-file-loader": "~6.0.0",
+    "@graphql-tools/url-loader": "~6.0.0",
+    "graphql-config": "^3.0.0"
+  },
+  "devDependencies": {
+    "@graphql-tools/load": "6.2.0",
+    "@graphql-tools/graphql-file-loader": "6.2.0",
+    "@graphql-tools/json-file-loader": "6.2.0",
+    "@graphql-tools/url-loader": "6.2.0",
+    "@types/eslint": "7.2.2",
+    "bob-the-bundler": "1.1.0",
+    "graphql": "15.3.0",
+    "typescript": "4.0.2"
+  },
+  "peerDependencies": {
+    "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
+  },
+  "buildOptions": {
+    "input": "./src/index.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
