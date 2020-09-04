@@ -1,4 +1,4 @@
 type Query {
-  // eslint-disable-next-line @graphql-eslint/require-description
+  # eslint-disable-next-line @graphql-eslint/require-description
   hello: String
 }
