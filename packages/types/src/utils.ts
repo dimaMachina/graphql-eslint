@@ -1,7 +1,8 @@
 import { GraphQLESlintRuleContext } from "./rule";
-import { Kind, GraphQLSchema, Location, ValueNode, StringValueNode, ASTNode, IntValueNode, FloatValueNode, BooleanValueNode, ListValueNode, ObjectValueNode, VariableNode } from 'graphql';
+import { Kind, GraphQLSchema, Location, ValueNode, StringValueNode, ASTNode, IntValueNode, FloatValueNode, BooleanValueNode, ListValueNode, ObjectValueNode, VariableNode, TokenKind, Token } from 'graphql';
 import { SourceLocation, Comment } from "estree";
 import { GraphQLESTreeNode } from './estree-ast';
+import { dedentBlockStringValue } from 'graphql/language/blockString';
 
 export function requireGraphQLSchemaFromContext(
   context: GraphQLESlintRuleContext
@@ -60,6 +61,42 @@ export function valueFromNode(
 
 export function convertRange(gqlLocation: Location): [number, number] {
   return [gqlLocation.start, gqlLocation.end];
+}
+
+export function extractCommentsFromAst(node: ASTNode): Comment[] {
+  const loc = node.loc;
+
+  if (!loc) {
+    return [];
+  }
+
+  const comments: Comment[] = [];
+  let token = loc.startToken;
+
+  while (token !== null) {
+    if (token.kind === TokenKind.COMMENT) {
+      const value = String(token.value);
+      comments.push({
+        type: "Block",
+        value: ' ' + value + ' ',
+        loc: {
+          start: {
+            line: token.line,
+            column: token.column,
+          },
+          end: {
+            line: token.line,
+            column: token.column,
+          }
+        },
+        range: [token.start, token.end],
+      });
+    }
+
+    token = token.next;
+  }
+
+  return comments;
 }
 
 export function convertLocation(gqlLocation: Location): SourceLocation {

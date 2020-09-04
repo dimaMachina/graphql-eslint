@@ -22,8 +22,7 @@ type RequireDescriptionRuleConfig = { on: typeof DESCRIBABLE_NODES };
 
 function verifyRule(
   context: GraphQLESlintRuleContext<RequireDescriptionRuleConfig>,
-  node: {
-    kind: string;
+  node: GraphQLESTreeNode<ASTNode> & {
     readonly description?: GraphQLESTreeNode<StringValueNode>;
   }
 ) {
@@ -34,7 +33,16 @@ function verifyRule(
       node.description.value.trim().length === 0
     ) {
       context.report({
-        node: node as GraphQLESTreeNode<ASTNode>,
+        loc: {
+          start: {
+            line: node.loc.start.line,
+            column: node.loc.start.column - 1,
+          },
+          end: {
+            line: node.loc.end.line,
+            column: node.loc.end.column - 1,
+          }
+        },
         messageId: REQUIRE_DESCRIPTION_ERROR,
         data: {
           nodeType: node.kind,

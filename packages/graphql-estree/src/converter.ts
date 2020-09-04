@@ -1,4 +1,4 @@
-import { convertDescription, GraphQLESTreeNode, SafeGraphQLType, convertLocation, convertRange } from "@graphql-eslint/types";
+import { extractCommentsFromAst, convertDescription, GraphQLESTreeNode, SafeGraphQLType, convertLocation, convertRange } from "@graphql-eslint/types";
 import {
   ASTNode,
   TypeNode,
@@ -6,13 +6,20 @@ import {
   visit,
   visitWithTypeInfo,
 } from "graphql";
+import { Comment } from "estree";
 
 export function convertToESTree<T extends ASTNode>(
   node: T,
   typeInfo?: TypeInfo
-): GraphQLESTreeNode<T> {
+): { rootTree: GraphQLESTreeNode<T>, comments: Comment[] } {
+  const comments: Comment[] = extractCommentsFromAst(node);
+  console.log(comments);
   const visitor = { leave: convertNode(typeInfo) };
-  return visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor);
+  
+  return {
+    rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor),
+    comments,
+  };
 }
 
 function hasTypeField<T extends ASTNode>(

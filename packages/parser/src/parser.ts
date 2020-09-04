@@ -73,21 +73,20 @@ export function parseForESLint(
     const graphqlAst = parseGraphQLSDL(config.filePath || '', code, {
       ...config,
       noLocation: false,
-      commentDescriptions: true,
     });
 
-    const estreeAst = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);
+    const { rootTree, comments } = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);
 
     return {
       services: parserServices,
       parserServices,
       ast: {
         type: "Program",
-        body: [estreeAst as any],
+        body: [rootTree as any],
         sourceType: "script",
-        comments: [],
-        loc: estreeAst.loc,
-        range: estreeAst.range,
+        comments,
+        loc: rootTree.loc,
+        range: rootTree.range,
         tokens: [],
       },
     };
