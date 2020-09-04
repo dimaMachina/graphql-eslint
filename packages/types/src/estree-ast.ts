@@ -8,12 +8,23 @@ export type SafeGraphQLType<T extends ASTNode> = Omit<
   "loc"
 >;
 
-export type SingleESTreeNode<T extends any> = T extends ASTNode ? SafeGraphQLType<T> &
-  Pick<BaseNode, "leadingComments" | "trailingComments" | "loc" | "range"> & {
-    type: T["kind"];
-    gqlLocation: Location;
-  } : T;
+export type SingleESTreeNode<T extends any> = T extends ASTNode
+  ? SafeGraphQLType<T> &
+      Pick<
+        BaseNode,
+        "leadingComments" | "trailingComments" | "loc" | "range"
+      > & {
+        type: T["kind"];
+        gqlLocation: Location;
+      }
+  : T;
 
-export type GraphQLESTreeNode<T extends any> = {rawNode: T; } & {
-  [K in keyof SingleESTreeNode<T>]: SingleESTreeNode<T>[K] extends ASTNode ? GraphQLESTreeNode<SingleESTreeNode<T>[K]> : SingleESTreeNode<T>[K];
+export type GraphQLESTreeNode<T extends any> = { rawNode: T } & {
+  [K in keyof SingleESTreeNode<T>]: SingleESTreeNode<T>[K] extends ASTNode
+    ? GraphQLESTreeNode<SingleESTreeNode<T>[K]>
+    : SingleESTreeNode<T>[K] extends ReadonlyArray<infer Nested>
+    ? Nested extends ASTNode
+      ? ReadonlyArray<GraphQLESTreeNode<Nested>>
+      : SingleESTreeNode<T>[K]
+    : SingleESTreeNode<T>[K];
 };

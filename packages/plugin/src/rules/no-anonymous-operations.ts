@@ -5,7 +5,7 @@ const NO_ANONYMOUS_OPERATIONS = 'NO_ANONYMOUS_OPERATIONS';
 const rule: GraphQLESLintRule = {
   meta: {
     messages: {
-      NO_ANONYMOUS_OPERATIONS: `Anonymous GraphQL operations are forbidden. Please make sure to name your {{ operation }}!`
+      [NO_ANONYMOUS_OPERATIONS]: `Anonymous GraphQL operations are forbidden. Please make sure to name your {{ operation }}!`
     }
   },
   create(context) {

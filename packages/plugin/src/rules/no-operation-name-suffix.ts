@@ -24,7 +24,7 @@ const rule: GraphQLESLintRule = {
   meta: {
     fixable: "code",
     messages: {
-      NO_OPERATION_NAME_SUFFIX: `Unnecessary "{{ invalidSuffix }}" suffix in your operation name!`
+      [NO_OPERATION_NAME_SUFFIX]: `Unnecessary "{{ invalidSuffix }}" suffix in your operation name!`
     }
   },
   create(context) {

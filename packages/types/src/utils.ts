@@ -1,6 +1,7 @@
 import { GraphQLESlintRuleContext } from "./rule";
-import { Kind, GraphQLSchema, Location, ValueNode, StringValueNode, ASTNode } from 'graphql';
+import { Kind, GraphQLSchema, Location, ValueNode, StringValueNode, ASTNode, IntValueNode, FloatValueNode, BooleanValueNode, ListValueNode, ObjectValueNode, VariableNode } from 'graphql';
 import { SourceLocation, Comment } from "estree";
+import { GraphQLESTreeNode } from './estree-ast';
 
 export function requireGraphQLSchemaFromContext(
   context: GraphQLESlintRuleContext
@@ -28,32 +29,32 @@ export default function keyValMap<T, V>(
 }
 
 export function valueFromNode(
-  valueNode: ValueNode,
+  valueNode: GraphQLESTreeNode<ValueNode>,
   variables?: Record<string, any>,
 ): any {
-  switch (valueNode.kind) {
+  switch (valueNode.type) {
     case Kind.NULL:
       return null;
     case Kind.INT:
-      return parseInt(valueNode.value, 10);
+      return parseInt((valueNode as GraphQLESTreeNode<IntValueNode>).value, 10);
     case Kind.FLOAT:
-      return parseFloat(valueNode.value);
+      return parseFloat((valueNode as GraphQLESTreeNode<FloatValueNode>).value);
     case Kind.STRING:
     case Kind.ENUM:
     case Kind.BOOLEAN:
-      return valueNode.value;
+      return (valueNode as GraphQLESTreeNode<BooleanValueNode>).value;
     case Kind.LIST:
-      return valueNode.values.map((node) =>
+      return ((valueNode as GraphQLESTreeNode<ListValueNode>).values as any).map((node) =>
         valueFromNode(node, variables),
       );
     case Kind.OBJECT:
       return keyValMap(
-        valueNode.fields,
+        (valueNode as GraphQLESTreeNode<ObjectValueNode>).fields,
         (field) => field.name.value,
         (field) => valueFromNode(field.value, variables),
       );
     case Kind.VARIABLE:
-      return variables?.[valueNode.name.value];
+      return variables?.[(valueNode as GraphQLESTreeNode<VariableNode>).name.value];
   }
 }
 
