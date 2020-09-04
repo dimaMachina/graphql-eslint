@@ -1,7 +1,9 @@
-import { parse } from "@graphql-eslint/graphql-estree";
+import { convertToESTree } from "@graphql-eslint/graphql-estree";
+import { parseGraphQLSDL } from "@graphql-tools/utils";
 import {
   GraphQLError,
   GraphQLSchema,
+  TypeInfo,
 } from "graphql";
 import { loadConfigSync, GraphQLProjectConfig } from "graphql-config";
 import { loadSchemaSync } from "@graphql-tools/load";
@@ -24,11 +26,6 @@ export function parseForESLint(
       ...DEFAULT_CONFIG,
       ...options,
     };
-
-    const estreeAst = parse(code, {
-      ...config,
-      noLocation: false,
-    });
 
     let schema: GraphQLSchema = null;
     let configProject: GraphQLProjectConfig = null;
@@ -53,6 +50,7 @@ export function parseForESLint(
       try {
         schema = loadSchemaSync(config.schemaPath, {
           ...config,
+          assumeValidSDL: true,
           loaders: [
             new GraphQLFileLoader(),
             new JsonFileLoader(),
@@ -71,6 +69,14 @@ export function parseForESLint(
       hasTypeInfo: schema !== null,
       schema,
     };
+
+    const graphqlAst = parseGraphQLSDL(config.filePath || '', code, {
+      ...config,
+      noLocation: false,
+      commentDescriptions: true,
+    });
+
+    const estreeAst = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);
 
     return {
       services: parserServices,
