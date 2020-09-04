@@ -14,8 +14,14 @@ const rule: GraphQLESLintRule = {
         if (node && (!node.name || node.name.value === '')) {
           context.report({
             loc: {
-              line: node.loc.start.line,
-              column: node.loc.start.column + node.operation.length + 1
+              start: {
+                column: node.loc.start.column - 1,
+                line: node.loc.start.line,
+              },
+              end: {
+                column: node.loc.start.column + node.operation.length,
+                line: node.loc.start.line,
+              }
             },
             data: {
               operation: node.operation,

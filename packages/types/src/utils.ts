@@ -1,6 +1,6 @@
 import { GraphQLESlintRuleContext } from "./rule";
-import { Kind, GraphQLSchema } from 'graphql';
-import { GraphQLESTree } from "./estree-ast"; 
+import { Kind, GraphQLSchema, Location, ValueNode, StringValueNode, ASTNode } from 'graphql';
+import { SourceLocation, Comment } from "estree";
 
 export function requireGraphQLSchemaFromContext(
   context: GraphQLESlintRuleContext
@@ -28,10 +28,10 @@ export default function keyValMap<T, V>(
 }
 
 export function valueFromNode(
-  valueNode: GraphQLESTree.ValueNode,
+  valueNode: ValueNode,
   variables?: Record<string, any>,
 ): any {
-  switch (valueNode.type) {
+  switch (valueNode.kind) {
     case Kind.NULL:
       return null;
     case Kind.INT:
@@ -55,4 +55,41 @@ export function valueFromNode(
     case Kind.VARIABLE:
       return variables?.[valueNode.name.value];
   }
+}
+
+export function convertRange(gqlLocation: Location): [number, number] {
+  return [gqlLocation.start, gqlLocation.end];
+}
+
+export function convertLocation(gqlLocation: Location): SourceLocation {
+  return {
+    start: {
+      column: gqlLocation.startToken.column,
+      line: gqlLocation.startToken.line,
+    },
+    end: {
+      column: gqlLocation.endToken.column,
+      line: gqlLocation.endToken.line,
+    },
+    source: gqlLocation.source.body,
+  };
+}
+
+export function isNodeWithDescription<T extends ASTNode>(
+  obj: T
+): obj is T & { readonly description?: StringValueNode } {
+  return obj && (obj as any).description;
+}
+
+export function convertDescription<T extends ASTNode>(node: T): Comment[] {
+  if (isNodeWithDescription(node)) {
+    return [
+      {
+        type: node.description.block ? "Block" : "Line",
+        value: node.description.value,
+      },
+    ];
+  }
+
+  return [];
 }

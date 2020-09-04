@@ -1,8 +1,9 @@
-import { GraphQLESLintRule, GraphQLESTree, GraphQLESlintRuleContext } from '@graphql-eslint/types';
+import { GraphQLESLintRule, GraphQLESlintRuleContext, GraphQLESTreeNode } from '@graphql-eslint/types';
+import { OperationDefinitionNode, FragmentDefinitionNode } from "graphql";
 
 const NO_OPERATION_NAME_SUFFIX = 'NO_OPERATION_NAME_SUFFIX';
 
-function verifyRule(context: GraphQLESlintRuleContext, node: GraphQLESTree.OperationDefinitionNode | GraphQLESTree.FragmentDefinitionNode) {
+function verifyRule(context: GraphQLESlintRuleContext, node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>) {
   if (node && node.name && node.name.value !== '') {
     const invalidSuffix = (node.type === 'OperationDefinition' ? node.operation : 'fragment').toLowerCase();
 

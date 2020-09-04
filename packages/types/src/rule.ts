@@ -1,11 +1,12 @@
 import { Rule, AST } from "eslint";
-import { GraphQLESTree } from "./estree-ast";
 import { ParserServices } from "./parser-types";
+import { GraphQLESTreeNode } from "./estree-ast";
+import { ASTNode, ASTKindToNode } from "graphql";
 
 export type GraphQLESlintRuleContext = Omit<Rule.RuleContext, "parserServices" | "report"> & {
   report(
     descriptor: Rule.ReportDescriptorMessage &
-      Rule.ReportDescriptorOptions & ({ node: GraphQLESTree.ASTNode } | { loc: AST.SourceLocation | { line: number; column: number } })
+      Rule.ReportDescriptorOptions & ({ node: GraphQLESTreeNode<ASTNode> } | { loc: AST.SourceLocation | { line: number; column: number } })
   ): void;
   parserServices?: ParserServices;
 };
@@ -16,7 +17,7 @@ export type GraphQLESLintRule = {
 };
 
 export type GraphQLESlintRuleListener = {
-  [K in keyof GraphQLESTree.ASTKindToNode]?: (
-    node: GraphQLESTree.ASTKindToNode[K]
+  [K in keyof ASTKindToNode]?: (
+    node: GraphQLESTreeNode<ASTKindToNode[K]>
   ) => void;
 };
