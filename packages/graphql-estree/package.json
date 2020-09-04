@@ -16,12 +16,10 @@
     "prepack": "bob prepack"
   },
   "dependencies": {
-    "clone-deep": "4.0.1",
     "@graphql-eslint/types": "0.0.1",
     "@graphql-tools/utils": "6.2.0"
   },
   "devDependencies": {
-    "@types/clone-deep": "4.0.1",
     "@types/eslint": "7.2.2",
     "bob-the-bundler": "1.1.0",
     "graphql": "15.3.0",

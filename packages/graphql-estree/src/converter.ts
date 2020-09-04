@@ -6,7 +6,6 @@ import {
   visit,
   visitWithTypeInfo,
 } from "graphql";
-import cloneAst from "clone-deep";
 
 export function convertToESTree<T extends ASTNode>(
   node: T,
@@ -25,7 +24,6 @@ function hasTypeField<T extends ASTNode>(
 const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
   node: T
 ): GraphQLESTreeNode<T> => {
-  const rawNode = cloneAst(node);
   const commonFields = {
     typeInfo: typeInfo
       ? {
@@ -56,7 +54,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode,
+      rawNode: node,
       gqlLocation,
     } as any as GraphQLESTreeNode<T>;
 
@@ -68,7 +66,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode,
+      rawNode: node,
       gqlLocation,
     } as any as GraphQLESTreeNode<T>;
 
