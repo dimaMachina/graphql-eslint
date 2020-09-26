@@ -1,5 +1,9 @@
 query test {
   user {
+    id
     name
+    ... on User {
+      name
+    }
   }
 }

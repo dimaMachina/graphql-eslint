@@ -13,6 +13,10 @@ import {
   ObjectValueNode,
   VariableNode,
   TokenKind,
+  GraphQLOutputType,
+  GraphQLNamedType,
+  isNonNullType,
+  isListType,
 } from "graphql";
 import { SourceLocation, Comment } from "estree";
 import { GraphQLESTreeNode } from "./estree-ast";
@@ -75,6 +79,14 @@ export function valueFromNode(
         (valueNode as GraphQLESTreeNode<VariableNode>).name.value
       ];
   }
+}
+
+export function getBaseType(type: GraphQLOutputType): GraphQLNamedType {
+  if (isNonNullType(type) || isListType(type)) {
+    return getBaseType(type.ofType);
+  }
+
+  return type;
 }
 
 export function convertRange(gqlLocation: Location): [number, number] {

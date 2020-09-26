@@ -5,7 +5,9 @@
   },
   "plugins": ["@graphql-eslint"],
   "rules": {
-    "@graphql-eslint/require-id-when-available": "error",
+    "@graphql-eslint/require-id-when-available": ["error", {
+      "fieldName": "_id" 
+    }],
     "@graphql-eslint/validate-against-schema": "error",
     "@graphql-eslint/no-anonymous-operations": "warn",
     "@graphql-eslint/no-operation-name-suffix": "error",
