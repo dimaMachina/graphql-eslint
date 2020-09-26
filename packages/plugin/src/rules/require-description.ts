@@ -41,7 +41,7 @@ function verifyRule(
           end: {
             line: node.loc.end.line,
             column: node.loc.end.column - 1,
-          }
+          },
         },
         messageId: REQUIRE_DESCRIPTION_ERROR,
         data: {
@@ -55,7 +55,7 @@ function verifyRule(
 const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
   meta: {
     messages: {
-      [REQUIRE_DESCRIPTION_ERROR]: `Description is required for nodes of type {{ nodeType }}"`,
+      [REQUIRE_DESCRIPTION_ERROR]: `Description is required for nodes of type "{{ nodeType }}"`,
     },
     schema: {
       type: "array",

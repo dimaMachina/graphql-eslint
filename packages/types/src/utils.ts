@@ -1,18 +1,35 @@
 import { GraphQLESlintRuleContext } from "./rule";
-import { Kind, GraphQLSchema, Location, ValueNode, StringValueNode, ASTNode, IntValueNode, FloatValueNode, BooleanValueNode, ListValueNode, ObjectValueNode, VariableNode, TokenKind, Token } from 'graphql';
+import {
+  Kind,
+  GraphQLSchema,
+  Location,
+  ValueNode,
+  StringValueNode,
+  ASTNode,
+  IntValueNode,
+  FloatValueNode,
+  BooleanValueNode,
+  ListValueNode,
+  ObjectValueNode,
+  VariableNode,
+  TokenKind,
+} from "graphql";
 import { SourceLocation, Comment } from "estree";
-import { GraphQLESTreeNode } from './estree-ast';
-import { dedentBlockStringValue } from 'graphql/language/blockString';
+import { GraphQLESTreeNode } from "./estree-ast";
 
 export function requireGraphQLSchemaFromContext(
   context: GraphQLESlintRuleContext
 ): GraphQLSchema {
   if (!context || !context.parserServices) {
-    throw new Error(`'You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.schema" property for "@typescript-graphql/parser", or use graphql-config!`)
+    throw new Error(
+      `'You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.schema" property for "@typescript-graphql/parser", or use graphql-config!`
+    );
   }
 
   if (!context.parserServices.hasTypeInfo) {
-    throw new Error(`Found "parserServices" generated, but unable to load your GraphQL schema and it's type-info!`)
+    throw new Error(
+      `Found "parserServices" generated, but unable to load your GraphQL schema and it's type-info!`
+    );
   }
 
   return context.parserServices.schema;
@@ -21,7 +38,7 @@ export function requireGraphQLSchemaFromContext(
 export default function keyValMap<T, V>(
   list: ReadonlyArray<T>,
   keyFn: (item: T) => string,
-  valFn: (item: T) => V,
+  valFn: (item: T) => V
 ): Record<string, V> {
   return list.reduce((map, item) => {
     map[keyFn(item)] = valFn(item);
@@ -31,7 +48,7 @@ export default function keyValMap<T, V>(
 
 export function valueFromNode(
   valueNode: GraphQLESTreeNode<ValueNode>,
-  variables?: Record<string, any>,
+  variables?: Record<string, any>
 ): any {
   switch (valueNode.type) {
     case Kind.NULL:
@@ -45,17 +62,18 @@ export function valueFromNode(
     case Kind.BOOLEAN:
       return (valueNode as GraphQLESTreeNode<BooleanValueNode>).value;
     case Kind.LIST:
-      return ((valueNode as GraphQLESTreeNode<ListValueNode>).values as any).map((node) =>
-        valueFromNode(node, variables),
-      );
+      return ((valueNode as GraphQLESTreeNode<ListValueNode>)
+        .values as any).map((node) => valueFromNode(node, variables));
     case Kind.OBJECT:
       return keyValMap(
         (valueNode as GraphQLESTreeNode<ObjectValueNode>).fields,
         (field) => field.name.value,
-        (field) => valueFromNode(field.value, variables),
+        (field) => valueFromNode(field.value, variables)
       );
     case Kind.VARIABLE:
-      return variables?.[(valueNode as GraphQLESTreeNode<VariableNode>).name.value];
+      return variables?.[
+        (valueNode as GraphQLESTreeNode<VariableNode>).name.value
+      ];
   }
 }
 
@@ -78,7 +96,7 @@ export function extractCommentsFromAst(node: ASTNode): Comment[] {
       const value = String(token.value);
       comments.push({
         type: "Block",
-        value: ' ' + value + ' ',
+        value: " " + value + " ",
         loc: {
           start: {
             line: token.line,
@@ -87,7 +105,7 @@ export function extractCommentsFromAst(node: ASTNode): Comment[] {
           end: {
             line: token.line,
             column: token.column,
-          }
+          },
         },
         range: [token.start, token.end],
       });

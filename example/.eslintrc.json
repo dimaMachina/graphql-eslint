@@ -5,8 +5,9 @@
   },
   "plugins": ["@graphql-eslint"],
   "rules": {
+    "@graphql-eslint/require-id-when-available": "error",
     "@graphql-eslint/validate-against-schema": "error",
-    "@graphql-eslint/no-anonymous-operations": "error",
+    "@graphql-eslint/no-anonymous-operations": "warn",
     "@graphql-eslint/no-operation-name-suffix": "error",
     "@graphql-eslint/deprecation-must-have-reason": "error",
     "@graphql-eslint/avoid-operation-name-prefix": ["error", {
@@ -15,7 +16,7 @@
     "@graphql-eslint/no-case-insensitive-enum-values-duplicates": [
       "error"
     ],
-    "@graphql-eslint/require-description": ["error", {
+    "@graphql-eslint/require-description": ["warn", {
       "on": ["SchemaDefinition", "FieldDefinition"]
     }]
   }

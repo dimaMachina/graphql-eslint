@@ -1,23 +1,32 @@
-import { extractCommentsFromAst, convertDescription, GraphQLESTreeNode, SafeGraphQLType, convertLocation, convertRange } from "@graphql-eslint/types";
+import {
+  convertDescription,
+  GraphQLESTreeNode,
+  SafeGraphQLType,
+  convertLocation,
+  convertRange,
+} from "@graphql-eslint/types";
 import {
   ASTNode,
   TypeNode,
   TypeInfo,
   visit,
   visitWithTypeInfo,
+  TokenKind,
 } from "graphql";
 import { Comment } from "estree";
 
 export function convertToESTree<T extends ASTNode>(
   node: T,
   typeInfo?: TypeInfo
-): { rootTree: GraphQLESTreeNode<T>, comments: Comment[] } {
-  const comments: Comment[] = extractCommentsFromAst(node);
-  console.log(comments);
+): { rootTree: GraphQLESTreeNode<T>; comments: Comment[] } {
+  const comments = extractCommentsFromAst(node);
   const visitor = { leave: convertNode(typeInfo) };
-  
+
   return {
-    rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor),
+    rootTree: visit(
+      node,
+      typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor
+    ),
     comments,
   };
 }
@@ -46,7 +55,6 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
         }
       : {},
     leadingComments: convertDescription(node),
-    trailingComments: [],
     loc: convertLocation(node.loc),
     range: convertRange(node.loc),
   };
@@ -57,26 +65,64 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...rest,
       gqlType,
     } as SafeGraphQLType<T & { readonly type: TypeNode }>;
-    const estreeNode: GraphQLESTreeNode<T> = {
+    const estreeNode: GraphQLESTreeNode<T> = ({
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
       rawNode: node,
       gqlLocation,
-    } as any as GraphQLESTreeNode<T>;
+    } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;
   } else {
     const { loc: gqlLocation, ...rest } = node;
-    const typeFieldSafe: SafeGraphQLType<T> = rest as SafeGraphQLType<T & { readonly type: TypeNode }>;
-    const estreeNode: GraphQLESTreeNode<T> = {
+    const typeFieldSafe: SafeGraphQLType<T> = rest as SafeGraphQLType<
+      T & { readonly type: TypeNode }
+    >;
+    const estreeNode: GraphQLESTreeNode<T> = ({
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
       rawNode: node,
       gqlLocation,
-    } as any as GraphQLESTreeNode<T>;
+    } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;
   }
 };
+
+export function extractCommentsFromAst(node: ASTNode): Comment[] {
+  const loc = node.loc;
+
+  if (!loc) {
+    return [];
+  }
+
+  const comments: Comment[] = [];
+  let token = loc.startToken;
+
+  while (token !== null) {
+    if (token.kind === TokenKind.COMMENT) {
+      const value = String(token.value);
+      comments.push({
+        type: "Block",
+        value: " " + value + " ",
+        loc: {
+          start: {
+            line: token.line,
+            column: token.column,
+          },
+          end: {
+            line: token.line,
+            column: token.column,
+          },
+        },
+        range: [token.start, token.end],
+      });
+    }
+
+    token = token.next;
+  }
+
+  return comments;
+}

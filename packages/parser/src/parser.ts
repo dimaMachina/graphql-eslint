@@ -1,10 +1,6 @@
 import { convertToESTree } from "@graphql-eslint/graphql-estree";
 import { parseGraphQLSDL } from "@graphql-tools/utils";
-import {
-  GraphQLError,
-  GraphQLSchema,
-  TypeInfo,
-} from "graphql";
+import { GraphQLError, GraphQLSchema, TypeInfo } from "graphql";
 import { loadConfigSync, GraphQLProjectConfig } from "graphql-config";
 import { loadSchemaSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
@@ -70,12 +66,15 @@ export function parseForESLint(
       schema,
     };
 
-    const graphqlAst = parseGraphQLSDL(config.filePath || '', code, {
+    const graphqlAst = parseGraphQLSDL(config.filePath || "", code, {
       ...config,
       noLocation: false,
     });
 
-    const { rootTree, comments } = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);
+    const { rootTree, comments } = convertToESTree(
+      graphqlAst.document,
+      schema ? new TypeInfo(schema) : null
+    );
 
     return {
       services: parserServices,
@@ -86,7 +85,7 @@ export function parseForESLint(
         sourceType: "script",
         comments,
         loc: rootTree.loc,
-        range: rootTree.range,
+        range: rootTree.range as [number, number],
         tokens: [],
       },
     };

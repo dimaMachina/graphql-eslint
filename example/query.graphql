@@ -1,3 +1,5 @@
-query my {
-  hello
+query test {
+  user {
+    name
+  }
 }

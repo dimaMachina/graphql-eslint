@@ -1,30 +1,59 @@
-import { ASTNode, Location, TypeNode } from "graphql";
+import {
+  ASTNode,
+  DirectiveNode,
+  Location,
+  NameNode,
+  StringValueNode,
+  TypeInfo,
+  TypeNode,
+  ValueNode,
+} from "graphql";
 import { BaseNode } from "estree";
 
-export type SafeGraphQLType<T extends ASTNode> = Omit<
+export type SafeGraphQLType<T extends ASTNode | ValueNode> = Omit<
   T extends { readonly type: TypeNode }
     ? Omit<T, "type"> & { readonly gqlType: TypeNode }
     : T,
   "loc"
 >;
 
-export type SingleESTreeNode<T extends any> = T extends ASTNode
+export type SingleESTreeNode<
+  T extends any,
+  WithTypeInfo extends boolean
+> = T extends ASTNode | ValueNode
   ? SafeGraphQLType<T> &
-      Pick<
-        BaseNode,
-        "leadingComments" | "trailingComments" | "loc" | "range"
-      > & {
+      Pick<BaseNode, "leadingComments" | "loc" | "range"> & {
         type: T["kind"];
         gqlLocation: Location;
-      }
+      } & (WithTypeInfo extends true
+        ? {
+            typeInfo?: {
+              argument?: ReturnType<TypeInfo["getArgument"]>;
+              defaultValue?: ReturnType<TypeInfo["getDefaultValue"]>;
+              directive?: ReturnType<TypeInfo["getDirective"]>;
+              enumValue?: ReturnType<TypeInfo["getEnumValue"]>;
+              fieldDef?: ReturnType<TypeInfo["getFieldDef"]>;
+              inputType?: ReturnType<TypeInfo["getInputType"]>;
+              parentInputType?: ReturnType<TypeInfo["getParentInputType"]>;
+              parentType?: ReturnType<TypeInfo["getParentType"]>;
+              gqlType?: ReturnType<TypeInfo["getType"]>;
+            };
+          }
+        : {})
   : T;
 
-export type GraphQLESTreeNode<T extends any> = { rawNode: T } & {
-  [K in keyof SingleESTreeNode<T>]: SingleESTreeNode<T>[K] extends ASTNode
-    ? GraphQLESTreeNode<SingleESTreeNode<T>[K]>
-    : SingleESTreeNode<T>[K] extends ReadonlyArray<infer Nested>
-    ? Nested extends ASTNode
-      ? ReadonlyArray<GraphQLESTreeNode<Nested>>
-      : SingleESTreeNode<T>[K]
-    : SingleESTreeNode<T>[K];
-};
+export type GraphQLESTreeNode<
+  T extends any,
+  WithTypeInfo extends boolean = false
+> = T extends ASTNode | ValueNode
+  ? { rawNode: T } & {
+      [K in keyof SingleESTreeNode<T, WithTypeInfo>]: SingleESTreeNode<
+        T,
+        WithTypeInfo
+      >[K] extends ReadonlyArray<infer Nested>
+        ? GraphQLESTreeNode<Nested, WithTypeInfo>[]
+        : SingleESTreeNode<T, WithTypeInfo>[K] extends ASTNode
+        ? GraphQLESTreeNode<SingleESTreeNode<T, WithTypeInfo>[K], WithTypeInfo>
+        : SingleESTreeNode<T, WithTypeInfo>[K];
+    }
+  : T;
