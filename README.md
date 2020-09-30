@@ -1,5 +1,5 @@
-<p align="center">
-  <img src="./logo.png">
+<p align="left">
+  <img height="170" src="./logo.png">
 </p>
 
 This project integrates GraphQL AST parser and ESLint.
