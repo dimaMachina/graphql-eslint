@@ -34,7 +34,8 @@ export type GraphQLESlintRuleListener<WithTypeInfo extends boolean> = {
   [K in keyof ASTKindToNode]?: (
     node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>
   ) => void;
-};
+} &
+  Record<string, any>;
 
 export type GraphQLValidTestCase<Options> = Omit<
   RuleTester.ValidTestCase,
