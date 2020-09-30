@@ -579,7 +579,7 @@
     fs-extra "9.0.1"
     tslib "~2.0.0"
 
-"@graphql-tools/load@^6.0.0":
+"@graphql-tools/load@^6.0.0", "@graphql-tools/load@~6.2.4":
   version "6.2.4"
   resolved "https://registry.npmjs.org/@graphql-tools/load/-/load-6.2.4.tgz#a1a860bdc9d9e0bd93e1dffdbd2cf8839a521c41"
   integrity sha512-FlQC50VELwRxoWUbJMMMs5gG0Dl8BaQYMrXUHTsxwqR7UmksUYnysC21rdousvs6jVZ7pf4unZfZFtBjz+8Edg==
@@ -593,30 +593,6 @@
     tslib "~2.0.1"
     unixify "1.0.0"
     valid-url "1.0.9"
-
-"@graphql-tools/load@~6.0.0":
-  version "6.0.18"
-  resolved "https://registry.npmjs.org/@graphql-tools/load/-/load-6.0.18.tgz#41a71707ff94d20740324fb659aa3fe021772bbe"
-  integrity sha512-DjaxkruBBRoR4twHOv8kzUp2ZP30s/Gvh92sm/EhxG89BgAXRZq5Ua5OqW/ASFvTa7x3V9PyfKsxTK5N3bOgtA==
-  dependencies:
-    "@graphql-tools/merge" "6.0.18"
-    "@graphql-tools/utils" "6.0.18"
-    globby "11.0.1"
-    import-from "3.0.0"
-    is-glob "4.0.1"
-    p-limit "3.0.2"
-    tslib "~2.0.0"
-    unixify "1.0.0"
-    valid-url "1.0.9"
-
-"@graphql-tools/merge@6.0.18":
-  version "6.0.18"
-  resolved "https://registry.npmjs.org/@graphql-tools/merge/-/merge-6.0.18.tgz#d105e16c6f5f874ddfdba3f3f4a2f676a6d2d04a"
-  integrity sha512-XAFbqMyXsExnuzgr5+JQC8mxsYp0aGIR0m+GbleQDZSlqDOL2maF5xM3dGOOkguz0Paa7ei/5UfnMXyRU3cW/w==
-  dependencies:
-    "@graphql-tools/schema" "6.0.18"
-    "@graphql-tools/utils" "6.0.18"
-    tslib "~2.0.0"
 
 "@graphql-tools/merge@^6.0.0", "@graphql-tools/merge@^6.2.4":
   version "6.2.4"
