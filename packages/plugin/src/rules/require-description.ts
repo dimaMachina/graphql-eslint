@@ -40,7 +40,7 @@ function verifyRule(
           },
           end: {
             line: node.loc.end.line,
-            column: node.loc.end.column - 1,
+            column: node.loc.end.column,
           },
         },
         messageId: REQUIRE_DESCRIPTION_ERROR,

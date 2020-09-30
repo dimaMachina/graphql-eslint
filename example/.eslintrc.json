@@ -1,25 +1,42 @@
 {
-  "parser": "@graphql-eslint/parser",
-  "parserOptions": {
-    "schemaPath": "./**/schema.graphql"
-  },
   "plugins": ["@graphql-eslint"],
+  "processor": "@graphql-eslint/graphql",
   "rules": {
-    "@graphql-eslint/require-id-when-available": ["error", {
-      "fieldName": "_id" 
-    }],
-    "@graphql-eslint/validate-against-schema": "error",
-    "@graphql-eslint/no-anonymous-operations": "warn",
-    "@graphql-eslint/no-operation-name-suffix": "error",
-    "@graphql-eslint/deprecation-must-have-reason": "error",
-    "@graphql-eslint/avoid-operation-name-prefix": ["error", {
-      "keywords": ["get"]
-    }],
-    "@graphql-eslint/no-case-insensitive-enum-values-duplicates": [
-      "error"
-    ],
-    "@graphql-eslint/require-description": ["warn", {
-      "on": ["SchemaDefinition", "FieldDefinition"]
-    }]
-  }
+    "@graphql-eslint/no-anonymous-operations": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["./**/*.graphql"],
+      "parser": "@graphql-eslint/parser",
+      "parserOptions": {
+        "schemaPath": "./**/schema.graphql"
+      },
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "@graphql-eslint/require-id-when-available": [
+          "error",
+          {
+            "fieldName": "_id"
+          }
+        ],
+        "@graphql-eslint/validate-against-schema": "error",
+        "@graphql-eslint/no-anonymous-operations": "warn",
+        "@graphql-eslint/no-operation-name-suffix": "error",
+        "@graphql-eslint/deprecation-must-have-reason": "error",
+        "@graphql-eslint/avoid-operation-name-prefix": [
+          "error",
+          {
+            "keywords": ["get"]
+          }
+        ],
+        "@graphql-eslint/no-case-insensitive-enum-values-duplicates": ["error"],
+        "@graphql-eslint/require-description": [
+          "warn",
+          {
+            "on": ["SchemaDefinition", "FieldDefinition"]
+          }
+        ]
+      }
+    }
+  ]
 }
