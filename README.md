@@ -1,13 +1,17 @@
+<p align="left">
+  <img height="150" src="./logo.png">
+</p>
+
 This project integrates GraphQL AST parser and ESLint.
 
-## Key Features:
+## Key Features
 
 - 🚀 Integrates with ESLint core (as a ESTree parser).
 - 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments.
 - 🚀 Lints both GraphQL schema and GraphQL operations.
 - 🚀 Extended type info for more advanced usages
 - 🚀 Supports ESLint directives (for example: `disable-next-line`)
-- 🚀 Easily extendable - supports custom rules.
+- 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API.
 
 Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
 
@@ -86,13 +90,7 @@ In order to enable it processing other extensions, add the following section in 
 
 ```json
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
   "eslint.options": {
     "extentions": [".js", ".graphql"]
   }
