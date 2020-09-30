@@ -45,6 +45,8 @@ export const createGraphqlProcessor = () => {
             });
           }
 
+          blocks.push({ text, filename });
+
           return blocks;
         }
       }

@@ -1,17 +1,25 @@
-import { convertToESTree } from "@graphql-eslint/graphql-estree";
-import { parseGraphQLSDL } from "@graphql-tools/utils";
+import { convertToESTree } from "./estree-parser/converter";
+import { GraphQLParseOptions, parseGraphQLSDL } from "@graphql-tools/utils";
 import { buildSchema, GraphQLError, GraphQLSchema, TypeInfo } from "graphql";
 import { loadConfigSync, GraphQLProjectConfig } from "graphql-config";
 import { loadSchemaSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { JsonFileLoader } from "@graphql-tools/json-file-loader";
 import { UrlLoader } from "@graphql-tools/url-loader";
-import { GraphQLESLintParseResult, ParserOptions } from "@graphql-eslint/types";
+import { Linter } from "eslint";
+import { GraphQLESLintParseResult, ParserOptions } from "./types";
 
 const DEFAULT_CONFIG: ParserOptions = {
   schema: null,
   skipGraphQLConfig: false,
 };
+
+export function parse(
+  code: string,
+  options?: GraphQLParseOptions
+): Linter.ESLintParseResult["ast"] {
+  return parseForESLint(code, options).ast;
+}
 
 export function parseForESLint(
   code: string,

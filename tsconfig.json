@@ -23,10 +23,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
-      "@graphql-eslint/parser": ["packages/parser/src/index.ts"],
-      "@graphql-eslint/graphql-estree": ["packages/graphql-estree/src/index.ts"],
-      "@graphql-eslint/plugin": ["packages/plugin/src/index.ts"],
-      "@graphql-eslint/types": ["packages/types/src/index.ts"]
+      "@graphql-eslint/eslint-plugin": ["packages/plugin/src/index.ts"]
     }
   },
   "include": ["packages"],

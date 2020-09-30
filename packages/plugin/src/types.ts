@@ -1,8 +1,25 @@
-import { Rule, AST } from "eslint";
-import { ParserOptions, ParserServices } from "./parser-types";
-import { GraphQLESTreeNode } from "./estree-ast";
-import { ASTNode, ASTKindToNode } from "graphql";
+import { Rule, AST, Linter } from "eslint";
+import { GraphQLESTreeNode } from "../../plugin/src/estree-parser/estree-ast";
+import { ASTNode, ASTKindToNode, GraphQLSchema } from "graphql";
 import type { RuleTester } from "eslint";
+import { GraphQLParseOptions } from "@graphql-tools/utils";
+import { GraphQLProjectConfig } from "graphql-config";
+
+export interface ParserOptions extends Omit<GraphQLParseOptions, "noLocation"> {
+  schema?: string | string[];
+  skipGraphQLConfig?: boolean;
+  filePath?: string;
+}
+
+export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
+  services: ParserServices;
+};
+
+export type ParserServices = {
+  graphqlConfigProject: GraphQLProjectConfig | null;
+  hasTypeInfo: boolean;
+  schema: GraphQLSchema | null;
+};
 
 export type GraphQLESlintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,

@@ -1,8 +1,5 @@
-import {
-  GraphQLESLintRule,
-  GraphQLESlintRuleContext,
-  GraphQLESTreeNode,
-} from "@graphql-eslint/types";
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from "../types";
+import { GraphQLESTreeNode } from "../estree-parser/estree-ast";
 import { OperationDefinitionNode, FragmentDefinitionNode } from "graphql";
 
 type AvoidOperationNamePrefixConfig = {
