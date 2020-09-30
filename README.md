@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo.png">
+</p>
+
 This project integrates GraphQL AST parser and ESLint.
 
 ## Key Features:
@@ -86,13 +90,7 @@ In order to enable it processing other extensions, add the following section in 
 
 ```json
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
   "eslint.options": {
     "extentions": [".js", ".graphql"]
   }
