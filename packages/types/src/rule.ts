@@ -1,7 +1,8 @@
 import { Rule, AST } from "eslint";
-import { ParserServices } from "./parser-types";
+import { ParserOptions, ParserServices } from "./parser-types";
 import { GraphQLESTreeNode } from "./estree-ast";
 import { ASTNode, ASTKindToNode } from "graphql";
+import type { RuleTester } from "eslint";
 
 export type GraphQLESlintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,
@@ -19,8 +20,13 @@ export type GraphQLESlintRuleContext<Options = any[]> = Omit<
   parserServices?: ParserServices;
 };
 
-export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
-  create(context: GraphQLESlintRuleContext<Options>): GraphQLESlintRuleListener<WithTypeInfo>;
+export type GraphQLESLintRule<
+  Options = any[],
+  WithTypeInfo extends boolean = false
+> = {
+  create(
+    context: GraphQLESlintRuleContext<Options>
+  ): GraphQLESlintRuleListener<WithTypeInfo>;
   meta?: Rule.RuleMetaData;
 };
 
@@ -30,22 +36,35 @@ export type GraphQLESlintRuleListener<WithTypeInfo extends boolean> = {
   ) => void;
 };
 
-// export type GraphQLValidTestCase<T> = Omit<RuleTester.ValidTestCase, "options"> & { options: T };
+export type GraphQLValidTestCase<Options> = Omit<
+  RuleTester.ValidTestCase,
+  "options" | "parserOptions"
+> & { options?: [Options]; parserOptions?: ParserOptions };
 
-// export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
-//   errors: number | Array<RuleTester.TestCaseError | string>;
-//   output?: string | null;
-// }
+export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
+  errors: number | Array<RuleTester.TestCaseError | string>;
+  output?: string | null;
+};
 
-// export class GraphQLRuleTester extends RuleTester {
-//   runGraphQLTests<Config>(
-//     name: string,
-//     rule: GraphQLESLintRule<Config>,
-//     tests: {
-//         valid?: Array<string | RuleTester.ValidTestCase | GraphQLValidTestCase<Config>>;
-//         invalid?: (RuleTester.InvalidTestCase | GraphQLInvalidTestCase<Config>)[];
-//     },
-//   ): void {
-//     super.run(name, rule as any, tests);
-//   }
-// }
+export class GraphQLRuleTester extends require("eslint").RuleTester {
+  constructor(parserOptions: ParserOptions = {}) {
+    super({
+      parser: require.resolve("@graphql-eslint/parser"),
+      parserOptions: {
+        ...(parserOptions || {}),
+        skipGraphQLConfig: true,
+      },
+    });
+  }
+
+  runGraphQLTests<Config>(
+    name: string,
+    rule: GraphQLESLintRule<Config>,
+    tests: {
+      valid?: Array<string | GraphQLValidTestCase<Config>>;
+      invalid?: Array<string | GraphQLInvalidTestCase<Config>>;
+    }
+  ): void {
+    super.run(name, rule as any, tests);
+  }
+}

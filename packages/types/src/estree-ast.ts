@@ -1,13 +1,4 @@
-import {
-  ASTNode,
-  DirectiveNode,
-  Location,
-  NameNode,
-  StringValueNode,
-  TypeInfo,
-  TypeNode,
-  ValueNode,
-} from "graphql";
+import { ASTNode, Location, TypeInfo, TypeNode, ValueNode } from "graphql";
 import { BaseNode } from "estree";
 
 export type SafeGraphQLType<T extends ASTNode | ValueNode> = Omit<
@@ -27,7 +18,7 @@ export type SingleESTreeNode<
         gqlLocation: Location;
       } & (WithTypeInfo extends true
         ? {
-            typeInfo?: {
+            typeInfo?: () => {
               argument?: ReturnType<TypeInfo["getArgument"]>;
               defaultValue?: ReturnType<TypeInfo["getDefaultValue"]>;
               directive?: ReturnType<TypeInfo["getDirective"]>;
@@ -46,7 +37,7 @@ export type GraphQLESTreeNode<
   T extends any,
   WithTypeInfo extends boolean = false
 > = T extends ASTNode | ValueNode
-  ? { rawNode: T } & {
+  ? { rawNode: () => T } & {
       [K in keyof SingleESTreeNode<T, WithTypeInfo>]: SingleESTreeNode<
         T,
         WithTypeInfo

@@ -1,15 +1,11 @@
 {
-  "plugins": ["@graphql-eslint"],
   "processor": "@graphql-eslint/graphql",
-  "rules": {
-    "@graphql-eslint/no-anonymous-operations": "warn"
-  },
   "overrides": [
     {
       "files": ["./**/*.graphql"],
       "parser": "@graphql-eslint/parser",
       "parserOptions": {
-        "schemaPath": "./**/schema.graphql"
+        "schema": "./**/schema.graphql"
       },
       "plugins": ["@graphql-eslint"],
       "rules": {

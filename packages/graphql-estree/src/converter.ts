@@ -12,6 +12,7 @@ import {
   visit,
   visitWithTypeInfo,
   TokenKind,
+  Location,
 } from "graphql";
 import { Comment } from "estree";
 
@@ -37,23 +38,32 @@ function hasTypeField<T extends ASTNode>(
   return obj && !!(obj as any).type;
 }
 
+function stripTokens(location: Location): Pick<Location, "start" | "end"> {
+  return {
+    end: location.end,
+    start: location.start,
+  };
+}
+
 const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
   node: T
 ): GraphQLESTreeNode<T> => {
+  const calculatedTypeInfo = typeInfo
+    ? {
+        argument: typeInfo.getArgument(),
+        defaultValue: typeInfo.getDefaultValue(),
+        directive: typeInfo.getDirective(),
+        enumValue: typeInfo.getEnumValue(),
+        fieldDef: typeInfo.getFieldDef(),
+        inputType: typeInfo.getInputType(),
+        parentInputType: typeInfo.getParentInputType(),
+        parentType: typeInfo.getParentType(),
+        gqlType: typeInfo.getType(),
+      }
+    : {};
+
   const commonFields = {
-    typeInfo: typeInfo
-      ? {
-          argument: typeInfo.getArgument(),
-          defaultValue: typeInfo.getDefaultValue(),
-          directive: typeInfo.getDirective(),
-          enumValue: typeInfo.getEnumValue(),
-          fieldDef: typeInfo.getFieldDef(),
-          inputType: typeInfo.getInputType(),
-          parentInputType: typeInfo.getParentInputType(),
-          parentType: typeInfo.getParentType(),
-          gqlType: typeInfo.getType(),
-        }
-      : {},
+    typeInfo: () => calculatedTypeInfo,
     leadingComments: convertDescription(node),
     loc: convertLocation(node.loc),
     range: convertRange(node.loc),
@@ -69,8 +79,8 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode: node,
-      gqlLocation,
+      // rawNode: () => node,
+      gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;
@@ -83,8 +93,8 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode: node,
-      gqlLocation,
+      // rawNode: () => node,
+      gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;

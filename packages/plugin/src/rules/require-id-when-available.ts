@@ -1,4 +1,8 @@
-import { GraphQLESLintRule, getBaseType } from "@graphql-eslint/types";
+import {
+  GraphQLESLintRule,
+  getBaseType,
+  requireGraphQLSchemaFromContext,
+} from "@graphql-eslint/types";
 import { GraphQLInterfaceType, GraphQLObjectType } from "graphql";
 
 const REQUIRE_ID_WHEN_AVAILABLE = "REQUIRE_ID_WHEN_AVAILABLE";
@@ -30,6 +34,8 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
   create(context) {
     return {
       SelectionSet(node) {
+        requireGraphQLSchemaFromContext(context);
+
         const fieldName =
           (context.options[0] || {}).fieldName || DEFAULT_ID_FIELD_NAME;
 
@@ -37,8 +43,10 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
           return;
         }
 
-        if (node.typeInfo && node.typeInfo.gqlType) {
-          const rawType = getBaseType(node.typeInfo.gqlType);
+        const typeInfo = node.typeInfo();
+
+        if (typeInfo && typeInfo.gqlType) {
+          const rawType = getBaseType(typeInfo.gqlType);
           if (
             rawType instanceof GraphQLObjectType ||
             rawType instanceof GraphQLInterfaceType

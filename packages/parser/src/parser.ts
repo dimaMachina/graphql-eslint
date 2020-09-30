@@ -1,6 +1,6 @@
 import { convertToESTree } from "@graphql-eslint/graphql-estree";
 import { parseGraphQLSDL } from "@graphql-tools/utils";
-import { GraphQLError, GraphQLSchema, TypeInfo } from "graphql";
+import { buildSchema, GraphQLError, GraphQLSchema, TypeInfo } from "graphql";
 import { loadConfigSync, GraphQLProjectConfig } from "graphql-config";
 import { loadSchemaSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
@@ -9,7 +9,7 @@ import { UrlLoader } from "@graphql-tools/url-loader";
 import { GraphQLESLintParseResult, ParserOptions } from "@graphql-eslint/types";
 
 const DEFAULT_CONFIG: ParserOptions = {
-  schemaPath: null,
+  schema: null,
   skipGraphQLConfig: false,
 };
 
@@ -42,12 +42,22 @@ export function parseForESLint(
       }
     }
 
-    if (!schema && config.schemaPath) {
+    if (!schema && config.schema) {
       try {
-        schema = loadSchemaSync(config.schemaPath, {
+        schema = loadSchemaSync(config.schema, {
           ...config,
           assumeValidSDL: true,
           loaders: [
+            {
+              loaderId: () => "direct-string",
+              canLoad: async () => false,
+              load: async () => null,
+              canLoadSync: (pointer) =>
+                typeof pointer === "string" && pointer.includes("type "),
+              loadSync: (pointer) => ({
+                schema: buildSchema(pointer),
+              }),
+            },
             new GraphQLFileLoader(),
             new JsonFileLoader(),
             new UrlLoader(),

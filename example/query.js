@@ -10,6 +10,19 @@ const myQuery = gql`
   }
 `;
 
+const myOther2Query = /* GraphQL */ `
+
+
+
+
+
+  query {
+    user {
+      name
+    }
+  }
+`;
+
 const myOtherQuery = gql`
   query a {
     user {

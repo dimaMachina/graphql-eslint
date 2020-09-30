@@ -3,7 +3,7 @@ import { Linter } from "eslint";
 import { GraphQLProjectConfig } from "graphql-config";
 
 export interface ParserOptions extends Omit<GraphQLParseOptions, "noLocation"> {
-  schemaPath?: string | string[];
+  schema?: string | string[];
   skipGraphQLConfig?: boolean;
   filePath?: string;
 }

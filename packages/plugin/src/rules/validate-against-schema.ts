@@ -1,17 +1,32 @@
-import { GraphQLESLintRule, requireGraphQLSchemaFromContext, GraphQLESlintRuleContext, GraphQLESTreeNode } from '@graphql-eslint/types';
+import {
+  GraphQLESLintRule,
+  requireGraphQLSchemaFromContext,
+  GraphQLESlintRuleContext,
+  GraphQLESTreeNode,
+} from "@graphql-eslint/types";
 import { Kind, validate, GraphQLSchema, DocumentNode } from "graphql";
 
-function validateDoc(context: GraphQLESlintRuleContext, schema: GraphQLSchema, documentNode: DocumentNode) {
-  if (documentNode && documentNode.definitions && documentNode.definitions.length > 0) {
+function validateDoc(
+  context: GraphQLESlintRuleContext,
+  schema: GraphQLSchema,
+  documentNode: DocumentNode
+) {
+  if (
+    documentNode &&
+    documentNode.definitions &&
+    documentNode.definitions.length > 0
+  ) {
     const validationErrors = validate(schema, documentNode);
 
     for (const error of validationErrors) {
-      const node = (error.nodes[0] as any as GraphQLESTreeNode<typeof error.nodes[0]>);
+      const node = (error.nodes[0] as any) as GraphQLESTreeNode<
+        typeof error.nodes[0]
+      >;
 
       context.report({
         loc: node.loc,
         message: error.message,
-      })
+      });
     }
   }
 }
@@ -27,19 +42,19 @@ const rule: GraphQLESLintRule = {
 
         validateDoc(context, schema, {
           kind: Kind.DOCUMENT,
-          definitions: [node.rawNode]
+          definitions: [node.rawNode()],
         });
       },
       FragmentDefinition(node) {
         const schema = requireGraphQLSchemaFromContext(context);
-        
+
         validateDoc(context, schema, {
           kind: Kind.DOCUMENT,
-          definitions: [node.rawNode]
+          definitions: [node.rawNode()],
         });
       },
-    }
-  }
-}
+    };
+  },
+};
 
 export default rule;
