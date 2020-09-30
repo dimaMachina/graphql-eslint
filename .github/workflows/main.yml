@@ -43,10 +43,10 @@ jobs:
             ${{ runner.os }}-${{matrix.node_version}}-jest-
       - name: Install Dependencies using Yarn
         run: yarn install
-      - name: Lint
-        run: yarn lint
       - name: Build
         run: yarn build
+      - name: Lint
+        run: yarn lint
       - name: Test
         run: yarn test --logHeapUsage
         env:

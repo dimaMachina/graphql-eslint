@@ -8,7 +8,7 @@
     "./example"
   ],
   "scripts": {
-    "lint": "eslint --ext .ts .",
+    "lint": "eslint --config .eslintrc.json --ext .ts .",
     "prebuild": "rimraf packages/*/dist",
     "build": "tsc --project tsconfig.json && bob build",
     "test": "jest",
