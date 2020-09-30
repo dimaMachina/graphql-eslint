@@ -2,12 +2,12 @@ This project integrates GraphQL AST parser and ESLint.
 
 ## Key Features:
 
-🚀 Integrates with ESLint core (as a ESTree parser).
-🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments.
-🚀 Lints both GraphQL schema and GraphQL operations.
-🚀 Extended type info for more advanced usages
-🚀 Supports ESLint directives (for example: `disable-next-line`)
-🚀 Easily extendable - supports custom rules.
+- 🚀 Integrates with ESLint core (as a ESTree parser).
+- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments.
+- 🚀 Lints both GraphQL schema and GraphQL operations.
+- 🚀 Extended type info for more advanced usages
+- 🚀 Supports ESLint directives (for example: `disable-next-line`)
+- 🚀 Easily extendable - supports custom rules.
 
 Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
 
@@ -101,6 +101,6 @@ In order to enable it processing other extensions, add the following section in 
 
 ## Available Rules
 
-You can find a complete list of [all available plugins here](./RULES.md)
+You can find a complete list of [all available plugins here](./docs/README.md)
 
 > This repo doesn't exports a "recommended" set of rules - feel free to recommend us!

@@ -1,3 +1,0 @@
-## Available Rules
-
-test
