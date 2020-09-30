@@ -79,7 +79,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      // rawNode: () => node,
+      rawNode: () => node,
       gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
@@ -93,7 +93,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      // rawNode: () => node,
+      rawNode: () => node,
       gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
