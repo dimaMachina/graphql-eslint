@@ -1,14 +1,18 @@
 ## Available Rules
 
-- [`avoid-operation-name-prefix`](./avoid-operation-name-prefix.md)
-- [`input-name`](./input-name.md)
-- [`description-style`](./description-style.md)
-- [`naming-convention`](./naming-convention.md)
-- [`no-anonymous-operations`](./no-anonymous-operations.md)
-- [`require-deprecation-reason`](./require-deprecation-reason.md)
-- [`no-case-insensitive-enum-values-duplicates`](./no-case-insensitive-enum-values-duplicates.md)
-- [`no-operation-name-suffix`](./no-operation-name-suffix.md)
-- [`require-id-when-available`](./require-id-when-available.md)
-- [`validate-against-schema`](./validate-against-schema.md)
-- [`prettier`](./prettier.md)
-- [`require-description`](./require-description.md)
+- [`avoid-operation-name-prefix`](./rules/avoid-operation-name-prefix.md)
+- [`input-name`](./rules/input-name.md)
+- [`description-style`](./rules/description-style.md)
+- [`naming-convention`](./rules/naming-convention.md)
+- [`no-anonymous-operations`](./rules/no-anonymous-operations.md)
+- [`require-deprecation-reason`](./rules/require-deprecation-reason.md)
+- [`no-case-insensitive-enum-values-duplicates`](./rules/no-case-insensitive-enum-values-duplicates.md)
+- [`no-operation-name-suffix`](./rules/no-operation-name-suffix.md)
+- [`require-id-when-available`](./rules/require-id-when-available.md)
+- [`validate-against-schema`](./rules/validate-against-schema.md)
+- [`prettier`](./rules/prettier.md)
+- [`require-description`](./rules/require-description.md)
+
+## Writing your own rules
+
+TBD
