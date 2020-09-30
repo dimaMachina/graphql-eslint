@@ -488,17 +488,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@graphql-tools/delegate@6.0.18":
-  version "6.0.18"
-  resolved "https://registry.npmjs.org/@graphql-tools/delegate/-/delegate-6.0.18.tgz#093e335e346cd26791222e066a3e5929bc38b79c"
-  integrity sha512-CmNTD60qcTEZM3bvOV2t3Zdj7veY0zgXXVXNgMC9Fx+D2dNdJFCwXdcPAF0SKqlJoj/alBDSl1U6nqYKT9fQOA==
-  dependencies:
-    "@ardatan/aggregate-error" "0.0.1"
-    "@graphql-tools/schema" "6.0.18"
-    "@graphql-tools/utils" "6.0.18"
-    is-promise "4.0.0"
-    tslib "~2.0.0"
-
 "@graphql-tools/delegate@^6.2.4":
   version "6.2.4"
   resolved "https://registry.npmjs.org/@graphql-tools/delegate/-/delegate-6.2.4.tgz#db553b63eb9512d5eb5bbfdfcd8cb1e2b534699c"
@@ -643,7 +632,7 @@
     "@graphql-tools/utils" "^6.2.4"
     tslib "~2.0.1"
 
-"@graphql-tools/url-loader@^6.0.0":
+"@graphql-tools/url-loader@^6.0.0", "@graphql-tools/url-loader@~6.2.4":
   version "6.2.4"
   resolved "https://registry.npmjs.org/@graphql-tools/url-loader/-/url-loader-6.2.4.tgz#999c38b03ffea9220840211356a766fb7f527224"
   integrity sha512-T14Ng02H2gzK5IRVNLKHM1ncQ2d+ou6+twGRNat3ETSP6arkS3jg0LPtJfu+8r6Op/4C3EXM6QbdaSNIkvatAQ==
@@ -657,21 +646,6 @@
     tslib "~2.0.1"
     valid-url "1.0.9"
     websocket "1.0.32"
-
-"@graphql-tools/url-loader@~6.0.0":
-  version "6.0.18"
-  resolved "https://registry.npmjs.org/@graphql-tools/url-loader/-/url-loader-6.0.18.tgz#0eeb4e195bf9d8edda78ad16bd2f05b9869d581a"
-  integrity sha512-rdKbLYyoiKiirFDIHN5/vpaAKB6Qkjc5j1cRbv7weQn0nIHHhj4ReMBvqSiISyierQ33ix5y4Pvo1VJPD+V4qQ==
-  dependencies:
-    "@graphql-tools/delegate" "6.0.18"
-    "@graphql-tools/utils" "6.0.18"
-    "@graphql-tools/wrap" "6.0.18"
-    "@types/websocket" "1.0.1"
-    cross-fetch "3.0.5"
-    subscriptions-transport-ws "0.9.17"
-    tslib "~2.0.0"
-    valid-url "1.0.9"
-    websocket "1.0.31"
 
 "@graphql-tools/utils@6.0.18", "@graphql-tools/utils@~6.0.0":
   version "6.0.18"
@@ -689,18 +663,6 @@
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.1"
     tslib "~2.0.1"
-
-"@graphql-tools/wrap@6.0.18":
-  version "6.0.18"
-  resolved "https://registry.npmjs.org/@graphql-tools/wrap/-/wrap-6.0.18.tgz#a9a9bd8e1dac469671274153f419ab35317164ac"
-  integrity sha512-AHegxtawd+ivpUhI1gP4xQWWYPl5GvCmvzaas03DfrGlGcV/LyKJIzdZDEs2E4oCgwCU7F9UQMxgTsq+Dttn5Q==
-  dependencies:
-    "@graphql-tools/delegate" "6.0.18"
-    "@graphql-tools/schema" "6.0.18"
-    "@graphql-tools/utils" "6.0.18"
-    aggregate-error "3.0.1"
-    is-promise "4.0.0"
-    tslib "~2.0.0"
 
 "@graphql-tools/wrap@^6.2.4":
   version "6.2.4"
@@ -1252,14 +1214,6 @@ acorn@^7.1.1, acorn@^7.4.0:
   version "7.4.0"
   resolved "https://registry.npmjs.org/acorn/-/acorn-7.4.0.tgz#e1ad486e6c54501634c6c397c5c121daa383607c"
   integrity sha512-+G7P8jJmCHr+S+cLfQxygbWhXy+8YTVGzAkpEbcLo2mLoL7tij/VG41QSHACSf5QgYRhMZYHuNc6drJaO0Da+w==
-
-aggregate-error@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/aggregate-error/-/aggregate-error-3.0.1.tgz#db2fe7246e536f40d9b5442a39e117d7dd6a24e0"
-  integrity sha512-quoaXsZ9/BLNae5yiNoUz+Nhkwz83GhWwtYFglcjEQB2NDHCIpApbqXxIFnm4Pq/Nvhrsq5sYJFyohrrxnTGAA==
-  dependencies:
-    clean-stack "^2.0.0"
-    indent-string "^4.0.0"
 
 aggregate-error@^3.0.0:
   version "3.1.0"
@@ -1937,13 +1891,6 @@ cosmiconfig@6.0.0, cosmiconfig@^6.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.7.2"
-
-cross-fetch@3.0.5:
-  version "3.0.5"
-  resolved "https://registry.npmjs.org/cross-fetch/-/cross-fetch-3.0.5.tgz#2739d2981892e7ab488a7ad03b92df2816e03f4c"
-  integrity sha512-FFLcLtraisj5eteosnX1gf01qYDCOc4fDy0+euOt8Kn9YBY2NtXL/pCoYPavw24NIQkQqm5ZOLsGD5Zzj0gyew==
-  dependencies:
-    node-fetch "2.6.0"
 
 cross-fetch@3.0.6:
   version "3.0.6"
@@ -4456,11 +4403,6 @@ ms@^2.1.1:
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-nan@^2.14.0:
-  version "2.14.1"
-  resolved "https://registry.npmjs.org/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
-  integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
-
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.npmjs.org/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -4500,11 +4442,6 @@ no-case@^3.0.3:
   dependencies:
     lower-case "^2.0.1"
     tslib "^1.10.0"
-
-node-fetch@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
-  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
 node-fetch@2.6.1:
   version "2.6.1"
@@ -5763,17 +5700,6 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-subscriptions-transport-ws@0.9.17:
-  version "0.9.17"
-  resolved "https://registry.npmjs.org/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.17.tgz#e30e40f0caae0d2781903c01a8cb51b6e2682098"
-  integrity sha512-hNHi2N80PBz4T0V0QhnnsMGvG3XDFDS9mS6BhZ3R12T6EBywC8d/uJscsga0cVO4DKtXCkCRrWm2sOYrbOdhEA==
-  dependencies:
-    backo2 "^1.0.2"
-    eventemitter3 "^3.1.0"
-    iterall "^1.2.1"
-    symbol-observable "^1.0.4"
-    ws "^5.2.0"
-
 subscriptions-transport-ws@0.9.18:
   version "0.9.18"
   resolved "https://registry.npmjs.org/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.18.tgz#bcf02320c911fbadb054f7f928e51c6041a37b97"
@@ -6233,17 +6159,6 @@ webidl-conversions@^6.1.0:
   version "6.1.0"
   resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
-
-websocket@1.0.31:
-  version "1.0.31"
-  resolved "https://registry.npmjs.org/websocket/-/websocket-1.0.31.tgz#e5d0f16c3340ed87670e489ecae6144c79358730"
-  integrity sha512-VAouplvGKPiKFDTeCCO65vYHsyay8DqoBSlzIO3fayrfOgU94lQN5a1uWVnFrMLceTJw/+fQXR5PGbUVRaHshQ==
-  dependencies:
-    debug "^2.2.0"
-    es5-ext "^0.10.50"
-    nan "^2.14.0"
-    typedarray-to-buffer "^3.1.5"
-    yaeti "^0.0.6"
 
 websocket@1.0.32:
   version "1.0.32"
