@@ -1,17 +1,16 @@
 import {
   convertDescription,
-  GraphQLESTreeNode,
-  SafeGraphQLType,
   convertLocation,
   convertRange,
-} from "@graphql-eslint/types";
+  extractCommentsFromAst,
+} from "./utils";
+import { GraphQLESTreeNode, SafeGraphQLType } from "./estree-ast";
 import {
   ASTNode,
   TypeNode,
   TypeInfo,
   visit,
   visitWithTypeInfo,
-  TokenKind,
   Location,
 } from "graphql";
 import { Comment } from "estree";
@@ -100,39 +99,3 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
     return estreeNode;
   }
 };
-
-export function extractCommentsFromAst(node: ASTNode): Comment[] {
-  const loc = node.loc;
-
-  if (!loc) {
-    return [];
-  }
-
-  const comments: Comment[] = [];
-  let token = loc.startToken;
-
-  while (token !== null) {
-    if (token.kind === TokenKind.COMMENT) {
-      const value = String(token.value);
-      comments.push({
-        type: "Block",
-        value: " " + value + " ",
-        loc: {
-          start: {
-            line: token.line,
-            column: token.column,
-          },
-          end: {
-            line: token.line,
-            column: token.column,
-          },
-        },
-        range: [token.start, token.end],
-      });
-    }
-
-    token = token.next;
-  }
-
-  return comments;
-}

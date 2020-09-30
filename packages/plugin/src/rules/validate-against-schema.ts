@@ -1,10 +1,7 @@
-import {
-  GraphQLESLintRule,
-  requireGraphQLSchemaFromContext,
-  GraphQLESlintRuleContext,
-  GraphQLESTreeNode,
-} from "@graphql-eslint/types";
 import { Kind, validate, GraphQLSchema, DocumentNode } from "graphql";
+import { GraphQLESTreeNode } from "../estree-parser";
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from "../types";
+import { requireGraphQLSchemaFromContext } from "../utils";
 
 function validateDoc(
   context: GraphQLESlintRuleContext,

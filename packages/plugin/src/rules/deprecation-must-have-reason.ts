@@ -1,4 +1,5 @@
-import { GraphQLESLintRule, valueFromNode } from "@graphql-eslint/types";
+import { GraphQLESLintRule } from "../types";
+import { valueFromNode } from "../estree-parser/utils";
 
 const rule: GraphQLESLintRule = {
   meta: {},

@@ -1,9 +1,7 @@
-import {
-  GraphQLESLintRule,
-  getBaseType,
-  requireGraphQLSchemaFromContext,
-} from "@graphql-eslint/types";
+import { requireGraphQLSchemaFromContext } from "../utils";
+import { GraphQLESLintRule } from "../types";
 import { GraphQLInterfaceType, GraphQLObjectType } from "graphql";
+import { getBaseType } from "../estree-parser";
 
 const REQUIRE_ID_WHEN_AVAILABLE = "REQUIRE_ID_WHEN_AVAILABLE";
 const DEFAULT_ID_FIELD_NAME = "id";

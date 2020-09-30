@@ -1,8 +1,5 @@
-import {
-  GraphQLESLintRule,
-  GraphQLESlintRuleContext,
-  GraphQLESTreeNode,
-} from "@graphql-eslint/types";
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from "../types";
+import { GraphQLESTreeNode } from "../estree-parser/estree-ast";
 import { ASTNode, Kind, StringValueNode } from "graphql";
 
 const REQUIRE_DESCRIPTION_ERROR = "REQUIRE_DESCRIPTION_ERROR";
