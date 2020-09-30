@@ -9,6 +9,8 @@ This project integrates GraphQL AST parser and ESLint.
 🚀 Supports ESLint directives (for example: `disable-next-line`)
 🚀 Easily extendable - supports custom rules.
 
+Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
+
 ## Getting Started
 
 ### Installation
@@ -76,4 +78,29 @@ The parser allow you to specify a json file / graphql files(s) / url / raw strin
 
 > Some rules requires type information to operate, it's marked in the docs of each plugin!
 
-### Available Rules
+### VSCode Integration
+
+By default, [ESLint VSCode plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) will not lint files with extensions other then js, jsx, ts, tsx.
+
+In order to enable it processing other extensions, add the following section in `settings.json` or workspace configuration.
+
+```json
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql"
+  ],
+  "eslint.options": {
+    "extentions": [".js", ".graphql"]
+  }
+}
+```
+
+## Available Rules
+
+You can find a complete list of [all available plugins here](./RULES.md)
+
+> This repo doesn't exports a "recommended" set of rules - feel free to recommend us!
