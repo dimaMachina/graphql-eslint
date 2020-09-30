@@ -1,30 +1,24 @@
-import { convertToESTree } from "./estree-parser/converter";
-import { GraphQLParseOptions, parseGraphQLSDL } from "@graphql-tools/utils";
-import { buildSchema, GraphQLError, GraphQLSchema, TypeInfo } from "graphql";
-import { loadConfigSync, GraphQLProjectConfig } from "graphql-config";
-import { loadSchemaSync } from "@graphql-tools/load";
-import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
-import { JsonFileLoader } from "@graphql-tools/json-file-loader";
-import { UrlLoader } from "@graphql-tools/url-loader";
-import { Linter } from "eslint";
-import { GraphQLESLintParseResult, ParserOptions } from "./types";
+import { convertToESTree } from './estree-parser/converter';
+import { GraphQLParseOptions, parseGraphQLSDL } from '@graphql-tools/utils';
+import { buildSchema, GraphQLError, GraphQLSchema, TypeInfo } from 'graphql';
+import { loadConfigSync, GraphQLProjectConfig } from 'graphql-config';
+import { loadSchemaSync } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+import { JsonFileLoader } from '@graphql-tools/json-file-loader';
+import { UrlLoader } from '@graphql-tools/url-loader';
+import { Linter } from 'eslint';
+import { GraphQLESLintParseResult, ParserOptions } from './types';
 
 const DEFAULT_CONFIG: ParserOptions = {
   schema: null,
   skipGraphQLConfig: false,
 };
 
-export function parse(
-  code: string,
-  options?: GraphQLParseOptions
-): Linter.ESLintParseResult["ast"] {
+export function parse(code: string, options?: GraphQLParseOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
 }
 
-export function parseForESLint(
-  code: string,
-  options: ParserOptions
-): GraphQLESLintParseResult {
+export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
     const config = {
       ...DEFAULT_CONFIG,
@@ -57,12 +51,11 @@ export function parseForESLint(
           assumeValidSDL: true,
           loaders: [
             {
-              loaderId: () => "direct-string",
+              loaderId: () => 'direct-string',
               canLoad: async () => false,
               load: async () => null,
-              canLoadSync: (pointer) =>
-                typeof pointer === "string" && pointer.includes("type "),
-              loadSync: (pointer) => ({
+              canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
+              loadSync: pointer => ({
                 schema: buildSchema(pointer),
               }),
             },
@@ -84,23 +77,20 @@ export function parseForESLint(
       schema,
     };
 
-    const graphqlAst = parseGraphQLSDL(config.filePath || "", code, {
+    const graphqlAst = parseGraphQLSDL(config.filePath || '', code, {
       ...config,
       noLocation: false,
     });
 
-    const { rootTree, comments } = convertToESTree(
-      graphqlAst.document,
-      schema ? new TypeInfo(schema) : null
-    );
+    const { rootTree, comments } = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);
 
     return {
       services: parserServices,
       parserServices,
       ast: {
-        type: "Program",
+        type: 'Program',
         body: [rootTree as any],
-        sourceType: "script",
+        sourceType: 'script',
         comments,
         loc: rootTree.loc,
         range: rootTree.range as [number, number],

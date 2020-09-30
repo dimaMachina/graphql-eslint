@@ -1,10 +1,10 @@
-import { GraphQLESLintRule } from "../types";
+import { GraphQLESLintRule } from '../types';
 
-const ERROR_MESSAGE_ID = "NO_CASE_INSENSITIVE_ENUM_VALUES_DUPLICATES";
+const ERROR_MESSAGE_ID = 'NO_CASE_INSENSITIVE_ENUM_VALUES_DUPLICATES';
 
 const rule: GraphQLESLintRule = {
   meta: {
-    fixable: "code",
+    fixable: 'code',
     messages: {
       [ERROR_MESSAGE_ID]: `Case-insensitive enum values duplicates are not allowed! Found: "{{ found }}"`,
     },
@@ -14,10 +14,7 @@ const rule: GraphQLESLintRule = {
       EnumTypeDefinition(node) {
         const foundDuplicates = node.values.filter(
           (item, index) =>
-            node.values.findIndex(
-              (v) =>
-                v.name.value.toLowerCase() === item.name.value.toLowerCase()
-            ) !== index
+            node.values.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !== index
         );
 
         for (const dup of foundDuplicates) {

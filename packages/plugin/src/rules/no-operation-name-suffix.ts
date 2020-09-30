@@ -1,20 +1,15 @@
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from "../types";
-import { GraphQLESTreeNode } from "../estree-parser/estree-ast";
-import { OperationDefinitionNode, FragmentDefinitionNode } from "graphql";
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
+import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
-const NO_OPERATION_NAME_SUFFIX = "NO_OPERATION_NAME_SUFFIX";
+const NO_OPERATION_NAME_SUFFIX = 'NO_OPERATION_NAME_SUFFIX';
 
 function verifyRule(
   context: GraphQLESlintRuleContext,
-  node:
-    | GraphQLESTreeNode<OperationDefinitionNode>
-    | GraphQLESTreeNode<FragmentDefinitionNode>
+  node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>
 ) {
-  if (node && node.name && node.name.value !== "") {
-    const invalidSuffix = (node.type === "OperationDefinition"
-      ? node.operation
-      : "fragment"
-    ).toLowerCase();
+  if (node && node.name && node.name.value !== '') {
+    const invalidSuffix = (node.type === 'OperationDefinition' ? node.operation : 'fragment').toLowerCase();
 
     if (node.name.value.toLowerCase().endsWith(invalidSuffix)) {
       context.report({
@@ -22,11 +17,7 @@ function verifyRule(
         data: {
           invalidSuffix,
         },
-        fix: (fixer) =>
-          fixer.removeRange([
-            node.name.range[1] - invalidSuffix.length,
-            node.name.range[1],
-          ]),
+        fix: fixer => fixer.removeRange([node.name.range[1] - invalidSuffix.length, node.name.range[1]]),
         messageId: NO_OPERATION_NAME_SUFFIX,
       });
     }
@@ -35,7 +26,7 @@ function verifyRule(
 
 const rule: GraphQLESLintRule = {
   meta: {
-    fixable: "code",
+    fixable: 'code',
     messages: {
       [NO_OPERATION_NAME_SUFFIX]: `Unnecessary "{{ invalidSuffix }}" suffix in your operation name!`,
     },

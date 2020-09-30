@@ -1,19 +1,7 @@
-import {
-  convertDescription,
-  convertLocation,
-  convertRange,
-  extractCommentsFromAst,
-} from "./utils";
-import { GraphQLESTreeNode, SafeGraphQLType } from "./estree-ast";
-import {
-  ASTNode,
-  TypeNode,
-  TypeInfo,
-  visit,
-  visitWithTypeInfo,
-  Location,
-} from "graphql";
-import { Comment } from "estree";
+import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
+import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
+import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location } from 'graphql';
+import { Comment } from 'estree';
 
 export function convertToESTree<T extends ASTNode>(
   node: T,
@@ -23,30 +11,23 @@ export function convertToESTree<T extends ASTNode>(
   const visitor = { leave: convertNode(typeInfo) };
 
   return {
-    rootTree: visit(
-      node,
-      typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor
-    ),
+    rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor),
     comments,
   };
 }
 
-function hasTypeField<T extends ASTNode>(
-  obj: any
-): obj is T & { readonly type: TypeNode } {
+function hasTypeField<T extends ASTNode>(obj: any): obj is T & { readonly type: TypeNode } {
   return obj && !!(obj as any).type;
 }
 
-function stripTokens(location: Location): Pick<Location, "start" | "end"> {
+function stripTokens(location: Location): Pick<Location, 'start' | 'end'> {
   return {
     end: location.end,
     start: location.start,
   };
 }
 
-const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
-  node: T
-): GraphQLESTreeNode<T> => {
+const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(node: T): GraphQLESTreeNode<T> => {
   const calculatedTypeInfo = typeInfo
     ? {
         argument: typeInfo.getArgument(),
@@ -85,9 +66,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
     return estreeNode;
   } else {
     const { loc: gqlLocation, ...rest } = node;
-    const typeFieldSafe: SafeGraphQLType<T> = rest as SafeGraphQLType<
-      T & { readonly type: TypeNode }
-    >;
+    const typeFieldSafe: SafeGraphQLType<T> = rest as SafeGraphQLType<T & { readonly type: TypeNode }>;
     const estreeNode: GraphQLESTreeNode<T> = ({
       ...typeFieldSafe,
       ...commonFields,

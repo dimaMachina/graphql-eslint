@@ -15,9 +15,9 @@ import {
   GraphQLNamedType,
   isNonNullType,
   isListType,
-} from "graphql";
-import { SourceLocation, Comment } from "estree";
-import { GraphQLESTreeNode } from "./estree-ast";
+} from 'graphql';
+import { SourceLocation, Comment } from 'estree';
+import { GraphQLESTreeNode } from './estree-ast';
 
 export default function keyValMap<T, V>(
   list: ReadonlyArray<T>,
@@ -30,10 +30,7 @@ export default function keyValMap<T, V>(
   }, Object.create(null));
 }
 
-export function valueFromNode(
-  valueNode: GraphQLESTreeNode<ValueNode>,
-  variables?: Record<string, any>
-): any {
+export function valueFromNode(valueNode: GraphQLESTreeNode<ValueNode>, variables?: Record<string, any>): any {
   switch (valueNode.type) {
     case Kind.NULL:
       return null;
@@ -46,18 +43,17 @@ export function valueFromNode(
     case Kind.BOOLEAN:
       return (valueNode as GraphQLESTreeNode<BooleanValueNode>).value;
     case Kind.LIST:
-      return ((valueNode as GraphQLESTreeNode<ListValueNode>)
-        .values as any).map((node) => valueFromNode(node, variables));
+      return ((valueNode as GraphQLESTreeNode<ListValueNode>).values as any).map(node =>
+        valueFromNode(node, variables)
+      );
     case Kind.OBJECT:
       return keyValMap(
         (valueNode as GraphQLESTreeNode<ObjectValueNode>).fields,
-        (field) => field.name.value,
-        (field) => valueFromNode(field.value, variables)
+        field => field.name.value,
+        field => valueFromNode(field.value, variables)
       );
     case Kind.VARIABLE:
-      return variables?.[
-        (valueNode as GraphQLESTreeNode<VariableNode>).name.value
-      ];
+      return variables?.[(valueNode as GraphQLESTreeNode<VariableNode>).name.value];
   }
 }
 
@@ -87,8 +83,8 @@ export function extractCommentsFromAst(node: ASTNode): Comment[] {
     if (token.kind === TokenKind.COMMENT) {
       const value = String(token.value);
       comments.push({
-        type: "Block",
-        value: " " + value + " ",
+        type: 'Block',
+        value: ' ' + value + ' ',
         loc: {
           start: {
             line: token.line,
@@ -133,7 +129,7 @@ export function convertDescription<T extends ASTNode>(node: T): Comment[] {
   if (isNodeWithDescription(node)) {
     return [
       {
-        type: node.description.block ? "Block" : "Line",
+        type: node.description.block ? 'Block' : 'Line',
         value: node.description.value,
       },
     ];

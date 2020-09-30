@@ -1,8 +1,8 @@
-import { extname } from "path";
-import { parseCode } from "@graphql-tools/graphql-tag-pluck";
+import { extname } from 'path';
+import { parseCode } from '@graphql-tools/graphql-tag-pluck';
 
-const EXTRACTABLE_FILES_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"];
-const RELEVANT_KEYWORDS = ["gql", "graphql", "/* GraphQL */"];
+const EXTRACTABLE_FILES_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
+const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
 
 type Block = {
   text: string;
@@ -14,10 +14,7 @@ export const createGraphqlProcessor = () => {
   const blocksMap = new Map<string, Block[]>();
 
   return {
-    preprocess: (
-      text: string,
-      filename: string
-    ): Array<{ text: string; filename: string }> => {
+    preprocess: (text: string, filename: string): Array<{ text: string; filename: string }> => {
       const blocks: Block[] = [];
       blocksMap.set(filename, blocks);
 
@@ -25,13 +22,13 @@ export const createGraphqlProcessor = () => {
         filename &&
         text &&
         EXTRACTABLE_FILES_EXTENSIONS.includes(extname(filename)) &&
-        RELEVANT_KEYWORDS.some((keyword) => text.includes(keyword))
+        RELEVANT_KEYWORDS.some(keyword => text.includes(keyword))
       ) {
         const extractedDocuments = parseCode({
           code: text,
           filePath: filename,
           options: {
-            globalGqlIdentifierName: ["gql", "graphql"],
+            globalGqlIdentifierName: ['gql', 'graphql'],
             skipIndent: true,
           },
         });

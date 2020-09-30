@@ -11,9 +11,11 @@
     "lint": "eslint --ext .ts .",
     "prebuild": "rimraf packages/*/dist",
     "build": "tsc --project tsconfig.json && bob build",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --ignore-path .gitignore --write --list-different \"**/*.{ts,tsx,graphql,yml}\""
   },
   "devDependencies": {
+    "@changesets/cli": "2.10.3",
     "@typescript-eslint/eslint-plugin": "3.7.1",
     "@typescript-eslint/parser": "3.7.1",
     "eslint": "7.6.0",
@@ -21,13 +23,13 @@
     "lint-staged": "10.2.11",
     "@types/node": "14.0.27",
     "bob-the-bundler": "1.1.0",
-    "eslint-config-prettier": "6.11.0",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react-hooks": "4.0.8",
     "eslint-plugin-standard": "4.0.1",
+    "eslint-config-prettier": "6.12.0",
     "@types/jest": "26.0.12",
     "ts-jest": "26.3.0",
     "rimraf": "3.0.2",
@@ -37,6 +39,12 @@
   "lint-staged": {
     "packages/**/src/**/*.{ts,tsx}": [
       "eslint --fix"
+    ],
+    "**/*.{ts,tsx,graphql,yml}": [
+      "prettier --write"
+    ],
+    "**/*.json": [
+      "prettier --write"
     ]
   }
 }

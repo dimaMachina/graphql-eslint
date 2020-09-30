@@ -1,10 +1,10 @@
-import { requireGraphQLSchemaFromContext } from "../utils";
-import { GraphQLESLintRule } from "../types";
-import { GraphQLInterfaceType, GraphQLObjectType } from "graphql";
-import { getBaseType } from "../estree-parser";
+import { requireGraphQLSchemaFromContext } from '../utils';
+import { GraphQLESLintRule } from '../types';
+import { GraphQLInterfaceType, GraphQLObjectType } from 'graphql';
+import { getBaseType } from '../estree-parser';
 
-const REQUIRE_ID_WHEN_AVAILABLE = "REQUIRE_ID_WHEN_AVAILABLE";
-const DEFAULT_ID_FIELD_NAME = "id";
+const REQUIRE_ID_WHEN_AVAILABLE = 'REQUIRE_ID_WHEN_AVAILABLE';
+const DEFAULT_ID_FIELD_NAME = 'id';
 
 type RequireIdWhenAvailableRuleConfig = { fieldName: string };
 
@@ -14,15 +14,15 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
       [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!`,
     },
     schema: {
-      type: "array",
+      type: 'array',
       additionalItems: false,
       minItems: 0,
       maxItems: 1,
       items: {
-        type: "object",
+        type: 'object',
         properties: {
           fieldName: {
-            type: "string",
+            type: 'string',
             default: DEFAULT_ID_FIELD_NAME,
           },
         },
@@ -34,8 +34,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
       SelectionSet(node) {
         requireGraphQLSchemaFromContext(context);
 
-        const fieldName =
-          (context.options[0] || {}).fieldName || DEFAULT_ID_FIELD_NAME;
+        const fieldName = (context.options[0] || {}).fieldName || DEFAULT_ID_FIELD_NAME;
 
         if (!node.selections || node.selections.length === 0) {
           return;
@@ -45,16 +44,13 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
 
         if (typeInfo && typeInfo.gqlType) {
           const rawType = getBaseType(typeInfo.gqlType);
-          if (
-            rawType instanceof GraphQLObjectType ||
-            rawType instanceof GraphQLInterfaceType
-          ) {
+          if (rawType instanceof GraphQLObjectType || rawType instanceof GraphQLInterfaceType) {
             const fields = rawType.getFields();
             const hasIdFieldInType = !!fields[fieldName];
 
             if (hasIdFieldInType) {
               const hasIdFieldInSelectionSet = !!node.selections.find(
-                (s) => s.kind === "Field" && s.name.value === fieldName
+                s => s.kind === 'Field' && s.name.value === fieldName
               );
 
               if (!hasIdFieldInSelectionSet) {

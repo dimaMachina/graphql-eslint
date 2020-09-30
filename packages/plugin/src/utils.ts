@@ -1,9 +1,7 @@
-import { GraphQLSchema } from "graphql";
-import { GraphQLESlintRuleContext } from "./types";
+import { GraphQLSchema } from 'graphql';
+import { GraphQLESlintRuleContext } from './types';
 
-export function requireGraphQLSchemaFromContext(
-  context: GraphQLESlintRuleContext<any>
-): GraphQLSchema {
+export function requireGraphQLSchemaFromContext(context: GraphQLESlintRuleContext<any>): GraphQLSchema {
   if (!context || !context.parserServices) {
     throw new Error(
       `You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.schema" property for "@typescript-graphql/parser", or use graphql-config!`

@@ -1,8 +1,8 @@
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from "../types";
-import { GraphQLESTreeNode } from "../estree-parser/estree-ast";
-import { ASTNode, Kind, StringValueNode } from "graphql";
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
+import { ASTNode, Kind, StringValueNode } from 'graphql';
 
-const REQUIRE_DESCRIPTION_ERROR = "REQUIRE_DESCRIPTION_ERROR";
+const REQUIRE_DESCRIPTION_ERROR = 'REQUIRE_DESCRIPTION_ERROR';
 const DESCRIBABLE_NODES = [
   Kind.SCHEMA_DEFINITION,
   Kind.OBJECT_TYPE_DEFINITION,
@@ -24,11 +24,7 @@ function verifyRule(
   }
 ) {
   if (node) {
-    if (
-      !node.description ||
-      !node.description.value ||
-      node.description.value.trim().length === 0
-    ) {
+    if (!node.description || !node.description.value || node.description.value.trim().length === 0) {
       context.report({
         loc: {
           start: {
@@ -55,20 +51,20 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
       [REQUIRE_DESCRIPTION_ERROR]: `Description is required for nodes of type "{{ nodeType }}"`,
     },
     schema: {
-      type: "array",
+      type: 'array',
       additionalItems: false,
       minItems: 1,
       maxItems: 1,
       items: {
-        type: "object",
-        require: ["on"],
+        type: 'object',
+        require: ['on'],
         properties: {
           on: {
-            type: "array",
+            type: 'array',
             minItems: 1,
             additionalItems: false,
             items: {
-              type: "string",
+              type: 'string',
               enum: DESCRIBABLE_NODES,
             },
           },
@@ -80,7 +76,7 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
     return context.options[0].on.reduce((prev, optionKey) => {
       return {
         ...prev,
-        [optionKey]: (node) => verifyRule(context, node),
+        [optionKey]: node => verifyRule(context, node),
       };
     }, {});
   },

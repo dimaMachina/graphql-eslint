@@ -1,24 +1,14 @@
-import { Kind, validate, GraphQLSchema, DocumentNode } from "graphql";
-import { GraphQLESTreeNode } from "../estree-parser";
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from "../types";
-import { requireGraphQLSchemaFromContext } from "../utils";
+import { Kind, validate, GraphQLSchema, DocumentNode } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { requireGraphQLSchemaFromContext } from '../utils';
 
-function validateDoc(
-  context: GraphQLESlintRuleContext,
-  schema: GraphQLSchema,
-  documentNode: DocumentNode
-) {
-  if (
-    documentNode &&
-    documentNode.definitions &&
-    documentNode.definitions.length > 0
-  ) {
+function validateDoc(context: GraphQLESlintRuleContext, schema: GraphQLSchema, documentNode: DocumentNode) {
+  if (documentNode && documentNode.definitions && documentNode.definitions.length > 0) {
     const validationErrors = validate(schema, documentNode);
 
     for (const error of validationErrors) {
-      const node = (error.nodes[0] as any) as GraphQLESTreeNode<
-        typeof error.nodes[0]
-      >;
+      const node = (error.nodes[0] as any) as GraphQLESTreeNode<typeof error.nodes[0]>;
 
       context.report({
         loc: node.loc,
@@ -30,7 +20,7 @@ function validateDoc(
 
 const rule: GraphQLESLintRule = {
   meta: {
-    type: "problem",
+    type: 'problem',
   },
   create(context) {
     return {

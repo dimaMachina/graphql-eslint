@@ -1,6 +1,6 @@
-import { GraphQLESLintRule } from "../types";
+import { GraphQLESLintRule } from '../types';
 
-const NO_ANONYMOUS_OPERATIONS = "NO_ANONYMOUS_OPERATIONS";
+const NO_ANONYMOUS_OPERATIONS = 'NO_ANONYMOUS_OPERATIONS';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -11,7 +11,7 @@ const rule: GraphQLESLintRule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        if (node && (!node.name || node.name.value === "")) {
+        if (node && (!node.name || node.name.value === '')) {
           context.report({
             loc: {
               start: {
