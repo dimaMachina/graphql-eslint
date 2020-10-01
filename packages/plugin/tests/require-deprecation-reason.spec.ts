@@ -3,7 +3,7 @@ import rule from '../src/rules/require-deprecation-reason';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.run('require-deprecation-reason', rule, {
+ruleTester.runGraphQLTests('require-deprecation-reason', rule, {
   valid: [
     {
       code: /* GraphQL */ `

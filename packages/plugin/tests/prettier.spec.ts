@@ -3,7 +3,7 @@ import rule from '../src/rules/prettier';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.run('prettier', rule, {
+ruleTester.runGraphQLTests('prettier', rule, {
   valid: ['scalar Test\n'],
   invalid: [
     {

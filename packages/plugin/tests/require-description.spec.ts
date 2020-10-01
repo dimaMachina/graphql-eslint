@@ -4,7 +4,7 @@ import { Kind } from 'graphql';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.run('require-description', rule, {
+ruleTester.runGraphQLTests('require-description', rule, {
   valid: [
     {
       code: /* GraphQL */ `

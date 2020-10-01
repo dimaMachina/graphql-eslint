@@ -3,7 +3,7 @@ import rule from '../src/rules/naming-convention';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.run('naming-convention', rule, {
+ruleTester.runGraphQLTests('naming-convention', rule, {
   valid: [
     {
       code: `query GetUser($userId:      ID!) {
@@ -46,7 +46,7 @@ ruleTester.run('naming-convention', rule, {
         {
           leadingUnderscore: 'allow',
           trailingUnderscore: 'allow',
-          TypeDefinition: 'PascalCase',
+          ObjectTypeDefinition: 'PascalCase',
           FieldDefinition: 'camelCase',
         },
       ],

@@ -3,7 +3,7 @@ import rule from '../src/rules/input-name';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.run('input-name', rule, {
+ruleTester.runGraphQLTests('input-name', rule, {
   valid: [
     {
       code: 'type Mutation { SetMessage(input: SetMessageInput): String }',
