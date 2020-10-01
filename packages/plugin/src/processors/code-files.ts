@@ -1,5 +1,6 @@
 import { extname } from 'path';
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
+import {} from 'eslint';
 
 const EXTRACTABLE_FILES_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
@@ -10,7 +11,8 @@ type Block = {
   lineOffset?: number;
 };
 
-export const createGraphqlProcessor = () => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function createGraphqlProcessor() {
   const blocksMap = new Map<string, Block[]>();
 
   return {
@@ -71,4 +73,4 @@ export const createGraphqlProcessor = () => {
       return [].concat(...messageLists);
     },
   };
-};
+}

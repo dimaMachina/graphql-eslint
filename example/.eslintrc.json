@@ -9,8 +9,28 @@
       },
       "plugins": ["@graphql-eslint"],
       "rules": {
-        "@graphql-eslint/description-style": ["error", { "style": "block" }]
-      }
+        "@graphql-eslint/require-id-when-available": [
+          "error",
+          {
+            "fieldName": "_id"
+          }
+        ],
+        "@graphql-eslint/validate-against-schema": "error",
+        "@graphql-eslint/no-anonymous-operations": "warn",
+        "@graphql-eslint/no-operation-name-suffix": "error",
+        "@graphql-eslint/avoid-operation-name-prefix": [
+          "error",
+          {
+            "keywords": ["get"]
+          }
+        ],
+        "@graphql-eslint/no-case-insensitive-enum-values-duplicates": ["error"],
+        "@graphql-eslint/require-description": [
+          "warn",
+          {
+            "on": ["SchemaDefinition", "FieldDefinition"]
+          }
+        ]      }
     }
   ]
 }
