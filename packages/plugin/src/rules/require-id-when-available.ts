@@ -6,7 +6,7 @@ import { getBaseType } from '../estree-parser';
 const REQUIRE_ID_WHEN_AVAILABLE = 'REQUIRE_ID_WHEN_AVAILABLE';
 const DEFAULT_ID_FIELD_NAME = 'id';
 
-type RequireIdWhenAvailableRuleConfig = { fieldName: string };
+type RequireIdWhenAvailableRuleConfig = [{ fieldName: string }];
 
 const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
   meta: {

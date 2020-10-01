@@ -2,10 +2,12 @@ import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
-type AvoidOperationNamePrefixConfig = {
-  keywords: string[];
-  caseSensitive?: boolean;
-};
+type AvoidOperationNamePrefixConfig = [
+  {
+    keywords: string[];
+    caseSensitive?: boolean;
+  }
+];
 
 const AVOID_OPERATION_NAME_PREFIX = 'AVOID_OPERATION_NAME_PREFIX';
 

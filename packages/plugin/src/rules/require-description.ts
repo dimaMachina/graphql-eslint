@@ -15,7 +15,7 @@ const DESCRIBABLE_NODES = [
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
   Kind.DIRECTIVE_DEFINITION,
 ];
-type RequireDescriptionRuleConfig = { on: typeof DESCRIBABLE_NODES };
+type RequireDescriptionRuleConfig = [{ on: typeof DESCRIBABLE_NODES }];
 
 function verifyRule(
   context: GraphQLESlintRuleContext<RequireDescriptionRuleConfig>,

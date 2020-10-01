@@ -1,8 +1,8 @@
 import { GraphQLESLintRule } from '../types';
 
-type DescriptionStyleRuleConfig = {
+type DescriptionStyleRuleConfig = [{
   style: 'inline' | 'block';
-};
+}];
 
 const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
   meta: {

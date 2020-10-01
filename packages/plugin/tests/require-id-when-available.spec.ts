@@ -1,4 +1,4 @@
-import { GraphQLRuleTester } from '@graphql-eslint/eslint-plugin';
+import { GraphQLRuleTester } from '../src/testkit';
 import rule from '../src/rules/require-id-when-available';
 
 const TEST_SCHEMA = /* GraphQL */ `

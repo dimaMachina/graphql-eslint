@@ -1,0 +1,1109 @@
+input _idOperatorsFilterFindManyUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input _idOperatorsFilterFindOneUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input _idOperatorsFilterRemoveManyUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input _idOperatorsFilterRemoveOneUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input _idOperatorsFilterUpdateManyUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input _idOperatorsFilterUpdateOneUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input _idOperatorsFilterUserInput {
+  gt: MongoID
+  gte: MongoID
+  lt: MongoID
+  lte: MongoID
+  ne: MongoID
+  in: [MongoID]
+  nin: [MongoID]
+}
+
+input AgeOperatorsFilterFindManyUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+input AgeOperatorsFilterFindOneUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+input AgeOperatorsFilterRemoveManyUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+input AgeOperatorsFilterRemoveOneUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+input AgeOperatorsFilterUpdateManyUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+input AgeOperatorsFilterUpdateOneUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+input AgeOperatorsFilterUserInput {
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  ne: Float
+  in: [Float]
+  nin: [Float]
+}
+
+"""
+The `Decimal` scalar type uses the IEEE 754 decimal128 decimal-based
+floating-point numbering format. Supports 34 decimal digits of precision, a max
+value of approximately 10^6145, and min value of approximately -10^6145
+"""
+scalar BSONDecimal
+
+input CreateManyUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+}
+
+type CreateManyUserPayload {
+  """
+  Created document ID
+  """
+  recordIds: [MongoID]!
+
+  """
+  Created documents
+  """
+  records: [User]!
+
+  """
+  Count of all documents created
+  """
+  createCount: Int!
+}
+
+input CreateOneUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+}
+
+type CreateOneUserPayload {
+  """
+  Created document ID
+  """
+  recordId: MongoID
+
+  """
+  Created document
+  """
+  record: User
+}
+
+enum EnumUserGender {
+  male
+  female
+  ladyboy
+}
+
+enum EnumUserLanguagesSkill {
+  basic
+  fluent
+  native
+}
+
+input FilterFindManyUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterFindManyUserInput
+  OR: [FilterFindManyUserInput!]
+  AND: [FilterFindManyUserInput!]
+
+  """
+  Search by distance in meters
+  """
+  geoDistance: GeoDistance
+}
+
+input FilterFindOneUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterFindOneUserInput
+  OR: [FilterFindOneUserInput!]
+  AND: [FilterFindOneUserInput!]
+}
+
+input FilterRemoveManyUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterRemoveManyUserInput
+  OR: [FilterRemoveManyUserInput!]
+  AND: [FilterRemoveManyUserInput!]
+}
+
+input FilterRemoveOneUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterRemoveOneUserInput
+  OR: [FilterRemoveOneUserInput!]
+  AND: [FilterRemoveOneUserInput!]
+}
+
+input FilterUpdateManyUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterUpdateManyUserInput
+  OR: [FilterUpdateManyUserInput!]
+  AND: [FilterUpdateManyUserInput!]
+}
+
+input FilterUpdateOneUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterUpdateOneUserInput
+  OR: [FilterUpdateOneUserInput!]
+  AND: [FilterUpdateOneUserInput!]
+}
+
+input FilterUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID
+  _ids: [MongoID]
+
+  """
+  List of *indexed* fields that can be filtered via operators.
+  """
+  _operators: OperatorsFilterUserInput
+  OR: [FilterUserInput!]
+  AND: [FilterUserInput!]
+}
+
+input GenderOperatorsFilterFindManyUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GenderOperatorsFilterFindOneUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GenderOperatorsFilterRemoveManyUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GenderOperatorsFilterRemoveOneUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GenderOperatorsFilterUpdateManyUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GenderOperatorsFilterUpdateOneUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GenderOperatorsFilterUserInput {
+  gt: EnumUserGender
+  gte: EnumUserGender
+  lt: EnumUserGender
+  lte: EnumUserGender
+  ne: EnumUserGender
+  in: [EnumUserGender]
+  nin: [EnumUserGender]
+}
+
+input GeoDistance {
+  lng: Float!
+  lat: Float!
+  distance: Float!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+The `ID` scalar type represents a unique MongoDB identifier in collection.
+MongoDB by default use 12-byte ObjectId value
+(https://docs.mongodb.com/manual/reference/bson-types/#objectid). But MongoDB
+also may accepts string or integer as correct values for _id field.
+"""
+scalar MongoID
+
+type Mutation {
+  """
+  Create one document with mongoose defaults, setters, hooks and validation
+  """
+  userCreate(record: CreateOneUserInput!): CreateOneUserPayload
+
+  """
+  Creates Many documents with mongoose defaults, setters, hooks and validation
+  """
+  userCreateMany(records: [CreateManyUserInput!]!): CreateManyUserPayload
+  """
+  Update one document: 1) Retrieve one document by findById. 2) Apply updates to
+  mongoose document. 3) Mongoose applies defaults, setters, hooks and
+  validation. 4) And save it.
+  """
+  userUpdateById(record: UpdateByIdUserInput!): UpdateByIdUserPayload
+  """
+  Update one document: 1) Retrieve one document via findOne. 2) Apply updates to
+  mongoose document. 3) Mongoose applies defaults, setters, hooks and
+  validation. 4) And save it.
+  """
+  userUpdateOne(
+    record: UpdateOneUserInput!
+    """
+    Filter by fields
+    """
+    filter: FilterUpdateOneUserInput
+    sort: SortUpdateOneUserInput
+    skip: Int
+  ): UpdateOneUserPayload
+  """
+  Update many documents without returning them: Use Query.update mongoose
+  method. Do not apply mongoose defaults, setters, hooks and validation.
+  """
+  userUpdateMany(
+    record: UpdateManyUserInput!
+    """
+    Filter by fields
+    """
+    filter: FilterUpdateManyUserInput
+    sort: SortUpdateManyUserInput
+    skip: Int
+    limit: Int = 1000
+  ): UpdateManyUserPayload
+  """
+  Remove one document: 1) Retrieve one document and remove with hooks via findByIdAndRemove. 2) Return removed document.
+  """
+  userRemoveById(_id: MongoID!): RemoveByIdUserPayload
+
+  """
+  Remove one document: 1) Remove with hooks via findOneAndRemove. 2) Return removed document.
+  """
+  userRemoveOne(
+    """
+    Filter by fields
+    """
+    filter: FilterRemoveOneUserInput
+    sort: SortRemoveOneUserInput
+  ): RemoveOneUserPayload
+
+  """
+  Remove many documents without returning them: Use Query.remove mongoose
+  method. Do not apply mongoose defaults, setters, hooks and validation.
+  """
+  userRemoveMany(
+    """
+    Filter by fields
+    """
+    filter: FilterRemoveManyUserInput!
+  ): RemoveManyUserPayload
+}
+input NameOperatorsFilterFindManyUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+input NameOperatorsFilterFindOneUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+input NameOperatorsFilterRemoveManyUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+input NameOperatorsFilterRemoveOneUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+input NameOperatorsFilterUpdateManyUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+input NameOperatorsFilterUpdateOneUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+input NameOperatorsFilterUserInput {
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  ne: String
+  in: [String]
+  nin: [String]
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterFindManyUserInput {
+  name: NameOperatorsFilterFindManyUserInput
+  age: AgeOperatorsFilterFindManyUserInput
+  gender: GenderOperatorsFilterFindManyUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterFindManyUserInput
+  _id: _idOperatorsFilterFindManyUserInput
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterFindOneUserInput {
+  name: NameOperatorsFilterFindOneUserInput
+  age: AgeOperatorsFilterFindOneUserInput
+  gender: GenderOperatorsFilterFindOneUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterFindOneUserInput
+  _id: _idOperatorsFilterFindOneUserInput
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterRemoveManyUserInput {
+  name: NameOperatorsFilterRemoveManyUserInput
+  age: AgeOperatorsFilterRemoveManyUserInput
+  gender: GenderOperatorsFilterRemoveManyUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterRemoveManyUserInput
+  _id: _idOperatorsFilterRemoveManyUserInput
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterRemoveOneUserInput {
+  name: NameOperatorsFilterRemoveOneUserInput
+  age: AgeOperatorsFilterRemoveOneUserInput
+  gender: GenderOperatorsFilterRemoveOneUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterRemoveOneUserInput
+  _id: _idOperatorsFilterRemoveOneUserInput
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterUpdateManyUserInput {
+  name: NameOperatorsFilterUpdateManyUserInput
+  age: AgeOperatorsFilterUpdateManyUserInput
+  gender: GenderOperatorsFilterUpdateManyUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterUpdateManyUserInput
+  _id: _idOperatorsFilterUpdateManyUserInput
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterUpdateOneUserInput {
+  name: NameOperatorsFilterUpdateOneUserInput
+  age: AgeOperatorsFilterUpdateOneUserInput
+  gender: GenderOperatorsFilterUpdateOneUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterUpdateOneUserInput
+  _id: _idOperatorsFilterUpdateOneUserInput
+}
+"""
+For performance reason this type contains only *indexed* fields.
+"""
+input OperatorsFilterUserInput {
+  name: NameOperatorsFilterUserInput
+  age: AgeOperatorsFilterUserInput
+  gender: GenderOperatorsFilterUserInput
+  salaryDecimal: SalaryDecimalOperatorsFilterUserInput
+  _id: _idOperatorsFilterUserInput
+}
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+}
+type PaginationInfo {
+  currentPage: Int!
+  perPage: Int!
+  pageCount: Int
+  itemCount: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+}
+type Query {
+  userById(_id: MongoID!): User
+  userByIds(_ids: [MongoID]!, limit: Int = 1000, sort: SortFindByIdsUserInput): [User]
+  userOne(
+    """
+    Filter by fields
+    """
+    filter: FilterFindOneUserInput
+    skip: Int
+    sort: SortFindOneUserInput
+  ): User
+  userMany(
+    """
+    Filter by fields
+    """
+    filter: FilterFindManyUserInput
+    skip: Int
+    limit: Int = 1000
+    sort: SortFindManyUserInput
+  ): [User]
+  userTotal(
+    """
+    Filter by fields
+    """
+    filter: FilterUserInput
+  ): Int
+  userConnection(
+    """
+    Forward pagination argument for returning at most first edges
+    """
+    first: Int
+    """
+    Forward pagination argument for returning at most first edges
+    """
+    after: String
+    """
+    Backward pagination argument for returning at most last edges
+    """
+    last: Int
+    """
+    Backward pagination argument for returning at most last edges
+    """
+    before: String
+    """
+    Filter by fields
+    """
+    filter: FilterFindManyUserInput
+    """
+    Sort argument for data ordering
+    """
+    sort: SortConnectionUserEnum = _ID_DESC
+  ): UserConnection
+  userPagination(
+    """
+    Page number for displaying
+    """
+    page: Int
+    perPage: Int = 20
+    """
+    Filter by fields
+    """
+    filter: FilterFindManyUserInput
+    sort: SortFindManyUserInput
+  ): UserPagination
+}
+type RemoveByIdUserPayload {
+  """
+  Removed document ID
+  """
+  recordId: MongoID
+  """
+  Removed document
+  """
+  record: User
+}
+type RemoveManyUserPayload {
+  """
+  Affected documents number
+  """
+  numAffected: Int
+}
+type RemoveOneUserPayload {
+  """
+  Removed document ID
+  """
+  recordId: MongoID
+  """
+  Removed document
+  """
+  record: User
+}
+input SalaryDecimalOperatorsFilterFindManyUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+input SalaryDecimalOperatorsFilterFindOneUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+input SalaryDecimalOperatorsFilterRemoveManyUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+input SalaryDecimalOperatorsFilterRemoveOneUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+input SalaryDecimalOperatorsFilterUpdateManyUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+input SalaryDecimalOperatorsFilterUserInput {
+  gt: BSONDecimal
+  gte: BSONDecimal
+  lt: BSONDecimal
+  lte: BSONDecimal
+  ne: BSONDecimal
+  in: [BSONDecimal]
+  nin: [BSONDecimal]
+}
+enum SortConnectionUserEnum {
+  _ID_DESC
+  _ID_ASC
+}
+enum SortFindByIdsUserInput {
+  _ID_ASC
+  _ID_DESC
+  NAME_ASC
+  NAME_DESC
+  AGE_ASC
+  AGE_DESC
+  SALARYDECIMAL_ASC
+  SALARYDECIMAL_DESC
+  GENDER_ASC
+  GENDER_DESC
+  GENDER__AGE_ASC
+  GENDER__AGE_DESC
+}
+enum SortFindManyUserInput {
+  _ID_ASC
+  _ID_DESC
+  NAME_ASC
+  NAME_DESC
+  AGE_ASC
+  AGE_DESC
+  SALARYDECIMAL_ASC
+  SALARYDECIMAL_DESC
+  GENDER_ASC
+  GENDER_DESC
+  GENDER__AGE_ASC
+  GENDER__AGE_DESC
+}
+enum SortFindOneUserInput {
+  _ID_ASC
+  _ID_DESC
+  NAME_ASC
+  NAME_DESC
+  AGE_ASC
+  AGE_DESC
+  SALARYDECIMAL_ASC
+  SALARYDECIMAL_DESC
+  GENDER_ASC
+  GENDER_DESC
+  GENDER__AGE_ASC
+  GENDER__AGE_DESC
+}
+enum SortRemoveOneUserInput {
+  _ID_ASC
+  _ID_DESC
+  NAME_ASC
+  NAME_DESC
+  AGE_ASC
+  AGE_DESC
+  SALARYDECIMAL_ASC
+  SALARYDECIMAL_DESC
+  GENDER_ASC
+  GENDER_DESC
+  GENDER__AGE_ASC
+  GENDER__AGE_DESC
+}
+enum SortUpdateManyUserInput {
+  _ID_ASC
+  _ID_DESC
+  NAME_ASC
+  NAME_DESC
+  AGE_ASC
+  AGE_DESC
+  SALARYDECIMAL_ASC
+  SALARYDECIMAL_DESC
+  GENDER_ASC
+  GENDER_DESC
+  GENDER__AGE_ASC
+  GENDER__AGE_DESC
+}
+enum SortUpdateOneUserInput {
+  _ID_ASC
+  _ID_DESC
+  NAME_ASC
+  NAME_DESC
+  AGE_ASC
+  AGE_DESC
+  SALARYDECIMAL_ASC
+  SALARYDECIMAL_DESC
+  GENDER_ASC
+  GENDER_DESC
+  GENDER__AGE_ASC
+  GENDER__AGE_DESC
+}
+input UpdateByIdUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID!
+}
+type UpdateByIdUserPayload {
+  """
+  Updated document ID
+  """
+  recordId: MongoID
+  """
+  Updated document
+  """
+  record: User
+}
+input UpdateManyUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+}
+type UpdateManyUserPayload {
+  """
+  Affected documents number
+  """
+  numAffected: Int
+}
+input UpdateOneUserInput {
+  name: String
+  age: Float
+  languages: [UserLanguagesInput]
+  contacts: UserContactsInput
+  gender: EnumUserGender
+  address: UserAddressInput
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+}
+type UpdateOneUserPayload {
+  """
+  Updated document ID
+  """
+  recordId: MongoID
+  """
+  Updated document
+  """
+  record: User
+}
+type User {
+  name: String
+  age: Float
+  languages: [UserLanguages]
+  contacts: UserContacts
+  gender: EnumUserGender
+  address: UserAddress
+  """
+  Some dynamic data
+  """
+  someMixed: JSON
+  salaryDecimal: BSONDecimal
+  _id: MongoID!
+  virtualField(lang: String): String
+}
+type UserAddress {
+  street: String
+  geo: [Float]
+  _id: MongoID
+}
+input UserAddressInput {
+  street: String
+  geo: [Float]
+  _id: MongoID
+}
+"""
+A connection to a list of items.
+"""
+type UserConnection {
+  """
+  Total object count.
+  """
+  count: Int!
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+  """
+  Information to aid in pagination.
+  """
+  edges: [UserEdge!]!
+}
+type UserContacts {
+  email: String
+  phones: [String]
+}
+input UserContactsInput {
+  email: String
+  phones: [String]
+}
+"""
+An edge in a connection.
+"""
+type UserEdge {
+  """
+  The item at the end of the edge
+  """
+  node: User!
+  """
+  A cursor for use in pagination
+  """
+  cursor: String!
+}
+type UserLanguages {
+  language: String
+  skill: EnumUserLanguagesSkill
+}
+input UserLanguagesInput {
+  language: String
+  skill: EnumUserLanguagesSkill
+}
+"""
+List of items with pagination.
+"""
+type UserPagination {
+  """
+  Total object count.
+  """
+  count: Int
+  """
+  Array of objects.
+  """
+  items: [User]
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PaginationInfo!
+}

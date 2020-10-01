@@ -7,8 +7,12 @@ import noCaseInsensitiveEnumValuesDuplicates from './no-case-insensitive-enum-va
 import requireDescription from './require-description';
 import requireIdWhenAvailable from './require-id-when-available';
 import descriptionStyle from './description-style';
+import prettier from './prettier';
+import namingConvention from './naming-convention';
+import inputName from './input-name';
+import { GraphQLESLintRule } from '../types';
 
-export const rules = {
+export const rules: Record<string, GraphQLESLintRule> = {
   'validate-against-schema': validate,
   'no-anonymous-operations': noAnonymousOperations,
   'no-operation-name-suffix': noOperationNameSuffix,
@@ -17,5 +21,8 @@ export const rules = {
   'no-case-insensitive-enum-values-duplicates': noCaseInsensitiveEnumValuesDuplicates,
   'require-description': requireDescription,
   'require-id-when-available': requireIdWhenAvailable,
-  'description-style': descriptionStyle
+  'description-style': descriptionStyle,
+  prettier: prettier,
+  'naming-convention': namingConvention,
+  'input-name': inputName,
 };
