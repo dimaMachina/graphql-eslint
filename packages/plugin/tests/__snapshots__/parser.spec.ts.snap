@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Parser parseForESLint() should return ast and tokens 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "definitions": Array [
+        Object {
+          "description": Object {
+            "block": true,
+            "gqlLocation": Object {
+              "end": 52,
+              "start": 7,
+            },
+            "kind": "StringValue",
+            "leadingComments": Array [],
+            "loc": Object {
+              "end": Object {
+                "column": 7,
+                "line": 2,
+              },
+              "source": "
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+              "start": Object {
+                "column": 7,
+                "line": 2,
+              },
+            },
+            "range": Array [
+              7,
+              52,
+            ],
+            "rawNode": [Function],
+            "type": "StringValue",
+            "typeInfo": [Function],
+            "value": "generic query placeholder",
+          },
+          "directives": Array [],
+          "fields": Array [],
+          "gqlLocation": Object {
+            "end": 69,
+            "start": 7,
+          },
+          "interfaces": Array [],
+          "kind": "ObjectTypeDefinition",
+          "leadingComments": Array [
+            Object {
+              "type": "Block",
+              "value": "generic query placeholder",
+            },
+          ],
+          "loc": Object {
+            "end": Object {
+              "column": 12,
+              "line": 5,
+            },
+            "source": "
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+            "start": Object {
+              "column": 7,
+              "line": 2,
+            },
+          },
+          "name": Object {
+            "gqlLocation": Object {
+              "end": 69,
+              "start": 64,
+            },
+            "kind": "Name",
+            "leadingComments": Array [],
+            "loc": Object {
+              "end": Object {
+                "column": 12,
+                "line": 5,
+              },
+              "source": "
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+              "start": Object {
+                "column": 12,
+                "line": 5,
+              },
+            },
+            "range": Array [
+              64,
+              69,
+            ],
+            "rawNode": [Function],
+            "type": "Name",
+            "typeInfo": [Function],
+            "value": "Query",
+          },
+          "range": Array [
+            7,
+            69,
+          ],
+          "rawNode": [Function],
+          "type": "ObjectTypeDefinition",
+          "typeInfo": [Function],
+        },
+      ],
+      "gqlLocation": Object {
+        "end": 74,
+        "start": 0,
+      },
+      "kind": "Document",
+      "leadingComments": Array [],
+      "loc": Object {
+        "end": Object {
+          "column": 5,
+          "line": 6,
+        },
+        "source": "
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+        "start": Object {
+          "column": 0,
+          "line": 0,
+        },
+      },
+      "range": Array [
+        0,
+        74,
+      ],
+      "rawNode": [Function],
+      "type": "Document",
+      "typeInfo": [Function],
+    },
+  ],
+  "comments": Array [],
+  "loc": Object {
+    "end": Object {
+      "column": 5,
+      "line": 6,
+    },
+    "source": "
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+    "start": Object {
+      "column": 0,
+      "line": 0,
+    },
+  },
+  "range": Array [
+    0,
+    74,
+  ],
+  "sourceType": "script",
+  "tokens": Array [],
+  "type": "Program",
+}
+`;

@@ -18,11 +18,11 @@ export function parse(code: string, options?: GraphQLParseOptions): Linter.ESLin
   return parseForESLint(code, options).ast;
 }
 
-export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
+export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
   try {
     const config = {
       ...DEFAULT_CONFIG,
-      ...options,
+      ...(options || {}),
     };
 
     let schema: GraphQLSchema = null;
