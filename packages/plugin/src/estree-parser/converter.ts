@@ -20,6 +20,11 @@ function hasTypeField<T extends ASTNode>(obj: any): obj is T & { readonly type: 
   return obj && !!(obj as any).type;
 }
 
+/**
+ * Strips tokens information from `location` object - this is needed since it's created as linked list in GraphQL-JS,
+ * causing eslint to fail on circular JSON
+ * @param location
+ */
 function stripTokens(location: Location): Pick<Location, 'start' | 'end'> {
   return {
     end: location.end,

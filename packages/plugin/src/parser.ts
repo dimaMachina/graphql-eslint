@@ -1,12 +1,12 @@
 import { convertToESTree } from './estree-parser/converter';
 import { GraphQLParseOptions, parseGraphQLSDL } from '@graphql-tools/utils';
-import { buildSchema, GraphQLError, GraphQLSchema, TypeInfo } from 'graphql';
+import { buildSchema, GraphQLError, GraphQLSchema, Source, Lexer, TypeInfo } from 'graphql';
 import { loadConfigSync, GraphQLProjectConfig } from 'graphql-config';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { JsonFileLoader } from '@graphql-tools/json-file-loader';
 import { UrlLoader } from '@graphql-tools/url-loader';
-import { Linter } from 'eslint';
+import { Linter, AST } from 'eslint';
 import { GraphQLESLintParseResult, ParserOptions } from './types';
 
 const DEFAULT_CONFIG: ParserOptions = {
@@ -16,6 +16,33 @@ const DEFAULT_CONFIG: ParserOptions = {
 
 export function parse(code: string, options?: GraphQLParseOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
+}
+
+export function extractTokens(source: string): AST.Token[] {
+  const lexer = new Lexer(new Source(source));
+  const tokens: AST.Token[] = [];
+  let token = lexer.advance();
+
+  while (token && token.kind !== '<EOF>') {
+    tokens.push({
+      type: token.kind as any,
+      loc: {
+        start: {
+          line: token.line,
+          column: token.column,
+        },
+        end: {
+          line: token.line,
+          column: token.column,
+        },
+      },
+      value: token.value,
+      range: [token.start, token.end],
+    });
+    token = lexer.advance();
+  }
+
+  return tokens;
 }
 
 export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
@@ -83,6 +110,7 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
     });
 
     const { rootTree, comments } = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);
+    const tokens = extractTokens(code);
 
     return {
       services: parserServices,
@@ -94,7 +122,7 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
         comments,
         loc: rootTree.loc,
         range: rootTree.range as [number, number],
-        tokens: [],
+        tokens,
       },
     };
   } catch (e) {

@@ -163,7 +163,62 @@ Object {
     74,
   ],
   "sourceType": "script",
-  "tokens": Array [],
+  "tokens": Array [
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 7,
+          "line": 2,
+        },
+        "start": Object {
+          "column": 7,
+          "line": 2,
+        },
+      },
+      "range": Array [
+        7,
+        52,
+      ],
+      "type": "BlockString",
+      "value": "generic query placeholder",
+    },
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 7,
+          "line": 5,
+        },
+        "start": Object {
+          "column": 7,
+          "line": 5,
+        },
+      },
+      "range": Array [
+        59,
+        63,
+      ],
+      "type": "Name",
+      "value": "type",
+    },
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 12,
+          "line": 5,
+        },
+        "start": Object {
+          "column": 12,
+          "line": 5,
+        },
+      },
+      "range": Array [
+        64,
+        69,
+      ],
+      "type": "Name",
+      "value": "Query",
+    },
+  ],
   "type": "Program",
 }
 `;
