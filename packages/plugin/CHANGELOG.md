@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.3.2
+
+### Patch Changes
+
+- da77db6: Fix `schemaOptions` support
+
 ## 0.3.1
 
 ### Patch Changes
