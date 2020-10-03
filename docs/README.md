@@ -16,3 +16,5 @@
 ## Further Reading
 
 - [Writing Custom Rules](./custom-rules.md)
+- [How the parser works?](./parser.md)
+- [`parserOptions`](./parser-options.md)
