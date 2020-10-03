@@ -1,5 +1,5 @@
 ---
-'@graphql-eslint/eslint-plugin': major
+'@graphql-eslint/eslint-plugin': minor
 ---
 
-Initial major release
+Initial minor release from this repo.
