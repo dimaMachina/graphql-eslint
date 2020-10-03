@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
 
-This project integrates GraphQL AST parser and ESLint.
+This project integrates GraphQL and ESLint, for a better developer experience.
 
 > Created and maintained by [The Guild](http://the-guild.dev/)
 
@@ -16,7 +16,7 @@ This project integrates GraphQL AST parser and ESLint.
 - 🚀 Extended type info for more advanced usages
 - 🚀 Supports ESLint directives (for example: `disable-next-line`)
 - 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API.
-- 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL operations
+- 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL operations.
 
 Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
 
