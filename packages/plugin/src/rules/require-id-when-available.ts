@@ -10,6 +10,12 @@ type RequireIdWhenAvailableRuleConfig = [{ fieldName: string }];
 
 const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
   meta: {
+    type: 'suggestion',
+    docs: {
+      category: 'Best Practices',
+      description: `This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md`,
+    },
     messages: {
       [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!`,
     },

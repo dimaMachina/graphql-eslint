@@ -12,6 +12,7 @@ This project integrates GraphQL AST parser and ESLint.
 - 🚀 Extended type info for more advanced usages
 - 🚀 Supports ESLint directives (for example: `disable-next-line`)
 - 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API.
+- 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL operations
 
 Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
 
@@ -61,7 +62,7 @@ If you are using code files to store your GraphQL schema or your GraphQL operati
 }
 ```
 
-#### Extended linting with GraphQL Schema
+#### Extended linting rules with GraphQL Schema
 
 If you are using [`graphql-config`](https://graphql-config.com/) - you are good to go. This package integrates with it automatically, and will use it to load your schema!
 
@@ -80,6 +81,8 @@ The parser allow you to specify a json file / graphql files(s) / url / raw strin
 }
 ```
 
+> You can find a complete [documentation of the `parserOptions` here](./docs/parser-options.md)
+
 > Some rules requires type information to operate, it's marked in the docs of each plugin!
 
 ### VSCode Integration
@@ -97,8 +100,33 @@ In order to enable it processing other extensions, add the following section in 
 }
 ```
 
+### Disabling Rules
+
+The `graphql-eslint` parser looks for GraphQL comments syntax (marked with `#`) and will send it to ESLint as directives. That means, you can use ESLint directives syntax to hint ESLint, just like in any other type of files.
+
+To disable ESLint for a specific line, you can do:
+
+```graphql
+# eslint-disable-next-line
+type Query {
+  foo: String!
+}
+```
+
+You can also specify specific rules to disable, apply it over the entire file, `next-line` or (current) `line`.
+
+You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/user-guide/configuring#disabling-rules-with-inline-comments).
+
 ## Available Rules
 
 You can find a complete list of [all available plugins here](./docs/README.md)
 
 > This repo doesn't exports a "recommended" set of rules - feel free to recommend us!
+
+## Further Reading
+
+If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](./docs/README.md))
+
+## Contributing
+
+If you think a rule is missing, or can be modified, feel free to report issues, on open PRs. We always welcome contributions.

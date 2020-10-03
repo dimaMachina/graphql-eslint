@@ -48,10 +48,10 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'requires description around GraphQL nodes',
+      description: 'Requires description around GraphQL nodes',
       category: 'Best practices',
       recommended: true,
-      url: 'https://github.com/ilyavolodin/graphql-eslint/blob/master/docs/rules/naming-convention.md',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/naming-convention.md',
     },
     schema: [
       {

@@ -95,7 +95,10 @@ type PrettierRuleConfig = [
 const rule: GraphQLESLintRule<PrettierRuleConfig> = {
   meta: {
     docs: {
-      url: 'https://github.com/ilyavolodin/graphql-eslint/blob/master/docs/rules/prettier.md',
+      description: `Having all your code follow the same styling guidelines makes it easier to read and understand the code`,
+      recommended: true,
+      category: 'Stylistic Issues',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/prettier.md',
     },
     type: 'layout',
     fixable: 'code',

@@ -13,6 +13,8 @@
 - [`prettier`](./rules/prettier.md)
 - [`require-description`](./rules/require-description.md)
 
-## Writing your own rules
+## Further Reading
 
-TBD
+- [Writing Custom Rules](./custom-rules.md)
+- [How the parser works?](./parser.md)
+- [`parserOptions`](./parser-options.md)

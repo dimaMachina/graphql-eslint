@@ -47,6 +47,13 @@ function verifyRule(
 
 const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
   meta: {
+    docs: {
+      category: 'Best Practices',
+      description: `Enforce descriptions in your type definitions`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-description.md`,
+      recommended: true,
+    },
+    type: 'suggestion',
     messages: {
       [REQUIRE_DESCRIPTION_ERROR]: `Description is required for nodes of type "{{ nodeType }}"`,
     },

@@ -4,6 +4,13 @@ const ERROR_MESSAGE_ID = 'NO_CASE_INSENSITIVE_ENUM_VALUES_DUPLICATES';
 
 const rule: GraphQLESLintRule = {
   meta: {
+    type: 'suggestion',
+    docs: {
+      url:
+        'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-case-insensitive-enum-values-duplicates.md',
+      category: 'Best Practices',
+      recommended: true,
+    },
     fixable: 'code',
     messages: {
       [ERROR_MESSAGE_ID]: `Case-insensitive enum values duplicates are not allowed! Found: "{{ found }}"`,

@@ -20,6 +20,11 @@ function validateDoc(context: GraphQLESlintRuleContext, schema: GraphQLSchema, d
 
 const rule: GraphQLESLintRule = {
   meta: {
+    docs: {
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/validate-against-schema.md`,
+      recommended: true,
+      description: `This rule validates GraphQL operations against your GraphQL schema, and reflects the error as lint errors.`,
+    },
     type: 'problem',
   },
   create(context) {
