@@ -53,12 +53,22 @@ To get started, create an override configuration for your ESLint, while applying
 }
 ```
 
-If you are using code files to store your GraphQL schema or your GraphQL operations, you can extend the behaviour of ESLint and extract those, by adding the following to your setup:
+If you are using code files to store your GraphQL schema or your GraphQL operations, you can extend the behaviour of ESLint and extract those, by adding **an additional `override`** that does that extraction processes:
 
 ```json
 {
-  "processor": "@graphql-eslint/graphql",
-  "overrides": [ ... ]
+  "overrides": [
+    {
+      "files": ["*.tsx", "*.ts", "*.jsx", "*.js"],
+      "processor": "@graphql-eslint/graphql"
+    },
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": { ... }
+    }
+  ]
 }
 ```
 
