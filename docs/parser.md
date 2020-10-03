@@ -15,15 +15,19 @@ The GraphQL AST structure is very similar to ESTree structure, but there are a f
 Here's a list of changes that the parser performs, in order to make the GraphQL AST compatible with ESTree:
 
 **Problem**: GraphQL uses `kind` field to define the kind of the AST node, while ESTree uses `type`.
+
 **Solution**: The parser adds `type` field on each node, and just copies the value from `kind` field.
 
 **Problem**: Some GraphQL AST nodes are using `type` field (which conflicts with the ESTree kind).
+
 **Solution**: AST nodes that has `type` field are being transformed, and the `type` field changes to `gqlType`.
 
 **Problem**: GraphQL AST structure allows circular JSON links (while ESTree might fail on `Maximum call stack exceeded`).
+
 **Solution**: The parser removes circular JSONs (specifically around GraphQL `Location` and the `Lexer`)
 
 **Problem**: GraphQL uses `location` field to store the AST locations, while ESTree also uses it in a different structure.
+
 **Solution**: The parser creates a new `location` field that is compatible with ESTree, and renames the GraphQL `location` to `gqlLocation`.
 
 ### Loading GraphQL Schema
