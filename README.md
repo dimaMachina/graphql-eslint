@@ -17,6 +17,8 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 - 🚀 Supports ESLint directives (for example: `disable-next-line`)
 - 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API.
 - 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL operations.
+- 🚀 Integrates with [`graphql-config`](https://graphql-config.com/)
+- 🚀 Integrates and visualizes lint issues in popular IDEs (VSCode / WebStorm)
 
 Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
 
