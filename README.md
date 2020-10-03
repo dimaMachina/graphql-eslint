@@ -2,7 +2,11 @@
   <img height="150" src="./logo.png">
 </p>
 
+[![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
+
 This project integrates GraphQL AST parser and ESLint.
+
+> Created and maintained by [The Guild](http://the-guild.dev/)
 
 ## Key Features
 
