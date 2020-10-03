@@ -27,6 +27,13 @@ function verifyRule(
 const rule: GraphQLESLintRule = {
   meta: {
     fixable: 'code',
+    type: 'suggestion',
+    docs: {
+      category: 'Stylistic Issues',
+      recommended: true,
+      description: `Makes sure you are not adding the operation type to the name of the operation.`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-operation-name-suffix.md`,
+    },
     messages: {
       [NO_OPERATION_NAME_SUFFIX]: `Unnecessary "{{ invalidSuffix }}" suffix in your operation name!`,
     },

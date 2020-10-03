@@ -11,10 +11,10 @@ const rule: GraphQLESLintRule<InputNameRuleConfig> = {
     type: 'suggestion',
     docs: {
       description:
-        'require mutation argument to be always called "input" and input type to be called Mutation name + "Input"',
+        'Require mutation argument to be always called "input" and input type to be called Mutation name + "Input"',
       category: 'Stylistic Issues',
       recommended: false,
-      url: 'https://github.com/ilyavolodin/graphql-eslint/blob/master/docs/rules/input-name.md',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/input-name.md',
     },
     schema: [
       {
