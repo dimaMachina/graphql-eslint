@@ -7,6 +7,7 @@ import { GraphQLESlintRuleListener } from './testkit';
 
 export interface ParserOptions extends Omit<GraphQLParseOptions, 'noLocation'> {
   schema?: string | string[];
+  schemaOptions?: Record<string, any>;
   skipGraphQLConfig?: boolean;
   filePath?: string;
 }
