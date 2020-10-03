@@ -50,6 +50,7 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
     const config = {
       ...DEFAULT_CONFIG,
       ...(options || {}),
+      ...(options?.schemaOptions || {}),
     };
 
     let schema: GraphQLSchema = null;
