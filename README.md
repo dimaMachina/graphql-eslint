@@ -20,7 +20,9 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 - 🚀 Integrates with [`graphql-config`](https://graphql-config.com/)
 - 🚀 Integrates and visualizes lint issues in popular IDEs (VSCode / WebStorm)
 
-Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
+> Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
+
+<img src="https://thumbs.gfycat.com/ActualTerrificDog-size_restricted.gif" />
 
 ## Getting Started
 
