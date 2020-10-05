@@ -18,8 +18,24 @@ export function parse(code: string, options?: GraphQLParseOptions): Linter.ESLin
   return parseForESLint(code, options).ast;
 }
 
+function getLexer(source: Source): Lexer {
+  // GraphQL v14
+  const gqlLanguage = require('graphql/language');
+  if (gqlLanguage && gqlLanguage.createLexer) {
+    return gqlLanguage.createLexer(source, {});
+  }
+
+  // GraphQL v15
+  const { Lexer: LexerCls } = require('graphql');
+  if (LexerCls && typeof LexerCls === 'function') {
+    return new LexerCls(source);
+  }
+
+  throw new Error(`Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!`);
+}
+
 export function extractTokens(source: string): AST.Token[] {
-  const lexer = new Lexer(new Source(source));
+  const lexer = getLexer(new Source(source));
   const tokens: AST.Token[] = [];
   let token = lexer.advance();
 
