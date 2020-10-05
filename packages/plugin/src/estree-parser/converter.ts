@@ -32,7 +32,11 @@ function stripTokens(location: Location): Pick<Location, 'start' | 'end'> {
   };
 }
 
-const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(node: T): GraphQLESTreeNode<T> => {
+const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
+  node: T,
+  key: string | number,
+  parent: any
+): GraphQLESTreeNode<T> => {
   const calculatedTypeInfo = typeInfo
     ? {
         argument: typeInfo.getArgument(),
@@ -64,7 +68,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(node: T): Graph
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode: () => node,
+      rawNode: () => parent[key],
       gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
@@ -76,7 +80,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(node: T): Graph
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode: () => node,
+      rawNode: () => parent[key],
       gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
