@@ -109,7 +109,7 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
             kind: Kind.DOCUMENT,
             definitions: [node.rawNode()],
           },
-          rulesArr
+          rulesArr.filter(r => r.name !== 'KnownFragmentNamesRule')
         );
       },
       FragmentDefinition(node) {

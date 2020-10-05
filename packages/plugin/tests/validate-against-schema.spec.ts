@@ -34,6 +34,14 @@ ruleTester.runGraphQLTests('validate-against-schema', rule, {
       ...WITH_SCHEMA,
       code: `fragment UserFields on User { id }`,
     },
+    {
+      ...WITH_SCHEMA,
+      code: `fragment UserFields on User { id }`,
+    },
+    {
+      ...WITH_SCHEMA,
+      code: `query { user(id: 1) { ...UserFields } }`,
+    },
   ],
   invalid: [
     {
