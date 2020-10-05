@@ -24,6 +24,8 @@ Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on 
 
 ## Getting Started
 
+* [Introducing GraphQL-ESLint!](https://the-guild.dev/blog/introducing-graphql-eslint) @ `the-guild.dev`
+
 ### Installation
 
 Start by installing the plugin package, which includes everything you need:
