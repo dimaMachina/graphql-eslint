@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.4.0
+
+### Minor Changes
+
+- 80e922c: Improved `validate-against-schema` rule configuration (allow to customize rules)
+
+### Patch Changes
+
+- 80e922c: Fix issues with `.rawNode()` values
+
 ## 0.3.3
 
 ### Patch Changes
