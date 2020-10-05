@@ -1,5 +1,12 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.4.1
+
+### Patch Changes
+
+- 52a98df: Ignore NoUnusedFragmentsRule validation for fragments operations
+- 52a98df: Improve error reported from validate-against-schema (added the rule name to the error)
+
 ## 0.4.0
 
 ### Minor Changes
