@@ -4,7 +4,7 @@ import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext } from '../utils';
 
 function extractRuleName(stack: string | undefined): string | null {
-  const match = (stack || '').match(/validation\/rules\/(.*?)\.js:/);
+  const match = (stack || '').match(/validation[/\\\\]rules[/\\\\](.*?)\.js:/);
 
   if (!match) {
     return null;
