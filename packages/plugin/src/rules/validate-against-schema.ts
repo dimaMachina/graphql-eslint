@@ -3,6 +3,16 @@ import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext } from '../utils';
 
+function extractRuleName(stack: string | undefined): string | null {
+  const match = (stack || '').match(/validation[/\\\\]rules[/\\\\](.*?)\.js:/);
+
+  if (!match) {
+    return null;
+  }
+
+  return match[1] || null;
+}
+
 function validateDoc(
   sourceNode: GraphQLESTreeNode<ASTNode>,
   context: GraphQLESlintRuleContext,
@@ -15,11 +25,11 @@ function validateDoc(
       const validationErrors = validate(schema, documentNode, rules);
 
       for (const error of validationErrors) {
-        const node = (error.nodes[0] as any) as GraphQLESTreeNode<ASTNode>;
+        const validateRuleName = extractRuleName(error.stack);
 
         context.report({
-          loc: node.loc,
-          message: error.message,
+          loc: error.locations[0],
+          message: validateRuleName ? `[${validateRuleName}] ${error.message}` : error.message,
         });
       }
     } catch (e) {
@@ -99,7 +109,7 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
             kind: Kind.DOCUMENT,
             definitions: [node.rawNode()],
           },
-          rulesArr
+          rulesArr.filter(r => r.name !== 'KnownFragmentNamesRule')
         );
       },
       FragmentDefinition(node) {
@@ -112,7 +122,7 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
             kind: Kind.DOCUMENT,
             definitions: [node.rawNode()],
           },
-          rulesArr
+          rulesArr.filter(r => r.name !== 'NoUnusedFragmentsRule')
         );
       },
     };
