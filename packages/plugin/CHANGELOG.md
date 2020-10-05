@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.3.3
+
+### Patch Changes
+
+- 2b87cb1: Fix compatibility with GraphQL v14
+
 ## 0.3.2
 
 ### Patch Changes
