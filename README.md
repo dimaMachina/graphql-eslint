@@ -139,7 +139,7 @@ You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/u
 
 ## Available Rules
 
-You can find a complete list of [all available plugins here](./docs/README.md)
+You can find a complete list of [all available rules here](./docs/README.md)
 
 > This repo doesn't exports a "recommended" set of rules - feel free to recommend us!
 
