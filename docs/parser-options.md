@@ -1,5 +1,11 @@
 ## Parser Options
 
+### `graphQLParserOptions`
+
+With this configuration, you can specify custom configurations for GraphQL's `parse` method. By default, `graphql-eslint` parser just adds `noLocation: false` to make sure all parsed AST has `location` set, since we need this for tokening and for converting the GraphQL AST into ESTree.
+
+You can find the [complete set of options for this object here](https://github.com/graphql/graphql-js/blob/master/src/language/parser.d.ts#L7)
+
 ### `skipGraphQLConfig`
 
 If you are using [`graphql-config`](https://graphql-config.com/) in your project, the parser will automatically use that to load your default GraphQL schema.

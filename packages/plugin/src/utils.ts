@@ -1,5 +1,6 @@
-import { GraphQLSchema } from 'graphql';
+import { Source, Lexer, GraphQLSchema } from 'graphql';
 import { GraphQLESlintRuleContext } from './types';
+import { AST } from 'eslint';
 
 export function requireGraphQLSchemaFromContext(context: GraphQLESlintRuleContext<any>): GraphQLSchema {
   if (!context || !context.parserServices) {
@@ -15,4 +16,47 @@ export function requireGraphQLSchemaFromContext(context: GraphQLESlintRuleContex
   }
 
   return context.parserServices.schema;
+}
+
+function getLexer(source: Source): Lexer {
+  // GraphQL v14
+  const gqlLanguage = require('graphql/language');
+  if (gqlLanguage && gqlLanguage.createLexer) {
+    return gqlLanguage.createLexer(source, {});
+  }
+
+  // GraphQL v15
+  const { Lexer: LexerCls } = require('graphql');
+  if (LexerCls && typeof LexerCls === 'function') {
+    return new LexerCls(source);
+  }
+
+  throw new Error(`Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!`);
+}
+
+export function extractTokens(source: string): AST.Token[] {
+  const lexer = getLexer(new Source(source));
+  const tokens: AST.Token[] = [];
+  let token = lexer.advance();
+
+  while (token && token.kind !== '<EOF>') {
+    tokens.push({
+      type: token.kind as any,
+      loc: {
+        start: {
+          line: token.line,
+          column: token.column,
+        },
+        end: {
+          line: token.line,
+          column: token.column,
+        },
+      },
+      value: token.value,
+      range: [token.start, token.end],
+    });
+    token = lexer.advance();
+  }
+
+  return tokens;
 }
