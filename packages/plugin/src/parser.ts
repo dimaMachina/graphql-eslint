@@ -5,6 +5,7 @@ import { Linter } from 'eslint';
 import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { extractTokens } from './utils';
 import { getSchema } from './schema';
+import { getSiblingOperations } from './sibling-operations';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
@@ -12,9 +13,15 @@ export function parse(code: string, options?: ParserOptions): Linter.ESLintParse
 
 export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
   const schema = getSchema(options);
+  const operationsPaths = options.operations || [];
+  const siblingOperations = getSiblingOperations(
+    process.cwd(),
+    Array.isArray(operationsPaths) ? operationsPaths : [operationsPaths]
+  );
   const parserServices = {
     hasTypeInfo: schema !== null,
     schema,
+    siblingOperations,
   };
 
   try {

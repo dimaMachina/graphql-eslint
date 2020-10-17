@@ -3,10 +3,11 @@ import { GraphQLESTreeNode } from './estree-parser';
 import { ASTNode, GraphQLSchema } from 'graphql';
 import { GraphQLParseOptions } from '@graphql-tools/utils';
 import { GraphQLESlintRuleListener } from './testkit';
+import { SiblingOperations } from './sibling-operations';
 
 export interface ParserOptions {
   schema?: string | string[];
-  siblingOperations?: string | string[];
+  operations?: string | string[];
   schemaOptions?: Omit<GraphQLParseOptions, 'assumeValidSDL'>;
   graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   skipGraphQLConfig?: boolean;
@@ -14,6 +15,7 @@ export interface ParserOptions {
 }
 
 export type ParserServices = {
+  siblingOperations: SiblingOperations;
   hasTypeInfo: boolean;
   schema: GraphQLSchema | null;
 };
