@@ -25,7 +25,7 @@
     "eslint": "7.11.0",
     "husky": "4.3.0",
     "lint-staged": "10.4.2",
-    "@types/node": "14.11.8",
+    "@types/node": "14.11.10",
     "bob-the-bundler": "1.1.0",
     "eslint-config-standard": "14.1.1",
     "eslint-plugin-import": "2.22.1",
