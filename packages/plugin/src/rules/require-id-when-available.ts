@@ -67,7 +67,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
               //   parent.parent.kind === 'SelectionSet' &&
               //   !!parent.parent.selections.find(s => s.kind === 'Field' && s.name.value === fieldName);
 
-              if (!hasIdFieldInSelectionSet && !hasIdFieldInInterfaceSelectionSet) {
+              if (!hasIdFieldInSelectionSet) {
                 context.report({
                   loc: {
                     start: {
