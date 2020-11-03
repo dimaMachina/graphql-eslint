@@ -47,7 +47,6 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
         }
 
         const typeInfo = node.typeInfo();
-
         if (typeInfo && typeInfo.gqlType) {
           const rawType = getBaseType(typeInfo.gqlType);
           if (rawType instanceof GraphQLObjectType || rawType instanceof GraphQLInterfaceType) {
@@ -59,7 +58,16 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                 s => s.kind === 'Field' && s.name.value === fieldName
               );
 
-              if (!hasIdFieldInSelectionSet) {
+              // check if the parent selection set has the ID field in there
+              const { parent } = node as any;
+              const hasIdFieldInInterfaceSelectionSet =
+                parent &&
+                parent.kind === 'InlineFragment' &&
+                parent.parent &&
+                parent.parent.kind === 'SelectionSet' &&
+                !!parent.parent.selections.find(s => s.kind === 'Field' && s.name.value === fieldName);
+
+              if (!hasIdFieldInSelectionSet && !hasIdFieldInInterfaceSelectionSet) {
                 context.report({
                   loc: {
                     start: {
