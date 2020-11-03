@@ -22,7 +22,7 @@
     "@graphql-tools/graphql-file-loader": "^6.2.4",
     "@graphql-tools/json-file-loader": "^6.2.4",
     "@graphql-tools/url-loader": "^6.3.0",
-    "@graphql-tools/graphql-tag-pluck": "^6.2.5",
+    "@graphql-tools/graphql-tag-pluck": "^6.3.0",
     "graphql-config": "^3.0.0"
   },
   "devDependencies": {
