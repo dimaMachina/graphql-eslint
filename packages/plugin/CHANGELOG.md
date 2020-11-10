@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.4.2
+
+### Patch Changes
+
+- 0dab062: [require-id-when-available] fix for inline fragments on interfaces (#139)
+
 ## 0.4.1
 
 ### Patch Changes
