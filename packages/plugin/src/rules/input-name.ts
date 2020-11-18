@@ -30,9 +30,15 @@ const rule: GraphQLESLintRule<InputNameRuleConfig> = {
     ],
   },
   create(context) {
+    const isMutationType = node => {
+      return (
+        (node.type === 'ObjectTypeDefinition' || node.type === 'ObjectTypeExtension') && node.name.value === 'Mutation'
+      );
+    };
+
     const listeners = {
       'FieldDefinition > InputValueDefinition': node => {
-        if (node.name.value !== 'input') {
+        if (node.name.value !== 'input' && isMutationType(node.parent.parent)) {
           context.report({
             node: node.name,
             message: `Input "${node.name.value}" should be called "input"`,
@@ -50,10 +56,13 @@ const rule: GraphQLESLintRule<InputNameRuleConfig> = {
           return currentNode;
         };
 
-        const mutationName = `${findInputType(node).parent.name.value}Input`;
+        const inputValueNode = findInputType(node);
+        if (isMutationType(inputValueNode.parent.parent)) {
+          const mutationName = `${inputValueNode.parent.name.value}Input`;
 
-        if (node.name.value !== mutationName) {
-          context.report({ node, message: `InputType "${node.name.value}" name should be "${mutationName}"` });
+          if (node.name.value !== mutationName) {
+            context.report({ node, message: `InputType "${node.name.value}" name should be "${mutationName}"` });
+          }
         }
       };
     }
