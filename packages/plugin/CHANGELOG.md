@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.4.3
+
+### Patch Changes
+
+- 0fe0f68: Fix a bug in the input-name rule to make sure it only checks fields on the Mutation type
+
 ## 0.4.2
 
 ### Patch Changes
