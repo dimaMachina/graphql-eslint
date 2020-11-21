@@ -12,7 +12,7 @@ This rule requires descriptions to be present in your type definitions files.
 Examples of **incorrect** code for this rule:
 
 ```graphql
-# eslint @graphql-eslint/require-description: ["error", { on: ["ObjectTypeDefinition", "FieldDefinition" }]
+# eslint @graphql-eslint/require-description: ["error", { on: ["ObjectTypeDefinition", "FieldDefinition"] }]
 
 type someTypeName {
   name: String
@@ -22,7 +22,7 @@ type someTypeName {
 Examples of **correct** code for this rule:
 
 ```graphql
-# eslint @graphql-eslint/require-description: ["error", { on: ["ObjectTypeDefinition", "FieldDefinition" }]
+# eslint @graphql-eslint/require-description: ["error", { on: ["ObjectTypeDefinition", "FieldDefinition"] }]
 
 """
 Some type description
