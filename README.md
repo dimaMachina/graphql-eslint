@@ -56,6 +56,8 @@ To get started, create an override configuration for your ESLint, while applying
       "parser": "@graphql-eslint/eslint-plugin",
       "plugins": ["@graphql-eslint"],
       "rules": {
+        "eol-last": "off",
+        "prettier/prettier": "off"
         ...
       }
     }
@@ -76,11 +78,16 @@ If you are using code files to store your GraphQL schema or your GraphQL operati
       "files": ["*.graphql"],
       "parser": "@graphql-eslint/eslint-plugin",
       "plugins": ["@graphql-eslint"],
-      "rules": { ... }
+      "rules": {
+        "eol-last": "off",
+        "prettier/prettier": "off"
+      }
     }
   ]
 }
 ```
+
+> Note: Make sure to disable `eol-last` and `prettier/prettier` - otherwise, you might get an error (see https://github.com/dotansimha/graphql-eslint/issues/88).
 
 #### Extended linting rules with GraphQL Schema
 
