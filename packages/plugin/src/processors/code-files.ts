@@ -9,6 +9,7 @@ type Block = {
   text: string;
   filename: string;
   lineOffset?: number;
+  offset?: number;
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -16,6 +17,7 @@ export function createGraphqlProcessor() {
   const blocksMap = new Map<string, Block[]>();
 
   return {
+    supportsAutofix: true,
     preprocess: (text: string, filename: string): Array<{ text: string; filename: string }> => {
       const blocks: Block[] = [];
       blocksMap.set(filename, blocks);
@@ -41,6 +43,7 @@ export function createGraphqlProcessor() {
               filename: `document.graphql`,
               text: item.content,
               lineOffset: item.loc.start.line - 1,
+              offset: item.start + 1,
             });
           }
 
@@ -58,13 +61,17 @@ export function createGraphqlProcessor() {
       if (blocks && blocks.length > 0) {
         for (let i = 0; i < messageLists.length; ++i) {
           const messages = messageLists[i];
-          const { lineOffset } = blocks[i];
+          const { lineOffset, offset } = blocks[i];
 
           for (const message of messages) {
             message.line += lineOffset;
 
             if (message.endLine != null) {
               message.endLine += lineOffset;
+            }
+            if (message.fix && typeof offset !== 'undefined') {
+              message.fix.range[0] = offset + message.fix.range[0];
+              message.fix.range[1] = offset + message.fix.range[1];
             }
           }
         }
