@@ -1,5 +1,12 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.4.4
+
+### Patch Changes
+
+- c9bbdbe: Added `supportsAutofix` to the processor.
+  Fixes can be applied in JS,TS files now.
+
 ## 0.4.3
 
 ### Patch Changes
