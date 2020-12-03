@@ -1,5 +1,6 @@
 import { GraphQLRuleTester } from '../src/testkit';
 import rule from '../src/rules/require-id-when-available';
+import { ParserOptions } from '../src/types';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -37,14 +38,25 @@ const TEST_SCHEMA = /* GraphQL */ `
   }
 `;
 
-const WITH_SCHEMA = { parserOptions: { schema: TEST_SCHEMA } };
+const WITH_SCHEMA = {
+  parserOptions: <ParserOptions>{
+    schema: TEST_SCHEMA,
+    operations: [
+      `fragment HasIdFields on HasId {
+        id
+      }`,
+    ],
+  },
+};
 const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('require-id-when-available', rule, {
   valid: [
     { ...WITH_SCHEMA, code: `query { noId { name } }` },
     { ...WITH_SCHEMA, code: `query { hasId { id name } }` },
-    { ...WITH_SCHEMA, code: `query { vehicles { id ...on Car { mileage } } }` },
+    { ...WITH_SCHEMA, code: `query { hasId { ...HasIdFields } }` },
+    { ...WITH_SCHEMA, code: `query { vehicles { id ...on Car { id mileage } } }` },
+    { ...WITH_SCHEMA, code: `query { vehicles { ...on Car { id mileage } } }` },
     { ...WITH_SCHEMA, code: `query { flying { ...on Bird { id } } }` },
     {
       ...WITH_SCHEMA,
@@ -53,6 +65,11 @@ ruleTester.runGraphQLTests('require-id-when-available', rule, {
     },
   ],
   invalid: [
+    {
+      ...WITH_SCHEMA,
+      code: `query { vehicles { id ...on Car { mileage } } }`,
+      errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
+    },
     {
       ...WITH_SCHEMA,
       code: `query { hasId { name } }`,

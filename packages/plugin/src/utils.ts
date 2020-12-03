@@ -1,8 +1,9 @@
 import { Source, Lexer, GraphQLSchema } from 'graphql';
 import { GraphQLESlintRuleContext } from './types';
 import { AST } from 'eslint';
+import { SiblingOperations } from './sibling-operations';
 
-export function requireSiblingsOperations(ruleName: string, context: GraphQLESlintRuleContext<any>): void {
+export function requireSiblingsOperations(ruleName: string, context: GraphQLESlintRuleContext<any>): SiblingOperations {
   if (!context || !context.parserServices) {
     throw new Error(
       `You have used a rule ("${ruleName}") which requires parserServices to be generated with operations. You must therefore provide a value for the "parserOptions.operations" property for "@typescript-graphql/parser", or use graphql-config!`
@@ -14,6 +15,8 @@ export function requireSiblingsOperations(ruleName: string, context: GraphQLESli
       `You have used a rule which requires GraphQL operations to be loaded. Found "parserServices" generated, but unable to load your GraphQL operations.`
     );
   }
+
+  return context.parserServices.siblingOperations;
 }
 
 export function requireGraphQLSchemaFromContext(

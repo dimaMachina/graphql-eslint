@@ -7,6 +7,7 @@ import {
   FragmentSpreadNode,
   Kind,
   OperationDefinitionNode,
+  parse,
   SelectionSetNode,
   visit,
 } from 'graphql';
@@ -28,7 +29,19 @@ export type SiblingOperations = {
 function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
   return loadDocumentsSync(loadPaths, {
     cwd: baseDir,
-    loaders: [new GraphQLFileLoader(), new CodeFileLoader()],
+    loaders: [
+      new GraphQLFileLoader(),
+      new CodeFileLoader(),
+      {
+        loaderId: () => 'direct-string',
+        canLoad: async () => false,
+        load: async () => null,
+        canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
+        loadSync: pointer => ({
+          document: parse(pointer),
+        }),
+      },
+    ],
   });
 }
 
@@ -37,6 +50,7 @@ const operationsCache: Map<string, Source[]> = new Map();
 export function getSiblingOperations(baseDir: string, loadPaths: string[]): SiblingOperations {
   if (loadPaths.length === 0) {
     let printed = false;
+
     const noopWarn = () => {
       if (printed) {
         return [];
@@ -72,6 +86,7 @@ export function getSiblingOperations(baseDir: string, loadPaths: string[]): Sibl
   const siblings = operationsCache.get(loadKey);
 
   let fragmentsCache: FragmentDefinitionNode[] | null = null;
+
   const getFragments = (): FragmentDefinitionNode[] => {
     if (fragmentsCache === null) {
       const result: FragmentDefinitionNode[] = [];
