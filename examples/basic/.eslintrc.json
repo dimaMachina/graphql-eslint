@@ -1,10 +1,10 @@
 {  
-  "processor": "@graphql-eslint/graphql",
   "overrides": [
     {
       "files": ["*.graphql"],
       "parser": "@graphql-eslint/eslint-plugin",
       "parserOptions": {
+        "operations": ["query.graphql"],
         "schema": "./**/schema.graphql"
       },
       "plugins": ["@graphql-eslint"],

@@ -1,0 +1,4 @@
+fragment UserFields on User {
+  id
+  name
+}

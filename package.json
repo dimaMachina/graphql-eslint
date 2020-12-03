@@ -5,7 +5,7 @@
   "license": "MIT",
   "workspaces": [
     "./packages/*",
-    "./example"
+    "./examples/*"
   ],
   "scripts": {
     "lint": "eslint --config .eslintrc.json --ext .ts .",

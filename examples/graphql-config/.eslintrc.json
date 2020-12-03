@@ -1,0 +1,17 @@
+{  
+  "overrides": [
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "@graphql-eslint/require-id-when-available": [
+          "error",
+          {
+            "fieldName": "id"
+          }
+        ]
+      }
+    }
+  ]
+}
