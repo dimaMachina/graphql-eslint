@@ -17,12 +17,13 @@
   },
   "dependencies": {
     "prettier-linter-helpers": "1.0.0",
-    "@graphql-tools/utils": "^7.1.3",
-    "@graphql-tools/load": "^6.2.5",
-    "@graphql-tools/graphql-file-loader": "^6.2.6",
-    "@graphql-tools/json-file-loader": "^6.2.6",
-    "@graphql-tools/url-loader": "^6.4.0",
-    "@graphql-tools/graphql-tag-pluck": "^6.3.0",
+    "@graphql-tools/utils": "~7.1.3",
+    "@graphql-tools/load": "~6.2.5",
+    "@graphql-tools/graphql-file-loader": "~6.2.6",
+    "@graphql-tools/json-file-loader": "~6.2.6",
+    "@graphql-tools/code-file-loader": "~6.2.6",
+    "@graphql-tools/url-loader": "~6.4.0",
+    "@graphql-tools/graphql-tag-pluck": "~6.3.0",
     "graphql-config": "^3.2.0"
   },
   "devDependencies": {

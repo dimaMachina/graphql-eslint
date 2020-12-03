@@ -100,7 +100,8 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
 
     return {
       OperationDefinition(node) {
-        const schema = requireGraphQLSchemaFromContext(context);
+        const schema = requireGraphQLSchemaFromContext('validate-against-schema', context);
+
         validateDoc(
           node,
           context,
@@ -113,7 +114,8 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
         );
       },
       FragmentDefinition(node) {
-        const schema = requireGraphQLSchemaFromContext(context);
+        const schema = requireGraphQLSchemaFromContext('validate-against-schema', context);
+
         validateDoc(
           node,
           context,

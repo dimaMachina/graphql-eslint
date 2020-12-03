@@ -26,7 +26,7 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 
 ## Getting Started
 
-* [Introducing GraphQL-ESLint!](https://the-guild.dev/blog/introducing-graphql-eslint) @ `the-guild.dev`
+- [Introducing GraphQL-ESLint!](https://the-guild.dev/blog/introducing-graphql-eslint) @ `the-guild.dev`
 
 ### Installation
 
@@ -111,6 +111,28 @@ The parser allow you to specify a json file / graphql files(s) / url / raw strin
 > You can find a complete [documentation of the `parserOptions` here](./docs/parser-options.md)
 
 > Some rules requires type information to operate, it's marked in the docs of each plugin!
+
+#### Extended linting rules with siblings operations
+
+While implementing this tool, we had to find solutions for a better integration of the GraphQL ecosystem and ESLint core.
+
+GraphQL operations can be distributed across many files, while ESLint operates on one file at a time. If you are using GraphQL fragments in separate files, some rules might yield incorrect results, due the the missing information.
+
+To workaround that, we allow you to provide additional information on your GraphQL operations, making it available for rules while doing the actual linting.
+
+To provide that, we are using `@graphql-tools` loaders to load your sibling operations and fragments, just specify a glob expression(s) that points to your code/.graphql files:
+
+```json
+{
+  "files": ["*.graphql"],
+  "parser": "@graphql-eslint/eslint-plugin",
+  "plugins": ["@graphql-eslint"],
+  "parserOptions": {
+    "operations": ["./src/**/*.graphql"],
+    "schema": "./schema.graphql"
+  }
+}
+```
 
 ### VSCode Integration
 
