@@ -3,13 +3,13 @@ import { JsonFileLoader } from '@graphql-tools/json-file-loader';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { UrlLoader } from '@graphql-tools/url-loader';
 import { buildSchema, GraphQLSchema } from 'graphql';
-import { loadConfigSync } from 'graphql-config';
+import { GraphQLConfig, loadConfigSync } from 'graphql-config';
 import { dirname } from 'path';
 import { ParserOptions } from './types';
 
 const schemaCache: Map<string, GraphQLSchema> = new Map();
 
-export function getSchema(options: ParserOptions): GraphQLSchema | null {
+export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): GraphQLSchema | null {
   let schema: GraphQLSchema | null = null;
 
   // We first try to use graphql-config for loading the schema, based on the type of the file,
@@ -20,11 +20,6 @@ export function getSchema(options: ParserOptions): GraphQLSchema | null {
     if (schemaCache.has(fileDir)) {
       schema = schemaCache.get(fileDir);
     } else {
-      const gqlConfig = loadConfigSync({
-        throwOnEmpty: false,
-        throwOnMissing: false,
-      });
-
       if (gqlConfig) {
         const projectForFile = gqlConfig.getProject(options.filePath);
 
