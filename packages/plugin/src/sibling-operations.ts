@@ -11,6 +11,9 @@ import {
   SelectionSetNode,
   visit,
 } from 'graphql';
+import { ParserOptions } from './types';
+import { GraphQLConfig } from 'graphql-config';
+import { dirname } from 'path';
 
 export type SiblingOperations = {
   available: boolean;
@@ -47,8 +50,41 @@ function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
 
 const operationsCache: Map<string, Source[]> = new Map();
 
-export function getSiblingOperations(baseDir: string, loadPaths: string[]): SiblingOperations {
-  if (loadPaths.length === 0) {
+export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLConfig): SiblingOperations {
+  let siblings: Source[] | null = null;
+
+  // We first try to use graphql-config for loading the operations paths, based on the type of the file,
+  // We are using the directory of the file as the key for the schema caching, to avoid reloading of the schema.
+  if (options && options.filePath && !options.skipGraphQLConfig) {
+    const fileDir = dirname(options.filePath);
+
+    if (operationsCache.has(fileDir)) {
+      siblings = operationsCache.get(fileDir);
+    } else {
+      if (gqlConfig) {
+        const projectForFile = gqlConfig.getProject(options.filePath);
+
+        if (projectForFile) {
+          siblings = projectForFile.getDocumentsSync();
+          operationsCache.set(fileDir, siblings);
+        }
+      }
+    }
+  }
+
+  if (options && options.operations && !siblings) {
+    const loadPaths = Array.isArray(options.operations) ? options.operations : [options.operations] || [];
+    const loadKey = loadPaths.join(',');
+
+    if (!operationsCache.has(loadKey)) {
+      siblings = loadSiblings(process.cwd(), loadPaths);
+      operationsCache.set(loadKey, siblings);
+    } else {
+      siblings = operationsCache.get(loadKey);
+    }
+  }
+
+  if (!siblings || siblings.length === 0) {
     let printed = false;
 
     const noopWarn = () => {
@@ -76,14 +112,6 @@ export function getSiblingOperations(baseDir: string, loadPaths: string[]): Sibl
       getUsedFragments: noopWarn,
     };
   }
-  const loadKey = loadPaths.join(',');
-
-  if (!operationsCache.has(loadKey)) {
-    const loadedSiblings = loadSiblings(baseDir, loadPaths);
-    operationsCache.set(loadKey, loadedSiblings);
-  }
-
-  const siblings = operationsCache.get(loadKey);
 
   let fragmentsCache: FragmentDefinitionNode[] | null = null;
 

@@ -6,18 +6,22 @@ import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { extractTokens } from './utils';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
+import { loadConfigSync, GraphQLConfig } from 'graphql-config';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
 }
 
 export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
-  const schema = getSchema(options);
-  const operationsPaths = options.operations || [];
-  const siblingOperations = getSiblingOperations(
-    process.cwd(),
-    Array.isArray(operationsPaths) ? operationsPaths : [operationsPaths]
-  );
+  const gqlConfig: GraphQLConfig | null = options?.skipGraphQLConfig
+    ? null
+    : loadConfigSync({
+        throwOnEmpty: false,
+        throwOnMissing: false,
+      });
+
+  const schema = getSchema(options, gqlConfig);
+  const siblingOperations = getSiblingOperations(options, gqlConfig);
   const parserServices = {
     hasTypeInfo: schema !== null,
     schema,
