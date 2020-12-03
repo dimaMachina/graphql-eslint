@@ -1,8 +1,5 @@
-import { extname } from 'path';
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
-import {} from 'eslint';
 
-const EXTRACTABLE_FILES_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
 
 type Block = {
@@ -22,12 +19,7 @@ export function createGraphqlProcessor() {
       const blocks: Block[] = [];
       blocksMap.set(filename, blocks);
 
-      if (
-        filename &&
-        text &&
-        EXTRACTABLE_FILES_EXTENSIONS.includes(extname(filename)) &&
-        RELEVANT_KEYWORDS.some(keyword => text.includes(keyword))
-      ) {
+      if (filename && text && RELEVANT_KEYWORDS.some(keyword => text.includes(keyword))) {
         const extractedDocuments = parseCode({
           code: text,
           filePath: filename,

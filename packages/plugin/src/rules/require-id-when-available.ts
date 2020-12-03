@@ -17,7 +17,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md`,
     },
     messages: {
-      [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments sepcifies the field "{{ fieldName }}".`,
+      [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments {{checkedFragments}} sepcifies the field "{{ fieldName }}".`,
     },
     schema: {
       type: 'array',
@@ -53,6 +53,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
           if (rawType instanceof GraphQLObjectType || rawType instanceof GraphQLInterfaceType) {
             const fields = rawType.getFields();
             const hasIdFieldInType = !!fields[fieldName];
+            const checkedFragmentSpreads: Set<string> = new Set();
 
             if (hasIdFieldInType) {
               let found = false;
@@ -68,6 +69,8 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                   const foundSpread = siblings.getFragment(selection.name.value);
 
                   if (foundSpread[0]) {
+                    checkedFragmentSpreads.add(foundSpread[0].name.value);
+
                     found = !!(foundSpread[0].selectionSet?.selections || []).find(
                       s => s.kind === 'Field' && s.name.value === fieldName
                     );
@@ -93,6 +96,8 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                   },
                   messageId: REQUIRE_ID_WHEN_AVAILABLE,
                   data: {
+                    checkedFragments:
+                      checkedFragmentSpreads.size === 0 ? '' : `(${Array.from(checkedFragmentSpreads).join(', ')})`,
                     fieldName,
                   },
                 });

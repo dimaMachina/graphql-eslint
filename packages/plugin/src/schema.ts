@@ -3,7 +3,7 @@ import { JsonFileLoader } from '@graphql-tools/json-file-loader';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { UrlLoader } from '@graphql-tools/url-loader';
 import { buildSchema, GraphQLSchema } from 'graphql';
-import { GraphQLConfig, loadConfigSync } from 'graphql-config';
+import { GraphQLConfig } from 'graphql-config';
 import { dirname } from 'path';
 import { ParserOptions } from './types';
 
@@ -21,7 +21,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
       schema = schemaCache.get(fileDir);
     } else {
       if (gqlConfig) {
-        const projectForFile = gqlConfig.getProject(options.filePath);
+        const projectForFile = gqlConfig.getProjectForFile(options.filePath);
 
         if (projectForFile) {
           schema = projectForFile.getSchemaSync();

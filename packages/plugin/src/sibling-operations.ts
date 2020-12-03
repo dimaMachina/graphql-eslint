@@ -62,7 +62,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
       siblings = operationsCache.get(fileDir);
     } else {
       if (gqlConfig) {
-        const projectForFile = gqlConfig.getProject(options.filePath);
+        const projectForFile = gqlConfig.getProjectForFile(options.filePath);
 
         if (projectForFile) {
           siblings = projectForFile.getDocumentsSync();

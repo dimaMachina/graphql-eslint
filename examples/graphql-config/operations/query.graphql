@@ -1,0 +1,6 @@
+query {
+  user {
+    name
+    ...UserFields
+  }
+}
