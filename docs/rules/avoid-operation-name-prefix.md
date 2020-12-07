@@ -10,7 +10,7 @@ Allow you to enforce and avoid operation name prefix, useful if you wish to avoi
 Examples of **incorrect** code for this rule:
 
 ```graphql
-# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", { keywords: "get" }]
+# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", { keywords: ["get"] }]
 
 query getUserDetails {
   # ...
@@ -20,7 +20,7 @@ query getUserDetails {
 Examples of **correct** code for this rule:
 
 ```graphql
-# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", { keywords: "get" }]
+# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", { keywords: ["get"] }]
 
 query userDetails {
   # ...
