@@ -50,7 +50,7 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
 const schemaOption = {
   type: ['string', 'object'],
   properties: {
-    format: {
+    style: {
       type: 'string',
       enum: acceptedStyles,
     },
@@ -61,7 +61,7 @@ const schemaOption = {
 };
 
 interface PropertySchema {
-  format?: ValidNaming;
+  style?: ValidNaming;
   suffix?: string;
 }
 
@@ -177,7 +177,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         return value;
       }
       return {
-        format: value,
+        style: value,
         suffix: '',
       };
     };
@@ -197,61 +197,61 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ObjectTypeDefinition: node => {
         if (options.ObjectTypeDefinition) {
           const property = convertToFinalPropertySchema(options.ObjectTypeDefinition);
-          checkNode(node.name, property.format, 'Type', property.suffix);
+          checkNode(node.name, property.style, 'Type', property.suffix);
         }
       },
       InterfaceTypeDefinition: node => {
         if (options.InterfaceTypeDefinition) {
           const property = convertToFinalPropertySchema(options.InterfaceTypeDefinition);
-          checkNode(node.name, property.format, 'Interface', property.suffix);
+          checkNode(node.name, property.style, 'Interface', property.suffix);
         }
       },
       EnumTypeDefinition: node => {
         if (options.EnumTypeDefinition) {
           const property = convertToFinalPropertySchema(options.EnumTypeDefinition);
-          checkNode(node.name, property.format, 'Enumerator', property.suffix);
+          checkNode(node.name, property.style, 'Enumerator', property.suffix);
         }
       },
       InputObjectTypeDefinition: node => {
         if (options.InputObjectTypeDefinition) {
           const property = convertToFinalPropertySchema(options.InputObjectTypeDefinition);
-          checkNode(node.name, property.format, 'Input type', property.suffix);
+          checkNode(node.name, property.style, 'Input type', property.suffix);
         }
       },
       FieldDefinition: node => {
         if (options.FieldDefinition) {
           const property = convertToFinalPropertySchema(options.FieldDefinition);
-          checkNode(node.name, property.format, 'Field', property.suffix);
+          checkNode(node.name, property.style, 'Field', property.suffix);
         }
       },
       EnumValueDefinition: node => {
         if (options.EnumValueDefinition) {
           const property = convertToFinalPropertySchema(options.EnumValueDefinition);
-          checkNode(node.name, property.format, 'Enumeration value', property.suffix);
+          checkNode(node.name, property.style, 'Enumeration value', property.suffix);
         }
       },
       InputValueDefinition: node => {
         if (options.InputValueDefinition) {
           const property = convertToFinalPropertySchema(options.InputValueDefinition);
-          checkNode(node.name, property.format, 'Input property', property.suffix);
+          checkNode(node.name, property.style, 'Input property', property.suffix);
         }
       },
       FragmentDefinition: node => {
         if (options.FragmentDefinition) {
           const property = convertToFinalPropertySchema(options.FragmentDefinition);
-          checkNode(node.name, property.format, 'Fragment', property.suffix);
+          checkNode(node.name, property.style, 'Fragment', property.suffix);
         }
       },
       ScalarTypeDefinition: node => {
         if (options.ScalarTypeDefinition) {
           const property = convertToFinalPropertySchema(options.ScalarTypeDefinition);
-          checkNode(node.name, property.format, 'Scalar', property.suffix);
+          checkNode(node.name, property.style, 'Scalar', property.suffix);
         }
       },
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
           const property = convertToFinalPropertySchema(options.UnionTypeDefinition);
-          checkNode(node.name, property.format, 'Scalar', property.suffix);
+          checkNode(node.name, property.style, 'Scalar', property.suffix);
         }
       },
     };

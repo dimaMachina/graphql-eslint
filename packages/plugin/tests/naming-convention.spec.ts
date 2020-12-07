@@ -79,9 +79,9 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
       options: [
         {
-          ObjectTypeDefinition: { format: 'PascalCase' },
-          FieldDefinition: { format: 'camelCase', suffix: 'Field' },
-          EnumValueDefinition: { format: 'UPPER_CASE', suffix: '' },
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', suffix: 'Field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', suffix: '' },
         },
       ],
     },
@@ -154,9 +154,9 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
       options: [
         {
-          ObjectTypeDefinition: { format: 'camelCase' },
-          FieldDefinition: { format: 'camelCase', suffix: 'AAA' },
-          EnumValueDefinition: { format: 'camelCase', suffix: 'ENUM' },
+          ObjectTypeDefinition: { style: 'camelCase' },
+          FieldDefinition: { style: 'camelCase', suffix: 'AAA' },
+          EnumValueDefinition: { style: 'camelCase', suffix: 'ENUM' },
         },
       ],
       errors: [
