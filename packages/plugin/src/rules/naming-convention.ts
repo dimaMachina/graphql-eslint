@@ -172,7 +172,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       }
     };
 
-    const convertToFinalPropertySchema = (value: ValidNaming | PropertySchema): PropertySchema => {
+    const normalisePropertyOption = (value: ValidNaming | PropertySchema): PropertySchema => {
       if (typeof value === 'object') {
         return value;
       }
@@ -196,61 +196,61 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       },
       ObjectTypeDefinition: node => {
         if (options.ObjectTypeDefinition) {
-          const property = convertToFinalPropertySchema(options.ObjectTypeDefinition);
+          const property = normalisePropertyOption(options.ObjectTypeDefinition);
           checkNode(node.name, property.style, 'Type', property.suffix);
         }
       },
       InterfaceTypeDefinition: node => {
         if (options.InterfaceTypeDefinition) {
-          const property = convertToFinalPropertySchema(options.InterfaceTypeDefinition);
+          const property = normalisePropertyOption(options.InterfaceTypeDefinition);
           checkNode(node.name, property.style, 'Interface', property.suffix);
         }
       },
       EnumTypeDefinition: node => {
         if (options.EnumTypeDefinition) {
-          const property = convertToFinalPropertySchema(options.EnumTypeDefinition);
+          const property = normalisePropertyOption(options.EnumTypeDefinition);
           checkNode(node.name, property.style, 'Enumerator', property.suffix);
         }
       },
       InputObjectTypeDefinition: node => {
         if (options.InputObjectTypeDefinition) {
-          const property = convertToFinalPropertySchema(options.InputObjectTypeDefinition);
+          const property = normalisePropertyOption(options.InputObjectTypeDefinition);
           checkNode(node.name, property.style, 'Input type', property.suffix);
         }
       },
       FieldDefinition: node => {
         if (options.FieldDefinition) {
-          const property = convertToFinalPropertySchema(options.FieldDefinition);
+          const property = normalisePropertyOption(options.FieldDefinition);
           checkNode(node.name, property.style, 'Field', property.suffix);
         }
       },
       EnumValueDefinition: node => {
         if (options.EnumValueDefinition) {
-          const property = convertToFinalPropertySchema(options.EnumValueDefinition);
+          const property = normalisePropertyOption(options.EnumValueDefinition);
           checkNode(node.name, property.style, 'Enumeration value', property.suffix);
         }
       },
       InputValueDefinition: node => {
         if (options.InputValueDefinition) {
-          const property = convertToFinalPropertySchema(options.InputValueDefinition);
+          const property = normalisePropertyOption(options.InputValueDefinition);
           checkNode(node.name, property.style, 'Input property', property.suffix);
         }
       },
       FragmentDefinition: node => {
         if (options.FragmentDefinition) {
-          const property = convertToFinalPropertySchema(options.FragmentDefinition);
+          const property = normalisePropertyOption(options.FragmentDefinition);
           checkNode(node.name, property.style, 'Fragment', property.suffix);
         }
       },
       ScalarTypeDefinition: node => {
         if (options.ScalarTypeDefinition) {
-          const property = convertToFinalPropertySchema(options.ScalarTypeDefinition);
+          const property = normalisePropertyOption(options.ScalarTypeDefinition);
           checkNode(node.name, property.style, 'Scalar', property.suffix);
         }
       },
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
-          const property = convertToFinalPropertySchema(options.UnionTypeDefinition);
+          const property = normalisePropertyOption(options.UnionTypeDefinition);
           checkNode(node.name, property.style, 'Scalar', property.suffix);
         }
       },
