@@ -8,7 +8,17 @@ const formats = {
   UPPER_CASE: /^[A-Z_]*$/g,
 };
 
-function checkNameFormat(value, style, leadingUnderscore, trailingUnderscore) {
+type ValidNaming = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
+const acceptedStyles: ValidNaming[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'];
+interface CheckNameFormatParams {
+  value: string;
+  style?: ValidNaming;
+  leadingUnderscore: 'allow' | 'forbid';
+  trailingUnderscore: 'allow' | 'forbid';
+  suffix: string;
+}
+function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
+  const { value, style, leadingUnderscore, trailingUnderscore, suffix } = params;
   let name = value;
   if (leadingUnderscore === 'allow') {
     [, name] = name.match(/^_*(.*)$/);
@@ -16,31 +26,60 @@ function checkNameFormat(value, style, leadingUnderscore, trailingUnderscore) {
   if (trailingUnderscore === 'allow') {
     name = name.replace(/_*$/, '');
   }
-  return new RegExp(formats[style]).test(name);
+  if (suffix && !name.endsWith(suffix)) {
+    return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix' };
+  }
+  if (style && !acceptedStyles.some(acceptedStyle => acceptedStyle === style)) {
+    return {
+      ok: false,
+      errorMessage: `{{nodeType}} name "{{nodeName}}" should be in one of the following options: ${acceptedStyles.join(
+        ','
+      )}`,
+    };
+  }
+  if (!formats[style]) {
+    return { ok: true };
+  }
+  const ok = new RegExp(formats[style]).test(name);
+  if (ok) {
+    return { ok: true };
+  }
+  return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format' };
 }
 
 const schemaOption = {
-  type: 'string',
-  enum: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'],
+  type: ['string', 'object'],
+  properties: {
+    format: {
+      type: 'string',
+      enum: acceptedStyles,
+    },
+    suffix: {
+      type: 'string',
+    },
+  },
 };
 
-type ValidNaming = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
+interface PropertySchema {
+  format?: ValidNaming;
+  suffix?: string;
+}
 
 type NamingConventionRuleConfig = [
   {
     leadingUnderscore?: 'allow' | 'forbid';
     trailingUnderscore?: 'allow' | 'forbid';
-    [Kind.FIELD_DEFINITION]?: ValidNaming;
-    [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming;
-    [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming;
-    [Kind.OBJECT_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.INTERFACE_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.ENUM_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.UNION_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.SCALAR_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.OPERATION_DEFINITION]?: ValidNaming;
-    [Kind.FRAGMENT_DEFINITION]?: ValidNaming;
-    [Kind.INPUT_OBJECT_TYPE_DEFINITION]?: ValidNaming;
+    [Kind.FIELD_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.OBJECT_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.INTERFACE_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.ENUM_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.UNION_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.SCALAR_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.OPERATION_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.FRAGMENT_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.INPUT_OBJECT_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
   }
 ];
 
@@ -111,18 +150,36 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ...(context.options[0] || {}),
     };
 
-    const checkNode = (node, style, nodeType) => {
-      if (!checkNameFormat(node.value, style, options.leadingUnderscore, options.trailingUnderscore)) {
+    const checkNode = (node, style, nodeType, suffix = '') => {
+      const result = checkNameFormat({
+        value: node.value,
+        style,
+        leadingUnderscore: options.leadingUnderscore,
+        trailingUnderscore: options.trailingUnderscore,
+        suffix: suffix,
+      });
+      if (result.ok === false) {
         context.report({
           node,
-          message: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format',
+          message: result.errorMessage,
           data: {
+            suffix: suffix,
             format: style,
             nodeType,
             nodeName: node.value,
           },
         });
       }
+    };
+
+    const convertToFinalPropertySchema = (value: ValidNaming | PropertySchema): PropertySchema => {
+      if (typeof value === 'object') {
+        return value;
+      }
+      return {
+        format: value,
+        suffix: '',
+      };
     };
 
     return {
@@ -139,52 +196,62 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       },
       ObjectTypeDefinition: node => {
         if (options.ObjectTypeDefinition) {
-          checkNode(node.name, options.ObjectTypeDefinition, 'Type');
+          const property = convertToFinalPropertySchema(options.ObjectTypeDefinition);
+          checkNode(node.name, property.format, 'Type', property.suffix);
         }
       },
       InterfaceTypeDefinition: node => {
         if (options.InterfaceTypeDefinition) {
-          checkNode(node.name, options.InterfaceTypeDefinition, 'Interface');
+          const property = convertToFinalPropertySchema(options.InterfaceTypeDefinition);
+          checkNode(node.name, property.format, 'Interface', property.suffix);
         }
       },
       EnumTypeDefinition: node => {
         if (options.EnumTypeDefinition) {
-          checkNode(node.name, options.EnumTypeDefinition, 'Enumerator');
+          const property = convertToFinalPropertySchema(options.EnumTypeDefinition);
+          checkNode(node.name, property.format, 'Enumerator', property.suffix);
         }
       },
       InputObjectTypeDefinition: node => {
         if (options.InputObjectTypeDefinition) {
-          checkNode(node.name, options.InputObjectTypeDefinition, 'Input type');
+          const property = convertToFinalPropertySchema(options.InputObjectTypeDefinition);
+          checkNode(node.name, property.format, 'Input type', property.suffix);
         }
       },
       FieldDefinition: node => {
         if (options.FieldDefinition) {
-          checkNode(node.name, options.FieldDefinition, 'Field');
+          const property = convertToFinalPropertySchema(options.FieldDefinition);
+          checkNode(node.name, property.format, 'Field', property.suffix);
         }
       },
       EnumValueDefinition: node => {
         if (options.EnumValueDefinition) {
-          checkNode(node.name, options.EnumValueDefinition, 'Enumeration value');
+          const property = convertToFinalPropertySchema(options.EnumValueDefinition);
+          checkNode(node.name, property.format, 'Enumeration value', property.suffix);
         }
       },
       InputValueDefinition: node => {
         if (options.InputValueDefinition) {
-          checkNode(node.name, options.InputValueDefinition, 'Input property');
+          const property = convertToFinalPropertySchema(options.InputValueDefinition);
+          checkNode(node.name, property.format, 'Input property', property.suffix);
         }
       },
       FragmentDefinition: node => {
         if (options.FragmentDefinition) {
-          checkNode(node.name, options.FragmentDefinition, 'Fragment');
+          const property = convertToFinalPropertySchema(options.FragmentDefinition);
+          checkNode(node.name, property.format, 'Fragment', property.suffix);
         }
       },
       ScalarTypeDefinition: node => {
         if (options.ScalarTypeDefinition) {
-          checkNode(node.name, options.ScalarTypeDefinition, 'Scalar');
+          const property = convertToFinalPropertySchema(options.ScalarTypeDefinition);
+          checkNode(node.name, property.format, 'Scalar', property.suffix);
         }
       },
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
-          checkNode(node.name, options.UnionTypeDefinition, 'Scalar');
+          const property = convertToFinalPropertySchema(options.UnionTypeDefinition);
+          checkNode(node.name, property.format, 'Scalar', property.suffix);
         }
       },
     };

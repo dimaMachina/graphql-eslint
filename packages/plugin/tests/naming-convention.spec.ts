@@ -75,6 +75,16 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code:
         'input test { item: String } enum B { Test } interface A { i: String } fragment PictureFragment on Picture { uri } scalar Hello',
     },
+    {
+      code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { format: 'PascalCase' },
+          FieldDefinition: { format: 'camelCase', suffix: 'Field' },
+          EnumValueDefinition: { format: 'UPPER_CASE', suffix: '' },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -138,6 +148,22 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         { message: 'Input type name "test" should be in PascalCase format' },
         { message: 'Input property name "_Value" should be in snake_case format' },
         { message: 'Leading underscores are not allowed' },
+      ],
+    },
+    {
+      code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { format: 'camelCase' },
+          FieldDefinition: { format: 'camelCase', suffix: 'AAA' },
+          EnumValueDefinition: { format: 'camelCase', suffix: 'ENUM' },
+        },
+      ],
+      errors: [
+        { message: 'Type name "TypeOne" should be in camelCase format' },
+        { message: 'Field name "aField" should have "AAA" suffix' },
+        { message: 'Enumeration value name "VALUE_ONE" should have "ENUM" suffix' },
+        { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" suffix' },
       ],
     },
   ],
