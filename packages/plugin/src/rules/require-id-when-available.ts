@@ -82,7 +82,15 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                 }
               }
 
-              if (!found) {
+              const { parent } = node as any;
+              const hasIdFieldInInterfaceSelectionSet =
+                parent &&
+                parent.kind === 'InlineFragment' &&
+                parent.parent &&
+                parent.parent.kind === 'SelectionSet' &&
+                !!parent.parent.selections.find(s => s.kind === 'Field' && s.name.value === fieldName);
+
+              if (!found && !hasIdFieldInInterfaceSelectionSet) {
                 context.report({
                   loc: {
                     start: {

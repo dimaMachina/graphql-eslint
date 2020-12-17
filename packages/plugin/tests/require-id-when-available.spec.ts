@@ -63,13 +63,12 @@ ruleTester.runGraphQLTests('require-id-when-available', rule, {
       code: `query { hasId { name } }`,
       options: [{ fieldName: 'name' }],
     },
-  ],
-  invalid: [
     {
       ...WITH_SCHEMA,
       code: `query { vehicles { id ...on Car { mileage } } }`,
-      errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
+  ],
+  invalid: [
     {
       ...WITH_SCHEMA,
       code: `query { hasId { name } }`,
