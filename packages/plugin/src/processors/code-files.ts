@@ -1,4 +1,5 @@
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
+import { basename } from 'path';
 
 const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
 
@@ -18,6 +19,11 @@ export function createGraphqlProcessor() {
     preprocess: (text: string, filename: string): Array<{ text: string; filename: string }> => {
       const blocks: Block[] = [];
       blocksMap.set(filename, blocks);
+
+      // WORKAROUND: This restores the original filename for the block representing original code.
+      //             This allows to be compatible with other eslint plugins relying on filesystem
+      //             This is temporary, waiting for https://github.com/eslint/eslint/issues/11989
+      const originalFileBlock = { text, filename: `/../../${basename(filename)}` }
 
       if (filename && text && RELEVANT_KEYWORDS.some(keyword => text.includes(keyword))) {
         const extractedDocuments = parseCode({
@@ -39,13 +45,13 @@ export function createGraphqlProcessor() {
             });
           }
 
-          blocks.push({ text, filename });
+          blocks.push(originalFileBlock);
 
           return blocks;
         }
       }
 
-      return [{ text, filename }];
+      return [originalFileBlock];
     },
     postprocess: (messageLists: any[], filename: string): any[] => {
       const blocks = blocksMap.get(filename);
