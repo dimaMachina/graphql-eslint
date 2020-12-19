@@ -1,5 +1,20 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.5.0
+
+### Minor Changes
+
+- 937b322: test release
+- 937b322: Allow to load siblings operations
+- 937b322: feature(processor): apply processor automatically on code files
+
+### Patch Changes
+
+- 937b322: Fix processor compatibility with other plugins
+- 937b322: Better integration of siblings operations and graphql-config
+- 937b322: fix(parser): better performance, make sure schema is loaded and cached
+- 937b322: fix(parser): better support for graphql-config intergration and project detection
+
 ## 0.4.4
 
 ### Patch Changes
