@@ -7,6 +7,9 @@
     "./packages/*",
     "./examples/*"
   ],
+  "husky": {
+    "pre-commit": "yarn generate:docs"
+  },
   "scripts": {
     "generate:docs": "ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/generate-docs.ts",
     "postinstall": "patch-package",
