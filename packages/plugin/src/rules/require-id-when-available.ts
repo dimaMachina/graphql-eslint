@@ -1,6 +1,6 @@
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESLintRule } from '../types';
-import { print, GraphQLInterfaceType, GraphQLObjectType } from 'graphql';
+import { GraphQLInterfaceType, GraphQLObjectType } from 'graphql';
 import { getBaseType } from '../estree-parser';
 
 const REQUIRE_ID_WHEN_AVAILABLE = 'REQUIRE_ID_WHEN_AVAILABLE';
@@ -15,6 +15,45 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
       category: 'Best Practices',
       description: `This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md`,
+      requiresSchema: true,
+      requiresSiblings: true,
+      examples: [
+        {
+          title: 'Incorrect',
+          code: /* GraphQL */ `
+            # In your schema
+            type User {
+              id: ID!
+              name: String!
+            }
+
+            # Query
+            query user {
+              user {
+                name
+              }
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          code: /* GraphQL */ `
+            # In your schema
+            type User {
+              id: ID!
+              name: String!
+            }
+
+            # Query
+            query user {
+              user {
+                id
+                name
+              }
+            }
+          `,
+        },
+      ],
     },
     messages: {
       [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments {{checkedFragments}} sepcifies the field "{{ fieldName }}".`,
@@ -69,9 +108,9 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                   const foundSpread = siblings.getFragment(selection.name.value);
 
                   if (foundSpread[0]) {
-                    checkedFragmentSpreads.add(foundSpread[0].name.value);
+                    checkedFragmentSpreads.add(foundSpread[0].document.name.value);
 
-                    found = !!(foundSpread[0].selectionSet?.selections || []).find(
+                    found = !!(foundSpread[0].document.selectionSet?.selections || []).find(
                       s => s.kind === 'Field' && s.name.value === fieldName
                     );
                   }

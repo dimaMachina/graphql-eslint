@@ -10,6 +10,30 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
   meta: {
     type: 'suggestion',
     docs: {
+      requiresSchema: false,
+      requiresSiblings: false,
+      examples: [
+        {
+          title: 'Incorrect',
+          usage: [{ style: 'inline' }],
+          code: /* GraphQL */ `
+            """ Description """
+            type someTypeName {
+                ...
+            }
+            `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ style: 'inline' }],
+          code: /* GraphQL */ `
+            " Description "
+            type someTypeName {
+                ...
+            }
+            `,
+        },
+      ],
       description: 'Require all comments to follow the same style (either block or inline)',
       category: 'Stylistic Issues',
       recommended: false,

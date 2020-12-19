@@ -1,13 +1,15 @@
-## Avoid Anonymous GraphQL operations
+# `no-anonymous-operations`
 
-- Name: `no-anonymous-operations`
+- Category: `Best Practices`
+- Rule name: `@graphql-eslint/no-anonymous-operations`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
-Allow you to require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.
+Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.
 
-### Usage Example
+## Usage Examples
 
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
 # eslint @graphql-eslint/no-anonymous-operations: ["error"]
@@ -17,12 +19,12 @@ query {
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
 # eslint @graphql-eslint/no-anonymous-operations: ["error"]
 
-query something {
+query user {
   # ...
 }
 ```

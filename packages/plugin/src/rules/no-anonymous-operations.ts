@@ -11,6 +11,26 @@ const rule: GraphQLESLintRule = {
         'Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.',
       recommended: true,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-anonymous-operations.md',
+      requiresSiblings: false,
+      requiresSchema: false,
+      examples: [
+        {
+          title: 'Incorrect',
+          code: /* GraphQL */ `
+            query {
+              # ...
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          code: /* GraphQL */ `
+            query user {
+              # ...
+            }
+          `,
+        },
+      ],
     },
     messages: {
       [NO_ANONYMOUS_OPERATIONS]: `Anonymous GraphQL operations are forbidden. Please make sure to name your {{ operation }}!`,

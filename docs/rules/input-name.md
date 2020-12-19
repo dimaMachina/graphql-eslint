@@ -1,42 +1,53 @@
-# Enforce names of input parameters and input types
+# `input-name`
 
-- Name: `input-name`
+- Category: `Stylistic Issues`
+- Rule name: `@graphql-eslint/input-name`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
+Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".
 Using the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.
 
-## Rule Details
+## Usage Examples
 
-This rule enforces all input parameters to be named `input`, and all InputTypes to use the name of the mutation + `'Input'`.
-
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/input-name: ["error", { checkInputType: true }]
+# eslint @graphql-eslint/input-name: ["error", [{"checkInputType":true}]]
 
 type Mutation {
   SetMessage(message: InputMessage): String
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct (with checkInputType)
 
 ```graphql
-# eslint @graphql-eslint/input-name: ["error", { checkInputType: true }]
+# eslint @graphql-eslint/input-name: ["error", [{"checkInputType":true}]]
 
 type Mutation {
   SetMessage(input: SetMessageInput): String
 }
 ```
 
+### Correct (without checkInputType)
+
 ```graphql
-# eslint @graphql-eslint/input-name: ["error", { checkInputType: false }]
+# eslint @graphql-eslint/input-name: ["error", [{"checkInputType":false}]]
 
 type Mutation {
   SetMessage(input: AnyInputTypeName): String
 }
 ```
 
-## Configuration
+## Config Schema
 
-This rule accepts one option `checkInputType`. If `true` (default) it will verify that the name of the input type matches name of the mutation + 'Input'. If `false` it will not check InputType name.
+### (array)
+
+The schema defines an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+#### `checkInputType` (boolean)
+
+Default: `"true"`

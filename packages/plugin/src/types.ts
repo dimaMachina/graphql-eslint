@@ -37,7 +37,19 @@ export type GraphQLESlintRuleContext<Options = any[]> = Omit<
   parserServices?: ParserServices;
 };
 
+export type RuleDocsInfo<T> = {
+  docs?: {
+    requiresSchema?: boolean;
+    requiresSiblings?: boolean;
+    examples?: {
+      title: string;
+      usage?: T;
+      code: string;
+    }[];
+  };
+};
+
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESlintRuleContext<Options>): GraphQLESlintRuleListener<WithTypeInfo>;
-  meta?: Rule.RuleMetaData;
+  meta?: Rule.RuleMetaData & RuleDocsInfo<Options>;
 };

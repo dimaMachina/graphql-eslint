@@ -1,15 +1,15 @@
-## Require querying id (or other field) when field exists
+# `require-id-when-available`
 
-- Name: `require-id-when-available`
+- Category: `Best Practices`
+- Rule name: `@graphql-eslint/require-id-when-available`
 - Requires GraphQL Schema: `true`
+- Requires GraphQL Operations: `true`
 
 This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.
 
-It's useful for GraphQL client libraries that are using `id` field for caching (when queried).
+## Usage Examples
 
-### Usage Example
-
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
 # eslint @graphql-eslint/require-id-when-available: ["error"]
@@ -28,7 +28,7 @@ query user {
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
 # eslint @graphql-eslint/require-id-when-available: ["error"]
@@ -47,3 +47,7 @@ query user {
   }
 }
 ```
+
+## Config Schema
+
+The schema defines the following properties:

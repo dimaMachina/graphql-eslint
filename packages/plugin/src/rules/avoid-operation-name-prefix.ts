@@ -48,21 +48,36 @@ const rule: GraphQLESLintRule<AvoidOperationNamePrefixConfig> = {
   meta: {
     type: 'suggestion',
     docs: {
+      requiresSchema: false,
+      requiresSiblings: false,
       description:
         'Enforce/avoid operation name prefix, useful if you wish to avoid prefix in your root fields, or avoid using REST terminology in your schema',
       category: 'Stylistic Issues',
-      recommended: false,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/avoid-operation-name-prefix.md',
+      examples: [
+        {
+          title: 'Incorrect',
+          usage: [{ keywords: ['get'] }],
+          code: /* GraphQL */ `
+            query getUserDetails {
+              # ...
+            }`,
+        },
+        {
+          title: 'Correct',
+          usage: [{ keywords: ['get'] }],
+          code: /* GraphQL */ `
+            query userDetails {
+              # ...
+            }`,
+        },
+      ],
     },
     messages: {
       [AVOID_OPERATION_NAME_PREFIX]: `Forbidden operation name prefix: "{{ invalidPrefix }}"`,
     },
-    schema: {
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      additionalItems: false,
-      items: {
+    schema: [
+      {
         additionalProperties: false,
         type: 'object',
         required: ['keywords'],
@@ -81,7 +96,7 @@ const rule: GraphQLESLintRule<AvoidOperationNamePrefixConfig> = {
           },
         },
       },
-    },
+    ],
   },
   create(context) {
     return {

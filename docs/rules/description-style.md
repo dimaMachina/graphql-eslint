@@ -1,18 +1,18 @@
-# Enforce style of the description comments
+# `description-style`
 
-- Name: `description-style`
+- Category: `Stylistic Issues`
+- Rule name: `@graphql-eslint/description-style`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
-Following the same style for description comments in your code will make them easier to read.
+Require all comments to follow the same style (either block or inline)
 
-## Rule Details
+## Usage Examples
 
-This rule enforces same style for all description comments in your code. This rule has one option: `style` that can be set to either `block` or `inline` (default).
-
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/description-style: ["error", { style: "inline" }]
+# eslint @graphql-eslint/description-style: ["error", [{"style":"inline"}]]
 
 """ Description """
 type someTypeName {
@@ -20,19 +20,30 @@ type someTypeName {
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
-# eslint @graphql-eslint/description-style: ["error", { style: "inline" }]
+# eslint @graphql-eslint/description-style: ["error", [{"style":"inline"}]]
 
 " Description "
-type SomeTypeName {
-  someFieldName: String
+type someTypeName {
+    ...
 }
 ```
 
-## Options
+## Config Schema
 
-This rule accepts configuration object with one option:
+### (array)
 
-- `style: 'block'|'inline'` - Will require all comments to be either in block style (`"""`) or inline style (`"`)
+The schema defines an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+#### `style` (string, enum)
+
+This element must be one of the following enum values:
+
+* `block`
+* `inline`
+
+Default: `"inline"`

@@ -1,12 +1,16 @@
-# Enforces styling consistency in your type definitions
+# `prettier`
 
-- Name: `prettier`
+- Category: `Stylistic Issues`
+- Rule name: `@graphql-eslint/prettier`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
-Having all your code follow the same styling guidelines makes it easier to read and understand the code
+Having all your code follow the same styling guidelines makes it easier to read and understand the code.
 
-## Rule Details
+## Config Schema
 
-This rule is a copy of the rule in [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) adjusted to work for GraphQL.
+### (array)
 
-Please see [documentation](https://github.com/prettier/eslint-plugin-prettier#options) for available options and configurations.
+The schema defines an array with all elements of the type `object`.
+
+The array object has the following properties:

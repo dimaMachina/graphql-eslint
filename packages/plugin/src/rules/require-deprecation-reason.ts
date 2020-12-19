@@ -8,6 +8,34 @@ const rule: GraphQLESLintRule = {
       category: 'Best Practices',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-deprecation-reason.md`,
       recommended: true,
+      requiresSchema: false,
+      requiresSiblings: false,
+      examples: [
+        {
+          title: 'Incorrect',
+          code: /* GraphQL */ `
+            type MyType {
+              name: String @deprecated
+            }
+          `,
+        },
+        {
+          title: 'Incorrect',
+          code: /* GraphQL */ `
+            type MyType {
+              name: String @deprecated(reason: "")
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          code: /* GraphQL */ `
+            type MyType {
+              name: String @deprecated(reason: "no longer relevant, please use fullName field")
+            }
+          `,
+        },
+      ],
     },
     type: 'suggestion',
   },

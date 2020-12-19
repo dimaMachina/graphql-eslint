@@ -10,9 +10,11 @@ import descriptionStyle from './description-style';
 import prettier from './prettier';
 import namingConvention from './naming-convention';
 import inputName from './input-name';
+import uniqueFragmentName from './unique-fragment-name';
 import { GraphQLESLintRule } from '../types';
 
 export const rules: Record<string, GraphQLESLintRule> = {
+  'unique-fragment-name': uniqueFragmentName,
   'validate-against-schema': validate,
   'no-anonymous-operations': noAnonymousOperations,
   'no-operation-name-suffix': noOperationNameSuffix,

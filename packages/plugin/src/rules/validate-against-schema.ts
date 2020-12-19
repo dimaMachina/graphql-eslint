@@ -54,15 +54,15 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/validate-against-schema.md`,
       recommended: true,
       description: `This rule validates GraphQL operations against your GraphQL schema, and reflects the error as lint errors.`,
+      requiresSchema: true,
+      requiresSiblings: false,
     },
-    schema: {
-      type: 'array',
-      minItems: 0,
-      maxItems: 1,
-      items: {
+    schema: [
+      {
         allOf: [
           {
             type: 'object',
+            title: 'overrideRules',
             properties: {
               overrideRules: {
                 type: 'array',
@@ -74,6 +74,7 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
           },
           {
             type: 'object',
+            title: 'disableRules',
             properties: {
               disableRules: {
                 type: 'array',
@@ -85,7 +86,7 @@ const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
           },
         ],
       },
-    },
+    ],
     type: 'problem',
   },
   create(context) {
