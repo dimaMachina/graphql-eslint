@@ -52,6 +52,28 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       category: 'Best practices',
       recommended: true,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/naming-convention.md',
+      requiresSchema: false,
+      requiresSiblings: false,
+      examples: [
+        {
+          title: 'Incorrect',
+          usage: [{ ObjectTypeDefinition: 'PascalCase' }],
+          code: /* GraphQL */ `
+            type someTypeName {
+              f: String!
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ FieldDefinition: 'camelCase', ObjectTypeDefinition: 'PascalCase' }],
+          code: /* GraphQL */ `
+            type SomeTypeName {
+              someFieldName: String
+            }
+          `,
+        },
+      ],
     },
     schema: [
       {

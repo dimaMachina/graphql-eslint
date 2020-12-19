@@ -52,6 +52,34 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
       description: `Enforce descriptions in your type definitions`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-description.md`,
       recommended: true,
+      requiresSchema: false,
+      requiresSiblings: false,
+      examples: [
+        {
+          title: 'Incorrect',
+          usage: [{ on: ['ObjectTypeDefinition', 'FieldDefinition'] }],
+          code: /* GraphQL */ `
+            type someTypeName {
+              name: String
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ on: ['ObjectTypeDefinition', 'FieldDefinition'] }],
+          code: /* GraphQL */ `
+            """
+            Some type description
+            """
+            type someTypeName {
+              """
+              Name description
+              """
+              name: String
+            }
+          `,
+        },
+      ],
     },
     type: 'suggestion',
     messages: {

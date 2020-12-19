@@ -1,28 +1,28 @@
-# Enforce descriptions in your type definitions
+# `require-description`
 
-- Name: `require-description`
+- Category: `Best Practices`
+- Rule name: `@graphql-eslint/require-description`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
-Because documentation for GraphQL schemas are usually auto-generated omitting descriptions will not provide any information about types in your schema. It's considered best practice to provide descriptions for all your type definitions.
+Enforce descriptions in your type definitions
 
-## Rule Details
+## Usage Examples
 
-This rule requires descriptions to be present in your type definitions files.
-
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-description: ["error", { on: ["ObjectTypeDefinition", "FieldDefinition"] }]
+# eslint @graphql-eslint/require-description: ["error", [{"on":["ObjectTypeDefinition","FieldDefinition"]}]]
 
 type someTypeName {
   name: String
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-description: ["error", { on: ["ObjectTypeDefinition", "FieldDefinition"] }]
+# eslint @graphql-eslint/require-description: ["error", [{"on":["ObjectTypeDefinition","FieldDefinition"]}]]
 
 """
 Some type description
@@ -35,19 +35,6 @@ type someTypeName {
 }
 ```
 
-## Configuration
+## Config Schema
 
-By default, this rules doesn't enforce description on any type of AST node.
-
-This rule accepts an configuration key called `on`, with an array strings. The values are all possible AST nodes that has `description` field available:
-
-- `SchemaDefinition`
-- `ObjectTypeDefinition`
-- `FieldDefinition`
-- `InputValueDefinition`
-- `InterfaceTypeDefinition`
-- `UnionTypeDefinition`
-- `EnumTypeDefinition`
-- `EnumValueDefinition`
-- `InputObjectTypeDefinition`
-- `DirectiveDefinition`
+The schema defines the following properties:

@@ -1,13 +1,15 @@
-## No Operation Name Suffix
+# `no-operation-name-suffix`
 
-- Name: `no-operation-name-suffix`
+- Category: `Stylistic Issues`
+- Rule name: `@graphql-eslint/no-operation-name-suffix`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
 Makes sure you are not adding the operation type to the name of the operation.
 
-### Usage Example
+## Usage Examples
 
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
 # eslint @graphql-eslint/no-operation-name-suffix: ["error"]
@@ -17,7 +19,7 @@ query userQuery {
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
 # eslint @graphql-eslint/no-operation-name-suffix: ["error"]

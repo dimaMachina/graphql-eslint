@@ -8,6 +8,7 @@
     "./examples/*"
   ],
   "scripts": {
+    "generate:docs": "ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/generate-docs.ts",
     "postinstall": "patch-package",
     "lint": "eslint --config .eslintrc.json --ext .ts .",
     "prebuild": "rimraf packages/*/dist",
@@ -20,6 +21,10 @@
     "prettier": "prettier --ignore-path .gitignore --write --list-different \"**/*.{ts,tsx,graphql,yml}\""
   },
   "devDependencies": {
+    "json-schema-to-markdown": "1.1.1",
+    "@types/dedent": "0.7.0",
+    "dedent": "0.7.0",
+    "ts-node": "9.1.1",
     "patch-package": "6.2.2",
     "@changesets/cli": "2.12.0",
     "@typescript-eslint/eslint-plugin": "4.10.0",

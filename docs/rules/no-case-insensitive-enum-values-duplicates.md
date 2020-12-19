@@ -1,13 +1,15 @@
-## Avoid Duplicates In Enum Values
+# `no-case-insensitive-enum-values-duplicates`
 
-- Name: `no-case-insensitive-enum-values-duplicates`
+- Category: `Best Practices`
+- Rule name: `@graphql-eslint/no-case-insensitive-enum-values-duplicates`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
-Checks enums values for duplicate values defined (case-insensitive).
 
-### Usage Example
 
-Examples of **incorrect** code for this rule:
+## Usage Examples
+
+### Incorrect
 
 ```graphql
 # eslint @graphql-eslint/no-case-insensitive-enum-values-duplicates: ["error"]
@@ -19,7 +21,7 @@ enum MyEnum {
 }
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
 # eslint @graphql-eslint/no-case-insensitive-enum-values-duplicates: ["error"]

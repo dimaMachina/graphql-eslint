@@ -1,35 +1,40 @@
-# Require all deprecation directives to specify a reason
+# `require-deprecation-reason`
 
-- Name: `require-deprecation-reason`
+- Category: `Best Practices`
+- Rule name: `@graphql-eslint/require-deprecation-reason`
 - Requires GraphQL Schema: `false`
+- Requires GraphQL Operations: `false`
 
-Deprecation reason will document your decisions for others.
+Require all deprecation directives to specify a reason
 
-# Rule Details
+## Usage Examples
 
-This rule will require all `@deprecated` directives to specify deprecation reason
-
-Examples of **incorrect** code for this rule:
+### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-deprecation-reason: "error"
-...
+# eslint @graphql-eslint/require-deprecation-reason: ["error"]
+
+type MyType {
   name: String @deprecated
-...
+}
 ```
 
+### Incorrect
+
 ```graphql
-# eslint @graphql-eslint/require-deprecation-reason: "error"
-...
+# eslint @graphql-eslint/require-deprecation-reason: ["error"]
+
+type MyType {
   name: String @deprecated(reason: "")
-...
+}
 ```
 
-Examples of **correct** code for this rule:
+### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-deprecation-reason: "error"
-...
-  name: String @depecated(reason: "Removing in 2 releases. Use fullname instead")
-...
+# eslint @graphql-eslint/require-deprecation-reason: ["error"]
+
+type MyType {
+  name: String @deprecated(reason: "no longer relevant, please use fullName field")
+}
 ```
