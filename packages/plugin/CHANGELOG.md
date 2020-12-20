@@ -1,5 +1,18 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.6.0
+
+### Minor Changes
+
+- e9d1d53: NEW RULE: unique-operation-name
+- e9d1d53: Port all graphql-js validation rules to standalone rules
+- e9d1d53: New rule: unique-fragment-name
+
+### Patch Changes
+
+- e9d1d53: Fix issues with AST converter and root Document causing to invalid ASTs when rawNode is called
+- e9d1d53: Fix issue with siblings operations and getOperation method
+
 ## 0.5.0
 
 ### Minor Changes
