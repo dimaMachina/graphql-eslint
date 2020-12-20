@@ -2,8 +2,8 @@
 
 - Category: `Stylistic Issues`
 - Rule name: `@graphql-eslint/avoid-operation-name-prefix`
-- Requires GraphQL Schema: `false`
-- Requires GraphQL Operations: `false`
+- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Enforce/avoid operation name prefix, useful if you wish to avoid prefix in your root fields, or avoid using REST terminology in your schema
 

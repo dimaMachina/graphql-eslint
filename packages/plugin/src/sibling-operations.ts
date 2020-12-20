@@ -142,7 +142,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
   let cachedOperations: OperationSource[] | null = null;
 
   const getOperations = (): OperationSource[] => {
-    if (operationsCache === null) {
+    if (cachedOperations === null) {
       const result: OperationSource[] = [];
 
       for (const source of siblings) {

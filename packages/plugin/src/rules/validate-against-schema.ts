@@ -13,23 +13,24 @@ function extractRuleName(stack: string | undefined): string | null {
   return match[1] || null;
 }
 
-function validateDoc(
+export function validateDoc(
   sourceNode: GraphQLESTreeNode<ASTNode>,
   context: GraphQLESlintRuleContext,
   schema: GraphQLSchema,
   documentNode: DocumentNode,
-  rules: ReadonlyArray<ValidationRule>
-) {
+  rules: ReadonlyArray<ValidationRule>,
+  ruleName: string | null = null
+): void {
   if (documentNode && documentNode.definitions && documentNode.definitions.length > 0) {
     try {
       const validationErrors = validate(schema, documentNode, rules);
 
       for (const error of validationErrors) {
-        const validateRuleName = extractRuleName(error.stack);
+        const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
 
         context.report({
           loc: error.locations[0],
-          message: validateRuleName ? `[${validateRuleName}] ${error.message}` : error.message,
+          message: ruleName ? error.message : `${validateRuleName} ${error.message}`,
         });
       }
     } catch (e) {
@@ -50,10 +51,10 @@ export type ValidateAgainstSchemaRuleConfig = [
 
 const rule: GraphQLESLintRule<ValidateAgainstSchemaRuleConfig> = {
   meta: {
+    deprecated: true,
     docs: {
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/validate-against-schema.md`,
-      recommended: true,
-      description: `This rule validates GraphQL operations against your GraphQL schema, and reflects the error as lint errors.`,
+      description: `This rule validates GraphQL operations against your GraphQL schema, and reflects the error as lint errors.\n\n> This rule is deprecated, all validations are available as standalone rules since v0.6.0.`,
       requiresSchema: true,
       requiresSiblings: false,
     },

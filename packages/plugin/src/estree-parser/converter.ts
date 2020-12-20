@@ -1,6 +1,6 @@
 import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
 import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
-import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location } from 'graphql';
+import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind } from 'graphql';
 import { Comment } from 'estree';
 
 export function convertToESTree<T extends ASTNode>(
@@ -68,7 +68,20 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode: () => parent[key],
+      rawNode: () => {
+        if (!parent || key === undefined) {
+          if (node && (node as any).definitions) {
+            return {
+              kind: Kind.DOCUMENT,
+              definitions: (node as any).definitions.map(d => d.rawNode()),
+            };
+          }
+
+          return node;
+        }
+
+        return parent[key];
+      },
       gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
@@ -80,7 +93,20 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       ...typeFieldSafe,
       ...commonFields,
       type: node.kind,
-      rawNode: () => parent[key],
+      rawNode: () => {
+        if (!parent || key === undefined) {
+          if (node && (node as any).definitions) {
+            return {
+              kind: Kind.DOCUMENT,
+              definitions: (node as any).definitions.map(d => d.rawNode()),
+            };
+          }
+
+          return node;
+        }
+
+        return parent[key];
+      },
       gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 

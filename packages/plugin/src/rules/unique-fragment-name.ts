@@ -1,16 +1,14 @@
 import { GraphQLESLintRule } from '../types';
 import { requireSiblingsOperations } from '../utils';
 
-type UniqueFragmentNameRuleConfig = [];
-
 const UNIQUE_FRAGMENT_NAME = 'UNIQUE_FRAGMENT_NAME';
 
-const rule: GraphQLESLintRule<UniqueFragmentNameRuleConfig, false> = {
+const rule: GraphQLESLintRule<[], false> = {
   meta: {
     type: 'suggestion',
     docs: {
       category: 'Best Practices',
-      description: `This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.`,
+      description: `This rule allow you to enforce unique fragment name across your application.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/unique-fragment-name.md`,
       requiresSchema: false,
       requiresSiblings: true,

@@ -11,10 +11,13 @@ import prettier from './prettier';
 import namingConvention from './naming-convention';
 import inputName from './input-name';
 import uniqueFragmentName from './unique-fragment-name';
+import uniqueOperationName from './unique-operation-name';
 import { GraphQLESLintRule } from '../types';
+import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
 export const rules: Record<string, GraphQLESLintRule> = {
   'unique-fragment-name': uniqueFragmentName,
+  'unique-operation-name': uniqueOperationName,
   'validate-against-schema': validate,
   'no-anonymous-operations': noAnonymousOperations,
   'no-operation-name-suffix': noOperationNameSuffix,
@@ -27,4 +30,5 @@ export const rules: Record<string, GraphQLESLintRule> = {
   prettier: prettier,
   'naming-convention': namingConvention,
   'input-name': inputName,
+  ...GRAPHQL_JS_VALIDATIONS,
 };

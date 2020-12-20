@@ -2,8 +2,8 @@
 
 - Category: `Best Practices`
 - Rule name: `@graphql-eslint/require-description`
-- Requires GraphQL Schema: `false`
-- Requires GraphQL Operations: `false`
+- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Enforce descriptions in your type definitions
 

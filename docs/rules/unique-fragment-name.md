@@ -2,10 +2,10 @@
 
 - Category: `Best Practices`
 - Rule name: `@graphql-eslint/unique-fragment-name`
-- Requires GraphQL Schema: `false`
-- Requires GraphQL Operations: `true`
+- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.
+This rule allow you to enforce unique fragment name across your application.
 
 ## Usage Examples
 
