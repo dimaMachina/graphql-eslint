@@ -30,7 +30,7 @@ export const operationsLoaders: Loader<string, SingleFileOptions>[] = [
       document: parse(pointer),
     }),
   },
-]
+];
 
 export type SiblingOperations = {
   available: boolean;
@@ -60,32 +60,30 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
 
   // We first try to use graphql-config for loading the operations paths, based on the type of the file,
   // We are using the directory of the file as the key for the schema caching, to avoid reloading of the schema.
-  if (options && options.filePath && !options.skipGraphQLConfig) {
+  if (gqlConfig && options?.filePath) {
     const fileDir = dirname(options.filePath);
 
     if (operationsCache.has(fileDir)) {
       siblings = operationsCache.get(fileDir);
     } else {
-      if (gqlConfig) {
-        const projectForFile = gqlConfig.getProjectForFile(options.filePath);
+      const projectForFile = gqlConfig.getProjectForFile(options.filePath);
 
-        if (projectForFile) {
-          siblings = projectForFile.getDocumentsSync();
-          operationsCache.set(fileDir, siblings);
-        }
+      if (projectForFile) {
+        siblings = projectForFile.getDocumentsSync();
+        operationsCache.set(fileDir, siblings);
       }
     }
   }
 
-  if (options && options.operations && !siblings) {
+  if (!siblings && options?.operations) {
     const loadPaths = Array.isArray(options.operations) ? options.operations : [options.operations] || [];
     const loadKey = loadPaths.join(',');
 
-    if (!operationsCache.has(loadKey)) {
+    if (operationsCache.has(loadKey)) {
+      siblings = operationsCache.get(loadKey);
+    } else {
       siblings = loadSiblings(process.cwd(), loadPaths);
       operationsCache.set(loadKey, siblings);
-    } else {
-      siblings = operationsCache.get(loadKey);
     }
   }
 

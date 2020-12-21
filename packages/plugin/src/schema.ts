@@ -23,26 +23,24 @@ export const schemaLoaders: Loader<string, SingleFileOptions>[] = [
   new GraphQLFileLoader(),
   new JsonFileLoader(),
   new UrlLoader(),
-]
+];
 
 export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): GraphQLSchema | null {
   let schema: GraphQLSchema | null = null;
 
   // We first try to use graphql-config for loading the schema, based on the type of the file,
   // We are using the directory of the file as the key for the schema caching, to avoid reloading of the schema.
-  if (options && options.filePath && !options.skipGraphQLConfig) {
+  if (gqlConfig && options?.filePath) {
     const fileDir = dirname(options.filePath);
 
     if (schemaCache.has(fileDir)) {
       schema = schemaCache.get(fileDir);
     } else {
-      if (gqlConfig) {
-        const projectForFile = gqlConfig.getProjectForFile(options.filePath);
+      const projectForFile = gqlConfig.getProjectForFile(options.filePath);
 
-        if (projectForFile) {
-          schema = projectForFile.getSchemaSync();
-          schemaCache.set(fileDir, schema);
-        }
+      if (projectForFile) {
+        schema = projectForFile.getSchemaSync();
+        schemaCache.set(fileDir, schema);
       }
     }
   }
@@ -50,7 +48,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
   // If schema was not loaded yet, and user configured it in the parserConfig, we can try to load it,
   // In this case, the cache key is the path for the schema. This is needed in order to allow separate
   // configurations for different file paths (a very edgey case).
-  if (options && !schema && options.schema) {
+  if (!schema && options?.schema) {
     const schemaKey = Array.isArray(options.schema) ? options.schema.join(',') : options.schema;
 
     if (schemaCache.has(schemaKey)) {
