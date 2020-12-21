@@ -54,6 +54,7 @@ function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
 }
 
 const operationsCache: Map<string, Source[]> = new Map();
+const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
 
 export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLConfig): SiblingOperations {
   let siblings: Source[] | null = null;
@@ -116,6 +117,13 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
       getOperationByType: noopWarn,
       getFragmentsInUse: noopWarn,
     };
+  }
+
+  // Since the siblings array is cached, we can use it as cache key.
+  // We should get the same array reference each time we get
+  // to this point for the same graphql project
+  if(siblingOperationsCache.has(siblings)) {
+    return siblingOperationsCache.get(siblings)
   }
 
   let fragmentsCache: FragmentSource[] | null = null;
@@ -199,7 +207,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
     return collected;
   };
 
-  return {
+  const siblingOperations = {
     available: true,
     getFragments,
     getOperations,
@@ -210,4 +218,6 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
     getOperationByType: type => getOperations().filter(o => o.document.operation === type),
     getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
   };
+  siblingOperationsCache.set(siblings, siblingOperations)
+  return siblingOperations
 }
