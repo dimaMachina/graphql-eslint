@@ -12,11 +12,11 @@ export function parse(code: string, options?: ParserOptions): Linter.ESLintParse
   return parseForESLint(code, options).ast;
 }
 
-const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = (api) => {
-  schemaLoaders.forEach(loader => api.loaders.schema.register(loader))
-  operationsLoaders.forEach(loader => api.loaders.documents.register(loader))
-  return { name: 'graphql-eslint-loaders' }
-}
+const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
+  schemaLoaders.forEach(loader => api.loaders.schema.register(loader));
+  operationsLoaders.forEach(loader => api.loaders.documents.register(loader));
+  return { name: 'graphql-eslint-loaders' };
+};
 
 export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
   const gqlConfig: GraphQLConfig | null = options?.skipGraphQLConfig
@@ -24,7 +24,7 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
     : loadConfigSync({
         throwOnEmpty: false,
         throwOnMissing: false,
-        extensions: [addCodeFileLoaderExtension]
+        extensions: [addCodeFileLoaderExtension],
       });
 
   const schema = getSchema(options, gqlConfig);
@@ -65,11 +65,13 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
         index: e.positions[0],
         lineNumber: e.locations[0].line,
         column: e.locations[0].column,
-        message: e.message,
+        message: `[graphql-eslint]: ${e.message}`,
       };
 
       throw eslintError;
     }
+
+    e.message = `[graphql-eslint]: ${e.message}`;
 
     throw e;
   }
