@@ -12,10 +12,12 @@ import namingConvention from './naming-convention';
 import inputName from './input-name';
 import uniqueFragmentName from './unique-fragment-name';
 import uniqueOperationName from './unique-operation-name';
+import noDeprecated from './no-deprecated';
 import { GraphQLESLintRule } from '../types';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
 export const rules: Record<string, GraphQLESLintRule> = {
+  'no-deprecated': noDeprecated,
   'unique-fragment-name': uniqueFragmentName,
   'unique-operation-name': uniqueOperationName,
   'validate-against-schema': validate,
