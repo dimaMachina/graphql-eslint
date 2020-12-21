@@ -1,6 +1,7 @@
 ## Available Rules
 
 
+- [`no-deprecated`](./rules/no-deprecated.md)
 - [`unique-fragment-name`](./rules/unique-fragment-name.md)
 - [`unique-operation-name`](./rules/unique-operation-name.md)
 - [`validate-against-schema`](./rules/validate-against-schema.md)
