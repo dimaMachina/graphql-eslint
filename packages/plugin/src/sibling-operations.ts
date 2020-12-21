@@ -1,7 +1,7 @@
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { loadDocumentsSync } from '@graphql-tools/load';
-import { Source } from '@graphql-tools/utils';
+import { Loader, SingleFileOptions, Source } from '@graphql-tools/utils';
 import {
   FragmentDefinitionNode,
   FragmentSpreadNode,
@@ -17,6 +17,20 @@ import { dirname, join } from 'path';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
+
+export const operationsLoaders: Loader<string, SingleFileOptions>[] = [
+  new GraphQLFileLoader(),
+  new CodeFileLoader(),
+  {
+    loaderId: () => 'direct-string',
+    canLoad: async () => false,
+    load: async () => null,
+    canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
+    loadSync: pointer => ({
+      document: parse(pointer),
+    }),
+  },
+]
 
 export type SiblingOperations = {
   available: boolean;
@@ -35,19 +49,7 @@ export type SiblingOperations = {
 function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
   return loadDocumentsSync(loadPaths, {
     cwd: baseDir,
-    loaders: [
-      new GraphQLFileLoader(),
-      new CodeFileLoader(),
-      {
-        loaderId: () => 'direct-string',
-        canLoad: async () => false,
-        load: async () => null,
-        canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
-        loadSync: pointer => ({
-          document: parse(pointer),
-        }),
-      },
-    ],
+    loaders: operationsLoaders,
   }).map(r => ({ ...r, location: join(baseDir, r.location) }));
 }
 

@@ -2,12 +2,28 @@ import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { JsonFileLoader } from '@graphql-tools/json-file-loader';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { UrlLoader } from '@graphql-tools/url-loader';
+import { Loader, SingleFileOptions } from '@graphql-tools/utils';
 import { buildSchema, GraphQLSchema } from 'graphql';
 import { GraphQLConfig } from 'graphql-config';
 import { dirname } from 'path';
 import { ParserOptions } from './types';
 
 const schemaCache: Map<string, GraphQLSchema> = new Map();
+
+export const schemaLoaders: Loader<string, SingleFileOptions>[] = [
+  {
+    loaderId: () => 'direct-string',
+    canLoad: async () => false,
+    load: async () => null,
+    canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
+    loadSync: pointer => ({
+      schema: buildSchema(pointer),
+    }),
+  },
+  new GraphQLFileLoader(),
+  new JsonFileLoader(),
+  new UrlLoader(),
+]
 
 export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): GraphQLSchema | null {
   let schema: GraphQLSchema | null = null;
@@ -44,20 +60,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
         schema = loadSchemaSync(options.schema, {
           ...(options.schemaOptions || {}),
           assumeValidSDL: true,
-          loaders: [
-            {
-              loaderId: () => 'direct-string',
-              canLoad: async () => false,
-              load: async () => null,
-              canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
-              loadSync: pointer => ({
-                schema: buildSchema(pointer),
-              }),
-            },
-            new GraphQLFileLoader(),
-            new JsonFileLoader(),
-            new UrlLoader(),
-          ],
+          loaders: schemaLoaders,
         });
         schemaCache.set(schemaKey, schema);
       } catch (e) {
