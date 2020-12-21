@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-eslint/example-graphql-config--code-file",
+  "name": "@graphql-eslint/example-graphql-config-code-file",
   "private": true,
   "version": "0.0.1",
   "repository": "https://github.com/dotansimha/graphql-eslint",

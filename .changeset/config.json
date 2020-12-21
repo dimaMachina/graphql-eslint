@@ -9,6 +9,7 @@
   "ignore": [
     "@graphql-eslint/example-code-file",
     "@graphql-eslint/example-basic",
-    "@graphql-eslint/example-graphql-config"
+    "@graphql-eslint/example-graphql-config",
+    "@graphql-eslint/example-graphql-config-code-file"
   ]
 }
