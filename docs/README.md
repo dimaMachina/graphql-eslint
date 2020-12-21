@@ -5,6 +5,7 @@
 - [`unique-fragment-name`](./rules/unique-fragment-name.md)
 - [`unique-operation-name`](./rules/unique-operation-name.md)
 - [`validate-against-schema`](./rules/validate-against-schema.md)
+- [`no-hashtag-description`](./rules/no-hashtag-description.md)
 - [`no-anonymous-operations`](./rules/no-anonymous-operations.md)
 - [`no-operation-name-suffix`](./rules/no-operation-name-suffix.md)
 - [`require-deprecation-reason`](./rules/require-deprecation-reason.md)

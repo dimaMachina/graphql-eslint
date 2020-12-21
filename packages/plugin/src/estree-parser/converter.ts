@@ -1,6 +1,6 @@
 import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
 import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
-import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind } from 'graphql';
+import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind, DocumentNode } from 'graphql';
 import { Comment } from 'estree';
 
 export function convertToESTree<T extends ASTNode>(
@@ -71,7 +71,8 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       rawNode: () => {
         if (!parent || key === undefined) {
           if (node && (node as any).definitions) {
-            return {
+            return <DocumentNode>{
+              loc: gqlLocation,
               kind: Kind.DOCUMENT,
               definitions: (node as any).definitions.map(d => d.rawNode()),
             };
@@ -96,7 +97,8 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
       rawNode: () => {
         if (!parent || key === undefined) {
           if (node && (node as any).definitions) {
-            return {
+            return <DocumentNode>{
+              loc: gqlLocation,
               kind: Kind.DOCUMENT,
               definitions: (node as any).definitions.map(d => d.rawNode()),
             };
