@@ -6,13 +6,13 @@ import { SiblingOperations } from './sibling-operations';
 export function requireSiblingsOperations(ruleName: string, context: GraphQLESlintRuleContext<any>): SiblingOperations {
   if (!context || !context.parserServices) {
     throw new Error(
-      `You have used a rule ("${ruleName}") which requires parserServices to be generated with operations. You must therefore provide a value for the "parserOptions.operations" property for "@typescript-graphql/parser", or use graphql-config!`
+      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
     );
   }
 
   if (!context.parserServices.siblingOperations.available) {
     throw new Error(
-      `You have used a rule which requires GraphQL operations to be loaded. Found "parserServices" generated, but unable to load your GraphQL operations.`
+      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
     );
   }
 
@@ -25,13 +25,13 @@ export function requireGraphQLSchemaFromContext(
 ): GraphQLSchema {
   if (!context || !context.parserServices) {
     throw new Error(
-      `You have used a rule ("${ruleName}") which requires parserServices to be generated with GraphQL schema. You must therefore provide a value for the "parserOptions.schema" property for "@typescript-graphql/parser", or use graphql-config!`
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
     );
   }
 
   if (!context.parserServices.hasTypeInfo) {
     throw new Error(
-      `You have used a rule which requires GraphQL Schema to be loaded. Found "parserServices" generated, but unable to load your GraphQL schema and it's type-info!`
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
     );
   }
 
