@@ -10,7 +10,7 @@ import { ParserOptions } from './types';
 
 const schemaCache: Map<string, GraphQLSchema> = new Map();
 
-export const schemaLoaders = (): Loader<string, SingleFileOptions>[] => [
+export const schemaLoaders: Loader<string, SingleFileOptions>[] = [
   {
     loaderId: () => 'direct-string',
     canLoad: async () => false,
@@ -60,7 +60,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
         schema = loadSchemaSync(options.schema, {
           ...(options.schemaOptions || {}),
           assumeValidSDL: true,
-          loaders: schemaLoaders(),
+          loaders: schemaLoaders,
         });
         schemaCache.set(schemaKey, schema);
       } catch (e) {

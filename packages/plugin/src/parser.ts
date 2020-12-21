@@ -13,8 +13,8 @@ export function parse(code: string, options?: ParserOptions): Linter.ESLintParse
 }
 
 const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = (api) => {
-  schemaLoaders().forEach(loader => api.loaders.schema.register(loader))
-  operationsLoaders().forEach(loader => api.loaders.documents.register(loader))
+  schemaLoaders.forEach(loader => api.loaders.schema.register(loader))
+  operationsLoaders.forEach(loader => api.loaders.documents.register(loader))
   return { name: 'graphql-eslint-loaders' }
 }
 

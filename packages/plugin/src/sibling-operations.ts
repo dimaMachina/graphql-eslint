@@ -18,7 +18,7 @@ import { dirname, join } from 'path';
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
 
-export const operationsLoaders = (): Loader<string, SingleFileOptions>[] => [
+export const operationsLoaders: Loader<string, SingleFileOptions>[] = [
   new GraphQLFileLoader(),
   new CodeFileLoader(),
   {
@@ -49,7 +49,7 @@ export type SiblingOperations = {
 function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
   return loadDocumentsSync(loadPaths, {
     cwd: baseDir,
-    loaders: operationsLoaders(),
+    loaders: operationsLoaders,
   }).map(r => ({ ...r, location: join(baseDir, r.location) }));
 }
 
