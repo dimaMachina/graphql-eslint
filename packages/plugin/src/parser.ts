@@ -4,29 +4,16 @@ import { GraphQLError, TypeInfo } from 'graphql';
 import { Linter } from 'eslint';
 import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { extractTokens } from './utils';
-import { getSchema, schemaLoaders } from './schema';
-import { getSiblingOperations, operationsLoaders } from './sibling-operations';
-import { loadConfigSync, GraphQLConfig, GraphQLExtensionDeclaration } from 'graphql-config';
+import { getSchema } from './schema';
+import { getSiblingOperations } from './sibling-operations';
+import { loadGraphqlConfig } from './graphql-config';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
 }
 
-const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
-  schemaLoaders.forEach(loader => api.loaders.schema.register(loader));
-  operationsLoaders.forEach(loader => api.loaders.documents.register(loader));
-  return { name: 'graphql-eslint-loaders' };
-};
-
 export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
-  const gqlConfig: GraphQLConfig | null = options?.skipGraphQLConfig
-    ? null
-    : loadConfigSync({
-        throwOnEmpty: false,
-        throwOnMissing: false,
-        extensions: [addCodeFileLoaderExtension],
-      });
-
+  const gqlConfig = loadGraphqlConfig(options);
   const schema = getSchema(options, gqlConfig);
   const siblingOperations = getSiblingOperations(options, gqlConfig);
   const parserServices = {
