@@ -54,7 +54,7 @@ export function requireReachableTypesFromContext(
     );
   }
 
-  return context.parserServices.reachableTypes;
+  return context.parserServices.getReachableTypes();
 }
 
 function getLexer(source: Source): Lexer {

@@ -17,13 +17,20 @@ import {
   isNonNullType,
 } from 'graphql';
 
-export function getReachableTypes(schema: GraphQLSchema): Set<string>
-export function getReachableTypes(schema?: GraphQLSchema): Set<string> | null {
+export function createReachableTypesService(schema: GraphQLSchema): () => Set<string>;
+export function createReachableTypesService(schema?: GraphQLSchema): () => Set<string> | null {
   if (schema) {
-    return collectReachableTypes(schema);
+    let cache: Set<string> = null;
+    return () => {
+      if (!cache) {
+        cache = collectReachableTypes(schema);
+      }
+
+      return cache;
+    };
   }
-  
-  return null;
+
+  return () => null;
 }
 
 export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
