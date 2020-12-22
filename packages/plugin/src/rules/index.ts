@@ -14,6 +14,7 @@ import uniqueFragmentName from './unique-fragment-name';
 import uniqueOperationName from './unique-operation-name';
 import noDeprecated from './no-deprecated';
 import noHashtagDescription from './no-hashtag-description';
+import selectionSetDepth from './selection-set-depth';
 import { GraphQLESLintRule } from '../types';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
@@ -27,6 +28,7 @@ export const rules: Record<string, GraphQLESLintRule> = {
   'no-operation-name-suffix': noOperationNameSuffix,
   'require-deprecation-reason': requireDeprecationReason,
   'avoid-operation-name-prefix': avoidOperationNamePrefix,
+  'selection-set-depth': selectionSetDepth,
   'no-case-insensitive-enum-values-duplicates': noCaseInsensitiveEnumValuesDuplicates,
   'require-description': requireDescription,
   'require-id-when-available': requireIdWhenAvailable,

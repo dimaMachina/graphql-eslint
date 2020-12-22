@@ -10,6 +10,7 @@
 - [`no-operation-name-suffix`](./rules/no-operation-name-suffix.md)
 - [`require-deprecation-reason`](./rules/require-deprecation-reason.md)
 - [`avoid-operation-name-prefix`](./rules/avoid-operation-name-prefix.md)
+- [`selection-set-depth`](./rules/selection-set-depth.md)
 - [`no-case-insensitive-enum-values-duplicates`](./rules/no-case-insensitive-enum-values-duplicates.md)
 - [`require-description`](./rules/require-description.md)
 - [`require-id-when-available`](./rules/require-id-when-available.md)
