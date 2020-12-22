@@ -37,104 +37,27 @@ The schema defines an array with all elements of the type `object`.
 
 The array object has the following properties:
 
-#### `FieldDefinition` (string, enum)
+#### `FieldDefinition` (string,object)
 
-This element must be one of the following enum values:
+#### `InputObjectTypeDefinition` (string,object)
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+#### `EnumValueDefinition` (string,object)
 
-#### `InputObjectTypeDefinition` (string, enum)
+#### `InputValueDefinition` (string,object)
 
-This element must be one of the following enum values:
+#### `ObjectTypeDefinition` (string,object)
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+#### `InterfaceTypeDefinition` (string,object)
 
-#### `EnumValueDefinition` (string, enum)
+#### `EnumTypeDefinition` (string,object)
 
-This element must be one of the following enum values:
+#### `UnionTypeDefinition` (string,object)
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+#### `ScalarTypeDefinition` (string,object)
 
-#### `InputValueDefinition` (string, enum)
+#### `OperationDefinition` (string,object)
 
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `ObjectTypeDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `InterfaceTypeDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `EnumTypeDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `UnionTypeDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `ScalarTypeDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `OperationDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-
-#### `FragmentDefinition` (string, enum)
-
-This element must be one of the following enum values:
-
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+#### `FragmentDefinition` (string,object)
 
 #### `leadingUnderscore` (string, enum)
 
