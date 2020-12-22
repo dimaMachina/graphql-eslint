@@ -45,7 +45,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
       `),
       errors: [
         {
-          message: `Type "User" in unreachable`,
+          message: `Type "User" is unreachable`,
         },
       ],
     },
@@ -66,7 +66,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
       `),
       errors: [
         {
-          message: `Type "UsersFilter" in unreachable`,
+          message: `Type "UsersFilter" is unreachable`,
         },
       ],
     },
@@ -89,7 +89,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
       `),
       errors: [
         {
-          message: `Type "Articles" in unreachable`,
+          message: `Type "Articles" is unreachable`,
         },
       ],
     },
@@ -118,7 +118,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
       `),
       errors: [
         {
-          message: `Type "Comment" in unreachable`,
+          message: `Type "Comment" is unreachable`,
         },
       ],
     },

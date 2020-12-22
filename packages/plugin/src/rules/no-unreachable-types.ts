@@ -6,7 +6,7 @@ const UNREACHABLE_TYPE = 'UNREACHABLE_TYPE';
 const rule: GraphQLESLintRule = {
   meta: {
     messages: {
-      [UNREACHABLE_TYPE]: `Type "{{ typeName }}" in unreachable`,
+      [UNREACHABLE_TYPE]: `Type "{{ typeName }}" is unreachable`,
     },
     docs: {
       description: `Requires all types to be reachable at some level by root level fields`,
