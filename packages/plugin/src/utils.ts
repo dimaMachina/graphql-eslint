@@ -48,7 +48,7 @@ export function requireReachableTypesFromContext(
     );
   }
 
-  if (!context.parserServices.hasTypeInfo) {
+  if (!context.parserServices.schema) {
     throw new Error(
       `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
     );
