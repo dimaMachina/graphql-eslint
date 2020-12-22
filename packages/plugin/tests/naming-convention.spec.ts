@@ -91,7 +91,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         {
           ObjectTypeDefinition: { style: 'PascalCase' },
           FieldDefinition: { style: 'camelCase', prefix: 'field' },
-          EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: '' },
         },
       ],
     },
