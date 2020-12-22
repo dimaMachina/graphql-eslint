@@ -63,6 +63,9 @@ const schemaOption = {
       type: 'string',
       enum: acceptedStyles,
     },
+    prefix: {
+      type: 'string',
+    },
     suffix: {
       type: 'string',
     },
