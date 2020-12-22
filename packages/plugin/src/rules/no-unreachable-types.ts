@@ -42,6 +42,7 @@ const rule: GraphQLESLintRule = {
         },
       ],
     },
+    fixable: 'code',
     type: 'suggestion',
   },
   create(context) {
@@ -56,6 +57,7 @@ const rule: GraphQLESLintRule = {
           data: {
             typeName,
           },
+          fix: fixer => fixer.removeRange(node.range)
         });
       }
     }

@@ -43,6 +43,12 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
           name: String
         }
       `),
+      output: /* GraphQL */ `
+        # normalize graphql
+        type Query {
+          me: String
+        }
+      `,
       errors: [
         {
           message: `Type "User" is unreachable`,
@@ -64,6 +70,17 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
           limit: Int
         }
       `),
+      output: /* GraphQL */ `
+        # normalize graphql
+        type Query {
+          users: [User]
+        }
+
+        type User {
+          id: ID
+          name: String
+        }
+      `,
       errors: [
         {
           message: `Type "UsersFilter" is unreachable`,
@@ -87,6 +104,18 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
           author: User
         }
       `),
+      output: /* GraphQL */ `
+        # normalize graphql
+
+        type Query {
+          me: User
+        }
+
+        type User {
+          id: ID
+          name: String
+        }
+      `,
       errors: [
         {
           message: `Type "Articles" is unreachable`,
@@ -95,6 +124,8 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
     },
     {
       ...useSchema(/* GraphQL */ `
+        # normalize graphql
+
         type Query {
           me: User
         }
@@ -116,6 +147,25 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
           article: Article
         }
       `),
+      output: /* GraphQL */ `
+        # normalize graphql
+
+        type Query {
+          me: User
+        }
+
+        type User {
+          id: ID
+          name: String
+          articles: [Article]
+        }
+
+        type Article {
+          id: ID
+          title: String
+          author: User
+        }
+      `,
       errors: [
         {
           message: `Type "Comment" is unreachable`,
