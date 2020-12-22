@@ -1,3 +1,4 @@
+import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { JsonFileLoader } from '@graphql-tools/json-file-loader';
 import { loadSchemaSync } from '@graphql-tools/load';
@@ -23,6 +24,7 @@ export const schemaLoaders: Loader<string, SingleFileOptions>[] = [
   new GraphQLFileLoader(),
   new JsonFileLoader(),
   new UrlLoader(),
+  new CodeFileLoader(),
 ];
 
 export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): GraphQLSchema | null {
