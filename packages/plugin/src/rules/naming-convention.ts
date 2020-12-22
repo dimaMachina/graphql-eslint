@@ -8,8 +8,13 @@ const formats = {
   UPPER_CASE: /^[A-Z_]*$/g,
 };
 
-type ValidNaming = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
-const acceptedStyles: ValidNaming[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'];
+const acceptedStyles: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'] = [
+  'camelCase',
+  'PascalCase',
+  'snake_case',
+  'UPPER_CASE',
+];
+type ValidNaming = typeof acceptedStyles[number];
 interface CheckNameFormatParams {
   value: string;
   style?: ValidNaming;
