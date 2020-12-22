@@ -15,16 +15,20 @@ interface CheckNameFormatParams {
   style?: ValidNaming;
   leadingUnderscore: 'allow' | 'forbid';
   trailingUnderscore: 'allow' | 'forbid';
+  prefix: string;
   suffix: string;
 }
 function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
-  const { value, style, leadingUnderscore, trailingUnderscore, suffix } = params;
+  const { value, style, leadingUnderscore, trailingUnderscore, suffix, prefix } = params;
   let name = value;
   if (leadingUnderscore === 'allow') {
     [, name] = name.match(/^_*(.*)$/);
   }
   if (trailingUnderscore === 'allow') {
     name = name.replace(/_*$/, '');
+  }
+  if (prefix && !name.startsWith(prefix)) {
+    return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{prefix}}" prefix' };
   }
   if (suffix && !name.endsWith(suffix)) {
     return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix' };
@@ -63,6 +67,7 @@ const schemaOption = {
 interface PropertySchema {
   style?: ValidNaming;
   suffix?: string;
+  prefix?: string;
 }
 
 type NamingConventionRuleConfig = [
@@ -150,12 +155,13 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ...(context.options[0] || {}),
     };
 
-    const checkNode = (node, style, nodeType, suffix = '') => {
+    const checkNode = (node, style, nodeType, suffix = '', prefix = '') => {
       const result = checkNameFormat({
         value: node.value,
         style,
         leadingUnderscore: options.leadingUnderscore,
         trailingUnderscore: options.trailingUnderscore,
+        prefix: prefix,
         suffix: suffix,
       });
       if (result.ok === false) {
@@ -163,6 +169,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
           node,
           message: result.errorMessage,
           data: {
+            prefix: prefix,
             suffix: suffix,
             format: style,
             nodeType,
@@ -178,6 +185,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       }
       return {
         style: value,
+        prefix: '',
         suffix: '',
       };
     };
@@ -197,61 +205,61 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ObjectTypeDefinition: node => {
         if (options.ObjectTypeDefinition) {
           const property = normalisePropertyOption(options.ObjectTypeDefinition);
-          checkNode(node.name, property.style, 'Type', property.suffix);
+          checkNode(node.name, property.style, 'Type', property.suffix, property.prefix);
         }
       },
       InterfaceTypeDefinition: node => {
         if (options.InterfaceTypeDefinition) {
           const property = normalisePropertyOption(options.InterfaceTypeDefinition);
-          checkNode(node.name, property.style, 'Interface', property.suffix);
+          checkNode(node.name, property.style, 'Interface', property.suffix, property.prefix);
         }
       },
       EnumTypeDefinition: node => {
         if (options.EnumTypeDefinition) {
           const property = normalisePropertyOption(options.EnumTypeDefinition);
-          checkNode(node.name, property.style, 'Enumerator', property.suffix);
+          checkNode(node.name, property.style, 'Enumerator', property.suffix, property.prefix);
         }
       },
       InputObjectTypeDefinition: node => {
         if (options.InputObjectTypeDefinition) {
           const property = normalisePropertyOption(options.InputObjectTypeDefinition);
-          checkNode(node.name, property.style, 'Input type', property.suffix);
+          checkNode(node.name, property.style, 'Input type', property.suffix, property.prefix);
         }
       },
       FieldDefinition: node => {
         if (options.FieldDefinition) {
           const property = normalisePropertyOption(options.FieldDefinition);
-          checkNode(node.name, property.style, 'Field', property.suffix);
+          checkNode(node.name, property.style, 'Field', property.suffix, property.prefix);
         }
       },
       EnumValueDefinition: node => {
         if (options.EnumValueDefinition) {
           const property = normalisePropertyOption(options.EnumValueDefinition);
-          checkNode(node.name, property.style, 'Enumeration value', property.suffix);
+          checkNode(node.name, property.style, 'Enumeration value', property.suffix, property.prefix);
         }
       },
       InputValueDefinition: node => {
         if (options.InputValueDefinition) {
           const property = normalisePropertyOption(options.InputValueDefinition);
-          checkNode(node.name, property.style, 'Input property', property.suffix);
+          checkNode(node.name, property.style, 'Input property', property.suffix, property.prefix);
         }
       },
       FragmentDefinition: node => {
         if (options.FragmentDefinition) {
           const property = normalisePropertyOption(options.FragmentDefinition);
-          checkNode(node.name, property.style, 'Fragment', property.suffix);
+          checkNode(node.name, property.style, 'Fragment', property.suffix, property.prefix);
         }
       },
       ScalarTypeDefinition: node => {
         if (options.ScalarTypeDefinition) {
           const property = normalisePropertyOption(options.ScalarTypeDefinition);
-          checkNode(node.name, property.style, 'Scalar', property.suffix);
+          checkNode(node.name, property.style, 'Scalar', property.suffix, property.prefix);
         }
       },
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
           const property = normalisePropertyOption(options.UnionTypeDefinition);
-          checkNode(node.name, property.style, 'Scalar', property.suffix);
+          checkNode(node.name, property.style, 'Scalar', property.suffix, property.prefix);
         }
       },
     };

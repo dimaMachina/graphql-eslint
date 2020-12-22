@@ -85,6 +85,16 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         },
       ],
     },
+    {
+      code: 'type One { fieldA: String } enum Z { ENUM_VALUE_ONE ENUM_VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', prefix: 'field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM' },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -164,6 +174,21 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         { message: 'Field name "aField" should have "AAA" suffix' },
         { message: 'Enumeration value name "VALUE_ONE" should have "ENUM" suffix' },
         { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" suffix' },
+      ],
+    },
+    {
+      code: 'type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', prefix: 'Field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM' },
+        },
+      ],
+      errors: [
+        { message: 'Field name "aField" should have "Field" prefix' },
+        { message: 'Enumeration value name "A_ENUM_VALUE_ONE" should have "ENUM" prefix' },
+        { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" prefix' },
       ],
     },
   ],
