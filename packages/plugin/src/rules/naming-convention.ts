@@ -57,19 +57,7 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
 }
 
 const schemaOption = {
-  type: ['string', 'object'],
-  properties: {
-    style: {
-      type: 'string',
-      enum: acceptedStyles,
-    },
-    prefix: {
-      type: 'string',
-    },
-    suffix: {
-      type: 'string',
-    },
-  },
+  oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 };
 
 interface PropertySchema {
@@ -127,21 +115,45 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         },
       ],
     },
-    schema: [
-      {
+    schema: {
+      definitions: {
+        asString: {
+          type: 'string',
+          description: `One of: ${acceptedStyles.map(t => `\`${t}\``).join(', ')}`,
+          enum: acceptedStyles,
+        },
+        asObject: {
+          type: 'object',
+          properties: {
+            style: {
+              type: 'string',
+              enum: acceptedStyles,
+            },
+            prefix: {
+              type: 'string',
+            },
+            suffix: {
+              type: 'string',
+            },
+          },
+        },
+      },
+      $schema: 'http://json-schema.org/draft-04/schema#',
+      type: 'array',
+      items: {
         type: 'object',
         properties: {
-          [Kind.FIELD_DEFINITION]: schemaOption,
-          [Kind.INPUT_OBJECT_TYPE_DEFINITION]: schemaOption,
-          [Kind.ENUM_VALUE_DEFINITION]: schemaOption,
-          [Kind.INPUT_VALUE_DEFINITION]: schemaOption,
-          [Kind.OBJECT_TYPE_DEFINITION]: schemaOption,
-          [Kind.INTERFACE_TYPE_DEFINITION]: schemaOption,
-          [Kind.ENUM_TYPE_DEFINITION]: schemaOption,
-          [Kind.UNION_TYPE_DEFINITION]: schemaOption,
-          [Kind.SCALAR_TYPE_DEFINITION]: schemaOption,
-          [Kind.OPERATION_DEFINITION]: schemaOption,
-          [Kind.FRAGMENT_DEFINITION]: schemaOption,
+          [Kind.FIELD_DEFINITION as string]: schemaOption,
+          [Kind.INPUT_OBJECT_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.ENUM_VALUE_DEFINITION as string]: schemaOption,
+          [Kind.INPUT_VALUE_DEFINITION as string]: schemaOption,
+          [Kind.OBJECT_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.INTERFACE_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.ENUM_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.UNION_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.SCALAR_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.OPERATION_DEFINITION as string]: schemaOption,
+          [Kind.FRAGMENT_DEFINITION as string]: schemaOption,
           leadingUnderscore: {
             type: 'string',
             enum: ['allow', 'forbid'],
@@ -154,7 +166,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
           },
         },
       },
-    ],
+    },
   },
   create(context) {
     const options: NamingConventionRuleConfig[number] = {

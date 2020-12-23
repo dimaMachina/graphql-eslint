@@ -58,15 +58,18 @@ async function main() {
 
     if (rule.meta?.schema) {
       blocks.push(BR, `## Config Schema`, BR);
+      let jsonSchema = rule.meta.schema;
       const isArray = Array.isArray(rule.meta.schema);
 
-      const patchedSchema = {
-        type: isArray ? 'array' : 'object',
-        ...(isArray ? { items: rule.meta.schema[0] } : rule.meta.schema[0]),
-        $schema: 'http://json-schema.org/draft-04/schema',
-      };
+      if (isArray) {
+        jsonSchema = {
+          type: isArray ? 'array' : 'object',
+          ...(isArray ? { items: rule.meta.schema[0] } : rule.meta.schema[0]),
+          $schema: 'http://json-schema.org/draft-04/schema',
+        };
+      }
 
-      blocks.push(md(patchedSchema, '##'));
+      blocks.push(md(jsonSchema, '##'));
     }
 
     return {

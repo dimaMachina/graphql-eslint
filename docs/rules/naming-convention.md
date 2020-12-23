@@ -37,27 +37,82 @@ The schema defines an array with all elements of the type `object`.
 
 The array object has the following properties:
 
-#### `FieldDefinition` (string,object)
+#### `FieldDefinition`
 
-#### `InputObjectTypeDefinition` (string,object)
+The object must be one of the following types:
 
-#### `EnumValueDefinition` (string,object)
+* `asString`
+* `asObject`
 
-#### `InputValueDefinition` (string,object)
+#### `InputObjectTypeDefinition`
 
-#### `ObjectTypeDefinition` (string,object)
+The object must be one of the following types:
 
-#### `InterfaceTypeDefinition` (string,object)
+* `asString`
+* `asObject`
 
-#### `EnumTypeDefinition` (string,object)
+#### `EnumValueDefinition`
 
-#### `UnionTypeDefinition` (string,object)
+The object must be one of the following types:
 
-#### `ScalarTypeDefinition` (string,object)
+* `asString`
+* `asObject`
 
-#### `OperationDefinition` (string,object)
+#### `InputValueDefinition`
 
-#### `FragmentDefinition` (string,object)
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `ObjectTypeDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `InterfaceTypeDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `EnumTypeDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `UnionTypeDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `ScalarTypeDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `OperationDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+#### `FragmentDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
 
 #### `leadingUnderscore` (string, enum)
 
@@ -76,3 +131,30 @@ This element must be one of the following enum values:
 * `forbid`
 
 Default: `"forbid"`
+
+---
+
+# Sub Schemas
+
+The schema defines the following additional types:
+
+## `asString` (string)
+
+One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
+
+## `asObject` (object)
+
+Properties of the `asObject` object:
+
+### `style` (string, enum)
+
+This element must be one of the following enum values:
+
+* `camelCase`
+* `PascalCase`
+* `snake_case`
+* `UPPER_CASE`
+
+### `prefix` (string)
+
+### `suffix` (string)
