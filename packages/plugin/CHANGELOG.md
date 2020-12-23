@@ -1,5 +1,27 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.7.0
+
+### Minor Changes
+
+- 5e1bbe6: NEW RULE: avoid-duplicate-fields
+- b093f88: NEW RULE: selection-set-depth
+- 2df9134: NEW RULE: no-hashtag-description
+- 625f083: New rule: no-unreachable-types
+- 174a66f: [naming-convention] Allow each definition to take either a strng or object. Object can take the following keys: style (naming style), prefix (value must have prefix) and suffix (value must have suffix)
+- d3ff768: NEW RULE: no-deprecated
+- 63cecdd: Added code file compatibility for graphql-config projects
+
+### Patch Changes
+
+- 0094548: Load graphql config file only once
+- e26a5d4: Fix issues with loading schemas from code-files
+- e6edc88: Added prefix to error thrown by the parser
+- 1594288: Improve error messages for parserServices
+- 4942b58: Optimisation of sibling operations loading (cache by project)
+- 2df9134: Fixed missing `loc` property when rawNode is called on Document node
+- a57d4f5: fix(naming-convention): fix issues with numeric values
+
 ## 0.6.0
 
 ### Minor Changes
