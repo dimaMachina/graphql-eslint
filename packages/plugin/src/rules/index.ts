@@ -15,6 +15,7 @@ import uniqueOperationName from './unique-operation-name';
 import noDeprecated from './no-deprecated';
 import noHashtagDescription from './no-hashtag-description';
 import selectionSetDepth from './selection-set-depth';
+import avoidDuplicateFields from './avoid-duplicate-fields';
 import { GraphQLESLintRule } from '../types';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
@@ -33,8 +34,9 @@ export const rules: Record<string, GraphQLESLintRule> = {
   'require-description': requireDescription,
   'require-id-when-available': requireIdWhenAvailable,
   'description-style': descriptionStyle,
-  prettier: prettier,
+  'avoid-duplicate-fields': avoidDuplicateFields,
   'naming-convention': namingConvention,
   'input-name': inputName,
+  prettier,
   ...GRAPHQL_JS_VALIDATIONS,
 };
