@@ -4,8 +4,8 @@ import { GraphQLESLintRule } from '../types';
 const formats = {
   camelCase: /^[a-z][^_]*$/g,
   PascalCase: /^[A-Z][^_]*$/g,
-  snake_case: /^[a-z_]*$/g,
-  UPPER_CASE: /^[A-Z_]*$/g,
+  snake_case: /^[a-z_][a-z0-9_]*$/g,
+  UPPER_CASE: /^[A-Z_][A-Z0-9_]*$/g,
 };
 
 const acceptedStyles: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'] = [
