@@ -37,6 +37,14 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       options: [{ ObjectTypeDefinition: 'PascalCase' }],
     },
     {
+      code: 'type my_test_6_t { test: String }',
+      options: [{ ObjectTypeDefinition: 'snake_case' }],
+    },
+    {
+      code: 'type MY_TEST_6_T { test: String }',
+      options: [{ ObjectTypeDefinition: 'UPPER_CASE' }],
+    },
+    {
       code: 'type B { test: String }',
       options: [{ leadingUnderscore: 'forbid', trailingUnderscore: 'forbid' }],
     },
