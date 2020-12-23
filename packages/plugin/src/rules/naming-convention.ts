@@ -8,7 +8,23 @@ const formats = {
   UPPER_CASE: /^[A-Z_]*$/g,
 };
 
-function checkNameFormat(value, style, leadingUnderscore, trailingUnderscore) {
+const acceptedStyles: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'] = [
+  'camelCase',
+  'PascalCase',
+  'snake_case',
+  'UPPER_CASE',
+];
+type ValidNaming = typeof acceptedStyles[number];
+interface CheckNameFormatParams {
+  value: string;
+  style?: ValidNaming;
+  leadingUnderscore: 'allow' | 'forbid';
+  trailingUnderscore: 'allow' | 'forbid';
+  prefix: string;
+  suffix: string;
+}
+function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
+  const { value, style, leadingUnderscore, trailingUnderscore, suffix, prefix } = params;
   let name = value;
   if (leadingUnderscore === 'allow') {
     [, name] = name.match(/^_*(.*)$/);
@@ -16,31 +32,55 @@ function checkNameFormat(value, style, leadingUnderscore, trailingUnderscore) {
   if (trailingUnderscore === 'allow') {
     name = name.replace(/_*$/, '');
   }
-  return new RegExp(formats[style]).test(name);
+  if (prefix && !name.startsWith(prefix)) {
+    return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{prefix}}" prefix' };
+  }
+  if (suffix && !name.endsWith(suffix)) {
+    return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix' };
+  }
+  if (style && !acceptedStyles.some(acceptedStyle => acceptedStyle === style)) {
+    return {
+      ok: false,
+      errorMessage: `{{nodeType}} name "{{nodeName}}" should be in one of the following options: ${acceptedStyles.join(
+        ','
+      )}`,
+    };
+  }
+  if (!formats[style]) {
+    return { ok: true };
+  }
+  const ok = new RegExp(formats[style]).test(name);
+  if (ok) {
+    return { ok: true };
+  }
+  return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format' };
 }
 
 const schemaOption = {
-  type: 'string',
-  enum: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'],
+  oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 };
 
-type ValidNaming = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
+interface PropertySchema {
+  style?: ValidNaming;
+  suffix?: string;
+  prefix?: string;
+}
 
 type NamingConventionRuleConfig = [
   {
     leadingUnderscore?: 'allow' | 'forbid';
     trailingUnderscore?: 'allow' | 'forbid';
-    [Kind.FIELD_DEFINITION]?: ValidNaming;
-    [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming;
-    [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming;
-    [Kind.OBJECT_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.INTERFACE_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.ENUM_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.UNION_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.SCALAR_TYPE_DEFINITION]?: ValidNaming;
-    [Kind.OPERATION_DEFINITION]?: ValidNaming;
-    [Kind.FRAGMENT_DEFINITION]?: ValidNaming;
-    [Kind.INPUT_OBJECT_TYPE_DEFINITION]?: ValidNaming;
+    [Kind.FIELD_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.OBJECT_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.INTERFACE_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.ENUM_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.UNION_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.SCALAR_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.OPERATION_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.FRAGMENT_DEFINITION]?: ValidNaming | PropertySchema;
+    [Kind.INPUT_OBJECT_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
   }
 ];
 
@@ -75,21 +115,45 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         },
       ],
     },
-    schema: [
-      {
+    schema: {
+      definitions: {
+        asString: {
+          type: 'string',
+          description: `One of: ${acceptedStyles.map(t => `\`${t}\``).join(', ')}`,
+          enum: acceptedStyles,
+        },
+        asObject: {
+          type: 'object',
+          properties: {
+            style: {
+              type: 'string',
+              enum: acceptedStyles,
+            },
+            prefix: {
+              type: 'string',
+            },
+            suffix: {
+              type: 'string',
+            },
+          },
+        },
+      },
+      $schema: 'http://json-schema.org/draft-04/schema#',
+      type: 'array',
+      items: {
         type: 'object',
         properties: {
-          [Kind.FIELD_DEFINITION]: schemaOption,
-          [Kind.INPUT_OBJECT_TYPE_DEFINITION]: schemaOption,
-          [Kind.ENUM_VALUE_DEFINITION]: schemaOption,
-          [Kind.INPUT_VALUE_DEFINITION]: schemaOption,
-          [Kind.OBJECT_TYPE_DEFINITION]: schemaOption,
-          [Kind.INTERFACE_TYPE_DEFINITION]: schemaOption,
-          [Kind.ENUM_TYPE_DEFINITION]: schemaOption,
-          [Kind.UNION_TYPE_DEFINITION]: schemaOption,
-          [Kind.SCALAR_TYPE_DEFINITION]: schemaOption,
-          [Kind.OPERATION_DEFINITION]: schemaOption,
-          [Kind.FRAGMENT_DEFINITION]: schemaOption,
+          [Kind.FIELD_DEFINITION as string]: schemaOption,
+          [Kind.INPUT_OBJECT_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.ENUM_VALUE_DEFINITION as string]: schemaOption,
+          [Kind.INPUT_VALUE_DEFINITION as string]: schemaOption,
+          [Kind.OBJECT_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.INTERFACE_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.ENUM_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.UNION_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.SCALAR_TYPE_DEFINITION as string]: schemaOption,
+          [Kind.OPERATION_DEFINITION as string]: schemaOption,
+          [Kind.FRAGMENT_DEFINITION as string]: schemaOption,
           leadingUnderscore: {
             type: 'string',
             enum: ['allow', 'forbid'],
@@ -102,7 +166,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
           },
         },
       },
-    ],
+    },
   },
   create(context) {
     const options: NamingConventionRuleConfig[number] = {
@@ -111,18 +175,39 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ...(context.options[0] || {}),
     };
 
-    const checkNode = (node, style, nodeType) => {
-      if (!checkNameFormat(node.value, style, options.leadingUnderscore, options.trailingUnderscore)) {
+    const checkNode = (node, style, nodeType, suffix = '', prefix = '') => {
+      const result = checkNameFormat({
+        value: node.value,
+        style,
+        leadingUnderscore: options.leadingUnderscore,
+        trailingUnderscore: options.trailingUnderscore,
+        prefix: prefix,
+        suffix: suffix,
+      });
+      if (result.ok === false) {
         context.report({
           node,
-          message: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format',
+          message: result.errorMessage,
           data: {
+            prefix: prefix,
+            suffix: suffix,
             format: style,
             nodeType,
             nodeName: node.value,
           },
         });
       }
+    };
+
+    const normalisePropertyOption = (value: ValidNaming | PropertySchema): PropertySchema => {
+      if (typeof value === 'object') {
+        return value;
+      }
+      return {
+        style: value,
+        prefix: '',
+        suffix: '',
+      };
     };
 
     return {
@@ -139,52 +224,62 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       },
       ObjectTypeDefinition: node => {
         if (options.ObjectTypeDefinition) {
-          checkNode(node.name, options.ObjectTypeDefinition, 'Type');
+          const property = normalisePropertyOption(options.ObjectTypeDefinition);
+          checkNode(node.name, property.style, 'Type', property.suffix, property.prefix);
         }
       },
       InterfaceTypeDefinition: node => {
         if (options.InterfaceTypeDefinition) {
-          checkNode(node.name, options.InterfaceTypeDefinition, 'Interface');
+          const property = normalisePropertyOption(options.InterfaceTypeDefinition);
+          checkNode(node.name, property.style, 'Interface', property.suffix, property.prefix);
         }
       },
       EnumTypeDefinition: node => {
         if (options.EnumTypeDefinition) {
-          checkNode(node.name, options.EnumTypeDefinition, 'Enumerator');
+          const property = normalisePropertyOption(options.EnumTypeDefinition);
+          checkNode(node.name, property.style, 'Enumerator', property.suffix, property.prefix);
         }
       },
       InputObjectTypeDefinition: node => {
         if (options.InputObjectTypeDefinition) {
-          checkNode(node.name, options.InputObjectTypeDefinition, 'Input type');
+          const property = normalisePropertyOption(options.InputObjectTypeDefinition);
+          checkNode(node.name, property.style, 'Input type', property.suffix, property.prefix);
         }
       },
       FieldDefinition: node => {
         if (options.FieldDefinition) {
-          checkNode(node.name, options.FieldDefinition, 'Field');
+          const property = normalisePropertyOption(options.FieldDefinition);
+          checkNode(node.name, property.style, 'Field', property.suffix, property.prefix);
         }
       },
       EnumValueDefinition: node => {
         if (options.EnumValueDefinition) {
-          checkNode(node.name, options.EnumValueDefinition, 'Enumeration value');
+          const property = normalisePropertyOption(options.EnumValueDefinition);
+          checkNode(node.name, property.style, 'Enumeration value', property.suffix, property.prefix);
         }
       },
       InputValueDefinition: node => {
         if (options.InputValueDefinition) {
-          checkNode(node.name, options.InputValueDefinition, 'Input property');
+          const property = normalisePropertyOption(options.InputValueDefinition);
+          checkNode(node.name, property.style, 'Input property', property.suffix, property.prefix);
         }
       },
       FragmentDefinition: node => {
         if (options.FragmentDefinition) {
-          checkNode(node.name, options.FragmentDefinition, 'Fragment');
+          const property = normalisePropertyOption(options.FragmentDefinition);
+          checkNode(node.name, property.style, 'Fragment', property.suffix, property.prefix);
         }
       },
       ScalarTypeDefinition: node => {
         if (options.ScalarTypeDefinition) {
-          checkNode(node.name, options.ScalarTypeDefinition, 'Scalar');
+          const property = normalisePropertyOption(options.ScalarTypeDefinition);
+          checkNode(node.name, property.style, 'Scalar', property.suffix, property.prefix);
         }
       },
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
-          checkNode(node.name, options.UnionTypeDefinition, 'Scalar');
+          const property = normalisePropertyOption(options.UnionTypeDefinition);
+          checkNode(node.name, property.style, 'Scalar', property.suffix, property.prefix);
         }
       },
     };

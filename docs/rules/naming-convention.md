@@ -37,104 +37,82 @@ The schema defines an array with all elements of the type `object`.
 
 The array object has the following properties:
 
-#### `FieldDefinition` (string, enum)
+#### `FieldDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `InputObjectTypeDefinition` (string, enum)
+#### `InputObjectTypeDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `EnumValueDefinition` (string, enum)
+#### `EnumValueDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `InputValueDefinition` (string, enum)
+#### `InputValueDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `ObjectTypeDefinition` (string, enum)
+#### `ObjectTypeDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `InterfaceTypeDefinition` (string, enum)
+#### `InterfaceTypeDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `EnumTypeDefinition` (string, enum)
+#### `EnumTypeDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `UnionTypeDefinition` (string, enum)
+#### `UnionTypeDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `ScalarTypeDefinition` (string, enum)
+#### `ScalarTypeDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `OperationDefinition` (string, enum)
+#### `OperationDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
-#### `FragmentDefinition` (string, enum)
+#### `FragmentDefinition`
 
-This element must be one of the following enum values:
+The object must be one of the following types:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+* `asString`
+* `asObject`
 
 #### `leadingUnderscore` (string, enum)
 
@@ -153,3 +131,30 @@ This element must be one of the following enum values:
 * `forbid`
 
 Default: `"forbid"`
+
+---
+
+# Sub Schemas
+
+The schema defines the following additional types:
+
+## `asString` (string)
+
+One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
+
+## `asObject` (object)
+
+Properties of the `asObject` object:
+
+### `style` (string, enum)
+
+This element must be one of the following enum values:
+
+* `camelCase`
+* `PascalCase`
+* `snake_case`
+* `UPPER_CASE`
+
+### `prefix` (string)
+
+### `suffix` (string)

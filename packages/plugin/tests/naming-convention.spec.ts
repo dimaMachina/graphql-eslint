@@ -75,6 +75,26 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code:
         'input test { item: String } enum B { Test } interface A { i: String } fragment PictureFragment on Picture { uri } scalar Hello',
     },
+    {
+      code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', suffix: 'Field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', suffix: '' },
+        },
+      ],
+    },
+    {
+      code: 'type One { fieldA: String } enum Z { ENUM_VALUE_ONE ENUM_VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', prefix: 'field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: '' },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -138,6 +158,37 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         { message: 'Input type name "test" should be in PascalCase format' },
         { message: 'Input property name "_Value" should be in snake_case format' },
         { message: 'Leading underscores are not allowed' },
+      ],
+    },
+    {
+      code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'camelCase' },
+          FieldDefinition: { style: 'camelCase', suffix: 'AAA' },
+          EnumValueDefinition: { style: 'camelCase', suffix: 'ENUM' },
+        },
+      ],
+      errors: [
+        { message: 'Type name "TypeOne" should be in camelCase format' },
+        { message: 'Field name "aField" should have "AAA" suffix' },
+        { message: 'Enumeration value name "VALUE_ONE" should have "ENUM" suffix' },
+        { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" suffix' },
+      ],
+    },
+    {
+      code: 'type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', prefix: 'Field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM' },
+        },
+      ],
+      errors: [
+        { message: 'Field name "aField" should have "Field" prefix' },
+        { message: 'Enumeration value name "A_ENUM_VALUE_ONE" should have "ENUM" prefix' },
+        { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" prefix' },
       ],
     },
   ],

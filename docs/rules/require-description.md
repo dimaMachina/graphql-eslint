@@ -37,4 +37,20 @@ type someTypeName {
 
 ## Config Schema
 
-The schema defines the following properties:
+### (array)
+
+The schema defines an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+#### `on` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+* Minimum items: `1`
+
+Additional restrictions:
+
+* Minimum items: `1`
