@@ -37,5 +37,18 @@ ruleTester.runGraphQLTests('avoid-duplicate-fields', rule, {
       `,
       errors: [{ message: 'Field "name" defined multiple times.' }],
     },
+    {
+      code: /* GraphQL */ `
+        query test {
+          users {
+            id
+            name
+            email
+            email: somethingElse
+          }
+        }
+      `,
+      errors: [{ message: 'Field "email" defined multiple times.' }],
+    },
   ],
 });
