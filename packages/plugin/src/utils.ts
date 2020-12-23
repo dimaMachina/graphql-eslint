@@ -38,6 +38,25 @@ export function requireGraphQLSchemaFromContext(
   return context.parserServices.schema;
 }
 
+export function requireReachableTypesFromContext(
+  ruleName: string,
+  context: GraphQLESlintRuleContext<any>
+): Set<string> {
+  if (!context || !context.parserServices) {
+    throw new Error(
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
+    );
+  }
+
+  if (!context.parserServices.schema) {
+    throw new Error(
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
+    );
+  }
+
+  return context.parserServices.getReachableTypes();
+}
+
 function getLexer(source: Source): Lexer {
   // GraphQL v14
   const gqlLanguage = require('graphql/language');

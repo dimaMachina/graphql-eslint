@@ -18,6 +18,7 @@ export type ParserServices = {
   siblingOperations: SiblingOperations;
   hasTypeInfo: boolean;
   schema: GraphQLSchema | null;
+  getReachableTypes: () => Set<string> | null;
 };
 
 export type GraphQLESLintParseResult = Linter.ESLintParseResult & {

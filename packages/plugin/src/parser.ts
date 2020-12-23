@@ -7,6 +7,7 @@ import { extractTokens } from './utils';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
 import { loadGraphqlConfig } from './graphql-config';
+import { createReachableTypesService } from './graphql-ast';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
@@ -20,6 +21,7 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
     hasTypeInfo: schema !== null,
     schema,
     siblingOperations,
+    getReachableTypes: createReachableTypesService(schema),
   };
 
   try {
