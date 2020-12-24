@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.7.1
+
+### Patch Changes
+
+- a5e1e6e: Fix issues with processor parsing errors breaking the eslint execution
+
 ## 0.7.0
 
 ### Minor Changes
