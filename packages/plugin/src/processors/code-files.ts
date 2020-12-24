@@ -23,31 +23,36 @@ export function createGraphqlProcessor() {
       // WORKAROUND: This restores the original filename for the block representing original code.
       //             This allows to be compatible with other eslint plugins relying on filesystem
       //             This is temporary, waiting for https://github.com/eslint/eslint/issues/11989
-      const originalFileBlock = { text, filename: `/../../${basename(filename)}` }
+      const originalFileBlock = { text, filename: `/../../${basename(filename)}` };
 
       if (filename && text && RELEVANT_KEYWORDS.some(keyword => text.includes(keyword))) {
-        const extractedDocuments = parseCode({
-          code: text,
-          filePath: filename,
-          options: {
-            globalGqlIdentifierName: ['gql', 'graphql'],
-            skipIndent: true,
-          },
-        });
+        try {
+          const extractedDocuments = parseCode({
+            code: text,
+            filePath: filename,
+            options: {
+              globalGqlIdentifierName: ['gql', 'graphql'],
+              skipIndent: true,
+            },
+          });
 
-        if (extractedDocuments && extractedDocuments.length > 0) {
-          for (const item of extractedDocuments) {
-            blocks.push({
-              filename: `document.graphql`,
-              text: item.content,
-              lineOffset: item.loc.start.line - 1,
-              offset: item.start + 1,
-            });
+          if (extractedDocuments && extractedDocuments.length > 0) {
+            for (const item of extractedDocuments) {
+              blocks.push({
+                filename: `document.graphql`,
+                text: item.content,
+                lineOffset: item.loc.start.line - 1,
+                offset: item.start + 1,
+              });
+            }
+
+            blocks.push(originalFileBlock);
+
+            return blocks;
           }
-
-          blocks.push(originalFileBlock);
-
-          return blocks;
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.warn(`[graphql-eslint/processor]: Unable to process file "${filename}": `, e);
         }
       }
 
