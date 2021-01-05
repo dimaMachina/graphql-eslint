@@ -208,5 +208,18 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" prefix' },
       ],
     },
+    {
+      code: 'type One { getC: String, queryD: String } type Query { getA(id: ID!): String, queryB: String }',
+      options: [
+        {
+          FieldDefinition: { style: 'camelCase', forbiddenPrefixes: ['foo', 'bar'] },
+          QueryDefinition: { style: 'camelCase', forbiddenPrefixes: ['get', 'query'] },
+        },
+      ],
+      errors: [
+        { message: 'Query "getA" should not have one of the following prefixes: get, query' },
+        { message: 'Query "queryB" should not have one of the following prefixes: get, query' },
+      ],
+    },
   ],
 });
