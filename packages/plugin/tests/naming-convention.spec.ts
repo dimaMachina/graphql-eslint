@@ -209,16 +209,17 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       ],
     },
     {
-      code: 'type One { getC: String, queryD: String } type Query { getA(id: ID!): String, queryB: String }',
+      code: 'type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String }',
       options: [
         {
           ObjectTypeDefinition: { style: 'PascalCase', forbiddenPrefixes: ['On'] },
-          FieldDefinition: { style: 'camelCase', forbiddenPrefixes: ['foo', 'bar'] },
+          FieldDefinition: { style: 'camelCase', forbiddenPrefixes: ['foo', 'bar'], forbiddenSuffixes: ['Foo'] },
           QueryDefinition: { style: 'camelCase', forbiddenPrefixes: ['get', 'query'] },
         },
       ],
       errors: [
         { message: 'Type "One" should not have one of the following prefix(es): On' },
+        { message: 'Field "getFoo" should not have one of the following suffix(es): Foo' },
         { message: 'Query "getA" should not have one of the following prefix(es): get, query' },
         { message: 'Query "queryB" should not have one of the following prefix(es): get, query' },
       ],

@@ -23,9 +23,19 @@ interface CheckNameFormatParams {
   prefix: string;
   suffix: string;
   forbiddenPrefixes: string[];
+  forbiddenSuffixes: string[];
 }
 function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
-  const { value, style, leadingUnderscore, trailingUnderscore, suffix, prefix, forbiddenPrefixes } = params;
+  const {
+    value,
+    style,
+    leadingUnderscore,
+    trailingUnderscore,
+    suffix,
+    prefix,
+    forbiddenPrefixes,
+    forbiddenSuffixes,
+  } = params;
   let name = value;
   if (leadingUnderscore === 'allow') {
     [, name] = name.match(/^_*(.*)$/);
@@ -55,6 +65,14 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
     };
   }
 
+  if (forbiddenSuffixes.some(forbiddenSuffix => name.endsWith(forbiddenSuffix))) {
+    return {
+      ok: false,
+      errorMessage:
+        '{{nodeType}} "{{nodeName}}" should not have one of the following suffix(es): {{forbiddenSuffixes}}',
+    };
+  }
+
   if (!formats[style]) {
     return { ok: true };
   }
@@ -74,6 +92,7 @@ interface PropertySchema {
   suffix?: string;
   prefix?: string;
   forbiddenPrefixes?: string[];
+  forbiddenSuffixes?: string[];
 }
 
 type NamingConventionRuleConfig = [
@@ -154,6 +173,14 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
                 type: 'string',
               },
             },
+            forbiddenSuffixes: {
+              additionalItems: false,
+              type: 'array',
+              minItems: 1,
+              items: {
+                type: 'string',
+              },
+            },
           },
         },
       },
@@ -196,7 +223,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
     };
 
     const checkNode = (node, property: PropertySchema, nodeType: string) => {
-      const { style, suffix = '', prefix = '', forbiddenPrefixes = [] } = property;
+      const { style, suffix = '', prefix = '', forbiddenPrefixes = [], forbiddenSuffixes = [] } = property;
       const result = checkNameFormat({
         value: node.value,
         style,
@@ -205,6 +232,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         prefix: prefix,
         suffix: suffix,
         forbiddenPrefixes: forbiddenPrefixes,
+        forbiddenSuffixes: forbiddenSuffixes,
       });
       if (result.ok === false) {
         context.report({
@@ -215,6 +243,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
             suffix: suffix,
             format: style,
             forbiddenPrefixes: forbiddenPrefixes.join(', '),
+            forbiddenSuffixes: forbiddenSuffixes.join(', '),
             nodeType,
             nodeName: node.value,
           },
