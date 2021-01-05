@@ -50,7 +50,8 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
   if (forbiddenPrefixes.some(forbiddenPrefix => name.startsWith(forbiddenPrefix))) {
     return {
       ok: false,
-      errorMessage: '{{nodeType}} "{{nodeName}}" should not have one of the following prefixes: {{forbiddenPrefixes}}',
+      errorMessage:
+        '{{nodeType}} "{{nodeName}}" should not have one of the following prefix(es): {{forbiddenPrefixes}}',
     };
   }
 
