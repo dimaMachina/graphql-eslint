@@ -70,6 +70,7 @@ type NamingConventionRuleConfig = [
   {
     leadingUnderscore?: 'allow' | 'forbid';
     trailingUnderscore?: 'allow' | 'forbid';
+    QueryDefinition?: ValidNaming | PropertySchema;
     [Kind.FIELD_DEFINITION]?: ValidNaming | PropertySchema;
     [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
     [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
@@ -154,6 +155,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
           [Kind.SCALAR_TYPE_DEFINITION as string]: schemaOption,
           [Kind.OPERATION_DEFINITION as string]: schemaOption,
           [Kind.FRAGMENT_DEFINITION as string]: schemaOption,
+          QueryDefinition: schemaOption,
           leadingUnderscore: {
             type: 'string',
             enum: ['allow', 'forbid'],
@@ -210,6 +212,12 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       };
     };
 
+    const isQueryType = (node): boolean => {
+      return (
+        (node.type === 'ObjectTypeDefinition' || node.type === 'ObjectTypeExtension') && node.name.value === 'Query'
+      );
+    };
+
     return {
       Name: node => {
         if (node.value.startsWith('_') && options.leadingUnderscore === 'forbid') {
@@ -246,8 +254,14 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
           checkNode(node.name, property.style, 'Input type', property.suffix, property.prefix);
         }
       },
-      FieldDefinition: node => {
-        if (options.FieldDefinition) {
+      FieldDefinition: (node: any) => {
+        // TODO: check proper node typing
+        if (options.QueryDefinition && isQueryType(node.parent)) {
+          const property = normalisePropertyOption(options.QueryDefinition);
+          checkNode(node.name, property.style, 'Query', property.suffix, property.prefix);
+        }
+
+        if (options.FieldDefinition && !isQueryType(node.parent)) {
           const property = normalisePropertyOption(options.FieldDefinition);
           checkNode(node.name, property.style, 'Field', property.suffix, property.prefix);
         }

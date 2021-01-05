@@ -114,6 +114,13 @@ The object must be one of the following types:
 * `asString`
 * `asObject`
 
+#### `QueryDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
 #### `leadingUnderscore` (string, enum)
 
 This element must be one of the following enum values:

@@ -103,6 +103,15 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         },
       ],
     },
+    {
+      code: 'type One { fieldA: String } type Query { QUERY_A(id: ID!): String }',
+      options: [
+        {
+          FieldDefinition: { style: 'camelCase', prefix: 'field' },
+          QueryDefinition: { style: 'UPPER_CASE', prefix: 'QUERY' },
+        },
+      ],
+    },
   ],
   invalid: [
     {
