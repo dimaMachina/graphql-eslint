@@ -305,7 +305,6 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         }
       },
       FieldDefinition: (node: any) => {
-        // TODO: check proper node typing
         if (options.QueryDefinition && isQueryType(node.parent)) {
           const property = normalisePropertyOption(options.QueryDefinition);
           checkNode(node.name, property, 'Query');
