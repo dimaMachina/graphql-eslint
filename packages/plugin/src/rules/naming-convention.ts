@@ -343,7 +343,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
           const property = normalisePropertyOption(options.UnionTypeDefinition);
-          checkNode(node.name, property, 'Scalar');
+          checkNode(node.name, property, 'Union');
         }
       },
     };
