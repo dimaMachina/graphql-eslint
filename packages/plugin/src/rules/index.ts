@@ -1,4 +1,5 @@
 import validate from './validate-against-schema';
+import noUnreachableTypes from './no-unreachable-types';
 import noAnonymousOperations from './no-anonymous-operations';
 import noOperationNameSuffix from './no-operation-name-suffix';
 import requireDeprecationReason from './require-deprecation-reason';
@@ -20,6 +21,7 @@ import { GraphQLESLintRule } from '../types';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
 export const rules: Record<string, GraphQLESLintRule> = {
+  'no-unreachable-types': noUnreachableTypes,
   'no-deprecated': noDeprecated,
   'unique-fragment-name': uniqueFragmentName,
   'unique-operation-name': uniqueOperationName,
