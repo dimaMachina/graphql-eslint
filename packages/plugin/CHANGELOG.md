@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.7.2
+
+### Patch Changes
+
+- 80f9090: Fix missing "no-unreachable-types"
+
 ## 0.7.1
 
 ### Patch Changes
