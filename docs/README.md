@@ -1,6 +1,6 @@
 ## Available Rules
 
-- [`no-unreachable-types.md`](./no-unreachable-types.md)
+- [`no-unreachable-types`](./rules/no-unreachable-types.md)
 - [`no-deprecated`](./rules/no-deprecated.md)
 - [`unique-fragment-name`](./rules/unique-fragment-name.md)
 - [`unique-operation-name`](./rules/unique-operation-name.md)
