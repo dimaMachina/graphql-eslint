@@ -82,10 +82,7 @@ export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
 
   function collectFromInterfaces(interfaces: GraphQLInterfaceType[]): void {
     if (interfaces) {
-      interfaces.forEach(interfaceType => {
-        collectFromFieldMap(interfaceType.getFields());
-        collectFromInterfaces(interfaceType.getInterfaces());
-      });
+      interfaces.forEach(collectFrom);
     }
   }
 
