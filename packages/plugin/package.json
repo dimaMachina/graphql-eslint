@@ -39,7 +39,42 @@
     "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
   },
   "buildOptions": {
-    "input": "./src/index.ts"
+    "input": "./src/index.ts",
+    "external": [
+      "graphql",
+      "graphql/validation/rules/ExecutableDefinitionsRule",
+      "graphql/validation/rules/FieldsOnCorrectTypeRule",
+      "graphql/validation/rules/FragmentsOnCompositeTypesRule",
+      "graphql/validation/rules/KnownArgumentNamesRule",
+      "graphql/validation/rules/KnownDirectivesRule",
+      "graphql/validation/rules/KnownFragmentNamesRule",
+      "graphql/validation/rules/KnownTypeNamesRule",
+      "graphql/validation/rules/LoneAnonymousOperationRule",
+      "graphql/validation/rules/LoneSchemaDefinition",
+      "graphql/validation/rules/NoFragmentCyclesRule",
+      "graphql/validation/rules/NoUndefinedVariablesRule",
+      "graphql/validation/rules/NoUnusedFragmentsRule",
+      "graphql/validation/rules/NoUnusedVariablesRule",
+      "graphql/validation/rules/OverlappingFieldsCanBeMergedRule",
+      "graphql/validation/rules/PossibleFragmentSpreadsRule",
+      "graphql/validation/rules/PossibleTypeExtensionsRule",
+      "graphql/validation/rules/ProvidedRequiredArgumentsRule",
+      "graphql/validation/rules/ScalarLeafsRule",
+      "graphql/validation/rules/SingleFieldSubscriptionsRule",
+      "graphql/validation/rules/UniqueArgumentNamesRule",
+      "graphql/validation/rules/UniqueDirectiveNamesRule",
+      "graphql/validation/rules/UniqueDirectivesPerLocationRule",
+      "graphql/validation/rules/UniqueEnumValueNamesRule",
+      "graphql/validation/rules/UniqueFieldDefinitionNamesRule",
+      "graphql/validation/rules/UniqueInputFieldNamesRule",
+      "graphql/validation/rules/UniqueOperationTypesRule",
+      "graphql/validation/rules/UniqueTypeNamesRule",
+      "graphql/validation/rules/UniqueVariableNamesRule",
+      "graphql/validation/rules/ValuesOfCorrectTypeRule",
+      "graphql/validation/rules/VariablesAreInputTypesRule",
+      "graphql/validation/rules/VariablesInAllowedPositionRule",
+      "graphql/language"
+    ]
   },
   "publishConfig": {
     "directory": "dist",
