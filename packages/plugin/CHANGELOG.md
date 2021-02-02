@@ -1,5 +1,17 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.8.0
+
+### Minor Changes
+
+- 5b35139: Add options to input-name rule.
+- 46d759e: [naming-convention] Add forbiddenPrefixes and forbiddenSuffixes options. Add QueryDefinition which targets queries ( may break existing config if FieldDefinition is used )
+
+### Patch Changes
+
+- 619d9eb: fix for `no-unreachable-types` does not recognize implemented interfaces
+- 2f6313b: Fix issues with built artifact containing parts of graphql-js library
+
 ## 0.7.2
 
 ### Patch Changes
