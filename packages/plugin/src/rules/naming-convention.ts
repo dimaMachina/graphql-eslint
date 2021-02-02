@@ -22,9 +22,20 @@ interface CheckNameFormatParams {
   trailingUnderscore: 'allow' | 'forbid';
   prefix: string;
   suffix: string;
+  forbiddenPrefixes: string[];
+  forbiddenSuffixes: string[];
 }
 function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
-  const { value, style, leadingUnderscore, trailingUnderscore, suffix, prefix } = params;
+  const {
+    value,
+    style,
+    leadingUnderscore,
+    trailingUnderscore,
+    suffix,
+    prefix,
+    forbiddenPrefixes,
+    forbiddenSuffixes,
+  } = params;
   let name = value;
   if (leadingUnderscore === 'allow') {
     [, name] = name.match(/^_*(.*)$/);
@@ -46,6 +57,22 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
       )}`,
     };
   }
+  if (forbiddenPrefixes.some(forbiddenPrefix => name.startsWith(forbiddenPrefix))) {
+    return {
+      ok: false,
+      errorMessage:
+        '{{nodeType}} "{{nodeName}}" should not have one of the following prefix(es): {{forbiddenPrefixes}}',
+    };
+  }
+
+  if (forbiddenSuffixes.some(forbiddenSuffix => name.endsWith(forbiddenSuffix))) {
+    return {
+      ok: false,
+      errorMessage:
+        '{{nodeType}} "{{nodeName}}" should not have one of the following suffix(es): {{forbiddenSuffixes}}',
+    };
+  }
+
   if (!formats[style]) {
     return { ok: true };
   }
@@ -64,12 +91,15 @@ interface PropertySchema {
   style?: ValidNaming;
   suffix?: string;
   prefix?: string;
+  forbiddenPrefixes?: string[];
+  forbiddenSuffixes?: string[];
 }
 
 type NamingConventionRuleConfig = [
   {
     leadingUnderscore?: 'allow' | 'forbid';
     trailingUnderscore?: 'allow' | 'forbid';
+    QueryDefinition?: ValidNaming | PropertySchema;
     [Kind.FIELD_DEFINITION]?: ValidNaming | PropertySchema;
     [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
     [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
@@ -135,6 +165,22 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
             suffix: {
               type: 'string',
             },
+            forbiddenPrefixes: {
+              additionalItems: false,
+              type: 'array',
+              minItems: 1,
+              items: {
+                type: 'string',
+              },
+            },
+            forbiddenSuffixes: {
+              additionalItems: false,
+              type: 'array',
+              minItems: 1,
+              items: {
+                type: 'string',
+              },
+            },
           },
         },
       },
@@ -154,6 +200,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
           [Kind.SCALAR_TYPE_DEFINITION as string]: schemaOption,
           [Kind.OPERATION_DEFINITION as string]: schemaOption,
           [Kind.FRAGMENT_DEFINITION as string]: schemaOption,
+          QueryDefinition: schemaOption,
           leadingUnderscore: {
             type: 'string',
             enum: ['allow', 'forbid'],
@@ -175,7 +222,8 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ...(context.options[0] || {}),
     };
 
-    const checkNode = (node, style, nodeType, suffix = '', prefix = '') => {
+    const checkNode = (node, property: PropertySchema, nodeType: string) => {
+      const { style, suffix = '', prefix = '', forbiddenPrefixes = [], forbiddenSuffixes = [] } = property;
       const result = checkNameFormat({
         value: node.value,
         style,
@@ -183,6 +231,8 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         trailingUnderscore: options.trailingUnderscore,
         prefix: prefix,
         suffix: suffix,
+        forbiddenPrefixes: forbiddenPrefixes,
+        forbiddenSuffixes: forbiddenSuffixes,
       });
       if (result.ok === false) {
         context.report({
@@ -192,6 +242,8 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
             prefix: prefix,
             suffix: suffix,
             format: style,
+            forbiddenPrefixes: forbiddenPrefixes.join(', '),
+            forbiddenSuffixes: forbiddenSuffixes.join(', '),
             nodeType,
             nodeName: node.value,
           },
@@ -210,6 +262,12 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       };
     };
 
+    const isQueryType = (node): boolean => {
+      return (
+        (node.type === 'ObjectTypeDefinition' || node.type === 'ObjectTypeExtension') && node.name.value === 'Query'
+      );
+    };
+
     return {
       Name: node => {
         if (node.value.startsWith('_') && options.leadingUnderscore === 'forbid') {
@@ -225,61 +283,66 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       ObjectTypeDefinition: node => {
         if (options.ObjectTypeDefinition) {
           const property = normalisePropertyOption(options.ObjectTypeDefinition);
-          checkNode(node.name, property.style, 'Type', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Type');
         }
       },
       InterfaceTypeDefinition: node => {
         if (options.InterfaceTypeDefinition) {
           const property = normalisePropertyOption(options.InterfaceTypeDefinition);
-          checkNode(node.name, property.style, 'Interface', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Interface');
         }
       },
       EnumTypeDefinition: node => {
         if (options.EnumTypeDefinition) {
           const property = normalisePropertyOption(options.EnumTypeDefinition);
-          checkNode(node.name, property.style, 'Enumerator', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Enumerator');
         }
       },
       InputObjectTypeDefinition: node => {
         if (options.InputObjectTypeDefinition) {
           const property = normalisePropertyOption(options.InputObjectTypeDefinition);
-          checkNode(node.name, property.style, 'Input type', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Input type');
         }
       },
-      FieldDefinition: node => {
-        if (options.FieldDefinition) {
+      FieldDefinition: (node: any) => {
+        if (options.QueryDefinition && isQueryType(node.parent)) {
+          const property = normalisePropertyOption(options.QueryDefinition);
+          checkNode(node.name, property, 'Query');
+        }
+
+        if (options.FieldDefinition && !isQueryType(node.parent)) {
           const property = normalisePropertyOption(options.FieldDefinition);
-          checkNode(node.name, property.style, 'Field', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Field');
         }
       },
       EnumValueDefinition: node => {
         if (options.EnumValueDefinition) {
           const property = normalisePropertyOption(options.EnumValueDefinition);
-          checkNode(node.name, property.style, 'Enumeration value', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Enumeration value');
         }
       },
       InputValueDefinition: node => {
         if (options.InputValueDefinition) {
           const property = normalisePropertyOption(options.InputValueDefinition);
-          checkNode(node.name, property.style, 'Input property', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Input property');
         }
       },
       FragmentDefinition: node => {
         if (options.FragmentDefinition) {
           const property = normalisePropertyOption(options.FragmentDefinition);
-          checkNode(node.name, property.style, 'Fragment', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Fragment');
         }
       },
       ScalarTypeDefinition: node => {
         if (options.ScalarTypeDefinition) {
           const property = normalisePropertyOption(options.ScalarTypeDefinition);
-          checkNode(node.name, property.style, 'Scalar', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Scalar');
         }
       },
       UnionTypeDefinition: node => {
         if (options.UnionTypeDefinition) {
           const property = normalisePropertyOption(options.UnionTypeDefinition);
-          checkNode(node.name, property.style, 'Scalar', property.suffix, property.prefix);
+          checkNode(node.name, property, 'Union');
         }
       },
     };

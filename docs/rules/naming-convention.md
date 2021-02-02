@@ -114,6 +114,13 @@ The object must be one of the following types:
 * `asString`
 * `asObject`
 
+#### `QueryDefinition`
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
 #### `leadingUnderscore` (string, enum)
 
 This element must be one of the following enum values:
@@ -158,3 +165,19 @@ This element must be one of the following enum values:
 ### `prefix` (string)
 
 ### `suffix` (string)
+
+### `forbiddenPrefixes` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+* Minimum items: `1`
+
+### `forbiddenSuffixes` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+* Minimum items: `1`

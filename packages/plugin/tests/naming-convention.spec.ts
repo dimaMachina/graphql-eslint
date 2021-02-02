@@ -103,6 +103,15 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         },
       ],
     },
+    {
+      code: 'type One { fieldA: String } type Query { QUERY_A(id: ID!): String }',
+      options: [
+        {
+          FieldDefinition: { style: 'camelCase', prefix: 'field' },
+          QueryDefinition: { style: 'UPPER_CASE', prefix: 'QUERY' },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -197,6 +206,24 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         { message: 'Field name "aField" should have "Field" prefix' },
         { message: 'Enumeration value name "A_ENUM_VALUE_ONE" should have "ENUM" prefix' },
         { message: 'Enumeration value name "VALUE_TWO" should have "ENUM" prefix' },
+      ],
+    },
+    {
+      code:
+        'type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }',
+      options: [
+        {
+          ObjectTypeDefinition: { style: 'PascalCase', forbiddenPrefixes: ['On'] },
+          FieldDefinition: { style: 'camelCase', forbiddenPrefixes: ['foo', 'bar'], forbiddenSuffixes: ['Foo'] },
+          QueryDefinition: { style: 'camelCase', forbiddenPrefixes: ['get', 'query'] },
+        },
+      ],
+      errors: [
+        { message: 'Type "One" should not have one of the following prefix(es): On' },
+        { message: 'Field "getFoo" should not have one of the following suffix(es): Foo' },
+        { message: 'Query "getA" should not have one of the following prefix(es): get, query' },
+        { message: 'Query "queryB" should not have one of the following prefix(es): get, query' },
+        { message: 'Query "getC" should not have one of the following prefix(es): get, query' },
       ],
     },
   ],
