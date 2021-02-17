@@ -1,5 +1,6 @@
 import { GraphQLESLintRule } from '../types';
 import { TokenKind } from 'graphql';
+import { checkForEslint } from '../utils';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
@@ -85,6 +86,7 @@ const rule: GraphQLESLintRule = {
                   });
                 } else if (
                   token.next.kind !== TokenKind.COMMENT &&
+                  !checkForEslint(token, rawNode) &&
                   token.next.kind !== TokenKind.EOF &&
                   token.next.line - token.line < 2 &&
                   token.prev.line !== token.line

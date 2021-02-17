@@ -75,6 +75,19 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
         # Test
       `,
     },
+    {
+      code: /* GraphQL */ `
+        # eslint-disable @graphql-eslint/no-unreachable-types
+
+        "Types of 'unlessContainsTypes' omit"
+        enum OmitTypes {
+          "Scalar fields"
+          scalar
+          "Complex type fields"
+          nonScalar
+        }
+      `,
+    },
   ],
   invalid: [
     {
