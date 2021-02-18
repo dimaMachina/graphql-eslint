@@ -58,7 +58,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
     `),
     useSchema(/* GraphQL */ `
       type Query {
-        me: Node!
+        node(id: ID!): Node!
       }
 
       interface Node {
@@ -70,8 +70,9 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         name: String
       }
 
-      type SuperUser implements User {
+      type SuperUser implements User & Node {
         id: ID!
+        name: String
         address: String
       }
     `),
