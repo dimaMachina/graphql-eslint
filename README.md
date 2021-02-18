@@ -171,6 +171,16 @@ You can find a complete list of [all available rules here](./docs/README.md)
 
 If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](./docs/README.md))
 
-## Contributing
+## Contributions
 
-If you think a rule is missing, or can be modified, feel free to report issues, on open PRs. We always welcome contributions.
+Contributions, issues and feature requests are very welcome. If you are using this package and fixed a bug for yourself, please consider submitting a PR!
+
+And if this is your first time contributing to this project, please do read our [Contributor Workflow Guide](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md) before you get started off.
+
+### Code of Conduct
+
+Help us keep GraphQL ESLint open and inclusive. Please read and follow our [Code of Conduct](https://github.com/the-guild-org/Stack/blob/master/CODE_OF_CONDUCT.md) as adopted from [Contributor Covenant](https://www.contributor-covenant.org/)
+
+## License
+
+Released under the [MIT license](./LICENSE).
