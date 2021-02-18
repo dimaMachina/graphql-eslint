@@ -30,7 +30,6 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         name: String
       }
     `),
-
     useSchema(/* GraphQL */ `
       type Query {
         me: User
@@ -42,6 +41,39 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
 
       type User implements Address {
         city: String
+      }
+    `),
+    useSchema(/* GraphQL */ `
+      type Query {
+        me: User!
+      }
+
+      interface User {
+        name: String
+      }
+
+      type SuperUser implements User {
+        address: String
+      }
+    `),
+    useSchema(/* GraphQL */ `
+      type Query {
+        node(id: ID!): Node!
+      }
+
+      interface Node {
+        id: ID!
+      }
+
+      interface User implements Node {
+        id: ID!
+        name: String
+      }
+
+      type SuperUser implements User & Node {
+        id: ID!
+        name: String
+        address: String
       }
     `),
   ],
@@ -183,6 +215,61 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
       errors: [
         {
           message: `Type "Comment" is unreachable`,
+        },
+      ],
+    },
+    {
+      ...useSchema(/* GraphQL */ `
+        # normalize graphql
+
+        type Query {
+          node(id: ID!): User
+        }
+
+        interface User implements Node {
+          id: ID!
+          name: String
+        }
+
+        interface Node {
+          id: ID!
+        }
+
+        interface Missing {
+          mid: ID!
+        }
+
+        type SuperUser implements User & Node {
+          id: ID!
+          name: String
+          isSuper: Boolean!
+        }
+      `),
+      output: /* GraphQL */ `
+        # normalize graphql
+
+        type Query {
+          node(id: ID!): User
+        }
+
+        interface User implements Node {
+          id: ID!
+          name: String
+        }
+
+        interface Node {
+          id: ID!
+        }
+
+        type SuperUser implements User & Node {
+          id: ID!
+          name: String
+          isSuper: Boolean!
+        }
+      `,
+      errors: [
+        {
+          message: `Type "Missing" is unreachable`,
         },
       ],
     },
