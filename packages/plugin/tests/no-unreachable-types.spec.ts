@@ -218,5 +218,60 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         },
       ],
     },
+    {
+      ...useSchema(/* GraphQL */ `
+        # normalize graphql
+
+        type Query {
+          node(id: ID!): User
+        }
+
+        interface User implements Node {
+          id: ID!
+          name: String
+        }
+
+        interface Node {
+          id: ID!
+        }
+
+        interface Missing {
+          mid: ID!
+        }
+
+        type SuperUser implements User & Node {
+          id: ID!
+          name: String
+          isSuper: Boolean!
+        }
+      `),
+      output: /* GraphQL */ `
+        # normalize graphql
+
+        type Query {
+          node(id: ID!): User
+        }
+
+        interface User implements Node {
+          id: ID!
+          name: String
+        }
+
+        interface Node {
+          id: ID!
+        }
+
+        type SuperUser implements User & Node {
+          id: ID!
+          name: String
+          isSuper: Boolean!
+        }
+      `,
+      errors: [
+        {
+          message: `Type "Missing" is unreachable`,
+        },
+      ],
+    },
   ],
 });
