@@ -12,7 +12,7 @@ Requires description around GraphQL nodes
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ["error", [{"ObjectTypeDefinition":"PascalCase"}]]
+# eslint @graphql-eslint/naming-convention: ["error", {"ObjectTypeDefinition":"PascalCase"}]
 
 type someTypeName {
   f: String!
@@ -22,7 +22,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ["error", [{"FieldDefinition":"camelCase","ObjectTypeDefinition":"PascalCase"}]]
+# eslint @graphql-eslint/naming-convention: ["error", {"FieldDefinition":"camelCase","ObjectTypeDefinition":"PascalCase"}]
 
 type SomeTypeName {
   someFieldName: String
