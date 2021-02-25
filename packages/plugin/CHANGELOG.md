@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.8.1
+
+### Patch Changes
+
+- 46742f0: no-hashtag-description allows eslint directives
+- 77eafd2: no-unreachable-types pass if type implements reachable interface
+- 13fd2fa: Fix compatibility issues with graphql v14
+
 ## 0.8.0
 
 ### Minor Changes
