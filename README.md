@@ -46,6 +46,8 @@ npm install --save-dev @graphql-eslint/eslint-plugin
 
 ### Configuration
 
+> Note: This plugin doesn't activate any rule by default at the moment, we are currently thinking of the right rules to be the "recommended" and the default set. Until then, please make sure to active rules based on your needs.
+
 To get started, create an override configuration for your ESLint, while applying it to to `.graphql` files (do that even if you are declaring your operations in code files):
 
 ```json
