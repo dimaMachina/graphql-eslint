@@ -75,6 +75,14 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
         # Test
       `,
     },
+    {
+      code: /* GraphQL */ `
+        # eslint
+        type Query {
+          foo: String
+        }
+      `,
+    },
   ],
   invalid: [
     {

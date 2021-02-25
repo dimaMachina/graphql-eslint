@@ -1,4 +1,4 @@
-import { Source, Lexer, GraphQLSchema } from 'graphql';
+import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
 import { GraphQLESlintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
@@ -98,4 +98,15 @@ export function extractTokens(source: string): AST.Token[] {
   }
 
   return tokens;
+}
+
+export function checkForEslint(token: Token, rawNode: DocumentNode): boolean {
+  if (token.kind !== 'Comment') {
+    return false;
+  }
+  const string = rawNode.loc?.source.body.substring(token.start+1, token.start+8);
+  if (string.toLocaleLowerCase().includes('eslint')) {
+    return true;
+  }
+  return false;
 }
