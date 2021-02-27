@@ -85,6 +85,41 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
         },
       ],
     },
+    schema: {
+      $schema: 'http://json-schema.org/draft-04/schema#',
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          acceptedIdNames: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            default: ['id'],
+          },
+          acceptedIdTypes: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            default: ['ID'],
+          },
+          exceptions: {
+            type: 'object',
+            properties: {
+              suffixes: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+                default: [],
+              },
+            },
+          },
+        },
+      },
+    },
   },
   create(context) {
     const options: StrictIdInTypesRuleConfig[number] = {

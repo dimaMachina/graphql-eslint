@@ -53,3 +53,49 @@ type CreateUserPayload {
   data: String!
 }
 ```
+
+## Config Schema
+
+### (array)
+
+The schema defines an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+#### `acceptedIdNames` (array)
+
+The object is an array with all elements of the type `string`.
+
+Default:
+
+```
+[
+  "id"
+]
+```
+
+#### `acceptedIdTypes` (array)
+
+The object is an array with all elements of the type `string`.
+
+Default:
+
+```
+[
+  "ID"
+]
+```
+
+#### `exceptions` (object)
+
+Properties of the `exceptions` object:
+
+##### `suffixes` (array)
+
+The object is an array with all elements of the type `string`.
+
+Default:
+
+```
+[]
+```
