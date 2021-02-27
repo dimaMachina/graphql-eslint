@@ -1,25 +1,48 @@
+import { ObjectTypeDefinitionNode } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
+
+interface ExceptionRule {
+  suffixes?: string[];
+}
 
 type StrictIdInTypesRuleConfig = [
   {
     acceptedIdNames?: string[];
     acceptedIdTypes?: string[];
-    exceptions?: {
-      suffixes?: string[];
-    };
+    exceptions?: ExceptionRule;
   }
 ];
+
+interface ShouldIgnoreNodeParams {
+  node: GraphQLESTreeNode<ObjectTypeDefinitionNode>;
+  exceptions: ExceptionRule;
+}
+const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean => {
+  const rawNode = node.rawNode();
+
+  if (exceptions.suffixes && exceptions.suffixes.some(suffix => rawNode.name.value.endsWith(suffix))) {
+    return true;
+  }
+
+  return false;
+};
 
 const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
   create(context) {
     const options: StrictIdInTypesRuleConfig[number] = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
+      exceptions: {},
       ...(context.options[0] || {}),
     };
 
     return {
       ObjectTypeDefinition(node) {
+        if (shouldIgnoreNode({ node, exceptions: options.exceptions })) {
+          return;
+        }
+
         const validIds = node.fields.filter(field => {
           const fieldNode = field.rawNode();
 

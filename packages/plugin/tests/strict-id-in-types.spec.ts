@@ -26,6 +26,55 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
         },
       ],
     },
+    {
+      code: 'type A { id: ID! } type AResult { key: String! } ',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            suffixes: ['Result'],
+          },
+        },
+      ],
+    },
+    {
+      code: 'type A { id: ID! } type A1 { id: ID! } ',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            suffixes: [''],
+          },
+        },
+      ],
+    },
+    {
+      code: 'type A { id: ID! } type A1 { id: ID! } ',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            suffixes: [],
+          },
+        },
+      ],
+    },
+    {
+      code:
+        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            suffixes: ['Result', 'Payload', 'Pagination'],
+          },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -77,6 +126,29 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
         {
           message:
             'B4 must have exactly one non-nullable unique identifier. Accepted name(s): id ; Accepted type(s): String',
+        },
+      ],
+    },
+    {
+      code:
+        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            suffixes: ['Result', 'Payload'],
+          },
+        },
+      ],
+      errors: [
+        {
+          message:
+            'Bresult must have exactly one non-nullable unique identifier. Accepted name(s): id ; Accepted type(s): ID',
+        },
+        {
+          message:
+            'BPagination must have exactly one non-nullable unique identifier. Accepted name(s): id ; Accepted type(s): ID',
         },
       ],
     },
