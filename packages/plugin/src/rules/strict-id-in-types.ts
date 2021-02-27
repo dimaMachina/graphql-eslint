@@ -29,6 +29,11 @@ const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean
 };
 
 const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
+  meta: {
+    docs: {
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/strict-id-in-types.md',
+    },
+  },
   create(context) {
     const options: StrictIdInTypesRuleConfig[number] = {
       acceptedIdNames: ['id'],

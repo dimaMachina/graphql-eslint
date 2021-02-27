@@ -7,4 +7,4 @@
 
 A type extension is only valid if the type is defined and has the same kind.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/PossibleTypeExtensionsRule.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/PossibleTypeExtensions.js).

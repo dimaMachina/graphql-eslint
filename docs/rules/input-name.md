@@ -50,4 +50,24 @@ The array object has the following properties:
 
 #### `checkInputType` (boolean)
 
-Default: `"true"`
+Check that the input type name follows the convention <mutationName>Input
+
+Default: `false`
+
+#### `caseSensitiveInputType` (boolean)
+
+Allow for case discrepancies in the input type name
+
+Default: `true`
+
+#### `checkQueries` (boolean)
+
+Apply the rule to Queries
+
+Default: `false`
+
+#### `checkMutations` (boolean)
+
+Apply the rule to Mutations
+
+Default: `true`
