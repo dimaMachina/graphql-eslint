@@ -149,6 +149,9 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
           return isValidIdName && isValidIdType;
         });
 
+        // Usually, there should be only one unique identifier field per type.
+        // Some clients allow multiple fields to be used. If more people need this,
+        // we can extend this rule later.
         if (validIds.length !== 1) {
           context.report({
             node,
