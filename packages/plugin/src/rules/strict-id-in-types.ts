@@ -30,8 +30,60 @@ const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean
 
 const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
   meta: {
+    type: 'suggestion',
     docs: {
+      description:
+        'Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.',
+      category: 'Best practices',
+      recommended: true,
+      requiresSchema: false,
+      requiresSiblings: false,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/strict-id-in-types.md',
+      examples: [
+        {
+          title: 'Incorrect',
+          usage: [{ acceptedIdNames: ['id', '_id'], acceptedIdTypes: ['ID'], exceptions: { suffixes: ['Payload'] } }],
+          code: /* GraphQL */ `
+            # Incorrect field name
+            type InvalidFieldName {
+              key: ID!
+            }
+
+            # Incorrect field type
+            type InvalidFieldType {
+              id: String!
+            }
+
+            # Incorrect exception suffix
+            type InvalidSuffixResult {
+              data: String!
+            }
+
+            # Too many unique identifiers. Must only contain one.
+            type InvalidFieldName {
+              id: ID!
+              _id: ID!
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ acceptedIdNames: ['id', '_id'], acceptedIdTypes: ['ID'], exceptions: { suffixes: ['Payload'] } }],
+          code: /* GraphQL */ `
+            type User {
+              id: ID!
+            }
+
+            type Post {
+              _id: ID!
+            }
+
+            type CreateUserPayload {
+              data: String!
+            }
+          `,
+        },
+      ],
     },
   },
   create(context) {
