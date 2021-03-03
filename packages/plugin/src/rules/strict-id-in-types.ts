@@ -1,4 +1,4 @@
-import { ObjectTypeDefinitionNode } from 'graphql';
+import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
 
@@ -142,7 +142,7 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
 
           // To be a valid type, it must be non-null and one of the accepted types.
           let isValidIdType = false;
-          if (fieldNode.type.kind === 'NonNullType' && fieldNode.type.type.kind === 'NamedType') {
+          if (fieldNode.type.kind === Kind.NON_NULL_TYPE && fieldNode.type.type.kind === Kind.NAMED_TYPE) {
             isValidIdType = options.acceptedIdTypes.includes(fieldNode.type.type.name.value);
           }
 
