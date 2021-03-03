@@ -39,7 +39,7 @@ type InvalidFieldName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/strict-id-in-types: ["error", [{"acceptedIdNames":["id","_id"],"acceptedIdTypes":["ID"],"exceptions":{"suffixes":["Payload"]}}]]
+# eslint @graphql-eslint/strict-id-in-types: ["error", [{"acceptedIdNames":["id","_id"],"acceptedIdTypes":["ID"],"exceptions":{"types":["Error"],"suffixes":["Payload"]}}]]
 
 type User {
   id: ID!
@@ -51,6 +51,10 @@ type Post {
 
 type CreateUserPayload {
   data: String!
+}
+
+type Error {
+  message: String!
 }
 ```
 
@@ -90,7 +94,21 @@ Default:
 
 Properties of the `exceptions` object:
 
+##### `types` (array)
+
+This is used to exclude types with names that match one of the specified values.
+
+The object is an array with all elements of the type `string`.
+
+Default:
+
+```
+[]
+```
+
 ##### `suffixes` (array)
+
+This is used to exclude types with names with suffixes that match one of the specified values.
 
 The object is an array with all elements of the type `string`.
 

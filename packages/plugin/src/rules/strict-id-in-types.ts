@@ -3,6 +3,7 @@ import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
 
 interface ExceptionRule {
+  types?: string[];
   suffixes?: string[];
 }
 
@@ -20,6 +21,10 @@ interface ShouldIgnoreNodeParams {
 }
 const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean => {
   const rawNode = node.rawNode();
+
+  if (exceptions.types && exceptions.types.some(type => rawNode.name.value === type)) {
+    return true;
+  }
 
   if (exceptions.suffixes && exceptions.suffixes.some(suffix => rawNode.name.value.endsWith(suffix))) {
     return true;
@@ -68,7 +73,13 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
         },
         {
           title: 'Correct',
-          usage: [{ acceptedIdNames: ['id', '_id'], acceptedIdTypes: ['ID'], exceptions: { suffixes: ['Payload'] } }],
+          usage: [
+            {
+              acceptedIdNames: ['id', '_id'],
+              acceptedIdTypes: ['ID'],
+              exceptions: { types: ['Error'], suffixes: ['Payload'] },
+            },
+          ],
           code: /* GraphQL */ `
             type User {
               id: ID!
@@ -80,6 +91,10 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
 
             type CreateUserPayload {
               data: String!
+            }
+
+            type Error {
+              message: String!
             }
           `,
         },
@@ -108,8 +123,18 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
           exceptions: {
             type: 'object',
             properties: {
+              types: {
+                type: 'array',
+                description: 'This is used to exclude types with names that match one of the specified values.',
+                items: {
+                  type: 'string',
+                },
+                default: [],
+              },
               suffixes: {
                 type: 'array',
+                description:
+                  'This is used to exclude types with names with suffixes that match one of the specified values.',
                 items: {
                   type: 'string',
                 },

@@ -75,6 +75,55 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
         },
       ],
     },
+    {
+      code: 'type A { id: ID! } type AError { message: String! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            types: ['AError'],
+          },
+        },
+      ],
+    },
+    {
+      code: 'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            types: ['AGeneralError', 'AForbiddenError'],
+          },
+        },
+      ],
+    },
+    {
+      code: 'type A { id: ID! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            types: [''],
+          },
+        },
+      ],
+    },
+    {
+      code: 'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            types: ['AError'],
+            suffixes: ['Result'],
+          },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -149,6 +198,24 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
         {
           message:
             'BPagination must have exactly one non-nullable unique identifier. Accepted name(s): id ; Accepted type(s): ID',
+        },
+      ],
+    },
+    {
+      code: 'type B { id: ID! } type BError { message: String! }',
+      options: [
+        {
+          acceptedIdNames: ['id'],
+          acceptedIdTypes: ['ID'],
+          exceptions: {
+            types: ['GeneralError'],
+          },
+        },
+      ],
+      errors: [
+        {
+          message:
+            'BError must have exactly one non-nullable unique identifier. Accepted name(s): id ; Accepted type(s): ID',
         },
       ],
     },
