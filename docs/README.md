@@ -1,5 +1,6 @@
 ## Available Rules
 
+
 - [`no-unreachable-types`](./rules/no-unreachable-types.md)
 - [`no-deprecated`](./rules/no-deprecated.md)
 - [`unique-fragment-name`](./rules/unique-fragment-name.md)
@@ -18,6 +19,7 @@
 - [`avoid-duplicate-fields`](./rules/avoid-duplicate-fields.md)
 - [`naming-convention`](./rules/naming-convention.md)
 - [`input-name`](./rules/input-name.md)
+- [`strict-id-in-types`](./rules/strict-id-in-types.md)
 - [`prettier`](./rules/prettier.md)
 - [`executable-definitions`](./rules/executable-definitions.md)
 - [`fields-on-correct-type`](./rules/fields-on-correct-type.md)

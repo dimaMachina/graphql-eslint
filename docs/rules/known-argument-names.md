@@ -7,4 +7,4 @@
 
 A GraphQL field is only valid if all supplied arguments are defined by that field.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/KnownArgumentNamesRule.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/KnownArgumentNames.js).

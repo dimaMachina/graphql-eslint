@@ -17,6 +17,7 @@ import noDeprecated from './no-deprecated';
 import noHashtagDescription from './no-hashtag-description';
 import selectionSetDepth from './selection-set-depth';
 import avoidDuplicateFields from './avoid-duplicate-fields';
+import strictIdInTypes from './strict-id-in-types';
 import { GraphQLESLintRule } from '../types';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
@@ -39,6 +40,7 @@ export const rules: Record<string, GraphQLESLintRule> = {
   'avoid-duplicate-fields': avoidDuplicateFields,
   'naming-convention': namingConvention,
   'input-name': inputName,
+  'strict-id-in-types': strictIdInTypes,
   prettier,
   ...GRAPHQL_JS_VALIDATIONS,
 };

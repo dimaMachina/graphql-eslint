@@ -53,4 +53,18 @@ query deep2 {
 
 ## Config Schema
 
-The schema defines the following properties:
+### (array)
+
+The schema defines an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+#### `maxDepth` (number)
+
+#### `ignore` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+* Minimum items: `1`
