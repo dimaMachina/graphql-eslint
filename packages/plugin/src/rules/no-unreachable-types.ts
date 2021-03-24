@@ -48,10 +48,9 @@ const rule: GraphQLESLintRule = {
   create(context) {
     function ensureReachability(node) {
       const typeName = node.name.value;
-      const implemented = node.interfaces?.map(instance => instance.name.value) || [];
       const reachableTypes = requireReachableTypesFromContext('no-unreachable-types', context);
 
-      if (!reachableTypes.has(typeName) && implemented.filter(name => reachableTypes.has(name)).length === 0) {
+      if (!reachableTypes.has(typeName)) {
         context.report({
           node,
           messageId: UNREACHABLE_TYPE,

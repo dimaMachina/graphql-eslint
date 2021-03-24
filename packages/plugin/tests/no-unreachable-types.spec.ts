@@ -76,6 +76,24 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         address: String
       }
     `),
+    useSchema(/* GraphQL */ `
+      interface User {
+        id: String
+      }
+
+      type SuperUser implements User {
+        id: String
+        superDetail: SuperDetail
+      }
+
+      type SuperDetail {
+        detail: String
+      }
+
+      type Query {
+        user: User!
+      }
+    `),
   ],
   invalid: [
     {

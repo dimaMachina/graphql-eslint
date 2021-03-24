@@ -44,9 +44,13 @@ export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
 
   function collectFrom(type?: GraphQLNamedType): void {
     if (type && shouldCollect(type.name)) {
-      if (isObjectType(type) || isInterfaceType(type)) {
+      if (isObjectType(type)) {
         collectFromFieldMap(type.getFields());
         collectFromInterfaces(type.getInterfaces());
+      } else if (isInterfaceType(type)) {
+        collectFromFieldMap(type.getFields());
+        collectFromInterfaces(type.getInterfaces());
+        collectFromImplementations(type);
       } else if (isUnionType(type)) {
         type.getTypes().forEach(collectFrom);
       } else if (isInputObjectType(type)) {
@@ -92,6 +96,10 @@ export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
 
   function collectFromInputType(input: GraphQLInputType): void {
     collectFrom(schema.getType(resolveName(input)));
+  }
+
+  function collectFromImplementations(type: GraphQLInterfaceType): void {
+    schema.getPossibleTypes(type).forEach(collectFrom);
   }
 
   function resolveName(type: GraphQLOutputType | GraphQLInputType) {
