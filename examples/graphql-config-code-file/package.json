@@ -9,7 +9,7 @@
     "lint": "eslint --ext graphql,js ."
   },
   "dependencies": {
-    "@graphql-eslint/eslint-plugin": "0.9.0",
+    "@graphql-eslint/eslint-plugin": "0.9.1",
     "eslint": "7.14.0",
     "graphql": "15.4.0",
     "graphql-tag": "^2.11.0",
