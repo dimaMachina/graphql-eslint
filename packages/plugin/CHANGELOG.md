@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 0.9.1
+
+### Patch Changes
+
+- beb3b14: Support possible types in no-unreachable-types rule
+
 ## 0.9.0
 
 ### Minor Changes
