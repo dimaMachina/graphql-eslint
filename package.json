@@ -29,7 +29,7 @@
     "dedent": "0.7.0",
     "ts-node": "9.1.1",
     "patch-package": "6.4.7",
-    "@changesets/cli": "2.14.1",
+    "@changesets/cli": "2.15.0",
     "@typescript-eslint/eslint-plugin": "4.20.0",
     "@typescript-eslint/parser": "4.20.0",
     "eslint": "7.23.0",
