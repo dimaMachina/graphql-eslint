@@ -24,6 +24,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       }`,
       options: [
         {
+          OperationDefinition: 'PascalCase',
           ObjectTypeDefinition: 'PascalCase',
           FieldDefinition: 'camelCase',
           EnumValueDefinition: 'UPPER_CASE',
@@ -224,6 +225,18 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         { message: 'Query "getA" should not have one of the following prefix(es): get, query' },
         { message: 'Query "queryB" should not have one of the following prefix(es): get, query' },
         { message: 'Query "getC" should not have one of the following prefix(es): get, query' },
+      ],
+    },
+    {
+      code: 'query Foo { foo } query getBar { bar }',
+      options: [
+        {
+          OperationDefinition: { style: 'camelCase', forbiddenPrefixes: ['get'] },
+        },
+      ],
+      errors: [
+        { message: 'Operation name "Foo" should be in camelCase format' },
+        { message: 'Operation "getBar" should not have one of the following prefix(es): get' },
       ],
     },
   ],
