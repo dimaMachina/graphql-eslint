@@ -118,7 +118,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Requires description around GraphQL nodes',
+      description: 'Require names to follow specified conventions.',
       category: 'Best practices',
       recommended: true,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/naming-convention.md',

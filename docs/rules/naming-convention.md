@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Requires description around GraphQL nodes
+Require names to follow specified conventions.
 
 ## Usage Examples
 
