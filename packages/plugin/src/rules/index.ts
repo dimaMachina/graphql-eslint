@@ -8,7 +8,6 @@ import noCaseInsensitiveEnumValuesDuplicates from './no-case-insensitive-enum-va
 import requireDescription from './require-description';
 import requireIdWhenAvailable from './require-id-when-available';
 import descriptionStyle from './description-style';
-import prettier from './prettier';
 import namingConvention from './naming-convention';
 import inputName from './input-name';
 import uniqueFragmentName from './unique-fragment-name';
@@ -41,6 +40,5 @@ export const rules: Record<string, GraphQLESLintRule> = {
   'naming-convention': namingConvention,
   'input-name': inputName,
   'strict-id-in-types': strictIdInTypes,
-  prettier,
   ...GRAPHQL_JS_VALIDATIONS,
 };

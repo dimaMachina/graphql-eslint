@@ -20,7 +20,6 @@
 - [`naming-convention`](./rules/naming-convention.md)
 - [`input-name`](./rules/input-name.md)
 - [`strict-id-in-types`](./rules/strict-id-in-types.md)
-- [`prettier`](./rules/prettier.md)
 - [`executable-definitions`](./rules/executable-definitions.md)
 - [`fields-on-correct-type`](./rules/fields-on-correct-type.md)
 - [`fragments-on-composite-type`](./rules/fragments-on-composite-type.md)

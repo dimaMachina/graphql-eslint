@@ -1,0 +1,21 @@
+{
+    "name": "@graphql-eslint/example-prettier",
+    "private": true,
+    "version": "0.0.1",
+    "repository": "https://github.com/dotansimha/graphql-eslint",
+    "author": "JounQin <admin@1stg.me>",
+    "license": "MIT",
+    "scripts": {
+      "lint": "eslint --ext graphql,js ."
+    },
+    "dependencies": {
+      "eslint": "7.24.0",
+      "eslint-config-prettier": "8.2.0",
+      "eslint-plugin-prettier": "3.4.0",
+      "@graphql-eslint/eslint-plugin": "0.9.1",
+      "graphql": "15.5.0",
+      "prettier": "1.19.1",
+      "typescript": "4.1.5"
+    }
+  }
+  
