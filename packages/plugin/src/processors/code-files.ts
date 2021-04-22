@@ -1,29 +1,23 @@
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
-import { basename } from 'path';
 
 const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
 
 type Block = {
   text: string;
   filename: string;
-  lineOffset?: number;
-  offset?: number;
+  lineOffset: number;
+  offset: number;
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function createGraphqlProcessor() {
-  const blocksMap = new Map<string, Block[]>();
+  const blocksMap = new Map<string, Array<Block | string>>();
 
   return {
     supportsAutofix: true,
-    preprocess: (text: string, filename: string): Array<{ text: string; filename: string }> => {
-      const blocks: Block[] = [];
+    preprocess: (text: string, filename: string): Array<{ text: string; filename: string } | string> => {
+      const blocks: Array<Block | string> = [];
       blocksMap.set(filename, blocks);
-
-      // WORKAROUND: This restores the original filename for the block representing original code.
-      //             This allows to be compatible with other eslint plugins relying on filesystem
-      //             This is temporary, waiting for https://github.com/eslint/eslint/issues/11989
-      const originalFileBlock = { text, filename: `/../../${basename(filename)}` };
 
       if (filename && text && RELEVANT_KEYWORDS.some(keyword => text.includes(keyword))) {
         try {
@@ -46,7 +40,7 @@ export function createGraphqlProcessor() {
               });
             }
 
-            blocks.push(originalFileBlock);
+            blocks.push(text);
 
             return blocks;
           }
@@ -56,7 +50,7 @@ export function createGraphqlProcessor() {
         }
       }
 
-      return [originalFileBlock];
+      return [text];
     },
     postprocess: (messageLists: any[], filename: string): any[] => {
       const blocks = blocksMap.get(filename);
@@ -64,7 +58,13 @@ export function createGraphqlProcessor() {
       if (blocks && blocks.length > 0) {
         for (let i = 0; i < messageLists.length; ++i) {
           const messages = messageLists[i];
-          const { lineOffset, offset } = blocks[i];
+          const block = blocks[i];
+
+          if (typeof block === 'string') {
+            continue;
+          }
+
+          const { lineOffset, offset } = block;
 
           for (const message of messages) {
             message.line += lineOffset;
