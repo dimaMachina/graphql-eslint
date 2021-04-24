@@ -42,7 +42,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.1.0",
     "eslint-plugin-standard": "5.0.0",
-    "eslint-config-prettier": "8.2.0",
+    "eslint-config-prettier": "8.3.0",
     "@types/jest": "26.0.22",
     "ts-jest": "26.5.5",
     "rimraf": "3.0.2",
