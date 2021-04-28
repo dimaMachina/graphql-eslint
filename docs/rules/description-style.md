@@ -12,7 +12,7 @@ Require all comments to follow the same style (either block or inline)
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/description-style: ["error", [{"style":"inline"}]]
+# eslint @graphql-eslint/description-style: ["error", {"style":"inline"}]
 
 """ Description """
 type someTypeName {
@@ -23,7 +23,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/description-style: ["error", [{"style":"inline"}]]
+# eslint @graphql-eslint/description-style: ["error", {"style":"inline"}]
 
 " Description "
 type someTypeName {

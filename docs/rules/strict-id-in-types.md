@@ -12,7 +12,7 @@ Requires output types to have one unique identifier unless they do not have a lo
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/strict-id-in-types: ["error", [{"acceptedIdNames":["id","_id"],"acceptedIdTypes":["ID"],"exceptions":{"suffixes":["Payload"]}}]]
+# eslint @graphql-eslint/strict-id-in-types: ["error", {"acceptedIdNames":["id","_id"],"acceptedIdTypes":["ID"],"exceptions":{"suffixes":["Payload"]}}]
 
 # Incorrect field name
 type InvalidFieldName {
@@ -39,7 +39,7 @@ type InvalidFieldName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/strict-id-in-types: ["error", [{"acceptedIdNames":["id","_id"],"acceptedIdTypes":["ID"],"exceptions":{"types":["Error"],"suffixes":["Payload"]}}]]
+# eslint @graphql-eslint/strict-id-in-types: ["error", {"acceptedIdNames":["id","_id"],"acceptedIdTypes":["ID"],"exceptions":{"types":["Error"],"suffixes":["Payload"]}}]
 
 type User {
   id: ID!
