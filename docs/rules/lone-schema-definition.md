@@ -7,4 +7,4 @@
 
 A GraphQL document is only valid if it contains only one schema definition.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/LoneSchemaDefinition.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/LoneSchemaDefinition.js).

@@ -7,4 +7,4 @@
 
 A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/VariablesAreInputTypes.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/VariablesAreInputTypes.js).

@@ -2,7 +2,7 @@ import { GraphQLRuleTester } from '../src/testkit';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 import { ParserOptions } from '../src/types';
 
-const TEST_SCHEMA = /* GraphQL */`
+const TEST_SCHEMA = /* GraphQL */ `
   type Query {
     foo: String
     bar: Boolean
@@ -22,7 +22,8 @@ ruleTester.runGraphQLTests('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-t
   valid: [
     { ...WITH_SCHEMA, code: TEST_SCHEMA },
     {
-      ...WITH_SCHEMA, code: /* GraphQL */`
+      ...WITH_SCHEMA,
+      code: /* GraphQL */ `
         type Query {
           foo: String
         }
@@ -36,7 +37,7 @@ ruleTester.runGraphQLTests('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-t
   invalid: [
     {
       ...WITH_SCHEMA,
-      code: /* GraphQL */`
+      code: /* GraphQL */ `
         type Query {
           foo: String
         }
@@ -45,9 +46,7 @@ ruleTester.runGraphQLTests('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-t
           bar: Boolean
         }
       `,
-      errors: [
-        { message: 'Type "Query" already exists in the schema. It cannot also be defined in this type definition.' },
-      ],
+      errors: [{ message: 'There can be only one type named "Query".' }],
     },
   ],
 });
