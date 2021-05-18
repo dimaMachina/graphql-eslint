@@ -1,6 +1,7 @@
 ## Available Rules
 
 
+- [`avoid-typename-prefix`](./rules/avoid-typename-prefix.md)
 - [`no-unreachable-types`](./rules/no-unreachable-types.md)
 - [`no-deprecated`](./rules/no-deprecated.md)
 - [`unique-fragment-name`](./rules/unique-fragment-name.md)
