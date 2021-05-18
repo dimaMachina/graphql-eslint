@@ -99,11 +99,16 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
       description: `A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition.`,
     },
   }),
-  validationToRule('lone-schema-definition', 'LoneSchemaDefinition', {
-    docs: {
-      description: `A GraphQL document is only valid if it contains only one schema definition.`,
+  validationToRule(
+    'lone-schema-definition',
+    'LoneSchemaDefinition',
+    {
+      docs: {
+        description: `A GraphQL document is only valid if it contains only one schema definition.`,
+      },
     },
-  }),
+    true
+  ),
   validationToRule('no-fragment-cycles', 'NoFragmentCycles', {
     docs: {
       description: `A GraphQL fragment is only valid when it does not have cycles in fragments usage.`,
