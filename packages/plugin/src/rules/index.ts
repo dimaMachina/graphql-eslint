@@ -16,9 +16,11 @@ import noHashtagDescription from './no-hashtag-description';
 import selectionSetDepth from './selection-set-depth';
 import avoidDuplicateFields from './avoid-duplicate-fields';
 import strictIdInTypes from './strict-id-in-types';
+import avoidTypenamePrefix from './avoid-typename-prefix';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
 export const rules = {
+  'avoid-typename-prefix': avoidTypenamePrefix,
   'no-unreachable-types': noUnreachableTypes,
   'no-deprecated': noDeprecated,
   'unique-fragment-name': uniqueFragmentName,
