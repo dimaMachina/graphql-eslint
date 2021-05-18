@@ -2,7 +2,7 @@ import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
 
-interface ExceptionRule {
+export interface ExceptionRule {
   types?: string[];
   suffixes?: string[];
 }

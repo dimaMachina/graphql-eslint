@@ -17,10 +17,9 @@ import noHashtagDescription from './no-hashtag-description';
 import selectionSetDepth from './selection-set-depth';
 import avoidDuplicateFields from './avoid-duplicate-fields';
 import strictIdInTypes from './strict-id-in-types';
-import { GraphQLESLintRule } from '../types';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 
-export const rules: Record<string, GraphQLESLintRule> = {
+export const rules = {
   'no-unreachable-types': noUnreachableTypes,
   'no-deprecated': noDeprecated,
   'unique-fragment-name': uniqueFragmentName,
