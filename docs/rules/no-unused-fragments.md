@@ -7,4 +7,4 @@
 
 A GraphQL document is only valid if all fragment definitions are spread within operations, or spread within other fragments spread within operations.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/NoUnusedFragments.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoUnusedFragments.js).

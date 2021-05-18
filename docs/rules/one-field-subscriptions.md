@@ -7,4 +7,4 @@
 
 A GraphQL subscription is valid only if it contains a single root field.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/master/src/validation/rules/SingleFieldSubscriptions.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/SingleFieldSubscriptions.js).

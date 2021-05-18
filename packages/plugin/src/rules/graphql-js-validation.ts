@@ -6,7 +6,8 @@ import { requireGraphQLSchemaFromContext } from '../utils';
 const validationToRule = (
   name: string,
   ruleName: string,
-  meta: GraphQLESLintRule['meta']
+  meta: GraphQLESLintRule['meta'],
+  skipSchema = false
 ): Record<typeof name, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
 
@@ -26,7 +27,7 @@ const validationToRule = (
         ...meta,
         docs: {
           category: 'Validation',
-          requiresSchema: true,
+          requiresSchema: !skipSchema,
           requiresSiblings: false,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${name}.md`,
           ...meta.docs,
@@ -47,7 +48,7 @@ const validationToRule = (
               return;
             }
 
-            const schema = requireGraphQLSchemaFromContext(name, context);
+            const schema = skipSchema ? null : requireGraphQLSchemaFromContext(name, context);
             validateDoc(node, context, schema, node.rawNode(), [ruleFn], ruleName);
           },
         };
@@ -188,11 +189,16 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
       description: `A GraphQL document is only valid if it has only one type per operation.`,
     },
   }),
-  validationToRule('unique-type-names', 'UniqueTypeNames', {
-    docs: {
-      description: `A GraphQL document is only valid if all defined types have unique names.`,
+  validationToRule(
+    'unique-type-names',
+    'UniqueTypeNames',
+    {
+      docs: {
+        description: `A GraphQL document is only valid if all defined types have unique names.`,
+      },
     },
-  }),
+    true
+  ),
   validationToRule('unique-variable-names', 'UniqueVariableNames', {
     docs: {
       description: `A GraphQL operation is only valid if all its variables are uniquely named.`,

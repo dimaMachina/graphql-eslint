@@ -1,4 +1,5 @@
 import { Kind, validate, GraphQLSchema, DocumentNode, ASTNode, ValidationRule, specifiedRules } from 'graphql';
+import { validateSDL } from 'graphql/validation/validate';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext } from '../utils';
@@ -16,14 +17,14 @@ function extractRuleName(stack: string | undefined): string | null {
 export function validateDoc(
   sourceNode: GraphQLESTreeNode<ASTNode>,
   context: GraphQLESlintRuleContext,
-  schema: GraphQLSchema,
+  schema: GraphQLSchema | null,
   documentNode: DocumentNode,
   rules: ReadonlyArray<ValidationRule>,
   ruleName: string | null = null
 ): void {
   if (documentNode && documentNode.definitions && documentNode.definitions.length > 0) {
     try {
-      const validationErrors = validate(schema, documentNode, rules);
+      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules);
 
       for (const error of validationErrors) {
         const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
