@@ -21,6 +21,21 @@ function useSchema(
 ruleTester.runGraphQLTests('no-unreachable-types', rule, {
   valid: [
     useSchema(/* GraphQL */ `
+      directive @omit(unlessContains: [String], unlessContainsTypes: OmitTypes) on FIELD_DEFINITION
+
+      "Types of 'unlessContainsTypes' omit"
+      enum OmitTypes {
+        "Scalar fields"
+        scalar
+        "Complex type fields"
+        nonScalar
+      }
+
+      type Query {
+        foo: String
+      }
+    `),
+    useSchema(/* GraphQL */ `
       type Query {
         me: User
       }
@@ -95,22 +110,22 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
       }
     `),
     useSchema(/* GraphQL */ `
-    interface User {
-      id: String
-    }
+      interface User {
+        id: String
+      }
 
-    type SuperUser implements User {
-      id: String
-    }
+      type SuperUser implements User {
+        id: String
+      }
 
-    extend type SuperUser {
-      detail: String
-    }
+      extend type SuperUser {
+        detail: String
+      }
 
-    type Query {
-      user: User!
-    }
-  `),
+      type Query {
+        user: User!
+      }
+    `),
   ],
   invalid: [
     {

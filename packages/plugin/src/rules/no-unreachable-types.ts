@@ -63,6 +63,7 @@ const rule: GraphQLESLintRule = {
     }
 
     return {
+      DirectiveDefinition: ensureReachability,
       ObjectTypeDefinition: ensureReachability,
       ObjectTypeExtension: ensureReachability,
       InterfaceTypeDefinition: ensureReachability,

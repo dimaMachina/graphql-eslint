@@ -15,6 +15,7 @@ import {
   isInputObjectType,
   isListType,
   isNonNullType,
+  GraphQLDirective,
 } from 'graphql';
 
 export function createReachableTypesService(schema: GraphQLSchema): () => Set<string>;
@@ -36,11 +37,19 @@ export function createReachableTypesService(schema?: GraphQLSchema): () => Set<s
 export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
   const reachableTypes = new Set<string>();
 
+  collectFromDirectives(schema.getDirectives());
   collectFrom(schema.getQueryType());
   collectFrom(schema.getMutationType());
   collectFrom(schema.getSubscriptionType());
 
   return reachableTypes;
+
+  function collectFromDirectives(directives: readonly GraphQLDirective[]) {
+    for (const directive of directives || []) {
+      reachableTypes.add(directive.name);
+      directive.args.forEach(collectFromArgument);
+    }
+  }
 
   function collectFrom(type?: GraphQLNamedType): void {
     if (type && shouldCollect(type.name)) {
