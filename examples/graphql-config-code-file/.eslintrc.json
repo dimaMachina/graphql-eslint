@@ -11,8 +11,7 @@
       "rules": {
         "@graphql-eslint/require-id-when-available": "warn",
         "@graphql-eslint/no-anonymous-operations": "warn",
-        "@graphql-eslint/no-operation-name-suffix": "error",
-        "@graphql-eslint/validate-against-schema": "error"
+        "@graphql-eslint/no-operation-name-suffix": "error"
       }
     }
   ]

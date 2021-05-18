@@ -1,7 +1,48 @@
-import { ValidationRule } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { validateDoc } from './validate-against-schema';
+import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext } from '../utils';
+
+import { validate, GraphQLSchema, DocumentNode, ASTNode, ValidationRule } from 'graphql';
+import { validateSDL } from 'graphql/validation/validate';
+import { GraphQLESTreeNode } from '../estree-parser';
+
+function extractRuleName(stack: string | undefined): string | null {
+  const match = (stack || '').match(/validation[/\\\\]rules[/\\\\](.*?)\.js:/);
+
+  if (!match) {
+    return null;
+  }
+
+  return match[1] || null;
+}
+
+export function validateDoc(
+  sourceNode: GraphQLESTreeNode<ASTNode>,
+  context: GraphQLESlintRuleContext,
+  schema: GraphQLSchema | null,
+  documentNode: DocumentNode,
+  rules: ReadonlyArray<ValidationRule>,
+  ruleName: string | null = null
+): void {
+  if (documentNode && documentNode.definitions && documentNode.definitions.length > 0) {
+    try {
+      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules);
+
+      for (const error of validationErrors) {
+        const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
+
+        context.report({
+          loc: error.locations[0],
+          message: ruleName ? error.message : `${validateRuleName} ${error.message}`,
+        });
+      }
+    } catch (e) {
+      context.report({
+        node: sourceNode,
+        message: e.message,
+      });
+    }
+  }
+}
 
 const validationToRule = (
   name: string,

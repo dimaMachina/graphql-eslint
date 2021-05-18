@@ -18,7 +18,6 @@ module.exports = {
           },
         ],
         '@graphql-eslint/unique-fragment-name': 'warn',
-        '@graphql-eslint/validate-against-schema': 'error',
         '@graphql-eslint/no-anonymous-operations': 'warn',
         '@graphql-eslint/no-operation-name-suffix': 'error',
         '@graphql-eslint/avoid-operation-name-prefix': [

@@ -1,4 +1,3 @@
-import validate from './validate-against-schema';
 import noUnreachableTypes from './no-unreachable-types';
 import noAnonymousOperations from './no-anonymous-operations';
 import noOperationNameSuffix from './no-operation-name-suffix';
@@ -24,7 +23,6 @@ export const rules = {
   'no-deprecated': noDeprecated,
   'unique-fragment-name': uniqueFragmentName,
   'unique-operation-name': uniqueOperationName,
-  'validate-against-schema': validate,
   'no-hashtag-description': noHashtagDescription,
   'no-anonymous-operations': noAnonymousOperations,
   'no-operation-name-suffix': noOperationNameSuffix,
