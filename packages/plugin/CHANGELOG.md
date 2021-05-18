@@ -1,5 +1,47 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.0.0
+
+### Major Changes
+
+- 14211d6: feat: remove `prettier` rule, add related docs
+
+  ### BREAKING CHANGE: Remove `prettier` Rule
+
+  Since prettier itself support now linting GraphQL code and syntax, we removed the need for this rule from this package.
+
+  For more information, see:
+
+  - [Migration guide and example](https://github.com/dotansimha/graphql-eslint#prettier-rule)
+  - [Related PR](https://github.com/dotansimha/graphql-eslint/issues/395)
+
+- 61251e7: BREAKING CHANGE: Remove deprecated rule `validate-against-schema`.
+
+  If you are using `validate-against-schema`, please remove it and specify the exact rules that you need.
+
+- 61251e7: Bump dependencies and update minimum Node version to `v12`
+
+### Minor Changes
+
+- 63dc00a: NEW RULE: avoid-typename-prefix
+
+### Patch Changes
+
+- 9a40163: Fix issues with `avoid-operation-name-prefix` and error with caseSensitive
+- 1257d51: fix: original file should not be considered as file block
+
+  Related #88
+
+  ESLint supports `text` directly, no need to use the hacky way. See https://github.com/eslint/eslint/blob/master/lib/linter/linter.js#L1298
+
+  Related `eslint-plugin-prettier`'s issue hae been fixed at https://github.com/prettier/eslint-plugin-prettier/pull/401
+
+- 6d4a356: Fix loadSiblings file location
+- 388a0bf: Support OperationDefinition in naming-convention rule
+- 5ff184b: Fix issues with `lone-schema-definition` rule
+- 7a04e1e: Added support for direcrives in `no-unreachable-types` rule
+- ef8d776: Fix errors always thrown with unique-type-names rule
+
 ## 0.9.1
 
 ### Patch Changes
