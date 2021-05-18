@@ -2,7 +2,7 @@ import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
-type AvoidOperationNamePrefixConfig = [
+export type AvoidOperationNamePrefixConfig = [
   {
     keywords: string[];
     caseSensitive?: boolean;
@@ -15,10 +15,12 @@ function verifyRule(
   context: GraphQLESlintRuleContext<AvoidOperationNamePrefixConfig>,
   node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>
 ) {
-  const caseSensitive = context.options[0].caseSensitive;
+  const config = context.options[0] || { keywords: [], caseSensitive: false };
+  const caseSensitive = config.caseSensitive;
+  const keywords = config.keywords || [];
 
   if (node && node.name && node.name.value !== '') {
-    for (const keyword of context.options[0].keywords) {
+    for (const keyword of keywords) {
       const testKeyword = caseSensitive ? keyword : keyword.toLowerCase();
       const testName = caseSensitive ? node.name.value : node.name.value.toLowerCase();
 
