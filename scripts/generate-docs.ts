@@ -48,10 +48,11 @@ async function main() {
       blocks.push(BR, `## Usage Examples`);
 
       for (const example of examples) {
+        // ESLint RuleTester accept options as array but in eslintrc config we must provide options as object
+        const options = example.usage ? ', ' + JSON.stringify(example.usage[0]) : '';
+
         blocks.push(
-          `\n### ${example.title}\n\n\`\`\`graphql\n# eslint @graphql-eslint/${ruleName}: ["error"${
-            example.usage ? ', ' + JSON.stringify(example.usage) : ''
-          }]\n\n${dedent(example.code)}\n\`\`\``
+          `\n### ${example.title}\n\n\`\`\`graphql\n# eslint @graphql-eslint/${ruleName}: ["error"${options}]\n\n${dedent(example.code)}\n\`\`\``,
         );
       }
     }

@@ -12,7 +12,7 @@ Enforce/avoid operation name prefix, useful if you wish to avoid prefix in your 
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", [{"keywords":["get"]}]]
+# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", {"keywords":["get"]}]
 
 query getUserDetails {
   # ...
@@ -22,7 +22,7 @@ query getUserDetails {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", [{"keywords":["get"]}]]
+# eslint @graphql-eslint/avoid-operation-name-prefix: ["error", {"keywords":["get"]}]
 
 query userDetails {
   # ...
