@@ -87,7 +87,7 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 };
 
-interface PropertySchema {
+export interface PropertySchema {
   style?: ValidNaming;
   suffix?: string;
   prefix?: string;

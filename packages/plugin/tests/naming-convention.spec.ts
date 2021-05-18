@@ -3,7 +3,7 @@ import rule from '../src/rules/naming-convention';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('naming-convention', rule, {
+ruleTester.runGraphQLTests('naming-convention', rule as any, {
   valid: [
     {
       code: `query GetUser($userId:      ID!) {
