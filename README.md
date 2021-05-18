@@ -169,6 +169,55 @@ You can find a complete list of [all available rules here](./docs/README.md)
 
 > This repo doesn't exports a "recommended" set of rules - feel free to recommend us!
 
+### `prettier` rule
+
+The original `prettier` rule has been removed because `eslint-plugin-prettier` supports `.graphql` files well actually.
+
+All you need to do is like the following for now:
+
+```js
+// .eslintrc.js
+module.exports = {
+  overrides: [
+    {
+      files: ['*.tsx', '*.ts', '*.jsx', '*.js'],
+      processor: '@graphql-eslint/graphql',
+    },
+    {
+      files: ['*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint'],
+      // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
+      // after https://github.com/prettier/eslint-plugin-prettier/pull/413
+      // been merged and released, it can be deleted safely
+      rules: {
+        'prettier/prettier': [
+          2,
+          {
+            parser: 'graphql',
+          },
+        ],
+      },
+    },
+    // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
+    // after https://github.com/prettier/eslint-plugin-prettier/pull/415
+    // been merged and released, it can be deleted safely
+    {
+      files: ['*.js/*.graphql'],
+      rules: {
+        'prettier/prettier': 0
+      }
+    },
+  ],
+};
+```
+
+You can take [`examples/prettier`](examples/prettier/.eslintrc.js) as example.
+
+It could be better to remove the unnecessary parser setting if https://github.com/prettier/eslint-plugin-prettier/pull/413 and https://github.com/prettier/eslint-plugin-prettier/pull/415 been merged and released.
+
+Please help to vote up if you want to speed up the progress.
+
 ## Further Reading
 
 If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](./docs/README.md))
