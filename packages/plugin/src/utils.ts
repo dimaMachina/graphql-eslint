@@ -104,9 +104,11 @@ export function checkForEslint(token: Token, rawNode: DocumentNode): boolean {
   if (token.kind !== 'Comment') {
     return false;
   }
-  const string = rawNode.loc?.source.body.substring(token.start+1, token.start+8);
+  const string = rawNode.loc?.source.body.substring(token.start + 1, token.start + 8);
   if (string.toLocaleLowerCase().includes('eslint')) {
     return true;
   }
   return false;
 }
+
+export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
