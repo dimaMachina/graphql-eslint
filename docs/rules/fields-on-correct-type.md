@@ -7,4 +7,4 @@
 
 A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as __typename.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FieldsOnCorrectType.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FieldsOnCorrectTypeRule.js).
