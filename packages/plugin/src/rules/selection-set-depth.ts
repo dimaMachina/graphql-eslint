@@ -88,7 +88,7 @@ const rule: GraphQLESLintRule<SelectionSetDepthRuleConfig> = {
     } catch (e) {
       // eslint-disable-next-line no-console
       console.warn(
-        `Rule "selection-set-depth" works best with sibligns operations loaded. For more info: http://bit.ly/graphql-eslint-operations`
+        `Rule "selection-set-depth" works best with siblings operations loaded. For more info: http://bit.ly/graphql-eslint-operations`
       );
     }
 
