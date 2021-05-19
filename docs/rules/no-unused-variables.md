@@ -7,4 +7,4 @@
 
 A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoUnusedVariables.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoUnusedVariablesRule.js).

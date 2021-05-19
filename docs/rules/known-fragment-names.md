@@ -7,4 +7,4 @@
 
 A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownFragmentNames.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownFragmentNamesRule.js).
