@@ -1,5 +1,5 @@
 import { GraphQLESLintRule } from '../types';
-import { requireSiblingsOperations } from '../utils';
+import { normalizePath, requireSiblingsOperations } from '../utils';
 
 const UNIQUE_FRAGMENT_NAME = 'UNIQUE_FRAGMENT_NAME';
 
@@ -61,7 +61,9 @@ const rule: GraphQLESLintRule<[], false> = {
           const siblingFragments = siblings.getFragment(fragmentName);
 
           const conflictingFragments = siblingFragments.filter(
-            f => f.document.name?.value === fragmentName && f.filePath !== context.getFilename()
+            f =>
+              f.document.name?.value === fragmentName &&
+              normalizePath(f.filePath) !== normalizePath(context.getFilename())
           );
 
           if (conflictingFragments.length > 0) {

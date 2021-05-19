@@ -1,5 +1,5 @@
 import { GraphQLESLintRule } from '../types';
-import { requireSiblingsOperations } from '../utils';
+import { normalizePath, requireSiblingsOperations } from '../utils';
 
 const UNIQUE_OPERATION_NAME = 'UNIQUE_OPERATION_NAME';
 
@@ -65,7 +65,9 @@ const rule: GraphQLESLintRule<[], false> = {
           const siblingOperations = siblings.getOperation(operationName);
 
           const conflictingOperations = siblingOperations.filter(
-            f => f.document.name?.value === operationName && f.filePath !== context.getFilename()
+            f =>
+              f.document.name?.value === operationName &&
+              normalizePath(f.filePath) !== normalizePath(context.getFilename())
           );
 
           if (conflictingOperations.length > 0) {
