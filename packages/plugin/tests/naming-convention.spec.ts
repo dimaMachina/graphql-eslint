@@ -113,6 +113,10 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         },
       ],
     },
+    {
+      code: 'query { foo }',
+      options: [{ OperationDefinition: { style: 'PascalCase' } }],
+    },
   ],
   invalid: [
     {

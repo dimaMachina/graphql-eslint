@@ -330,7 +330,9 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       OperationDefinition: node => {
         if (options.OperationDefinition) {
           const property = normalisePropertyOption(options.OperationDefinition);
-          checkNode(node.name, property, 'Operation');
+          if (node.name) {
+            checkNode(node.name, property, 'Operation');
+          }
         }
       },
       FragmentDefinition: node => {
