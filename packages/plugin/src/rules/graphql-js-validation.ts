@@ -180,11 +180,16 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
       description: `A fragment spread is only valid if the type condition could ever possibly be true: if there is a non-empty intersection of the possible parent types, and possible types which pass the type condition.`,
     },
   }),
-  validationToRule('possible-type-extension', 'PossibleTypeExtensions', {
-    docs: {
-      description: `A type extension is only valid if the type is defined and has the same kind.`,
+  validationToRule(
+    'possible-type-extension',
+    'PossibleTypeExtensions',
+    {
+      docs: {
+        description: `A type extension is only valid if the type is defined and has the same kind.`,
+      },
     },
-  }),
+    true
+  ),
   validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
     docs: {
       description: `A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.`,
@@ -205,36 +210,61 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
       description: `A GraphQL field or directive is only valid if all supplied arguments are uniquely named.`,
     },
   }),
-  validationToRule('unique-directive-names', 'UniqueDirectiveNames', {
-    docs: {
-      description: `A GraphQL document is only valid if all defined directives have unique names.`,
+  validationToRule(
+    'unique-directive-names',
+    'UniqueDirectiveNames',
+    {
+      docs: {
+        description: `A GraphQL document is only valid if all defined directives have unique names.`,
+      },
     },
-  }),
+    true
+  ),
   validationToRule('unique-directive-names-per-location', 'UniqueDirectivesPerLocation', {
     docs: {
       description: `A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.`,
     },
   }),
-  validationToRule('unique-enum-value-names', 'UniqueEnumValueNames', {
-    docs: {
-      description: `A GraphQL enum type is only valid if all its values are uniquely named.`,
+  validationToRule(
+    'unique-enum-value-names',
+    'UniqueEnumValueNames',
+    {
+      docs: {
+        description: `A GraphQL enum type is only valid if all its values are uniquely named.`,
+      },
     },
-  }),
-  validationToRule('unique-field-definition-names', 'UniqueFieldDefinitionNames', {
-    docs: {
-      description: `A GraphQL complex type is only valid if all its fields are uniquely named.`,
+    true
+  ),
+  validationToRule(
+    'unique-field-definition-names',
+    'UniqueFieldDefinitionNames',
+    {
+      docs: {
+        description: `A GraphQL complex type is only valid if all its fields are uniquely named.`,
+      },
     },
-  }),
-  validationToRule('unique-input-field-names', 'UniqueInputFieldNames', {
-    docs: {
-      description: `A GraphQL input object value is only valid if all supplied fields are uniquely named.`,
+    true
+  ),
+  validationToRule(
+    'unique-input-field-names',
+    'UniqueInputFieldNames',
+    {
+      docs: {
+        description: `A GraphQL input object value is only valid if all supplied fields are uniquely named.`,
+      },
     },
-  }),
-  validationToRule('unique-operation-types', 'UniqueOperationTypes', {
-    docs: {
-      description: `A GraphQL document is only valid if it has only one type per operation.`,
+    true
+  ),
+  validationToRule(
+    'unique-operation-types',
+    'UniqueOperationTypes',
+    {
+      docs: {
+        description: `A GraphQL document is only valid if it has only one type per operation.`,
+      },
     },
-  }),
+    true
+  ),
   validationToRule(
     'unique-type-names',
     'UniqueTypeNames',
