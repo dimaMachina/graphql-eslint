@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.0.1
+
+### Patch Changes
+
+- 1d85025: fix: allow anonymous operations for naming-convention rule
+- a92267b: fixes for graphql-js rules issues
+- 45acfde: Fix console.warn typo in selection-set-depth rule
+- 533d123: Fix issues with Windows paths
+
 ## 1.0.0
 
 ### Major Changes
