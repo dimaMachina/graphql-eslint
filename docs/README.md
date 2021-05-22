@@ -3,6 +3,7 @@
 
 - [`avoid-typename-prefix`](./rules/avoid-typename-prefix.md)
 - [`no-unreachable-types`](./rules/no-unreachable-types.md)
+- [`no-unused-fields`](./rules/no-unused-fields.md)
 - [`no-deprecated`](./rules/no-deprecated.md)
 - [`unique-fragment-name`](./rules/unique-fragment-name.md)
 - [`unique-operation-name`](./rules/unique-operation-name.md)

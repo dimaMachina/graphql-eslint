@@ -16,7 +16,9 @@ import {
   isListType,
   isNonNullType,
   GraphQLDirective,
+  Kind,
 } from 'graphql';
+import { SiblingOperations } from './sibling-operations';
 
 export function createReachableTypesService(schema: GraphQLSchema): () => Set<string>;
 export function createReachableTypesService(schema?: GraphQLSchema): () => Set<string> | null {
@@ -127,4 +129,88 @@ export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
 
     return false;
   }
+}
+
+export type FieldsCache = Record<string, Set<string>>;
+
+export function createUsedFieldsService(schema: GraphQLSchema, operations: SiblingOperations): () => FieldsCache | null {
+  if (!schema || !operations) {
+    return () => null;
+  }
+
+  let cache: FieldsCache = null;
+
+  return () => {
+    if (!cache) {
+      cache = collectUsedFields(schema, operations);
+    }
+
+    return cache;
+  };
+}
+
+export function collectUsedFields(schema: GraphQLSchema, operations: SiblingOperations): FieldsCache {
+  const typesByOperations = {
+    query: schema.getQueryType(),
+    mutation: schema.getMutationType(),
+    subscription: schema.getSubscriptionType(),
+  };
+
+  const cache: FieldsCache = {};
+
+  const addField = (typeName, fieldName) => {
+    const fieldType = cache[typeName] ?? (cache[typeName] = new Set());
+    fieldType.add(fieldName);
+  };
+
+  const visit = (selection, type?: GraphQLNamedType) => {
+    switch (selection.kind) {
+      case Kind.OPERATION_DEFINITION:
+        type = typesByOperations[selection.operation];
+        break;
+      case Kind.FRAGMENT_DEFINITION:
+      case Kind.INLINE_FRAGMENT:
+        type = schema.getType(selection.typeCondition.name.value);
+        break;
+    }
+
+    // Skipping if not found in schema
+    if (!type) {
+      return;
+    }
+
+    for (const node of selection.selectionSet.selections) {
+      if (node.kind === Kind.INLINE_FRAGMENT) {
+        visit(node);
+        continue;
+      }
+
+      if (node.kind === Kind.FIELD) {
+        const fieldName = node.name.value;
+        addField(type.name, fieldName);
+
+        if (node.selectionSet) {
+          let parentType = (type.astNode as any).fields.find(n => n.name.value === fieldName);
+          // Skipping if not found in schema
+          if (parentType) {
+            while (parentType.type) {
+              parentType = parentType.type;
+            }
+            const parent = schema.getType(parentType.name.value);
+            visit(node, parent);
+          }
+        }
+      }
+    }
+  };
+
+  for (const { document } of operations.getFragments()) {
+    visit(document);
+  }
+
+  for (const { document } of operations.getOperations()) {
+    visit(document);
+  }
+
+  return cache;
 }

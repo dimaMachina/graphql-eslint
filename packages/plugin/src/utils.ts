@@ -2,6 +2,7 @@ import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
 import { GraphQLESlintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
+import { FieldsCache } from './graphql-ast';
 
 export function requireSiblingsOperations(ruleName: string, context: GraphQLESlintRuleContext<any>): SiblingOperations {
   if (!context || !context.parserServices) {
@@ -55,6 +56,25 @@ export function requireReachableTypesFromContext(
   }
 
   return context.parserServices.getReachableTypes();
+}
+
+export function requireUsedFieldsFromContext(
+  ruleName: string,
+  context: GraphQLESlintRuleContext<any>
+): FieldsCache {
+  if (!context || !context.parserServices) {
+    throw new Error(
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
+    );
+  }
+
+  if (!context.parserServices.schema) {
+    throw new Error(
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
+    );
+  }
+
+  return context.parserServices.getUsedFields();
 }
 
 function getLexer(source: Source): Lexer {
