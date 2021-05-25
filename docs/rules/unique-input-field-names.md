@@ -7,4 +7,4 @@
 
 A GraphQL input object value is only valid if all supplied fields are uniquely named.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueInputFieldNamesRule.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueInputFieldNamesRule.ts).
