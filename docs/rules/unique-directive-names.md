@@ -7,4 +7,4 @@
 
 A GraphQL document is only valid if all defined directives have unique names.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueDirectiveNamesRule.js).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueDirectiveNamesRule.ts).

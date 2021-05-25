@@ -74,7 +74,7 @@ const validationToRule = (
           ...meta.docs,
           description:
             meta.docs.description +
-            `\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.js).`,
+            `\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
         },
       },
       create: context => {
