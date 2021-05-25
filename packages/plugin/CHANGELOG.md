@@ -27,6 +27,43 @@
 - 61251e7: BREAKING CHANGE: Remove deprecated rule `validate-against-schema`.
 
   If you are using `validate-against-schema`, please remove it and specify the exact rules that you need.
+  
+  As a drop-in replacement for the whole set of rules we had in `validate-against-schema`, you can use this: 
+  
+
+```
+      "@graphql-eslint/executable-definitions": "error",
+      "@graphql-eslint/fields-on-correct-type": "error",
+      "@graphql-eslint/fragments-on-composite-type": "error",
+      "@graphql-eslint/known-argument-names": "error",
+      "@graphql-eslint/known-directives": "error",
+      "@graphql-eslint/known-fragment-names": "error",
+      "@graphql-eslint/known-type-names": "error",
+      "@graphql-eslint/lone-anonymous-operation": "error",
+      "@graphql-eslint/lone-schema-definition": "error",
+      "@graphql-eslint/no-fragment-cycles": "error",
+      "@graphql-eslint/no-undefined-variables": "error",
+      "@graphql-eslint/no-unused-fragments": "error",
+      "@graphql-eslint/no-unused-variables": "error",
+      "@graphql-eslint/overlapping-fields-can-be-merged": "error",
+      "@graphql-eslint/possible-fragment-spread": "error",
+      "@graphql-eslint/possible-type-extension": "error",
+      "@graphql-eslint/provided-required-arguments": "error",
+      "@graphql-eslint/scalar-leafs": "error",
+      "@graphql-eslint/one-field-subscriptions": "error",
+      "@graphql-eslint/unique-argument-names": "error",
+      "@graphql-eslint/unique-directive-names": "error",
+      "@graphql-eslint/unique-directive-names-per-location": "error",
+      "@graphql-eslint/unique-enum-value-names": "error",
+      "@graphql-eslint/unique-field-definition-names": "error",
+      "@graphql-eslint/unique-input-field-names": "error",
+      "@graphql-eslint/unique-operation-types": "error",
+      "@graphql-eslint/unique-type-names": "error",
+      "@graphql-eslint/unique-variable-names": "error",
+      "@graphql-eslint/value-literals-of-correct-type": "error",
+      "@graphql-eslint/variables-are-input-types": "error",
+      "@graphql-eslint/variables-in-allowed-position": "error"
+```
 
 - 61251e7: Bump dependencies and update minimum Node version to `v12`
 
