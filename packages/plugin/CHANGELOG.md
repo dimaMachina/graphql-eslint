@@ -26,6 +26,8 @@
 
 - 61251e7: BREAKING CHANGE: Remove deprecated rule `validate-against-schema`.
 
+  ### BREAKING CHANGE: Remove deprecated rule `validate-against-schema`.
+  
   If you are using `validate-against-schema`, please remove it and specify the exact rules that you need.
   
   As a drop-in replacement for the whole set of rules we had in `validate-against-schema`, you can use this: 
