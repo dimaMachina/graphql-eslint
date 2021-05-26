@@ -56,7 +56,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
       ],
     },
     messages: {
-      [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments {{checkedFragments}} sepcifies the field "{{ fieldName }}".`,
+      [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments {{checkedFragments}} specifies the field "{{ fieldName }}".`,
     },
     schema: {
       type: 'array',
