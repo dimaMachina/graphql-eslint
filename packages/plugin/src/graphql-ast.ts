@@ -16,7 +16,9 @@ import {
   isListType,
   isNonNullType,
   GraphQLDirective,
-  Kind,
+  TypeInfo,
+  visit,
+  visitWithTypeInfo,
 } from 'graphql';
 import { SiblingOperations } from './sibling-operations';
 
@@ -150,12 +152,6 @@ export function createUsedFieldsService(schema: GraphQLSchema, operations: Sibli
 }
 
 export function collectUsedFields(schema: GraphQLSchema, operations: SiblingOperations): FieldsCache {
-  const typesByOperations = {
-    query: schema.getQueryType(),
-    mutation: schema.getMutationType(),
-    subscription: schema.getSubscriptionType(),
-  };
-
   const cache: FieldsCache = {};
 
   const addField = (typeName, fieldName) => {
@@ -163,53 +159,34 @@ export function collectUsedFields(schema: GraphQLSchema, operations: SiblingOper
     fieldType.add(fieldName);
   };
 
-  const visit = (selection, type?: GraphQLNamedType) => {
-    switch (selection.kind) {
-      case Kind.OPERATION_DEFINITION:
-        type = typesByOperations[selection.operation];
-        break;
-      case Kind.FRAGMENT_DEFINITION:
-      case Kind.INLINE_FRAGMENT:
-        type = schema.getType(selection.typeCondition.name.value);
-        break;
-    }
+  const typeInfo = new TypeInfo(schema);
 
-    // Skipping if not found in schema
-    if (!type) {
-      return;
-    }
+  const visitor = visitWithTypeInfo(typeInfo, {
+    Field: {
+      enter(node) {
+        const fieldDef = typeInfo.getFieldDef();
 
-    for (const node of selection.selectionSet.selections) {
-      if (node.kind === Kind.INLINE_FRAGMENT) {
-        visit(node);
-        continue;
-      }
-
-      if (node.kind === Kind.FIELD) {
-        const fieldName = node.name.value;
-        addField(type.name, fieldName);
-
-        if (node.selectionSet) {
-          let parentType = (type.astNode as any).fields.find(n => n.name.value === fieldName);
-          // Skipping if not found in schema
-          if (parentType) {
-            while (parentType.type) {
-              parentType = parentType.type;
-            }
-            const parent = schema.getType(parentType.name.value);
-            visit(node, parent);
-          }
+        if (!fieldDef) {
+          // skip visiting this node if field is not defined in schema
+          return false;
         }
-      }
-    }
-  };
 
-  for (const { document } of operations.getFragments()) {
-    visit(document);
-  }
+        const parent = typeInfo.getParentType();
+        const fieldName = node.name.value;
+        addField(parent.name, fieldName);
 
-  for (const { document } of operations.getOperations()) {
-    visit(document);
+        return undefined;
+      },
+    },
+  });
+
+  const allDocuments = [
+    ...operations.getOperations(),
+    ...operations.getFragments(),
+  ];
+
+  for (const { document } of allDocuments) {
+    visit(document, visitor);
   }
 
   return cache;
