@@ -17,6 +17,7 @@ function checkNameValidity(
   fileName: string,
   options: MatchDocumentFilenameRuleConfig[number]
 ): boolean {
+  // TODO: Implement this
   return true;
 }
 
