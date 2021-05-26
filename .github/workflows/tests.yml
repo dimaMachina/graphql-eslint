@@ -1,0 +1,98 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 16
+      - name: Cache Yarn
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-16-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-16-node-modules-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-16-node-modules-
+      - name: Install Dependencies using Yarn
+        run: yarn install && git checkout yarn.lock
+      - name: Lint
+        run: yarn lint
+  typecheck:
+    name: TypeScript Type Checking
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 16
+      - name: Cache Yarn
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-16-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-16-node-modules-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-16-node-modules-
+      - name: Install Dependencies using Yarn
+        run: yarn install && git checkout yarn.lock
+      - name: Build
+        run: yarn transpile-ts --noEmit
+
+  test:
+    name: Testing on Node ${{matrix.node_version}}
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [12, 16]
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node ${{matrix.node_version}}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Cache Yarn
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{matrix.node_version}}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{matrix.node_version}}-node-modules-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-${{matrix.node_version}}-node-modules-
+      - name: Install Dependencies using Yarn
+        run: yarn install && git checkout yarn.lock
+      - name: Cache Jest
+        uses: actions/cache@v2
+        with:
+          path: .cache/jest
+          key: ${{ runner.os }}-${{matrix.node_version}}-jest-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{matrix.node_version}}-jest-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-${{matrix.node_version}}-jest-
+      - name: Test
+        run: yarn test
+        env:
+          CI: true
