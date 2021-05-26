@@ -1,5 +1,6 @@
 import { Kind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
+import { isQueryType } from '../utils';
 
 const formats = {
   camelCase: /^[a-z][^_]*$/g,
@@ -15,6 +16,7 @@ const acceptedStyles: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'] = 
   'UPPER_CASE',
 ];
 type ValidNaming = typeof acceptedStyles[number];
+
 interface CheckNameFormatParams {
   value: string;
   style?: ValidNaming;
@@ -25,6 +27,7 @@ interface CheckNameFormatParams {
   forbiddenPrefixes: string[];
   forbiddenSuffixes: string[];
 }
+
 function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
   const {
     value,
@@ -44,10 +47,16 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
     name = name.replace(/_*$/, '');
   }
   if (prefix && !name.startsWith(prefix)) {
-    return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{prefix}}" prefix' };
+    return {
+      ok: false,
+      errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{prefix}}" prefix',
+    };
   }
   if (suffix && !name.endsWith(suffix)) {
-    return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix' };
+    return {
+      ok: false,
+      errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix',
+    };
   }
   if (style && !acceptedStyles.some(acceptedStyle => acceptedStyle === style)) {
     return {
@@ -80,7 +89,10 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
   if (ok) {
     return { ok: true };
   }
-  return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format' };
+  return {
+    ok: false,
+    errorMessage: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format',
+  };
 }
 
 const schemaOption = {
@@ -260,19 +272,10 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       };
     };
 
-    const isQueryType = (node): boolean => {
-      return (
-        (node.type === 'ObjectTypeDefinition' || node.type === 'ObjectTypeExtension') && node.name.value === 'Query'
-      );
-    };
-
     return {
       Name: node => {
         if (node.value.startsWith('_') && options.leadingUnderscore === 'forbid') {
-          context.report({
-            node,
-            message: 'Leading underscores are not allowed',
-          });
+          context.report({ node, message: 'Leading underscores are not allowed' });
         }
         if (node.value.endsWith('_') && options.trailingUnderscore === 'forbid') {
           context.report({ node, message: 'Trailing underscores are not allowed' });

@@ -1,31 +1,13 @@
-import { FieldDefinitionNode } from 'graphql';
+import {
+  InterfaceTypeDefinitionNode,
+  InterfaceTypeExtensionNode,
+  ObjectTypeDefinitionNode,
+  ObjectTypeExtensionNode,
+} from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import { GraphQLESLintRule } from '../types';
 
 const AVOID_TYPENAME_PREFIX = 'AVOID_TYPENAME_PREFIX';
-
-function checkNode(
-  context: GraphQLESLintRuleContext<any>,
-  typeName: string,
-  fields: GraphQLESTreeNode<FieldDefinitionNode>[]
-) {
-  const lowerTypeName = (typeName || '').toLowerCase();
-
-  for (const field of fields) {
-    const fieldName = field.name.value || '';
-
-    if (fieldName && lowerTypeName && fieldName.toLowerCase().startsWith(lowerTypeName)) {
-      context.report({
-        node: field.name,
-        data: {
-          fieldName,
-          typeName,
-        },
-        messageId: AVOID_TYPENAME_PREFIX,
-      });
-    }
-  }
-}
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -60,17 +42,28 @@ const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      ObjectTypeDefinition(node) {
-        checkNode(context, node.name.value, node.fields);
-      },
-      ObjectTypeExtension(node) {
-        checkNode(context, node.name.value, node.fields);
-      },
-      InterfaceTypeDefinition(node) {
-        checkNode(context, node.name.value, node.fields);
-      },
-      InterfaceTypeExtension(node) {
-        checkNode(context, node.name.value, node.fields);
+      'ObjectTypeDefinition, ObjectTypeExtension, InterfaceTypeDefinition, InterfaceTypeExtension'(
+        node: GraphQLESTreeNode<
+          ObjectTypeDefinitionNode | ObjectTypeExtensionNode | InterfaceTypeDefinitionNode | InterfaceTypeExtensionNode
+        >
+      ) {
+        const typeName = node.name.value;
+        const lowerTypeName = (typeName || '').toLowerCase();
+
+        for (const field of node.fields) {
+          const fieldName = field.name.value || '';
+
+          if (fieldName && lowerTypeName && fieldName.toLowerCase().startsWith(lowerTypeName)) {
+            context.report({
+              node: field.name,
+              data: {
+                fieldName,
+                typeName,
+              },
+              messageId: AVOID_TYPENAME_PREFIX,
+            });
+          }
+        }
       },
     };
   },

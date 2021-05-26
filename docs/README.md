@@ -24,6 +24,7 @@ Each rule has emojis denoting:
 | [known-type-names](rules/known-type-names.md) | A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema. | &nbsp;&nbsp;&nbsp;&nbsp;🔮 |  |
 | [lone-anonymous-operation](rules/lone-anonymous-operation.md) | A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition. | &nbsp;&nbsp;&nbsp;&nbsp;🔮 |  |
 | [lone-schema-definition](rules/lone-schema-definition.md) | A GraphQL document is only valid if it contains only one schema definition. | &nbsp;&nbsp;&nbsp;&nbsp;🔮 |  |
+| [match-document-filename](rules/match-document-filename.md) | This rule allows you to enforce that the file name should match the operation name | &nbsp;&nbsp;&nbsp;&nbsp;🚀 |  |
 | [naming-convention](rules/naming-convention.md) | Require names to follow specified conventions. | &nbsp;&nbsp;&nbsp;&nbsp;🚀 |  |
 | [no-anonymous-operations](rules/no-anonymous-operations.md) | Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes. | &nbsp;&nbsp;&nbsp;&nbsp;🚀 |  |
 | [no-case-insensitive-enum-values-duplicates](rules/no-case-insensitive-enum-values-duplicates.md) |  | &nbsp;&nbsp;&nbsp;&nbsp;🚀 | 🔧 |
