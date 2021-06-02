@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/graphql-depth-limit": "1.1.2",
     "@types/eslint": "7.2.13",
-    "bob-the-bundler": "1.2.0",
+    "bob-the-bundler": "1.2.1",
     "graphql-config": "3.3.0",
     "graphql": "15.5.0",
     "typescript": "4.3.2"
