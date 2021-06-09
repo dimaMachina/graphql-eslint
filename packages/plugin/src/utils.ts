@@ -2,6 +2,7 @@ import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
 import { GraphQLESlintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
+import * as gqlLanguage from 'graphql/language';
 
 export function requireSiblingsOperations(ruleName: string, context: GraphQLESlintRuleContext<any>): SiblingOperations {
   if (!context || !context.parserServices) {
@@ -59,15 +60,13 @@ export function requireReachableTypesFromContext(
 
 function getLexer(source: Source): Lexer {
   // GraphQL v14
-  const gqlLanguage = require('graphql/language');
-  if (gqlLanguage && gqlLanguage.createLexer) {
-    return gqlLanguage.createLexer(source, {});
+  if (gqlLanguage && (gqlLanguage as any).createLexer) {
+    return (gqlLanguage as any).createLexer(source, {});
   }
 
   // GraphQL v15
-  const { Lexer: LexerCls } = require('graphql');
-  if (LexerCls && typeof LexerCls === 'function') {
-    return new LexerCls(source);
+  if (Lexer && typeof Lexer === 'function') {
+    return new Lexer(source);
   }
 
   throw new Error(`Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!`);
