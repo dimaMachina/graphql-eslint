@@ -16,7 +16,11 @@ import {
   isListType,
   isNonNullType,
   GraphQLDirective,
+  TypeInfo,
+  visit,
+  visitWithTypeInfo,
 } from 'graphql';
+import { SiblingOperations } from './sibling-operations';
 
 export function createReachableTypesService(schema: GraphQLSchema): () => Set<string>;
 export function createReachableTypesService(schema?: GraphQLSchema): () => Set<string> | null {
@@ -127,4 +131,63 @@ export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
 
     return false;
   }
+}
+
+export type FieldsCache = Record<string, Set<string>>;
+
+export function createUsedFieldsService(schema: GraphQLSchema, operations: SiblingOperations): () => FieldsCache | null {
+  if (!schema || !operations) {
+    return () => null;
+  }
+
+  let cache: FieldsCache = null;
+
+  return () => {
+    if (!cache) {
+      cache = collectUsedFields(schema, operations);
+    }
+
+    return cache;
+  };
+}
+
+export function collectUsedFields(schema: GraphQLSchema, operations: SiblingOperations): FieldsCache {
+  const cache: FieldsCache = {};
+
+  const addField = (typeName, fieldName) => {
+    const fieldType = cache[typeName] ?? (cache[typeName] = new Set());
+    fieldType.add(fieldName);
+  };
+
+  const typeInfo = new TypeInfo(schema);
+
+  const visitor = visitWithTypeInfo(typeInfo, {
+    Field: {
+      enter(node) {
+        const fieldDef = typeInfo.getFieldDef();
+
+        if (!fieldDef) {
+          // skip visiting this node if field is not defined in schema
+          return false;
+        }
+
+        const parent = typeInfo.getParentType();
+        const fieldName = node.name.value;
+        addField(parent.name, fieldName);
+
+        return undefined;
+      },
+    },
+  });
+
+  const allDocuments = [
+    ...operations.getOperations(),
+    ...operations.getFragments(),
+  ];
+
+  for (const { document } of allDocuments) {
+    visit(document, visitor);
+  }
+
+  return cache;
 }

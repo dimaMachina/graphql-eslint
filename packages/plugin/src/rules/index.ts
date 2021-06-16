@@ -1,4 +1,5 @@
 import noUnreachableTypes from './no-unreachable-types';
+import noUnusedFields from './no-unused-fields';
 import noAnonymousOperations from './no-anonymous-operations';
 import noOperationNameSuffix from './no-operation-name-suffix';
 import requireDeprecationReason from './require-deprecation-reason';
@@ -22,6 +23,7 @@ import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 export const rules = {
   'avoid-typename-prefix': avoidTypenamePrefix,
   'no-unreachable-types': noUnreachableTypes,
+  'no-unused-fields': noUnusedFields,
   'no-deprecated': noDeprecated,
   'unique-fragment-name': uniqueFragmentName,
   'unique-operation-name': uniqueOperationName,

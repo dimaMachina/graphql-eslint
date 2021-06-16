@@ -4,6 +4,7 @@ import { ASTNode, GraphQLSchema } from 'graphql';
 import { GraphQLParseOptions } from '@graphql-tools/utils';
 import { GraphQLESlintRuleListener } from './testkit';
 import { SiblingOperations } from './sibling-operations';
+import { FieldsCache } from './graphql-ast';
 
 export interface ParserOptions {
   schema?: string | string[];
@@ -19,6 +20,7 @@ export type ParserServices = {
   hasTypeInfo: boolean;
   schema: GraphQLSchema | null;
   getReachableTypes: () => Set<string> | null;
+  getUsedFields: () => FieldsCache | null;
 };
 
 export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
