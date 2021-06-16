@@ -140,11 +140,10 @@ In order to enable it processing other extensions, add the following section in 
 ```json
 {
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
-  "eslint.options": {
-    "extentions": [".js", ".graphql"]
-  }
 }
 ```
+
+Currently, you also need a GraphQL IDE extension for syntax highlighting installed (which may potentially have its own linting) - for example [GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
 
 ### Disabling Rules
 
