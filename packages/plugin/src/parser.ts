@@ -1,7 +1,8 @@
-import { convertToESTree } from './estree-parser/converter';
-import { parseGraphQLSDL } from '@graphql-tools/utils';
+import { convertToESTree } from './estree-parser';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { GraphQLError, TypeInfo } from 'graphql';
 import { Linter } from 'eslint';
+import fs from 'fs';
 import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { extractTokens } from './utils';
 import { getSchema } from './schema';
@@ -26,9 +27,14 @@ export function parseForESLint(code: string, options?: ParserOptions): GraphQLES
   };
 
   try {
-    const graphqlAst = parseGraphQLSDL(options.filePath || '', code, {
-      ...(options.graphQLParserOptions || {}),
+    const filePath = options.filePath || '';
+    const isVirtualFile = !fs.existsSync(options.filePath);
+    const fileLoader = new GraphQLFileLoader();
+
+    const graphqlAst = fileLoader.handleFileContent(code, filePath, {
+      ...options.graphQLParserOptions,
       noLocation: false,
+      skipGraphQLImport: isVirtualFile,
     });
 
     const { rootTree, comments } = convertToESTree(graphqlAst.document, schema ? new TypeInfo(schema) : null);

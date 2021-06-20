@@ -13,7 +13,7 @@ import {
 } from 'graphql';
 import { ParserOptions } from './types';
 import { GraphQLConfig } from 'graphql-config';
-import { dirname, join } from 'path';
+import { dirname } from 'path';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
@@ -77,7 +77,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
   }
 
   if (!siblings && options?.operations) {
-    const loadPaths = Array.isArray(options.operations) ? options.operations : [options.operations] || [];
+    const loadPaths = Array.isArray(options.operations) ? options.operations : [options.operations];
     const loadKey = loadPaths.join(',');
 
     if (operationsCache.has(loadKey)) {

@@ -128,6 +128,48 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
   validationToRule('known-fragment-names', 'KnownFragmentNames', {
     docs: {
       description: `A GraphQL document is only valid if all \`...Fragment\` fragment spreads refer to fragments defined in the same document.`,
+      examples: [
+        {
+          title: 'Incorrect (fragment not defined in the document)',
+          code: /* GraphQL */ `
+            query {
+              user {
+                id
+                ...UserFields
+              }
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          code: /* GraphQL */ `
+            fragment UserFields on User {
+              firstName
+              lastName
+            }
+
+            query {
+              user {
+                id
+                ...UserFields
+              }
+            }
+          `,
+        },
+        {
+          title: 'Correct (existing import to UserFields fragment)',
+          code: /* GraphQL */ `
+            #import '../UserFields.gql'
+
+            query {
+              user {
+                id
+                ...UserFields
+              }
+            }
+          `,
+        },
+      ],
     },
   }),
   validationToRule('known-type-names', 'KnownTypeNames', {
