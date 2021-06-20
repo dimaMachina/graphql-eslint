@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { ASTKindToNode } from 'graphql';
 import { resolve } from 'path';
 import { GraphQLESTreeNode } from './estree-parser';
-import { GraphQLESLintRule, ParserOptions } from './types';
+import { ParserOptions } from './types';
 
 export type GraphQLESlintRuleListener<WithTypeInfo extends boolean> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
@@ -37,7 +37,7 @@ export class GraphQLRuleTester extends require('eslint').RuleTester {
 
   runGraphQLTests<Config>(
     name: string,
-    rule: any,
+    rule: any, // Actually, it's GraphQLESLintRule, but TS has issues with that
     tests: {
       valid?: Array<string | GraphQLValidTestCase<Config>>;
       invalid?: Array<string | GraphQLInvalidTestCase<Config>>;
