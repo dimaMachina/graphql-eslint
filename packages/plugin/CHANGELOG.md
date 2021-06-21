@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.1.0
+
+### Minor Changes
+
+- a44d426: support #import in known-fragment-names rule
+
 ## 1.0.2
 
 ### Patch Changes
