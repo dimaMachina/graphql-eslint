@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.14.6",
-    "@babel/preset-env": "7.14.5",
+    "@babel/preset-env": "7.14.7",
     "@babel/preset-typescript": "7.14.5",
     "json-schema-to-markdown": "1.1.1",
     "@types/dedent": "0.7.0",
