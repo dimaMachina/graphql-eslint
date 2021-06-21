@@ -1,0 +1,7 @@
+#import "./user-fields.graphql"
+
+query User {
+  user {
+    ...UserFields
+  }
+}
