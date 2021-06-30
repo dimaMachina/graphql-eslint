@@ -1,4 +1,5 @@
-import { GraphQLRuleTester } from '../src/testkit';
+import { join } from 'path';
+import { GraphQLRuleTester } from '../src';
 import rule from '../src/rules/no-anonymous-operations';
 
 const ruleTester = new GraphQLRuleTester();
@@ -44,12 +45,8 @@ ruleTester.runGraphQLTests('test-directives', rule, {
       `,
     },
     {
-      code: /* GraphQL */ `
-        # eslint-disable
-        query {
-          a
-        }
-      `,
+      filename: join(__dirname, 'mocks/test-directives-with-import.graphql'),
+      code: ruleTester.fromMockFile('test-directives-with-import.graphql'),
     },
   ],
   invalid: [
