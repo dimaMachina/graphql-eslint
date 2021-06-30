@@ -1,0 +1,7 @@
+#import './user-fields.graphql'
+
+fragment PostFields on Post {
+  user {
+    ...UserFields
+  }
+}

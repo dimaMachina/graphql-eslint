@@ -50,6 +50,7 @@ function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
   return loadDocumentsSync(loadPaths, {
     cwd: baseDir,
     loaders: operationsLoaders,
+    skipGraphQLImport: true,
   });
 }
 
@@ -69,8 +70,10 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
     } else {
       const projectForFile = gqlConfig.getProjectForFile(options.filePath);
 
-      if (projectForFile) {
-        siblings = projectForFile.getDocumentsSync();
+      if (projectForFile && projectForFile.documents.length > 0) {
+        siblings = projectForFile.loadDocumentsSync(projectForFile.documents, {
+          skipGraphQLImport: true,
+        });
         operationsCache.set(fileDir, siblings);
       }
     }
