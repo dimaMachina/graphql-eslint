@@ -72,7 +72,7 @@ export function createGraphqlProcessor() {
             if (message.endLine != null) {
               message.endLine += lineOffset;
             }
-            if (message.fix && typeof offset !== 'undefined') {
+            if (message.fix && offset !== undefined) {
               message.fix.range[0] = offset + message.fix.range[0];
               message.fix.range[1] = offset + message.fix.range[1];
             }

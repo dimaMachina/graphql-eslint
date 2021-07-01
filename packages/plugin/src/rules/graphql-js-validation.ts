@@ -2,7 +2,7 @@ import { validate, GraphQLSchema, DocumentNode, ASTNode, ValidationRule } from '
 import { validateSDL } from 'graphql/validation/validate';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import fs from 'fs';
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
@@ -18,7 +18,7 @@ function extractRuleName(stack: string | undefined): string | null {
 
 export function validateDoc(
   sourceNode: GraphQLESTreeNode<ASTNode>,
-  context: GraphQLESlintRuleContext,
+  context: GraphQLESLintRuleContext,
   schema: GraphQLSchema | null,
   documentNode: DocumentNode,
   rules: ReadonlyArray<ValidationRule>,
@@ -54,7 +54,7 @@ const validationToRule = (
   name: string,
   ruleName: string,
   docs: GraphQLESLintRule['meta']['docs'],
-  getDocumentNode?: (context: GraphQLESlintRuleContext) => DocumentNode | null
+  getDocumentNode?: (context: GraphQLESLintRuleContext) => DocumentNode | null
 ): Record<typeof name, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
 

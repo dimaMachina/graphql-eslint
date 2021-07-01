@@ -1,11 +1,11 @@
 import { FieldDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 
 const AVOID_TYPENAME_PREFIX = 'AVOID_TYPENAME_PREFIX';
 
 function checkNode(
-  context: GraphQLESlintRuleContext<any>,
+  context: GraphQLESLintRuleContext<any>,
   typeName: string,
   fields: GraphQLESTreeNode<FieldDefinitionNode>[]
 ) {

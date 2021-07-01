@@ -3,9 +3,9 @@ import { readFileSync } from 'fs';
 import { ASTKindToNode } from 'graphql';
 import { resolve } from 'path';
 import { GraphQLESTreeNode } from './estree-parser';
-import { ParserOptions } from './types';
+import { GraphQLESLintRule, ParserOptions } from './types';
 
-export type GraphQLESlintRuleListener<WithTypeInfo extends boolean> = {
+export type GraphQLESLintRuleListener<WithTypeInfo extends boolean> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
 } &
   Record<string, any>;
@@ -21,11 +21,11 @@ export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
 };
 
 export class GraphQLRuleTester extends require('eslint').RuleTester {
-  constructor(parserOptions: ParserOptions = {}) {
+  constructor(parserOptions: ParserOptions) {
     super({
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
-        ...(parserOptions || {}),
+        ...parserOptions,
         skipGraphQLConfig: true,
       },
     });
@@ -37,12 +37,12 @@ export class GraphQLRuleTester extends require('eslint').RuleTester {
 
   runGraphQLTests<Config>(
     name: string,
-    rule: any, // Actually, it's GraphQLESLintRule, but TS has issues with that
+    rule: GraphQLESLintRule,
     tests: {
-      valid?: Array<string | GraphQLValidTestCase<Config>>;
-      invalid?: Array<string | GraphQLInvalidTestCase<Config>>;
+      valid?: GraphQLValidTestCase<Config>[];
+      invalid?: GraphQLInvalidTestCase<Config>[];
     }
   ): void {
-    super.run(name, rule as any, tests);
+    super.run(name, rule, tests);
   }
 }
