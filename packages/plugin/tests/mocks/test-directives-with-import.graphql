@@ -1,0 +1,6 @@
+#import './user-fields.graphql'
+
+# eslint-disable-next-line
+query {
+  a
+}
