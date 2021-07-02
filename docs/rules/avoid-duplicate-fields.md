@@ -12,7 +12,7 @@ Checks for duplicate fields in selection set, variables in operation definition,
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-duplicate-fields: ["error"]
+# eslint @graphql-eslint/avoid-duplicate-fields: 'error'
 
 query getUserDetails {
   user {
@@ -26,7 +26,7 @@ query getUserDetails {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-duplicate-fields: ["error"]
+# eslint @graphql-eslint/avoid-duplicate-fields: 'error'
 
 query getUsers {
   users(
@@ -43,7 +43,7 @@ query getUsers {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-duplicate-fields: ["error"]
+# eslint @graphql-eslint/avoid-duplicate-fields: 'error'
 
 query getUsers($first: Int!, $first: Int!) {
   # Duplicate variable

@@ -12,7 +12,7 @@
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/no-case-insensitive-enum-values-duplicates: ["error"]
+# eslint @graphql-eslint/no-case-insensitive-enum-values-duplicates: 'error'
 
 enum MyEnum {
   Value
@@ -24,7 +24,7 @@ enum MyEnum {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-case-insensitive-enum-values-duplicates: ["error"]
+# eslint @graphql-eslint/no-case-insensitive-enum-values-duplicates: 'error'
 
 enum MyEnum {
   Value1

@@ -11,9 +11,8 @@ const rule: GraphQLESLintRule<SelectionSetDepthRuleConfig> = {
   meta: {
     docs: {
       category: 'Best Practices',
-      description: `Limit the complexity of the GraphQL operations solely by their depth. Based on https://github.com/stems/graphql-depth-limit .`,
+      description: `Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/selection-set-depth.md`,
-      requiresSchema: false,
       requiresSiblings: true,
       examples: [
         {

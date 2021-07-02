@@ -50,10 +50,8 @@ const rule: GraphQLESLintRule<AvoidOperationNamePrefixConfig> = {
   meta: {
     type: 'suggestion',
     docs: {
-      requiresSchema: false,
-      requiresSiblings: false,
       description:
-        'Enforce/avoid operation name prefix, useful if you wish to avoid prefix in your root fields, or avoid using REST terminology in your schema',
+        'Enforce/avoid operation name prefix, useful if you wish to avoid prefix in your root fields, or avoid using REST terminology in your schema.',
       category: 'Stylistic Issues',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/avoid-operation-name-prefix.md',
       examples: [

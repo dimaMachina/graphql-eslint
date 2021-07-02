@@ -5,14 +5,14 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Require all comments to follow the same style (either block or inline)
+Require all comments to follow the same style (either block or inline).
 
 ## Usage Examples
 
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/description-style: ["error", {"style":"inline"}]
+# eslint @graphql-eslint/description-style: ['error', { style: 'inline' }]
 
 """ Description """
 type someTypeName {
@@ -23,7 +23,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/description-style: ["error", {"style":"inline"}]
+# eslint @graphql-eslint/description-style: ['error', { style: 'inline' }]
 
 " Description "
 type someTypeName {

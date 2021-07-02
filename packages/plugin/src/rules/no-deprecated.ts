@@ -11,7 +11,6 @@ const rule: GraphQLESLintRule<[], true> = {
       description: `This rule allow you to enforce that deprecated fields or enum values are not in use by operations.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-deprecated.md`,
       requiresSchema: true,
-      requiresSiblings: false,
       examples: [
         {
           title: 'Incorrect (field)',

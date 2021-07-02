@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Requires to use """ or " for adding a GraphQL description instead of #.
+Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.
 This rule allows you to use hashtag for comments, as long as it's not attached to a AST definition.
 
 ## Usage Examples
@@ -13,7 +13,7 @@ This rule allows you to use hashtag for comments, as long as it's not attached t
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/no-hashtag-description: ["error"]
+# eslint @graphql-eslint/no-hashtag-description: 'error'
 
 # Represents a user
 type User {
@@ -25,7 +25,7 @@ type User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-hashtag-description: ["error"]
+# eslint @graphql-eslint/no-hashtag-description: 'error'
 
 " Represents a user "
 type User {
@@ -37,7 +37,7 @@ type User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-hashtag-description: ["error"]
+# eslint @graphql-eslint/no-hashtag-description: 'error'
 
 # This file defines the basic User type.
 # This comment is valid because it's not attached specifically to an AST object.

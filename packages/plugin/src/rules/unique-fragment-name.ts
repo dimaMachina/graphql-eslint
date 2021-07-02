@@ -10,7 +10,6 @@ const rule: GraphQLESLintRule<[], false> = {
       category: 'Best Practices',
       description: `This rule allow you to enforce unique fragment name across your application.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/unique-fragment-name.md`,
-      requiresSchema: false,
       requiresSiblings: true,
       examples: [
         {

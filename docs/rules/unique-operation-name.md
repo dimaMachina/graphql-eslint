@@ -12,7 +12,7 @@ This rule allow you to enforce unique operation names across your project.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/unique-operation-name: ["error"]
+# eslint @graphql-eslint/unique-operation-name: 'error'
 
 # foo.query.graphql
 query user {
@@ -32,7 +32,7 @@ query user {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/unique-operation-name: ["error"]
+# eslint @graphql-eslint/unique-operation-name: 'error'
 
 # foo.query.graphql
 query user {

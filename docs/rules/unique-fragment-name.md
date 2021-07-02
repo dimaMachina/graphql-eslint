@@ -12,7 +12,7 @@ This rule allow you to enforce unique fragment name across your application.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/unique-fragment-name: ["error"]
+# eslint @graphql-eslint/unique-fragment-name: 'error'
 
 # user.fragment.graphql
 fragment UserFields on User {
@@ -30,7 +30,7 @@ fragment UserFields on User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/unique-fragment-name: ["error"]
+# eslint @graphql-eslint/unique-fragment-name: 'error'
 
 # user.fragment.graphql
 fragment AllUserFields on User {

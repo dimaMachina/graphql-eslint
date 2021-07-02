@@ -9,7 +9,7 @@ const rule: GraphQLESLintRule = {
       [UNREACHABLE_TYPE]: `Type "{{ typeName }}" is unreachable`,
     },
     docs: {
-      description: `Requires all types to be reachable at some level by root level fields`,
+      description: `Requires all types to be reachable at some level by root level fields.`,
       category: 'Best Practices',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md`,
       requiresSchema: true,

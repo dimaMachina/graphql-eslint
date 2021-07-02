@@ -5,14 +5,14 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Require all deprecation directives to specify a reason
+Require all deprecation directives to specify a reason.
 
 ## Usage Examples
 
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-deprecation-reason: ["error"]
+# eslint @graphql-eslint/require-deprecation-reason: 'error'
 
 type MyType {
   name: String @deprecated
@@ -22,7 +22,7 @@ type MyType {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-deprecation-reason: ["error"]
+# eslint @graphql-eslint/require-deprecation-reason: 'error'
 
 type MyType {
   name: String @deprecated(reason: "")
@@ -32,7 +32,7 @@ type MyType {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-deprecation-reason: ["error"]
+# eslint @graphql-eslint/require-deprecation-reason: 'error'
 
 type MyType {
   name: String @deprecated(reason: "no longer relevant, please use fullName field")

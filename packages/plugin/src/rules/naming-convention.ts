@@ -119,11 +119,9 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
     type: 'suggestion',
     docs: {
       description: 'Require names to follow specified conventions.',
-      category: 'Best practices',
+      category: 'Best Practices',
       recommended: true,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/naming-convention.md',
-      requiresSchema: false,
-      requiresSiblings: false,
       examples: [
         {
           title: 'Incorrect',

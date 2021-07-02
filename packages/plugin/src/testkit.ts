@@ -39,8 +39,8 @@ export class GraphQLRuleTester extends require('eslint').RuleTester {
     name: string,
     rule: GraphQLESLintRule,
     tests: {
-      valid?: GraphQLValidTestCase<Config>[];
-      invalid?: GraphQLInvalidTestCase<Config>[];
+      valid: GraphQLValidTestCase<Config>[];
+      invalid: GraphQLInvalidTestCase<Config>[];
     }
   ): void {
     super.run(name, rule, tests);

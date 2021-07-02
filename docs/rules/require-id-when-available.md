@@ -12,7 +12,7 @@ This rule allow you to enforce selecting specific fields when they are available
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-id-when-available: ["error"]
+# eslint @graphql-eslint/require-id-when-available: 'error'
 
 # In your schema
 type User {
@@ -31,7 +31,7 @@ query user {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-id-when-available: ["error"]
+# eslint @graphql-eslint/require-id-when-available: 'error'
 
 # In your schema
 type User {

@@ -33,8 +33,6 @@ const rule: GraphQLESLintRule = {
       recommended: true,
       description: `Makes sure you are not adding the operation type to the name of the operation.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-operation-name-suffix.md`,
-      requiresSchema: false,
-      requiresSiblings: false,
       examples: [
         {
           title: 'Incorrect',

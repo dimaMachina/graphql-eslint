@@ -21,8 +21,6 @@ const rule: GraphQLESLintRule<[], false> = {
   meta: {
     type: 'suggestion',
     docs: {
-      requiresSchema: false,
-      requiresSiblings: false,
       description:
         'Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.',
       category: 'Stylistic Issues',

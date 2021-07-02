@@ -13,7 +13,7 @@ Using the same name for all input parameters will make your schemas easier to co
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/input-name: ["error", {"checkInputType":true}]
+# eslint @graphql-eslint/input-name: ['error', { checkInputType: true }]
 
 type Mutation {
   SetMessage(message: InputMessage): String
@@ -23,7 +23,7 @@ type Mutation {
 ### Correct (with checkInputType)
 
 ```graphql
-# eslint @graphql-eslint/input-name: ["error", {"checkInputType":true}]
+# eslint @graphql-eslint/input-name: ['error', { checkInputType: true }]
 
 type Mutation {
   SetMessage(input: SetMessageInput): String
@@ -33,7 +33,7 @@ type Mutation {
 ### Correct (without checkInputType)
 
 ```graphql
-# eslint @graphql-eslint/input-name: ["error", {"checkInputType":false}]
+# eslint @graphql-eslint/input-name: ['error', { checkInputType: false }]
 
 type Mutation {
   SetMessage(input: AnyInputTypeName): String

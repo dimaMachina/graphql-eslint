@@ -15,8 +15,6 @@ const rule: GraphQLESLintRule<InputNameRuleConfig[]> = {
         'Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".\nUsing the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.',
       category: 'Stylistic Issues',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/input-name.md',
-      requiresSiblings: false,
-      requiresSchema: false,
       examples: [
         {
           title: 'Incorrect',

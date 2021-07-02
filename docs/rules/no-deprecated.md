@@ -12,7 +12,7 @@ This rule allow you to enforce that deprecated fields or enum values are not in 
 ### Incorrect (field)
 
 ```graphql
-# eslint @graphql-eslint/no-deprecated: ["error"]
+# eslint @graphql-eslint/no-deprecated: 'error'
 
 # In your schema
 type User {
@@ -32,7 +32,7 @@ query user {
 ### Incorrect (enum value)
 
 ```graphql
-# eslint @graphql-eslint/no-deprecated: ["error"]
+# eslint @graphql-eslint/no-deprecated: 'error'
 
 # In your schema
 type Mutation {
@@ -57,7 +57,7 @@ mutation {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-deprecated: ["error"]
+# eslint @graphql-eslint/no-deprecated: 'error'
 
 # In your schema
 type User {
