@@ -40,14 +40,15 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   parserServices?: ParserServices;
 };
 
-export type RuleDocsInfo<T> = {
-  docs?: {
+export type RuleDocsInfo<T> = Rule.RuleMetaData & {
+  docs: {
+    category: 'Best Practices' | 'Stylistic Issues' | 'Validation';
     requiresSchema?: boolean;
     requiresSiblings?: boolean;
     examples?: {
       title: string;
-      usage?: T;
       code: string;
+      usage?: T;
     }[];
   };
 };

@@ -10,8 +10,6 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
   meta: {
     type: 'suggestion',
     docs: {
-      requiresSchema: false,
-      requiresSiblings: false,
       examples: [
         {
           title: 'Incorrect',
@@ -34,9 +32,8 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
             `,
         },
       ],
-      description: 'Require all comments to follow the same style (either block or inline)',
+      description: 'Require all comments to follow the same style (either block or inline).',
       category: 'Stylistic Issues',
-      recommended: false,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/description-style.md',
     },
     schema: [

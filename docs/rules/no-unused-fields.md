@@ -5,14 +5,14 @@
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Requires all fields to be used at some level by siblings operations
+Requires all fields to be used at some level by siblings operations.
 
 ## Usage Examples
 
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/no-unused-fields: ["error"]
+# eslint @graphql-eslint/no-unused-fields: 'error'
 
 type User {
   id: ID!
@@ -35,7 +35,7 @@ query {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-unused-fields: ["error"]
+# eslint @graphql-eslint/no-unused-fields: 'error'
 
 type User {
   id: ID!

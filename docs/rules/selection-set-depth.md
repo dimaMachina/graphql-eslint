@@ -5,14 +5,14 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Limit the complexity of the GraphQL operations solely by their depth. Based on https://github.com/stems/graphql-depth-limit .
+Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).
 
 ## Usage Examples
 
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/selection-set-depth: ["error", {"maxDepth":1}]
+# eslint @graphql-eslint/selection-set-depth: ['error', { maxDepth: 1 }]
 
 query deep2 {
   viewer { # Level 0
@@ -26,7 +26,7 @@ query deep2 {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/selection-set-depth: ["error", {"maxDepth":4}]
+# eslint @graphql-eslint/selection-set-depth: ['error', { maxDepth: 4 }]
 
 query deep2 {
   viewer { # Level 0
@@ -40,7 +40,7 @@ query deep2 {
 ### Correct (ignored field)
 
 ```graphql
-# eslint @graphql-eslint/selection-set-depth: ["error", {"maxDepth":1,"ignore":["albums"]}]
+# eslint @graphql-eslint/selection-set-depth: ['error', { maxDepth: 1, ignore: ['albums'] }]
 
 query deep2 {
   viewer { # Level 0

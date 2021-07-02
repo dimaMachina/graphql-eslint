@@ -12,7 +12,7 @@ Makes sure you are not adding the operation type to the name of the operation.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/no-operation-name-suffix: ["error"]
+# eslint @graphql-eslint/no-operation-name-suffix: 'error'
 
 query userQuery {
   # ...
@@ -22,7 +22,7 @@ query userQuery {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-operation-name-suffix: ["error"]
+# eslint @graphql-eslint/no-operation-name-suffix: 'error'
 
 query user {
   # ...

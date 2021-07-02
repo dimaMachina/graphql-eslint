@@ -10,7 +10,7 @@ const rule: GraphQLESLintRule = {
       [UNUSED_FIELD]: `Field "{{fieldName}}" is unused`,
     },
     docs: {
-      description: `Requires all fields to be used at some level by siblings operations`,
+      description: `Requires all fields to be used at some level by siblings operations.`,
       category: 'Best Practices',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${ruleName}.md`,
       requiresSiblings: true,

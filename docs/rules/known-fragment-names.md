@@ -14,7 +14,7 @@ A GraphQL document is only valid if all `...Fragment` fragment spreads refer to 
 ### Incorrect (fragment not defined in the document)
 
 ```graphql
-# eslint @graphql-eslint/known-fragment-names: ["error"]
+# eslint @graphql-eslint/known-fragment-names: 'error'
 
 query {
   user {
@@ -27,7 +27,7 @@ query {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/known-fragment-names: ["error"]
+# eslint @graphql-eslint/known-fragment-names: 'error'
 
 fragment UserFields on User {
   firstName
@@ -45,7 +45,7 @@ query {
 ### Correct (existing import to UserFields fragment)
 
 ```graphql
-# eslint @graphql-eslint/known-fragment-names: ["error"]
+# eslint @graphql-eslint/known-fragment-names: 'error'
 
 #import '../UserFields.gql'
 

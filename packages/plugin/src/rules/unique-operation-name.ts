@@ -10,7 +10,6 @@ const rule: GraphQLESLintRule<[], false> = {
       category: 'Best Practices',
       description: `This rule allow you to enforce unique operation names across your project.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/unique-operation-name.md`,
-      requiresSchema: false,
       requiresSiblings: true,
       examples: [
         {

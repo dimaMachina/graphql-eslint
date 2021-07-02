@@ -12,7 +12,7 @@ Enforces users to avoid using the type name in a field name while defining your 
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-typename-prefix: ["error"]
+# eslint @graphql-eslint/avoid-typename-prefix: 'error'
 
 type User {
   userId: ID!
@@ -22,7 +22,7 @@ type User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/avoid-typename-prefix: ["error"]
+# eslint @graphql-eslint/avoid-typename-prefix: 'error'
 
 type User {
   id: ID!

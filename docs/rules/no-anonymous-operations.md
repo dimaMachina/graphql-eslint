@@ -12,7 +12,7 @@ Require name for your GraphQL operations. This is useful since most GraphQL clie
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/no-anonymous-operations: ["error"]
+# eslint @graphql-eslint/no-anonymous-operations: 'error'
 
 query {
   # ...
@@ -22,7 +22,7 @@ query {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/no-anonymous-operations: ["error"]
+# eslint @graphql-eslint/no-anonymous-operations: 'error'
 
 query user {
   # ...

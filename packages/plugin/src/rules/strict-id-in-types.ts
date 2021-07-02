@@ -39,10 +39,8 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
     docs: {
       description:
         'Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.',
-      category: 'Best practices',
+      category: 'Best Practices',
       recommended: true,
-      requiresSchema: false,
-      requiresSiblings: false,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/strict-id-in-types.md',
       examples: [
         {

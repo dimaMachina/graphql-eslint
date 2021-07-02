@@ -53,7 +53,7 @@ const isGraphQLImportFile = rawSDL => {
 const validationToRule = (
   name: string,
   ruleName: string,
-  docs: GraphQLESLintRule['meta']['docs'],
+  docs: Partial<GraphQLESLintRule['meta']['docs']>,
   getDocumentNode?: (context: GraphQLESLintRuleContext) => DocumentNode | null
 ): Record<typeof name, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
@@ -74,14 +74,12 @@ const validationToRule = (
     [name]: {
       meta: {
         docs: {
+          ...docs,
           category: 'Validation',
           requiresSchema,
           requiresSiblings: false,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${name}.md`,
-          ...docs,
-          description:
-            docs.description +
-            `\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
+          description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
         },
       },
       create(context) {
@@ -117,7 +115,8 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
     description: `A GraphQL document is only valid for execution if all definitions are either operation or fragment definitions.`,
   }),
   validationToRule('fields-on-correct-type', 'FieldsOnCorrectType', {
-    description: `A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as __typename.`,
+    description:
+      'A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as `__typename`.',
   }),
   validationToRule('fragments-on-composite-type', 'FragmentsOnCompositeTypes', {
     description: `Fragments use a type condition to determine if they apply, since fragments can only be spread into a composite type (object, interface, or union), the type condition must also be a composite type.`,

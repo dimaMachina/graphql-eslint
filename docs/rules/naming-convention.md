@@ -1,6 +1,6 @@
 # `naming-convention`
 
-- Category: `Best practices`
+- Category: `Best Practices`
 - Rule name: `@graphql-eslint/naming-convention`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -12,7 +12,7 @@ Require names to follow specified conventions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ["error", {"ObjectTypeDefinition":"PascalCase"}]
+# eslint @graphql-eslint/naming-convention: ['error', { ObjectTypeDefinition: 'PascalCase' }]
 
 type someTypeName {
   f: String!
@@ -22,7 +22,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ["error", {"FieldDefinition":"camelCase","ObjectTypeDefinition":"PascalCase"}]
+# eslint @graphql-eslint/naming-convention: ['error', { FieldDefinition: 'camelCase', ObjectTypeDefinition: 'PascalCase' }]
 
 type SomeTypeName {
   someFieldName: String
