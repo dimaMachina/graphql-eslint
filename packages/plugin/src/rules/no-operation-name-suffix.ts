@@ -1,11 +1,11 @@
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
 const NO_OPERATION_NAME_SUFFIX = 'NO_OPERATION_NAME_SUFFIX';
 
 function verifyRule(
-  context: GraphQLESlintRuleContext,
+  context: GraphQLESLintRuleContext,
   node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>
 ) {
   if (node && node.name && node.name.value !== '') {

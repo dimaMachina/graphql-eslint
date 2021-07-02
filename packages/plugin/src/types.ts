@@ -2,7 +2,7 @@ import { Rule, AST, Linter } from 'eslint';
 import { GraphQLESTreeNode } from './estree-parser';
 import { ASTNode, GraphQLSchema } from 'graphql';
 import { GraphQLParseOptions } from '@graphql-tools/utils';
-import { GraphQLESlintRuleListener } from './testkit';
+import { GraphQLESLintRuleListener } from './testkit';
 import { SiblingOperations } from './sibling-operations';
 import { FieldsCache } from './graphql-ast';
 
@@ -27,7 +27,7 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
   services: ParserServices;
 };
 
-export type GraphQLESlintRuleContext<Options = any[]> = Omit<
+export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,
   'parserServices' | 'report' | 'options'
 > & {
@@ -53,6 +53,6 @@ export type RuleDocsInfo<T> = {
 };
 
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
-  create(context: GraphQLESlintRuleContext<Options>): GraphQLESlintRuleListener<WithTypeInfo>;
+  create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
   meta?: Rule.RuleMetaData & RuleDocsInfo<Options>;
 };

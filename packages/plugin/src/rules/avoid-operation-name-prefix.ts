@@ -1,4 +1,4 @@
-import { GraphQLESLintRule, GraphQLESlintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
@@ -12,7 +12,7 @@ export type AvoidOperationNamePrefixConfig = [
 const AVOID_OPERATION_NAME_PREFIX = 'AVOID_OPERATION_NAME_PREFIX';
 
 function verifyRule(
-  context: GraphQLESlintRuleContext<AvoidOperationNamePrefixConfig>,
+  context: GraphQLESLintRuleContext<AvoidOperationNamePrefixConfig>,
   node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>
 ) {
   const config = context.options[0] || { keywords: [], caseSensitive: false };

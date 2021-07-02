@@ -1,10 +1,10 @@
 import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
-import { GraphQLESlintRuleContext } from './types';
+import { GraphQLESLintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
 import { FieldsCache } from './graphql-ast';
 
-export function requireSiblingsOperations(ruleName: string, context: GraphQLESlintRuleContext<any>): SiblingOperations {
+export function requireSiblingsOperations(ruleName: string, context: GraphQLESLintRuleContext<any>): SiblingOperations {
   if (!context || !context.parserServices) {
     throw new Error(
       `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
@@ -22,7 +22,7 @@ export function requireSiblingsOperations(ruleName: string, context: GraphQLESli
 
 export function requireGraphQLSchemaFromContext(
   ruleName: string,
-  context: GraphQLESlintRuleContext<any>
+  context: GraphQLESLintRuleContext<any>
 ): GraphQLSchema {
   if (!context || !context.parserServices) {
     throw new Error(
@@ -41,7 +41,7 @@ export function requireGraphQLSchemaFromContext(
 
 export function requireReachableTypesFromContext(
   ruleName: string,
-  context: GraphQLESlintRuleContext<any>
+  context: GraphQLESLintRuleContext<any>
 ): Set<string> {
   if (!context || !context.parserServices) {
     throw new Error(
@@ -60,7 +60,7 @@ export function requireReachableTypesFromContext(
 
 export function requireUsedFieldsFromContext(
   ruleName: string,
-  context: GraphQLESlintRuleContext<any>
+  context: GraphQLESLintRuleContext<any>
 ): FieldsCache {
   if (!context || !context.parserServices) {
     throw new Error(
