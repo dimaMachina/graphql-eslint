@@ -13,6 +13,7 @@ const SIBLING_FRAGMENTS = (...operations: string[]) => ({
     operations,
   },
 });
+
 const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('unique-fragment-name', rule, {
@@ -22,9 +23,20 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
       code: `fragment Test on U { a b c }`,
     },
     {
+      // Assert `skipGraphQLImport` is set to true
       ...SIBLING_FRAGMENTS(join(__dirname, 'mocks/user-fields.graphql'), join(__dirname, 'mocks/user.graphql')),
       filename: join(__dirname, 'mocks/user-fields.graphql'),
       code: ruleTester.fromMockFile('user-fields.graphql'),
+    },
+    {
+      // Compare filepath of code as real instead of virtual with siblings
+      ...SIBLING_FRAGMENTS(join(__dirname, 'mocks/unique-fragment.js')),
+      filename: join(__dirname, 'mocks/unique-fragment.js/0_document.graphql '),
+      code: /* GraphQL */ `
+        fragment UserFields on User {
+          id
+        }
+      `,
     },
   ],
   invalid: [

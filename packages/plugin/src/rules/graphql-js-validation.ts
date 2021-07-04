@@ -7,13 +7,8 @@ import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
-function extractRuleName(stack: string | undefined): string | null {
-  const match = (stack || '').match(/validation[/\\\\]rules[/\\\\](.*?)\.js:/);
-
-  if (!match) {
-    return null;
-  }
-
+function extractRuleName(stack?: string): string | null {
+  const match = (stack || '').match(/validation[/\\\\]rules[/\\\\](.*?)\.js:/) || [];
   return match[1] || null;
 }
 
@@ -47,7 +42,7 @@ export function validateDoc(
 }
 
 const isGraphQLImportFile = rawSDL => {
-  const trimmedRawSDL = rawSDL.trim();
+  const trimmedRawSDL = rawSDL.trimLeft();
   return trimmedRawSDL.startsWith('# import') || trimmedRawSDL.startsWith('#import');
 };
 
@@ -70,7 +65,6 @@ const validationToRule = (
   }
 
   const requiresSchema = docs.requiresSchema ?? true;
-  const requiresSiblings = docs.requiresSiblings ?? false;
   return {
     [name]: {
       meta: {
@@ -78,7 +72,6 @@ const validationToRule = (
           ...docs,
           category: 'Validation',
           requiresSchema,
-          requiresSiblings,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${name}.md`,
           description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
         },
@@ -227,6 +220,7 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
           if (!isFileImported) {
             continue;
           }
+
           // Import first file that import this file
           const document = processImport(docFilePath);
           // Import most top file that import this file

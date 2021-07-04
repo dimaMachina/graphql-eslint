@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-This rule allow you to enforce that deprecated fields or enum values are not in use by operations.
+Enforce that deprecated fields or enum values are not in use by operations.
 
 ## Usage Examples
 

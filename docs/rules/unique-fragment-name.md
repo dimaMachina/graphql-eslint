@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-This rule allow you to enforce unique fragment name across your application.
+Enforce unique fragment names across your project.
 
 ## Usage Examples
 

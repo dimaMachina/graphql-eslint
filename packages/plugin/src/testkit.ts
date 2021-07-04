@@ -21,7 +21,7 @@ export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
 };
 
 export class GraphQLRuleTester extends require('eslint').RuleTester {
-  constructor(parserOptions: ParserOptions) {
+  constructor(parserOptions?: ParserOptions) {
     super({
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
