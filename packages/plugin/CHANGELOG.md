@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.1.1
+
+### Patch Changes
+
+- f428d46: feat: improve generate-docs and types
+- 5a7e9a7: fix comments in files that contains import comments
+- 4348dcc: update eslint, various improvements
+- 01ade2e: fix unique-fragment-name and no-unused-fragments rule
+
 ## 1.1.0
 
 ### Minor Changes
