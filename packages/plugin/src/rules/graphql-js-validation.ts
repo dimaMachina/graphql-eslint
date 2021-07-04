@@ -1,9 +1,10 @@
 import { validate, GraphQLSchema, DocumentNode, ASTNode, ValidationRule } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-import fs from 'fs';
+import { parseImportLine, processImport } from '@graphql-tools/import';
+import { existsSync } from 'fs';
+import { join, dirname } from 'path';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { requireGraphQLSchemaFromContext } from '../utils';
+import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 function extractRuleName(stack: string | undefined): string | null {
@@ -24,7 +25,7 @@ export function validateDoc(
   rules: ReadonlyArray<ValidationRule>,
   ruleName: string | null = null
 ): void {
-  if (documentNode && documentNode.definitions && documentNode.definitions.length > 0) {
+  if (documentNode?.definitions?.length > 0) {
     try {
       const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules);
 
@@ -69,7 +70,7 @@ const validationToRule = (
   }
 
   const requiresSchema = docs.requiresSchema ?? true;
-
+  const requiresSiblings = docs.requiresSiblings ?? false;
   return {
     [name]: {
       meta: {
@@ -77,7 +78,7 @@ const validationToRule = (
           ...docs,
           category: 'Validation',
           requiresSchema,
-          requiresSiblings: false,
+          requiresSiblings,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${name}.md`,
           description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
         },
@@ -96,9 +97,8 @@ const validationToRule = (
             const schema = requiresSchema ? requireGraphQLSchemaFromContext(name, context) : null;
 
             let documentNode: DocumentNode;
-            const filePath = context.getFilename();
-            const isVirtualFile = !fs.existsSync(filePath);
-            if (!isVirtualFile && getDocumentNode) {
+            const isRealFile = existsSync(context.getFilename());
+            if (isRealFile && getDocumentNode) {
               documentNode = getDocumentNode(context);
             }
             validateDoc(node, context, schema, documentNode || node.rawNode(), [ruleFn], ruleName);
@@ -180,10 +180,8 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
       if (!isGraphQLImportFile(code)) {
         return null;
       }
-      // Import documents if file contains '#import' comments
-      const fileLoader = new GraphQLFileLoader();
-      const graphqlAst = fileLoader.handleFileContent(code, context.getFilename(), { noLocation: true });
-      return graphqlAst.document;
+      // Import documents because file contains '#import' comments
+      return processImport(context.getFilename());
     }
   ),
   validationToRule('known-type-names', 'KnownTypeNames', {
@@ -202,9 +200,45 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
   validationToRule('no-undefined-variables', 'NoUndefinedVariables', {
     description: `A GraphQL operation is only valid if all variables encountered, both directly and via fragment spreads, are defined by that operation.`,
   }),
-  validationToRule('no-unused-fragments', 'NoUnusedFragments', {
-    description: `A GraphQL document is only valid if all fragment definitions are spread within operations, or spread within other fragments spread within operations.`,
-  }),
+  validationToRule(
+    'no-unused-fragments',
+    'NoUnusedFragments',
+    {
+      description: `A GraphQL document is only valid if all fragment definitions are spread within operations, or spread within other fragments spread within operations.`,
+      requiresSiblings: true,
+    },
+    context => {
+      const siblings = requireSiblingsOperations('no-unused-fragments', context);
+      const documents = [...siblings.getOperations(), ...siblings.getFragments()]
+        .filter(({ document }) => isGraphQLImportFile(document.loc.source.body))
+        .map(({ filePath, document }) => ({
+          filePath,
+          code: document.loc.source.body,
+        }));
+
+      const getParentNode = (filePath: string): DocumentNode | null => {
+        for (const { filePath: docFilePath, code } of documents) {
+          const isFileImported = code
+            .split('\n')
+            .filter(isGraphQLImportFile)
+            .map(line => parseImportLine(line.replace('#', '')))
+            .some(o => filePath === join(dirname(docFilePath), o.from));
+
+          if (!isFileImported) {
+            continue;
+          }
+          // Import first file that import this file
+          const document = processImport(docFilePath);
+          // Import most top file that import this file
+          return getParentNode(docFilePath) || document;
+        }
+
+        return null;
+      };
+
+      return getParentNode(context.getFilename());
+    }
+  ),
   validationToRule('no-unused-variables', 'NoUnusedVariables', {
     description: `A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.`,
   }),

@@ -1,3 +1,4 @@
+import { relative } from 'path';
 import { GraphQLESLintRule } from '../types';
 import { normalizePath, requireSiblingsOperations } from '../utils';
 
@@ -51,19 +52,20 @@ const rule: GraphQLESLintRule<[], false> = {
     },
   },
   create(context) {
+    const filename = context.getFilename();
     return {
-      FragmentDefinition: node => {
+      FragmentDefinition(node) {
         const fragmentName = node.name?.value;
         const siblings = requireSiblingsOperations('unique-fragment-name', context);
 
         if (fragmentName) {
           const siblingFragments = siblings.getFragment(fragmentName);
+          const conflictingFragments = siblingFragments.filter(f => {
+            const isSameName = f.document.name?.value === fragmentName;
+            const isSamePath = normalizePath(f.filePath) === normalizePath(filename);
 
-          const conflictingFragments = siblingFragments.filter(
-            f =>
-              f.document.name?.value === fragmentName &&
-              normalizePath(f.filePath) !== normalizePath(context.getFilename())
-          );
+            return isSameName && !isSamePath;
+          });
 
           if (conflictingFragments.length > 0) {
             context.report({
@@ -80,7 +82,7 @@ const rule: GraphQLESLintRule<[], false> = {
               messageId: UNIQUE_FRAGMENT_NAME,
               data: {
                 fragmentName,
-                fragmentsSummary: conflictingFragments.map(f => `\t${f.filePath}`).join('\n'),
+                fragmentsSummary: conflictingFragments.map(f => `\t${relative(process.cwd(), f.filePath)}`).join('\n'),
               },
             });
           }
