@@ -28,7 +28,7 @@
     "graphql-depth-limit": "1.1.0"
   },
   "devDependencies": {
-    "@types/eslint": "7.2.13",
+    "@types/eslint": "7.2.14",
     "@types/graphql-depth-limit": "1.1.2",
     "bob-the-bundler": "1.2.1",
     "graphql": "15.5.1",
