@@ -70,7 +70,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
     } else {
       const projectForFile = gqlConfig.getProjectForFile(options.filePath);
 
-      if (projectForFile && projectForFile.documents.length > 0) {
+      if (projectForFile?.documents) {
         siblings = projectForFile.loadDocumentsSync(projectForFile.documents, {
           skipGraphQLImport: true,
         });
