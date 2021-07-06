@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.1.2
+
+### Patch Changes
+
+- e7d8496: fix: documents in graphql-config can be null
+
 ## 1.1.1
 
 ### Patch Changes
