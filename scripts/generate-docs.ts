@@ -10,6 +10,7 @@ const BR = '';
 const EMOJI_GRAPHQL_ESLINT = '🚀';
 const EMOJI_GRAPHQL_JS = '🔮';
 const EMOJI_FIXABLE = '🔧';
+
 // const EMOJI_RECOMMENDED = '✅';
 
 async function main() {
@@ -52,16 +53,12 @@ async function main() {
                 .replace(';\n', '')
             : "'error'";
 
-        blocks.push(
-          BR,
-          `### ${title}`,
-          BR,
-          '```graphql',
-          `# eslint @graphql-eslint/${ruleName}: ${options}`,
-          BR,
-          dedent(code),
-          '```'
-        );
+        const isJsFile = ['gql`', '/* GraphQL */'].some(str => code.includes(str));
+        blocks.push(BR, `### ${title}`, BR, '```' + (isJsFile ? 'js' : 'graphql'));
+        if (!isJsFile) {
+          blocks.push(`# eslint @graphql-eslint/${ruleName}: ${options}`, BR);
+        }
+        blocks.push(dedent(code), '```');
       }
     }
 
@@ -116,7 +113,6 @@ async function main() {
     path: resolve(__dirname, '../docs/README.md'),
     content: [
       `## Available Rules`,
-      BR,
       BR,
       'Each rule has emojis denoting:',
       BR,

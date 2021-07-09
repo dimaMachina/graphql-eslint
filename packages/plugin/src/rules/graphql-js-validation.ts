@@ -166,6 +166,29 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
             }
           `,
         },
+        {
+          title:
+            "False positive case\n\nFor extracting documents from code under the hood we use [graphql-tag-pluck](https://graphql-tools.com/docs/graphql-tag-pluck) that [don't support string interpolation](https://stackoverflow.com/questions/62749847/graphql-codegen-dynamic-fields-with-interpolation/62751311#62751311) for this moment.",
+          code: `
+            const USER_FIELDS = gql\`
+              fragment UserFields on User {
+                id
+              }
+            \`
+            
+            const GET_USER = /* GraphQL */ \`
+              # eslint @graphql-eslint/known-fragment-names: 'error'
+
+              query User {
+                user {
+                  ...UserFields
+                }
+              }
+
+              # Will give false positive error 'Unknown fragment "UserFields"'
+              \${USER_FIELDS}
+            \``,
+        },
       ],
     },
     context => {

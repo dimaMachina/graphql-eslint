@@ -1,6 +1,5 @@
 ## Available Rules
 
-
 Each rule has emojis denoting:
 
 * 🚀 `graphql-eslint` rule
