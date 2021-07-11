@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.1.3
+
+### Patch Changes
+
+- ca8b521: fix: code filepath in unique-fragment-name and unique-operation-name rules
+
 ## 1.1.2
 
 ### Patch Changes
