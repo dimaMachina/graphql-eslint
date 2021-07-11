@@ -10,17 +10,13 @@ const BR = '';
 const EMOJI_GRAPHQL_ESLINT = '🚀';
 const EMOJI_GRAPHQL_JS = '🔮';
 const EMOJI_FIXABLE = '🔧';
-const EMOJI_RECOMMENDED = '✅';
+
+// const EMOJI_RECOMMENDED = '✅';
 
 async function main() {
   const result = Object.entries(rules).map(([ruleName, rule]) => {
-    const { docs, deprecated, schema } = rule.meta;
-    const outputPath = resolve(
-      __dirname,
-      docs.url.replace('https://github.com/dotansimha/graphql-eslint/blob/master', '..')
-    );
-
     const blocks: string[] = [`# \`${ruleName}\``, BR];
+    const { deprecated, docs, schema } = rule.meta;
 
     if (deprecated) {
       blocks.push(`- ❗ DEPRECATED ❗`);
@@ -57,18 +53,16 @@ async function main() {
                 .replace(';\n', '')
             : "'error'";
 
-        blocks.push(
-          `\n### ${title}\n`,
-          '```graphql',
-          `# eslint @graphql-eslint/${ruleName}: ${options}\n`,
-          dedent(code),
-          '```'
-        );
+        const isJsFile = ['gql`', '/* GraphQL */'].some(str => code.includes(str));
+        blocks.push(BR, `### ${title}`, BR, '```' + (isJsFile ? 'js' : 'graphql'));
+        if (!isJsFile) {
+          blocks.push(`# eslint @graphql-eslint/${ruleName}: ${options}`, BR);
+        }
+        blocks.push(dedent(code), '```');
       }
     }
 
     if (schema) {
-      blocks.push(BR, `## Config Schema`, BR);
       const jsonSchema = Array.isArray(schema)
         ? {
             type: 'array',
@@ -77,12 +71,17 @@ async function main() {
           }
         : schema;
 
-      blocks.push(md(jsonSchema, '##'));
+      blocks.push(BR, `## Config Schema`, BR, md(jsonSchema, '##'));
     }
 
+    const outputPath = resolve(
+      __dirname,
+      docs.url.replace('https://github.com/dotansimha/graphql-eslint/blob/master', '..')
+    );
+
     return {
-      content: blocks.join('\n'),
       path: outputPath,
+      content: blocks.join('\n'),
     };
   });
 
@@ -90,15 +89,15 @@ async function main() {
     .sort()
     .map(ruleName => {
       const link = `[${ruleName}](rules/${ruleName}.md)`;
-      const { description = '', recommended } = rules[ruleName].meta.docs;
-      const { fixable } = rules[ruleName].meta;
+      const { docs, fixable } = rules[ruleName].meta;
+      const { description = '' } = docs;
 
       return `| ${[
         link,
         description.split('\n')[0],
-        '&nbsp;'.repeat(3) + (ruleName in GRAPHQL_JS_VALIDATIONS ? EMOJI_GRAPHQL_JS : EMOJI_GRAPHQL_ESLINT),
+        '&nbsp;'.repeat(4) + (ruleName in GRAPHQL_JS_VALIDATIONS ? EMOJI_GRAPHQL_JS : EMOJI_GRAPHQL_ESLINT),
         fixable ? EMOJI_FIXABLE : '',
-        // recommended ? EMOJI_RECOMMENDED : '',
+        // docs.recommended ? EMOJI_RECOMMENDED : '',
       ].join(' | ')} |`;
     });
 
@@ -115,10 +114,9 @@ async function main() {
     content: [
       `## Available Rules`,
       BR,
-      BR,
       'Each rule has emojis denoting:',
       BR,
-      `* ${EMOJI_GRAPHQL_ESLINT} \`@graphql-eslint\` rule`,
+      `* ${EMOJI_GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
       `* ${EMOJI_GRAPHQL_JS} \`graphql-js\` rule`,
       `* ${EMOJI_FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
       // `* ${EMOJI_RECOMMENDED} if it belongs to the \`recommended\` configuration`, // TODO: add when recommended config will be available

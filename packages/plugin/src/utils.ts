@@ -1,3 +1,5 @@
+import { statSync } from 'fs';
+import { dirname } from 'path';
 import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
 import { GraphQLESLintRuleContext } from './types';
 import { AST } from 'eslint';
@@ -58,10 +60,7 @@ export function requireReachableTypesFromContext(
   return context.parserServices.getReachableTypes();
 }
 
-export function requireUsedFieldsFromContext(
-  ruleName: string,
-  context: GraphQLESLintRuleContext<any>
-): FieldsCache {
+export function requireUsedFieldsFromContext(ruleName: string, context: GraphQLESLintRuleContext<any>): FieldsCache {
   if (!context || !context.parserServices) {
     throw new Error(
       `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
@@ -132,3 +131,24 @@ export function checkForEslint(token: Token, rawNode: DocumentNode): boolean {
 }
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
+
+/**
+ * https://github.com/prettier/eslint-plugin-prettier/blob/76bd45ece6d56eb52f75db6b4a1efdd2efb56392/eslint-plugin-prettier.js#L71
+ * Given a filepath, get the nearest path that is a regular file.
+ * The filepath provided by eslint may be a virtual filepath rather than a file
+ * on disk. This attempts to transform a virtual path into an on-disk path
+ */
+export const getOnDiskFilepath = (filepath: string): string => {
+  try {
+    if (statSync(filepath).isFile()) {
+      return filepath;
+    }
+  } catch (err) {
+    // https://github.com/eslint/eslint/issues/11989
+    if (err.code === 'ENOTDIR') {
+      return getOnDiskFilepath(dirname(filepath));
+    }
+  }
+
+  return filepath;
+};

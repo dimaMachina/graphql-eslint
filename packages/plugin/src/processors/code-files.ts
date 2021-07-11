@@ -1,3 +1,4 @@
+import { Linter } from 'eslint';
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
 
 const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
@@ -9,13 +10,12 @@ type Block = {
   offset: number;
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function createGraphqlProcessor() {
+export function createGraphqlProcessor(): Linter.Processor {
   const blocksMap = new Map<string, Array<Block | string>>();
 
   return {
     supportsAutofix: true,
-    preprocess: (text: string, filename: string): Array<{ text: string; filename: string } | string> => {
+    preprocess(text: string, filename: string): (string | Linter.ProcessorFile)[] {
       const blocks: Array<Block | string> = [];
       blocksMap.set(filename, blocks);
 
@@ -30,7 +30,7 @@ export function createGraphqlProcessor() {
             },
           });
 
-          if (extractedDocuments && extractedDocuments.length > 0) {
+          if (extractedDocuments?.length > 0) {
             for (const item of extractedDocuments) {
               blocks.push({
                 filename: `document.graphql`,
@@ -52,10 +52,10 @@ export function createGraphqlProcessor() {
 
       return [text];
     },
-    postprocess: (messageLists: any[], filename: string): any[] => {
+    postprocess(messageLists: Linter.LintMessage[][], filename: string): Linter.LintMessage[] {
       const blocks = blocksMap.get(filename);
 
-      if (blocks && blocks.length > 0) {
+      if (blocks?.length > 0) {
         for (let i = 0; i < messageLists.length; ++i) {
           const messages = messageLists[i];
           const block = blocks[i];
@@ -73,14 +73,14 @@ export function createGraphqlProcessor() {
               message.endLine += lineOffset;
             }
             if (message.fix && offset !== undefined) {
-              message.fix.range[0] = offset + message.fix.range[0];
-              message.fix.range[1] = offset + message.fix.range[1];
+              message.fix.range[0] += offset;
+              message.fix.range[1] += offset;
             }
           }
         }
       }
 
-      return [].concat(...messageLists);
+      return messageLists.flat();
     },
   };
 }

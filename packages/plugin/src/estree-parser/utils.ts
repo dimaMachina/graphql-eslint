@@ -70,7 +70,7 @@ export function convertRange(gqlLocation: Location): [number, number] {
 }
 
 export function extractCommentsFromAst(node: ASTNode): Comment[] {
-  const loc = node.loc;
+  const { loc } = node;
 
   if (!loc) {
     return [];
@@ -81,19 +81,13 @@ export function extractCommentsFromAst(node: ASTNode): Comment[] {
 
   while (token !== null) {
     if (token.kind === TokenKind.COMMENT) {
-      const value = String(token.value);
+      const { line, column } = token;
       comments.push({
         type: 'Block',
-        value: ' ' + value + ' ',
+        value: ` ${token.value} `,
         loc: {
-          start: {
-            line: token.line,
-            column: token.column,
-          },
-          end: {
-            line: token.line,
-            column: token.column,
-          },
+          start: { line, column },
+          end: { line, column },
         },
         range: [token.start, token.end],
       });
@@ -122,7 +116,7 @@ export function convertLocation(gqlLocation: Location): SourceLocation {
 export function isNodeWithDescription<T extends ASTNode>(
   obj: T
 ): obj is T & { readonly description?: StringValueNode } {
-  return obj && (obj as any).description;
+  return (obj as any)?.description;
 }
 
 export function convertDescription<T extends ASTNode>(node: T): Comment[] {

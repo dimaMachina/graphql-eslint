@@ -13,7 +13,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
     type: 'suggestion',
     docs: {
       category: 'Best Practices',
-      description: `This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.`,
+      description: `Enforce selecting specific fields when they are available on the GraphQL type.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md`,
       requiresSchema: true,
       requiresSiblings: true,

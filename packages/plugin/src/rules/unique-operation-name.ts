@@ -1,15 +1,16 @@
 import { GraphQLESLintRule } from '../types';
-import { normalizePath, requireSiblingsOperations } from '../utils';
+import { checkNode } from './unique-fragment-name';
 
+const RULE_NAME = 'unique-operation-name';
 const UNIQUE_OPERATION_NAME = 'UNIQUE_OPERATION_NAME';
 
-const rule: GraphQLESLintRule<[], false> = {
+const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
       category: 'Best Practices',
-      description: `This rule allow you to enforce unique operation names across your project.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/unique-operation-name.md`,
+      description: `Enforce unique operation names across your project.`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
       requiresSiblings: true,
       examples: [
         {
@@ -51,44 +52,13 @@ const rule: GraphQLESLintRule<[], false> = {
       ],
     },
     messages: {
-      [UNIQUE_OPERATION_NAME]: `Operation named "{{ operationName }}" already defined in:\n{{ operationsSummary }}`,
+      [UNIQUE_OPERATION_NAME]: 'Operation named "{{ documentName }}" already defined in:\n{{ summary }}',
     },
   },
   create(context) {
     return {
-      OperationDefinition: node => {
-        const operationName = node.name?.value;
-        const siblings = requireSiblingsOperations('unique-operation-name', context);
-
-        if (operationName) {
-          const siblingOperations = siblings.getOperation(operationName);
-
-          const conflictingOperations = siblingOperations.filter(
-            f =>
-              f.document.name?.value === operationName &&
-              normalizePath(f.filePath) !== normalizePath(context.getFilename())
-          );
-
-          if (conflictingOperations.length > 0) {
-            context.report({
-              loc: {
-                start: {
-                  line: node.name.loc.start.line,
-                  column: node.name.loc.start.column - 1,
-                },
-                end: {
-                  line: node.name.loc.end.line,
-                  column: node.name.loc.end.column - 1,
-                },
-              },
-              messageId: UNIQUE_OPERATION_NAME,
-              data: {
-                operationName,
-                operationsSummary: conflictingOperations.map(f => `\t${f.filePath}`).join('\n'),
-              },
-            });
-          }
-        }
+      OperationDefinition(node) {
+        checkNode(context, node, RULE_NAME, UNIQUE_OPERATION_NAME);
       },
     };
   },

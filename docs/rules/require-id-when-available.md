@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-This rule allow you to enforce selecting specific fields when they are available on the GraphQL type.
+Enforce selecting specific fields when they are available on the GraphQL type.
 
 ## Usage Examples
 

@@ -55,5 +55,5 @@ export type RuleDocsInfo<T> = Rule.RuleMetaData & {
 
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
-  meta?: Rule.RuleMetaData & RuleDocsInfo<Options>;
+  meta: Rule.RuleMetaData & RuleDocsInfo<Options>;
 };

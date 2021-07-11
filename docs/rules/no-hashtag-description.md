@@ -6,7 +6,7 @@
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.
-This rule allows you to use hashtag for comments, as long as it's not attached to a AST definition.
+Allows to use hashtag for comments, as long as it's not attached to an AST definition.
 
 ## Usage Examples
 

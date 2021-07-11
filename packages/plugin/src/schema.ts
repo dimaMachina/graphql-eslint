@@ -64,7 +64,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
         });
         schemaCache.set(schemaKey, schema);
       } catch (e) {
-        e.message = e.message + `\nRunning from directory: ${process.cwd()}`;
+        e.message += `\nRunning from directory: ${process.cwd()}`;
 
         throw e;
       }
