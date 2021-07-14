@@ -31,7 +31,7 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
     {
       // Compare filepath of code as real instead of virtual with siblings
       ...SIBLING_FRAGMENTS(join(__dirname, 'mocks/unique-fragment.js')),
-      filename: join(__dirname, 'mocks/unique-fragment.js/0_document.graphql '),
+      filename: join(__dirname, 'mocks/unique-fragment.js/0_document.graphql'),
       code: /* GraphQL */ `
         fragment UserFields on User {
           id
