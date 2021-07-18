@@ -35,14 +35,14 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
   // We are using the directory of the file as the key for the schema caching, to avoid reloading of the schema.
   if (gqlConfig && options.filePath) {
     const realFilepath = getOnDiskFilepath(options.filePath);
-    const fileDir = dirname(realFilepath);
+    const projectForFile = gqlConfig.getProjectForFile(realFilepath);
+    const schemaKey = projectForFile.schema.toString();
 
-    if (schemaCache.has(fileDir)) {
-      schema = schemaCache.get(fileDir);
+    if (schemaCache.has(schemaKey)) {
+      schema = schemaCache.get(schemaKey);
     } else {
-      const projectForFile = gqlConfig.getProjectForFile(realFilepath);
       schema = projectForFile.getSchemaSync();
-      schemaCache.set(fileDir, schema);
+      schemaCache.set(schemaKey, schema);
     }
   }
 
@@ -50,7 +50,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
   // In this case, the cache key is the path for the schema. This is needed in order to allow separate
   // configurations for different file paths (a very edgey case).
   if (!schema && options.schema) {
-    const schemaKey = Array.isArray(options.schema) ? options.schema.join(',') : options.schema;
+    const schemaKey = options.schema.toString();
 
     if (schemaCache.has(schemaKey)) {
       schema = schemaCache.get(schemaKey);
