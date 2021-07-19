@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 1.1.4
+
+### Patch Changes
+
+- 34b4300: fix(graphql-config): pass real filepath to `gqlConfig.getProjectForFile`
+
 ## 1.1.3
 
 ### Patch Changes
