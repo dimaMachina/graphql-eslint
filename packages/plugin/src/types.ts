@@ -1,14 +1,20 @@
 import { Rule, AST, Linter } from 'eslint';
-import { GraphQLESTreeNode } from './estree-parser';
 import { ASTNode, GraphQLSchema } from 'graphql';
 import { GraphQLParseOptions } from '@graphql-tools/utils';
+import { IExtensions, IGraphQLProject, DocumentPointer, SchemaPointer } from 'graphql-config';
 import { GraphQLESLintRuleListener } from './testkit';
+import { GraphQLESTreeNode } from './estree-parser';
 import { SiblingOperations } from './sibling-operations';
 import { FieldsCache } from './graphql-ast';
 
 export interface ParserOptions {
-  schema?: string | string[];
-  operations?: string | string[];
+  schema?: SchemaPointer;
+  documents?: DocumentPointer;
+  operations?: DocumentPointer; // legacy
+  extensions?: IExtensions;
+  include?: string | string[];
+  exclude?: string | string[];
+  projects?: Record<string, IGraphQLProject>;
   schemaOptions?: Omit<GraphQLParseOptions, 'assumeValidSDL'>;
   graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   skipGraphQLConfig?: boolean;

@@ -18,7 +18,7 @@
     "transpile-ts": "tsc --project tsconfig.json",
     "build": "yarn transpile-ts && bob build",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/",
-    "test": "jest --no-watchman --forceExit",
+    "test": "jest --no-watchman --forceExit --noStackTrace",
     "prerelease": "yarn build",
     "release": "changeset publish",
     "release:canary": "(node scripts/canary-release.js && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",

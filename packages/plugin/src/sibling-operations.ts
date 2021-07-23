@@ -1,36 +1,18 @@
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-import { CodeFileLoader } from '@graphql-tools/code-file-loader';
-import { loadDocumentsSync } from '@graphql-tools/load';
-import { Loader, SingleFileOptions, Source } from '@graphql-tools/utils';
 import {
   FragmentDefinitionNode,
   FragmentSpreadNode,
   Kind,
   OperationDefinitionNode,
-  parse,
   SelectionSetNode,
   visit,
 } from 'graphql';
-import { ParserOptions } from './types';
+import { Source, asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
-import { dirname } from 'path';
+import { ParserOptions } from './types';
+import { getOnDiskFilepath } from './utils';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
-
-export const operationsLoaders: Loader<string, SingleFileOptions>[] = [
-  new GraphQLFileLoader(),
-  new CodeFileLoader(),
-  {
-    loaderId: () => 'direct-string',
-    canLoad: async () => false,
-    load: async () => null,
-    canLoadSync: pointer => typeof pointer === 'string' && pointer.includes('type '),
-    loadSync: pointer => ({
-      document: parse(pointer),
-    }),
-  },
-];
 
 export type SiblingOperations = {
   available: boolean;
@@ -46,65 +28,46 @@ export type SiblingOperations = {
   getOperationByType(operationType: 'query' | 'mutation' | 'subscription'): OperationSource[];
 };
 
-function loadSiblings(baseDir: string, loadPaths: string[]): Source[] {
-  return loadDocumentsSync(loadPaths, {
-    cwd: baseDir,
-    loaders: operationsLoaders,
-    skipGraphQLImport: true,
-  });
-}
-
 const operationsCache: Map<string, Source[]> = new Map();
 const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
 
+const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] | null => {
+  const realFilepath = filePath ? getOnDiskFilepath(filePath) : null;
+  const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
+  const documentsKey = asArray(projectForFile.documents)
+    .sort()
+    .join(',');
+
+  if (!documentsKey) {
+    return [];
+  }
+
+  if (operationsCache.has(documentsKey)) {
+    return operationsCache.get(documentsKey);
+  }
+
+  const siblings = projectForFile.loadDocumentsSync(projectForFile.documents, {
+    skipGraphQLImport: true,
+  });
+  operationsCache.set(documentsKey, siblings);
+
+  return siblings;
+};
+
 export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLConfig): SiblingOperations {
-  let siblings: Source[] | null = null;
+  const siblings = getSiblings(options.filePath, gqlConfig);
 
-  // We first try to use graphql-config for loading the operations paths, based on the type of the file,
-  // We are using the directory of the file as the key for the schema caching, to avoid reloading of the schema.
-  if (gqlConfig && options?.filePath) {
-    const fileDir = dirname(options.filePath);
-
-    if (operationsCache.has(fileDir)) {
-      siblings = operationsCache.get(fileDir);
-    } else {
-      const projectForFile = gqlConfig.getProjectForFile(options.filePath);
-
-      if (projectForFile?.documents) {
-        siblings = projectForFile.loadDocumentsSync(projectForFile.documents, {
-          skipGraphQLImport: true,
-        });
-        operationsCache.set(fileDir, siblings);
-      }
-    }
-  }
-
-  if (!siblings && options?.operations) {
-    const loadPaths = Array.isArray(options.operations) ? options.operations : [options.operations];
-    const loadKey = loadPaths.join(',');
-
-    if (operationsCache.has(loadKey)) {
-      siblings = operationsCache.get(loadKey);
-    } else {
-      siblings = loadSiblings(process.cwd(), loadPaths);
-      operationsCache.set(loadKey, siblings);
-    }
-  }
-
-  if (!siblings || siblings.length === 0) {
+  if (siblings.length === 0) {
     let printed = false;
 
     const noopWarn = () => {
-      if (printed) {
-        return [];
+      if (!printed) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!`
+        );
+        printed = true;
       }
-
-      printed = true;
-      // eslint-disable-next-line no-console
-      console.warn(
-        `getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!`
-      );
-
       return [];
     };
 
