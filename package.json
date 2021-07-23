@@ -11,14 +11,14 @@
     "pre-commit": "yarn generate:docs"
   },
   "scripts": {
-    "generate:docs": "ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/generate-docs.ts",
+    "generate:docs": "ts-node scripts/generate-docs.ts",
     "postinstall": "patch-package",
-    "lint": "eslint --config .eslintrc.json --ext .ts .",
+    "lint": "eslint --config .eslintrc.json --ext ts,js .",
     "prebuild": "rimraf packages/*/dist",
     "transpile-ts": "tsc --project tsconfig.json",
     "build": "yarn transpile-ts && bob build",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/",
-    "test": "jest --no-watchman --forceExit --noStackTrace",
+    "test": "jest --no-watchman --forceExit --noStackTrace --detectOpenHandles",
     "prerelease": "yarn build",
     "release": "changeset publish",
     "release:canary": "(node scripts/canary-release.js && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",

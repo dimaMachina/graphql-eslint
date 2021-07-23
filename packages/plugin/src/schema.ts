@@ -6,7 +6,7 @@ import { getOnDiskFilepath } from './utils';
 
 const schemaCache: Map<string, GraphQLSchema> = new Map();
 
-export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): GraphQLSchema | null {
+export function getSchema(options: ParserOptions = {}, gqlConfig: GraphQLConfig): GraphQLSchema | null {
   const realFilepath = options.filePath ? getOnDiskFilepath(options.filePath) : null;
   const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
   const schemaKey = asArray(projectForFile.schema)
@@ -21,7 +21,7 @@ export function getSchema(options: ParserOptions, gqlConfig: GraphQLConfig): Gra
     return schemaCache.get(schemaKey);
   }
 
-  const schema = projectForFile.getSchemaSync();
+  const schema = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', options.schemaOptions);
   schemaCache.set(schemaKey, schema);
 
   return schema;
