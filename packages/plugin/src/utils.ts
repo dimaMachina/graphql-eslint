@@ -4,10 +4,13 @@ import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
 import { GraphQLESLintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
-import { FieldsCache } from './graphql-ast';
+import { UsedFields, ReachableTypes } from './graphql-ast';
 
-export function requireSiblingsOperations(ruleName: string, context: GraphQLESLintRuleContext<any>): SiblingOperations {
-  if (!context || !context.parserServices) {
+export function requireSiblingsOperations(
+  ruleName: string,
+  context: GraphQLESLintRuleContext
+): SiblingOperations | never {
+  if (!context.parserServices) {
     throw new Error(
       `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
     );
@@ -24,9 +27,9 @@ export function requireSiblingsOperations(ruleName: string, context: GraphQLESLi
 
 export function requireGraphQLSchemaFromContext(
   ruleName: string,
-  context: GraphQLESLintRuleContext<any>
-): GraphQLSchema {
-  if (!context || !context.parserServices) {
+  context: GraphQLESLintRuleContext
+): GraphQLSchema | never {
+  if (!context.parserServices) {
     throw new Error(
       `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
     );
@@ -43,37 +46,16 @@ export function requireGraphQLSchemaFromContext(
 
 export function requireReachableTypesFromContext(
   ruleName: string,
-  context: GraphQLESLintRuleContext<any>
-): Set<string> {
-  if (!context || !context.parserServices) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
-    );
-  }
-
-  if (!context.parserServices.schema) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
-    );
-  }
-
-  return context.parserServices.getReachableTypes();
+  context: GraphQLESLintRuleContext
+): ReachableTypes | never {
+  const schema = requireGraphQLSchemaFromContext(ruleName, context);
+  return context.parserServices.reachableTypes(schema);
 }
 
-export function requireUsedFieldsFromContext(ruleName: string, context: GraphQLESLintRuleContext<any>): FieldsCache {
-  if (!context || !context.parserServices) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
-    );
-  }
-
-  if (!context.parserServices.schema) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
-    );
-  }
-
-  return context.parserServices.getUsedFields();
+export function requireUsedFieldsFromContext(ruleName: string, context: GraphQLESLintRuleContext): UsedFields | never {
+  const schema = requireGraphQLSchemaFromContext(ruleName, context);
+  const siblings = requireSiblingsOperations(ruleName, context);
+  return context.parserServices.usedFields(schema, siblings);
 }
 
 function getLexer(source: Source): Lexer {

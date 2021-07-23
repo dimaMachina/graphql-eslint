@@ -2,27 +2,26 @@ import { parseGraphQLSDL } from '@graphql-tools/utils';
 import { GraphQLError, TypeInfo } from 'graphql';
 import { Linter } from 'eslint';
 import { convertToESTree } from './estree-parser';
-import { GraphQLESLintParseResult, ParserOptions } from './types';
+import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types';
 import { extractTokens } from './utils';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
 import { loadGraphqlConfig } from './graphql-config';
-import { createReachableTypesService, createUsedFieldsService } from './graphql-ast';
+import { getReachableTypes, getUsedFields } from './graphql-ast';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
 }
 
-export function parseForESLint(code: string, options?: ParserOptions): GraphQLESLintParseResult {
+export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
   const gqlConfig = loadGraphqlConfig(options);
   const schema = getSchema(options, gqlConfig);
-  const siblingOperations = getSiblingOperations(options, gqlConfig);
-  const parserServices = {
+  const parserServices: ParserServices = {
     hasTypeInfo: schema !== null,
     schema,
-    siblingOperations,
-    getReachableTypes: createReachableTypesService(schema),
-    getUsedFields: createUsedFieldsService(schema, siblingOperations),
+    siblingOperations: getSiblingOperations(options, gqlConfig),
+    reachableTypes: getReachableTypes,
+    usedFields: getUsedFields,
   };
 
   try {
