@@ -31,14 +31,14 @@ export type SiblingOperations = {
 };
 
 const handleVirtualPath = (documents: Source[]): Source[] => {
-  const filepathMap: Record<string, number> = {};
+  const filepathMap: Record<string, number> = Object.create(null);
 
   return documents.map(source => {
     const { location } = source;
     if (['.gql', '.graphql'].some(extension => location.endsWith(extension))) {
       return source;
     }
-    filepathMap[location] = filepathMap[location] ?? -1;
+    filepathMap[location] ??= -1;
     const index = filepathMap[location] += 1;
     return {
       ...source,
@@ -65,16 +65,17 @@ const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
     return operationsCache.get(documentsKey);
   }
 
-  const siblings = projectForFile.loadDocumentsSync(projectForFile.documents, {
+  const documents = projectForFile.loadDocumentsSync(projectForFile.documents, {
     skipGraphQLImport: true,
   });
+  const siblings = handleVirtualPath(documents)
   operationsCache.set(documentsKey, siblings);
 
   return siblings;
 };
 
 export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLConfig): SiblingOperations {
-  const siblings = handleVirtualPath(getSiblings(options.filePath, gqlConfig));
+  const siblings = getSiblings(options.filePath, gqlConfig);
 
   if (siblings.length === 0) {
     let printed = false;

@@ -45,7 +45,7 @@ class TestGraphQLServer {
     }
   }
 
-  parseData(req: IncomingMessage): Promise<any | string> {
+  private parseData(req: IncomingMessage): Promise<any | string> {
     return new Promise(resolve => {
       let data = '';
       req.on('data', chunk => {
