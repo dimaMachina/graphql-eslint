@@ -1,4 +1,4 @@
-import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync } from 'graphql-config';
+import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync, SchemaPointer } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
 
@@ -26,7 +26,7 @@ export function loadGraphqlConfig(options: ParserOptions): GraphQLConfig {
         config: options.projects
           ? { projects: options.projects }
           : {
-              schema: options.schema || '', // if `options.schema` is `undefined` will throw error `Project 'default' not found`
+              schema: (options.schema || '') as SchemaPointer, // if `schema` is `undefined` will throw error `Project 'default' not found`
               documents: options.documents || options.operations,
               extensions: options.extensions,
               include: options.include,

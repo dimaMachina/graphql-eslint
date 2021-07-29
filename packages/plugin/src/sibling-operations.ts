@@ -32,7 +32,7 @@ export type SiblingOperations = {
 const operationsCache: Map<string, Source[]> = new Map();
 const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
 
-const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] | null => {
+const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
   const realFilepath = filePath ? getOnDiskFilepath(filePath) : null;
   const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
   const documentsKey = asArray(projectForFile.documents)

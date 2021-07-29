@@ -8,14 +8,16 @@ import { SiblingOperations } from './sibling-operations';
 import { getReachableTypes, getUsedFields } from './graphql-ast';
 
 export interface ParserOptions {
-  schema?: SchemaPointer;
+  schema?: SchemaPointer | Record<string, { headers: Record<string, string> }>;
   documents?: DocumentPointer;
   operations?: DocumentPointer; // legacy
   extensions?: IExtensions;
   include?: string | string[];
   exclude?: string | string[];
   projects?: Record<string, IGraphQLProject>;
-  schemaOptions?: Omit<GraphQLParseOptions, 'assumeValidSDL'>;
+  schemaOptions?: Omit<GraphQLParseOptions, 'assumeValidSDL'> & {
+    headers: Record<string, string>;
+  };
   graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   skipGraphQLConfig?: boolean;
   filePath?: string;
