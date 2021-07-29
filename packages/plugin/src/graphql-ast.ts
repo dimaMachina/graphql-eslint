@@ -9,46 +9,41 @@ import {
   GraphQLNamedType,
   GraphQLInterfaceType,
   GraphQLArgument,
+  GraphQLDirective,
   isObjectType,
   isInterfaceType,
   isUnionType,
   isInputObjectType,
   isListType,
   isNonNullType,
-  GraphQLDirective,
   TypeInfo,
   visit,
   visitWithTypeInfo,
 } from 'graphql';
 import { SiblingOperations } from './sibling-operations';
 
-export function createReachableTypesService(schema: GraphQLSchema): () => Set<string>;
-export function createReachableTypesService(schema?: GraphQLSchema): () => Set<string> | null {
-  if (schema) {
-    let cache: Set<string> = null;
-    return () => {
-      if (!cache) {
-        cache = collectReachableTypes(schema);
-      }
+export type ReachableTypes = Set<string>;
 
-      return cache;
-    };
+let reachableTypesCache: ReachableTypes;
+
+export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
+  // We don't want cache reachableTypes on test environment
+  // Otherwise reachableTypes will be same for all tests
+  if (process.env.NODE_ENV !== 'test' && reachableTypesCache) {
+    return reachableTypesCache
   }
 
-  return () => null;
-}
-
-export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
-  const reachableTypes = new Set<string>();
+  const reachableTypes: ReachableTypes = new Set();
 
   collectFromDirectives(schema.getDirectives());
   collectFrom(schema.getQueryType());
   collectFrom(schema.getMutationType());
   collectFrom(schema.getSubscriptionType());
 
-  return reachableTypes;
+  reachableTypesCache = reachableTypes;
+  return reachableTypesCache;
 
-  function collectFromDirectives(directives: readonly GraphQLDirective[]) {
+  function collectFromDirectives(directives: readonly GraphQLDirective[]): void {
     for (const directive of directives || []) {
       reachableTypes.add(directive.name);
       directive.args.forEach(collectFromArgument);
@@ -119,43 +114,33 @@ export function collectReachableTypes(schema: GraphQLSchema): Set<string> {
     if (isListType(type) || isNonNullType(type)) {
       return resolveName(type.ofType);
     }
-
     return type.name;
   }
 
   function shouldCollect(name: string): boolean {
-    if (!reachableTypes.has(name)) {
-      reachableTypes.add(name);
-      return true;
+    if (reachableTypes.has(name)) {
+      return false;
     }
-
-    return false;
+    reachableTypes.add(name);
+    return true;
   }
 }
 
-export type FieldsCache = Record<string, Set<string>>;
+export type UsedFields = Record<string, Set<string>>;
 
-export function createUsedFieldsService(schema: GraphQLSchema, operations: SiblingOperations): () => FieldsCache | null {
-  if (!schema || !operations) {
-    return () => null;
+let usedFieldsCache: UsedFields;
+
+export function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): UsedFields {
+  // We don't want cache usedFields on test environment
+  // Otherwise usedFields will be same for all tests
+  if (process.env.NODE_ENV !== 'test' && usedFieldsCache) {
+    return usedFieldsCache;
   }
 
-  let cache: FieldsCache = null;
-
-  return () => {
-    if (!cache) {
-      cache = collectUsedFields(schema, operations);
-    }
-
-    return cache;
-  };
-}
-
-export function collectUsedFields(schema: GraphQLSchema, operations: SiblingOperations): FieldsCache {
-  const cache: FieldsCache = {};
+  const usedFields: UsedFields = {};
 
   const addField = (typeName, fieldName) => {
-    const fieldType = cache[typeName] ?? (cache[typeName] = new Set());
+    const fieldType = usedFields[typeName] ?? (usedFields[typeName] = new Set());
     fieldType.add(fieldName);
   };
 
@@ -180,14 +165,12 @@ export function collectUsedFields(schema: GraphQLSchema, operations: SiblingOper
     },
   });
 
-  const allDocuments = [
-    ...operations.getOperations(),
-    ...operations.getFragments(),
-  ];
+  const allDocuments = [...operations.getOperations(), ...operations.getFragments()];
 
   for (const { document } of allDocuments) {
     visit(document, visitor);
   }
 
-  return cache;
+  usedFieldsCache = usedFields;
+  return usedFieldsCache;
 }

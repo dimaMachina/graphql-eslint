@@ -5,6 +5,7 @@ import {
   OperationDefinitionNode,
   SelectionSetNode,
   visit,
+  OperationTypeNode,
 } from 'graphql';
 import { Source, asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
@@ -25,7 +26,7 @@ export type SiblingOperations = {
     recursive: boolean
   ): FragmentDefinitionNode[];
   getOperation(operationName: string): OperationSource[];
-  getOperationByType(operationType: 'query' | 'mutation' | 'subscription'): OperationSource[];
+  getOperationByType(operationType: OperationTypeNode): OperationSource[];
 };
 
 const operationsCache: Map<string, Source[]> = new Map();
@@ -106,10 +107,8 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
           }
         }
       }
-
       fragmentsCache = result;
     }
-
     return fragmentsCache;
   };
 
@@ -129,10 +128,8 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
           }
         }
       }
-
       cachedOperations = result;
     }
-
     return cachedOperations;
   };
 
@@ -144,7 +141,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
     collected: Map<string, FragmentDefinitionNode> = new Map()
   ) => {
     visit(selectable, {
-      FragmentSpread: (spread: FragmentSpreadNode) => {
+      FragmentSpread(spread: FragmentSpreadNode) {
         const name = spread.name.value;
         const fragmentInfo = getFragment(name);
 
@@ -153,32 +150,29 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
           console.warn(
             `Unable to locate fragment named "${name}", please make sure it's loaded using "parserOptions.operations"`
           );
-        } else {
-          const fragment = fragmentInfo[0];
-          const alreadyVisited = collected.has(name);
+          return;
+        }
+        const fragment = fragmentInfo[0];
+        const alreadyVisited = collected.has(name);
 
-          if (!alreadyVisited) {
-            collected.set(spread.name.value, fragment.document);
-
-            if (recursive) {
-              collectFragments(fragment.document, recursive, collected);
-            }
+        if (!alreadyVisited) {
+          collected.set(name, fragment.document);
+          if (recursive) {
+            collectFragments(fragment.document, recursive, collected);
           }
         }
       },
     });
-
     return collected;
   };
 
-  const siblingOperations = {
+  const siblingOperations: SiblingOperations = {
     available: true,
     getFragments,
     getOperations,
     getFragment,
-    getFragmentByType: (typeName: string) =>
-      getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
-    getOperation: (name: string) => getOperations().filter(o => o.document.name?.value === name),
+    getFragmentByType: typeName => getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
+    getOperation: name => getOperations().filter(o => o.document.name?.value === name),
     getOperationByType: type => getOperations().filter(o => o.document.operation === type),
     getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
   };

@@ -5,7 +5,7 @@ import { IExtensions, IGraphQLProject, DocumentPointer, SchemaPointer } from 'gr
 import { GraphQLESLintRuleListener } from './testkit';
 import { GraphQLESTreeNode } from './estree-parser';
 import { SiblingOperations } from './sibling-operations';
-import { FieldsCache } from './graphql-ast';
+import { getReachableTypes, getUsedFields } from './graphql-ast';
 
 export interface ParserOptions {
   schema?: SchemaPointer;
@@ -22,11 +22,11 @@ export interface ParserOptions {
 }
 
 export type ParserServices = {
-  siblingOperations: SiblingOperations;
   hasTypeInfo: boolean;
   schema: GraphQLSchema | null;
-  getReachableTypes: () => Set<string> | null;
-  getUsedFields: () => FieldsCache | null;
+  siblingOperations: SiblingOperations;
+  reachableTypes: typeof getReachableTypes;
+  usedFields: typeof getUsedFields;
 };
 
 export type GraphQLESLintParseResult = Linter.ESLintParseResult & {

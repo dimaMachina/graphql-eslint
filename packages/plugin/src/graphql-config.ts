@@ -23,14 +23,15 @@ export function loadGraphqlConfig(options: ParserOptions): GraphQLConfig {
     onDiskConfig ||
     new GraphQLConfig(
       {
-        config: {
-          schema: options.schema || '', // if undefined will throw error `Project 'default' not found`
-          documents: options.documents || options.operations,
-          extensions: options.extensions,
-          include: options.include,
-          exclude: options.exclude,
-          projects: options.projects,
-        },
+        config: options.projects
+          ? { projects: options.projects }
+          : {
+              schema: options.schema || '', // if `options.schema` is `undefined` will throw error `Project 'default' not found`
+              documents: options.documents || options.operations,
+              extensions: options.extensions,
+              include: options.include,
+              exclude: options.exclude,
+            },
         filepath: 'virtual-config',
       },
       [addCodeFileLoaderExtension]
