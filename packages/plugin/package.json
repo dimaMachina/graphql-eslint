@@ -16,23 +16,18 @@
     "prepack": "bob prepack"
   },
   "dependencies": {
-    "@graphql-tools/code-file-loader": "~6.3.0",
-    "@graphql-tools/graphql-file-loader": "~6.2.0",
-    "@graphql-tools/graphql-tag-pluck": "~6.5.0",
+    "@graphql-tools/code-file-loader": "^7.0.1",
+    "@graphql-tools/graphql-tag-pluck": "^7.0.1",
     "@graphql-tools/import": "^6.3.1",
-    "@graphql-tools/json-file-loader": "~6.2.6",
-    "@graphql-tools/load": "~6.2.0",
-    "@graphql-tools/url-loader": "~6.10.0",
-    "@graphql-tools/utils": "~7.10.0",
-    "graphql-config": "^3.2.0",
+    "@graphql-tools/utils": "^8.0.1",
+    "graphql-config": "^3.4.0",
     "graphql-depth-limit": "1.1.0"
   },
   "devDependencies": {
     "@types/eslint": "7.28.0",
     "@types/graphql-depth-limit": "1.1.2",
     "bob-the-bundler": "1.2.1",
-    "graphql": "15.5.1",
-    "graphql-config": "3.4.0",
+    "graphql": "15.5.0",
     "typescript": "4.3.5"
   },
   "peerDependencies": {

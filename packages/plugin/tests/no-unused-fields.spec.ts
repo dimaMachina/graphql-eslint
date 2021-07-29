@@ -1,4 +1,4 @@
-import { GraphQLRuleTester } from '../src/testkit';
+import { GraphQLRuleTester } from '../src';
 import rule from '../src/rules/no-unused-fields';
 
 const SCHEMA = /* GraphQL */ `
@@ -38,20 +38,19 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-new GraphQLRuleTester().runGraphQLTests('no-unused-fields', rule, {
+new GraphQLRuleTester({ schema: SCHEMA }).runGraphQLTests('no-unused-fields', rule, {
   valid: [
     {
       code: SCHEMA,
       parserOptions: {
-        schema: SCHEMA,
         operations: /* GraphQL */ `
           {
             user(id: 1) {
-              ...on User {
+              ... on User {
                 address {
                   zip
                   events {
-                    ...on Event {
+                    ... on Event {
                       by {
                         id
                       }
@@ -93,7 +92,6 @@ new GraphQLRuleTester().runGraphQLTests('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        schema: SCHEMA,
         operations: /* GraphQL */ `
           {
             user(id: 1) {
@@ -122,7 +120,6 @@ new GraphQLRuleTester().runGraphQLTests('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        schema: SCHEMA,
         operations: /* GraphQL */ `
           {
             user(id: 1) {
@@ -131,9 +128,7 @@ new GraphQLRuleTester().runGraphQLTests('no-unused-fields', rule, {
           }
         `,
       },
-      errors: [
-        { message: 'Field "deleteUser" is unused' },
-      ],
+      errors: [{ message: 'Field "deleteUser" is unused' }],
       output: /* GraphQL */ `
         # normalize graphql
         type Query {

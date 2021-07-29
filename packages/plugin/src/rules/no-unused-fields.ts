@@ -2,7 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import { requireUsedFieldsFromContext } from '../utils';
 
 const UNUSED_FIELD = 'UNUSED_FIELD';
-const ruleName = 'no-unused-fields';
+const RULE_NAME = 'no-unused-fields';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -12,7 +12,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       description: `Requires all fields to be used at some level by siblings operations.`,
       category: 'Best Practices',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${ruleName}.md`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
       requiresSiblings: true,
       requiresSchema: true,
       examples: [
@@ -28,7 +28,7 @@ const rule: GraphQLESLintRule = {
             type Query {
               me: User
             }
-            
+
             query {
               me {
                 id
@@ -48,7 +48,7 @@ const rule: GraphQLESLintRule = {
             type Query {
               me: User
             }
-            
+
             query {
               me {
                 id
@@ -63,14 +63,12 @@ const rule: GraphQLESLintRule = {
     type: 'suggestion',
   },
   create(context) {
-    const sourceCode = context.getSourceCode();
-    const usedFields = requireUsedFieldsFromContext(ruleName, context);
+    const usedFields = requireUsedFieldsFromContext(RULE_NAME, context);
 
     return {
       FieldDefinition(node) {
         const fieldName = node.name.value;
         const parentTypeName = (node as any).parent.name.value;
-
         const isUsed = usedFields[parentTypeName]?.has(fieldName);
 
         if (isUsed) {
@@ -82,6 +80,7 @@ const rule: GraphQLESLintRule = {
           messageId: UNUSED_FIELD,
           data: { fieldName },
           fix(fixer) {
+            const sourceCode = context.getSourceCode();
             const tokenBefore = (sourceCode as any).getTokenBefore(node);
             const tokenAfter = (sourceCode as any).getTokenAfter(node);
             const isEmptyType = tokenBefore.type === '{' && tokenAfter.type === '}';

@@ -1,25 +1,46 @@
 import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync } from 'graphql-config';
-import { schemaLoaders } from './schema';
-import { operationsLoaders } from './sibling-operations';
+import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
 
-export function loadGraphqlConfig(options: ParserOptions): GraphQLConfig | null {
-  if (options?.skipGraphQLConfig) return null;
-  if (!graphqlConfig) {
-    graphqlConfig = loadConfigSync({
-      throwOnEmpty: false,
-      throwOnMissing: false,
-      extensions: [addCodeFileLoaderExtension],
-    });
+let graphqlConfig: GraphQLConfig;
+
+export function loadGraphqlConfig(options: ParserOptions): GraphQLConfig {
+  // We don't want cache config on test environment
+  // Otherwise schema and documents will be same for all tests
+  if (process.env.NODE_ENV !== 'test' && graphqlConfig) {
+    return graphqlConfig;
   }
+
+  const onDiskConfig = options.skipGraphQLConfig
+    ? null
+    : loadConfigSync({
+        throwOnEmpty: false,
+        throwOnMissing: false,
+        extensions: [addCodeFileLoaderExtension],
+      });
+
+  graphqlConfig =
+    onDiskConfig ||
+    new GraphQLConfig(
+      {
+        config: {
+          schema: options.schema || '', // if undefined will throw error `Project 'default' not found`
+          documents: options.documents || options.operations,
+          extensions: options.extensions,
+          include: options.include,
+          exclude: options.exclude,
+          projects: options.projects,
+        },
+        filepath: 'virtual-config',
+      },
+      [addCodeFileLoaderExtension]
+    );
 
   return graphqlConfig;
 }
 
-let graphqlConfig: GraphQLConfig | null;
-
 const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
-  schemaLoaders.forEach(loader => api.loaders.schema.register(loader));
-  operationsLoaders.forEach(loader => api.loaders.documents.register(loader));
+  api.loaders.schema.register(new CodeFileLoader());
+  api.loaders.documents.register(new CodeFileLoader());
   return { name: 'graphql-eslint-loaders' };
 };
