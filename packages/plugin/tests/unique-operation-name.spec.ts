@@ -21,7 +21,7 @@ ruleTester.runGraphQLTests('unique-operation-name', rule, {
     {
       // Compare filepath of code as real instead of virtual with siblings
       ...SIBLING_OPERATIONS(join(__dirname, 'mocks/unique-fragment.js')),
-      filename: join(__dirname, 'mocks/unique-fragment.js/1_document.graphql '),
+      filename: join(__dirname, 'mocks/unique-fragment.js/1_document.graphql'),
       code: /* GraphQL */ `
         query User {
           user {

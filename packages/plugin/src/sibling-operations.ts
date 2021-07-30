@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import {
   FragmentDefinitionNode,
   FragmentSpreadNode,
@@ -29,6 +30,23 @@ export type SiblingOperations = {
   getOperationByType(operationType: OperationTypeNode): OperationSource[];
 };
 
+const handleVirtualPath = (documents: Source[]): Source[] => {
+  const filepathMap: Record<string, number> = {};
+
+  return documents.map(source => {
+    const { location } = source;
+    if (['.gql', '.graphql'].some(extension => location.endsWith(extension))) {
+      return source;
+    }
+    filepathMap[location] = filepathMap[location] ?? -1;
+    const index = filepathMap[location] += 1;
+    return {
+      ...source,
+      location: resolve(location, `${index}_document.graphql`)
+    };
+  });
+};
+
 const operationsCache: Map<string, Source[]> = new Map();
 const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
 
@@ -56,7 +74,7 @@ const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
 };
 
 export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLConfig): SiblingOperations {
-  const siblings = getSiblings(options.filePath, gqlConfig);
+  const siblings = handleVirtualPath(getSiblings(options.filePath, gqlConfig));
 
   if (siblings.length === 0) {
     let printed = false;

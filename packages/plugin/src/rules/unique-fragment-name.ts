@@ -22,11 +22,11 @@ export const checkNode = (
   const siblings = requireSiblingsOperations(ruleName, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
     node.kind === Kind.FRAGMENT_DEFINITION ? siblings.getFragment(documentName) : siblings.getOperation(documentName);
-  const realFilepath = getOnDiskFilepath(context.getFilename());
+  const filepath = context.getFilename();
 
   const conflictingDocuments = siblingDocuments.filter(f => {
     const isSameName = f.document.name?.value === documentName;
-    const isSamePath = normalizePath(f.filePath) === normalizePath(realFilepath);
+    const isSamePath = normalizePath(f.filePath) === normalizePath(filepath);
     return isSameName && !isSamePath;
   });
 
@@ -36,7 +36,9 @@ export const checkNode = (
       messageId,
       data: {
         documentName,
-        summary: conflictingDocuments.map(f => `\t${relative(process.cwd(), f.filePath)}`).join('\n'),
+        summary: conflictingDocuments
+          .map(f => `\t${relative(process.cwd(), getOnDiskFilepath(f.filePath))}`)
+          .join('\n'),
       },
       loc: {
         start: {
