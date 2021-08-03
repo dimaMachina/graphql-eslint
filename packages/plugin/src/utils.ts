@@ -1,10 +1,11 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
+import { Lexer, GraphQLSchema, Token, DocumentNode, Source } from 'graphql';
 import { GraphQLESLintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
+import { Source as LoaderSource } from '@graphql-tools/utils';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -134,3 +135,5 @@ export const getOnDiskFilepath = (filepath: string): string => {
 
   return filepath;
 };
+
+export const loaderCache: Record<string, LoaderSource> = {};
