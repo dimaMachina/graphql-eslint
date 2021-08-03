@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.0.1
+
+### Patch Changes
+
+- 0fb8d51: Update range of graphql-config and graphql-tools to fix documents loading issues
+
 ## 2.0.0
 
 ### Major Changes
