@@ -2,6 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import { requireReachableTypesFromContext } from '../utils';
 
 const UNREACHABLE_TYPE = 'UNREACHABLE_TYPE';
+const RULE_NAME = 'no-unreachable-types';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -11,7 +12,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       description: `Requires all types to be reachable at some level by root level fields.`,
       category: 'Best Practices',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
       requiresSchema: true,
       examples: [
         {
@@ -46,18 +47,17 @@ const rule: GraphQLESLintRule = {
     type: 'suggestion',
   },
   create(context) {
-    function ensureReachability(node) {
+    const reachableTypes = requireReachableTypesFromContext(RULE_NAME, context);
+
+    function ensureReachability(node): void {
       const typeName = node.name.value;
-      const reachableTypes = requireReachableTypesFromContext('no-unreachable-types', context);
 
       if (!reachableTypes.has(typeName)) {
         context.report({
           node,
           messageId: UNREACHABLE_TYPE,
-          data: {
-            typeName,
-          },
-          fix: fixer => fixer.removeRange(node.range),
+          data: { typeName },
+          fix: fixer => fixer.remove(node),
         });
       }
     }
