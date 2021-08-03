@@ -1,5 +1,19 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.0.0
+
+### Major Changes
+
+- 17014ee: Drop support for Node 10, update to latest graphql-tools
+
+### Patch Changes
+
+- c0b12a5: fix(siblings): return virtual path for code files instead of real path
+- 3701b2a: use `graphql-config` even there is no `graphql-config` consmiconfig file
+- 44f0d73: fix false negative cases for `no-unreachable-types` rule
+- 5065482: fix caching for `no-unreachable-types` and `no-unused-fields` rules
+- 5e8ebd8: add tests for schema loaders
+
 ## 1.1.4
 
 ### Patch Changes
