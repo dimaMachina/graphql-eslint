@@ -4413,10 +4413,10 @@ graphql-config@3.2.0:
     string-env-interpolation "1.0.1"
     tslib "^2.0.0"
 
-graphql-config@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-3.4.0.tgz#79b0913cdabeaebf62a86f6b61a14a62225662cb"
-  integrity sha512-jnnN8wr9vkMMUHq1gOEcG9Qzd3NGgJ6k8nc3WuzsYGrQfZtQX7Mve+sHOUOfDUKsV4uhSRa/gHURA+tw5qK42g==
+graphql-config@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-4.0.0.tgz#412c93f5565d8a57cd962998b0944ef60b12ee88"
+  integrity sha512-gU0R5rWf0OLDlK1cRhj42SSfXZbtnl6WIjhwhrxFV0MhhQW/s0XQvXjG77O5ntUaXq1JPJKhV6+oYaELGs0Mrg==
   dependencies:
     "@endemolshinegroup/cosmiconfig-typescript-loader" "3.0.2"
     "@graphql-tools/graphql-file-loader" "^7.0.0"
