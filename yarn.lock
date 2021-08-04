@@ -1551,6 +1551,13 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@rollup/plugin-json@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-json/-/plugin-json-4.1.0.tgz#54e09867ae6963c593844d8bd7a9c718294496f3"
+  integrity sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
+  dependencies:
+    "@rollup/pluginutils" "^3.0.8"
+
 "@rollup/plugin-node-resolve@7.1.1":
   version "7.1.1"
   resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-7.1.1.tgz#8c6e59c4b28baf9d223028d0e450e06a485bb2b7"
@@ -1869,6 +1876,11 @@
     "@typescript-eslint/types" "4.29.0"
     eslint-visitor-keys "^2.0.0"
 
+"@vercel/ncc@0.28.3":
+  version "0.28.3"
+  resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.28.3.tgz#9461bdbf334d616759b0e7e5415e2f480b9aa30f"
+  integrity sha512-g3gk4D9itbhUQa5MtN7TOdeoQnNLkPDCox5SBaQ/H3Or5lo59TOaZWrLb+x47StiAJ+8DXZS/9MJ67cIBWSsRw==
+
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
@@ -2177,12 +2189,14 @@ better-path-resolve@1.0.0:
   dependencies:
     is-windows "^1.0.0"
 
-bob-the-bundler@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/bob-the-bundler/-/bob-the-bundler-1.2.1.tgz#ed759de2ac59f5bda71cb625d17f1cd787984e4e"
-  integrity sha512-mrmiqX10ghyMB6v4T/VXjmhQie8xrqoOCWZ0b3N8JmTqnzYpOZbSw9UaAygxGzg4V2hjwTz0Wl7H1GlXQnawVA==
+bob-the-bundler@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/bob-the-bundler/-/bob-the-bundler-1.5.1.tgz#31468d2194fde09f05ee40d5be8f94aa3e5f3781"
+  integrity sha512-npVm0JSzufI3419f1sFJ7r5A7c8oZ8893jJCaXa9AZNRfVMwKXKH6Z+820JvLbQMahQw3IrRImzEnsRWbd6riw==
   dependencies:
+    "@rollup/plugin-json" "4.1.0"
     "@rollup/plugin-node-resolve" "7.1.1"
+    "@vercel/ncc" "0.28.3"
     builtins "4.0.0"
     consola "2.11.3"
     cosmiconfig "6.0.0"
