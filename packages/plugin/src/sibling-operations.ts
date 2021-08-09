@@ -194,6 +194,8 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
       getOperationByType: type => getOperations().filter(o => o.document.operation === type),
       getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
     };
+
+    siblingOperationsCache.set(siblings, siblingOperations);
   }
   return siblingOperations;
 }

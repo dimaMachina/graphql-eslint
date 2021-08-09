@@ -1,8 +1,8 @@
 diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
-index cac81bc..3a3dbbe 100644
+index 2b55249..08547f3 100644
 --- a/node_modules/eslint/lib/rule-tester/rule-tester.js
 +++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
-@@ -905,7 +905,17 @@ class RuleTester {
+@@ -911,7 +911,17 @@ class RuleTester {
                          "Expected no autofixes to be suggested"
                      );
                  } else {

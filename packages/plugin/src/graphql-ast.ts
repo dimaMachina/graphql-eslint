@@ -70,7 +70,7 @@ export function getUsedFields(schema: GraphQLSchema, operations: SiblingOperatio
   if (process.env.NODE_ENV !== 'test' && usedFieldsCache) {
     return usedFieldsCache;
   }
-  const usedFields: UsedFields = {};
+  const usedFields: UsedFields = Object.create(null);
   const typeInfo = new TypeInfo(schema);
   const allDocuments = [...operations.getOperations(), ...operations.getFragments()];
 
