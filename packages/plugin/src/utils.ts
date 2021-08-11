@@ -1,10 +1,11 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { Source, Lexer, GraphQLSchema, Token, DocumentNode } from 'graphql';
+import { Lexer, GraphQLSchema, Token, DocumentNode, Source } from 'graphql';
 import { GraphQLESLintRuleContext } from './types';
 import { AST } from 'eslint';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
+import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -134,3 +135,21 @@ export const getOnDiskFilepath = (filepath: string): string => {
 
   return filepath;
 };
+
+// Small workaround for the bug in older versions of @graphql-tools/load
+// Can be removed after graphql-config bumps to a new version
+export const loaderCache: Record<string, LoaderSource[]> = new Proxy(Object.create(null), {
+  get(cache, key) {
+    const value = cache[key];
+    if (value) {
+      return asArray(value);
+    }
+    return undefined;
+  },
+  set(cache, key, value) {
+    if (value) {
+      cache[key] = asArray(value);
+    }
+    return true;
+  }
+});

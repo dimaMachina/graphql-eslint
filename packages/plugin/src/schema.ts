@@ -2,7 +2,7 @@ import { GraphQLSchema } from 'graphql';
 import { GraphQLConfig } from 'graphql-config';
 import { asArray } from '@graphql-tools/utils';
 import { ParserOptions } from './types';
-import { getOnDiskFilepath } from './utils';
+import { getOnDiskFilepath, loaderCache } from './utils';
 
 const schemaCache: Map<string, GraphQLSchema> = new Map();
 
@@ -17,12 +17,15 @@ export function getSchema(options: ParserOptions = {}, gqlConfig: GraphQLConfig)
     return null;
   }
 
-  if (schemaCache.has(schemaKey)) {
-    return schemaCache.get(schemaKey);
-  }
+  let schema = schemaCache.get(schemaKey);
 
-  const schema = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', options.schemaOptions);
-  schemaCache.set(schemaKey, schema);
+  if (!schema) {
+    schema = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', {
+      cache: loaderCache,
+      ...options.schemaOptions
+    });
+    schemaCache.set(schemaKey, schema);
+  }
 
   return schema;
 }

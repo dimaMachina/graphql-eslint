@@ -1,5 +1,5 @@
-import { GraphQLSchema, TypeInfo, ASTKindToNode, Visitor, visit, visitWithTypeInfo, parse } from 'graphql';
-import { printSchemaWithDirectives } from '@graphql-tools/utils';
+import { GraphQLSchema, TypeInfo, ASTKindToNode, Visitor, visit, visitWithTypeInfo } from 'graphql';
+import { getDocumentNodeFromSchema, getRootTypeNames } from '@graphql-tools/utils';
 import { SiblingOperations } from './sibling-operations';
 
 export type ReachableTypes = Set<string>;
@@ -12,10 +12,9 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   if (process.env.NODE_ENV !== 'test' && reachableTypesCache) {
     return reachableTypesCache;
   }
-  // 👀 `printSchemaWithDirectives` keep all custom directives and `printSchema` from `graphql` not
-  const printedSchema = printSchemaWithDirectives(schema); // Returns a string representation of the schema
-  const astNode = parse(printedSchema); // Transforms the string into ASTNode
-  const cache = Object.create(null);
+
+  const astNode = getDocumentNodeFromSchema(schema); // Transforms the schema into ASTNode
+  const cache: Record<string, number> = Object.create(null);
 
   const collect = (nodeType: any): void => {
     let node = nodeType;
@@ -32,10 +31,12 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
       node.operationTypes.forEach(collect);
     },
     ObjectTypeDefinition(node) {
-      [node, ...node.interfaces].forEach(collect);
+      collect(node);
+      node.interfaces?.forEach(collect);
     },
     UnionTypeDefinition(node) {
-      [node, ...node.types].forEach(collect);
+      collect(node);
+      node.types?.forEach(collect);
     },
     InputObjectTypeDefinition: collect,
     InterfaceTypeDefinition: collect,
@@ -49,7 +50,8 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
 
   visit(astNode, visitor);
 
-  const operationTypeNames = new Set(['Query', 'Mutation', 'Subscription']);
+  const operationTypeNames = getRootTypeNames(schema);
+  
   const usedTypes = Object.entries(cache)
     .filter(([typeName, usedCount]) => usedCount > 1 || operationTypeNames.has(typeName))
     .map(([typeName]) => typeName);
@@ -68,7 +70,7 @@ export function getUsedFields(schema: GraphQLSchema, operations: SiblingOperatio
   if (process.env.NODE_ENV !== 'test' && usedFieldsCache) {
     return usedFieldsCache;
   }
-  const usedFields: UsedFields = {};
+  const usedFields: UsedFields = Object.create(null);
   const typeInfo = new TypeInfo(schema);
   const allDocuments = [...operations.getOperations(), ...operations.getFragments()];
 
