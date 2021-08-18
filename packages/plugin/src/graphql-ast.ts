@@ -12,15 +12,15 @@ import { SiblingOperations } from './sibling-operations';
 
 export type ReachableTypes = Set<string>;
 
-let reachableTypes: ReachableTypes;
+let reachableTypesCache: ReachableTypes;
 
 export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   // We don't want cache reachableTypes on test environment
   // Otherwise reachableTypes will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && reachableTypes) {
-    return reachableTypes;
+  if (process.env.NODE_ENV !== 'test' && reachableTypesCache) {
+    return reachableTypesCache;
   }
-  reachableTypes = new Set();
+  const reachableTypes: ReachableTypes = new Set();
   const getTypeName = node => ('type' in node ? getTypeName(node.type) : node.name.value);
 
   const collect = (node: ASTNode): false | void => {
@@ -62,20 +62,21 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
       visit(type.astNode, visitor);
     }
   }
-  return reachableTypes;
+  reachableTypesCache = reachableTypes
+  return reachableTypesCache;
 }
 
 export type UsedFields = Record<string, Set<string>>;
 
-let usedFields: UsedFields;
+let usedFieldsCache: UsedFields;
 
 export function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): UsedFields {
   // We don't want cache usedFields on test environment
   // Otherwise usedFields will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && usedFields) {
-    return usedFields;
+  if (process.env.NODE_ENV !== 'test' && usedFieldsCache) {
+    return usedFieldsCache;
   }
-  usedFields = Object.create(null);
+  const usedFields: UsedFields = Object.create(null);
   const typeInfo = new TypeInfo(schema);
 
   const visitor = visitWithTypeInfo(typeInfo, {
@@ -97,5 +98,6 @@ export function getUsedFields(schema: GraphQLSchema, operations: SiblingOperatio
   for (const { document } of allDocuments) {
     visit(document, visitor);
   }
-  return usedFields;
+  usedFieldsCache = usedFields;
+  return usedFieldsCache;
 }
