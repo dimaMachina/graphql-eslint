@@ -6,7 +6,7 @@
     "prettier",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "unicorn"],
   "rules": {
     "no-empty": "off",
     "no-console": "error",
@@ -22,7 +22,8 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/ban-types": "off",
+    "unicorn/prefer-array-some": "error"
   },
   "env": {
     "es6": true,
