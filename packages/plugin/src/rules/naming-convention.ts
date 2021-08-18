@@ -49,7 +49,7 @@ function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessa
   if (suffix && !name.endsWith(suffix)) {
     return { ok: false, errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix' };
   }
-  if (style && !acceptedStyles.some(acceptedStyle => acceptedStyle === style)) {
+  if (style && !acceptedStyles.includes(style)) {
     return {
       ok: false,
       errorMessage: `{{nodeType}} name "{{nodeName}}" should be in one of the following options: ${acceptedStyles.join(
