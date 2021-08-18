@@ -101,7 +101,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                 if (selection.kind === 'Field' && selection.name.value === fieldName) {
                   found = true;
                 } else if (selection.kind === 'InlineFragment') {
-                  found = !!(selection.selectionSet?.selections || []).find(
+                  found = (selection.selectionSet?.selections || []).some(
                     s => s.kind === 'Field' && s.name.value === fieldName
                   );
                 } else if (selection.kind === 'FragmentSpread') {
@@ -110,7 +110,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                   if (foundSpread[0]) {
                     checkedFragmentSpreads.add(foundSpread[0].document.name.value);
 
-                    found = !!(foundSpread[0].document.selectionSet?.selections || []).find(
+                    found = (foundSpread[0].document.selectionSet?.selections || []).some(
                       s => s.kind === 'Field' && s.name.value === fieldName
                     );
                   }
@@ -127,7 +127,7 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
                 parent.kind === 'InlineFragment' &&
                 parent.parent &&
                 parent.parent.kind === 'SelectionSet' &&
-                !!parent.parent.selections.find(s => s.kind === 'Field' && s.name.value === fieldName);
+                parent.parent.selections.some(s => s.kind === 'Field' && s.name.value === fieldName);
 
               if (!found && !hasIdFieldInInterfaceSelectionSet) {
                 context.report({
