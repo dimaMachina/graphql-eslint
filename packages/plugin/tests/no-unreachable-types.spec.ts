@@ -77,7 +77,12 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
     `),
     useSchema(/* GraphQL */ `
       # DirectiveDefinition
-      directive @auth(role: [String]!) on FIELD_DEFINITION
+      directive @auth(role: [Role!]!) on FIELD_DEFINITION
+
+      enum Role {
+        ADMIN
+        USER
+      }
 
       type Query {
         # Directive
@@ -95,8 +100,67 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
         subscription: RootSubscription
       }
     `),
+    useSchema(/* GraphQL */ `
+      interface User {
+        id: ID!
+      }
+
+      interface Manager implements User {
+        id: ID!
+      }
+
+      type TopManager implements Manager {
+        id: ID!
+        name: String
+      }
+
+      type Query {
+        me: User
+      }
+    `),
   ],
   invalid: [
+    {
+      ...useSchema(/* GraphQL */ `
+        type Query {
+          node(id: ID!): AnotherNode!
+        }
+
+        interface Node {
+          id: ID!
+        }
+
+        interface AnotherNode {
+          createdAt: String
+        }
+
+        interface User implements Node {
+          id: ID!
+          name: String
+        }
+
+        type SuperUser implements User & Node {
+          id: ID!
+          name: String
+          address: String
+        }
+      `),
+      output: /* GraphQL */ `
+        # normalize graphql
+        type Query {
+          node(id: ID!): AnotherNode!
+        }
+
+        interface AnotherNode {
+          createdAt: String
+        }
+      `,
+      errors: [
+        { message: `Type "Node" is unreachable` },
+        { message: `Type "User" is unreachable` },
+        { message: `Type "SuperUser" is unreachable` },
+      ],
+    },
     {
       ...useSchema(/* GraphQL */ `
         # ScalarTypeDefinition
@@ -114,6 +178,21 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
         # UnionTypeDefinition
         union Union = String | Boolean
 
+        # InputObjectTypeDefinition
+        input UsersFilter {
+          limit: Int
+        }
+
+        # InterfaceTypeDefinition
+        interface Address {
+          city: String
+        }
+
+        # ObjectTypeDefinition
+        type User implements Address {
+          city: String
+        }
+
         type Query
       `),
       output: /* GraphQL */ `
@@ -125,26 +204,10 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
         { message: 'Type "Role" is unreachable' },
         { message: 'Type "auth" is unreachable' },
         { message: 'Type "Union" is unreachable' },
+        { message: `Type "UsersFilter" is unreachable` },
+        { message: 'Type "Address" is unreachable' },
+        { message: 'Type "User" is unreachable' },
       ],
-    },
-    {
-      ...useSchema(/* GraphQL */ `
-        # InterfaceTypeDefinition
-        interface Address {
-          city: String
-        }
-
-        type User implements Address {
-          city: String
-        }
-      `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        interface Address {
-          city: String
-        }
-      `,
-      errors: [{ message: 'Type "User" is unreachable' }],
     },
     {
       ...useSchema(/* GraphQL */ `
@@ -164,11 +227,18 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
         type Query {
           user: User!
         }
+
+        scalar DateTime
       `),
       output: /* GraphQL */ `
         # normalize graphql
         interface User {
           id: String
+        }
+
+        type SuperUser implements User {
+          id: String
+          superDetail: SuperDetail
         }
 
         type SuperDetail {
@@ -179,12 +249,16 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
           user: User!
         }
       `,
-      errors: [{ message: 'Type "SuperUser" is unreachable' }],
+      errors: [{ message: 'Type "DateTime" is unreachable' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         interface User {
           id: String
+        }
+
+        interface AnotherUser {
+          createdAt: String
         }
 
         type SuperUser implements User {
@@ -197,20 +271,24 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
         }
 
         type Query {
-          user: User!
+          user: AnotherUser!
         }
       `),
       output: /* GraphQL */ `
         # normalize graphql
-        interface User {
-          id: String
+        interface AnotherUser {
+          createdAt: String
         }
 
         type Query {
-          user: User!
+          user: AnotherUser!
         }
       `,
-      errors: [{ message: `Type "SuperUser" is unreachable` }, { message: `Type "SuperUser" is unreachable` }],
+      errors: [
+        { message: `Type "User" is unreachable` },
+        { message: `Type "SuperUser" is unreachable` },
+        { message: `Type "SuperUser" is unreachable` },
+      ],
     },
     {
       ...useSchema(/* GraphQL */ `
@@ -232,6 +310,8 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
           name: String
           address: String
         }
+
+        scalar DateTime
       `),
       output: /* GraphQL */ `
         # normalize graphql
@@ -247,39 +327,14 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
           id: ID!
           name: String
         }
-      `,
-      errors: [{ message: `Type "SuperUser" is unreachable` }],
-    },
-    {
-      ...useSchema(/* GraphQL */ `
-        type Query {
-          me: User!
-        }
 
-        interface User {
+        type SuperUser implements User & Node {
+          id: ID!
           name: String
-        }
-
-        type SuperUser implements User {
           address: String
         }
-
-        # InputObjectTypeDefinition
-        input UsersFilter {
-          limit: Int
-        }
-      `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        type Query {
-          me: User!
-        }
-
-        interface User {
-          name: String
-        }
       `,
-      errors: [{ message: `Type "SuperUser" is unreachable` }, { message: `Type "UsersFilter" is unreachable` }],
+      errors: [{ message: `Type "DateTime" is unreachable` }],
     },
   ],
 });

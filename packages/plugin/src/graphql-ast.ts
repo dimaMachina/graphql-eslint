@@ -1,99 +1,101 @@
-import { GraphQLSchema, TypeInfo, ASTKindToNode, Visitor, visit, visitWithTypeInfo } from 'graphql';
-import { getDocumentNodeFromSchema, getRootTypeNames } from '@graphql-tools/utils';
+import {
+  ASTNode,
+  Visitor,
+  TypeInfo,
+  GraphQLSchema,
+  ASTKindToNode,
+  visit,
+  isInterfaceType,
+  visitWithTypeInfo,
+} from 'graphql';
 import { SiblingOperations } from './sibling-operations';
 
 export type ReachableTypes = Set<string>;
 
-let reachableTypesCache: ReachableTypes;
+let reachableTypes: ReachableTypes;
 
 export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   // We don't want cache reachableTypes on test environment
   // Otherwise reachableTypes will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && reachableTypesCache) {
-    return reachableTypesCache;
+  if (process.env.NODE_ENV !== 'test' && reachableTypes) {
+    return reachableTypes;
   }
+  reachableTypes = new Set();
+  const getTypeName = node => ('type' in node ? getTypeName(node.type) : node.name.value);
 
-  const astNode = getDocumentNodeFromSchema(schema); // Transforms the schema into ASTNode
-  const cache: Record<string, number> = Object.create(null);
-
-  const collect = (nodeType: any): void => {
-    let node = nodeType;
-    while (node.type) {
-      node = node.type;
+  const collect = (node: ASTNode): false | void => {
+    const typeName = getTypeName(node);
+    if (reachableTypes.has(typeName)) {
+      // skip visiting this node if type is already visited
+      return false;
     }
-    const typeName = node.name.value;
-    cache[typeName] ??= 0;
-    cache[typeName] += 1;
+    reachableTypes.add(typeName);
+    const type = schema.getType(typeName) || schema.getDirective(typeName);
+
+    if (isInterfaceType(type)) {
+      const { objects, interfaces } = schema.getImplementations(type);
+      for (const { astNode } of [...objects, ...interfaces]) {
+        visit(astNode, visitor);
+      }
+    } else {
+      visit(type.astNode, visitor);
+    }
   };
 
   const visitor: Visitor<ASTKindToNode> = {
-    SchemaDefinition(node) {
-      node.operationTypes.forEach(collect);
-    },
     ObjectTypeDefinition(node) {
-      collect(node);
-      node.interfaces?.forEach(collect);
+      node.interfaces.forEach(collect);
+      return collect(node);
     },
     UnionTypeDefinition(node) {
-      collect(node);
-      node.types?.forEach(collect);
+      node.types.forEach(collect);
+      return collect(node);
     },
-    InputObjectTypeDefinition: collect,
     InterfaceTypeDefinition: collect,
-    ScalarTypeDefinition: collect,
     InputValueDefinition: collect,
-    DirectiveDefinition: collect,
-    EnumTypeDefinition: collect,
     FieldDefinition: collect,
     Directive: collect,
   };
 
-  visit(astNode, visitor);
-
-  const operationTypeNames = getRootTypeNames(schema);
-  
-  const usedTypes = Object.entries(cache)
-    .filter(([typeName, usedCount]) => usedCount > 1 || operationTypeNames.has(typeName))
-    .map(([typeName]) => typeName);
-
-  reachableTypesCache = new Set(usedTypes);
-  return reachableTypesCache;
+  for (const type of [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]) {
+    if (type) {
+      visit(type.astNode, visitor);
+    }
+  }
+  return reachableTypes;
 }
 
 export type UsedFields = Record<string, Set<string>>;
 
-let usedFieldsCache: UsedFields;
+let usedFields: UsedFields;
 
 export function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): UsedFields {
   // We don't want cache usedFields on test environment
   // Otherwise usedFields will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && usedFieldsCache) {
-    return usedFieldsCache;
+  if (process.env.NODE_ENV !== 'test' && usedFields) {
+    return usedFields;
   }
-  const usedFields: UsedFields = Object.create(null);
+  usedFields = Object.create(null);
   const typeInfo = new TypeInfo(schema);
-  const allDocuments = [...operations.getOperations(), ...operations.getFragments()];
 
   const visitor = visitWithTypeInfo(typeInfo, {
-    Field: {
-      enter(node): false | void {
-        const fieldDef = typeInfo.getFieldDef();
-        if (!fieldDef) {
-          // skip visiting this node if field is not defined in schema
-          return false;
-        }
-        const parentTypeName = typeInfo.getParentType().name;
-        const fieldName = node.name.value;
+    Field(node): false | void {
+      const fieldDef = typeInfo.getFieldDef();
+      if (!fieldDef) {
+        // skip visiting this node if field is not defined in schema
+        return false;
+      }
+      const parentTypeName = typeInfo.getParentType().name;
+      const fieldName = node.name.value;
 
-        usedFields[parentTypeName] ??= new Set();
-        usedFields[parentTypeName].add(fieldName);
-      },
+      usedFields[parentTypeName] ??= new Set();
+      usedFields[parentTypeName].add(fieldName);
     },
   });
 
+  const allDocuments = [...operations.getOperations(), ...operations.getFragments()];
   for (const { document } of allDocuments) {
     visit(document, visitor);
   }
-  usedFieldsCache = usedFields;
-  return usedFieldsCache;
+  return usedFields;
 }
