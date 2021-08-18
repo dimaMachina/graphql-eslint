@@ -1,19 +1,19 @@
-import { GraphQLESLintRule } from '../types';
 import { TokenKind } from 'graphql';
-import { checkForEslint } from '../utils';
+import { GraphQLESLintRule } from '../types';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
 const rule: GraphQLESLintRule = {
   meta: {
     messages: {
-      [HASHTAG_COMMENT]: `Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.`,
+      [HASHTAG_COMMENT]:
+        'Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.',
     },
     docs: {
       description:
         'Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.\nAllows to use hashtag for comments, as long as it\'s not attached to an AST definition.',
       category: 'Best Practices',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-hashtag-description.md`,
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-hashtag-description.md',
       examples: [
         {
           title: 'Incorrect',
@@ -55,60 +55,27 @@ const rule: GraphQLESLintRule = {
   create(context) {
     return {
       Document(node) {
-        if (node) {
-          const rawNode = node.rawNode();
+        const rawNode = node.rawNode();
+        let token = rawNode.loc.startToken;
 
-          if (rawNode && rawNode.loc && rawNode.loc.startToken) {
-            let token = rawNode.loc.startToken;
+        while (token !== null) {
+          const { kind, prev, next, value, line, column } = token;
 
-            while (token !== null) {
-              if (token.kind === TokenKind.COMMENT && token.next && token.prev) {
-                if (
-                  token.prev.kind !== TokenKind.SOF &&
-                  token.prev.kind !== TokenKind.COMMENT &&
-                  token.next.kind !== TokenKind.COMMENT &&
-                  token.next.line - token.line > 1 &&
-                  token.prev.line !== token.line
-                ) {
-                  context.report({
-                    messageId: HASHTAG_COMMENT,
-                    loc: {
-                      start: {
-                        line: token.line,
-                        column: token.column,
-                      },
-                      end: {
-                        line: token.line,
-                        column: token.column,
-                      },
-                    },
-                  });
-                } else if (
-                  token.next.kind !== TokenKind.COMMENT &&
-                  !checkForEslint(token, rawNode) &&
-                  token.next.kind !== TokenKind.EOF &&
-                  token.next.line - token.line < 2 &&
-                  token.prev.line !== token.line
-                ) {
-                  context.report({
-                    messageId: HASHTAG_COMMENT,
-                    loc: {
-                      start: {
-                        line: token.line,
-                        column: token.column,
-                      },
-                      end: {
-                        line: token.line,
-                        column: token.column,
-                      },
-                    },
-                  });
-                }
-              }
+          if (kind === TokenKind.COMMENT && prev && next) {
+            const isEslintComment = value.trimLeft().startsWith('eslint');
+            const linesAfter = next.line - line;
 
-              token = token.next;
+            if (!isEslintComment && line !== prev.line && next.kind === TokenKind.NAME && linesAfter < 2) {
+              context.report({
+                messageId: HASHTAG_COMMENT,
+                loc: {
+                  start: { line, column },
+                  end: { line, column },
+                },
+              });
             }
           }
+          token = next;
         }
       },
     };

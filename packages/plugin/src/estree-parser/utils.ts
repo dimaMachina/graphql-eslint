@@ -69,33 +69,28 @@ export function convertRange(gqlLocation: Location): [number, number] {
   return [gqlLocation.start, gqlLocation.end];
 }
 
-export function extractCommentsFromAst(node: ASTNode): Comment[] {
-  const { loc } = node;
-
+export function extractCommentsFromAst(loc: Location): Comment[] {
   if (!loc) {
     return [];
   }
-
   const comments: Comment[] = [];
   let token = loc.startToken;
 
   while (token !== null) {
-    if (token.kind === TokenKind.COMMENT) {
-      const { line, column } = token;
+    const { kind, value, line, column, start, end, next } = token;
+    if (kind === TokenKind.COMMENT) {
       comments.push({
         type: 'Block',
-        value: ` ${token.value} `,
+        value,
         loc: {
           start: { line, column },
           end: { line, column },
         },
-        range: [token.start, token.end],
+        range: [start, end],
       });
     }
-
-    token = token.next;
+    token = next;
   }
-
   return comments;
 }
 
