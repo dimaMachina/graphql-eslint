@@ -26,8 +26,7 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   const collect = (node: ASTNode): false | void => {
     const typeName = getTypeName(node);
     if (reachableTypes.has(typeName)) {
-      // skip visiting this node if type is already visited
-      return false;
+      return;
     }
     reachableTypes.add(typeName);
     const type = schema.getType(typeName) || schema.getDirective(typeName);
@@ -43,18 +42,13 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   };
 
   const visitor: Visitor<ASTKindToNode> = {
-    ObjectTypeDefinition(node) {
-      node.interfaces.forEach(collect);
-      return collect(node);
-    },
-    UnionTypeDefinition(node) {
-      node.types.forEach(collect);
-      return collect(node);
-    },
     InterfaceTypeDefinition: collect,
+    ObjectTypeDefinition: collect,
     InputValueDefinition: collect,
+    UnionTypeDefinition: collect,
     FieldDefinition: collect,
     Directive: collect,
+    NamedType: collect,
   };
 
   for (const type of [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]) {
@@ -62,7 +56,7 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
       visit(type.astNode, visitor);
     }
   }
-  reachableTypesCache = reachableTypes
+  reachableTypesCache = reachableTypes;
   return reachableTypesCache;
 }
 
