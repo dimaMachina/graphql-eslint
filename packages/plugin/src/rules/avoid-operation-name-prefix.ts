@@ -1,4 +1,4 @@
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
@@ -10,41 +10,6 @@ export type AvoidOperationNamePrefixConfig = [
 ];
 
 const AVOID_OPERATION_NAME_PREFIX = 'AVOID_OPERATION_NAME_PREFIX';
-
-function verifyRule(
-  context: GraphQLESLintRuleContext<AvoidOperationNamePrefixConfig>,
-  node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>
-) {
-  const config = context.options[0] || { keywords: [], caseSensitive: false };
-  const caseSensitive = config.caseSensitive;
-  const keywords = config.keywords || [];
-
-  if (node && node.name && node.name.value !== '') {
-    for (const keyword of keywords) {
-      const testKeyword = caseSensitive ? keyword : keyword.toLowerCase();
-      const testName = caseSensitive ? node.name.value : node.name.value.toLowerCase();
-
-      if (testName.startsWith(testKeyword)) {
-        context.report({
-          loc: {
-            start: {
-              line: node.name.loc.start.line,
-              column: node.name.loc.start.column - 1,
-            },
-            end: {
-              line: node.name.loc.start.line,
-              column: node.name.loc.start.column + testKeyword.length - 1,
-            },
-          },
-          data: {
-            invalidPrefix: keyword,
-          },
-          messageId: AVOID_OPERATION_NAME_PREFIX,
-        });
-      }
-    }
-  }
-}
 
 const rule: GraphQLESLintRule<AvoidOperationNamePrefixConfig> = {
   meta: {
@@ -100,11 +65,38 @@ const rule: GraphQLESLintRule<AvoidOperationNamePrefixConfig> = {
   },
   create(context) {
     return {
-      OperationDefinition(node) {
-        verifyRule(context, node);
-      },
-      FragmentDefinition(node) {
-        verifyRule(context, node);
+      'OperationDefinition, FragmentDefinition'(
+        node: GraphQLESTreeNode<OperationDefinitionNode | FragmentDefinitionNode>
+      ) {
+        const config = context.options[0] || { keywords: [], caseSensitive: false };
+        const caseSensitive = config.caseSensitive;
+        const keywords = config.keywords || [];
+
+        if (node && node.name && node.name.value !== '') {
+          for (const keyword of keywords) {
+            const testKeyword = caseSensitive ? keyword : keyword.toLowerCase();
+            const testName = caseSensitive ? node.name.value : node.name.value.toLowerCase();
+
+            if (testName.startsWith(testKeyword)) {
+              context.report({
+                loc: {
+                  start: {
+                    line: node.name.loc.start.line,
+                    column: node.name.loc.start.column - 1,
+                  },
+                  end: {
+                    line: node.name.loc.start.line,
+                    column: node.name.loc.start.column + testKeyword.length - 1,
+                  },
+                },
+                data: {
+                  invalidPrefix: keyword,
+                },
+                messageId: AVOID_OPERATION_NAME_PREFIX,
+              });
+            }
+          }
+        }
       },
     };
   },

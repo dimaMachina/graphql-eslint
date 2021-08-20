@@ -1,28 +1,8 @@
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { OperationDefinitionNode, FragmentDefinitionNode } from 'graphql';
 
 const NO_OPERATION_NAME_SUFFIX = 'NO_OPERATION_NAME_SUFFIX';
-
-function verifyRule(
-  context: GraphQLESLintRuleContext,
-  node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>
-) {
-  if (node && node.name && node.name.value !== '') {
-    const invalidSuffix = (node.type === 'OperationDefinition' ? node.operation : 'fragment').toLowerCase();
-
-    if (node.name.value.toLowerCase().endsWith(invalidSuffix)) {
-      context.report({
-        node: node.name,
-        data: {
-          invalidSuffix,
-        },
-        fix: fixer => fixer.removeRange([node.name.range[1] - invalidSuffix.length, node.name.range[1]]),
-        messageId: NO_OPERATION_NAME_SUFFIX,
-      });
-    }
-  }
-}
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -58,11 +38,23 @@ const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      OperationDefinition(node) {
-        verifyRule(context, node);
-      },
-      FragmentDefinition(node) {
-        verifyRule(context, node);
+      'OperationDefinition, FragmentDefinition'(
+        node: GraphQLESTreeNode<OperationDefinitionNode | FragmentDefinitionNode>
+      ) {
+        if (node && node.name && node.name.value !== '') {
+          const invalidSuffix = (node.type === 'OperationDefinition' ? node.operation : 'fragment').toLowerCase();
+
+          if (node.name.value.toLowerCase().endsWith(invalidSuffix)) {
+            context.report({
+              node: node.name,
+              data: {
+                invalidSuffix,
+              },
+              fix: fixer => fixer.removeRange([node.name.range[1] - invalidSuffix.length, node.name.range[1]]),
+              messageId: NO_OPERATION_NAME_SUFFIX,
+            });
+          }
+        }
       },
     };
   },
