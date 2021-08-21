@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.0.2
+
+### Patch Changes
+
+- 403b946: enhance(eslint-plugin): refactor the parts using tools
+
 ## 2.0.1
 
 ### Patch Changes
