@@ -17,6 +17,7 @@ import noHashtagDescription from './no-hashtag-description';
 import noOperationNameSuffix from './no-operation-name-suffix';
 import noUnreachableTypes from './no-unreachable-types';
 import noUnusedFields from './no-unused-fields';
+import requireDeprecationDate from './require-deprecation-date';
 import requireDeprecationReason from './require-deprecation-reason';
 import requireDescription from './require-description';
 import requireIdWhenAvailable from './require-id-when-available';
@@ -41,6 +42,7 @@ export const rules = {
   'no-operation-name-suffix': noOperationNameSuffix,
   'no-unreachable-types': noUnreachableTypes,
   'no-unused-fields': noUnusedFields,
+  'require-deprecation-date': requireDeprecationDate,
   'require-deprecation-reason': requireDeprecationReason,
   'require-description': requireDescription,
   'require-id-when-available': requireIdWhenAvailable,
