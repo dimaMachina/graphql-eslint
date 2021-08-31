@@ -1068,14 +1068,14 @@
   resolved "https://registry.yarnpkg.com/@changesets/get-version-range-type/-/get-version-range-type-0.3.2.tgz#8131a99035edd11aa7a44c341cbb05e668618c67"
   integrity sha512-SVqwYs5pULYjYT4op21F2pVbcrca4qA/bAA3FmFXKMN7Y+HcO8sbZUTx3TAy2VXulP2FACd1aC7f2nTuqSPbqg==
 
-"@changesets/git@1.1.1", "@changesets/git@^1.1.2":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@changesets/git/-/git-1.1.1.tgz#f444d3ff3604acb6949560656c9ef330485a5fa3"
-  integrity sha512-Z12TcKwgU33YE3r76cyU+X81RchOXljDZ5s3G2u0Zd+ODyrwlDb91IO55+6R0Ha6ouPz8ioont0gA70c1RFngg==
+"@changesets/git@1.1.2", "@changesets/git@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@changesets/git/-/git-1.1.2.tgz#248d4418bcb2d4f198852409cfcbd06a1fcb0424"
+  integrity sha512-dfza8elsIwcYVa4fFzLaPs4+AkoCFiW3sfzkkC7WR+rG9j+zZh7CelzVpnoiAbEI2QOzeCbZKMoLSvBPgHhB1g==
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@changesets/errors" "^0.1.4"
-    "@changesets/types" "^4.0.0"
+    "@changesets/types" "^4.0.1"
     "@manypkg/get-packages" "^1.0.1"
     is-subdir "^1.1.1"
     spawndamnit "^2.0.0"
@@ -1119,11 +1119,6 @@
     chalk "^2.1.0"
     fs-extra "^7.0.1"
     p-filter "^2.1.0"
-
-"@changesets/types@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@changesets/types/-/types-4.0.0.tgz#635f804546b0a96ecc0ca3f26403a6782a3dc938"
-  integrity sha512-whLmPx2wgJRoOtxVZop+DJ71z1gTSkij7osiHgN+pe//FiE6bb4ffvBBb0rACs2cUPfAkWxgSPzqkECgKS1jvQ==
 
 "@changesets/types@^4.0.1":
   version "4.0.1"
