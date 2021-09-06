@@ -1,5 +1,17 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.1.0
+
+### Minor Changes
+
+- c6886ba: [New rule] Compare operation/fragment name to the file name
+- 2032a66: fix `no-unreachable-types` rule when interface implementing other interface
+
+### Patch Changes
+
+- c6886ba: NEW PLUGIN: Compare operation/fragment name to the file name
+- 7b12bbf: fix(no-hashtag-description): allow hashtag comments between fields and arguments
+
 ## 2.0.2
 
 ### Patch Changes
