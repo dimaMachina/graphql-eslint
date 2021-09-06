@@ -1,93 +1,90 @@
-import { GraphQLRuleTester } from '../src/testkit';
+import { GraphQLRuleTester } from '../src';
 import rule from '../src/rules/no-hashtag-description';
-import { Kind } from 'graphql';
 
 const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('no-hashtag-description', rule, {
   valid: [
-    {
-      code: /* GraphQL */ `
-        " test "
-        type Query {
-          foo: String
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        # Test
+    /* GraphQL */ `
+      " Good "
+      type Query {
+        foo: String
+      }
+    `,
+    /* GraphQL */ `
+      # Good
 
-        type Query {
-          foo: String
-        }
-      `,
-    },
-    {
-      code: `#import t
+      type Query {
+        foo: String
+      }
+      # Good
+    `,
+    /* GraphQL */ `
+      #import t
 
-        type Query {
-          foo: String
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        # multiline
-        # multiline
-        # multiline
-        # multiline
+      type Query {
+        foo: String
+      }
+    `,
+    /* GraphQL */ `
+      # multiline
+      # multiline
+      # multiline
 
-        type Query {
-          foo: String
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        type Query {
-          foo: String
-        }
+      type Query {
+        foo: String
+      }
+    `,
+    /* GraphQL */ `
+      type Query { # Good
+        foo: String # Good
+      } # Good
+    `,
+    /* GraphQL */ `
+      # eslint-disable-next-line
+      type Query {
+        foo: String
+      }
+    `,
+    /* GraphQL */ `
+      type Query {
+        # Good
 
-        # Test
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        type Query {
-          foo: String # this is also fine, comes after the definition
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        type Query { # this is also fine, comes after the definition
-          foo: String
-        } # this is also fine, comes after the definition
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        type Query {
-          foo: String
-        }
+        foo: ID
+      }
+    `,
+    /* GraphQL */ `
+      type Query {
+        foo: ID
+        # Good
 
-        # Test
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        # eslint
-        type Query {
-          foo: String
-        }
-      `,
-    },
+        bar: ID
+      }
+    `,
+    /* GraphQL */ `
+      type Query {
+        user(
+          # Good
+
+          id: Int
+        ): User
+      }
+    `,
   ],
   invalid: [
     {
       code: /* GraphQL */ `
-        # Test
+        # Bad
+        type Query {
+          foo: String
+        }
+      `,
+      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+    },
+    {
+      code: /* GraphQL */ `
+        # multiline
+        # multiline
         type Query {
           foo: String
         }
@@ -97,8 +94,30 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
     {
       code: /* GraphQL */ `
         type Query {
-          # Test
+          # Bad
           foo: String
+        }
+      `,
+      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+    },
+    {
+      code: /* GraphQL */ `
+        type Query {
+          bar: ID
+          # Bad
+          foo: ID
+          # Good
+        }
+      `,
+      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+    },
+    {
+      code: /* GraphQL */ `
+        type Query {
+          user(
+            # Bad
+            id: Int!
+          ): User
         }
       `,
       errors: [{ messageId: 'HASHTAG_COMMENT' }],

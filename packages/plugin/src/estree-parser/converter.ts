@@ -7,12 +7,10 @@ export function convertToESTree<T extends ASTNode>(
   node: T,
   typeInfo?: TypeInfo
 ): { rootTree: GraphQLESTreeNode<T>; comments: Comment[] } {
-  const comments = extractCommentsFromAst(node);
   const visitor = { leave: convertNode(typeInfo) };
-
   return {
     rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor),
-    comments,
+    comments: extractCommentsFromAst(node.loc),
   };
 }
 
