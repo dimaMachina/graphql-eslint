@@ -22,7 +22,7 @@ interface ShouldIgnoreNodeParams {
 const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean => {
   const rawNode = node.rawNode();
 
-  if (exceptions.types && exceptions.types.some(type => rawNode.name.value === type)) {
+  if (exceptions.types && exceptions.types.includes(rawNode.name.value)) {
     return true;
   }
 

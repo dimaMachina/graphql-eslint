@@ -23,7 +23,8 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-types": "off",
-    "unicorn/prefer-array-some": "error"
+    "unicorn/prefer-array-some": "error",
+    "unicorn/prefer-includes": "error"
   },
   "env": {
     "es6": true,
