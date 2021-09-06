@@ -106,12 +106,7 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
     },
   },
   create(context) {
-    return context.options[0].on.reduce((prev, optionKey) => {
-      return {
-        ...prev,
-        [optionKey]: node => verifyRule(context, node),
-      };
-    }, {});
+    return Object.fromEntries(context.options[0].on.map(optionKey => [optionKey, node => verifyRule(context, node)]));
   },
 };
 

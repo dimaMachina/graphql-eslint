@@ -1,11 +1,12 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
 import { Lexer, GraphQLSchema, Token, DocumentNode, Source } from 'graphql';
-import { GraphQLESLintRuleContext } from './types';
 import { AST } from 'eslint';
+import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
+import lowerCase from 'lodash.lowercase';
+import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
-import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -140,5 +141,41 @@ export const loaderCache: Record<string, LoaderSource[]> = new Proxy(Object.crea
       cache[key] = asArray(value);
     }
     return true;
-  }
+  },
 });
+
+const isObjectType = (node): boolean => ['ObjectTypeDefinition', 'ObjectTypeExtension'].includes(node.type);
+export const isQueryType = (node): boolean => isObjectType(node) && node.name.value === 'Query';
+export const isMutationType = (node): boolean => isObjectType(node) && node.name.value === 'Mutation';
+export const isSubscriptionType = (node): boolean => isObjectType(node) && node.name.value === 'Subscription';
+
+export enum CaseStyle {
+  camelCase = 'camelCase',
+  pascalCase = 'PascalCase',
+  snakeCase = 'snake_case',
+  upperCase = 'UPPER_CASE',
+  kebabCase = 'kebab-case',
+}
+
+export const convertCase = (style: CaseStyle, str: string): string => {
+  const pascalCase = (str: string): string =>
+    lowerCase(str)
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
+
+  switch (style) {
+    case CaseStyle.camelCase: {
+      const result = pascalCase(str);
+      return result.charAt(0).toLowerCase() + result.slice(1);
+    }
+    case CaseStyle.pascalCase:
+      return pascalCase(str);
+    case CaseStyle.snakeCase:
+      return lowerCase(str).replace(/ /g, '_');
+    case CaseStyle.upperCase:
+      return lowerCase(str).replace(/ /g, '_').toUpperCase();
+    case CaseStyle.kebabCase:
+      return lowerCase(str).replace(/ /g, '-');
+  }
+};

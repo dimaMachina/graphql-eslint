@@ -95,37 +95,36 @@ const rule: GraphQLESLintRule<SelectionSetDepthRuleConfig> = {
     const ignore = context.options[0].ignore || [];
     const checkFn = depthLimit(maxDepth, { ignore });
 
-    return ['OperationDefinition', 'FragmentDefinition'].reduce((prev, nodeType) => {
-      return {
-        ...prev,
-        [nodeType]: (node: GraphQLESTreeNode<OperationDefinitionNode> | GraphQLESTreeNode<FragmentDefinitionNode>) => {
-          try {
-            const rawNode = node.rawNode();
-            const fragmentsInUse = siblings ? siblings.getFragmentsInUse(rawNode, true) : [];
-            const document: DocumentNode = {
-              kind: Kind.DOCUMENT,
-              definitions: [rawNode, ...fragmentsInUse],
-            };
+    return {
+      'OperationDefinition, FragmentDefinition'(
+        node: GraphQLESTreeNode<OperationDefinitionNode | FragmentDefinitionNode>
+      ) {
+        try {
+          const rawNode = node.rawNode();
+          const fragmentsInUse = siblings ? siblings.getFragmentsInUse(rawNode, true) : [];
+          const document: DocumentNode = {
+            kind: Kind.DOCUMENT,
+            definitions: [rawNode, ...fragmentsInUse],
+          };
 
-            checkFn({
-              getDocument: () => document,
-              reportError: (error: GraphQLError) => {
-                context.report({
-                  loc: error.locations[0],
-                  message: error.message,
-                });
-              },
-            });
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.warn(
-              `Rule "selection-set-depth" check failed due to a missing siblings operations. For more info: http://bit.ly/graphql-eslint-operations`,
-              e
-            );
-          }
-        },
-      };
-    }, {});
+          checkFn({
+            getDocument: () => document,
+            reportError: (error: GraphQLError) => {
+              context.report({
+                loc: error.locations[0],
+                message: error.message,
+              });
+            },
+          });
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `Rule "selection-set-depth" check failed due to a missing siblings operations. For more info: http://bit.ly/graphql-eslint-operations`,
+            e
+          );
+        }
+      },
+    };
   },
 };
 
