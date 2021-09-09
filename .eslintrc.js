@@ -2,13 +2,7 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   ignorePatterns: ['examples'],
   parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'standard',
-    'plugin:eslint-plugin/recommended',
-    'prettier',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'standard', 'prettier'],
   plugins: ['unicorn'],
   rules: {
     'no-empty': 'off',
@@ -29,18 +23,29 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     'unicorn/prefer-array-some': 'error',
     'unicorn/prefer-includes': 'error',
-    'eslint-plugin/test-case-shorthand-strings': 'error',
-    'eslint-plugin/no-only-tests': 'error',
-    'eslint-plugin/require-meta-docs-url': [
-      'error',
-      { pattern: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
-    ],
   },
   overrides: [
+    {
+      files: ['**/rules/*.ts'],
+      extends: ['plugin:eslint-plugin/rules-recommended'],
+      rules: {
+        'eslint-plugin/no-deprecated-context-methods': 'error',
+        'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.' }], // force to put a point at the end
+        'eslint-plugin/require-meta-docs-url': [
+          'error',
+          { pattern: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
+        ],
+      },
+    },
     {
       files: ['*.{spec,test}.{ts,js}'],
       env: {
         jest: true,
+      },
+      extends: ['plugin:eslint-plugin/tests-recommended'],
+      rules: {
+        'eslint-plugin/no-only-tests': 'error',
+        'eslint-plugin/test-case-shorthand-strings': 'error',
       },
     },
     {

@@ -41,7 +41,7 @@ const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
     type: 'suggestion',
     docs: {
       category: 'Best Practices',
-      description: 'This rule allows you to enforce that the file name should match the operation name',
+      description: 'This rule allows you to enforce that the file name should match the operation name.',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/match-document-filename.md`,
       examples: [
         {
