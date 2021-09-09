@@ -1,3 +1,16 @@
+diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
+index 78f0c6d..f4f98b1 100644
+--- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
++++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
+@@ -30,7 +30,7 @@ module.exports = {
+ 
+               const onlyProperty = test.properties.find(
+                 property =>
+-                  property.key.type === 'Identifier' &&
++                  property.key?.type === 'Identifier' &&
+                   property.key.name === 'only' &&
+                   property.value.type === 'Literal' &&
+                   property.value.value
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
 index ed7d67a..af8ea5c 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js

@@ -25,7 +25,7 @@ const WITH_SCHEMA = {
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('executable-definitions', GRAPHQL_JS_VALIDATIONS['executable-definitions'] as any, {
+ruleTester.runGraphQLTests('executable-definitions', GRAPHQL_JS_VALIDATIONS['executable-definitions'], {
   valid: [
     {
       ...WITH_SCHEMA,
