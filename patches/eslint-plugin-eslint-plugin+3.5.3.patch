@@ -1,5 +1,18 @@
+diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
+index ed7d67a..af8ea5c 100644
+--- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
++++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
+@@ -48,7 +48,7 @@ module.exports = {
+     const options = context.options[0] || {};
+     const sourceCode = context.getSourceCode();
+     const filename = context.getFilename();
+-    const ruleName = filename === '<input>' ? undefined : path.basename(filename, '.js');
++    const ruleName = filename === '<input>' ? undefined : path.basename(filename, '.ts');
+     const expectedUrl = !options.pattern || !ruleName
+       ? undefined
+       : options.pattern.replace(/{{\s*name\s*}}/g, ruleName);
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-index e00aada..555ec69 100644
+index e00aada..9eeb3b9 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 @@ -76,10 +76,10 @@ function isNormalFunctionExpressionReference (node, scopeManager) {
@@ -15,7 +28,58 @@ index e00aada..555ec69 100644
    );
  }
  
-@@ -239,7 +239,7 @@ module.exports = {
+@@ -98,7 +98,15 @@ module.exports = {
+     let exportsVarOverridden = false;
+     let exportsIsFunction = false;
+ 
+-    const exportNodes = ast.body
++    const collectProps = (parsedProps, prop) => {
++      const keyValue = module.exports.getKeyName(prop);
++      if (INTERESTING_KEYS.has(keyValue)) {
++        parsedProps[keyValue] = prop.value;
++      }
++      return parsedProps;
++    };
++
++    let exportNodes = ast.body
+       .filter(statement => statement.type === 'ExpressionStatement')
+       .map(statement => statement.expression)
+       .filter(expression => expression.type === 'AssignmentExpression')
+@@ -119,13 +127,7 @@ module.exports = {
+             // Check `module.exports = { create: function () {}, meta: {} }`
+ 
+             exportsIsFunction = false;
+-            return node.right.properties.reduce((parsedProps, prop) => {
+-              const keyValue = module.exports.getKeyName(prop);
+-              if (INTERESTING_KEYS.has(keyValue)) {
+-                parsedProps[keyValue] = prop.value;
+-              }
+-              return parsedProps;
+-            }, {});
++            return node.right.properties.reduce(collectProps, {});
+           }
+           return {};
+         } else if (
+@@ -150,6 +152,18 @@ module.exports = {
+         return currentExports;
+       }, {});
+ 
++    exportNodes = Object.keys(exportNodes).length > 0
++      ? exportNodes
++      : ast.body.filter(statement => statement.type === "VariableDeclaration")
++        .flatMap(statement => statement.declarations)
++        .filter(statement => statement.init?.properties)
++        .reduce((nodes, statement) => {
++          return {
++            ...nodes,
++            ...statement.init.properties.reduce(collectProps, {})
++          };
++        }, {});
++
+     const createExists = Object.prototype.hasOwnProperty.call(exportNodes, 'create');
+     if (!createExists) {
+       return null;
+@@ -239,7 +253,7 @@ module.exports = {
            variableIdentifiers.has(statement.expression.callee.object)
          ) &&
          statement.expression.callee.property.type === 'Identifier' &&
