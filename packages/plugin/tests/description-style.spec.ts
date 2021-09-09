@@ -37,9 +37,7 @@ ruleTester.runGraphQLTests('description-style', rule, {
       code: BLOCK_SDL,
       options: [{ style: 'block' }],
     },
-    {
-      code: INLINE_SDL,
-    },
+    INLINE_SDL,
   ],
   invalid: [
     {

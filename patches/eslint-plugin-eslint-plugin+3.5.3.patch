@@ -1,0 +1,26 @@
+diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
+index e00aada..555ec69 100644
+--- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
++++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
+@@ -76,10 +76,10 @@ function isNormalFunctionExpressionReference (node, scopeManager) {
+ */
+ function isRuleTesterConstruction (node) {
+   return node.type === 'NewExpression' && (
+-    (node.callee.type === 'Identifier' && node.callee.name === 'RuleTester') ||
++    (node.callee.type === 'Identifier' && node.callee.name === 'GraphQLRuleTester') ||
+     (node.callee.type === 'MemberExpression' &&
+       node.callee.property.type === 'Identifier' &&
+-      node.callee.property.name === 'RuleTester')
++      node.callee.property.name === 'GraphQLRuleTester')
+   );
+ }
+ 
+@@ -239,7 +239,7 @@ module.exports = {
+           variableIdentifiers.has(statement.expression.callee.object)
+         ) &&
+         statement.expression.callee.property.type === 'Identifier' &&
+-        statement.expression.callee.property.name === 'run'
++        statement.expression.callee.property.name === 'runGraphQLTests'
+       ) {
+         runCalls.push(statement.expression);
+       }

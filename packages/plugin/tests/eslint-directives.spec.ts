@@ -6,44 +6,34 @@ const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('test-directives', rule, {
   valid: [
-    {
-      code: /* GraphQL */ `
-        # eslint-disable-next-line
-        query {
-          a
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        # eslint-disable-next-line test-directives
-        query {
-          a
-        }
-      `,
-    },
-    {
-      code: `
-        query { # eslint-disable-line test-directives
-          a
-        }
-      `,
-    },
-    {
-      code: `
-        query { # eslint-disable-line
-          a
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        # eslint-disable
-        query {
-          a
-        }
-      `,
-    },
+    /* GraphQL */ `
+      # eslint-disable-next-line
+      query {
+        a
+      }
+    `,
+    /* GraphQL */ `
+      # eslint-disable-next-line test-directives
+      query {
+        a
+      }
+    `,
+    `
+      query { # eslint-disable-line test-directives
+        a
+      }
+    `,
+    `
+      query { # eslint-disable-line
+        a
+      }
+    `,
+    /* GraphQL */ `
+      # eslint-disable
+      query {
+        a
+      }
+    `,
     {
       filename: join(__dirname, 'mocks/test-directives-with-import.graphql'),
       code: ruleTester.fromMockFile('test-directives-with-import.graphql'),

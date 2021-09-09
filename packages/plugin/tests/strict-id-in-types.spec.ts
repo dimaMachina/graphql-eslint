@@ -5,9 +5,7 @@ const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('strict-id-in-types', rule, {
   valid: [
-    {
-      code: 'type A { id: ID! }',
-    },
+    'type A { id: ID! }',
     {
       code: 'type A { _id: String! }',
       options: [
@@ -63,8 +61,7 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
       ],
     },
     {
-      code:
-        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
+      code: 'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -151,8 +148,7 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
       ],
     },
     {
-      code:
-        'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }',
+      code: 'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -179,8 +175,7 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
       ],
     },
     {
-      code:
-        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
+      code: 'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
       options: [
         {
           acceptedIdNames: ['id'],
