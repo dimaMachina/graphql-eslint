@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-
+Disallow case-insensitive enum values duplicates.
 
 ## Usage Examples
 
