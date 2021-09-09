@@ -30,6 +30,7 @@ module.exports = {
     'unicorn/prefer-array-some': 'error',
     'unicorn/prefer-includes': 'error',
     'eslint-plugin/test-case-shorthand-strings': 'error',
+    'eslint-plugin/no-only-tests': 'error',
     'eslint-plugin/require-meta-docs-url': [
       'error',
       { pattern: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
