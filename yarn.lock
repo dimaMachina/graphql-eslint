@@ -1956,10 +1956,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/graphql-depth-limit@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@types/graphql-depth-limit/-/graphql-depth-limit-1.1.2.tgz#8e8a7b68548d703a3c3bd7f0531f314b3051f556"
-  integrity sha512-CJoghYUfE5/IKrqexgSsTECP0RcP2Ii+ulv/BjjFniABNAMgfwCTKFnCkkRskg9Sr3WZeJrSLjwBhNFetP5Tyw==
+"@types/graphql-depth-limit@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@types/graphql-depth-limit/-/graphql-depth-limit-1.1.3.tgz#2e4a1a85cd2dfaacaeaf7b4bf1a158f450687875"
+  integrity sha512-fvK0qXNvwKD5bSnMEkidi51EloYsz/E8JG/8Kzq1peoLRQAEGgLVauE1xGeT4W/nbSpecgG+34dcKPdwfGzFHQ==
   dependencies:
     graphql "^14.5.3"
 
