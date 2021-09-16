@@ -71,9 +71,10 @@ const validationToRule = (
         docs: {
           ...docs,
           category: 'Validation',
+          recommended: true,
           requiresSchema,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${name}.md`,
-          description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
+          description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
         },
       },
       create(context) {

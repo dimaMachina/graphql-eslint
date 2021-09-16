@@ -1,5 +1,7 @@
 # `value-literals-of-correct-type`
 
+✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+
 - Category: `Validation`
 - Rule name: `@graphql-eslint/value-literals-of-correct-type`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
@@ -7,4 +9,4 @@
 
 A GraphQL document is only valid if all value literals are of the type expected at their position.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/ValuesOfCorrectTypeRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/ValuesOfCorrectTypeRule.ts).

@@ -7,10 +7,8 @@
     "./packages/*",
     "./examples/*"
   ],
-  "husky": {
-    "pre-commit": "yarn generate:docs"
-  },
   "scripts": {
+    "generate:configs": "ts-node scripts/generate-configs.ts",
     "generate:docs": "ts-node scripts/generate-docs.ts",
     "postinstall": "patch-package",
     "lint": "eslint --ignore-path .gitignore --ext ts,js .",
@@ -60,13 +58,15 @@
     "@changesets/git": "1.1.2"
   },
   "lint-staged": {
-    "packages/**/src/**/*.{ts,tsx}": [
-      "eslint --fix"
+    "{packages,scripts}/**/*.{ts,tsx,js,jsx,cjs,mjs}": [
+      "eslint --fix",
+      "yarn generate:configs",
+      "git add packages/plugin/src/rules/index.ts",
+      "git add packages/plugin/src/configs",
+      "yarn generate:docs",
+      "git add docs"
     ],
-    "**/*.{ts,tsx,graphql,yml}": [
-      "prettier --write"
-    ],
-    "**/*.json": [
+    "*.{ts,tsx,js,jsx,cjs,mjs,gql,graphql,yml,yaml,json}": [
       "prettier --write"
     ]
   }

@@ -1,5 +1,7 @@
 # `fields-on-correct-type`
 
+✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+
 - Category: `Validation`
 - Rule name: `@graphql-eslint/fields-on-correct-type`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
@@ -7,4 +9,4 @@
 
 A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as `__typename`.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FieldsOnCorrectTypeRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FieldsOnCorrectTypeRule.ts).
