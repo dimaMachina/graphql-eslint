@@ -32,21 +32,19 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 
 Start by installing the plugin package, which includes everything you need:
 
-```
+```sh
 yarn add -D @graphql-eslint/eslint-plugin
 ```
 
 Or, with NPM:
 
-```
+```sh
 npm install --save-dev @graphql-eslint/eslint-plugin
 ```
 
 > Also, make sure you have `graphql` dependency in your project.
 
 ### Configuration
-
-> Note: This plugin doesn't activate any rule by default at the moment, we are currently thinking of the right rules to be the "recommended" and the default set. Until then, please make sure to active rules based on your needs.
 
 To get started, create an override configuration for your ESLint, while applying it to to `.graphql` files (do that even if you are declaring your operations in code files):
 
@@ -166,7 +164,36 @@ You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/u
 
 You can find a complete list of [all available rules here](./docs/README.md)
 
-> This repo doesn't exports a "recommended" set of rules - feel free to recommend us!
+## Available Configs
+
+This plugin exports a [`recommended` config](packages/plugin/src/configs/recommended.ts) that enforces good practices and an [`all` config](packages/plugin/src/configs/all.ts) that makes use of all rules (except for deprecated ones).
+
+Enable it in your `.eslintrc` file with the `extends` option.
+
+> These configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add `@graphql-eslint` to `plugins` array, so you don't need to specify them.
+
+```diff
+{
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "processor": "@graphql-eslint/graphql",
+      "rules": {
+        // your rules for JavaScript files
+      }
+    },
+    {
+      "files": ["*.graphql"],
+-     "parser": "@graphql-eslint/eslint-plugin",
+-     "plugins": ["@graphql-eslint"],
++     "extends": "plugin:@graphql-eslint/recommended", // or plugin:@graphql-eslint/all
+      "rules": {
+        // your rules for GraphQL files
+      }
+    }
+  ]
+}
+```
 
 ### `prettier` rule
 

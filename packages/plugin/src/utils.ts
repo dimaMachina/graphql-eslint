@@ -162,18 +162,21 @@ export enum CaseStyle {
   kebabCase = 'kebab-case',
 }
 
-export const convertCase = (style: CaseStyle, str: string): string => {
-  const pascalCase = (str: string): string =>
-    lowerCase(str)
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('');
+const pascalCase = (str: string): string =>
+  lowerCase(str)
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
 
+export const camelCase = (str: string): string => {
+  const result = pascalCase(str);
+  return result.charAt(0).toLowerCase() + result.slice(1);
+};
+
+export const convertCase = (style: CaseStyle, str: string): string => {
   switch (style) {
-    case CaseStyle.camelCase: {
-      const result = pascalCase(str);
-      return result.charAt(0).toLowerCase() + result.slice(1);
-    }
+    case CaseStyle.camelCase:
+      return camelCase(str);
     case CaseStyle.pascalCase:
       return pascalCase(str);
     case CaseStyle.snakeCase:

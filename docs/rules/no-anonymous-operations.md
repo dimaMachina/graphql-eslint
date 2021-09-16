@@ -1,5 +1,7 @@
 # `no-anonymous-operations`
 
+✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+
 - Category: `Best Practices`
 - Rule name: `@graphql-eslint/no-anonymous-operations`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)

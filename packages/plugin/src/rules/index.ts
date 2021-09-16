@@ -1,5 +1,8 @@
+/*
+ * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
+ */
+
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
-/* eslint sort-imports: 'error', sort-keys: 'error' */
 import avoidDuplicateFields from './avoid-duplicate-fields';
 import avoidOperationNamePrefix from './avoid-operation-name-prefix';
 import avoidTypenamePrefix from './avoid-typename-prefix';
@@ -23,6 +26,7 @@ import uniqueFragmentName from './unique-fragment-name';
 import uniqueOperationName from './unique-operation-name';
 
 export const rules = {
+  ...GRAPHQL_JS_VALIDATIONS,
   'avoid-duplicate-fields': avoidDuplicateFields,
   'avoid-operation-name-prefix': avoidOperationNamePrefix,
   'avoid-typename-prefix': avoidTypenamePrefix,
@@ -44,5 +48,4 @@ export const rules = {
   'strict-id-in-types': strictIdInTypes,
   'unique-fragment-name': uniqueFragmentName,
   'unique-operation-name': uniqueOperationName,
-  ...GRAPHQL_JS_VALIDATIONS,
 };

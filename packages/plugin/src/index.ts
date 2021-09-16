@@ -1,3 +1,4 @@
+export { configs } from './configs';
 export { rules } from './rules';
 export { processors } from './processors';
 export * from './parser';
