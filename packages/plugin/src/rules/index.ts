@@ -5,6 +5,7 @@
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 import avoidDuplicateFields from './avoid-duplicate-fields';
 import avoidOperationNamePrefix from './avoid-operation-name-prefix';
+import avoidScalarResultTypeOnMutation from './avoid-scalar-result-type-on-mutation';
 import avoidTypenamePrefix from './avoid-typename-prefix';
 import descriptionStyle from './description-style';
 import inputName from './input-name';
@@ -30,6 +31,7 @@ export const rules = {
   ...GRAPHQL_JS_VALIDATIONS,
   'avoid-duplicate-fields': avoidDuplicateFields,
   'avoid-operation-name-prefix': avoidOperationNamePrefix,
+  'avoid-scalar-result-type-on-mutation': avoidScalarResultTypeOnMutation,
   'avoid-typename-prefix': avoidTypenamePrefix,
   'description-style': descriptionStyle,
   'input-name': inputName,
