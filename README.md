@@ -206,23 +206,16 @@ All you need to do is like the following for now:
 module.exports = {
   overrides: [
     {
-      files: ['*.tsx', '*.ts', '*.jsx', '*.js'],
+      files: ['*.js'],
       processor: '@graphql-eslint/graphql',
+      extends: ['plugin:prettier/recommended'],
     },
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
-      // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
-      // after https://github.com/prettier/eslint-plugin-prettier/pull/413
-      // been merged and released, it can be deleted safely
       rules: {
-        'prettier/prettier': [
-          2,
-          {
-            parser: 'graphql',
-          },
-        ],
+        'prettier/prettier': 'error',
       },
     },
     // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
@@ -231,8 +224,8 @@ module.exports = {
     {
       files: ['*.js/*.graphql'],
       rules: {
-        'prettier/prettier': 0
-      }
+        'prettier/prettier': 'off',
+      },
     },
   ],
 };
@@ -240,7 +233,7 @@ module.exports = {
 
 You can take [`examples/prettier`](examples/prettier/.eslintrc.js) as example.
 
-It could be better to remove the unnecessary parser setting if https://github.com/prettier/eslint-plugin-prettier/pull/413 and https://github.com/prettier/eslint-plugin-prettier/pull/415 been merged and released.
+It could be better to remove the unnecessary `*.js/*.graphql` overrides setting if <https://github.com/prettier/eslint-plugin-prettier/pull/415> will be merged and released.
 
 Please help to vote up if you want to speed up the progress.
 
