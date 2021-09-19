@@ -19,7 +19,7 @@
     "test": "jest --no-watchman --forceExit --noStackTrace --detectOpenHandles",
     "prerelease": "yarn build",
     "release": "changeset publish",
-    "release:canary": "(node scripts/canary-release.js && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",
+    "release:canary": "(ts-node scripts/canary-release.ts && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",
     "prettier": "prettier --ignore-path .gitignore --write --list-different \"**/*.{ts,tsx,graphql,yml}\""
   },
   "devDependencies": {
