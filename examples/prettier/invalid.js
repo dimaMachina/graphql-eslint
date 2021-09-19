@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const GET_USER = /* GraphQL */ `query User($userId:      ID!) {
   user(id: $userId) {
     id,

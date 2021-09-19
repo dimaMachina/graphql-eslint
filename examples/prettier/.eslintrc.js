@@ -4,8 +4,9 @@ module.exports = {
     {
       files: ['*.js'],
       processor: '@graphql-eslint/graphql',
-      extends: ['plugin:prettier/recommended'],
+      extends: ['eslint:recommended', 'plugin:prettier/recommended'],
       env: {
+        node: true,
         es6: true,
       },
     },
