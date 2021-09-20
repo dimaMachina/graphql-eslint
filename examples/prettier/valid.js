@@ -1,3 +1,3 @@
-export const content = /* GraphQL */ `
+const TEST = /* GraphQL */ `
   scalar Test
 `;

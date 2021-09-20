@@ -4,12 +4,6 @@ import {
   ValueNode,
   StringValueNode,
   ASTNode,
-  IntValueNode,
-  FloatValueNode,
-  BooleanValueNode,
-  ListValueNode,
-  ObjectValueNode,
-  VariableNode,
   TokenKind,
   GraphQLOutputType,
   GraphQLNamedType,
@@ -35,25 +29,23 @@ export function valueFromNode(valueNode: GraphQLESTreeNode<ValueNode>, variables
     case Kind.NULL:
       return null;
     case Kind.INT:
-      return parseInt((valueNode as GraphQLESTreeNode<IntValueNode>).value, 10);
+      return parseInt(valueNode.value, 10);
     case Kind.FLOAT:
-      return parseFloat((valueNode as GraphQLESTreeNode<FloatValueNode>).value);
+      return parseFloat(valueNode.value);
     case Kind.STRING:
     case Kind.ENUM:
     case Kind.BOOLEAN:
-      return (valueNode as GraphQLESTreeNode<BooleanValueNode>).value;
+      return valueNode.value;
     case Kind.LIST:
-      return ((valueNode as GraphQLESTreeNode<ListValueNode>).values as any).map(node =>
-        valueFromNode(node, variables)
-      );
+      return valueNode.values.map(node => valueFromNode(node, variables));
     case Kind.OBJECT:
       return keyValMap(
-        (valueNode as GraphQLESTreeNode<ObjectValueNode>).fields,
+        valueNode.fields,
         field => field.name.value,
         field => valueFromNode(field.value, variables)
       );
     case Kind.VARIABLE:
-      return variables?.[(valueNode as GraphQLESTreeNode<VariableNode>).name.value];
+      return variables?.[valueNode.name.value];
   }
 }
 

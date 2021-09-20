@@ -17,6 +17,7 @@ export const allConfig = {
     '@graphql-eslint/no-hashtag-description': 'error',
     '@graphql-eslint/no-unreachable-types': 'error',
     '@graphql-eslint/no-unused-fields': 'error',
+    '@graphql-eslint/require-deprecation-date': 'error',
     '@graphql-eslint/require-description': 'error',
     '@graphql-eslint/require-id-when-available': 'error',
     '@graphql-eslint/selection-set-depth': 'error',
