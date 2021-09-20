@@ -8,6 +8,7 @@ module.exports = {
     'no-empty': 'off',
     'no-console': 'error',
     'no-prototype-builtins': 'off',
+    'no-restricted-globals': ['error', { name: 'isNaN', message: 'Use Number.isNaN instead' }],
     'no-useless-constructor': 'off',
     'no-unused-vars': 'off', // disable base rule as it can report incorrect errors
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
@@ -30,7 +31,7 @@ module.exports = {
       extends: ['plugin:eslint-plugin/rules-recommended'],
       rules: {
         'eslint-plugin/no-deprecated-context-methods': 'error',
-        'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.' }], // force to put a point at the end
+        'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.$' }], // force to put a point at the end
         'eslint-plugin/require-meta-docs-url': [
           'error',
           { pattern: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
