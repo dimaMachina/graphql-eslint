@@ -1,2 +1,2 @@
 schema: schema.graphql
-documents: "operations/*.graphql"
+documents: operations/*.graphql

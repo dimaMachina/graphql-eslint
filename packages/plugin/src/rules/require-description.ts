@@ -51,7 +51,6 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
       category: 'Best Practices',
       description: `Enforce descriptions in your type definitions.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-description.md`,
-      recommended: true,
       examples: [
         {
           title: 'Incorrect',

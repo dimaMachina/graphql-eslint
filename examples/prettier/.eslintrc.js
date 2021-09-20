@@ -1,24 +1,21 @@
 module.exports = {
-  extends: ['plugin:prettier/recommended'],
+  root: true,
   overrides: [
     {
-      files: ['*.tsx', '*.ts', '*.jsx', '*.js'],
+      files: ['*.js'],
       processor: '@graphql-eslint/graphql',
+      extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+      env: {
+        node: true,
+        es6: true,
+      },
     },
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
-      // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
-      // after https://github.com/prettier/eslint-plugin-prettier/pull/413
-      // been merged and released, it can be deleted safely
       rules: {
-        'prettier/prettier': [
-          2,
-          {
-            parser: 'graphql',
-          },
-        ],
+        'prettier/prettier': 'error',
       },
     },
     // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
@@ -27,7 +24,7 @@ module.exports = {
     {
       files: ['*.js/*.graphql'],
       rules: {
-        'prettier/prettier': 0,
+        'prettier/prettier': 'off',
       },
     },
   ],

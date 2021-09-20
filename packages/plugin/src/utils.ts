@@ -127,6 +127,8 @@ export const getOnDiskFilepath = (filepath: string): string => {
   return filepath;
 };
 
+export const getTypeName = node => ('type' in node ? getTypeName(node.type) : node.name.value);
+
 // Small workaround for the bug in older versions of @graphql-tools/load
 // Can be removed after graphql-config bumps to a new version
 export const loaderCache: Record<string, LoaderSource[]> = new Proxy(Object.create(null), {
@@ -162,18 +164,21 @@ export enum CaseStyle {
   kebabCase = 'kebab-case',
 }
 
-export const convertCase = (style: CaseStyle, str: string): string => {
-  const pascalCase = (str: string): string =>
-    lowerCase(str)
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('');
+const pascalCase = (str: string): string =>
+  lowerCase(str)
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
 
+export const camelCase = (str: string): string => {
+  const result = pascalCase(str);
+  return result.charAt(0).toLowerCase() + result.slice(1);
+};
+
+export const convertCase = (style: CaseStyle, str: string): string => {
   switch (style) {
-    case CaseStyle.camelCase: {
-      const result = pascalCase(str);
-      return result.charAt(0).toLowerCase() + result.slice(1);
-    }
+    case CaseStyle.camelCase:
+      return camelCase(str);
     case CaseStyle.pascalCase:
       return pascalCase(str);
     case CaseStyle.snakeCase:

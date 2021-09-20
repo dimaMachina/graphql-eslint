@@ -1,5 +1,7 @@
 # `possible-fragment-spread`
 
+✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+
 - Category: `Validation`
 - Rule name: `@graphql-eslint/possible-fragment-spread`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
@@ -7,4 +9,4 @@
 
 A fragment spread is only valid if the type condition could ever possibly be true: if there is a non-empty intersection of the possible parent types, and possible types which pass the type condition.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find it's source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/PossibleFragmentSpreadsRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/PossibleFragmentSpreadsRule.ts).

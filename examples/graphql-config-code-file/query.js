@@ -1,6 +1,7 @@
-import gql from 'graphql-tag'
+const gql = require('graphql-tag');
 
-const myQuery = gql`
+// eslint-disable-next-line no-unused-vars
+const GET_USER = gql`
   query {
     user {
       name

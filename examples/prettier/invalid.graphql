@@ -1,15 +1,15 @@
-query GetUser($userId:      ID!) {
+query User($userId:      ID!) {
   user(id: $userId) {
-        id,
-  name,
+    id,
+    name,
     isViewerFriend,
     profilePicture(size: 50)  {
-      ...PictureFragment
+      ...PictureFields
     }
   }
 }
 
-fragment PictureFragment on Picture {
+fragment PictureFields on Picture {
   uri,
   width,
   height

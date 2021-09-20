@@ -1,5 +1,7 @@
 # `require-deprecation-reason`
 
+✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+
 - Category: `Best Practices`
 - Rule name: `@graphql-eslint/require-deprecation-reason`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)

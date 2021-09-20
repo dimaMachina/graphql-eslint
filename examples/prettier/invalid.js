@@ -1,17 +1,18 @@
-export const quqery =  /* GraphQL */ `query GetUser($userId:      ID!) {
-user(id: $userId) {
-        id,
-name,
+// eslint-disable-next-line no-unused-vars
+const GET_USER = /* GraphQL */ `query User($userId:      ID!) {
+  user(id: $userId) {
+    id,
+    name,
     isViewerFriend,
     profilePicture(size: 50)  {
-    ...PictureFragment
+      ...PictureFields
     }
-}
+  }
 }
 
-fragment PictureFragment on Picture {
-uri,
-width,
-height
+fragment PictureFields on Picture {
+  uri,
+  width,
+  height
 }
 `
