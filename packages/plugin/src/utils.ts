@@ -1,12 +1,13 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { Lexer, GraphQLSchema, Token, DocumentNode, Source } from 'graphql';
+import { Lexer, GraphQLSchema, Source, ObjectTypeDefinitionNode, ObjectTypeExtensionNode, Kind } from 'graphql';
 import { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
+import { GraphQLESTreeNode } from './estree-parser';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -144,10 +145,14 @@ export const loaderCache: Record<string, LoaderSource[]> = new Proxy(Object.crea
   },
 });
 
-const isObjectType = (node): boolean => ['ObjectTypeDefinition', 'ObjectTypeExtension'].includes(node.type);
-export const isQueryType = (node): boolean => isObjectType(node) && node.name.value === 'Query';
-export const isMutationType = (node): boolean => isObjectType(node) && node.name.value === 'Mutation';
-export const isSubscriptionType = (node): boolean => isObjectType(node) && node.name.value === 'Subscription';
+type ObjectTypeNode = GraphQLESTreeNode<ObjectTypeDefinitionNode | ObjectTypeExtensionNode>;
+
+const isObjectType = (node: ObjectTypeNode): boolean =>
+  [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION].includes(node.type);
+export const isQueryType = (node: ObjectTypeNode): boolean => isObjectType(node) && node.name.value === 'Query';
+export const isMutationType = (node: ObjectTypeNode): boolean => isObjectType(node) && node.name.value === 'Mutation';
+export const isSubscriptionType = (node: ObjectTypeNode): boolean =>
+  isObjectType(node) && node.name.value === 'Subscription';
 
 export enum CaseStyle {
   camelCase = 'camelCase',

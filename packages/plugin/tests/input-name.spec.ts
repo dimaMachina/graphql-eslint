@@ -10,12 +10,7 @@ ruleTester.runGraphQLTests('input-name', rule, {
       options: [{ checkInputType: true }],
     },
     {
-      code: 'type Mutation { SetMessage(input: SetMessageInput): String }',
-      options: [{ checkInputType: true }],
-    },
-    {
-      code:
-        'type Mutation { CreateMessage(input: CreateMessageInput): String DeleteMessage(input: DeleteMessageInput): Boolean }',
+      code: 'type Mutation { CreateMessage(input: CreateMessageInput): String DeleteMessage(input: DeleteMessageInput): Boolean }',
       options: [{ checkInputType: true }],
     },
     {

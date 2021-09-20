@@ -1,11 +1,9 @@
-// eslint-disable-next-line no-undef
-const USER_FIELDS = gql`
+const USER_FIELDS = /* GraphQL */ `
   fragment UserFields on User {
     id
   }
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const GET_USER = /* GraphQL */ `
   query User {
     user {

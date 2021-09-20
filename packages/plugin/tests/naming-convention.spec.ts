@@ -80,10 +80,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'input Test { item: String }',
       options: [{ InputObjectTypeDefinition: 'PascalCase', InputValueDefinition: 'camelCase' }],
     },
-    {
-      code:
-        'input test { item: String } enum B { Test } interface A { i: String } fragment PictureFragment on Picture { uri } scalar Hello',
-    },
+    'input test { item: String } enum B { Test } interface A { i: String } fragment PictureFragment on Picture { uri } scalar Hello',
     {
       code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
       options: [
@@ -214,12 +211,15 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       ],
     },
     {
-      code:
-        'type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }',
+      code: 'type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }',
       options: [
         {
           ObjectTypeDefinition: { style: 'PascalCase', forbiddenPrefixes: ['On'] },
-          FieldDefinition: { style: 'camelCase', forbiddenPrefixes: ['foo', 'bar'], forbiddenSuffixes: ['Foo'] },
+          FieldDefinition: {
+            style: 'camelCase',
+            forbiddenPrefixes: ['foo', 'bar'],
+            forbiddenSuffixes: ['Foo'],
+          },
           QueryDefinition: { style: 'camelCase', forbiddenPrefixes: ['get', 'query'] },
         },
       ],

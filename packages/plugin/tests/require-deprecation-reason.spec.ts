@@ -5,36 +5,32 @@ const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('require-deprecation-reason', rule, {
   valid: [
-    {
-      code: /* GraphQL */ `
-        query getUser {
-          f
-          a
-          b
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        type test {
-          field1: String @authorized
-          field2: Number
-          field4: String @deprecated(reason: "Reason")
-        }
+    /* GraphQL */ `
+      query getUser {
+        f
+        a
+        b
+      }
+    `,
+    /* GraphQL */ `
+      type test {
+        field1: String @authorized
+        field2: Number
+        field4: String @deprecated(reason: "Reason")
+      }
 
-        enum testEnum {
-          item1 @authorized
-          item2 @deprecated(reason: "Reason")
-          item3
-        }
+      enum testEnum {
+        item1 @authorized
+        item2 @deprecated(reason: "Reason")
+        item3
+      }
 
-        interface testInterface {
-          field1: String @authorized
-          field2: Number
-          field3: String @deprecated(reason: "Reason")
-        }
-      `,
-    },
+      interface testInterface {
+        field1: String @authorized
+        field2: Number
+        field3: String @deprecated(reason: "Reason")
+      }
+    `,
   ],
   invalid: [
     {

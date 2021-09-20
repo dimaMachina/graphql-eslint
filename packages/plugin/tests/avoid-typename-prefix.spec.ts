@@ -5,28 +5,22 @@ const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('avoid-typename-prefix', rule, {
   valid: [
-    {
-      code: /* GraphQL */ `
-        type User {
-          id: ID!
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        interface Node {
-          id: ID!
-        }
-      `,
-    },
-    {
-      code: /* GraphQL */ `
-        type User {
-          # eslint-disable-next-line
-          userId: ID!
-        }
-      `,
-    },
+    /* GraphQL */ `
+      type User {
+        id: ID!
+      }
+    `,
+    /* GraphQL */ `
+      interface Node {
+        id: ID!
+      }
+    `,
+    /* GraphQL */ `
+      type User {
+        # eslint-disable-next-line
+        userId: ID!
+      }
+    `,
   ],
   invalid: [
     {
