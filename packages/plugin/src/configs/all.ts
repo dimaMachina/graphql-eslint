@@ -10,6 +10,7 @@ export const allConfig = {
     ...recommendedConfig.rules,
     '@graphql-eslint/avoid-duplicate-fields': 'error',
     '@graphql-eslint/avoid-operation-name-prefix': 'error',
+    '@graphql-eslint/avoid-scalar-result-type-on-mutation': 'error',
     '@graphql-eslint/description-style': 'error',
     '@graphql-eslint/input-name': 'error',
     '@graphql-eslint/match-document-filename': 'error',

@@ -9,6 +9,7 @@ import {
   visitWithTypeInfo,
 } from 'graphql';
 import { SiblingOperations } from './sibling-operations';
+import { getTypeName } from './utils';
 
 export type ReachableTypes = Set<string>;
 
@@ -21,7 +22,6 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
     return reachableTypesCache;
   }
   const reachableTypes: ReachableTypes = new Set();
-  const getTypeName = node => ('type' in node ? getTypeName(node.type) : node.name.value);
 
   const collect = (node: ASTNode): false | void => {
     const typeName = getTypeName(node);
