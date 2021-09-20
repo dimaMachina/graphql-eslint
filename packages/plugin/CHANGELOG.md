@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.2.0
+
+### Minor Changes
+
+- 1dd2f43: feat: add recommended and all configs
+- 1dd2f43: add new rule require-deprecation-date
+- 1dd2f43: add new rule avoid-scalar-result-type-on-mutation
+
 ## 2.1.0
 
 ### Minor Changes
