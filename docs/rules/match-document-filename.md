@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-This rule allows you to enforce that the file name should match the operation name
+This rule allows you to enforce that the file name should match the operation name.
 
 ## Usage Examples
 
