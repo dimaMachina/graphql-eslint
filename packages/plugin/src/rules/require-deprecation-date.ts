@@ -14,7 +14,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
     docs: {
       category: 'Best Practices',
       description:
-        'Require deletion date on @deprecated directive. Suggest to remove deprecated things after deprecated date.',
+        'Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-deprecation-date.md',
       examples: [
         {
@@ -47,10 +47,10 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
       ],
     },
     messages: {
-      [MESSAGE_REQUIRE_DATE]: 'Directive "@deprecated" must have a deletion date',
-      [MESSAGE_INVALID_FORMAT]: 'Deletion date must be in format "DD/MM/YYYY"',
-      [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date',
-      [MESSAGE_CAN_BE_REMOVED]: '"{{ nodeName }}" сan be removed',
+      [MESSAGE_REQUIRE_DATE]: 'Directive "@deprecated" must have a deletion date.',
+      [MESSAGE_INVALID_FORMAT]: 'Deletion date must be in format "DD/MM/YYYY".',
+      [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date.',
+      [MESSAGE_CAN_BE_REMOVED]: '"{{ nodeName }}" сan be removed.',
     },
     schema: [
       {

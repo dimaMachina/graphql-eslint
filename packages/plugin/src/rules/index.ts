@@ -21,6 +21,7 @@ import noUnusedFields from './no-unused-fields';
 import requireDeprecationDate from './require-deprecation-date';
 import requireDeprecationReason from './require-deprecation-reason';
 import requireDescription from './require-description';
+import requireFieldOfTypeQueryInMutationResult from './require-field-of-type-query-in-mutation-result';
 import requireIdWhenAvailable from './require-id-when-available';
 import selectionSetDepth from './selection-set-depth';
 import strictIdInTypes from './strict-id-in-types';
@@ -47,6 +48,7 @@ export const rules = {
   'require-deprecation-date': requireDeprecationDate,
   'require-deprecation-reason': requireDeprecationReason,
   'require-description': requireDescription,
+  'require-field-of-type-query-in-mutation-result': requireFieldOfTypeQueryInMutationResult,
   'require-id-when-available': requireIdWhenAvailable,
   'selection-set-depth': selectionSetDepth,
   'strict-id-in-types': strictIdInTypes,

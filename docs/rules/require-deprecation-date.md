@@ -5,7 +5,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Require deletion date on @deprecated directive. Suggest to remove deprecated things after deprecated date.
+Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.
 
 ## Usage Examples
 
