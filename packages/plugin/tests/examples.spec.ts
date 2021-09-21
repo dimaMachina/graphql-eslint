@@ -12,9 +12,14 @@ function countErrors(results: ESLint.LintResult[]): number {
 }
 
 function getEslintOutput(cwd: string): ESLint.LintResult[] {
-  const output = spawnSync('eslint', ['.', '--format', 'json'], { cwd }).stdout.toString();
-  const start = output.indexOf('[');
-  const end = output.lastIndexOf(']') + 1;
+  const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
+  const errorOutput = stderr.toString();
+  if (errorOutput) {
+    throw new Error(errorOutput);
+  }
+  const output = stdout.toString();
+  const start = output.indexOf('[{');
+  const end = output.lastIndexOf('}]') + 2;
   return JSON.parse(output.slice(start, end));
 }
 
