@@ -40,27 +40,43 @@ function generateRules(): void {
     BR,
     'export const rules = {',
     '...GRAPHQL_JS_VALIDATIONS,',
-    ruleFilenames.map(ruleName => `'${ruleName}': ${camelCase(ruleName)}`),
+    ruleFilenames.map(ruleName => (ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName)),
     '}',
   ].join('\n');
 
   writeFormattedFile(join(SRC_PATH, 'rules/index.ts'), code);
 }
 
+type RuleSeverity = 'error' | ['error', ...any];
+
 async function generateConfigs(): Promise<void> {
   const { rules } = await import('../packages/plugin/src');
 
-  const recommendedRules = Object.entries(rules as Record<string, GraphQLESLintRule>)
-    .filter(([, rule]) => rule.meta.docs.recommended)
-    .map(([ruleName]) => ruleName)
-    .sort();
+  const getRulesSeverityWithOptions = (rule: GraphQLESLintRule): RuleSeverity => {
+    const { optionsForConfig = [] } = rule.meta.docs;
+    if (optionsForConfig.length > 0) {
+      return ['error', ...optionsForConfig];
+    }
+    return 'error';
+  };
+
+  const getRulesConfig = (isRecommended: boolean): Record<string, RuleSeverity> => {
+    const filteredRules = Object.entries(rules)
+      .filter(([, rule]) => Boolean(rule.meta.docs.recommended) === isRecommended)
+      .map(([ruleName]) => ruleName)
+      .sort();
+
+    return Object.fromEntries(
+      filteredRules.map(ruleName => [`@graphql-eslint/${ruleName}`, getRulesSeverityWithOptions(rules[ruleName])])
+    );
+  };
 
   writeFormattedFile(
     join(SRC_PATH, 'configs/recommended.ts'),
     `export const recommendedConfig = ${JSON.stringify({
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
-      rules: Object.fromEntries(recommendedRules.map(ruleName => [`@graphql-eslint/${ruleName}`, 'error'])),
+      rules: getRulesConfig(true),
     })}`
   );
 
@@ -73,10 +89,7 @@ async function generateConfigs(): Promise<void> {
       '...recommendedConfig,',
       'rules: {',
       '...recommendedConfig.rules,',
-      Object.keys(rules)
-        .filter(ruleName => !recommendedRules.includes(ruleName))
-        .sort()
-        .map(ruleName => `'@graphql-eslint/${ruleName}': 'error'`),
+      JSON.stringify(getRulesConfig(false)).slice(1, -1), // remove object brackets
       '}',
       '}',
     ].join('\n')

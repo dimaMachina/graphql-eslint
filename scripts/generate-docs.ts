@@ -82,15 +82,19 @@ function generateDocs(): void {
     }
 
     if (schema) {
-      const jsonSchema = Array.isArray(schema)
-        ? {
-            type: 'array',
-            $schema: 'http://json-schema.org/draft-04/schema',
-            items: schema[0],
-          }
-        : schema;
+      let jsonSchema = Array.isArray(schema) ? schema[0] : schema;
+      jsonSchema =
+        jsonSchema.type === 'array'
+          ? {
+              ...jsonSchema,
+              minItems: undefined,
+              maxItems: undefined,
+              items: undefined,
+              ...jsonSchema.items,
+            }
+          : jsonSchema;
 
-      blocks.push(BR, `## Config Schema`, BR, md(jsonSchema, '##'));
+      blocks.push(BR, '## Config Schema', BR, md(jsonSchema, '##'));
     }
 
     return {

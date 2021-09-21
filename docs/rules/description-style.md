@@ -16,7 +16,7 @@ Require all comments to follow the same style (either block or inline).
 
 """ Description """
 type someTypeName {
-    ...
+  # ...
 }
 ```
 
@@ -27,19 +27,15 @@ type someTypeName {
 
 " Description "
 type someTypeName {
-    ...
+  # ...
 }
 ```
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `style` (string, enum)
+### `style` (string, enum)
 
 This element must be one of the following enum values:
 

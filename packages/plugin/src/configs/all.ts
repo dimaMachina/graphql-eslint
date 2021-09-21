@@ -8,6 +8,16 @@ export const allConfig = {
   ...recommendedConfig,
   rules: {
     ...recommendedConfig.rules,
+    '@graphql-eslint/alphabetize': [
+      'error',
+      {
+        fields: ['ObjectTypeDefinition', 'InterfaceTypeDefinition', 'InputObjectTypeDefinition'],
+        values: ['EnumTypeDefinition'],
+        selections: ['OperationDefinition', 'FragmentDefinition'],
+        variables: ['OperationDefinition'],
+        arguments: ['FieldDefinition', 'Field', 'DirectiveDefinition', 'Directive'],
+      },
+    ],
     '@graphql-eslint/avoid-duplicate-fields': 'error',
     '@graphql-eslint/avoid-operation-name-prefix': 'error',
     '@graphql-eslint/avoid-scalar-result-type-on-mutation': 'error',

@@ -50,12 +50,8 @@ query user {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `fieldName` (string)
+### `fieldName` (string)
 
 Default: `"id"`

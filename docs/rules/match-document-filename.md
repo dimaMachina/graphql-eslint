@@ -86,41 +86,37 @@ query UserById {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `fileExtension` (string, enum)
+### `fileExtension` (string, enum)
 
 This element must be one of the following enum values:
 
 * `.gql`
 * `.graphql`
 
-#### `query`
+### `query`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `mutation`
+### `mutation`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `subscription`
+### `subscription`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `fragment`
+### `fragment`
 
 The object must be one of the following types:
 

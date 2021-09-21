@@ -58,6 +58,7 @@ export type RuleDocsInfo<T> = Rule.RuleMetaData & {
       code: string;
       usage?: T;
     }[];
+    optionsForConfig?: T;
   };
 };
 

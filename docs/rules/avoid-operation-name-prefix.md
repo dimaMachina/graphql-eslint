@@ -31,17 +31,13 @@ query userDetails {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `caseSensitive` (boolean)
+### `caseSensitive` (boolean)
 
 Default: `false`
 
-#### `keywords` (array, required)
+### `keywords` (array, required)
 
 The object is an array with all elements of the type `string`.
 
