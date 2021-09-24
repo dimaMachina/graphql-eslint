@@ -47,7 +47,7 @@ const rule: GraphQLESLintRule = {
         if (isScalarType(graphQLType)) {
           context.report({
             node,
-            message: `Unexpected scalar result type "${typeName}"`,
+            message: `Unexpected scalar result type "${typeName}".`,
           });
         }
       },
