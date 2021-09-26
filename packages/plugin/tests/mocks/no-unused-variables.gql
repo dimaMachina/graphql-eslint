@@ -1,0 +1,8 @@
+#import UserFields from './no-unused-variables-imported.gql'
+
+query User($limit: Int!, $offset: Int!) {
+  user {
+    id
+    ...UserFields
+  }
+}

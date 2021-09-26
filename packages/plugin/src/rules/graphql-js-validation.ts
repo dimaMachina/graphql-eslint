@@ -103,6 +103,15 @@ const validationToRule = (
   };
 };
 
+const importFiles = (context: GraphQLESLintRuleContext) => {
+  const code = context.getSourceCode().text;
+  if (!isGraphQLImportFile(code)) {
+    return null;
+  }
+  // Import documents because file contains '#import' comments
+  return processImport(context.getFilename());
+};
+
 export const GRAPHQL_JS_VALIDATIONS = Object.assign(
   {},
   validationToRule('executable-definitions', 'ExecutableDefinitions', {
@@ -192,14 +201,7 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
         },
       ],
     },
-    context => {
-      const code = context.getSourceCode().text;
-      if (!isGraphQLImportFile(code)) {
-        return null;
-      }
-      // Import documents because file contains '#import' comments
-      return processImport(context.getFilename());
-    }
+    importFiles
   ),
   validationToRule('known-type-names', 'KnownTypeNames', {
     description: `A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.`,
@@ -257,9 +259,14 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
       return getParentNode(context.getFilename());
     }
   ),
-  validationToRule('no-unused-variables', 'NoUnusedVariables', {
-    description: `A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.`,
-  }),
+  validationToRule(
+    'no-unused-variables',
+    'NoUnusedVariables',
+    {
+      description: `A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.`,
+    },
+    importFiles
+  ),
   validationToRule('overlapping-fields-can-be-merged', 'OverlappingFieldsCanBeMerged', {
     description: `A selection set is only valid if all fields (including spreading any fragments) either correspond to distinct response names or can be merged without ambiguity.`,
   }),
