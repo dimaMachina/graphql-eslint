@@ -216,9 +216,14 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
   validationToRule('no-fragment-cycles', 'NoFragmentCycles', {
     description: `A GraphQL fragment is only valid when it does not have cycles in fragments usage.`,
   }),
-  validationToRule('no-undefined-variables', 'NoUndefinedVariables', {
-    description: `A GraphQL operation is only valid if all variables encountered, both directly and via fragment spreads, are defined by that operation.`,
-  }),
+  validationToRule(
+    'no-undefined-variables',
+    'NoUndefinedVariables',
+    {
+      description: `A GraphQL operation is only valid if all variables encountered, both directly and via fragment spreads, are defined by that operation.`,
+    },
+    importFiles
+  ),
   validationToRule(
     'no-unused-fragments',
     'NoUnusedFragments',
