@@ -1,7 +1,7 @@
 import { Linter } from 'eslint';
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
 
-const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
+const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */', '#graphql'];
 
 type Block = {
   text: string;

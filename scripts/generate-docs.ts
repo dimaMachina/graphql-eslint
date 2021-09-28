@@ -62,7 +62,7 @@ function generateDocs(): void {
       blocks.push(BR, `## Usage Examples`);
 
       for (const { usage, title, code } of docs.examples) {
-        const isJsCode = ['gql`', '/* GraphQL */'].some(str => code.includes(str));
+        const isJsCode = ['gql`', '/* GraphQL */', '#graphql'].some(str => code.includes(str));
         blocks.push(BR, `### ${title}`, BR, '```' + (isJsCode ? 'js' : 'graphql'));
 
         if (!isJsCode) {

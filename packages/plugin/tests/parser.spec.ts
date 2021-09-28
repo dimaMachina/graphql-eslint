@@ -14,6 +14,19 @@ describe('Parser', () => {
     expect(result.ast.tokens).toBeTruthy();
   });
 
+  it('parseForESLint() should return ast and tokens for #graphql', () => {
+    const code = `#graphql
+      """
+      generic query placeholder
+      """
+      type Query
+    `;
+
+    const result = parseForESLint(code, { filePath: 'test.graphql' });
+    expect(result.ast).toMatchSnapshot();
+    expect(result.ast.tokens).toBeTruthy();
+  });
+
   it('should throw on invalid code', () => {
     const code = 'Hello World!';
 
@@ -48,7 +61,7 @@ describe('Parser', () => {
         user(id: ID!): User!
       }
     `;
-    const code = /* GraphQL */ `
+    const code = `#graphql
       query user($id: ID!) {
         user(id: $id) {
           id

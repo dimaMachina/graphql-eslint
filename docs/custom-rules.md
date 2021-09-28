@@ -4,7 +4,7 @@ To get started with your own rules, start by understanding how [ESLint custom ru
 
 `graphql-eslint` converts the [GraphQL AST](https://graphql.org/graphql-js/language/) into [ESTree structure](https://github.com/estree/estree), so it allows you to easily travel the GraphQL AST tree easily.
 
-You can visit any GraphQL AST node in your custom rules, and report this as error. You don't need to have special handlers for code-files, since `graphql-eslint` extracts usages of `gql` and magic `/* GraphQL */` comments automatically, and runs it through the parser, and eventually it knows to adjust errors location to fit in your code files original location.
+You can visit any GraphQL AST node in your custom rules, and report this as error. You don't need to have special handlers for code-files, since `graphql-eslint` extracts usages of `gql` and magic `/* GraphQL */` or `#graphql` comments automatically, and runs it through the parser, and eventually it knows to adjust errors location to fit in your code files original location.
 
 ## Getting Started
 

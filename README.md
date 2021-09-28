@@ -11,7 +11,7 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 ## Key Features
 
 - 🚀 Integrates with ESLint core (as a ESTree parser).
-- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments.
+- 🚀 Works on `.graphql` files, `gql` usages, `/* GraphQL */` and `#graphql` magic comments.
 - 🚀 Lints both GraphQL schema and GraphQL operations.
 - 🚀 Extended type info for more advanced usages
 - 🚀 Supports ESLint directives (for example: `disable-next-line`)

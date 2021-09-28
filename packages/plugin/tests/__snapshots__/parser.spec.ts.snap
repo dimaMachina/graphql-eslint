@@ -222,3 +222,245 @@ Object {
   "type": "Program",
 }
 `;
+
+exports[`Parser parseForESLint() should return ast and tokens for #graphql 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "definitions": Array [
+        Object {
+          "description": Object {
+            "block": true,
+            "gqlLocation": Object {
+              "end": 60,
+              "start": 15,
+            },
+            "kind": "StringValue",
+            "leadingComments": Array [],
+            "loc": Object {
+              "end": Object {
+                "column": 7,
+                "line": 2,
+              },
+              "source": "#graphql
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+              "start": Object {
+                "column": 7,
+                "line": 2,
+              },
+            },
+            "range": Array [
+              15,
+              60,
+            ],
+            "rawNode": [Function],
+            "type": "StringValue",
+            "typeInfo": [Function],
+            "value": "generic query placeholder",
+          },
+          "directives": Array [],
+          "fields": Array [],
+          "gqlLocation": Object {
+            "end": 77,
+            "start": 15,
+          },
+          "interfaces": Array [],
+          "kind": "ObjectTypeDefinition",
+          "leadingComments": Array [
+            Object {
+              "type": "Block",
+              "value": "generic query placeholder",
+            },
+          ],
+          "loc": Object {
+            "end": Object {
+              "column": 12,
+              "line": 5,
+            },
+            "source": "#graphql
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+            "start": Object {
+              "column": 7,
+              "line": 2,
+            },
+          },
+          "name": Object {
+            "gqlLocation": Object {
+              "end": 77,
+              "start": 72,
+            },
+            "kind": "Name",
+            "leadingComments": Array [],
+            "loc": Object {
+              "end": Object {
+                "column": 12,
+                "line": 5,
+              },
+              "source": "#graphql
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+              "start": Object {
+                "column": 12,
+                "line": 5,
+              },
+            },
+            "range": Array [
+              72,
+              77,
+            ],
+            "rawNode": [Function],
+            "type": "Name",
+            "typeInfo": [Function],
+            "value": "Query",
+          },
+          "range": Array [
+            15,
+            77,
+          ],
+          "rawNode": [Function],
+          "type": "ObjectTypeDefinition",
+          "typeInfo": [Function],
+        },
+      ],
+      "gqlLocation": Object {
+        "end": 82,
+        "start": 0,
+      },
+      "kind": "Document",
+      "leadingComments": Array [],
+      "loc": Object {
+        "end": Object {
+          "column": 5,
+          "line": 6,
+        },
+        "source": "#graphql
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+        "start": Object {
+          "column": 0,
+          "line": 0,
+        },
+      },
+      "range": Array [
+        0,
+        82,
+      ],
+      "rawNode": [Function],
+      "type": "Document",
+      "typeInfo": [Function],
+    },
+  ],
+  "comments": Array [
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 1,
+          "line": 1,
+        },
+        "start": Object {
+          "column": 1,
+          "line": 1,
+        },
+      },
+      "range": Array [
+        0,
+        8,
+      ],
+      "type": "Block",
+      "value": "graphql",
+    },
+  ],
+  "loc": Object {
+    "end": Object {
+      "column": 5,
+      "line": 6,
+    },
+    "source": "#graphql
+      \\"\\"\\"
+      generic query placeholder
+      \\"\\"\\"
+      type Query
+    ",
+    "start": Object {
+      "column": 0,
+      "line": 0,
+    },
+  },
+  "range": Array [
+    0,
+    82,
+  ],
+  "sourceType": "script",
+  "tokens": Array [
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 7,
+          "line": 2,
+        },
+        "start": Object {
+          "column": 7,
+          "line": 2,
+        },
+      },
+      "range": Array [
+        15,
+        60,
+      ],
+      "type": "BlockString",
+      "value": "generic query placeholder",
+    },
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 7,
+          "line": 5,
+        },
+        "start": Object {
+          "column": 7,
+          "line": 5,
+        },
+      },
+      "range": Array [
+        67,
+        71,
+      ],
+      "type": "Name",
+      "value": "type",
+    },
+    Object {
+      "loc": Object {
+        "end": Object {
+          "column": 12,
+          "line": 5,
+        },
+        "start": Object {
+          "column": 12,
+          "line": 5,
+        },
+      },
+      "range": Array [
+        72,
+        77,
+      ],
+      "type": "Name",
+      "value": "Query",
+    },
+  ],
+  "type": "Program",
+}
+`;
