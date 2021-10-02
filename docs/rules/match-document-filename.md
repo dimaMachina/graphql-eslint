@@ -92,8 +92,8 @@ The schema defines the following properties:
 
 This element must be one of the following enum values:
 
-* `.gql`
-* `.graphql`
+- `.gql`
+- `.graphql`
 
 ### `query`
 
@@ -141,11 +141,11 @@ Properties of the `asObject` object:
 
 This element must be one of the following enum values:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-* `kebab-case`
+- `camelCase`
+- `PascalCase`
+- `snake_case`
+- `UPPER_CASE`
+- `kebab-case`
 
 ## Resources
 

@@ -1,11 +1,5 @@
 import {
   Kind,
-  ObjectTypeDefinitionNode,
-  ObjectTypeExtensionNode,
-  InterfaceTypeDefinitionNode,
-  InterfaceTypeExtensionNode,
-  InputObjectTypeDefinitionNode,
-  InputObjectTypeExtensionNode,
   FieldDefinitionNode,
   InputValueDefinitionNode,
   EnumTypeDefinitionNode,
@@ -19,8 +13,9 @@ import {
   DirectiveNode,
   SelectionSetNode,
   FragmentSpreadNode,
+  ASTKindToNode,
 } from 'graphql';
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESLintRule, ValueOf } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 import { getLocation } from '../utils';
@@ -151,38 +146,48 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
         properties: {
           fields: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: fieldsEnum,
             },
-            description: 'Fields of `type`, `interface`, and `input`.',
+            description: 'Fields of `type`, `interface`, and `input`',
           },
           values: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: valuesEnum,
             },
-            description: 'Values of `enum`.',
+            description: 'Values of `enum`',
           },
           selections: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: selectionsEnum,
             },
-            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`.',
+            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`',
           },
           variables: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: variablesEnum,
             },
-            description: 'Variables of operations (`query`, `mutation` and `subscription`).',
+            description: 'Variables of operations (`query`, `mutation` and `subscription`)',
           },
           arguments: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: argumentsEnum,
             },
-            description: 'Arguments of fields and directives.',
+            description: 'Arguments of fields and directives',
           },
         },
       },
@@ -225,7 +230,7 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
     const fields = new Set(opts.fields ?? []);
     const listeners: GraphQLESLintRuleListener = {};
 
-    const fieldsSelector = [
+    const kinds = [
       fields.has(Kind.OBJECT_TYPE_DEFINITION) && [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION],
       fields.has(Kind.INTERFACE_TYPE_DEFINITION) && [Kind.INTERFACE_TYPE_DEFINITION, Kind.INTERFACE_TYPE_EXTENSION],
       fields.has(Kind.INPUT_OBJECT_TYPE_DEFINITION) && [
@@ -233,24 +238,20 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
         Kind.INPUT_OBJECT_TYPE_EXTENSION,
       ],
     ]
-      .flat()
-      .join(',');
+      .filter(Boolean)
+      .flat();
+
+    const fieldsSelector = kinds.join(',');
+
     const hasEnumValues = opts.values?.[0] === Kind.ENUM_TYPE_DEFINITION;
     const selectionsSelector = opts.selections?.join(',');
     const hasVariables = opts.variables?.[0] === Kind.OPERATION_DEFINITION;
     const argumentsSelector = opts.arguments?.join(',');
 
     if (fieldsSelector) {
-      listeners[fieldsSelector] = (
-        node: GraphQLESTreeNode<
-          | ObjectTypeDefinitionNode
-          | ObjectTypeExtensionNode
-          | InterfaceTypeDefinitionNode
-          | InterfaceTypeExtensionNode
-          | InputObjectTypeDefinitionNode
-          | InputObjectTypeExtensionNode
-        >
-      ) => {
+      type KindToNode = ValueOf<Pick<ASTKindToNode, typeof kinds[number]>>;
+
+      listeners[fieldsSelector] = (node: GraphQLESTreeNode<KindToNode>) => {
         checkNodes(node.fields);
       };
     }

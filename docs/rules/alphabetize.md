@@ -95,49 +95,74 @@ The schema defines the following properties:
 
 ### `fields` (array)
 
-Fields of `type`, `interface`, and `input`.
+Fields of `type`, `interface`, and `input`
 
-The elements of the array must contain the following properties:
+The elements of the array can contain the following enum values:
 
 - `ObjectTypeDefinition`
 - `InterfaceTypeDefinition`
 - `InputObjectTypeDefinition`
 
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
+
 ### `values` (array)
 
-Values of `enum`.
+Values of `enum`
 
-The elements of the array must contain the following properties:
+The elements of the array can contain the following enum values:
 
 - `EnumTypeDefinition`
 
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
+
 ### `selections` (array)
 
-Selections of operations (`query`, `mutation` and `subscription`) and `fragment`.
+Selections of operations (`query`, `mutation` and `subscription`) and `fragment`
 
-The elements of the array must contain the following properties:
+The elements of the array can contain the following enum values:
 
 - `OperationDefinition`
 - `FragmentDefinition`
 
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
+
 ### `variables` (array)
 
-Variables of operations (`query`, `mutation` and `subscription`).
+Variables of operations (`query`, `mutation` and `subscription`)
 
-The elements of the array must contain the following properties:
+The elements of the array can contain the following enum values:
 
 - `OperationDefinition`
 
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
+
 ### `arguments` (array)
 
-Arguments of fields and directives.
+Arguments of fields and directives
 
-The elements of the array must contain the following properties:
+The elements of the array can contain the following enum values:
 
 - `FieldDefinition`
 - `Field`
 - `DirectiveDefinition`
 - `Directive`
+
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
 
 ## Resources
 

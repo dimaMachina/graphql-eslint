@@ -25,6 +25,8 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     'unicorn/prefer-array-some': 'error',
     'unicorn/prefer-includes': 'error',
+    'unicorn/no-useless-fallback-in-spread': 'error',
+    'unicorn/better-regex': 'error',
   },
   overrides: [
     {
