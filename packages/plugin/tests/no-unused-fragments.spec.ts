@@ -7,11 +7,14 @@ const ruleTester = new GraphQLRuleTester();
 ruleTester.runGraphQLTests('no-unused-fragments', GRAPHQL_JS_VALIDATIONS['no-unused-fragments'], {
   valid: [
     {
-      filename: join(__dirname, 'mocks/user-fields.graphql'),
-      code: ruleTester.fromMockFile('user-fields.graphql'),
+      filename: join(__dirname, 'mocks/user-fields-with-nested-fragment.gql'),
+      code: ruleTester.fromMockFile('user-fields-with-nested-fragment.gql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: [join(__dirname, 'mocks/user-fields.graphql'), join(__dirname, 'mocks/user.graphql')],
+        operations: [
+          join(__dirname, 'mocks/user-fields-with-nested-fragment.gql'),
+          join(__dirname, 'mocks/user.graphql'),
+        ],
       },
     },
     {

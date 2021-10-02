@@ -1,10 +1,9 @@
 import { join } from 'path';
-import { GraphQLRuleTester } from '../src';
-import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
+import { GraphQLRuleTester, rules } from '../src';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('known-fragment-names', GRAPHQL_JS_VALIDATIONS['known-fragment-names'], {
+ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names'], {
   valid: [
     {
       filename: join(__dirname, 'mocks/user.graphql'),

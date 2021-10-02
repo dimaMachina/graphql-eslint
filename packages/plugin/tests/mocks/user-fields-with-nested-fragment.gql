@@ -1,0 +1,19 @@
+fragment UserFields on User {
+  ...AnotherUserFields
+  posts {
+    ...PostFields
+  }
+}
+
+fragment AnotherUserFields on User {
+  firstName
+}
+
+fragment PostFields on Post {
+  title
+  ...AnotherPostFields
+}
+
+fragment AnotherPostFields on Post {
+  content
+}
