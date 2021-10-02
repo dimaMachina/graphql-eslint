@@ -150,7 +150,7 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
       exceptions: {},
-      ...(context.options[0] || {}),
+      ...context.options[0],
     };
 
     return {

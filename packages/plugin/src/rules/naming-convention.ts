@@ -1,132 +1,77 @@
-import { Kind } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { getLocation, isQueryType } from '../utils';
+import { ASTKindToNode, Kind, NameNode } from 'graphql';
+import { GraphQLESLintRule, ValueOf } from '../types';
+import { TYPES_KINDS, getLocation } from '../utils';
+import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESLintRuleListener } from '../testkit';
 
-const formats = {
-  camelCase: /^[a-z][^_]*$/g,
-  PascalCase: /^[A-Z][^_]*$/g,
-  snake_case: /^[a-z_][a-z0-9_]*$/g,
-  UPPER_CASE: /^[A-Z_][A-Z0-9_]*$/g,
+const FIELDS_KINDS = [
+  Kind.FIELD_DEFINITION,
+  Kind.INPUT_VALUE_DEFINITION,
+  Kind.VARIABLE_DEFINITION,
+  Kind.ARGUMENT,
+  Kind.DIRECTIVE_DEFINITION,
+];
+
+const KindToDisplayName = {
+  // types
+  [Kind.OBJECT_TYPE_DEFINITION]: 'Type',
+  [Kind.INTERFACE_TYPE_DEFINITION]: 'Interface',
+  [Kind.ENUM_TYPE_DEFINITION]: 'Enumerator',
+  [Kind.SCALAR_TYPE_DEFINITION]: 'Scalar',
+  [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'Input type',
+  [Kind.UNION_TYPE_DEFINITION]: 'Union',
+  // fields
+  [Kind.FIELD_DEFINITION]: 'Field',
+  [Kind.INPUT_VALUE_DEFINITION]: 'Input property',
+  [Kind.VARIABLE_DEFINITION]: 'Variable',
+  [Kind.ARGUMENT]: 'Argument',
+  [Kind.DIRECTIVE_DEFINITION]: 'Directive',
+  // rest
+  [Kind.ENUM_VALUE_DEFINITION]: 'Enumeration value',
+  [Kind.OPERATION_DEFINITION]: 'Operation',
+  [Kind.FRAGMENT_DEFINITION]: 'Fragment',
 };
 
-const acceptedStyles: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'] = [
-  'camelCase',
-  'PascalCase',
-  'snake_case',
-  'UPPER_CASE',
-];
-type ValidNaming = typeof acceptedStyles[number];
+type AllowedKind = keyof typeof KindToDisplayName;
+type AllowedStyle = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
 
-interface CheckNameFormatParams {
-  value: string;
-  style?: ValidNaming;
-  leadingUnderscore: 'allow' | 'forbid';
-  trailingUnderscore: 'allow' | 'forbid';
-  prefix: string;
-  suffix: string;
-  forbiddenPrefixes: string[];
-  forbiddenSuffixes: string[];
-}
+const StyleToRegex: Record<AllowedStyle, RegExp> = {
+  camelCase: /^[a-z][\dA-Za-z]*$/,
+  PascalCase: /^[A-Z][\dA-Za-z]*$/,
+  snake_case: /^[a-z][\d_a-z]*[\da-z]$/,
+  UPPER_CASE: /^[A-Z][\dA-Z_]*[\dA-Z]$/,
+};
 
-function checkNameFormat(params: CheckNameFormatParams): { ok: false; errorMessage: string } | { ok: true } {
-  const {
-    value,
-    style,
-    leadingUnderscore,
-    trailingUnderscore,
-    suffix,
-    prefix,
-    forbiddenPrefixes,
-    forbiddenSuffixes,
-  } = params;
-  let name = value;
-  if (leadingUnderscore === 'allow') {
-    [, name] = name.match(/^_*(.*)$/);
-  }
-  if (trailingUnderscore === 'allow') {
-    name = name.replace(/_*$/, '');
-  }
-  if (prefix && !name.startsWith(prefix)) {
-    return {
-      ok: false,
-      errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{prefix}}" prefix',
-    };
-  }
-  if (suffix && !name.endsWith(suffix)) {
-    return {
-      ok: false,
-      errorMessage: '{{nodeType}} name "{{nodeName}}" should have "{{suffix}}" suffix',
-    };
-  }
-  if (style && !acceptedStyles.includes(style)) {
-    return {
-      ok: false,
-      errorMessage: `{{nodeType}} name "{{nodeName}}" should be in one of the following options: ${acceptedStyles.join(
-        ','
-      )}`,
-    };
-  }
-  if (forbiddenPrefixes.some(forbiddenPrefix => name.startsWith(forbiddenPrefix))) {
-    return {
-      ok: false,
-      errorMessage:
-        '{{nodeType}} "{{nodeName}}" should not have one of the following prefix(es): {{forbiddenPrefixes}}',
-    };
-  }
-
-  if (forbiddenSuffixes.some(forbiddenSuffix => name.endsWith(forbiddenSuffix))) {
-    return {
-      ok: false,
-      errorMessage:
-        '{{nodeType}} "{{nodeName}}" should not have one of the following suffix(es): {{forbiddenSuffixes}}',
-    };
-  }
-
-  if (!formats[style]) {
-    return { ok: true };
-  }
-  const ok = new RegExp(formats[style]).test(name);
-  if (ok) {
-    return { ok: true };
-  }
-  return {
-    ok: false,
-    errorMessage: '{{nodeType}} name "{{nodeName}}" should be in {{format}} format',
-  };
-}
+const ALLOWED_KINDS = Object.keys(KindToDisplayName).sort() as AllowedKind[];
+const ALLOWED_STYLES = Object.keys(StyleToRegex) as AllowedStyle[];
 
 const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 };
 
-export interface PropertySchema {
-  style?: ValidNaming;
+type PropertySchema = {
+  style?: AllowedStyle;
   suffix?: string;
   prefix?: string;
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
-}
+};
 
-type NamingConventionRuleConfig = [
-  {
-    leadingUnderscore?: 'allow' | 'forbid';
-    trailingUnderscore?: 'allow' | 'forbid';
-    QueryDefinition?: ValidNaming | PropertySchema;
-    [Kind.FIELD_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.ENUM_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.INPUT_VALUE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.OBJECT_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.INTERFACE_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.ENUM_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.UNION_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.SCALAR_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.OPERATION_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.FRAGMENT_DEFINITION]?: ValidNaming | PropertySchema;
-    [Kind.INPUT_OBJECT_TYPE_DEFINITION]?: ValidNaming | PropertySchema;
-  }
-];
+type Options = AllowedStyle | PropertySchema;
 
-const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
+type NamingConventionRuleConfig = {
+  allowLeadingUnderscore?: boolean;
+  allowTrailingUnderscore?: boolean;
+  types?: Options;
+  fields?: Options;
+  overrides?: {
+    [key in `${AllowedKind}${string}`]?: Options;
+  };
+};
+
+type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
+
+const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -137,230 +82,216 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       examples: [
         {
           title: 'Incorrect',
-          usage: [{ ObjectTypeDefinition: 'PascalCase' }],
+          usage: [{ types: 'PascalCase', fields: 'camelCase' }],
           code: /* GraphQL */ `
-            type someTypeName {
-              f: String!
+            type user {
+              first_name: String!
             }
           `,
         },
         {
           title: 'Correct',
-          usage: [{ FieldDefinition: 'camelCase', ObjectTypeDefinition: 'PascalCase' }],
+          usage: [{ types: 'PascalCase', fields: 'camelCase' }],
           code: /* GraphQL */ `
-            type SomeTypeName {
-              someFieldName: String
+            type User {
+              firstName: String
             }
           `,
+        },
+      ],
+      optionsForConfig: [
+        {
+          types: 'PascalCase',
+          fields: 'camelCase',
+          overrides: {
+            EnumValueDefinition: 'UPPER_CASE',
+            OperationDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+            },
+            FragmentDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Fragment'],
+              forbiddenSuffixes: ['Fragment'],
+            },
+            'FieldDefinition[parent.name.value=Query]': {
+              forbiddenPrefixes: ['query', 'get'],
+              forbiddenSuffixes: ['Query'],
+            },
+            'FieldDefinition[parent.name.value=Mutation]': {
+              forbiddenPrefixes: ['mutation'],
+              forbiddenSuffixes: ['Mutation'],
+            },
+            'FieldDefinition[parent.name.value=Subscription]': {
+              forbiddenPrefixes: ['subscription'],
+              forbiddenSuffixes: ['Subscription'],
+            },
+          },
         },
       ],
     },
     schema: {
       definitions: {
         asString: {
-          type: 'string',
-          description: `One of: ${acceptedStyles.map(t => `\`${t}\``).join(', ')}`,
-          enum: acceptedStyles,
+          enum: ALLOWED_STYLES,
+          description: `One of: ${ALLOWED_STYLES.map(t => `\`${t}\``).join(', ')}`,
         },
         asObject: {
           type: 'object',
+          additionalProperties: false,
           properties: {
-            style: {
-              type: 'string',
-              enum: acceptedStyles,
-            },
-            prefix: {
-              type: 'string',
-            },
-            suffix: {
-              type: 'string',
-            },
+            style: { enum: ALLOWED_STYLES },
+            prefix: { type: 'string' },
+            suffix: { type: 'string' },
             forbiddenPrefixes: {
-              additionalItems: false,
               type: 'array',
+              uniqueItems: true,
               minItems: 1,
-              items: {
-                type: 'string',
-              },
+              items: { type: 'string' },
             },
             forbiddenSuffixes: {
-              additionalItems: false,
               type: 'array',
+              uniqueItems: true,
               minItems: 1,
-              items: {
-                type: 'string',
-              },
+              items: { type: 'string' },
             },
           },
         },
       },
-      $schema: 'http://json-schema.org/draft-04/schema#',
       type: 'array',
+      maxItems: 1,
       items: {
         type: 'object',
+        additionalProperties: false,
         properties: {
-          [Kind.FIELD_DEFINITION as string]: schemaOption,
-          [Kind.INPUT_OBJECT_TYPE_DEFINITION as string]: schemaOption,
-          [Kind.ENUM_VALUE_DEFINITION as string]: schemaOption,
-          [Kind.INPUT_VALUE_DEFINITION as string]: schemaOption,
-          [Kind.OBJECT_TYPE_DEFINITION as string]: schemaOption,
-          [Kind.INTERFACE_TYPE_DEFINITION as string]: schemaOption,
-          [Kind.ENUM_TYPE_DEFINITION as string]: schemaOption,
-          [Kind.UNION_TYPE_DEFINITION as string]: schemaOption,
-          [Kind.SCALAR_TYPE_DEFINITION as string]: schemaOption,
-          [Kind.OPERATION_DEFINITION as string]: schemaOption,
-          [Kind.FRAGMENT_DEFINITION as string]: schemaOption,
-          QueryDefinition: schemaOption,
-          leadingUnderscore: {
-            type: 'string',
-            enum: ['allow', 'forbid'],
-            default: 'forbid',
+          types: {
+            ...schemaOption,
+            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
-          trailingUnderscore: {
-            type: 'string',
-            enum: ['allow', 'forbid'],
-            default: 'forbid',
+          fields: {
+            ...schemaOption,
+            description: `Includes:\n\n${FIELDS_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+          },
+          allowLeadingUnderscore: {
+            type: 'boolean',
+            default: false,
+          },
+          allowTrailingUnderscore: {
+            type: 'boolean',
+            default: false,
+          },
+          overrides: {
+            type: 'object',
+            additionalProperties: false,
+            description: [
+              'May contain the following `ASTNode` names:',
+              '',
+              ...ALLOWED_KINDS.map(kind => `- \`${kind}\``),
+              '',
+              "> It's also possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with `ASTNode` name",
+              '>',
+              '> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`',
+            ].join('\n'),
+            patternProperties: {
+              [`^(${ALLOWED_KINDS.join('|')})(.+)?$`]: schemaOption,
+            },
           },
         },
       },
     },
   },
   create(context) {
-    const options: NamingConventionRuleConfig[number] = {
-      leadingUnderscore: 'forbid',
-      trailingUnderscore: 'forbid',
-      ...(context.options[0] || {}),
+    const options: NamingConventionRuleConfig = {
+      overrides: {},
+      ...context.options[0],
     };
 
-    const checkNode = (node, property: PropertySchema, nodeType: string) => {
-      const { style, suffix = '', prefix = '', forbiddenPrefixes = [], forbiddenSuffixes = [] } = property;
-      const result = checkNameFormat({
-        value: node.value,
-        style,
-        leadingUnderscore: options.leadingUnderscore,
-        trailingUnderscore: options.trailingUnderscore,
-        prefix,
-        suffix,
-        forbiddenPrefixes,
-        forbiddenSuffixes,
-      });
-      if (result.ok === false) {
+    function normalisePropertyOption(kind: string): PropertySchema {
+      let style: Options = options.overrides[kind];
+
+      if (!style) {
+        style = TYPES_KINDS.includes(kind as any) ? options.types : options.fields;
+      }
+      return typeof style === 'object' ? style : { style };
+    }
+
+    const checkNode = (selector: string) => (node: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) => {
+      const { name } = node.kind === Kind.VARIABLE_DEFINITION ? node.variable : node;
+      if (!name) {
+        return;
+      }
+      const { prefix, suffix, forbiddenPrefixes, forbiddenSuffixes, style } = normalisePropertyOption(selector);
+      const nodeType = KindToDisplayName[node.kind] || node.kind;
+      const nodeName = name.value;
+      const errorMessage = getErrorMessage();
+      if (errorMessage) {
         context.report({
-          loc: getLocation(node.loc, node.value),
-          message: result.errorMessage,
-          data: {
-            prefix,
-            suffix,
-            format: style,
-            forbiddenPrefixes: forbiddenPrefixes.join(', '),
-            forbiddenSuffixes: forbiddenSuffixes.join(', '),
-            nodeType,
-            nodeName: node.value,
-          },
+          loc: getLocation(name.loc, name.value),
+          message: `${nodeType} "${nodeName}" should ${errorMessage}`,
         });
       }
-    };
 
-    const normalisePropertyOption = (value: ValidNaming | PropertySchema): PropertySchema => {
-      if (typeof value === 'object') {
-        return value;
+      function getErrorMessage(): string | void {
+        let name = nodeName;
+        if (options.allowLeadingUnderscore) {
+          name = name.replace(/^_*/, '');
+        }
+        if (options.allowTrailingUnderscore) {
+          name = name.replace(/_*$/, '');
+        }
+        if (prefix && !name.startsWith(prefix)) {
+          return `have "${prefix}" prefix`;
+        }
+        if (suffix && !name.endsWith(suffix)) {
+          return `have "${suffix}" suffix`;
+        }
+        const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
+        if (forbiddenPrefix) {
+          return `not have "${forbiddenPrefix}" prefix`;
+        }
+        const forbiddenSuffix = forbiddenSuffixes?.find(suffix => name.endsWith(suffix));
+        if (forbiddenSuffix) {
+          return `not have "${forbiddenSuffix}" suffix`;
+        }
+        if (style && !ALLOWED_STYLES.includes(style)) {
+          return `be in one of the following options: ${ALLOWED_STYLES.join(', ')}`;
+        }
+        const caseRegex = StyleToRegex[style];
+        if (caseRegex && !caseRegex.test(name)) {
+          return `be in ${style} format`;
+        }
       }
-      return {
-        style: value,
-        prefix: '',
-        suffix: '',
-      };
     };
 
-    return {
-      Name: node => {
-        if (node.value.startsWith('_') && options.leadingUnderscore === 'forbid') {
-          context.report({
-            loc: getLocation(node.loc, node.value),
-            message: 'Leading underscores are not allowed',
-          });
-        }
-        if (node.value.endsWith('_') && options.trailingUnderscore === 'forbid') {
-          context.report({
-            loc: getLocation(node.loc, node.value),
-            message: 'Trailing underscores are not allowed',
-          });
-        }
-      },
-      ObjectTypeDefinition: node => {
-        if (options.ObjectTypeDefinition) {
-          const property = normalisePropertyOption(options.ObjectTypeDefinition);
-          checkNode(node.name, property, 'Type');
-        }
-      },
-      InterfaceTypeDefinition: node => {
-        if (options.InterfaceTypeDefinition) {
-          const property = normalisePropertyOption(options.InterfaceTypeDefinition);
-          checkNode(node.name, property, 'Interface');
-        }
-      },
-      EnumTypeDefinition: node => {
-        if (options.EnumTypeDefinition) {
-          const property = normalisePropertyOption(options.EnumTypeDefinition);
-          checkNode(node.name, property, 'Enumerator');
-        }
-      },
-      InputObjectTypeDefinition: node => {
-        if (options.InputObjectTypeDefinition) {
-          const property = normalisePropertyOption(options.InputObjectTypeDefinition);
-          checkNode(node.name, property, 'Input type');
-        }
-      },
-      FieldDefinition: (node: any) => {
-        if (options.QueryDefinition && isQueryType(node.parent)) {
-          const property = normalisePropertyOption(options.QueryDefinition);
-          checkNode(node.name, property, 'Query');
-        }
-
-        if (options.FieldDefinition && !isQueryType(node.parent)) {
-          const property = normalisePropertyOption(options.FieldDefinition);
-          checkNode(node.name, property, 'Field');
-        }
-      },
-      EnumValueDefinition: node => {
-        if (options.EnumValueDefinition) {
-          const property = normalisePropertyOption(options.EnumValueDefinition);
-          checkNode(node.name, property, 'Enumeration value');
-        }
-      },
-      InputValueDefinition: node => {
-        if (options.InputValueDefinition) {
-          const property = normalisePropertyOption(options.InputValueDefinition);
-          checkNode(node.name, property, 'Input property');
-        }
-      },
-      OperationDefinition: node => {
-        if (options.OperationDefinition) {
-          const property = normalisePropertyOption(options.OperationDefinition);
-          if (node.name) {
-            checkNode(node.name, property, 'Operation');
-          }
-        }
-      },
-      FragmentDefinition: node => {
-        if (options.FragmentDefinition) {
-          const property = normalisePropertyOption(options.FragmentDefinition);
-          checkNode(node.name, property, 'Fragment');
-        }
-      },
-      ScalarTypeDefinition: node => {
-        if (options.ScalarTypeDefinition) {
-          const property = normalisePropertyOption(options.ScalarTypeDefinition);
-          checkNode(node.name, property, 'Scalar');
-        }
-      },
-      UnionTypeDefinition: node => {
-        if (options.UnionTypeDefinition) {
-          const property = normalisePropertyOption(options.UnionTypeDefinition);
-          checkNode(node.name, property, 'Union');
-        }
-      },
+    const checkUnderscore = (node: GraphQLESTreeNode<NameNode>) => {
+      const name = node.value
+      context.report({
+        loc: getLocation(node.loc, name),
+        message: `${name.startsWith('_') ? 'Leading' : 'Trailing'} underscores are not allowed`,
+      });
     };
+
+    const listeners: GraphQLESLintRuleListener = {};
+
+    if (!options.allowLeadingUnderscore) {
+      listeners['Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
+    }
+    if (!options.allowTrailingUnderscore) {
+      listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
+    }
+
+    const selectors = new Set(
+      [options.types && TYPES_KINDS, options.fields && FIELDS_KINDS, Object.keys(options.overrides)]
+        .flat()
+        .filter(Boolean)
+    );
+
+    for (const selector of selectors) {
+      listeners[selector] = checkNode(selector);
+    }
+
+    return listeners;
   },
 };
 

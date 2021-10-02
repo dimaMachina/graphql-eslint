@@ -14,20 +14,20 @@ Require names to follow specified conventions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { ObjectTypeDefinition: 'PascalCase' }]
+# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', fields: 'camelCase' }]
 
-type someTypeName {
-  f: String!
+type user {
+  first_name: String!
 }
 ```
 
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { FieldDefinition: 'camelCase', ObjectTypeDefinition: 'PascalCase' }]
+# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', fields: 'camelCase' }]
 
-type SomeTypeName {
-  someFieldName: String
+type User {
+  firstName: String
 }
 ```
 
@@ -35,107 +35,76 @@ type SomeTypeName {
 
 The schema defines the following properties:
 
-### `FieldDefinition`
+### `types`
+
+Includes:
+
+- `ObjectTypeDefinition`
+- `InterfaceTypeDefinition`
+- `EnumTypeDefinition`
+- `ScalarTypeDefinition`
+- `InputObjectTypeDefinition`
+- `UnionTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `InputObjectTypeDefinition`
+### `fields`
+
+Includes:
+
+- `FieldDefinition`
+- `InputValueDefinition`
+- `VariableDefinition`
+- `Argument`
+- `DirectiveDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `EnumValueDefinition`
+### `allowLeadingUnderscore` (boolean)
+
+Default: `false`
+
+### `allowTrailingUnderscore` (boolean)
+
+Default: `false`
+
+### `overrides` (object)
+
+May contain the following `ASTNode` names:
+
+- `Argument`
+- `DirectiveDefinition`
+- `EnumTypeDefinition`
+- `EnumValueDefinition`
+- `FieldDefinition`
+- `FragmentDefinition`
+- `InputObjectTypeDefinition`
+- `InputValueDefinition`
+- `InterfaceTypeDefinition`
+- `ObjectTypeDefinition`
+- `OperationDefinition`
+- `ScalarTypeDefinition`
+- `UnionTypeDefinition`
+- `VariableDefinition`
+
+> It's also possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with `ASTNode` name
+>
+> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`
+
+Pattern properties of the `overrides` object:
+
+#### `^(Argument|DirectiveDefinition|EnumTypeDefinition|EnumValueDefinition|FieldDefinition|FragmentDefinition|InputObjectTypeDefinition|InputValueDefinition|InterfaceTypeDefinition|ObjectTypeDefinition|OperationDefinition|ScalarTypeDefinition|UnionTypeDefinition|VariableDefinition)(.+)?$`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
-
-### `InputValueDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `ObjectTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `InterfaceTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `EnumTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `UnionTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `ScalarTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `OperationDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `FragmentDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `QueryDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `leadingUnderscore` (string, enum)
-
-This element must be one of the following enum values:
-
-* `allow`
-* `forbid`
-
-Default: `"forbid"`
-
-### `trailingUnderscore` (string, enum)
-
-This element must be one of the following enum values:
-
-* `allow`
-* `forbid`
-
-Default: `"forbid"`
 
 ---
 
@@ -143,7 +112,7 @@ Default: `"forbid"`
 
 The schema defines the following additional types:
 
-## `asString` (string)
+## `asString` (enum)
 
 One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
 
@@ -151,14 +120,14 @@ One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
 
 Properties of the `asObject` object:
 
-### `style` (string, enum)
+### `style` (enum)
 
 This element must be one of the following enum values:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+- `camelCase`
+- `PascalCase`
+- `snake_case`
+- `UPPER_CASE`
 
 ### `prefix` (string)
 
@@ -171,6 +140,7 @@ The object is an array with all elements of the type `string`.
 Additional restrictions:
 
 * Minimum items: `1`
+* Unique items: `true`
 
 ### `forbiddenSuffixes` (array)
 
@@ -179,6 +149,7 @@ The object is an array with all elements of the type `string`.
 Additional restrictions:
 
 * Minimum items: `1`
+* Unique items: `true`
 
 ## Resources
 

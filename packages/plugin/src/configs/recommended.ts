@@ -16,7 +16,34 @@ export const recommendedConfig = {
     '@graphql-eslint/known-type-names': 'error',
     '@graphql-eslint/lone-anonymous-operation': 'error',
     '@graphql-eslint/lone-schema-definition': 'error',
-    '@graphql-eslint/naming-convention': 'error',
+    '@graphql-eslint/naming-convention': [
+      'error',
+      {
+        types: 'PascalCase',
+        fields: 'camelCase',
+        overrides: {
+          EnumValueDefinition: 'UPPER_CASE',
+          OperationDefinition: {
+            style: 'PascalCase',
+            forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+            forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+          },
+          FragmentDefinition: { style: 'PascalCase', forbiddenPrefixes: ['Fragment'], forbiddenSuffixes: ['Fragment'] },
+          'FieldDefinition[parent.name.value=Query]': {
+            forbiddenPrefixes: ['query', 'get'],
+            forbiddenSuffixes: ['Query'],
+          },
+          'FieldDefinition[parent.name.value=Mutation]': {
+            forbiddenPrefixes: ['mutation'],
+            forbiddenSuffixes: ['Mutation'],
+          },
+          'FieldDefinition[parent.name.value=Subscription]': {
+            forbiddenPrefixes: ['subscription'],
+            forbiddenSuffixes: ['Subscription'],
+          },
+        },
+      },
+    ],
     '@graphql-eslint/no-anonymous-operations': 'error',
     '@graphql-eslint/no-case-insensitive-enum-values-duplicates': 'error',
     '@graphql-eslint/no-fragment-cycles': 'error',

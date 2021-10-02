@@ -52,7 +52,7 @@ type RuleSeverity = 'error' | ['error', ...any];
 async function generateConfigs(): Promise<void> {
   const { rules } = await import('../packages/plugin/src');
 
-  const getRulesSeverityWithOptions = (rule: GraphQLESLintRule): RuleSeverity => {
+  const getRuleSeverityWithOptions = (rule: GraphQLESLintRule): RuleSeverity => {
     const { optionsForConfig = [] } = rule.meta.docs;
     if (optionsForConfig.length > 0) {
       return ['error', ...optionsForConfig];
@@ -62,12 +62,12 @@ async function generateConfigs(): Promise<void> {
 
   const getRulesConfig = (isRecommended: boolean): Record<string, RuleSeverity> => {
     const filteredRules = Object.entries(rules)
-      .filter(([, rule]) => Boolean(rule.meta.docs.recommended) === isRecommended)
+      .filter(([, rule]) => !rule.meta.deprecated && Boolean(rule.meta.docs.recommended) === isRecommended)
       .map(([ruleName]) => ruleName)
       .sort();
 
     return Object.fromEntries(
-      filteredRules.map(ruleName => [`@graphql-eslint/${ruleName}`, getRulesSeverityWithOptions(rules[ruleName])])
+      filteredRules.map(ruleName => [`@graphql-eslint/${ruleName}`, getRuleSeverityWithOptions(rules[ruleName])])
     );
   };
 

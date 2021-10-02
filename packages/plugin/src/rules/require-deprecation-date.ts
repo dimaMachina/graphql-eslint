@@ -2,6 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import { valueFromNode } from '../estree-parser/utils';
 import { getLocation } from '../utils';
 
+// eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
 
 const MESSAGE_REQUIRE_DATE = 'MESSAGE_REQUIRE_DATE';
