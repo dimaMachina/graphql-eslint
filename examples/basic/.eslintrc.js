@@ -23,7 +23,7 @@ module.exports = {
         '@graphql-eslint/no-operation-name-suffix': 'error',
         '@graphql-eslint/avoid-operation-name-prefix': ['error', { keywords: ['get'] }],
         '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
-        '@graphql-eslint/require-description': ['error', { on: ['SchemaDefinition', 'FieldDefinition'] }],
+        '@graphql-eslint/require-description': ['error', { overrides: { FieldDefinition: true } }],
       },
     },
   ],

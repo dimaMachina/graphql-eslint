@@ -12,7 +12,7 @@ Enforce descriptions in your type definitions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-description: ['error', { on: ['ObjectTypeDefinition', 'FieldDefinition'] }]
+# eslint @graphql-eslint/require-description: ['error', { types: true, overrides: { FieldDefinition: true } }]
 
 type someTypeName {
   name: String
@@ -22,7 +22,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-description: ['error', { on: ['ObjectTypeDefinition', 'FieldDefinition'] }]
+# eslint @graphql-eslint/require-description: ['error', { types: true, overrides: { FieldDefinition: true } }]
 
 """
 Some type description
@@ -39,13 +39,42 @@ type someTypeName {
 
 The schema defines the following properties:
 
-### `on` (array)
+### `types` (boolean)
 
-The object is an array with all elements of the type `string`.
+Includes:
 
-Additional restrictions:
+- `ObjectTypeDefinition`
+- `InterfaceTypeDefinition`
+- `EnumTypeDefinition`
+- `ScalarTypeDefinition`
+- `InputObjectTypeDefinition`
+- `UnionTypeDefinition`
 
-* Minimum items: `1`
+### `overrides` (object)
+
+Configuration for precise `ASTNode`
+
+Properties of the `overrides` object:
+
+#### `ObjectTypeDefinition` (boolean)
+
+#### `InterfaceTypeDefinition` (boolean)
+
+#### `EnumTypeDefinition` (boolean)
+
+#### `ScalarTypeDefinition` (boolean)
+
+#### `InputObjectTypeDefinition` (boolean)
+
+#### `UnionTypeDefinition` (boolean)
+
+#### `FieldDefinition` (boolean)
+
+#### `InputValueDefinition` (boolean)
+
+#### `EnumValueDefinition` (boolean)
+
+#### `DirectiveDefinition` (boolean)
 
 ## Resources
 
