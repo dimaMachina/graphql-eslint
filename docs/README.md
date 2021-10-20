@@ -11,6 +11,7 @@ Each rule has emojis denoting:
 <!-- prettier-ignore-start -->
 Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Description|🚀&nbsp;/&nbsp;🔮|🔧|✅
 -|-|:-:|-|-
+[alphabetize](rules/alphabetize.md)|Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.|🚀||
 [avoid-duplicate-fields](rules/avoid-duplicate-fields.md)|Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.|🚀||
 [avoid-operation-name-prefix](rules/avoid-operation-name-prefix.md)|Enforce/avoid operation name prefix, useful if you wish to avoid prefix in your root fields, or avoid using REST terminology in your schema.|🚀||
 [avoid-scalar-result-type-on-mutation](rules/avoid-scalar-result-type-on-mutation.md)|Avoid scalar result type on mutation type to make sure to return a valid state.|🚀||

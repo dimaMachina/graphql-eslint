@@ -62,13 +62,9 @@ type Error {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `acceptedIdNames` (array)
+### `acceptedIdNames` (array)
 
 The object is an array with all elements of the type `string`.
 
@@ -80,7 +76,7 @@ Default:
 ]
 ```
 
-#### `acceptedIdTypes` (array)
+### `acceptedIdTypes` (array)
 
 The object is an array with all elements of the type `string`.
 
@@ -92,11 +88,11 @@ Default:
 ]
 ```
 
-#### `exceptions` (object)
+### `exceptions` (object)
 
 Properties of the `exceptions` object:
 
-##### `types` (array)
+#### `types` (array)
 
 This is used to exclude types with names that match one of the specified values.
 
@@ -108,7 +104,7 @@ Default:
 []
 ```
 
-##### `suffixes` (array)
+#### `suffixes` (array)
 
 This is used to exclude types with names with suffixes that match one of the specified values.
 

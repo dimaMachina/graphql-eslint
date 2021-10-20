@@ -17,9 +17,9 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
           code: /* GraphQL */ `
             """ Description """
             type someTypeName {
-                ...
+              # ...
             }
-            `,
+          `,
         },
         {
           title: 'Correct',
@@ -27,9 +27,9 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
           code: /* GraphQL */ `
             " Description "
             type someTypeName {
-                ...
+              # ...
             }
-            `,
+          `,
         },
       ],
       description: 'Require all comments to follow the same style (either block or inline).',

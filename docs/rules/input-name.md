@@ -42,31 +42,27 @@ type Mutation {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `checkInputType` (boolean)
+### `checkInputType` (boolean)
 
 Check that the input type name follows the convention <mutationName>Input
 
 Default: `false`
 
-#### `caseSensitiveInputType` (boolean)
+### `caseSensitiveInputType` (boolean)
 
 Allow for case discrepancies in the input type name
 
 Default: `true`
 
-#### `checkQueries` (boolean)
+### `checkQueries` (boolean)
 
 Apply the rule to Queries
 
 Default: `false`
 
-#### `checkMutations` (boolean)
+### `checkMutations` (boolean)
 
 Apply the rule to Mutations
 
