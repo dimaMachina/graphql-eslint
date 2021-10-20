@@ -13,7 +13,7 @@
     "graphql-tag": "^2.12.5"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "2.2.0",
+    "@graphql-eslint/eslint-plugin": "2.3.0",
     "eslint": "8.0.0"
   }
 }
