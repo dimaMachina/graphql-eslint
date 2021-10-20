@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.3.0
+
+### Minor Changes
+
+- f2a6635: add new rule `require-field-of-type-query-in-mutation-result`
+- 44a6c73: fix false negative case for `no-undefined-variables` rule
+- ed6644b: feat: support ESLint 8
+- f713823: fix false positive case for `no-unused-variables` rule
+- c7a8b33: add new rule `alphabetize`
+
 ## 2.2.0
 
 ### Minor Changes
