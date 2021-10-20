@@ -1,19 +1,19 @@
 diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
-index 2b55249..08547f3 100644
+index 324af7b..e771420 100644
 --- a/node_modules/eslint/lib/rule-tester/rule-tester.js
 +++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
-@@ -911,7 +911,17 @@ class RuleTester {
+@@ -943,8 +943,18 @@ class RuleTester {
                          "Expected no autofixes to be suggested"
                      );
                  } else {
 -                    assert.strictEqual(result.output, item.output, "Output is incorrect.");
 +                    if (item.output.includes('# normalize graphql')) {
 +                        const graphql = require('graphql');
-+  
++
 +                        function normalize(value) {
 +                            return graphql.print(graphql.parse(value.replace('# normalize graphql', '')));
 +                        }
-+  
++
 +                        assert.strictEqual(normalize(result.output), normalize(item.output), 'Output is incorrect.');
 +                    } else {
 +                        assert.strictEqual(result.output, item.output, 'Output is incorrect.');
@@ -21,3 +21,4 @@ index 2b55249..08547f3 100644
                  }
              } else {
                  assert.strictEqual(
+                     result.output,
