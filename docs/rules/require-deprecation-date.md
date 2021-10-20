@@ -44,10 +44,6 @@ type User {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `argumentName` (string)
+### `argumentName` (string)

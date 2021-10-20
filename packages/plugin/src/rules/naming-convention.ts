@@ -239,18 +239,18 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
         style,
         leadingUnderscore: options.leadingUnderscore,
         trailingUnderscore: options.trailingUnderscore,
-        prefix: prefix,
-        suffix: suffix,
-        forbiddenPrefixes: forbiddenPrefixes,
-        forbiddenSuffixes: forbiddenSuffixes,
+        prefix,
+        suffix,
+        forbiddenPrefixes,
+        forbiddenSuffixes,
       });
       if (result.ok === false) {
         context.report({
           node,
           message: result.errorMessage,
           data: {
-            prefix: prefix,
-            suffix: suffix,
+            prefix,
+            suffix,
             format: style,
             forbiddenPrefixes: forbiddenPrefixes.join(', '),
             forbiddenSuffixes: forbiddenSuffixes.join(', '),

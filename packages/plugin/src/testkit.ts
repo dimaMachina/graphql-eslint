@@ -5,7 +5,7 @@ import { resolve } from 'path';
 import { GraphQLESTreeNode } from './estree-parser';
 import { GraphQLESLintRule, ParserOptions } from './types';
 
-export type GraphQLESLintRuleListener<WithTypeInfo extends boolean> = {
+export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
 } &
   Record<string, any>;

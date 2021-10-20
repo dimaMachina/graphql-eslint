@@ -12,10 +12,10 @@
     "graphql": "15.5.3"
   },
   "devDependencies": {
-    "eslint": "7.32.0",
+    "@graphql-eslint/eslint-plugin": "2.2.0",
+    "eslint": "8.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
-    "@graphql-eslint/eslint-plugin": "2.2.0",
     "prettier": "2.4.1"
   }
 }

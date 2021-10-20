@@ -33,97 +33,93 @@ type SomeTypeName {
 
 ## Config Schema
 
-### (array)
+The schema defines the following properties:
 
-The schema defines an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-#### `FieldDefinition`
+### `FieldDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `InputObjectTypeDefinition`
+### `InputObjectTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `EnumValueDefinition`
+### `EnumValueDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `InputValueDefinition`
+### `InputValueDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `ObjectTypeDefinition`
+### `ObjectTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `InterfaceTypeDefinition`
+### `InterfaceTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `EnumTypeDefinition`
+### `EnumTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `UnionTypeDefinition`
+### `UnionTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `ScalarTypeDefinition`
+### `ScalarTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `OperationDefinition`
+### `OperationDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `FragmentDefinition`
+### `FragmentDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `QueryDefinition`
+### `QueryDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-#### `leadingUnderscore` (string, enum)
+### `leadingUnderscore` (string, enum)
 
 This element must be one of the following enum values:
 
@@ -132,7 +128,7 @@ This element must be one of the following enum values:
 
 Default: `"forbid"`
 
-#### `trailingUnderscore` (string, enum)
+### `trailingUnderscore` (string, enum)
 
 This element must be one of the following enum values:
 

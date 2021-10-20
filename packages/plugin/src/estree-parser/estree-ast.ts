@@ -6,7 +6,7 @@ export type SafeGraphQLType<T extends ASTNode | ValueNode> = Omit<
   'loc'
 >;
 
-export type SingleESTreeNode<T extends any, WithTypeInfo extends boolean> = T extends ASTNode | ValueNode
+export type SingleESTreeNode<T, WithTypeInfo extends boolean> = T extends ASTNode | ValueNode
   ? SafeGraphQLType<T> &
       Pick<BaseNode, 'leadingComments' | 'loc' | 'range'> & {
         type: T['kind'];
@@ -28,7 +28,7 @@ export type SingleESTreeNode<T extends any, WithTypeInfo extends boolean> = T ex
         : {})
   : T;
 
-export type GraphQLESTreeNode<T extends any, WithTypeInfo extends boolean = false> = T extends ASTNode | ValueNode
+export type GraphQLESTreeNode<T, WithTypeInfo extends boolean = false> = T extends ASTNode | ValueNode
   ? { rawNode: () => T } & {
       [K in keyof SingleESTreeNode<T, WithTypeInfo>]: SingleESTreeNode<T, WithTypeInfo>[K] extends ReadonlyArray<
         infer Nested
