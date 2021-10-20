@@ -45,6 +45,7 @@ const rule: GraphQLESLintRule = {
     },
     fixable: 'code',
     type: 'suggestion',
+    schema: [],
   },
   create(context) {
     const reachableTypes = requireReachableTypesFromContext(RULE_NAME, context);

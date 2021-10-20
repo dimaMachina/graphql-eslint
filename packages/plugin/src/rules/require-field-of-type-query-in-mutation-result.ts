@@ -44,6 +44,7 @@ const rule: GraphQLESLintRule = {
         },
       ],
     },
+    schema: [],
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_NAME, context);

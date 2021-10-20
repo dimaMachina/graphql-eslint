@@ -35,6 +35,7 @@ const rule: GraphQLESLintRule = {
     messages: {
       [NO_OPERATION_NAME_SUFFIX]: `Unnecessary "{{ invalidSuffix }}" suffix in your operation name!`,
     },
+    schema: [],
   },
   create(context) {
     return {

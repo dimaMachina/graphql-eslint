@@ -36,6 +36,7 @@ const rule: GraphQLESLintRule = {
       ],
     },
     type: 'suggestion',
+    schema: [],
   },
   create(context) {
     return {

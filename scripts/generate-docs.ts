@@ -81,8 +81,8 @@ function generateDocs(): void {
       }
     }
 
-    if (schema) {
-      let jsonSchema = Array.isArray(schema) ? schema[0] : schema;
+    let jsonSchema = Array.isArray(schema) ? schema[0] : schema;
+    if (jsonSchema) {
       jsonSchema =
         jsonSchema.type === 'array'
           ? {

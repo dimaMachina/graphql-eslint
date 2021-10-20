@@ -100,6 +100,7 @@ const rule: GraphQLESLintRule = {
     messages: {
       [UNIQUE_FRAGMENT_NAME]: 'Fragment named "{{ documentName }}" already defined in:\n{{ summary }}',
     },
+    schema: [],
   },
   create(context) {
     return {

@@ -61,6 +61,7 @@ const rule: GraphQLESLintRule = {
     },
     fixable: 'code',
     type: 'suggestion',
+    schema: [],
   },
   create(context) {
     const usedFields = requireUsedFieldsFromContext(RULE_NAME, context);

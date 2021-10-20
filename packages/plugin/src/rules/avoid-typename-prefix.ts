@@ -39,6 +39,7 @@ const rule: GraphQLESLintRule = {
     messages: {
       [AVOID_TYPENAME_PREFIX]: `Field "{{ fieldName }}" starts with the name of the parent type "{{ typeName }}"`,
     },
+    schema: [],
   },
   create(context) {
     return {

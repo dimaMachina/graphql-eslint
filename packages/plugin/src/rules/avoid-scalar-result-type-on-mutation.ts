@@ -30,6 +30,7 @@ const rule: GraphQLESLintRule = {
         },
       ],
     },
+    schema: [],
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext('avoid-scalar-result-type-on-mutation', context);

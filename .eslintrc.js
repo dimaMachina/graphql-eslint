@@ -31,7 +31,6 @@ module.exports = {
       files: ['**/rules/*.ts'],
       extends: ['plugin:eslint-plugin/rules-recommended'],
       rules: {
-        'eslint-plugin/no-deprecated-context-methods': 'error',
         'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.$' }], // force to put a point at the end
         'eslint-plugin/require-meta-docs-url': [
           'error',
@@ -46,7 +45,6 @@ module.exports = {
       },
       extends: ['plugin:eslint-plugin/tests-recommended'],
       rules: {
-        'eslint-plugin/no-only-tests': 'error',
         'eslint-plugin/test-case-shorthand-strings': 'error',
       },
     },
