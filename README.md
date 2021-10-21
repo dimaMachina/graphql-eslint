@@ -46,7 +46,7 @@ npm install --save-dev @graphql-eslint/eslint-plugin
 
 ### Configuration
 
-To get started, create an override configuration for your ESLint, while applying it to to `.graphql` files (do that even if you are declaring your operations in code files):
+To get started, create an override configuration for your ESLint, while applying it to `.graphql` files (do that even if you are declaring your operations in code files):
 
 ```json
 {
