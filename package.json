@@ -40,7 +40,7 @@
     "eslint-plugin-eslint-plugin": "3.6.1",
     "eslint-plugin-import": "2.25.2",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-promise": "5.1.1",
     "eslint-plugin-standard": "5.0.0",
     "eslint-plugin-unicorn": "37.0.1",
     "husky": "7.0.4",
