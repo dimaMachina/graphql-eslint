@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "graphql": "16.0.1",
-    "graphql-tag": "^2.12.5"
+    "graphql-tag": "2.12.6"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "2.4.1",
-    "eslint": "8.1.0"
+    "eslint": "8.2.0"
   }
 }

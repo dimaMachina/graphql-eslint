@@ -10,10 +10,15 @@ fragment AnotherUserFields on User {
 }
 
 fragment PostFields on Post {
-  title
+  id
   ...AnotherPostFields
 }
 
 fragment AnotherPostFields on Post {
+  title
+  ...YetAnotherPostFields
+}
+
+fragment YetAnotherPostFields on Post {
   content
 }
