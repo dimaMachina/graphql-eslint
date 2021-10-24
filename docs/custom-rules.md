@@ -38,7 +38,7 @@ const rule: GraphQLESLintRule = {
 So what happens here?
 
 1. `@graphql-eslint/eslint-plugin` handles the parsing process for your GraphQL content. It will load the GraphQL files (either from code files or from `.graphql` files with SDL), parse it using GraphQL parser, converts it to ESTree structure and let ESLint do the rest.
-1. You rule is being loaded by ESLint, and executes just like any other ESLint rule.
+1. Your rule is being loaded by ESLint, and executes just like any other ESLint rule.
 1. Our custom rule asks ESLint to run our function for every `OperationDefinition` found.
 1. If the `OperationDefinition` node doesn't have a valid `name` - we report an error to ESLint.
 
@@ -49,7 +49,7 @@ You can scan the `packages/plugin/src/rules` directory in this repo for referenc
 ## Accessing original GraphQL AST nodes
 
 Since our parser converts GraphQL AST to ESTree structure, there are some minor differences in the structure of the objects.
-If you are using TypeScript, and you typed your rule with `GraphQLESLintRule` - you'll see that each `node` is a bit different from from the AST nodes of GraphQL (you can read more about that in [graphql-eslint parser documentation](./parser.md)).
+If you are using TypeScript, and you typed your rule with `GraphQLESLintRule` - you'll see that each `node` is a bit different from the AST nodes of GraphQL (you can read more about that in [graphql-eslint parser documentation](./parser.md)).
 
 If you need access to the original GraphQL AST `node`, you can use `.rawNode()` method on each node you get from the AST structure of ESLint.
 
