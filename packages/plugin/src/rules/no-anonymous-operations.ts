@@ -33,6 +33,7 @@ const rule: GraphQLESLintRule = {
     messages: {
       [NO_ANONYMOUS_OPERATIONS]: `Anonymous GraphQL operations are forbidden. Please make sure to name your {{ operation }}!`,
     },
+    schema: [],
   },
   create(context) {
     return {

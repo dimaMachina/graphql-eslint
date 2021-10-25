@@ -1,5 +1,5 @@
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-index 78f0c6d..f4f98b1 100644
+index 56ca29a..f3bb142 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
 @@ -30,7 +30,7 @@ module.exports = {
@@ -25,10 +25,18 @@ index ed7d67a..af8ea5c 100644
        ? undefined
        : options.pattern.replace(/{{\s*name\s*}}/g, ruleName);
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-index e00aada..9eeb3b9 100644
+index 3b27af1..9754663 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-@@ -76,10 +76,10 @@ function isNormalFunctionExpressionReference (node, scopeManager) {
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-const { getStaticValue } = require('eslint-utils');
++const { getStaticValue, findVariable } = require('eslint-utils');
+ const estraverse = require('estraverse');
+ 
+ /**
+@@ -77,10 +77,10 @@ function isNormalFunctionExpressionReference (node, scopeManager) {
  */
  function isRuleTesterConstruction (node) {
    return node.type === 'NewExpression' && (
@@ -41,58 +49,36 @@ index e00aada..9eeb3b9 100644
    );
  }
  
-@@ -98,7 +98,15 @@ module.exports = {
-     let exportsVarOverridden = false;
-     let exportsIsFunction = false;
- 
--    const exportNodes = ast.body
-+    const collectProps = (parsedProps, prop) => {
-+      const keyValue = module.exports.getKeyName(prop);
-+      if (INTERESTING_KEYS.has(keyValue)) {
-+        parsedProps[keyValue] = prop.value;
+@@ -138,12 +138,18 @@ function isFunctionRule (node) {
+ /**
+  * Helper for `getRuleInfo`. Handles ESM and TypeScript rules.
+  */
+-function getRuleExportsESM (ast) {
++function getRuleExportsESM (ast, scopeManager) {
+   return ast.body
+     .filter(statement => statement.type === 'ExportDefaultDeclaration')
+     .map(statement => statement.declaration)
+     // eslint-disable-next-line unicorn/prefer-object-from-entries
+     .reduce((currentExports, node) => {
++      // Check `const rule = { create() {}, meta: {} }; export default rule`
++      if (node.type === 'Identifier' && scopeManager) {
++        const variable = findVariable(scopeManager.globalScope, node);
++        return collectInterestingProperties(variable.defs[0].node.init.properties, INTERESTING_RULE_KEYS);
 +      }
-+      return parsedProps;
-+    };
 +
-+    let exportNodes = ast.body
-       .filter(statement => statement.type === 'ExpressionStatement')
-       .map(statement => statement.expression)
-       .filter(expression => expression.type === 'AssignmentExpression')
-@@ -119,13 +127,7 @@ module.exports = {
-             // Check `module.exports = { create: function () {}, meta: {} }`
+       if (node.type === 'ObjectExpression') {
+         // Check `export default { create() {}, meta: {} }`
+         return collectInterestingProperties(node.properties, INTERESTING_RULE_KEYS);
+@@ -244,7 +250,7 @@ module.exports = {
+   from the file, the return value will be `null`.
+   */
+   getRuleInfo ({ ast, scopeManager }) {
+-    const exportNodes = ast.sourceType === 'module' ? getRuleExportsESM(ast) : getRuleExportsCJS(ast);
++    const exportNodes = ast.sourceType === 'module' ? getRuleExportsESM(ast, scopeManager) : getRuleExportsCJS(ast);
  
-             exportsIsFunction = false;
--            return node.right.properties.reduce((parsedProps, prop) => {
--              const keyValue = module.exports.getKeyName(prop);
--              if (INTERESTING_KEYS.has(keyValue)) {
--                parsedProps[keyValue] = prop.value;
--              }
--              return parsedProps;
--            }, {});
-+            return node.right.properties.reduce(collectProps, {});
-           }
-           return {};
-         } else if (
-@@ -150,6 +152,18 @@ module.exports = {
-         return currentExports;
-       }, {});
- 
-+    exportNodes = Object.keys(exportNodes).length > 0
-+      ? exportNodes
-+      : ast.body.filter(statement => statement.type === "VariableDeclaration")
-+        .flatMap(statement => statement.declarations)
-+        .filter(statement => statement.init?.properties)
-+        .reduce((nodes, statement) => {
-+          return {
-+            ...nodes,
-+            ...statement.init.properties.reduce(collectProps, {})
-+          };
-+        }, {});
-+
      const createExists = Object.prototype.hasOwnProperty.call(exportNodes, 'create');
      if (!createExists) {
-       return null;
-@@ -239,7 +253,7 @@ module.exports = {
+@@ -335,7 +341,7 @@ module.exports = {
            variableIdentifiers.has(statement.expression.callee.object)
          ) &&
          statement.expression.callee.property.type === 'Identifier' &&

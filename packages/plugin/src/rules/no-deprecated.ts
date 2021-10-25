@@ -77,6 +77,7 @@ const rule: GraphQLESLintRule<[], true> = {
     messages: {
       [NO_DEPRECATED]: `This {{ type }} is marked as deprecated in your GraphQL schema {{ reason }}`,
     },
+    schema: [],
   },
   create(context) {
     return {

@@ -54,6 +54,7 @@ const rule: GraphQLESLintRule = {
     messages: {
       [UNIQUE_OPERATION_NAME]: 'Operation named "{{ documentName }}" already defined in:\n{{ summary }}',
     },
+    schema: [],
   },
   create(context) {
     return {

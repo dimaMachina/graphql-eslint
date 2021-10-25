@@ -38,6 +38,7 @@ const rule: GraphQLESLintRule = {
     messages: {
       [ERROR_MESSAGE_ID]: `Case-insensitive enum values duplicates are not allowed! Found: "{{ found }}"`,
     },
+    schema: [],
   },
   create(context) {
     return {

@@ -69,6 +69,7 @@ const rule: GraphQLESLintRule<[], false> = {
     messages: {
       [AVOID_DUPLICATE_FIELDS]: `{{ type }} "{{ fieldName }}" defined multiple times.`,
     },
+    schema: [],
   },
   create(context) {
     return {
