@@ -10,3 +10,8 @@
 A GraphQL document is only valid if all defined types have unique names.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueTypeNamesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueTypeNamesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/UniqueTypeNamesRule-test.ts)

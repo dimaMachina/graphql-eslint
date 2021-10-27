@@ -10,3 +10,8 @@
 A GraphQL complex type is only valid if all its fields are uniquely named.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueFieldDefinitionNamesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueFieldDefinitionNamesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/UniqueFieldDefinitionNamesRule-test.ts)

@@ -115,3 +115,8 @@ Default:
 ```
 []
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/strict-id-in-types.ts)
+- [Test source](../../packages/plugin/tests/strict-id-in-types.spec.ts)

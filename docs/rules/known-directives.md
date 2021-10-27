@@ -10,3 +10,8 @@
 A GraphQL document is only valid if all `@directives` are known by the schema and legally positioned.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownDirectivesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownDirectivesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/KnownDirectivesRule-test.ts)

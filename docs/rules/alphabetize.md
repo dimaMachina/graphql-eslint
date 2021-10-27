@@ -138,3 +138,8 @@ The elements of the array must contain the following properties:
 - `Field`
 - `DirectiveDefinition`
 - `Directive`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/alphabetize.ts)
+- [Test source](../../packages/plugin/tests/alphabetize.spec.ts)

@@ -30,3 +30,8 @@ type User {
   id: ID!
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/avoid-typename-prefix.ts)
+- [Test source](../../packages/plugin/tests/avoid-typename-prefix.spec.ts)

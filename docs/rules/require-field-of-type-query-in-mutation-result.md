@@ -40,3 +40,8 @@ type Mutation {
   createUser: CreateUserPayload!
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/require-field-of-type-query-in-mutation-result.ts)
+- [Test source](../../packages/plugin/tests/require-field-of-type-query-in-mutation-result.spec.ts)

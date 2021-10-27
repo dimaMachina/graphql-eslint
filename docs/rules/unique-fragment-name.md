@@ -44,3 +44,8 @@ fragment UserFields on User {
   id
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/unique-fragment-name.ts)
+- [Test source](../../packages/plugin/tests/unique-fragment-name.spec.ts)

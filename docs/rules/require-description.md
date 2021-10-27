@@ -46,3 +46,8 @@ The object is an array with all elements of the type `string`.
 Additional restrictions:
 
 * Minimum items: `1`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/require-description.ts)
+- [Test source](../../packages/plugin/tests/require-description.spec.ts)

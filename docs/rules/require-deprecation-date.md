@@ -47,3 +47,8 @@ type User {
 The schema defines the following properties:
 
 ### `argumentName` (string)
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/require-deprecation-date.ts)
+- [Test source](../../packages/plugin/tests/require-deprecation-date.spec.ts)

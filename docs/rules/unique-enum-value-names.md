@@ -10,3 +10,8 @@
 A GraphQL enum type is only valid if all its values are uniquely named.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueEnumValueNamesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueEnumValueNamesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/UniqueEnumValueNamesRule-test.ts)

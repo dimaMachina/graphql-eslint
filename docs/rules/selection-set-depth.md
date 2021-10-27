@@ -60,3 +60,8 @@ The schema defines the following properties:
 ### `ignore` (array)
 
 The object is an array with all elements of the type `string`.
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/selection-set-depth.ts)
+- [Test source](../../packages/plugin/tests/selection-set-depth.spec.ts)

@@ -10,3 +10,8 @@
 A GraphQL operation is only valid if all variables encountered, both directly and via fragment spreads, are defined by that operation.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoUndefinedVariablesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoUndefinedVariablesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/NoUndefinedVariablesRule-test.ts)

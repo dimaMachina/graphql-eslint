@@ -28,3 +28,8 @@ type Mutation {
   createUser: User!
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/avoid-scalar-result-type-on-mutation.ts)
+- [Test source](../../packages/plugin/tests/avoid-scalar-result-type-on-mutation.spec.ts)

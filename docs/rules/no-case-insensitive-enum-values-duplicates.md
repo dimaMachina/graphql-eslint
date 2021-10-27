@@ -36,3 +36,7 @@ enum MyEnum {
   Value3
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/no-case-insensitive-enum-values-duplicates.ts)

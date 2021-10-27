@@ -55,3 +55,8 @@ query {
   }
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/no-unused-fields.ts)
+- [Test source](../../packages/plugin/tests/no-unused-fields.spec.ts)

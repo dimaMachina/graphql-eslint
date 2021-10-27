@@ -30,3 +30,8 @@ query user {
   # ...
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/no-anonymous-operations.ts)
+- [Test source](../../packages/plugin/tests/no-anonymous-operations.spec.ts)

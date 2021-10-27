@@ -40,3 +40,8 @@ type MyType {
   name: String @deprecated(reason: "no longer relevant, please use fullName field")
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/require-deprecation-reason.ts)
+- [Test source](../../packages/plugin/tests/require-deprecation-reason.spec.ts)
