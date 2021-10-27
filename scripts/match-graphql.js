@@ -12,6 +12,7 @@ pkg.devDependencies = pkg.devDependencies || {};
 if (pkg.devDependencies.graphql.startsWith(version)) {
   // eslint-disable-next-line no-console
   console.info(`GraphQL v${version} is match! Skipping.`);
+  return;
 }
 
 const npmVersion = version.includes('-') ? version : `^${version}`;
