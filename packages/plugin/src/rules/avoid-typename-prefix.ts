@@ -49,19 +49,30 @@ const rule: GraphQLESLintRule = {
         >
       ) {
         const typeName = node.name.value;
-        const lowerTypeName = (typeName || '').toLowerCase();
+        const lowerTypeName = typeName.toLowerCase();
 
         for (const field of node.fields) {
-          const fieldName = field.name.value || '';
+          const fieldName = field.name.value;
 
-          if (fieldName && lowerTypeName && fieldName.toLowerCase().startsWith(lowerTypeName)) {
+          if (fieldName.toLowerCase().startsWith(lowerTypeName)) {
+            const { start } = field.loc;
+
             context.report({
-              node: field.name,
               data: {
                 fieldName,
                 typeName,
               },
               messageId: AVOID_TYPENAME_PREFIX,
+              loc: {
+                start: {
+                  line: start.line,
+                  column: start.column - 1,
+                },
+                end: {
+                  line: start.line,
+                  column: start.column - 1 + lowerTypeName.length,
+                },
+              },
             });
           }
         }
