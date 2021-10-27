@@ -42,12 +42,23 @@ const rule: GraphQLESLintRule = {
       'OperationDefinition, FragmentDefinition'(
         node: GraphQLESTreeNode<OperationDefinitionNode | FragmentDefinitionNode>
       ) {
-        if (node && node.name && node.name.value !== '') {
-          const invalidSuffix = (node.type === 'OperationDefinition' ? node.operation : 'fragment').toLowerCase();
+        const name = node.name?.value || '';
+        if (name.length > 0) {
+          const invalidSuffix = 'operation' in node ? node.operation : 'fragment';
 
-          if (node.name.value.toLowerCase().endsWith(invalidSuffix)) {
+          if (name.toLowerCase().endsWith(invalidSuffix)) {
+            const { start, end } = node.name.loc;
             context.report({
-              node: node.name,
+              loc: {
+                start: {
+                  column: start.column - 1 + name.length - invalidSuffix.length,
+                  line: start.line,
+                },
+                end: {
+                  column: end.column - 1 + name.length,
+                  line: end.line,
+                },
+              },
               data: {
                 invalidSuffix,
               },
