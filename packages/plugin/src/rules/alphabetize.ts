@@ -167,8 +167,7 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
             contains: {
               enum: selectionsEnum,
             },
-            description:
-              'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`.',
+            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`.',
           },
           variables: {
             type: 'array',
@@ -213,10 +212,7 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
                 line: start.line,
                 column: start.column - (isVariableNode ? 2 : 1),
               },
-              end: {
-                line: end.line,
-                column: end.column,
-              },
+              end,
             },
             messageId: ALPHABETIZE,
             data: isVariableNode
