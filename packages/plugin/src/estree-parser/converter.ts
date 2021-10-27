@@ -1,7 +1,6 @@
 import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
 import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
 import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind, DocumentNode, ASTVisitor } from 'graphql';
-import { Comment } from 'estree';
 
 export function convertToESTree<T extends ASTNode>(
   node: T,
