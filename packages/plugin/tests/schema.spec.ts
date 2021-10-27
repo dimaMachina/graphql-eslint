@@ -54,6 +54,9 @@ describe('schema', () => {
         url = chunk.toString().trimRight();
         done();
       });
+      local.stderr.on('data', chunk => {
+        throw new Error(chunk.toString().trimRight());
+      });
     });
 
     afterAll(done => {
