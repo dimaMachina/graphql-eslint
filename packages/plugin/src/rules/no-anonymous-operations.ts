@@ -38,16 +38,18 @@ const rule: GraphQLESLintRule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        if (node && (!node.name || node.name.value === '')) {
+        const isAnonymous = (node.name?.value || '').length === 0;
+        if (isAnonymous) {
+          const { start } = node.loc;
           context.report({
             loc: {
               start: {
-                column: node.loc.start.column - 1,
-                line: node.loc.start.line,
+                column: start.column - 1,
+                line: start.line,
               },
               end: {
-                column: node.loc.start.column + node.operation.length,
-                line: node.loc.start.line,
+                column: start.column - 1 + node.operation.length,
+                line: start.line,
               },
             },
             data: {
