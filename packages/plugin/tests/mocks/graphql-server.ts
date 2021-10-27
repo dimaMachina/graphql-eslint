@@ -3,16 +3,11 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { createServer, Server, IncomingMessage, ServerResponse } from 'http';
-import { buildSchema, getIntrospectionQuery, graphqlSync } from 'graphql';
+import { buildSchema, introspectionFromSchema } from 'graphql';
 
 const sdlSchema = readFileSync(resolve(__dirname, 'user-schema.graphql'), 'utf8');
 const graphqlSchemaObj = buildSchema(sdlSchema);
-const introspectionQueryResult = require('graphql/package.json').version.startsWith('16')
-  ? graphqlSync({
-      schema: graphqlSchemaObj,
-      source: getIntrospectionQuery(),
-    })
-  : graphqlSync(graphqlSchemaObj, getIntrospectionQuery());
+const introspectionQueryResult = introspectionFromSchema(graphqlSchemaObj);
 
 class TestGraphQLServer {
   private server: Server;
