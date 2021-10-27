@@ -48,3 +48,8 @@ type User {
   name: String
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/no-hashtag-description.ts)
+- [Test source](../../packages/plugin/tests/no-hashtag-description.spec.ts)

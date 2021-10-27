@@ -10,3 +10,8 @@
 A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/LoneAnonymousOperationRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/LoneAnonymousOperationRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/LoneAnonymousOperationRule-test.ts)

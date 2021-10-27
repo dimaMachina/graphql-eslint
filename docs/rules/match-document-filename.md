@@ -146,3 +146,8 @@ This element must be one of the following enum values:
 * `snake_case`
 * `UPPER_CASE`
 * `kebab-case`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/match-document-filename.ts)
+- [Test source](../../packages/plugin/tests/match-document-filename.spec.ts)

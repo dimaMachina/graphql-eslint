@@ -52,3 +52,8 @@ query getUsers($first: Int!, $first: Int!) {
   }
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/avoid-duplicate-fields.ts)
+- [Test source](../../packages/plugin/tests/avoid-duplicate-fields.spec.ts)

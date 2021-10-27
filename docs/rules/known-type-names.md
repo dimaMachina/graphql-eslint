@@ -10,3 +10,8 @@
 A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownTypeNamesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownTypeNamesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/KnownTypeNamesRule-test.ts)

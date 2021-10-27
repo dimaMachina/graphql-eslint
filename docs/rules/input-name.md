@@ -67,3 +67,8 @@ Default: `false`
 Apply the rule to Mutations
 
 Default: `true`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/input-name.ts)
+- [Test source](../../packages/plugin/tests/input-name.spec.ts)

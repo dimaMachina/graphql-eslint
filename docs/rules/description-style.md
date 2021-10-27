@@ -43,3 +43,8 @@ This element must be one of the following enum values:
 * `inline`
 
 Default: `"inline"`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/description-style.ts)
+- [Test source](../../packages/plugin/tests/description-style.spec.ts)

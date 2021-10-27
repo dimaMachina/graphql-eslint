@@ -48,3 +48,8 @@ query me {
   }
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/unique-operation-name.ts)
+- [Test source](../../packages/plugin/tests/unique-operation-name.spec.ts)

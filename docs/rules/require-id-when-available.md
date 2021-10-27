@@ -55,3 +55,8 @@ The schema defines the following properties:
 ### `fieldName` (string)
 
 Default: `"id"`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/require-id-when-available.ts)
+- [Test source](../../packages/plugin/tests/require-id-when-available.spec.ts)

@@ -32,3 +32,7 @@ query user {
   # ...
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/no-operation-name-suffix.ts)

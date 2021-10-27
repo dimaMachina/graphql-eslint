@@ -1,9 +1,10 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import { format } from 'prettier';
 import { rules } from '../packages/plugin/src';
+import { pascalCase } from '../packages/plugin/src/utils';
 import { GRAPHQL_JS_VALIDATIONS } from '../packages/plugin/src/rules/graphql-js-validation';
 
 const BR = '';
@@ -16,11 +17,26 @@ enum Icon {
   RECOMMENDED = '✅',
 }
 
-function printMarkDownTable(columns: { name: string; align?: 'center' }[], dataSource: string[][]) {
+type Column = {
+  name: string;
+  align: 'center' | 'right';
+};
+
+function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]): string {
+  const headerRow: string[] = [];
+  const alignRow: ('-' | '-:' | ':-:')[] = [];
+
+  for (let column of columns) {
+    column = typeof column === 'string' ? ({ name: column } as Column) : column;
+    headerRow.push(column.name);
+    const alignSymbol = column.align === 'center' ? ':-:' : column.align === 'right' ? '-:' : '-';
+    alignRow.push(alignSymbol);
+  }
+
   return [
     '<!-- prettier-ignore-start -->',
-    columns.map(column => column.name).join('|'),
-    columns.map(column => (column.align === 'center' ? ':-:' : '-')).join('|'),
+    headerRow.join('|'),
+    alignRow.join('|'),
     ...dataSource.map(row => row.join('|')),
     '<!-- prettier-ignore-end -->',
   ].join('\n');
@@ -86,10 +102,7 @@ function generateDocs(): void {
       jsonSchema =
         jsonSchema.type === 'array'
           ? {
-              ...jsonSchema,
-              minItems: undefined,
-              maxItems: undefined,
-              items: undefined,
+              definitions: jsonSchema.definitions,
               ...jsonSchema.items,
             }
           : jsonSchema;
@@ -97,17 +110,37 @@ function generateDocs(): void {
       blocks.push(BR, '## Config Schema', BR, md(jsonSchema, '##'));
     }
 
+    blocks.push(BR, '## Resources', BR);
+    const isGraphQLJSRule = ruleName in GRAPHQL_JS_VALIDATIONS;
+
+    if (isGraphQLJSRule) {
+      const graphQLJSRuleName = `${pascalCase(ruleName)}Rule`;
+      blocks.push(
+        `- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${graphQLJSRuleName}.ts)`,
+        `- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/${graphQLJSRuleName}-test.ts)`
+      );
+    } else {
+      blocks.push(`- [Rule source](../../packages/plugin/src/rules/${ruleName}.ts)`);
+      const testPath = `packages/plugin/tests/${ruleName}.spec.ts`;
+      const isTestExists = existsSync(resolve(process.cwd(), testPath));
+      if (isTestExists) {
+        blocks.push(`- [Test source](../../${testPath})`);
+      }
+    }
+
+    blocks.push(BR);
     return {
       path: resolve(DOCS_PATH, `rules/${ruleName}.md`),
       content: blocks.join('\n'),
     };
   });
 
-  const sortedRules = Object.keys(rules)
-    .sort()
-    .map(ruleName => {
+  const sortedRules = Object.entries(rules)
+    .filter(([, rule]) => !rule.meta.deprecated)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([ruleName, rule]) => {
       const link = `[${ruleName}](rules/${ruleName}.md)`;
-      const { docs, fixable } = rules[ruleName].meta;
+      const { docs, fixable } = rule.meta;
 
       return [
         link,
@@ -131,13 +164,13 @@ function generateDocs(): void {
       `- ${Icon.RECOMMENDED} if it belongs to the \`recommended\` configuration`,
       BR,
       '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
-      printMarkDownTable(
+      printMarkdownTable(
         [
-          { name: `Name${'&nbsp;'.repeat(20)}` },
-          { name: 'Description' },
+          `Name${'&nbsp;'.repeat(20)}`,
+          'Description',
           { name: `${Icon.GRAPHQL_ESLINT}&nbsp;/&nbsp;${Icon.GRAPHQL_JS}`, align: 'center' },
-          { name: Icon.FIXABLE },
-          { name: Icon.RECOMMENDED },
+          Icon.FIXABLE,
+          Icon.RECOMMENDED,
         ],
         sortedRules
       ),
@@ -147,6 +180,7 @@ function generateDocs(): void {
       `- [Writing Custom Rules](custom-rules.md)`,
       `- [How the parser works?](parser.md)`,
       '- [`parserOptions`](parser-options.md)',
+      BR,
     ].join('\n'),
   });
 

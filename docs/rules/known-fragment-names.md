@@ -83,3 +83,8 @@ const GET_USER = /* GraphQL */ `
   ${USER_FIELDS}
 `
 ```
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownFragmentNamesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/KnownFragmentNamesRule-test.ts)

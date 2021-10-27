@@ -40,3 +40,8 @@ type Query {
   me: User
 }
 ```
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/no-unreachable-types.ts)
+- [Test source](../../packages/plugin/tests/no-unreachable-types.spec.ts)

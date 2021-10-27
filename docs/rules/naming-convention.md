@@ -179,3 +179,8 @@ The object is an array with all elements of the type `string`.
 Additional restrictions:
 
 * Minimum items: `1`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/naming-convention.ts)
+- [Test source](../../packages/plugin/tests/naming-convention.spec.ts)

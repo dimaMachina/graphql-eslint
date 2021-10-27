@@ -10,3 +10,8 @@
 A GraphQL fragment is only valid when it does not have cycles in fragments usage.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoFragmentCyclesRule.ts).
+
+## Resources
+
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/NoFragmentCyclesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/NoFragmentCyclesRule-test.ts)
