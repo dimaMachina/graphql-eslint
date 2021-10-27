@@ -18,12 +18,12 @@ export function validateDoc(
   context: GraphQLESLintRuleContext,
   schema: GraphQLSchema | null,
   documentNode: DocumentNode,
-  rules: ReadonlyArray<SDLValidationRule>,
+  rules: ReadonlyArray<ValidationRule>,
   ruleName: string | null = null
 ): void {
   if (documentNode?.definitions?.length > 0) {
     try {
-      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules);
+      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules as ReadonlyArray<SDLValidationRule>);
 
       for (const error of validationErrors) {
         const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
