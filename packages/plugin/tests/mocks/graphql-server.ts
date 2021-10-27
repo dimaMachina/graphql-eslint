@@ -40,7 +40,9 @@ class TestGraphQLServer {
     if (pathname === '/') {
       const { query } = await this.parseData(req);
       if (query.includes('query IntrospectionQuery')) {
-        res.end(JSON.stringify(introspectionQueryResult));
+        res.end(JSON.stringify({
+          data: introspectionQueryResult
+        }));
       }
     } else if (pathname === '/my-headers') {
       res.end(JSON.stringify(req.headers));
