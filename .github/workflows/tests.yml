@@ -36,6 +36,12 @@ jobs:
   typecheck:
     name: TypeScript Type Checking
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        graphql_version:
+          # - 14
+          - 15
+          - 16.0.0-rc.7
     steps:
       - name: Checkout Master
         uses: actions/checkout@v2
@@ -49,10 +55,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-16-15-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{ runner.os }}-16-15-node-modules-${{ hashFiles('yarn.lock') }}
-            ${{ runner.os }}-16-15-node-modules-
+            ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-
+      - name: Use GraphQL v${{matrix.graphql_version}}
+        run: node ./scripts/match-graphql.js ${{matrix.graphql_version}}
       - name: Install Dependencies using Yarn
         run: yarn install && git checkout yarn.lock
       - name: Build
