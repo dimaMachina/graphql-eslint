@@ -23,7 +23,7 @@ export function validateDoc(
 ): void {
   if (documentNode?.definitions?.length > 0) {
     try {
-      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules as ReadonlyArray<SDLValidationRule>);
+      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules as any);
 
       for (const error of validationErrors) {
         const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
