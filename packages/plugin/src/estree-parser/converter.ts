@@ -1,15 +1,15 @@
 import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
 import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
-import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind, DocumentNode } from 'graphql';
+import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind, DocumentNode, ASTVisitor } from 'graphql';
 import { Comment } from 'estree';
 
 export function convertToESTree<T extends ASTNode>(
   node: T,
   typeInfo?: TypeInfo
-): { rootTree: GraphQLESTreeNode<T>; comments: Comment[] } {
-  const visitor = { leave: convertNode(typeInfo) };
+) {
+  const visitor: ASTVisitor = { leave: convertNode(typeInfo) };
   return {
-    rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor),
+    rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor) as GraphQLESTreeNode<T>,
     comments: extractCommentsFromAst(node.loc),
   };
 }

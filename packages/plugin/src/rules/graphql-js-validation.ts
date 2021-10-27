@@ -6,6 +6,7 @@ import { join, dirname } from 'path';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
+import { SDLValidationRule } from 'graphql/validation/ValidationContext';
 
 function extractRuleName(stack?: string): string | null {
   const match = (stack || '').match(/validation[/\\\\]rules[/\\\\](.*?)\.js:/) || [];
@@ -17,7 +18,7 @@ export function validateDoc(
   context: GraphQLESLintRuleContext,
   schema: GraphQLSchema | null,
   documentNode: DocumentNode,
-  rules: ReadonlyArray<ValidationRule>,
+  rules: ReadonlyArray<SDLValidationRule>,
   ruleName: string | null = null
 ): void {
   if (documentNode?.definitions?.length > 0) {

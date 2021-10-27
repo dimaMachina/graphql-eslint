@@ -1,9 +1,8 @@
 import {
   ASTNode,
-  Visitor,
+  ASTVisitor,
   TypeInfo,
   GraphQLSchema,
-  ASTKindToNode,
   visit,
   isInterfaceType,
   visitWithTypeInfo,
@@ -41,7 +40,7 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
     }
   };
 
-  const visitor: Visitor<ASTKindToNode> = {
+  const visitor: ASTVisitor = {
     InterfaceTypeDefinition: collect,
     ObjectTypeDefinition: collect,
     InputValueDefinition: collect,

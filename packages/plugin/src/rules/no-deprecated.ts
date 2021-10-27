@@ -86,7 +86,7 @@ const rule: GraphQLESLintRule<[], true> = {
         const typeInfo = node.typeInfo();
 
         if (typeInfo && typeInfo.enumValue) {
-          if (typeInfo.enumValue.isDeprecated) {
+          if (typeInfo.enumValue.deprecationReason) {
             const enumValueName = node.value;
             context.report({
               loc: getLocation(node.loc, enumValueName),
@@ -104,8 +104,12 @@ const rule: GraphQLESLintRule<[], true> = {
         const typeInfo = node.typeInfo();
 
         if (typeInfo && typeInfo.fieldDef) {
+<<<<<<< HEAD
           if (typeInfo.fieldDef.isDeprecated) {
             const fieldName = node.name.value;
+=======
+          if (typeInfo.fieldDef.deprecationReason) {
+>>>>>>> ...
             context.report({
               loc: getLocation(node.loc, fieldName),
               messageId: NO_DEPRECATED,
