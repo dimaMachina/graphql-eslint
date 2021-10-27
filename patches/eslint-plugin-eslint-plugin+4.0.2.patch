@@ -1,8 +1,8 @@
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-index 56ca29a..f3bb142 100644
+index f680961..c9a08b4 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-@@ -30,7 +30,7 @@ module.exports = {
+@@ -31,7 +31,7 @@ module.exports = {
  
                const onlyProperty = test.properties.find(
                  property =>
@@ -11,32 +11,11 @@ index 56ca29a..f3bb142 100644
                    property.key.name === 'only' &&
                    property.value.type === 'Literal' &&
                    property.value.value
-diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
-index ed7d67a..af8ea5c 100644
---- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
-+++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/require-meta-docs-url.js
-@@ -48,7 +48,7 @@ module.exports = {
-     const options = context.options[0] || {};
-     const sourceCode = context.getSourceCode();
-     const filename = context.getFilename();
--    const ruleName = filename === '<input>' ? undefined : path.basename(filename, '.js');
-+    const ruleName = filename === '<input>' ? undefined : path.basename(filename, '.ts');
-     const expectedUrl = !options.pattern || !ruleName
-       ? undefined
-       : options.pattern.replace(/{{\s*name\s*}}/g, ruleName);
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-index 3b27af1..9754663 100644
+index d7a2b82..326d387 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-@@ -1,6 +1,6 @@
- 'use strict';
- 
--const { getStaticValue } = require('eslint-utils');
-+const { getStaticValue, findVariable } = require('eslint-utils');
- const estraverse = require('estraverse');
- 
- /**
-@@ -77,10 +77,10 @@ function isNormalFunctionExpressionReference (node, scopeManager) {
+@@ -24,10 +24,10 @@ function isNormalFunctionExpression (node) {
  */
  function isRuleTesterConstruction (node) {
    return node.type === 'NewExpression' && (
@@ -49,7 +28,7 @@ index 3b27af1..9754663 100644
    );
  }
  
-@@ -138,12 +138,18 @@ function isFunctionRule (node) {
+@@ -85,12 +85,17 @@ function isFunctionRule (node) {
  /**
   * Helper for `getRuleInfo`. Handles ESM and TypeScript rules.
   */
@@ -65,11 +44,10 @@ index 3b27af1..9754663 100644
 +        const variable = findVariable(scopeManager.globalScope, node);
 +        return collectInterestingProperties(variable.defs[0].node.init.properties, INTERESTING_RULE_KEYS);
 +      }
-+
        if (node.type === 'ObjectExpression') {
          // Check `export default { create() {}, meta: {} }`
          return collectInterestingProperties(node.properties, INTERESTING_RULE_KEYS);
-@@ -244,7 +250,7 @@ module.exports = {
+@@ -218,7 +223,7 @@ module.exports = {
    from the file, the return value will be `null`.
    */
    getRuleInfo ({ ast, scopeManager }) {
@@ -78,7 +56,7 @@ index 3b27af1..9754663 100644
  
      const createExists = Object.prototype.hasOwnProperty.call(exportNodes, 'create');
      if (!createExists) {
-@@ -335,7 +341,7 @@ module.exports = {
+@@ -317,7 +322,7 @@ module.exports = {
            variableIdentifiers.has(statement.expression.callee.object)
          ) &&
          statement.expression.callee.property.type === 'Identifier' &&
