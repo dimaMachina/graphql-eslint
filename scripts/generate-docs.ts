@@ -4,8 +4,6 @@ import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import { format } from 'prettier';
 import { rules } from '../packages/plugin/src';
-import { pascalCase } from '../packages/plugin/src/utils';
-import { GRAPHQL_JS_VALIDATIONS } from '../packages/plugin/src/rules/graphql-js-validation';
 
 const BR = '';
 const DOCS_PATH = resolve(process.cwd(), 'docs');
@@ -63,7 +61,7 @@ function generateDocs(): void {
       );
     }
 
-    const { requiresSchema = false, requiresSiblings = false } = docs;
+    const { requiresSchema = false, requiresSiblings = false, graphQLJSRuleName } = docs;
 
     blocks.push(
       `- Category: \`${docs.category}\``,
@@ -111,13 +109,11 @@ function generateDocs(): void {
     }
 
     blocks.push(BR, '## Resources', BR);
-    const isGraphQLJSRule = ruleName in GRAPHQL_JS_VALIDATIONS;
 
-    if (isGraphQLJSRule) {
-      const graphQLJSRuleName = `${pascalCase(ruleName)}Rule`;
+    if (graphQLJSRuleName) {
       blocks.push(
-        `- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${graphQLJSRuleName}.ts)`,
-        `- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/${graphQLJSRuleName}-test.ts)`
+        `- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${graphQLJSRuleName}Rule.ts)`,
+        `- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/${graphQLJSRuleName}Rule-test.ts)`
       );
     } else {
       blocks.push(`- [Rule source](../../packages/plugin/src/rules/${ruleName}.ts)`);
@@ -145,7 +141,7 @@ function generateDocs(): void {
       return [
         link,
         docs.description.split('\n')[0],
-        ruleName in GRAPHQL_JS_VALIDATIONS ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
+        docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
         fixable ? Icon.FIXABLE : '',
         docs.recommended ? Icon.RECOMMENDED : '',
       ];

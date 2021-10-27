@@ -13,5 +13,5 @@ A GraphQL document is only valid if all non-repeatable directives at a given loc
 
 ## Resources
 
-- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueDirectiveNamesPerLocationRule.ts)
-- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/UniqueDirectiveNamesPerLocationRule-test.ts)
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueDirectivesPerLocationRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/UniqueDirectivesPerLocationRule-test.ts)

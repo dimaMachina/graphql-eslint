@@ -70,6 +70,7 @@ const validationToRule = (
       meta: {
         docs: {
           ...docs,
+          graphQLJSRuleName: ruleName,
           category: 'Validation',
           recommended: true,
           requiresSchema,

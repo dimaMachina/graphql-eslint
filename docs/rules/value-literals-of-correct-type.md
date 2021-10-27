@@ -13,5 +13,5 @@ A GraphQL document is only valid if all value literals are of the type expected 
 
 ## Resources
 
-- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/ValueLiteralsOfCorrectTypeRule.ts)
-- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/ValueLiteralsOfCorrectTypeRule-test.ts)
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/ValuesOfCorrectTypeRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/ValuesOfCorrectTypeRule-test.ts)
