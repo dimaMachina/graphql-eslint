@@ -2,7 +2,7 @@ const { writeFileSync } = require('fs');
 const { resolve } = require('path');
 const { argv, cwd } = require('process');
 
-const pkgPath = resolve(cwd(), '../package.json');
+const pkgPath = resolve(__dirname, '../package.json');
 
 const pkg = require(pkgPath);
 
