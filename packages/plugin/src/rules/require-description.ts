@@ -1,6 +1,6 @@
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext, ValueOf } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
-import { ASTNode, Kind, StringValueNode } from 'graphql';
+import { ASTKindToNode, Kind, StringValueNode } from 'graphql';
 
 const REQUIRE_DESCRIPTION_ERROR = 'REQUIRE_DESCRIPTION_ERROR';
 const DESCRIBABLE_NODES = [
@@ -17,23 +17,30 @@ const DESCRIBABLE_NODES = [
 ];
 type RequireDescriptionRuleConfig = [{ on: typeof DESCRIBABLE_NODES }];
 
+type AllowedKind = typeof DESCRIBABLE_NODES[number];
+type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
+
 function verifyRule(
   context: GraphQLESLintRuleContext<RequireDescriptionRuleConfig>,
-  node: GraphQLESTreeNode<ASTNode> & {
+  node: GraphQLESTreeNode<ValueOf<AllowedKindToNode>> & {
     readonly description?: GraphQLESTreeNode<StringValueNode>;
   }
 ) {
   if (node) {
     if (!node.description || !node.description.value || node.description.value.trim().length === 0) {
+      const { start, end } = ('name' in node ? node.name : node).loc;
+
       context.report({
         loc: {
           start: {
-            line: node.loc.start.line,
-            column: node.loc.start.column - 1,
+            line: start.line,
+            column: start.column - 1,
           },
           end: {
-            line: node.loc.end.line,
-            column: node.loc.end.column,
+            line: end.line,
+            column:
+              // node.name don't exist on SchemaDefinition
+              'name' in node ? end.column - 1 + node.name.value.length : end.column,
           },
         },
         messageId: REQUIRE_DESCRIPTION_ERROR,

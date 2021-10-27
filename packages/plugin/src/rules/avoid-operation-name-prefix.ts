@@ -78,15 +78,16 @@ const rule: GraphQLESLintRule<AvoidOperationNamePrefixConfig> = {
             const testName = caseSensitive ? node.name.value : node.name.value.toLowerCase();
 
             if (testName.startsWith(testKeyword)) {
+              const { start } = node.name.loc;
               context.report({
                 loc: {
                   start: {
-                    line: node.name.loc.start.line,
-                    column: node.name.loc.start.column - 1,
+                    line: start.line,
+                    column: start.column - 1,
                   },
                   end: {
-                    line: node.name.loc.start.line,
-                    column: node.name.loc.start.column + testKeyword.length - 1,
+                    line: start.line,
+                    column: start.column - 1 + testKeyword.length,
                   },
                 },
                 data: {
