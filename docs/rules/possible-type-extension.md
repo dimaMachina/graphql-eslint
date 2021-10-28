@@ -13,5 +13,5 @@ A type extension is only valid if the type is defined and has the same kind.
 
 ## Resources
 
-- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/PossibleTypeExtensionRule.ts)
-- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/PossibleTypeExtensionRule-test.ts)
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/PossibleTypeExtensionsRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/PossibleTypeExtensionsRule-test.ts)

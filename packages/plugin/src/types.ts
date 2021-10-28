@@ -59,6 +59,7 @@ export type RuleDocsInfo<T> = Rule.RuleMetaData & {
       usage?: T;
     }[];
     optionsForConfig?: T;
+    graphQLJSRuleName?: string
   };
 };
 

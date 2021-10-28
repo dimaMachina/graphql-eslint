@@ -164,7 +164,7 @@ export enum CaseStyle {
   kebabCase = 'kebab-case',
 }
 
-export const pascalCase = (str: string): string =>
+const pascalCase = (str: string): string =>
   lowerCase(str)
     .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))

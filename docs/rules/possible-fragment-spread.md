@@ -13,5 +13,5 @@ A fragment spread is only valid if the type condition could ever possibly be tru
 
 ## Resources
 
-- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/PossibleFragmentSpreadRule.ts)
-- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/PossibleFragmentSpreadRule-test.ts)
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/PossibleFragmentSpreadsRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/PossibleFragmentSpreadsRule-test.ts)

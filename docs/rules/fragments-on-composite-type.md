@@ -13,5 +13,5 @@ Fragments use a type condition to determine if they apply, since fragments can o
 
 ## Resources
 
-- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FragmentsOnCompositeTypeRule.ts)
-- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/FragmentsOnCompositeTypeRule-test.ts)
+- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FragmentsOnCompositeTypesRule.ts)
+- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/FragmentsOnCompositeTypesRule-test.ts)
