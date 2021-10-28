@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.3.1
+
+### Patch Changes
+
+- 98b6bcb: fix: adjust report location for `no-operation-name-suffix` rule
+- 1bacedd: fix: adjust report location for `no-anonymous-operations` rule
+- c42cee5: fix: adjust report location for `avoid-typename-prefix` rule
+- eb4a851: fix: adjust report location for `require-description` rule
+
 ## 2.3.0
 
 ### Minor Changes
