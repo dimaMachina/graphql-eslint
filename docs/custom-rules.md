@@ -58,7 +58,7 @@ This is useful if you wish to use other GraphQL tools that works with the origin
 Here's an example for using original `graphql-js` validate method to validate `OperationDefinition`:
 
 ```ts
-import { validate } from 'graphql-js';
+import { validate } from 'graphql';
 import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin';
 
 export const rule = {
