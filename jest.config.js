@@ -9,4 +9,5 @@ module.exports = {
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
     '@eslint/eslintrc/universal': '@eslint/eslintrc/dist/eslintrc-universal.cjs',
   },
+  snapshotSerializers: ['jest-snapshot-serializer-raw/always'],
 };

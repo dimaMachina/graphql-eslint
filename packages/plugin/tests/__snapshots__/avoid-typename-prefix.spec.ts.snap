@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+  1 |
+  2 |         type User {
+> 3 |           userId: ID!
+    |           ^^^^ Field "userId" starts with the name of the parent type "User"
+  4 |         }
+  5 |       
+`;
+
+exports[` 2`] = `
+  1 |
+  2 |         type User {
+> 3 |           userId: ID!
+    |           ^^^^ Field "userId" starts with the name of the parent type "User"
+  4 |           userName: String!
+  5 |         }
+  6 |       
+`;
+
+exports[` 3`] = `
+  1 |
+  2 |         type User {
+  3 |           userId: ID!
+> 4 |           userName: String!
+    |           ^^^^ Field "userName" starts with the name of the parent type "User"
+  5 |         }
+  6 |       
+`;
+
+exports[` 4`] = `
+  1 |
+  2 |         interface Node {
+> 3 |           nodeId: ID!
+    |           ^^^^ Field "nodeId" starts with the name of the parent type "Node"
+  4 |         }
+  5 |       
+`;

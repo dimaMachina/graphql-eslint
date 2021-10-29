@@ -1,0 +1,301 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+  1 |
+  2 |         type User {
+  3 |           password: String
+> 4 |           firstName: String!
+    |           ^ "firstName" should be before "password".
+  5 |           age: Int
+  6 |           lastName: String!
+  7 |         }
+  8 |       
+`;
+
+exports[` 2`] = `
+  1 |
+  2 |         type User {
+  3 |           password: String
+  4 |           firstName: String!
+> 5 |           age: Int
+    |           ^ "age" should be before "firstName".
+  6 |           lastName: String!
+  7 |         }
+  8 |       
+`;
+
+exports[` 3`] = `
+  1 |
+  2 |         extend type User {
+  3 |           age: Int
+  4 |           firstName: String!
+  5 |           password: String
+> 6 |           lastName: String!
+    |           ^ "lastName" should be before "password".
+  7 |         }
+  8 |       
+`;
+
+exports[` 4`] = `
+  1 |
+  2 |         interface Test {
+  3 |           c: Int
+> 4 |           b: Int
+    |           ^ "b" should be before "c".
+  5 |           a: Int
+  6 |         }
+  7 |       
+`;
+
+exports[` 5`] = `
+  1 |
+  2 |         interface Test {
+  3 |           c: Int
+  4 |           b: Int
+> 5 |           a: Int
+    |           ^ "a" should be before "b".
+  6 |         }
+  7 |       
+`;
+
+exports[` 6`] = `
+  1 |
+  2 |         input UserInput {
+  3 |           password: String
+> 4 |           firstName: String!
+    |           ^ "firstName" should be before "password".
+  5 |           age: Int
+  6 |           lastName: String!
+  7 |         }
+  8 |       
+`;
+
+exports[` 7`] = `
+  1 |
+  2 |         input UserInput {
+  3 |           password: String
+  4 |           firstName: String!
+> 5 |           age: Int
+    |           ^ "age" should be before "firstName".
+  6 |           lastName: String!
+  7 |         }
+  8 |       
+`;
+
+exports[` 8`] = `
+  1 |
+  2 |         extend input UserInput {
+  3 |           age: Int
+  4 |           firstName: String!
+  5 |           password: String
+> 6 |           lastName: String!
+    |           ^ "lastName" should be before "password".
+  7 |         }
+  8 |       
+`;
+
+exports[` 9`] = `
+  1 |
+  2 |         enum Role {
+  3 |           SUPER_ADMIN
+> 4 |           ADMIN
+    |           ^ "ADMIN" should be before "SUPER_ADMIN".
+  5 |           USER
+  6 |           GOD
+  7 |         }
+  8 |       
+`;
+
+exports[` 10`] = `
+  1 |
+  2 |         enum Role {
+  3 |           SUPER_ADMIN
+  4 |           ADMIN
+  5 |           USER
+> 6 |           GOD
+    |           ^ "GOD" should be before "USER".
+  7 |         }
+  8 |       
+`;
+
+exports[` 11`] = `
+  1 |
+  2 |         extend enum Role {
+  3 |           ADMIN
+  4 |           SUPER_ADMIN
+> 5 |           GOD
+    |           ^ "GOD" should be before "SUPER_ADMIN".
+  6 |           USER
+  7 |         }
+  8 |       
+`;
+
+exports[` 12`] = `
+  1 |
+> 2 |         directive @test(c: Int, b: Int, a: Int) on FIELD_DEFINITION
+    |                                 ^ "b" should be before "c".
+  3 |       
+`;
+
+exports[` 13`] = `
+  1 |
+> 2 |         directive @test(c: Int, b: Int, a: Int) on FIELD_DEFINITION
+    |                                         ^ "a" should be before "b".
+  3 |       
+`;
+
+exports[` 14`] = `
+  1 |
+  2 |         type Query {
+> 3 |           test(c: Int, b: Int, a: Int): Int
+    |                        ^ "b" should be before "c".
+  4 |         }
+  5 |       
+`;
+
+exports[` 15`] = `
+  1 |
+  2 |         type Query {
+> 3 |           test(c: Int, b: Int, a: Int): Int
+    |                                ^ "a" should be before "b".
+  4 |         }
+  5 |       
+`;
+
+exports[` 16`] = `
+  1 |
+  2 |         fragment TestFields on Test {
+  3 |           c
+> 4 |           b
+    |           ^ "b" should be before "c".
+  5 |           a
+  6 |         }
+  7 |       
+`;
+
+exports[` 17`] = `
+  1 |
+  2 |         fragment TestFields on Test {
+  3 |           c
+  4 |           b
+> 5 |           a
+    |           ^ "a" should be before "b".
+  6 |         }
+  7 |       
+`;
+
+exports[` 18`] = `
+   1 |
+   2 |         query {
+   3 |           test {
+   4 |             c
+>  5 |             b
+     |             ^ "b" should be before "c".
+   6 |             a
+   7 |             ... on Test {
+   8 |               cc
+   9 |               bb
+  10 |               aa
+  11 |             }
+  12 |           }
+  13 |         }
+  14 |       
+`;
+
+exports[` 19`] = `
+   1 |
+   2 |         query {
+   3 |           test {
+   4 |             c
+   5 |             b
+>  6 |             a
+     |             ^ "a" should be before "b".
+   7 |             ... on Test {
+   8 |               cc
+   9 |               bb
+  10 |               aa
+  11 |             }
+  12 |           }
+  13 |         }
+  14 |       
+`;
+
+exports[` 20`] = `
+   1 |
+   2 |         query {
+   3 |           test {
+   4 |             c
+   5 |             b
+   6 |             a
+   7 |             ... on Test {
+   8 |               cc
+>  9 |               bb
+     |               ^ "bb" should be before "cc".
+  10 |               aa
+  11 |             }
+  12 |           }
+  13 |         }
+  14 |       
+`;
+
+exports[` 21`] = `
+   1 |
+   2 |         query {
+   3 |           test {
+   4 |             c
+   5 |             b
+   6 |             a
+   7 |             ... on Test {
+   8 |               cc
+   9 |               bb
+> 10 |               aa
+     |               ^ "aa" should be before "bb".
+  11 |             }
+  12 |           }
+  13 |         }
+  14 |       
+`;
+
+exports[` 22`] = `
+  1 |
+> 2 |         mutation ($c: Int, $b: Int, $a: Int) {
+    |                            ^^ "$b" should be before "$c".
+  3 |           test(cc: $c, bb: $b, aa: $a) {
+  4 |             something
+  5 |           }
+  6 |         }
+  7 |       
+`;
+
+exports[` 23`] = `
+  1 |
+> 2 |         mutation ($c: Int, $b: Int, $a: Int) {
+    |                                     ^^ "$a" should be before "$b".
+  3 |           test(cc: $c, bb: $b, aa: $a) {
+  4 |             something
+  5 |           }
+  6 |         }
+  7 |       
+`;
+
+exports[` 24`] = `
+  1 |
+  2 |         mutation ($c: Int, $b: Int, $a: Int) {
+> 3 |           test(cc: $c, bb: $b, aa: $a) {
+    |                        ^ "bb" should be before "cc".
+  4 |             something
+  5 |           }
+  6 |         }
+  7 |       
+`;
+
+exports[` 25`] = `
+  1 |
+  2 |         mutation ($c: Int, $b: Int, $a: Int) {
+> 3 |           test(cc: $c, bb: $b, aa: $a) {
+    |                                ^ "aa" should be before "bb".
+  4 |             something
+  5 |           }
+  6 |         }
+  7 |       
+`;

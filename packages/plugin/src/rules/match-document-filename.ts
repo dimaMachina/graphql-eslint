@@ -172,7 +172,8 @@ const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
       Document(documentNode) {
         if (options.fileExtension && options.fileExtension !== fileExtension) {
           context.report({
-            node: documentNode,
+            // Report on first character
+            loc: { column: 0, line: 1 },
             messageId: MATCH_EXTENSION,
             data: {
               fileExtension,
@@ -215,7 +216,8 @@ const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
 
         if (expectedFilename !== filenameWithExtension) {
           context.report({
-            node: documentNode,
+            // Report on first character
+            loc: { column: 0, line: 1 },
             messageId: MATCH_STYLE,
             data: {
               expectedFilename,

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+  1 | #import UserFields from './user-fields-with-variables.gql'
+  2 |
+  3 | query User {
+  4 |   user {
+  5 |     id
+  6 |     ...UserFields
+  7 |   }
+  8 | }
+> 9 |
+    | ^ Variable "$limit" is not defined by operation "User".
+`;
+
+exports[` 2`] = `
+  1 | #import UserFields from './user-fields-with-variables.gql'
+  2 |
+  3 | query User {
+  4 |   user {
+  5 |     id
+  6 |     ...UserFields
+  7 |   }
+  8 | }
+> 9 |
+    | ^ Variable "$offset" is not defined by operation "User".
+`;

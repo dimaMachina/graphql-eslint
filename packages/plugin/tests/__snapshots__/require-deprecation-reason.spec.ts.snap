@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+   1 |
+   2 |         type A {
+>  3 |           deprecatedWithoutReason: String @deprecated
+     |                                             ^ Directive "@deprecated" must have a reason!
+   4 |           deprecatedWithReason: String @deprecated(reason: "Reason")
+   5 |           notDeprecated: String
+   6 |         }
+   7 |
+   8 |         enum testEnum {
+   9 |           item1 @deprecated
+  10 |           item2 @deprecated(reason: "Reason")
+  11 |         }
+  12 |
+  13 |         interface testInterface {
+  14 |           item1: String @deprecated
+  15 |           item2: Number @deprecated(reason: "Reason")
+  16 |           item3: String
+  17 |           item4: String @deprecated(reason: "")
+  18 |           item5: String @deprecated(reason: "  ")
+  19 |         }
+  20 |       
+`;
+
+exports[` 2`] = `
+   1 |
+   2 |         type A {
+   3 |           deprecatedWithoutReason: String @deprecated
+   4 |           deprecatedWithReason: String @deprecated(reason: "Reason")
+   5 |           notDeprecated: String
+   6 |         }
+   7 |
+   8 |         enum testEnum {
+>  9 |           item1 @deprecated
+     |                   ^ Directive "@deprecated" must have a reason!
+  10 |           item2 @deprecated(reason: "Reason")
+  11 |         }
+  12 |
+  13 |         interface testInterface {
+  14 |           item1: String @deprecated
+  15 |           item2: Number @deprecated(reason: "Reason")
+  16 |           item3: String
+  17 |           item4: String @deprecated(reason: "")
+  18 |           item5: String @deprecated(reason: "  ")
+  19 |         }
+  20 |       
+`;
+
+exports[` 3`] = `
+   1 |
+   2 |         type A {
+   3 |           deprecatedWithoutReason: String @deprecated
+   4 |           deprecatedWithReason: String @deprecated(reason: "Reason")
+   5 |           notDeprecated: String
+   6 |         }
+   7 |
+   8 |         enum testEnum {
+   9 |           item1 @deprecated
+  10 |           item2 @deprecated(reason: "Reason")
+  11 |         }
+  12 |
+  13 |         interface testInterface {
+> 14 |           item1: String @deprecated
+     |                           ^ Directive "@deprecated" must have a reason!
+  15 |           item2: Number @deprecated(reason: "Reason")
+  16 |           item3: String
+  17 |           item4: String @deprecated(reason: "")
+  18 |           item5: String @deprecated(reason: "  ")
+  19 |         }
+  20 |       
+`;
+
+exports[` 4`] = `
+   1 |
+   2 |         type A {
+   3 |           deprecatedWithoutReason: String @deprecated
+   4 |           deprecatedWithReason: String @deprecated(reason: "Reason")
+   5 |           notDeprecated: String
+   6 |         }
+   7 |
+   8 |         enum testEnum {
+   9 |           item1 @deprecated
+  10 |           item2 @deprecated(reason: "Reason")
+  11 |         }
+  12 |
+  13 |         interface testInterface {
+  14 |           item1: String @deprecated
+  15 |           item2: Number @deprecated(reason: "Reason")
+  16 |           item3: String
+> 17 |           item4: String @deprecated(reason: "")
+     |                           ^ Directive "@deprecated" must have a reason!
+  18 |           item5: String @deprecated(reason: "  ")
+  19 |         }
+  20 |       
+`;
+
+exports[` 5`] = `
+   1 |
+   2 |         type A {
+   3 |           deprecatedWithoutReason: String @deprecated
+   4 |           deprecatedWithReason: String @deprecated(reason: "Reason")
+   5 |           notDeprecated: String
+   6 |         }
+   7 |
+   8 |         enum testEnum {
+   9 |           item1 @deprecated
+  10 |           item2 @deprecated(reason: "Reason")
+  11 |         }
+  12 |
+  13 |         interface testInterface {
+  14 |           item1: String @deprecated
+  15 |           item2: Number @deprecated(reason: "Reason")
+  16 |           item3: String
+  17 |           item4: String @deprecated(reason: "")
+> 18 |           item5: String @deprecated(reason: "  ")
+     |                           ^ Directive "@deprecated" must have a reason!
+  19 |         }
+  20 |       
+`;

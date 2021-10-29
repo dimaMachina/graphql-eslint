@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+>  3 |           gt: BSONDecimal
+     |           ^^ Description is required for nodes of type "InputValueDefinition"
+   4 |           gte: BSONDecimal
+   5 |           lt: BSONDecimal
+   6 |           lte: BSONDecimal
+   7 |           ne: BSONDecimal
+   8 |           in: [BSONDecimal]
+   9 |           nin: [BSONDecimal]
+  10 |         }
+  11 |       
+`;
+
+exports[` 2`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+   3 |           gt: BSONDecimal
+>  4 |           gte: BSONDecimal
+     |           ^^^ Description is required for nodes of type "InputValueDefinition"
+   5 |           lt: BSONDecimal
+   6 |           lte: BSONDecimal
+   7 |           ne: BSONDecimal
+   8 |           in: [BSONDecimal]
+   9 |           nin: [BSONDecimal]
+  10 |         }
+  11 |       
+`;
+
+exports[` 3`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+   3 |           gt: BSONDecimal
+   4 |           gte: BSONDecimal
+>  5 |           lt: BSONDecimal
+     |           ^^ Description is required for nodes of type "InputValueDefinition"
+   6 |           lte: BSONDecimal
+   7 |           ne: BSONDecimal
+   8 |           in: [BSONDecimal]
+   9 |           nin: [BSONDecimal]
+  10 |         }
+  11 |       
+`;
+
+exports[` 4`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+   3 |           gt: BSONDecimal
+   4 |           gte: BSONDecimal
+   5 |           lt: BSONDecimal
+>  6 |           lte: BSONDecimal
+     |           ^^^ Description is required for nodes of type "InputValueDefinition"
+   7 |           ne: BSONDecimal
+   8 |           in: [BSONDecimal]
+   9 |           nin: [BSONDecimal]
+  10 |         }
+  11 |       
+`;
+
+exports[` 5`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+   3 |           gt: BSONDecimal
+   4 |           gte: BSONDecimal
+   5 |           lt: BSONDecimal
+   6 |           lte: BSONDecimal
+>  7 |           ne: BSONDecimal
+     |           ^^ Description is required for nodes of type "InputValueDefinition"
+   8 |           in: [BSONDecimal]
+   9 |           nin: [BSONDecimal]
+  10 |         }
+  11 |       
+`;
+
+exports[` 6`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+   3 |           gt: BSONDecimal
+   4 |           gte: BSONDecimal
+   5 |           lt: BSONDecimal
+   6 |           lte: BSONDecimal
+   7 |           ne: BSONDecimal
+>  8 |           in: [BSONDecimal]
+     |           ^^ Description is required for nodes of type "InputValueDefinition"
+   9 |           nin: [BSONDecimal]
+  10 |         }
+  11 |       
+`;
+
+exports[` 7`] = `
+   1 |
+   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+   3 |           gt: BSONDecimal
+   4 |           gte: BSONDecimal
+   5 |           lt: BSONDecimal
+   6 |           lte: BSONDecimal
+   7 |           ne: BSONDecimal
+   8 |           in: [BSONDecimal]
+>  9 |           nin: [BSONDecimal]
+     |           ^^^ Description is required for nodes of type "InputValueDefinition"
+  10 |         }
+  11 |       
+`;
+
+exports[` 8`] = `
+  1 |
+  2 |         enum EnumUserLanguagesSkill {
+> 3 |           basic
+    |           ^^^^^ Description is required for nodes of type "EnumValueDefinition"
+  4 |           fluent
+  5 |           native
+  6 |         }
+  7 |       
+`;
+
+exports[` 9`] = `
+  1 |
+  2 |         enum EnumUserLanguagesSkill {
+  3 |           basic
+> 4 |           fluent
+    |           ^^^^^^ Description is required for nodes of type "EnumValueDefinition"
+  5 |           native
+  6 |         }
+  7 |       
+`;
+
+exports[` 10`] = `
+  1 |
+  2 |         enum EnumUserLanguagesSkill {
+  3 |           basic
+  4 |           fluent
+> 5 |           native
+    |           ^^^^^^ Description is required for nodes of type "EnumValueDefinition"
+  6 |         }
+  7 |       
+`;
+
+exports[` 11`] = `
+  1 |
+> 2 |         type CreateOneUserPayload {
+    |              ^^^^^^^^^^^^^^^^^^^^ Description is required for nodes of type "ObjectTypeDefinition"
+  3 |           recordId: MongoID
+  4 |           record: User
+  5 |         }
+  6 |       
+`;
+
+exports[` 12`] = `
+  1 |
+  2 |         type CreateOneUserPayload {
+> 3 |           recordId: MongoID
+    |           ^^^^^^^^ Description is required for nodes of type "FieldDefinition"
+  4 |           record: User
+  5 |         }
+  6 |       
+`;
+
+exports[` 13`] = `
+  1 |
+  2 |         type CreateOneUserPayload {
+  3 |           recordId: MongoID
+> 4 |           record: User
+    |           ^^^^^^ Description is required for nodes of type "FieldDefinition"
+  5 |         }
+  6 |       
+`;
