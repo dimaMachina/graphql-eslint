@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+  1 |
+  2 |         query deep2 {
+  3 |           viewer {
+  4 |             albums {
+> 5 |               title
+    |                ^ 'deep2' exceeds maximum operation depth of 1
+  6 |             }
+  7 |           }
+  8 |         }
+  9 |       
+`;
+
+exports[` 2`] = `
+  1 |
+  2 |         query deep2 {
+  3 |           viewer {
+  4 |             albums {
+> 5 |               ...AlbumFields
+    |                ^ 'deep2' exceeds maximum operation depth of 1
+  6 |             }
+  7 |           }
+  8 |         }
+  9 |       
+`;

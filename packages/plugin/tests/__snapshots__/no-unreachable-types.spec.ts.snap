@@ -1,0 +1,496 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+   1 |
+   2 |         type Query {
+   3 |           node(id: ID!): AnotherNode!
+   4 |         }
+   5 |
+>  6 |         interface Node {
+     |          ^^^^^^^^^^^^^^^
+>  7 |           id: ID!
+     | ^^^^^^^^^^^^^^^^^
+>  8 |         }
+     | ^^^^^^^^^^ Type "Node" is unreachable
+   9 |
+  10 |         interface AnotherNode {
+  11 |           createdAt: String
+  12 |         }
+  13 |
+  14 |         interface User implements Node {
+  15 |           id: ID!
+  16 |           name: String
+  17 |         }
+  18 |
+  19 |         type SuperUser implements User & Node {
+  20 |           id: ID!
+  21 |           name: String
+  22 |           address: String
+  23 |         }
+  24 |       
+`;
+
+exports[` 2`] = `
+   1 |
+   2 |         type Query {
+   3 |           node(id: ID!): AnotherNode!
+   4 |         }
+   5 |
+   6 |         interface Node {
+   7 |           id: ID!
+   8 |         }
+   9 |
+  10 |         interface AnotherNode {
+  11 |           createdAt: String
+  12 |         }
+  13 |
+> 14 |         interface User implements Node {
+     |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |           id: ID!
+     | ^^^^^^^^^^^^^^^^^
+> 16 |           name: String
+     | ^^^^^^^^^^^^^^^^^
+> 17 |         }
+     | ^^^^^^^^^^ Type "User" is unreachable
+  18 |
+  19 |         type SuperUser implements User & Node {
+  20 |           id: ID!
+  21 |           name: String
+  22 |           address: String
+  23 |         }
+  24 |       
+`;
+
+exports[` 3`] = `
+   1 |
+   2 |         type Query {
+   3 |           node(id: ID!): AnotherNode!
+   4 |         }
+   5 |
+   6 |         interface Node {
+   7 |           id: ID!
+   8 |         }
+   9 |
+  10 |         interface AnotherNode {
+  11 |           createdAt: String
+  12 |         }
+  13 |
+  14 |         interface User implements Node {
+  15 |           id: ID!
+  16 |           name: String
+  17 |         }
+  18 |
+> 19 |         type SuperUser implements User & Node {
+     |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 20 |           id: ID!
+     | ^^^^^^^^^^^^^^^^^
+> 21 |           name: String
+     | ^^^^^^^^^^^^^^^^^
+> 22 |           address: String
+     | ^^^^^^^^^^^^^^^^^
+> 23 |         }
+     | ^^^^^^^^^^ Type "SuperUser" is unreachable
+  24 |       
+`;
+
+exports[` 4`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+>  3 |         scalar DateTime
+     |          ^^^^^^^ Type "DateTime" is unreachable
+   4 |
+   5 |         # EnumTypeDefinition
+   6 |         enum Role {
+   7 |           ADMIN
+   8 |           USER
+   9 |         }
+  10 |
+  11 |         # DirectiveDefinition
+  12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+  13 |
+  14 |         # UnionTypeDefinition
+  15 |         union Union = String | Boolean
+  16 |
+  17 |         # InputObjectTypeDefinition
+  18 |         input UsersFilter {
+  19 |           limit: Int
+  20 |         }
+  21 |
+  22 |         # InterfaceTypeDefinition
+  23 |         interface Address {
+  24 |           city: String
+  25 |         }
+  26 |
+  27 |         # ObjectTypeDefinition
+  28 |         type User implements Address {
+  29 |           city: String
+  30 |         }
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 5`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+   3 |         scalar DateTime
+   4 |
+   5 |         # EnumTypeDefinition
+>  6 |         enum Role {
+     |          ^^^^^^^^^^
+>  7 |           ADMIN
+     | ^^^^^^^^^^^^^^^
+>  8 |           USER
+     | ^^^^^^^^^^^^^^^
+>  9 |         }
+     | ^^^^^^^^^^ Type "Role" is unreachable
+  10 |
+  11 |         # DirectiveDefinition
+  12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+  13 |
+  14 |         # UnionTypeDefinition
+  15 |         union Union = String | Boolean
+  16 |
+  17 |         # InputObjectTypeDefinition
+  18 |         input UsersFilter {
+  19 |           limit: Int
+  20 |         }
+  21 |
+  22 |         # InterfaceTypeDefinition
+  23 |         interface Address {
+  24 |           city: String
+  25 |         }
+  26 |
+  27 |         # ObjectTypeDefinition
+  28 |         type User implements Address {
+  29 |           city: String
+  30 |         }
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 6`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+   3 |         scalar DateTime
+   4 |
+   5 |         # EnumTypeDefinition
+   6 |         enum Role {
+   7 |           ADMIN
+   8 |           USER
+   9 |         }
+  10 |
+  11 |         # DirectiveDefinition
+> 12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+     |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Type "auth" is unreachable
+  13 |
+  14 |         # UnionTypeDefinition
+  15 |         union Union = String | Boolean
+  16 |
+  17 |         # InputObjectTypeDefinition
+  18 |         input UsersFilter {
+  19 |           limit: Int
+  20 |         }
+  21 |
+  22 |         # InterfaceTypeDefinition
+  23 |         interface Address {
+  24 |           city: String
+  25 |         }
+  26 |
+  27 |         # ObjectTypeDefinition
+  28 |         type User implements Address {
+  29 |           city: String
+  30 |         }
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 7`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+   3 |         scalar DateTime
+   4 |
+   5 |         # EnumTypeDefinition
+   6 |         enum Role {
+   7 |           ADMIN
+   8 |           USER
+   9 |         }
+  10 |
+  11 |         # DirectiveDefinition
+  12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+  13 |
+  14 |         # UnionTypeDefinition
+> 15 |         union Union = String | Boolean
+     |          ^^^^^^^^^^^^^^^^^^^^^^^ Type "Union" is unreachable
+  16 |
+  17 |         # InputObjectTypeDefinition
+  18 |         input UsersFilter {
+  19 |           limit: Int
+  20 |         }
+  21 |
+  22 |         # InterfaceTypeDefinition
+  23 |         interface Address {
+  24 |           city: String
+  25 |         }
+  26 |
+  27 |         # ObjectTypeDefinition
+  28 |         type User implements Address {
+  29 |           city: String
+  30 |         }
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 8`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+   3 |         scalar DateTime
+   4 |
+   5 |         # EnumTypeDefinition
+   6 |         enum Role {
+   7 |           ADMIN
+   8 |           USER
+   9 |         }
+  10 |
+  11 |         # DirectiveDefinition
+  12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+  13 |
+  14 |         # UnionTypeDefinition
+  15 |         union Union = String | Boolean
+  16 |
+  17 |         # InputObjectTypeDefinition
+> 18 |         input UsersFilter {
+     |          ^^^^^^^^^^^^^^^^^^
+> 19 |           limit: Int
+     | ^^^^^^^^^^^^^^^^^^^^
+> 20 |         }
+     | ^^^^^^^^^^ Type "UsersFilter" is unreachable
+  21 |
+  22 |         # InterfaceTypeDefinition
+  23 |         interface Address {
+  24 |           city: String
+  25 |         }
+  26 |
+  27 |         # ObjectTypeDefinition
+  28 |         type User implements Address {
+  29 |           city: String
+  30 |         }
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 9`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+   3 |         scalar DateTime
+   4 |
+   5 |         # EnumTypeDefinition
+   6 |         enum Role {
+   7 |           ADMIN
+   8 |           USER
+   9 |         }
+  10 |
+  11 |         # DirectiveDefinition
+  12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+  13 |
+  14 |         # UnionTypeDefinition
+  15 |         union Union = String | Boolean
+  16 |
+  17 |         # InputObjectTypeDefinition
+  18 |         input UsersFilter {
+  19 |           limit: Int
+  20 |         }
+  21 |
+  22 |         # InterfaceTypeDefinition
+> 23 |         interface Address {
+     |          ^^^^^^^^^^^^^^^^^^
+> 24 |           city: String
+     | ^^^^^^^^^^^^^^^^^^^^^^
+> 25 |         }
+     | ^^^^^^^^^^ Type "Address" is unreachable
+  26 |
+  27 |         # ObjectTypeDefinition
+  28 |         type User implements Address {
+  29 |           city: String
+  30 |         }
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 10`] = `
+   1 |
+   2 |         # ScalarTypeDefinition
+   3 |         scalar DateTime
+   4 |
+   5 |         # EnumTypeDefinition
+   6 |         enum Role {
+   7 |           ADMIN
+   8 |           USER
+   9 |         }
+  10 |
+  11 |         # DirectiveDefinition
+  12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+  13 |
+  14 |         # UnionTypeDefinition
+  15 |         union Union = String | Boolean
+  16 |
+  17 |         # InputObjectTypeDefinition
+  18 |         input UsersFilter {
+  19 |           limit: Int
+  20 |         }
+  21 |
+  22 |         # InterfaceTypeDefinition
+  23 |         interface Address {
+  24 |           city: String
+  25 |         }
+  26 |
+  27 |         # ObjectTypeDefinition
+> 28 |         type User implements Address {
+     |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 29 |           city: String
+     | ^^^^^^^^^^^^^^^^^^^^^^
+> 30 |         }
+     | ^^^^^^^^^^ Type "User" is unreachable
+  31 |
+  32 |         type Query
+  33 |       
+`;
+
+exports[` 11`] = `
+   1 |
+   2 |         interface User {
+   3 |           id: String
+   4 |         }
+   5 |
+   6 |         type SuperUser implements User {
+   7 |           id: String
+   8 |           superDetail: SuperDetail
+   9 |         }
+  10 |
+  11 |         type SuperDetail {
+  12 |           detail: String
+  13 |         }
+  14 |
+  15 |         type Query {
+  16 |           user: User!
+  17 |         }
+  18 |
+> 19 |         scalar DateTime
+     |          ^^^^^^^ Type "DateTime" is unreachable
+  20 |       
+`;
+
+exports[` 12`] = `
+   1 |
+>  2 |         interface User {
+     |          ^^^^^^^^^^^^^^^
+>  3 |           id: String
+     | ^^^^^^^^^^^^^^^^^^^^
+>  4 |         }
+     | ^^^^^^^^^^ Type "User" is unreachable
+   5 |
+   6 |         interface AnotherUser {
+   7 |           createdAt: String
+   8 |         }
+   9 |
+  10 |         type SuperUser implements User {
+  11 |           id: String
+  12 |         }
+  13 |
+  14 |         # ObjectTypeExtension
+  15 |         extend type SuperUser {
+  16 |           detail: String
+  17 |         }
+  18 |
+  19 |         type Query {
+  20 |           user: AnotherUser!
+  21 |         }
+  22 |       
+`;
+
+exports[` 13`] = `
+   1 |
+   2 |         interface User {
+   3 |           id: String
+   4 |         }
+   5 |
+   6 |         interface AnotherUser {
+   7 |           createdAt: String
+   8 |         }
+   9 |
+> 10 |         type SuperUser implements User {
+     |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 11 |           id: String
+     | ^^^^^^^^^^^^^^^^^^^^
+> 12 |         }
+     | ^^^^^^^^^^ Type "SuperUser" is unreachable
+  13 |
+  14 |         # ObjectTypeExtension
+  15 |         extend type SuperUser {
+  16 |           detail: String
+  17 |         }
+  18 |
+  19 |         type Query {
+  20 |           user: AnotherUser!
+  21 |         }
+  22 |       
+`;
+
+exports[` 14`] = `
+   1 |
+   2 |         interface User {
+   3 |           id: String
+   4 |         }
+   5 |
+   6 |         interface AnotherUser {
+   7 |           createdAt: String
+   8 |         }
+   9 |
+  10 |         type SuperUser implements User {
+  11 |           id: String
+  12 |         }
+  13 |
+  14 |         # ObjectTypeExtension
+> 15 |         extend type SuperUser {
+     |          ^^^^^^^^^^^^^^^^^^^^^^
+> 16 |           detail: String
+     | ^^^^^^^^^^^^^^^^^^^^^^^^
+> 17 |         }
+     | ^^^^^^^^^^ Type "SuperUser" is unreachable
+  18 |
+  19 |         type Query {
+  20 |           user: AnotherUser!
+  21 |         }
+  22 |       
+`;
+
+exports[` 15`] = `
+   1 |
+   2 |         type Query {
+   3 |           node(id: ID!): Node!
+   4 |         }
+   5 |
+   6 |         interface Node {
+   7 |           id: ID!
+   8 |         }
+   9 |
+  10 |         interface User implements Node {
+  11 |           id: ID!
+  12 |           name: String
+  13 |         }
+  14 |
+  15 |         type SuperUser implements User & Node {
+  16 |           id: ID!
+  17 |           name: String
+  18 |           address: String
+  19 |         }
+  20 |
+> 21 |         scalar DateTime
+     |          ^^^^^^^ Type "DateTime" is unreachable
+  22 |       
+`;

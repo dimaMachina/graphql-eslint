@@ -35,6 +35,8 @@
     "lodash.lowercase": "^4.3.0"
   },
   "devDependencies": {
+    "@babel/code-frame": "^7.15.8",
+    "@types/babel__code-frame": "^7.0.3",
     "@types/eslint": "7.28.2",
     "@types/graphql-depth-limit": "1.1.3",
     "@types/lodash.lowercase": "4.3.6",
@@ -48,6 +50,8 @@
   "buildOptions": {
     "input": "./src/index.ts",
     "external": [
+      "@babel/code-frame",
+      "eslint",
       "graphql",
       "graphql/validation/rules/ExecutableDefinitionsRule",
       "graphql/validation/rules/FieldsOnCorrectTypeRule",
