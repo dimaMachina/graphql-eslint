@@ -40,8 +40,8 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
       `,
     },
     {
+      name: 'should not report error if selection is duplicated',
       options: [{ selections: ['OperationDefinition'] }],
-      // should not report error if selection is duplicated
       code: /* GraphQL */ `
         query {
           test {
@@ -65,8 +65,8 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '"firstName" should be before "password".' },
-        { message: '"age" should be before "firstName".' },
+        { message: '"firstName" should be before "password"' },
+        { message: '"age" should be before "firstName"' },
       ],
     },
     {
@@ -79,18 +79,18 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: '"lastName" should be before "password".' }],
+      errors: [{ message: '"lastName" should be before "password"' }],
     },
     {
       options: [{ fields: ['InterfaceTypeDefinition'] }],
       code: /* GraphQL */ `
         interface Test {
-          c: Int
-          b: Int
-          a: Int
+          cc: Int
+          bb: Int
+          aa: Int
         }
       `,
-      errors: [{ message: '"b" should be before "c".' }, { message: '"a" should be before "b".' }],
+      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
     },
     {
       options: [{ fields: ['InputObjectTypeDefinition'] }],
@@ -103,8 +103,8 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '"firstName" should be before "password".' },
-        { message: '"age" should be before "firstName".' },
+        { message: '"firstName" should be before "password"' },
+        { message: '"age" should be before "firstName"' },
       ],
     },
     {
@@ -117,7 +117,7 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: '"lastName" should be before "password".' }],
+      errors: [{ message: '"lastName" should be before "password"' }],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -129,7 +129,7 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
           GOD
         }
       `,
-      errors: [{ message: '"ADMIN" should be before "SUPER_ADMIN".' }, { message: '"GOD" should be before "USER".' }],
+      errors: [{ message: '"ADMIN" should be before "SUPER_ADMIN"' }, { message: '"GOD" should be before "USER"' }],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -141,72 +141,72 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
           USER
         }
       `,
-      errors: [{ message: '"GOD" should be before "SUPER_ADMIN".' }],
+      errors: [{ message: '"GOD" should be before "SUPER_ADMIN"' }],
     },
     {
       options: [{ arguments: ['DirectiveDefinition'] }],
       code: /* GraphQL */ `
-        directive @test(c: Int, b: Int, a: Int) on FIELD_DEFINITION
+        directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
       `,
-      errors: [{ message: '"b" should be before "c".' }, { message: '"a" should be before "b".' }],
+      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
     },
     {
       options: [{ arguments: ['FieldDefinition'] }],
       code: /* GraphQL */ `
         type Query {
-          test(c: Int, b: Int, a: Int): Int
+          test(cc: Int, bb: Int, aa: Int): Int
         }
       `,
-      errors: [{ message: '"b" should be before "c".' }, { message: '"a" should be before "b".' }],
+      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
     },
     {
       options: [{ selections: ['FragmentDefinition'] }],
       code: /* GraphQL */ `
         fragment TestFields on Test {
-          c
-          b
-          a
+          cc
+          bb
+          aa
         }
       `,
-      errors: [{ message: '"b" should be before "c".' }, { message: '"a" should be before "b".' }],
+      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
     },
     {
       options: [{ selections: ['OperationDefinition'] }],
       code: /* GraphQL */ `
         query {
           test {
-            c
-            b
-            a
+            cc
+            bb
+            aa
             ... on Test {
-              cc
-              bb
-              aa
+              ccc
+              bbb
+              aaa
             }
           }
         }
       `,
       errors: [
-        { message: '"b" should be before "c".' },
-        { message: '"a" should be before "b".' },
-        { message: '"bb" should be before "cc".' },
-        { message: '"aa" should be before "bb".' },
+        { message: '"bb" should be before "cc"' },
+        { message: '"aa" should be before "bb"' },
+        { message: '"bbb" should be before "ccc"' },
+        { message: '"aaa" should be before "bbb"' },
       ],
     },
     {
       options: [{ variables: ['OperationDefinition'], arguments: ['Field'] }],
       code: /* GraphQL */ `
-        mutation ($c: Int, $b: Int, $a: Int) {
-          test(cc: $c, bb: $b, aa: $a) {
+        mutation ($cc: Int, $bb: Int, $aa: Int) {
+          test(ccc: $cc, bbb: $bb, aaa: $aa) {
             something
           }
         }
       `,
       errors: [
-        { message: '"$b" should be before "$c".' },
-        { message: '"$a" should be before "$b".' },
-        { message: '"bb" should be before "cc".' },
-        { message: '"aa" should be before "bb".' },
+        { message: '"$bb" should be before "$cc"' },
+        { message: '"$aa" should be before "$bb"' },
+        { message: '"bbb" should be before "ccc"' },
+        { message: '"aaa" should be before "bbb"' },
       ],
     },
   ],
