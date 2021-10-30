@@ -2,7 +2,7 @@ import { relative } from 'path';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { normalizePath, requireSiblingsOperations, getOnDiskFilepath } from '../utils';
+import { normalizePath, requireSiblingsOperations, getOnDiskFilepath, getLocation } from '../utils';
 import { FragmentSource, OperationSource } from '../sibling-operations';
 
 const RULE_NAME = 'unique-fragment-name';
@@ -14,11 +14,7 @@ export const checkNode = (
   ruleName: string,
   messageId: string
 ): void => {
-  const documentName = node.name?.value;
-  if (!documentName) {
-    return;
-  }
-
+  const documentName = node.name.value;
   const siblings = requireSiblingsOperations(ruleName, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
     node.kind === Kind.FRAGMENT_DEFINITION ? siblings.getFragment(documentName) : siblings.getOperation(documentName);
@@ -31,7 +27,6 @@ export const checkNode = (
   });
 
   if (conflictingDocuments.length > 0) {
-    const { start, end } = node.name.loc;
     context.report({
       messageId,
       data: {
@@ -40,16 +35,7 @@ export const checkNode = (
           .map(f => `\t${relative(process.cwd(), getOnDiskFilepath(f.filePath))}`)
           .join('\n'),
       },
-      loc: {
-        start: {
-          line: start.line,
-          column: start.column - 1,
-        },
-        end: {
-          line: end.line,
-          column: end.column - 1,
-        },
-      },
+      loc: getLocation(node.name.loc, documentName),
     });
   }
 };

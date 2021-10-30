@@ -189,3 +189,28 @@ export const convertCase = (style: CaseStyle, str: string): string => {
       return lowerCase(str).replace(/ /g, '-');
   }
 };
+
+export function getLocation(
+  loc: Partial<AST.SourceLocation>,
+  fieldName = '',
+  offset?: { offsetStart?: number; offsetEnd?: number }
+): AST.SourceLocation {
+  const { start } = loc;
+
+  /*
+   * ESLint has 0-based column number
+   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
+   */
+  const { offsetStart = 1, offsetEnd = 1 } = offset ?? {};
+
+  return {
+    start: {
+      line: start.line,
+      column: start.column - offsetStart,
+    },
+    end: {
+      line: start.line,
+      column: start.column - offsetEnd + fieldName.length,
+    },
+  };
+}
