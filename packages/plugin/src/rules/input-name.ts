@@ -1,5 +1,5 @@
 import { GraphQLESLintRule } from '../types';
-import { isMutationType, isQueryType } from '../utils';
+import { getLocation, isMutationType, isQueryType } from '../utils';
 
 type InputNameRuleConfig = {
   checkInputType?: boolean;
@@ -89,10 +89,11 @@ const rule: GraphQLESLintRule<InputNameRuleConfig[]> = {
 
     const listeners = {
       'FieldDefinition > InputValueDefinition': node => {
-        if (node.name.value !== 'input' && shouldCheckType(node.parent.parent)) {
+        const name = node.name.value;
+        if (name !== 'input' && shouldCheckType(node.parent.parent)) {
           context.report({
-            node: node.name,
-            message: `Input "${node.name.value}" should be called "input"`,
+            loc: getLocation(node.loc, name),
+            message: `Input "${name}" should be called "input"`,
           });
         }
       },
@@ -111,14 +112,14 @@ const rule: GraphQLESLintRule<InputNameRuleConfig[]> = {
         const inputValueNode = findInputType(node);
         if (shouldCheckType(inputValueNode.parent.parent)) {
           const mutationName = `${inputValueNode.parent.name.value}Input`;
-
+          const name = node.name.value;
           if (
             (options.caseSensitiveInputType && node.name.value !== mutationName) ||
-            node.name.value.toLowerCase() !== mutationName.toLowerCase()
+            name.toLowerCase() !== mutationName.toLowerCase()
           ) {
             context.report({
-              node,
-              message: `InputType "${node.name.value}" name should be "${mutationName}"`,
+              loc: getLocation(node.loc, name),
+              message: `InputType "${name}" name should be "${mutationName}"`,
             });
           }
         }

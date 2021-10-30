@@ -2,105 +2,105 @@
 
 exports[` 1`] = `
 > 1 | type Mutation { SetMessage(message: String): String }
-    |                             ^ Input "message" should be called "input"
+    |                            ^^^^^^^ Input "message" should be called "input"
 `;
 
 exports[` 2`] = `
 > 1 | type Mutation { SetMessage(message: String): String }
-    |                                      ^ InputType "String" name should be "SetMessageInput"
+    |                                     ^^^^^^ InputType "String" name should be "SetMessageInput"
 `;
 
 exports[` 3`] = `
 > 1 | type Mutation { SetMessage(input: String): String }
-    |                                    ^ InputType "String" name should be "SetMessageInput"
+    |                                   ^^^^^^ InputType "String" name should be "SetMessageInput"
 `;
 
 exports[` 4`] = `
 > 1 | type Mutation { SetMessage(hello: SetMessageInput): String }
-    |                             ^ Input "hello" should be called "input"
+    |                            ^^^^^ Input "hello" should be called "input"
 `;
 
 exports[` 5`] = `
 > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
-    |                             ^ Input "record" should be called "input"
+    |                            ^^^^^^ Input "record" should be called "input"
 `;
 
 exports[` 6`] = `
 > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
-    |                                     ^ InputType "CreateOneUserInput" name should be "userCreateInput"
+    |                                    ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 7`] = `
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
-    |                             ^ Input "record" should be called "input"
+    |                            ^^^^^^ Input "record" should be called "input"
 `;
 
 exports[` 8`] = `
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
-    |                                      ^ InputType "CreateOneUserInput" name should be "userCreateInput"
+    |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 9`] = `
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
-    |                             ^ Input "record" should be called "input"
+    |                            ^^^^^^ Input "record" should be called "input"
 `;
 
 exports[` 10`] = `
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
-    |                                      ^ InputType "CreateOneUserInput" name should be "userCreateInput"
+    |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 11`] = `
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
-    |                             ^ Input "record" should be called "input"
+    |                            ^^^^^^ Input "record" should be called "input"
 `;
 
 exports[` 12`] = `
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
-    |                                      ^ InputType "CreateOneUserInput" name should be "userCreateInput"
+    |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 13`] = `
 > 1 | type Mutation { userCreate(record: String, test: String): String }
-    |                             ^ Input "record" should be called "input"
+    |                            ^^^^^^ Input "record" should be called "input"
 `;
 
 exports[` 14`] = `
 > 1 | type Mutation { userCreate(record: String, test: String): String }
-    |                                     ^ InputType "String" name should be "userCreateInput"
+    |                                    ^^^^^^ InputType "String" name should be "userCreateInput"
 `;
 
 exports[` 15`] = `
 > 1 | type Mutation { userCreate(record: String, test: String): String }
-    |                                             ^ Input "test" should be called "input"
+    |                                            ^^^^ Input "test" should be called "input"
 `;
 
 exports[` 16`] = `
 > 1 | type Mutation { userCreate(record: String, test: String): String }
-    |                                                   ^ InputType "String" name should be "userCreateInput"
+    |                                                  ^^^^^^ InputType "String" name should be "userCreateInput"
 `;
 
 exports[` 17`] = `
 > 1 | type Mutation { userCreate(record: String, test: String): String }
-    |                             ^ Input "record" should be called "input"
+    |                            ^^^^^^ Input "record" should be called "input"
 `;
 
 exports[` 18`] = `
 > 1 | type Mutation { userCreate(record: String, test: String): String }
-    |                                             ^ Input "test" should be called "input"
+    |                                            ^^^^ Input "test" should be called "input"
 `;
 
 exports[` 19`] = `
 > 1 | type Mutation { userCreate(input: String): String }
-    |                                    ^ InputType "String" name should be "userCreateInput"
+    |                                   ^^^^^^ InputType "String" name should be "userCreateInput"
 `;
 
 exports[` 20`] = `
 > 1 | type Mutation { userCreate(input: UserCreateInput): String }
-    |                                    ^ InputType "UserCreateInput" name should be "userCreateInput"
+    |                                   ^^^^^^^^^^^^^^^ InputType "UserCreateInput" name should be "userCreateInput"
 `;
 
 exports[` 21`] = `
 > 1 | type Query { getUser(input: GetUserInput): String }
-    |                              ^ InputType "GetUserInput" name should be "getUserInput"
+    |                             ^^^^^^^^^^^^ InputType "GetUserInput" name should be "getUserInput"
 `;
