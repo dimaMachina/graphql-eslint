@@ -1,5 +1,6 @@
 import { GraphQLESLintRule } from '../types';
 import { valueFromNode } from '../estree-parser/utils';
+import { getLocation } from '../utils';
 
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
 
@@ -47,10 +48,10 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
       ],
     },
     messages: {
-      [MESSAGE_REQUIRE_DATE]: 'Directive "@deprecated" must have a deletion date.',
-      [MESSAGE_INVALID_FORMAT]: 'Deletion date must be in format "DD/MM/YYYY".',
-      [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date.',
-      [MESSAGE_CAN_BE_REMOVED]: '"{{ nodeName }}" сan be removed.',
+      [MESSAGE_REQUIRE_DATE]: 'Directive "@deprecated" must have a deletion date',
+      [MESSAGE_INVALID_FORMAT]: 'Deletion date must be in format "DD/MM/YYYY"',
+      [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date',
+      [MESSAGE_CAN_BE_REMOVED]: '"{{ nodeName }}" сan be removed',
     },
     schema: [
       {
@@ -71,14 +72,17 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
         const deletionDateNode = node.arguments.find(arg => arg.name.value === argName);
 
         if (!deletionDateNode) {
-          context.report({ node: node.name, messageId: MESSAGE_REQUIRE_DATE });
+          context.report({
+            loc: getLocation(node.loc, node.name.value, { offsetEnd: 0 }),
+            messageId: MESSAGE_REQUIRE_DATE,
+          });
           return;
         }
         const deletionDate = valueFromNode(deletionDateNode.value);
         const isValidDate = DATE_REGEX.test(deletionDate);
 
         if (!isValidDate) {
-          context.report({ node: node.name, messageId: MESSAGE_INVALID_FORMAT });
+          context.report({ node: deletionDateNode.value, messageId: MESSAGE_INVALID_FORMAT });
           return;
         }
         let [day, month, year] = deletionDate.split('/');
@@ -88,7 +92,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
 
         if (Number.isNaN(deletionDateInMS)) {
           context.report({
-            node: node.name,
+            node: deletionDateNode.value,
             messageId: MESSAGE_INVALID_DATE,
             data: {
               deletionDate,
@@ -101,7 +105,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
 
         if (canRemove) {
           context.report({
-            node: node.name,
+            node,
             messageId: MESSAGE_CAN_BE_REMOVED,
             data: {
               nodeName: node.parent.name.value,
