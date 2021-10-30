@@ -4,7 +4,7 @@ exports[` 1`] = `
   1 |
   2 |         type Mutation {
 > 3 |           createUser: Boolean
-    |            ^^^^^^^^^^^^ Unexpected scalar result type "Boolean".
+    |                       ^^^^^^^ Unexpected scalar result type "Boolean"
   4 |         }
   5 |       
 `;
@@ -14,8 +14,8 @@ exports[` 2`] = `
   2 |         type Mutation
   3 |
   4 |         extend type Mutation {
-> 5 |           createUser: Boolean
-    |            ^^^^^^^^^^^^ Unexpected scalar result type "Boolean".
+> 5 |           createUser: Boolean!
+    |                       ^^^^^^^ Unexpected scalar result type "Boolean"
   6 |         }
   7 |       
 `;
@@ -23,8 +23,8 @@ exports[` 2`] = `
 exports[` 3`] = `
   1 |
   2 |         type RootMutation {
-> 3 |           createUser: Boolean!
-    |            ^^^^^^^^^^^^^^^^^^^ Unexpected scalar result type "Boolean".
+> 3 |           createUser: [Boolean]
+    |                        ^^^^^^^ Unexpected scalar result type "Boolean"
   4 |         }
   5 |
   6 |         schema {
@@ -37,8 +37,8 @@ exports[` 4`] = `
    1 |
    2 |         type RootMutation
    3 |         extend type RootMutation {
->  4 |           createUser: Boolean!
-     |            ^^^^^^^^^^^^^^^^^^^ Unexpected scalar result type "Boolean".
+>  4 |           createUser: [Boolean]!
+     |                        ^^^^^^^ Unexpected scalar result type "Boolean"
    5 |         }
    6 |
    7 |         schema {
@@ -52,8 +52,8 @@ exports[` 5`] = `
   2 |         type Mutation {
   3 |           createUser: User!
 > 4 |           updateUser: Int
-    |            ^^^^^^^^^^^^ Unexpected scalar result type "Int".
-  5 |           deleteUser: Boolean
+    |                       ^^^ Unexpected scalar result type "Int"
+  5 |           deleteUser: [Boolean!]!
   6 |         }
   7 |       
 `;
@@ -63,8 +63,8 @@ exports[` 6`] = `
   2 |         type Mutation {
   3 |           createUser: User!
   4 |           updateUser: Int
-> 5 |           deleteUser: Boolean
-    |            ^^^^^^^^^^^^ Unexpected scalar result type "Boolean".
+> 5 |           deleteUser: [Boolean!]!
+    |                        ^^^^^^^ Unexpected scalar result type "Boolean"
   6 |         }
   7 |       
 `;
