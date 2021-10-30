@@ -1,4 +1,5 @@
 import { GraphQLESLintRule } from '../types';
+import { getLocation } from '../utils';
 
 type DescriptionStyleRuleConfig = [
   {
@@ -58,7 +59,7 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
       '[description.type="StringValue"]': node => {
         if (node.description.block !== (style === 'block')) {
           context.report({
-            node: node.description,
+            loc: getLocation(node.description.loc),
             message: `Unexpected ${wrongDescriptionType} description`,
           });
         }
