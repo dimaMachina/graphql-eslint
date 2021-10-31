@@ -11,6 +11,7 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
 } & Record<string, any>;
 
 export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'options' | 'parserOptions'> & {
+  name: string;
   options?: Options;
   parserOptions?: ParserOptions;
 };
@@ -50,7 +51,26 @@ export class GraphQLRuleTester extends RuleTester {
       invalid: GraphQLInvalidTestCase<Config>[];
     }
   ): void {
-    super.run(name, rule as Rule.RuleModule, tests);
+    const ruleTests = Linter.version.startsWith('8')
+      ? tests
+      : {
+          valid: tests.valid.map(test => {
+            if (typeof test === 'string') {
+              return test;
+            }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { name, ...testCaseOptions } = test;
+            return testCaseOptions;
+          }),
+          invalid: tests.invalid.map(test => {
+            // ESLint 7 throws an error on CI - Unexpected top-level property "name"
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { name, ...testCaseOptions } = test;
+            return testCaseOptions;
+          }),
+        };
+
+    super.run(name, rule as Rule.RuleModule, ruleTests);
 
     // Skip snapshot testing if `expect` variable is not defined
     if (typeof expect === 'undefined') {
