@@ -4,7 +4,7 @@ import { parseImportLine, processImport } from '@graphql-tools/import';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
+import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 function extractRuleName(stack?: string): string | null {
@@ -26,9 +26,8 @@ export function validateDoc(
 
       for (const error of validationErrors) {
         const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
-
         context.report({
-          loc: error.locations[0],
+          loc: getLocation({ start: error.locations[0] }),
           message: ruleName ? error.message : `${validateRuleName} ${error.message}`,
         });
       }

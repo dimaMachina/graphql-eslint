@@ -6,6 +6,7 @@ import {
 } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
+import { getLocation } from '../utils';
 
 const AVOID_TYPENAME_PREFIX = 'AVOID_TYPENAME_PREFIX';
 
@@ -55,24 +56,13 @@ const rule: GraphQLESLintRule = {
           const fieldName = field.name.value;
 
           if (fieldName.toLowerCase().startsWith(lowerTypeName)) {
-            const { start } = field.loc;
-
             context.report({
               data: {
                 fieldName,
                 typeName,
               },
               messageId: AVOID_TYPENAME_PREFIX,
-              loc: {
-                start: {
-                  line: start.line,
-                  column: start.column - 1,
-                },
-                end: {
-                  line: start.line,
-                  column: start.column - 1 + lowerTypeName.length,
-                },
-              },
+              loc: getLocation(field.loc, lowerTypeName),
             });
           }
         }

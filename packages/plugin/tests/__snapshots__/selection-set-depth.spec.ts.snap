@@ -6,7 +6,7 @@ exports[` 1`] = `
   3 |           viewer {
   4 |             albums {
 > 5 |               title
-    |                ^ 'deep2' exceeds maximum operation depth of 1
+    |               ^ 'deep2' exceeds maximum operation depth of 1
   6 |             }
   7 |           }
   8 |         }
@@ -19,7 +19,7 @@ exports[` 2`] = `
   3 |           viewer {
   4 |             albums {
 > 5 |               ...AlbumFields
-    |                ^ 'deep2' exceeds maximum operation depth of 1
+    |               ^ 'deep2' exceeds maximum operation depth of 1
   6 |             }
   7 |           }
   8 |         }

@@ -3,7 +3,7 @@
 exports[` 1`] = `
   1 |
 > 2 |         type Query {
-    |               ^ There can be only one type named "Query".
+    |              ^ There can be only one type named "Query".
   3 |           foo: String
   4 |         }
   5 |
