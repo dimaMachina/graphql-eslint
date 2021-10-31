@@ -1,5 +1,6 @@
 import { GraphQLESLintRule } from '../types';
 import { valueFromNode } from '../estree-parser/utils';
+import { getLocation } from '../utils';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -40,18 +41,16 @@ const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      Directive(node) {
-        if (node && node.name && node.name.value === 'deprecated') {
-          const args = node.arguments || [];
-          const reasonArg = args.find(arg => arg.name && arg.name.value === 'reason');
-          const value = reasonArg ? String(valueFromNode(reasonArg.value) || '').trim() : null;
+      'Directive[name.value=deprecated]'(node) {
+        const args = node.arguments || [];
+        const reasonArg = args.find(arg => arg.name && arg.name.value === 'reason');
+        const value = reasonArg ? String(valueFromNode(reasonArg.value) || '').trim() : null;
 
-          if (!value) {
-            context.report({
-              node: node.name,
-              message: 'Directive "@deprecated" must have a reason!',
-            });
-          }
+        if (!value) {
+          context.report({
+            loc: getLocation(node.loc, node.name.value, { offsetEnd: 0 }),
+            message: 'Directive "@deprecated" must have a reason!',
+          });
         }
       },
     };
