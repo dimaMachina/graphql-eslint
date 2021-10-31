@@ -1,6 +1,7 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
+import { getLocation } from '../utils';
 
 export interface ExceptionRule {
   types?: string[];
@@ -171,17 +172,16 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
 
           return isValidIdName && isValidIdType;
         });
-
+        const typeName = node.name.value;
         // Usually, there should be only one unique identifier field per type.
         // Some clients allow multiple fields to be used. If more people need this,
         // we can extend this rule later.
         if (validIds.length !== 1) {
           context.report({
-            node,
-            message:
-              '{{nodeName}} must have exactly one non-nullable unique identifier. Accepted name(s): {{acceptedNamesString}} ; Accepted type(s): {{acceptedTypesString}}',
+            loc: getLocation(node.name.loc, typeName),
+            message: `{{ typeName }} must have exactly one non-nullable unique identifier. Accepted name(s): {{ acceptedNamesString }} ; Accepted type(s): {{ acceptedTypesString }}`,
             data: {
-              nodeName: node.name.value,
+              typeName,
               acceptedNamesString: options.acceptedIdNames.join(','),
               acceptedTypesString: options.acceptedIdTypes.join(','),
             },
