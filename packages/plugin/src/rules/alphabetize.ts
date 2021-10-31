@@ -23,6 +23,7 @@ import {
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
+import { getLocation } from '../utils';
 
 const ALPHABETIZE = 'ALPHABETIZE';
 
@@ -137,7 +138,7 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
       ],
     },
     messages: {
-      [ALPHABETIZE]: '"{{ currName }}" should be before "{{ prevName }}".',
+      [ALPHABETIZE]: '"{{ currName }}" should be before "{{ prevName }}"',
     },
     schema: {
       type: 'array',
@@ -203,17 +204,10 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
       for (const node of nodes) {
         const currName = node.name.value;
         if (prevName && prevName > currName) {
-          const { start, end } = node.name.loc;
           const isVariableNode = node.kind === Kind.VARIABLE;
 
           context.report({
-            loc: {
-              start: {
-                line: start.line,
-                column: start.column - (isVariableNode ? 2 : 1),
-              },
-              end,
-            },
+            loc: getLocation(node.loc, node.name.value, { offsetEnd: isVariableNode ? 0 : 1 }),
             messageId: ALPHABETIZE,
             data: isVariableNode
               ? {
