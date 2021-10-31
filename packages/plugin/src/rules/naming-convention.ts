@@ -1,6 +1,6 @@
 import { Kind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { isQueryType } from '../utils';
+import { getLocation, isQueryType } from '../utils';
 
 const formats = {
   camelCase: /^[a-z][^_]*$/g,
@@ -246,7 +246,7 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
       });
       if (result.ok === false) {
         context.report({
-          node,
+          loc: getLocation(node.loc, node.value),
           message: result.errorMessage,
           data: {
             prefix,
@@ -275,10 +275,16 @@ const rule: GraphQLESLintRule<NamingConventionRuleConfig> = {
     return {
       Name: node => {
         if (node.value.startsWith('_') && options.leadingUnderscore === 'forbid') {
-          context.report({ node, message: 'Leading underscores are not allowed' });
+          context.report({
+            loc: getLocation(node.loc, node.value),
+            message: 'Leading underscores are not allowed',
+          });
         }
         if (node.value.endsWith('_') && options.trailingUnderscore === 'forbid') {
-          context.report({ node, message: 'Trailing underscores are not allowed' });
+          context.report({
+            loc: getLocation(node.loc, node.value),
+            message: 'Trailing underscores are not allowed',
+          });
         }
       },
       ObjectTypeDefinition: node => {
