@@ -1,5 +1,6 @@
 import { TokenKind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
+import { getLocation } from '../utils';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
@@ -69,10 +70,7 @@ const rule: GraphQLESLintRule = {
             if (!isEslintComment && line !== prev.line && next.kind === TokenKind.NAME && linesAfter < 2) {
               context.report({
                 messageId: HASHTAG_COMMENT,
-                loc: {
-                  start: { line, column },
-                  end: { line, column },
-                },
+                loc: getLocation({ start: { line, column } }),
               });
             }
           }

@@ -1,39 +1,26 @@
-import { Kind } from 'graphql';
+import { VariableDefinitionNode, ArgumentNode, FieldNode, Kind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode } from '../estree-parser';
+import { getLocation } from '../utils';
 
 const AVOID_DUPLICATE_FIELDS = 'AVOID_DUPLICATE_FIELDS';
 
-const ensureUnique = () => {
-  const set = new Set<string>();
-
-  return {
-    add: (item: string, onError: () => void) => {
-      if (set.has(item)) {
-        onError();
-      } else {
-        set.add(item);
-      }
-    },
-  };
-};
-
-const rule: GraphQLESLintRule<[], false> = {
+const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.',
+      description: `Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.`,
       category: 'Stylistic Issues',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/avoid-duplicate-fields.md',
       examples: [
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            query getUserDetails {
+            query {
               user {
-                name # first
+                name
                 email
-                name # second
+                name # duplicate field
               }
             }
           `,
@@ -41,7 +28,7 @@ const rule: GraphQLESLintRule<[], false> = {
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            query getUsers {
+            query {
               users(
                 first: 100
                 skip: 50
@@ -56,9 +43,11 @@ const rule: GraphQLESLintRule<[], false> = {
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            query getUsers($first: Int!, $first: Int!) {
-              # Duplicate variable
-              users(first: 100, skip: 50, after: "cji629tngfgou0b73kt7vi5jo") {
+            query (
+              $first: Int!
+              $first: Int! # duplicate variable
+            ) {
+              users(first: $first, skip: 50) {
                 id
               }
             }
@@ -67,61 +56,51 @@ const rule: GraphQLESLintRule<[], false> = {
       ],
     },
     messages: {
-      [AVOID_DUPLICATE_FIELDS]: `{{ type }} "{{ fieldName }}" defined multiple times.`,
+      [AVOID_DUPLICATE_FIELDS]: `{{ type }} "{{ fieldName }}" defined multiple times`,
     },
     schema: [],
   },
   create(context) {
+    function checkNode(
+      usedFields: Set<string>,
+      fieldName: string,
+      type: string,
+      node: GraphQLESTreeNode<VariableDefinitionNode | ArgumentNode | FieldNode>
+    ): void {
+      if (usedFields.has(fieldName)) {
+        context.report({
+          loc: getLocation((node.kind === Kind.FIELD && node.alias ? node.alias : node).loc, fieldName, {
+            offsetEnd: node.kind === Kind.VARIABLE_DEFINITION ? 0 : 1,
+          }),
+          messageId: AVOID_DUPLICATE_FIELDS,
+          data: {
+            type,
+            fieldName,
+          },
+        });
+      } else {
+        usedFields.add(fieldName);
+      }
+    }
+
     return {
       OperationDefinition(node) {
-        const uniqueCheck = ensureUnique();
-
-        for (const arg of node.variableDefinitions || []) {
-          uniqueCheck.add(arg.variable.name.value, () => {
-            context.report({
-              messageId: AVOID_DUPLICATE_FIELDS,
-              data: {
-                type: 'Operation variable',
-                fieldName: arg.variable.name.value,
-              },
-              node: arg,
-            });
-          });
+        const set = new Set<string>();
+        for (const varDef of node.variableDefinitions) {
+          checkNode(set, varDef.variable.name.value, 'Operation variable', varDef);
         }
       },
       Field(node) {
-        const uniqueCheck = ensureUnique();
-
-        for (const arg of node.arguments || []) {
-          uniqueCheck.add(arg.name.value, () => {
-            context.report({
-              messageId: AVOID_DUPLICATE_FIELDS,
-              data: {
-                type: 'Field argument',
-                fieldName: arg.name.value,
-              },
-              node: arg,
-            });
-          });
+        const set = new Set<string>();
+        for (const arg of node.arguments) {
+          checkNode(set, arg.name.value, 'Field argument', arg);
         }
       },
       SelectionSet(node) {
-        const uniqueCheck = ensureUnique();
-
-        for (const selection of node.selections || []) {
+        const set = new Set<string>();
+        for (const selection of node.selections) {
           if (selection.kind === Kind.FIELD) {
-            const nameToCheck = selection.alias?.value || selection.name.value;
-
-            uniqueCheck.add(nameToCheck, () => {
-              context.report({
-                messageId: AVOID_DUPLICATE_FIELDS,
-                data: {
-                  type: 'Field',
-                  fieldName: nameToCheck,
-                },
-                node: selection,
-              });
-            });
+            checkNode(set, selection.alias?.value || selection.name.value, 'Field', selection);
           }
         }
       },
