@@ -4,7 +4,7 @@ exports[` 1`] = `
    1 |
    2 |   enum EnumUserLanguagesSkill {
 >  3 |     """
-     |      ^ Unexpected block description
+     |     ^ Unexpected block description
    4 |     basic
    5 |     """
    6 |     basic
@@ -28,7 +28,7 @@ exports[` 2`] = `
    5 |     """
    6 |     basic
 >  7 |     """
-     |      ^ Unexpected block description
+     |     ^ Unexpected block description
    8 |     fluent
    9 |     """
   10 |     fluent
@@ -52,7 +52,7 @@ exports[` 3`] = `
    9 |     """
   10 |     fluent
 > 11 |     """
-     |      ^ Unexpected block description
+     |     ^ Unexpected block description
   12 |     native
   13 |     """
   14 |     native
@@ -63,7 +63,7 @@ exports[` 3`] = `
 exports[` 4`] = `
    1 |
 >  2 |   " Test "
-     |    ^ Unexpected inline description
+     |   ^ Unexpected inline description
    3 |   type CreateOneUserPayload {
    4 |     "Created document ID"
    5 |     recordId: MongoID
@@ -79,7 +79,7 @@ exports[` 5`] = `
    2 |   " Test "
    3 |   type CreateOneUserPayload {
 >  4 |     "Created document ID"
-     |      ^ Unexpected inline description
+     |     ^ Unexpected inline description
    5 |     recordId: MongoID
    6 |
    7 |     "Created document"
@@ -96,7 +96,7 @@ exports[` 6`] = `
    5 |     recordId: MongoID
    6 |
 >  7 |     "Created document"
-     |      ^ Unexpected inline description
+     |     ^ Unexpected inline description
    8 |     record: User
    9 |   }
   10 |
