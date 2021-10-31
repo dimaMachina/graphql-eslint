@@ -45,54 +45,54 @@ ruleTester.runGraphQLTests('avoid-scalar-result-type-on-mutation', rule, {
           createUser: Boolean
         }
       `),
-      errors: [{ message: 'Unexpected scalar result type "Boolean".' }],
+      errors: [{ message: 'Unexpected scalar result type "Boolean"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         type Mutation
 
         extend type Mutation {
-          createUser: Boolean
+          createUser: Boolean!
         }
       `),
-      errors: [{ message: 'Unexpected scalar result type "Boolean".' }],
+      errors: [{ message: 'Unexpected scalar result type "Boolean"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         type RootMutation {
-          createUser: Boolean!
+          createUser: [Boolean]
         }
 
         schema {
           mutation: RootMutation
         }
       `),
-      errors: [{ message: 'Unexpected scalar result type "Boolean".' }],
+      errors: [{ message: 'Unexpected scalar result type "Boolean"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         type RootMutation
         extend type RootMutation {
-          createUser: Boolean!
+          createUser: [Boolean]!
         }
 
         schema {
           mutation: RootMutation
         }
       `),
-      errors: [{ message: 'Unexpected scalar result type "Boolean".' }],
+      errors: [{ message: 'Unexpected scalar result type "Boolean"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         type Mutation {
           createUser: User!
           updateUser: Int
-          deleteUser: Boolean
+          deleteUser: [Boolean!]!
         }
       `),
       errors: [
-        { message: 'Unexpected scalar result type "Int".' },
-        { message: 'Unexpected scalar result type "Boolean".' },
+        { message: 'Unexpected scalar result type "Int"' },
+        { message: 'Unexpected scalar result type "Boolean"' },
       ],
     },
   ],
