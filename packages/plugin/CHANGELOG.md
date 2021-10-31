@@ -1,5 +1,22 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.3.2
+
+### Patch Changes
+
+- 86b3709: fix error report for `no-unused-fields` and `no-unreachable-types` rule
+- cf3cc4f: fix error report for `require-deprecation-reason` and `require-field-of-type-query-in-mutation-result` rule
+- 578b890: fix error report for `require-deprecation-date` rule
+- ebab010: fix error report for `alphabetize` rule
+- 7dacfe5: fix error report for `avoid-scalar-result-type-on-mutation` rule
+- f712780: fix error report for `unique-fragment-name` and `unique-operation-name` rule
+- d081fcc: fix error report for `selection-set-depth` rule and for `graphql-js` rules
+- 46f03f7: fix error report for `description-style` rule
+- b36a32c: fix error report for `strict-id-in-types` and `naming-convention` rule
+- 7aa8157: fix error report for `input-name` rule
+- a285de3: fix error report for `require-deprecation-reason` and `require-field-of-type-query-in-mutation-result` rule
+- ced6789: fix error report for `no-deprecated` rule
+
 ## 2.3.1
 
 ### Patch Changes
