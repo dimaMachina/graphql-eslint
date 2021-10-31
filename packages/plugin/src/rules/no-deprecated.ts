@@ -104,12 +104,8 @@ const rule: GraphQLESLintRule<[], true> = {
         const typeInfo = node.typeInfo();
 
         if (typeInfo && typeInfo.fieldDef) {
-<<<<<<< HEAD
-          if (typeInfo.fieldDef.isDeprecated) {
-            const fieldName = node.name.value;
-=======
           if (typeInfo.fieldDef.deprecationReason) {
->>>>>>> ...
+            const fieldName = node.name.value;
             context.report({
               loc: getLocation(node.loc, fieldName),
               messageId: NO_DEPRECATED,

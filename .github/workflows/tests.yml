@@ -25,10 +25,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-16-15-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-16-16-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-16-15-node-modules-${{ hashFiles('yarn.lock') }}
-            ${{ runner.os }}-16-15-node-modules-
+            ${{ runner.os }}-16-16-node-modules-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-16-16-node-modules-
       - name: Install Dependencies using Yarn
         run: yarn install && git checkout yarn.lock
       - name: Lint
@@ -41,7 +41,7 @@ jobs:
         graphql_version:
           # - 14
           - 15
-          - 16.0.0-rc.7
+          - 16
     steps:
       - name: Checkout Master
         uses: actions/checkout@v2
@@ -83,7 +83,7 @@ jobs:
         graphql_version:
           # - 14
           - 15
-          - 16.0.0-rc.7
+          - 16
     steps:
       - name: Checkout Master
         uses: actions/checkout@v2
