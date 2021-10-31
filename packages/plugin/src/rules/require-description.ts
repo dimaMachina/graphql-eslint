@@ -1,6 +1,7 @@
 import { GraphQLESLintRule, GraphQLESLintRuleContext, ValueOf } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 import { ASTKindToNode, Kind, StringValueNode } from 'graphql';
+import { getLocation } from '../utils';
 
 const REQUIRE_DESCRIPTION_ERROR = 'REQUIRE_DESCRIPTION_ERROR';
 const DESCRIBABLE_NODES = [
@@ -28,21 +29,8 @@ function verifyRule(
 ) {
   if (node) {
     if (!node.description || !node.description.value || node.description.value.trim().length === 0) {
-      const { start, end } = ('name' in node ? node.name : node).loc;
-
       context.report({
-        loc: {
-          start: {
-            line: start.line,
-            column: start.column - 1,
-          },
-          end: {
-            line: end.line,
-            column:
-              // node.name don't exist on SchemaDefinition
-              'name' in node ? end.column - 1 + node.name.value.length : end.column,
-          },
-        },
+        loc: getLocation(('name' in node ? node.name : node).loc, 'name' in node ? node.name.value : 'schema'),
         messageId: REQUIRE_DESCRIPTION_ERROR,
         data: {
           nodeType: node.kind,

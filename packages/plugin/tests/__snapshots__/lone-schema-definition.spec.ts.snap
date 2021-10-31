@@ -24,7 +24,7 @@ exports[` 1`] = `
   21 |         }
   22 |
 > 23 |         schema {
-     |          ^ Must provide only one schema definition.
+     |         ^ Must provide only one schema definition.
   24 |           query: RootQuery
   25 |           mutation: RootMutation
   26 |         }

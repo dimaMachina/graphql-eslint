@@ -1,4 +1,5 @@
 import { GraphQLESLintRule } from '../types';
+import { getLocation } from '../utils';
 
 const NO_ANONYMOUS_OPERATIONS = 'NO_ANONYMOUS_OPERATIONS';
 
@@ -37,27 +38,14 @@ const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      OperationDefinition(node) {
-        const isAnonymous = (node.name?.value || '').length === 0;
-        if (isAnonymous) {
-          const { start } = node.loc;
-          context.report({
-            loc: {
-              start: {
-                column: start.column - 1,
-                line: start.line,
-              },
-              end: {
-                column: start.column - 1 + node.operation.length,
-                line: start.line,
-              },
-            },
-            data: {
-              operation: node.operation,
-            },
-            messageId: NO_ANONYMOUS_OPERATIONS,
-          });
-        }
+      'OperationDefinition[name=undefined]'(node) {
+        context.report({
+          loc: getLocation(node.loc, node.operation),
+          data: {
+            operation: node.operation,
+          },
+          messageId: NO_ANONYMOUS_OPERATIONS,
+        });
       },
     };
   },
