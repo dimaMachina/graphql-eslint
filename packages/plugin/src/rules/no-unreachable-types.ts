@@ -1,5 +1,6 @@
+import { Kind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { requireReachableTypesFromContext } from '../utils';
+import { getLocation, requireReachableTypesFromContext } from '../utils';
 
 const UNREACHABLE_TYPE = 'UNREACHABLE_TYPE';
 const RULE_NAME = 'no-unreachable-types';
@@ -55,7 +56,7 @@ const rule: GraphQLESLintRule = {
 
       if (!reachableTypes.has(typeName)) {
         context.report({
-          node,
+          loc: getLocation(node.name.loc, typeName, { offsetStart: node.kind === Kind.DIRECTIVE_DEFINITION ? 2 : 1 }),
           messageId: UNREACHABLE_TYPE,
           data: { typeName },
           fix: fixer => fixer.remove(node),
