@@ -191,7 +191,7 @@ Array [
     filePath: examples/graphql-config/operations/user.fragment.graphql,
     messages: Array [
       Object {
-        message: Field "name" defined multiple times.,
+        message: Field "name" defined multiple times,
         ruleId: @graphql-eslint/avoid-duplicate-fields,
       },
     ],

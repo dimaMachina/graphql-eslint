@@ -14,11 +14,11 @@ Checks for duplicate fields in selection set, variables in operation definition,
 ```graphql
 # eslint @graphql-eslint/avoid-duplicate-fields: 'error'
 
-query getUserDetails {
+query {
   user {
-    name # first
+    name
     email
-    name # second
+    name # duplicate field
   }
 }
 ```
@@ -28,7 +28,7 @@ query getUserDetails {
 ```graphql
 # eslint @graphql-eslint/avoid-duplicate-fields: 'error'
 
-query getUsers {
+query {
   users(
     first: 100
     skip: 50
@@ -45,9 +45,11 @@ query getUsers {
 ```graphql
 # eslint @graphql-eslint/avoid-duplicate-fields: 'error'
 
-query getUsers($first: Int!, $first: Int!) {
-  # Duplicate variable
-  users(first: 100, skip: 50, after: "cji629tngfgou0b73kt7vi5jo") {
+query (
+  $first: Int!
+  $first: Int! # duplicate variable
+) {
+  users(first: $first, skip: 50) {
     id
   }
 }
