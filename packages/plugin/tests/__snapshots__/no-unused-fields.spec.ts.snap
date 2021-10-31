@@ -6,7 +6,7 @@ exports[` 1`] = `
   3 |         type User {
   4 |           id: ID!
 > 5 |           firstName: String
-    |            ^^^^^^^^^^^ Field "firstName" is unused
+    |           ^^^^^^^^^ Field "firstName" is unused
   6 |         }
   7 |       
 `;
@@ -20,7 +20,7 @@ exports[` 2`] = `
    6 |
    7 |         type Mutation {
 >  8 |           deleteUser(id: ID!): User
-     |            ^^^^^^^^^^^^^^^^^^^^^ Field "deleteUser" is unused
+     |           ^^^^^^^^^^ Field "deleteUser" is unused
    9 |         }
   10 |       
 `;
