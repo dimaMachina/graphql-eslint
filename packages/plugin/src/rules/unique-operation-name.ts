@@ -58,7 +58,7 @@ const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      OperationDefinition(node) {
+      'OperationDefinition[name!=undefined]'(node) {
         checkNode(context, node, RULE_NAME, UNIQUE_OPERATION_NAME);
       },
     };
