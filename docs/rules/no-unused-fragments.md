@@ -1,8 +1,8 @@
 # `no-unused-fragments`
 
-✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
 
-- Category: `Validation`
+- Category: `Operations`
 - Rule name: `@graphql-eslint/no-unused-fragments`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

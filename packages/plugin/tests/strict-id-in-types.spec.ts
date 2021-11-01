@@ -54,9 +54,6 @@ ruleTester.runGraphQLTests('strict-id-in-types', rule, {
         {
           acceptedIdNames: ['id'],
           acceptedIdTypes: ['ID'],
-          exceptions: {
-            suffixes: [],
-          },
         },
       ],
     },

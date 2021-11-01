@@ -11,7 +11,7 @@ const rule: GraphQLESLintRule = {
     },
     docs: {
       description: `Requires all fields to be used at some level by siblings operations.`,
-      category: 'Best Practices',
+      category: 'Schema',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
       requiresSiblings: true,
       requiresSchema: true,

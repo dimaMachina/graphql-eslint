@@ -24,13 +24,13 @@ const isObjectType = (node: ObjectTypeNode): boolean =>
 const isQueryType = (node: ObjectTypeNode): boolean => isObjectType(node) && node.name.value === 'Query';
 const isMutationType = (node: ObjectTypeNode): boolean => isObjectType(node) && node.name.value === 'Mutation';
 
-const rule: GraphQLESLintRule<InputNameRuleConfig[]> = {
+const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
       description:
         'Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".\nUsing the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.',
-      category: 'Stylistic Issues',
+      category: 'Schema',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/input-name.md',
       examples: [
         {

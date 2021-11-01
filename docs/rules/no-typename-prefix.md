@@ -1,8 +1,8 @@
 # `no-typename-prefix`
 
-✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
 
-- Category: `Best Practices`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/no-typename-prefix`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

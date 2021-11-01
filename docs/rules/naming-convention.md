@@ -1,8 +1,8 @@
 # `naming-convention`
 
-✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and `"plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
 
-- Category: `Best Practices`
+- Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/naming-convention`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -57,7 +57,6 @@ Includes:
 
 - [FieldDefinition](https://spec.graphql.org/October2021/#FieldDefinition)
 - [InputValueDefinition](https://spec.graphql.org/October2021/#InputValueDefinition)
-- [VariableDefinition](https://spec.graphql.org/October2021/#VariableDefinition)
 - [Argument](https://spec.graphql.org/October2021/#Argument)
 - [DirectiveDefinition](https://spec.graphql.org/October2021/#DirectiveDefinition)
 

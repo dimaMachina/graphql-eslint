@@ -1,6 +1,6 @@
 # `alphabetize`
 
-- Category: `Best Practices`
+- Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/alphabetize`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

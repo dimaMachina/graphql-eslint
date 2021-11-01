@@ -1,6 +1,6 @@
 # `no-root-type`
 
-- Category: `Validation`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/no-root-type`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

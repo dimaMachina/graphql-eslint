@@ -7,7 +7,7 @@ const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: 'Operations',
       description:
         'Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.',
       recommended: true,

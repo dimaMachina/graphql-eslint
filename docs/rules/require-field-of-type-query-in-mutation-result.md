@@ -1,6 +1,6 @@
 # `require-field-of-type-query-in-mutation-result`
 
-- Category: `Best Practices`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/require-field-of-type-query-in-mutation-result`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

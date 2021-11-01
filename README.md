@@ -184,11 +184,18 @@ You can find a complete list of [all available rules here](docs/README.md).
 
 ## Available Configs
 
-This plugin exports a [`recommended` config](packages/plugin/src/configs/recommended.ts) that enforces good practices and an [`all` config](packages/plugin/src/configs/all.ts) that makes use of all rules (except for deprecated ones).
+| Name                                                                              | Description                                                        |
+| :-------------------------------------------------------------------------------- | :----------------------------------------------------------------- |
+| [`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)         | enables all recommended rules that are aimed at linting schema     |
+| [`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) | enables all recommended rules that are aimed at linting operations |
+| [`schema-all`](packages/plugin/src/configs/schema-all.ts)                         | enables all rules that are aimed at linting schema                 |
+| [`operations-all`](packages/plugin/src/configs/operations-all.ts)                 | enables all rules that are aimed at linting operations             |
 
-Enable it in your `.eslintrc` file with the `extends` option.
+## Config usage
 
-> These configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add `@graphql-eslint` to `plugins` array, so you don't need to specify them.
+For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the `extends` option:
+
+> All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add `@graphql-eslint` to `plugins` array, so you don't need to specify them.
 
 ```diff
 {
@@ -201,7 +208,7 @@ Enable it in your `.eslintrc` file with the `extends` option.
       "files": ["*.graphql"],
 -     "parser": "@graphql-eslint/eslint-plugin",
 -     "plugins": ["@graphql-eslint"],
-+     "extends": "plugin:@graphql-eslint/recommended" // or plugin:@graphql-eslint/all
++     "extends": "plugin:@graphql-eslint/schema-recommended"
     }
   ]
 }

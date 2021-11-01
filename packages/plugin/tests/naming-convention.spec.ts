@@ -304,7 +304,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
           subscriptionField: ID
         }
       `,
-      options: rule.meta.docs.optionsForConfig,
+      options: (rule.meta.docs.configOptions as any).schema,
       errors: [
         { message: 'Field "fieldQuery" should not have "Query" suffix' },
         { message: 'Field "queryField" should not have "query" prefix' },
@@ -331,7 +331,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         fragment TestFragment on Test { id }
         fragment FragmentTest on Test { id }
       `,
-      options: rule.meta.docs.optionsForConfig,
+      options: (rule.meta.docs.configOptions as any).operations,
       errors: [
         { message: 'Operation "TestQuery" should not have "Query" suffix' },
         { message: 'Operation "QueryTest" should not have "Query" prefix' },

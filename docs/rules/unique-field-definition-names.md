@@ -1,8 +1,8 @@
 # `unique-field-definition-names`
 
-✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
 
-- Category: `Validation`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/unique-field-definition-names`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

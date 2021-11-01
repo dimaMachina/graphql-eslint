@@ -1,6 +1,6 @@
 # `unique-operation-name`
 
-- Category: `Best Practices`
+- Category: `Operations`
 - Rule name: `@graphql-eslint/unique-operation-name`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
