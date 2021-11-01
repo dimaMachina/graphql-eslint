@@ -61,8 +61,8 @@ Array [
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
       Object {
-        message: Unnecessary "query" suffix in your operation name!,
-        ruleId: @graphql-eslint/no-operation-name-suffix,
+        message: Operation "UserQuery" should not have "Query" suffix,
+        ruleId: @graphql-eslint/naming-convention,
       },
     ],
   },
@@ -192,7 +192,7 @@ Array [
     messages: Array [
       Object {
         message: Field "name" defined multiple times,
-        ruleId: @graphql-eslint/avoid-duplicate-fields,
+        ruleId: @graphql-eslint/no-duplicate-fields,
       },
     ],
   },

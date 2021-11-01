@@ -8,7 +8,7 @@ import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
 import { getLocation } from '../utils';
 
-const AVOID_TYPENAME_PREFIX = 'AVOID_TYPENAME_PREFIX';
+const NO_TYPENAME_PREFIX = 'NO_TYPENAME_PREFIX';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -17,7 +17,7 @@ const rule: GraphQLESLintRule = {
       category: 'Best Practices',
       description: 'Enforces users to avoid using the type name in a field name while defining your schema.',
       recommended: true,
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/avoid-typename-prefix.md',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-typename-prefix.md',
       examples: [
         {
           title: 'Incorrect',
@@ -38,7 +38,7 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [AVOID_TYPENAME_PREFIX]: `Field "{{ fieldName }}" starts with the name of the parent type "{{ typeName }}"`,
+      [NO_TYPENAME_PREFIX]: `Field "{{ fieldName }}" starts with the name of the parent type "{{ typeName }}"`,
     },
     schema: [],
   },
@@ -61,7 +61,7 @@ const rule: GraphQLESLintRule = {
                 fieldName,
                 typeName,
               },
-              messageId: AVOID_TYPENAME_PREFIX,
+              messageId: NO_TYPENAME_PREFIX,
               loc: getLocation(field.loc, lowerTypeName),
             });
           }

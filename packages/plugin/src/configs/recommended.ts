@@ -6,7 +6,6 @@ export const recommendedConfig = {
   parser: '@graphql-eslint/eslint-plugin',
   plugins: ['@graphql-eslint'],
   rules: {
-    '@graphql-eslint/avoid-typename-prefix': 'error',
     '@graphql-eslint/executable-definitions': 'error',
     '@graphql-eslint/fields-on-correct-type': 'error',
     '@graphql-eslint/fragments-on-composite-type': 'error',
@@ -47,7 +46,7 @@ export const recommendedConfig = {
     '@graphql-eslint/no-anonymous-operations': 'error',
     '@graphql-eslint/no-case-insensitive-enum-values-duplicates': 'error',
     '@graphql-eslint/no-fragment-cycles': 'error',
-    '@graphql-eslint/no-operation-name-suffix': 'error',
+    '@graphql-eslint/no-typename-prefix': 'error',
     '@graphql-eslint/no-undefined-variables': 'error',
     '@graphql-eslint/no-unused-fragments': 'error',
     '@graphql-eslint/no-unused-variables': 'error',

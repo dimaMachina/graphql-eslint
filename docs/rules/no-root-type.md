@@ -45,6 +45,12 @@ The schema defines the following properties:
 
 ### `disallow` (array, required)
 
+The elements of the array can contain the following enum values:
+
+- `query`
+- `mutation`
+- `subscription`
+
 Additional restrictions:
 
 * Minimum items: `1`

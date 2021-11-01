@@ -14,7 +14,7 @@ module.exports = {
       plugins: ['@graphql-eslint'],
       rules: {
         '@graphql-eslint/no-anonymous-operations': 'error',
-        '@graphql-eslint/avoid-duplicate-fields': 'error',
+        '@graphql-eslint/no-duplicate-fields': 'error',
       },
     },
   ],

@@ -4,10 +4,6 @@
 
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 import alphabetize from './alphabetize';
-import avoidDuplicateFields from './avoid-duplicate-fields';
-import avoidOperationNamePrefix from './avoid-operation-name-prefix';
-import avoidScalarResultTypeOnMutation from './avoid-scalar-result-type-on-mutation';
-import avoidTypenamePrefix from './avoid-typename-prefix';
 import descriptionStyle from './description-style';
 import inputName from './input-name';
 import matchDocumentFilename from './match-document-filename';
@@ -15,9 +11,11 @@ import namingConvention from './naming-convention';
 import noAnonymousOperations from './no-anonymous-operations';
 import noCaseInsensitiveEnumValuesDuplicates from './no-case-insensitive-enum-values-duplicates';
 import noDeprecated from './no-deprecated';
+import noDuplicateFields from './no-duplicate-fields';
 import noHashtagDescription from './no-hashtag-description';
-import noOperationNameSuffix from './no-operation-name-suffix';
 import noRootType from './no-root-type';
+import noScalarResultTypeOnMutation from './no-scalar-result-type-on-mutation';
+import noTypenamePrefix from './no-typename-prefix';
 import noUnreachableTypes from './no-unreachable-types';
 import noUnusedFields from './no-unused-fields';
 import requireDeprecationDate from './require-deprecation-date';
@@ -33,10 +31,6 @@ import uniqueOperationName from './unique-operation-name';
 export const rules = {
   ...GRAPHQL_JS_VALIDATIONS,
   alphabetize,
-  'avoid-duplicate-fields': avoidDuplicateFields,
-  'avoid-operation-name-prefix': avoidOperationNamePrefix,
-  'avoid-scalar-result-type-on-mutation': avoidScalarResultTypeOnMutation,
-  'avoid-typename-prefix': avoidTypenamePrefix,
   'description-style': descriptionStyle,
   'input-name': inputName,
   'match-document-filename': matchDocumentFilename,
@@ -44,9 +38,11 @@ export const rules = {
   'no-anonymous-operations': noAnonymousOperations,
   'no-case-insensitive-enum-values-duplicates': noCaseInsensitiveEnumValuesDuplicates,
   'no-deprecated': noDeprecated,
+  'no-duplicate-fields': noDuplicateFields,
   'no-hashtag-description': noHashtagDescription,
-  'no-operation-name-suffix': noOperationNameSuffix,
   'no-root-type': noRootType,
+  'no-scalar-result-type-on-mutation': noScalarResultTypeOnMutation,
+  'no-typename-prefix': noTypenamePrefix,
   'no-unreachable-types': noUnreachableTypes,
   'no-unused-fields': noUnusedFields,
   'require-deprecation-date': requireDeprecationDate,
