@@ -1,5 +1,5 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
-import { ASTNode, GraphQLError, TypeInfo } from 'graphql';
+import { ASTNode, GraphQLError, TypeInfo, Source } from 'graphql';
 import { Linter } from 'eslint';
 import { convertToESTree } from './estree-parser';
 import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types';
@@ -33,7 +33,7 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
     });
 
     const { rootTree, comments } = convertToESTree(graphqlAst.document as ASTNode, schema ? new TypeInfo(schema) : null);
-    const tokens = extractTokens(code);
+    const tokens = extractTokens(new Source(code, filePath));
 
     return {
       services: parserServices,
