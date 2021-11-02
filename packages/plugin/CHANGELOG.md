@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.4.0
+
+### Minor Changes
+
+- 81fae5a: GraphQL v16 support
+
 ## 2.3.2
 
 ### Patch Changes
