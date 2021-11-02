@@ -120,7 +120,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
             if (definition.kind === Kind.FRAGMENT_DEFINITION) {
               result.push({
                 filePath: source.location,
-                document: definition,
+                document: definition as FragmentDefinitionNode,
               });
             }
           }
@@ -141,7 +141,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
             if (definition.kind === Kind.OPERATION_DEFINITION) {
               result.push({
                 filePath: source.location,
-                document: definition,
+                document: definition as OperationDefinitionNode,
               });
             }
           }

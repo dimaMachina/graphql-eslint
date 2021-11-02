@@ -1,11 +1,13 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- ignore type errors from `graphql` package
+// @ts-nocheck
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { createServer, Server, IncomingMessage, ServerResponse } from 'http';
-import { buildSchema, getIntrospectionQuery, graphqlSync } from 'graphql';
+import { buildSchema, introspectionFromSchema } from 'graphql';
 
 const sdlSchema = readFileSync(resolve(__dirname, 'user-schema.graphql'), 'utf8');
 const graphqlSchemaObj = buildSchema(sdlSchema);
-const introspectionQueryResult = graphqlSync(graphqlSchemaObj, getIntrospectionQuery());
+const introspectionQueryResult = introspectionFromSchema(graphqlSchemaObj);
 
 class TestGraphQLServer {
   private server: Server;
@@ -38,7 +40,9 @@ class TestGraphQLServer {
     if (pathname === '/') {
       const { query } = await this.parseData(req);
       if (query.includes('query IntrospectionQuery')) {
-        res.end(JSON.stringify(introspectionQueryResult));
+        res.end(JSON.stringify({
+          data: introspectionQueryResult
+        }));
       }
     } else if (pathname === '/my-headers') {
       res.end(JSON.stringify(req.headers));

@@ -49,7 +49,7 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
       examples: [
         {
           title: 'Incorrect',
-          usage: [{ on: ['ObjectTypeDefinition', 'FieldDefinition'] }],
+          usage: [{ on: [Kind.OBJECT_TYPE_DEFINITION, Kind.FIELD_DEFINITION] }],
           code: /* GraphQL */ `
             type someTypeName {
               name: String
@@ -58,7 +58,7 @@ const rule: GraphQLESLintRule<RequireDescriptionRuleConfig> = {
         },
         {
           title: 'Correct',
-          usage: [{ on: ['ObjectTypeDefinition', 'FieldDefinition'] }],
+          usage: [{ on: [Kind.OBJECT_TYPE_DEFINITION, Kind.FIELD_DEFINITION] }],
           code: /* GraphQL */ `
             """
             Some type description

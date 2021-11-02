@@ -1,8 +1,8 @@
 diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
-index 324af7b..e771420 100644
+index 7f590a5..5368321 100644
 --- a/node_modules/eslint/lib/rule-tester/rule-tester.js
 +++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
-@@ -943,8 +943,18 @@ class RuleTester {
+@@ -946,7 +946,17 @@ class RuleTester {
                          "Expected no autofixes to be suggested"
                      );
                  } else {
@@ -21,4 +21,3 @@ index 324af7b..e771420 100644
                  }
              } else {
                  assert.strictEqual(
-                     result.output,

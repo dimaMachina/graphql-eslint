@@ -17,7 +17,7 @@ describe('schema', () => {
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
     const sdlString = printSchema(graphQLSchema);
-    expect(sdlString).toBe(schemaOnDisk);
+    expect(sdlString.trim()).toBe(schemaOnDisk.trim());
   };
 
   describe('GraphQLFileLoader', () => {
@@ -53,6 +53,9 @@ describe('schema', () => {
       local.stdout.on('data', chunk => {
         url = chunk.toString().trimRight();
         done();
+      });
+      local.stderr.on('data', chunk => {
+        throw new Error(chunk.toString().trimRight());
       });
     });
 
