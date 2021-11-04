@@ -1,6 +1,7 @@
 import { ESLint } from 'eslint';
+import { ParserOptions } from '../src';
 
-function getESLintWithConfig(configName: 'schema-all' | 'operations-all'): ESLint {
+function getESLintWithConfig(configName: 'schema-all' | 'operations-all', parserOptions?: ParserOptions): ESLint {
   return new ESLint({
     useEslintrc: false,
     baseConfig: {
@@ -10,8 +11,8 @@ function getESLintWithConfig(configName: 'schema-all' | 'operations-all'): ESLin
           extends: `plugin:@graphql-eslint/${configName}`,
           parserOptions: {
             schema: 'type Query { foo: Int }',
-            operations: '{ foo }',
             skipGraphQLConfig: true,
+            ...parserOptions,
           },
         },
       ],
@@ -27,7 +28,7 @@ describe('Rules', () => {
   });
 
   it('should load all rules properly from `operations-all` config', async () => {
-    const eslint = getESLintWithConfig('operations-all');
+    const eslint = getESLintWithConfig('operations-all', { operations: '{ foo }' });
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });

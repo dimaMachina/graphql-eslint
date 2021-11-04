@@ -67,9 +67,3 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [variables-are-input-types](rules/variables-are-input-types.md)|A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).|🔮||✅
 [variables-in-allowed-position](rules/variables-in-allowed-position.md)|Variables passed to field arguments conform to type.|🔮||✅
 <!-- prettier-ignore-end -->
-
-## Further Reading
-
-- [Writing Custom Rules](custom-rules.md)
-- [How the parser works?](parser.md)
-- [`parserOptions`](parser-options.md)

@@ -12,6 +12,7 @@ const prettierOptions = {
 };
 const SRC_PATH = join(process.cwd(), 'packages/plugin/src');
 const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
+const DISABLED_RULES_FOR_ALL_CONFIG = new Set<string>(['no-root-type', 'no-unused-fields']);
 
 function writeFormattedFile(filePath: string, typeScriptCode: string): void {
   const code = [
@@ -46,14 +47,17 @@ function generateRules(): void {
   writeFormattedFile('rules/index.ts', code);
 }
 
-type RuleOptions = 'error' | ['error', ...any];
+type RuleOptions = 'error' | ['error', ...any] | 'off';
 
 async function generateConfigs(): Promise<void> {
   const { rules } = await import('../packages/plugin/src');
 
   const getRulesConfig = (categoryType: CategoryType, isRecommended: boolean): Record<string, RuleOptions> => {
-    const getRuleOptions = (rule: GraphQLESLintRule): RuleOptions => {
+    const getRuleOptions = (ruleId, rule: GraphQLESLintRule): RuleOptions => {
       const { configOptions } = rule.meta.docs;
+      if (!isRecommended && DISABLED_RULES_FOR_ALL_CONFIG.has(ruleId)) {
+        return 'off';
+      }
       if (!configOptions) {
         return 'error';
       }
@@ -76,7 +80,7 @@ async function generateConfigs(): Promise<void> {
       .sort();
 
     return Object.fromEntries(
-      filteredRules.map(ruleName => [`@graphql-eslint/${ruleName}`, getRuleOptions(rules[ruleName])])
+      filteredRules.map(ruleId => [`@graphql-eslint/${ruleId}`, getRuleOptions(ruleId, rules[ruleId])])
     );
   };
 

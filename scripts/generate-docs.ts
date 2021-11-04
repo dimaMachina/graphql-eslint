@@ -175,12 +175,6 @@ function generateDocs(): void {
         sortedRules
       ),
       BR,
-      `## Further Reading`,
-      BR,
-      `- [Writing Custom Rules](custom-rules.md)`,
-      `- [How the parser works?](parser.md)`,
-      '- [`parserOptions`](parser-options.md)',
-      BR,
     ].join('\n'),
   });
 

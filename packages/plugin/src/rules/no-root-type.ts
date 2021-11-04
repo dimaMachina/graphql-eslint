@@ -44,9 +44,6 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
           `,
         },
       ],
-      configOptions: {
-        schema: [{ disallow: ['subscription'] }]
-      },
     },
     schema: {
       type: 'array',

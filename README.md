@@ -1,8 +1,6 @@
 This project integrates GraphQL and ESLint, for a better developer experience.
 
-<p align="left">
-  <img height="150" src="./logo.png">
-</p>
+<img height="150" src="./logo.png">
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
 
@@ -184,12 +182,14 @@ You can find a complete list of [all available rules here](docs/README.md).
 
 ## Available Configs
 
-| Name                                                                              | Description                                                        |
-| :-------------------------------------------------------------------------------- | :----------------------------------------------------------------- |
-| [`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)         | enables all recommended rules that are aimed at linting schema     |
-| [`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) | enables all recommended rules that are aimed at linting operations |
-| [`schema-all`](packages/plugin/src/configs/schema-all.ts)                         | enables all rules that are aimed at linting schema                 |
-| [`operations-all`](packages/plugin/src/configs/operations-all.ts)                 | enables all rules that are aimed at linting operations             |
+<!-- prettier-ignore-start -->
+|Name|Description|
+|:-:|-|
+|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables all recommended rules|
+|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables all recommended rules|
+|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules (except for the rules that require `parserOptions.operations` option)|
+|[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules|
+<!-- prettier-ignore-end -->
 
 ## Config usage
 
@@ -255,7 +255,11 @@ Please help to vote up if you want to speed up the progress.
 
 ## Further Reading
 
-If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](docs/README.md).
+If you wish to learn more about this project, how the parser works, how to add custom rules and more please refer to the below links:
+
+- [Writing Custom Rules](docs/custom-rules.md)
+- [How the parser works?](docs/parser.md)
+- [`parserOptions`](docs/parser-options.md)
 
 ## Contributions
 
