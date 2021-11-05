@@ -8,7 +8,9 @@ const useSchema = (schema: string): { code: string; parserOptions: ParserOptions
   };
 };
 
-new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
+const ruleTester = new GraphQLRuleTester();
+
+ruleTester.runGraphQLTests('no-unreachable-types', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       scalar A
@@ -118,6 +120,18 @@ new GraphQLRuleTester().runGraphQLTests('no-unreachable-types', rule, {
         me: User
       }
     `),
+    {
+      name: 'directive on schema',
+      ...useSchema(/* GraphQL */ `
+        type Query
+
+        schema @good {
+          query: Query
+        }
+
+        directive @good on SCHEMA
+      `),
+    },
   ],
   invalid: [
     {
