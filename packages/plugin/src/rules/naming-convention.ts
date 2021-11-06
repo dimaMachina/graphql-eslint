@@ -167,11 +167,15 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         properties: {
           types: {
             ...schemaOption,
-            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+            description: `Includes:\n\n${TYPES_KINDS.map(
+              kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`
+            ).join('\n')}`,
           },
           fields: {
             ...schemaOption,
-            description: `Includes:\n\n${FIELDS_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+            description: `Includes:\n\n${FIELDS_KINDS.map(
+              kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`
+            ).join('\n')}`,
           },
           allowLeadingUnderscore: {
             type: 'boolean',
@@ -187,7 +191,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
             description: [
               'May contain the following `ASTNode` names:',
               '',
-              ...ALLOWED_KINDS.map(kind => `- \`${kind}\``),
+              ...ALLOWED_KINDS.map(kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`),
               '',
               "> It's also possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with `ASTNode` name",
               '>',
@@ -265,7 +269,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     };
 
     const checkUnderscore = (node: GraphQLESTreeNode<NameNode>) => {
-      const name = node.value
+      const name = node.value;
       context.report({
         loc: getLocation(node.loc, name),
         message: `${name.startsWith('_') ? 'Leading' : 'Trailing'} underscores are not allowed`,

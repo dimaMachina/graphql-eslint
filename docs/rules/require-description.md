@@ -43,12 +43,12 @@ The schema defines the following properties:
 
 Includes:
 
-- `ObjectTypeDefinition`
-- `InterfaceTypeDefinition`
-- `EnumTypeDefinition`
-- `ScalarTypeDefinition`
-- `InputObjectTypeDefinition`
-- `UnionTypeDefinition`
+- [ObjectTypeDefinition](https://spec.graphql.org/October2021/#ObjectTypeDefinition)
+- [InterfaceTypeDefinition](https://spec.graphql.org/October2021/#InterfaceTypeDefinition)
+- [EnumTypeDefinition](https://spec.graphql.org/October2021/#EnumTypeDefinition)
+- [ScalarTypeDefinition](https://spec.graphql.org/October2021/#ScalarTypeDefinition)
+- [InputObjectTypeDefinition](https://spec.graphql.org/October2021/#InputObjectTypeDefinition)
+- [UnionTypeDefinition](https://spec.graphql.org/October2021/#UnionTypeDefinition)
 
 ### `overrides` (object)
 

@@ -79,7 +79,9 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
         properties: {
           types: {
             type: 'boolean',
-            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+            description: `Includes:\n\n${TYPES_KINDS.map(
+              kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`
+            ).join('\n')}`,
           },
           overrides: {
             type: 'object',

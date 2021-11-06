@@ -39,12 +39,12 @@ The schema defines the following properties:
 
 Includes:
 
-- `ObjectTypeDefinition`
-- `InterfaceTypeDefinition`
-- `EnumTypeDefinition`
-- `ScalarTypeDefinition`
-- `InputObjectTypeDefinition`
-- `UnionTypeDefinition`
+- [ObjectTypeDefinition](https://spec.graphql.org/October2021/#ObjectTypeDefinition)
+- [InterfaceTypeDefinition](https://spec.graphql.org/October2021/#InterfaceTypeDefinition)
+- [EnumTypeDefinition](https://spec.graphql.org/October2021/#EnumTypeDefinition)
+- [ScalarTypeDefinition](https://spec.graphql.org/October2021/#ScalarTypeDefinition)
+- [InputObjectTypeDefinition](https://spec.graphql.org/October2021/#InputObjectTypeDefinition)
+- [UnionTypeDefinition](https://spec.graphql.org/October2021/#UnionTypeDefinition)
 
 The object must be one of the following types:
 
@@ -55,11 +55,11 @@ The object must be one of the following types:
 
 Includes:
 
-- `FieldDefinition`
-- `InputValueDefinition`
-- `VariableDefinition`
-- `Argument`
-- `DirectiveDefinition`
+- [FieldDefinition](https://spec.graphql.org/October2021/#FieldDefinition)
+- [InputValueDefinition](https://spec.graphql.org/October2021/#InputValueDefinition)
+- [VariableDefinition](https://spec.graphql.org/October2021/#VariableDefinition)
+- [Argument](https://spec.graphql.org/October2021/#Argument)
+- [DirectiveDefinition](https://spec.graphql.org/October2021/#DirectiveDefinition)
 
 The object must be one of the following types:
 
@@ -78,20 +78,20 @@ Default: `false`
 
 May contain the following `ASTNode` names:
 
-- `Argument`
-- `DirectiveDefinition`
-- `EnumTypeDefinition`
-- `EnumValueDefinition`
-- `FieldDefinition`
-- `FragmentDefinition`
-- `InputObjectTypeDefinition`
-- `InputValueDefinition`
-- `InterfaceTypeDefinition`
-- `ObjectTypeDefinition`
-- `OperationDefinition`
-- `ScalarTypeDefinition`
-- `UnionTypeDefinition`
-- `VariableDefinition`
+- [Argument](https://spec.graphql.org/October2021/#Argument)
+- [DirectiveDefinition](https://spec.graphql.org/October2021/#DirectiveDefinition)
+- [EnumTypeDefinition](https://spec.graphql.org/October2021/#EnumTypeDefinition)
+- [EnumValueDefinition](https://spec.graphql.org/October2021/#EnumValueDefinition)
+- [FieldDefinition](https://spec.graphql.org/October2021/#FieldDefinition)
+- [FragmentDefinition](https://spec.graphql.org/October2021/#FragmentDefinition)
+- [InputObjectTypeDefinition](https://spec.graphql.org/October2021/#InputObjectTypeDefinition)
+- [InputValueDefinition](https://spec.graphql.org/October2021/#InputValueDefinition)
+- [InterfaceTypeDefinition](https://spec.graphql.org/October2021/#InterfaceTypeDefinition)
+- [ObjectTypeDefinition](https://spec.graphql.org/October2021/#ObjectTypeDefinition)
+- [OperationDefinition](https://spec.graphql.org/October2021/#OperationDefinition)
+- [ScalarTypeDefinition](https://spec.graphql.org/October2021/#ScalarTypeDefinition)
+- [UnionTypeDefinition](https://spec.graphql.org/October2021/#UnionTypeDefinition)
+- [VariableDefinition](https://spec.graphql.org/October2021/#VariableDefinition)
 
 > It's also possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with `ASTNode` name
 >
