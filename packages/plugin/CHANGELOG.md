@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.4.1
+
+### Patch Changes
+
+- dc29c27: update graphql-js peer dependency range
+
 ## 2.4.0
 
 ### Minor Changes
