@@ -1,12 +1,4 @@
-import {
-  ASTNode,
-  ASTVisitor,
-  TypeInfo,
-  GraphQLSchema,
-  visit,
-  isInterfaceType,
-  visitWithTypeInfo,
-} from 'graphql';
+import { ASTNode, ASTVisitor, TypeInfo, GraphQLSchema, visit, isInterfaceType, visitWithTypeInfo } from 'graphql';
 import { SiblingOperations } from './sibling-operations';
 import { getTypeName } from './utils';
 
@@ -50,7 +42,12 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
     NamedType: collect,
   };
 
-  for (const type of [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]) {
+  for (const type of [
+    schema, // visiting SchemaDefinition node
+    schema.getQueryType(),
+    schema.getMutationType(),
+    schema.getSubscriptionType(),
+  ]) {
     if (type) {
       visit(type.astNode, visitor);
     }
