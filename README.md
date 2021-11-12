@@ -80,19 +80,19 @@ To get started, define an override in your ESLint config to tell ESLint to modif
 }
 ```
 
-If your GraphQL definitions are defined only in `.graphql` files and you're only using rules that apply to individual files, you should be good to go :thumbsup:. If you would like to use rules that apply across schema and operation definitions across multiple files, see [here](#using-rules-with-constraints-that-span-the-entire-schema).
+If your GraphQL definitions are defined only in `.graphql` files and you're only using rules that apply to individual files, you should be good to go 👍 . If you would like use a remote schema or use rules that apply across the entire collection of definitions at once, see [here](#using-rules-with-constraints-that-span-the-entire-schema).
 
 #### Tell ESLint to apply this plugin to GraphQL definitions defined in code files.
 
-If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an additional override to extend the functionality of this plugin to the GraphQL schema and operations in those files.
+If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an additional override to extend the functionality of this plugin to the schema and operations in those files.
 
 ```diff
 {
   "overrides": [
-+    {
-+      "files": ["*.tsx", "*.ts", "*.jsx", "*.js"],
-+      "processor": "@graphql-eslint/graphql"
-+    },
++   {
++     "files": ["*.tsx", "*.ts", "*.jsx", "*.js"],
++     "processor": "@graphql-eslint/graphql"
++   },
     {
       "files": ["*.graphql"],
       "parser": "@graphql-eslint/eslint-plugin",
@@ -120,7 +120,7 @@ If you are defining GraphQL schema or GraphQL operations in code files, you'll w
 
 Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause `graphql-eslint/graphql` to extract the schema and operation definitions from these files into virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined for `.graphql` files, via `files: ["*.graphql"]`, to get applied to the definitions defined in your code files.
 
-#### Using rules with constraints that span the entire schema.
+#### Using a remote schema or rules with constraints that span the entire schema.
 
 Some rules require an understanding of the entire schema at once. For example, [no-unreachable-types](https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types) checks that all types are reachable by root-level fields.
 
@@ -128,7 +128,7 @@ To use these rules, you'll need to tell ESLint how to identify the entire set of
 
 If you are using [`graphql-config`](https://graphql-config.com/), you are good to go. `graphql-eslint` integrates with it automatically and will use it to load your schema!
 
-Alternatively, you can define `parserOptions.schema` in the override in your eslint config.
+Alternatively, you can define `parserOptions.schema` in the `*.graphql` override in your ESLint config.
 
 The parser allows you to specify a json file / graphql files(s) / url / raw string to locate your schema (We are using `graphql-tools` to do that). Just add `parserOptions.schema` to your configuration file:
 
@@ -140,9 +140,9 @@ The parser allows you to specify a json file / graphql files(s) / url / raw stri
   "rules": {
     "no-unused-types": ["error"]
   },
-+  "parserOptions": {
-+    "schema": "./schema.graphql"
-+  }
++ "parserOptions": {
++   "schema": "./schema.graphql"
++ }
 }
 ```
 
@@ -160,13 +160,16 @@ To workaround that, we allow you to provide additional information on your Graph
 
 To provide that, we are using `@graphql-tools` loaders to load your sibling operations and fragments, just specify a glob expression(s) that points to your code/.graphql files:
 
-```json
+```diff
 {
   "files": ["*.graphql"],
   "parser": "@graphql-eslint/eslint-plugin",
   "plugins": ["@graphql-eslint"],
+  "rules": {
+    "unique-operation-name": ["error"]
+  },
   "parserOptions": {
-    "operations": ["./src/**/*.graphql"],
++   "operations": ["./src/**/*.graphql"],
     "schema": "./schema.graphql"
   }
 }
