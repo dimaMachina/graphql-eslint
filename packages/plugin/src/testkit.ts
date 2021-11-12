@@ -11,7 +11,7 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
 } & Record<string, any>;
 
 export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'options' | 'parserOptions'> & {
-  name: string;
+  name?: string;
   options?: Options;
   parserOptions?: ParserOptions;
 };

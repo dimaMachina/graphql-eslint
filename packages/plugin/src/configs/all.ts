@@ -26,6 +26,7 @@ export const allConfig = {
     '@graphql-eslint/match-document-filename': 'error',
     '@graphql-eslint/no-deprecated': 'error',
     '@graphql-eslint/no-hashtag-description': 'error',
+    '@graphql-eslint/no-root-type': ['error', { disallow: ['subscription'] }],
     '@graphql-eslint/no-unreachable-types': 'error',
     '@graphql-eslint/no-unused-fields': 'error',
     '@graphql-eslint/require-deprecation-date': 'error',

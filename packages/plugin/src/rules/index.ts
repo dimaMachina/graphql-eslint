@@ -17,6 +17,7 @@ import noCaseInsensitiveEnumValuesDuplicates from './no-case-insensitive-enum-va
 import noDeprecated from './no-deprecated';
 import noHashtagDescription from './no-hashtag-description';
 import noOperationNameSuffix from './no-operation-name-suffix';
+import noRootType from './no-root-type';
 import noUnreachableTypes from './no-unreachable-types';
 import noUnusedFields from './no-unused-fields';
 import requireDeprecationDate from './require-deprecation-date';
@@ -45,6 +46,7 @@ export const rules = {
   'no-deprecated': noDeprecated,
   'no-hashtag-description': noHashtagDescription,
   'no-operation-name-suffix': noOperationNameSuffix,
+  'no-root-type': noRootType,
   'no-unreachable-types': noUnreachableTypes,
   'no-unused-fields': noUnusedFields,
   'require-deprecation-date': requireDeprecationDate,
