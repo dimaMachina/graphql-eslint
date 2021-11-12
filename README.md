@@ -70,10 +70,10 @@ To get started, define an override in your ESLint config to tell ESLint to modif
               "InputObjectTypeDefinition",
               "UnionTypeDefinition",
               "FieldDefinition",
-              "DirectiveDefinition",
-            ],
-          },
-        ],
+              "DirectiveDefinition"
+            ]
+          }
+        ]
       }
     }
   ]
@@ -183,7 +183,7 @@ In order to enable it processing other extensions, add the following section in 
 
 ```json
 {
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"]
 }
 ```
 
@@ -254,15 +254,15 @@ module.exports = {
     {
       files: ['*.js'],
       processor: '@graphql-eslint/graphql',
-      extends: ['plugin:prettier/recommended'],
+      extends: ['plugin:prettier/recommended']
     },
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
       rules: {
-        'prettier/prettier': 'error',
-      },
+        'prettier/prettier': 'error'
+      }
     },
     // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
     // after https://github.com/prettier/eslint-plugin-prettier/pull/415
@@ -270,11 +270,11 @@ module.exports = {
     {
       files: ['*.js/*.graphql'],
       rules: {
-        'prettier/prettier': 'off',
-      },
-    },
-  ],
-};
+        'prettier/prettier': 'off'
+      }
+    }
+  ]
+}
 ```
 
 You can take [`examples/prettier`](examples/prettier/.eslintrc.js) as example.

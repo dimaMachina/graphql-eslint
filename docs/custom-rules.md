@@ -17,22 +17,22 @@ The `graphql-eslint` comes with a TypeScript wrapper for ESLint rules, and provi
 Here's an example for a simple rule that reports on anonymous GraphQL operations:
 
 ```ts
-import { GraphQLESLintRule } from '@graphql-eslint/eslint-plugin';
+import { GraphQLESLintRule } from '@graphql-eslint/eslint-plugin'
 
 const rule: GraphQLESLintRule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        if (node && (!node.name || node.name.value === '')) {
+        if (!node.name || !node.name.value) {
           context.report({
-            node: node,
-            message: `Oops, name is required!`,
-          });
+            node,
+            message: 'Oops, name is required!'
+          })
         }
-      },
-    };
-  },
-};
+      }
+    }
+  }
+}
 ```
 
 So what happens here?
@@ -58,23 +58,23 @@ This is useful if you wish to use other GraphQL tools that works with the origin
 Here's an example for using original `graphql-js` validate method to validate `OperationDefinition`:
 
 ```ts
-import { validate } from 'graphql';
-import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin';
+import { validate } from 'graphql'
+import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
 
 export const rule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        const schema = requireGraphQLSchemaFromContext(context);
+        const schema = requireGraphQLSchemaFromContext(context)
 
         validate(context, schema, {
           kind: Kind.DOCUMENT,
-          definitions: [node.rawNode()],
-        });
-      },
-    };
-  },
-};
+          definitions: [node.rawNode()]
+        })
+      }
+    }
+  }
+}
 ```
 
 ## `TypeInfo` / `GraphQLSchema`
@@ -89,7 +89,7 @@ If you provide GraphQL schema in your ESLint configuration, it will get loaded a
 To mark your ESLint rules as a rule that needs access to GraphQL schema, start by running `requireGraphQLSchemaFromContext` from the plugin package, it will make sure to return a schema, or throw an error for the user about the missing schema.
 
 ```ts
-const schema = requireGraphQLSchemaFromContext(context);
+const schema = requireGraphQLSchemaFromContext(context)
 ```
 
 #### Accessing TypeInfo
@@ -100,23 +100,23 @@ If your plugin requires `typeInfo` in order to operate and run, make sure to cal
 `typeInfo` is provided on every node, based on the type of that node, for example, to access the `GraphQLOutputType` while you are visiting a `SelectionSet` node, you can do:
 
 ```ts
-import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin';
+import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
 
 export const rule = {
   create(context) {
-    requireGraphQLSchemaFromContext(context);
+    requireGraphQLSchemaFromContext(context)
 
     return {
       SelectionSet(node) {
-        const typeInfo = node.typeInfo();
+        const typeInfo = node.typeInfo()
 
         if (typeInfo && typeInfo.gqlType) {
-          console.log(`The GraphQLOutputType is: ${typeInfo.gqlType}`);
+          console.log(`The GraphQLOutputType is: ${typeInfo.gqlType}`)
         }
-      },
-    };
-  },
-};
+      }
+    }
+  }
+}
 ```
 
 The structure of the return value of `.typeInfo()` is [defined here](https://github.com/dotansimha/graphql-eslint/blob/master/packages/plugin/src/estree-parser/converter.ts#L38-L46). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
@@ -128,21 +128,21 @@ To test your rules, you can either use the wrapped `GraphQLRuleTester` from this
 The wrapped `GraphQLRuleTester` provides built-in configured parser, and a schema loader, if you need to test your rule with a loaded schema.
 
 ```ts
-import { GraphQLRuleTester } from '@graphql-eslint/eslint-plugin';
-import { rule } from './my-rule';
+import { GraphQLRuleTester } from '@graphql-eslint/eslint-plugin'
+import { rule } from './my-rule'
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new GraphQLRuleTester()
 
 ruleTester.runGraphQLTests('my-rule', rule, {
   valid: [
     {
-      code: `query something { foo }`,
-    },
+      code: 'query something { foo }'
+    }
   ],
   invalid: [
     {
-      code: `query invalid { foo }`,
-    },
-  ],
-});
+      code: 'query invalid { foo }'
+    }
+  ]
+})
 ```
