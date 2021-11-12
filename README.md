@@ -46,7 +46,11 @@ npm install --save-dev @graphql-eslint/eslint-plugin
 
 ### Configuration
 
-To get started, create an override configuration for your ESLint, while applying it to `.graphql` files (do that even if you are declaring your operations in code files):
+#### Setup ESLint override for `.graphql` files.
+
+_This step is necessary even if you are declaring operations and/or schema in code files._
+
+To get started, define an override in your ESLint config to tell ESLint to modify the way it treats `.graphql` files.
 
 ```json
 {
@@ -63,7 +67,9 @@ To get started, create an override configuration for your ESLint, while applying
 }
 ```
 
-If you are using code files to store your GraphQL schema or your GraphQL operations, you can extend the behaviour of ESLint and extract those, by adding **an additional `override`** that does that extraction processes:
+#### Setup ESLint override for code files that define GraphQL schema or operations.
+
+If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an additional override to extend the functionality of this plugin to the GraphQL schema and operations in those files.
 
 ```json
 {
@@ -83,6 +89,8 @@ If you are using code files to store your GraphQL schema or your GraphQL operati
   ]
 }
 ```
+
+Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause `graphql-eslint/graphql` to extract the schema and operations from these files into virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined for `.graphql` files, via `files: ["*.graphql"]`, to get applied to the schema and operations defined in your code files.
 
 #### Extended linting rules with GraphQL Schema
 
