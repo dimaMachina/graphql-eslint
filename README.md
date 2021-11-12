@@ -6,18 +6,18 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
 
-> Created and maintained by [The Guild](http://the-guild.dev/)
+> Created and maintained by [The Guild](http://the-guild.dev)
 
 ## Key Features
 
-- 🚀 Integrates with ESLint core (as a ESTree parser).
-- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments.
-- 🚀 Lints both GraphQL schema and GraphQL operations.
+- 🚀 Integrates with ESLint core (as a ESTree parser)
+- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
+- 🚀 Lints both GraphQL schema and GraphQL operations
 - 🚀 Extended type info for more advanced usages
-- 🚀 Supports ESLint directives (for example: `disable-next-line`)
-- 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API.
-- 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL operations.
-- 🚀 Integrates with [`graphql-config`](https://graphql-config.com/)
+- 🚀 Supports ESLint directives (for example: `eslint-disable-next-line`)
+- 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API
+- 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL operations
+- 🚀 Integrates with [`graphql-config`](https://graphql-config.com)
 - 🚀 Integrates and visualizes lint issues in popular IDEs (VSCode / WebStorm)
 
 > Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
@@ -42,15 +42,13 @@ Or, with NPM:
 npm install --save-dev @graphql-eslint/eslint-plugin
 ```
 
-> Also, make sure you have `graphql` dependency in your project.
+> Make sure you have `graphql` dependency in your project.
 
 ### Configuration
 
-#### Tell ESLint to apply this plugin to `.graphql` files.
+To get started, define an override in your ESLint config to apply this plugin to `.graphql` files. Add the [rules](docs/README.md) you want applied.
 
-_This step is necessary even if you are declaring operations and/or schema in code files._
-
-To get started, define an override in your ESLint config to tell ESLint to modify the way it treats `.graphql` files. Add the [rules](./docs/README.md) you want applied.
+> 🚨 Important! This step is necessary even if you are declaring operations and/or schema in code files.
 
 ```json
 {
@@ -60,29 +58,16 @@ To get started, define an override in your ESLint config to tell ESLint to modif
       "parser": "@graphql-eslint/eslint-plugin",
       "plugins": ["@graphql-eslint"],
       "rules": {
-        "@graphql-eslint/require-description": [
-          "error",
-          {
-            "on": [
-              "ObjectTypeDefinition",
-              "InterfaceTypeDefinition",
-              "EnumTypeDefinition",
-              "InputObjectTypeDefinition",
-              "UnionTypeDefinition",
-              "FieldDefinition",
-              "DirectiveDefinition",
-            ],
-          },
-        ],
+        "@graphql-eslint/known-type-names": "error"
       }
     }
   ]
 }
 ```
 
-If your GraphQL definitions are defined only in `.graphql` files and you're only using rules that apply to individual files, you should be good to go 👍 . If you would like use a remote schema or use rules that apply across the entire collection of definitions at once, see [here](#using-rules-with-constraints-that-span-the-entire-schema).
+If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that apply to individual files, you should be good to go 👍. If you would like use a remote schema or use rules that apply across the entire collection of definitions at once, see [here](#using-a-remote-schema-or-rules-with-constraints-that-span-the-entire-schema).
 
-#### Tell ESLint to apply this plugin to GraphQL definitions defined in code files.
+#### Tell ESLint to apply this plugin to GraphQL definitions defined in code files
 
 If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an additional override to extend the functionality of this plugin to the schema and operations in those files.
 
@@ -90,7 +75,7 @@ If you are defining GraphQL schema or GraphQL operations in code files, you'll w
 {
   "overrides": [
 +   {
-+     "files": ["*.tsx", "*.ts", "*.jsx", "*.js"],
++     "files": ["*.js"],
 +     "processor": "@graphql-eslint/graphql"
 +   },
     {
@@ -98,35 +83,22 @@ If you are defining GraphQL schema or GraphQL operations in code files, you'll w
       "parser": "@graphql-eslint/eslint-plugin",
       "plugins": ["@graphql-eslint"],
       "rules": {
-        "@graphql-eslint/require-description": [
-          "error",
-          {
-            "on": [
-              "ObjectTypeDefinition",
-              "InterfaceTypeDefinition",
-              "EnumTypeDefinition",
-              "InputObjectTypeDefinition",
-              "UnionTypeDefinition",
-              "FieldDefinition",
-              "DirectiveDefinition",
-            ],
-          },
-        ],
+        "@graphql-eslint/known-type-names": "error"
       }
     }
   ]
 }
 ```
 
-Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause `graphql-eslint/graphql` to extract the schema and operation definitions from these files into virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined for `.graphql` files, via `files: ["*.graphql"]`, to get applied to the definitions defined in your code files.
+Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause `graphql-eslint/graphql` to extract the schema and operation definitions from these files into virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined for `.graphql` files, via `"files": ["*.graphql"]`, to get applied to the definitions defined in your code files.
 
-#### Using a remote schema or rules with constraints that span the entire schema.
+#### Using a remote schema or rules with constraints that span the entire schema
 
 Some rules require an understanding of the entire schema at once. For example, [no-unreachable-types](https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types) checks that all types are reachable by root-level fields.
 
 To use these rules, you'll need to tell ESLint how to identify the entire set of schema definitions.
 
-If you are using [`graphql-config`](https://graphql-config.com/), you are good to go. `graphql-eslint` integrates with it automatically and will use it to load your schema!
+If you are using [`graphql-config`](https://graphql-config.com), you are good to go. `graphql-eslint` integrates with it automatically and will use it to load your schema!
 
 Alternatively, you can define `parserOptions.schema` in the `*.graphql` override in your ESLint config.
 
@@ -138,7 +110,7 @@ The parser allows you to specify a json file / graphql files(s) / url / raw stri
   "parser": "@graphql-eslint/eslint-plugin",
   "plugins": ["@graphql-eslint"],
   "rules": {
-    "no-unused-types": ["error"]
+    "@graphql-eslint/no-unreachable-types": "error"
   },
 + "parserOptions": {
 +   "schema": "./schema.graphql"
@@ -146,19 +118,19 @@ The parser allows you to specify a json file / graphql files(s) / url / raw stri
 }
 ```
 
-> You can find a complete [documentation of the `parserOptions` here](./docs/parser-options.md)
+> You can find a complete [documentation of the `parserOptions` here](docs/parser-options.md).
 
-> Some rules requires type information to operate, it's marked in the docs for each rule!
+> Some rules require type information to operate, it's marked in the docs for each rule!
 
 #### Extended linting rules with siblings operations
 
 While implementing this tool, we had to find solutions for a better integration of the GraphQL ecosystem and ESLint core.
 
-GraphQL operations can be distributed across many files, while ESLint operates on one file at a time. If you are using GraphQL fragments in separate files, some rules might yield incorrect results, due the the missing information.
+GraphQL operations can be distributed across many files, while ESLint operates on one file at a time. If you are using GraphQL fragments in separate files, some rules might yield incorrect results, due the missing information.
 
 To workaround that, we allow you to provide additional information on your GraphQL operations, making it available for rules while doing the actual linting.
 
-To provide that, we are using `@graphql-tools` loaders to load your sibling operations and fragments, just specify a glob expression(s) that points to your code/.graphql files:
+To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments, just specify a glob expression(s) that points to your code/`.graphql` files:
 
 ```diff
 {
@@ -166,10 +138,10 @@ To provide that, we are using `@graphql-tools` loaders to load your sibling oper
   "parser": "@graphql-eslint/eslint-plugin",
   "plugins": ["@graphql-eslint"],
   "rules": {
-    "unique-operation-name": ["error"]
+    "@graphql-eslint/unique-operation-name": "error"
   },
   "parserOptions": {
-+   "operations": ["./src/**/*.graphql"],
++   "operations": "./src/**/*.graphql",
     "schema": "./schema.graphql"
   }
 }
@@ -177,13 +149,13 @@ To provide that, we are using `@graphql-tools` loaders to load your sibling oper
 
 ### VSCode Integration
 
-By default, [ESLint VSCode plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) will not lint files with extensions other then js, jsx, ts, tsx.
+By default, [ESLint VSCode plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) will not lint files with extensions other than `js`, `jsx`, `ts` and `tsx`.
 
 In order to enable it processing other extensions, add the following section in `settings.json` or workspace configuration.
 
 ```json
 {
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"]
 }
 ```
 
@@ -202,13 +174,13 @@ type Query {
 }
 ```
 
-You can also specify specific rules to disable, apply it over the entire file, `next-line` or (current) `line`.
+You can also specify specific rules to disable, apply it over the entire file, `eslint-disable-next-line` or current `eslint-disable-line`.
 
 You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/user-guide/configuring#disabling-rules-with-inline-comments).
 
 ## Available Rules
 
-You can find a complete list of [all available rules here](./docs/README.md)
+You can find a complete list of [all available rules here](docs/README.md).
 
 ## Available Configs
 
@@ -223,19 +195,13 @@ Enable it in your `.eslintrc` file with the `extends` option.
   "overrides": [
     {
       "files": ["*.js"],
-      "processor": "@graphql-eslint/graphql",
-      "rules": {
-        // your rules for JavaScript files
-      }
+      "processor": "@graphql-eslint/graphql"
     },
     {
       "files": ["*.graphql"],
 -     "parser": "@graphql-eslint/eslint-plugin",
 -     "plugins": ["@graphql-eslint"],
-+     "extends": "plugin:@graphql-eslint/recommended", // or plugin:@graphql-eslint/all
-      "rules": {
-        // your rules for GraphQL files
-      }
++     "extends": "plugin:@graphql-eslint/recommended" // or plugin:@graphql-eslint/all
     }
   ]
 }
@@ -243,26 +209,23 @@ Enable it in your `.eslintrc` file with the `extends` option.
 
 ### `prettier` rule
 
-The original `prettier` rule has been removed because `eslint-plugin-prettier` supports `.graphql` files well actually.
-
-All you need to do is like the following for now:
+`eslint-plugin-prettier` supports `.graphql` files. You need to do the following:
 
 ```js
-// .eslintrc.js
 module.exports = {
   overrides: [
     {
       files: ['*.js'],
       processor: '@graphql-eslint/graphql',
-      extends: ['plugin:prettier/recommended'],
+      extends: ['plugin:prettier/recommended']
     },
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
       rules: {
-        'prettier/prettier': 'error',
-      },
+        'prettier/prettier': 'error'
+      }
     },
     // the following is required for `eslint-plugin-prettier@<=3.4.0` temporarily
     // after https://github.com/prettier/eslint-plugin-prettier/pull/415
@@ -270,22 +233,22 @@ module.exports = {
     {
       files: ['*.js/*.graphql'],
       rules: {
-        'prettier/prettier': 'off',
-      },
-    },
-  ],
-};
+        'prettier/prettier': 'off'
+      }
+    }
+  ]
+}
 ```
 
 You can take [`examples/prettier`](examples/prettier/.eslintrc.js) as example.
 
-It could be better to remove the unnecessary `*.js/*.graphql` overrides setting if <https://github.com/prettier/eslint-plugin-prettier/pull/415> will be merged and released.
+It could be better to remove the unnecessary `*.js/*.graphql` override setting if <https://github.com/prettier/eslint-plugin-prettier/pull/415> will be merged and released.
 
 Please help to vote up if you want to speed up the progress.
 
 ## Further Reading
 
-If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](./docs/README.md))
+If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](docs/README.md).
 
 ## Contributions
 
@@ -295,8 +258,8 @@ And if this is your first time contributing to this project, please do read our 
 
 ### Code of Conduct
 
-Help us keep GraphQL ESLint open and inclusive. Please read and follow our [Code of Conduct](https://github.com/the-guild-org/Stack/blob/master/CODE_OF_CONDUCT.md) as adopted from [Contributor Covenant](https://www.contributor-covenant.org/)
+Help us keep GraphQL ESLint open and inclusive. Please read and follow our [Code of Conduct](https://github.com/the-guild-org/Stack/blob/master/CODE_OF_CONDUCT.md) as adopted from [Contributor Covenant](https://contributor-covenant.org).
 
 ## License
 
-Released under the [MIT license](./LICENSE).
+Released under the [MIT license](LICENSE).
