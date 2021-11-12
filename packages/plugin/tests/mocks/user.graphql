@@ -1,4 +1,4 @@
-#import "./user-fields.graphql"
+#import './user-fields-with-nested-fragment.gql'
 
 query User {
   user {
