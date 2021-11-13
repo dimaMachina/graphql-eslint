@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+> 1 | type Query
+    |      ^^^^^ Root type "Query" is forbidden
+`;
+
+exports[` 2`] = `
+> 1 | type Mutation
+    |      ^^^^^^^^ Root type "Mutation" is forbidden
+`;
+
+exports[` 3`] = `
+> 1 | type Subscription
+    |      ^^^^^^^^^^^^ Root type "Subscription" is forbidden
+`;
+
+exports[` 4`] = `
+> 1 | extend type Mutation { foo: ID }
+    |             ^^^^^^^^ Root type "Mutation" is forbidden
+`;
+
+exports[` 5`] = `
+> 1 | type MyMutation
+    |      ^^^^^^^^^^ Root type "MyMutation" is forbidden
+`;

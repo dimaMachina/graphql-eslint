@@ -48,8 +48,8 @@ enum SomeType {
 mutation {
   changeSomething(
     type: OLD # This is deprecated, so you'll get an error
-  ) { 
-    ... 
+  ) {
+    ...
   }
 }
 ```
