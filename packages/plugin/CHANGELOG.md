@@ -1,5 +1,17 @@
 # @graphql-eslint/eslint-plugin
 
+## 2.5.0
+
+### Minor Changes
+
+- 64c302c: feat: add new rule `no-root-type`
+- c837c99: fix false positive case in `no-unreachable-types` rule when directive on root schema is used
+- 1914d6a: fix false positive case in `known-fragment-names` when import nested fragment
+
+### Patch Changes
+
+- 4c29de7: fix: make works graphql-eslint in yarn berry
+
 ## 2.4.1
 
 ### Patch Changes
