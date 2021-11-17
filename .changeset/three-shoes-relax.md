@@ -4,7 +4,7 @@
 
 feat: add new options for `naming-convention` rule
 
-Options for `naming-convention` are changed. New option `types` include the following kinds:
+Options for `naming-convention` are changed. New option `types` includes the following kinds:
 
 - `ObjectTypeDefinition`
 - `InterfaceTypeDefinition`
@@ -13,7 +13,7 @@ Options for `naming-convention` are changed. New option `types` include the foll
 - `InputObjectTypeDefinition`
 - `UnionTypeDefinition`
 
-New option `fields` include the following kinds:
+New option `fields` includes the following kinds:
 
 - `FieldDefinition`
 - `InputValueDefinition`

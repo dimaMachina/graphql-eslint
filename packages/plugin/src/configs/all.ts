@@ -30,7 +30,7 @@ export const allConfig = {
     '@graphql-eslint/no-unreachable-types': 'error',
     '@graphql-eslint/no-unused-fields': 'error',
     '@graphql-eslint/require-deprecation-date': 'error',
-    '@graphql-eslint/require-description': 'error',
+    '@graphql-eslint/require-description': ['error', { types: true, overrides: { DirectiveDefinition: true } }],
     '@graphql-eslint/require-field-of-type-query-in-mutation-result': 'error',
     '@graphql-eslint/require-id-when-available': 'error',
     '@graphql-eslint/selection-set-depth': 'error',

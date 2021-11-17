@@ -153,7 +153,7 @@ export const TYPES_KINDS = [
   Kind.SCALAR_TYPE_DEFINITION,
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
   Kind.UNION_TYPE_DEFINITION,
-];
+] as const;
 
 export enum CaseStyle {
   camelCase = 'camelCase',
