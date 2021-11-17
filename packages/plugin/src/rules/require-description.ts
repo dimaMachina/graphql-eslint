@@ -11,7 +11,7 @@ const ALLOWED_KINDS = [
   Kind.INPUT_VALUE_DEFINITION,
   Kind.ENUM_VALUE_DEFINITION,
   Kind.DIRECTIVE_DEFINITION,
-];
+] as const;
 
 type AllowedKind = typeof ALLOWED_KINDS[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
