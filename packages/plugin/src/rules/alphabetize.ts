@@ -1,5 +1,11 @@
 import {
   Kind,
+  ObjectTypeDefinitionNode,
+  ObjectTypeExtensionNode,
+  InterfaceTypeDefinitionNode,
+  InterfaceTypeExtensionNode,
+  InputObjectTypeDefinitionNode,
+  InputObjectTypeExtensionNode,
   FieldDefinitionNode,
   InputValueDefinitionNode,
   EnumTypeDefinitionNode,
@@ -13,20 +19,31 @@ import {
   DirectiveNode,
   SelectionSetNode,
   FragmentSpreadNode,
-  ASTKindToNode,
 } from 'graphql';
-import { GraphQLESLintRule, ValueOf } from '../types';
+import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 import { getLocation } from '../utils';
 
 const ALPHABETIZE = 'ALPHABETIZE';
 
-const fieldsEnum = [Kind.OBJECT_TYPE_DEFINITION, Kind.INTERFACE_TYPE_DEFINITION, Kind.INPUT_OBJECT_TYPE_DEFINITION];
-const valuesEnum = [Kind.ENUM_TYPE_DEFINITION];
-const selectionsEnum = [Kind.OPERATION_DEFINITION, Kind.FRAGMENT_DEFINITION];
-const variablesEnum = [Kind.OPERATION_DEFINITION];
-const argumentsEnum = [Kind.FIELD_DEFINITION, Kind.FIELD, Kind.DIRECTIVE_DEFINITION, Kind.DIRECTIVE];
+const fieldsEnum: ('ObjectTypeDefinition' | 'InterfaceTypeDefinition' | 'InputObjectTypeDefinition')[] = [
+  Kind.OBJECT_TYPE_DEFINITION,
+  Kind.INTERFACE_TYPE_DEFINITION,
+  Kind.INPUT_OBJECT_TYPE_DEFINITION,
+];
+const valuesEnum: ['EnumTypeDefinition'] = [Kind.ENUM_TYPE_DEFINITION];
+const selectionsEnum: ('OperationDefinition' | 'FragmentDefinition')[] = [
+  Kind.OPERATION_DEFINITION,
+  Kind.FRAGMENT_DEFINITION,
+];
+const variablesEnum: ['OperationDefinition'] = [Kind.OPERATION_DEFINITION];
+const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Directive')[] = [
+  Kind.FIELD_DEFINITION,
+  Kind.FIELD,
+  Kind.DIRECTIVE_DEFINITION,
+  Kind.DIRECTIVE,
+];
 
 type AlphabetizeConfig = [
   {
@@ -249,9 +266,16 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
     const argumentsSelector = opts.arguments?.join(',');
 
     if (fieldsSelector) {
-      type KindToNode = ValueOf<Pick<ASTKindToNode, typeof kinds[number]>>;
-
-      listeners[fieldsSelector] = (node: GraphQLESTreeNode<KindToNode>) => {
+      listeners[fieldsSelector] = (
+        node: GraphQLESTreeNode<
+          | ObjectTypeDefinitionNode
+          | ObjectTypeExtensionNode
+          | InterfaceTypeDefinitionNode
+          | InterfaceTypeExtensionNode
+          | InputObjectTypeDefinitionNode
+          | InputObjectTypeExtensionNode
+        >
+      ) => {
         checkNodes(node.fields);
       };
     }
