@@ -6,7 +6,7 @@ const rule: GraphQLESLintRule = {
   meta: {
     docs: {
       description: `Require all deprecation directives to specify a reason.`,
-      category: 'Best Practices',
+      category: 'Schema',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-deprecation-reason.md`,
       recommended: true,
       examples: [

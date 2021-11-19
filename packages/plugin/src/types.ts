@@ -48,9 +48,11 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   parserServices?: ParserServices;
 };
 
-export type RuleDocsInfo<T> = Rule.RuleMetaData & {
-  docs: {
-    category: 'Best Practices' | 'Stylistic Issues' | 'Validation';
+export type CategoryType = 'Schema' | 'Operations';
+
+export type RuleDocsInfo<T> = {
+  docs: Omit<Rule.RuleMetaData['docs'], 'category'> & {
+    category: CategoryType | CategoryType[];
     requiresSchema?: boolean;
     requiresSiblings?: boolean;
     examples?: {
@@ -58,14 +60,19 @@ export type RuleDocsInfo<T> = Rule.RuleMetaData & {
       code: string;
       usage?: T;
     }[];
-    optionsForConfig?: T;
+    configOptions?:
+      | T
+      | {
+          schema?: T;
+          operations?: T;
+        };
     graphQLJSRuleName?: string;
   };
 };
 
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
-  meta: Rule.RuleMetaData & RuleDocsInfo<Options>;
+  meta: Omit<Rule.RuleMetaData, 'docs'> & RuleDocsInfo<Options>;
 };
 
 export type ValueOf<T> = T[keyof T];

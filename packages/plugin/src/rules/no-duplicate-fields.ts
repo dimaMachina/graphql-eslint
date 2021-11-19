@@ -10,8 +10,9 @@ const rule: GraphQLESLintRule = {
     type: 'suggestion',
     docs: {
       description: `Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.`,
-      category: 'Stylistic Issues',
+      category: 'Operations',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-duplicate-fields.md',
+      recommended: true,
       examples: [
         {
           title: 'Incorrect',

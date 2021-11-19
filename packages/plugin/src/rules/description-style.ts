@@ -1,13 +1,11 @@
 import { GraphQLESLintRule } from '../types';
 import { getLocation } from '../utils';
 
-type DescriptionStyleRuleConfig = [
-  {
-    style: 'inline' | 'block';
-  }
-];
+type DescriptionStyleRuleConfig = {
+  style: 'inline' | 'block';
+};
 
-const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
+const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -34,20 +32,20 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
         },
       ],
       description: 'Require all comments to follow the same style (either block or inline).',
-      category: 'Stylistic Issues',
+      category: 'Schema',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/description-style.md',
+      recommended: true,
     },
     schema: [
       {
         type: 'object',
+        additionalProperties: false,
         properties: {
           style: {
-            type: 'string',
             enum: ['block', 'inline'],
             default: 'inline',
           },
         },
-        additionalProperties: false,
       },
     ],
   },

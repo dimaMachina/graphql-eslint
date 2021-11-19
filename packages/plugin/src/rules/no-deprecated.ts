@@ -7,7 +7,7 @@ const rule: GraphQLESLintRule<[], true> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: 'Operations',
       description: `Enforce that deprecated fields or enum values are not in use by operations.`,
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-deprecated.md`,
       requiresSchema: true,
@@ -73,6 +73,7 @@ const rule: GraphQLESLintRule<[], true> = {
           `,
         },
       ],
+      recommended: true,
     },
     messages: {
       [NO_DEPRECATED]: `This {{ type }} is marked as deprecated in your GraphQL schema {{ reason }}`,

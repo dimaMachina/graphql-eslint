@@ -4,13 +4,7 @@ import { TYPES_KINDS, getLocation } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
-const FIELDS_KINDS = [
-  Kind.FIELD_DEFINITION,
-  Kind.INPUT_VALUE_DEFINITION,
-  Kind.VARIABLE_DEFINITION,
-  Kind.ARGUMENT,
-  Kind.DIRECTIVE_DEFINITION,
-];
+const FIELDS_KINDS = [Kind.FIELD_DEFINITION, Kind.INPUT_VALUE_DEFINITION, Kind.ARGUMENT, Kind.DIRECTIVE_DEFINITION];
 
 const KindToDisplayName = {
   // types
@@ -23,13 +17,13 @@ const KindToDisplayName = {
   // fields
   [Kind.FIELD_DEFINITION]: 'Field',
   [Kind.INPUT_VALUE_DEFINITION]: 'Input property',
-  [Kind.VARIABLE_DEFINITION]: 'Variable',
   [Kind.ARGUMENT]: 'Argument',
   [Kind.DIRECTIVE_DEFINITION]: 'Directive',
   // rest
   [Kind.ENUM_VALUE_DEFINITION]: 'Enumeration value',
   [Kind.OPERATION_DEFINITION]: 'Operation',
   [Kind.FRAGMENT_DEFINITION]: 'Fragment',
+  [Kind.VARIABLE_DEFINITION]: 'Variable',
 };
 
 type AllowedKind = keyof typeof KindToDisplayName;
@@ -76,7 +70,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     type: 'suggestion',
     docs: {
       description: 'Require names to follow specified conventions.',
-      category: 'Best Practices',
+      category: ['Schema', 'Operations'],
       recommended: true,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/naming-convention.md',
       examples: [
@@ -99,37 +93,47 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
           `,
         },
       ],
-      optionsForConfig: [
-        {
-          types: 'PascalCase',
-          fields: 'camelCase',
-          overrides: {
-            EnumValueDefinition: 'UPPER_CASE',
-            OperationDefinition: {
-              style: 'PascalCase',
-              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-            },
-            FragmentDefinition: {
-              style: 'PascalCase',
-              forbiddenPrefixes: ['Fragment'],
-              forbiddenSuffixes: ['Fragment'],
-            },
-            'FieldDefinition[parent.name.value=Query]': {
-              forbiddenPrefixes: ['query', 'get'],
-              forbiddenSuffixes: ['Query'],
-            },
-            'FieldDefinition[parent.name.value=Mutation]': {
-              forbiddenPrefixes: ['mutation'],
-              forbiddenSuffixes: ['Mutation'],
-            },
-            'FieldDefinition[parent.name.value=Subscription]': {
-              forbiddenPrefixes: ['subscription'],
-              forbiddenSuffixes: ['Subscription'],
+      configOptions: {
+        schema: [
+          {
+            types: 'PascalCase',
+            fields: 'camelCase',
+            overrides: {
+              EnumValueDefinition: 'UPPER_CASE',
+              'FieldDefinition[parent.name.value=Query]': {
+                forbiddenPrefixes: ['query', 'get'],
+                forbiddenSuffixes: ['Query'],
+              },
+              'FieldDefinition[parent.name.value=Mutation]': {
+                forbiddenPrefixes: ['mutation'],
+                forbiddenSuffixes: ['Mutation'],
+              },
+              'FieldDefinition[parent.name.value=Subscription]': {
+                forbiddenPrefixes: ['subscription'],
+                forbiddenSuffixes: ['Subscription'],
+              },
             },
           },
-        },
-      ],
+        ],
+        operations: [
+          {
+            overrides: {
+              Argument: 'camelCase',
+              VariableDefinition: 'camelCase',
+              OperationDefinition: {
+                style: 'PascalCase',
+                forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+                forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+              },
+              FragmentDefinition: {
+                style: 'PascalCase',
+                forbiddenPrefixes: ['Fragment'],
+                forbiddenSuffixes: ['Fragment'],
+              },
+            },
+          },
+        ],
+      },
     },
     schema: {
       definitions: {

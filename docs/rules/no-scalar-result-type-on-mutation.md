@@ -1,6 +1,6 @@
 # `no-scalar-result-type-on-mutation`
 
-- Category: `Best Practices`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/no-scalar-result-type-on-mutation`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

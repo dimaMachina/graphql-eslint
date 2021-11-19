@@ -1,7 +1,13 @@
-import { allConfig } from './all';
-import { recommendedConfig } from './recommended';
+import base from './base';
+import schemaRecommendedConfig from './schema-recommended';
+import schemaAllConfig from './schema-all';
+import operationsRecommendedConfig from './operations-recommended';
+import operationsAllConfig from './operations-all';
 
 export const configs = {
-  all: allConfig,
-  recommended: recommendedConfig,
+  base,
+  'schema-recommended': schemaRecommendedConfig,
+  'schema-all': schemaAllConfig,
+  'operations-recommended': operationsRecommendedConfig,
+  'operations-all': operationsAllConfig,
 };

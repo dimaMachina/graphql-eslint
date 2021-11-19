@@ -48,9 +48,13 @@ function generateDocs(): void {
     if (deprecated) {
       blocks.push(`- ❗ DEPRECATED ❗`);
     }
+    const categories = Array.isArray(docs.category) ? docs.category : [docs.category];
     if (docs.recommended) {
+      const configNames = categories.map(category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`);
       blocks.push(
-        `${Icon.RECOMMENDED} The \`"extends": "plugin:@graphql-eslint/recommended"\` property in a configuration file enables this rule.`,
+        `${Icon.RECOMMENDED} The \`"extends": ${configNames.join(
+          '` and `'
+        )}\` property in a configuration file enables this rule.`,
         BR
       );
     }
@@ -64,7 +68,7 @@ function generateDocs(): void {
     const { requiresSchema = false, requiresSiblings = false, graphQLJSRuleName } = docs;
 
     blocks.push(
-      `- Category: \`${docs.category}\``,
+      `- Category: \`${categories.join(' & ')}\``,
       `- Rule name: \`@graphql-eslint/${ruleName}\``,
       `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)`,
       `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)`,
@@ -170,12 +174,6 @@ function generateDocs(): void {
         ],
         sortedRules
       ),
-      BR,
-      `## Further Reading`,
-      BR,
-      `- [Writing Custom Rules](custom-rules.md)`,
-      `- [How the parser works?](parser.md)`,
-      '- [`parserOptions`](parser-options.md)',
       BR,
     ].join('\n'),
   });

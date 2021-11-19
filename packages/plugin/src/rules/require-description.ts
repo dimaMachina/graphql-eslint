@@ -26,7 +26,7 @@ type RequireDescriptionRuleConfig = {
 const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
   meta: {
     docs: {
-      category: 'Best Practices',
+      category: 'Schema',
       description: 'Enforce descriptions in your type definitions.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-description.md',
       examples: [
@@ -55,7 +55,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
           `,
         },
       ],
-      optionsForConfig: [
+      configOptions: [
         {
           types: true,
           overrides: {

@@ -14,7 +14,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: 'Schema',
       description:
         'Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-deprecation-date.md',

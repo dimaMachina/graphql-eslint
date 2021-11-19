@@ -45,21 +45,19 @@ const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Dir
   Kind.DIRECTIVE,
 ];
 
-type AlphabetizeConfig = [
-  {
-    fields?: typeof fieldsEnum;
-    values?: typeof valuesEnum;
-    selections?: typeof selectionsEnum;
-    variables?: typeof variablesEnum;
-    arguments?: typeof argumentsEnum;
-  }
-];
+type AlphabetizeConfig = {
+  fields?: typeof fieldsEnum;
+  values?: typeof valuesEnum;
+  selections?: typeof selectionsEnum;
+  variables?: typeof variablesEnum;
+  arguments?: typeof argumentsEnum;
+};
 
-const rule: GraphQLESLintRule<AlphabetizeConfig> = {
+const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: ['Schema', 'Operations'],
       description:
         'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
@@ -139,15 +137,22 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
           `,
         },
       ],
-      optionsForConfig: [
-        {
-          fields: fieldsEnum,
-          values: valuesEnum,
-          selections: selectionsEnum,
-          variables: variablesEnum,
-          arguments: argumentsEnum,
-        },
-      ],
+      configOptions: {
+        schema: [
+          {
+            fields: fieldsEnum,
+            values: valuesEnum,
+            arguments: argumentsEnum,
+          },
+        ],
+        operations: [
+          {
+            selections: selectionsEnum,
+            variables: variablesEnum,
+            arguments: [Kind.FIELD, Kind.DIRECTIVE],
+          },
+        ],
+      },
     },
     messages: {
       [ALPHABETIZE]: '"{{ currName }}" should be before "{{ prevName }}"',

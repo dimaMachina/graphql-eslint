@@ -11,7 +11,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Validation',
+      category: 'Schema',
       description: 'Disallow using root types for `read-only` or `write-only` schemas.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-root-type.md',
       requiresSchema: true,
@@ -44,7 +44,6 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
           `,
         },
       ],
-      optionsForConfig: [{ disallow: ['subscription'] }],
     },
     schema: {
       type: 'array',
