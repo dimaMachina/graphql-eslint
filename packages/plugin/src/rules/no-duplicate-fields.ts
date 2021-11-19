@@ -3,7 +3,7 @@ import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { getLocation } from '../utils';
 
-const AVOID_DUPLICATE_FIELDS = 'AVOID_DUPLICATE_FIELDS';
+const NO_DUPLICATE_FIELDS = 'NO_DUPLICATE_FIELDS';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -11,7 +11,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       description: `Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.`,
       category: 'Stylistic Issues',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/avoid-duplicate-fields.md',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-duplicate-fields.md',
       examples: [
         {
           title: 'Incorrect',
@@ -56,7 +56,7 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [AVOID_DUPLICATE_FIELDS]: `{{ type }} "{{ fieldName }}" defined multiple times`,
+      [NO_DUPLICATE_FIELDS]: `{{ type }} "{{ fieldName }}" defined multiple times`,
     },
     schema: [],
   },
@@ -72,7 +72,7 @@ const rule: GraphQLESLintRule = {
           loc: getLocation((node.kind === Kind.FIELD && node.alias ? node.alias : node).loc, fieldName, {
             offsetEnd: node.kind === Kind.VARIABLE_DEFINITION ? 0 : 1,
           }),
-          messageId: AVOID_DUPLICATE_FIELDS,
+          messageId: NO_DUPLICATE_FIELDS,
           data: {
             type,
             fieldName,

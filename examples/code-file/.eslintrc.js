@@ -19,7 +19,18 @@ module.exports = {
       },
       rules: {
         '@graphql-eslint/no-anonymous-operations': 'error',
-        '@graphql-eslint/no-operation-name-suffix': 'error',
+        '@graphql-eslint/naming-convention': [
+          'error',
+          {
+            overrides: {
+              OperationDefinition: {
+                style: 'PascalCase',
+                forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+                forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+              },
+            },
+          },
+        ],
       },
     },
   ],

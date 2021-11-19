@@ -20,8 +20,18 @@ module.exports = {
         '@graphql-eslint/require-id-when-available': ['error', { fieldName: '_id' }],
         '@graphql-eslint/unique-fragment-name': 'error',
         '@graphql-eslint/no-anonymous-operations': 'error',
-        '@graphql-eslint/no-operation-name-suffix': 'error',
-        '@graphql-eslint/avoid-operation-name-prefix': ['error', { keywords: ['get'] }],
+        '@graphql-eslint/naming-convention': [
+          'error',
+          {
+            overrides: {
+              OperationDefinition: {
+                style: 'PascalCase',
+                forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+                forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+              },
+            },
+          },
+        ],
         '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
         '@graphql-eslint/require-description': ['error', { overrides: { FieldDefinition: true } }],
       },
