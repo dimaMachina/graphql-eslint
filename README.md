@@ -187,7 +187,7 @@ You can find a complete list of [all available rules here](docs/README.md).
 |:-:|-|
 |[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables all recommended rules|
 |[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables all recommended rules|
-|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules (except for the rules that require `parserOptions.operations` option)|
+|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules, except for those that require `parserOptions.operations` option)|
 |[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules|
 <!-- prettier-ignore-end -->
 

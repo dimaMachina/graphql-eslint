@@ -1,5 +1,7 @@
 # `require-description`
 
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
+
 - Category: `Schema`
 - Rule name: `@graphql-eslint/require-description`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)

@@ -83,11 +83,47 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
           `,
         },
         {
+          title: 'Incorrect',
+          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }],
+          code: /* GraphQL */ `
+            fragment UserFragment on User {
+              # ...
+            }
+          `,
+        },
+        {
+          title: 'Incorrect',
+          usage: [{ 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }],
+          code: /* GraphQL */ `
+            type Query {
+              getUsers: [User!]!
+            }
+          `,
+        },
+        {
           title: 'Correct',
           usage: [{ types: 'PascalCase', fields: 'camelCase' }],
           code: /* GraphQL */ `
             type User {
               firstName: String
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }],
+          code: /* GraphQL */ `
+            fragment UserFields on User {
+              # ...
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }],
+          code: /* GraphQL */ `
+            type Query {
+              users: [User!]!
             }
           `,
         },
@@ -164,14 +200,6 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         type: 'object',
         additionalProperties: false,
         properties: {
-          allowLeadingUnderscore: {
-            type: 'boolean',
-            default: false,
-          },
-          allowTrailingUnderscore: {
-            type: 'boolean',
-            default: false,
-          },
           types: {
             ...schemaOption,
             description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
@@ -189,6 +217,14 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
               },
             ])
           ),
+          allowLeadingUnderscore: {
+            type: 'boolean',
+            default: false,
+          },
+          allowTrailingUnderscore: {
+            type: 'boolean',
+            default: false,
+          },
         },
         patternProperties: {
           [`^(${ALLOWED_KINDS.join('|')})(.+)?$`]: schemaOption,

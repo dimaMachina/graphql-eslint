@@ -21,6 +21,26 @@ type user {
 }
 ```
 
+### Incorrect
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+
+fragment UserFragment on User {
+  # ...
+}
+```
+
+### Incorrect
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+
+type Query {
+  getUsers: [User!]!
+}
+```
+
 ### Correct
 
 ```graphql
@@ -28,6 +48,26 @@ type user {
 
 type User {
   firstName: String
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+
+fragment UserFields on User {
+  # ...
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+
+type Query {
+  users: [User!]!
 }
 ```
 
@@ -40,14 +80,6 @@ type User {
 > Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.
 
 The schema defines the following properties:
-
-### `allowLeadingUnderscore` (boolean)
-
-Default: `false`
-
-### `allowTrailingUnderscore` (boolean)
-
-Default: `false`
 
 ### `types`
 
@@ -204,6 +236,14 @@ The object must be one of the following types:
 
 * `asString`
 * `asObject`
+
+### `allowLeadingUnderscore` (boolean)
+
+Default: `false`
+
+### `allowTrailingUnderscore` (boolean)
+
+Default: `false`
 
 ---
 

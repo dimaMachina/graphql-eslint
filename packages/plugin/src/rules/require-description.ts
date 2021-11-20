@@ -60,6 +60,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
           [Kind.DIRECTIVE_DEFINITION]: true,
         },
       ],
+      recommended: true,
     },
     type: 'suggestion',
     messages: {

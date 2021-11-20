@@ -37,6 +37,7 @@ export default {
     '@graphql-eslint/possible-type-extension': 'error',
     '@graphql-eslint/provided-required-arguments': 'error',
     '@graphql-eslint/require-deprecation-reason': 'error',
+    '@graphql-eslint/require-description': ['error', { types: true, DirectiveDefinition: true }],
     '@graphql-eslint/strict-id-in-types': 'error',
     '@graphql-eslint/unique-directive-names': 'error',
     '@graphql-eslint/unique-directive-names-per-location': 'error',

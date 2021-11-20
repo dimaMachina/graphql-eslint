@@ -39,7 +39,11 @@ Before
       "UnionTypeDefinition": "PascalCase",
       "FieldDefinition": "camelCase",
       "InputValueDefinition": "camelCase",
-      "QueryDefinition": "camelCase"
+      "QueryDefinition": {
+        "forbiddenPrefixes": ["get"]
+      },
+      "leadingUnderscore": "allow",
+      "trailingUnderscore": "allow"
     }
   ]
 }
@@ -54,7 +58,11 @@ After
     {
       "types": "PascalCase",
       "fields": "camelCase",
-      "FieldDefinition[parent.name.value=Query]": "camelCase"
+      "FieldDefinition[parent.name.value=Query]": {
+        "forbiddenPrefixes": ["get"]
+      },
+      "allowLeadingUnderscore": true,
+      "allowTrailingUnderscore": true
     }
   ]
 }
