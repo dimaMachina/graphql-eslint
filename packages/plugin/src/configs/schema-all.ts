@@ -18,7 +18,7 @@ export default {
     '@graphql-eslint/no-scalar-result-type-on-mutation': 'error',
     '@graphql-eslint/no-unused-fields': 'off',
     '@graphql-eslint/require-deprecation-date': 'error',
-    '@graphql-eslint/require-description': ['error', { types: true, overrides: { DirectiveDefinition: true } }],
+    '@graphql-eslint/require-description': ['error', { types: true, DirectiveDefinition: true }],
     '@graphql-eslint/require-field-of-type-query-in-mutation-result': 'error',
   },
 };

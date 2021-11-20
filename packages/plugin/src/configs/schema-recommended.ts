@@ -15,20 +15,18 @@ export default {
       {
         types: 'PascalCase',
         fields: 'camelCase',
-        overrides: {
-          EnumValueDefinition: 'UPPER_CASE',
-          'FieldDefinition[parent.name.value=Query]': {
-            forbiddenPrefixes: ['query', 'get'],
-            forbiddenSuffixes: ['Query'],
-          },
-          'FieldDefinition[parent.name.value=Mutation]': {
-            forbiddenPrefixes: ['mutation'],
-            forbiddenSuffixes: ['Mutation'],
-          },
-          'FieldDefinition[parent.name.value=Subscription]': {
-            forbiddenPrefixes: ['subscription'],
-            forbiddenSuffixes: ['Subscription'],
-          },
+        EnumValueDefinition: 'UPPER_CASE',
+        'FieldDefinition[parent.name.value=Query]': {
+          forbiddenPrefixes: ['query', 'get'],
+          forbiddenSuffixes: ['Query'],
+        },
+        'FieldDefinition[parent.name.value=Mutation]': {
+          forbiddenPrefixes: ['mutation'],
+          forbiddenSuffixes: ['Mutation'],
+        },
+        'FieldDefinition[parent.name.value=Subscription]': {
+          forbiddenPrefixes: ['subscription'],
+          forbiddenSuffixes: ['Subscription'],
         },
       },
     ],

@@ -22,12 +22,10 @@ module.exports = {
         '@graphql-eslint/naming-convention': [
           'error',
           {
-            overrides: {
-              OperationDefinition: {
-                style: 'PascalCase',
-                forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-                forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-              },
+            OperationDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
             },
           },
         ],

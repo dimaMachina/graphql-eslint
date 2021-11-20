@@ -28,11 +28,9 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         {
           types: 'PascalCase',
           fields: 'camelCase',
-          overrides: {
-            EnumValueDefinition: 'UPPER_CASE',
-            OperationDefinition: 'PascalCase',
-            FragmentDefinition: 'PascalCase',
-          },
+          EnumValueDefinition: 'UPPER_CASE',
+          OperationDefinition: 'PascalCase',
+          FragmentDefinition: 'PascalCase',
         },
       ],
     },
@@ -73,7 +71,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
     },
     {
       code: 'enum B { TEST }',
-      options: [{ types: 'PascalCase', overrides: { EnumValueDefinition: 'UPPER_CASE' } }],
+      options: [{ types: 'PascalCase', EnumValueDefinition: 'UPPER_CASE' }],
     },
     {
       code: 'input Test { item: String }',
@@ -86,9 +84,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         {
           types: { style: 'PascalCase' },
           fields: { style: 'camelCase', suffix: 'Field' },
-          overrides: {
-            EnumValueDefinition: { style: 'UPPER_CASE', suffix: '' },
-          },
+          EnumValueDefinition: { style: 'UPPER_CASE', suffix: '' },
         },
       ],
     },
@@ -98,9 +94,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         {
           types: { style: 'PascalCase' },
           fields: { style: 'camelCase', prefix: 'field' },
-          overrides: {
-            EnumValueDefinition: { style: 'UPPER_CASE', prefix: '' },
-          },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: '' },
         },
       ],
     },
@@ -108,16 +102,14 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'type One { fieldA: String } type Query { QUERY_A(id: ID!): String }',
       options: [
         {
-          overrides: {
-            'FieldDefinition[parent.name.value=Query]': { style: 'UPPER_CASE', prefix: 'QUERY' },
-            'FieldDefinition[parent.name.value!=Query]': { style: 'camelCase', prefix: 'field' },
-          },
+          'FieldDefinition[parent.name.value=Query]': { style: 'UPPER_CASE', prefix: 'QUERY' },
+          'FieldDefinition[parent.name.value!=Query]': { style: 'camelCase', prefix: 'field' },
         },
       ],
     },
     {
       code: 'query { foo }',
-      options: [{ overrides: { OperationDefinition: { style: 'PascalCase' } } }],
+      options: [{ OperationDefinition: { style: 'PascalCase' } }],
     },
     '{ test { __typename ok_ } }',
   ],
@@ -137,7 +129,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
     },
     {
       code: 'scalar BSONDecimal',
-      options: [{ overrides: { ScalarTypeDefinition: 'snake_case' } }],
+      options: [{ ScalarTypeDefinition: 'snake_case' }],
       errors: [{ message: 'Scalar "BSONDecimal" should be in snake_case format' }],
     },
     {
@@ -147,10 +139,8 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
           allowLeadingUnderscore: true,
           types: 'PascalCase',
           fields: 'camelCase',
-          overrides: {
-            EnumValueDefinition: 'UPPER_CASE',
-            FragmentDefinition: 'PascalCase',
-          },
+          EnumValueDefinition: 'UPPER_CASE',
+          FragmentDefinition: 'PascalCase',
         },
       ],
       errors: [
@@ -187,10 +177,8 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'enum B { test }',
       options: [
         {
-          overrides: {
-            EnumTypeDefinition: 'camelCase',
-            EnumValueDefinition: 'UPPER_CASE',
-          },
+          EnumTypeDefinition: 'camelCase',
+          EnumValueDefinition: 'UPPER_CASE',
         },
       ],
       errors: [
@@ -211,11 +199,9 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }',
       options: [
         {
-          overrides: {
-            ObjectTypeDefinition: { style: 'camelCase' },
-            FieldDefinition: { style: 'camelCase', suffix: 'AAA' },
-            EnumValueDefinition: { style: 'camelCase', suffix: 'ENUM' },
-          },
+          ObjectTypeDefinition: { style: 'camelCase' },
+          FieldDefinition: { style: 'camelCase', suffix: 'AAA' },
+          EnumValueDefinition: { style: 'camelCase', suffix: 'ENUM' },
         },
       ],
       errors: [
@@ -229,11 +215,9 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }',
       options: [
         {
-          overrides: {
-            ObjectTypeDefinition: { style: 'PascalCase' },
-            FieldDefinition: { style: 'camelCase', prefix: 'Field' },
-            EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM' },
-          },
+          ObjectTypeDefinition: { style: 'PascalCase' },
+          FieldDefinition: { style: 'camelCase', prefix: 'Field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM' },
         },
       ],
       errors: [
@@ -246,17 +230,15 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       code: 'type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }',
       options: [
         {
-          overrides: {
-            ObjectTypeDefinition: { style: 'PascalCase', forbiddenPrefixes: ['On'] },
-            FieldDefinition: {
-              style: 'camelCase',
-              forbiddenPrefixes: ['foo', 'bar'],
-              forbiddenSuffixes: ['Foo'],
-            },
-            'FieldDefinition[parent.name.value=Query]': {
-              style: 'camelCase',
-              forbiddenPrefixes: ['get', 'query'],
-            },
+          ObjectTypeDefinition: { style: 'PascalCase', forbiddenPrefixes: ['On'] },
+          FieldDefinition: {
+            style: 'camelCase',
+            forbiddenPrefixes: ['foo', 'bar'],
+            forbiddenSuffixes: ['Foo'],
+          },
+          'FieldDefinition[parent.name.value=Query]': {
+            style: 'camelCase',
+            forbiddenPrefixes: ['get', 'query'],
           },
         },
       ],
@@ -270,16 +252,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
     },
     {
       code: 'query Foo { foo } query getBar { bar }',
-      options: [
-        {
-          overrides: {
-            OperationDefinition: {
-              style: 'camelCase',
-              forbiddenPrefixes: ['get'],
-            },
-          },
-        },
-      ],
+      options: [{ OperationDefinition: { style: 'camelCase', forbiddenPrefixes: ['get'] } }],
       errors: [
         { message: 'Operation "Foo" should be in camelCase format' },
         { message: 'Operation "getBar" should not have "get" prefix' },

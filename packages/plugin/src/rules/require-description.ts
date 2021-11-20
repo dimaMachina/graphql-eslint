@@ -18,9 +18,8 @@ type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 
 type RequireDescriptionRuleConfig = {
   types?: boolean;
-  overrides?: {
-    [key in AllowedKind]?: boolean;
-  };
+} & {
+  [key in AllowedKind]?: boolean;
 };
 
 const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
@@ -32,7 +31,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
       examples: [
         {
           title: 'Incorrect',
-          usage: [{ types: true, overrides: { FieldDefinition: true } }],
+          usage: [{ types: true, FieldDefinition: true }],
           code: /* GraphQL */ `
             type someTypeName {
               name: String
@@ -41,7 +40,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
         },
         {
           title: 'Correct',
-          usage: [{ types: true, overrides: { FieldDefinition: true } }],
+          usage: [{ types: true, FieldDefinition: true }],
           code: /* GraphQL */ `
             """
             Some type description
@@ -58,9 +57,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
       configOptions: [
         {
           types: true,
-          overrides: {
-            [Kind.DIRECTIVE_DEFINITION]: true,
-          },
+          [Kind.DIRECTIVE_DEFINITION]: true,
         },
       ],
     },
@@ -79,25 +76,26 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
         properties: {
           types: {
             type: 'boolean',
-            description: `Includes:\n\n${TYPES_KINDS.map(
-              kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`
-            ).join('\n')}`,
+            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
-          overrides: {
-            type: 'object',
-            description: 'Configuration for precise `ASTNode`',
-            additionalProperties: false,
-            properties: Object.fromEntries(ALLOWED_KINDS.map(kind => [kind, { type: 'boolean' }])),
-          },
+          ...Object.fromEntries(
+            [...ALLOWED_KINDS].sort().map(kind => [
+              kind,
+              {
+                type: 'boolean',
+                description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
+              },
+            ])
+          ),
         },
       },
     },
   },
   create(context) {
-    const { types, overrides = {} } = context.options[0];
+    const { types, ...restOptions } = context.options[0];
 
     const kinds: Set<string> = new Set(types ? TYPES_KINDS : []);
-    for (const [kind, isEnabled] of Object.entries(overrides)) {
+    for (const [kind, isEnabled] of Object.entries(restOptions)) {
       if (isEnabled) {
         kinds.add(kind);
       } else {

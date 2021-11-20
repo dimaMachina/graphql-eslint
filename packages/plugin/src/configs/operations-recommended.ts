@@ -16,16 +16,14 @@ export default {
     '@graphql-eslint/naming-convention': [
       'error',
       {
-        overrides: {
-          Argument: 'camelCase',
-          VariableDefinition: 'camelCase',
-          OperationDefinition: {
-            style: 'PascalCase',
-            forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-            forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-          },
-          FragmentDefinition: { style: 'PascalCase', forbiddenPrefixes: ['Fragment'], forbiddenSuffixes: ['Fragment'] },
+        Argument: 'camelCase',
+        VariableDefinition: 'camelCase',
+        OperationDefinition: {
+          style: 'PascalCase',
+          forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+          forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
         },
+        FragmentDefinition: { style: 'PascalCase', forbiddenPrefixes: ['Fragment'], forbiddenSuffixes: ['Fragment'] },
       },
     ],
     '@graphql-eslint/no-anonymous-operations': 'error',

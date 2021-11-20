@@ -44,12 +44,10 @@ After
     "error",
     {
       "types": true,
-      "overrides": {
-        "FieldDefinition":  true,
-        "InputValueDefinition": true,
-        "EnumValueDefinition":  true,
-        "DirectiveDefinition": true
-      }
+      "FieldDefinition": true,
+      "InputValueDefinition": true,
+      "EnumValueDefinition": true,
+      "DirectiveDefinition": true
     }
   ]
 }

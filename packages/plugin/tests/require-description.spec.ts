@@ -22,7 +22,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           native
         }
       `,
-      options: [{ overrides: { EnumValueDefinition: true } }],
+      options: [{ EnumValueDefinition: true }],
     },
     {
       code: /* GraphQL */ `
@@ -39,7 +39,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           nin: [BSONDecimal]
         }
       `,
-      options: [{ overrides: { InputValueDefinition: true } }],
+      options: [{ InputValueDefinition: true }],
     },
     {
       code: /* GraphQL */ `
@@ -52,7 +52,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           record: User
         }
       `,
-      options: [{ types: true, overrides: { FieldDefinition: true } }],
+      options: [{ types: true, FieldDefinition: true }],
     },
   ],
   invalid: [
@@ -68,7 +68,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           nin: [BSONDecimal]
         }
       `,
-      options: [{ overrides: { InputValueDefinition: true } }],
+      options: [{ InputValueDefinition: true }],
       errors: 7,
     },
     {
@@ -79,7 +79,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           native
         }
       `,
-      options: [{ overrides: { EnumValueDefinition: true } }],
+      options: [{ EnumValueDefinition: true }],
       errors: [
         { message: 'Description is required for nodes of type "EnumValueDefinition"' },
         { message: 'Description is required for nodes of type "EnumValueDefinition"' },
@@ -97,10 +97,8 @@ ruleTester.runGraphQLTests('require-description', rule, {
       options: [
         {
           types: true,
-          overrides: {
-            ObjectTypeDefinition: false,
-            FieldDefinition: true,
-          },
+          ObjectTypeDefinition: false,
+          FieldDefinition: true,
         },
       ],
       errors: 2,

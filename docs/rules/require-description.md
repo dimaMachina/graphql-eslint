@@ -12,7 +12,7 @@ Enforce descriptions in your type definitions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-description: ['error', { types: true, overrides: { FieldDefinition: true } }]
+# eslint @graphql-eslint/require-description: ['error', { types: true, FieldDefinition: true }]
 
 type someTypeName {
   name: String
@@ -22,7 +22,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-description: ['error', { types: true, overrides: { FieldDefinition: true } }]
+# eslint @graphql-eslint/require-description: ['error', { types: true, FieldDefinition: true }]
 
 """
 Some type description
@@ -43,38 +43,52 @@ The schema defines the following properties:
 
 Includes:
 
-- [ObjectTypeDefinition](https://spec.graphql.org/October2021/#ObjectTypeDefinition)
-- [InterfaceTypeDefinition](https://spec.graphql.org/October2021/#InterfaceTypeDefinition)
-- [EnumTypeDefinition](https://spec.graphql.org/October2021/#EnumTypeDefinition)
-- [ScalarTypeDefinition](https://spec.graphql.org/October2021/#ScalarTypeDefinition)
-- [InputObjectTypeDefinition](https://spec.graphql.org/October2021/#InputObjectTypeDefinition)
-- [UnionTypeDefinition](https://spec.graphql.org/October2021/#UnionTypeDefinition)
+- `ObjectTypeDefinition`
+- `InterfaceTypeDefinition`
+- `EnumTypeDefinition`
+- `ScalarTypeDefinition`
+- `InputObjectTypeDefinition`
+- `UnionTypeDefinition`
 
-### `overrides` (object)
+### `DirectiveDefinition` (boolean)
 
-Configuration for precise `ASTNode`
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
 
-Properties of the `overrides` object:
+### `EnumTypeDefinition` (boolean)
 
-#### `ObjectTypeDefinition` (boolean)
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
 
-#### `InterfaceTypeDefinition` (boolean)
+### `EnumValueDefinition` (boolean)
 
-#### `EnumTypeDefinition` (boolean)
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
 
-#### `ScalarTypeDefinition` (boolean)
+### `FieldDefinition` (boolean)
 
-#### `InputObjectTypeDefinition` (boolean)
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
 
-#### `UnionTypeDefinition` (boolean)
+### `InputObjectTypeDefinition` (boolean)
 
-#### `FieldDefinition` (boolean)
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
 
-#### `InputValueDefinition` (boolean)
+### `InputValueDefinition` (boolean)
 
-#### `EnumValueDefinition` (boolean)
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
 
-#### `DirectiveDefinition` (boolean)
+### `InterfaceTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
+
+### `ObjectTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+
+### `ScalarTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
+
+### `UnionTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
 
 ## Resources
 

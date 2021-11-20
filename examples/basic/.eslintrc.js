@@ -23,17 +23,15 @@ module.exports = {
         '@graphql-eslint/naming-convention': [
           'error',
           {
-            overrides: {
-              OperationDefinition: {
-                style: 'PascalCase',
-                forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-                forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-              },
+            OperationDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
             },
           },
         ],
         '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
-        '@graphql-eslint/require-description': ['error', { overrides: { FieldDefinition: true } }],
+        '@graphql-eslint/require-description': ['error', { FieldDefinition: true }],
       },
     },
   ],

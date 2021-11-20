@@ -58,9 +58,8 @@ type NamingConventionRuleConfig = {
   allowTrailingUnderscore?: boolean;
   types?: Options;
   fields?: Options;
-  overrides?: {
-    [key in `${AllowedKind}${string}`]?: Options;
-  };
+} & {
+  [key in `${AllowedKind}${string}`]?: Options;
 };
 
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
@@ -98,38 +97,34 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
           {
             types: 'PascalCase',
             fields: 'camelCase',
-            overrides: {
-              EnumValueDefinition: 'UPPER_CASE',
-              'FieldDefinition[parent.name.value=Query]': {
-                forbiddenPrefixes: ['query', 'get'],
-                forbiddenSuffixes: ['Query'],
-              },
-              'FieldDefinition[parent.name.value=Mutation]': {
-                forbiddenPrefixes: ['mutation'],
-                forbiddenSuffixes: ['Mutation'],
-              },
-              'FieldDefinition[parent.name.value=Subscription]': {
-                forbiddenPrefixes: ['subscription'],
-                forbiddenSuffixes: ['Subscription'],
-              },
+            EnumValueDefinition: 'UPPER_CASE',
+            'FieldDefinition[parent.name.value=Query]': {
+              forbiddenPrefixes: ['query', 'get'],
+              forbiddenSuffixes: ['Query'],
+            },
+            'FieldDefinition[parent.name.value=Mutation]': {
+              forbiddenPrefixes: ['mutation'],
+              forbiddenSuffixes: ['Mutation'],
+            },
+            'FieldDefinition[parent.name.value=Subscription]': {
+              forbiddenPrefixes: ['subscription'],
+              forbiddenSuffixes: ['Subscription'],
             },
           },
         ],
         operations: [
           {
-            overrides: {
-              Argument: 'camelCase',
-              VariableDefinition: 'camelCase',
-              OperationDefinition: {
-                style: 'PascalCase',
-                forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-                forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-              },
-              FragmentDefinition: {
-                style: 'PascalCase',
-                forbiddenPrefixes: ['Fragment'],
-                forbiddenSuffixes: ['Fragment'],
-              },
+            Argument: 'camelCase',
+            VariableDefinition: 'camelCase',
+            OperationDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+            },
+            FragmentDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Fragment'],
+              forbiddenSuffixes: ['Fragment'],
             },
           },
         ],
@@ -169,18 +164,6 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         type: 'object',
         additionalProperties: false,
         properties: {
-          types: {
-            ...schemaOption,
-            description: `Includes:\n\n${TYPES_KINDS.map(
-              kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`
-            ).join('\n')}`,
-          },
-          fields: {
-            ...schemaOption,
-            description: `Includes:\n\n${FIELDS_KINDS.map(
-              kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`
-            ).join('\n')}`,
-          },
           allowLeadingUnderscore: {
             type: 'boolean',
             default: false,
@@ -189,37 +172,47 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
             type: 'boolean',
             default: false,
           },
-          overrides: {
-            type: 'object',
-            additionalProperties: false,
-            description: [
-              'May contain the following `ASTNode` names:',
-              '',
-              ...ALLOWED_KINDS.map(kind => `- [${kind}](https://spec.graphql.org/October2021/#${kind})`),
-              '',
-              "> It's also possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with `ASTNode` name",
-              '>',
-              '> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`',
-            ].join('\n'),
-            patternProperties: {
-              [`^(${ALLOWED_KINDS.join('|')})(.+)?$`]: schemaOption,
-            },
+          types: {
+            ...schemaOption,
+            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
+          fields: {
+            ...schemaOption,
+            description: `Includes:\n\n${FIELDS_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+          },
+          ...Object.fromEntries(
+            ALLOWED_KINDS.map(kind => [
+              kind,
+              {
+                ...schemaOption,
+                description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
+              },
+            ])
+          ),
         },
+        patternProperties: {
+          [`^(${ALLOWED_KINDS.join('|')})(.+)?$`]: schemaOption,
+        },
+        description: [
+          "> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.",
+          '>',
+          '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
+          '>',
+          '> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.',
+        ].join('\n'),
       },
     },
   },
   create(context) {
-    const options: NamingConventionRuleConfig = {
-      overrides: {},
-      ...context.options[0],
-    };
+    const options = context.options[0] || {};
+
+    const { allowLeadingUnderscore, allowTrailingUnderscore, types, fields, ...restOptions } = options;
 
     function normalisePropertyOption(kind: string): PropertySchema {
-      let style: Options = options.overrides[kind];
+      let style: Options = options[kind];
 
       if (!style) {
-        style = TYPES_KINDS.includes(kind as any) ? options.types : options.fields;
+        style = TYPES_KINDS.includes(kind as any) ? types : fields;
       }
       return typeof style === 'object' ? style : { style };
     }
@@ -242,10 +235,10 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
 
       function getErrorMessage(): string | void {
         let name = nodeName;
-        if (options.allowLeadingUnderscore) {
+        if (allowLeadingUnderscore) {
           name = name.replace(/^_*/, '');
         }
-        if (options.allowTrailingUnderscore) {
+        if (allowTrailingUnderscore) {
           name = name.replace(/_*$/, '');
         }
         if (prefix && !name.startsWith(prefix)) {
@@ -282,17 +275,15 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
 
     const listeners: GraphQLESLintRuleListener = {};
 
-    if (!options.allowLeadingUnderscore) {
+    if (!allowLeadingUnderscore) {
       listeners['Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
     }
-    if (!options.allowTrailingUnderscore) {
+    if (!allowTrailingUnderscore) {
       listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
     }
 
     const selectors = new Set(
-      [options.types && TYPES_KINDS, options.fields && FIELDS_KINDS, Object.keys(options.overrides)]
-        .flat()
-        .filter(Boolean)
+      [types && TYPES_KINDS, fields && FIELDS_KINDS, Object.keys(restOptions)].flat().filter(Boolean)
     );
 
     for (const selector of selectors) {

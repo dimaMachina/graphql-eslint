@@ -33,18 +33,32 @@ type User {
 
 ## Config Schema
 
+> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.
+>
+> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.
+>
+> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.
+
 The schema defines the following properties:
+
+### `allowLeadingUnderscore` (boolean)
+
+Default: `false`
+
+### `allowTrailingUnderscore` (boolean)
+
+Default: `false`
 
 ### `types`
 
 Includes:
 
-- [ObjectTypeDefinition](https://spec.graphql.org/October2021/#ObjectTypeDefinition)
-- [InterfaceTypeDefinition](https://spec.graphql.org/October2021/#InterfaceTypeDefinition)
-- [EnumTypeDefinition](https://spec.graphql.org/October2021/#EnumTypeDefinition)
-- [ScalarTypeDefinition](https://spec.graphql.org/October2021/#ScalarTypeDefinition)
-- [InputObjectTypeDefinition](https://spec.graphql.org/October2021/#InputObjectTypeDefinition)
-- [UnionTypeDefinition](https://spec.graphql.org/October2021/#UnionTypeDefinition)
+- `ObjectTypeDefinition`
+- `InterfaceTypeDefinition`
+- `EnumTypeDefinition`
+- `ScalarTypeDefinition`
+- `InputObjectTypeDefinition`
+- `UnionTypeDefinition`
 
 The object must be one of the following types:
 
@@ -55,50 +69,136 @@ The object must be one of the following types:
 
 Includes:
 
-- [FieldDefinition](https://spec.graphql.org/October2021/#FieldDefinition)
-- [InputValueDefinition](https://spec.graphql.org/October2021/#InputValueDefinition)
-- [Argument](https://spec.graphql.org/October2021/#Argument)
-- [DirectiveDefinition](https://spec.graphql.org/October2021/#DirectiveDefinition)
+- `FieldDefinition`
+- `InputValueDefinition`
+- `Argument`
+- `DirectiveDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `allowLeadingUnderscore` (boolean)
+### `Argument`
 
-Default: `false`
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#Argument).
 
-### `allowTrailingUnderscore` (boolean)
+The object must be one of the following types:
 
-Default: `false`
+* `asString`
+* `asObject`
 
-### `overrides` (object)
+### `DirectiveDefinition`
 
-May contain the following `ASTNode` names:
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
 
-- [Argument](https://spec.graphql.org/October2021/#Argument)
-- [DirectiveDefinition](https://spec.graphql.org/October2021/#DirectiveDefinition)
-- [EnumTypeDefinition](https://spec.graphql.org/October2021/#EnumTypeDefinition)
-- [EnumValueDefinition](https://spec.graphql.org/October2021/#EnumValueDefinition)
-- [FieldDefinition](https://spec.graphql.org/October2021/#FieldDefinition)
-- [FragmentDefinition](https://spec.graphql.org/October2021/#FragmentDefinition)
-- [InputObjectTypeDefinition](https://spec.graphql.org/October2021/#InputObjectTypeDefinition)
-- [InputValueDefinition](https://spec.graphql.org/October2021/#InputValueDefinition)
-- [InterfaceTypeDefinition](https://spec.graphql.org/October2021/#InterfaceTypeDefinition)
-- [ObjectTypeDefinition](https://spec.graphql.org/October2021/#ObjectTypeDefinition)
-- [OperationDefinition](https://spec.graphql.org/October2021/#OperationDefinition)
-- [ScalarTypeDefinition](https://spec.graphql.org/October2021/#ScalarTypeDefinition)
-- [UnionTypeDefinition](https://spec.graphql.org/October2021/#UnionTypeDefinition)
-- [VariableDefinition](https://spec.graphql.org/October2021/#VariableDefinition)
+The object must be one of the following types:
 
-> It's also possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with `ASTNode` name
->
-> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`
+* `asString`
+* `asObject`
 
-Pattern properties of the `overrides` object:
+### `EnumTypeDefinition`
 
-#### `^(Argument|DirectiveDefinition|EnumTypeDefinition|EnumValueDefinition|FieldDefinition|FragmentDefinition|InputObjectTypeDefinition|InputValueDefinition|InterfaceTypeDefinition|ObjectTypeDefinition|OperationDefinition|ScalarTypeDefinition|UnionTypeDefinition|VariableDefinition)(.+)?$`
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `EnumValueDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `FieldDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `FragmentDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FragmentDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `InputObjectTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `InputValueDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `InterfaceTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `ObjectTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `OperationDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `ScalarTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `UnionTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `VariableDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#VariableDefinition).
 
 The object must be one of the following types:
 

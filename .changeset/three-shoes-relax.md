@@ -54,9 +54,7 @@ After
     {
       "types": "PascalCase",
       "fields": "camelCase",
-      "overrides": {
-        "FieldDefinition[parent.name.value=Query]": "camelCase"
-      }
+      "FieldDefinition[parent.name.value=Query]": "camelCase"
     }
   ]
 }
