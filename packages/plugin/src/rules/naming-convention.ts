@@ -4,8 +4,6 @@ import { TYPES_KINDS, getLocation } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
-const FIELDS_KINDS = [Kind.FIELD_DEFINITION, Kind.INPUT_VALUE_DEFINITION, Kind.ARGUMENT, Kind.DIRECTIVE_DEFINITION];
-
 const KindToDisplayName = {
   // types
   [Kind.OBJECT_TYPE_DEFINITION]: 'Type',
@@ -57,7 +55,6 @@ type NamingConventionRuleConfig = {
   allowLeadingUnderscore?: boolean;
   allowTrailingUnderscore?: boolean;
   types?: Options;
-  fields?: Options;
 } & {
   [key in `${AllowedKind}${string}`]?: Options;
 };
@@ -75,7 +72,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       examples: [
         {
           title: 'Incorrect',
-          usage: [{ types: 'PascalCase', fields: 'camelCase' }],
+          usage: [{ types: 'PascalCase', FieldDefinition: 'camelCase' }],
           code: /* GraphQL */ `
             type user {
               first_name: String!
@@ -102,7 +99,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         },
         {
           title: 'Correct',
-          usage: [{ types: 'PascalCase', fields: 'camelCase' }],
+          usage: [{ types: 'PascalCase', FieldDefinition: 'camelCase' }],
           code: /* GraphQL */ `
             type User {
               firstName: String
@@ -132,7 +129,10 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         schema: [
           {
             types: 'PascalCase',
-            fields: 'camelCase',
+            FieldDefinition: 'camelCase',
+            InputValueDefinition: 'camelCase',
+            Argument: 'camelCase',
+            DirectiveDefinition: 'camelCase',
             EnumValueDefinition: 'UPPER_CASE',
             'FieldDefinition[parent.name.value=Query]': {
               forbiddenPrefixes: ['query', 'get'],
@@ -203,10 +203,6 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
             ...schemaOption,
             description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
-          fields: {
-            ...schemaOption,
-            description: `Includes:\n\n${FIELDS_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
-          },
           ...Object.fromEntries(
             ALLOWED_KINDS.map(kind => [
               kind,
@@ -240,15 +236,10 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
   },
   create(context) {
     const options = context.options[0] || {};
-
-    const { allowLeadingUnderscore, allowTrailingUnderscore, types, fields, ...restOptions } = options;
+    const { allowLeadingUnderscore, allowTrailingUnderscore, types, ...restOptions } = options;
 
     function normalisePropertyOption(kind: string): PropertySchema {
-      let style: Options = options[kind];
-
-      if (!style) {
-        style = TYPES_KINDS.includes(kind as any) ? types : fields;
-      }
+      const style: Options = restOptions[kind] || types;
       return typeof style === 'object' ? style : { style };
     }
 
@@ -317,14 +308,11 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
     }
 
-    const selectors = new Set(
-      [types && TYPES_KINDS, fields && FIELDS_KINDS, Object.keys(restOptions)].flat().filter(Boolean)
-    );
+    const selectors = new Set([types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean));
 
     for (const selector of selectors) {
       listeners[selector] = checkNode(selector);
     }
-
     return listeners;
   },
 };

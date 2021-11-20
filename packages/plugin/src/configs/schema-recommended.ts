@@ -14,7 +14,10 @@ export default {
       'error',
       {
         types: 'PascalCase',
-        fields: 'camelCase',
+        FieldDefinition: 'camelCase',
+        InputValueDefinition: 'camelCase',
+        Argument: 'camelCase',
+        DirectiveDefinition: 'camelCase',
         EnumValueDefinition: 'UPPER_CASE',
         'FieldDefinition[parent.name.value=Query]': {
           forbiddenPrefixes: ['query', 'get'],

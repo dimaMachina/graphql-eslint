@@ -14,7 +14,7 @@ Require names to follow specified conventions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', fields: 'camelCase' }]
+# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', FieldDefinition: 'camelCase' }]
 
 type user {
   first_name: String!
@@ -44,7 +44,7 @@ type Query {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', fields: 'camelCase' }]
+# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', FieldDefinition: 'camelCase' }]
 
 type User {
   firstName: String
@@ -91,20 +91,6 @@ Includes:
 - `ScalarTypeDefinition`
 - `InputObjectTypeDefinition`
 - `UnionTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `fields`
-
-Includes:
-
-- `FieldDefinition`
-- `InputValueDefinition`
-- `Argument`
-- `DirectiveDefinition`
 
 The object must be one of the following types:
 

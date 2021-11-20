@@ -180,6 +180,10 @@ You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/u
 
 You can find a complete list of [all available rules here](docs/README.md).
 
+## Deprecated Rules
+
+See [docs/deprecated-rules.md](docs/deprecated-rules.md).
+
 ## Available Configs
 
 <!-- prettier-ignore-start -->

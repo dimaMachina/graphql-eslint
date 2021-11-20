@@ -13,15 +13,13 @@ Options for `naming-convention` are changed. New option `types` includes the fol
 - `InputObjectTypeDefinition`
 - `UnionTypeDefinition`
 
-New option `fields` includes the following kinds:
+Added new options:
 
-- `FieldDefinition`
-- `InputValueDefinition`
-- `VariableDefinition` (new in v3)
-- `Argument` (new in v3)
-- `DirectiveDefinition` (new in v3)
+- `Argument`
+- `DirectiveDefinition`
+- `VariableDefinition`
 
-`QueryDefinition` option is removed in favor of `AST` specific
+Option `QueryDefinition` was removed in favor of `AST` specific
 selector `FieldDefinition[parent.name.value=Query]`.
 
 Before
@@ -57,7 +55,8 @@ After
     "error",
     {
       "types": "PascalCase",
-      "fields": "camelCase",
+      "FieldDefinition": "camelCase",
+      "InputValueDefinition": "camelCase",
       "FieldDefinition[parent.name.value=Query]": {
         "forbiddenPrefixes": ["get"]
       },

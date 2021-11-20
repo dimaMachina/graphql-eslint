@@ -27,7 +27,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       options: [
         {
           types: 'PascalCase',
-          fields: 'camelCase',
+          VariableDefinition: 'camelCase',
           EnumValueDefinition: 'UPPER_CASE',
           OperationDefinition: 'PascalCase',
           FragmentDefinition: 'PascalCase',
@@ -57,7 +57,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
           allowLeadingUnderscore: true,
           allowTrailingUnderscore: true,
           types: 'PascalCase',
-          fields: 'camelCase',
+          FieldDefinition: 'camelCase',
         },
       ],
     },
@@ -75,7 +75,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
     },
     {
       code: 'input Test { item: String }',
-      options: [{ types: 'PascalCase', fields: 'camelCase' }],
+      options: [{ types: 'PascalCase', InputValueDefinition: 'camelCase' }],
     },
     'input test { item: String } enum B { Test } interface A { i: String } fragment PictureFragment on Picture { uri } scalar Hello',
     {
@@ -83,7 +83,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       options: [
         {
           types: { style: 'PascalCase' },
-          fields: { style: 'camelCase', suffix: 'Field' },
+          FieldDefinition: { style: 'camelCase', suffix: 'Field' },
           EnumValueDefinition: { style: 'UPPER_CASE', suffix: '' },
         },
       ],
@@ -93,8 +93,8 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
       options: [
         {
           types: { style: 'PascalCase' },
-          fields: { style: 'camelCase', prefix: 'field' },
-          EnumValueDefinition: { style: 'UPPER_CASE', prefix: '' },
+          FieldDefinition: { style: 'camelCase', prefix: 'field' },
+          EnumValueDefinition: { style: 'UPPER_CASE', prefix: 'ENUM_VALUE_' },
         },
       ],
     },
@@ -116,7 +116,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
   invalid: [
     {
       code: 'type b { test: String }',
-      options: [{ types: 'PascalCase', fields: 'PascalCase' }],
+      options: [{ types: 'PascalCase', FieldDefinition: 'PascalCase' }],
       errors: [
         { message: 'Type "b" should be in PascalCase format' },
         { message: 'Field "test" should be in PascalCase format' },
@@ -138,7 +138,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         {
           allowLeadingUnderscore: true,
           types: 'PascalCase',
-          fields: 'camelCase',
+          InputValueDefinition: 'camelCase',
           EnumValueDefinition: 'UPPER_CASE',
           FragmentDefinition: 'PascalCase',
         },
@@ -188,7 +188,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
     },
     {
       code: 'input test { _Value: String }',
-      options: [{ types: 'PascalCase', fields: 'snake_case' }],
+      options: [{ types: 'PascalCase', InputValueDefinition: 'snake_case' }],
       errors: [
         { message: 'Input type "test" should be in PascalCase format' },
         { message: 'Input property "_Value" should be in snake_case format' },
