@@ -44,7 +44,7 @@ This element must be one of the following enum values:
 - `block`
 - `inline`
 
-Default: `"inline"`
+Default: `"block"`
 
 ## Resources
 

@@ -33,15 +33,16 @@ export const BLOCK_SDL = /* GraphQL */ `
 
 ruleTester.runGraphQLTests('description-style', rule, {
   valid: [
+    BLOCK_SDL,
     {
-      code: BLOCK_SDL,
-      options: [{ style: 'block' }],
+      code: INLINE_SDL,
+      options: [{ style: 'inline' }],
     },
-    INLINE_SDL,
   ],
   invalid: [
     {
       code: BLOCK_SDL,
+      options: [{ style: 'inline' }],
       errors: 3,
     },
     {
