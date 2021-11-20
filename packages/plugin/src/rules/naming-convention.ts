@@ -150,7 +150,6 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         ],
         operations: [
           {
-            Argument: 'camelCase',
             VariableDefinition: 'camelCase',
             OperationDefinition: {
               style: 'PascalCase',

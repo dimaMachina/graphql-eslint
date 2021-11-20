@@ -16,7 +16,6 @@ export default {
     '@graphql-eslint/naming-convention': [
       'error',
       {
-        Argument: 'camelCase',
         VariableDefinition: 'camelCase',
         OperationDefinition: {
           style: 'PascalCase',

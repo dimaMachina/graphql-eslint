@@ -294,6 +294,7 @@ ruleTester.runGraphQLTests('naming-convention', rule, {
         query TestQuery { test }
         query QueryTest { test }
         query GetQuery { test }
+        query Test { test(CONTROLLED_BY_SCHEMA: 0) }
 
         mutation TestMutation { test }
         mutation MutationTest { test }

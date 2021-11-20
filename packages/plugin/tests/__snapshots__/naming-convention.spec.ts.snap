@@ -30351,16 +30351,17 @@ exports[` 59`] = `
      |               ^^^^^^^^^ Operation "TestQuery" should not have "Query" suffix
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 60`] = `
@@ -30369,16 +30370,17 @@ exports[` 60`] = `
 >  3 |         query QueryTest { test }
      |               ^^^^^^^^^ Operation "QueryTest" should not have "Query" prefix
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 61`] = `
@@ -30387,16 +30389,17 @@ exports[` 61`] = `
    3 |         query QueryTest { test }
 >  4 |         query GetQuery { test }
      |               ^^^^^^^^ Operation "GetQuery" should not have "Get" prefix
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 62`] = `
@@ -30404,17 +30407,18 @@ exports[` 62`] = `
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
->  6 |         mutation TestMutation { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+>  7 |         mutation TestMutation { test }
      |                  ^^^^^^^^^^^^ Operation "TestMutation" should not have "Mutation" suffix
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 63`] = `
@@ -30422,17 +30426,18 @@ exports[` 63`] = `
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
->  7 |         mutation MutationTest { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+>  8 |         mutation MutationTest { test }
      |                  ^^^^^^^^^^^^ Operation "MutationTest" should not have "Mutation" prefix
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 64`] = `
@@ -30440,17 +30445,18 @@ exports[` 64`] = `
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
->  9 |         subscription TestSubscription { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+> 10 |         subscription TestSubscription { test }
      |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 65`] = `
@@ -30458,17 +30464,18 @@ exports[` 65`] = `
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-> 10 |         subscription SubscriptionTest { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+> 11 |         subscription SubscriptionTest { test }
      |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
-  11 |
-  12 |         fragment TestFragment on Test { id }
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 66`] = `
@@ -30476,17 +30483,18 @@ exports[` 66`] = `
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-> 12 |         fragment TestFragment on Test { id }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+> 13 |         fragment TestFragment on Test { id }
      |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
-  13 |         fragment FragmentTest on Test { id }
-  14 |       
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
 `;
 
 exports[` 67`] = `
@@ -30494,17 +30502,18 @@ exports[` 67`] = `
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
    4 |         query GetQuery { test }
-   5 |
-   6 |         mutation TestMutation { test }
-   7 |         mutation MutationTest { test }
-   8 |
-   9 |         subscription TestSubscription { test }
-  10 |         subscription SubscriptionTest { test }
-  11 |
-  12 |         fragment TestFragment on Test { id }
-> 13 |         fragment FragmentTest on Test { id }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+> 14 |         fragment FragmentTest on Test { id }
      |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not have "Fragment" prefix
-  14 |       
+  15 |       
 `;
 
 exports[` 68`] = `
