@@ -5,11 +5,11 @@
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Disallow using root types for `read-only` or `write-only` schemas.
+Disallow using root types `mutation` and/or `subscription`.
 
 ## Usage Examples
 
-### Incorrect (`read-only` schema)
+### Incorrect
 
 ```graphql
 # eslint @graphql-eslint/no-root-type: ['error', { disallow: ['mutation', 'subscription'] }]
@@ -19,17 +19,7 @@ type Mutation {
 }
 ```
 
-### Incorrect (`write-only` schema)
-
-```graphql
-# eslint @graphql-eslint/no-root-type: ['error', { disallow: ['query'] }]
-
-type Query {
-  users: [User!]!
-}
-```
-
-### Correct (`read-only` schema)
+### Correct
 
 ```graphql
 # eslint @graphql-eslint/no-root-type: ['error', { disallow: ['mutation', 'subscription'] }]
@@ -47,7 +37,6 @@ The schema defines the following properties:
 
 The elements of the array can contain the following enum values:
 
-- `query`
 - `mutation`
 - `subscription`
 

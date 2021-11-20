@@ -3,7 +3,7 @@ import { getLocation, requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
-const ROOT_TYPES: ('query' | 'mutation' | 'subscription')[] = ['query', 'mutation', 'subscription'];
+const ROOT_TYPES: ('mutation' | 'subscription')[] = ['mutation', 'subscription'];
 
 type NoRootTypeConfig = { disallow: typeof ROOT_TYPES };
 
@@ -12,12 +12,12 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     type: 'suggestion',
     docs: {
       category: 'Schema',
-      description: 'Disallow using root types for `read-only` or `write-only` schemas.',
+      description: 'Disallow using root types `mutation` and/or `subscription`.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-root-type.md',
       requiresSchema: true,
       examples: [
         {
-          title: 'Incorrect (`read-only` schema)',
+          title: 'Incorrect',
           usage: [{ disallow: ['mutation', 'subscription'] }],
           code: /* GraphQL */ `
             type Mutation {
@@ -26,16 +26,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
           `,
         },
         {
-          title: 'Incorrect (`write-only` schema)',
-          usage: [{ disallow: ['query'] }],
-          code: /* GraphQL */ `
-            type Query {
-              users: [User!]!
-            }
-          `,
-        },
-        {
-          title: 'Correct (`read-only` schema)',
+          title: 'Correct',
           usage: [{ disallow: ['mutation', 'subscription'] }],
           code: /* GraphQL */ `
             type Query {
@@ -71,7 +62,6 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     const disallow = new Set(context.options[0].disallow);
 
     const rootTypeNames = [
-      disallow.has('query') && schema.getQueryType(),
       disallow.has('mutation') && schema.getMutationType(),
       disallow.has('subscription') && schema.getSubscriptionType(),
     ]
