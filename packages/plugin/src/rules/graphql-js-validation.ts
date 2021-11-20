@@ -68,9 +68,9 @@ const validationToRule = (
     [name]: {
       meta: {
         docs: {
+          recommended: true,
           ...docs,
           graphQLJSRuleName: ruleName,
-          recommended: true,
           requiresSchema,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${name}.md`,
           description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
@@ -296,6 +296,7 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
     category: 'Schema',
     description: `A type extension is only valid if the type is defined and has the same kind.`,
     requiresSchema: false,
+    recommended: false, // TODO: enable after https://github.com/dotansimha/graphql-eslint/issues/787 will be fixed
   }),
   validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
     category: ['Schema', 'Operations'],

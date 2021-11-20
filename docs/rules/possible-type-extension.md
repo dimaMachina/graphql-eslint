@@ -1,7 +1,5 @@
 # `possible-type-extension`
 
-✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
-
 - Category: `Schema`
 - Rule name: `@graphql-eslint/possible-type-extension`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)

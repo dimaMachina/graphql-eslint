@@ -12,7 +12,7 @@ const prettierOptions = {
 };
 const SRC_PATH = join(process.cwd(), 'packages/plugin/src');
 const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
-const DISABLED_RULES_FOR_ALL_CONFIG = new Set<string>(['no-root-type', 'no-unused-fields']);
+const DISABLED_RULES_FOR_ALL_CONFIG = new Set<string>(['no-root-type', 'no-unused-fields', 'possible-type-extension']);
 
 function writeFormattedFile(filePath: string, typeScriptCode: string): void {
   const code = [
