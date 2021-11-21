@@ -1,5 +1,211 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.0.0
+
+### Major Changes
+
+- a69f0be: ❗ BREAKING CHANGE ❗
+
+  Split `recommended` config to 2 modes: "schema" and "operations".
+
+  > This was done in order to use `recommended` and `all` configs in `schema-only` projects where it is not possible to provide operations.
+
+  `recommended` and `all` configs were divided to 4 configs:
+
+  - `schema-recommended` - enables recommended rules for schema (SDL) development.
+  - `schema-all` - enables all recommended rules for schema (SDL) development.
+  - `operations-recommended` - enables recommended rules for consuming GraphQL (operations) development.
+  - `operations-all` - enables all rules for consuming GraphQL (operations) development.
+
+  If you are migrating from v2 where `recommended` was introdued, please change the following:
+
+  ```yaml
+  {
+    'overrides':
+      [
+        { 'files': ['*.js'], 'processor': '@graphql-eslint/graphql' },
+        {
+          'files': ['*.graphql'],
+          -     "extends": 'plugin:@graphql-eslint/schema',
+          +     "extends": 'plugin:@graphql-eslint/schema-recommended',
+        },
+      ],
+  }
+  ```
+
+  > If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
+
+  > If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll need `operations` rules.
+
+  > If you are in a monorepo project, you probably need both sets of rules.
+
+- a69f0be: ❗ BREAKING CHANGE ❗
+
+  feat: `description-style` now have default description style `block`.
+
+- a69f0be: ❗ BREAKING CHANGE ❗
+
+  feat: remove `query` option in `no-root-type` as it's impossible to have write-only schema.
+
+- a69f0be: ❗ BREAKING CHANGE ❗
+
+  - rename `avoid` prefix in rules to `no`.
+  - remove `avoid-operation-name-prefix` and `no-operation-name-suffix`
+
+  All rules that had a `avoid` prefix now have a `no` prefix.
+
+  Rules `avoid-operation-name-prefix` and `no-operation-name-suffix` were removed because the same things can be validated by `naming-convention` rule.
+
+  ### Before
+
+  ```json
+  {
+    "@graphql-eslint/avoid-operation-name-prefix": [
+      "error",
+      {
+        "keywords": ["Query", "Mutation", "Subscription", "Get"]
+      }
+    ],
+    "@graphql-eslint/no-operation-name-suffix": "error"
+  }
+  ```
+
+  ### After
+
+  ```json
+  {
+    "@graphql-eslint/naming-convention": [
+      "error",
+      {
+        "OperationDefinition": {
+          "style": "PascalCase",
+          "forbiddenPrefixes": ["Query", "Mutation", "Subscription", "Get"],
+          "forbiddenSuffixes": ["Query", "Mutation", "Subscription"]
+        }
+      }
+    ]
+  }
+  ```
+
+- a69f0be: ❗ BREAKING CHANGE ❗
+
+  feat: add new options for `naming-convention` rule
+
+  Options for `naming-convention` are changed. New option `types` includes the following kinds:
+
+  - `ObjectTypeDefinition`
+  - `InterfaceTypeDefinition`
+  - `EnumTypeDefinition`
+  - `ScalarTypeDefinition`
+  - `InputObjectTypeDefinition`
+  - `UnionTypeDefinition`
+
+  Added new options:
+
+  - `Argument`
+  - `DirectiveDefinition`
+  - `VariableDefinition`
+
+  Option `QueryDefinition` was removed in favor of `AST` specific selector `FieldDefinition[parent.name.value=Query]`.
+
+  ### Before
+
+  ```json
+  {
+    "@graphql-eslint/naming-convention": [
+      "error",
+      {
+        "ObjectTypeDefinition": "PascalCase",
+        "InterfaceTypeDefinition": "PascalCase",
+        "EnumTypeDefinition": "PascalCase",
+        "ScalarTypeDefinition": "PascalCase",
+        "InputObjectTypeDefinition": "PascalCase",
+        "UnionTypeDefinition": "PascalCase",
+        "FieldDefinition": "camelCase",
+        "InputValueDefinition": "camelCase",
+        "QueryDefinition": {
+          "forbiddenPrefixes": ["get"]
+        },
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      }
+    ]
+  }
+  ```
+
+  ### After
+
+  ```json
+  {
+    "@graphql-eslint/naming-convention": [
+      "error",
+      {
+        "types": "PascalCase",
+        "FieldDefinition": "camelCase",
+        "InputValueDefinition": "camelCase",
+        "FieldDefinition[parent.name.value=Query]": {
+          "forbiddenPrefixes": ["get"]
+        },
+        "allowLeadingUnderscore": true,
+        "allowTrailingUnderscore": true
+      }
+    ]
+  }
+  ```
+
+- a69f0be: ❗ BREAKING CHANGE ❗
+
+  feat: add new options for `require-description` rule
+
+  Options for `require-description` are changed. New option `types` includes the following kinds:
+
+  - `ObjectTypeDefinition`
+  - `InterfaceTypeDefinition`
+  - `EnumTypeDefinition`
+  - `ScalarTypeDefinition` (new in v3)
+  - `InputObjectTypeDefinition`
+  - `UnionTypeDefinition`
+
+  ### Before
+
+  ```json
+  {
+    "@graphql-eslint/require-description": [
+      "error",
+      {
+        "on": [
+          "ObjectTypeDefinition",
+          "InterfaceTypeDefinition",
+          "EnumTypeDefinition",
+          "InputObjectTypeDefinition",
+          "UnionTypeDefinition",
+          "FieldDefinition",
+          "InputValueDefinition",
+          "EnumValueDefinition",
+          "DirectiveDefinition"
+        ]
+      }
+    ]
+  }
+  ```
+
+  ### After
+
+  ```json
+  {
+    "@graphql-eslint/require-description": [
+      "error",
+      {
+        "types": true,
+        "FieldDefinition": true,
+        "InputValueDefinition": true,
+        "EnumValueDefinition": true,
+        "DirectiveDefinition": true
+      }
+    ]
+  }
+  ```
+
 ## 2.5.0
 
 ### Minor Changes
