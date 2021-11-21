@@ -12,24 +12,26 @@
 
   `recommended` and `all` configs were divided to 4 configs:
 
-  - `schema-recommended` - enables recommended rules for schema (SDL) development.
-  - `schema-all` - enables all recommended rules for schema (SDL) development.
-  - `operations-recommended` - enables recommended rules for consuming GraphQL (operations) development.
-  - `operations-all` - enables all rules for consuming GraphQL (operations) development.
+  - `schema-recommended` - enables recommended rules for schema (SDL) development
+  - `schema-all` - enables all rules for schema (SDL) development
+  - `operations-recommended` - enables recommended rules for consuming GraphQL (operations) development
+  - `operations-all` - enables all rules for consuming GraphQL (operations) development
 
-  If you are migrating from v2 where `recommended` was introdued, please change the following:
+  If you are migrating from v2 where `recommended` was introduced, please change the following:
 
-  ```yaml
+  ```diff
   {
-    'overrides':
-      [
-        { 'files': ['*.js'], 'processor': '@graphql-eslint/graphql' },
-        {
-          'files': ['*.graphql'],
-          -     "extends": 'plugin:@graphql-eslint/schema',
-          +     "extends": 'plugin:@graphql-eslint/schema-recommended',
-        },
-      ],
+    "overrides": [
+      {
+        "files": ["*.js"],
+        "processor": "@graphql-eslint/graphql"
+      },
+      {
+        "files": ["*.graphql"],
+  -     "extends": "plugin:@graphql-eslint/recommended"
+  +     "extends": "plugin:@graphql-eslint/schema-recommended"
+      }
+    ]
   }
   ```
 
