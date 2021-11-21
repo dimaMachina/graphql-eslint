@@ -1,6 +1,8 @@
 # `require-description`
 
-- Category: `Best Practices`
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
+
+- Category: `Schema`
 - Rule name: `@graphql-eslint/require-description`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -12,7 +14,7 @@ Enforce descriptions in your type definitions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-description: ['error', { on: ['ObjectTypeDefinition', 'FieldDefinition'] }]
+# eslint @graphql-eslint/require-description: ['error', { types: true, FieldDefinition: true }]
 
 type someTypeName {
   name: String
@@ -22,7 +24,7 @@ type someTypeName {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-description: ['error', { on: ['ObjectTypeDefinition', 'FieldDefinition'] }]
+# eslint @graphql-eslint/require-description: ['error', { types: true, FieldDefinition: true }]
 
 """
 Some type description
@@ -39,13 +41,56 @@ type someTypeName {
 
 The schema defines the following properties:
 
-### `on` (array)
+### `types` (boolean)
 
-The object is an array with all elements of the type `string`.
+Includes:
 
-Additional restrictions:
+- `ObjectTypeDefinition`
+- `InterfaceTypeDefinition`
+- `EnumTypeDefinition`
+- `ScalarTypeDefinition`
+- `InputObjectTypeDefinition`
+- `UnionTypeDefinition`
 
-* Minimum items: `1`
+### `DirectiveDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
+
+### `EnumTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
+
+### `EnumValueDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
+
+### `FieldDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
+
+### `InputObjectTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
+
+### `InputValueDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
+
+### `InterfaceTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
+
+### `ObjectTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+
+### `ScalarTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
+
+### `UnionTypeDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
 
 ## Resources
 

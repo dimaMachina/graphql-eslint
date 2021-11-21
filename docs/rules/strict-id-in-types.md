@@ -1,8 +1,8 @@
 # `strict-id-in-types`
 
-✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
 
-- Category: `Best Practices`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/strict-id-in-types`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -70,11 +70,15 @@ The object is an array with all elements of the type `string`.
 
 Default:
 
-```
+```json
 [
   "id"
 ]
 ```
+
+Additional restrictions:
+
+* Unique items: `true`
 
 ### `acceptedIdTypes` (array)
 
@@ -82,11 +86,15 @@ The object is an array with all elements of the type `string`.
 
 Default:
 
-```
+```json
 [
   "ID"
 ]
 ```
+
+Additional restrictions:
+
+* Unique items: `true`
 
 ### `exceptions` (object)
 
@@ -98,11 +106,10 @@ This is used to exclude types with names that match one of the specified values.
 
 The object is an array with all elements of the type `string`.
 
-Default:
+Additional restrictions:
 
-```
-[]
-```
+* Minimum items: `1`
+* Unique items: `true`
 
 #### `suffixes` (array)
 
@@ -110,11 +117,10 @@ This is used to exclude types with names with suffixes that match one of the spe
 
 The object is an array with all elements of the type `string`.
 
-Default:
+Additional restrictions:
 
-```
-[]
-```
+* Minimum items: `1`
+* Unique items: `true`
 
 ## Resources
 

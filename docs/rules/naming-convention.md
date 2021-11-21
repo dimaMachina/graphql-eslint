@@ -1,8 +1,8 @@
 # `naming-convention`
 
-✅ The `"extends": "plugin:@graphql-eslint/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and `"plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
 
-- Category: `Best Practices`
+- Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/naming-convention`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -14,63 +14,101 @@ Require names to follow specified conventions.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { ObjectTypeDefinition: 'PascalCase' }]
+# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', FieldDefinition: 'camelCase' }]
 
-type someTypeName {
-  f: String!
+type user {
+  first_name: String!
+}
+```
+
+### Incorrect
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+
+fragment UserFragment on User {
+  # ...
+}
+```
+
+### Incorrect
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+
+type Query {
+  getUsers: [User!]!
 }
 ```
 
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { FieldDefinition: 'camelCase', ObjectTypeDefinition: 'PascalCase' }]
+# eslint @graphql-eslint/naming-convention: ['error', { types: 'PascalCase', FieldDefinition: 'camelCase' }]
 
-type SomeTypeName {
-  someFieldName: String
+type User {
+  firstName: String
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+
+fragment UserFields on User {
+  # ...
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+
+type Query {
+  users: [User!]!
 }
 ```
 
 ## Config Schema
 
+> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.
+>
+> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.
+>
+> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.
+
 The schema defines the following properties:
 
-### `FieldDefinition`
+### `types`
+
+Includes:
+
+- `ObjectTypeDefinition`
+- `InterfaceTypeDefinition`
+- `EnumTypeDefinition`
+- `ScalarTypeDefinition`
+- `InputObjectTypeDefinition`
+- `UnionTypeDefinition`
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `InputObjectTypeDefinition`
+### `Argument`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#Argument).
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `EnumValueDefinition`
+### `DirectiveDefinition`
 
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `InputValueDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `ObjectTypeDefinition`
-
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `InterfaceTypeDefinition`
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
 
 The object must be one of the following types:
 
@@ -79,26 +117,25 @@ The object must be one of the following types:
 
 ### `EnumTypeDefinition`
 
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `UnionTypeDefinition`
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `ScalarTypeDefinition`
+### `EnumValueDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `OperationDefinition`
+### `FieldDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
 
 The object must be one of the following types:
 
@@ -107,35 +144,92 @@ The object must be one of the following types:
 
 ### `FragmentDefinition`
 
-The object must be one of the following types:
-
-* `asString`
-* `asObject`
-
-### `QueryDefinition`
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FragmentDefinition).
 
 The object must be one of the following types:
 
 * `asString`
 * `asObject`
 
-### `leadingUnderscore` (string, enum)
+### `InputObjectTypeDefinition`
 
-This element must be one of the following enum values:
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
 
-* `allow`
-* `forbid`
+The object must be one of the following types:
 
-Default: `"forbid"`
+* `asString`
+* `asObject`
 
-### `trailingUnderscore` (string, enum)
+### `InputValueDefinition`
 
-This element must be one of the following enum values:
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
 
-* `allow`
-* `forbid`
+The object must be one of the following types:
 
-Default: `"forbid"`
+* `asString`
+* `asObject`
+
+### `InterfaceTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `ObjectTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `OperationDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `ScalarTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `UnionTypeDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `VariableDefinition`
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#VariableDefinition).
+
+The object must be one of the following types:
+
+* `asString`
+* `asObject`
+
+### `allowLeadingUnderscore` (boolean)
+
+Default: `false`
+
+### `allowTrailingUnderscore` (boolean)
+
+Default: `false`
 
 ---
 
@@ -143,7 +237,7 @@ Default: `"forbid"`
 
 The schema defines the following additional types:
 
-## `asString` (string)
+## `asString` (enum)
 
 One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
 
@@ -151,14 +245,14 @@ One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
 
 Properties of the `asObject` object:
 
-### `style` (string, enum)
+### `style` (enum)
 
 This element must be one of the following enum values:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
+- `camelCase`
+- `PascalCase`
+- `snake_case`
+- `UPPER_CASE`
 
 ### `prefix` (string)
 
@@ -171,6 +265,7 @@ The object is an array with all elements of the type `string`.
 Additional restrictions:
 
 * Minimum items: `1`
+* Unique items: `true`
 
 ### `forbiddenSuffixes` (array)
 
@@ -179,6 +274,7 @@ The object is an array with all elements of the type `string`.
 Additional restrictions:
 
 * Minimum items: `1`
+* Unique items: `true`
 
 ## Resources
 

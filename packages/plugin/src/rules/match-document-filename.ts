@@ -22,25 +22,23 @@ type PropertySchema = {
   suffix: string;
 };
 
-type MatchDocumentFilenameRuleConfig = [
-  {
-    fileExtension?: typeof ACCEPTED_EXTENSIONS[number];
-    query?: CaseStyle | PropertySchema;
-    mutation?: CaseStyle | PropertySchema;
-    subscription?: CaseStyle | PropertySchema;
-    fragment?: CaseStyle | PropertySchema;
-  }
-];
+type MatchDocumentFilenameRuleConfig = {
+  fileExtension?: typeof ACCEPTED_EXTENSIONS[number];
+  query?: CaseStyle | PropertySchema;
+  mutation?: CaseStyle | PropertySchema;
+  subscription?: CaseStyle | PropertySchema;
+  fragment?: CaseStyle | PropertySchema;
+};
 
 const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 };
 
-const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
+const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: 'Operations',
       description: 'This rule allows you to enforce that the file name should match the operation name.',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/match-document-filename.md`,
       examples: [
@@ -114,6 +112,14 @@ const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
           `,
         },
       ],
+      configOptions: [
+        {
+          query: CaseStyle.kebabCase,
+          mutation: CaseStyle.kebabCase,
+          subscription: CaseStyle.kebabCase,
+          fragment: CaseStyle.kebabCase,
+        },
+      ],
     },
     messages: {
       [MATCH_EXTENSION]: `File extension "{{ fileExtension }}" don't match extension "{{ expectedFileExtension }}"`,
@@ -122,27 +128,29 @@ const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
     schema: {
       definitions: {
         asString: {
-          type: 'string',
-          description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
           enum: CASE_STYLES,
+          description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
         },
         asObject: {
           type: 'object',
+          additionalProperties: false,
           properties: {
             style: {
-              type: 'string',
               enum: CASE_STYLES,
+            },
+            suffix: {
+              type: 'string',
             },
           },
         },
       },
-      $schema: 'http://json-schema.org/draft-04/schema#',
       type: 'array',
+      maxItems: 1,
       items: {
         type: 'object',
+        additionalProperties: false,
         properties: {
           fileExtension: {
-            type: 'string',
             enum: ACCEPTED_EXTENSIONS,
           },
           query: schemaOption,
@@ -154,7 +162,7 @@ const rule: GraphQLESLintRule<MatchDocumentFilenameRuleConfig> = {
     },
   },
   create(context) {
-    const options: MatchDocumentFilenameRuleConfig[number] = context.options[0] || {
+    const options: MatchDocumentFilenameRuleConfig = context.options[0] || {
       fileExtension: null,
     };
     const filePath = context.getFilename();

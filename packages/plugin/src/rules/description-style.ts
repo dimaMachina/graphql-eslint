@@ -1,13 +1,11 @@
+import { StringValueNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { getLocation } from '../utils';
+import { GraphQLESTreeNode } from '../estree-parser';
 
-type DescriptionStyleRuleConfig = [
-  {
-    style: 'inline' | 'block';
-  }
-];
+type DescriptionStyleRuleConfig = { style: 'inline' | 'block' };
 
-const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
+const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -34,35 +32,32 @@ const rule: GraphQLESLintRule<DescriptionStyleRuleConfig> = {
         },
       ],
       description: 'Require all comments to follow the same style (either block or inline).',
-      category: 'Stylistic Issues',
+      category: 'Schema',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/description-style.md',
+      recommended: true,
     },
     schema: [
       {
         type: 'object',
+        additionalProperties: false,
         properties: {
           style: {
-            type: 'string',
             enum: ['block', 'inline'],
-            default: 'inline',
+            default: 'block',
           },
         },
-        additionalProperties: false,
       },
     ],
   },
   create(context) {
-    const { style } = context.options[0] || { style: 'inline' };
-    const wrongDescriptionType = style === 'block' ? 'inline' : 'block';
-
+    const { style = 'block' } = context.options[0] || {};
+    const isBlock = style === 'block';
     return {
-      '[description.type="StringValue"]': node => {
-        if (node.description.block !== (style === 'block')) {
-          context.report({
-            loc: getLocation(node.description.loc),
-            message: `Unexpected ${wrongDescriptionType} description`,
-          });
-        }
+      [`.description[type=StringValue][block!=${isBlock}]`](node: GraphQLESTreeNode<StringValueNode>) {
+        context.report({
+          loc: getLocation(node.loc),
+          message: `Unexpected ${isBlock ? 'inline' : 'block'} description`,
+        });
       },
     };
   },

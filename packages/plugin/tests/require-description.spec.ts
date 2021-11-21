@@ -1,6 +1,5 @@
-import { GraphQLRuleTester } from '../src/testkit';
+import { GraphQLRuleTester } from '../src';
 import rule from '../src/rules/require-description';
-import { Kind } from 'graphql';
 
 const ruleTester = new GraphQLRuleTester();
 
@@ -23,7 +22,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           native
         }
       `,
-      options: [{ on: [Kind.ENUM_VALUE_DEFINITION] }],
+      options: [{ EnumValueDefinition: true }],
     },
     {
       code: /* GraphQL */ `
@@ -40,7 +39,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           nin: [BSONDecimal]
         }
       `,
-      options: [{ on: [Kind.INPUT_VALUE_DEFINITION] }],
+      options: [{ InputValueDefinition: true }],
     },
     {
       code: /* GraphQL */ `
@@ -53,7 +52,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           record: User
         }
       `,
-      options: [{ on: [Kind.OBJECT_TYPE_DEFINITION] }],
+      options: [{ types: true, FieldDefinition: true }],
     },
   ],
   invalid: [
@@ -69,7 +68,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           nin: [BSONDecimal]
         }
       `,
-      options: [{ on: [Kind.INPUT_VALUE_DEFINITION] }],
+      options: [{ InputValueDefinition: true }],
       errors: 7,
     },
     {
@@ -80,11 +79,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
           native
         }
       `,
-      options: [
-        {
-          on: [Kind.ENUM_VALUE_DEFINITION],
-        },
-      ],
+      options: [{ EnumValueDefinition: true }],
       errors: [
         { message: 'Description is required for nodes of type "EnumValueDefinition"' },
         { message: 'Description is required for nodes of type "EnumValueDefinition"' },
@@ -92,6 +87,7 @@ ruleTester.runGraphQLTests('require-description', rule, {
       ],
     },
     {
+      name: 'should disable description for ObjectTypeDefinition',
       code: /* GraphQL */ `
         type CreateOneUserPayload {
           recordId: MongoID
@@ -100,10 +96,12 @@ ruleTester.runGraphQLTests('require-description', rule, {
       `,
       options: [
         {
-          on: [Kind.OBJECT_TYPE_DEFINITION, Kind.FIELD_DEFINITION],
+          types: true,
+          ObjectTypeDefinition: false,
+          FieldDefinition: true,
         },
       ],
-      errors: 3,
+      errors: 2,
     },
   ],
 });

@@ -5,14 +5,14 @@ import { GraphQLESTreeNode } from '../estree-parser';
 import { getLocation, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../sibling-operations';
 
-type SelectionSetDepthRuleConfig = [{ maxDepth: number; ignore?: string[] }];
+type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
 
-const rule: GraphQLESLintRule<SelectionSetDepthRuleConfig> = {
+const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
   meta: {
     docs: {
-      category: 'Best Practices',
+      category: 'Operations',
       description: `Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/selection-set-depth.md`,
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/selection-set-depth.md',
       requiresSiblings: true,
       examples: [
         {
@@ -55,22 +55,26 @@ const rule: GraphQLESLintRule<SelectionSetDepthRuleConfig> = {
           `,
         },
       ],
+      recommended: true,
+      configOptions: [{ maxDepth: 7 }],
     },
     type: 'suggestion',
     schema: {
       type: 'array',
-      additionalItems: false,
       minItems: 1,
       maxItems: 1,
       items: {
         type: 'object',
-        require: ['maxDepth'],
+        additionalProperties: false,
+        required: ['maxDepth'],
         properties: {
           maxDepth: {
             type: 'number',
           },
           ignore: {
             type: 'array',
+            uniqueItems: true,
+            minItems: 1,
             items: {
               type: 'string',
             },

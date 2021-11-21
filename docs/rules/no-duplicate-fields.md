@@ -1,7 +1,9 @@
-# `avoid-duplicate-fields`
+# `no-duplicate-fields`
 
-- Category: `Stylistic Issues`
-- Rule name: `@graphql-eslint/avoid-duplicate-fields`
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+
+- Category: `Operations`
+- Rule name: `@graphql-eslint/no-duplicate-fields`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
@@ -12,7 +14,7 @@ Checks for duplicate fields in selection set, variables in operation definition,
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-duplicate-fields: 'error'
+# eslint @graphql-eslint/no-duplicate-fields: 'error'
 
 query {
   user {
@@ -26,7 +28,7 @@ query {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-duplicate-fields: 'error'
+# eslint @graphql-eslint/no-duplicate-fields: 'error'
 
 query {
   users(
@@ -43,7 +45,7 @@ query {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-duplicate-fields: 'error'
+# eslint @graphql-eslint/no-duplicate-fields: 'error'
 
 query (
   $first: Int!
@@ -57,5 +59,5 @@ query (
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/avoid-duplicate-fields.ts)
-- [Test source](../../packages/plugin/tests/avoid-duplicate-fields.spec.ts)
+- [Rule source](../../packages/plugin/src/rules/no-duplicate-fields.ts)
+- [Test source](../../packages/plugin/tests/no-duplicate-fields.spec.ts)

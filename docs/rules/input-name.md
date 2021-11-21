@@ -1,6 +1,6 @@
 # `input-name`
 
-- Category: `Stylistic Issues`
+- Category: `Schema`
 - Rule name: `@graphql-eslint/input-name`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

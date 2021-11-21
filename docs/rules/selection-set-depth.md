@@ -1,6 +1,8 @@
 # `selection-set-depth`
 
-- Category: `Best Practices`
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+
+- Category: `Operations`
 - Rule name: `@graphql-eslint/selection-set-depth`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -55,11 +57,16 @@ query deep2 {
 
 The schema defines the following properties:
 
-### `maxDepth` (number)
+### `maxDepth` (number, required)
 
 ### `ignore` (array)
 
 The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
 
 ## Resources
 

@@ -6,15 +6,15 @@ import { getBaseType } from '../estree-parser';
 const REQUIRE_ID_WHEN_AVAILABLE = 'REQUIRE_ID_WHEN_AVAILABLE';
 const DEFAULT_ID_FIELD_NAME = 'id';
 
-type RequireIdWhenAvailableRuleConfig = [{ fieldName: string }];
+type RequireIdWhenAvailableRuleConfig = { fieldName: string };
 
-const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
+const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
-      description: `Enforce selecting specific fields when they are available on the GraphQL type.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md`,
+      category: 'Operations',
+      description: 'Enforce selecting specific fields when they are available on the GraphQL type.',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md',
       requiresSchema: true,
       requiresSiblings: true,
       examples: [
@@ -54,17 +54,17 @@ const rule: GraphQLESLintRule<RequireIdWhenAvailableRuleConfig, true> = {
           `,
         },
       ],
+      recommended: true,
     },
     messages: {
-      [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments {{checkedFragments}} specifies the field "{{ fieldName }}".`,
+      [REQUIRE_ID_WHEN_AVAILABLE]: `Field "{{ fieldName }}" must be selected when it's available on a type. Please make sure to include it in your selection set!\nIf you are using fragments, make sure that all used fragments {{ checkedFragments }} specifies the field "{{ fieldName }}".`,
     },
     schema: {
       type: 'array',
-      additionalItems: false,
-      minItems: 0,
       maxItems: 1,
       items: {
         type: 'object',
+        additionalProperties: false,
         properties: {
           fieldName: {
             type: 'string',

@@ -1,8 +1,6 @@
 This project integrates GraphQL and ESLint, for a better developer experience.
 
-<p align="left">
-  <img height="150" src="./logo.png">
-</p>
+<img height="150" src="./logo.png">
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
 
@@ -182,13 +180,26 @@ You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/u
 
 You can find a complete list of [all available rules here](docs/README.md).
 
+## Deprecated Rules
+
+See [docs/deprecated-rules.md](docs/deprecated-rules.md).
+
 ## Available Configs
 
-This plugin exports a [`recommended` config](packages/plugin/src/configs/recommended.ts) that enforces good practices and an [`all` config](packages/plugin/src/configs/all.ts) that makes use of all rules (except for deprecated ones).
+<!-- prettier-ignore-start -->
+|Name|Description|
+|:-:|-|
+|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables all recommended rules|
+|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables all recommended rules|
+|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules, except for those that require `parserOptions.operations` option)|
+|[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules|
+<!-- prettier-ignore-end -->
 
-Enable it in your `.eslintrc` file with the `extends` option.
+## Config usage
 
-> These configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add `@graphql-eslint` to `plugins` array, so you don't need to specify them.
+For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the `extends` option:
+
+> All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add `@graphql-eslint` to `plugins` array, so you don't need to specify them.
 
 ```diff
 {
@@ -201,7 +212,7 @@ Enable it in your `.eslintrc` file with the `extends` option.
       "files": ["*.graphql"],
 -     "parser": "@graphql-eslint/eslint-plugin",
 -     "plugins": ["@graphql-eslint"],
-+     "extends": "plugin:@graphql-eslint/recommended" // or plugin:@graphql-eslint/all
++     "extends": "plugin:@graphql-eslint/schema-recommended"
     }
   ]
 }
@@ -248,7 +259,11 @@ Please help to vote up if you want to speed up the progress.
 
 ## Further Reading
 
-If you wish to learn more about this project, how the parser works, how to add custom rules and more, [please refer to the docs directory](docs/README.md).
+If you wish to learn more about this project, how the parser works, how to add custom rules and more please refer to the below links:
+
+- [Writing Custom Rules](docs/custom-rules.md)
+- [How the parser works?](docs/parser.md)
+- [`parserOptions`](docs/parser-options.md)
 
 ## Contributions
 

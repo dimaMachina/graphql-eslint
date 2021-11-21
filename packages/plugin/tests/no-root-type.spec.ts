@@ -16,18 +16,8 @@ ruleTester.runGraphQLTests('no-root-type', rule, {
       ...useSchema('type Query'),
       options: [{ disallow: ['mutation', 'subscription'] }],
     },
-    {
-      ...useSchema('type Mutation'),
-      options: [{ disallow: ['query'] }],
-    },
   ],
   invalid: [
-    {
-      ...useSchema('type Query'),
-      name: 'disallow query',
-      options: [{ disallow: ['query'] }],
-      errors: [{ message: 'Root type "Query" is forbidden' }],
-    },
     {
       ...useSchema('type Mutation'),
       name: 'disallow mutation',

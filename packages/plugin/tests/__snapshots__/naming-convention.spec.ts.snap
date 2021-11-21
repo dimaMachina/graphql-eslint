@@ -2,12 +2,12 @@
 
 exports[` 1`] = `
 > 1 | type b { test: String }
-    |      ^ Type name "b" should be in PascalCase format
+    |      ^ Type "b" should be in PascalCase format
 `;
 
 exports[` 2`] = `
 > 1 | type b { test: String }
-    |          ^^^^ Field name "test" should be in PascalCase format
+    |          ^^^^ Field "test" should be in PascalCase format
 `;
 
 exports[` 3`] = `
@@ -22,12 +22,12 @@ exports[` 4`] = `
 
 exports[` 5`] = `
 > 1 | scalar BSONDecimal
-    |        ^^^^^^^^^^^ Scalar name "BSONDecimal" should be in snake_case format
+    |        ^^^^^^^^^^^ Scalar "BSONDecimal" should be in snake_case format
 `;
 
 exports[` 6`] = `
 >  1 | input _idOperatorsFilterFindManyUserInput {
-     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterFindManyUserInput" should be in PascalCase format
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format
    2 |   gt: MongoID
    3 |   gte: MongoID
    4 |   lt: MongoID
@@ -1151,7 +1151,7 @@ exports[` 7`] = `
    9 | }
    10 |
 >  11 | input _idOperatorsFilterFindOneUserInput {
-      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterFindOneUserInput" should be in PascalCase format
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format
    12 |   gt: MongoID
    13 |   gte: MongoID
    14 |   lt: MongoID
@@ -2275,7 +2275,7 @@ exports[` 8`] = `
    19 | }
    20 |
 >  21 | input _idOperatorsFilterRemoveManyUserInput {
-      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format
    22 |   gt: MongoID
    23 |   gte: MongoID
    24 |   lt: MongoID
@@ -3399,7 +3399,7 @@ exports[` 9`] = `
    29 | }
    30 |
 >  31 | input _idOperatorsFilterRemoveOneUserInput {
-      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format
    32 |   gt: MongoID
    33 |   gte: MongoID
    34 |   lt: MongoID
@@ -4523,7 +4523,7 @@ exports[` 10`] = `
    39 | }
    40 |
 >  41 | input _idOperatorsFilterUpdateManyUserInput {
-      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format
    42 |   gt: MongoID
    43 |   gte: MongoID
    44 |   lt: MongoID
@@ -5647,7 +5647,7 @@ exports[` 11`] = `
    49 | }
    50 |
 >  51 | input _idOperatorsFilterUpdateOneUserInput {
-      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format
    52 |   gt: MongoID
    53 |   gte: MongoID
    54 |   lt: MongoID
@@ -6771,7 +6771,7 @@ exports[` 12`] = `
    59 | }
    60 |
 >  61 | input _idOperatorsFilterUserInput {
-      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type name "_idOperatorsFilterUserInput" should be in PascalCase format
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUserInput" should be in PascalCase format
    62 |   gt: MongoID
    63 |   gte: MongoID
    64 |   lt: MongoID
@@ -8032,7 +8032,7 @@ exports[` 13`] = `
    206 |
    207 | enum EnumUserGender {
 >  208 |   male
-       |   ^^^^ Enumeration value name "male" should be in UPPER_CASE format
+       |   ^^^^ Enumeration value "male" should be in UPPER_CASE format
    209 |   female
    210 |   ladyboy
    211 | }
@@ -9147,7 +9147,7 @@ exports[` 14`] = `
    207 | enum EnumUserGender {
    208 |   male
 >  209 |   female
-       |   ^^^^^^ Enumeration value name "female" should be in UPPER_CASE format
+       |   ^^^^^^ Enumeration value "female" should be in UPPER_CASE format
    210 |   ladyboy
    211 | }
    212 |
@@ -10262,7 +10262,7 @@ exports[` 15`] = `
    208 |   male
    209 |   female
 >  210 |   ladyboy
-       |   ^^^^^^^ Enumeration value name "ladyboy" should be in UPPER_CASE format
+       |   ^^^^^^^ Enumeration value "ladyboy" should be in UPPER_CASE format
    211 | }
    212 |
    213 | enum EnumUserLanguagesSkill {
@@ -11380,7 +11380,7 @@ exports[` 16`] = `
    212 |
    213 | enum EnumUserLanguagesSkill {
 >  214 |   basic
-       |   ^^^^^ Enumeration value name "basic" should be in UPPER_CASE format
+       |   ^^^^^ Enumeration value "basic" should be in UPPER_CASE format
    215 |   fluent
    216 |   native
    217 | }
@@ -12495,7 +12495,7 @@ exports[` 17`] = `
    213 | enum EnumUserLanguagesSkill {
    214 |   basic
 >  215 |   fluent
-       |   ^^^^^^ Enumeration value name "fluent" should be in UPPER_CASE format
+       |   ^^^^^^ Enumeration value "fluent" should be in UPPER_CASE format
    216 |   native
    217 | }
    218 |
@@ -13610,7 +13610,7 @@ exports[` 18`] = `
    214 |   basic
    215 |   fluent
 >  216 |   native
-       |   ^^^^^^ Enumeration value name "native" should be in UPPER_CASE format
+       |   ^^^^^^ Enumeration value "native" should be in UPPER_CASE format
    217 | }
    218 |
    219 | input FilterFindManyUserInput {
@@ -14747,7 +14747,7 @@ exports[` 19`] = `
    237 |   """
    238 |   _operators: OperatorsFilterFindManyUserInput
 >  239 |   OR: [FilterFindManyUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    240 |   AND: [FilterFindManyUserInput!]
    241 |
    242 |   """
@@ -15862,7 +15862,7 @@ exports[` 20`] = `
    238 |   _operators: OperatorsFilterFindManyUserInput
    239 |   OR: [FilterFindManyUserInput!]
 >  240 |   AND: [FilterFindManyUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    241 |
    242 |   """
    243 |   Search by distance in meters
@@ -17004,7 +17004,7 @@ exports[` 21`] = `
    266 |   """
    267 |   _operators: OperatorsFilterFindOneUserInput
 >  268 |   OR: [FilterFindOneUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    269 |   AND: [FilterFindOneUserInput!]
    270 | }
    271 |
@@ -18119,7 +18119,7 @@ exports[` 22`] = `
    267 |   _operators: OperatorsFilterFindOneUserInput
    268 |   OR: [FilterFindOneUserInput!]
 >  269 |   AND: [FilterFindOneUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    270 | }
    271 |
    272 | input FilterRemoveManyUserInput {
@@ -19256,7 +19256,7 @@ exports[` 23`] = `
    290 |   """
    291 |   _operators: OperatorsFilterRemoveManyUserInput
 >  292 |   OR: [FilterRemoveManyUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    293 |   AND: [FilterRemoveManyUserInput!]
    294 | }
    295 |
@@ -20371,7 +20371,7 @@ exports[` 24`] = `
    291 |   _operators: OperatorsFilterRemoveManyUserInput
    292 |   OR: [FilterRemoveManyUserInput!]
 >  293 |   AND: [FilterRemoveManyUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    294 | }
    295 |
    296 | input FilterRemoveOneUserInput {
@@ -21508,7 +21508,7 @@ exports[` 25`] = `
    314 |   """
    315 |   _operators: OperatorsFilterRemoveOneUserInput
 >  316 |   OR: [FilterRemoveOneUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    317 |   AND: [FilterRemoveOneUserInput!]
    318 | }
    319 |
@@ -22623,7 +22623,7 @@ exports[` 26`] = `
    315 |   _operators: OperatorsFilterRemoveOneUserInput
    316 |   OR: [FilterRemoveOneUserInput!]
 >  317 |   AND: [FilterRemoveOneUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    318 | }
    319 |
    320 | input FilterUpdateManyUserInput {
@@ -23760,7 +23760,7 @@ exports[` 27`] = `
    338 |   """
    339 |   _operators: OperatorsFilterUpdateManyUserInput
 >  340 |   OR: [FilterUpdateManyUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    341 |   AND: [FilterUpdateManyUserInput!]
    342 | }
    343 |
@@ -24875,7 +24875,7 @@ exports[` 28`] = `
    339 |   _operators: OperatorsFilterUpdateManyUserInput
    340 |   OR: [FilterUpdateManyUserInput!]
 >  341 |   AND: [FilterUpdateManyUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    342 | }
    343 |
    344 | input FilterUpdateOneUserInput {
@@ -26012,7 +26012,7 @@ exports[` 29`] = `
    362 |   """
    363 |   _operators: OperatorsFilterUpdateOneUserInput
 >  364 |   OR: [FilterUpdateOneUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    365 |   AND: [FilterUpdateOneUserInput!]
    366 | }
    367 |
@@ -27127,7 +27127,7 @@ exports[` 30`] = `
    363 |   _operators: OperatorsFilterUpdateOneUserInput
    364 |   OR: [FilterUpdateOneUserInput!]
 >  365 |   AND: [FilterUpdateOneUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    366 | }
    367 |
    368 | input FilterUserInput {
@@ -28264,7 +28264,7 @@ exports[` 31`] = `
    386 |   """
    387 |   _operators: OperatorsFilterUserInput
 >  388 |   OR: [FilterUserInput!]
-       |   ^^ Input property name "OR" should be in camelCase format
+       |   ^^ Input property "OR" should be in camelCase format
    389 |   AND: [FilterUserInput!]
    390 | }
    391 |
@@ -29379,7 +29379,7 @@ exports[` 32`] = `
    387 |   _operators: OperatorsFilterUserInput
    388 |   OR: [FilterUserInput!]
 >  389 |   AND: [FilterUserInput!]
-       |   ^^^ Input property name "AND" should be in camelCase format
+       |   ^^^ Input property "AND" should be in camelCase format
    390 | }
    391 |
    392 | input GenderOperatorsFilterFindManyUserInput {
@@ -30105,22 +30105,22 @@ exports[` 32`] = `
 
 exports[` 33`] = `
 > 1 | enum B { test }
-    |      ^ Enumerator name "B" should be in camelCase format
+    |      ^ Enumerator "B" should be in camelCase format
 `;
 
 exports[` 34`] = `
 > 1 | enum B { test }
-    |          ^^^^ Enumeration value name "test" should be in UPPER_CASE format
+    |          ^^^^ Enumeration value "test" should be in UPPER_CASE format
 `;
 
 exports[` 35`] = `
 > 1 | input test { _Value: String }
-    |       ^^^^ Input type name "test" should be in PascalCase format
+    |       ^^^^ Input type "test" should be in PascalCase format
 `;
 
 exports[` 36`] = `
 > 1 | input test { _Value: String }
-    |              ^^^^^^ Input property name "_Value" should be in snake_case format
+    |              ^^^^^^ Input property "_Value" should be in snake_case format
 `;
 
 exports[` 37`] = `
@@ -30130,70 +30130,416 @@ exports[` 37`] = `
 
 exports[` 38`] = `
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
-    |      ^^^^^^^ Type name "TypeOne" should be in camelCase format
+    |      ^^^^^^^ Type "TypeOne" should be in camelCase format
 `;
 
 exports[` 39`] = `
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
-    |                ^^^^^^ Field name "aField" should have "AAA" suffix
+    |                ^^^^^^ Field "aField" should have "AAA" suffix
 `;
 
 exports[` 40`] = `
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
-    |                                          ^^^^^^^^^ Enumeration value name "VALUE_ONE" should have "ENUM" suffix
+    |                                          ^^^^^^^^^ Enumeration value "VALUE_ONE" should have "ENUM" suffix
 `;
 
 exports[` 41`] = `
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
-    |                                                    ^^^^^^^^^ Enumeration value name "VALUE_TWO" should have "ENUM" suffix
+    |                                                    ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" suffix
 `;
 
 exports[` 42`] = `
 > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
-    |            ^^^^^^ Field name "aField" should have "Field" prefix
+    |            ^^^^^^ Field "aField" should have "Field" prefix
 `;
 
 exports[` 43`] = `
 > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
-    |                                      ^^^^^^^^^^^^^^^^ Enumeration value name "A_ENUM_VALUE_ONE" should have "ENUM" prefix
+    |                                      ^^^^^^^^^^^^^^^^ Enumeration value "A_ENUM_VALUE_ONE" should have "ENUM" prefix
 `;
 
 exports[` 44`] = `
 > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
-    |                                                       ^^^^^^^^^ Enumeration value name "VALUE_TWO" should have "ENUM" prefix
+    |                                                       ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" prefix
 `;
 
 exports[` 45`] = `
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
-    |      ^^^ Type "One" should not have one of the following prefix(es): On
+    |      ^^^ Type "One" should not have "On" prefix
 `;
 
 exports[` 46`] = `
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
-    |            ^^^^^^ Field "getFoo" should not have one of the following suffix(es): Foo
+    |            ^^^^^^ Field "getFoo" should not have "Foo" suffix
 `;
 
 exports[` 47`] = `
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
-    |                                                            ^^^^ Query "getA" should not have one of the following prefix(es): get, query
+    |                                                            ^^^^ Field "getA" should not have "get" prefix
 `;
 
 exports[` 48`] = `
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
-    |                                                                                   ^^^^^^ Query "queryB" should not have one of the following prefix(es): get, query
+    |                                                                                   ^^^^^^ Field "queryB" should not have "query" prefix
 `;
 
 exports[` 49`] = `
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
-    |                                                                                                                        ^^^^ Query "getC" should not have one of the following prefix(es): get, query
+    |                                                                                                                        ^^^^ Field "getC" should not have "get" prefix
 `;
 
 exports[` 50`] = `
 > 1 | query Foo { foo } query getBar { bar }
-    |       ^^^ Operation name "Foo" should be in camelCase format
+    |       ^^^ Operation "Foo" should be in camelCase format
 `;
 
 exports[` 51`] = `
 > 1 | query Foo { foo } query getBar { bar }
-    |                         ^^^^^^ Operation "getBar" should not have one of the following prefix(es): get
+    |                         ^^^^^^ Operation "getBar" should not have "get" prefix
+`;
+
+exports[` 52`] = `
+   1 |
+   2 |         type Query {
+>  3 |           fieldQuery: ID
+     |           ^^^^^^^^^^ Field "fieldQuery" should not have "Query" suffix
+   4 |           queryField: ID
+   5 |           getField: ID
+   6 |         }
+   7 |
+   8 |         type Mutation {
+   9 |           fieldMutation: ID
+  10 |           mutationField: ID
+  11 |         }
+  12 |
+  13 |         type Subscription {
+  14 |           fieldSubscription: ID
+  15 |           subscriptionField: ID
+  16 |         }
+  17 |       
+`;
+
+exports[` 53`] = `
+   1 |
+   2 |         type Query {
+   3 |           fieldQuery: ID
+>  4 |           queryField: ID
+     |           ^^^^^^^^^^ Field "queryField" should not have "query" prefix
+   5 |           getField: ID
+   6 |         }
+   7 |
+   8 |         type Mutation {
+   9 |           fieldMutation: ID
+  10 |           mutationField: ID
+  11 |         }
+  12 |
+  13 |         type Subscription {
+  14 |           fieldSubscription: ID
+  15 |           subscriptionField: ID
+  16 |         }
+  17 |       
+`;
+
+exports[` 54`] = `
+   1 |
+   2 |         type Query {
+   3 |           fieldQuery: ID
+   4 |           queryField: ID
+>  5 |           getField: ID
+     |           ^^^^^^^^ Field "getField" should not have "get" prefix
+   6 |         }
+   7 |
+   8 |         type Mutation {
+   9 |           fieldMutation: ID
+  10 |           mutationField: ID
+  11 |         }
+  12 |
+  13 |         type Subscription {
+  14 |           fieldSubscription: ID
+  15 |           subscriptionField: ID
+  16 |         }
+  17 |       
+`;
+
+exports[` 55`] = `
+   1 |
+   2 |         type Query {
+   3 |           fieldQuery: ID
+   4 |           queryField: ID
+   5 |           getField: ID
+   6 |         }
+   7 |
+   8 |         type Mutation {
+>  9 |           fieldMutation: ID
+     |           ^^^^^^^^^^^^^ Field "fieldMutation" should not have "Mutation" suffix
+  10 |           mutationField: ID
+  11 |         }
+  12 |
+  13 |         type Subscription {
+  14 |           fieldSubscription: ID
+  15 |           subscriptionField: ID
+  16 |         }
+  17 |       
+`;
+
+exports[` 56`] = `
+   1 |
+   2 |         type Query {
+   3 |           fieldQuery: ID
+   4 |           queryField: ID
+   5 |           getField: ID
+   6 |         }
+   7 |
+   8 |         type Mutation {
+   9 |           fieldMutation: ID
+> 10 |           mutationField: ID
+     |           ^^^^^^^^^^^^^ Field "mutationField" should not have "mutation" prefix
+  11 |         }
+  12 |
+  13 |         type Subscription {
+  14 |           fieldSubscription: ID
+  15 |           subscriptionField: ID
+  16 |         }
+  17 |       
+`;
+
+exports[` 57`] = `
+   1 |
+   2 |         type Query {
+   3 |           fieldQuery: ID
+   4 |           queryField: ID
+   5 |           getField: ID
+   6 |         }
+   7 |
+   8 |         type Mutation {
+   9 |           fieldMutation: ID
+  10 |           mutationField: ID
+  11 |         }
+  12 |
+  13 |         type Subscription {
+> 14 |           fieldSubscription: ID
+     |           ^^^^^^^^^^^^^^^^^ Field "fieldSubscription" should not have "Subscription" suffix
+  15 |           subscriptionField: ID
+  16 |         }
+  17 |       
+`;
+
+exports[` 58`] = `
+   1 |
+   2 |         type Query {
+   3 |           fieldQuery: ID
+   4 |           queryField: ID
+   5 |           getField: ID
+   6 |         }
+   7 |
+   8 |         type Mutation {
+   9 |           fieldMutation: ID
+  10 |           mutationField: ID
+  11 |         }
+  12 |
+  13 |         type Subscription {
+  14 |           fieldSubscription: ID
+> 15 |           subscriptionField: ID
+     |           ^^^^^^^^^^^^^^^^^ Field "subscriptionField" should not have "subscription" prefix
+  16 |         }
+  17 |       
+`;
+
+exports[` 59`] = `
+   1 |
+>  2 |         query TestQuery { test }
+     |               ^^^^^^^^^ Operation "TestQuery" should not have "Query" suffix
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 60`] = `
+   1 |
+   2 |         query TestQuery { test }
+>  3 |         query QueryTest { test }
+     |               ^^^^^^^^^ Operation "QueryTest" should not have "Query" prefix
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 61`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+>  4 |         query GetQuery { test }
+     |               ^^^^^^^^ Operation "GetQuery" should not have "Get" prefix
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 62`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+>  7 |         mutation TestMutation { test }
+     |                  ^^^^^^^^^^^^ Operation "TestMutation" should not have "Mutation" suffix
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 63`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+>  8 |         mutation MutationTest { test }
+     |                  ^^^^^^^^^^^^ Operation "MutationTest" should not have "Mutation" prefix
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 64`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+> 10 |         subscription TestSubscription { test }
+     |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 65`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+> 11 |         subscription SubscriptionTest { test }
+     |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
+  12 |
+  13 |         fragment TestFragment on Test { id }
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 66`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+> 13 |         fragment TestFragment on Test { id }
+     |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
+  14 |         fragment FragmentTest on Test { id }
+  15 |       
+`;
+
+exports[` 67`] = `
+   1 |
+   2 |         query TestQuery { test }
+   3 |         query QueryTest { test }
+   4 |         query GetQuery { test }
+   5 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
+   6 |
+   7 |         mutation TestMutation { test }
+   8 |         mutation MutationTest { test }
+   9 |
+  10 |         subscription TestSubscription { test }
+  11 |         subscription SubscriptionTest { test }
+  12 |
+  13 |         fragment TestFragment on Test { id }
+> 14 |         fragment FragmentTest on Test { id }
+     |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not have "Fragment" prefix
+  15 |       
+`;
+
+exports[` 68`] = `
+   1 |
+   2 |         {
+   3 |           test {
+>  4 |             _badAlias: foo
+     |             ^^^^^^^^^ Leading underscores are not allowed
+   5 |             badAlias_: bar
+   6 |             _ok
+   7 |             ok_
+   8 |           }
+   9 |         }
+  10 |       
+`;
+
+exports[` 69`] = `
+   1 |
+   2 |         {
+   3 |           test {
+   4 |             _badAlias: foo
+>  5 |             badAlias_: bar
+     |             ^^^^^^^^^ Trailing underscores are not allowed
+   6 |             _ok
+   7 |             ok_
+   8 |           }
+   9 |         }
+  10 |       
 `;

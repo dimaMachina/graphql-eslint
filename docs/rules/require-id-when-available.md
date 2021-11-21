@@ -1,6 +1,8 @@
 # `require-id-when-available`
 
-- Category: `Best Practices`
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+
+- Category: `Operations`
 - Rule name: `@graphql-eslint/require-id-when-available`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)

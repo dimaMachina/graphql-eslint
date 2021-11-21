@@ -2,6 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import { valueFromNode } from '../estree-parser/utils';
 import { getLocation } from '../utils';
 
+// eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
 
 const MESSAGE_REQUIRE_DATE = 'MESSAGE_REQUIRE_DATE';
@@ -13,7 +14,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: 'Schema',
       description:
         'Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-deprecation-date.md',

@@ -1,7 +1,7 @@
-# `avoid-scalar-result-type-on-mutation`
+# `no-scalar-result-type-on-mutation`
 
-- Category: `Best Practices`
-- Rule name: `@graphql-eslint/avoid-scalar-result-type-on-mutation`
+- Category: `Schema`
+- Rule name: `@graphql-eslint/no-scalar-result-type-on-mutation`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
@@ -12,7 +12,7 @@ Avoid scalar result type on mutation type to make sure to return a valid state.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/avoid-scalar-result-type-on-mutation: 'error'
+# eslint @graphql-eslint/no-scalar-result-type-on-mutation: 'error'
 
 type Mutation {
   createUser: Boolean
@@ -22,7 +22,7 @@ type Mutation {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/avoid-scalar-result-type-on-mutation: 'error'
+# eslint @graphql-eslint/no-scalar-result-type-on-mutation: 'error'
 
 type Mutation {
   createUser: User!
@@ -31,5 +31,5 @@ type Mutation {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/avoid-scalar-result-type-on-mutation.ts)
-- [Test source](../../packages/plugin/tests/avoid-scalar-result-type-on-mutation.spec.ts)
+- [Rule source](../../packages/plugin/src/rules/no-scalar-result-type-on-mutation.ts)
+- [Test source](../../packages/plugin/tests/no-scalar-result-type-on-mutation.spec.ts)

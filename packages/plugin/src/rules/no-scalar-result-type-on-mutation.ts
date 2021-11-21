@@ -7,9 +7,9 @@ const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: 'Schema',
       description: 'Avoid scalar result type on mutation type to make sure to return a valid state.',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/avoid-scalar-result-type-on-mutation.md',
+      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-scalar-result-type-on-mutation.md',
       requiresSchema: true,
       examples: [
         {
@@ -33,7 +33,7 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext('avoid-scalar-result-type-on-mutation', context);
+    const schema = requireGraphQLSchemaFromContext('no-scalar-result-type-on-mutation', context);
     const mutationType = schema.getMutationType();
     if (!mutationType) {
       return {};

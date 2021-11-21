@@ -27,27 +27,37 @@ import { getLocation } from '../utils';
 
 const ALPHABETIZE = 'ALPHABETIZE';
 
-const fieldsEnum = [Kind.OBJECT_TYPE_DEFINITION, Kind.INTERFACE_TYPE_DEFINITION, Kind.INPUT_OBJECT_TYPE_DEFINITION];
-const valuesEnum = [Kind.ENUM_TYPE_DEFINITION];
-const selectionsEnum = [Kind.OPERATION_DEFINITION, Kind.FRAGMENT_DEFINITION];
-const variablesEnum = [Kind.OPERATION_DEFINITION];
-const argumentsEnum = [Kind.FIELD_DEFINITION, Kind.FIELD, Kind.DIRECTIVE_DEFINITION, Kind.DIRECTIVE];
-
-type AlphabetizeConfig = [
-  {
-    fields?: typeof fieldsEnum;
-    values?: typeof valuesEnum;
-    selections?: typeof selectionsEnum;
-    variables?: typeof variablesEnum;
-    arguments?: typeof argumentsEnum;
-  }
+const fieldsEnum: ('ObjectTypeDefinition' | 'InterfaceTypeDefinition' | 'InputObjectTypeDefinition')[] = [
+  Kind.OBJECT_TYPE_DEFINITION,
+  Kind.INTERFACE_TYPE_DEFINITION,
+  Kind.INPUT_OBJECT_TYPE_DEFINITION,
+];
+const valuesEnum: ['EnumTypeDefinition'] = [Kind.ENUM_TYPE_DEFINITION];
+const selectionsEnum: ('OperationDefinition' | 'FragmentDefinition')[] = [
+  Kind.OPERATION_DEFINITION,
+  Kind.FRAGMENT_DEFINITION,
+];
+const variablesEnum: ['OperationDefinition'] = [Kind.OPERATION_DEFINITION];
+const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Directive')[] = [
+  Kind.FIELD_DEFINITION,
+  Kind.FIELD,
+  Kind.DIRECTIVE_DEFINITION,
+  Kind.DIRECTIVE,
 ];
 
-const rule: GraphQLESLintRule<AlphabetizeConfig> = {
+type AlphabetizeConfig = {
+  fields?: typeof fieldsEnum;
+  values?: typeof valuesEnum;
+  selections?: typeof selectionsEnum;
+  variables?: typeof variablesEnum;
+  arguments?: typeof argumentsEnum;
+};
+
+const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Best Practices',
+      category: ['Schema', 'Operations'],
       description:
         'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
@@ -127,15 +137,22 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
           `,
         },
       ],
-      optionsForConfig: [
-        {
-          fields: fieldsEnum,
-          values: valuesEnum,
-          selections: selectionsEnum,
-          variables: variablesEnum,
-          arguments: argumentsEnum,
-        },
-      ],
+      configOptions: {
+        schema: [
+          {
+            fields: fieldsEnum,
+            values: valuesEnum,
+            arguments: argumentsEnum,
+          },
+        ],
+        operations: [
+          {
+            selections: selectionsEnum,
+            variables: variablesEnum,
+            arguments: [Kind.FIELD, Kind.DIRECTIVE],
+          },
+        ],
+      },
     },
     messages: {
       [ALPHABETIZE]: '"{{ currName }}" should be before "{{ prevName }}"',
@@ -151,38 +168,48 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
         properties: {
           fields: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: fieldsEnum,
             },
-            description: 'Fields of `type`, `interface`, and `input`.',
+            description: 'Fields of `type`, `interface`, and `input`',
           },
           values: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: valuesEnum,
             },
-            description: 'Values of `enum`.',
+            description: 'Values of `enum`',
           },
           selections: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: selectionsEnum,
             },
-            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`.',
+            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`',
           },
           variables: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: variablesEnum,
             },
-            description: 'Variables of operations (`query`, `mutation` and `subscription`).',
+            description: 'Variables of operations (`query`, `mutation` and `subscription`)',
           },
           arguments: {
             type: 'array',
-            contains: {
+            uniqueItems: true,
+            minItems: 1,
+            items: {
               enum: argumentsEnum,
             },
-            description: 'Arguments of fields and directives.',
+            description: 'Arguments of fields and directives',
           },
         },
       },
@@ -225,7 +252,7 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
     const fields = new Set(opts.fields ?? []);
     const listeners: GraphQLESLintRuleListener = {};
 
-    const fieldsSelector = [
+    const kinds = [
       fields.has(Kind.OBJECT_TYPE_DEFINITION) && [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION],
       fields.has(Kind.INTERFACE_TYPE_DEFINITION) && [Kind.INTERFACE_TYPE_DEFINITION, Kind.INTERFACE_TYPE_EXTENSION],
       fields.has(Kind.INPUT_OBJECT_TYPE_DEFINITION) && [
@@ -233,8 +260,11 @@ const rule: GraphQLESLintRule<AlphabetizeConfig> = {
         Kind.INPUT_OBJECT_TYPE_EXTENSION,
       ],
     ]
-      .flat()
-      .join(',');
+      .filter(Boolean)
+      .flat();
+
+    const fieldsSelector = kinds.join(',');
+
     const hasEnumValues = opts.values?.[0] === Kind.ENUM_TYPE_DEFINITION;
     const selectionsSelector = opts.selections?.join(',');
     const hasVariables = opts.variables?.[0] === Kind.OPERATION_DEFINITION;

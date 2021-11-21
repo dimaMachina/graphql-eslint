@@ -1,6 +1,6 @@
 # `match-document-filename`
 
-- Category: `Best Practices`
+- Category: `Operations`
 - Rule name: `@graphql-eslint/match-document-filename`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
@@ -88,12 +88,12 @@ query UserById {
 
 The schema defines the following properties:
 
-### `fileExtension` (string, enum)
+### `fileExtension` (enum)
 
 This element must be one of the following enum values:
 
-* `.gql`
-* `.graphql`
+- `.gql`
+- `.graphql`
 
 ### `query`
 
@@ -129,7 +129,7 @@ The object must be one of the following types:
 
 The schema defines the following additional types:
 
-## `asString` (string)
+## `asString` (enum)
 
 One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`, `kebab-case`
 
@@ -137,15 +137,17 @@ One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`, `kebab-case`
 
 Properties of the `asObject` object:
 
-### `style` (string, enum)
+### `style` (enum)
 
 This element must be one of the following enum values:
 
-* `camelCase`
-* `PascalCase`
-* `snake_case`
-* `UPPER_CASE`
-* `kebab-case`
+- `camelCase`
+- `PascalCase`
+- `snake_case`
+- `UPPER_CASE`
+- `kebab-case`
+
+### `suffix` (string)
 
 ## Resources
 

@@ -8,13 +8,11 @@ export interface ExceptionRule {
   suffixes?: string[];
 }
 
-type StrictIdInTypesRuleConfig = [
-  {
-    acceptedIdNames?: string[];
-    acceptedIdTypes?: string[];
-    exceptions?: ExceptionRule;
-  }
-];
+type StrictIdInTypesRuleConfig = {
+  acceptedIdNames?: string[];
+  acceptedIdTypes?: string[];
+  exceptions?: ExceptionRule;
+};
 
 interface ShouldIgnoreNodeParams {
   node: GraphQLESTreeNode<ObjectTypeDefinitionNode>;
@@ -34,13 +32,13 @@ const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean
   return false;
 };
 
-const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
+const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
       description:
         'Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.',
-      category: 'Best Practices',
+      category: 'Schema',
       recommended: true,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/strict-id-in-types.md',
       examples: [
@@ -100,13 +98,15 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
       ],
     },
     schema: {
-      $schema: 'http://json-schema.org/draft-04/schema#',
       type: 'array',
+      maxItems: 1,
       items: {
         type: 'object',
+        additionalProperties: false,
         properties: {
           acceptedIdNames: {
             type: 'array',
+            uniqueItems: true,
             items: {
               type: 'string',
             },
@@ -114,6 +114,7 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
           },
           acceptedIdTypes: {
             type: 'array',
+            uniqueItems: true,
             items: {
               type: 'string',
             },
@@ -124,20 +125,22 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
             properties: {
               types: {
                 type: 'array',
+                uniqueItems: true,
+                minItems: 1,
                 description: 'This is used to exclude types with names that match one of the specified values.',
                 items: {
                   type: 'string',
                 },
-                default: [],
               },
               suffixes: {
                 type: 'array',
+                uniqueItems: true,
+                minItems: 1,
                 description:
                   'This is used to exclude types with names with suffixes that match one of the specified values.',
                 items: {
                   type: 'string',
                 },
-                default: [],
               },
             },
           },
@@ -146,11 +149,11 @@ const rule: GraphQLESLintRule<StrictIdInTypesRuleConfig> = {
     },
   },
   create(context) {
-    const options: StrictIdInTypesRuleConfig[number] = {
+    const options: StrictIdInTypesRuleConfig = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
       exceptions: {},
-      ...(context.options[0] || {}),
+      ...context.options[0],
     };
 
     return {
