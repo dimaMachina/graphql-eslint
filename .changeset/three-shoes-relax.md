@@ -2,6 +2,8 @@
 '@graphql-eslint/eslint-plugin': major
 ---
 
+❗ BREAKING CHANGE ❗
+
 feat: add new options for `naming-convention` rule
 
 Options for `naming-convention` are changed. New option `types` includes the following kinds:
@@ -19,10 +21,9 @@ Added new options:
 - `DirectiveDefinition`
 - `VariableDefinition`
 
-Option `QueryDefinition` was removed in favor of `AST` specific
-selector `FieldDefinition[parent.name.value=Query]`.
+Option `QueryDefinition` was removed in favor of `AST` specific selector `FieldDefinition[parent.name.value=Query]`.
 
-Before
+### Before
 
 ```json
 {
@@ -47,7 +48,7 @@ Before
 }
 ```
 
-After
+### After
 
 ```json
 {

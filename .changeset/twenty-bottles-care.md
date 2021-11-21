@@ -2,6 +2,8 @@
 '@graphql-eslint/eslint-plugin': major
 ---
 
+❗ BREAKING CHANGE ❗
+
 feat: add new options for `require-description` rule
 
 Options for `require-description` are changed. New option `types` includes the following kinds:
@@ -13,7 +15,7 @@ Options for `require-description` are changed. New option `types` includes the f
 - `InputObjectTypeDefinition`
 - `UnionTypeDefinition`
 
-Before
+### Before
 
 ```json
 {
@@ -36,7 +38,7 @@ Before
 }
 ```
 
-After
+### After
 
 ```json
 {

@@ -2,14 +2,16 @@
 '@graphql-eslint/eslint-plugin': major
 ---
 
-feat: rename `avoid` prefix in rules to `no`, remove `avoid-operation-name-prefix`
-and `no-operation-name-suffix`
+❗ BREAKING CHANGE ❗
 
-All rules that had a `avoid` prefix now have a `no` prefix. Rules `avoid-operation-name-prefix`
-and `no-operation-name-suffix` were removed because the same things can be validated
-by `naming-convention` rule.
+- rename `avoid` prefix in rules to `no`. 
+- remove `avoid-operation-name-prefix` and `no-operation-name-suffix`
 
-Before
+All rules that had a `avoid` prefix now have a `no` prefix. 
+
+Rules `avoid-operation-name-prefix` and `no-operation-name-suffix` were removed because the same things can be validated by `naming-convention` rule.
+
+### Before
 
 ```json
 {
@@ -23,7 +25,7 @@ Before
 }
 ```
 
-After
+### After
 
 ```json
 {

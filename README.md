@@ -195,6 +195,12 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 |[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules|
 <!-- prettier-ignore-end -->
 
+> If you are in a project that develops the GraphQL schema, you'll need `schema` rules. 
+
+> If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll need `operations` rules.
+
+> If you are in a monorepo project, you probably need both sets of rules.
+
 ## Config usage
 
 For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the `extends` option:
