@@ -189,10 +189,10 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 <!-- prettier-ignore-start -->
 |Name|Description|
 |:-:|-|
-|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables all recommended rules|
-|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables all recommended rules|
-|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules, except for those that require `parserOptions.operations` option)|
-|[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules|
+|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables recommended rules for schema (SDL) development|
+|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules for schema (SDL) development, except for those that require `parserOptions.operations` option|
+|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables recommended rules for consuming GraphQL (operations) development|
+|[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules for consuming GraphQL (operations) development|
 <!-- prettier-ignore-end -->
 
 > If you are in a project that develops the GraphQL schema, you'll need `schema` rules. 
