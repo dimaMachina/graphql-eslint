@@ -40,9 +40,10 @@ ruleTester.runGraphQLTests('no-scalar-result-type-on-mutation', rule, {
   ],
   invalid: [
     {
+      name: 'should ignore arguments',
       ...useSchema(/* GraphQL */ `
         type Mutation {
-          createUser: Boolean
+          createUser(a: ID, b: ID!, c: [ID]!, d: [ID!]!): Boolean
         }
       `),
       errors: [{ message: 'Unexpected scalar result type "Boolean"' }],
