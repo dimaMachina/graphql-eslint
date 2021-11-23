@@ -1,13 +1,13 @@
+import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
-
-const ERROR_MESSAGE_ID = 'NO_CASE_INSENSITIVE_ENUM_VALUES_DUPLICATES';
+import { getLocation } from '../utils';
 
 const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      url:
-        'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-case-insensitive-enum-values-duplicates.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-case-insensitive-enum-values-duplicates.md`,
       category: 'Schema',
       recommended: true,
       description: 'Disallow case-insensitive enum values duplicates.',
@@ -34,27 +34,21 @@ const rule: GraphQLESLintRule = {
         },
       ],
     },
-    fixable: 'code',
-    messages: {
-      [ERROR_MESSAGE_ID]: `Case-insensitive enum values duplicates are not allowed! Found: "{{ found }}"`,
-    },
     schema: [],
   },
   create(context) {
+    const selector = [Kind.ENUM_TYPE_DEFINITION, Kind.ENUM_TYPE_EXTENSION].join(',');
     return {
-      EnumTypeDefinition(node) {
-        const foundDuplicates = node.values.filter(
-          (item, index) =>
-            node.values.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !== index
+      [selector](node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>) {
+        const duplicates = node.values.filter(
+          (item, index, array) =>
+            array.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !== index
         );
-
-        for (const dup of foundDuplicates) {
+        for (const duplicate of duplicates) {
+          const enumName = duplicate.name.value;
           context.report({
-            node: dup.name,
-            data: {
-              found: dup.name.value,
-            },
-            messageId: ERROR_MESSAGE_ID,
+            loc: getLocation(duplicate.loc, enumName),
+            message: `Case-insensitive enum values duplicates are not allowed! Found: "${enumName}"`,
           });
         }
       },

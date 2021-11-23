@@ -43,7 +43,6 @@ export default {
     '@graphql-eslint/strict-id-in-types': 'error',
     '@graphql-eslint/unique-directive-names': 'error',
     '@graphql-eslint/unique-directive-names-per-location': 'error',
-    '@graphql-eslint/unique-enum-value-names': 'error',
     '@graphql-eslint/unique-field-definition-names': 'error',
     '@graphql-eslint/unique-operation-types': 'error',
     '@graphql-eslint/unique-type-names': 'error',

@@ -4,6 +4,7 @@ import { format, resolveConfig } from 'prettier';
 import chalk from 'chalk';
 import { camelCase } from '../packages/plugin/src/utils';
 import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src';
+import { DISABLED_RULES_FOR_ALL_CONFIG } from './constants';
 
 const BR = '';
 const prettierOptions = {
@@ -12,7 +13,6 @@ const prettierOptions = {
 };
 const SRC_PATH = join(process.cwd(), 'packages/plugin/src');
 const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
-const DISABLED_RULES_FOR_ALL_CONFIG = new Set<string>(['no-root-type', 'no-unused-fields', 'possible-type-extension']);
 
 function writeFormattedFile(filePath: string, typeScriptCode: string): void {
   const code = [
@@ -47,7 +47,7 @@ function generateRules(): void {
   writeFormattedFile('rules/index.ts', code);
 }
 
-type RuleOptions = 'error' | ['error', ...any] | 'off';
+type RuleOptions = 'error' | ['error', ...any];
 
 async function generateConfigs(): Promise<void> {
   const { rules } = await import('../packages/plugin/src');
@@ -55,9 +55,6 @@ async function generateConfigs(): Promise<void> {
   const getRulesConfig = (categoryType: CategoryType, isRecommended: boolean): Record<string, RuleOptions> => {
     const getRuleOptions = (ruleId, rule: GraphQLESLintRule): RuleOptions => {
       const { configOptions } = rule.meta.docs;
-      if (!isRecommended && DISABLED_RULES_FOR_ALL_CONFIG.has(ruleId)) {
-        return 'off';
-      }
       if (!configOptions) {
         return 'error';
       }
@@ -80,7 +77,9 @@ async function generateConfigs(): Promise<void> {
       .sort();
 
     return Object.fromEntries(
-      filteredRules.map(ruleId => [`@graphql-eslint/${ruleId}`, getRuleOptions(ruleId, rules[ruleId])])
+      filteredRules
+        .filter(ruleId => !DISABLED_RULES_FOR_ALL_CONFIG.has(ruleId))
+        .map(ruleId => [`@graphql-eslint/${ruleId}`, getRuleOptions(ruleId, rules[ruleId])])
     );
   };
 
