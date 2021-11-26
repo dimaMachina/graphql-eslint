@@ -56,7 +56,7 @@
     "typescript": "4.5.2"
   },
   "resolutions": {
-    "@changesets/git": "1.2.0",
+    "@changesets/git": "1.2.1",
     "graphql": "16.0.1"
   },
   "lint-staged": {
