@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.0.1
+
+### Patch Changes
+
+- 32ec2cb: fix: ignore arguments in `require-field-of-type-query-in-mutation-result` rule
+- 5a259ce: chore: remove `unique-enum-value-names` rule from recommended config
+- 36d5334: fix: ignore arguments in `no-scalar-result-type-on-mutation` rule
+
 ## 3.0.0
 
 ### Major Changes
