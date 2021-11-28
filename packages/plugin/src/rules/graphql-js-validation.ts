@@ -327,6 +327,7 @@ export const GRAPHQL_JS_VALIDATIONS = Object.assign(
     category: 'Schema',
     description: `A GraphQL enum type is only valid if all its values are uniquely named.`,
     requiresSchema: false,
+    recommended: false,
   }),
   validationToRule('unique-field-definition-names', 'UniqueFieldDefinitionNames', {
     category: 'Schema',
