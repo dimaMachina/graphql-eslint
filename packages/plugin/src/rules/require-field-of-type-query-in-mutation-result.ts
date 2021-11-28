@@ -1,4 +1,4 @@
-import { Kind, FieldDefinitionNode, isObjectType } from 'graphql';
+import { Kind, isObjectType, NameNode } from 'graphql';
 import { requireGraphQLSchemaFromContext, getTypeName, getLocation } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
@@ -56,14 +56,12 @@ const rule: GraphQLESLintRule = {
     }
     const selector = [
       `:matches(${Kind.OBJECT_TYPE_DEFINITION}, ${Kind.OBJECT_TYPE_EXTENSION})[name.value=${mutationType.name}]`,
-      '>',
-      Kind.FIELD_DEFINITION,
-      Kind.NAMED_TYPE,
+      `> ${Kind.FIELD_DEFINITION} > .gqlType ${Kind.NAME}`,
     ].join(' ');
 
     return {
-      [selector](node: GraphQLESTreeNode<FieldDefinitionNode>) {
-        const typeName = node.name.value;
+      [selector](node: GraphQLESTreeNode<NameNode>) {
+        const typeName = node.value;
         const graphQLType = schema.getType(typeName);
 
         if (isObjectType(graphQLType)) {
@@ -72,7 +70,7 @@ const rule: GraphQLESLintRule = {
           if (!hasQueryType) {
             context.report({
               loc: getLocation(node.loc, typeName),
-              message: `Mutation result type "${graphQLType.name}" must contain field of type "${queryType.name}".`,
+              message: `Mutation result type "${graphQLType.name}" must contain field of type "${queryType.name}"`,
             });
           }
         }

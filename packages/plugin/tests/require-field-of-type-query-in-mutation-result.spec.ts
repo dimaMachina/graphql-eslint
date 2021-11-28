@@ -61,13 +61,14 @@ ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rul
   ],
   invalid: [
     {
+      name: 'should ignore arguments',
       ...useSchema(/* GraphQL */ `
         type Query
         type Mutation {
-          createUser: User!
+          createUser(a: User, b: User!, c: [User], d: [User]!, e: [User!]!): User
         }
       `),
-      errors: [{ message: 'Mutation result type "User" must contain field of type "Query".' }],
+      errors: [{ message: 'Mutation result type "User" must contain field of type "Query"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
@@ -78,13 +79,13 @@ ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rul
           createUser: User!
         }
       `),
-      errors: [{ message: 'Mutation result type "User" must contain field of type "Query".' }],
+      errors: [{ message: 'Mutation result type "User" must contain field of type "Query"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         type RootQuery
         type RootMutation {
-          createUser: User!
+          createUser: [User]
         }
 
         schema {
@@ -92,14 +93,14 @@ ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rul
           query: RootQuery
         }
       `),
-      errors: [{ message: 'Mutation result type "User" must contain field of type "RootQuery".' }],
+      errors: [{ message: 'Mutation result type "User" must contain field of type "RootQuery"' }],
     },
     {
       ...useSchema(/* GraphQL */ `
         type RootQuery
         type RootMutation
         extend type RootMutation {
-          createUser: User!
+          createUser: [User!]!
         }
 
         schema {
@@ -107,7 +108,7 @@ ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rul
           query: RootQuery
         }
       `),
-      errors: [{ message: 'Mutation result type "User" must contain field of type "RootQuery".' }],
+      errors: [{ message: 'Mutation result type "User" must contain field of type "RootQuery"' }],
     },
   ],
 });

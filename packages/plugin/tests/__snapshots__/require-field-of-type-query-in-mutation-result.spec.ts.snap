@@ -4,8 +4,8 @@ exports[` 1`] = `
   1 |
   2 |         type Query
   3 |         type Mutation {
-> 4 |           createUser: User!
-    |                       ^^^^ Mutation result type "User" must contain field of type "Query".
+> 4 |           createUser(a: User, b: User!, c: [User], d: [User]!, e: [User!]!): User
+    |                                                                              ^^^^ Mutation result type "User" must contain field of type "Query"
   5 |         }
   6 |       
 `;
@@ -17,7 +17,7 @@ exports[` 2`] = `
   4 |
   5 |         extend type Mutation {
 > 6 |           createUser: User!
-    |                       ^^^^ Mutation result type "User" must contain field of type "Query".
+    |                       ^^^^ Mutation result type "User" must contain field of type "Query"
   7 |         }
   8 |       
 `;
@@ -26,8 +26,8 @@ exports[` 3`] = `
    1 |
    2 |         type RootQuery
    3 |         type RootMutation {
->  4 |           createUser: User!
-     |                       ^^^^ Mutation result type "User" must contain field of type "RootQuery".
+>  4 |           createUser: [User]
+     |                        ^^^^ Mutation result type "User" must contain field of type "RootQuery"
    5 |         }
    6 |
    7 |         schema {
@@ -42,8 +42,8 @@ exports[` 4`] = `
    2 |         type RootQuery
    3 |         type RootMutation
    4 |         extend type RootMutation {
->  5 |           createUser: User!
-     |                       ^^^^ Mutation result type "User" must contain field of type "RootQuery".
+>  5 |           createUser: [User!]!
+     |                        ^^^^ Mutation result type "User" must contain field of type "RootQuery"
    6 |         }
    7 |
    8 |         schema {
