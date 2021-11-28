@@ -3,8 +3,8 @@
 exports[` 1`] = `
   1 |
   2 |         type Mutation {
-> 3 |           createUser: Boolean
-    |                       ^^^^^^^ Unexpected scalar result type "Boolean"
+> 3 |           createUser(a: ID, b: ID!, c: [ID]!, d: [ID!]!): Boolean
+    |                                                           ^^^^^^^ Unexpected scalar result type "Boolean"
   4 |         }
   5 |       
 `;
