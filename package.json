@@ -44,7 +44,7 @@
     "eslint-plugin-standard": "5.0.0",
     "eslint-plugin-unicorn": "39.0.0",
     "husky": "7.0.4",
-    "jest": "27.4.1",
+    "jest": "27.4.2",
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
     "lint-staged": "12.1.2",
