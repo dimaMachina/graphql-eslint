@@ -1,4 +1,4 @@
-import { TokenKind } from 'graphql';
+import { Kind, TokenKind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { getLocation } from '../utils';
 
@@ -7,8 +7,7 @@ const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 const rule: GraphQLESLintRule = {
   meta: {
     messages: {
-      [HASHTAG_COMMENT]:
-        'Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.',
+      [HASHTAG_COMMENT]: `Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.`,
     },
     docs: {
       description:
@@ -56,8 +55,9 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
+    const selector = `${Kind.DOCUMENT}[definitions.0.kind!=/^(${Kind.OPERATION_DEFINITION}|${Kind.FRAGMENT_DEFINITION})$/]`;
     return {
-      Document(node) {
+      [selector](node) {
         const rawNode = node.rawNode();
         let token = rawNode.loc.startToken;
 
@@ -65,7 +65,7 @@ const rule: GraphQLESLintRule = {
           const { kind, prev, next, value, line, column } = token;
 
           if (kind === TokenKind.COMMENT && prev && next) {
-            const isEslintComment = value.trimLeft().startsWith('eslint');
+            const isEslintComment = value.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
 
             if (!isEslintComment && line !== prev.line && next.kind === TokenKind.NAME && linesAfter < 2) {
