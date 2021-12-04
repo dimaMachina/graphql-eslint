@@ -1,6 +1,5 @@
-import { GraphQLRuleTester } from '../src/testkit';
+import { GraphQLRuleTester, ParserOptions } from '../src';
 import rule from '../src/rules/require-id-when-available';
-import { ParserOptions } from '../src/types';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -34,6 +33,7 @@ const TEST_SCHEMA = /* GraphQL */ `
 
   type HasId {
     id: ID!
+    _id: ID!
     name: String!
   }
 `;
@@ -41,11 +41,11 @@ const TEST_SCHEMA = /* GraphQL */ `
 const WITH_SCHEMA = {
   parserOptions: <ParserOptions>{
     schema: TEST_SCHEMA,
-    operations: [
-      `fragment HasIdFields on HasId {
+    operations: /* GraphQL */ `
+      fragment HasIdFields on HasId {
         id
-      }`,
-    ],
+      }
+    `,
   },
 };
 const ruleTester = new GraphQLRuleTester();
@@ -67,6 +67,12 @@ ruleTester.runGraphQLTests('require-id-when-available', rule, {
       ...WITH_SCHEMA,
       code: `query { vehicles { id ...on Car { mileage } } }`,
     },
+    {
+      ...WITH_SCHEMA,
+      name: 'support multiple id field names',
+      code: `query { hasId { _id } }`,
+      options: [{ fieldName: ['id', '_id'] }],
+    },
   ],
   invalid: [
     {
@@ -78,6 +84,19 @@ ruleTester.runGraphQLTests('require-id-when-available', rule, {
       ...WITH_SCHEMA,
       code: `query { hasId { id } }`,
       options: [{ fieldName: 'name' }],
+      errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
+    },
+    {
+      ...WITH_SCHEMA,
+      name: 'support multiple id field names',
+      code: /* GraphQL */ `
+        query {
+          hasId {
+            name
+          }
+        }
+      `,
+      options: [{ fieldName: ['id', '_id'] }],
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
   ],
