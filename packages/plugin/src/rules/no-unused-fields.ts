@@ -2,7 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import { getLocation, requireUsedFieldsFromContext } from '../utils';
 
 const UNUSED_FIELD = 'UNUSED_FIELD';
-const RULE_NAME = 'no-unused-fields';
+const RULE_ID = 'no-unused-fields';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -12,7 +12,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       description: `Requires all fields to be used at some level by siblings operations.`,
       category: 'Schema',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       requiresSchema: true,
       examples: [
@@ -59,12 +59,12 @@ const rule: GraphQLESLintRule = {
         },
       ],
     },
-    fixable: 'code',
     type: 'suggestion',
     schema: [],
+    hasSuggestions: true,
   },
   create(context) {
-    const usedFields = requireUsedFieldsFromContext(RULE_NAME, context);
+    const usedFields = requireUsedFieldsFromContext(RULE_ID, context);
 
     return {
       FieldDefinition(node) {
@@ -80,24 +80,19 @@ const rule: GraphQLESLintRule = {
           loc: getLocation(node.loc, fieldName),
           messageId: UNUSED_FIELD,
           data: { fieldName },
-          fix(fixer) {
-            const sourceCode = context.getSourceCode();
-            const tokenBefore = (sourceCode as any).getTokenBefore(node);
-            const tokenAfter = (sourceCode as any).getTokenAfter(node);
-            const isEmptyType = tokenBefore.type === '{' && tokenAfter.type === '}';
+          suggest: [
+            {
+              desc: `Remove "${fieldName}" field`,
+              fix(fixer) {
+                const sourceCode = context.getSourceCode() as any;
+                const tokenBefore = sourceCode.getTokenBefore(node);
+                const tokenAfter = sourceCode.getTokenAfter(node);
+                const isEmptyType = tokenBefore.type === '{' && tokenAfter.type === '}';
 
-            if (isEmptyType) {
-              // Remove type
-              const { parent } = node as any;
-              const parentBeforeToken = sourceCode.getTokenBefore(parent);
-              return parentBeforeToken
-                ? fixer.removeRange([parentBeforeToken.range[1], parent.range[1]])
-                : fixer.remove(parent);
-            }
-
-            // Remove whitespace before token
-            return fixer.removeRange([tokenBefore.range[1], node.range[1]]);
-          },
+                return isEmptyType ? fixer.remove((node as any).parent) : fixer.remove(node as any);
+              },
+            },
+          ],
         });
       },
     };
