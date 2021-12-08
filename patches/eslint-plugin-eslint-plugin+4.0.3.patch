@@ -1,8 +1,8 @@
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-index f680961..c9a08b4 100644
+index e6719bb..b0e871d 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-@@ -31,7 +31,7 @@ module.exports = {
+@@ -32,7 +32,7 @@ module.exports = {
  
                const onlyProperty = test.properties.find(
                  property =>
@@ -12,7 +12,7 @@ index f680961..c9a08b4 100644
                    property.value.type === 'Literal' &&
                    property.value.value
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-index d7a2b82..326d387 100644
+index 8aca920..707fe53 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 @@ -24,10 +24,10 @@ function isNormalFunctionExpression (node) {
@@ -28,35 +28,7 @@ index d7a2b82..326d387 100644
    );
  }
  
-@@ -85,12 +85,17 @@ function isFunctionRule (node) {
- /**
-  * Helper for `getRuleInfo`. Handles ESM and TypeScript rules.
-  */
--function getRuleExportsESM (ast) {
-+function getRuleExportsESM (ast, scopeManager) {
-   return ast.body
-     .filter(statement => statement.type === 'ExportDefaultDeclaration')
-     .map(statement => statement.declaration)
-     // eslint-disable-next-line unicorn/prefer-object-from-entries
-     .reduce((currentExports, node) => {
-+      // Check `const rule = { create() {}, meta: {} }; export default rule`
-+      if (node.type === 'Identifier' && scopeManager) {
-+        const variable = findVariable(scopeManager.globalScope, node);
-+        return collectInterestingProperties(variable.defs[0].node.init.properties, INTERESTING_RULE_KEYS);
-+      }
-       if (node.type === 'ObjectExpression') {
-         // Check `export default { create() {}, meta: {} }`
-         return collectInterestingProperties(node.properties, INTERESTING_RULE_KEYS);
-@@ -218,7 +223,7 @@ module.exports = {
-   from the file, the return value will be `null`.
-   */
-   getRuleInfo ({ ast, scopeManager }) {
--    const exportNodes = ast.sourceType === 'module' ? getRuleExportsESM(ast) : getRuleExportsCJS(ast);
-+    const exportNodes = ast.sourceType === 'module' ? getRuleExportsESM(ast, scopeManager) : getRuleExportsCJS(ast);
- 
-     const createExists = Object.prototype.hasOwnProperty.call(exportNodes, 'create');
-     if (!createExists) {
-@@ -317,7 +322,7 @@ module.exports = {
+@@ -343,7 +343,7 @@ module.exports = {
            variableIdentifiers.has(statement.expression.callee.object)
          ) &&
          statement.expression.callee.property.type === 'Identifier' &&
