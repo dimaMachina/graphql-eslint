@@ -70,6 +70,30 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
         ): User
       }
     `,
+    /* GraphQL */ `
+      # ok
+      query {
+        test
+      }
+    `,
+    /* GraphQL */ `
+      # ok
+      mutation {
+        test
+      }
+    `,
+    /* GraphQL */ `
+      # ok
+      subscription {
+        test
+      }
+    `,
+    /* GraphQL */ `
+      # ok
+      fragment UserFields on User {
+        id
+      }
+    `,
   ],
   invalid: [
     {
