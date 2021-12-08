@@ -1,5 +1,5 @@
 {
-  "eslint.enable": true,  
+  "eslint.enable": true,
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
@@ -10,5 +10,12 @@
     "npm": true,
     "**/dist": true
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto",
+      "changeProcessCWD": true
+    }
+  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"]
 }

@@ -116,9 +116,7 @@ exports[` 4`] = `
   28 |         type User implements Address {
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 5`] = `
@@ -153,9 +151,7 @@ exports[` 5`] = `
   28 |         type User implements Address {
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 6`] = `
@@ -190,9 +186,7 @@ exports[` 6`] = `
   28 |         type User implements Address {
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 7`] = `
@@ -227,9 +221,7 @@ exports[` 7`] = `
   28 |         type User implements Address {
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 8`] = `
@@ -264,9 +256,7 @@ exports[` 8`] = `
   28 |         type User implements Address {
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 9`] = `
@@ -301,9 +291,7 @@ exports[` 9`] = `
   28 |         type User implements Address {
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 10`] = `
@@ -338,9 +326,7 @@ exports[` 10`] = `
      |              ^^^^ Type "User" is unreachable
   29 |           city: String
   30 |         }
-  31 |
-  32 |         type Query
-  33 |       
+  31 |       
 `;
 
 exports[` 11`] = `

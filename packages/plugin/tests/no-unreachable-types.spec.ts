@@ -159,16 +159,6 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
           address: String
         }
       `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        type Query {
-          node(id: ID!): AnotherNode!
-        }
-
-        interface AnotherNode {
-          createdAt: String
-        }
-      `,
       errors: [
         { message: `Type "Node" is unreachable` },
         { message: `Type "User" is unreachable` },
@@ -206,13 +196,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         type User implements Address {
           city: String
         }
-
-        type Query
       `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        type Query
-      `,
       errors: [
         { message: 'Type "DateTime" is unreachable' },
         { message: 'Type "Role" is unreachable' },
@@ -244,25 +228,6 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
 
         scalar DateTime
       `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        interface User {
-          id: String
-        }
-
-        type SuperUser implements User {
-          id: String
-          superDetail: SuperDetail
-        }
-
-        type SuperDetail {
-          detail: String
-        }
-
-        type Query {
-          user: User!
-        }
-      `,
       errors: [{ message: 'Type "DateTime" is unreachable' }],
     },
     {
@@ -288,16 +253,6 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
           user: AnotherUser!
         }
       `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        interface AnotherUser {
-          createdAt: String
-        }
-
-        type Query {
-          user: AnotherUser!
-        }
-      `,
       errors: [
         { message: `Type "User" is unreachable` },
         { message: `Type "SuperUser" is unreachable` },
@@ -327,27 +282,6 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
 
         scalar DateTime
       `),
-      output: /* GraphQL */ `
-        # normalize graphql
-        type Query {
-          node(id: ID!): Node!
-        }
-
-        interface Node {
-          id: ID!
-        }
-
-        interface User implements Node {
-          id: ID!
-          name: String
-        }
-
-        type SuperUser implements User & Node {
-          id: ID!
-          name: String
-          address: String
-        }
-      `,
       errors: [{ message: `Type "DateTime" is unreachable` }],
     },
   ],

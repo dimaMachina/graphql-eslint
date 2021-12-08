@@ -2,25 +2,23 @@
 
 exports[` 1`] = `
   1 |
-  2 |         # normalize graphql
-  3 |         type User {
-  4 |           id: ID!
-> 5 |           firstName: String
+  2 |         type User {
+  3 |           id: ID!
+> 4 |           firstName: String
     |           ^^^^^^^^^ Field "firstName" is unused
-  6 |         }
-  7 |       
+  5 |         }
+  6 |       
 `;
 
 exports[` 2`] = `
-   1 |
-   2 |         # normalize graphql
-   3 |         type Query {
-   4 |           user(id: ID!): User
-   5 |         }
-   6 |
-   7 |         type Mutation {
->  8 |           deleteUser(id: ID!): User
-     |           ^^^^^^^^^^ Field "deleteUser" is unused
-   9 |         }
-  10 |       
+  1 |
+  2 |         type Query {
+  3 |           user(id: ID!): User
+  4 |         }
+  5 |
+  6 |         type Mutation {
+> 7 |           deleteUser(id: ID!): User
+    |           ^^^^^^^^^^ Field "deleteUser" is unused
+  8 |         }
+  9 |       
 `;

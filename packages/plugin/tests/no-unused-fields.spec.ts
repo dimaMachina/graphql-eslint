@@ -84,8 +84,7 @@ new GraphQLRuleTester({ schema: SCHEMA }).runGraphQLTests('no-unused-fields', ru
   ],
   invalid: [
     {
-      code: `
-        # normalize graphql
+      code: /* GraphQL */ `
         type User {
           id: ID!
           firstName: String
@@ -101,16 +100,9 @@ new GraphQLRuleTester({ schema: SCHEMA }).runGraphQLTests('no-unused-fields', ru
         `,
       },
       errors: [{ message: 'Field "firstName" is unused' }],
-      output: /* GraphQL */ `
-        # normalize graphql
-        type User {
-          id: ID!
-        }
-      `,
     },
     {
       code: /* GraphQL */ `
-        # normalize graphql
         type Query {
           user(id: ID!): User
         }
@@ -129,12 +121,6 @@ new GraphQLRuleTester({ schema: SCHEMA }).runGraphQLTests('no-unused-fields', ru
         `,
       },
       errors: [{ message: 'Field "deleteUser" is unused' }],
-      output: /* GraphQL */ `
-        # normalize graphql
-        type Query {
-          user(id: ID!): User
-        }
-      `,
     },
   ],
 });

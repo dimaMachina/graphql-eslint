@@ -12,7 +12,6 @@ const DOCS_PATH = resolve(process.cwd(), 'docs');
 enum Icon {
   GRAPHQL_ESLINT = '🚀',
   GRAPHQL_JS = '🔮',
-  FIXABLE = '🔧',
   RECOMMENDED = '✅',
 }
 
@@ -44,7 +43,7 @@ function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]
 function generateDocs(): void {
   const result = Object.entries(rules).map(([ruleName, rule]) => {
     const blocks: string[] = [`# \`${ruleName}\``, BR];
-    const { deprecated, docs, fixable, schema } = rule.meta;
+    const { deprecated, docs, schema } = rule.meta;
 
     if (deprecated) {
       blocks.push(`- ❗ DEPRECATED ❗`);
@@ -56,12 +55,6 @@ function generateDocs(): void {
         `${Icon.RECOMMENDED} The \`"extends": ${configNames.join(
           '` and `'
         )}\` property in a configuration file enables this rule.`,
-        BR
-      );
-    }
-    if (fixable) {
-      blocks.push(
-        `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
         BR
       );
     }
@@ -141,7 +134,7 @@ function generateDocs(): void {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([ruleName, rule]) => {
       const link = `[${ruleName}](rules/${ruleName}.md)`;
-      const { docs, fixable } = rule.meta;
+      const { docs } = rule.meta;
       const isDisabled = DISABLED_RULES_FOR_ALL_CONFIG.has(ruleName);
 
       return [
@@ -149,7 +142,6 @@ function generateDocs(): void {
         docs.description.split('\n')[0],
         isDisabled ? '' : docs.recommended ? '![recommended][]' : '![all][]',
         docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
-        fixable ? Icon.FIXABLE : '',
       ];
     });
 
@@ -162,7 +154,6 @@ function generateDocs(): void {
       BR,
       `- ${Icon.GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
       `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
-      `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
       BR,
       '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
       printMarkdownTable(
@@ -171,7 +162,6 @@ function generateDocs(): void {
           'Description',
           { name: `${'&nbsp;'.repeat(4)}Config${'&nbsp;'.repeat(4)}`, align: 'center' },
           { name: `${Icon.GRAPHQL_ESLINT}&nbsp;/&nbsp;${Icon.GRAPHQL_JS}`, align: 'center' },
-          Icon.FIXABLE,
         ],
         sortedRules
       ),
