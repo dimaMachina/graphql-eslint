@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.1.0
+
+### Minor Changes
+
+- 37c1579: feat: convert fix to suggestions in `no-unreachable-types` and `no-unused-fields` rules
+
+### Patch Changes
+
+- 988e445: fix: ignore operations and fragments in `no-hashtag-description` rule
+
 ## 3.0.1
 
 ### Patch Changes
