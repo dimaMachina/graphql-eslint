@@ -5,7 +5,7 @@
 - Category: `Operations`
 - Rule name: `@graphql-eslint/known-fragment-names`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.
 
@@ -13,7 +13,7 @@ A GraphQL document is only valid if all `...Fragment` fragment spreads refer to 
 
 ## Usage Examples
 
-### Incorrect (fragment not defined in the document)
+### Incorrect
 
 ```graphql
 # eslint @graphql-eslint/known-fragment-names: 'error'
@@ -21,7 +21,7 @@ A GraphQL document is only valid if all `...Fragment` fragment spreads refer to 
 query {
   user {
     id
-    ...UserFields
+    ...UserFields # fragment not defined in the document
   }
 }
 ```
@@ -44,44 +44,23 @@ query {
 }
 ```
 
-### Correct (existing import to UserFields fragment)
+### Correct (`UserFields` fragment located in a separate file)
 
 ```graphql
 # eslint @graphql-eslint/known-fragment-names: 'error'
 
-#import '../UserFields.gql'
-
+# user.gql
 query {
   user {
     id
     ...UserFields
   }
 }
-```
 
-### False positive case
-
-For extracting documents from code under the hood we use [graphql-tag-pluck](https://graphql-tools.com/docs/graphql-tag-pluck) that [don't support string interpolation](https://stackoverflow.com/questions/62749847/graphql-codegen-dynamic-fields-with-interpolation/62751311#62751311) for this moment.
-
-```js
-const USER_FIELDS = gql`
-  fragment UserFields on User {
-    id
-  }
-`
-
-const GET_USER = /* GraphQL */ `
-  # eslint @graphql-eslint/known-fragment-names: 'error'
-
-  query User {
-    user {
-      ...UserFields
-    }
-  }
-
-  # Will give false positive error 'Unknown fragment "UserFields"'
-  ${USER_FIELDS}
-`
+# user-fields.gql
+fragment UserFields on User {
+  id
+}
 ```
 
 ## Resources

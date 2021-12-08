@@ -1,6 +1,4 @@
-#import UserFields from './user-fields-with-variables.gql'
-
-query User($limit: Int!, $offset: Int!) {
+query ($limit: Int!, $offset: Int!) {
   user {
     id
     ...UserFields

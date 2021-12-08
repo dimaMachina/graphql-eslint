@@ -1,5 +1,3 @@
-#import UserFields from './user-fields-with-variables.gql'
-
 query User {
   user {
     id

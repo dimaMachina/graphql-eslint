@@ -1,5 +1,3 @@
-#import './user-fields-with-nested-fragment.gql'
-
 query User {
   user {
     ...UserFields
