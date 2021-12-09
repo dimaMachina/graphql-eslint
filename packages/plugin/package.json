@@ -27,10 +27,10 @@
   },
   "dependencies": {
     "@babel/code-frame": "7.16.0",
-    "@graphql-tools/code-file-loader": "7.2.2",
+    "@graphql-tools/code-file-loader": "7.2.3",
     "@graphql-tools/graphql-tag-pluck": "7.1.4",
-    "@graphql-tools/import": "6.6.1",
-    "@graphql-tools/utils": "8.5.3",
+    "@graphql-tools/import": "6.6.2",
+    "@graphql-tools/utils": "8.5.4",
     "graphql-config": "4.1.0",
     "graphql-depth-limit": "1.1.0",
     "lodash.lowercase": "4.3.0"
