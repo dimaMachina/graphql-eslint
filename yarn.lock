@@ -1491,10 +1491,10 @@
     tslib "~2.3.0"
     value-or-promise "1.0.11"
 
-"@graphql-tools/code-file-loader@7.2.2":
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/code-file-loader/-/code-file-loader-7.2.2.tgz#79f8ce5723ee87ecb4d490d1497ac7e616340358"
-  integrity sha512-AADyxqipGWLBl4N59CGPgv3i35UF1fQpJvbC5a6TXmcppnghD2olDLewOh1pIQrwxGAAh1S75XVIi28PTKYZhg==
+"@graphql-tools/code-file-loader@7.2.3":
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/code-file-loader/-/code-file-loader-7.2.3.tgz#b53e8809528da07911423c3a511e5fccf9121a12"
+  integrity sha512-aNVG3/VG5cUpS389rpCum+z7RY98qvPwOzd+J4LVr+f5hWQbDREnSFM+5RVTDfULujrsi7edKaGxGKp68pGmAA==
   dependencies:
     "@graphql-tools/graphql-tag-pluck" "^7.1.3"
     "@graphql-tools/utils" "^8.5.1"
@@ -1547,7 +1547,16 @@
     "@graphql-tools/utils" "^8.5.1"
     tslib "~2.3.0"
 
-"@graphql-tools/import@6.6.1", "@graphql-tools/import@^6.5.7":
+"@graphql-tools/import@6.6.2":
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/import/-/import-6.6.2.tgz#2d1dabfee82ccebcd5e26d05f427cd1da91b2bf1"
+  integrity sha512-XBAw4GBaTwwA736VPTe5vKOS/FCVXpi0ofSeOa2AKedD4JEViAYx4Al3MPpmi2sIVumIOV7wGwHgX7HAgG5RdQ==
+  dependencies:
+    "@graphql-tools/utils" "8.5.4"
+    resolve-from "5.0.0"
+    tslib "~2.3.0"
+
+"@graphql-tools/import@^6.5.7":
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/import/-/import-6.6.1.tgz#2a7e1ceda10103ffeb8652a48ddc47150b035485"
   integrity sha512-i9WA6k+erJMci822o9w9DoX+uncVBK60LGGYW8mdbhX0l7wEubUpA000thJ1aarCusYh0u+ZT9qX0HyVPXu25Q==
@@ -1623,6 +1632,13 @@
   version "8.5.3"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.5.3.tgz#404062e62cae9453501197039687749c4885356e"
   integrity sha512-HDNGWFVa8QQkoQB0H1lftvaO1X5xUaUDk1zr1qDe0xN1NL0E/CrQdJ5UKLqOvH4hkqVUPxQsyOoAZFkaH6rLHg==
+  dependencies:
+    tslib "~2.3.0"
+
+"@graphql-tools/utils@8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.5.4.tgz#9dadbd2fad2115ab5cde546d1353e41ef3d139a0"
+  integrity sha512-ViupMJH590be75tCiyHs/wgJ2KPbWMzc+jopen6P6MliHWoqRlGWMMvYQE1hDj25v4fxObCVq20maQCow0T9nQ==
   dependencies:
     tslib "~2.3.0"
 
