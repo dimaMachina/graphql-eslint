@@ -255,13 +255,16 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       const error = getError();
       if (error) {
         const { errorMessage, renameToName } = error;
+        const [leadingUnderscore] = nodeName.match(/^_*/);
+        const [trailingUnderscore] = nodeName.match(/_*$/);
+        const suggestedName = leadingUnderscore + renameToName + trailingUnderscore;
         context.report({
           loc: getLocation(node.loc, node.value),
           message: `${nodeType} "${nodeName}" should ${errorMessage}`,
           suggest: [
             {
-              desc: `Rename to "${renameToName}"`,
-              fix: fixer => fixer.replaceText(node as any, renameToName),
+              desc: `Rename to "${suggestedName}"`,
+              fix: fixer => fixer.replaceText(node as any, suggestedName),
             },
           ],
         });
@@ -275,34 +278,34 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         if (prefix && !name.startsWith(prefix)) {
           return {
             errorMessage: `have "${prefix}" prefix`,
-            renameToName: prefix + nodeName,
+            renameToName: prefix + name,
           };
         }
         if (suffix && !name.endsWith(suffix)) {
           return {
             errorMessage: `have "${suffix}" suffix`,
-            renameToName: nodeName + suffix,
+            renameToName: name + suffix,
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
         if (forbiddenPrefix) {
           return {
             errorMessage: `not have "${forbiddenPrefix}" prefix`,
-            renameToName: nodeName.replace(new RegExp(`^${forbiddenPrefix}`), ''),
+            renameToName: name.replace(new RegExp(`^${forbiddenPrefix}`), ''),
           };
         }
         const forbiddenSuffix = forbiddenSuffixes?.find(suffix => name.endsWith(suffix));
         if (forbiddenSuffix) {
           return {
             errorMessage: `not have "${forbiddenSuffix}" suffix`,
-            renameToName: nodeName.replace(new RegExp(`${forbiddenSuffix}$`), ''),
+            renameToName: name.replace(new RegExp(`${forbiddenSuffix}$`), ''),
           };
         }
         const caseRegex = StyleToRegex[style];
         if (caseRegex && !caseRegex.test(name)) {
           return {
             errorMessage: `be in ${style} format`,
-            renameToName: convertCase(style, nodeName),
+            renameToName: convertCase(style, name),
           };
         }
       }
