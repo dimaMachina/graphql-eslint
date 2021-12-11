@@ -1,3 +1,4 @@
+import { AST } from 'eslint';
 import { validate, GraphQLSchema, DocumentNode, ASTNode, ValidationRule } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import { parseImportLine, processImport } from '@graphql-tools/import';
@@ -7,36 +8,50 @@ import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
-function extractRuleName(stack?: string): string | null {
-  const match = (stack || '').match(/validation[/\\]rules[/\\](.*?)\.js:/) || [];
-  return match[1] || null;
-}
-
 export function validateDoc(
   sourceNode: GraphQLESTreeNode<ASTNode>,
   context: GraphQLESLintRuleContext,
   schema: GraphQLSchema | null,
   documentNode: DocumentNode,
-  rules: ReadonlyArray<ValidationRule>,
-  ruleName: string | null = null
+  rules: ReadonlyArray<ValidationRule>
 ): void {
-  if (documentNode?.definitions?.length > 0) {
-    try {
-      const validationErrors = schema ? validate(schema, documentNode, rules) : validateSDL(documentNode, null, rules as any);
+  if (documentNode.definitions.length === 0) {
+    return;
+  }
+  try {
+    const validationErrors = schema
+      ? validate(schema, documentNode, rules)
+      : validateSDL(documentNode, null, rules as any);
 
-      for (const error of validationErrors) {
-        const validateRuleName = ruleName || `[${extractRuleName(error.stack)}]`;
-        context.report({
-          loc: getLocation({ start: error.locations[0] }),
-          message: ruleName ? error.message : `${validateRuleName} ${error.message}`,
-        });
-      }
-    } catch (e) {
+    for (const error of validationErrors) {
+      /*
+       * TODO: Fix ESTree-AST converter because currently it's incorrectly convert loc.end
+       * Example: loc.end always equal loc.start
+       *  {
+       *    token: {
+       *      type: 'Name',
+       *      loc: { start: { line: 4, column: 13 }, end: { line: 4, column: 13 } },
+       *      value: 'veryBad',
+       *      range: [ 40, 47 ]
+       *    }
+       *  }
+       */
+      const { line, column } = error.locations[0];
+      const ancestors = context.getAncestors();
+      const token = (ancestors[0] as AST.Program).tokens.find(
+        token => token.loc.start.line === line && token.loc.start.column === column
+      );
+
       context.report({
-        node: sourceNode,
-        message: e.message,
+        loc: getLocation({ start: error.locations[0] }, token?.value),
+        message: error.message,
       });
     }
+  } catch (e) {
+    context.report({
+      node: sourceNode,
+      message: e.message,
+    });
   }
 }
 
@@ -94,7 +109,7 @@ const validationToRule = (
             if (isRealFile && getDocumentNode) {
               documentNode = getDocumentNode(context);
             }
-            validateDoc(node, context, schema, documentNode || node.rawNode(), [ruleFn], ruleName);
+            validateDoc(node, context, schema, documentNode || node.rawNode(), [ruleFn]);
           },
         };
       },
