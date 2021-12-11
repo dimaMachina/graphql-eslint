@@ -155,13 +155,7 @@ export const TYPES_KINDS = [
   Kind.UNION_TYPE_DEFINITION,
 ] as const;
 
-export enum CaseStyle {
-  camelCase = 'camelCase',
-  pascalCase = 'PascalCase',
-  snakeCase = 'snake_case',
-  upperCase = 'UPPER_CASE',
-  kebabCase = 'kebab-case',
-}
+export type CaseStyle = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE' | 'kebab-case';
 
 const pascalCase = (str: string): string =>
   lowerCase(str)
@@ -176,15 +170,15 @@ export const camelCase = (str: string): string => {
 
 export const convertCase = (style: CaseStyle, str: string): string => {
   switch (style) {
-    case CaseStyle.camelCase:
+    case 'camelCase':
       return camelCase(str);
-    case CaseStyle.pascalCase:
+    case 'PascalCase':
       return pascalCase(str);
-    case CaseStyle.snakeCase:
+    case 'snake_case':
       return lowerCase(str).replace(/ /g, '_');
-    case CaseStyle.upperCase:
+    case 'UPPER_CASE':
       return lowerCase(str).replace(/ /g, '_').toUpperCase();
-    case CaseStyle.kebabCase:
+    case 'kebab-case':
       return lowerCase(str).replace(/ /g, '-');
   }
 };

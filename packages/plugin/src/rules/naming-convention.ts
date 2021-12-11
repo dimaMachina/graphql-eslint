@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
-import { TYPES_KINDS, getLocation, convertCase, CaseStyle } from '../utils';
+import { TYPES_KINDS, getLocation, convertCase } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
@@ -51,7 +51,7 @@ type PropertySchema = {
 
 type Options = AllowedStyle | PropertySchema;
 
-type NamingConventionRuleConfig = {
+export type NamingConventionRuleConfig = {
   allowLeadingUnderscore?: boolean;
   allowTrailingUnderscore?: boolean;
   types?: Options;
@@ -302,7 +302,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         if (caseRegex && !caseRegex.test(name)) {
           return {
             errorMessage: `be in ${style} format`,
-            renameToName: convertCase(style as CaseStyle, name),
+            renameToName: convertCase(style, nodeName),
           };
         }
       }

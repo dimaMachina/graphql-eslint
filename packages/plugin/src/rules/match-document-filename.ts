@@ -9,20 +9,14 @@ const MATCH_EXTENSION = 'MATCH_EXTENSION';
 const MATCH_STYLE = 'MATCH_STYLE';
 
 const ACCEPTED_EXTENSIONS: ['.gql', '.graphql'] = ['.gql', '.graphql'];
-const CASE_STYLES: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case'] = [
-  CaseStyle.camelCase,
-  CaseStyle.pascalCase,
-  CaseStyle.snakeCase,
-  CaseStyle.upperCase,
-  CaseStyle.kebabCase,
-];
+const CASE_STYLES: CaseStyle[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case'];
 
 type PropertySchema = {
-  style: CaseStyle;
-  suffix: string;
+  style?: CaseStyle;
+  suffix?: string;
 };
 
-type MatchDocumentFilenameRuleConfig = {
+export type MatchDocumentFilenameRuleConfig = {
   fileExtension?: typeof ACCEPTED_EXTENSIONS[number];
   query?: CaseStyle | PropertySchema;
   mutation?: CaseStyle | PropertySchema;
@@ -54,7 +48,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         },
         {
           title: 'Correct',
-          usage: [{ query: CaseStyle.snakeCase }],
+          usage: [{ query: 'snake_case' }],
           code: /* GraphQL */ `
             # user_by_id.gql
             query UserById {
@@ -68,7 +62,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         },
         {
           title: 'Correct',
-          usage: [{ fragment: { style: CaseStyle.kebabCase, suffix: '.fragment' } }],
+          usage: [{ fragment: { style: 'kebab-case', suffix: '.fragment' } }],
           code: /* GraphQL */ `
             # user-fields.fragment.gql
             fragment user_fields on User {
@@ -79,7 +73,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         },
         {
           title: 'Correct',
-          usage: [{ mutation: { style: CaseStyle.pascalCase, suffix: 'Mutation' } }],
+          usage: [{ mutation: { style: 'PascalCase', suffix: 'Mutation' } }],
           code: /* GraphQL */ `
             # DeleteUserMutation.gql
             mutation DELETE_USER {
@@ -99,7 +93,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         },
         {
           title: 'Incorrect',
-          usage: [{ query: CaseStyle.pascalCase }],
+          usage: [{ query: 'PascalCase' }],
           code: /* GraphQL */ `
             # user-by-id.gql
             query UserById {
@@ -114,10 +108,10 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
       ],
       configOptions: [
         {
-          query: CaseStyle.kebabCase,
-          mutation: CaseStyle.kebabCase,
-          subscription: CaseStyle.kebabCase,
-          fragment: CaseStyle.kebabCase,
+          query: 'kebab-case',
+          mutation: 'kebab-case',
+          subscription: 'kebab-case',
+          fragment: 'kebab-case',
         },
       ],
     },
@@ -134,25 +128,22 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         asObject: {
           type: 'object',
           additionalProperties: false,
+          minProperties: 1,
           properties: {
-            style: {
-              enum: CASE_STYLES,
-            },
-            suffix: {
-              type: 'string',
-            },
+            style: { enum: CASE_STYLES },
+            suffix: { type: 'string' },
           },
         },
       },
       type: 'array',
+      minItems: 1,
       maxItems: 1,
       items: {
         type: 'object',
         additionalProperties: false,
+        minProperties: 1,
         properties: {
-          fileExtension: {
-            enum: ACCEPTED_EXTENSIONS,
-          },
+          fileExtension: { enum: ACCEPTED_EXTENSIONS },
           query: schemaOption,
           mutation: schemaOption,
           subscription: schemaOption,
@@ -219,7 +210,8 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
           option = { style: option } as PropertySchema;
         }
         const expectedExtension = options.fileExtension || fileExtension;
-        const expectedFilename = convertCase(option.style, docName) + (option.suffix || '') + expectedExtension;
+        const expectedFilename =
+          (option.style ? convertCase(option.style, docName) : filename) + (option.suffix || '') + expectedExtension;
         const filenameWithExtension = filename + expectedExtension;
 
         if (expectedFilename !== filenameWithExtension) {
