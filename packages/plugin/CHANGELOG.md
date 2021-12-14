@@ -1,5 +1,17 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.2.0
+
+### Minor Changes
+
+- 2c73cb7: feat: add suggestions for `naming-convention` rule
+- 11b3af6: feat: support multiple id field names in `require-id-when-available` rule
+
+### Patch Changes
+
+- 503dd9f: fix error report location for `graphql-js` rules
+- 9378d24: Fix exports in package.json for react-native projects
+
 ## 3.1.0
 
 ### Minor Changes
