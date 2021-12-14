@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
-import { TYPES_KINDS, getLocation } from '../utils';
+import { TYPES_KINDS, getLocation, convertCase } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
@@ -51,7 +51,7 @@ type PropertySchema = {
 
 type Options = AllowedStyle | PropertySchema;
 
-type NamingConventionRuleConfig = {
+export type NamingConventionRuleConfig = {
   allowLeadingUnderscore?: boolean;
   allowTrailingUnderscore?: boolean;
   types?: Options;
@@ -165,6 +165,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         ],
       },
     },
+    hasSuggestions: true,
     schema: {
       definitions: {
         asString: {
@@ -243,69 +244,97 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       return typeof style === 'object' ? style : { style };
     }
 
-    const checkNode = (selector: string) => (node: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) => {
-      const { name } = node.kind === Kind.VARIABLE_DEFINITION ? node.variable : node;
-      if (!name) {
+    const checkNode = (selector: string) => (n: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) => {
+      const { name: node } = n.kind === Kind.VARIABLE_DEFINITION ? n.variable : n;
+      if (!node) {
         return;
       }
       const { prefix, suffix, forbiddenPrefixes, forbiddenSuffixes, style } = normalisePropertyOption(selector);
-      const nodeType = KindToDisplayName[node.kind] || node.kind;
-      const nodeName = name.value;
-      const errorMessage = getErrorMessage();
-      if (errorMessage) {
+      const nodeType = KindToDisplayName[n.kind] || n.kind;
+      const nodeName = node.value;
+      const error = getError();
+      if (error) {
+        const { errorMessage, renameToName } = error;
+        const [leadingUnderscore] = nodeName.match(/^_*/);
+        const [trailingUnderscore] = nodeName.match(/_*$/);
+        const suggestedName = leadingUnderscore + renameToName + trailingUnderscore;
         context.report({
-          loc: getLocation(name.loc, name.value),
+          loc: getLocation(node.loc, node.value),
           message: `${nodeType} "${nodeName}" should ${errorMessage}`,
+          suggest: [
+            {
+              desc: `Rename to "${suggestedName}"`,
+              fix: fixer => fixer.replaceText(node as any, suggestedName),
+            },
+          ],
         });
       }
 
-      function getErrorMessage(): string | void {
-        let name = nodeName;
-        if (allowLeadingUnderscore) {
-          name = name.replace(/^_*/, '');
-        }
-        if (allowTrailingUnderscore) {
-          name = name.replace(/_*$/, '');
-        }
+      function getError(): {
+        errorMessage: string;
+        renameToName: string;
+      } | void {
+        const name = nodeName.replace(/(^_+)|(_+$)/g, '');
         if (prefix && !name.startsWith(prefix)) {
-          return `have "${prefix}" prefix`;
+          return {
+            errorMessage: `have "${prefix}" prefix`,
+            renameToName: prefix + name,
+          };
         }
         if (suffix && !name.endsWith(suffix)) {
-          return `have "${suffix}" suffix`;
+          return {
+            errorMessage: `have "${suffix}" suffix`,
+            renameToName: name + suffix,
+          };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
         if (forbiddenPrefix) {
-          return `not have "${forbiddenPrefix}" prefix`;
+          return {
+            errorMessage: `not have "${forbiddenPrefix}" prefix`,
+            renameToName: name.replace(new RegExp(`^${forbiddenPrefix}`), ''),
+          };
         }
         const forbiddenSuffix = forbiddenSuffixes?.find(suffix => name.endsWith(suffix));
         if (forbiddenSuffix) {
-          return `not have "${forbiddenSuffix}" suffix`;
-        }
-        if (style && !ALLOWED_STYLES.includes(style)) {
-          return `be in one of the following options: ${ALLOWED_STYLES.join(', ')}`;
+          return {
+            errorMessage: `not have "${forbiddenSuffix}" suffix`,
+            renameToName: name.replace(new RegExp(`${forbiddenSuffix}$`), ''),
+          };
         }
         const caseRegex = StyleToRegex[style];
         if (caseRegex && !caseRegex.test(name)) {
-          return `be in ${style} format`;
+          return {
+            errorMessage: `be in ${style} format`,
+            renameToName: convertCase(style, name),
+          };
         }
       }
     };
 
-    const checkUnderscore = (node: GraphQLESTreeNode<NameNode>) => {
+    const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
       const name = node.value;
+      const renameToName = name.replace(new RegExp(isLeading ? '^_+' : '_+$'), '');
       context.report({
         loc: getLocation(node.loc, name),
-        message: `${name.startsWith('_') ? 'Leading' : 'Trailing'} underscores are not allowed`,
+        message: `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
+        suggest: [
+          {
+            desc: `Rename to "${renameToName}"`,
+            fix: fixer => fixer.replaceText(node as any, renameToName),
+          },
+        ],
       });
     };
 
     const listeners: GraphQLESLintRuleListener = {};
 
     if (!allowLeadingUnderscore) {
-      listeners['Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
+      listeners['Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] =
+        checkUnderscore(true);
     }
     if (!allowTrailingUnderscore) {
-      listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] = checkUnderscore;
+      listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] =
+        checkUnderscore(false);
     }
 
     const selectors = new Set([types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean));
