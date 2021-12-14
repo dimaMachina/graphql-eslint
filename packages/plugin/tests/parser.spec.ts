@@ -57,7 +57,7 @@ describe('Parser', () => {
     `;
 
     const result = parseForESLint(code, { filePath: 'test.graphql', schema, skipGraphQLConfig: true });
-    const selectionSet = (result.ast.body[0] as any).definitions[0].selectionSet;
+    const { selectionSet } = (result.ast.body[0] as any).definitions[0];
     const typeInfo = selectionSet.typeInfo();
     expect(typeInfo).toBeDefined();
     expect(typeInfo.gqlType.name).toEqual('Query');

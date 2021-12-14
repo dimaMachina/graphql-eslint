@@ -27,6 +27,7 @@ module.exports = {
     'unicorn/prefer-includes': 'error',
     'unicorn/no-useless-fallback-in-spread': 'error',
     'unicorn/better-regex': 'error',
+    'prefer-destructuring': ['error', { object: true }],
   },
   overrides: [
     {

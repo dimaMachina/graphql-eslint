@@ -54,9 +54,24 @@ query user {
 
 The schema defines the following properties:
 
-### `fieldName` (string)
+### `fieldName`
+
+The object must be one of the following types:
+
+* `asString`
+* `asArray`
 
 Default: `"id"`
+
+---
+
+# Sub Schemas
+
+The schema defines the following additional types:
+
+## `asString` (string)
+
+## `asArray` (array)
 
 ## Resources
 

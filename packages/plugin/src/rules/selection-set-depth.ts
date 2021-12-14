@@ -95,7 +95,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       );
     }
 
-    const maxDepth = context.options[0].maxDepth;
+    const { maxDepth } = context.options[0];
     const ignore = context.options[0].ignore || [];
     const checkFn = depthLimit(maxDepth, { ignore });
 
