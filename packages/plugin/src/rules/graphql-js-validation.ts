@@ -34,17 +34,17 @@ function validateDocument(
 
     for (const error of validationErrors) {
       /*
- * TODO: Fix ESTree-AST converter because currently it's incorrectly convert loc.end
- * Example: loc.end always equal loc.start
- *  {
- *    token: {
- *      type: 'Name',
- *      loc: { start: { line: 4, column: 13 }, end: { line: 4, column: 13 } },
- *      value: 'veryBad',
- *      range: [ 40, 47 ]
- *    }
- *  }
- */
+       * TODO: Fix ESTree-AST converter because currently it's incorrectly convert loc.end
+       * Example: loc.end always equal loc.start
+       *  {
+       *    token: {
+       *      type: 'Name',
+       *      loc: { start: { line: 4, column: 13 }, end: { line: 4, column: 13 } },
+       *      value: 'veryBad',
+       *      range: [ 40, 47 ]
+       *    }
+       *  }
+       */
       const { line, column } = error.locations[0];
       const ancestors = context.getAncestors();
       const token = (ancestors[0] as AST.Program).tokens.find(
