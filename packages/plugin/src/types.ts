@@ -53,8 +53,8 @@ export type CategoryType = 'Schema' | 'Operations';
 export type RuleDocsInfo<T> = {
   docs: Omit<Rule.RuleMetaData['docs'], 'category'> & {
     category: CategoryType | CategoryType[];
-    requiresSchema?: boolean;
-    requiresSiblings?: boolean;
+    requiresSchema?: true;
+    requiresSiblings?: true;
     examples?: {
       title: string;
       code: string;

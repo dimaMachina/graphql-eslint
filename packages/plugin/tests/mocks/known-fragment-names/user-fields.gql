@@ -1,0 +1,19 @@
+fragment UserFields on User {
+  id
+  ... on User {
+    ...AnotherUserFields
+  }
+  posts {
+    ... on Post {
+      ... PostFields
+    }
+  }
+}
+
+fragment AnotherUserFields on User {
+  id
+}
+
+fragment PostFields on Post {
+  id
+}

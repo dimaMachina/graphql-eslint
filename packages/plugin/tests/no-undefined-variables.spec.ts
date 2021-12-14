@@ -11,6 +11,7 @@ ruleTester.runGraphQLTests('no-undefined-variables', rules['no-undefined-variabl
       code: ruleTester.fromMockFile('no-undefined-variables.gql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
+        operations: join(__dirname, 'mocks/user-fields-with-variables.gql'),
       },
       errors: [
         { message: 'Variable "$limit" is not defined by operation "User".' },

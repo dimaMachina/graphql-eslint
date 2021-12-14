@@ -1,23 +1,12 @@
 import { join } from 'path';
-import { GraphQLRuleTester } from '../src';
-import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
+import { GraphQLRuleTester, rules } from '../src';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('no-unused-fragments', GRAPHQL_JS_VALIDATIONS['no-unused-fragments'], {
+ruleTester.runGraphQLTests('no-unused-fragments', rules['no-unused-fragments'], {
   valid: [
     {
-      filename: join(__dirname, 'mocks/user-fields-with-nested-fragment.gql'),
-      code: ruleTester.fromMockFile('user-fields-with-nested-fragment.gql'),
-      parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: [
-          join(__dirname, 'mocks/user-fields-with-nested-fragment.gql'),
-          join(__dirname, 'mocks/user.graphql'),
-        ],
-      },
-    },
-    {
+      name: 'should find file with operation definition that import current fragment',
       filename: join(__dirname, 'mocks/user-fields.graphql'),
       code: ruleTester.fromMockFile('user-fields.graphql'),
       parserOptions: {

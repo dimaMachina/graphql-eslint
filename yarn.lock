@@ -1604,15 +1604,6 @@
     "@graphql-tools/utils" "^8.5.1"
     tslib "~2.3.0"
 
-"@graphql-tools/import@6.6.2":
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/import/-/import-6.6.2.tgz#2d1dabfee82ccebcd5e26d05f427cd1da91b2bf1"
-  integrity sha512-XBAw4GBaTwwA736VPTe5vKOS/FCVXpi0ofSeOa2AKedD4JEViAYx4Al3MPpmi2sIVumIOV7wGwHgX7HAgG5RdQ==
-  dependencies:
-    "@graphql-tools/utils" "8.5.4"
-    resolve-from "5.0.0"
-    tslib "~2.3.0"
-
 "@graphql-tools/import@^6.5.7":
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/import/-/import-6.6.1.tgz#2a7e1ceda10103ffeb8652a48ddc47150b035485"

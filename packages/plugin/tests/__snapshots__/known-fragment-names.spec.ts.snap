@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+  1 | {
+  2 |   user {
+> 3 |     ...DoesNotExist
+    |        ^^^^^^^^^^^^ Unknown fragment "DoesNotExist".
+  4 |   }
+  5 | }
+  6 |
+`;
