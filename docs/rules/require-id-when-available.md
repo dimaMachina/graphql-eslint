@@ -23,7 +23,7 @@ type User {
 }
 
 # Query
-query user {
+query {
   user {
     name
   }
@@ -42,7 +42,7 @@ type User {
 }
 
 # Query
-query user {
+query {
   user {
     id
     name

@@ -38,9 +38,11 @@ const TEST_SCHEMA = /* GraphQL */ `
   }
 `;
 
-const parserOptions: ParserOptions = {
-  schema: TEST_SCHEMA,
-  operations: 'fragment HasIdFields on HasId { id }',
+const WITH_SCHEMA = {
+  parserOptions: <ParserOptions>{
+    schema: TEST_SCHEMA,
+    operations: '{ foo }',
+  },
 };
 
 const ruleTester = new GraphQLRuleTester();
@@ -48,31 +50,42 @@ const ruleTester = new GraphQLRuleTester();
 ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-available', rule, {
   valid: [
     {
-      parserOptions,
-      name: 'should ignore fragments',
+      ...WITH_SCHEMA,
+      name: 'should ignore FragmentDefinition',
       code: 'fragment Test on HasId { name }',
     },
-    { parserOptions, code: '{ noId { name } }' },
-    { parserOptions, code: '{ hasId { id name } }' },
     {
-      parserOptions,
-      name: 'should find id in fragment',
-      code: '{ hasId { ...HasIdFields } }'
+      name: "should ignore checking selections on OperationDefinition as it's redundant check",
+      code: '{ foo }',
+      parserOptions: {
+        schema: 'type Query { id: ID }',
+        operations: '{ foo }',
+      },
     },
-    { parserOptions, code: '{ vehicles { id ...on Car { id mileage } } }' },
-    { parserOptions, code: '{ vehicles { ...on Car { id mileage } } }' },
-    { parserOptions, code: '{ flying { ...on Bird { id } } }' },
+    { ...WITH_SCHEMA, code: '{ noId { name } }' },
+    { ...WITH_SCHEMA, code: '{ hasId { id name } }' },
     {
-      parserOptions,
+      name: 'should find selection in fragment',
+      code: '{ hasId { ...HasIdFields } }',
+      parserOptions: {
+        schema: TEST_SCHEMA,
+        operations: 'fragment HasIdFields on HasId { id }',
+      },
+    },
+    { ...WITH_SCHEMA, code: '{ vehicles { id ...on Car { id mileage } } }' },
+    { ...WITH_SCHEMA, code: '{ vehicles { ...on Car { id mileage } } }' },
+    { ...WITH_SCHEMA, code: '{ flying { ...on Bird { id } } }' },
+    {
+      ...WITH_SCHEMA,
       code: '{ hasId { name } }',
       options: [{ fieldName: 'name' }],
     },
     {
-      parserOptions,
+      ...WITH_SCHEMA,
       code: '{ vehicles { id ...on Car { mileage } } }',
     },
     {
-      parserOptions,
+      ...WITH_SCHEMA,
       name: 'support multiple id field names',
       code: '{ hasId { _id } }',
       options: [{ fieldName: ['id', '_id'] }],
@@ -80,18 +93,18 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-
   ],
   invalid: [
     {
-      parserOptions,
+      ...WITH_SCHEMA,
       code: '{ hasId { name } }',
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
     {
-      parserOptions,
+      ...WITH_SCHEMA,
       code: '{ hasId { id } }',
       options: [{ fieldName: 'name' }],
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
     {
-      parserOptions,
+      ...WITH_SCHEMA,
       name: 'support multiple id field names',
       code: '{ hasId { name } }',
       options: [{ fieldName: ['id', '_id'] }],
