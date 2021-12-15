@@ -38,6 +38,23 @@ const TEST_SCHEMA = /* GraphQL */ `
   }
 `;
 
+const USER_POST_SCHEMA = /* GraphQL */ `
+  type User {
+    id: ID
+    name: String
+    posts: [Post]
+  }
+
+  type Post {
+    id: ID
+    title: String
+  }
+
+  type Query {
+    user: User
+  }
+`;
+
 const WITH_SCHEMA = {
   parserOptions: <ParserOptions>{
     schema: TEST_SCHEMA,
@@ -50,9 +67,19 @@ const ruleTester = new GraphQLRuleTester();
 ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-available', rule, {
   valid: [
     {
-      ...WITH_SCHEMA,
-      name: 'should ignore FragmentDefinition',
-      code: 'fragment Test on HasId { name }',
+      name: 'should completely ignore FragmentDefinition',
+      code: /* GraphQL */ `
+        fragment UserFields on User {
+          name
+          posts {
+            title
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: '{ foo }',
+      },
     },
     {
       name: "should ignore checking selections on OperationDefinition as it's redundant check",
@@ -92,6 +119,16 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-
     },
   ],
   invalid: [
+    // TODO: Improve this
+    // {
+    // name: 'should report an error about missing "posts.id" selection',
+    // code: '{ user { id ...UserFields } }',
+    // errors: [{ message: 'REQUIRE_ID_WHEN_AVAILABLE' }],
+    // parserOptions: {
+    //   schema: USER_POST_SCHEMA,
+    //   operations: 'fragment UserFields on User { posts { title } }'
+    // },
+    // },
     {
       ...WITH_SCHEMA,
       code: '{ hasId { name } }',

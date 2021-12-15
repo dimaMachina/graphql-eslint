@@ -98,8 +98,8 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     const isFound = (s: GraphQLESTreeNode<SelectionNode> | SelectionNode) =>
       s.kind === Kind.FIELD && idNames.includes(s.name.value);
 
-    // Do not check selections for FragmentDefinition and OperationDefinition
-    const selector = `${Kind.SELECTION_SET}[parent.kind!=/^(${Kind.FRAGMENT_DEFINITION})|${Kind.OPERATION_DEFINITION}$/]`;
+    // Skip check selections in FragmentDefinition
+    const selector = 'OperationDefinition SelectionSet[parent.kind!=OperationDefinition]';
 
     return {
       [selector](node: GraphQLESTreeNode<SelectionSetNode, true>) {
