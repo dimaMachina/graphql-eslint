@@ -57,7 +57,7 @@
   },
   "resolutions": {
     "@changesets/git": "1.2.1",
-    "graphql": "16.1.0"
+    "graphql": "16.2.0"
   },
   "lint-staged": {
     "{packages,scripts}/**/*.{ts,tsx,js,jsx,cjs,mjs}": [
