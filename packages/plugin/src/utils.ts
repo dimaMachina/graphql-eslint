@@ -7,6 +7,7 @@ import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
+import { loadGraphQLConfig } from './graphql-config';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -44,6 +45,33 @@ export function requireGraphQLSchemaFromContext(
   }
 
   return context.parserServices.schema;
+}
+
+const schemaToExtendCache = new Map<string, GraphQLSchema>();
+
+export function getGraphQLSchemaToExtend(context: GraphQLESLintRuleContext): GraphQLSchema | null {
+  // If parserOptions.schema not set or not loaded, there is no reason to make partial schema aka schemaToExtend
+  if (!context.parserServices.hasTypeInfo) {
+    return null;
+  }
+  const filename = context.getPhysicalFilename();
+  if (!schemaToExtendCache.has(filename)) {
+    const { schema, schemaOptions } = context.parserOptions;
+    const gqlConfig = loadGraphQLConfig({ schema });
+    const projectForFile = gqlConfig.getProjectForFile(filename);
+    let schemaToExtend;
+    try {
+      schemaToExtend = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', {
+        ...schemaOptions,
+        ignore: filename,
+      });
+    } catch {
+      // If error throws just ignore it because maybe schema is located in 1 file
+      schemaToExtend = null;
+    }
+    schemaToExtendCache.set(filename, schemaToExtend);
+  }
+  return schemaToExtendCache.get(filename);
 }
 
 export function requireReachableTypesFromContext(

@@ -14,23 +14,30 @@ import {
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
+import {
+  getLocation,
+  getGraphQLSchemaToExtend,
+  requireGraphQLSchemaFromContext,
+  requireSiblingsOperations,
+} from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 function validateDocument(
   sourceNode: GraphQLESTreeNode<ASTNode>,
   context: GraphQLESLintRuleContext,
-  schema: GraphQLSchema | null,
+  schema: GraphQLSchema | null = null,
   documentNode: DocumentNode,
-  rule: ValidationRule
+  rule: ValidationRule,
+  isSchemaToExtend = false
 ): void {
   if (documentNode.definitions.length === 0) {
     return;
   }
   try {
-    const validationErrors = schema
-      ? validate(schema, documentNode, [rule])
-      : validateSDL(documentNode, null, [rule as any]);
+    const validationErrors =
+      schema && !isSchemaToExtend
+        ? validate(schema, documentNode, [rule])
+        : validateSDL(documentNode, schema, [rule as any]);
 
     for (const error of validationErrors) {
       /*
@@ -167,21 +174,28 @@ const validationToRule = (
         },
       },
       create(context) {
+        if (!ruleFn) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `You rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql-js" version you are using. Skipping...`
+          );
+          return {};
+        }
+
+        let schema: GraphQLSchema;
+        if (docs.requiresSchemaToExtend) {
+          schema = getGraphQLSchemaToExtend(context);
+        }
+        if (docs.requiresSchema) {
+          schema = requireGraphQLSchemaFromContext(ruleId, context);
+        }
+
         return {
           Document(node) {
-            if (!ruleFn) {
-              // eslint-disable-next-line no-console
-              console.warn(
-                `You rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql-js" version you are using. Skipping...`
-              );
-              return;
-            }
-            const schema = docs.requiresSchema ? requireGraphQLSchemaFromContext(ruleId, context) : null;
             const documentNode = getDocumentNode
               ? getDocumentNode({ ruleId, context, schema, node: node.rawNode() })
               : node.rawNode();
-
-            validateDocument(node, context, schema, documentNode, ruleFn);
+            validateDocument(node, context, schema, documentNode, ruleFn, docs.requiresSchemaToExtend);
           },
         };
       },
@@ -376,6 +390,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     category: 'Schema',
     description: `A type extension is only valid if the type is defined and has the same kind.`,
     recommended: false, // TODO: enable after https://github.com/dotansimha/graphql-eslint/issues/787 will be fixed
+    requiresSchemaToExtend: true,
   }),
   validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
     category: ['Schema', 'Operations'],

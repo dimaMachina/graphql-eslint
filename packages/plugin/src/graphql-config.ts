@@ -2,15 +2,19 @@ import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync, SchemaPoint
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
 
-let graphqlConfig: GraphQLConfig;
+let graphQLConfig: GraphQLConfig;
 
-export function loadGraphqlConfig(options: ParserOptions): GraphQLConfig {
+export function loadCachedGraphQLConfig(options: ParserOptions): GraphQLConfig {
   // We don't want cache config on test environment
   // Otherwise schema and documents will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && graphqlConfig) {
-    return graphqlConfig;
+  if (process.env.NODE_ENV !== 'test' && graphQLConfig) {
+    return graphQLConfig;
   }
+  graphQLConfig = loadGraphQLConfig(options);
+  return graphQLConfig;
+}
 
+export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   const onDiskConfig = options.skipGraphQLConfig
     ? null
     : loadConfigSync({
@@ -19,25 +23,27 @@ export function loadGraphqlConfig(options: ParserOptions): GraphQLConfig {
         extensions: [addCodeFileLoaderExtension],
       });
 
-  graphqlConfig =
+  const configOptions = options.projects
+    ? { projects: options.projects }
+    : {
+        schema: (options.schema || '') as SchemaPointer, // if `schema` is `undefined` will throw error `Project 'default' not found`
+        documents: options.documents || options.operations,
+        extensions: options.extensions,
+        include: options.include,
+        exclude: options.exclude,
+      };
+
+  graphQLConfig =
     onDiskConfig ||
     new GraphQLConfig(
       {
-        config: options.projects
-          ? { projects: options.projects }
-          : {
-              schema: (options.schema || '') as SchemaPointer, // if `schema` is `undefined` will throw error `Project 'default' not found`
-              documents: options.documents || options.operations,
-              extensions: options.extensions,
-              include: options.include,
-              exclude: options.exclude,
-            },
+        config: configOptions,
         filepath: 'virtual-config',
       },
       [addCodeFileLoaderExtension]
     );
 
-  return graphqlConfig;
+  return graphQLConfig;
 }
 
 const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = api => {

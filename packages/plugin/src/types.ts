@@ -55,6 +55,7 @@ export type RuleDocsInfo<T> = {
     category: CategoryType | CategoryType[];
     requiresSchema?: true;
     requiresSiblings?: true;
+    requiresSchemaToExtend?: true;
     examples?: {
       title: string;
       code: string;

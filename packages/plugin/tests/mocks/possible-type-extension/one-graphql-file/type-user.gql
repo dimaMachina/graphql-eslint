@@ -1,0 +1,7 @@
+type User {
+  id: ID!
+}
+
+extend type User {
+  firstName: String
+}

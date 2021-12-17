@@ -6,7 +6,7 @@ import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types
 import { extractTokens } from './utils';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
-import { loadGraphqlConfig } from './graphql-config';
+import { loadCachedGraphQLConfig } from './graphql-config';
 import { getReachableTypes, getUsedFields } from './graphql-ast';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
@@ -14,7 +14,7 @@ export function parse(code: string, options?: ParserOptions): Linter.ESLintParse
 }
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
-  const gqlConfig = loadGraphqlConfig(options);
+  const gqlConfig = loadCachedGraphQLConfig(options);
   const schema = getSchema(options, gqlConfig);
   const parserServices: ParserServices = {
     hasTypeInfo: schema !== null,

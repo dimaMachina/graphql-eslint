@@ -52,7 +52,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/tests/mocks/*.{ts,js}'],
+      files: ['**/tests/mocks/**/*.{ts,js}'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
       },

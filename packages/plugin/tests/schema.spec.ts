@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { spawn } from 'child_process';
 import { GraphQLSchema, printSchema } from 'graphql';
 import { getSchema } from '../src/schema';
-import { loadGraphqlConfig } from '../src/graphql-config';
+import { loadGraphQLConfig } from '../src/graphql-config';
 
 describe('schema', () => {
   const SCHEMA_GRAPHQL_PATH = resolve(__dirname, 'mocks/user-schema.graphql');
@@ -12,7 +12,7 @@ describe('schema', () => {
   const schemaOnDisk = readFileSync(SCHEMA_GRAPHQL_PATH, 'utf8');
 
   const testSchema = (schema: string) => {
-    const gqlConfig = loadGraphqlConfig({ schema });
+    const gqlConfig = loadGraphQLConfig({ schema });
     const graphQLSchema = getSchema({ schema }, gqlConfig);
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
@@ -79,7 +79,7 @@ describe('schema', () => {
 
       try {
         // https://graphql-config.com/schema#passing-headers
-        const gqlConfig = loadGraphqlConfig({
+        const gqlConfig = loadGraphQLConfig({
           schema: {
             [schemaUrl]: schemaOptions,
           },
@@ -91,7 +91,7 @@ describe('schema', () => {
 
       try {
         // https://github.com/dotansimha/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
-        const gqlConfig = loadGraphqlConfig({ schema: schemaUrl });
+        const gqlConfig = loadGraphQLConfig({ schema: schemaUrl });
         getSchema({ schemaOptions }, gqlConfig);
       } catch (e) {
         expect(e.message).toMatch('"authorization":"Bearer Foo"');
