@@ -2,7 +2,7 @@
 
 To get started with your own rules, start by understanding how [ESLint custom rules works](https://eslint.org/docs/developer-guide/working-with-rules).
 
-`graphql-eslint` converts the [GraphQL AST](https://graphql.org/graphql-js/language/) into [ESTree structure](https://github.com/estree/estree), so it allows you to easily travel the GraphQL AST tree easily.
+`graphql-eslint` converts the [GraphQL AST](https://graphql.org/graphql-js/language) into [ESTree structure](https://github.com/estree/estree), so it allows you to easily travel the GraphQL AST tree easily.
 
 You can visit any GraphQL AST node in your custom rules, and report this as error. You don't need to have special handlers for code-files, since `graphql-eslint` extracts usages of `gql` and magic `/* GraphQL */` comments automatically, and runs it through the parser, and eventually it knows to adjust errors location to fit in your code files original location.
 
@@ -10,7 +10,7 @@ You can visit any GraphQL AST node in your custom rules, and report this as erro
 
 Start by creating a [simple ESLint rule file](https://eslint.org/docs/developer-guide/working-with-rules), and choose the AST nodes you wish to visit. It can either be a [simple AST node `Kind`](https://github.com/graphql/graphql-js/blob/master/src/language/kinds.d.ts) or a complex [ESLint selector](https://eslint.org/docs/developer-guide/selectors) that allows you to travel and filter AST nodes.
 
-We recommend you to read the [graphql-eslint parser documentation](./parser.md) before getting started, to understand the differences between the AST structures.
+We recommend you to read the [graphql-eslint parser documentation](parser.md) before getting started, to understand the differences between the AST structures.
 
 The `graphql-eslint` comes with a TypeScript wrapper for ESLint rules, and provides a testkit to simplify testing process with GraphQL schemas, so you can use that by importing `GraphQLESLintRule` type. But if you wish to use JavaScript - that's fine :)
 
@@ -49,7 +49,7 @@ You can scan the `packages/plugin/src/rules` directory in this repo for referenc
 ## Accessing original GraphQL AST nodes
 
 Since our parser converts GraphQL AST to ESTree structure, there are some minor differences in the structure of the objects.
-If you are using TypeScript, and you typed your rule with `GraphQLESLintRule` - you'll see that each `node` is a bit different from the AST nodes of GraphQL (you can read more about that in [graphql-eslint parser documentation](./parser.md)).
+If you are using TypeScript, and you typed your rule with `GraphQLESLintRule` - you'll see that each `node` is a bit different from the AST nodes of GraphQL (you can read more about that in [graphql-eslint parser documentation](parser.md)).
 
 If you need access to the original GraphQL AST `node`, you can use `.rawNode()` method on each node you get from the AST structure of ESLint.
 
@@ -104,13 +104,12 @@ import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
 
 export const rule = {
   create(context) {
-    requireGraphQLSchemaFromContext(context)
+    requireGraphQLSchemaFromContext('your-rule-name', context)
 
     return {
       SelectionSet(node) {
         const typeInfo = node.typeInfo()
-
-        if (typeInfo && typeInfo.gqlType) {
+        if (typeInfo.gqlType) {
           console.log(`The GraphQLOutputType is: ${typeInfo.gqlType}`)
         }
       }
@@ -119,7 +118,7 @@ export const rule = {
 }
 ```
 
-The structure of the return value of `.typeInfo()` is [defined here](https://github.com/dotansimha/graphql-eslint/blob/master/packages/plugin/src/estree-parser/converter.ts#L38-L46). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
+The structure of the return value of `.typeInfo()` is [defined here](https://github.com/dotansimha/graphql-eslint/blob/master/packages/plugin/src/estree-parser/converter.ts#L45-L53). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
 
 ## Testing your rules
 
@@ -141,7 +140,8 @@ ruleTester.runGraphQLTests('my-rule', rule, {
   ],
   invalid: [
     {
-      code: 'query invalid { foo }'
+      code: 'query invalid { foo }',
+      errors: [{ message: 'Your error message.' }],
     }
   ]
 })

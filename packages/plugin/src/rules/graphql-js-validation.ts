@@ -368,6 +368,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     description: `A type extension is only valid if the type is defined and has the same kind.`,
     recommended: false, // TODO: enable after https://github.com/dotansimha/graphql-eslint/issues/787 will be fixed
     requiresSchema: true,
+    isDisabledForAllConfig: true,
   }),
   validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
     category: ['Schema', 'Operations'],
@@ -402,6 +403,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     category: 'Schema',
     description: `A GraphQL enum type is only valid if all its values are uniquely named.`,
     recommended: false,
+    isDisabledForAllConfig: true,
   }),
   validationToRule('unique-field-definition-names', 'UniqueFieldDefinitionNames', {
     category: 'Schema',

@@ -67,6 +67,7 @@ export type RuleDocsInfo<T> = {
           operations?: T;
         };
     graphQLJSRuleName?: string;
+    isDisabledForAllConfig?: true;
   };
 };
 

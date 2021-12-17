@@ -22,7 +22,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
-    '@typescript-eslint/ban-types': 'off',
     'unicorn/prefer-array-some': 'error',
     'unicorn/prefer-includes': 'error',
     'unicorn/no-useless-fallback-in-spread': 'error',

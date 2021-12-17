@@ -9,7 +9,7 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 ## Key Features
 
 - 🚀 Integrates with ESLint core (as a ESTree parser)
-- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
+- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
 - 🚀 Lints both GraphQL schema and GraphQL operations
 - 🚀 Extended type info for more advanced usages
 - 🚀 Supports ESLint directives (for example: `eslint-disable-next-line`)
@@ -189,10 +189,10 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 <!-- prettier-ignore-start -->
 |Name|Description|
 |:-:|-|
-|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables recommended rules for schema (SDL) development|
-|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules for schema (SDL) development, except for those that require `parserOptions.operations` option|
-|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables recommended rules for consuming GraphQL (operations) development|
-|[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules for consuming GraphQL (operations) development|
+|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.json)|enables recommended rules for schema (SDL) development|
+|[`schema-all`](packages/plugin/src/configs/schema-all.json)|enables all rules for schema (SDL) development, except for those that require `parserOptions.operations` option|
+|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.json) |enables recommended rules for consuming GraphQL (operations) development|
+|[`operations-all`](packages/plugin/src/configs/operations-all.json)|enables all rules for consuming GraphQL (operations) development|
 <!-- prettier-ignore-end -->
 
 > If you are in a project that develops the GraphQL schema, you'll need `schema` rules. 
