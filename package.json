@@ -26,7 +26,7 @@
     "@babel/core": "7.16.5",
     "@babel/preset-env": "7.16.5",
     "@babel/preset-typescript": "7.16.5",
-    "@changesets/cli": "2.18.1",
+    "@changesets/cli": "2.19.0",
     "@types/dedent": "0.7.0",
     "@types/jest": "27.0.3",
     "@types/node": "16.11.14",
