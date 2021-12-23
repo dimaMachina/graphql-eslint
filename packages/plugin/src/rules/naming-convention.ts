@@ -47,6 +47,7 @@ type PropertySchema = {
   prefix?: string;
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
+  ignorePattern?: string;
 };
 
 type Options = AllowedStyle | PropertySchema;
@@ -124,6 +125,17 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [{ FieldDefinition: { style: 'camelCase', ignorePattern: '^(EAN13|UPC|UK)' } }],
+          code: /* GraphQL */ `
+            type Product {
+              EAN13: String
+              UPC: String
+              UKFlag: String
+            }
+          `,
+        },
       ],
       configOptions: {
         schema: [
@@ -191,6 +203,10 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
               minItems: 1,
               items: { type: 'string' },
             },
+            ignorePattern: {
+              type: 'string',
+              description: 'Option to skip validation of some words, e.g. acronyms',
+            },
           },
         },
       },
@@ -249,15 +265,16 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       if (!node) {
         return;
       }
-      const { prefix, suffix, forbiddenPrefixes, forbiddenSuffixes, style } = normalisePropertyOption(selector);
+      const { prefix, suffix, forbiddenPrefixes, forbiddenSuffixes, style, ignorePattern } =
+        normalisePropertyOption(selector);
       const nodeType = KindToDisplayName[n.kind] || n.kind;
       const nodeName = node.value;
       const error = getError();
       if (error) {
         const { errorMessage, renameToName } = error;
-        const [leadingUnderscore] = nodeName.match(/^_*/);
-        const [trailingUnderscore] = nodeName.match(/_*$/);
-        const suggestedName = leadingUnderscore + renameToName + trailingUnderscore;
+        const [leadingUnderscores] = nodeName.match(/^_*/);
+        const [trailingUnderscores] = nodeName.match(/_*$/);
+        const suggestedName = leadingUnderscores + renameToName + trailingUnderscores;
         context.report({
           loc: getLocation(node.loc, node.value),
           message: `${nodeType} "${nodeName}" should ${errorMessage}`,
@@ -275,6 +292,9 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         renameToName: string;
       } | void {
         const name = nodeName.replace(/(^_+)|(_+$)/g, '');
+        if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
+          return;
+        }
         if (prefix && !name.startsWith(prefix)) {
           return {
             errorMessage: `have "${prefix}" prefix`,
@@ -301,8 +321,12 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
             renameToName: name.replace(new RegExp(`${forbiddenSuffix}$`), ''),
           };
         }
+        // Style is optional
+        if (!style) {
+          return;
+        }
         const caseRegex = StyleToRegex[style];
-        if (caseRegex && !caseRegex.test(name)) {
+        if (!caseRegex.test(name)) {
           return {
             errorMessage: `be in ${style} format`,
             renameToName: convertCase(style, name),
