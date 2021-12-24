@@ -71,6 +71,18 @@ type Query {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { FieldDefinition: { style: 'camelCase', ignorePattern: '^(EAN13|UPC|UK)' } }]
+
+type Product {
+  EAN13: String
+  UPC: String
+  UKFlag: String
+}
+```
+
 ## Config Schema
 
 > It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.
@@ -275,6 +287,10 @@ Additional restrictions:
 
 * Minimum items: `1`
 * Unique items: `true`
+
+### `ignorePattern` (string)
+
+Option to skip validation of some words, e.g. acronyms
 
 ## Resources
 

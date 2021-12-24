@@ -112,6 +112,34 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
       options: [{ OperationDefinition: { style: 'PascalCase' } }],
     },
     '{ test { __typename ok_ } }',
+    {
+      name: 'should ignore fields',
+      code: /* GraphQL */ `
+        type Test {
+          EU: ID
+          EUIntlFlag: ID
+          IE: ID
+          IEIntlFlag: ID
+          GB: ID
+          UKFlag: ID
+          UKService_Badge: ID
+          CCBleaching: ID
+          CCDryCleaning: ID
+          CCIroning: ID
+          UPC: ID
+          CMWA: ID
+          EAN13: ID
+        }
+      `,
+      options: [
+        {
+          FieldDefinition: {
+            style: 'camelCase',
+            ignorePattern: '^(EU|IE|GB|UK|CC|UPC|CMWA|EAN13)',
+          },
+        },
+      ],
+    },
   ],
   invalid: [
     {
