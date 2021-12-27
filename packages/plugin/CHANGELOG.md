@@ -1,5 +1,12 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.3.0
+
+### Minor Changes
+
+- b4c5d55: feat: add new option ignorePattern for `naming-convention` rule
+- f20f7de: feat: remove the need of `#import` comments in favor of `parserOptions.operations`
+
 ## 3.2.0
 
 ### Minor Changes
