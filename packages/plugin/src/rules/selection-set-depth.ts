@@ -2,17 +2,19 @@ import { GraphQLESLintRule } from '../types';
 import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, FragmentDefinitionNode, GraphQLError, Kind, OperationDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { getLocation, requireSiblingsOperations } from '../utils';
+import { getLocation, logger, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../sibling-operations';
 
 type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
+
+const RULE_ID = 'selection-set-depth';
 
 const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
   meta: {
     docs: {
       category: 'Operations',
       description: `Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).`,
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/selection-set-depth.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       examples: [
         {
@@ -87,11 +89,10 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
     let siblings: SiblingOperations | null = null;
 
     try {
-      siblings = requireSiblingsOperations('selection-set-depth', context);
+      siblings = requireSiblingsOperations(RULE_ID, context);
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Rule "selection-set-depth" works best with siblings operations loaded. For more info: http://bit.ly/graphql-eslint-operations`
+      logger.warn(
+        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: http://bit.ly/graphql-eslint-operations`
       );
     }
 
@@ -121,9 +122,8 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
             },
           });
         } catch (e) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            `Rule "selection-set-depth" check failed due to a missing siblings operations. For more info: http://bit.ly/graphql-eslint-operations`,
+          logger.warn(
+            `Rule "${RULE_ID}" check failed due to a missing siblings operations. For more info: http://bit.ly/graphql-eslint-operations`,
             e
           );
         }

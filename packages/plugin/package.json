@@ -38,6 +38,7 @@
     "@graphql-tools/code-file-loader": "7.2.3",
     "@graphql-tools/graphql-tag-pluck": "7.1.4",
     "@graphql-tools/utils": "8.5.5",
+    "chalk": "4.1.2",
     "graphql-config": "4.1.0",
     "graphql-depth-limit": "1.1.0",
     "lodash.lowercase": "4.3.0"

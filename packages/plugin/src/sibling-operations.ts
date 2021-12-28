@@ -11,7 +11,7 @@ import {
 import { Source, asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
 import { ParserOptions } from './types';
-import { getOnDiskFilepath, loaderCache } from './utils';
+import { getOnDiskFilepath, loaderCache, logger } from './utils';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
@@ -39,10 +39,10 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
       return source;
     }
     filepathMap[location] ??= -1;
-    const index = filepathMap[location] += 1;
+    const index = (filepathMap[location] += 1);
     return {
       ...source,
-      location: resolve(location, `${index}_document.graphql`)
+      location: resolve(location, `${index}_document.graphql`),
     };
   });
 };
@@ -53,9 +53,7 @@ const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
 const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
   const realFilepath = filePath ? getOnDiskFilepath(filePath) : null;
   const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
-  const documentsKey = asArray(projectForFile.documents)
-    .sort()
-    .join(',');
+  const documentsKey = asArray(projectForFile.documents).sort().join(',');
 
   if (!documentsKey) {
     return [];
@@ -66,9 +64,9 @@ const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
   if (!siblings) {
     const documents = projectForFile.loadDocumentsSync(projectForFile.documents, {
       skipGraphQLImport: true,
-      cache: loaderCache
+      cache: loaderCache,
     });
-    siblings = handleVirtualPath(documents)
+    siblings = handleVirtualPath(documents);
     operationsCache.set(documentsKey, siblings);
   }
 
@@ -83,8 +81,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
 
     const noopWarn = () => {
       if (!printed) {
-        // eslint-disable-next-line no-console
-        console.warn(
+        logger.warn(
           `getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!`
         );
         printed = true;
@@ -164,8 +161,7 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
           const fragmentInfo = getFragment(name);
 
           if (fragmentInfo.length === 0) {
-            // eslint-disable-next-line no-console
-            console.warn(
+            logger.warn(
               `Unable to locate fragment named "${name}", please make sure it's loaded using "parserOptions.operations"`
             );
             return;
