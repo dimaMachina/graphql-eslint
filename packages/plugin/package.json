@@ -34,7 +34,7 @@
     "prepack": "bob prepack"
   },
   "dependencies": {
-    "@babel/code-frame": "7.16.0",
+    "@babel/code-frame": "7.16.7",
     "@graphql-tools/code-file-loader": "7.2.3",
     "@graphql-tools/graphql-tag-pluck": "7.1.4",
     "@graphql-tools/utils": "8.5.5",
