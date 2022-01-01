@@ -3,3 +3,9 @@ const USER = /* GraphQL */ `
     id: ID!
   }
 `;
+
+const QUERY = /* GraphQL */ `
+  type Query {
+    user: User
+  }
+`;

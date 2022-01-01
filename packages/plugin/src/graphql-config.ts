@@ -4,17 +4,13 @@ import { ParserOptions } from './types';
 
 let graphQLConfig: GraphQLConfig;
 
-export function loadCachedGraphQLConfig(options: ParserOptions): GraphQLConfig {
+export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   // We don't want cache config on test environment
   // Otherwise schema and documents will be same for all tests
   if (process.env.NODE_ENV !== 'test' && graphQLConfig) {
     return graphQLConfig;
   }
-  graphQLConfig = loadGraphQLConfig(options);
-  return graphQLConfig;
-}
 
-export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   const onDiskConfig = options.skipGraphQLConfig
     ? null
     : loadConfigSync({

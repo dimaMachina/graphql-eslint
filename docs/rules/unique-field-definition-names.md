@@ -4,7 +4,7 @@
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/unique-field-definition-names`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 A GraphQL complex type is only valid if all its fields are uniquely named.

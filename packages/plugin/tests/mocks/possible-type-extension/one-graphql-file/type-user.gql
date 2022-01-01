@@ -5,3 +5,7 @@ type User {
 extend type User {
   firstName: String
 }
+
+type Query {
+  user: User
+}

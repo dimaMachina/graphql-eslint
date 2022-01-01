@@ -1,9 +1,12 @@
+/* eslint-disable no-console */
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { spawn } from 'child_process';
 import { GraphQLSchema, printSchema } from 'graphql';
 import { getSchema } from '../src/schema';
 import { loadGraphQLConfig } from '../src/graphql-config';
+
+const noopFn = () => null;
 
 describe('schema', () => {
   const SCHEMA_GRAPHQL_PATH = resolve(__dirname, 'mocks/user-schema.graphql');
@@ -68,34 +71,86 @@ describe('schema', () => {
       testSchema(url);
     });
 
-    it('should passe headers', () => {
-      expect.assertions(2);
-      const schemaUrl = `${url}/my-headers`;
-      const schemaOptions = {
-        headers: {
-          Authorization: 'Bearer Foo',
-        },
-      };
+    describe('should passe headers', () => {
+      let schemaUrl;
+      let schemaOptions;
+      let consoleError;
+      const originalConsoleError = console.error;
 
-      try {
-        // https://graphql-config.com/schema#passing-headers
+      beforeAll(() => {
+        schemaUrl = `${url}/my-headers`;
+        schemaOptions = {
+          headers: {
+            authorization: 'Bearer Foo',
+          },
+        };
+        // Hide console.error in test
+        console.error = noopFn;
+      });
+
+      beforeEach(() => {
+        consoleError = jest.spyOn(console, 'error');
+      });
+
+      afterEach(() => {
+        consoleError.mockRestore();
+      });
+
+      afterAll(() => {
+        console.error = originalConsoleError;
+      });
+
+      // https://graphql-config.com/schema#passing-headers
+      it('with `parserOptions.schema`', () => {
         const gqlConfig = loadGraphQLConfig({
           schema: {
             [schemaUrl]: schemaOptions,
           },
         });
         getSchema(undefined, gqlConfig);
-      } catch (e) {
-        expect(e.message).toMatch('"authorization":"Bearer Foo"');
-      }
 
-      try {
-        // https://github.com/dotansimha/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
+        expect(consoleError).toHaveBeenCalledTimes(1);
+        expect(consoleError.mock.calls[0][2]).toMatch('"authorization":"Bearer Foo"');
+      });
+
+      // https://github.com/dotansimha/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
+      it('with `parserOptions.schemaOptions`', () => {
         const gqlConfig = loadGraphQLConfig({ schema: schemaUrl });
         getSchema({ schemaOptions }, gqlConfig);
-      } catch (e) {
-        expect(e.message).toMatch('"authorization":"Bearer Foo"');
-      }
+
+        expect(consoleError).toHaveBeenCalledTimes(1);
+        expect(consoleError.mock.calls[0][2]).toMatch('"authorization":"Bearer Foo"');
+      });
     });
+  });
+
+  describe('schema loading', () => {
+    const originalConsoleError = console.error;
+    const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql' });
+    let consoleError;
+
+    beforeAll(() => {
+      // Hide console.error in test
+      console.error = noopFn;
+      consoleError = jest.spyOn(console, 'error');
+    });
+
+    afterAll(() => {
+      console.error = originalConsoleError;
+      consoleError.mockRestore();
+    });
+
+    it('should not throw an error, but log an error in `console.error`', () => {
+      expect(consoleError).toHaveBeenCalledTimes(0);
+      expect(getSchema(undefined, gqlConfig)).toBe(null);
+      expect(consoleError.mock.calls[0][2]).toMatch(
+        'Unable to find any GraphQL type definitions for the following pointers'
+      );
+    })
+
+    it('should not log second time error from same schema', () => {
+      expect(getSchema(undefined, gqlConfig)).toBe(null);
+      expect(consoleError).toHaveBeenCalledTimes(1);
+    })
   });
 });

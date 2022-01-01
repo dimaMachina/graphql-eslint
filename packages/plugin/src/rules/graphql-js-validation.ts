@@ -13,29 +13,21 @@ import {
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import {
-  getLocation,
-  getGraphQLSchemaToExtend,
-  requireGraphQLSchemaFromContext,
-  requireSiblingsOperations,
-  logger,
-} from '../utils';
+import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
 
 function validateDocument(
   context: GraphQLESLintRuleContext,
   schema: GraphQLSchema | null = null,
   documentNode: DocumentNode,
-  rule: ValidationRule,
-  isSchemaToExtend = false
+  rule: ValidationRule
 ): void {
   if (documentNode.definitions.length === 0) {
     return;
   }
   try {
-    const validationErrors =
-      schema && !isSchemaToExtend
-        ? validate(schema, documentNode, [rule])
-        : validateSDL(documentNode, schema, [rule as any]);
+    const validationErrors = schema
+      ? validate(schema, documentNode, [rule])
+      : validateSDL(documentNode, null, [rule as any]);
 
     for (const error of validationErrors) {
       /*
@@ -180,20 +172,15 @@ const validationToRule = (
           return {};
         }
 
-        let schema: GraphQLSchema;
-        if (docs.requiresSchemaToExtend) {
-          schema = getGraphQLSchemaToExtend(ruleId, context);
-        } else if (docs.requiresSchema) {
-          schema = requireGraphQLSchemaFromContext(ruleId, context);
-        }
-
         return {
           Document(node) {
+            const schema = docs.requiresSchema ? requireGraphQLSchemaFromContext(ruleId, context) : null;
+
             const documentNode = getDocumentNode
               ? getDocumentNode({ ruleId, context, schema, node: node.rawNode() })
               : node.rawNode();
 
-            validateDocument(context, schema, documentNode, ruleFn, docs.requiresSchemaToExtend);
+            validateDocument(context, schema, documentNode, ruleFn);
           },
         };
       },
@@ -389,7 +376,6 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     description: `A type extension is only valid if the type is defined and has the same kind.`,
     recommended: false, // TODO: enable after https://github.com/dotansimha/graphql-eslint/issues/787 will be fixed
     requiresSchema: true,
-    requiresSchemaToExtend: true,
   }),
   validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
     category: ['Schema', 'Operations'],
@@ -424,14 +410,10 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     category: 'Schema',
     description: `A GraphQL enum type is only valid if all its values are uniquely named.`,
     recommended: false,
-    requiresSchema: true,
-    requiresSchemaToExtend: true,
   }),
   validationToRule('unique-field-definition-names', 'UniqueFieldDefinitionNames', {
     category: 'Schema',
     description: `A GraphQL complex type is only valid if all its fields are uniquely named.`,
-    requiresSchema: true,
-    requiresSchemaToExtend: true,
   }),
   validationToRule('unique-input-field-names', 'UniqueInputFieldNames', {
     category: 'Operations',

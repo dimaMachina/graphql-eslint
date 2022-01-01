@@ -8,7 +8,6 @@ import chalk from 'chalk';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
-import { loadGraphQLConfig } from './graphql-config';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -54,46 +53,6 @@ export const logger = {
   // eslint-disable-next-line no-console
   warn: (...args) => console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
 };
-
-const schemaToExtendCache = new Map<string, GraphQLSchema>();
-
-type GetGraphQLSchemaToExtend = {
-  (ruleId: string, ctx: GraphQLESLintRuleContext): GraphQLSchema | null;
-  warningPrintedMap: Record<string, boolean>;
-};
-
-export const getGraphQLSchemaToExtend: GetGraphQLSchemaToExtend = (ruleId, context) => {
-  // If schema is not loaded, there is no reason to make partial schema aka schemaToExtend
-  if (!context.parserServices.hasTypeInfo) {
-    if (!getGraphQLSchemaToExtend.warningPrintedMap[ruleId]) {
-      logger.warn(
-        `Rule "${ruleId}" works best with schema loaded. See http://bit.ly/graphql-eslint-schema for more info`
-      );
-      getGraphQLSchemaToExtend.warningPrintedMap[ruleId] = true;
-    }
-    return null;
-  }
-  const filename = context.getPhysicalFilename();
-  if (!schemaToExtendCache.has(filename)) {
-    const { schema, schemaOptions } = context.parserOptions;
-    const gqlConfig = loadGraphQLConfig({ schema });
-    const projectForFile = gqlConfig.getProjectForFile(filename);
-    let schemaToExtend: GraphQLSchema | null;
-    try {
-      schemaToExtend = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', {
-        ...schemaOptions,
-        ignore: filename,
-      });
-    } catch {
-      // If error throws just ignore it because maybe schema is located in 1 file
-      schemaToExtend = null;
-    }
-    schemaToExtendCache.set(filename, schemaToExtend);
-  }
-
-  return schemaToExtendCache.get(filename);
-};
-getGraphQLSchemaToExtend.warningPrintedMap = Object.create(null);
 
 export function requireReachableTypesFromContext(
   ruleName: string,
