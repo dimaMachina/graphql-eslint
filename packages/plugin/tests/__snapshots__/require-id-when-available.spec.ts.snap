@@ -1,25 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-> 1 | query { hasId { name } }
-    |               ^ Field "id" must be selected when it's available on a type. Please make sure to include it in your selection set!
+> 1 | { hasId { name } }
+    |         ^ Field "id" must be selected when it's available on a type. Please make sure to include it in your selection set!
 If you are using fragments, make sure that all used fragments specifies the field "id".
 `;
 
 exports[` 2`] = `
-> 1 | query { hasId { id } }
-    |               ^ Field "name" must be selected when it's available on a type. Please make sure to include it in your selection set!
+> 1 | { hasId { id } }
+    |         ^ Field "name" must be selected when it's available on a type. Please make sure to include it in your selection set!
 If you are using fragments, make sure that all used fragments specifies the field "name".
 `;
 
 exports[` 3`] = `
-  1 |
-  2 |         query {
-> 3 |           hasId {
-    |                 ^ Field "id" or "_id" must be selected when it's available on a type. Please make sure to include it in your selection set!
+> 1 | { hasId { name } }
+    |         ^ Field "id" or "_id" must be selected when it's available on a type. Please make sure to include it in your selection set!
 If you are using fragments, make sure that all used fragments specifies the field "id" or "_id".
-  4 |             name
-  5 |           }
-  6 |         }
-  7 |       
 `;

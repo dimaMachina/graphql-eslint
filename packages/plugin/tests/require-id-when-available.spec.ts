@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/require-id-when-available';
+import rule, { RequireIdWhenAvailableRuleConfig } from '../src/rules/require-id-when-available';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -38,64 +38,112 @@ const TEST_SCHEMA = /* GraphQL */ `
   }
 `;
 
+const USER_POST_SCHEMA = /* GraphQL */ `
+  type User {
+    id: ID
+    name: String
+    posts: [Post]
+  }
+
+  type Post {
+    id: ID
+    title: String
+  }
+
+  type Query {
+    user: User
+  }
+`;
+
 const WITH_SCHEMA = {
   parserOptions: <ParserOptions>{
     schema: TEST_SCHEMA,
-    operations: /* GraphQL */ `
-      fragment HasIdFields on HasId {
-        id
-      }
-    `,
+    operations: '{ foo }',
   },
 };
+
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('require-id-when-available', rule, {
+ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-available', rule, {
   valid: [
-    { ...WITH_SCHEMA, code: `query { noId { name } }` },
-    { ...WITH_SCHEMA, code: `query { hasId { id name } }` },
-    { ...WITH_SCHEMA, code: `query { hasId { ...HasIdFields } }` },
-    { ...WITH_SCHEMA, code: `query { vehicles { id ...on Car { id mileage } } }` },
-    { ...WITH_SCHEMA, code: `query { vehicles { ...on Car { id mileage } } }` },
-    { ...WITH_SCHEMA, code: `query { flying { ...on Bird { id } } }` },
+    {
+      name: 'should completely ignore FragmentDefinition',
+      code: /* GraphQL */ `
+        fragment UserFields on User {
+          name
+          posts {
+            title
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: '{ foo }',
+      },
+    },
+    {
+      name: "should ignore checking selections on OperationDefinition as it's redundant check",
+      code: '{ foo }',
+      parserOptions: {
+        schema: 'type Query { id: ID }',
+        operations: '{ foo }',
+      },
+    },
+    { ...WITH_SCHEMA, code: '{ noId { name } }' },
+    { ...WITH_SCHEMA, code: '{ hasId { id name } }' },
+    {
+      name: 'should find selection in fragment',
+      code: '{ hasId { ...HasIdFields } }',
+      parserOptions: {
+        schema: TEST_SCHEMA,
+        operations: 'fragment HasIdFields on HasId { id }',
+      },
+    },
+    { ...WITH_SCHEMA, code: '{ vehicles { id ...on Car { id mileage } } }' },
+    { ...WITH_SCHEMA, code: '{ vehicles { ...on Car { id mileage } } }' },
+    { ...WITH_SCHEMA, code: '{ flying { ...on Bird { id } } }' },
     {
       ...WITH_SCHEMA,
-      code: `query { hasId { name } }`,
+      code: '{ hasId { name } }',
       options: [{ fieldName: 'name' }],
     },
     {
       ...WITH_SCHEMA,
-      code: `query { vehicles { id ...on Car { mileage } } }`,
+      code: '{ vehicles { id ...on Car { mileage } } }',
     },
     {
       ...WITH_SCHEMA,
       name: 'support multiple id field names',
-      code: `query { hasId { _id } }`,
+      code: '{ hasId { _id } }',
       options: [{ fieldName: ['id', '_id'] }],
     },
   ],
   invalid: [
+    // TODO: Improve this
+    // {
+    // name: 'should report an error about missing "posts.id" selection',
+    // code: '{ user { id ...UserFields } }',
+    // errors: [{ message: 'REQUIRE_ID_WHEN_AVAILABLE' }],
+    // parserOptions: {
+    //   schema: USER_POST_SCHEMA,
+    //   operations: 'fragment UserFields on User { posts { title } }'
+    // },
+    // },
     {
       ...WITH_SCHEMA,
-      code: `query { hasId { name } }`,
+      code: '{ hasId { name } }',
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
     {
       ...WITH_SCHEMA,
-      code: `query { hasId { id } }`,
+      code: '{ hasId { id } }',
       options: [{ fieldName: 'name' }],
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
     {
       ...WITH_SCHEMA,
       name: 'support multiple id field names',
-      code: /* GraphQL */ `
-        query {
-          hasId {
-            name
-          }
-        }
-      `,
+      code: '{ hasId { name } }',
       options: [{ fieldName: ['id', '_id'] }],
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },

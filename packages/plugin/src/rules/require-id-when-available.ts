@@ -1,12 +1,14 @@
 import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionNode } from 'graphql';
+import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionNode, SelectionSetNode } from 'graphql';
+import { asArray } from '@graphql-tools/utils';
 import { getBaseType, GraphQLESTreeNode } from '../estree-parser';
 
-const REQUIRE_ID_WHEN_AVAILABLE = 'REQUIRE_ID_WHEN_AVAILABLE';
-const DEFAULT_ID_FIELD_NAME = 'id';
+export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
 
-type RequireIdWhenAvailableRuleConfig = { fieldName: string };
+const RULE_ID = 'require-id-when-available';
+const MESSAGE_ID = 'REQUIRE_ID_WHEN_AVAILABLE';
+const DEFAULT_ID_FIELD_NAME = 'id';
 
 const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
@@ -14,7 +16,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     docs: {
       category: 'Operations',
       description: 'Enforce selecting specific fields when they are available on the GraphQL type.',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-id-when-available.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       requiresSiblings: true,
       examples: [
@@ -28,7 +30,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
             }
 
             # Query
-            query user {
+            query {
               user {
                 name
               }
@@ -45,7 +47,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
             }
 
             # Query
-            query user {
+            query {
               user {
                 id
                 name
@@ -57,7 +59,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       recommended: true,
     },
     messages: {
-      [REQUIRE_ID_WHEN_AVAILABLE]: [
+      [MESSAGE_ID]: [
         `Field {{ fieldName }} must be selected when it's available on a type. Please make sure to include it in your selection set!`,
         `If you are using fragments, make sure that all used fragments {{ checkedFragments }}specifies the field {{ fieldName }}.`,
       ].join('\n'),
@@ -88,21 +90,23 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     },
   },
   create(context) {
-    requireGraphQLSchemaFromContext('require-id-when-available', context);
-    const siblings = requireSiblingsOperations('require-id-when-available', context);
+    requireGraphQLSchemaFromContext(RULE_ID, context);
+    const siblings = requireSiblingsOperations(RULE_ID, context);
     const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
-    const idNames = Array.isArray(fieldName) ? fieldName : [fieldName];
+    const idNames = asArray(fieldName);
 
     const isFound = (s: GraphQLESTreeNode<SelectionNode> | SelectionNode) =>
       s.kind === Kind.FIELD && idNames.includes(s.name.value);
 
+    // Skip check selections in FragmentDefinition
+    const selector = 'OperationDefinition SelectionSet[parent.kind!=OperationDefinition]';
+
     return {
-      SelectionSet(node) {
+      [selector](node: GraphQLESTreeNode<SelectionSetNode, true>) {
         const typeInfo = node.typeInfo();
         if (!typeInfo.gqlType) {
           return;
         }
-
         const rawType = getBaseType(typeInfo.gqlType);
         const isObjectType = rawType instanceof GraphQLObjectType;
         const isInterfaceType = rawType instanceof GraphQLInterfaceType;
@@ -115,47 +119,43 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
         if (!hasIdFieldInType) {
           return;
         }
-
         const checkedFragmentSpreads = new Set<string>();
-        let found = false;
 
         for (const selection of node.selections) {
           if (isFound(selection)) {
-            found = true;
-          } else if (selection.kind === Kind.INLINE_FRAGMENT) {
-            found = selection.selectionSet?.selections.some(s => isFound(s));
-          } else if (selection.kind === Kind.FRAGMENT_SPREAD) {
+            return;
+          }
+          if (selection.kind === Kind.INLINE_FRAGMENT && selection.selectionSet.selections.some(isFound)) {
+            return;
+          }
+          if (selection.kind === Kind.FRAGMENT_SPREAD) {
             const [foundSpread] = siblings.getFragment(selection.name.value);
-
             if (foundSpread) {
               checkedFragmentSpreads.add(foundSpread.document.name.value);
-              found = foundSpread.document.selectionSet?.selections.some(s => isFound(s));
+              if (foundSpread.document.selectionSet.selections.some(isFound)) {
+                return;
+              }
             }
-          }
-
-          if (found) {
-            break;
           }
         }
 
         const { parent } = node as any;
         const hasIdFieldInInterfaceSelectionSet =
-          parent &&
-          parent.kind === Kind.INLINE_FRAGMENT &&
-          parent.parent &&
-          parent.parent.kind === Kind.SELECTION_SET &&
-          parent.parent.selections.some(s => isFound(s));
-
-        if (!found && !hasIdFieldInInterfaceSelectionSet) {
-          context.report({
-            loc: getLocation(node.loc),
-            messageId: REQUIRE_ID_WHEN_AVAILABLE,
-            data: {
-              checkedFragments: checkedFragmentSpreads.size === 0 ? '' : `(${[...checkedFragmentSpreads].join(', ')}) `,
-              fieldName: idNames.map(name => `"${name}"`).join(' or '),
-            },
-          });
+          parent?.kind === Kind.INLINE_FRAGMENT &&
+          parent.parent?.kind === Kind.SELECTION_SET &&
+          parent.parent.selections.some(isFound);
+        if (hasIdFieldInInterfaceSelectionSet) {
+          return;
         }
+
+        context.report({
+          loc: getLocation(node.loc),
+          messageId: MESSAGE_ID,
+          data: {
+            checkedFragments: checkedFragmentSpreads.size === 0 ? '' : `(${[...checkedFragmentSpreads].join(', ')}) `,
+            fieldName: idNames.map(name => `"${name}"`).join(' or '),
+          },
+        });
       },
     };
   },
