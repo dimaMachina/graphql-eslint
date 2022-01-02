@@ -2,13 +2,9 @@
 
 exports[` 1`] = `
   1 |
-  2 |         type User {
-  3 |           id: ID!
-  4 |         }
-  5 |
-> 6 |         extend type OtherUser {
+> 2 |         extend type OtherUser {
     |                     ^^^^^^^^^ Cannot extend type "OtherUser" because it is not defined.
-  7 |           name: String!
-  8 |         }
-  9 |       
+  3 |           name: String
+  4 |         }
+  5 |       
 `;

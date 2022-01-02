@@ -1,7 +1,6 @@
 import { AST } from 'eslint';
 import {
   Kind,
-  ASTNode,
   TypeInfo,
   DocumentNode,
   GraphQLSchema,
@@ -14,13 +13,11 @@ import {
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
 
 function validateDocument(
-  sourceNode: GraphQLESTreeNode<ASTNode>,
   context: GraphQLESLintRuleContext,
-  schema: GraphQLSchema | null,
+  schema: GraphQLSchema | null = null,
   documentNode: DocumentNode,
   rule: ValidationRule
 ): void {
@@ -58,7 +55,8 @@ function validateDocument(
     }
   } catch (e) {
     context.report({
-      node: sourceNode,
+      // Report on first character
+      loc: { column: 0, line: 1 },
       message: e.message,
     });
   }
@@ -167,21 +165,22 @@ const validationToRule = (
         },
       },
       create(context) {
+        if (!ruleFn) {
+          logger.warn(
+            `You rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql-js" version you are using. Skipping...`
+          );
+          return {};
+        }
+
         return {
           Document(node) {
-            if (!ruleFn) {
-              // eslint-disable-next-line no-console
-              console.warn(
-                `You rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql-js" version you are using. Skipping...`
-              );
-              return;
-            }
             const schema = docs.requiresSchema ? requireGraphQLSchemaFromContext(ruleId, context) : null;
+
             const documentNode = getDocumentNode
               ? getDocumentNode({ ruleId, context, schema, node: node.rawNode() })
               : node.rawNode();
 
-            validateDocument(node, context, schema, documentNode, ruleFn);
+            validateDocument(context, schema, documentNode, ruleFn);
           },
         };
       },
@@ -376,6 +375,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     category: 'Schema',
     description: `A type extension is only valid if the type is defined and has the same kind.`,
     recommended: false, // TODO: enable after https://github.com/dotansimha/graphql-eslint/issues/787 will be fixed
+    requiresSchema: true,
   }),
   validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
     category: ['Schema', 'Operations'],

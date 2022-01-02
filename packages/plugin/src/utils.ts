@@ -4,6 +4,7 @@ import { Lexer, GraphQLSchema, Source, Kind } from 'graphql';
 import { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
+import chalk from 'chalk';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 import { UsedFields, ReachableTypes } from './graphql-ast';
@@ -45,6 +46,13 @@ export function requireGraphQLSchemaFromContext(
 
   return context.parserServices.schema;
 }
+
+export const logger = {
+  // eslint-disable-next-line no-console
+  error: (...args) => console.error(chalk.red('error'), '[graphql-eslint]', chalk(...args)),
+  // eslint-disable-next-line no-console
+  warn: (...args) => console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
+};
 
 export function requireReachableTypesFromContext(
   ruleName: string,

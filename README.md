@@ -42,7 +42,7 @@ npm install --save-dev @graphql-eslint/eslint-plugin
 
 > Make sure you have `graphql` dependency in your project.
 
-### Configuration
+## Configuration
 
 To get started, define an override in your ESLint config to apply this plugin to `.graphql` files. Add the [rules](docs/README.md) you want applied.
 
@@ -65,7 +65,7 @@ To get started, define an override in your ESLint config to apply this plugin to
 
 If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that apply to individual files, you should be good to go 👍. If you would like use a remote schema or use rules that apply across the entire collection of definitions at once, see [here](#using-a-remote-schema-or-rules-with-constraints-that-span-the-entire-schema).
 
-#### Tell ESLint to apply this plugin to GraphQL definitions defined in code files
+### Apply this plugin to GraphQL definitions defined in code files
 
 If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an additional override to extend the functionality of this plugin to the schema and operations in those files.
 
@@ -90,7 +90,7 @@ If you are defining GraphQL schema or GraphQL operations in code files, you'll w
 
 Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause `graphql-eslint/graphql` to extract the schema and operation definitions from these files into virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined for `.graphql` files, via `"files": ["*.graphql"]`, to get applied to the definitions defined in your code files.
 
-#### Using a remote schema or rules with constraints that span the entire schema
+### Extended linting rules with GraphQL Schema
 
 Some rules require an understanding of the entire schema at once. For example, [no-unreachable-types](https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types) checks that all types are reachable by root-level fields.
 
@@ -120,7 +120,7 @@ The parser allows you to specify a json file / graphql files(s) / url / raw stri
 
 > Some rules require type information to operate, it's marked in the docs for each rule!
 
-#### Extended linting rules with siblings operations
+### Extended linting rules with siblings operations
 
 While implementing this tool, we had to find solutions for a better integration of the GraphQL ecosystem and ESLint core.
 
@@ -180,7 +180,7 @@ You can find a list of [ESLint directives here](https://eslint.org/docs/2.13.1/u
 
 You can find a complete list of [all available rules here](docs/README.md).
 
-## Deprecated Rules
+### Deprecated Rules
 
 See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 
@@ -201,7 +201,7 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 
 > If you are in a monorepo project, you probably need both sets of rules.
 
-## Config usage
+### Config usage
 
 For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the `extends` option:
 

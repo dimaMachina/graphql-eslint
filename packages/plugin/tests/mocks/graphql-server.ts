@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- ignore type errors from `graphql` package
-// @ts-nocheck
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { createServer, Server, IncomingMessage, ServerResponse } from 'http';

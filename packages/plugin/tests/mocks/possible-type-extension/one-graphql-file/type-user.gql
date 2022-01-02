@@ -1,0 +1,11 @@
+type User {
+  id: ID!
+}
+
+extend type User {
+  firstName: String
+}
+
+type Query {
+  user: User
+}

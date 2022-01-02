@@ -1,5 +1,6 @@
 import { Linter } from 'eslint';
 import { parseCode } from '@graphql-tools/graphql-tag-pluck';
+import { logger } from '../utils';
 
 const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'];
 
@@ -45,8 +46,7 @@ export function createGraphqlProcessor(): Linter.Processor {
             return blocks;
           }
         } catch (e) {
-          // eslint-disable-next-line no-console
-          console.warn(`[graphql-eslint/processor]: Unable to process file "${filename}": `, e);
+          logger.warn(`Unable to process file "${filename}"`, e);
         }
       }
 

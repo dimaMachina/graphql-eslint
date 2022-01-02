@@ -6,7 +6,7 @@ import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types
 import { extractTokens } from './utils';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
-import { loadGraphqlConfig } from './graphql-config';
+import { loadGraphQLConfig } from './graphql-config';
 import { getReachableTypes, getUsedFields } from './graphql-ast';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
@@ -14,7 +14,7 @@ export function parse(code: string, options?: ParserOptions): Linter.ESLintParse
 }
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
-  const gqlConfig = loadGraphqlConfig(options);
+  const gqlConfig = loadGraphQLConfig(options);
   const schema = getSchema(options, gqlConfig);
   const parserServices: ParserServices = {
     hasTypeInfo: schema !== null,
@@ -49,6 +49,7 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
       },
     };
   } catch (e) {
+    e.message = `[graphql-eslint] ${e.message}`;
     // In case of GraphQL parser error, we report it to ESLint as a parser error that matches the requirements
     // of ESLint. This will make sure to display it correctly in IDEs and lint results.
     if (e instanceof GraphQLError) {
@@ -56,14 +57,10 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
         index: e.positions[0],
         lineNumber: e.locations[0].line,
         column: e.locations[0].column,
-        message: `[graphql-eslint]: ${e.message}`,
+        message: e.message,
       };
-
       throw eslintError;
     }
-
-    e.message = `[graphql-eslint]: ${e.message}`;
-
     throw e;
   }
 }
