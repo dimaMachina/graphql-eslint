@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.5.0
+
+### Minor Changes
+
+- cc9a561: feat: ignore fragments in `require-id-when-available` rule
+
 ## 3.4.0
 
 ### Minor Changes
