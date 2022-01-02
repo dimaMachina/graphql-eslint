@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.4.0
+
+### Minor Changes
+
+- 75ec7d1: fix false positive case in `possible-type-extension` rule when schema is separate into multiple files
+
 ## 3.3.0
 
 ### Minor Changes
