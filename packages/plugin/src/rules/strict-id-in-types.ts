@@ -1,50 +1,38 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
-import { getLocation } from '../utils';
+import { getLocation, requireGraphQLSchemaFromContext } from '../utils';
+import { GraphQLESTreeNode } from '../estree-parser';
 
-export interface ExceptionRule {
-  types?: string[];
-  suffixes?: string[];
-}
-
-type StrictIdInTypesRuleConfig = {
+export type StrictIdInTypesRuleConfig = {
   acceptedIdNames?: string[];
   acceptedIdTypes?: string[];
-  exceptions?: ExceptionRule;
+  exceptions?: {
+    types?: string[];
+    suffixes?: string[];
+  };
 };
 
-interface ShouldIgnoreNodeParams {
-  node: GraphQLESTreeNode<ObjectTypeDefinitionNode>;
-  exceptions: ExceptionRule;
-}
-const shouldIgnoreNode = ({ node, exceptions }: ShouldIgnoreNodeParams): boolean => {
-  const rawNode = node.rawNode();
-
-  if (exceptions.types && exceptions.types.includes(rawNode.name.value)) {
-    return true;
-  }
-
-  if (exceptions.suffixes && exceptions.suffixes.some(suffix => rawNode.name.value.endsWith(suffix))) {
-    return true;
-  }
-
-  return false;
-};
+const RULE_ID = 'strict-id-in-types';
 
 const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.',
+      description: `Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.`,
       category: 'Schema',
       recommended: true,
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/strict-id-in-types.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      requiresSchema: true,
       examples: [
         {
           title: 'Incorrect',
-          usage: [{ acceptedIdNames: ['id', '_id'], acceptedIdTypes: ['ID'], exceptions: { suffixes: ['Payload'] } }],
+          usage: [
+            {
+              acceptedIdNames: ['id', '_id'],
+              acceptedIdTypes: ['ID'],
+              exceptions: { suffixes: ['Payload'] },
+            },
+          ],
           code: /* GraphQL */ `
             # Incorrect field name
             type InvalidFieldName {
@@ -147,6 +135,9 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         },
       },
     },
+    messages: {
+      [RULE_ID]: `{{ typeName }} must have exactly one non-nullable unique identifier. Accepted name(s): {{ acceptedNamesString }}; Accepted type(s): {{ acceptedTypesString }}.`,
+    },
   },
   create(context) {
     const options: StrictIdInTypesRuleConfig = {
@@ -156,15 +147,26 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
       ...context.options[0],
     };
 
+    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const rootTypeNames = [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]
+      .filter(Boolean)
+      .map(type => type.name);
+    const selector = `ObjectTypeDefinition[name.value!=/^(${rootTypeNames.join('|')})$/]`;
+
     return {
-      ObjectTypeDefinition(node) {
-        if (shouldIgnoreNode({ node, exceptions: options.exceptions })) {
+      [selector](node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) {
+        const typeName = node.name.value;
+
+        const shouldIgnoreNode =
+          options.exceptions.types?.includes(typeName) ||
+          options.exceptions.suffixes?.some(suffix => typeName.endsWith(suffix));
+
+        if (shouldIgnoreNode) {
           return;
         }
 
         const validIds = node.fields.filter(field => {
           const fieldNode = field.rawNode();
-
           const isValidIdName = options.acceptedIdNames.includes(fieldNode.name.value);
 
           // To be a valid type, it must be non-null and one of the accepted types.
@@ -175,18 +177,18 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
 
           return isValidIdName && isValidIdType;
         });
-        const typeName = node.name.value;
+
         // Usually, there should be only one unique identifier field per type.
         // Some clients allow multiple fields to be used. If more people need this,
         // we can extend this rule later.
         if (validIds.length !== 1) {
           context.report({
             loc: getLocation(node.name.loc, typeName),
-            message: `{{ typeName }} must have exactly one non-nullable unique identifier. Accepted name(s): {{ acceptedNamesString }} ; Accepted type(s): {{ acceptedTypesString }}`,
+            messageId: RULE_ID,
             data: {
               typeName,
-              acceptedNamesString: options.acceptedIdNames.join(','),
-              acceptedTypesString: options.acceptedIdTypes.join(','),
+              acceptedNamesString: options.acceptedIdNames.join(', '),
+              acceptedTypesString: options.acceptedIdTypes.join(', '),
             },
           });
         }
