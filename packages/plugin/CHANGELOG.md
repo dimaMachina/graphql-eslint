@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.6.0
+
+### Minor Changes
+
+- 624d604: fix: ignore root types in `strict-id-in-types` rule
+
 ## 3.5.0
 
 ### Minor Changes
