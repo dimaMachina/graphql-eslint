@@ -1,6 +1,7 @@
 import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync, SchemaPointer } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
+import { dirname } from 'path';
 
 let graphQLConfig: GraphQLConfig;
 
@@ -14,6 +15,8 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   const onDiskConfig = options.skipGraphQLConfig
     ? null
     : loadConfigSync({
+        // load config relative to the file being linted
+        rootDir: options.filePath ? dirname(options.filePath) : undefined,
         throwOnEmpty: false,
         throwOnMissing: false,
         extensions: [addCodeFileLoaderExtension],
