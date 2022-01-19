@@ -37,6 +37,17 @@ type someTypeName {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/require-description: ['error', { OperationDefinition: true }]
+
+# Enforce description on operations
+query {
+  foo
+}
+```
+
 ## Config Schema
 
 The schema defines the following properties:
@@ -83,6 +94,10 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 ### `ObjectTypeDefinition` (boolean)
 
 Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+
+### `OperationDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
 
 ### `ScalarTypeDefinition` (boolean)
 

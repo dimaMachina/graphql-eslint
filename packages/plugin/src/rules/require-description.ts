@@ -1,9 +1,9 @@
-import { ASTKindToNode, Kind } from 'graphql';
+import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
 import { TYPES_KINDS, getLocation } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 
-const REQUIRE_DESCRIPTION_ERROR = 'REQUIRE_DESCRIPTION_ERROR';
+const RULE_ID = 'require-description';
 
 const ALLOWED_KINDS = [
   ...TYPES_KINDS,
@@ -11,12 +11,13 @@ const ALLOWED_KINDS = [
   Kind.INPUT_VALUE_DEFINITION,
   Kind.ENUM_VALUE_DEFINITION,
   Kind.DIRECTIVE_DEFINITION,
+  Kind.OPERATION_DEFINITION,
 ] as const;
 
 type AllowedKind = typeof ALLOWED_KINDS[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 
-type RequireDescriptionRuleConfig = {
+export type RequireDescriptionRuleConfig = {
   types?: boolean;
 } & {
   [key in AllowedKind]?: boolean;
@@ -27,7 +28,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     docs: {
       category: 'Schema',
       description: 'Enforce descriptions in your type definitions.',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/require-description.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Incorrect',
@@ -53,6 +54,16 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [{ OperationDefinition: true }],
+          code: /* GraphQL */ `
+            # Enforce description on operations
+            query {
+              foo
+            }
+          `,
+        },
       ],
       configOptions: [
         {
@@ -64,7 +75,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     },
     type: 'suggestion',
     messages: {
-      [REQUIRE_DESCRIPTION_ERROR]: 'Description is required for nodes of type "{{ nodeType }}"',
+      [RULE_ID]: 'Description is required for nodes of type "{{ nodeType }}"',
     },
     schema: {
       type: 'array',
@@ -93,7 +104,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     },
   },
   create(context) {
-    const { types, ...restOptions } = context.options[0];
+    const { types, ...restOptions } = context.options[0] || {};
 
     const kinds: Set<string> = new Set(types ? TYPES_KINDS : []);
     for (const [kind, isEnabled] of Object.entries(restOptions)) {
@@ -108,11 +119,26 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
 
     return {
       [selector](node: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) {
-        const description = node.description?.value || '';
-        if (description.trim().length === 0) {
+        let description = '';
+        const isOperation = node.kind === Kind.OPERATION_DEFINITION;
+        if (isOperation) {
+          const rawNode = node.rawNode();
+          const { prev, line } = rawNode.loc.startToken;
+          if (prev.kind === TokenKind.COMMENT) {
+            const value = prev.value.trim();
+            const linesBefore = line - prev.line;
+            if (!value.startsWith('eslint') && linesBefore === 1) {
+              description = value;
+            }
+          }
+        } else {
+          description = node.description?.value.trim() || '';
+        }
+
+        if (description.length === 0) {
           context.report({
-            loc: getLocation(node.name.loc, node.name.value),
-            messageId: REQUIRE_DESCRIPTION_ERROR,
+            loc: isOperation ? getLocation(node.loc, node.operation) : getLocation(node.name.loc, node.name.value),
+            messageId: RULE_ID,
             data: {
               nodeType: node.kind,
             },
