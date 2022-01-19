@@ -23,8 +23,8 @@
     "prettier": "prettier --ignore-path .gitignore --write --list-different \"**/*.{ts,tsx,graphql,yml}\""
   },
   "devDependencies": {
-    "@babel/core": "7.16.7",
-    "@babel/preset-env": "7.16.8",
+    "@babel/core": "7.16.10",
+    "@babel/preset-env": "7.16.10",
     "@babel/preset-typescript": "7.16.7",
     "@changesets/cli": "2.19.0",
     "@types/dedent": "0.7.0",
