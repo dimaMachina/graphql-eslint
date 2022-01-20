@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.7.0
+
+### Minor Changes
+
+- 6f8c3b6: fix: find graphqlrc files relative to linted file
+
 ## 3.6.0
 
 ### Minor Changes
