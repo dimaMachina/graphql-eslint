@@ -146,11 +146,28 @@ describe('schema', () => {
       expect(consoleError.mock.calls[0][2]).toMatch(
         'Unable to find any GraphQL type definitions for the following pointers'
       );
-    })
+    });
 
     it('should not log second time error from same schema', () => {
       expect(getSchema(undefined, gqlConfig)).toBe(null);
       expect(consoleError).toHaveBeenCalledTimes(1);
-    })
+    });
+  });
+
+  it('should load the graphql-config rc file relative to the linted file', () => {
+    const schema = resolve(__dirname, 'mocks/using-config/schema.graphql');
+    const gqlConfig = loadGraphQLConfig({
+      schema,
+      filePath: resolve(__dirname, 'mocks/using-config/test.graphql'),
+    });
+
+    const graphQLSchema = getSchema({ schema }, gqlConfig);
+    expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
+    const sdlString = printSchema(graphQLSchema);
+    expect(sdlString.trim()).toMatchInlineSnapshot(`
+      type Query {
+        hello: String
+      }
+    `);
   });
 });
