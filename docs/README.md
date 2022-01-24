@@ -7,7 +7,7 @@ Each rule has emojis denoting:
 
 <!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->
 <!-- prettier-ignore-start -->
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Description|&nbsp;&nbsp;&nbsp;&nbsp;Config&nbsp;&nbsp;&nbsp;&nbsp;|🚀 / 🔮
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Description|&nbsp;&nbsp;&nbsp;&nbsp;Config&nbsp;&nbsp;&nbsp;&nbsp;|🚀&nbsp;/&nbsp;🔮
 -|-|:-:|:-:
 [alphabetize](rules/alphabetize.md)|Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.|![all][]|🚀
 [description-style](rules/description-style.md)|Require all comments to follow the same style (either block or inline).|![recommended][]|🚀

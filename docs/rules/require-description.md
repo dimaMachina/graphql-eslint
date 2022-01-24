@@ -99,7 +99,7 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
 
-> You must use only comment syntax (`#`) and not description syntax (`"""` or `"`).
+> You must use only comment syntax `#` and not description syntax `"""` or `"`.
 
 ### `ScalarTypeDefinition` (boolean)
 
