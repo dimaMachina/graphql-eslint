@@ -7,7 +7,7 @@
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Enforce descriptions in your type definitions.
+Enforce descriptions in type definitions and operations.
 
 ## Usage Examples
 
@@ -34,6 +34,17 @@ type someTypeName {
   Name description
   """
   name: String
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/require-description: ['error', { OperationDefinition: true }]
+
+# Create a new user
+mutation createUser {
+  # ...
 }
 ```
 
@@ -83,6 +94,12 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 ### `ObjectTypeDefinition` (boolean)
 
 Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+
+### `OperationDefinition` (boolean)
+
+Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
+
+> You must use only comment syntax `#` and not description syntax `"""` or `"`.
 
 ### `ScalarTypeDefinition` (boolean)
 

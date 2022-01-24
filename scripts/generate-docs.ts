@@ -7,6 +7,7 @@ import { rules } from '../packages/plugin/src';
 import { DISABLED_RULES_FOR_ALL_CONFIG } from './constants';
 
 const BR = '';
+const NBSP = '&nbsp;';
 const DOCS_PATH = resolve(process.cwd(), 'docs');
 
 enum Icon {
@@ -158,10 +159,10 @@ function generateDocs(): void {
       '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
       printMarkdownTable(
         [
-          `Name${'&nbsp;'.repeat(20)}`,
+          `Name${NBSP.repeat(20)}`,
           'Description',
-          { name: `${'&nbsp;'.repeat(4)}Config${'&nbsp;'.repeat(4)}`, align: 'center' },
-          { name: `${Icon.GRAPHQL_ESLINT}&nbsp;/&nbsp;${Icon.GRAPHQL_JS}`, align: 'center' },
+          { name: `${NBSP.repeat(4)}Config${NBSP.repeat(4)}`, align: 'center' },
+          { name: `${Icon.GRAPHQL_ESLINT}${NBSP}/${NBSP}${Icon.GRAPHQL_JS}`, align: 'center' },
         ],
         sortedRules
       ),

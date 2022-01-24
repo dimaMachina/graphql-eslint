@@ -44,7 +44,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [provided-required-arguments](rules/provided-required-arguments.md)|A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.|![recommended][]|🔮
 [require-deprecation-date](rules/require-deprecation-date.md)|Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.|![all][]|🚀
 [require-deprecation-reason](rules/require-deprecation-reason.md)|Require all deprecation directives to specify a reason.|![recommended][]|🚀
-[require-description](rules/require-description.md)|Enforce descriptions in your type definitions.|![recommended][]|🚀
+[require-description](rules/require-description.md)|Enforce descriptions in type definitions and operations.|![recommended][]|🚀
 [require-field-of-type-query-in-mutation-result](rules/require-field-of-type-query-in-mutation-result.md)|Allow the client in one round-trip not only to call mutation but also to get a wagon of data to update their application.|![all][]|🚀
 [require-id-when-available](rules/require-id-when-available.md)|Enforce selecting specific fields when they are available on the GraphQL type.|![recommended][]|🚀
 [scalar-leafs](rules/scalar-leafs.md)|A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.|![recommended][]|🔮

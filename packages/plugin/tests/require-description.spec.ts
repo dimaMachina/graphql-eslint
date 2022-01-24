@@ -1,9 +1,12 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/require-description';
+import rule, { RequireDescriptionRuleConfig } from '../src/rules/require-description';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('require-description', rule, {
+const ERROR = { message: 'Description is required for nodes of type "OperationDefinition"' };
+const OPERATION = { OperationDefinition: true };
+
+ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description', rule, {
   valid: [
     {
       code: /* GraphQL */ `
@@ -54,6 +57,24 @@ ruleTester.runGraphQLTests('require-description', rule, {
       `,
       options: [{ types: true, FieldDefinition: true }],
     },
+    {
+      code: /* GraphQL */ `
+        # OK
+        query {
+          test
+        }
+      `,
+      options: [OPERATION],
+    },
+    {
+      code: /* GraphQL */ `
+        # ignore fragments
+        fragment UserFields on User {
+          id
+        }
+      `,
+      options: [OPERATION],
+    },
   ],
   invalid: [
     {
@@ -102,6 +123,58 @@ ruleTester.runGraphQLTests('require-description', rule, {
         },
       ],
       errors: 2,
+    },
+    {
+      name: 'should report because of linesBefore !== 1',
+      code: /* GraphQL */ `
+        # linesBefore !== 1
+
+        query {
+          foo
+        }
+      `,
+      options: [OPERATION],
+      errors: [ERROR],
+    },
+    {
+      name: 'should validate mutation',
+      code: 'mutation { test }',
+      options: [OPERATION],
+      errors: [ERROR],
+    },
+    {
+      name: 'should validate subscription',
+      code: 'subscription { test }',
+      options: [OPERATION],
+      errors: [ERROR],
+    },
+    {
+      name: 'should report because skips previous comment that starts with `eslint`',
+      code: /* GraphQL */ `
+        # eslint-disable-next-line semi
+        query {
+          foo
+        }
+      `,
+      options: [OPERATION],
+      errors: [ERROR],
+    },
+    {
+      name: 'should ignore comments before fragment definition',
+      code: /* GraphQL */ `
+        # BAD
+        fragment UserFields on User {
+          id
+        }
+
+        query {
+          user {
+            ...UserFields
+          }
+        }
+      `,
+      options: [OPERATION],
+      errors: [ERROR],
     },
   ],
 });
