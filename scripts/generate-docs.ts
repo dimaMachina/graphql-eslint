@@ -161,7 +161,8 @@ function generateDocs(): void {
           `Name${'&nbsp;'.repeat(20)}`,
           'Description',
           { name: `${'&nbsp;'.repeat(4)}Config${'&nbsp;'.repeat(4)}`, align: 'center' },
-          { name: `${Icon.GRAPHQL_ESLINT}&nbsp;/&nbsp;${Icon.GRAPHQL_JS}`, align: 'center' },
+          // \u00A0 - whitespace character for mobile
+          { name: `${Icon.GRAPHQL_ESLINT}\u00A0/\u00A0${Icon.GRAPHQL_JS}`, align: 'center' },
         ],
         sortedRules
       ),

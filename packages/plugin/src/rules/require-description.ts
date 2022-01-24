@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
-import { TYPES_KINDS, getLocation } from '../utils';
+import { getLocation, TYPES_KINDS } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
 
 const RULE_ID = 'require-description';
@@ -27,7 +27,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
   meta: {
     docs: {
       category: 'Schema',
-      description: 'Enforce descriptions in your type definitions.',
+      description: 'Enforce descriptions in type definitions and operations.',
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
@@ -58,9 +58,9 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
           title: 'Correct',
           usage: [{ OperationDefinition: true }],
           code: /* GraphQL */ `
-            # Enforce description on operations
-            query {
-              foo
+            # Create a new user
+            mutation createUser {
+              # ...
             }
           `,
         },
@@ -91,13 +91,13 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
           ...Object.fromEntries(
-            [...ALLOWED_KINDS].sort().map(kind => [
-              kind,
-              {
-                type: 'boolean',
-                description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
-              },
-            ])
+            [...ALLOWED_KINDS].sort().map(kind => {
+              let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
+              if (kind === Kind.OPERATION_DEFINITION) {
+                description += '\n\n> You must use only comment syntax (`#`) and not description syntax (`"""` or `"`).';
+              }
+              return [kind, { type: 'boolean', description }];
+            })
           ),
         },
       },
