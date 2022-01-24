@@ -2,8 +2,6 @@ import { GraphQLRuleTester } from '../src';
 import rule, { RequireDescriptionRuleConfig } from '../src/rules/require-description';
 
 const ruleTester = new GraphQLRuleTester();
-
-const ERROR = { message: 'Description is required for nodes of type "OperationDefinition"' };
 const OPERATION = { OperationDefinition: true };
 
 ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description', rule, {
@@ -78,34 +76,54 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
   ],
   invalid: [
     {
-      code: /* GraphQL */ `
-        input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-          gt: BSONDecimal
-          gte: BSONDecimal
-          lt: BSONDecimal
-          lte: BSONDecimal
-          ne: BSONDecimal
-          in: [BSONDecimal]
-          nin: [BSONDecimal]
-        }
-      `,
-      options: [{ InputValueDefinition: true }],
-      errors: 7,
+      code: 'type User { id: ID }',
+      options: [{ ObjectTypeDefinition: true }],
+      errors: [{ message: 'Description is required for `type User`.' }],
     },
     {
-      code: /* GraphQL */ `
-        enum EnumUserLanguagesSkill {
-          basic
-          fluent
-          native
-        }
-      `,
+      code: 'interface Node { id: ID! }',
+      options: [{ InterfaceTypeDefinition: true }],
+      errors: [{ message: 'Description is required for `interface Node`.' }],
+    },
+    {
+      code: 'enum Role { ADMIN }',
+      options: [{ EnumTypeDefinition: true }],
+      errors: [{ message: 'Description is required for `enum Role`.' }],
+    },
+    {
+      code: 'scalar Email',
+      options: [{ ScalarTypeDefinition: true }],
+      errors: [{ message: 'Description is required for `scalar Email`.' }],
+    },
+    {
+      code: 'input CreateUserInput { email: Email! }',
+      options: [{ InputObjectTypeDefinition: true }],
+      errors: [{ message: 'Description is required for `input CreateUserInput`.' }],
+    },
+    {
+      code: 'union Media = Book | Movie',
+      options: [{ UnionTypeDefinition: true }],
+      errors: [{ message: 'Description is required for `union Media`.' }],
+    },
+    {
+      code: 'directive @auth(requires: Role!) on FIELD_DEFINITION',
+      options: [{ DirectiveDefinition: true }],
+      errors: [{ message: 'Description is required for `directive @auth`.' }],
+    },
+    {
+      code: 'type User { email: Email! }',
+      options: [{ FieldDefinition: true }],
+      errors: [{ message: 'Description is required for `User.email`.' }],
+    },
+    {
+      code: 'input CreateUserInput { email: Email! }',
+      options: [{ InputValueDefinition: true }],
+      errors: [{ message: 'Description is required for `CreateUserInput.email`.' }],
+    },
+    {
+      code: 'enum Role { ADMIN }',
       options: [{ EnumValueDefinition: true }],
-      errors: [
-        { message: 'Description is required for nodes of type "EnumValueDefinition"' },
-        { message: 'Description is required for nodes of type "EnumValueDefinition"' },
-        { message: 'Description is required for nodes of type "EnumValueDefinition"' },
-      ],
+      errors: [{ message: 'Description is required for `Role.ADMIN`.' }],
     },
     {
       name: 'should disable description for ObjectTypeDefinition',
@@ -122,7 +140,10 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
           FieldDefinition: true,
         },
       ],
-      errors: 2,
+      errors: [
+        { message: 'Description is required for `CreateOneUserPayload.recordId`.' },
+        { message: 'Description is required for `CreateOneUserPayload.record`.' },
+      ],
     },
     {
       name: 'should report because of linesBefore !== 1',
@@ -134,22 +155,22 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
         }
       `,
       options: [OPERATION],
-      errors: [ERROR],
+      errors: [{ message: 'Description is required for `query`.' }],
     },
     {
       name: 'should validate mutation',
-      code: 'mutation { test }',
+      code: 'mutation createUser { foo }',
       options: [OPERATION],
-      errors: [ERROR],
+      errors: [{ message: 'Description is required for `mutation createUser`.' }],
     },
     {
       name: 'should validate subscription',
-      code: 'subscription { test }',
+      code: 'subscription commentAdded { foo }',
       options: [OPERATION],
-      errors: [ERROR],
+      errors: [{ message: 'Description is required for `subscription commentAdded`.' }],
     },
     {
-      name: 'should report because skips previous comment that starts with `eslint`',
+      name: 'should report because skips comment that starts with `eslint`',
       code: /* GraphQL */ `
         # eslint-disable-next-line semi
         query {
@@ -157,7 +178,7 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
         }
       `,
       options: [OPERATION],
-      errors: [ERROR],
+      errors: [{ message: 'Description is required for `query`.' }],
     },
     {
       name: 'should ignore comments before fragment definition',
@@ -174,7 +195,7 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
         }
       `,
       options: [OPERATION],
-      errors: [ERROR],
+      errors: [{ message: 'Description is required for `query`.' }],
     },
   ],
 });

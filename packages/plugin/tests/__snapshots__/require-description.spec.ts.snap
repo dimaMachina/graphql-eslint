@@ -1,148 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
->  3 |           gt: BSONDecimal
-     |           ^^ Description is required for nodes of type "InputValueDefinition"
-   4 |           gte: BSONDecimal
-   5 |           lt: BSONDecimal
-   6 |           lte: BSONDecimal
-   7 |           ne: BSONDecimal
-   8 |           in: [BSONDecimal]
-   9 |           nin: [BSONDecimal]
-  10 |         }
-  11 |       
+> 1 | type User { id: ID }
+    |      ^^^^ Description is required for \`type User\`.
 `;
 
 exports[` 2`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-   3 |           gt: BSONDecimal
->  4 |           gte: BSONDecimal
-     |           ^^^ Description is required for nodes of type "InputValueDefinition"
-   5 |           lt: BSONDecimal
-   6 |           lte: BSONDecimal
-   7 |           ne: BSONDecimal
-   8 |           in: [BSONDecimal]
-   9 |           nin: [BSONDecimal]
-  10 |         }
-  11 |       
+> 1 | interface Node { id: ID! }
+    |           ^^^^ Description is required for \`interface Node\`.
 `;
 
 exports[` 3`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-   3 |           gt: BSONDecimal
-   4 |           gte: BSONDecimal
->  5 |           lt: BSONDecimal
-     |           ^^ Description is required for nodes of type "InputValueDefinition"
-   6 |           lte: BSONDecimal
-   7 |           ne: BSONDecimal
-   8 |           in: [BSONDecimal]
-   9 |           nin: [BSONDecimal]
-  10 |         }
-  11 |       
+> 1 | enum Role { ADMIN }
+    |      ^^^^ Description is required for \`enum Role\`.
 `;
 
 exports[` 4`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-   3 |           gt: BSONDecimal
-   4 |           gte: BSONDecimal
-   5 |           lt: BSONDecimal
->  6 |           lte: BSONDecimal
-     |           ^^^ Description is required for nodes of type "InputValueDefinition"
-   7 |           ne: BSONDecimal
-   8 |           in: [BSONDecimal]
-   9 |           nin: [BSONDecimal]
-  10 |         }
-  11 |       
+> 1 | scalar Email
+    |        ^^^^^ Description is required for \`scalar Email\`.
 `;
 
 exports[` 5`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-   3 |           gt: BSONDecimal
-   4 |           gte: BSONDecimal
-   5 |           lt: BSONDecimal
-   6 |           lte: BSONDecimal
->  7 |           ne: BSONDecimal
-     |           ^^ Description is required for nodes of type "InputValueDefinition"
-   8 |           in: [BSONDecimal]
-   9 |           nin: [BSONDecimal]
-  10 |         }
-  11 |       
+> 1 | input CreateUserInput { email: Email! }
+    |       ^^^^^^^^^^^^^^^ Description is required for \`input CreateUserInput\`.
 `;
 
 exports[` 6`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-   3 |           gt: BSONDecimal
-   4 |           gte: BSONDecimal
-   5 |           lt: BSONDecimal
-   6 |           lte: BSONDecimal
-   7 |           ne: BSONDecimal
->  8 |           in: [BSONDecimal]
-     |           ^^ Description is required for nodes of type "InputValueDefinition"
-   9 |           nin: [BSONDecimal]
-  10 |         }
-  11 |       
+> 1 | union Media = Book | Movie
+    |       ^^^^^ Description is required for \`union Media\`.
 `;
 
 exports[` 7`] = `
-   1 |
-   2 |         input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-   3 |           gt: BSONDecimal
-   4 |           gte: BSONDecimal
-   5 |           lt: BSONDecimal
-   6 |           lte: BSONDecimal
-   7 |           ne: BSONDecimal
-   8 |           in: [BSONDecimal]
->  9 |           nin: [BSONDecimal]
-     |           ^^^ Description is required for nodes of type "InputValueDefinition"
-  10 |         }
-  11 |       
+> 1 | directive @auth(requires: Role!) on FIELD_DEFINITION
+    |            ^^^^ Description is required for \`directive @auth\`.
 `;
 
 exports[` 8`] = `
-  1 |
-  2 |         enum EnumUserLanguagesSkill {
-> 3 |           basic
-    |           ^^^^^ Description is required for nodes of type "EnumValueDefinition"
-  4 |           fluent
-  5 |           native
-  6 |         }
-  7 |       
+> 1 | type User { email: Email! }
+    |             ^^^^^ Description is required for \`User.email\`.
 `;
 
 exports[` 9`] = `
-  1 |
-  2 |         enum EnumUserLanguagesSkill {
-  3 |           basic
-> 4 |           fluent
-    |           ^^^^^^ Description is required for nodes of type "EnumValueDefinition"
-  5 |           native
-  6 |         }
-  7 |       
+> 1 | input CreateUserInput { email: Email! }
+    |                         ^^^^^ Description is required for \`CreateUserInput.email\`.
 `;
 
 exports[` 10`] = `
-  1 |
-  2 |         enum EnumUserLanguagesSkill {
-  3 |           basic
-  4 |           fluent
-> 5 |           native
-    |           ^^^^^^ Description is required for nodes of type "EnumValueDefinition"
-  6 |         }
-  7 |       
+> 1 | enum Role { ADMIN }
+    |             ^^^^^ Description is required for \`Role.ADMIN\`.
 `;
 
 exports[` 11`] = `
   1 |
   2 |         type CreateOneUserPayload {
 > 3 |           recordId: MongoID
-    |           ^^^^^^^^ Description is required for nodes of type "FieldDefinition"
+    |           ^^^^^^^^ Description is required for \`CreateOneUserPayload.recordId\`.
   4 |           record: User
   5 |         }
   6 |       
@@ -153,7 +65,7 @@ exports[` 12`] = `
   2 |         type CreateOneUserPayload {
   3 |           recordId: MongoID
 > 4 |           record: User
-    |           ^^^^^^ Description is required for nodes of type "FieldDefinition"
+    |           ^^^^^^ Description is required for \`CreateOneUserPayload.record\`.
   5 |         }
   6 |       
 `;
@@ -163,27 +75,27 @@ exports[` 13`] = `
   2 |         # linesBefore !== 1
   3 |
 > 4 |         query {
-    |         ^^^^^ Description is required for nodes of type "OperationDefinition"
+    |         ^^^^^ Description is required for \`query\`.
   5 |           foo
   6 |         }
   7 |       
 `;
 
 exports[` 14`] = `
-> 1 | mutation { test }
-    | ^^^^^^^^ Description is required for nodes of type "OperationDefinition"
+> 1 | mutation createUser { foo }
+    | ^^^^^^^^ Description is required for \`mutation createUser\`.
 `;
 
 exports[` 15`] = `
-> 1 | subscription { test }
-    | ^^^^^^^^^^^^ Description is required for nodes of type "OperationDefinition"
+> 1 | subscription commentAdded { foo }
+    | ^^^^^^^^^^^^ Description is required for \`subscription commentAdded\`.
 `;
 
 exports[` 16`] = `
   1 |
   2 |         # eslint-disable-next-line semi
 > 3 |         query {
-    |         ^^^^^ Description is required for nodes of type "OperationDefinition"
+    |         ^^^^^ Description is required for \`query\`.
   4 |           foo
   5 |         }
   6 |       
@@ -197,7 +109,7 @@ exports[` 17`] = `
    5 |         }
    6 |
 >  7 |         query {
-     |         ^^^^^ Description is required for nodes of type "OperationDefinition"
+     |         ^^^^^ Description is required for \`query\`.
    8 |           user {
    9 |             ...UserFields
   10 |           }
