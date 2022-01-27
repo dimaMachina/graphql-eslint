@@ -56,6 +56,7 @@ type AlphabetizeConfig = {
 const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
   meta: {
     type: 'suggestion',
+    fixable: 'code',
     docs: {
       category: ['Schema', 'Operations'],
       description:
@@ -227,14 +228,17 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         | VariableDefinitionNode['variable']
       >[]
     ) {
-      let prevName = null;
-      for (const node of nodes) {
-        const currName = node.name.value;
-        if (prevName && prevName > currName) {
-          const isVariableNode = node.kind === Kind.VARIABLE;
+      // Starts from 1, ignore nodes.length <= 1
+      for (let i = 1; i < nodes.length; i += 1) {
+        const prevNode = nodes[i - 1];
+        const currNode = nodes[i];
+        const prevName = prevNode.name.value;
+        const currName = currNode.name.value;
+        if (prevName > currName) {
+          const isVariableNode = currNode.kind === Kind.VARIABLE;
 
           context.report({
-            loc: getLocation(node.loc, node.name.value, { offsetEnd: isVariableNode ? 0 : 1 }),
+            loc: getLocation(currNode.loc, currName, { offsetEnd: isVariableNode ? 0 : 1 }),
             messageId: ALPHABETIZE,
             data: isVariableNode
               ? {
@@ -242,9 +246,13 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
                   prevName: `$${prevName}`,
                 }
               : { currName, prevName },
+            *fix(fixer) {
+              const sourceCode = context.getSourceCode();
+              yield fixer.replaceText(prevNode, sourceCode.getText(currNode));
+              yield fixer.replaceText(currNode, sourceCode.getText(prevNode));
+            },
           });
         }
-        prevName = currName;
       }
     }
 
