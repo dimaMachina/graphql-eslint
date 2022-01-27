@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
 import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
+import dedent from 'dedent';
 import { GraphQLESTreeNode } from './estree-parser';
 import { GraphQLESLintRule, ParserOptions } from './types';
 
@@ -11,7 +12,6 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
 } & Record<string, any>;
 
 export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'options' | 'parserOptions'> & {
-  name?: string;
   options?: Options;
   parserOptions?: ParserOptions;
 };
@@ -80,11 +80,16 @@ export class GraphQLRuleTester extends RuleTester {
     const linter = new Linter();
     linter.defineRule(name, rule as Rule.RuleModule);
 
+    const hasOnlyTest = tests.invalid.some(t => t.only);
+
     for (const testCase of tests.invalid) {
+      const { only, code, filename } = testCase;
+      if (hasOnlyTest && !only) {
+        continue;
+      }
+
       const verifyConfig = getVerifyConfig(name, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
-
-      const { code, filename } = testCase;
 
       const messages = linter.verify(code, verifyConfig, { filename });
 
@@ -93,7 +98,14 @@ export class GraphQLRuleTester extends RuleTester {
           throw new Error(message.message);
         }
 
-        const messageForSnapshot = visualizeEslintMessage(code, message);
+        let messageForSnapshot = visualizeEslintMessage(code, message);
+
+        if (rule.meta.fixable) {
+          const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
+          if (fixed) {
+            messageForSnapshot += `\n\n## Autofix output\n\n${dedent(output)}`;
+          }
+        }
         // eslint-disable-next-line no-undef
         expect(messageForSnapshot).toMatchSnapshot();
       }
