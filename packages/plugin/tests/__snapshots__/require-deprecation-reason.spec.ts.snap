@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+Error 1/5
+
    1 |
    2 |         type A {
 >  3 |           deprecatedWithoutReason: String @deprecated
@@ -22,9 +24,9 @@ exports[` 1`] = `
   18 |           item5: String @deprecated(reason: "  ")
   19 |         }
   20 |       
-`;
 
-exports[` 2`] = `
+Error 2/5
+
    1 |
    2 |         type A {
    3 |           deprecatedWithoutReason: String @deprecated
@@ -46,9 +48,9 @@ exports[` 2`] = `
   18 |           item5: String @deprecated(reason: "  ")
   19 |         }
   20 |       
-`;
 
-exports[` 3`] = `
+Error 3/5
+
    1 |
    2 |         type A {
    3 |           deprecatedWithoutReason: String @deprecated
@@ -70,9 +72,9 @@ exports[` 3`] = `
   18 |           item5: String @deprecated(reason: "  ")
   19 |         }
   20 |       
-`;
 
-exports[` 4`] = `
+Error 4/5
+
    1 |
    2 |         type A {
    3 |           deprecatedWithoutReason: String @deprecated
@@ -94,9 +96,9 @@ exports[` 4`] = `
   18 |           item5: String @deprecated(reason: "  ")
   19 |         }
   20 |       
-`;
 
-exports[` 5`] = `
+Error 5/5
+
    1 |
    2 |         type A {
    3 |           deprecatedWithoutReason: String @deprecated

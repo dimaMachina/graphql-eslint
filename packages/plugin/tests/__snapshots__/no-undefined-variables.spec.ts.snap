@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+Error 1/2
+
   1 | query User {
   2 |   user {
 > 3 |     id
@@ -9,9 +11,9 @@ exports[` 1`] = `
   5 |   }
   6 | }
   7 |
-`;
 
-exports[` 2`] = `
+Error 2/2
+
   1 | query User {
   2 |   user {
 > 3 |     id
