@@ -250,5 +250,18 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       `,
       errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
     },
+    {
+      name: 'should compare with lexicographic order',
+      options: [{ values: ['EnumTypeDefinition'] }],
+      code: /* GraphQL */ `
+        enum Test {
+          a1
+          a3
+          a100
+          a0
+        }
+      `,
+      errors: [{ message: '"a100" should be before "a3"' }, { message: '"a0" should be before "a100"' }],
+    },
   ],
 });
