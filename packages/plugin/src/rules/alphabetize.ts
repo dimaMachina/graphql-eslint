@@ -62,7 +62,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       category: ['Schema', 'Operations'],
       description: [
         'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
-        '> Note: this rule will autofix only fields without comments (between or around)',
+        '> Note: autofix will work only for fields without comments (between or around)',
       ].join('\n\n'),
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
       examples: [
