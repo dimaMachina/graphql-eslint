@@ -92,23 +92,23 @@ export class GraphQLRuleTester extends RuleTester {
       defineParser(linter, verifyConfig.parser);
 
       const messages = linter.verify(code, verifyConfig, { filename });
-
-      for (const message of messages) {
+      const messageForSnapshot: string[] = [];
+      for (const [index, message] of messages.entries()) {
         if (message.fatal) {
           throw new Error(message.message);
         }
 
-        let messageForSnapshot = visualizeEslintMessage(code, message);
+        messageForSnapshot.push(`Error ${index + 1}/${messages.length}`, visualizeEslintMessage(code, message));
 
-        if (rule.meta.fixable) {
-          const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
-          if (fixed) {
-            messageForSnapshot += `\n\n## Autofix output\n\n${dedent(output)}`;
-          }
-        }
-        // eslint-disable-next-line no-undef
-        expect(messageForSnapshot).toMatchSnapshot();
       }
+      if (rule.meta.fixable) {
+        const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
+        if (fixed) {
+          messageForSnapshot.push('Autofix output', dedent(output));
+        }
+      }
+      // eslint-disable-next-line no-undef
+      expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
     }
   }
 }

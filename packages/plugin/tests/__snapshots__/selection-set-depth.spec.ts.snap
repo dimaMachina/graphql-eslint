@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+Error 1/1
+
   1 |
   2 |         query deep2 {
   3 |           viewer {
@@ -14,6 +16,8 @@ exports[` 1`] = `
 `;
 
 exports[` 2`] = `
+Error 1/1
+
   1 |
   2 |         query deep2 {
   3 |           viewer {

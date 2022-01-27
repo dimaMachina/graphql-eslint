@@ -7,6 +7,8 @@
 
 Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.
 
+> Note: this rule will autofix only fields without comments (between or around)
+
 ## Usage Examples
 
 ### Incorrect
