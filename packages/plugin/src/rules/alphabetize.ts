@@ -241,7 +241,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         const currNode = nodes[i];
         const prevName = prevNode.name.value;
         const currName = currNode.name.value;
-        if (prevName > currName) {
+        if (prevName.localeCompare(currName) === 1) {
           const isVariableNode = currNode.kind === Kind.VARIABLE;
 
           context.report({
