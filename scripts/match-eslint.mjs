@@ -7,10 +7,10 @@ if (version && !version.startsWith('8')) {
   if (version.startsWith('7')) {
     const eslint7Patch = `
 diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
-index 2b55249..08547f3 100644
+index 2b55249..89e82dc 100644
 --- a/node_modules/eslint/lib/rule-tester/rule-tester.js
 +++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
-@@ -911,7 +911,17 @@ class RuleTester {
+@@ -911,14 +911,25 @@ class RuleTester {
                          "Expected no autofixes to be suggested"
                      );
                  } else {
@@ -28,7 +28,20 @@ index 2b55249..08547f3 100644
 +                    }
                  }
              } else {
-                 assert.strictEqual(
+-                assert.strictEqual(
+-                    result.output,
+-                    item.code,
+-                    "The rule fixed the code. Please add 'output' property."
+-                );
++                // 🚨 Don't need, as we assert autofix output with snapshots
++                // assert.strictEqual(
++                //     result.output,
++                //     item.code,
++                //     "The rule fixed the code. Please add 'output' property."
++                // );
+             }
+
+             // Rules that produce fixes must have \`meta.fixable\` property.
 `.trimStart();
     writeFileSync(resolve(process.cwd(), `patches/eslint+${version}.patch`), eslint7Patch, 'utf8');
 
