@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+Error 1/1
+
   1 |
   2 |         type Mutation {
 > 3 |           createUser(a: ID, b: ID!, c: [ID]!, d: [ID!]!): Boolean
@@ -10,6 +12,8 @@ exports[` 1`] = `
 `;
 
 exports[` 2`] = `
+Error 1/1
+
   1 |
   2 |         type Mutation
   3 |
@@ -21,6 +25,8 @@ exports[` 2`] = `
 `;
 
 exports[` 3`] = `
+Error 1/1
+
   1 |
   2 |         type RootMutation {
 > 3 |           createUser: [Boolean]
@@ -34,6 +40,8 @@ exports[` 3`] = `
 `;
 
 exports[` 4`] = `
+Error 1/1
+
    1 |
    2 |         type RootMutation
    3 |         extend type RootMutation {
@@ -48,6 +56,8 @@ exports[` 4`] = `
 `;
 
 exports[` 5`] = `
+Error 1/2
+
   1 |
   2 |         type Mutation {
   3 |           createUser: User!
@@ -56,9 +66,9 @@ exports[` 5`] = `
   5 |           deleteUser: [Boolean!]!
   6 |         }
   7 |       
-`;
 
-exports[` 6`] = `
+Error 2/2
+
   1 |
   2 |         type Mutation {
   3 |           createUser: User!

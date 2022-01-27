@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+Error 1/2
+
   1 |
   2 |         type User {
   3 |           password: String
@@ -10,9 +12,9 @@ exports[` 1`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
-`;
 
-exports[` 2`] = `
+Error 2/2
+
   1 |
   2 |         type User {
   3 |           password: String
@@ -22,9 +24,20 @@ exports[` 2`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
+
+Autofix output
+
+type User {
+  age: Int
+  firstName: String!
+  lastName: String!
+  password: String
+}
 `;
 
-exports[` 3`] = `
+exports[` 2`] = `
+Error 1/1
+
   1 |
   2 |         extend type User {
   3 |           age: Int
@@ -34,9 +47,20 @@ exports[` 3`] = `
     |           ^^^^^^^^ "lastName" should be before "password"
   7 |         }
   8 |       
+
+Autofix output
+
+extend type User {
+  age: Int
+  firstName: String!
+  lastName: String!
+  password: String
+}
 `;
 
-exports[` 4`] = `
+exports[` 3`] = `
+Error 1/2
+
   1 |
   2 |         interface Test {
   3 |           cc: Int
@@ -45,9 +69,9 @@ exports[` 4`] = `
   5 |           aa: Int
   6 |         }
   7 |       
-`;
 
-exports[` 5`] = `
+Error 2/2
+
   1 |
   2 |         interface Test {
   3 |           cc: Int
@@ -56,9 +80,19 @@ exports[` 5`] = `
     |           ^^ "aa" should be before "bb"
   6 |         }
   7 |       
+
+Autofix output
+
+interface Test {
+  aa: Int
+  bb: Int
+  cc: Int
+}
 `;
 
-exports[` 6`] = `
+exports[` 4`] = `
+Error 1/2
+
   1 |
   2 |         input UserInput {
   3 |           password: String
@@ -68,9 +102,9 @@ exports[` 6`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
-`;
 
-exports[` 7`] = `
+Error 2/2
+
   1 |
   2 |         input UserInput {
   3 |           password: String
@@ -80,9 +114,20 @@ exports[` 7`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
+
+Autofix output
+
+input UserInput {
+  age: Int
+  firstName: String!
+  lastName: String!
+  password: String
+}
 `;
 
-exports[` 8`] = `
+exports[` 5`] = `
+Error 1/1
+
   1 |
   2 |         extend input UserInput {
   3 |           age: Int
@@ -92,9 +137,20 @@ exports[` 8`] = `
     |           ^^^^^^^^ "lastName" should be before "password"
   7 |         }
   8 |       
+
+Autofix output
+
+extend input UserInput {
+  age: Int
+  firstName: String!
+  lastName: String!
+  password: String
+}
 `;
 
-exports[` 9`] = `
+exports[` 6`] = `
+Error 1/2
+
   1 |
   2 |         enum Role {
   3 |           SUPER_ADMIN
@@ -104,9 +160,9 @@ exports[` 9`] = `
   6 |           GOD
   7 |         }
   8 |       
-`;
 
-exports[` 10`] = `
+Error 2/2
+
   1 |
   2 |         enum Role {
   3 |           SUPER_ADMIN
@@ -116,9 +172,20 @@ exports[` 10`] = `
     |           ^^^ "GOD" should be before "USER"
   7 |         }
   8 |       
+
+Autofix output
+
+enum Role {
+  ADMIN
+  GOD
+  SUPER_ADMIN
+  USER
+}
 `;
 
-exports[` 11`] = `
+exports[` 7`] = `
+Error 1/1
+
   1 |
   2 |         extend enum Role {
   3 |           ADMIN
@@ -128,41 +195,66 @@ exports[` 11`] = `
   6 |           USER
   7 |         }
   8 |       
+
+Autofix output
+
+extend enum Role {
+  ADMIN
+  GOD
+  SUPER_ADMIN
+  USER
+}
 `;
 
-exports[` 12`] = `
+exports[` 8`] = `
+Error 1/2
+
   1 |
 > 2 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
     |                                  ^^ "bb" should be before "cc"
   3 |       
-`;
 
-exports[` 13`] = `
+Error 2/2
+
   1 |
 > 2 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
     |                                           ^^ "aa" should be before "bb"
   3 |       
+
+Autofix output
+
+directive @test(aa: Int, bb: Int, cc: Int) on FIELD_DEFINITION
 `;
 
-exports[` 14`] = `
+exports[` 9`] = `
+Error 1/2
+
   1 |
   2 |         type Query {
 > 3 |           test(cc: Int, bb: Int, aa: Int): Int
     |                         ^^ "bb" should be before "cc"
   4 |         }
   5 |       
-`;
 
-exports[` 15`] = `
+Error 2/2
+
   1 |
   2 |         type Query {
 > 3 |           test(cc: Int, bb: Int, aa: Int): Int
     |                                  ^^ "aa" should be before "bb"
   4 |         }
   5 |       
+
+Autofix output
+
+type Query {
+  test(aa: Int, bb: Int, cc: Int): Int
+}
 `;
 
-exports[` 16`] = `
+exports[` 10`] = `
+Error 1/2
+
   1 |
   2 |         fragment TestFields on Test {
   3 |           cc
@@ -171,9 +263,9 @@ exports[` 16`] = `
   5 |           aa
   6 |         }
   7 |       
-`;
 
-exports[` 17`] = `
+Error 2/2
+
   1 |
   2 |         fragment TestFields on Test {
   3 |           cc
@@ -182,9 +274,19 @@ exports[` 17`] = `
     |           ^^ "aa" should be before "bb"
   6 |         }
   7 |       
+
+Autofix output
+
+fragment TestFields on Test {
+  aa
+  bb
+  cc
+}
 `;
 
-exports[` 18`] = `
+exports[` 11`] = `
+Error 1/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -200,9 +302,9 @@ exports[` 18`] = `
   12 |           }
   13 |         }
   14 |       
-`;
 
-exports[` 19`] = `
+Error 2/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -218,9 +320,9 @@ exports[` 19`] = `
   12 |           }
   13 |         }
   14 |       
-`;
 
-exports[` 20`] = `
+Error 3/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -236,9 +338,9 @@ exports[` 20`] = `
   12 |           }
   13 |         }
   14 |       
-`;
 
-exports[` 21`] = `
+Error 4/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -254,9 +356,26 @@ exports[` 21`] = `
   12 |           }
   13 |         }
   14 |       
+
+Autofix output
+
+query {
+  test {
+    aa
+    bb
+    cc
+    ... on Test {
+      aaa
+      bbb
+      ccc
+    }
+  }
+}
 `;
 
-exports[` 22`] = `
+exports[` 12`] = `
+Error 1/4
+
   1 |
 > 2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
     |                             ^^^ "$bb" should be before "$cc"
@@ -265,9 +384,9 @@ exports[` 22`] = `
   5 |           }
   6 |         }
   7 |       
-`;
 
-exports[` 23`] = `
+Error 2/4
+
   1 |
 > 2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
     |                                       ^^^ "$aa" should be before "$bb"
@@ -276,9 +395,9 @@ exports[` 23`] = `
   5 |           }
   6 |         }
   7 |       
-`;
 
-exports[` 24`] = `
+Error 3/4
+
   1 |
   2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
 > 3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
@@ -287,9 +406,9 @@ exports[` 24`] = `
   5 |           }
   6 |         }
   7 |       
-`;
 
-exports[` 25`] = `
+Error 4/4
+
   1 |
   2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
 > 3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
@@ -298,4 +417,12 @@ exports[` 25`] = `
   5 |           }
   6 |         }
   7 |       
+
+Autofix output
+
+mutation ($aa: Int, $bb: Int, $cc: Int) {
+  test(aaa: $aa, bbb: $bb, ccc: $cc) {
+    something
+  }
+}
 `;

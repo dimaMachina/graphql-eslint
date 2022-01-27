@@ -59,8 +59,10 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     fixable: 'code',
     docs: {
       category: ['Schema', 'Operations'],
-      description:
+      description: [
         'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
+        '> Note: this rule will autofix only fields without comments (between or around)',
+      ].join('\n\n'),
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
       examples: [
         {
@@ -248,8 +250,8 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
               : { currName, prevName },
             *fix(fixer) {
               const sourceCode = context.getSourceCode();
-              yield fixer.replaceText(prevNode, sourceCode.getText(currNode));
-              yield fixer.replaceText(currNode, sourceCode.getText(prevNode));
+              yield fixer.replaceText(prevNode as any, sourceCode.getText(currNode as any));
+              yield fixer.replaceText(currNode as any, sourceCode.getText(prevNode as any));
             },
           });
         }
