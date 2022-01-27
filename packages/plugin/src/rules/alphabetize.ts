@@ -261,7 +261,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
               const beforeComments = sourceCode.getCommentsBefore(prev);
               if (beforeComments.length > 0) {
                 const tokenBefore = sourceCode.getTokenBefore(prev);
-                const lastBeforeComment = beforeComments.at(-1);
+                const lastBeforeComment = beforeComments[beforeComments.length - 1];
                 if (!tokenBefore || !isOnSameLineNodeAndComment(tokenBefore, lastBeforeComment)) return;
               }
 
