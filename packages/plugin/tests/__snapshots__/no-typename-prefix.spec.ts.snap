@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+Error 1/1
+
   1 |
   2 |         type User {
 > 3 |           userId: ID!
@@ -10,6 +12,8 @@ exports[` 1`] = `
 `;
 
 exports[` 2`] = `
+Error 1/2
+
   1 |
   2 |         type User {
 > 3 |           userId: ID!
@@ -17,9 +21,9 @@ exports[` 2`] = `
   4 |           userName: String!
   5 |         }
   6 |       
-`;
 
-exports[` 3`] = `
+Error 2/2
+
   1 |
   2 |         type User {
   3 |           userId: ID!
@@ -29,7 +33,9 @@ exports[` 3`] = `
   6 |       
 `;
 
-exports[` 4`] = `
+exports[` 3`] = `
+Error 1/1
+
   1 |
   2 |         interface Node {
 > 3 |           nodeId: ID!

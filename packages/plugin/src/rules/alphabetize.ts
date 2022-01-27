@@ -20,6 +20,7 @@ import {
   SelectionSetNode,
   FragmentSpreadNode,
 } from 'graphql';
+import type { SourceLocation, Comment } from 'estree';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
@@ -45,7 +46,7 @@ const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Dir
   Kind.DIRECTIVE,
 ];
 
-type AlphabetizeConfig = {
+export type AlphabetizeConfig = {
   fields?: typeof fieldsEnum;
   values?: typeof valuesEnum;
   selections?: typeof selectionsEnum;
@@ -219,6 +220,10 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     },
   },
   create(context) {
+    function isOnSameLineNodeAndComment(beforeNode: { loc: SourceLocation }, afterNode: Comment): boolean {
+      return beforeNode.loc.end.line === afterNode.loc.start.line;
+    }
+
     function checkNodes(
       nodes: GraphQLESTreeNode<
         | FieldDefinitionNode
@@ -249,9 +254,25 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
                 }
               : { currName, prevName },
             *fix(fixer) {
+              const prev = prevNode as any;
+              const curr = currNode as any;
               const sourceCode = context.getSourceCode();
-              yield fixer.replaceText(prevNode as any, sourceCode.getText(currNode as any));
-              yield fixer.replaceText(currNode as any, sourceCode.getText(prevNode as any));
+
+              const beforeComments = sourceCode.getCommentsBefore(prev);
+              if (beforeComments.length > 0) {
+                const tokenBefore = sourceCode.getTokenBefore(prev);
+                const lastBeforeComment = beforeComments.at(-1);
+                if (!tokenBefore || !isOnSameLineNodeAndComment(tokenBefore, lastBeforeComment)) return;
+              }
+
+              const betweenComments = sourceCode.getCommentsBefore(curr);
+              if (betweenComments.length > 0) return;
+
+              const [firstAfterComment] = sourceCode.getCommentsAfter(curr);
+              if (firstAfterComment && isOnSameLineNodeAndComment(curr, firstAfterComment)) return;
+
+              yield fixer.replaceText(prev, sourceCode.getText(curr));
+              yield fixer.replaceText(curr, sourceCode.getText(prev));
             },
           });
         }

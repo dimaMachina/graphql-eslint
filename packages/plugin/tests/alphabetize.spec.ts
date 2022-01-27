@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/alphabetize';
+import rule, { AlphabetizeConfig } from '../src/rules/alphabetize';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('alphabetize', rule, {
+ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
   valid: [
     {
       options: [{ fields: ['ObjectTypeDefinition'] }],
@@ -208,6 +208,47 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
         { message: '"bbb" should be before "ccc"' },
         { message: '"aaa" should be before "bbb"' },
       ],
+    },
+    {
+      name: 'should not autofix for fields with comment between',
+      options: [{ fields: ['ObjectTypeDefinition'] }],
+      code: /* GraphQL */ `
+        type Test {
+          cc: Int
+          # between 'cc' and 'c'
+          c: Float
+          bb: String
+          aa: Int
+        }
+      `,
+      errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
+    },
+    {
+      name: 'should autofix if after comment is not on same line',
+      options: [{ fields: ['ObjectTypeDefinition'] }],
+      code: /* GraphQL */ `
+        type Test {
+          cc: Int
+          c: Float
+          # ok for 'cc' and 'c' but not for 'bb' and 'aa'
+          bb: String
+          aa: Int
+        }
+      `,
+      errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
+    },
+    {
+      name: 'should autofix if before comment is not on same line',
+      options: [{ fields: ['ObjectTypeDefinition'] }],
+      code: /* GraphQL */ `
+        type Test {
+          cc: Int
+          c: Float # ok for 'bb' and 'aa' but not for 'cc' and 'c'
+          bb: String
+          aa: Int
+        }
+      `,
+      errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
     },
   ],
 });
