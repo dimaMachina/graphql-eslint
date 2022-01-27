@@ -238,7 +238,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
     },
     {
-      name: 'should autofix if before comment is not on same line',
+      name: 'should autofix if before comment is on same line with previous token',
       options: [{ fields: ['ObjectTypeDefinition'] }],
       code: /* GraphQL */ `
         type Test {

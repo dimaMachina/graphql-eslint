@@ -13,6 +13,7 @@ const DOCS_PATH = resolve(process.cwd(), 'docs');
 enum Icon {
   GRAPHQL_ESLINT = '🚀',
   GRAPHQL_JS = '🔮',
+  FIXABLE = '🔧',
   RECOMMENDED = '✅',
 }
 
@@ -44,7 +45,7 @@ function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]
 function generateDocs(): void {
   const result = Object.entries(rules).map(([ruleName, rule]) => {
     const blocks: string[] = [`# \`${ruleName}\``, BR];
-    const { deprecated, docs, schema } = rule.meta;
+    const { deprecated, docs, schema, fixable } = rule.meta;
 
     if (deprecated) {
       blocks.push(`- ❗ DEPRECATED ❗`);
@@ -56,6 +57,12 @@ function generateDocs(): void {
         `${Icon.RECOMMENDED} The \`"extends": ${configNames.join(
           '` and `'
         )}\` property in a configuration file enables this rule.`,
+        BR
+      );
+    }
+    if (fixable) {
+      blocks.push(
+        `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
         BR
       );
     }
