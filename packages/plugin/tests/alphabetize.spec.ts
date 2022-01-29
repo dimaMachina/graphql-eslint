@@ -210,58 +210,51 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       ],
     },
     {
-      name: 'should not autofix for fields with comment between',
+      name: 'should move comment',
       options: [{ fields: ['ObjectTypeDefinition'] }],
       code: /* GraphQL */ `
-        type Test {
-          cc: Int
-          # between 'cc' and 'c'
-          c: Float
-          bb: String
-          aa: Int
-        }
+        type Test { # { character
+          # before d 1
+          
+          # before d 2
+          d: Int # same d
+          # before c
+          c: Float!
+          # before b 1
+          # before b 2
+          b: [String] # same b
+          # before a
+          a: [Int!]! # same a
+          # end
+        } # } character
       `,
-      errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
-    },
-    {
-      name: 'should autofix if after comment is not on same line',
-      options: [{ fields: ['ObjectTypeDefinition'] }],
-      code: /* GraphQL */ `
-        type Test {
-          cc: Int
-          c: Float
-          # ok for 'cc' and 'c' but not for 'bb' and 'aa'
-          bb: String
-          aa: Int
-        }
-      `,
-      errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
-    },
-    {
-      name: 'should autofix if before comment is on same line with previous token',
-      options: [{ fields: ['ObjectTypeDefinition'] }],
-      code: /* GraphQL */ `
-        type Test {
-          cc: Int
-          c: Float # ok for 'bb' and 'aa' but not for 'cc' and 'c'
-          bb: String
-          aa: Int
-        }
-      `,
-      errors: [{ message: '"c" should be before "cc"' },{ message: '"bb" should be before "c"' }, { message: '"aa" should be before "bb"' }],
+      errors: [
+        { message: '"c" should be before "d"' },
+        { message: '"b" should be before "c"' },
+        { message: '"a" should be before "b"' },
+      ],
     },
     {
       name: 'should compare with lexicographic order',
       options: [{ values: ['EnumTypeDefinition'] }],
       code: /* GraphQL */ `
         enum Test {
-          a1
-          a3
-          a100
-          a0
+          "qux"
+          qux
+          foo
+          "Bar"
+          Bar
+          """
+          bar
+          """
+          bar
         }
       `,
-      errors: [{ message: '"a100" should be before "a3"' }, { message: '"a0" should be before "a100"' }],
+      errors: [
+        { message: '"foo" should be before "qux"' },
+        { message: '"Bar" should be before "foo"' },
+        { message: '"bar" should be before "Bar"' },
+      ],
     },
   ],
 });

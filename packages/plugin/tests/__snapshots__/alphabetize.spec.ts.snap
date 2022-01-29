@@ -430,183 +430,145 @@ mutation ($aa: Int, $bb: Int, $cc: Int) {
 exports[` 13`] = `
 Error 1/3
 
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           # between 'cc' and 'c'
-> 5 |           c: Float
-    |           ^ "c" should be before "cc"
-  6 |           bb: String
-  7 |           aa: Int
-  8 |         }
-  9 |       
+   1 |
+   2 |         type Test { # { character
+   3 |           # before d 1
+   4 |           
+   5 |           # before d 2
+   6 |           d: Int # same d
+   7 |           # before c
+>  8 |           c: Float!
+     |           ^ "c" should be before "d"
+   9 |           # before b 1
+  10 |           # before b 2
+  11 |           b: [String] # same b
+  12 |           # before a
+  13 |           a: [Int!]! # same a
+  14 |           # end
+  15 |         } # } character
+  16 |       
 
 Error 2/3
 
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           # between 'cc' and 'c'
-  5 |           c: Float
-> 6 |           bb: String
-    |           ^^ "bb" should be before "c"
-  7 |           aa: Int
-  8 |         }
-  9 |       
+   1 |
+   2 |         type Test { # { character
+   3 |           # before d 1
+   4 |           
+   5 |           # before d 2
+   6 |           d: Int # same d
+   7 |           # before c
+   8 |           c: Float!
+   9 |           # before b 1
+  10 |           # before b 2
+> 11 |           b: [String] # same b
+     |           ^ "b" should be before "c"
+  12 |           # before a
+  13 |           a: [Int!]! # same a
+  14 |           # end
+  15 |         } # } character
+  16 |       
 
 Error 3/3
 
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           # between 'cc' and 'c'
-  5 |           c: Float
-  6 |           bb: String
-> 7 |           aa: Int
-    |           ^^ "aa" should be before "bb"
-  8 |         }
-  9 |       
+   1 |
+   2 |         type Test { # { character
+   3 |           # before d 1
+   4 |           
+   5 |           # before d 2
+   6 |           d: Int # same d
+   7 |           # before c
+   8 |           c: Float!
+   9 |           # before b 1
+  10 |           # before b 2
+  11 |           b: [String] # same b
+  12 |           # before a
+> 13 |           a: [Int!]! # same a
+     |           ^ "a" should be before "b"
+  14 |           # end
+  15 |         } # } character
+  16 |       
 
 Autofix output
 
-type Test {
-  cc: Int
-  # between 'cc' and 'c'
-  c: Float
-  aa: Int
-  bb: String
-}
+type Test { # { character
+  # before a
+  a: [Int!]! # same a
+  # before b 1
+  # before b 2
+  b: [String] # same b
+  # before c
+  c: Float!
+  # before d 1
+  
+  # before d 2
+  d: Int # same d
+  # end
+} # } character
 `;
 
 exports[` 14`] = `
 Error 1/3
 
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-> 4 |           c: Float
-    |           ^ "c" should be before "cc"
-  5 |           # ok for 'cc' and 'c' but not for 'bb' and 'aa'
-  6 |           bb: String
-  7 |           aa: Int
-  8 |         }
-  9 |       
+   1 |
+   2 |         enum Test {
+   3 |           "qux"
+   4 |           qux
+>  5 |           foo
+     |           ^^^ "foo" should be before "qux"
+   6 |           "Bar"
+   7 |           Bar
+   8 |           """
+   9 |           bar
+  10 |           """
+  11 |           bar
+  12 |         }
+  13 |       
 
 Error 2/3
 
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           c: Float
-  5 |           # ok for 'cc' and 'c' but not for 'bb' and 'aa'
-> 6 |           bb: String
-    |           ^^ "bb" should be before "c"
-  7 |           aa: Int
-  8 |         }
-  9 |       
+   1 |
+   2 |         enum Test {
+   3 |           "qux"
+   4 |           qux
+   5 |           foo
+   6 |           "Bar"
+>  7 |           Bar
+     |           ^^^ "Bar" should be before "foo"
+   8 |           """
+   9 |           bar
+  10 |           """
+  11 |           bar
+  12 |         }
+  13 |       
 
 Error 3/3
 
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           c: Float
-  5 |           # ok for 'cc' and 'c' but not for 'bb' and 'aa'
-  6 |           bb: String
-> 7 |           aa: Int
-    |           ^^ "aa" should be before "bb"
-  8 |         }
-  9 |       
-
-Autofix output
-
-type Test {
-  c: Float
-  cc: Int
-  # ok for 'cc' and 'c' but not for 'bb' and 'aa'
-  bb: String
-  aa: Int
-}
-`;
-
-exports[` 15`] = `
-Error 1/3
-
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-> 4 |           c: Float # ok for 'bb' and 'aa' but not for 'cc' and 'c'
-    |           ^ "c" should be before "cc"
-  5 |           bb: String
-  6 |           aa: Int
-  7 |         }
-  8 |       
-
-Error 2/3
-
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           c: Float # ok for 'bb' and 'aa' but not for 'cc' and 'c'
-> 5 |           bb: String
-    |           ^^ "bb" should be before "c"
-  6 |           aa: Int
-  7 |         }
-  8 |       
-
-Error 3/3
-
-  1 |
-  2 |         type Test {
-  3 |           cc: Int
-  4 |           c: Float # ok for 'bb' and 'aa' but not for 'cc' and 'c'
-  5 |           bb: String
-> 6 |           aa: Int
-    |           ^^ "aa" should be before "bb"
-  7 |         }
-  8 |       
-
-Autofix output
-
-type Test {
-  cc: Int
-  c: Float # ok for 'bb' and 'aa' but not for 'cc' and 'c'
-  aa: Int
-  bb: String
-}
-`;
-
-exports[` 16`] = `
-Error 1/2
-
-  1 |
-  2 |         enum Test {
-  3 |           a1
-  4 |           a3
-> 5 |           a100
-    |           ^^^^ "a100" should be before "a3"
-  6 |           a0
-  7 |         }
-  8 |       
-
-Error 2/2
-
-  1 |
-  2 |         enum Test {
-  3 |           a1
-  4 |           a3
-  5 |           a100
-> 6 |           a0
-    |           ^^ "a0" should be before "a100"
-  7 |         }
-  8 |       
+   1 |
+   2 |         enum Test {
+   3 |           "qux"
+   4 |           qux
+   5 |           foo
+   6 |           "Bar"
+   7 |           Bar
+   8 |           """
+   9 |           bar
+  10 |           """
+> 11 |           bar
+     |           ^^^ "bar" should be before "Bar"
+  12 |         }
+  13 |       
 
 Autofix output
 
 enum Test {
-  a0
-  a1
-  a100
-  a3
+  """
+  bar
+  """
+  bar
+  "Bar"
+  Bar
+  foo
+  "qux"
+  qux
 }
 `;

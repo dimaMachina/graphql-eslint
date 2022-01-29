@@ -21,6 +21,7 @@ import {
   FragmentSpreadNode,
 } from 'graphql';
 import type { SourceLocation, Comment } from 'estree';
+import type { AST } from 'eslint';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
@@ -60,10 +61,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     fixable: 'code',
     docs: {
       category: ['Schema', 'Operations'],
-      description: [
-        'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
-        '> Note: autofix will work only for fields without comments (between or around)',
-      ].join('\n\n'),
+      description: `Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.`,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
       examples: [
         {
@@ -220,8 +218,30 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     },
   },
   create(context) {
-    function isOnSameLineNodeAndComment(beforeNode: { loc: SourceLocation }, afterNode: Comment): boolean {
-      return beforeNode.loc.end.line === afterNode.loc.start.line;
+    const sourceCode = context.getSourceCode();
+
+    function isNodeAndCommentOnSameLine(node: { loc: SourceLocation }, comment: Comment): boolean {
+      return node.loc.end.line === comment.loc.start.line;
+    }
+
+    function getBeforeComments(node): Comment[] {
+      const commentsBefore = sourceCode.getCommentsBefore(node);
+      if (commentsBefore.length === 0) {
+        return [];
+      }
+      const tokenBefore = sourceCode.getTokenBefore(node);
+      if (tokenBefore) {
+        return commentsBefore.filter(comment => !isNodeAndCommentOnSameLine(tokenBefore, comment));
+      }
+      return commentsBefore;
+    }
+
+    function getRangeWithComments(node): AST.Range {
+      const [firstBeforeComment] = getBeforeComments(node);
+      const [firstAfterComment] = sourceCode.getCommentsAfter(node);
+      const from = firstBeforeComment || node;
+      const to = firstAfterComment && isNodeAndCommentOnSameLine(node, firstAfterComment) ? firstAfterComment : node;
+      return [from.range[0], to.range[1]];
     }
 
     function checkNodes(
@@ -241,41 +261,27 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         const currNode = nodes[i];
         const prevName = prevNode.name.value;
         const currName = currNode.name.value;
-        if (prevName.localeCompare(currName) === 1) {
-          const isVariableNode = currNode.kind === Kind.VARIABLE;
-
-          context.report({
-            loc: getLocation(currNode.loc, currName, { offsetEnd: isVariableNode ? 0 : 1 }),
-            messageId: ALPHABETIZE,
-            data: isVariableNode
-              ? {
-                  currName: `$${currName}`,
-                  prevName: `$${prevName}`,
-                }
-              : { currName, prevName },
-            *fix(fixer) {
-              const prev = prevNode as any;
-              const curr = currNode as any;
-              const sourceCode = context.getSourceCode();
-
-              const beforeComments = sourceCode.getCommentsBefore(prev);
-              if (beforeComments.length > 0) {
-                const tokenBefore = sourceCode.getTokenBefore(prev);
-                const lastBeforeComment = beforeComments[beforeComments.length - 1];
-                if (!tokenBefore || !isOnSameLineNodeAndComment(tokenBefore, lastBeforeComment)) return;
-              }
-
-              const betweenComments = sourceCode.getCommentsBefore(curr);
-              if (betweenComments.length > 0) return;
-
-              const [firstAfterComment] = sourceCode.getCommentsAfter(curr);
-              if (firstAfterComment && isOnSameLineNodeAndComment(curr, firstAfterComment)) return;
-
-              yield fixer.replaceText(prev, sourceCode.getText(curr));
-              yield fixer.replaceText(curr, sourceCode.getText(prev));
-            },
-          });
+        // Compare with lexicographic order
+        if (prevName.localeCompare(currName) !== 1) {
+          continue;
         }
+        const isVariableNode = currNode.kind === Kind.VARIABLE;
+        context.report({
+          loc: getLocation(currNode.name.loc, currName, { offsetStart: isVariableNode ? 2 : 1 }),
+          messageId: ALPHABETIZE,
+          data: isVariableNode
+            ? {
+                currName: `$${currName}`,
+                prevName: `$${prevName}`,
+              }
+            : { currName, prevName },
+          *fix(fixer) {
+            const prevRange = getRangeWithComments(prevNode);
+            const currRange = getRangeWithComments(currNode);
+            yield fixer.replaceTextRange(prevRange, sourceCode.getText({ range: currRange } as any));
+            yield fixer.replaceTextRange(currRange, sourceCode.getText({ range: prevRange } as any));
+          },
+        });
       }
     }
 
