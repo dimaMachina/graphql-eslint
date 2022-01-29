@@ -1,11 +1,19 @@
-import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
+import type { SourceLocation } from 'estree';
+import { convertDescription, extractCommentsFromAst } from './utils';
 import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
-import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind, DocumentNode, ASTVisitor } from 'graphql';
+import {
+  ASTNode,
+  TypeNode,
+  TypeInfo,
+  visit,
+  visitWithTypeInfo,
+  Location,
+  Kind,
+  DocumentNode,
+  ASTVisitor,
+} from 'graphql';
 
-export function convertToESTree<T extends ASTNode>(
-  node: T,
-  typeInfo?: TypeInfo
-) {
+export function convertToESTree<T extends ASTNode>(node: T, typeInfo?: TypeInfo) {
   const visitor: ASTVisitor = { leave: convertNode(typeInfo) };
   return {
     rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor) as GraphQLESTreeNode<T>,
@@ -27,6 +35,29 @@ function stripTokens(location: Location): Pick<Location, 'start' | 'end'> {
     end: location.end,
     start: location.start,
   };
+}
+
+function convertLocation(location: Location): SourceLocation {
+  const { startToken, endToken, source, start, end } = location;
+  /*
+   * ESLint has 0-based column number
+   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
+   */
+  const loc = {
+    start: {
+      column: startToken.column - 1,
+      line: startToken.line,
+    },
+    end: {
+      column: endToken.column - 1,
+      line: endToken.line,
+    },
+    source: source.body,
+  };
+  if (loc.start.column === loc.end.column) {
+    loc.end.column += end - start;
+  }
+  return loc;
 }
 
 const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
@@ -52,7 +83,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
     typeInfo: () => calculatedTypeInfo,
     leadingComments: convertDescription(node),
     loc: convertLocation(node.loc),
-    range: convertRange(node.loc),
+    range: [node.loc.start, node.loc.end],
   };
 
   if (hasTypeField<T>(node)) {

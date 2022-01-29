@@ -25,7 +25,6 @@ import type { AST } from 'eslint';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
-import { getLocation } from '../utils';
 
 const ALPHABETIZE = 'ALPHABETIZE';
 
@@ -267,7 +266,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         }
         const isVariableNode = currNode.kind === Kind.VARIABLE;
         context.report({
-          loc: getLocation(currNode.name.loc, currName, { offsetStart: isVariableNode ? 2 : 1 }),
+          loc: currNode.name.loc,
           messageId: ALPHABETIZE,
           data: isVariableNode
             ? {

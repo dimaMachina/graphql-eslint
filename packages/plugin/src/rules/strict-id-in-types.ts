@@ -1,6 +1,6 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { getLocation, requireGraphQLSchemaFromContext } from '../utils';
+import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 export type StrictIdInTypesRuleConfig = {
@@ -183,7 +183,7 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         // we can extend this rule later.
         if (validIds.length !== 1) {
           context.report({
-            loc: getLocation(node.name.loc, typeName),
+            node: node.name,
             messageId: RULE_ID,
             data: {
               typeName,

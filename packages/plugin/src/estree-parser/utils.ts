@@ -10,8 +10,9 @@ import {
   isNonNullType,
   isListType,
 } from 'graphql';
-import { SourceLocation, Comment } from 'estree';
+import { Comment } from 'estree';
 import { GraphQLESTreeNode } from './estree-ast';
+import { convertToken } from '../utils';
 
 export default function keyValMap<T, V>(
   list: ReadonlyArray<T>,
@@ -57,10 +58,6 @@ export function getBaseType(type: GraphQLOutputType): GraphQLNamedType {
   return type;
 }
 
-export function convertRange(gqlLocation: Location): [number, number] {
-  return [gqlLocation.start, gqlLocation.end];
-}
-
 export function extractCommentsFromAst(loc: Location): Comment[] {
   if (!loc) {
     return [];
@@ -69,35 +66,17 @@ export function extractCommentsFromAst(loc: Location): Comment[] {
   let token = loc.startToken;
 
   while (token !== null) {
-    const { kind, value, line, column, start, end, next } = token;
-    if (kind === TokenKind.COMMENT) {
-      comments.push({
-        type: 'Block',
-        value,
-        loc: {
-          start: { line, column },
-          end: { line, column },
-        },
-        range: [start, end],
-      });
+    if (token.kind === TokenKind.COMMENT) {
+      const comment = convertToken(
+        token,
+        // `eslint-disable` directive works only with `Block` type comment
+        token.value.trimStart().startsWith('eslint') ? 'Block' : 'Line'
+      );
+      comments.push(comment);
     }
-    token = next;
+    token = token.next;
   }
   return comments;
-}
-
-export function convertLocation(gqlLocation: Location): SourceLocation {
-  return {
-    start: {
-      column: gqlLocation.startToken.column,
-      line: gqlLocation.startToken.line,
-    },
-    end: {
-      column: gqlLocation.endToken.column,
-      line: gqlLocation.endToken.line,
-    },
-    source: gqlLocation.source.body,
-  };
 }
 
 export function isNodeWithDescription<T extends ASTNode>(

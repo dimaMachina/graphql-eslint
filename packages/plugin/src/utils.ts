@@ -1,13 +1,13 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { Lexer, GraphQLSchema, Source, Kind } from 'graphql';
-import { AST } from 'eslint';
+import { GraphQLSchema, Kind, Lexer, Source, Token, TokenKind } from 'graphql';
+import type { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
-import { UsedFields, ReachableTypes } from './graphql-ast';
+import { ReachableTypes, UsedFields } from './graphql-ast';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -84,27 +84,39 @@ function getLexer(source: Source): Lexer {
   throw new Error(`Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!`);
 }
 
+export function convertToken<T extends 'Line' | 'Block' | TokenKind>(
+  token: Token,
+  type: T
+): Omit<AST.Token, 'type'> & { type: T } {
+  const { line, column, end, start, value } = token;
+  return {
+    type,
+    value,
+    /*
+     * ESLint has 0-based column number
+     * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
+     */
+    loc: {
+      start: {
+        line,
+        column: column - 1,
+      },
+      end: {
+        line,
+        column: column - 1 + (end - start),
+      },
+    },
+    range: [start, end],
+  };
+}
+
 export function extractTokens(source: Source): AST.Token[] {
   const lexer = getLexer(source);
   const tokens: AST.Token[] = [];
   let token = lexer.advance();
 
-  while (token && token.kind !== '<EOF>') {
-    tokens.push({
-      type: token.kind as any,
-      loc: {
-        start: {
-          line: token.line,
-          column: token.column,
-        },
-        end: {
-          line: token.line,
-          column: token.column,
-        },
-      },
-      value: token.value,
-      range: [token.start, token.end],
-    });
+  while (token && token.kind !== TokenKind.EOF) {
+    tokens.push(convertToken(token, token.kind) as AST.Token);
     token = lexer.advance();
   }
 
@@ -191,27 +203,17 @@ export const convertCase = (style: CaseStyle, str: string): string => {
   }
 };
 
-export function getLocation(
-  loc: Partial<AST.SourceLocation>,
-  fieldName = '',
-  offset?: { offsetStart?: number; offsetEnd?: number }
-): AST.SourceLocation {
-  const { start } = loc;
-
-  /*
-   * ESLint has 0-based column number
-   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
-   */
-  const { offsetStart = 1, offsetEnd = 1 } = offset ?? {};
+export function getLocation(loc: Partial<AST.SourceLocation>, fieldName = ''): AST.SourceLocation {
+  const { line, column } = loc.start;
 
   return {
     start: {
-      line: start.line,
-      column: start.column - offsetStart,
+      line,
+      column,
     },
     end: {
-      line: start.line,
-      column: start.column - offsetEnd + fieldName.length,
+      line,
+      column: column + fieldName.length,
     },
   };
 }

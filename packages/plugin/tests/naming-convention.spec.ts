@@ -161,6 +161,7 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
       errors: [{ message: 'Scalar "BSONDecimal" should be in snake_case format' }],
     },
     {
+      name: 'large graphql file',
       code: ruleTester.fromMockFile('large.graphql'),
       options: [
         {

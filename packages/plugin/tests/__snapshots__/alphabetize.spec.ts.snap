@@ -378,7 +378,7 @@ Error 1/4
 
   1 |
 > 2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
-    |                             ^^^ "$bb" should be before "$cc"
+    |                              ^^ "$bb" should be before "$cc"
   3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
   4 |             something
   5 |           }
@@ -389,7 +389,7 @@ Error 2/4
 
   1 |
 > 2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
-    |                                       ^^^ "$aa" should be before "$bb"
+    |                                        ^^ "$aa" should be before "$bb"
   3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
   4 |             something
   5 |           }

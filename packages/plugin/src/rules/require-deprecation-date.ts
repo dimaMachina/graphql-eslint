@@ -1,6 +1,5 @@
 import { GraphQLESLintRule } from '../types';
 import { valueFromNode } from '../estree-parser/utils';
-import { getLocation } from '../utils';
 
 // eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -74,7 +73,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
 
         if (!deletionDateNode) {
           context.report({
-            loc: getLocation(node.loc, node.name.value, { offsetEnd: 0 }),
+            node: node.name,
             messageId: MESSAGE_REQUIRE_DATE,
           });
           return;
@@ -106,7 +105,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
 
         if (canRemove) {
           context.report({
-            node,
+            node: node.parent.name,
             messageId: MESSAGE_CAN_BE_REMOVED,
             data: {
               nodeName: node.parent.name.value,

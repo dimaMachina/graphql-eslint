@@ -1,5 +1,5 @@
 import { Kind, NameNode } from 'graphql';
-import { getLocation, requireGraphQLSchemaFromContext } from '../utils';
+import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
@@ -82,7 +82,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
       [selector](node: GraphQLESTreeNode<NameNode>) {
         const typeName = node.value;
         context.report({
-          loc: getLocation(node.loc, typeName),
+          node,
           message: `Root type "${typeName}" is forbidden`,
         });
       },

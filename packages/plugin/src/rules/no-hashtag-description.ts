@@ -1,6 +1,6 @@
-import { Kind, TokenKind } from 'graphql';
+import { DocumentNode, TokenKind } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { getLocation } from '../utils';
+import { GraphQLESTreeNode } from '../estree-parser';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
@@ -55,9 +55,9 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const selector = `${Kind.DOCUMENT}[definitions.0.kind!=/^(${Kind.OPERATION_DEFINITION}|${Kind.FRAGMENT_DEFINITION})$/]`;
+    const selector = 'Document[definitions.0.kind!=/^(OperationDefinition|FragmentDefinition)$/]';
     return {
-      [selector](node) {
+      [selector](node: GraphQLESTreeNode<DocumentNode>) {
         const rawNode = node.rawNode();
         let token = rawNode.loc.startToken;
 
@@ -71,7 +71,10 @@ const rule: GraphQLESLintRule = {
             if (!isEslintComment && line !== prev.line && next.kind === TokenKind.NAME && linesAfter < 2) {
               context.report({
                 messageId: HASHTAG_COMMENT,
-                loc: getLocation({ start: { line, column } }),
+                loc: {
+                  line,
+                  column: column - 1,
+                },
               });
             }
           }

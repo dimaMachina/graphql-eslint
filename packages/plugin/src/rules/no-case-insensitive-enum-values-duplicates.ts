@@ -1,7 +1,6 @@
 import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
-import { getLocation } from '../utils';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -47,7 +46,7 @@ const rule: GraphQLESLintRule = {
         for (const duplicate of duplicates) {
           const enumName = duplicate.name.value;
           context.report({
-            loc: getLocation(duplicate.loc, enumName),
+            node: duplicate.name,
             message: `Case-insensitive enum values duplicates are not allowed! Found: "${enumName}"`,
           });
         }

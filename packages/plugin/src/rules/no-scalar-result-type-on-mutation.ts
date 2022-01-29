@@ -1,5 +1,5 @@
 import { Kind, isScalarType, NameNode } from 'graphql';
-import { getLocation, requireGraphQLSchemaFromContext } from '../utils';
+import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
@@ -49,7 +49,7 @@ const rule: GraphQLESLintRule = {
         const graphQLType = schema.getType(typeName);
         if (isScalarType(graphQLType)) {
           context.report({
-            loc: getLocation(node.loc, typeName),
+            node,
             message: `Unexpected scalar result type "${typeName}"`,
           });
         }

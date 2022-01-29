@@ -1,7 +1,6 @@
-import { VariableDefinitionNode, ArgumentNode, FieldNode, Kind } from 'graphql';
+import { ArgumentNode, FieldNode, Kind, VariableDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { getLocation } from '../utils';
 
 const NO_DUPLICATE_FIELDS = 'NO_DUPLICATE_FIELDS';
 
@@ -62,6 +61,18 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
+    const getNameNode = node => {
+      switch (node.kind) {
+        case Kind.VARIABLE_DEFINITION:
+          return node.variable.name;
+        case Kind.FIELD:
+          return node.alias || node.name;
+        case Kind.ARGUMENT:
+          return node.name;
+      }
+      return node;
+    };
+
     function checkNode(
       usedFields: Set<string>,
       fieldName: string,
@@ -70,9 +81,7 @@ const rule: GraphQLESLintRule = {
     ): void {
       if (usedFields.has(fieldName)) {
         context.report({
-          loc: getLocation((node.kind === Kind.FIELD && node.alias ? node.alias : node).loc, fieldName, {
-            offsetEnd: node.kind === Kind.VARIABLE_DEFINITION ? 0 : 1,
-          }),
+          node: getNameNode(node),
           messageId: NO_DUPLICATE_FIELDS,
           data: {
             type,
