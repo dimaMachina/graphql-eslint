@@ -266,7 +266,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         }
         const isVariableNode = currNode.kind === Kind.VARIABLE;
         context.report({
-          loc: currNode.name.loc,
+          node: currNode.name,
           messageId: ALPHABETIZE,
           data: isVariableNode
             ? {

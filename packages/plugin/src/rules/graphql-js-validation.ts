@@ -36,7 +36,12 @@ function validateDocument(
         token => token.loc.start.line === line && token.loc.start.column === column - 1
       );
       context.report({
-        loc: token ? token.loc : error.locations[0],
+        loc: token
+          ? token.loc
+          : {
+              line,
+              column: column - 1,
+            },
         message: error.message,
       });
     }
