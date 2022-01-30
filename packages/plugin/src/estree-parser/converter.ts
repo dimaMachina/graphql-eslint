@@ -25,18 +25,6 @@ function hasTypeField<T extends ASTNode>(obj: any): obj is T & { readonly type: 
   return obj && !!(obj as any).type;
 }
 
-/**
- * Strips tokens information from `location` object - this is needed since it's created as linked list in GraphQL-JS,
- * causing eslint to fail on circular JSON
- * @param location
- */
-function stripTokens(location: Location): Pick<Location, 'start' | 'end'> {
-  return {
-    end: location.end,
-    start: location.start,
-  };
-}
-
 function convertLocation(location: Location): SourceLocation {
   const { startToken, endToken, source, start, end } = location;
   /*
@@ -45,12 +33,15 @@ function convertLocation(location: Location): SourceLocation {
    */
   const loc = {
     start: {
-      column: startToken.column - 1,
-      line: startToken.line,
+      /*
+       * Kind.Document has startToken: { line: 0, column: 0 }, we set line as 1 and column as 0
+       */
+      line: startToken.line === 0 ? 1 : startToken.line,
+      column: startToken.column === 0 ? 0 : startToken.column - 1,
     },
     end: {
-      column: endToken.column - 1,
       line: endToken.line,
+      column: endToken.column - 1,
     },
     source: source.body,
   };
@@ -111,7 +102,6 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
 
         return parent[key];
       },
-      gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;
@@ -137,7 +127,6 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
 
         return parent[key];
       },
-      gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;

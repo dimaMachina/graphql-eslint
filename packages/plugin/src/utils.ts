@@ -1,6 +1,6 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { GraphQLSchema, Kind, Lexer, Source, Token, TokenKind } from 'graphql';
+import { GraphQLSchema, Kind } from 'graphql';
 import type { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
@@ -66,61 +66,6 @@ export function requireUsedFieldsFromContext(ruleName: string, context: GraphQLE
   const schema = requireGraphQLSchemaFromContext(ruleName, context);
   const siblings = requireSiblingsOperations(ruleName, context);
   return context.parserServices.usedFields(schema, siblings);
-}
-
-function getLexer(source: Source): Lexer {
-  // GraphQL v14
-  const gqlLanguage = require('graphql/language');
-  if (gqlLanguage && gqlLanguage.createLexer) {
-    return gqlLanguage.createLexer(source, {});
-  }
-
-  // GraphQL v15
-  const { Lexer: LexerCls } = require('graphql');
-  if (LexerCls && typeof LexerCls === 'function') {
-    return new LexerCls(source);
-  }
-
-  throw new Error(`Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!`);
-}
-
-export function convertToken<T extends 'Line' | 'Block' | TokenKind>(
-  token: Token,
-  type: T
-): Omit<AST.Token, 'type'> & { type: T } {
-  const { line, column, end, start, value } = token;
-  return {
-    type,
-    value,
-    /*
-     * ESLint has 0-based column number
-     * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
-     */
-    loc: {
-      start: {
-        line,
-        column: column - 1,
-      },
-      end: {
-        line,
-        column: column - 1 + (end - start),
-      },
-    },
-    range: [start, end],
-  };
-}
-
-export function extractTokens(source: Source): AST.Token[] {
-  const lexer = getLexer(source);
-  const tokens: AST.Token[] = [];
-  let token = lexer.advance();
-
-  while (token && token.kind !== TokenKind.EOF) {
-    tokens.push(convertToken(token, token.kind) as AST.Token);
-    token = lexer.advance();
-  }
-
-  return tokens;
 }
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');

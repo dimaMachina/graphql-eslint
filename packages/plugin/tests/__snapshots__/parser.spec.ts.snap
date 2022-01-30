@@ -8,10 +8,6 @@ Object {
         Object {
           description: Object {
             block: true,
-            gqlLocation: Object {
-              end: 52,
-              start: 7,
-            },
             kind: StringValue,
             leadingComments: Array [],
             loc: Object {
@@ -41,10 +37,6 @@ Object {
           },
           directives: Array [],
           fields: Array [],
-          gqlLocation: Object {
-            end: 69,
-            start: 7,
-          },
           interfaces: Array [],
           kind: ObjectTypeDefinition,
           leadingComments: Array [
@@ -70,10 +62,6 @@ Object {
             },
           },
           name: Object {
-            gqlLocation: Object {
-              end: 69,
-              start: 64,
-            },
             kind: Name,
             leadingComments: Array [],
             loc: Object {
@@ -110,10 +98,6 @@ Object {
           typeInfo: [Function],
         },
       ],
-      gqlLocation: Object {
-        end: 74,
-        start: 0,
-      },
       kind: Document,
       leadingComments: Array [],
       loc: Object {
@@ -128,8 +112,8 @@ Object {
       type Query
     ,
         start: Object {
-          column: -1,
-          line: 0,
+          column: 0,
+          line: 1,
         },
       },
       range: Array [
@@ -154,8 +138,8 @@ Object {
       type Query
     ,
     start: Object {
-      column: -1,
-      line: 0,
+      column: 0,
+      line: 1,
     },
   },
   range: Array [

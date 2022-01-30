@@ -9,10 +9,13 @@ import {
   GraphQLNamedType,
   isNonNullType,
   isListType,
+  Token,
+  Source,
+  Lexer,
 } from 'graphql';
-import { Comment } from 'estree';
-import { GraphQLESTreeNode } from './estree-ast';
-import { convertToken } from '../utils';
+import type { Comment } from 'estree';
+import type { AST } from 'eslint';
+import type { GraphQLESTreeNode } from './estree-ast';
 
 export default function keyValMap<T, V>(
   list: ReadonlyArray<T>,
@@ -56,6 +59,62 @@ export function getBaseType(type: GraphQLOutputType): GraphQLNamedType {
   }
 
   return type;
+}
+
+export function convertToken<T extends 'Line' | 'Block' | TokenKind>(
+  token: Token,
+  type: T
+): Omit<AST.Token, 'type'> & { type: T } {
+  const { line, column, end, start, value } = token;
+  return {
+    type,
+    value,
+    /*
+     * ESLint has 0-based column number
+     * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
+     */
+    loc: {
+      start: {
+        line,
+        column: column - 1,
+      },
+      end: {
+        line,
+        column: column - 1 + (end - start),
+      },
+    },
+    range: [start, end],
+  };
+}
+
+function getLexer(source: Source): Lexer {
+  // GraphQL v14
+  const gqlLanguage = require('graphql/language');
+  if (gqlLanguage && gqlLanguage.createLexer) {
+    return gqlLanguage.createLexer(source, {});
+  }
+
+  // GraphQL v15
+  const { Lexer: LexerCls } = require('graphql');
+  if (LexerCls && typeof LexerCls === 'function') {
+    return new LexerCls(source);
+  }
+
+  throw new Error('Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!');
+}
+
+export function extractTokens(source: Source): AST.Token[] {
+  const lexer = getLexer(source);
+  const tokens: AST.Token[] = [];
+  let token = lexer.advance();
+
+  while (token && token.kind !== TokenKind.EOF) {
+    const result = convertToken(token, token.kind) as AST.Token;
+    tokens.push(result);
+    token = lexer.advance();
+  }
+
+  return tokens;
 }
 
 export function extractCommentsFromAst(loc: Location): Comment[] {
