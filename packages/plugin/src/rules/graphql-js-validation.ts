@@ -1,4 +1,5 @@
-import { AST } from 'eslint';
+import type { AST } from 'eslint';
+import type { JSONSchema4 } from 'json-schema';
 import {
   Kind,
   TypeInfo,
@@ -10,9 +11,10 @@ import {
   visit,
   validate,
   visitWithTypeInfo,
+  TokenKind,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
 
 function validateDocument(
@@ -132,7 +134,8 @@ const validationToRule = (
   ruleId: string,
   ruleName: string,
   docs: GraphQLESLintRule['meta']['docs'],
-  getDocumentNode?: GetDocumentNode
+  getDocumentNode?: GetDocumentNode,
+  schema: JSONSchema4 | JSONSchema4[] = []
 ): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
 
@@ -155,6 +158,7 @@ const validationToRule = (
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${ruleId}.md`,
           description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
         },
+        schema,
       },
       create(context) {
         if (!ruleFn) {
@@ -203,11 +207,61 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     description: `A GraphQL field is only valid if all supplied arguments are defined by that field.`,
     requiresSchema: true,
   }),
-  validationToRule('known-directives', 'KnownDirectives', {
-    category: ['Schema', 'Operations'],
-    description: `A GraphQL document is only valid if all \`@directives\` are known by the schema and legally positioned.`,
-    requiresSchema: true,
-  }),
+  validationToRule(
+    'known-directives',
+    'KnownDirectives',
+    {
+      category: ['Schema', 'Operations'],
+      description: `A GraphQL document is only valid if all \`@directive\`s are known by the schema and legally positioned.`,
+      requiresSchema: true,
+      examples: [
+        {
+          title: 'Valid',
+          usage: [{ ignoreClientDirectives: ['client'] }],
+          code: /* GraphQL */ `
+            {
+              product {
+                someClientField @client
+              }
+            }
+          `,
+        },
+      ],
+    },
+    ({ context, node: documentNode }) => {
+      const { ignoreClientDirectives = [] } = context.options[0] || {};
+      if (ignoreClientDirectives.length === 0) {
+        return documentNode;
+      }
+      return visit(documentNode, {
+        Field(node) {
+          return {
+            ...node,
+            directives: node.directives.filter(directive => !ignoreClientDirectives.includes(directive.name.value)),
+          };
+        },
+      });
+    },
+    {
+      type: 'array',
+      maxItems: 1,
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['ignoreClientDirectives'],
+        properties: {
+          ignoreClientDirectives: {
+            type: 'array',
+            uniqueItems: true,
+            minItems: 1,
+            items: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    }
+  ),
   validationToRule(
     'known-fragment-names',
     'KnownFragmentNames',

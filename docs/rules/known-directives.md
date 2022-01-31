@@ -7,9 +7,36 @@
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-A GraphQL document is only valid if all `@directives` are known by the schema and legally positioned.
+A GraphQL document is only valid if all `@directive`s are known by the schema and legally positioned.
 
 > This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/KnownDirectivesRule.ts).
+
+## Usage Examples
+
+### Valid
+
+```graphql
+# eslint @graphql-eslint/known-directives: ['error', { ignoreClientDirectives: ['client'] }]
+
+{
+  product {
+    someClientField @client
+  }
+}
+```
+
+## Config Schema
+
+The schema defines the following properties:
+
+### `ignoreClientDirectives` (array, required)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+* Minimum items: `1`
+* Unique items: `true`
 
 ## Resources
 
