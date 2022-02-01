@@ -131,7 +131,7 @@ The schema defines the following additional types:
 
 ## `asString` (enum)
 
-One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`, `kebab-case`, `documentStyle`
+One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`, `kebab-case`, `matchDocumentStyle`
 
 ## `asObject` (object)
 
@@ -146,7 +146,7 @@ This element must be one of the following enum values:
 - `snake_case`
 - `UPPER_CASE`
 - `kebab-case`
-- `documentStyle`
+- `matchDocumentStyle`
 
 ### `suffix` (string)
 

@@ -5,13 +5,13 @@ import { CaseStyle as _CaseStyle, convertCase } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
-type CaseStyle = _CaseStyle | 'documentStyle';
+type CaseStyle = _CaseStyle | 'matchDocumentStyle';
 
 const MATCH_EXTENSION = 'MATCH_EXTENSION';
 const MATCH_STYLE = 'MATCH_STYLE';
 
 const ACCEPTED_EXTENSIONS: ['.gql', '.graphql'] = ['.gql', '.graphql'];
-const CASE_STYLES: CaseStyle[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case', 'documentStyle'];
+const CASE_STYLES: CaseStyle[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case', 'matchDocumentStyle'];
 
 type PropertySchema = {
   style?: CaseStyle;
@@ -214,7 +214,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         const expectedExtension = options.fileExtension || fileExtension;
         let expectedFilename: string;
         if (option.style) {
-          expectedFilename = option.style === 'documentStyle' ? docName : convertCase(option.style, docName);
+          expectedFilename = option.style === 'matchDocumentStyle' ? docName : convertCase(option.style, docName);
         } else {
           expectedFilename = filename;
         }

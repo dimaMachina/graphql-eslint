@@ -38,7 +38,7 @@ ruleTester.runGraphQLTests<[MatchDocumentFilenameRuleConfig]>('match-document-fi
     {
       filename: 'src/SAMEAsOperation.gql',
       code: 'query SAMEAsOperation { foo }',
-      options: [{ query: 'documentStyle' }],
+      options: [{ query: 'matchDocumentStyle' }],
     },
   ],
   invalid: [
