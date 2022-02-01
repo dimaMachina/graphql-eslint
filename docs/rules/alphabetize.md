@@ -1,5 +1,7 @@
 # `alphabetize`
 
+🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.
+
 - Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/alphabetize`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)

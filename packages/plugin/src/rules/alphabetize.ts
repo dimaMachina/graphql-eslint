@@ -20,10 +20,11 @@ import {
   SelectionSetNode,
   FragmentSpreadNode,
 } from 'graphql';
+import type { SourceLocation, Comment } from 'estree';
+import type { AST } from 'eslint';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
-import { getLocation } from '../utils';
 
 const ALPHABETIZE = 'ALPHABETIZE';
 
@@ -45,7 +46,7 @@ const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Dir
   Kind.DIRECTIVE,
 ];
 
-type AlphabetizeConfig = {
+export type AlphabetizeConfig = {
   fields?: typeof fieldsEnum;
   values?: typeof valuesEnum;
   selections?: typeof selectionsEnum;
@@ -56,10 +57,10 @@ type AlphabetizeConfig = {
 const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
   meta: {
     type: 'suggestion',
+    fixable: 'code',
     docs: {
       category: ['Schema', 'Operations'],
-      description:
-        'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
+      description: `Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.`,
       url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
       examples: [
         {
@@ -216,6 +217,32 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     },
   },
   create(context) {
+    const sourceCode = context.getSourceCode();
+
+    function isNodeAndCommentOnSameLine(node: { loc: SourceLocation }, comment: Comment): boolean {
+      return node.loc.end.line === comment.loc.start.line;
+    }
+
+    function getBeforeComments(node): Comment[] {
+      const commentsBefore = sourceCode.getCommentsBefore(node);
+      if (commentsBefore.length === 0) {
+        return [];
+      }
+      const tokenBefore = sourceCode.getTokenBefore(node);
+      if (tokenBefore) {
+        return commentsBefore.filter(comment => !isNodeAndCommentOnSameLine(tokenBefore, comment));
+      }
+      return commentsBefore;
+    }
+
+    function getRangeWithComments(node): AST.Range {
+      const [firstBeforeComment] = getBeforeComments(node);
+      const [firstAfterComment] = sourceCode.getCommentsAfter(node);
+      const from = firstBeforeComment || node;
+      const to = firstAfterComment && isNodeAndCommentOnSameLine(node, firstAfterComment) ? firstAfterComment : node;
+      return [from.range[0], to.range[1]];
+    }
+
     function checkNodes(
       nodes: GraphQLESTreeNode<
         | FieldDefinitionNode
@@ -227,24 +254,33 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         | VariableDefinitionNode['variable']
       >[]
     ) {
-      let prevName = null;
-      for (const node of nodes) {
-        const currName = node.name.value;
-        if (prevName && prevName > currName) {
-          const isVariableNode = node.kind === Kind.VARIABLE;
-
-          context.report({
-            loc: getLocation(node.loc, node.name.value, { offsetEnd: isVariableNode ? 0 : 1 }),
-            messageId: ALPHABETIZE,
-            data: isVariableNode
-              ? {
-                  currName: `$${currName}`,
-                  prevName: `$${prevName}`,
-                }
-              : { currName, prevName },
-          });
+      // Starts from 1, ignore nodes.length <= 1
+      for (let i = 1; i < nodes.length; i += 1) {
+        const prevNode = nodes[i - 1];
+        const currNode = nodes[i];
+        const prevName = prevNode.name.value;
+        const currName = currNode.name.value;
+        // Compare with lexicographic order
+        if (prevName.localeCompare(currName) !== 1) {
+          continue;
         }
-        prevName = currName;
+        const isVariableNode = currNode.kind === Kind.VARIABLE;
+        context.report({
+          node: currNode.name,
+          messageId: ALPHABETIZE,
+          data: isVariableNode
+            ? {
+                currName: `$${currName}`,
+                prevName: `$${prevName}`,
+              }
+            : { currName, prevName },
+          *fix(fixer) {
+            const prevRange = getRangeWithComments(prevNode);
+            const currRange = getRangeWithComments(currNode);
+            yield fixer.replaceTextRange(prevRange, sourceCode.getText({ range: currRange } as any));
+            yield fixer.replaceTextRange(currRange, sourceCode.getText({ range: prevRange } as any));
+          },
+        });
       }
     }
 

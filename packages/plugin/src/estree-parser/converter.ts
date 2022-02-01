@@ -1,11 +1,19 @@
-import { convertDescription, convertLocation, convertRange, extractCommentsFromAst } from './utils';
+import type { SourceLocation } from 'estree';
+import { convertDescription, extractCommentsFromAst } from './utils';
 import { GraphQLESTreeNode, SafeGraphQLType } from './estree-ast';
-import { ASTNode, TypeNode, TypeInfo, visit, visitWithTypeInfo, Location, Kind, DocumentNode, ASTVisitor } from 'graphql';
+import {
+  ASTNode,
+  TypeNode,
+  TypeInfo,
+  visit,
+  visitWithTypeInfo,
+  Location,
+  Kind,
+  DocumentNode,
+  ASTVisitor,
+} from 'graphql';
 
-export function convertToESTree<T extends ASTNode>(
-  node: T,
-  typeInfo?: TypeInfo
-) {
+export function convertToESTree<T extends ASTNode>(node: T, typeInfo?: TypeInfo) {
   const visitor: ASTVisitor = { leave: convertNode(typeInfo) };
   return {
     rootTree: visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor) as GraphQLESTreeNode<T>,
@@ -17,16 +25,30 @@ function hasTypeField<T extends ASTNode>(obj: any): obj is T & { readonly type: 
   return obj && !!(obj as any).type;
 }
 
-/**
- * Strips tokens information from `location` object - this is needed since it's created as linked list in GraphQL-JS,
- * causing eslint to fail on circular JSON
- * @param location
- */
-function stripTokens(location: Location): Pick<Location, 'start' | 'end'> {
-  return {
-    end: location.end,
-    start: location.start,
+function convertLocation(location: Location): SourceLocation {
+  const { startToken, endToken, source, start, end } = location;
+  /*
+   * ESLint has 0-based column number
+   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
+   */
+  const loc = {
+    start: {
+      /*
+       * Kind.Document has startToken: { line: 0, column: 0 }, we set line as 1 and column as 0
+       */
+      line: startToken.line === 0 ? 1 : startToken.line,
+      column: startToken.column === 0 ? 0 : startToken.column - 1,
+    },
+    end: {
+      line: endToken.line,
+      column: endToken.column - 1,
+    },
+    source: source.body,
   };
+  if (loc.start.column === loc.end.column) {
+    loc.end.column += end - start;
+  }
+  return loc;
 }
 
 const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
@@ -52,7 +74,7 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
     typeInfo: () => calculatedTypeInfo,
     leadingComments: convertDescription(node),
     loc: convertLocation(node.loc),
-    range: convertRange(node.loc),
+    range: [node.loc.start, node.loc.end],
   };
 
   if (hasTypeField<T>(node)) {
@@ -80,7 +102,6 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
 
         return parent[key];
       },
-      gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;
@@ -106,7 +127,6 @@ const convertNode = (typeInfo?: TypeInfo) => <T extends ASTNode>(
 
         return parent[key];
       },
-      gqlLocation: stripTokens(gqlLocation),
     } as any) as GraphQLESTreeNode<T>;
 
     return estreeNode;

@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+❌ Error 1/3
+
    1 |
    2 |         type Query {
    3 |           node(id: ID!): AnotherNode!
@@ -26,9 +28,9 @@ exports[` 1`] = `
   22 |           address: String
   23 |         }
   24 |       
-`;
 
-exports[` 2`] = `
+❌ Error 2/3
+
    1 |
    2 |         type Query {
    3 |           node(id: ID!): AnotherNode!
@@ -54,9 +56,9 @@ exports[` 2`] = `
   22 |           address: String
   23 |         }
   24 |       
-`;
 
-exports[` 3`] = `
+❌ Error 3/3
+
    1 |
    2 |         type Query {
    3 |           node(id: ID!): AnotherNode!
@@ -84,7 +86,9 @@ exports[` 3`] = `
   24 |       
 `;
 
-exports[` 4`] = `
+exports[` 2`] = `
+❌ Error 1/7
+
    1 |
    2 |         # ScalarTypeDefinition
 >  3 |         scalar DateTime
@@ -117,9 +121,9 @@ exports[` 4`] = `
   29 |           city: String
   30 |         }
   31 |       
-`;
 
-exports[` 5`] = `
+❌ Error 2/7
+
    1 |
    2 |         # ScalarTypeDefinition
    3 |         scalar DateTime
@@ -152,9 +156,9 @@ exports[` 5`] = `
   29 |           city: String
   30 |         }
   31 |       
-`;
 
-exports[` 6`] = `
+❌ Error 3/7
+
    1 |
    2 |         # ScalarTypeDefinition
    3 |         scalar DateTime
@@ -167,7 +171,7 @@ exports[` 6`] = `
   10 |
   11 |         # DirectiveDefinition
 > 12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-     |                   ^^^^^ Type "auth" is unreachable
+     |                    ^^^^ Type "auth" is unreachable
   13 |
   14 |         # UnionTypeDefinition
   15 |         union Union = String | Boolean
@@ -187,9 +191,9 @@ exports[` 6`] = `
   29 |           city: String
   30 |         }
   31 |       
-`;
 
-exports[` 7`] = `
+❌ Error 4/7
+
    1 |
    2 |         # ScalarTypeDefinition
    3 |         scalar DateTime
@@ -222,9 +226,9 @@ exports[` 7`] = `
   29 |           city: String
   30 |         }
   31 |       
-`;
 
-exports[` 8`] = `
+❌ Error 5/7
+
    1 |
    2 |         # ScalarTypeDefinition
    3 |         scalar DateTime
@@ -257,9 +261,9 @@ exports[` 8`] = `
   29 |           city: String
   30 |         }
   31 |       
-`;
 
-exports[` 9`] = `
+❌ Error 6/7
+
    1 |
    2 |         # ScalarTypeDefinition
    3 |         scalar DateTime
@@ -292,9 +296,9 @@ exports[` 9`] = `
   29 |           city: String
   30 |         }
   31 |       
-`;
 
-exports[` 10`] = `
+❌ Error 7/7
+
    1 |
    2 |         # ScalarTypeDefinition
    3 |         scalar DateTime
@@ -329,7 +333,9 @@ exports[` 10`] = `
   31 |       
 `;
 
-exports[` 11`] = `
+exports[` 3`] = `
+❌ Error 1/1
+
    1 |
    2 |         interface User {
    3 |           id: String
@@ -353,7 +359,9 @@ exports[` 11`] = `
   20 |       
 `;
 
-exports[` 12`] = `
+exports[` 4`] = `
+❌ Error 1/3
+
    1 |
 >  2 |         interface User {
      |                   ^^^^ Type "User" is unreachable
@@ -377,9 +385,9 @@ exports[` 12`] = `
   20 |           user: AnotherUser!
   21 |         }
   22 |       
-`;
 
-exports[` 13`] = `
+❌ Error 2/3
+
    1 |
    2 |         interface User {
    3 |           id: String
@@ -403,9 +411,9 @@ exports[` 13`] = `
   20 |           user: AnotherUser!
   21 |         }
   22 |       
-`;
 
-exports[` 14`] = `
+❌ Error 3/3
+
    1 |
    2 |         interface User {
    3 |           id: String
@@ -431,7 +439,9 @@ exports[` 14`] = `
   22 |       
 `;
 
-exports[` 15`] = `
+exports[` 5`] = `
+❌ Error 1/1
+
    1 |
    2 |         type Query {
    3 |           node(id: ID!): Node!

@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+❌ Error 1/2
+
   1 |
   2 |         type User {
   3 |           password: String
@@ -10,9 +12,9 @@ exports[` 1`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
-`;
 
-exports[` 2`] = `
+❌ Error 2/2
+
   1 |
   2 |         type User {
   3 |           password: String
@@ -22,9 +24,22 @@ exports[` 2`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         type User {
+    3 |           age: Int
+    4 |           firstName: String!
+    5 |           lastName: String!
+    6 |           password: String
+    7 |         }
+    8 |       
 `;
 
-exports[` 3`] = `
+exports[` 2`] = `
+❌ Error 1/1
+
   1 |
   2 |         extend type User {
   3 |           age: Int
@@ -34,9 +49,22 @@ exports[` 3`] = `
     |           ^^^^^^^^ "lastName" should be before "password"
   7 |         }
   8 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         extend type User {
+    3 |           age: Int
+    4 |           firstName: String!
+    5 |           lastName: String!
+    6 |           password: String
+    7 |         }
+    8 |       
 `;
 
-exports[` 4`] = `
+exports[` 3`] = `
+❌ Error 1/2
+
   1 |
   2 |         interface Test {
   3 |           cc: Int
@@ -45,9 +73,9 @@ exports[` 4`] = `
   5 |           aa: Int
   6 |         }
   7 |       
-`;
 
-exports[` 5`] = `
+❌ Error 2/2
+
   1 |
   2 |         interface Test {
   3 |           cc: Int
@@ -56,9 +84,21 @@ exports[` 5`] = `
     |           ^^ "aa" should be before "bb"
   6 |         }
   7 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         interface Test {
+    3 |           aa: Int
+    4 |           bb: Int
+    5 |           cc: Int
+    6 |         }
+    7 |       
 `;
 
-exports[` 6`] = `
+exports[` 4`] = `
+❌ Error 1/2
+
   1 |
   2 |         input UserInput {
   3 |           password: String
@@ -68,9 +108,9 @@ exports[` 6`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
-`;
 
-exports[` 7`] = `
+❌ Error 2/2
+
   1 |
   2 |         input UserInput {
   3 |           password: String
@@ -80,9 +120,22 @@ exports[` 7`] = `
   6 |           lastName: String!
   7 |         }
   8 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         input UserInput {
+    3 |           age: Int
+    4 |           firstName: String!
+    5 |           lastName: String!
+    6 |           password: String
+    7 |         }
+    8 |       
 `;
 
-exports[` 8`] = `
+exports[` 5`] = `
+❌ Error 1/1
+
   1 |
   2 |         extend input UserInput {
   3 |           age: Int
@@ -92,9 +145,22 @@ exports[` 8`] = `
     |           ^^^^^^^^ "lastName" should be before "password"
   7 |         }
   8 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         extend input UserInput {
+    3 |           age: Int
+    4 |           firstName: String!
+    5 |           lastName: String!
+    6 |           password: String
+    7 |         }
+    8 |       
 `;
 
-exports[` 9`] = `
+exports[` 6`] = `
+❌ Error 1/2
+
   1 |
   2 |         enum Role {
   3 |           SUPER_ADMIN
@@ -104,9 +170,9 @@ exports[` 9`] = `
   6 |           GOD
   7 |         }
   8 |       
-`;
 
-exports[` 10`] = `
+❌ Error 2/2
+
   1 |
   2 |         enum Role {
   3 |           SUPER_ADMIN
@@ -116,9 +182,22 @@ exports[` 10`] = `
     |           ^^^ "GOD" should be before "USER"
   7 |         }
   8 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         enum Role {
+    3 |           ADMIN
+    4 |           GOD
+    5 |           SUPER_ADMIN
+    6 |           USER
+    7 |         }
+    8 |       
 `;
 
-exports[` 11`] = `
+exports[` 7`] = `
+❌ Error 1/1
+
   1 |
   2 |         extend enum Role {
   3 |           ADMIN
@@ -128,41 +207,72 @@ exports[` 11`] = `
   6 |           USER
   7 |         }
   8 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         extend enum Role {
+    3 |           ADMIN
+    4 |           GOD
+    5 |           SUPER_ADMIN
+    6 |           USER
+    7 |         }
+    8 |       
 `;
 
-exports[` 12`] = `
+exports[` 8`] = `
+❌ Error 1/2
+
   1 |
 > 2 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
     |                                  ^^ "bb" should be before "cc"
   3 |       
-`;
 
-exports[` 13`] = `
+❌ Error 2/2
+
   1 |
 > 2 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
     |                                           ^^ "aa" should be before "bb"
   3 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         directive @test(aa: Int, bb: Int, cc: Int) on FIELD_DEFINITION
+    3 |       
 `;
 
-exports[` 14`] = `
+exports[` 9`] = `
+❌ Error 1/2
+
   1 |
   2 |         type Query {
 > 3 |           test(cc: Int, bb: Int, aa: Int): Int
     |                         ^^ "bb" should be before "cc"
   4 |         }
   5 |       
-`;
 
-exports[` 15`] = `
+❌ Error 2/2
+
   1 |
   2 |         type Query {
 > 3 |           test(cc: Int, bb: Int, aa: Int): Int
     |                                  ^^ "aa" should be before "bb"
   4 |         }
   5 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         type Query {
+    3 |           test(aa: Int, bb: Int, cc: Int): Int
+    4 |         }
+    5 |       
 `;
 
-exports[` 16`] = `
+exports[` 10`] = `
+❌ Error 1/2
+
   1 |
   2 |         fragment TestFields on Test {
   3 |           cc
@@ -171,9 +281,9 @@ exports[` 16`] = `
   5 |           aa
   6 |         }
   7 |       
-`;
 
-exports[` 17`] = `
+❌ Error 2/2
+
   1 |
   2 |         fragment TestFields on Test {
   3 |           cc
@@ -182,9 +292,21 @@ exports[` 17`] = `
     |           ^^ "aa" should be before "bb"
   6 |         }
   7 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         fragment TestFields on Test {
+    3 |           aa
+    4 |           bb
+    5 |           cc
+    6 |         }
+    7 |       
 `;
 
-exports[` 18`] = `
+exports[` 11`] = `
+❌ Error 1/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -200,9 +322,9 @@ exports[` 18`] = `
   12 |           }
   13 |         }
   14 |       
-`;
 
-exports[` 19`] = `
+❌ Error 2/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -218,9 +340,9 @@ exports[` 19`] = `
   12 |           }
   13 |         }
   14 |       
-`;
 
-exports[` 20`] = `
+❌ Error 3/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -236,9 +358,9 @@ exports[` 20`] = `
   12 |           }
   13 |         }
   14 |       
-`;
 
-exports[` 21`] = `
+❌ Error 4/4
+
    1 |
    2 |         query {
    3 |           test {
@@ -254,31 +376,50 @@ exports[` 21`] = `
   12 |           }
   13 |         }
   14 |       
+
+🔧 Autofix output
+
+     1 |
+     2 |         query {
+     3 |           test {
+     4 |             aa
+     5 |             bb
+     6 |             cc
+     7 |             ... on Test {
+     8 |               aaa
+     9 |               bbb
+    10 |               ccc
+    11 |             }
+    12 |           }
+    13 |         }
+    14 |       
 `;
 
-exports[` 22`] = `
+exports[` 12`] = `
+❌ Error 1/4
+
   1 |
 > 2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
-    |                             ^^^ "$bb" should be before "$cc"
+    |                              ^^ "$bb" should be before "$cc"
   3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
   4 |             something
   5 |           }
   6 |         }
   7 |       
-`;
 
-exports[` 23`] = `
+❌ Error 2/4
+
   1 |
 > 2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
-    |                                       ^^^ "$aa" should be before "$bb"
+    |                                        ^^ "$aa" should be before "$bb"
   3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
   4 |             something
   5 |           }
   6 |         }
   7 |       
-`;
 
-exports[` 24`] = `
+❌ Error 3/4
+
   1 |
   2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
 > 3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
@@ -287,9 +428,9 @@ exports[` 24`] = `
   5 |           }
   6 |         }
   7 |       
-`;
 
-exports[` 25`] = `
+❌ Error 4/4
+
   1 |
   2 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
 > 3 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
@@ -298,4 +439,164 @@ exports[` 25`] = `
   5 |           }
   6 |         }
   7 |       
+
+🔧 Autofix output
+
+    1 |
+    2 |         mutation ($aa: Int, $bb: Int, $cc: Int) {
+    3 |           test(aaa: $aa, bbb: $bb, ccc: $cc) {
+    4 |             something
+    5 |           }
+    6 |         }
+    7 |       
+`;
+
+exports[` 13`] = `
+❌ Error 1/3
+
+   1 |
+   2 |         type Test { # { character
+   3 |           # before d 1
+   4 |           
+   5 |           # before d 2
+   6 |           d: Int # same d
+   7 |           # before c
+>  8 |           c: Float!
+     |           ^ "c" should be before "d"
+   9 |           # before b 1
+  10 |           # before b 2
+  11 |           b: [String] # same b
+  12 |           # before a
+  13 |           a: [Int!]! # same a
+  14 |           # end
+  15 |         } # } character
+  16 |       
+
+❌ Error 2/3
+
+   1 |
+   2 |         type Test { # { character
+   3 |           # before d 1
+   4 |           
+   5 |           # before d 2
+   6 |           d: Int # same d
+   7 |           # before c
+   8 |           c: Float!
+   9 |           # before b 1
+  10 |           # before b 2
+> 11 |           b: [String] # same b
+     |           ^ "b" should be before "c"
+  12 |           # before a
+  13 |           a: [Int!]! # same a
+  14 |           # end
+  15 |         } # } character
+  16 |       
+
+❌ Error 3/3
+
+   1 |
+   2 |         type Test { # { character
+   3 |           # before d 1
+   4 |           
+   5 |           # before d 2
+   6 |           d: Int # same d
+   7 |           # before c
+   8 |           c: Float!
+   9 |           # before b 1
+  10 |           # before b 2
+  11 |           b: [String] # same b
+  12 |           # before a
+> 13 |           a: [Int!]! # same a
+     |           ^ "a" should be before "b"
+  14 |           # end
+  15 |         } # } character
+  16 |       
+
+🔧 Autofix output
+
+     1 |
+     2 |         type Test { # { character
+     3 |           # before a
+     4 |           a: [Int!]! # same a
+     5 |           # before b 1
+     6 |           # before b 2
+     7 |           b: [String] # same b
+     8 |           # before c
+     9 |           c: Float!
+    10 |           # before d 1
+    11 |           
+    12 |           # before d 2
+    13 |           d: Int # same d
+    14 |           # end
+    15 |         } # } character
+    16 |       
+`;
+
+exports[` 14`] = `
+❌ Error 1/3
+
+   1 |
+   2 |         enum Test {
+   3 |           "qux"
+   4 |           qux
+>  5 |           foo
+     |           ^^^ "foo" should be before "qux"
+   6 |           "Bar"
+   7 |           Bar
+   8 |           """
+   9 |           bar
+  10 |           """
+  11 |           bar
+  12 |         }
+  13 |       
+
+❌ Error 2/3
+
+   1 |
+   2 |         enum Test {
+   3 |           "qux"
+   4 |           qux
+   5 |           foo
+   6 |           "Bar"
+>  7 |           Bar
+     |           ^^^ "Bar" should be before "foo"
+   8 |           """
+   9 |           bar
+  10 |           """
+  11 |           bar
+  12 |         }
+  13 |       
+
+❌ Error 3/3
+
+   1 |
+   2 |         enum Test {
+   3 |           "qux"
+   4 |           qux
+   5 |           foo
+   6 |           "Bar"
+   7 |           Bar
+   8 |           """
+   9 |           bar
+  10 |           """
+> 11 |           bar
+     |           ^^^ "bar" should be before "Bar"
+  12 |         }
+  13 |       
+
+🔧 Autofix output
+
+     1 |
+     2 |         enum Test {
+     3 |           """
+     4 |           bar
+     5 |           """
+     6 |           bar
+     7 |           "Bar"
+     8 |           Bar
+     9 |           foo
+    10 |           "qux"
+    11 |           qux
+    12 |         }
+    13 |       
 `;

@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
-import { getLocation, requireReachableTypesFromContext } from '../utils';
+import { requireReachableTypesFromContext } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 const UNREACHABLE_TYPE = 'UNREACHABLE_TYPE';
@@ -79,7 +79,7 @@ const rule: GraphQLESLintRule = {
 
         if (!reachableTypes.has(typeName)) {
           context.report({
-            loc: getLocation(node.name.loc, typeName, { offsetStart: node.kind === Kind.DIRECTIVE_DEFINITION ? 2 : 1 }),
+            node: node.name,
             messageId: UNREACHABLE_TYPE,
             data: { typeName },
             suggest: [

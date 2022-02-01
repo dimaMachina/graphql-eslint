@@ -2,7 +2,7 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   ignorePatterns: ['examples'],
   parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'standard', 'prettier'],
+  extends: ['eslint:recommended', 'standard', 'plugin:@typescript-eslint/recommended', 'prettier'],
   plugins: ['unicorn'],
   rules: {
     'no-empty': 'off',

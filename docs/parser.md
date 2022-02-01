@@ -36,7 +36,7 @@ Here's a list of changes that the parser performs, in order to make the GraphQL 
 
 **Problem**: GraphQL uses `location` field to store the AST locations, while ESTree also uses it in a different structure.
 
-**Solution**: The parser creates a new `location` field that is compatible with ESTree, and renames the GraphQL `location` to `gqlLocation`.
+**Solution**: The parser creates a new `location` field that is compatible with ESTree.
 
 ### Loading GraphQL Schema
 

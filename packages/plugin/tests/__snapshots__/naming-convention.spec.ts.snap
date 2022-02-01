@@ -1,31 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+❌ Error 1/2
+
 > 1 | type b { test: String }
     |      ^ Type "b" should be in PascalCase format
-`;
 
-exports[` 2`] = `
+❌ Error 2/2
+
 > 1 | type b { test: String }
     |          ^^^^ Field "test" should be in PascalCase format
 `;
 
-exports[` 3`] = `
+exports[` 2`] = `
+❌ Error 1/2
+
 > 1 | type __b { test__: String }
     |      ^^^ Leading underscores are not allowed
-`;
 
-exports[` 4`] = `
+❌ Error 2/2
+
 > 1 | type __b { test__: String }
     |            ^^^^^^ Trailing underscores are not allowed
 `;
 
-exports[` 5`] = `
+exports[` 3`] = `
+❌ Error 1/1
+
 > 1 | scalar BSONDecimal
     |        ^^^^^^^^^^^ Scalar "BSONDecimal" should be in snake_case format
 `;
 
-exports[` 6`] = `
+exports[` 4`] = `
+❌ Error 1/27
+
 >  1 | input _idOperatorsFilterFindManyUserInput {
      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format
    2 |   gt: MongoID
@@ -1137,9 +1145,9 @@ exports[` 6`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 7`] = `
+❌ Error 2/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -2251,9 +2259,9 @@ exports[` 7`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 8`] = `
+❌ Error 3/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -3365,9 +3373,9 @@ exports[` 8`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 9`] = `
+❌ Error 4/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -4479,9 +4487,9 @@ exports[` 9`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 10`] = `
+❌ Error 5/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -5593,9 +5601,9 @@ exports[` 10`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 11`] = `
+❌ Error 6/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -6707,9 +6715,9 @@ exports[` 11`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 12`] = `
+❌ Error 7/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -7821,9 +7829,9 @@ exports[` 12`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 13`] = `
+❌ Error 8/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -8935,9 +8943,9 @@ exports[` 13`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 14`] = `
+❌ Error 9/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -10049,9 +10057,9 @@ exports[` 14`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 15`] = `
+❌ Error 10/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -11163,9 +11171,9 @@ exports[` 15`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 16`] = `
+❌ Error 11/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -12277,9 +12285,9 @@ exports[` 16`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 17`] = `
+❌ Error 12/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -13391,9 +13399,9 @@ exports[` 17`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 18`] = `
+❌ Error 13/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -14505,9 +14513,9 @@ exports[` 18`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 19`] = `
+❌ Error 14/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -15619,9 +15627,9 @@ exports[` 19`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 20`] = `
+❌ Error 15/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -16733,9 +16741,9 @@ exports[` 20`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 21`] = `
+❌ Error 16/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -17847,9 +17855,9 @@ exports[` 21`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 22`] = `
+❌ Error 17/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -18961,9 +18969,9 @@ exports[` 22`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 23`] = `
+❌ Error 18/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -20075,9 +20083,9 @@ exports[` 23`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 24`] = `
+❌ Error 19/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -21189,9 +21197,9 @@ exports[` 24`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 25`] = `
+❌ Error 20/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -22303,9 +22311,9 @@ exports[` 25`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 26`] = `
+❌ Error 21/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -23417,9 +23425,9 @@ exports[` 26`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 27`] = `
+❌ Error 22/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -24531,9 +24539,9 @@ exports[` 27`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 28`] = `
+❌ Error 23/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -25645,9 +25653,9 @@ exports[` 28`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 29`] = `
+❌ Error 24/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -26759,9 +26767,9 @@ exports[` 29`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 30`] = `
+❌ Error 25/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -27873,9 +27881,9 @@ exports[` 30`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 31`] = `
+❌ Error 26/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -28987,9 +28995,9 @@ exports[` 31`] = `
   1108 |   pageInfo: PaginationInfo!
   1109 | }
   1110 |
-`;
 
-exports[` 32`] = `
+❌ Error 27/27
+
    1 | input _idOperatorsFilterFindManyUserInput {
    2 |   gt: MongoID
    3 |   gte: MongoID
@@ -30103,102 +30111,116 @@ exports[` 32`] = `
   1110 |
 `;
 
-exports[` 33`] = `
+exports[` 5`] = `
+❌ Error 1/2
+
 > 1 | enum B { test }
     |      ^ Enumerator "B" should be in camelCase format
-`;
 
-exports[` 34`] = `
+❌ Error 2/2
+
 > 1 | enum B { test }
     |          ^^^^ Enumeration value "test" should be in UPPER_CASE format
 `;
 
-exports[` 35`] = `
+exports[` 6`] = `
+❌ Error 1/3
+
 > 1 | input test { _Value: String }
     |       ^^^^ Input type "test" should be in PascalCase format
-`;
 
-exports[` 36`] = `
+❌ Error 2/3
+
 > 1 | input test { _Value: String }
     |              ^^^^^^ Input property "_Value" should be in snake_case format
-`;
 
-exports[` 37`] = `
+❌ Error 3/3
+
 > 1 | input test { _Value: String }
     |              ^^^^^^ Leading underscores are not allowed
 `;
 
-exports[` 38`] = `
+exports[` 7`] = `
+❌ Error 1/4
+
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
     |      ^^^^^^^ Type "TypeOne" should be in camelCase format
-`;
 
-exports[` 39`] = `
+❌ Error 2/4
+
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
     |                ^^^^^^ Field "aField" should have "AAA" suffix
-`;
 
-exports[` 40`] = `
+❌ Error 3/4
+
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
     |                                          ^^^^^^^^^ Enumeration value "VALUE_ONE" should have "ENUM" suffix
-`;
 
-exports[` 41`] = `
+❌ Error 4/4
+
 > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
     |                                                    ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" suffix
 `;
 
-exports[` 42`] = `
+exports[` 8`] = `
+❌ Error 1/3
+
 > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
     |            ^^^^^^ Field "aField" should have "Field" prefix
-`;
 
-exports[` 43`] = `
+❌ Error 2/3
+
 > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
     |                                      ^^^^^^^^^^^^^^^^ Enumeration value "A_ENUM_VALUE_ONE" should have "ENUM" prefix
-`;
 
-exports[` 44`] = `
+❌ Error 3/3
+
 > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
     |                                                       ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" prefix
 `;
 
-exports[` 45`] = `
+exports[` 9`] = `
+❌ Error 1/5
+
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
     |      ^^^ Type "One" should not have "On" prefix
-`;
 
-exports[` 46`] = `
+❌ Error 2/5
+
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
     |            ^^^^^^ Field "getFoo" should not have "Foo" suffix
-`;
 
-exports[` 47`] = `
+❌ Error 3/5
+
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
     |                                                            ^^^^ Field "getA" should not have "get" prefix
-`;
 
-exports[` 48`] = `
+❌ Error 4/5
+
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
     |                                                                                   ^^^^^^ Field "queryB" should not have "query" prefix
-`;
 
-exports[` 49`] = `
+❌ Error 5/5
+
 > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
     |                                                                                                                        ^^^^ Field "getC" should not have "get" prefix
 `;
 
-exports[` 50`] = `
+exports[` 10`] = `
+❌ Error 1/2
+
 > 1 | query Foo { foo } query getBar { bar }
     |       ^^^ Operation "Foo" should be in camelCase format
-`;
 
-exports[` 51`] = `
+❌ Error 2/2
+
 > 1 | query Foo { foo } query getBar { bar }
     |                         ^^^^^^ Operation "getBar" should not have "get" prefix
 `;
 
-exports[` 52`] = `
+exports[` 11`] = `
+❌ Error 1/7
+
    1 |
    2 |         type Query {
 >  3 |           fieldQuery: ID
@@ -30217,9 +30239,9 @@ exports[` 52`] = `
   15 |           subscriptionField: ID
   16 |         }
   17 |       
-`;
 
-exports[` 53`] = `
+❌ Error 2/7
+
    1 |
    2 |         type Query {
    3 |           fieldQuery: ID
@@ -30238,9 +30260,9 @@ exports[` 53`] = `
   15 |           subscriptionField: ID
   16 |         }
   17 |       
-`;
 
-exports[` 54`] = `
+❌ Error 3/7
+
    1 |
    2 |         type Query {
    3 |           fieldQuery: ID
@@ -30259,9 +30281,9 @@ exports[` 54`] = `
   15 |           subscriptionField: ID
   16 |         }
   17 |       
-`;
 
-exports[` 55`] = `
+❌ Error 4/7
+
    1 |
    2 |         type Query {
    3 |           fieldQuery: ID
@@ -30280,9 +30302,9 @@ exports[` 55`] = `
   15 |           subscriptionField: ID
   16 |         }
   17 |       
-`;
 
-exports[` 56`] = `
+❌ Error 5/7
+
    1 |
    2 |         type Query {
    3 |           fieldQuery: ID
@@ -30301,9 +30323,9 @@ exports[` 56`] = `
   15 |           subscriptionField: ID
   16 |         }
   17 |       
-`;
 
-exports[` 57`] = `
+❌ Error 6/7
+
    1 |
    2 |         type Query {
    3 |           fieldQuery: ID
@@ -30322,9 +30344,9 @@ exports[` 57`] = `
   15 |           subscriptionField: ID
   16 |         }
   17 |       
-`;
 
-exports[` 58`] = `
+❌ Error 7/7
+
    1 |
    2 |         type Query {
    3 |           fieldQuery: ID
@@ -30345,7 +30367,9 @@ exports[` 58`] = `
   17 |       
 `;
 
-exports[` 59`] = `
+exports[` 12`] = `
+❌ Error 1/9
+
    1 |
 >  2 |         query TestQuery { test }
      |               ^^^^^^^^^ Operation "TestQuery" should not have "Query" suffix
@@ -30362,9 +30386,9 @@ exports[` 59`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 60`] = `
+❌ Error 2/9
+
    1 |
    2 |         query TestQuery { test }
 >  3 |         query QueryTest { test }
@@ -30381,9 +30405,9 @@ exports[` 60`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 61`] = `
+❌ Error 3/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30400,9 +30424,9 @@ exports[` 61`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 62`] = `
+❌ Error 4/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30419,9 +30443,9 @@ exports[` 62`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 63`] = `
+❌ Error 5/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30438,9 +30462,9 @@ exports[` 63`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 64`] = `
+❌ Error 6/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30457,9 +30481,9 @@ exports[` 64`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 65`] = `
+❌ Error 7/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30476,9 +30500,9 @@ exports[` 65`] = `
   13 |         fragment TestFragment on Test { id }
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 66`] = `
+❌ Error 8/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30495,9 +30519,9 @@ exports[` 66`] = `
      |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
   14 |         fragment FragmentTest on Test { id }
   15 |       
-`;
 
-exports[` 67`] = `
+❌ Error 9/9
+
    1 |
    2 |         query TestQuery { test }
    3 |         query QueryTest { test }
@@ -30516,7 +30540,9 @@ exports[` 67`] = `
   15 |       
 `;
 
-exports[` 68`] = `
+exports[` 13`] = `
+❌ Error 1/2
+
    1 |
    2 |         {
    3 |           test {
@@ -30528,9 +30554,9 @@ exports[` 68`] = `
    8 |           }
    9 |         }
   10 |       
-`;
 
-exports[` 69`] = `
+❌ Error 2/2
+
    1 |
    2 |         {
    3 |           test {

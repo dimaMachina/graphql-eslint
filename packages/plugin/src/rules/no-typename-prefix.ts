@@ -6,7 +6,6 @@ import {
 } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRule } from '../types';
-import { getLocation } from '../utils';
 
 const NO_TYPENAME_PREFIX = 'NO_TYPENAME_PREFIX';
 
@@ -62,7 +61,7 @@ const rule: GraphQLESLintRule = {
                 typeName,
               },
               messageId: NO_TYPENAME_PREFIX,
-              loc: getLocation(field.loc, lowerTypeName),
+              node: field.name,
             });
           }
         }

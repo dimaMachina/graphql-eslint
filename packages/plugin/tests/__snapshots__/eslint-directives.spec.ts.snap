@@ -1,16 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+❌ Error 1/2
+
   1 |
 > 2 |         # eslint-disable-next-line non-existing-rule
-    |          ^ Definition for rule 'non-existing-rule' was not found.
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Definition for rule 'non-existing-rule' was not found.
   3 |         query {
   4 |           a
   5 |         }
   6 |       
-`;
 
-exports[` 2`] = `
+❌ Error 2/2
+
   1 |
   2 |         # eslint-disable-next-line non-existing-rule
 > 3 |         query {
@@ -20,11 +22,9 @@ exports[` 2`] = `
   6 |       
 `;
 
-exports[` 3`] = `
-  1 |
-> 2 |         query {
-    |         ^^^^^ Anonymous GraphQL operations are forbidden. Please make sure to name your query!
-  3 |           a
-  4 |         }
-  5 |       
+exports[` 2`] = `
+❌ Error 1/1
+
+> 1 | query { a }
+    | ^^^^^ Anonymous GraphQL operations are forbidden. Please make sure to name your query!
 `;

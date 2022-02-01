@@ -1,5 +1,5 @@
 import { GraphQLESLintRule } from '../types';
-import { getLocation, requireUsedFieldsFromContext } from '../utils';
+import { requireUsedFieldsFromContext } from '../utils';
 
 const UNUSED_FIELD = 'UNUSED_FIELD';
 const RULE_ID = 'no-unused-fields';
@@ -77,7 +77,7 @@ const rule: GraphQLESLintRule = {
         }
 
         context.report({
-          loc: getLocation(node.loc, fieldName),
+          node: node.name,
           messageId: UNUSED_FIELD,
           data: { fieldName },
           suggest: [

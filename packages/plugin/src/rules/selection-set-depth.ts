@@ -2,7 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, FragmentDefinitionNode, GraphQLError, Kind, OperationDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { getLocation, logger, requireSiblingsOperations } from '../utils';
+import { logger, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../sibling-operations';
 
 type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
@@ -114,9 +114,13 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
 
           checkFn({
             getDocument: () => document,
-            reportError: (error: GraphQLError) => {
+            reportError(error: GraphQLError) {
+              const { line, column } = error.locations[0];
               context.report({
-                loc: getLocation({ start: error.locations[0] }),
+                loc: {
+                  line,
+                  column: column - 1,
+                },
                 message: error.message,
               });
             },

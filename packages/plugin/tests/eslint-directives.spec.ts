@@ -41,21 +41,20 @@ ruleTester.runGraphQLTests('test-directives', rule, {
   ],
   invalid: [
     {
-      errors: 2,
       code: /* GraphQL */ `
         # eslint-disable-next-line non-existing-rule
         query {
           a
         }
       `,
+      errors: [
+        { message: "Definition for rule 'non-existing-rule' was not found." },
+        { message: 'Anonymous GraphQL operations are forbidden. Please make sure to name your query!' },
+      ],
     },
     {
-      code: /* GraphQL */ `
-        query {
-          a
-        }
-      `,
-      errors: 1,
+      code: 'query { a }',
+      errors: [{ message: 'Anonymous GraphQL operations are forbidden. Please make sure to name your query!' }],
     },
   ],
 });

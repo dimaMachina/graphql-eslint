@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/alphabetize';
+import rule, { AlphabetizeConfig } from '../src/rules/alphabetize';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('alphabetize', rule, {
+ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
   valid: [
     {
       options: [{ fields: ['ObjectTypeDefinition'] }],
@@ -207,6 +207,53 @@ ruleTester.runGraphQLTests('alphabetize', rule, {
         { message: '"$aa" should be before "$bb"' },
         { message: '"bbb" should be before "ccc"' },
         { message: '"aaa" should be before "bbb"' },
+      ],
+    },
+    {
+      name: 'should move comment',
+      options: [{ fields: ['ObjectTypeDefinition'] }],
+      code: /* GraphQL */ `
+        type Test { # { character
+          # before d 1
+          
+          # before d 2
+          d: Int # same d
+          # before c
+          c: Float!
+          # before b 1
+          # before b 2
+          b: [String] # same b
+          # before a
+          a: [Int!]! # same a
+          # end
+        } # } character
+      `,
+      errors: [
+        { message: '"c" should be before "d"' },
+        { message: '"b" should be before "c"' },
+        { message: '"a" should be before "b"' },
+      ],
+    },
+    {
+      name: 'should compare with lexicographic order',
+      options: [{ values: ['EnumTypeDefinition'] }],
+      code: /* GraphQL */ `
+        enum Test {
+          "qux"
+          qux
+          foo
+          "Bar"
+          Bar
+          """
+          bar
+          """
+          bar
+        }
+      `,
+      errors: [
+        { message: '"foo" should be before "qux"' },
+        { message: '"Bar" should be before "foo"' },
+        { message: '"bar" should be before "Bar"' },
       ],
     },
   ],

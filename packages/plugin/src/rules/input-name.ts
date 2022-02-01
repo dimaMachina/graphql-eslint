@@ -8,7 +8,6 @@ import {
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
-import { getLocation } from '../utils';
 
 type InputNameRuleConfig = {
   checkInputType?: boolean;
@@ -108,7 +107,7 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
         if (shouldCheckType((node as any).parent.parent)) {
           const name = node.name.value;
           context.report({
-            loc: getLocation(node.loc, name),
+            node: node.name,
             message: `Input "${name}" should be called "input"`,
           });
         }
@@ -134,7 +133,7 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
             name.toLowerCase() !== mutationName.toLowerCase()
           ) {
             context.report({
-              loc: getLocation(node.loc, name),
+              node: node.name,
               message: `InputType "${name}" name should be "${mutationName}"`,
             });
           }

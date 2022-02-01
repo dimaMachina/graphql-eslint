@@ -1,13 +1,13 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { Lexer, GraphQLSchema, Source, Kind } from 'graphql';
-import { AST } from 'eslint';
+import { GraphQLSchema, Kind } from 'graphql';
+import type { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
-import { UsedFields, ReachableTypes } from './graphql-ast';
+import { ReachableTypes, UsedFields } from './graphql-ast';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -66,49 +66,6 @@ export function requireUsedFieldsFromContext(ruleName: string, context: GraphQLE
   const schema = requireGraphQLSchemaFromContext(ruleName, context);
   const siblings = requireSiblingsOperations(ruleName, context);
   return context.parserServices.usedFields(schema, siblings);
-}
-
-function getLexer(source: Source): Lexer {
-  // GraphQL v14
-  const gqlLanguage = require('graphql/language');
-  if (gqlLanguage && gqlLanguage.createLexer) {
-    return gqlLanguage.createLexer(source, {});
-  }
-
-  // GraphQL v15
-  const { Lexer: LexerCls } = require('graphql');
-  if (LexerCls && typeof LexerCls === 'function') {
-    return new LexerCls(source);
-  }
-
-  throw new Error(`Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!`);
-}
-
-export function extractTokens(source: Source): AST.Token[] {
-  const lexer = getLexer(source);
-  const tokens: AST.Token[] = [];
-  let token = lexer.advance();
-
-  while (token && token.kind !== '<EOF>') {
-    tokens.push({
-      type: token.kind as any,
-      loc: {
-        start: {
-          line: token.line,
-          column: token.column,
-        },
-        end: {
-          line: token.line,
-          column: token.column,
-        },
-      },
-      value: token.value,
-      range: [token.start, token.end],
-    });
-    token = lexer.advance();
-  }
-
-  return tokens;
 }
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
@@ -191,27 +148,17 @@ export const convertCase = (style: CaseStyle, str: string): string => {
   }
 };
 
-export function getLocation(
-  loc: Partial<AST.SourceLocation>,
-  fieldName = '',
-  offset?: { offsetStart?: number; offsetEnd?: number }
-): AST.SourceLocation {
-  const { start } = loc;
-
-  /*
-   * ESLint has 0-based column number
-   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
-   */
-  const { offsetStart = 1, offsetEnd = 1 } = offset ?? {};
+export function getLocation(loc: Partial<AST.SourceLocation>, fieldName = ''): AST.SourceLocation {
+  const { line, column } = loc.start;
 
   return {
     start: {
-      line: start.line,
-      column: start.column - offsetStart,
+      line,
+      column,
     },
     end: {
-      line: start.line,
-      column: start.column - offsetEnd + fieldName.length,
+      line,
+      column: column + fieldName.length,
     },
   };
 }

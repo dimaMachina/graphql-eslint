@@ -11,7 +11,6 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
 } & Record<string, any>;
 
 export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'options' | 'parserOptions'> & {
-  name?: string;
   options?: Options;
   parserOptions?: ParserOptions;
 };
@@ -20,6 +19,21 @@ export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
   errors: number | Array<RuleTester.TestCaseError | string>;
   output?: string | null;
 };
+
+function indentCode(code: string, indent = 4): string {
+  return code.replace(/^/gm, ' '.repeat(indent));
+}
+
+function printCode(code: string): string {
+  return codeFrameColumns(
+    code,
+    { start: { line: 0, column: 0 } },
+    {
+      linesAbove: Number.POSITIVE_INFINITY,
+      linesBelow: Number.POSITIVE_INFINITY,
+    }
+  );
+}
 
 export class GraphQLRuleTester extends RuleTester {
   config: {
@@ -80,23 +94,34 @@ export class GraphQLRuleTester extends RuleTester {
     const linter = new Linter();
     linter.defineRule(name, rule as Rule.RuleModule);
 
+    const hasOnlyTest = tests.invalid.some(t => t.only);
+
     for (const testCase of tests.invalid) {
+      const { only, code, filename } = testCase;
+      if (hasOnlyTest && !only) {
+        continue;
+      }
+
       const verifyConfig = getVerifyConfig(name, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
 
-      const { code, filename } = testCase;
-
       const messages = linter.verify(code, verifyConfig, { filename });
-
-      for (const message of messages) {
+      const messageForSnapshot: string[] = [];
+      for (const [index, message] of messages.entries()) {
         if (message.fatal) {
           throw new Error(message.message);
         }
 
-        const messageForSnapshot = visualizeEslintMessage(code, message);
-        // eslint-disable-next-line no-undef
-        expect(messageForSnapshot).toMatchSnapshot();
+        messageForSnapshot.push(`❌ Error ${index + 1}/${messages.length}`, visualizeEslintMessage(code, message));
+
       }
+      if (rule.meta.fixable) {
+        const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
+        if (fixed) {
+          messageForSnapshot.push('🔧 Autofix output', indentCode(printCode(output), 2));
+        }
+      }
+      expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
     }
   }
 }

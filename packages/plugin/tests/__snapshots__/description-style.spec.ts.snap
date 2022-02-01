@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
+❌ Error 1/3
+
    1 |
    2 |   enum EnumUserLanguagesSkill {
 >  3 |     """
@@ -18,9 +20,9 @@ exports[` 1`] = `
   14 |     native
   15 |   }
   16 |
-`;
 
-exports[` 2`] = `
+❌ Error 2/3
+
    1 |
    2 |   enum EnumUserLanguagesSkill {
    3 |     """
@@ -38,9 +40,9 @@ exports[` 2`] = `
   14 |     native
   15 |   }
   16 |
-`;
 
-exports[` 3`] = `
+❌ Error 3/3
+
    1 |
    2 |   enum EnumUserLanguagesSkill {
    3 |     """
@@ -60,7 +62,9 @@ exports[` 3`] = `
   16 |
 `;
 
-exports[` 4`] = `
+exports[` 2`] = `
+❌ Error 1/3
+
    1 |
 >  2 |   " Test "
      |   ^ Unexpected inline description
@@ -72,9 +76,9 @@ exports[` 4`] = `
    8 |     record: User
    9 |   }
   10 |
-`;
 
-exports[` 5`] = `
+❌ Error 2/3
+
    1 |
    2 |   " Test "
    3 |   type CreateOneUserPayload {
@@ -86,9 +90,9 @@ exports[` 5`] = `
    8 |     record: User
    9 |   }
   10 |
-`;
 
-exports[` 6`] = `
+❌ Error 3/3
+
    1 |
    2 |   " Test "
    3 |   type CreateOneUserPayload {

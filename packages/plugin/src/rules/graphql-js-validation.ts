@@ -13,7 +13,7 @@ import {
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
+import { requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
 
 function validateDocument(
   context: GraphQLESLintRuleContext,
@@ -30,26 +30,18 @@ function validateDocument(
       : validateSDL(documentNode, null, [rule as any]);
 
     for (const error of validationErrors) {
-      /*
-       * TODO: Fix ESTree-AST converter because currently it's incorrectly convert loc.end
-       * Example: loc.end always equal loc.start
-       *  {
-       *    token: {
-       *      type: 'Name',
-       *      loc: { start: { line: 4, column: 13 }, end: { line: 4, column: 13 } },
-       *      value: 'veryBad',
-       *      range: [ 40, 47 ]
-       *    }
-       *  }
-       */
       const { line, column } = error.locations[0];
       const ancestors = context.getAncestors();
       const token = (ancestors[0] as AST.Program).tokens.find(
-        token => token.loc.start.line === line && token.loc.start.column === column
+        token => token.loc.start.line === line && token.loc.start.column === column - 1
       );
-
       context.report({
-        loc: getLocation({ start: error.locations[0] }, token?.value),
+        loc: token
+          ? token.loc
+          : {
+              line,
+              column: column - 1,
+            },
         message: error.message,
       });
     }

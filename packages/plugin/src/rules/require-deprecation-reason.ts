@@ -1,6 +1,5 @@
 import { GraphQLESLintRule } from '../types';
 import { valueFromNode } from '../estree-parser/utils';
-import { getLocation } from '../utils';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -48,7 +47,7 @@ const rule: GraphQLESLintRule = {
 
         if (!value) {
           context.report({
-            loc: getLocation(node.loc, node.name.value, { offsetEnd: 0 }),
+            node: node.name,
             message: 'Directive "@deprecated" must have a reason!',
           });
         }

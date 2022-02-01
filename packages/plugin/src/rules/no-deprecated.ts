@@ -1,4 +1,4 @@
-import { getLocation, requireGraphQLSchemaFromContext } from '../utils';
+import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 
 const NO_DEPRECATED = 'NO_DEPRECATED';
@@ -88,9 +88,8 @@ const rule: GraphQLESLintRule<[], true> = {
 
         if (typeInfo && typeInfo.enumValue) {
           if (typeInfo.enumValue.deprecationReason) {
-            const enumValueName = node.value;
             context.report({
-              loc: getLocation(node.loc, enumValueName),
+              node,
               messageId: NO_DEPRECATED,
               data: {
                 type: 'enum value',
@@ -106,9 +105,8 @@ const rule: GraphQLESLintRule<[], true> = {
 
         if (typeInfo && typeInfo.fieldDef) {
           if (typeInfo.fieldDef.deprecationReason) {
-            const fieldName = node.name.value;
             context.report({
-              loc: getLocation(node.loc, fieldName),
+              node: node.name,
               messageId: NO_DEPRECATED,
               data: {
                 type: 'field',

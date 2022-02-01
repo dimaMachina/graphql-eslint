@@ -1,4 +1,4 @@
-import { ASTNode, Location, TypeInfo, TypeNode, ValueNode } from 'graphql';
+import { ASTNode, TypeInfo, TypeNode, ValueNode } from 'graphql';
 import { BaseNode } from 'estree';
 
 export type SafeGraphQLType<T extends ASTNode | ValueNode> = Omit<
@@ -10,7 +10,6 @@ export type SingleESTreeNode<T, WithTypeInfo extends boolean> = T extends ASTNod
   ? SafeGraphQLType<T> &
       Pick<BaseNode, 'leadingComments' | 'loc' | 'range'> & {
         type: T['kind'];
-        gqlLocation: Location;
       } & (WithTypeInfo extends true
         ? {
             typeInfo?: () => {
