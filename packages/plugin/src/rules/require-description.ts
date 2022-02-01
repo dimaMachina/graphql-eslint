@@ -1,4 +1,4 @@
-import { ASTKindToNode, Kind, TokenKind } from 'graphql';
+import { ASTKindToNode, Kind, NameNode, TokenKind } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
 import { getLocation, TYPES_KINDS } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
@@ -7,21 +7,52 @@ const RULE_ID = 'require-description';
 
 const ALLOWED_KINDS = [
   ...TYPES_KINDS,
+  Kind.DIRECTIVE_DEFINITION,
   Kind.FIELD_DEFINITION,
   Kind.INPUT_VALUE_DEFINITION,
   Kind.ENUM_VALUE_DEFINITION,
-  Kind.DIRECTIVE_DEFINITION,
   Kind.OPERATION_DEFINITION,
 ] as const;
 
 type AllowedKind = typeof ALLOWED_KINDS[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
+type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>> & { parent: { name: NameNode } };
 
 export type RequireDescriptionRuleConfig = {
   types?: boolean;
 } & {
   [key in AllowedKind]?: boolean;
 };
+
+function getNodeName(node: SelectorNode) {
+  const DisplayNodeNameMap = {
+    [Kind.OBJECT_TYPE_DEFINITION]: 'type',
+    [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
+    [Kind.ENUM_TYPE_DEFINITION]: 'enum',
+    [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
+    [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
+    [Kind.UNION_TYPE_DEFINITION]: 'union',
+    [Kind.DIRECTIVE_DEFINITION]: 'directive',
+  } as const;
+
+  switch (node.kind) {
+    case Kind.OBJECT_TYPE_DEFINITION:
+    case Kind.INTERFACE_TYPE_DEFINITION:
+    case Kind.ENUM_TYPE_DEFINITION:
+    case Kind.SCALAR_TYPE_DEFINITION:
+    case Kind.INPUT_OBJECT_TYPE_DEFINITION:
+    case Kind.UNION_TYPE_DEFINITION:
+      return `${DisplayNodeNameMap[node.kind]} ${node.name.value}`;
+    case Kind.DIRECTIVE_DEFINITION:
+      return `${DisplayNodeNameMap[node.kind]} @${node.name.value}`;
+    case Kind.FIELD_DEFINITION:
+    case Kind.INPUT_VALUE_DEFINITION:
+    case Kind.ENUM_VALUE_DEFINITION:
+      return `${node.parent.name.value}.${node.name.value}`;
+    case Kind.OPERATION_DEFINITION:
+      return node.name ? `${node.operation} ${node.name.value}` : node.operation;
+  }
+}
 
 const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
   meta: {
@@ -75,7 +106,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     },
     type: 'suggestion',
     messages: {
-      [RULE_ID]: 'Description is required for nodes of type "{{ nodeType }}"',
+      [RULE_ID]: 'Description is required for `{{ nodeName }}`.',
     },
     schema: {
       type: 'array',
@@ -118,7 +149,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     const selector = [...kinds].join(',');
 
     return {
-      [selector](node: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) {
+      [selector](node: SelectorNode) {
         let description = '';
         const isOperation = node.kind === Kind.OPERATION_DEFINITION;
         if (isOperation) {
@@ -140,7 +171,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             loc: isOperation ? getLocation(node.loc, node.operation) : getLocation(node.name.loc, node.name.value),
             messageId: RULE_ID,
             data: {
-              nodeType: node.kind,
+              nodeName: getNodeName(node),
             },
           });
         }

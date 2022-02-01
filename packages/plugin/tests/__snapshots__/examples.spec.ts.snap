@@ -35,15 +35,15 @@ Array [
     filePath: examples/basic/schema.graphql,
     messages: Array [
       Object {
-        message: Description is required for nodes of type "FieldDefinition",
+        message: Description is required for \`Query.user\`.,
         ruleId: @graphql-eslint/require-description,
       },
       Object {
-        message: Description is required for nodes of type "FieldDefinition",
+        message: Description is required for \`User.id\`.,
         ruleId: @graphql-eslint/require-description,
       },
       Object {
-        message: Description is required for nodes of type "FieldDefinition",
+        message: Description is required for \`User.name\`.,
         ruleId: @graphql-eslint/require-description,
       },
     ],
