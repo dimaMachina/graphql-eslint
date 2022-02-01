@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | query test { bar }
     |       ^^^^ Operation named "test" already defined in:
@@ -9,7 +9,7 @@ Error 1/1
 `;
 
 exports[` 2`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | query test { bar }
     |       ^^^^ Operation named "test" already defined in:

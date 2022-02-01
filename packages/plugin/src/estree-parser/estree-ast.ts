@@ -10,7 +10,6 @@ export type SingleESTreeNode<T, WithTypeInfo extends boolean> = T extends ASTNod
   ? SafeGraphQLType<T> &
       Pick<BaseNode, 'leadingComments' | 'loc' | 'range'> & {
         type: T['kind'];
-        gqlLocation: Location;
       } & (WithTypeInfo extends true
         ? {
             typeInfo?: () => {

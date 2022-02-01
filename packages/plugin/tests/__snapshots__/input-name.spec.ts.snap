@@ -1,129 +1,129 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-Error 1/2
+❌ Error 1/2
 
 > 1 | type Mutation { SetMessage(message: String): String }
     |                            ^^^^^^^ Input "message" should be called "input"
 
-Error 2/2
+❌ Error 2/2
 
 > 1 | type Mutation { SetMessage(message: String): String }
     |                                     ^^^^^^ InputType "String" name should be "SetMessageInput"
 `;
 
 exports[` 2`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | type Mutation { SetMessage(input: String): String }
     |                                   ^^^^^^ InputType "String" name should be "SetMessageInput"
 `;
 
 exports[` 3`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | type Mutation { SetMessage(hello: SetMessageInput): String }
     |                            ^^^^^ Input "hello" should be called "input"
 `;
 
 exports[` 4`] = `
-Error 1/2
+❌ Error 1/2
 
 > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
     |                            ^^^^^^ Input "record" should be called "input"
 
-Error 2/2
+❌ Error 2/2
 
 > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
     |                                    ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 5`] = `
-Error 1/2
+❌ Error 1/2
 
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
     |                            ^^^^^^ Input "record" should be called "input"
 
-Error 2/2
+❌ Error 2/2
 
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
     |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 6`] = `
-Error 1/2
+❌ Error 1/2
 
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
     |                            ^^^^^^ Input "record" should be called "input"
 
-Error 2/2
+❌ Error 2/2
 
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
     |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 7`] = `
-Error 1/2
+❌ Error 1/2
 
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
     |                            ^^^^^^ Input "record" should be called "input"
 
-Error 2/2
+❌ Error 2/2
 
 > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
     |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
 `;
 
 exports[` 8`] = `
-Error 1/4
+❌ Error 1/4
 
 > 1 | type Mutation { userCreate(record: String, test: String): String }
     |                            ^^^^^^ Input "record" should be called "input"
 
-Error 2/4
+❌ Error 2/4
 
 > 1 | type Mutation { userCreate(record: String, test: String): String }
     |                                    ^^^^^^ InputType "String" name should be "userCreateInput"
 
-Error 3/4
+❌ Error 3/4
 
 > 1 | type Mutation { userCreate(record: String, test: String): String }
     |                                            ^^^^ Input "test" should be called "input"
 
-Error 4/4
+❌ Error 4/4
 
 > 1 | type Mutation { userCreate(record: String, test: String): String }
     |                                                  ^^^^^^ InputType "String" name should be "userCreateInput"
 `;
 
 exports[` 9`] = `
-Error 1/2
+❌ Error 1/2
 
 > 1 | type Mutation { userCreate(record: String, test: String): String }
     |                            ^^^^^^ Input "record" should be called "input"
 
-Error 2/2
+❌ Error 2/2
 
 > 1 | type Mutation { userCreate(record: String, test: String): String }
     |                                            ^^^^ Input "test" should be called "input"
 `;
 
 exports[` 10`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | type Mutation { userCreate(input: String): String }
     |                                   ^^^^^^ InputType "String" name should be "userCreateInput"
 `;
 
 exports[` 11`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | type Mutation { userCreate(input: UserCreateInput): String }
     |                                   ^^^^^^^^^^^^^^^ InputType "UserCreateInput" name should be "userCreateInput"
 `;
 
 exports[` 12`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | type Query { getUser(input: GetUserInput): String }
     |                             ^^^^^^^^^^^^ InputType "GetUserInput" name should be "getUserInput"

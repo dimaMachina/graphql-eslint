@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
 import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
-import dedent from 'dedent';
 import { GraphQLESTreeNode } from './estree-parser';
 import { GraphQLESLintRule, ParserOptions } from './types';
 
@@ -20,6 +19,21 @@ export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
   errors: number | Array<RuleTester.TestCaseError | string>;
   output?: string | null;
 };
+
+function indentCode(code: string, indent = 4): string {
+  return code.replace(/^/gm, ' '.repeat(indent));
+}
+
+function printCode(code: string): string {
+  return codeFrameColumns(
+    code,
+    { start: { line: 0, column: 0 } },
+    {
+      linesAbove: Number.POSITIVE_INFINITY,
+      linesBelow: Number.POSITIVE_INFINITY,
+    }
+  );
+}
 
 export class GraphQLRuleTester extends RuleTester {
   config: {
@@ -98,13 +112,13 @@ export class GraphQLRuleTester extends RuleTester {
           throw new Error(message.message);
         }
 
-        messageForSnapshot.push(`Error ${index + 1}/${messages.length}`, visualizeEslintMessage(code, message));
+        messageForSnapshot.push(`❌ Error ${index + 1}/${messages.length}`, visualizeEslintMessage(code, message));
 
       }
       if (rule.meta.fixable) {
         const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
         if (fixed) {
-          messageForSnapshot.push('Autofix output', dedent(output));
+          messageForSnapshot.push('🔧 Autofix output', indentCode(printCode(output), 2));
         }
       }
       expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();

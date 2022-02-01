@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | { hasId { name } }
     |         ^ Field "id" must be selected when it's available on a type. Please make sure to include it in your selection set!
@@ -9,7 +9,7 @@ If you are using fragments, make sure that all used fragments specifies the fiel
 `;
 
 exports[` 2`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | { hasId { id } }
     |         ^ Field "name" must be selected when it's available on a type. Please make sure to include it in your selection set!
@@ -17,7 +17,7 @@ If you are using fragments, make sure that all used fragments specifies the fiel
 `;
 
 exports[` 3`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | { hasId { name } }
     |         ^ Field "id" or "_id" must be selected when it's available on a type. Please make sure to include it in your selection set!

@@ -1,42 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | { me }
     | ^ File extension ".graphql" don't match extension ".gql"
 `;
 
 exports[` 2`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | query UserById { user { id } }
     | ^ Unexpected filename "user-by-id.gql". Rename it to "UserById.gql"
 `;
 
 exports[` 3`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | query UserById { user { id } }
     | ^ Unexpected filename "userById.gql". Rename it to "UserById.query.gql"
 `;
 
 exports[` 4`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | fragment UserFields on User { id }
     | ^ Unexpected filename "user-fields.gql". Rename it to "UserFields.gql"
 `;
 
 exports[` 5`] = `
-Error 1/1
+❌ Error 1/1
 
 > 1 | query getUsers { users } mutation createPost { createPost }
     | ^ Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"
 `;
 
 exports[` 6`] = `
-Error 1/1
+❌ Error 1/1
 
 >  1 |
      | ^ Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"

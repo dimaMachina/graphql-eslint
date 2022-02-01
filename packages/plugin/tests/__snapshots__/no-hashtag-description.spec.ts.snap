@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[` 1`] = `
-Error 1/1
+❌ Error 1/1
 
   1 |
 > 2 |         # Bad
@@ -13,7 +13,7 @@ Error 1/1
 `;
 
 exports[` 2`] = `
-Error 1/1
+❌ Error 1/1
 
   1 |
   2 |         # multiline
@@ -26,7 +26,7 @@ Error 1/1
 `;
 
 exports[` 3`] = `
-Error 1/1
+❌ Error 1/1
 
   1 |
   2 |         type Query {
@@ -38,7 +38,7 @@ Error 1/1
 `;
 
 exports[` 4`] = `
-Error 1/1
+❌ Error 1/1
 
   1 |
   2 |         type Query {
@@ -52,7 +52,7 @@ Error 1/1
 `;
 
 exports[` 5`] = `
-Error 1/1
+❌ Error 1/1
 
   1 |
   2 |         type Query {
