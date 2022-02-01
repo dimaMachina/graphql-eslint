@@ -1,15 +1,17 @@
 import { basename, extname } from 'path';
 import { existsSync } from 'fs';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
-import { CaseStyle, convertCase } from '../utils';
+import { CaseStyle as _CaseStyle, convertCase } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
+
+type CaseStyle = _CaseStyle | 'matchDocumentStyle';
 
 const MATCH_EXTENSION = 'MATCH_EXTENSION';
 const MATCH_STYLE = 'MATCH_STYLE';
 
 const ACCEPTED_EXTENSIONS: ['.gql', '.graphql'] = ['.gql', '.graphql'];
-const CASE_STYLES: CaseStyle[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case'];
+const CASE_STYLES: CaseStyle[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case', 'matchDocumentStyle'];
 
 type PropertySchema = {
   style?: CaseStyle;
@@ -210,8 +212,13 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
           option = { style: option } as PropertySchema;
         }
         const expectedExtension = options.fileExtension || fileExtension;
-        const expectedFilename =
-          (option.style ? convertCase(option.style, docName) : filename) + (option.suffix || '') + expectedExtension;
+        let expectedFilename: string;
+        if (option.style) {
+          expectedFilename = option.style === 'matchDocumentStyle' ? docName : convertCase(option.style, docName);
+        } else {
+          expectedFilename = filename;
+        }
+        expectedFilename += (option.suffix || '') + expectedExtension;
         const filenameWithExtension = filename + expectedExtension;
 
         if (expectedFilename !== filenameWithExtension) {
