@@ -1,5 +1,19 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.8.0
+
+### Minor Changes
+
+- 0da135f: feat: add new option `OperationDefinition` in `require-description` rule
+- 1729313: feat: add autofix for `alphabetize` rule and change sort order to lexicographic
+- d9bdbd3: feat: add new style `matchDocumentStyle` for `match-document-filename` rule
+
+### Patch Changes
+
+- 7a5ebe0: fix error in `no-unreachable-types` rule on graphql@16.3.0
+- af22d9d: chore: clarify report message for `require-description` rule
+- 1729313: fix ESTree parser, convert `loc.column` to 0-based column number
+
 ## 3.7.0
 
 ### Minor Changes
