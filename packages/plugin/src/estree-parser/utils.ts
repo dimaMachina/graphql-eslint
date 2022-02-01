@@ -61,7 +61,32 @@ export function getBaseType(type: GraphQLOutputType): GraphQLNamedType {
   return type;
 }
 
-export function convertToken<T extends 'Line' | 'Block' | TokenKind>(
+// Hardcoded type because tests fails on graphql 15
+type TokenKindValue =
+  | '<SOF>'
+  // | '<EOF>'
+  | '!'
+  | '$'
+  | '&'
+  | '('
+  | ')'
+  | '...'
+  | ':'
+  | '='
+  | '@'
+  | '['
+  | ']'
+  | '{'
+  | '|'
+  | '}'
+  | 'Name'
+  | 'Int'
+  | 'Float'
+  | 'String'
+  | 'BlockString'
+  | 'Comment';
+
+export function convertToken<T extends 'Line' | 'Block' | TokenKindValue>(
   token: Token,
   type: T
 ): Omit<AST.Token, 'type'> & { type: T } {

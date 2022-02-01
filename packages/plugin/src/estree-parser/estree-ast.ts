@@ -1,4 +1,4 @@
-import { ASTNode, Location, TypeInfo, TypeNode, ValueNode } from 'graphql';
+import { ASTNode, TypeInfo, TypeNode, ValueNode } from 'graphql';
 import { BaseNode } from 'estree';
 
 export type SafeGraphQLType<T extends ASTNode | ValueNode> = Omit<
