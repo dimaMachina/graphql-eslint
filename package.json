@@ -29,7 +29,7 @@
     "@changesets/cli": "2.20.0",
     "@types/dedent": "0.7.0",
     "@types/jest": "27.4.0",
-    "@types/node": "16.11.21",
+    "@types/node": "16.11.22",
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
     "bob-the-bundler": "1.6.1",
