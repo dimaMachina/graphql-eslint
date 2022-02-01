@@ -1,9 +1,8 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
 import { ASTNode, GraphQLError, TypeInfo, Source } from 'graphql';
 import { Linter } from 'eslint';
-import { convertToESTree } from './estree-parser';
+import { convertToESTree, extractTokens } from './estree-parser';
 import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types';
-import { extractTokens } from './utils';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
 import { loadGraphQLConfig } from './graphql-config';

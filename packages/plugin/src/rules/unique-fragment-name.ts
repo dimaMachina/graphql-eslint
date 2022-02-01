@@ -2,7 +2,7 @@ import { relative } from 'path';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { normalizePath, requireSiblingsOperations, getOnDiskFilepath, getLocation } from '../utils';
+import { normalizePath, requireSiblingsOperations, getOnDiskFilepath } from '../utils';
 import { FragmentSource, OperationSource } from '../sibling-operations';
 
 const RULE_NAME = 'unique-fragment-name';
@@ -35,7 +35,7 @@ export const checkNode = (
           .map(f => `\t${relative(process.cwd(), getOnDiskFilepath(f.filePath))}`)
           .join('\n'),
       },
-      loc: getLocation(node.name.loc, documentName),
+      node: node.name,
     });
   }
 };

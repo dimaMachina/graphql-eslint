@@ -1,5 +1,5 @@
 import { Kind, isObjectType, NameNode } from 'graphql';
-import { requireGraphQLSchemaFromContext, getTypeName, getLocation } from '../utils';
+import { requireGraphQLSchemaFromContext, getTypeName } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
@@ -69,7 +69,7 @@ const rule: GraphQLESLintRule = {
           const hasQueryType = fields.some(field => getTypeName(field) === queryType.name);
           if (!hasQueryType) {
             context.report({
-              loc: getLocation(node.loc, typeName),
+              node,
               message: `Mutation result type "${graphQLType.name}" must contain field of type "${queryType.name}"`,
             });
           }

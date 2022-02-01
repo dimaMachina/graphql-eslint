@@ -8,15 +8,11 @@ Object {
         Object {
           description: Object {
             block: true,
-            gqlLocation: Object {
-              end: 52,
-              start: 7,
-            },
             kind: StringValue,
             leadingComments: Array [],
             loc: Object {
               end: Object {
-                column: 7,
+                column: 51,
                 line: 2,
               },
               source: 
@@ -26,7 +22,7 @@ Object {
       type Query
     ,
               start: Object {
-                column: 7,
+                column: 6,
                 line: 2,
               },
             },
@@ -41,10 +37,6 @@ Object {
           },
           directives: Array [],
           fields: Array [],
-          gqlLocation: Object {
-            end: 69,
-            start: 7,
-          },
           interfaces: Array [],
           kind: ObjectTypeDefinition,
           leadingComments: Array [
@@ -55,7 +47,7 @@ Object {
           ],
           loc: Object {
             end: Object {
-              column: 12,
+              column: 11,
               line: 5,
             },
             source: 
@@ -65,20 +57,16 @@ Object {
       type Query
     ,
             start: Object {
-              column: 7,
+              column: 6,
               line: 2,
             },
           },
           name: Object {
-            gqlLocation: Object {
-              end: 69,
-              start: 64,
-            },
             kind: Name,
             leadingComments: Array [],
             loc: Object {
               end: Object {
-                column: 12,
+                column: 16,
                 line: 5,
               },
               source: 
@@ -88,7 +76,7 @@ Object {
       type Query
     ,
               start: Object {
-                column: 12,
+                column: 11,
                 line: 5,
               },
             },
@@ -110,15 +98,11 @@ Object {
           typeInfo: [Function],
         },
       ],
-      gqlLocation: Object {
-        end: 74,
-        start: 0,
-      },
       kind: Document,
       leadingComments: Array [],
       loc: Object {
         end: Object {
-          column: 5,
+          column: 4,
           line: 6,
         },
         source: 
@@ -129,7 +113,7 @@ Object {
     ,
         start: Object {
           column: 0,
-          line: 0,
+          line: 1,
         },
       },
       range: Array [
@@ -144,7 +128,7 @@ Object {
   comments: Array [],
   loc: Object {
     end: Object {
-      column: 5,
+      column: 4,
       line: 6,
     },
     source: 
@@ -155,7 +139,7 @@ Object {
     ,
     start: Object {
       column: 0,
-      line: 0,
+      line: 1,
     },
   },
   range: Array [
@@ -167,11 +151,11 @@ Object {
     Object {
       loc: Object {
         end: Object {
-          column: 7,
+          column: 51,
           line: 2,
         },
         start: Object {
-          column: 7,
+          column: 6,
           line: 2,
         },
       },
@@ -185,11 +169,11 @@ Object {
     Object {
       loc: Object {
         end: Object {
-          column: 7,
+          column: 10,
           line: 5,
         },
         start: Object {
-          column: 7,
+          column: 6,
           line: 5,
         },
       },
@@ -203,11 +187,11 @@ Object {
     Object {
       loc: Object {
         end: Object {
-          column: 12,
+          column: 16,
           line: 5,
         },
         start: Object {
-          column: 12,
+          column: 11,
           line: 5,
         },
       },

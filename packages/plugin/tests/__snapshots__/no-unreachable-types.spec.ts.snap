@@ -171,7 +171,7 @@ Error 3/7
   10 |
   11 |         # DirectiveDefinition
 > 12 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-     |                   ^^^^^ Type "auth" is unreachable
+     |                    ^^^^ Type "auth" is unreachable
   13 |
   14 |         # UnionTypeDefinition
   15 |         union Union = String | Boolean

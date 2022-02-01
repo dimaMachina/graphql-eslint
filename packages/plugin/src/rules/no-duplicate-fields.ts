@@ -1,7 +1,6 @@
-import { VariableDefinitionNode, ArgumentNode, FieldNode, Kind } from 'graphql';
+import { Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { getLocation } from '../utils';
 
 const NO_DUPLICATE_FIELDS = 'NO_DUPLICATE_FIELDS';
 
@@ -62,17 +61,11 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    function checkNode(
-      usedFields: Set<string>,
-      fieldName: string,
-      type: string,
-      node: GraphQLESTreeNode<VariableDefinitionNode | ArgumentNode | FieldNode>
-    ): void {
+    function checkNode(usedFields: Set<string>, type: string, node: GraphQLESTreeNode<NameNode>): void {
+      const fieldName = node.value;
       if (usedFields.has(fieldName)) {
         context.report({
-          loc: getLocation((node.kind === Kind.FIELD && node.alias ? node.alias : node).loc, fieldName, {
-            offsetEnd: node.kind === Kind.VARIABLE_DEFINITION ? 0 : 1,
-          }),
+          node,
           messageId: NO_DUPLICATE_FIELDS,
           data: {
             type,
@@ -88,20 +81,20 @@ const rule: GraphQLESLintRule = {
       OperationDefinition(node) {
         const set = new Set<string>();
         for (const varDef of node.variableDefinitions) {
-          checkNode(set, varDef.variable.name.value, 'Operation variable', varDef);
+          checkNode(set, 'Operation variable', varDef.variable.name);
         }
       },
       Field(node) {
         const set = new Set<string>();
         for (const arg of node.arguments) {
-          checkNode(set, arg.name.value, 'Field argument', arg);
+          checkNode(set, 'Field argument', arg.name);
         }
       },
       SelectionSet(node) {
         const set = new Set<string>();
         for (const selection of node.selections) {
           if (selection.kind === Kind.FIELD) {
-            checkNode(set, selection.alias?.value || selection.name.value, 'Field', selection);
+            checkNode(set, 'Field', selection.alias || selection.name);
           }
         }
       },

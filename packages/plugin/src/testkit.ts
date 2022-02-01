@@ -107,7 +107,6 @@ export class GraphQLRuleTester extends RuleTester {
           messageForSnapshot.push('Autofix output', dedent(output));
         }
       }
-      // eslint-disable-next-line no-undef
       expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
     }
   }

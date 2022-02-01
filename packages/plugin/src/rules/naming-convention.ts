@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
-import { TYPES_KINDS, getLocation, convertCase } from '../utils';
+import { TYPES_KINDS, convertCase } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
@@ -276,7 +276,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         const [trailingUnderscores] = nodeName.match(/_*$/);
         const suggestedName = leadingUnderscores + renameToName + trailingUnderscores;
         context.report({
-          loc: getLocation(node.loc, node.value),
+          node,
           message: `${nodeType} "${nodeName}" should ${errorMessage}`,
           suggest: [
             {
@@ -339,7 +339,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       const name = node.value;
       const renameToName = name.replace(new RegExp(isLeading ? '^_+' : '_+$'), '');
       context.report({
-        loc: getLocation(node.loc, name),
+        node,
         message: `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
         suggest: [
           {
