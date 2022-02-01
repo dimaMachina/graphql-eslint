@@ -27,7 +27,8 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
       for (const { astNode } of [...objects, ...interfaces]) {
         visit(astNode, visitor);
       }
-    } else {
+    } else if (type.astNode) {
+      // astNode can be undefined for ID, String, Boolean
       visit(type.astNode, visitor);
     }
   };
@@ -48,7 +49,8 @@ export function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
     schema.getMutationType(),
     schema.getSubscriptionType(),
   ]) {
-    if (type) {
+    // if schema don't have Query type, schema.astNode will be undefined
+    if (type?.astNode) {
       visit(type.astNode, visitor);
     }
   }
