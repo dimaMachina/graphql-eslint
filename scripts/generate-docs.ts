@@ -1,10 +1,10 @@
-import { writeFileSync, existsSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import { format } from 'prettier';
+import { asArray } from '@graphql-tools/utils';
 import { rules } from '../packages/plugin/src';
-import { DISABLED_RULES_FOR_ALL_CONFIG } from './constants';
 
 const BR = '';
 const NBSP = '&nbsp;';
@@ -50,7 +50,7 @@ function generateDocs(): void {
     if (deprecated) {
       blocks.push(`- ❗ DEPRECATED ❗`);
     }
-    const categories = Array.isArray(docs.category) ? docs.category : [docs.category];
+    const categories = asArray(docs.category);
     if (docs.recommended) {
       const configNames = categories.map(category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`);
       blocks.push(
@@ -122,12 +122,10 @@ function generateDocs(): void {
         `- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/${graphQLJSRuleName}Rule-test.ts)`
       );
     } else {
-      blocks.push(`- [Rule source](../../packages/plugin/src/rules/${ruleName}.ts)`);
-      const testPath = `packages/plugin/tests/${ruleName}.spec.ts`;
-      const isTestExists = existsSync(resolve(process.cwd(), testPath));
-      if (isTestExists) {
-        blocks.push(`- [Test source](../../${testPath})`);
-      }
+      blocks.push(
+        `- [Rule source](../../packages/plugin/src/rules/${ruleName}.ts)`,
+        `- [Test source](../../packages/plugin/tests/${ruleName}.spec.ts)`
+      );
     }
 
     blocks.push(BR);
@@ -143,12 +141,11 @@ function generateDocs(): void {
     .map(([ruleName, rule]) => {
       const link = `[${ruleName}](rules/${ruleName}.md)`;
       const { docs } = rule.meta;
-      const isDisabled = DISABLED_RULES_FOR_ALL_CONFIG.has(ruleName);
 
       return [
         link,
         docs.description.split('\n')[0],
-        isDisabled ? '' : docs.recommended ? '![recommended][]' : '![all][]',
+        docs.isDisabledForAllConfig ? '' : docs.recommended ? '![recommended][]' : '![all][]',
         docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
       ];
     });

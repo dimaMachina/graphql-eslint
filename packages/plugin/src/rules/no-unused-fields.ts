@@ -15,6 +15,7 @@ const rule: GraphQLESLintRule = {
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       requiresSchema: true,
+      isDisabledForAllConfig: true,
       examples: [
         {
           title: 'Incorrect',

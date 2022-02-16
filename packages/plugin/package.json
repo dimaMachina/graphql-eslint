@@ -57,6 +57,7 @@
   },
   "buildOptions": {
     "input": "./src/index.ts",
+    "copy": "./src/configs",
     "external": [
       "eslint",
       "graphql",
