@@ -117,6 +117,54 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-
       code: '{ hasId { _id } }',
       options: [{ fieldName: ['id', '_id'] }],
     },
+    {
+      name: 'should work with nested fragments',
+      code: /* GraphQL */ `
+        query User {
+          user {
+            ...UserFullFields
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: `
+          fragment UserLightFields on User {
+            id
+          }
+          fragment UserFullFields on User {
+            ...UserLightFields
+            name
+          }
+        `,
+      },
+    },
+    {
+      name: 'should work with nested fragments n level also',
+      code: /* GraphQL */ `
+        query User {
+          user {
+            ...UserFullFields
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: `
+          fragment UserLightFields on User {
+            id
+          }
+          fragment UserMediumFields on User {
+            ...UserLightFields
+            name
+          }
+          fragment UserFullFields on User {
+            ...UserMediumFields
+            name
+          }
+        `,
+      },
+    },
   ],
   invalid: [
     // TODO: Improve this
@@ -145,6 +193,33 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-
       name: 'support multiple id field names',
       code: '{ hasId { name } }',
       options: [{ fieldName: ['id', '_id'] }],
+      errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
+    },
+    {
+      name: 'should not work with n nested fragments if you never get the id',
+      code: /* GraphQL */ `
+        query User {
+          user {
+            ...UserFullFields
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: `
+          fragment UserLightFields on User {
+            name
+          }
+          fragment UserMediumFields on User {
+            ...UserLightFields
+            name
+          }
+          fragment UserFullFields on User {
+            ...UserMediumFields
+            name
+          }
+        `,
+      },
       errors: [{ messageId: 'REQUIRE_ID_WHEN_AVAILABLE' }],
     },
   ],

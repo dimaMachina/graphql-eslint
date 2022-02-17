@@ -23,3 +23,17 @@ exports[` 3`] = `
     |         ^ Field "id" or "_id" must be selected when it's available on a type. Please make sure to include it in your selection set!
 If you are using fragments, make sure that all used fragments specifies the field "id" or "_id".
 `;
+
+exports[` 4`] = `
+❌ Error 1/1
+
+  1 |
+  2 |         query User {
+> 3 |           user {
+    |                ^ Field "id" must be selected when it's available on a type. Please make sure to include it in your selection set!
+If you are using fragments, make sure that all used fragments (UserFullFields, UserLightFields) specifies the field "id".
+  4 |             ...UserFullFields
+  5 |           }
+  6 |         }
+  7 |       
+`;
