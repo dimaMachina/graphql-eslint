@@ -121,22 +121,39 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
         }
         const checkedFragmentSpreads = new Set<string>();
 
-        for (const selection of node.selections) {
-          if (isFound(selection)) {
-            return;
-          }
-          if (selection.kind === Kind.INLINE_FRAGMENT && selection.selectionSet.selections.some(isFound)) {
-            return;
-          }
-          if (selection.kind === Kind.FRAGMENT_SPREAD) {
-            const [foundSpread] = siblings.getFragment(selection.name.value);
-            if (foundSpread) {
-              checkedFragmentSpreads.add(foundSpread.document.name.value);
-              if (foundSpread.document.selectionSet.selections.some(isFound)) {
-                return;
+        function checkNestedNodeSelections(nodeSelections) {
+          for (const selection of nodeSelections) {
+            if (isFound(selection)) {
+              return true;
+            }
+            if (selection.kind === Kind.INLINE_FRAGMENT && selection.selectionSet.selections.some(isFound)) {
+              return true;
+            }
+            if (selection.kind === Kind.FRAGMENT_SPREAD) {
+              const [foundSpread] = siblings.getFragment(selection.name.value);
+              if (foundSpread) {
+                checkedFragmentSpreads.add(foundSpread.document.name.value);
+                if (foundSpread.document.selectionSet.selections.some(isFound)) {
+                  return true;
+                }
+                const subFrags = foundSpread.document.selectionSet.selections.filter(
+                  c => c.kind === Kind.FRAGMENT_SPREAD
+                );
+                for (const frag of subFrags) {
+                  const [foundSpreadNested] = siblings.getFragment((frag as any).name.value);
+                  if (foundSpreadNested) {
+                    return checkNestedNodeSelections(foundSpreadNested.document.selectionSet?.selections);
+                  }
+                }
               }
             }
           }
+          return false;
+        }
+
+        const nestedFound = checkNestedNodeSelections(node.selections);
+        if (nestedFound) {
+          return;
         }
 
         const { parent } = node as any;
