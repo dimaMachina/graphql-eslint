@@ -65,8 +65,8 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '"firstName" should be before "password"' },
-        { message: '"age" should be before "firstName"' },
+        { message: '`firstName` should be before `password`.' },
+        { message: '`age` should be before `firstName`.' },
       ],
     },
     {
@@ -79,7 +79,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: '"lastName" should be before "password"' }],
+      errors: [{ message: '`lastName` should be before `password`.' }],
     },
     {
       options: [{ fields: ['InterfaceTypeDefinition'] }],
@@ -90,7 +90,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           aa: Int
         }
       `,
-      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
+      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
     },
     {
       options: [{ fields: ['InputObjectTypeDefinition'] }],
@@ -103,8 +103,8 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '"firstName" should be before "password"' },
-        { message: '"age" should be before "firstName"' },
+        { message: '`firstName` should be before `password`.' },
+        { message: '`age` should be before `firstName`.' },
       ],
     },
     {
@@ -117,7 +117,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: '"lastName" should be before "password"' }],
+      errors: [{ message: '`lastName` should be before `password`.' }],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -129,7 +129,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           GOD
         }
       `,
-      errors: [{ message: '"ADMIN" should be before "SUPER_ADMIN"' }, { message: '"GOD" should be before "USER"' }],
+      errors: [{ message: '`ADMIN` should be before `SUPER_ADMIN`.' }, { message: '`GOD` should be before `USER`.' }],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -141,14 +141,14 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           USER
         }
       `,
-      errors: [{ message: '"GOD" should be before "SUPER_ADMIN"' }],
+      errors: [{ message: '`GOD` should be before `SUPER_ADMIN`.' }],
     },
     {
       options: [{ arguments: ['DirectiveDefinition'] }],
       code: /* GraphQL */ `
         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
       `,
-      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
+      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
     },
     {
       options: [{ arguments: ['FieldDefinition'] }],
@@ -157,7 +157,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           test(cc: Int, bb: Int, aa: Int): Int
         }
       `,
-      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
+      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
     },
     {
       options: [{ selections: ['FragmentDefinition'] }],
@@ -168,7 +168,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           aa
         }
       `,
-      errors: [{ message: '"bb" should be before "cc"' }, { message: '"aa" should be before "bb"' }],
+      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
     },
     {
       options: [{ selections: ['OperationDefinition'] }],
@@ -176,21 +176,21 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         query {
           test {
             cc
-            bb
-            aa
             ... on Test {
               ccc
               bbb
               aaa
             }
+            bb
+            aa
           }
         }
       `,
       errors: [
-        { message: '"bb" should be before "cc"' },
-        { message: '"aa" should be before "bb"' },
-        { message: '"bbb" should be before "ccc"' },
-        { message: '"aaa" should be before "bbb"' },
+        { message: '`bbb` should be before `ccc`.' },
+        { message: '`aaa` should be before `bbb`.' },
+        { message: '`bb` should be before inline fragment.' },
+        { message: '`aa` should be before `bb`.' },
       ],
     },
     {
@@ -203,10 +203,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '"$bb" should be before "$cc"' },
-        { message: '"$aa" should be before "$bb"' },
-        { message: '"bbb" should be before "ccc"' },
-        { message: '"aaa" should be before "bbb"' },
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+        { message: '`bbb` should be before `ccc`.' },
+        { message: '`aaa` should be before `bbb`.' },
       ],
     },
     {
@@ -215,7 +215,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       code: /* GraphQL */ `
         type Test { # { character
           # before d 1
-          
+
           # before d 2
           d: Int # same d
           # before c
@@ -229,9 +229,9 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         } # } character
       `,
       errors: [
-        { message: '"c" should be before "d"' },
-        { message: '"b" should be before "c"' },
-        { message: '"a" should be before "b"' },
+        { message: '`c` should be before `d`.' },
+        { message: '`b` should be before `c`.' },
+        { message: '`a` should be before `b`.' },
       ],
     },
     {
@@ -251,9 +251,84 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '"foo" should be before "qux"' },
-        { message: '"Bar" should be before "foo"' },
-        { message: '"bar" should be before "Bar"' },
+        { message: '`foo` should be before `qux`.' },
+        { message: '`Bar` should be before `foo`.' },
+        { message: '`bar` should be before `Bar`.' },
+      ],
+    },
+    {
+      name: 'should sort definitions',
+      options: [{ definitions: true }],
+      code: /* GraphQL */ `
+        # START
+        
+        # before1 extend union Data
+        # before2 extend union Data
+        extend union Data = Role # same extend union Data
+        # before extend input UserInput
+        extend input UserInput {
+          email: Email!
+        } # same extend input UserInput
+        # before fragment UserFields
+        fragment UserFields on User {
+          id
+        } # same fragment UserFields
+        # before type User
+        type User # same type User
+        # before extend enum Role
+        extend enum Role {
+          SUPERMAN
+        } # same extend enum Role
+        # before anonymous operation
+        query {
+          foo
+        } # same anonymous operation
+        # before mutation CreateUser
+        mutation CreateUser {
+          createUser
+        } # same mutation CreateUser
+        # before extend interface Node
+        extend interface Node {
+          createdAt: String!
+        } # same extend interface Node
+        # before extend interface Node
+        extend interface Node {
+          updatedAt: String!
+        } # same extend interface Node
+        # before type RootQuery
+        type RootQuery # same type RootQuery
+        # before interface Node
+        interface Node # same interface Node
+        # before enum Role
+        enum Role # same enum Role
+        # before scalar Email
+        scalar Email # same scalar Email
+        # before input UserInput
+        input UserInput # same input UserInput
+        # before extend type User
+        extend type User {
+          firstName: String!
+        } # same extend type User
+        # before schema definition
+        schema {
+          query: RootQuery
+        } # same schema definition
+        # before union Data
+        union Data = User | Node # same union Data
+        # before directive @auth
+        directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
+        # END
+      `,
+      errors: [
+        { message: '`UserFields` should be before `UserInput`.' },
+        { message: '`User` should be before `UserFields`.' },
+        { message: '`Role` should be before `User`.' },
+        { message: '`CreateUser` should be before operation definition.' },
+        { message: '`Node` should be before `RootQuery`.' },
+        { message: '`Email` should be before `Role`.' },
+        { message: '`User` should be before `UserInput`.' },
+        { message: '`Data` should be before schema definition.' },
+        { message: '`auth` should be before `Data`.' },
       ],
     },
   ],

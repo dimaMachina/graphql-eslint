@@ -26,7 +26,8 @@ type SingleESTreeNode<T extends ASTNode | ValueNode, WithTypeInfo extends boolea
     rawNode: () => T;
   };
 
-export type GraphQLESTreeNode<T, WithTypeInfo extends boolean = false> = T extends ASTNode | ValueNode
+// eslint-disable-next-line @typescript-eslint/ban-types -- only empty object makes the tooltips expand without recursion
+export type GraphQLESTreeNode<T, WithTypeInfo extends boolean = false> = {} & (T extends ASTNode | ValueNode
   ? {
       [K in keyof SingleESTreeNode<T, WithTypeInfo>]: SingleESTreeNode<T, WithTypeInfo>[K] extends ReadonlyArray<
         infer Nested
@@ -36,4 +37,4 @@ export type GraphQLESTreeNode<T, WithTypeInfo extends boolean = false> = T exten
         ? GraphQLESTreeNode<SingleESTreeNode<T, WithTypeInfo>[K], WithTypeInfo>
         : SingleESTreeNode<T, WithTypeInfo>[K];
     }
-  : T;
+  : T);

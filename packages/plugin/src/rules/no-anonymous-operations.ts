@@ -1,7 +1,9 @@
+import { OperationDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { getLocation } from '../utils';
+import { GraphQLESTreeNode } from '../estree-parser';
 
-const NO_ANONYMOUS_OPERATIONS = 'NO_ANONYMOUS_OPERATIONS';
+const RULE_ID = 'no-anonymous-operations';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -11,7 +13,7 @@ const rule: GraphQLESLintRule = {
       description:
         'Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.',
       recommended: true,
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-anonymous-operations.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Incorrect',
@@ -32,19 +34,19 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [NO_ANONYMOUS_OPERATIONS]: `Anonymous GraphQL operations are forbidden. Please make sure to name your {{ operation }}!`,
+      [RULE_ID]: `Anonymous GraphQL operations are forbidden. Please make sure to name your {{ operation }}!`,
     },
     schema: [],
   },
   create(context) {
     return {
-      'OperationDefinition[name=undefined]'(node) {
+      'OperationDefinition[name=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {
         context.report({
-          loc: getLocation(node.loc, node.operation),
+          loc: getLocation(node.loc.start, node.operation),
+          messageId: RULE_ID,
           data: {
             operation: node.operation,
           },
-          messageId: NO_ANONYMOUS_OPERATIONS,
         });
       },
     };

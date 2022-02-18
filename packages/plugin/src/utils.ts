@@ -8,6 +8,7 @@ import chalk from 'chalk';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 import { ReachableTypes, UsedFields } from './graphql-ast';
+import type * as ESTree from 'estree';
 
 export function requireSiblingsOperations(
   ruleName: string,
@@ -148,9 +149,8 @@ export const convertCase = (style: CaseStyle, str: string): string => {
   }
 };
 
-export function getLocation(loc: Partial<AST.SourceLocation>, fieldName = ''): AST.SourceLocation {
-  const { line, column } = loc.start;
-
+export function getLocation(start: ESTree.Position, fieldName = ''): AST.SourceLocation {
+  const { line, column } = start;
   return {
     start: {
       line,

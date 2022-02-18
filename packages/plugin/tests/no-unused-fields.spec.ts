@@ -38,7 +38,9 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-new GraphQLRuleTester({ schema: SCHEMA }).runGraphQLTests('no-unused-fields', rule, {
+const ruleTester = new GraphQLRuleTester({ schema: SCHEMA });
+
+ruleTester.runGraphQLTests('no-unused-fields', rule, {
   valid: [
     {
       code: SCHEMA,

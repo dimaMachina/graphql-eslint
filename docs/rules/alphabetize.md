@@ -97,7 +97,7 @@ The schema defines the following properties:
 
 ### `fields` (array)
 
-Fields of `type`, `interface`, and `input`
+Fields of `type`, `interface`, and `input`.
 
 The elements of the array can contain the following enum values:
 
@@ -112,7 +112,7 @@ Additional restrictions:
 
 ### `values` (array)
 
-Values of `enum`
+Values of `enum`.
 
 The elements of the array can contain the following enum values:
 
@@ -125,7 +125,7 @@ Additional restrictions:
 
 ### `selections` (array)
 
-Selections of operations (`query`, `mutation` and `subscription`) and `fragment`
+Selections of `fragment` and operations `query`, `mutation` and `subscription`.
 
 The elements of the array can contain the following enum values:
 
@@ -139,7 +139,7 @@ Additional restrictions:
 
 ### `variables` (array)
 
-Variables of operations (`query`, `mutation` and `subscription`)
+Variables of operations `query`, `mutation` and `subscription`.
 
 The elements of the array can contain the following enum values:
 
@@ -152,7 +152,7 @@ Additional restrictions:
 
 ### `arguments` (array)
 
-Arguments of fields and directives
+Arguments of fields and directives.
 
 The elements of the array can contain the following enum values:
 
@@ -165,6 +165,12 @@ Additional restrictions:
 
 * Minimum items: `1`
 * Unique items: `true`
+
+### `definitions` (boolean)
+
+Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.
+
+Default: `false`
 
 ## Resources
 

@@ -1,5 +1,5 @@
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESLintRule, OmitRecursively } from '../types';
 import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionSetNode } from 'graphql';
 import { asArray } from '@graphql-tools/utils';
 import { getBaseType, GraphQLESTreeNode } from '../estree-parser';
@@ -125,16 +125,14 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
         }
         const checkedFragmentSpreads = new Set<string>();
 
-        function checkSelections(selections): boolean {
-          let hasIdField = false;
-          for (const selection of selections) {
-            if (hasIdField) {
-              return true;
+        const hasIdField = ({ selections }: OmitRecursively<SelectionSetNode, 'loc'>): boolean =>
+          selections.some(selection => {
+            if (selection.kind === Kind.FIELD) {
+              return idNames.includes(selection.name.value);
             }
 
-            if (selection.kind === Kind.FIELD) {
-              hasIdField = idNames.includes(selection.name.value);
-              continue;
+            if (selection.kind === Kind.INLINE_FRAGMENT) {
+              return hasIdField(selection.selectionSet);
             }
 
             if (selection.kind === Kind.FRAGMENT_SPREAD) {
@@ -142,20 +140,13 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
               if (foundSpread) {
                 const fragmentSpread = foundSpread.document;
                 checkedFragmentSpreads.add(fragmentSpread.name.value);
-                hasIdField = checkSelections(fragmentSpread.selectionSet.selections);
+                return hasIdField(fragmentSpread.selectionSet);
               }
-              continue;
             }
+            return false;
+          });
 
-            if (selection.kind === Kind.INLINE_FRAGMENT) {
-              hasIdField = checkSelections(selection.selectionSet.selections);
-            }
-          }
-          return hasIdField;
-        }
-
-        const idFound = checkSelections(node.selections);
-        if (idFound) {
+        if (hasIdField(node)) {
           return;
         }
 

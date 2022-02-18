@@ -366,7 +366,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule('possible-type-extension', 'PossibleTypeExtensions', {
     category: 'Schema',
     description: `A type extension is only valid if the type is defined and has the same kind.`,
-    recommended: false, // TODO: enable after https://github.com/dotansimha/graphql-eslint/issues/787 will be fixed
+    // TODO: add in graphql-eslint v4
+    recommended: false,
     requiresSchema: true,
     isDisabledForAllConfig: true,
   }),

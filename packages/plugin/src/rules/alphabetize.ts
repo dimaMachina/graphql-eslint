@@ -7,26 +7,23 @@ import {
   InputObjectTypeDefinitionNode,
   InputObjectTypeExtensionNode,
   FieldDefinitionNode,
-  InputValueDefinitionNode,
   EnumTypeDefinitionNode,
   EnumTypeExtensionNode,
-  EnumValueDefinitionNode,
   DirectiveDefinitionNode,
-  ArgumentNode,
-  VariableDefinitionNode,
   OperationDefinitionNode,
   FieldNode,
   DirectiveNode,
   SelectionSetNode,
-  FragmentSpreadNode,
+  ASTNode,
 } from 'graphql';
 import type { SourceLocation, Comment } from 'estree';
 import type { AST } from 'eslint';
+import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
-const ALPHABETIZE = 'ALPHABETIZE';
+const RULE_ID = 'alphabetize';
 
 const fieldsEnum: ('ObjectTypeDefinition' | 'InterfaceTypeDefinition' | 'InputObjectTypeDefinition')[] = [
   Kind.OBJECT_TYPE_DEFINITION,
@@ -52,6 +49,7 @@ export type AlphabetizeConfig = {
   selections?: typeof selectionsEnum;
   variables?: typeof variablesEnum;
   arguments?: typeof argumentsEnum;
+  definitions?: boolean;
 };
 
 const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
@@ -61,7 +59,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     docs: {
       category: ['Schema', 'Operations'],
       description: `Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.`,
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/alphabetize.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Incorrect',
@@ -144,6 +142,8 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             fields: fieldsEnum,
             values: valuesEnum,
             arguments: argumentsEnum,
+            // TODO: add in graphql-eslint v4
+            // definitions: true,
           },
         ],
         operations: [
@@ -156,7 +156,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       },
     },
     messages: {
-      [ALPHABETIZE]: '"{{ currName }}" should be before "{{ prevName }}"',
+      [RULE_ID]: '`{{ currName }}` should be before {{ prevName }}.',
     },
     schema: {
       type: 'array',
@@ -174,7 +174,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: fieldsEnum,
             },
-            description: 'Fields of `type`, `interface`, and `input`',
+            description: 'Fields of `type`, `interface`, and `input`.',
           },
           values: {
             type: 'array',
@@ -183,7 +183,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: valuesEnum,
             },
-            description: 'Values of `enum`',
+            description: 'Values of `enum`.',
           },
           selections: {
             type: 'array',
@@ -192,7 +192,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: selectionsEnum,
             },
-            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`',
+            description: 'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
           },
           variables: {
             type: 'array',
@@ -201,7 +201,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: variablesEnum,
             },
-            description: 'Variables of operations (`query`, `mutation` and `subscription`)',
+            description: 'Variables of operations `query`, `mutation` and `subscription`.',
           },
           arguments: {
             type: 'array',
@@ -210,7 +210,12 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: argumentsEnum,
             },
-            description: 'Arguments of fields and directives',
+            description: 'Arguments of fields and directives.',
+          },
+          definitions: {
+            type: 'boolean',
+            description: 'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
+            default: false,
           },
         },
       },
@@ -232,7 +237,17 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       if (tokenBefore) {
         return commentsBefore.filter(comment => !isNodeAndCommentOnSameLine(tokenBefore, comment));
       }
-      return commentsBefore;
+      const filteredComments = [];
+      const nodeLine = node.loc.start.line;
+      // Break on comment that not attached to node
+      for (let i = commentsBefore.length - 1; i >= 0; i -= 1) {
+        const comment = commentsBefore[i];
+        if (nodeLine - comment.loc.start.line - filteredComments.length > 1) {
+          break;
+        }
+        filteredComments.unshift(comment);
+      }
+      return filteredComments;
     }
 
     function getRangeWithComments(node): AST.Range {
@@ -243,37 +258,37 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       return [from.range[0], to.range[1]];
     }
 
-    function checkNodes(
-      nodes: GraphQLESTreeNode<
-        | FieldDefinitionNode
-        | InputValueDefinitionNode
-        | EnumValueDefinitionNode
-        | FieldNode
-        | FragmentSpreadNode
-        | ArgumentNode
-        | VariableDefinitionNode['variable']
-      >[]
-    ) {
+    function checkNodes(nodes: GraphQLESTreeNode<ASTNode>[]) {
       // Starts from 1, ignore nodes.length <= 1
       for (let i = 1; i < nodes.length; i += 1) {
-        const prevNode = nodes[i - 1];
         const currNode = nodes[i];
-        const prevName = prevNode.name.value;
-        const currName = currNode.name.value;
-        // Compare with lexicographic order
-        if (prevName.localeCompare(currName) !== 1) {
+        const currName = 'name' in currNode && currNode.name?.value;
+        if (!currName) {
+          // we don't move unnamed current nodes
           continue;
         }
-        const isVariableNode = currNode.kind === Kind.VARIABLE;
+
+        const prevNode = nodes[i - 1];
+        const prevName = 'name' in prevNode && prevNode.name?.value;
+        if (prevName) {
+          // Compare with lexicographic order
+          const compareResult = prevName.localeCompare(currName);
+          const shouldSort = compareResult === 1;
+          if (!shouldSort) {
+            const isSameName = compareResult === 0;
+            if (!isSameName || !prevNode.kind.endsWith('Extension') || currNode.kind.endsWith('Extension')) {
+              continue;
+            }
+          }
+        }
+
         context.report({
           node: currNode.name,
-          messageId: ALPHABETIZE,
-          data: isVariableNode
-            ? {
-                currName: `$${currName}`,
-                prevName: `$${prevName}`,
-              }
-            : { currName, prevName },
+          messageId: RULE_ID,
+          data: {
+            currName,
+            prevName: prevName ? `\`${prevName}\`` : lowerCase(prevNode.kind),
+          },
           *fix(fixer) {
             const prevRange = getRangeWithComments(prevNode);
             const currRange = getRangeWithComments(currNode);
@@ -331,13 +346,10 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     if (selectionsSelector) {
       listeners[`:matches(${selectionsSelector}) SelectionSet`] = (node: GraphQLESTreeNode<SelectionSetNode>) => {
         checkNodes(
-          node.selections
-            // inline fragment don't have name, so we skip them
-            .filter(selection => selection.kind !== Kind.INLINE_FRAGMENT)
-            .map(selection =>
-              // sort by alias is field is renamed
-              'alias' in selection && selection.alias ? ({ name: selection.alias } as any) : selection
-            )
+          node.selections.map(selection =>
+            // sort by alias is field is renamed
+            'alias' in selection && selection.alias ? ({ name: selection.alias } as any) : selection
+          )
         );
       };
     }
@@ -353,6 +365,12 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         node: GraphQLESTreeNode<FieldDefinitionNode | FieldNode | DirectiveDefinitionNode | DirectiveNode>
       ) => {
         checkNodes(node.arguments);
+      };
+    }
+
+    if (opts.definitions) {
+      listeners.Document = node => {
+        checkNodes(node.definitions);
       };
     }
 

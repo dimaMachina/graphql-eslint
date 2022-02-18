@@ -65,7 +65,7 @@ const WITH_SCHEMA = {
 const ruleTester = new GraphQLRuleTester();
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
 
-ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig]>('require-id-when-available', rule, {
+ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id-when-available', rule, {
   valid: [
     {
       name: 'should completely ignore FragmentDefinition',
