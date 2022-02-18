@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { RuleTester, AST, Linter, Rule } from 'eslint';
+import { RuleTester, AST, Linter } from 'eslint';
 import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
 import { GraphQLESTreeNode } from './estree-parser';
@@ -57,12 +57,12 @@ export class GraphQLRuleTester extends RuleTester {
     return readFileSync(resolve(__dirname, `../tests/mocks/${path}`), 'utf-8');
   }
 
-  runGraphQLTests<Config>(
+  runGraphQLTests<Options, WithTypeInfo extends boolean = false>(
     name: string,
-    rule: GraphQLESLintRule,
+    rule: GraphQLESLintRule<Options, WithTypeInfo>,
     tests: {
-      valid: (string | GraphQLValidTestCase<Config>)[];
-      invalid: GraphQLInvalidTestCase<Config>[];
+      valid: (string | GraphQLValidTestCase<Options>)[];
+      invalid: GraphQLInvalidTestCase<Options>[];
     }
   ): void {
     const ruleTests = Linter.version.startsWith('8')
@@ -84,7 +84,7 @@ export class GraphQLRuleTester extends RuleTester {
           }),
         };
 
-    super.run(name, rule as Rule.RuleModule, ruleTests);
+    super.run(name, rule as any, ruleTests);
 
     // Skip snapshot testing if `expect` variable is not defined
     if (typeof expect === 'undefined') {
@@ -92,7 +92,7 @@ export class GraphQLRuleTester extends RuleTester {
     }
 
     const linter = new Linter();
-    linter.defineRule(name, rule as Rule.RuleModule);
+    linter.defineRule(name, rule as any);
 
     const hasOnlyTest = tests.invalid.some(t => t.only);
 
