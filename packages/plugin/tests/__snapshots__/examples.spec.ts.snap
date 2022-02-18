@@ -209,8 +209,8 @@ Array [
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
       Object {
-        message: Field "id" must be selected when it's available on a type. Please make sure to include it in your selection set!
-If you are using fragments, make sure that all used fragments specifies the field "id".,
+        message: Field \`id\` must be selected when it's available on a type.
+Include it in your selection set.,
         ruleId: @graphql-eslint/require-id-when-available,
       },
     ],

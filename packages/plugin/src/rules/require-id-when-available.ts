@@ -1,14 +1,23 @@
-import { getLocation, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
+import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionNode, SelectionSetNode } from 'graphql';
+import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionSetNode } from 'graphql';
 import { asArray } from '@graphql-tools/utils';
 import { getBaseType, GraphQLESTreeNode } from '../estree-parser';
 
 export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
 
 const RULE_ID = 'require-id-when-available';
-const MESSAGE_ID = 'REQUIRE_ID_WHEN_AVAILABLE';
 const DEFAULT_ID_FIELD_NAME = 'id';
+
+declare namespace Intl {
+  class ListFormat {
+    constructor(locales: string, options: any);
+
+    public format: (items: [string]) => string;
+  }
+}
+
+const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);
 
 const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
@@ -59,10 +68,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       recommended: true,
     },
     messages: {
-      [MESSAGE_ID]: [
-        `Field {{ fieldName }} must be selected when it's available on a type. Please make sure to include it in your selection set!`,
-        `If you are using fragments, make sure that all used fragments {{ checkedFragments }}specifies the field {{ fieldName }}.`,
-      ].join('\n'),
+      [RULE_ID]: `Field{{ pluralSuffix }} {{ fieldName }} must be selected when it's available on a type.\nInclude it in your selection set{{ addition }}.`,
     },
     schema: {
       definitions: {
@@ -95,11 +101,9 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
     const idNames = asArray(fieldName);
 
-    const isFound = (s: GraphQLESTreeNode<SelectionNode> | SelectionNode) =>
-      s.kind === Kind.FIELD && idNames.includes(s.name.value);
-
-    // Skip check selections in FragmentDefinition
-    const selector = 'OperationDefinition SelectionSet[parent.kind!=OperationDefinition]';
+    // Check selections only in OperationDefinition,
+    // skip selections of OperationDefinition and InlineFragment
+    const selector = 'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
 
     return {
       [selector](node: GraphQLESTreeNode<SelectionSetNode, true>) {
@@ -121,39 +125,56 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
         }
         const checkedFragmentSpreads = new Set<string>();
 
-        for (const selection of node.selections) {
-          if (isFound(selection)) {
-            return;
-          }
-          if (selection.kind === Kind.INLINE_FRAGMENT && selection.selectionSet.selections.some(isFound)) {
-            return;
-          }
-          if (selection.kind === Kind.FRAGMENT_SPREAD) {
-            const [foundSpread] = siblings.getFragment(selection.name.value);
-            if (foundSpread) {
-              checkedFragmentSpreads.add(foundSpread.document.name.value);
-              if (foundSpread.document.selectionSet.selections.some(isFound)) {
-                return;
+        function checkSelections(selections): boolean {
+          let hasIdField = false;
+          for (const selection of selections) {
+            if (hasIdField) {
+              return true;
+            }
+
+            if (selection.kind === Kind.FIELD) {
+              hasIdField = idNames.includes(selection.name.value);
+              continue;
+            }
+
+            if (selection.kind === Kind.FRAGMENT_SPREAD) {
+              const [foundSpread] = siblings.getFragment(selection.name.value);
+              if (foundSpread) {
+                const fragmentSpread = foundSpread.document;
+                checkedFragmentSpreads.add(fragmentSpread.name.value);
+                hasIdField = checkSelections(fragmentSpread.selectionSet.selections);
               }
+              continue;
+            }
+
+            if (selection.kind === Kind.INLINE_FRAGMENT) {
+              hasIdField = checkSelections(selection.selectionSet.selections);
             }
           }
+          return hasIdField;
         }
 
-        const { parent } = node as any;
-        const hasIdFieldInInterfaceSelectionSet =
-          parent?.kind === Kind.INLINE_FRAGMENT &&
-          parent.parent?.kind === Kind.SELECTION_SET &&
-          parent.parent.selections.some(isFound);
-        if (hasIdFieldInInterfaceSelectionSet) {
+        const idFound = checkSelections(node.selections);
+        if (idFound) {
           return;
         }
 
+        const pluralSuffix = idNames.length > 1 ? 's' : '';
+        const fieldName = englishJoinWords(idNames.map(name => `\`${name}\``));
+        const addition =
+          checkedFragmentSpreads.size === 0
+            ? ''
+            : ` or add to used fragment${checkedFragmentSpreads.size > 1 ? 's' : ''} ${englishJoinWords(
+                [...checkedFragmentSpreads].map(name => `\`${name}\``)
+              )}`;
+
         context.report({
-          loc: getLocation(node.loc),
-          messageId: MESSAGE_ID,
+          loc: node.loc.start,
+          messageId: RULE_ID,
           data: {
-            checkedFragments: checkedFragmentSpreads.size === 0 ? '' : `(${[...checkedFragmentSpreads].join(', ')}) `,
-            fieldName: idNames.map(name => `"${name}"`).join(' or '),
+            pluralSuffix,
+            fieldName,
+            addition,
           },
         });
       },
