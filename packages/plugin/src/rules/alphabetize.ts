@@ -23,7 +23,7 @@ import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
-const MESSAGE_ID = 'alphabetize';
+const RULE_ID = 'alphabetize';
 
 const fieldsEnum: ('ObjectTypeDefinition' | 'InterfaceTypeDefinition' | 'InputObjectTypeDefinition')[] = [
   Kind.OBJECT_TYPE_DEFINITION,
@@ -59,7 +59,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     docs: {
       category: ['Schema', 'Operations'],
       description: `Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${MESSAGE_ID}.md`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Incorrect',
@@ -156,7 +156,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       },
     },
     messages: {
-      [MESSAGE_ID]: '`{{ currName }}` should be before {{ prevName }}.',
+      [RULE_ID]: '`{{ currName }}` should be before {{ prevName }}.',
     },
     schema: {
       type: 'array',
@@ -174,7 +174,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: fieldsEnum,
             },
-            description: 'Fields of `type`, `interface`, and `input`',
+            description: 'Fields of `type`, `interface`, and `input`.',
           },
           values: {
             type: 'array',
@@ -183,7 +183,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: valuesEnum,
             },
-            description: 'Values of `enum`',
+            description: 'Values of `enum`.',
           },
           selections: {
             type: 'array',
@@ -192,7 +192,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: selectionsEnum,
             },
-            description: 'Selections of operations (`query`, `mutation` and `subscription`) and `fragment`',
+            description: 'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
           },
           variables: {
             type: 'array',
@@ -201,7 +201,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: variablesEnum,
             },
-            description: 'Variables of operations (`query`, `mutation` and `subscription`)',
+            description: 'Variables of operations `query`, `mutation` and `subscription`.',
           },
           arguments: {
             type: 'array',
@@ -210,10 +210,11 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: argumentsEnum,
             },
-            description: 'Arguments of fields and directives',
+            description: 'Arguments of fields and directives.',
           },
           definitions: {
             type: 'boolean',
+            description: 'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
             default: false,
           },
         },
@@ -283,7 +284,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
 
         context.report({
           node: currNode.name,
-          messageId: MESSAGE_ID,
+          messageId: RULE_ID,
           data: {
             currName,
             prevName: prevName ? `\`${prevName}\`` : lowerCase(prevNode.kind),
