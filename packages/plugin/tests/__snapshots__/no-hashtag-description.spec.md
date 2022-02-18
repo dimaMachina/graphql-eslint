@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+❌ Error
+
+    > 1 |         # Bad
+        |         ^ Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.
+      2 |         type Query {
+      3 |           foo: String
+      4 |         }
+`;
+
+exports[` 2`] = `
+❌ Error
+
+      1 |         # multiline
+    > 2 |         # multiline
+        |         ^ Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.
+      3 |         type Query {
+      4 |           foo: String
+      5 |         }
+`;
+
+exports[` 3`] = `
+❌ Error
+
+      1 |         type Query {
+    > 2 |           # Bad
+        |           ^ Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.
+      3 |           foo: String
+      4 |         }
+`;
+
+exports[` 4`] = `
+❌ Error
+
+      1 |         type Query {
+      2 |           bar: ID
+    > 3 |           # Bad
+        |           ^ Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.
+      4 |           foo: ID
+      5 |           # Good
+      6 |         }
+`;
+
+exports[` 5`] = `
+❌ Error
+
+      1 |         type Query {
+      2 |           user(
+    > 3 |             # Bad
+        |             ^ Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.
+      4 |             id: Int!
+      5 |           ): User
+      6 |         }
+`;

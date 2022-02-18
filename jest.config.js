@@ -10,4 +10,5 @@ module.exports = {
     '@eslint/eslintrc/universal': '@eslint/eslintrc/dist/eslintrc-universal.cjs',
   },
   snapshotSerializers: ['jest-snapshot-serializer-raw/always'],
+  snapshotResolver: './snapshot-resolver.js',
 };
