@@ -78,7 +78,7 @@ export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = fa
 
 export type ValueOf<T> = T[keyof T];
 
-// eslint-disable-next-line @typescript-eslint/ban-types -- Cosmetic use only makes the tooltips expand the type can be removed
+// eslint-disable-next-line @typescript-eslint/ban-types -- Cosmetic use only, makes the tooltips expand the type can be removed
 type Id<T> = {} & { [P in keyof T]: T[P] };
 // eslint-disable-next-line no-use-before-define
 type OmitDistributive<T, K extends PropertyKey> = T extends object ? Id<OmitRecursively<T, K>> : T;

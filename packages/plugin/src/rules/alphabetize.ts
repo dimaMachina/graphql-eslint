@@ -142,6 +142,8 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             fields: fieldsEnum,
             values: valuesEnum,
             arguments: argumentsEnum,
+            // TODO: add in graphql-eslint v4
+            // definitions: true,
           },
         ],
         operations: [

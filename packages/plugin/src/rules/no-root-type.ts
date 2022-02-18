@@ -1,4 +1,4 @@
-import { Kind, NameNode } from 'graphql';
+import { NameNode } from 'graphql';
 import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
@@ -74,9 +74,9 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     }
 
     const selector = [
-      `:matches(${Kind.OBJECT_TYPE_DEFINITION}, ${Kind.OBJECT_TYPE_EXTENSION})`,
+      `:matches(ObjectTypeDefinition, ObjectTypeExtension)`,
       '>',
-      `${Kind.NAME}[value=/^(${rootTypeNames.join('|')})$/]`,
+      `Name[value=/^(${rootTypeNames.join('|')})$/]`,
     ].join(' ');
 
     return {
