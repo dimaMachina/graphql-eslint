@@ -166,6 +166,10 @@ Additional restrictions:
 * Minimum items: `1`
 * Unique items: `true`
 
+### `definitions` (boolean)
+
+Default: `false`
+
 ## Resources
 
 - [Rule source](../../packages/plugin/src/rules/alphabetize.ts)

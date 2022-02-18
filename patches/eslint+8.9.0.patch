@@ -1,5 +1,18 @@
+diff --git a/node_modules/eslint/lib/linter/linter.js b/node_modules/eslint/lib/linter/linter.js
+index 9b9f491..993e640 100644
+--- a/node_modules/eslint/lib/linter/linter.js
++++ b/node_modules/eslint/lib/linter/linter.js
+@@ -41,7 +41,7 @@ const { getRuleFromConfig } = require("../config/flat-config-helpers");
+ const { FlatConfigArray } = require("../config/flat-config-array");
+ 
+ const debug = require("debug")("eslint:linter");
+-const MAX_AUTOFIX_PASSES = 10;
++const MAX_AUTOFIX_PASSES = 20;
+ const DEFAULT_PARSER_NAME = "espree";
+ const DEFAULT_ECMA_VERSION = 5;
+ const commentParser = new ConfigCommentParser();
 diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
-index 398f210..2d4c0f8 100644
+index 398f210..6c99072 100644
 --- a/node_modules/eslint/lib/rule-tester/rule-tester.js
 +++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
 @@ -960,14 +960,25 @@ class RuleTester {
@@ -32,5 +45,5 @@ index 398f210..2d4c0f8 100644
 +                //     "The rule fixed the code. Please add 'output' property."
 +                // );
              }
-
+ 
              assertASTDidntChange(result.beforeAST, result.afterAST);
