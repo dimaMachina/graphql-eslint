@@ -6,26 +6,26 @@ const version = process.argv[2];
 if (version && !version.startsWith('8')) {
   if (version.startsWith('7')) {
     const eslint7Patch = `
+diff --git a/node_modules/eslint/lib/linter/linter.js b/node_modules/eslint/lib/linter/linter.js
+index 4e80926..cc486c1 100644
+--- a/node_modules/eslint/lib/linter/linter.js
++++ b/node_modules/eslint/lib/linter/linter.js
+@@ -35,7 +35,8 @@ const
+     ruleReplacements = require("../../conf/replacements.json");
+ 
+ const debug = require("debug")("eslint:linter");
+-const MAX_AUTOFIX_PASSES = 10;
++// 🚨 10 is not enough for alphabetize test with definitions sorting
++const MAX_AUTOFIX_PASSES = 20;
+ const DEFAULT_PARSER_NAME = "espree";
+ const DEFAULT_ECMA_VERSION = 5;
+ const commentParser = new ConfigCommentParser();
 diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
-index 2b55249..89e82dc 100644
+index 2b55249..0a5e5a6 100644
 --- a/node_modules/eslint/lib/rule-tester/rule-tester.js
 +++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
-@@ -911,14 +911,25 @@ class RuleTester {
-                         "Expected no autofixes to be suggested"
-                     );
-                 } else {
--                    assert.strictEqual(result.output, item.output, "Output is incorrect.");
-+                    if (item.output.includes('# normalize graphql')) {
-+                        const graphql = require('graphql');
-+
-+                        function normalize(value) {
-+                            return graphql.print(graphql.parse(value.replace('# normalize graphql', '')));
-+                        }
-+
-+                        assert.strictEqual(normalize(result.output), normalize(item.output), 'Output is incorrect.');
-+                    } else {
-+                        assert.strictEqual(result.output, item.output, 'Output is incorrect.');
-+                    }
+@@ -914,11 +914,12 @@ class RuleTester {
+                     assert.strictEqual(result.output, item.output, "Output is incorrect.");
                  }
              } else {
 -                assert.strictEqual(
