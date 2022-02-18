@@ -91,88 +91,88 @@ Code
        7 |   in: [MongoID]
        8 |   nin: [MongoID]
        9 | }
-       10 | input _idOperatorsFilterFindOneUserInput {
-       11 |   gt: MongoID
-       12 |   gte: MongoID
-       13 |   lt: MongoID
-       14 |   lte: MongoID
-       15 |   ne: MongoID
-       16 |   in: [MongoID]
-       17 |   nin: [MongoID]
-       18 | }
-       19 | input _idOperatorsFilterRemoveManyUserInput {
-       20 |   gt: MongoID
-       21 |   gte: MongoID
-       22 |   lt: MongoID
-       23 |   lte: MongoID
-       24 |   ne: MongoID
-       25 |   in: [MongoID]
-       26 |   nin: [MongoID]
-       27 | }
-       28 | input _idOperatorsFilterRemoveOneUserInput {
-       29 |   gt: MongoID
-       30 |   gte: MongoID
-       31 |   lt: MongoID
-       32 |   lte: MongoID
-       33 |   ne: MongoID
-       34 |   in: [MongoID]
-       35 |   nin: [MongoID]
-       36 | }
-       37 | input _idOperatorsFilterUpdateManyUserInput {
-       38 |   gt: MongoID
-       39 |   gte: MongoID
-       40 |   lt: MongoID
-       41 |   lte: MongoID
-       42 |   ne: MongoID
-       43 |   in: [MongoID]
-       44 |   nin: [MongoID]
-       45 | }
-       46 | input _idOperatorsFilterUpdateOneUserInput {
-       47 |   gt: MongoID
-       48 |   gte: MongoID
-       49 |   lt: MongoID
-       50 |   lte: MongoID
-       51 |   ne: MongoID
-       52 |   in: [MongoID]
-       53 |   nin: [MongoID]
-       54 | }
-       55 | input _idOperatorsFilterUserInput {
-       56 |   gt: MongoID
-       57 |   gte: MongoID
-       58 |   lt: MongoID
-       59 |   lte: MongoID
-       60 |   ne: MongoID
-       61 |   in: [MongoID]
-       62 |   nin: [MongoID]
-       63 | }
-       64 | input AgeOperatorsFilterFindManyUserInput {
-       65 |   gt: Float
-       66 |   gte: Float
-       67 |   lt: Float
-       68 |   lte: Float
-       69 |   ne: Float
-       70 |   in: [Float]
-       71 |   nin: [Float]
-       72 | }
-       73 | input AgeOperatorsFilterFindOneUserInput {
-       74 |   gt: Float
-       75 |   gte: Float
-       76 |   lt: Float
-       77 |   lte: Float
-       78 |   ne: Float
-       79 |   in: [Float]
-       80 |   nin: [Float]
-       81 | }
-       82 | input AgeOperatorsFilterRemoveManyUserInput {
-       83 |   gt: Float
-       84 |   gte: Float
-       85 |   lt: Float
-       86 |   lte: Float
-       87 |   ne: Float
-       88 |   in: [Float]
-       89 |   nin: [Float]
-       90 | }
-       91 | input AgeOperatorsFilterRemoveOneUserInput {
+       10 |
+       11 | input _idOperatorsFilterFindOneUserInput {
+       12 |   gt: MongoID
+       13 |   gte: MongoID
+       14 |   lt: MongoID
+       15 |   lte: MongoID
+       16 |   ne: MongoID
+       17 |   in: [MongoID]
+       18 |   nin: [MongoID]
+       19 | }
+       20 |
+       21 | input _idOperatorsFilterRemoveManyUserInput {
+       22 |   gt: MongoID
+       23 |   gte: MongoID
+       24 |   lt: MongoID
+       25 |   lte: MongoID
+       26 |   ne: MongoID
+       27 |   in: [MongoID]
+       28 |   nin: [MongoID]
+       29 | }
+       30 |
+       31 | input _idOperatorsFilterRemoveOneUserInput {
+       32 |   gt: MongoID
+       33 |   gte: MongoID
+       34 |   lt: MongoID
+       35 |   lte: MongoID
+       36 |   ne: MongoID
+       37 |   in: [MongoID]
+       38 |   nin: [MongoID]
+       39 | }
+       40 |
+       41 | input _idOperatorsFilterUpdateManyUserInput {
+       42 |   gt: MongoID
+       43 |   gte: MongoID
+       44 |   lt: MongoID
+       45 |   lte: MongoID
+       46 |   ne: MongoID
+       47 |   in: [MongoID]
+       48 |   nin: [MongoID]
+       49 | }
+       50 |
+       51 | input _idOperatorsFilterUpdateOneUserInput {
+       52 |   gt: MongoID
+       53 |   gte: MongoID
+       54 |   lt: MongoID
+       55 |   lte: MongoID
+       56 |   ne: MongoID
+       57 |   in: [MongoID]
+       58 |   nin: [MongoID]
+       59 | }
+       60 |
+       61 | input _idOperatorsFilterUserInput {
+       62 |   gt: MongoID
+       63 |   gte: MongoID
+       64 |   lt: MongoID
+       65 |   lte: MongoID
+       66 |   ne: MongoID
+       67 |   in: [MongoID]
+       68 |   nin: [MongoID]
+       69 | }
+       70 |
+       71 | input AgeOperatorsFilterFindManyUserInput {
+       72 |   gt: Float
+       73 |   gte: Float
+       74 |   lt: Float
+       75 |   lte: Float
+       76 |   ne: Float
+       77 |   in: [Float]
+       78 |   nin: [Float]
+       79 | }
+       80 |
+       81 | input AgeOperatorsFilterFindOneUserInput {
+       82 |   gt: Float
+       83 |   gte: Float
+       84 |   lt: Float
+       85 |   lte: Float
+       86 |   ne: Float
+       87 |   in: [Float]
+       88 |   nin: [Float]
+       89 | }
+       90 |
+       91 | input AgeOperatorsFilterRemoveManyUserInput {
        92 |   gt: Float
        93 |   gte: Float
        94 |   lt: Float
@@ -181,955 +181,1016 @@ Code
        97 |   in: [Float]
        98 |   nin: [Float]
        99 | }
-       100 | input AgeOperatorsFilterUpdateManyUserInput {
-       101 |   gt: Float
-       102 |   gte: Float
-       103 |   lt: Float
-       104 |   lte: Float
-       105 |   ne: Float
-       106 |   in: [Float]
-       107 |   nin: [Float]
-       108 | }
-       109 | input AgeOperatorsFilterUpdateOneUserInput {
-       110 |   gt: Float
-       111 |   gte: Float
-       112 |   lt: Float
-       113 |   lte: Float
-       114 |   ne: Float
-       115 |   in: [Float]
-       116 |   nin: [Float]
-       117 | }
-       118 | input AgeOperatorsFilterUserInput {
-       119 |   gt: Float
-       120 |   gte: Float
-       121 |   lt: Float
-       122 |   lte: Float
-       123 |   ne: Float
-       124 |   in: [Float]
-       125 |   nin: [Float]
-       126 | }
-       127 | """
-       128 | The \`Decimal\` scalar type uses the IEEE 754 decimal128 decimal-based
-       129 | floating-point numbering format. Supports 34 decimal digits of precision, a max
-       130 | value of approximately 10^6145, and min value of approximately -10^6145
-       131 | """
-       132 | scalar BSONDecimal
-       133 | input CreateManyUserInput {
-       134 |   name: String
-       135 |   age: Float
-       136 |   languages: [UserLanguagesInput]
-       137 |   contacts: UserContactsInput
-       138 |   gender: EnumUserGender
-       139 |   address: UserAddressInput
-       140 |   """
-       141 |   Some dynamic data
-       142 |   """
-       143 |   someMixed: JSON
-       144 |   salaryDecimal: BSONDecimal
-       145 | }
-       146 | type CreateManyUserPayload {
-       147 |   """
-       148 |   Created document ID
-       149 |   """
-       150 |   recordIds: [MongoID]!
-       151 |   """
-       152 |   Created documents
-       153 |   """
-       154 |   records: [User]!
-       155 |   """
-       156 |   Count of all documents created
-       157 |   """
-       158 |   createCount: Int!
-       159 | }
-       160 | input CreateOneUserInput {
-       161 |   name: String
-       162 |   age: Float
-       163 |   languages: [UserLanguagesInput]
-       164 |   contacts: UserContactsInput
-       165 |   gender: EnumUserGender
-       166 |   address: UserAddressInput
-       167 |   """
-       168 |   Some dynamic data
+       100 |
+       101 | input AgeOperatorsFilterRemoveOneUserInput {
+       102 |   gt: Float
+       103 |   gte: Float
+       104 |   lt: Float
+       105 |   lte: Float
+       106 |   ne: Float
+       107 |   in: [Float]
+       108 |   nin: [Float]
+       109 | }
+       110 |
+       111 | input AgeOperatorsFilterUpdateManyUserInput {
+       112 |   gt: Float
+       113 |   gte: Float
+       114 |   lt: Float
+       115 |   lte: Float
+       116 |   ne: Float
+       117 |   in: [Float]
+       118 |   nin: [Float]
+       119 | }
+       120 |
+       121 | input AgeOperatorsFilterUpdateOneUserInput {
+       122 |   gt: Float
+       123 |   gte: Float
+       124 |   lt: Float
+       125 |   lte: Float
+       126 |   ne: Float
+       127 |   in: [Float]
+       128 |   nin: [Float]
+       129 | }
+       130 |
+       131 | input AgeOperatorsFilterUserInput {
+       132 |   gt: Float
+       133 |   gte: Float
+       134 |   lt: Float
+       135 |   lte: Float
+       136 |   ne: Float
+       137 |   in: [Float]
+       138 |   nin: [Float]
+       139 | }
+       140 |
+       141 | """
+       142 | The \`Decimal\` scalar type uses the IEEE 754 decimal128 decimal-based
+       143 | floating-point numbering format. Supports 34 decimal digits of precision, a max
+       144 | value of approximately 10^6145, and min value of approximately -10^6145
+       145 | """
+       146 | scalar BSONDecimal
+       147 |
+       148 | input CreateManyUserInput {
+       149 |   name: String
+       150 |   age: Float
+       151 |   languages: [UserLanguagesInput]
+       152 |   contacts: UserContactsInput
+       153 |   gender: EnumUserGender
+       154 |   address: UserAddressInput
+       155 |
+       156 |   """
+       157 |   Some dynamic data
+       158 |   """
+       159 |   someMixed: JSON
+       160 |   salaryDecimal: BSONDecimal
+       161 | }
+       162 |
+       163 | type CreateManyUserPayload {
+       164 |   """
+       165 |   Created document ID
+       166 |   """
+       167 |   recordIds: [MongoID]!
+       168 |
        169 |   """
-       170 |   someMixed: JSON
-       171 |   salaryDecimal: BSONDecimal
-       172 | }
-       173 | type CreateOneUserPayload {
+       170 |   Created documents
+       171 |   """
+       172 |   records: [User]!
+       173 |
        174 |   """
-       175 |   Created document ID
+       175 |   Count of all documents created
        176 |   """
-       177 |   recordId: MongoID
-       178 |   """
-       179 |   Created document
-       180 |   """
-       181 |   record: User
-       182 | }
-       183 | enum EnumUserGender {
-       184 |   male
-       185 |   female
-       186 |   ladyboy
-       187 | }
-       188 | enum EnumUserLanguagesSkill {
-       189 |   basic
-       190 |   fluent
-       191 |   native
-       192 | }
-       193 | input FilterFindManyUserInput {
-       194 |   name: String
-       195 |   age: Float
-       196 |   languages: [UserLanguagesInput]
-       197 |   contacts: UserContactsInput
-       198 |   gender: EnumUserGender
-       199 |   address: UserAddressInput
-       200 |   """
-       201 |   Some dynamic data
-       202 |   """
-       203 |   someMixed: JSON
-       204 |   salaryDecimal: BSONDecimal
-       205 |   _id: MongoID
-       206 |   _ids: [MongoID]
-       207 |   """
-       208 |   List of *indexed* fields that can be filtered via operators.
-       209 |   """
-       210 |   _operators: OperatorsFilterFindManyUserInput
-       211 |   OR: [FilterFindManyUserInput!]
-       212 |   AND: [FilterFindManyUserInput!]
-       213 |   """
-       214 |   Search by distance in meters
-       215 |   """
-       216 |   geoDistance: GeoDistance
+       177 |   createCount: Int!
+       178 | }
+       179 |
+       180 | input CreateOneUserInput {
+       181 |   name: String
+       182 |   age: Float
+       183 |   languages: [UserLanguagesInput]
+       184 |   contacts: UserContactsInput
+       185 |   gender: EnumUserGender
+       186 |   address: UserAddressInput
+       187 |
+       188 |   """
+       189 |   Some dynamic data
+       190 |   """
+       191 |   someMixed: JSON
+       192 |   salaryDecimal: BSONDecimal
+       193 | }
+       194 |
+       195 | type CreateOneUserPayload {
+       196 |   """
+       197 |   Created document ID
+       198 |   """
+       199 |   recordId: MongoID
+       200 |
+       201 |   """
+       202 |   Created document
+       203 |   """
+       204 |   record: User
+       205 | }
+       206 |
+       207 | enum EnumUserGender {
+       208 |   male
+       209 |   female
+       210 |   ladyboy
+       211 | }
+       212 |
+       213 | enum EnumUserLanguagesSkill {
+       214 |   basic
+       215 |   fluent
+       216 |   native
        217 | }
-       218 | input FilterFindOneUserInput {
-       219 |   name: String
-       220 |   age: Float
-       221 |   languages: [UserLanguagesInput]
-       222 |   contacts: UserContactsInput
-       223 |   gender: EnumUserGender
-       224 |   address: UserAddressInput
-       225 |   """
-       226 |   Some dynamic data
+       218 |
+       219 | input FilterFindManyUserInput {
+       220 |   name: String
+       221 |   age: Float
+       222 |   languages: [UserLanguagesInput]
+       223 |   contacts: UserContactsInput
+       224 |   gender: EnumUserGender
+       225 |   address: UserAddressInput
+       226 |
        227 |   """
-       228 |   someMixed: JSON
-       229 |   salaryDecimal: BSONDecimal
-       230 |   _id: MongoID
-       231 |   _ids: [MongoID]
-       232 |   """
-       233 |   List of *indexed* fields that can be filtered via operators.
-       234 |   """
-       235 |   _operators: OperatorsFilterFindOneUserInput
-       236 |   OR: [FilterFindOneUserInput!]
-       237 |   AND: [FilterFindOneUserInput!]
-       238 | }
-       239 | input FilterRemoveManyUserInput {
-       240 |   name: String
-       241 |   age: Float
-       242 |   languages: [UserLanguagesInput]
-       243 |   contacts: UserContactsInput
-       244 |   gender: EnumUserGender
-       245 |   address: UserAddressInput
-       246 |   """
-       247 |   Some dynamic data
-       248 |   """
-       249 |   someMixed: JSON
-       250 |   salaryDecimal: BSONDecimal
-       251 |   _id: MongoID
-       252 |   _ids: [MongoID]
-       253 |   """
-       254 |   List of *indexed* fields that can be filtered via operators.
-       255 |   """
-       256 |   _operators: OperatorsFilterRemoveManyUserInput
-       257 |   OR: [FilterRemoveManyUserInput!]
-       258 |   AND: [FilterRemoveManyUserInput!]
-       259 | }
-       260 | input FilterRemoveOneUserInput {
-       261 |   name: String
-       262 |   age: Float
-       263 |   languages: [UserLanguagesInput]
-       264 |   contacts: UserContactsInput
-       265 |   gender: EnumUserGender
-       266 |   address: UserAddressInput
-       267 |   """
-       268 |   Some dynamic data
-       269 |   """
-       270 |   someMixed: JSON
-       271 |   salaryDecimal: BSONDecimal
-       272 |   _id: MongoID
-       273 |   _ids: [MongoID]
-       274 |   """
-       275 |   List of *indexed* fields that can be filtered via operators.
-       276 |   """
-       277 |   _operators: OperatorsFilterRemoveOneUserInput
-       278 |   OR: [FilterRemoveOneUserInput!]
-       279 |   AND: [FilterRemoveOneUserInput!]
-       280 | }
-       281 | input FilterUpdateManyUserInput {
-       282 |   name: String
-       283 |   age: Float
-       284 |   languages: [UserLanguagesInput]
-       285 |   contacts: UserContactsInput
-       286 |   gender: EnumUserGender
-       287 |   address: UserAddressInput
+       228 |   Some dynamic data
+       229 |   """
+       230 |   someMixed: JSON
+       231 |   salaryDecimal: BSONDecimal
+       232 |   _id: MongoID
+       233 |   _ids: [MongoID]
+       234 |
+       235 |   """
+       236 |   List of *indexed* fields that can be filtered via operators.
+       237 |   """
+       238 |   _operators: OperatorsFilterFindManyUserInput
+       239 |   OR: [FilterFindManyUserInput!]
+       240 |   AND: [FilterFindManyUserInput!]
+       241 |
+       242 |   """
+       243 |   Search by distance in meters
+       244 |   """
+       245 |   geoDistance: GeoDistance
+       246 | }
+       247 |
+       248 | input FilterFindOneUserInput {
+       249 |   name: String
+       250 |   age: Float
+       251 |   languages: [UserLanguagesInput]
+       252 |   contacts: UserContactsInput
+       253 |   gender: EnumUserGender
+       254 |   address: UserAddressInput
+       255 |
+       256 |   """
+       257 |   Some dynamic data
+       258 |   """
+       259 |   someMixed: JSON
+       260 |   salaryDecimal: BSONDecimal
+       261 |   _id: MongoID
+       262 |   _ids: [MongoID]
+       263 |
+       264 |   """
+       265 |   List of *indexed* fields that can be filtered via operators.
+       266 |   """
+       267 |   _operators: OperatorsFilterFindOneUserInput
+       268 |   OR: [FilterFindOneUserInput!]
+       269 |   AND: [FilterFindOneUserInput!]
+       270 | }
+       271 |
+       272 | input FilterRemoveManyUserInput {
+       273 |   name: String
+       274 |   age: Float
+       275 |   languages: [UserLanguagesInput]
+       276 |   contacts: UserContactsInput
+       277 |   gender: EnumUserGender
+       278 |   address: UserAddressInput
+       279 |
+       280 |   """
+       281 |   Some dynamic data
+       282 |   """
+       283 |   someMixed: JSON
+       284 |   salaryDecimal: BSONDecimal
+       285 |   _id: MongoID
+       286 |   _ids: [MongoID]
+       287 |
        288 |   """
-       289 |   Some dynamic data
+       289 |   List of *indexed* fields that can be filtered via operators.
        290 |   """
-       291 |   someMixed: JSON
-       292 |   salaryDecimal: BSONDecimal
-       293 |   _id: MongoID
-       294 |   _ids: [MongoID]
-       295 |   """
-       296 |   List of *indexed* fields that can be filtered via operators.
-       297 |   """
-       298 |   _operators: OperatorsFilterUpdateManyUserInput
-       299 |   OR: [FilterUpdateManyUserInput!]
-       300 |   AND: [FilterUpdateManyUserInput!]
-       301 | }
-       302 | input FilterUpdateOneUserInput {
-       303 |   name: String
-       304 |   age: Float
-       305 |   languages: [UserLanguagesInput]
-       306 |   contacts: UserContactsInput
-       307 |   gender: EnumUserGender
-       308 |   address: UserAddressInput
-       309 |   """
-       310 |   Some dynamic data
-       311 |   """
-       312 |   someMixed: JSON
-       313 |   salaryDecimal: BSONDecimal
-       314 |   _id: MongoID
-       315 |   _ids: [MongoID]
-       316 |   """
-       317 |   List of *indexed* fields that can be filtered via operators.
-       318 |   """
-       319 |   _operators: OperatorsFilterUpdateOneUserInput
-       320 |   OR: [FilterUpdateOneUserInput!]
-       321 |   AND: [FilterUpdateOneUserInput!]
-       322 | }
-       323 | input FilterUserInput {
-       324 |   name: String
-       325 |   age: Float
-       326 |   languages: [UserLanguagesInput]
-       327 |   contacts: UserContactsInput
-       328 |   gender: EnumUserGender
-       329 |   address: UserAddressInput
+       291 |   _operators: OperatorsFilterRemoveManyUserInput
+       292 |   OR: [FilterRemoveManyUserInput!]
+       293 |   AND: [FilterRemoveManyUserInput!]
+       294 | }
+       295 |
+       296 | input FilterRemoveOneUserInput {
+       297 |   name: String
+       298 |   age: Float
+       299 |   languages: [UserLanguagesInput]
+       300 |   contacts: UserContactsInput
+       301 |   gender: EnumUserGender
+       302 |   address: UserAddressInput
+       303 |
+       304 |   """
+       305 |   Some dynamic data
+       306 |   """
+       307 |   someMixed: JSON
+       308 |   salaryDecimal: BSONDecimal
+       309 |   _id: MongoID
+       310 |   _ids: [MongoID]
+       311 |
+       312 |   """
+       313 |   List of *indexed* fields that can be filtered via operators.
+       314 |   """
+       315 |   _operators: OperatorsFilterRemoveOneUserInput
+       316 |   OR: [FilterRemoveOneUserInput!]
+       317 |   AND: [FilterRemoveOneUserInput!]
+       318 | }
+       319 |
+       320 | input FilterUpdateManyUserInput {
+       321 |   name: String
+       322 |   age: Float
+       323 |   languages: [UserLanguagesInput]
+       324 |   contacts: UserContactsInput
+       325 |   gender: EnumUserGender
+       326 |   address: UserAddressInput
+       327 |
+       328 |   """
+       329 |   Some dynamic data
        330 |   """
-       331 |   Some dynamic data
-       332 |   """
-       333 |   someMixed: JSON
-       334 |   salaryDecimal: BSONDecimal
-       335 |   _id: MongoID
-       336 |   _ids: [MongoID]
-       337 |   """
-       338 |   List of *indexed* fields that can be filtered via operators.
-       339 |   """
-       340 |   _operators: OperatorsFilterUserInput
-       341 |   OR: [FilterUserInput!]
-       342 |   AND: [FilterUserInput!]
-       343 | }
-       344 | input GenderOperatorsFilterFindManyUserInput {
-       345 |   gt: EnumUserGender
-       346 |   gte: EnumUserGender
-       347 |   lt: EnumUserGender
-       348 |   lte: EnumUserGender
-       349 |   ne: EnumUserGender
-       350 |   in: [EnumUserGender]
-       351 |   nin: [EnumUserGender]
-       352 | }
-       353 | input GenderOperatorsFilterFindOneUserInput {
-       354 |   gt: EnumUserGender
-       355 |   gte: EnumUserGender
-       356 |   lt: EnumUserGender
-       357 |   lte: EnumUserGender
-       358 |   ne: EnumUserGender
-       359 |   in: [EnumUserGender]
-       360 |   nin: [EnumUserGender]
-       361 | }
-       362 | input GenderOperatorsFilterRemoveManyUserInput {
-       363 |   gt: EnumUserGender
-       364 |   gte: EnumUserGender
-       365 |   lt: EnumUserGender
-       366 |   lte: EnumUserGender
-       367 |   ne: EnumUserGender
-       368 |   in: [EnumUserGender]
-       369 |   nin: [EnumUserGender]
-       370 | }
-       371 | input GenderOperatorsFilterRemoveOneUserInput {
-       372 |   gt: EnumUserGender
-       373 |   gte: EnumUserGender
-       374 |   lt: EnumUserGender
-       375 |   lte: EnumUserGender
-       376 |   ne: EnumUserGender
-       377 |   in: [EnumUserGender]
-       378 |   nin: [EnumUserGender]
-       379 | }
-       380 | input GenderOperatorsFilterUpdateManyUserInput {
-       381 |   gt: EnumUserGender
-       382 |   gte: EnumUserGender
-       383 |   lt: EnumUserGender
-       384 |   lte: EnumUserGender
-       385 |   ne: EnumUserGender
-       386 |   in: [EnumUserGender]
-       387 |   nin: [EnumUserGender]
-       388 | }
-       389 | input GenderOperatorsFilterUpdateOneUserInput {
-       390 |   gt: EnumUserGender
-       391 |   gte: EnumUserGender
-       392 |   lt: EnumUserGender
-       393 |   lte: EnumUserGender
-       394 |   ne: EnumUserGender
-       395 |   in: [EnumUserGender]
-       396 |   nin: [EnumUserGender]
-       397 | }
-       398 | input GenderOperatorsFilterUserInput {
-       399 |   gt: EnumUserGender
-       400 |   gte: EnumUserGender
-       401 |   lt: EnumUserGender
-       402 |   lte: EnumUserGender
-       403 |   ne: EnumUserGender
-       404 |   in: [EnumUserGender]
-       405 |   nin: [EnumUserGender]
-       406 | }
-       407 | input GeoDistance {
-       408 |   lng: Float!
-       409 |   lat: Float!
-       410 |   distance: Float!
-       411 | }
-       412 | """
-       413 | The \`JSON\` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-       414 | """
-       415 | scalar JSON
-       416 | """
-       417 | The \`ID\` scalar type represents a unique MongoDB identifier in collection.
-       418 | MongoDB by default use 12-byte ObjectId value
-       419 | (https://docs.mongodb.com/manual/reference/bson-types/#objectid). But MongoDB
-       420 | also may accepts string or integer as correct values for _id field.
-       421 | """
-       422 | scalar MongoID
-       423 | type Mutation {
-       424 |   """
-       425 |   Create one document with mongoose defaults, setters, hooks and validation
-       426 |   """
-       427 |   userCreate(record: CreateOneUserInput!): CreateOneUserPayload
-       428 |   """
-       429 |   Creates Many documents with mongoose defaults, setters, hooks and validation
-       430 |   """
-       431 |   userCreateMany(records: [CreateManyUserInput!]!): CreateManyUserPayload
-       432 |   """
-       433 |   Update one document: 1) Retrieve one document by findById. 2) Apply updates to
-       434 |   mongoose document. 3) Mongoose applies defaults, setters, hooks and
-       435 |   validation. 4) And save it.
-       436 |   """
-       437 |   userUpdateById(record: UpdateByIdUserInput!): UpdateByIdUserPayload
-       438 |   """
-       439 |   Update one document: 1) Retrieve one document via findOne. 2) Apply updates to
-       440 |   mongoose document. 3) Mongoose applies defaults, setters, hooks and
-       441 |   validation. 4) And save it.
-       442 |   """
-       443 |   userUpdateOne(
-       444 |     record: UpdateOneUserInput!
-       445 |     """
-       446 |     Filter by fields
-       447 |     """
-       448 |     filter: FilterUpdateOneUserInput
-       449 |     sort: SortUpdateOneUserInput
-       450 |     skip: Int
-       451 |   ): UpdateOneUserPayload
-       452 |   """
-       453 |   Update many documents without returning them: Use Query.update mongoose
-       454 |   method. Do not apply mongoose defaults, setters, hooks and validation.
-       455 |   """
-       456 |   userUpdateMany(
-       457 |     record: UpdateManyUserInput!
-       458 |     """
-       459 |     Filter by fields
-       460 |     """
-       461 |     filter: FilterUpdateManyUserInput
-       462 |     sort: SortUpdateManyUserInput
-       463 |     skip: Int
-       464 |     limit: Int = 1000
-       465 |   ): UpdateManyUserPayload
-       466 |   """
-       467 |   Remove one document: 1) Retrieve one document and remove with hooks via findByIdAndRemove. 2) Return removed document.
-       468 |   """
-       469 |   userRemoveById(_id: MongoID!): RemoveByIdUserPayload
-       470 |   """
-       471 |   Remove one document: 1) Remove with hooks via findOneAndRemove. 2) Return removed document.
-       472 |   """
-       473 |   userRemoveOne(
-       474 |     """
-       475 |     Filter by fields
-       476 |     """
-       477 |     filter: FilterRemoveOneUserInput
-       478 |     sort: SortRemoveOneUserInput
-       479 |   ): RemoveOneUserPayload
-       480 |   """
-       481 |   Remove many documents without returning them: Use Query.remove mongoose
-       482 |   method. Do not apply mongoose defaults, setters, hooks and validation.
-       483 |   """
-       484 |   userRemoveMany(
-       485 |     """
-       486 |     Filter by fields
-       487 |     """
-       488 |     filter: FilterRemoveManyUserInput!
-       489 |   ): RemoveManyUserPayload
-       490 | }
-       491 | input NameOperatorsFilterFindManyUserInput {
-       492 |   gt: String
-       493 |   gte: String
-       494 |   lt: String
-       495 |   lte: String
-       496 |   ne: String
-       497 |   in: [String]
-       498 |   nin: [String]
-       499 | }
-       500 | input NameOperatorsFilterFindOneUserInput {
-       501 |   gt: String
-       502 |   gte: String
-       503 |   lt: String
-       504 |   lte: String
-       505 |   ne: String
-       506 |   in: [String]
-       507 |   nin: [String]
-       508 | }
-       509 | input NameOperatorsFilterRemoveManyUserInput {
-       510 |   gt: String
-       511 |   gte: String
-       512 |   lt: String
-       513 |   lte: String
-       514 |   ne: String
-       515 |   in: [String]
-       516 |   nin: [String]
-       517 | }
-       518 | input NameOperatorsFilterRemoveOneUserInput {
-       519 |   gt: String
-       520 |   gte: String
-       521 |   lt: String
-       522 |   lte: String
-       523 |   ne: String
-       524 |   in: [String]
-       525 |   nin: [String]
-       526 | }
-       527 | input NameOperatorsFilterUpdateManyUserInput {
-       528 |   gt: String
-       529 |   gte: String
-       530 |   lt: String
-       531 |   lte: String
-       532 |   ne: String
-       533 |   in: [String]
-       534 |   nin: [String]
-       535 | }
-       536 | input NameOperatorsFilterUpdateOneUserInput {
-       537 |   gt: String
-       538 |   gte: String
-       539 |   lt: String
-       540 |   lte: String
-       541 |   ne: String
-       542 |   in: [String]
-       543 |   nin: [String]
-       544 | }
-       545 | input NameOperatorsFilterUserInput {
-       546 |   gt: String
-       547 |   gte: String
-       548 |   lt: String
-       549 |   lte: String
-       550 |   ne: String
-       551 |   in: [String]
-       552 |   nin: [String]
-       553 | }
-       554 | """
-       555 | For performance reason this type contains only *indexed* fields.
-       556 | """
-       557 | input OperatorsFilterFindManyUserInput {
-       558 |   name: NameOperatorsFilterFindManyUserInput
-       559 |   age: AgeOperatorsFilterFindManyUserInput
-       560 |   gender: GenderOperatorsFilterFindManyUserInput
-       561 |   salaryDecimal: SalaryDecimalOperatorsFilterFindManyUserInput
-       562 |   _id: _idOperatorsFilterFindManyUserInput
-       563 | }
-       564 | """
-       565 | For performance reason this type contains only *indexed* fields.
-       566 | """
-       567 | input OperatorsFilterFindOneUserInput {
-       568 |   name: NameOperatorsFilterFindOneUserInput
-       569 |   age: AgeOperatorsFilterFindOneUserInput
-       570 |   gender: GenderOperatorsFilterFindOneUserInput
-       571 |   salaryDecimal: SalaryDecimalOperatorsFilterFindOneUserInput
-       572 |   _id: _idOperatorsFilterFindOneUserInput
-       573 | }
-       574 | """
-       575 | For performance reason this type contains only *indexed* fields.
-       576 | """
-       577 | input OperatorsFilterRemoveManyUserInput {
-       578 |   name: NameOperatorsFilterRemoveManyUserInput
-       579 |   age: AgeOperatorsFilterRemoveManyUserInput
-       580 |   gender: GenderOperatorsFilterRemoveManyUserInput
-       581 |   salaryDecimal: SalaryDecimalOperatorsFilterRemoveManyUserInput
-       582 |   _id: _idOperatorsFilterRemoveManyUserInput
-       583 | }
-       584 | """
-       585 | For performance reason this type contains only *indexed* fields.
-       586 | """
-       587 | input OperatorsFilterRemoveOneUserInput {
-       588 |   name: NameOperatorsFilterRemoveOneUserInput
-       589 |   age: AgeOperatorsFilterRemoveOneUserInput
-       590 |   gender: GenderOperatorsFilterRemoveOneUserInput
-       591 |   salaryDecimal: SalaryDecimalOperatorsFilterRemoveOneUserInput
-       592 |   _id: _idOperatorsFilterRemoveOneUserInput
-       593 | }
-       594 | """
-       595 | For performance reason this type contains only *indexed* fields.
-       596 | """
-       597 | input OperatorsFilterUpdateManyUserInput {
-       598 |   name: NameOperatorsFilterUpdateManyUserInput
-       599 |   age: AgeOperatorsFilterUpdateManyUserInput
-       600 |   gender: GenderOperatorsFilterUpdateManyUserInput
-       601 |   salaryDecimal: SalaryDecimalOperatorsFilterUpdateManyUserInput
-       602 |   _id: _idOperatorsFilterUpdateManyUserInput
-       603 | }
-       604 | """
-       605 | For performance reason this type contains only *indexed* fields.
-       606 | """
-       607 | input OperatorsFilterUpdateOneUserInput {
-       608 |   name: NameOperatorsFilterUpdateOneUserInput
-       609 |   age: AgeOperatorsFilterUpdateOneUserInput
-       610 |   gender: GenderOperatorsFilterUpdateOneUserInput
-       611 |   salaryDecimal: SalaryDecimalOperatorsFilterUpdateOneUserInput
-       612 |   _id: _idOperatorsFilterUpdateOneUserInput
-       613 | }
-       614 | """
-       615 | For performance reason this type contains only *indexed* fields.
-       616 | """
-       617 | input OperatorsFilterUserInput {
-       618 |   name: NameOperatorsFilterUserInput
-       619 |   age: AgeOperatorsFilterUserInput
-       620 |   gender: GenderOperatorsFilterUserInput
-       621 |   salaryDecimal: SalaryDecimalOperatorsFilterUserInput
-       622 |   _id: _idOperatorsFilterUserInput
-       623 | }
-       624 | """
-       625 | Information about pagination in a connection.
-       626 | """
-       627 | type PageInfo {
-       628 |   """
-       629 |   When paginating forwards, are there more items?
-       630 |   """
-       631 |   hasNextPage: Boolean!
-       632 |   """
-       633 |   When paginating backwards, are there more items?
-       634 |   """
-       635 |   hasPreviousPage: Boolean!
-       636 |   """
-       637 |   When paginating backwards, the cursor to continue.
-       638 |   """
-       639 |   startCursor: String
-       640 |   """
-       641 |   When paginating forwards, the cursor to continue.
-       642 |   """
-       643 |   endCursor: String
+       331 |   someMixed: JSON
+       332 |   salaryDecimal: BSONDecimal
+       333 |   _id: MongoID
+       334 |   _ids: [MongoID]
+       335 |
+       336 |   """
+       337 |   List of *indexed* fields that can be filtered via operators.
+       338 |   """
+       339 |   _operators: OperatorsFilterUpdateManyUserInput
+       340 |   OR: [FilterUpdateManyUserInput!]
+       341 |   AND: [FilterUpdateManyUserInput!]
+       342 | }
+       343 |
+       344 | input FilterUpdateOneUserInput {
+       345 |   name: String
+       346 |   age: Float
+       347 |   languages: [UserLanguagesInput]
+       348 |   contacts: UserContactsInput
+       349 |   gender: EnumUserGender
+       350 |   address: UserAddressInput
+       351 |
+       352 |   """
+       353 |   Some dynamic data
+       354 |   """
+       355 |   someMixed: JSON
+       356 |   salaryDecimal: BSONDecimal
+       357 |   _id: MongoID
+       358 |   _ids: [MongoID]
+       359 |
+       360 |   """
+       361 |   List of *indexed* fields that can be filtered via operators.
+       362 |   """
+       363 |   _operators: OperatorsFilterUpdateOneUserInput
+       364 |   OR: [FilterUpdateOneUserInput!]
+       365 |   AND: [FilterUpdateOneUserInput!]
+       366 | }
+       367 |
+       368 | input FilterUserInput {
+       369 |   name: String
+       370 |   age: Float
+       371 |   languages: [UserLanguagesInput]
+       372 |   contacts: UserContactsInput
+       373 |   gender: EnumUserGender
+       374 |   address: UserAddressInput
+       375 |
+       376 |   """
+       377 |   Some dynamic data
+       378 |   """
+       379 |   someMixed: JSON
+       380 |   salaryDecimal: BSONDecimal
+       381 |   _id: MongoID
+       382 |   _ids: [MongoID]
+       383 |
+       384 |   """
+       385 |   List of *indexed* fields that can be filtered via operators.
+       386 |   """
+       387 |   _operators: OperatorsFilterUserInput
+       388 |   OR: [FilterUserInput!]
+       389 |   AND: [FilterUserInput!]
+       390 | }
+       391 |
+       392 | input GenderOperatorsFilterFindManyUserInput {
+       393 |   gt: EnumUserGender
+       394 |   gte: EnumUserGender
+       395 |   lt: EnumUserGender
+       396 |   lte: EnumUserGender
+       397 |   ne: EnumUserGender
+       398 |   in: [EnumUserGender]
+       399 |   nin: [EnumUserGender]
+       400 | }
+       401 |
+       402 | input GenderOperatorsFilterFindOneUserInput {
+       403 |   gt: EnumUserGender
+       404 |   gte: EnumUserGender
+       405 |   lt: EnumUserGender
+       406 |   lte: EnumUserGender
+       407 |   ne: EnumUserGender
+       408 |   in: [EnumUserGender]
+       409 |   nin: [EnumUserGender]
+       410 | }
+       411 |
+       412 | input GenderOperatorsFilterRemoveManyUserInput {
+       413 |   gt: EnumUserGender
+       414 |   gte: EnumUserGender
+       415 |   lt: EnumUserGender
+       416 |   lte: EnumUserGender
+       417 |   ne: EnumUserGender
+       418 |   in: [EnumUserGender]
+       419 |   nin: [EnumUserGender]
+       420 | }
+       421 |
+       422 | input GenderOperatorsFilterRemoveOneUserInput {
+       423 |   gt: EnumUserGender
+       424 |   gte: EnumUserGender
+       425 |   lt: EnumUserGender
+       426 |   lte: EnumUserGender
+       427 |   ne: EnumUserGender
+       428 |   in: [EnumUserGender]
+       429 |   nin: [EnumUserGender]
+       430 | }
+       431 |
+       432 | input GenderOperatorsFilterUpdateManyUserInput {
+       433 |   gt: EnumUserGender
+       434 |   gte: EnumUserGender
+       435 |   lt: EnumUserGender
+       436 |   lte: EnumUserGender
+       437 |   ne: EnumUserGender
+       438 |   in: [EnumUserGender]
+       439 |   nin: [EnumUserGender]
+       440 | }
+       441 |
+       442 | input GenderOperatorsFilterUpdateOneUserInput {
+       443 |   gt: EnumUserGender
+       444 |   gte: EnumUserGender
+       445 |   lt: EnumUserGender
+       446 |   lte: EnumUserGender
+       447 |   ne: EnumUserGender
+       448 |   in: [EnumUserGender]
+       449 |   nin: [EnumUserGender]
+       450 | }
+       451 |
+       452 | input GenderOperatorsFilterUserInput {
+       453 |   gt: EnumUserGender
+       454 |   gte: EnumUserGender
+       455 |   lt: EnumUserGender
+       456 |   lte: EnumUserGender
+       457 |   ne: EnumUserGender
+       458 |   in: [EnumUserGender]
+       459 |   nin: [EnumUserGender]
+       460 | }
+       461 |
+       462 | input GeoDistance {
+       463 |   lng: Float!
+       464 |   lat: Float!
+       465 |   distance: Float!
+       466 | }
+       467 |
+       468 | """
+       469 | The \`JSON\` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+       470 | """
+       471 | scalar JSON
+       472 |
+       473 | """
+       474 | The \`ID\` scalar type represents a unique MongoDB identifier in collection.
+       475 | MongoDB by default use 12-byte ObjectId value
+       476 | (https://docs.mongodb.com/manual/reference/bson-types/#objectid). But MongoDB
+       477 | also may accepts string or integer as correct values for _id field.
+       478 | """
+       479 | scalar MongoID
+       480 |
+       481 | type Mutation {
+       482 |   """
+       483 |   Create one document with mongoose defaults, setters, hooks and validation
+       484 |   """
+       485 |   userCreate(record: CreateOneUserInput!): CreateOneUserPayload
+       486 |
+       487 |   """
+       488 |   Creates Many documents with mongoose defaults, setters, hooks and validation
+       489 |   """
+       490 |   userCreateMany(records: [CreateManyUserInput!]!): CreateManyUserPayload
+       491 |   """
+       492 |   Update one document: 1) Retrieve one document by findById. 2) Apply updates to
+       493 |   mongoose document. 3) Mongoose applies defaults, setters, hooks and
+       494 |   validation. 4) And save it.
+       495 |   """
+       496 |   userUpdateById(record: UpdateByIdUserInput!): UpdateByIdUserPayload
+       497 |   """
+       498 |   Update one document: 1) Retrieve one document via findOne. 2) Apply updates to
+       499 |   mongoose document. 3) Mongoose applies defaults, setters, hooks and
+       500 |   validation. 4) And save it.
+       501 |   """
+       502 |   userUpdateOne(
+       503 |     record: UpdateOneUserInput!
+       504 |     """
+       505 |     Filter by fields
+       506 |     """
+       507 |     filter: FilterUpdateOneUserInput
+       508 |     sort: SortUpdateOneUserInput
+       509 |     skip: Int
+       510 |   ): UpdateOneUserPayload
+       511 |   """
+       512 |   Update many documents without returning them: Use Query.update mongoose
+       513 |   method. Do not apply mongoose defaults, setters, hooks and validation.
+       514 |   """
+       515 |   userUpdateMany(
+       516 |     record: UpdateManyUserInput!
+       517 |     """
+       518 |     Filter by fields
+       519 |     """
+       520 |     filter: FilterUpdateManyUserInput
+       521 |     sort: SortUpdateManyUserInput
+       522 |     skip: Int
+       523 |     limit: Int = 1000
+       524 |   ): UpdateManyUserPayload
+       525 |   """
+       526 |   Remove one document: 1) Retrieve one document and remove with hooks via findByIdAndRemove. 2) Return removed document.
+       527 |   """
+       528 |   userRemoveById(_id: MongoID!): RemoveByIdUserPayload
+       529 |
+       530 |   """
+       531 |   Remove one document: 1) Remove with hooks via findOneAndRemove. 2) Return removed document.
+       532 |   """
+       533 |   userRemoveOne(
+       534 |     """
+       535 |     Filter by fields
+       536 |     """
+       537 |     filter: FilterRemoveOneUserInput
+       538 |     sort: SortRemoveOneUserInput
+       539 |   ): RemoveOneUserPayload
+       540 |
+       541 |   """
+       542 |   Remove many documents without returning them: Use Query.remove mongoose
+       543 |   method. Do not apply mongoose defaults, setters, hooks and validation.
+       544 |   """
+       545 |   userRemoveMany(
+       546 |     """
+       547 |     Filter by fields
+       548 |     """
+       549 |     filter: FilterRemoveManyUserInput!
+       550 |   ): RemoveManyUserPayload
+       551 | }
+       552 | input NameOperatorsFilterFindManyUserInput {
+       553 |   gt: String
+       554 |   gte: String
+       555 |   lt: String
+       556 |   lte: String
+       557 |   ne: String
+       558 |   in: [String]
+       559 |   nin: [String]
+       560 | }
+       561 | input NameOperatorsFilterFindOneUserInput {
+       562 |   gt: String
+       563 |   gte: String
+       564 |   lt: String
+       565 |   lte: String
+       566 |   ne: String
+       567 |   in: [String]
+       568 |   nin: [String]
+       569 | }
+       570 | input NameOperatorsFilterRemoveManyUserInput {
+       571 |   gt: String
+       572 |   gte: String
+       573 |   lt: String
+       574 |   lte: String
+       575 |   ne: String
+       576 |   in: [String]
+       577 |   nin: [String]
+       578 | }
+       579 | input NameOperatorsFilterRemoveOneUserInput {
+       580 |   gt: String
+       581 |   gte: String
+       582 |   lt: String
+       583 |   lte: String
+       584 |   ne: String
+       585 |   in: [String]
+       586 |   nin: [String]
+       587 | }
+       588 | input NameOperatorsFilterUpdateManyUserInput {
+       589 |   gt: String
+       590 |   gte: String
+       591 |   lt: String
+       592 |   lte: String
+       593 |   ne: String
+       594 |   in: [String]
+       595 |   nin: [String]
+       596 | }
+       597 | input NameOperatorsFilterUpdateOneUserInput {
+       598 |   gt: String
+       599 |   gte: String
+       600 |   lt: String
+       601 |   lte: String
+       602 |   ne: String
+       603 |   in: [String]
+       604 |   nin: [String]
+       605 | }
+       606 | input NameOperatorsFilterUserInput {
+       607 |   gt: String
+       608 |   gte: String
+       609 |   lt: String
+       610 |   lte: String
+       611 |   ne: String
+       612 |   in: [String]
+       613 |   nin: [String]
+       614 | }
+       615 | """
+       616 | For performance reason this type contains only *indexed* fields.
+       617 | """
+       618 | input OperatorsFilterFindManyUserInput {
+       619 |   name: NameOperatorsFilterFindManyUserInput
+       620 |   age: AgeOperatorsFilterFindManyUserInput
+       621 |   gender: GenderOperatorsFilterFindManyUserInput
+       622 |   salaryDecimal: SalaryDecimalOperatorsFilterFindManyUserInput
+       623 |   _id: _idOperatorsFilterFindManyUserInput
+       624 | }
+       625 | """
+       626 | For performance reason this type contains only *indexed* fields.
+       627 | """
+       628 | input OperatorsFilterFindOneUserInput {
+       629 |   name: NameOperatorsFilterFindOneUserInput
+       630 |   age: AgeOperatorsFilterFindOneUserInput
+       631 |   gender: GenderOperatorsFilterFindOneUserInput
+       632 |   salaryDecimal: SalaryDecimalOperatorsFilterFindOneUserInput
+       633 |   _id: _idOperatorsFilterFindOneUserInput
+       634 | }
+       635 | """
+       636 | For performance reason this type contains only *indexed* fields.
+       637 | """
+       638 | input OperatorsFilterRemoveManyUserInput {
+       639 |   name: NameOperatorsFilterRemoveManyUserInput
+       640 |   age: AgeOperatorsFilterRemoveManyUserInput
+       641 |   gender: GenderOperatorsFilterRemoveManyUserInput
+       642 |   salaryDecimal: SalaryDecimalOperatorsFilterRemoveManyUserInput
+       643 |   _id: _idOperatorsFilterRemoveManyUserInput
        644 | }
-       645 | type PaginationInfo {
-       646 |   currentPage: Int!
-       647 |   perPage: Int!
-       648 |   pageCount: Int
-       649 |   itemCount: Int
-       650 |   hasNextPage: Boolean
-       651 |   hasPreviousPage: Boolean
-       652 | }
-       653 | type Query {
-       654 |   userById(_id: MongoID!): User
-       655 |   userByIds(_ids: [MongoID]!, limit: Int = 1000, sort: SortFindByIdsUserInput): [User]
-       656 |   userOne(
-       657 |     """
-       658 |     Filter by fields
-       659 |     """
-       660 |     filter: FilterFindOneUserInput
-       661 |     skip: Int
-       662 |     sort: SortFindOneUserInput
-       663 |   ): User
-       664 |   userMany(
-       665 |     """
-       666 |     Filter by fields
-       667 |     """
-       668 |     filter: FilterFindManyUserInput
-       669 |     skip: Int
-       670 |     limit: Int = 1000
-       671 |     sort: SortFindManyUserInput
-       672 |   ): [User]
-       673 |   userTotal(
-       674 |     """
-       675 |     Filter by fields
-       676 |     """
-       677 |     filter: FilterUserInput
-       678 |   ): Int
-       679 |   userConnection(
-       680 |     """
-       681 |     Forward pagination argument for returning at most first edges
-       682 |     """
-       683 |     first: Int
-       684 |     """
-       685 |     Forward pagination argument for returning at most first edges
-       686 |     """
-       687 |     after: String
-       688 |     """
-       689 |     Backward pagination argument for returning at most last edges
-       690 |     """
-       691 |     last: Int
-       692 |     """
-       693 |     Backward pagination argument for returning at most last edges
-       694 |     """
-       695 |     before: String
-       696 |     """
-       697 |     Filter by fields
-       698 |     """
-       699 |     filter: FilterFindManyUserInput
-       700 |     """
-       701 |     Sort argument for data ordering
-       702 |     """
-       703 |     sort: SortConnectionUserEnum = _ID_DESC
-       704 |   ): UserConnection
-       705 |   userPagination(
-       706 |     """
-       707 |     Page number for displaying
-       708 |     """
-       709 |     page: Int
-       710 |     perPage: Int = 20
-       711 |     """
-       712 |     Filter by fields
-       713 |     """
-       714 |     filter: FilterFindManyUserInput
-       715 |     sort: SortFindManyUserInput
-       716 |   ): UserPagination
-       717 | }
-       718 | type RemoveByIdUserPayload {
-       719 |   """
-       720 |   Removed document ID
-       721 |   """
-       722 |   recordId: MongoID
-       723 |   """
-       724 |   Removed document
-       725 |   """
-       726 |   record: User
-       727 | }
-       728 | type RemoveManyUserPayload {
-       729 |   """
-       730 |   Affected documents number
-       731 |   """
-       732 |   numAffected: Int
-       733 | }
-       734 | type RemoveOneUserPayload {
-       735 |   """
-       736 |   Removed document ID
-       737 |   """
-       738 |   recordId: MongoID
-       739 |   """
-       740 |   Removed document
-       741 |   """
-       742 |   record: User
-       743 | }
-       744 | input SalaryDecimalOperatorsFilterFindManyUserInput {
-       745 |   gt: BSONDecimal
-       746 |   gte: BSONDecimal
-       747 |   lt: BSONDecimal
-       748 |   lte: BSONDecimal
-       749 |   ne: BSONDecimal
-       750 |   in: [BSONDecimal]
-       751 |   nin: [BSONDecimal]
-       752 | }
-       753 | input SalaryDecimalOperatorsFilterFindOneUserInput {
-       754 |   gt: BSONDecimal
-       755 |   gte: BSONDecimal
-       756 |   lt: BSONDecimal
-       757 |   lte: BSONDecimal
-       758 |   ne: BSONDecimal
-       759 |   in: [BSONDecimal]
-       760 |   nin: [BSONDecimal]
-       761 | }
-       762 | input SalaryDecimalOperatorsFilterRemoveManyUserInput {
-       763 |   gt: BSONDecimal
-       764 |   gte: BSONDecimal
-       765 |   lt: BSONDecimal
-       766 |   lte: BSONDecimal
-       767 |   ne: BSONDecimal
-       768 |   in: [BSONDecimal]
-       769 |   nin: [BSONDecimal]
-       770 | }
-       771 | input SalaryDecimalOperatorsFilterRemoveOneUserInput {
-       772 |   gt: BSONDecimal
-       773 |   gte: BSONDecimal
-       774 |   lt: BSONDecimal
-       775 |   lte: BSONDecimal
-       776 |   ne: BSONDecimal
-       777 |   in: [BSONDecimal]
-       778 |   nin: [BSONDecimal]
-       779 | }
-       780 | input SalaryDecimalOperatorsFilterUpdateManyUserInput {
-       781 |   gt: BSONDecimal
-       782 |   gte: BSONDecimal
-       783 |   lt: BSONDecimal
-       784 |   lte: BSONDecimal
-       785 |   ne: BSONDecimal
-       786 |   in: [BSONDecimal]
-       787 |   nin: [BSONDecimal]
+       645 | """
+       646 | For performance reason this type contains only *indexed* fields.
+       647 | """
+       648 | input OperatorsFilterRemoveOneUserInput {
+       649 |   name: NameOperatorsFilterRemoveOneUserInput
+       650 |   age: AgeOperatorsFilterRemoveOneUserInput
+       651 |   gender: GenderOperatorsFilterRemoveOneUserInput
+       652 |   salaryDecimal: SalaryDecimalOperatorsFilterRemoveOneUserInput
+       653 |   _id: _idOperatorsFilterRemoveOneUserInput
+       654 | }
+       655 | """
+       656 | For performance reason this type contains only *indexed* fields.
+       657 | """
+       658 | input OperatorsFilterUpdateManyUserInput {
+       659 |   name: NameOperatorsFilterUpdateManyUserInput
+       660 |   age: AgeOperatorsFilterUpdateManyUserInput
+       661 |   gender: GenderOperatorsFilterUpdateManyUserInput
+       662 |   salaryDecimal: SalaryDecimalOperatorsFilterUpdateManyUserInput
+       663 |   _id: _idOperatorsFilterUpdateManyUserInput
+       664 | }
+       665 | """
+       666 | For performance reason this type contains only *indexed* fields.
+       667 | """
+       668 | input OperatorsFilterUpdateOneUserInput {
+       669 |   name: NameOperatorsFilterUpdateOneUserInput
+       670 |   age: AgeOperatorsFilterUpdateOneUserInput
+       671 |   gender: GenderOperatorsFilterUpdateOneUserInput
+       672 |   salaryDecimal: SalaryDecimalOperatorsFilterUpdateOneUserInput
+       673 |   _id: _idOperatorsFilterUpdateOneUserInput
+       674 | }
+       675 | """
+       676 | For performance reason this type contains only *indexed* fields.
+       677 | """
+       678 | input OperatorsFilterUserInput {
+       679 |   name: NameOperatorsFilterUserInput
+       680 |   age: AgeOperatorsFilterUserInput
+       681 |   gender: GenderOperatorsFilterUserInput
+       682 |   salaryDecimal: SalaryDecimalOperatorsFilterUserInput
+       683 |   _id: _idOperatorsFilterUserInput
+       684 | }
+       685 | """
+       686 | Information about pagination in a connection.
+       687 | """
+       688 | type PageInfo {
+       689 |   """
+       690 |   When paginating forwards, are there more items?
+       691 |   """
+       692 |   hasNextPage: Boolean!
+       693 |   """
+       694 |   When paginating backwards, are there more items?
+       695 |   """
+       696 |   hasPreviousPage: Boolean!
+       697 |   """
+       698 |   When paginating backwards, the cursor to continue.
+       699 |   """
+       700 |   startCursor: String
+       701 |   """
+       702 |   When paginating forwards, the cursor to continue.
+       703 |   """
+       704 |   endCursor: String
+       705 | }
+       706 | type PaginationInfo {
+       707 |   currentPage: Int!
+       708 |   perPage: Int!
+       709 |   pageCount: Int
+       710 |   itemCount: Int
+       711 |   hasNextPage: Boolean
+       712 |   hasPreviousPage: Boolean
+       713 | }
+       714 | type Query {
+       715 |   userById(_id: MongoID!): User
+       716 |   userByIds(_ids: [MongoID]!, limit: Int = 1000, sort: SortFindByIdsUserInput): [User]
+       717 |   userOne(
+       718 |     """
+       719 |     Filter by fields
+       720 |     """
+       721 |     filter: FilterFindOneUserInput
+       722 |     skip: Int
+       723 |     sort: SortFindOneUserInput
+       724 |   ): User
+       725 |   userMany(
+       726 |     """
+       727 |     Filter by fields
+       728 |     """
+       729 |     filter: FilterFindManyUserInput
+       730 |     skip: Int
+       731 |     limit: Int = 1000
+       732 |     sort: SortFindManyUserInput
+       733 |   ): [User]
+       734 |   userTotal(
+       735 |     """
+       736 |     Filter by fields
+       737 |     """
+       738 |     filter: FilterUserInput
+       739 |   ): Int
+       740 |   userConnection(
+       741 |     """
+       742 |     Forward pagination argument for returning at most first edges
+       743 |     """
+       744 |     first: Int
+       745 |     """
+       746 |     Forward pagination argument for returning at most first edges
+       747 |     """
+       748 |     after: String
+       749 |     """
+       750 |     Backward pagination argument for returning at most last edges
+       751 |     """
+       752 |     last: Int
+       753 |     """
+       754 |     Backward pagination argument for returning at most last edges
+       755 |     """
+       756 |     before: String
+       757 |     """
+       758 |     Filter by fields
+       759 |     """
+       760 |     filter: FilterFindManyUserInput
+       761 |     """
+       762 |     Sort argument for data ordering
+       763 |     """
+       764 |     sort: SortConnectionUserEnum = _ID_DESC
+       765 |   ): UserConnection
+       766 |   userPagination(
+       767 |     """
+       768 |     Page number for displaying
+       769 |     """
+       770 |     page: Int
+       771 |     perPage: Int = 20
+       772 |     """
+       773 |     Filter by fields
+       774 |     """
+       775 |     filter: FilterFindManyUserInput
+       776 |     sort: SortFindManyUserInput
+       777 |   ): UserPagination
+       778 | }
+       779 | type RemoveByIdUserPayload {
+       780 |   """
+       781 |   Removed document ID
+       782 |   """
+       783 |   recordId: MongoID
+       784 |   """
+       785 |   Removed document
+       786 |   """
+       787 |   record: User
        788 | }
-       789 | input SalaryDecimalOperatorsFilterUpdateOneUserInput {
-       790 |   gt: BSONDecimal
-       791 |   gte: BSONDecimal
-       792 |   lt: BSONDecimal
-       793 |   lte: BSONDecimal
-       794 |   ne: BSONDecimal
-       795 |   in: [BSONDecimal]
-       796 |   nin: [BSONDecimal]
-       797 | }
-       798 | input SalaryDecimalOperatorsFilterUserInput {
-       799 |   gt: BSONDecimal
-       800 |   gte: BSONDecimal
-       801 |   lt: BSONDecimal
-       802 |   lte: BSONDecimal
-       803 |   ne: BSONDecimal
-       804 |   in: [BSONDecimal]
-       805 |   nin: [BSONDecimal]
-       806 | }
-       807 | enum SortConnectionUserEnum {
-       808 |   _ID_DESC
-       809 |   _ID_ASC
-       810 | }
-       811 | enum SortFindByIdsUserInput {
-       812 |   _ID_ASC
-       813 |   _ID_DESC
-       814 |   NAME_ASC
-       815 |   NAME_DESC
-       816 |   AGE_ASC
-       817 |   AGE_DESC
-       818 |   SALARYDECIMAL_ASC
-       819 |   SALARYDECIMAL_DESC
-       820 |   GENDER_ASC
-       821 |   GENDER_DESC
-       822 |   GENDER__AGE_ASC
-       823 |   GENDER__AGE_DESC
-       824 | }
-       825 | enum SortFindManyUserInput {
-       826 |   _ID_ASC
-       827 |   _ID_DESC
-       828 |   NAME_ASC
-       829 |   NAME_DESC
-       830 |   AGE_ASC
-       831 |   AGE_DESC
-       832 |   SALARYDECIMAL_ASC
-       833 |   SALARYDECIMAL_DESC
-       834 |   GENDER_ASC
-       835 |   GENDER_DESC
-       836 |   GENDER__AGE_ASC
-       837 |   GENDER__AGE_DESC
-       838 | }
-       839 | enum SortFindOneUserInput {
-       840 |   _ID_ASC
-       841 |   _ID_DESC
-       842 |   NAME_ASC
-       843 |   NAME_DESC
-       844 |   AGE_ASC
-       845 |   AGE_DESC
-       846 |   SALARYDECIMAL_ASC
-       847 |   SALARYDECIMAL_DESC
-       848 |   GENDER_ASC
-       849 |   GENDER_DESC
-       850 |   GENDER__AGE_ASC
-       851 |   GENDER__AGE_DESC
-       852 | }
-       853 | enum SortRemoveOneUserInput {
-       854 |   _ID_ASC
-       855 |   _ID_DESC
-       856 |   NAME_ASC
-       857 |   NAME_DESC
-       858 |   AGE_ASC
-       859 |   AGE_DESC
-       860 |   SALARYDECIMAL_ASC
-       861 |   SALARYDECIMAL_DESC
-       862 |   GENDER_ASC
-       863 |   GENDER_DESC
-       864 |   GENDER__AGE_ASC
-       865 |   GENDER__AGE_DESC
-       866 | }
-       867 | enum SortUpdateManyUserInput {
-       868 |   _ID_ASC
+       789 | type RemoveManyUserPayload {
+       790 |   """
+       791 |   Affected documents number
+       792 |   """
+       793 |   numAffected: Int
+       794 | }
+       795 | type RemoveOneUserPayload {
+       796 |   """
+       797 |   Removed document ID
+       798 |   """
+       799 |   recordId: MongoID
+       800 |   """
+       801 |   Removed document
+       802 |   """
+       803 |   record: User
+       804 | }
+       805 | input SalaryDecimalOperatorsFilterFindManyUserInput {
+       806 |   gt: BSONDecimal
+       807 |   gte: BSONDecimal
+       808 |   lt: BSONDecimal
+       809 |   lte: BSONDecimal
+       810 |   ne: BSONDecimal
+       811 |   in: [BSONDecimal]
+       812 |   nin: [BSONDecimal]
+       813 | }
+       814 | input SalaryDecimalOperatorsFilterFindOneUserInput {
+       815 |   gt: BSONDecimal
+       816 |   gte: BSONDecimal
+       817 |   lt: BSONDecimal
+       818 |   lte: BSONDecimal
+       819 |   ne: BSONDecimal
+       820 |   in: [BSONDecimal]
+       821 |   nin: [BSONDecimal]
+       822 | }
+       823 | input SalaryDecimalOperatorsFilterRemoveManyUserInput {
+       824 |   gt: BSONDecimal
+       825 |   gte: BSONDecimal
+       826 |   lt: BSONDecimal
+       827 |   lte: BSONDecimal
+       828 |   ne: BSONDecimal
+       829 |   in: [BSONDecimal]
+       830 |   nin: [BSONDecimal]
+       831 | }
+       832 | input SalaryDecimalOperatorsFilterRemoveOneUserInput {
+       833 |   gt: BSONDecimal
+       834 |   gte: BSONDecimal
+       835 |   lt: BSONDecimal
+       836 |   lte: BSONDecimal
+       837 |   ne: BSONDecimal
+       838 |   in: [BSONDecimal]
+       839 |   nin: [BSONDecimal]
+       840 | }
+       841 | input SalaryDecimalOperatorsFilterUpdateManyUserInput {
+       842 |   gt: BSONDecimal
+       843 |   gte: BSONDecimal
+       844 |   lt: BSONDecimal
+       845 |   lte: BSONDecimal
+       846 |   ne: BSONDecimal
+       847 |   in: [BSONDecimal]
+       848 |   nin: [BSONDecimal]
+       849 | }
+       850 | input SalaryDecimalOperatorsFilterUpdateOneUserInput {
+       851 |   gt: BSONDecimal
+       852 |   gte: BSONDecimal
+       853 |   lt: BSONDecimal
+       854 |   lte: BSONDecimal
+       855 |   ne: BSONDecimal
+       856 |   in: [BSONDecimal]
+       857 |   nin: [BSONDecimal]
+       858 | }
+       859 | input SalaryDecimalOperatorsFilterUserInput {
+       860 |   gt: BSONDecimal
+       861 |   gte: BSONDecimal
+       862 |   lt: BSONDecimal
+       863 |   lte: BSONDecimal
+       864 |   ne: BSONDecimal
+       865 |   in: [BSONDecimal]
+       866 |   nin: [BSONDecimal]
+       867 | }
+       868 | enum SortConnectionUserEnum {
        869 |   _ID_DESC
-       870 |   NAME_ASC
-       871 |   NAME_DESC
-       872 |   AGE_ASC
-       873 |   AGE_DESC
-       874 |   SALARYDECIMAL_ASC
-       875 |   SALARYDECIMAL_DESC
-       876 |   GENDER_ASC
-       877 |   GENDER_DESC
-       878 |   GENDER__AGE_ASC
-       879 |   GENDER__AGE_DESC
-       880 | }
-       881 | enum SortUpdateOneUserInput {
-       882 |   _ID_ASC
-       883 |   _ID_DESC
-       884 |   NAME_ASC
-       885 |   NAME_DESC
-       886 |   AGE_ASC
-       887 |   AGE_DESC
-       888 |   SALARYDECIMAL_ASC
-       889 |   SALARYDECIMAL_DESC
-       890 |   GENDER_ASC
-       891 |   GENDER_DESC
-       892 |   GENDER__AGE_ASC
-       893 |   GENDER__AGE_DESC
-       894 | }
-       895 | input UpdateByIdUserInput {
-       896 |   name: String
-       897 |   age: Float
-       898 |   languages: [UserLanguagesInput]
-       899 |   contacts: UserContactsInput
-       900 |   gender: EnumUserGender
-       901 |   address: UserAddressInput
-       902 |   """
-       903 |   Some dynamic data
-       904 |   """
-       905 |   someMixed: JSON
-       906 |   salaryDecimal: BSONDecimal
-       907 |   _id: MongoID!
-       908 | }
-       909 | type UpdateByIdUserPayload {
-       910 |   """
-       911 |   Updated document ID
-       912 |   """
-       913 |   recordId: MongoID
-       914 |   """
-       915 |   Updated document
-       916 |   """
-       917 |   record: User
-       918 | }
-       919 | input UpdateManyUserInput {
-       920 |   name: String
-       921 |   age: Float
-       922 |   languages: [UserLanguagesInput]
-       923 |   contacts: UserContactsInput
-       924 |   gender: EnumUserGender
-       925 |   address: UserAddressInput
-       926 |   """
-       927 |   Some dynamic data
-       928 |   """
-       929 |   someMixed: JSON
-       930 |   salaryDecimal: BSONDecimal
-       931 | }
-       932 | type UpdateManyUserPayload {
-       933 |   """
-       934 |   Affected documents number
-       935 |   """
-       936 |   numAffected: Int
-       937 | }
-       938 | input UpdateOneUserInput {
-       939 |   name: String
-       940 |   age: Float
-       941 |   languages: [UserLanguagesInput]
-       942 |   contacts: UserContactsInput
-       943 |   gender: EnumUserGender
-       944 |   address: UserAddressInput
-       945 |   """
-       946 |   Some dynamic data
-       947 |   """
-       948 |   someMixed: JSON
-       949 |   salaryDecimal: BSONDecimal
-       950 | }
-       951 | type UpdateOneUserPayload {
-       952 |   """
-       953 |   Updated document ID
-       954 |   """
-       955 |   recordId: MongoID
-       956 |   """
-       957 |   Updated document
-       958 |   """
-       959 |   record: User
-       960 | }
-       961 | type User {
-       962 |   name: String
-       963 |   age: Float
-       964 |   languages: [UserLanguages]
-       965 |   contacts: UserContacts
-       966 |   gender: EnumUserGender
-       967 |   address: UserAddress
-       968 |   """
-       969 |   Some dynamic data
-       970 |   """
-       971 |   someMixed: JSON
-       972 |   salaryDecimal: BSONDecimal
-       973 |   _id: MongoID!
-       974 |   virtualField(lang: String): String
-       975 | }
-       976 | type UserAddress {
-       977 |   street: String
-       978 |   geo: [Float]
-       979 |   _id: MongoID
-       980 | }
-       981 | input UserAddressInput {
-       982 |   street: String
-       983 |   geo: [Float]
-       984 |   _id: MongoID
-       985 | }
-       986 | """
-       987 | A connection to a list of items.
-       988 | """
-       989 | type UserConnection {
-       990 |   """
-       991 |   Total object count.
-       992 |   """
-       993 |   count: Int!
+       870 |   _ID_ASC
+       871 | }
+       872 | enum SortFindByIdsUserInput {
+       873 |   _ID_ASC
+       874 |   _ID_DESC
+       875 |   NAME_ASC
+       876 |   NAME_DESC
+       877 |   AGE_ASC
+       878 |   AGE_DESC
+       879 |   SALARYDECIMAL_ASC
+       880 |   SALARYDECIMAL_DESC
+       881 |   GENDER_ASC
+       882 |   GENDER_DESC
+       883 |   GENDER__AGE_ASC
+       884 |   GENDER__AGE_DESC
+       885 | }
+       886 | enum SortFindManyUserInput {
+       887 |   _ID_ASC
+       888 |   _ID_DESC
+       889 |   NAME_ASC
+       890 |   NAME_DESC
+       891 |   AGE_ASC
+       892 |   AGE_DESC
+       893 |   SALARYDECIMAL_ASC
+       894 |   SALARYDECIMAL_DESC
+       895 |   GENDER_ASC
+       896 |   GENDER_DESC
+       897 |   GENDER__AGE_ASC
+       898 |   GENDER__AGE_DESC
+       899 | }
+       900 | enum SortFindOneUserInput {
+       901 |   _ID_ASC
+       902 |   _ID_DESC
+       903 |   NAME_ASC
+       904 |   NAME_DESC
+       905 |   AGE_ASC
+       906 |   AGE_DESC
+       907 |   SALARYDECIMAL_ASC
+       908 |   SALARYDECIMAL_DESC
+       909 |   GENDER_ASC
+       910 |   GENDER_DESC
+       911 |   GENDER__AGE_ASC
+       912 |   GENDER__AGE_DESC
+       913 | }
+       914 | enum SortRemoveOneUserInput {
+       915 |   _ID_ASC
+       916 |   _ID_DESC
+       917 |   NAME_ASC
+       918 |   NAME_DESC
+       919 |   AGE_ASC
+       920 |   AGE_DESC
+       921 |   SALARYDECIMAL_ASC
+       922 |   SALARYDECIMAL_DESC
+       923 |   GENDER_ASC
+       924 |   GENDER_DESC
+       925 |   GENDER__AGE_ASC
+       926 |   GENDER__AGE_DESC
+       927 | }
+       928 | enum SortUpdateManyUserInput {
+       929 |   _ID_ASC
+       930 |   _ID_DESC
+       931 |   NAME_ASC
+       932 |   NAME_DESC
+       933 |   AGE_ASC
+       934 |   AGE_DESC
+       935 |   SALARYDECIMAL_ASC
+       936 |   SALARYDECIMAL_DESC
+       937 |   GENDER_ASC
+       938 |   GENDER_DESC
+       939 |   GENDER__AGE_ASC
+       940 |   GENDER__AGE_DESC
+       941 | }
+       942 | enum SortUpdateOneUserInput {
+       943 |   _ID_ASC
+       944 |   _ID_DESC
+       945 |   NAME_ASC
+       946 |   NAME_DESC
+       947 |   AGE_ASC
+       948 |   AGE_DESC
+       949 |   SALARYDECIMAL_ASC
+       950 |   SALARYDECIMAL_DESC
+       951 |   GENDER_ASC
+       952 |   GENDER_DESC
+       953 |   GENDER__AGE_ASC
+       954 |   GENDER__AGE_DESC
+       955 | }
+       956 | input UpdateByIdUserInput {
+       957 |   name: String
+       958 |   age: Float
+       959 |   languages: [UserLanguagesInput]
+       960 |   contacts: UserContactsInput
+       961 |   gender: EnumUserGender
+       962 |   address: UserAddressInput
+       963 |   """
+       964 |   Some dynamic data
+       965 |   """
+       966 |   someMixed: JSON
+       967 |   salaryDecimal: BSONDecimal
+       968 |   _id: MongoID!
+       969 | }
+       970 | type UpdateByIdUserPayload {
+       971 |   """
+       972 |   Updated document ID
+       973 |   """
+       974 |   recordId: MongoID
+       975 |   """
+       976 |   Updated document
+       977 |   """
+       978 |   record: User
+       979 | }
+       980 | input UpdateManyUserInput {
+       981 |   name: String
+       982 |   age: Float
+       983 |   languages: [UserLanguagesInput]
+       984 |   contacts: UserContactsInput
+       985 |   gender: EnumUserGender
+       986 |   address: UserAddressInput
+       987 |   """
+       988 |   Some dynamic data
+       989 |   """
+       990 |   someMixed: JSON
+       991 |   salaryDecimal: BSONDecimal
+       992 | }
+       993 | type UpdateManyUserPayload {
        994 |   """
-       995 |   Information to aid in pagination.
+       995 |   Affected documents number
        996 |   """
-       997 |   pageInfo: PageInfo!
-       998 |   """
-       999 |   Information to aid in pagination.
-      1000 |   """
-      1001 |   edges: [UserEdge!]!
-      1002 | }
-      1003 | type UserContacts {
-      1004 |   email: String
-      1005 |   phones: [String]
-      1006 | }
-      1007 | input UserContactsInput {
-      1008 |   email: String
-      1009 |   phones: [String]
-      1010 | }
-      1011 | """
-      1012 | An edge in a connection.
-      1013 | """
-      1014 | type UserEdge {
+       997 |   numAffected: Int
+       998 | }
+       999 | input UpdateOneUserInput {
+      1000 |   name: String
+      1001 |   age: Float
+      1002 |   languages: [UserLanguagesInput]
+      1003 |   contacts: UserContactsInput
+      1004 |   gender: EnumUserGender
+      1005 |   address: UserAddressInput
+      1006 |   """
+      1007 |   Some dynamic data
+      1008 |   """
+      1009 |   someMixed: JSON
+      1010 |   salaryDecimal: BSONDecimal
+      1011 | }
+      1012 | type UpdateOneUserPayload {
+      1013 |   """
+      1014 |   Updated document ID
       1015 |   """
-      1016 |   The item at the end of the edge
+      1016 |   recordId: MongoID
       1017 |   """
-      1018 |   node: User!
+      1018 |   Updated document
       1019 |   """
-      1020 |   A cursor for use in pagination
-      1021 |   """
-      1022 |   cursor: String!
-      1023 | }
-      1024 | type UserLanguages {
-      1025 |   language: String
-      1026 |   skill: EnumUserLanguagesSkill
-      1027 | }
-      1028 | input UserLanguagesInput {
-      1029 |   language: String
-      1030 |   skill: EnumUserLanguagesSkill
-      1031 | }
-      1032 | """
-      1033 | List of items with pagination.
-      1034 | """
-      1035 | type UserPagination {
-      1036 |   """
-      1037 |   Total object count.
-      1038 |   """
-      1039 |   count: Int
-      1040 |   """
-      1041 |   Array of objects.
-      1042 |   """
-      1043 |   items: [User]
-      1044 |   """
-      1045 |   Information to aid in pagination.
-      1046 |   """
-      1047 |   pageInfo: PaginationInfo!
-      1048 | }
+      1020 |   record: User
+      1021 | }
+      1022 | type User {
+      1023 |   name: String
+      1024 |   age: Float
+      1025 |   languages: [UserLanguages]
+      1026 |   contacts: UserContacts
+      1027 |   gender: EnumUserGender
+      1028 |   address: UserAddress
+      1029 |   """
+      1030 |   Some dynamic data
+      1031 |   """
+      1032 |   someMixed: JSON
+      1033 |   salaryDecimal: BSONDecimal
+      1034 |   _id: MongoID!
+      1035 |   virtualField(lang: String): String
+      1036 | }
+      1037 | type UserAddress {
+      1038 |   street: String
+      1039 |   geo: [Float]
+      1040 |   _id: MongoID
+      1041 | }
+      1042 | input UserAddressInput {
+      1043 |   street: String
+      1044 |   geo: [Float]
+      1045 |   _id: MongoID
+      1046 | }
+      1047 | """
+      1048 | A connection to a list of items.
+      1049 | """
+      1050 | type UserConnection {
+      1051 |   """
+      1052 |   Total object count.
+      1053 |   """
+      1054 |   count: Int!
+      1055 |   """
+      1056 |   Information to aid in pagination.
+      1057 |   """
+      1058 |   pageInfo: PageInfo!
+      1059 |   """
+      1060 |   Information to aid in pagination.
+      1061 |   """
+      1062 |   edges: [UserEdge!]!
+      1063 | }
+      1064 | type UserContacts {
+      1065 |   email: String
+      1066 |   phones: [String]
+      1067 | }
+      1068 | input UserContactsInput {
+      1069 |   email: String
+      1070 |   phones: [String]
+      1071 | }
+      1072 | """
+      1073 | An edge in a connection.
+      1074 | """
+      1075 | type UserEdge {
+      1076 |   """
+      1077 |   The item at the end of the edge
+      1078 |   """
+      1079 |   node: User!
+      1080 |   """
+      1081 |   A cursor for use in pagination
+      1082 |   """
+      1083 |   cursor: String!
+      1084 | }
+      1085 | type UserLanguages {
+      1086 |   language: String
+      1087 |   skill: EnumUserLanguagesSkill
+      1088 | }
+      1089 | input UserLanguagesInput {
+      1090 |   language: String
+      1091 |   skill: EnumUserLanguagesSkill
+      1092 | }
+      1093 | """
+      1094 | List of items with pagination.
+      1095 | """
+      1096 | type UserPagination {
+      1097 |   """
+      1098 |   Total object count.
+      1099 |   """
+      1100 |   count: Int
+      1101 |   """
+      1102 |   Array of objects.
+      1103 |   """
+      1104 |   items: [User]
+      1105 |   """
+      1106 |   Information to aid in pagination.
+      1107 |   """
+      1108 |   pageInfo: PaginationInfo!
+      1109 | }
 
 ⚙️ Options
 
@@ -1149,185 +1210,185 @@ Code
 
 ❌ Error 2/27
 
-       9 | }
-    > 10 | input _idOperatorsFilterFindOneUserInput {
+      10 |
+    > 11 | input _idOperatorsFilterFindOneUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format
-      11 |   gt: MongoID
+      12 |   gt: MongoID
 
 ❌ Error 3/27
 
-      18 | }
-    > 19 | input _idOperatorsFilterRemoveManyUserInput {
+      20 |
+    > 21 | input _idOperatorsFilterRemoveManyUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format
-      20 |   gt: MongoID
+      22 |   gt: MongoID
 
 ❌ Error 4/27
 
-      27 | }
-    > 28 | input _idOperatorsFilterRemoveOneUserInput {
+      30 |
+    > 31 | input _idOperatorsFilterRemoveOneUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format
-      29 |   gt: MongoID
+      32 |   gt: MongoID
 
 ❌ Error 5/27
 
-      36 | }
-    > 37 | input _idOperatorsFilterUpdateManyUserInput {
+      40 |
+    > 41 | input _idOperatorsFilterUpdateManyUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format
-      38 |   gt: MongoID
+      42 |   gt: MongoID
 
 ❌ Error 6/27
 
-      45 | }
-    > 46 | input _idOperatorsFilterUpdateOneUserInput {
+      50 |
+    > 51 | input _idOperatorsFilterUpdateOneUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format
-      47 |   gt: MongoID
+      52 |   gt: MongoID
 
 ❌ Error 7/27
 
-      54 | }
-    > 55 | input _idOperatorsFilterUserInput {
+      60 |
+    > 61 | input _idOperatorsFilterUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUserInput" should be in PascalCase format
-      56 |   gt: MongoID
+      62 |   gt: MongoID
 
 ❌ Error 8/27
 
-      183 | enum EnumUserGender {
-    > 184 |   male
+      207 | enum EnumUserGender {
+    > 208 |   male
           |   ^^^^ Enumeration value "male" should be in UPPER_CASE format
-      185 |   female
+      209 |   female
 
 ❌ Error 9/27
 
-      184 |   male
-    > 185 |   female
+      208 |   male
+    > 209 |   female
           |   ^^^^^^ Enumeration value "female" should be in UPPER_CASE format
-      186 |   ladyboy
+      210 |   ladyboy
 
 ❌ Error 10/27
 
-      185 |   female
-    > 186 |   ladyboy
+      209 |   female
+    > 210 |   ladyboy
           |   ^^^^^^^ Enumeration value "ladyboy" should be in UPPER_CASE format
-      187 | }
+      211 | }
 
 ❌ Error 11/27
 
-      188 | enum EnumUserLanguagesSkill {
-    > 189 |   basic
+      213 | enum EnumUserLanguagesSkill {
+    > 214 |   basic
           |   ^^^^^ Enumeration value "basic" should be in UPPER_CASE format
-      190 |   fluent
+      215 |   fluent
 
 ❌ Error 12/27
 
-      189 |   basic
-    > 190 |   fluent
+      214 |   basic
+    > 215 |   fluent
           |   ^^^^^^ Enumeration value "fluent" should be in UPPER_CASE format
-      191 |   native
+      216 |   native
 
 ❌ Error 13/27
 
-      190 |   fluent
-    > 191 |   native
+      215 |   fluent
+    > 216 |   native
           |   ^^^^^^ Enumeration value "native" should be in UPPER_CASE format
-      192 | }
+      217 | }
 
 ❌ Error 14/27
 
-      210 |   _operators: OperatorsFilterFindManyUserInput
-    > 211 |   OR: [FilterFindManyUserInput!]
+      238 |   _operators: OperatorsFilterFindManyUserInput
+    > 239 |   OR: [FilterFindManyUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      212 |   AND: [FilterFindManyUserInput!]
+      240 |   AND: [FilterFindManyUserInput!]
 
 ❌ Error 15/27
 
-      211 |   OR: [FilterFindManyUserInput!]
-    > 212 |   AND: [FilterFindManyUserInput!]
+      239 |   OR: [FilterFindManyUserInput!]
+    > 240 |   AND: [FilterFindManyUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      213 |   """
+      241 |
 
 ❌ Error 16/27
 
-      235 |   _operators: OperatorsFilterFindOneUserInput
-    > 236 |   OR: [FilterFindOneUserInput!]
+      267 |   _operators: OperatorsFilterFindOneUserInput
+    > 268 |   OR: [FilterFindOneUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      237 |   AND: [FilterFindOneUserInput!]
+      269 |   AND: [FilterFindOneUserInput!]
 
 ❌ Error 17/27
 
-      236 |   OR: [FilterFindOneUserInput!]
-    > 237 |   AND: [FilterFindOneUserInput!]
+      268 |   OR: [FilterFindOneUserInput!]
+    > 269 |   AND: [FilterFindOneUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      238 | }
+      270 | }
 
 ❌ Error 18/27
 
-      256 |   _operators: OperatorsFilterRemoveManyUserInput
-    > 257 |   OR: [FilterRemoveManyUserInput!]
+      291 |   _operators: OperatorsFilterRemoveManyUserInput
+    > 292 |   OR: [FilterRemoveManyUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      258 |   AND: [FilterRemoveManyUserInput!]
+      293 |   AND: [FilterRemoveManyUserInput!]
 
 ❌ Error 19/27
 
-      257 |   OR: [FilterRemoveManyUserInput!]
-    > 258 |   AND: [FilterRemoveManyUserInput!]
+      292 |   OR: [FilterRemoveManyUserInput!]
+    > 293 |   AND: [FilterRemoveManyUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      259 | }
+      294 | }
 
 ❌ Error 20/27
 
-      277 |   _operators: OperatorsFilterRemoveOneUserInput
-    > 278 |   OR: [FilterRemoveOneUserInput!]
+      315 |   _operators: OperatorsFilterRemoveOneUserInput
+    > 316 |   OR: [FilterRemoveOneUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      279 |   AND: [FilterRemoveOneUserInput!]
+      317 |   AND: [FilterRemoveOneUserInput!]
 
 ❌ Error 21/27
 
-      278 |   OR: [FilterRemoveOneUserInput!]
-    > 279 |   AND: [FilterRemoveOneUserInput!]
+      316 |   OR: [FilterRemoveOneUserInput!]
+    > 317 |   AND: [FilterRemoveOneUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      280 | }
+      318 | }
 
 ❌ Error 22/27
 
-      298 |   _operators: OperatorsFilterUpdateManyUserInput
-    > 299 |   OR: [FilterUpdateManyUserInput!]
+      339 |   _operators: OperatorsFilterUpdateManyUserInput
+    > 340 |   OR: [FilterUpdateManyUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      300 |   AND: [FilterUpdateManyUserInput!]
+      341 |   AND: [FilterUpdateManyUserInput!]
 
 ❌ Error 23/27
 
-      299 |   OR: [FilterUpdateManyUserInput!]
-    > 300 |   AND: [FilterUpdateManyUserInput!]
+      340 |   OR: [FilterUpdateManyUserInput!]
+    > 341 |   AND: [FilterUpdateManyUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      301 | }
+      342 | }
 
 ❌ Error 24/27
 
-      319 |   _operators: OperatorsFilterUpdateOneUserInput
-    > 320 |   OR: [FilterUpdateOneUserInput!]
+      363 |   _operators: OperatorsFilterUpdateOneUserInput
+    > 364 |   OR: [FilterUpdateOneUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      321 |   AND: [FilterUpdateOneUserInput!]
+      365 |   AND: [FilterUpdateOneUserInput!]
 
 ❌ Error 25/27
 
-      320 |   OR: [FilterUpdateOneUserInput!]
-    > 321 |   AND: [FilterUpdateOneUserInput!]
+      364 |   OR: [FilterUpdateOneUserInput!]
+    > 365 |   AND: [FilterUpdateOneUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      322 | }
+      366 | }
 
 ❌ Error 26/27
 
-      340 |   _operators: OperatorsFilterUserInput
-    > 341 |   OR: [FilterUserInput!]
+      387 |   _operators: OperatorsFilterUserInput
+    > 388 |   OR: [FilterUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
-      342 |   AND: [FilterUserInput!]
+      389 |   AND: [FilterUserInput!]
 
 ❌ Error 27/27
 
-      341 |   OR: [FilterUserInput!]
-    > 342 |   AND: [FilterUserInput!]
+      388 |   OR: [FilterUserInput!]
+    > 389 |   AND: [FilterUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
-      343 | }
+      390 | }
 `;
 
 exports[` 5`] = `
@@ -1630,14 +1691,16 @@ Code
        3 |           queryField: ID
        4 |           getField: ID
        5 |         }
-       6 |         type Mutation {
-       7 |           fieldMutation: ID
-       8 |           mutationField: ID
-       9 |         }
-      10 |         type Subscription {
-      11 |           fieldSubscription: ID
-      12 |           subscriptionField: ID
-      13 |         }
+       6 |
+       7 |         type Mutation {
+       8 |           fieldMutation: ID
+       9 |           mutationField: ID
+      10 |         }
+      11 |
+      12 |         type Subscription {
+      13 |           fieldSubscription: ID
+      14 |           subscriptionField: ID
+      15 |         }
 
 ⚙️ Options
 
@@ -1689,14 +1752,16 @@ Code
      3 |           queryField: ID
      4 |           getField: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           fieldMutation: ID
-     8 |           mutationField: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           fieldSubscription: ID
-    12 |           subscriptionField: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
 
 ❌ Error 2/7
 
@@ -1712,14 +1777,16 @@ Code
      3 |           Field: ID
      4 |           getField: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           fieldMutation: ID
-     8 |           mutationField: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           fieldSubscription: ID
-    12 |           subscriptionField: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
 
 ❌ Error 3/7
 
@@ -1735,21 +1802,23 @@ Code
      3 |           queryField: ID
      4 |           Field: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           fieldMutation: ID
-     8 |           mutationField: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           fieldSubscription: ID
-    12 |           subscriptionField: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
 
 ❌ Error 4/7
 
-      6 |         type Mutation {
-    > 7 |           fieldMutation: ID
+      7 |         type Mutation {
+    > 8 |           fieldMutation: ID
         |           ^^^^^^^^^^^^^ Field "fieldMutation" should not have "Mutation" suffix
-      8 |           mutationField: ID
+      9 |           mutationField: ID
 
 💡 Suggestion: Rename to "field"
 
@@ -1758,21 +1827,23 @@ Code
      3 |           queryField: ID
      4 |           getField: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           field: ID
-     8 |           mutationField: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           fieldSubscription: ID
-    12 |           subscriptionField: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           field: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
 
 ❌ Error 5/7
 
-      7 |           fieldMutation: ID
-    > 8 |           mutationField: ID
-        |           ^^^^^^^^^^^^^ Field "mutationField" should not have "mutation" prefix
-      9 |         }
+       8 |           fieldMutation: ID
+    >  9 |           mutationField: ID
+         |           ^^^^^^^^^^^^^ Field "mutationField" should not have "mutation" prefix
+      10 |         }
 
 💡 Suggestion: Rename to "Field"
 
@@ -1781,21 +1852,23 @@ Code
      3 |           queryField: ID
      4 |           getField: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           fieldMutation: ID
-     8 |           Field: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           fieldSubscription: ID
-    12 |           subscriptionField: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           Field: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
 
 ❌ Error 6/7
 
-      10 |         type Subscription {
-    > 11 |           fieldSubscription: ID
+      12 |         type Subscription {
+    > 13 |           fieldSubscription: ID
          |           ^^^^^^^^^^^^^^^^^ Field "fieldSubscription" should not have "Subscription" suffix
-      12 |           subscriptionField: ID
+      14 |           subscriptionField: ID
 
 💡 Suggestion: Rename to "field"
 
@@ -1804,21 +1877,23 @@ Code
      3 |           queryField: ID
      4 |           getField: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           fieldMutation: ID
-     8 |           mutationField: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           field: ID
-    12 |           subscriptionField: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           field: ID
+    14 |           subscriptionField: ID
+    15 |         }
 
 ❌ Error 7/7
 
-      11 |           fieldSubscription: ID
-    > 12 |           subscriptionField: ID
+      13 |           fieldSubscription: ID
+    > 14 |           subscriptionField: ID
          |           ^^^^^^^^^^^^^^^^^ Field "subscriptionField" should not have "subscription" prefix
-      13 |         }
+      15 |         }
 
 💡 Suggestion: Rename to "Field"
 
@@ -1827,14 +1902,16 @@ Code
      3 |           queryField: ID
      4 |           getField: ID
      5 |         }
-     6 |         type Mutation {
-     7 |           fieldMutation: ID
-     8 |           mutationField: ID
-     9 |         }
-    10 |         type Subscription {
-    11 |           fieldSubscription: ID
-    12 |           Field: ID
-    13 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           Field: ID
+    15 |         }
 `;
 
 exports[` 12`] = `
@@ -1844,12 +1921,15 @@ Code
        2 |         query QueryTest { test }
        3 |         query GetQuery { test }
        4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-       5 |         mutation TestMutation { test }
-       6 |         mutation MutationTest { test }
-       7 |         subscription TestSubscription { test }
-       8 |         subscription SubscriptionTest { test }
-       9 |         fragment TestFragment on Test { id }
-      10 |         fragment FragmentTest on Test { id }
+       5 |
+       6 |         mutation TestMutation { test }
+       7 |         mutation MutationTest { test }
+       8 |
+       9 |         subscription TestSubscription { test }
+      10 |         subscription SubscriptionTest { test }
+      11 |
+      12 |         fragment TestFragment on Test { id }
+      13 |         fragment FragmentTest on Test { id }
 
 ⚙️ Options
 
@@ -1892,12 +1972,15 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 2/9
 
@@ -1912,12 +1995,15 @@ Code
      2 |         query Test { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 3/9
 
@@ -1932,19 +2018,22 @@ Code
      2 |         query QueryTest { test }
      3 |         query Query { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 4/9
 
-      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-    > 5 |         mutation TestMutation { test }
+      5 |
+    > 6 |         mutation TestMutation { test }
         |                  ^^^^^^^^^^^^ Operation "TestMutation" should not have "Mutation" suffix
-      6 |         mutation MutationTest { test }
+      7 |         mutation MutationTest { test }
 
 💡 Suggestion: Rename to "Test"
 
@@ -1952,19 +2041,22 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation Test { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation Test { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 5/9
 
-      5 |         mutation TestMutation { test }
-    > 6 |         mutation MutationTest { test }
+      6 |         mutation TestMutation { test }
+    > 7 |         mutation MutationTest { test }
         |                  ^^^^^^^^^^^^ Operation "MutationTest" should not have "Mutation" prefix
-      7 |         subscription TestSubscription { test }
+      8 |
 
 💡 Suggestion: Rename to "Test"
 
@@ -1972,19 +2064,22 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation Test { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation Test { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 6/9
 
-      6 |         mutation MutationTest { test }
-    > 7 |         subscription TestSubscription { test }
-        |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
-      8 |         subscription SubscriptionTest { test }
+       8 |
+    >  9 |         subscription TestSubscription { test }
+         |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
+      10 |         subscription SubscriptionTest { test }
 
 💡 Suggestion: Rename to "Test"
 
@@ -1992,19 +2087,22 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription Test { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription Test { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 7/9
 
-      7 |         subscription TestSubscription { test }
-    > 8 |         subscription SubscriptionTest { test }
-        |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
-      9 |         fragment TestFragment on Test { id }
+       9 |         subscription TestSubscription { test }
+    > 10 |         subscription SubscriptionTest { test }
+         |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
+      11 |
 
 💡 Suggestion: Rename to "Test"
 
@@ -2012,19 +2110,22 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription Test { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription Test { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 8/9
 
-       8 |         subscription SubscriptionTest { test }
-    >  9 |         fragment TestFragment on Test { id }
+      11 |
+    > 12 |         fragment TestFragment on Test { id }
          |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
-      10 |         fragment FragmentTest on Test { id }
+      13 |         fragment FragmentTest on Test { id }
 
 💡 Suggestion: Rename to "Test"
 
@@ -2032,17 +2133,20 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment Test on Test { id }
-    10 |         fragment FragmentTest on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment Test on Test { id }
+    13 |         fragment FragmentTest on Test { id }
 
 ❌ Error 9/9
 
-       9 |         fragment TestFragment on Test { id }
-    > 10 |         fragment FragmentTest on Test { id }
+      12 |         fragment TestFragment on Test { id }
+    > 13 |         fragment FragmentTest on Test { id }
          |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not have "Fragment" prefix
 
 💡 Suggestion: Rename to "Test"
@@ -2051,12 +2155,15 @@ Code
      2 |         query QueryTest { test }
      3 |         query GetQuery { test }
      4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
-     5 |         mutation TestMutation { test }
-     6 |         mutation MutationTest { test }
-     7 |         subscription TestSubscription { test }
-     8 |         subscription SubscriptionTest { test }
-     9 |         fragment TestFragment on Test { id }
-    10 |         fragment Test on Test { id }
+     5 |
+     6 |         mutation TestMutation { test }
+     7 |         mutation MutationTest { test }
+     8 |
+     9 |         subscription TestSubscription { test }
+    10 |         subscription SubscriptionTest { test }
+    11 |
+    12 |         fragment TestFragment on Test { id }
+    13 |         fragment Test on Test { id }
 `;
 
 exports[` 13`] = `

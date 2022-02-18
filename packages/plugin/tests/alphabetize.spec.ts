@@ -261,7 +261,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       options: [{ definitions: true }],
       code: /* GraphQL */ `
         # START
-        
+
         # before1 extend union Data
         # before2 extend union Data
         extend union Data = Role # same extend union Data
@@ -317,6 +317,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         union Data = User | Node # same union Data
         # before directive @auth
         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
+
         # END
       `,
       errors: [

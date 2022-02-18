@@ -7,7 +7,8 @@ exports[` 1`] = `
         |              ^^^^^ There can be only one type named "Query".
       2 |           foo: String
       3 |         }
-      4 |         type Query {
-      5 |           bar: Boolean
-      6 |         }
+      4 |
+      5 |         type Query {
+      6 |           bar: Boolean
+      7 |         }
 `;

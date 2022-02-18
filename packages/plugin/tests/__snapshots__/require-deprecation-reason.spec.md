@@ -8,17 +8,19 @@ Code
        3 |           deprecatedWithReason: String @deprecated(reason: "Reason")
        4 |           notDeprecated: String
        5 |         }
-       6 |         enum testEnum {
-       7 |           item1 @deprecated
-       8 |           item2 @deprecated(reason: "Reason")
-       9 |         }
-      10 |         interface testInterface {
-      11 |           item1: String @deprecated
-      12 |           item2: Number @deprecated(reason: "Reason")
-      13 |           item3: String
-      14 |           item4: String @deprecated(reason: "")
-      15 |           item5: String @deprecated(reason: "  ")
-      16 |         }
+       6 |
+       7 |         enum testEnum {
+       8 |           item1 @deprecated
+       9 |           item2 @deprecated(reason: "Reason")
+      10 |         }
+      11 |
+      12 |         interface testInterface {
+      13 |           item1: String @deprecated
+      14 |           item2: Number @deprecated(reason: "Reason")
+      15 |           item3: String
+      16 |           item4: String @deprecated(reason: "")
+      17 |           item5: String @deprecated(reason: "  ")
+      18 |         }
 
 ❌ Error 1/5
 
@@ -29,29 +31,29 @@ Code
 
 ❌ Error 2/5
 
-      6 |         enum testEnum {
-    > 7 |           item1 @deprecated
+      7 |         enum testEnum {
+    > 8 |           item1 @deprecated
         |                  ^^^^^^^^^^ Directive "@deprecated" must have a reason!
-      8 |           item2 @deprecated(reason: "Reason")
+      9 |           item2 @deprecated(reason: "Reason")
 
 ❌ Error 3/5
 
-      10 |         interface testInterface {
-    > 11 |           item1: String @deprecated
+      12 |         interface testInterface {
+    > 13 |           item1: String @deprecated
          |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
-      12 |           item2: Number @deprecated(reason: "Reason")
+      14 |           item2: Number @deprecated(reason: "Reason")
 
 ❌ Error 4/5
 
-      13 |           item3: String
-    > 14 |           item4: String @deprecated(reason: "")
+      15 |           item3: String
+    > 16 |           item4: String @deprecated(reason: "")
          |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
-      15 |           item5: String @deprecated(reason: "  ")
+      17 |           item5: String @deprecated(reason: "  ")
 
 ❌ Error 5/5
 
-      14 |           item4: String @deprecated(reason: "")
-    > 15 |           item5: String @deprecated(reason: "  ")
+      16 |           item4: String @deprecated(reason: "")
+    > 17 |           item5: String @deprecated(reason: "  ")
          |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
-      16 |         }
+      18 |         }
 `;

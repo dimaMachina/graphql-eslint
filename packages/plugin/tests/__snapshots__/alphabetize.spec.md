@@ -485,17 +485,18 @@ Code
 
        1 |         type Test { # { character
        2 |           # before d 1
-       3 |           # before d 2
-       4 |           d: Int # same d
-       5 |           # before c
-       6 |           c: Float!
-       7 |           # before b 1
-       8 |           # before b 2
-       9 |           b: [String] # same b
-      10 |           # before a
-      11 |           a: [Int!]! # same a
-      12 |           # end
-      13 |         } # } character
+       3 |
+       4 |           # before d 2
+       5 |           d: Int # same d
+       6 |           # before c
+       7 |           c: Float!
+       8 |           # before b 1
+       9 |           # before b 2
+      10 |           b: [String] # same b
+      11 |           # before a
+      12 |           a: [Int!]! # same a
+      13 |           # end
+      14 |         } # } character
 
 ⚙️ Options
 
@@ -507,24 +508,24 @@ Code
 
 ❌ Error 1/3
 
-      5 |           # before c
-    > 6 |           c: Float!
+      6 |           # before c
+    > 7 |           c: Float!
         |           ^ \`c\` should be before \`d\`.
-      7 |           # before b 1
+      8 |           # before b 1
 
 ❌ Error 2/3
 
-       8 |           # before b 2
-    >  9 |           b: [String] # same b
+       9 |           # before b 2
+    > 10 |           b: [String] # same b
          |           ^ \`b\` should be before \`c\`.
-      10 |           # before a
+      11 |           # before a
 
 ❌ Error 3/3
 
-      10 |           # before a
-    > 11 |           a: [Int!]! # same a
+      11 |           # before a
+    > 12 |           a: [Int!]! # same a
          |           ^ \`a\` should be before \`b\`.
-      12 |           # end
+      13 |           # end
 
 🔧 Autofix output
 
@@ -537,10 +538,11 @@ Code
        7 |           # before c
        8 |           c: Float!
        9 |           # before d 1
-      10 |           # before d 2
-      11 |           d: Int # same d
-      12 |           # end
-      13 |         } # } character
+      10 |
+      11 |           # before d 2
+      12 |           d: Int # same d
+      13 |           # end
+      14 |         } # } character
 `;
 
 exports[` 14`] = `
@@ -606,62 +608,64 @@ exports[` 15`] = `
 Code
 
        1 |         # START
-       2 |         # before1 extend union Data
-       3 |         # before2 extend union Data
-       4 |         extend union Data = Role # same extend union Data
-       5 |         # before extend input UserInput
-       6 |         extend input UserInput {
-       7 |           email: Email!
-       8 |         } # same extend input UserInput
-       9 |         # before fragment UserFields
-      10 |         fragment UserFields on User {
-      11 |           id
-      12 |         } # same fragment UserFields
-      13 |         # before type User
-      14 |         type User # same type User
-      15 |         # before extend enum Role
-      16 |         extend enum Role {
-      17 |           SUPERMAN
-      18 |         } # same extend enum Role
-      19 |         # before anonymous operation
-      20 |         query {
-      21 |           foo
-      22 |         } # same anonymous operation
-      23 |         # before mutation CreateUser
-      24 |         mutation CreateUser {
-      25 |           createUser
-      26 |         } # same mutation CreateUser
-      27 |         # before extend interface Node
-      28 |         extend interface Node {
-      29 |           createdAt: String!
-      30 |         } # same extend interface Node
-      31 |         # before extend interface Node
-      32 |         extend interface Node {
-      33 |           updatedAt: String!
-      34 |         } # same extend interface Node
-      35 |         # before type RootQuery
-      36 |         type RootQuery # same type RootQuery
-      37 |         # before interface Node
-      38 |         interface Node # same interface Node
-      39 |         # before enum Role
-      40 |         enum Role # same enum Role
-      41 |         # before scalar Email
-      42 |         scalar Email # same scalar Email
-      43 |         # before input UserInput
-      44 |         input UserInput # same input UserInput
-      45 |         # before extend type User
-      46 |         extend type User {
-      47 |           firstName: String!
-      48 |         } # same extend type User
-      49 |         # before schema definition
-      50 |         schema {
-      51 |           query: RootQuery
-      52 |         } # same schema definition
-      53 |         # before union Data
-      54 |         union Data = User | Node # same union Data
-      55 |         # before directive @auth
-      56 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
-      57 |         # END
+       2 |
+       3 |         # before1 extend union Data
+       4 |         # before2 extend union Data
+       5 |         extend union Data = Role # same extend union Data
+       6 |         # before extend input UserInput
+       7 |         extend input UserInput {
+       8 |           email: Email!
+       9 |         } # same extend input UserInput
+      10 |         # before fragment UserFields
+      11 |         fragment UserFields on User {
+      12 |           id
+      13 |         } # same fragment UserFields
+      14 |         # before type User
+      15 |         type User # same type User
+      16 |         # before extend enum Role
+      17 |         extend enum Role {
+      18 |           SUPERMAN
+      19 |         } # same extend enum Role
+      20 |         # before anonymous operation
+      21 |         query {
+      22 |           foo
+      23 |         } # same anonymous operation
+      24 |         # before mutation CreateUser
+      25 |         mutation CreateUser {
+      26 |           createUser
+      27 |         } # same mutation CreateUser
+      28 |         # before extend interface Node
+      29 |         extend interface Node {
+      30 |           createdAt: String!
+      31 |         } # same extend interface Node
+      32 |         # before extend interface Node
+      33 |         extend interface Node {
+      34 |           updatedAt: String!
+      35 |         } # same extend interface Node
+      36 |         # before type RootQuery
+      37 |         type RootQuery # same type RootQuery
+      38 |         # before interface Node
+      39 |         interface Node # same interface Node
+      40 |         # before enum Role
+      41 |         enum Role # same enum Role
+      42 |         # before scalar Email
+      43 |         scalar Email # same scalar Email
+      44 |         # before input UserInput
+      45 |         input UserInput # same input UserInput
+      46 |         # before extend type User
+      47 |         extend type User {
+      48 |           firstName: String!
+      49 |         } # same extend type User
+      50 |         # before schema definition
+      51 |         schema {
+      52 |           query: RootQuery
+      53 |         } # same schema definition
+      54 |         # before union Data
+      55 |         union Data = User | Node # same union Data
+      56 |         # before directive @auth
+      57 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
+      58 |
+      59 |         # END
 
 ⚙️ Options
 
@@ -671,124 +675,126 @@ Code
 
 ❌ Error 1/9
 
-       9 |         # before fragment UserFields
-    > 10 |         fragment UserFields on User {
+      10 |         # before fragment UserFields
+    > 11 |         fragment UserFields on User {
          |                  ^^^^^^^^^^ \`UserFields\` should be before \`UserInput\`.
-      11 |           id
+      12 |           id
 
 ❌ Error 2/9
 
-      13 |         # before type User
-    > 14 |         type User # same type User
+      14 |         # before type User
+    > 15 |         type User # same type User
          |              ^^^^ \`User\` should be before \`UserFields\`.
-      15 |         # before extend enum Role
+      16 |         # before extend enum Role
 
 ❌ Error 3/9
 
-      15 |         # before extend enum Role
-    > 16 |         extend enum Role {
+      16 |         # before extend enum Role
+    > 17 |         extend enum Role {
          |                     ^^^^ \`Role\` should be before \`User\`.
-      17 |           SUPERMAN
+      18 |           SUPERMAN
 
 ❌ Error 4/9
 
-      23 |         # before mutation CreateUser
-    > 24 |         mutation CreateUser {
+      24 |         # before mutation CreateUser
+    > 25 |         mutation CreateUser {
          |                  ^^^^^^^^^^ \`CreateUser\` should be before operation definition.
-      25 |           createUser
+      26 |           createUser
 
 ❌ Error 5/9
 
-      37 |         # before interface Node
-    > 38 |         interface Node # same interface Node
+      38 |         # before interface Node
+    > 39 |         interface Node # same interface Node
          |                   ^^^^ \`Node\` should be before \`RootQuery\`.
-      39 |         # before enum Role
+      40 |         # before enum Role
 
 ❌ Error 6/9
 
-      41 |         # before scalar Email
-    > 42 |         scalar Email # same scalar Email
+      42 |         # before scalar Email
+    > 43 |         scalar Email # same scalar Email
          |                ^^^^^ \`Email\` should be before \`Role\`.
-      43 |         # before input UserInput
+      44 |         # before input UserInput
 
 ❌ Error 7/9
 
-      45 |         # before extend type User
-    > 46 |         extend type User {
+      46 |         # before extend type User
+    > 47 |         extend type User {
          |                     ^^^^ \`User\` should be before \`UserInput\`.
-      47 |           firstName: String!
+      48 |           firstName: String!
 
 ❌ Error 8/9
 
-      53 |         # before union Data
-    > 54 |         union Data = User | Node # same union Data
+      54 |         # before union Data
+    > 55 |         union Data = User | Node # same union Data
          |               ^^^^ \`Data\` should be before schema definition.
-      55 |         # before directive @auth
+      56 |         # before directive @auth
 
 ❌ Error 9/9
 
-      55 |         # before directive @auth
-    > 56 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
+      56 |         # before directive @auth
+    > 57 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
          |                    ^^^^ \`auth\` should be before \`Data\`.
-      57 |         # END
+      58 |
 
 🔧 Autofix output
 
-       1 |         # before directive @auth
-       2 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
-       3 |         # before mutation CreateUser
-       4 |         mutation CreateUser {
-       5 |           createUser
-       6 |         } # same mutation CreateUser
-       7 |         # before union Data
-       8 |         union Data = User | Node # same union Data
-       9 |         # START
-      10 |         # before1 extend union Data
-      11 |         # before2 extend union Data
-      12 |         extend union Data = Role # same extend union Data
-      13 |         # before scalar Email
-      14 |         scalar Email # same scalar Email
-      15 |         # before interface Node
-      16 |         interface Node # same interface Node
-      17 |         # before extend interface Node
-      18 |         extend interface Node {
-      19 |           createdAt: String!
-      20 |         } # same extend interface Node
-      21 |         # before extend interface Node
-      22 |         extend interface Node {
-      23 |           updatedAt: String!
-      24 |         } # same extend interface Node
-      25 |         # before enum Role
-      26 |         enum Role # same enum Role
-      27 |         # before extend enum Role
-      28 |         extend enum Role {
-      29 |           SUPERMAN
-      30 |         } # same extend enum Role
-      31 |         # before type RootQuery
-      32 |         type RootQuery # same type RootQuery
-      33 |         # before type User
-      34 |         type User # same type User
-      35 |         # before extend type User
-      36 |         extend type User {
-      37 |           firstName: String!
-      38 |         } # same extend type User
-      39 |         # before fragment UserFields
-      40 |         fragment UserFields on User {
-      41 |           id
-      42 |         } # same fragment UserFields
-      43 |         # before input UserInput
-      44 |         input UserInput # same input UserInput
-      45 |         # before extend input UserInput
-      46 |         extend input UserInput {
-      47 |           email: Email!
-      48 |         } # same extend input UserInput
-      49 |         # before anonymous operation
-      50 |         query {
-      51 |           foo
-      52 |         } # same anonymous operation
-      53 |         # before schema definition
-      54 |         schema {
-      55 |           query: RootQuery
-      56 |         } # same schema definition
-      57 |         # END
+       1 |         # START
+       2 |
+       3 |         # before directive @auth
+       4 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
+       5 |         # before mutation CreateUser
+       6 |         mutation CreateUser {
+       7 |           createUser
+       8 |         } # same mutation CreateUser
+       9 |         # before union Data
+      10 |         union Data = User | Node # same union Data
+      11 |         # before1 extend union Data
+      12 |         # before2 extend union Data
+      13 |         extend union Data = Role # same extend union Data
+      14 |         # before scalar Email
+      15 |         scalar Email # same scalar Email
+      16 |         # before interface Node
+      17 |         interface Node # same interface Node
+      18 |         # before extend interface Node
+      19 |         extend interface Node {
+      20 |           createdAt: String!
+      21 |         } # same extend interface Node
+      22 |         # before extend interface Node
+      23 |         extend interface Node {
+      24 |           updatedAt: String!
+      25 |         } # same extend interface Node
+      26 |         # before enum Role
+      27 |         enum Role # same enum Role
+      28 |         # before extend enum Role
+      29 |         extend enum Role {
+      30 |           SUPERMAN
+      31 |         } # same extend enum Role
+      32 |         # before type RootQuery
+      33 |         type RootQuery # same type RootQuery
+      34 |         # before type User
+      35 |         type User # same type User
+      36 |         # before extend type User
+      37 |         extend type User {
+      38 |           firstName: String!
+      39 |         } # same extend type User
+      40 |         # before fragment UserFields
+      41 |         fragment UserFields on User {
+      42 |           id
+      43 |         } # same fragment UserFields
+      44 |         # before input UserInput
+      45 |         input UserInput # same input UserInput
+      46 |         # before extend input UserInput
+      47 |         extend input UserInput {
+      48 |           email: Email!
+      49 |         } # same extend input UserInput
+      50 |         # before anonymous operation
+      51 |         query {
+      52 |           foo
+      53 |         } # same anonymous operation
+      54 |         # before schema definition
+      55 |         schema {
+      56 |           query: RootQuery
+      57 |         } # same schema definition
+      58 |
+      59 |         # END
 `;

@@ -23,15 +23,17 @@ exports[` 2`] = `
       1 |         type Query {
       2 |           user(id: ID!): User
       3 |         }
-      4 |         type Mutation {
-    > 5 |           deleteUser(id: ID!): User
+      4 |
+      5 |         type Mutation {
+    > 6 |           deleteUser(id: ID!): User
         |           ^^^^^^^^^^ Field "deleteUser" is unused
-      6 |         }
+      7 |         }
 
 💡 Suggestion: Remove "deleteUser" field
 
     1 |         type Query {
     2 |           user(id: ID!): User
     3 |         }
-    4 |         
+    4 |
+    5 |         
 `;
