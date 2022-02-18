@@ -1,6 +1,7 @@
+/* eslint-env jest */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { RuleTester, AST, Linter } from 'eslint';
+import { RuleTester, AST, Linter, Rule } from 'eslint';
 import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
 import { GraphQLESTreeNode } from './estree-parser';
@@ -33,6 +34,12 @@ function printCode(code: string): string {
       linesBelow: Number.POSITIVE_INFINITY,
     }
   );
+}
+
+// A simple version of `SourceCodeFixer.applyFixes`
+// https://github.com/eslint/eslint/issues/14936#issuecomment-906746754
+function applyFix(code: string, fix: Rule.Fix): string {
+  return [code.slice(0, fix.range[0]), fix.text, code.slice(fix.range[1])].join('');
 }
 
 export class GraphQLRuleTester extends RuleTester {
@@ -97,28 +104,50 @@ export class GraphQLRuleTester extends RuleTester {
     const hasOnlyTest = tests.invalid.some(t => t.only);
 
     for (const testCase of tests.invalid) {
-      const { only, code, filename } = testCase;
+      const { only, filename, options } = testCase;
       if (hasOnlyTest && !only) {
         continue;
       }
 
+      const code = removeTrailingBlankLines(testCase.code);
       const verifyConfig = getVerifyConfig(name, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
 
       const messages = linter.verify(code, verifyConfig, { filename });
       const messageForSnapshot: string[] = [];
+      const hasMultipleMessages = messages.length > 1;
+      if (hasMultipleMessages) {
+        messageForSnapshot.push('Code', indentCode(printCode(code)));
+      }
+      if (options) {
+        const opts = JSON.stringify(options, null, 2).slice(1, -1);
+        messageForSnapshot.push('⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
+      }
+
       for (const [index, message] of messages.entries()) {
         if (message.fatal) {
           throw new Error(message.message);
         }
 
-        messageForSnapshot.push(`❌ Error ${index + 1}/${messages.length}`, visualizeEslintMessage(code, message));
+        const codeWithMessage = visualizeEslintMessage(code, message, hasMultipleMessages ? 1 : undefined);
+        messageForSnapshot.push(printWithIndex('❌ Error', index, messages.length), indentCode(codeWithMessage));
 
+        const { suggestions } = message;
+
+        // Don't print suggestions in snapshots for too big codes
+        if (suggestions && (code.match(/\n/g) || '').length < 1000) {
+          for (const [i, suggestion] of message.suggestions.entries()) {
+            const output = applyFix(code, suggestion.fix);
+            const title = printWithIndex('💡 Suggestion', i, suggestions.length, suggestion.desc);
+            messageForSnapshot.push(title, indentCode(printCode(output), 2));
+          }
+        }
       }
+
       if (rule.meta.fixable) {
         const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
         if (fixed) {
-          messageForSnapshot.push('🔧 Autofix output', indentCode(printCode(output), 2));
+          messageForSnapshot.push('🔧 Autofix output', indentCode(codeFrameColumns(output, {} as any)));
         }
       }
       expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
@@ -126,8 +155,22 @@ export class GraphQLRuleTester extends RuleTester {
   }
 }
 
+function removeTrailingBlankLines(text: string): string {
+  return text.replace(/^\s*\n/gm, '').trimEnd();
+}
+
+function printWithIndex(title: string, index: number, total: number, description?: string): string {
+  if (total > 1) {
+    title += ` ${index + 1}/${total}`;
+  }
+  if (description) {
+    title += `: ${description}`;
+  }
+  return title;
+}
+
 function getVerifyConfig(ruleId: string, testerConfig, testCase) {
-  const { options, parserOptions, parser = testerConfig.parser } = testCase;
+  const { parser = testerConfig.parser, parserOptions, options } = testCase;
 
   return {
     ...testerConfig,
@@ -137,7 +180,7 @@ function getVerifyConfig(ruleId: string, testerConfig, testCase) {
       ...parserOptions,
     },
     rules: {
-      [ruleId]: ['error', ...(Array.isArray(options) ? options : [])],
+      [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
     },
   };
 }
@@ -159,7 +202,11 @@ function defineParser(linter: Linter, parser: string): void {
   }
 }
 
-function visualizeEslintMessage(text: string, result: Linter.LintMessage): string {
+function visualizeEslintMessage(
+  text: string,
+  result: Linter.LintMessage,
+  linesOffset = Number.POSITIVE_INFINITY
+): string {
   const { line, column, endLine, endColumn, message } = result;
   const location: Partial<AST.SourceLocation> = {
     start: {
@@ -176,8 +223,8 @@ function visualizeEslintMessage(text: string, result: Linter.LintMessage): strin
   }
 
   return codeFrameColumns(text, location as AST.SourceLocation, {
-    linesAbove: Number.POSITIVE_INFINITY,
-    linesBelow: Number.POSITIVE_INFINITY,
+    linesAbove: linesOffset,
+    linesBelow: linesOffset,
     message,
   });
 }
