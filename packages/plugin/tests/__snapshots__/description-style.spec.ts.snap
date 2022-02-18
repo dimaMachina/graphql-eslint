@@ -67,7 +67,7 @@ exports[` 2`] = `
 
    1 |
 >  2 |   " Test "
-     |   ^ Unexpected inline description
+     |   ^^^^^^^^ Unexpected inline description
    3 |   type CreateOneUserPayload {
    4 |     "Created document ID"
    5 |     recordId: MongoID
@@ -83,7 +83,7 @@ exports[` 2`] = `
    2 |   " Test "
    3 |   type CreateOneUserPayload {
 >  4 |     "Created document ID"
-     |     ^ Unexpected inline description
+     |     ^^^^^^^^^^^^^^^^^^^^^ Unexpected inline description
    5 |     recordId: MongoID
    6 |
    7 |     "Created document"
@@ -100,7 +100,7 @@ exports[` 2`] = `
    5 |     recordId: MongoID
    6 |
 >  7 |     "Created document"
-     |     ^ Unexpected inline description
+     |     ^^^^^^^^^^^^^^^^^^ Unexpected inline description
    8 |     record: User
    9 |   }
   10 |

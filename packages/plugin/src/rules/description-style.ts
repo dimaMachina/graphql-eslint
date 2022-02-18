@@ -1,6 +1,5 @@
 import { StringValueNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { getLocation } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 type DescriptionStyleRuleConfig = { style: 'inline' | 'block' };
@@ -55,7 +54,7 @@ const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
     return {
       [`.description[type=StringValue][block!=${isBlock}]`](node: GraphQLESTreeNode<StringValueNode>) {
         context.report({
-          loc: getLocation(node.loc),
+          loc: isBlock ? node.loc : node.loc.start,
           message: `Unexpected ${isBlock ? 'inline' : 'block'} description`,
         });
       },
