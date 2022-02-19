@@ -7,6 +7,7 @@ type DescriptionStyleRuleConfig = { style: 'inline' | 'block' };
 const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       examples: [
         {
@@ -55,7 +56,20 @@ const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
       [`.description[type=StringValue][block!=${isBlock}]`](node: GraphQLESTreeNode<StringValueNode>) {
         context.report({
           loc: isBlock ? node.loc : node.loc.start,
-          message: `Unexpected ${isBlock ? 'inline' : 'block'} description`,
+          message: `Unexpected ${isBlock ? 'inline' : 'block'} description.`,
+          suggest: [
+            {
+              desc: `Change to ${isBlock ? 'block' : 'inline'} style description`,
+              fix(fixer) {
+                const sourceCode = context.getSourceCode();
+                const originalText = sourceCode.getText(node as any);
+                const newText = isBlock
+                  ? originalText.replace(/(^")|("$)/g, '"""')
+                  : originalText.replace(/(^""")|("""$)/g, '"').replace(/\s+/g, ' ');
+                return fixer.replaceText(node as any, newText);
+              },
+            },
+          ],
         });
       },
     };

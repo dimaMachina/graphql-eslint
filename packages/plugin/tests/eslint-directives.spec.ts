@@ -65,12 +65,12 @@ ruleTester.runGraphQLTests('test-directives', noAnonymousOperations, {
       `,
       errors: [
         { message: "Definition for rule 'non-existing-rule' was not found." },
-        { message: 'Anonymous GraphQL operations are forbidden. Please make sure to name your query!' },
+        { message: 'Anonymous GraphQL operations are forbidden. Make sure to name your query!' },
       ],
     },
     {
       code: 'query { a }',
-      errors: [{ message: 'Anonymous GraphQL operations are forbidden. Please make sure to name your query!' }],
+      errors: [{ message: 'Anonymous GraphQL operations are forbidden. Make sure to name your query!' }],
     },
   ],
 });
