@@ -128,7 +128,6 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                   {
                     desc: 'Remove selections',
                     fix(fixer) {
-                      const { line, column } = error.locations[0];
                       const ancestors = context.getAncestors();
                       const token = (ancestors[0] as AST.Program).tokens.find(
                         token => token.loc.start.line === line && token.loc.start.column === column - 1
