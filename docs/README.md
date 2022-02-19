@@ -18,7 +18,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [fragments-on-composite-type](rules/fragments-on-composite-type.md)|Fragments use a type condition to determine if they apply, since fragments can only be spread into a composite type (object, interface, or union), the type condition must also be a composite type.|![recommended][]|🔮|
 [input-name](rules/input-name.md)|Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".|![all][]|🚀|💡
 [known-argument-names](rules/known-argument-names.md)|A GraphQL field is only valid if all supplied arguments are defined by that field.|![recommended][]|🔮|
-[known-directives](rules/known-directives.md)|A GraphQL document is only valid if all `@directives` are known by the schema and legally positioned.|![recommended][]|🔮|
+[known-directives](rules/known-directives.md)|A GraphQL document is only valid if all `@directive`s are known by the schema and legally positioned.|![recommended][]|🔮|
 [known-fragment-names](rules/known-fragment-names.md)|A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.|![recommended][]|🔮|
 [known-type-names](rules/known-type-names.md)|A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.|![recommended][]|🔮|
 [lone-anonymous-operation](rules/lone-anonymous-operation.md)|A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition.|![recommended][]|🔮|

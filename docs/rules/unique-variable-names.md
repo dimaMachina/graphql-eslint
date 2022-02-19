@@ -9,7 +9,7 @@
 
 A GraphQL operation is only valid if all its variables are uniquely named.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueVariableNamesRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function.
 
 ## Resources
 

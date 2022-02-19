@@ -1,4 +1,5 @@
-import { AST } from 'eslint';
+import type { AST } from 'eslint';
+import type { JSONSchema4 } from 'json-schema';
 import {
   Kind,
   TypeInfo,
@@ -12,8 +13,14 @@ import {
   visitWithTypeInfo,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
+import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import {
+  requireGraphQLSchemaFromContext,
+  requireSiblingsOperations,
+  logger,
+  REPORT_ON_FIRST_CHARACTER,
+  ARRAY_DEFAULT_OPTIONS,
+} from '../utils';
 
 function validateDocument(
   context: GraphQLESLintRuleContext,
@@ -31,24 +38,28 @@ function validateDocument(
 
     for (const error of validationErrors) {
       const { line, column } = error.locations[0];
-      const ancestors = context.getAncestors();
-      const token = (ancestors[0] as AST.Program).tokens.find(
-        token => token.loc.start.line === line && token.loc.start.column === column - 1
-      );
+      const sourceCode = context.getSourceCode();
+      const { tokens } = sourceCode.ast;
+      const token = tokens.find(token => token.loc.start.line === line && token.loc.start.column === column - 1);
+
+      let loc: { line: number; column: number } | AST.SourceLocation = {
+        line,
+        column: column - 1,
+      };
+      if (token) {
+        loc =
+          // if cursor on `@` symbol than use next node
+          (token.type as any) === '@' ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc : token.loc;
+      }
+
       context.report({
-        loc: token
-          ? token.loc
-          : {
-              line,
-              column: column - 1,
-            },
+        loc,
         message: error.message,
       });
     }
   } catch (e) {
     context.report({
-      // Report on first character
-      loc: { column: 0, line: 1 },
+      loc: REPORT_ON_FIRST_CHARACTER,
       message: e.message,
     });
   }
@@ -132,7 +143,8 @@ const validationToRule = (
   ruleId: string,
   ruleName: string,
   docs: GraphQLESLintRule['meta']['docs'],
-  getDocumentNode?: GetDocumentNode
+  getDocumentNode?: GetDocumentNode,
+  schema: JSONSchema4 | JSONSchema4[] = []
 ): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
 
@@ -153,8 +165,9 @@ const validationToRule = (
           ...docs,
           graphQLJSRuleName: ruleName,
           url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${ruleId}.md`,
-          description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${ruleName}Rule.ts).`,
+          description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
         },
+        schema,
       },
       create(context) {
         if (!ruleFn) {
@@ -203,11 +216,54 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     description: `A GraphQL field is only valid if all supplied arguments are defined by that field.`,
     requiresSchema: true,
   }),
-  validationToRule('known-directives', 'KnownDirectives', {
-    category: ['Schema', 'Operations'],
-    description: `A GraphQL document is only valid if all \`@directives\` are known by the schema and legally positioned.`,
-    requiresSchema: true,
-  }),
+  validationToRule(
+    'known-directives',
+    'KnownDirectives',
+    {
+      category: ['Schema', 'Operations'],
+      description: `A GraphQL document is only valid if all \`@directive\`s are known by the schema and legally positioned.`,
+      requiresSchema: true,
+      examples: [
+        {
+          title: 'Valid',
+          usage: [{ ignoreClientDirectives: ['client'] }],
+          code: /* GraphQL */ `
+            {
+              product {
+                someClientField @client
+              }
+            }
+          `,
+        },
+      ],
+    },
+    ({ context, node: documentNode }) => {
+      const { ignoreClientDirectives = [] } = context.options[0] || {};
+      if (ignoreClientDirectives.length === 0) {
+        return documentNode;
+      }
+      return visit(documentNode, {
+        Field(node) {
+          return {
+            ...node,
+            directives: node.directives.filter(directive => !ignoreClientDirectives.includes(directive.name.value)),
+          };
+        },
+      });
+    },
+    {
+      type: 'array',
+      maxItems: 1,
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['ignoreClientDirectives'],
+        properties: {
+          ignoreClientDirectives: ARRAY_DEFAULT_OPTIONS,
+        },
+      },
+    }
+  ),
   validationToRule(
     'known-fragment-names',
     'KnownFragmentNames',

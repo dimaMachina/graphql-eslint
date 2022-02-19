@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
-import { TYPES_KINDS, convertCase } from '../utils';
+import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
 
@@ -191,18 +191,8 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
             style: { enum: ALLOWED_STYLES },
             prefix: { type: 'string' },
             suffix: { type: 'string' },
-            forbiddenPrefixes: {
-              type: 'array',
-              uniqueItems: true,
-              minItems: 1,
-              items: { type: 'string' },
-            },
-            forbiddenSuffixes: {
-              type: 'array',
-              uniqueItems: true,
-              minItems: 1,
-              items: { type: 'string' },
-            },
+            forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
+            forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
             ignorePattern: {
               type: 'string',
               description: 'Option to skip validation of some words, e.g. acronyms',

@@ -9,7 +9,7 @@
 
 A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/ProvidedRequiredArgumentsRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function.
 
 ## Resources
 
