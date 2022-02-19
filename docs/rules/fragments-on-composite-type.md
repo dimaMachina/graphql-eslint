@@ -9,7 +9,7 @@
 
 Fragments use a type condition to determine if they apply, since fragments can only be spread into a composite type (object, interface, or union), the type condition must also be a composite type.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/FragmentsOnCompositeTypesRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function.
 
 ## Resources
 

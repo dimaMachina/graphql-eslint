@@ -9,7 +9,7 @@
 
 A GraphQL field or directive is only valid if all supplied arguments are uniquely named.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/UniqueArgumentNamesRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function.
 
 ## Resources
 

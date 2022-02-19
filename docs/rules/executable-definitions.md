@@ -9,7 +9,7 @@
 
 A GraphQL document is only valid for execution if all definitions are either operation or fragment definitions.
 
-> This rule is a wrapper around a `graphql-js` validation function. [You can find its source code here](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/ExecutableDefinitionsRule.ts).
+> This rule is a wrapper around a `graphql-js` validation function.
 
 ## Resources
 
