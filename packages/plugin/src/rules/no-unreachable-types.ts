@@ -1,4 +1,5 @@
 import { ASTKindToNode, ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, visit } from 'graphql';
+import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule, ValueOf } from '../types';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
@@ -83,7 +84,7 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
 const rule: GraphQLESLintRule = {
   meta: {
     messages: {
-      [RULE_ID]: 'Type "{{ typeName }}" is unreachable',
+      [RULE_ID]: '{{ type }} `{{ typeName }}` is unreachable.',
     },
     docs: {
       description: `Requires all types to be reachable at some level by root level fields.`,
@@ -134,10 +135,14 @@ const rule: GraphQLESLintRule = {
         const typeName = node.name.value;
 
         if (!reachableTypes.has(typeName)) {
+          const type = lowerCase(node.kind.replace(/(Extension|Definition)$/, ''))
           context.report({
             node: node.name,
             messageId: RULE_ID,
-            data: { typeName },
+            data: {
+              type: type[0].toUpperCase() + type.slice(1),
+              typeName
+            },
             suggest: [
               {
                 desc: `Remove \`${typeName}\``,
