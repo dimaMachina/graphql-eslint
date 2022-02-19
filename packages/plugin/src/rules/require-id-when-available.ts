@@ -22,6 +22,7 @@ const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunct
 const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Operations',
       description: 'Enforce selecting specific fields when they are available on the GraphQL type.',
@@ -167,6 +168,10 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
             fieldName,
             addition,
           },
+          suggest: idNames.map(idName => ({
+            desc: `Add \`${idName}\` selection`,
+            fix: fixer => fixer.insertTextBefore((node as any).selections[0], `${idName} `),
+          })),
         });
       },
     };

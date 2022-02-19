@@ -5,8 +5,14 @@ exports[` 1`] = `
 
       1 |         type Mutation {
     > 2 |           createUser(a: ID, b: ID!, c: [ID]!, d: [ID!]!): Boolean
-        |                                                           ^^^^^^^ Unexpected scalar result type "Boolean"
+        |                                                           ^^^^^^^ Unexpected scalar result type \`Boolean\`.
       3 |         }
+
+💡 Suggestion: Remove \`Boolean\`
+
+    1 |         type Mutation {
+    2 |           createUser(a: ID, b: ID!, c: [ID]!, d: [ID!]!): 
+    3 |         }
 `;
 
 exports[` 2`] = `
@@ -16,8 +22,16 @@ exports[` 2`] = `
       2 |
       3 |         extend type Mutation {
     > 4 |           createUser: Boolean!
-        |                       ^^^^^^^ Unexpected scalar result type "Boolean"
+        |                       ^^^^^^^ Unexpected scalar result type \`Boolean\`.
       5 |         }
+
+💡 Suggestion: Remove \`Boolean\`
+
+    1 |         type Mutation
+    2 |
+    3 |         extend type Mutation {
+    4 |           createUser: !
+    5 |         }
 `;
 
 exports[` 3`] = `
@@ -25,12 +39,22 @@ exports[` 3`] = `
 
       1 |         type RootMutation {
     > 2 |           createUser: [Boolean]
-        |                        ^^^^^^^ Unexpected scalar result type "Boolean"
+        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\`.
       3 |         }
       4 |
       5 |         schema {
       6 |           mutation: RootMutation
       7 |         }
+
+💡 Suggestion: Remove \`Boolean\`
+
+    1 |         type RootMutation {
+    2 |           createUser: []
+    3 |         }
+    4 |
+    5 |         schema {
+    6 |           mutation: RootMutation
+    7 |         }
 `;
 
 exports[` 4`] = `
@@ -39,12 +63,23 @@ exports[` 4`] = `
       1 |         type RootMutation
       2 |         extend type RootMutation {
     > 3 |           createUser: [Boolean]!
-        |                        ^^^^^^^ Unexpected scalar result type "Boolean"
+        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\`.
       4 |         }
       5 |
       6 |         schema {
       7 |           mutation: RootMutation
       8 |         }
+
+💡 Suggestion: Remove \`Boolean\`
+
+    1 |         type RootMutation
+    2 |         extend type RootMutation {
+    3 |           createUser: []!
+    4 |         }
+    5 |
+    6 |         schema {
+    7 |           mutation: RootMutation
+    8 |         }
 `;
 
 exports[` 5`] = `
@@ -60,13 +95,29 @@ Code
 
       2 |           createUser: User!
     > 3 |           updateUser: Int
-        |                       ^^^ Unexpected scalar result type "Int"
+        |                       ^^^ Unexpected scalar result type \`Int\`.
       4 |           deleteUser: [Boolean!]!
+
+💡 Suggestion: Remove \`Int\`
+
+    1 |         type Mutation {
+    2 |           createUser: User!
+    3 |           updateUser: 
+    4 |           deleteUser: [Boolean!]!
+    5 |         }
 
 ❌ Error 2/2
 
       3 |           updateUser: Int
     > 4 |           deleteUser: [Boolean!]!
-        |                        ^^^^^^^ Unexpected scalar result type "Boolean"
+        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\`.
       5 |         }
+
+💡 Suggestion: Remove \`Boolean\`
+
+    1 |         type Mutation {
+    2 |           createUser: User!
+    3 |           updateUser: Int
+    4 |           deleteUser: [!]!
+    5 |         }
 `;
