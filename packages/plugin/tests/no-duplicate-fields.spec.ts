@@ -12,7 +12,7 @@ ruleTester.runGraphQLTests('no-duplicate-fields', rule, {
           id
         }
       `,
-      errors: [{ message: 'Operation variable "v" defined multiple times' }],
+      errors: [{ message: 'Variable `v` defined multiple times.' }],
     },
     {
       code: /* GraphQL */ `
@@ -22,7 +22,7 @@ ruleTester.runGraphQLTests('no-duplicate-fields', rule, {
           }
         }
       `,
-      errors: [{ message: 'Field argument "first" defined multiple times' }],
+      errors: [{ message: 'Argument `first` defined multiple times.' }],
     },
     {
       code: /* GraphQL */ `
@@ -35,7 +35,7 @@ ruleTester.runGraphQLTests('no-duplicate-fields', rule, {
           }
         }
       `,
-      errors: [{ message: 'Field "name" defined multiple times' }],
+      errors: [{ message: 'Field `name` defined multiple times.' }],
     },
     {
       code: /* GraphQL */ `
@@ -48,7 +48,7 @@ ruleTester.runGraphQLTests('no-duplicate-fields', rule, {
           }
         }
       `,
-      errors: [{ message: 'Field "email" defined multiple times' }],
+      errors: [{ message: 'Field `email` defined multiple times.' }],
     },
   ],
 });

@@ -14,6 +14,7 @@ enum Icon {
   GRAPHQL_ESLINT = '🚀',
   GRAPHQL_JS = '🔮',
   FIXABLE = '🔧',
+  HAS_SUGGESTIONS = '💡',
   RECOMMENDED = '✅',
 }
 
@@ -45,7 +46,7 @@ function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]
 function generateDocs(): void {
   const result = Object.entries(rules).map(([ruleName, rule]) => {
     const blocks: string[] = [`# \`${ruleName}\``, BR];
-    const { deprecated, docs, schema, fixable } = rule.meta;
+    const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
 
     if (deprecated) {
       blocks.push(`- ❗ DEPRECATED ❗`);
@@ -63,6 +64,12 @@ function generateDocs(): void {
     if (fixable) {
       blocks.push(
         `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
+        BR
+      );
+    }
+    if (hasSuggestions) {
+      blocks.push(
+        `${Icon.HAS_SUGGESTIONS} This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
         BR
       );
     }
@@ -147,6 +154,7 @@ function generateDocs(): void {
         docs.description.split('\n')[0],
         docs.isDisabledForAllConfig ? '' : docs.recommended ? '![recommended][]' : '![all][]',
         docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
+        rule.meta.hasSuggestions ? Icon.HAS_SUGGESTIONS : rule.meta.fixable ? Icon.FIXABLE : '',
       ];
     });
 
@@ -159,6 +167,8 @@ function generateDocs(): void {
       BR,
       `- ${Icon.GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
       `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
+      `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
+      `- ${Icon.HAS_SUGGESTIONS} if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
       BR,
       '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
       printMarkdownTable(
@@ -167,6 +177,7 @@ function generateDocs(): void {
           'Description',
           { name: `${NBSP.repeat(4)}Config${NBSP.repeat(4)}`, align: 'center' },
           { name: `${Icon.GRAPHQL_ESLINT}${NBSP}/${NBSP}${Icon.GRAPHQL_JS}`, align: 'center' },
+          { name: `${Icon.FIXABLE}${NBSP}/${NBSP}${Icon.HAS_SUGGESTIONS}`, align: 'center' },
         ],
         sortedRules
       ),

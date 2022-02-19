@@ -1,29 +1,22 @@
-import { GraphQLRuleTester } from '../src/testkit';
-import rule from '../src/rules/selection-set-depth';
-import { ParserOptions } from '../src/types';
+import { GraphQLRuleTester, ParserOptions } from '../src';
+import rule, { SelectionSetDepthRuleConfig } from '../src/rules/selection-set-depth';
 
 const WITH_SIBLINGS = {
   parserOptions: <ParserOptions>{
-    operations: [
-      `fragment AlbumFields on Album {
-        id
-      }`,
-    ],
+    operations: 'fragment AlbumFields on Album { id }',
   },
 };
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('selection-set-depth', rule, {
+ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth', rule, {
   valid: [
     {
       options: [{ maxDepth: 2 }],
-      code: /* GraphQL */ `
-        query deep2 {
-          viewer {
-            # Level 0
-            albums {
-              # Level 1
+      code: `
+        query {
+          viewer { # Level 0
+            albums { # Level 1
               title # Level 2
             }
           }
@@ -80,6 +73,23 @@ ruleTester.runGraphQLTests('selection-set-depth', rule, {
           viewer {
             albums {
               ...AlbumFields
+            }
+          }
+        }
+      `,
+    },
+    {
+      name: 'suggestions should work with inline fragments',
+      ...WITH_SIBLINGS,
+      options: [{ maxDepth: 1 }],
+      errors: [{ message: `'' exceeds maximum operation depth of 1` }],
+      code: /* GraphQL */ `
+        query {
+          viewer {
+            albums {
+              ... on Album {
+                id
+              }
             }
           }
         }

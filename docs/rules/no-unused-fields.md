@@ -1,5 +1,7 @@
 # `no-unused-fields`
 
+💡 This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+
 - Category: `Schema`
 - Rule name: `@graphql-eslint/no-unused-fields`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)

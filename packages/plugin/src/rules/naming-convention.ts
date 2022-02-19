@@ -260,6 +260,19 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       return typeof style === 'object' ? style : { style };
     }
 
+    function report(node: GraphQLESTreeNode<NameNode>, message: string, suggestedName: string): void {
+      context.report({
+        node,
+        message,
+        suggest: [
+          {
+            desc: `Rename to \`${suggestedName}\``,
+            fix: fixer => fixer.replaceText(node as any, suggestedName),
+          },
+        ],
+      });
+    }
+
     const checkNode = (selector: string) => (n: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) => {
       const { name: node } = n.kind === Kind.VARIABLE_DEFINITION ? n.variable : n;
       if (!node) {
@@ -275,16 +288,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         const [leadingUnderscores] = nodeName.match(/^_*/);
         const [trailingUnderscores] = nodeName.match(/_*$/);
         const suggestedName = leadingUnderscores + renameToName + trailingUnderscores;
-        context.report({
-          node,
-          message: `${nodeType} "${nodeName}" should ${errorMessage}`,
-          suggest: [
-            {
-              desc: `Rename to "${suggestedName}"`,
-              fix: fixer => fixer.replaceText(node as any, suggestedName),
-            },
-          ],
-        });
+        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedName);
       }
 
       function getError(): {
@@ -336,18 +340,8 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     };
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
-      const name = node.value;
-      const renameToName = name.replace(new RegExp(isLeading ? '^_+' : '_+$'), '');
-      context.report({
-        node,
-        message: `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
-        suggest: [
-          {
-            desc: `Rename to "${renameToName}"`,
-            fix: fixer => fixer.replaceText(node as any, renameToName),
-          },
-        ],
-      });
+      const suggestedName = node.value.replace(isLeading ? /^_+/ : /_+$/, '');
+      report(node, `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`, suggestedName);
     };
 
     const listeners: GraphQLESLintRuleListener = {};
