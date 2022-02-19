@@ -83,7 +83,7 @@ const rule: GraphQLESLintRule = {
           data: { fieldName },
           suggest: [
             {
-              desc: `Remove "${fieldName}" field`,
+              desc: `Remove \`${fieldName}\` field`,
               fix(fixer) {
                 const sourceCode = context.getSourceCode() as any;
                 const tokenBefore = sourceCode.getTokenBefore(node);

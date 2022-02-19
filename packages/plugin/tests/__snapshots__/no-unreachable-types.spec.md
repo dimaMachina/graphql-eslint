@@ -33,7 +33,7 @@ Code
         |                   ^^^^ Type "Node" is unreachable
       6 |           id: ID!
 
-💡 Suggestion: Remove Node
+💡 Suggestion: Remove \`Node\`
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
@@ -63,7 +63,7 @@ Code
          |                   ^^^^ Type "User" is unreachable
       14 |           id: ID!
 
-💡 Suggestion: Remove User
+💡 Suggestion: Remove \`User\`
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
@@ -92,7 +92,7 @@ Code
          |              ^^^^^^^^^ Type "SuperUser" is unreachable
       19 |           id: ID!
 
-💡 Suggestion: Remove SuperUser
+💡 Suggestion: Remove \`SuperUser\`
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
@@ -154,7 +154,7 @@ Code
         |                ^^^^^^^^ Type "DateTime" is unreachable
       3 |
 
-💡 Suggestion: Remove DateTime
+💡 Suggestion: Remove \`DateTime\`
 
      1 |         # ScalarTypeDefinition
      2 |         
@@ -193,7 +193,7 @@ Code
         |              ^^^^ Type "Role" is unreachable
       6 |           ADMIN
 
-💡 Suggestion: Remove Role
+💡 Suggestion: Remove \`Role\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -229,7 +229,7 @@ Code
          |                    ^^^^ Type "auth" is unreachable
       12 |
 
-💡 Suggestion: Remove auth
+💡 Suggestion: Remove \`auth\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -268,7 +268,7 @@ Code
          |               ^^^^^ Type "Union" is unreachable
       15 |
 
-💡 Suggestion: Remove Union
+💡 Suggestion: Remove \`Union\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -307,7 +307,7 @@ Code
          |               ^^^^^^^^^^^ Type "UsersFilter" is unreachable
       18 |           limit: Int
 
-💡 Suggestion: Remove UsersFilter
+💡 Suggestion: Remove \`UsersFilter\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -344,7 +344,7 @@ Code
          |                   ^^^^^^^ Type "Address" is unreachable
       23 |           city: String
 
-💡 Suggestion: Remove Address
+💡 Suggestion: Remove \`Address\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -381,7 +381,7 @@ Code
          |              ^^^^ Type "User" is unreachable
       28 |           city: String
 
-💡 Suggestion: Remove User
+💡 Suggestion: Remove \`User\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -435,7 +435,7 @@ exports[` 3`] = `
     > 18 |         scalar DateTime
          |                ^^^^^^^^ Type "DateTime" is unreachable
 
-💡 Suggestion: Remove DateTime
+💡 Suggestion: Remove \`DateTime\`
 
      1 |         interface User {
      2 |           id: String
@@ -487,7 +487,7 @@ Code
         |                   ^^^^ Type "User" is unreachable
       2 |           id: String
 
-💡 Suggestion: Remove User
+💡 Suggestion: Remove \`User\`
 
      1 |         
      2 |
@@ -515,7 +515,7 @@ Code
          |              ^^^^^^^^^ Type "SuperUser" is unreachable
       10 |           id: String
 
-💡 Suggestion: Remove SuperUser
+💡 Suggestion: Remove \`SuperUser\`
 
      1 |         interface User {
      2 |           id: String
@@ -543,7 +543,7 @@ Code
          |                     ^^^^^^^^^ Type "SuperUser" is unreachable
       15 |           detail: String
 
-💡 Suggestion: Remove SuperUser
+💡 Suggestion: Remove \`SuperUser\`
 
      1 |         interface User {
      2 |           id: String
@@ -590,7 +590,7 @@ exports[` 5`] = `
     > 20 |         scalar DateTime
          |                ^^^^^^^^ Type "DateTime" is unreachable
 
-💡 Suggestion: Remove DateTime
+💡 Suggestion: Remove \`DateTime\`
 
      1 |         type Query {
      2 |           node(id: ID!): Node!

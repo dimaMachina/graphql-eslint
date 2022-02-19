@@ -12,7 +12,11 @@ exports[` 1`] = `
 ❌ Error
 
     > 1 | type Mutation
-        |      ^^^^^^^^ Root type "Mutation" is forbidden
+        |      ^^^^^^^^ Root type \`Mutation\` is forbidden.
+
+💡 Suggestion: Remove \`Mutation\` type
+
+    1 |
 `;
 
 exports[` 2`] = `
@@ -27,7 +31,11 @@ exports[` 2`] = `
 ❌ Error
 
     > 1 | type Subscription
-        |      ^^^^^^^^^^^^ Root type "Subscription" is forbidden
+        |      ^^^^^^^^^^^^ Root type \`Subscription\` is forbidden.
+
+💡 Suggestion: Remove \`Subscription\` type
+
+    1 |
 `;
 
 exports[` 3`] = `
@@ -42,7 +50,11 @@ exports[` 3`] = `
 ❌ Error
 
     > 1 | extend type Mutation { foo: ID }
-        |             ^^^^^^^^ Root type "Mutation" is forbidden
+        |             ^^^^^^^^ Root type \`Mutation\` is forbidden.
+
+💡 Suggestion: Remove \`Mutation\` type
+
+    1 |
 `;
 
 exports[` 4`] = `
@@ -57,5 +69,9 @@ exports[` 4`] = `
 ❌ Error
 
     > 1 | type MyMutation
-        |      ^^^^^^^^^^ Root type "MyMutation" is forbidden
+        |      ^^^^^^^^^^ Root type \`MyMutation\` is forbidden.
+
+💡 Suggestion: Remove \`MyMutation\` type
+
+    1 |
 `;

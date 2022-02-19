@@ -12,6 +12,7 @@ const NO_TYPENAME_PREFIX = 'NO_TYPENAME_PREFIX';
 const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Schema',
       description: 'Enforces users to avoid using the type name in a field name while defining your schema.',
@@ -62,6 +63,13 @@ const rule: GraphQLESLintRule = {
               },
               messageId: NO_TYPENAME_PREFIX,
               node: field.name,
+              suggest: [
+                {
+                  desc: `Remove \`${fieldName.slice(0, typeName.length)}\` prefix`,
+                  fix: fixer =>
+                    fixer.replaceText(field.name as any, fieldName.replace(new RegExp(`^${typeName}`, 'i'), '')),
+                },
+              ],
             });
           }
         }
