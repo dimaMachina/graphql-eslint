@@ -18,13 +18,24 @@ Code
 
       1 |         # eslint-disable-next-line non-existing-rule
     > 2 |         query {
-        |         ^^^^^ Anonymous GraphQL operations are forbidden. Please make sure to name your query!
+        |         ^^^^^ Anonymous GraphQL operations are forbidden. Make sure to name your query!
       3 |           a
+
+💡 Suggestion: Rename to \`a\`
+
+    1 |         # eslint-disable-next-line non-existing-rule
+    2 |         query a {
+    3 |           a
+    4 |         }
 `;
 
 exports[` 2`] = `
 ❌ Error
 
     > 1 | query { a }
-        | ^^^^^ Anonymous GraphQL operations are forbidden. Please make sure to name your query!
+        | ^^^^^ Anonymous GraphQL operations are forbidden. Make sure to name your query!
+
+💡 Suggestion: Rename to \`a\`
+
+    1 | query a { a }
 `;

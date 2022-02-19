@@ -1,10 +1,4 @@
-import {
-  Kind,
-  NamedTypeNode,
-  ObjectTypeExtensionNode,
-  ObjectTypeDefinitionNode,
-  InputValueDefinitionNode,
-} from 'graphql';
+import { Kind, NamedTypeNode, ObjectTypeExtensionNode, ObjectTypeDefinitionNode, NameNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
@@ -26,6 +20,7 @@ const isMutationType = (node: ObjectTypeNode): boolean => isObjectType(node) && 
 const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       description:
         'Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".\nUsing the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.',
@@ -103,12 +98,18 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
       (options.checkMutations && isMutationType(node)) || (options.checkQueries && isQueryType(node));
 
     const listeners: GraphQLESLintRuleListener = {
-      'FieldDefinition > InputValueDefinition[name.value!=input]'(node: GraphQLESTreeNode<InputValueDefinitionNode>) {
-        if (shouldCheckType((node as any).parent.parent)) {
-          const name = node.name.value;
+      'FieldDefinition > InputValueDefinition[name.value!=input] > Name'(node: GraphQLESTreeNode<NameNode>) {
+        if (shouldCheckType((node as any).parent.parent.parent)) {
+          const inputName = node.value;
           context.report({
-            node: node.name,
-            message: `Input "${name}" should be called "input"`,
+            node,
+            message: `Input \`${inputName}\` should be called \`input\`.`,
+            suggest: [
+              {
+                desc: 'Rename to `input`',
+                fix: fixer => fixer.replaceText(node as any, 'input'),
+              },
+            ],
           });
         }
       },
@@ -134,7 +135,13 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
           ) {
             context.report({
               node: node.name,
-              message: `InputType "${name}" name should be "${mutationName}"`,
+              message: `Input type \`${name}\` name should be \`${mutationName}\`.`,
+              suggest: [
+                {
+                  desc: `Rename to \`${mutationName}\``,
+                  fix: fixer => fixer.replaceText(node as any, mutationName),
+                },
+              ],
             });
           }
         }

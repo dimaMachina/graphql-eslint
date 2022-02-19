@@ -26,7 +26,7 @@ Array [
     filePath: examples/basic/query.graphql,
     messages: Array [
       Object {
-        message: Anonymous GraphQL operations are forbidden. Please make sure to name your query!,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
     ],
@@ -57,7 +57,7 @@ Array [
     filePath: examples/code-file/query.js,
     messages: Array [
       Object {
-        message: Anonymous GraphQL operations are forbidden. Please make sure to name your query!,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
       Object {
@@ -182,7 +182,7 @@ Array [
     filePath: examples/graphql-config/operations/query.graphql,
     messages: Array [
       Object {
-        message: Anonymous GraphQL operations are forbidden. Please make sure to name your query!,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
     ],
@@ -205,7 +205,7 @@ Array [
     filePath: examples/graphql-config-code-file/query.js,
     messages: Array [
       Object {
-        message: Anonymous GraphQL operations are forbidden. Please make sure to name your query!,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
       Object {

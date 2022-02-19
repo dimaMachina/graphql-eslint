@@ -14,12 +14,20 @@ Code
 ❌ Error 1/2
 
     > 1 | type Mutation { SetMessage(message: String): String }
-        |                            ^^^^^^^ Input "message" should be called "input"
+        |                            ^^^^^^^ Input \`message\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { SetMessage(input: String): String }
 
 ❌ Error 2/2
 
     > 1 | type Mutation { SetMessage(message: String): String }
-        |                                     ^^^^^^ InputType "String" name should be "SetMessageInput"
+        |                                     ^^^^^^ Input type \`String\` name should be \`SetMessageInput\`.
+
+💡 Suggestion: Rename to \`SetMessageInput\`
+
+    1 | type Mutation { SetMessage(message: SetMessageInput): String }
 `;
 
 exports[` 2`] = `
@@ -32,7 +40,11 @@ exports[` 2`] = `
 ❌ Error
 
     > 1 | type Mutation { SetMessage(input: String): String }
-        |                                   ^^^^^^ InputType "String" name should be "SetMessageInput"
+        |                                   ^^^^^^ Input type \`String\` name should be \`SetMessageInput\`.
+
+💡 Suggestion: Rename to \`SetMessageInput\`
+
+    1 | type Mutation { SetMessage(input: SetMessageInput): String }
 `;
 
 exports[` 3`] = `
@@ -45,7 +57,11 @@ exports[` 3`] = `
 ❌ Error
 
     > 1 | type Mutation { SetMessage(hello: SetMessageInput): String }
-        |                            ^^^^^ Input "hello" should be called "input"
+        |                            ^^^^^ Input \`hello\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { SetMessage(input: SetMessageInput): String }
 `;
 
 exports[` 4`] = `
@@ -62,12 +78,20 @@ Code
 ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
-        |                            ^^^^^^ Input "record" should be called "input"
+        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(input: CreateOneUserInput!): CreateOneUserPayload }
 
 ❌ Error 2/2
 
     > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
-        |                                    ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
+        |                                    ^^^^^^^^^^^^^^^^^^ Input type \`CreateOneUserInput\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(record: userCreateInput!): CreateOneUserPayload }
 `;
 
 exports[` 5`] = `
@@ -84,12 +108,20 @@ Code
 ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
-        |                            ^^^^^^ Input "record" should be called "input"
+        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(input: [CreateOneUserInput]!): CreateOneUserPayload }
 
 ❌ Error 2/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
-        |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
+        |                                     ^^^^^^^^^^^^^^^^^^ Input type \`CreateOneUserInput\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(record: [userCreateInput]!): CreateOneUserPayload }
 `;
 
 exports[` 6`] = `
@@ -106,12 +138,20 @@ Code
 ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
-        |                            ^^^^^^ Input "record" should be called "input"
+        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(input: [CreateOneUserInput!]!): CreateOneUserPayload }
 
 ❌ Error 2/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
-        |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
+        |                                     ^^^^^^^^^^^^^^^^^^ Input type \`CreateOneUserInput\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(record: [userCreateInput!]!): CreateOneUserPayload }
 `;
 
 exports[` 7`] = `
@@ -128,12 +168,20 @@ Code
 ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
-        |                            ^^^^^^ Input "record" should be called "input"
+        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(input: [CreateOneUserInput!]): CreateOneUserPayload }
 
 ❌ Error 2/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
-        |                                     ^^^^^^^^^^^^^^^^^^ InputType "CreateOneUserInput" name should be "userCreateInput"
+        |                                     ^^^^^^^^^^^^^^^^^^ Input type \`CreateOneUserInput\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(record: [userCreateInput!]): CreateOneUserPayload }
 `;
 
 exports[` 8`] = `
@@ -150,22 +198,38 @@ Code
 ❌ Error 1/4
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                            ^^^^^^ Input "record" should be called "input"
+        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(input: String, test: String): String }
 
 ❌ Error 2/4
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                                    ^^^^^^ InputType "String" name should be "userCreateInput"
+        |                                    ^^^^^^ Input type \`String\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(record: userCreateInput, test: String): String }
 
 ❌ Error 3/4
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                                            ^^^^ Input "test" should be called "input"
+        |                                            ^^^^ Input \`test\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(record: String, input: String): String }
 
 ❌ Error 4/4
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                                                  ^^^^^^ InputType "String" name should be "userCreateInput"
+        |                                                  ^^^^^^ Input type \`String\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(record: String, test: userCreateInput): String }
 `;
 
 exports[` 9`] = `
@@ -182,12 +246,20 @@ Code
 ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                            ^^^^^^ Input "record" should be called "input"
+        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(input: String, test: String): String }
 
 ❌ Error 2/2
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                                            ^^^^ Input "test" should be called "input"
+        |                                            ^^^^ Input \`test\` should be called \`input\`.
+
+💡 Suggestion: Rename to \`input\`
+
+    1 | type Mutation { userCreate(record: String, input: String): String }
 `;
 
 exports[` 10`] = `
@@ -201,7 +273,11 @@ exports[` 10`] = `
 ❌ Error
 
     > 1 | type Mutation { userCreate(input: String): String }
-        |                                   ^^^^^^ InputType "String" name should be "userCreateInput"
+        |                                   ^^^^^^ Input type \`String\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(input: userCreateInput): String }
 `;
 
 exports[` 11`] = `
@@ -215,7 +291,11 @@ exports[` 11`] = `
 ❌ Error
 
     > 1 | type Mutation { userCreate(input: UserCreateInput): String }
-        |                                   ^^^^^^^^^^^^^^^ InputType "UserCreateInput" name should be "userCreateInput"
+        |                                   ^^^^^^^^^^^^^^^ Input type \`UserCreateInput\` name should be \`userCreateInput\`.
+
+💡 Suggestion: Rename to \`userCreateInput\`
+
+    1 | type Mutation { userCreate(input: userCreateInput): String }
 `;
 
 exports[` 12`] = `
@@ -230,5 +310,9 @@ exports[` 12`] = `
 ❌ Error
 
     > 1 | type Query { getUser(input: GetUserInput): String }
-        |                             ^^^^^^^^^^^^ InputType "GetUserInput" name should be "getUserInput"
+        |                             ^^^^^^^^^^^^ Input type \`GetUserInput\` name should be \`getUserInput\`.
+
+💡 Suggestion: Rename to \`getUserInput\`
+
+    1 | type Query { getUser(input: getUserInput): String }
 `;
