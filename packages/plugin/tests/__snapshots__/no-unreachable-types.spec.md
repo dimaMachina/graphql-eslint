@@ -6,96 +6,112 @@ Code
        1 |         type Query {
        2 |           node(id: ID!): AnotherNode!
        3 |         }
-       4 |         interface Node {
-       5 |           id: ID!
-       6 |         }
-       7 |         interface AnotherNode {
-       8 |           createdAt: String
-       9 |         }
-      10 |         interface User implements Node {
-      11 |           id: ID!
-      12 |           name: String
-      13 |         }
-      14 |         type SuperUser implements User & Node {
-      15 |           id: ID!
-      16 |           name: String
-      17 |           address: String
-      18 |         }
+       4 |
+       5 |         interface Node {
+       6 |           id: ID!
+       7 |         }
+       8 |
+       9 |         interface AnotherNode {
+      10 |           createdAt: String
+      11 |         }
+      12 |
+      13 |         interface User implements Node {
+      14 |           id: ID!
+      15 |           name: String
+      16 |         }
+      17 |
+      18 |         type SuperUser implements User & Node {
+      19 |           id: ID!
+      20 |           name: String
+      21 |           address: String
+      22 |         }
 
 ❌ Error 1/3
 
-      3 |         }
-    > 4 |         interface Node {
+      4 |
+    > 5 |         interface Node {
         |                   ^^^^ Type "Node" is unreachable
-      5 |           id: ID!
+      6 |           id: ID!
 
 💡 Suggestion: Remove Node
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
      3 |         }
-     4 |         
-     5 |         interface AnotherNode {
-     6 |           createdAt: String
-     7 |         }
-     8 |         interface User implements Node {
-     9 |           id: ID!
-    10 |           name: String
-    11 |         }
-    12 |         type SuperUser implements User & Node {
-    13 |           id: ID!
-    14 |           name: String
-    15 |           address: String
-    16 |         }
+     4 |
+     5 |         
+     6 |
+     7 |         interface AnotherNode {
+     8 |           createdAt: String
+     9 |         }
+    10 |
+    11 |         interface User implements Node {
+    12 |           id: ID!
+    13 |           name: String
+    14 |         }
+    15 |
+    16 |         type SuperUser implements User & Node {
+    17 |           id: ID!
+    18 |           name: String
+    19 |           address: String
+    20 |         }
 
 ❌ Error 2/3
 
-       9 |         }
-    > 10 |         interface User implements Node {
+      12 |
+    > 13 |         interface User implements Node {
          |                   ^^^^ Type "User" is unreachable
-      11 |           id: ID!
+      14 |           id: ID!
 
 💡 Suggestion: Remove User
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
      3 |         }
-     4 |         interface Node {
-     5 |           id: ID!
-     6 |         }
-     7 |         interface AnotherNode {
-     8 |           createdAt: String
-     9 |         }
-    10 |         
-    11 |         type SuperUser implements User & Node {
-    12 |           id: ID!
-    13 |           name: String
-    14 |           address: String
-    15 |         }
+     4 |
+     5 |         interface Node {
+     6 |           id: ID!
+     7 |         }
+     8 |
+     9 |         interface AnotherNode {
+    10 |           createdAt: String
+    11 |         }
+    12 |
+    13 |         
+    14 |
+    15 |         type SuperUser implements User & Node {
+    16 |           id: ID!
+    17 |           name: String
+    18 |           address: String
+    19 |         }
 
 ❌ Error 3/3
 
-      13 |         }
-    > 14 |         type SuperUser implements User & Node {
+      17 |
+    > 18 |         type SuperUser implements User & Node {
          |              ^^^^^^^^^ Type "SuperUser" is unreachable
-      15 |           id: ID!
+      19 |           id: ID!
 
 💡 Suggestion: Remove SuperUser
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
      3 |         }
-     4 |         interface Node {
-     5 |           id: ID!
-     6 |         }
-     7 |         interface AnotherNode {
-     8 |           createdAt: String
-     9 |         }
-    10 |         interface User implements Node {
-    11 |           id: ID!
-    12 |           name: String
-    13 |         }
-    14 |         
+     4 |
+     5 |         interface Node {
+     6 |           id: ID!
+     7 |         }
+     8 |
+     9 |         interface AnotherNode {
+    10 |           createdAt: String
+    11 |         }
+    12 |
+    13 |         interface User implements Node {
+    14 |           id: ID!
+    15 |           name: String
+    16 |         }
+    17 |
+    18 |         
 `;
 
 exports[` 2`] = `
@@ -103,249 +119,297 @@ Code
 
        1 |         # ScalarTypeDefinition
        2 |         scalar DateTime
-       3 |         # EnumTypeDefinition
-       4 |         enum Role {
-       5 |           ADMIN
-       6 |           USER
-       7 |         }
-       8 |         # DirectiveDefinition
-       9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-      10 |         # UnionTypeDefinition
-      11 |         union Union = String | Boolean
-      12 |         # InputObjectTypeDefinition
-      13 |         input UsersFilter {
-      14 |           limit: Int
-      15 |         }
-      16 |         # InterfaceTypeDefinition
-      17 |         interface Address {
-      18 |           city: String
+       3 |
+       4 |         # EnumTypeDefinition
+       5 |         enum Role {
+       6 |           ADMIN
+       7 |           USER
+       8 |         }
+       9 |
+      10 |         # DirectiveDefinition
+      11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+      12 |
+      13 |         # UnionTypeDefinition
+      14 |         union Union = String | Boolean
+      15 |
+      16 |         # InputObjectTypeDefinition
+      17 |         input UsersFilter {
+      18 |           limit: Int
       19 |         }
-      20 |         # ObjectTypeDefinition
-      21 |         type User implements Address {
-      22 |           city: String
-      23 |         }
+      20 |
+      21 |         # InterfaceTypeDefinition
+      22 |         interface Address {
+      23 |           city: String
+      24 |         }
+      25 |
+      26 |         # ObjectTypeDefinition
+      27 |         type User implements Address {
+      28 |           city: String
+      29 |         }
 
 ❌ Error 1/7
 
       1 |         # ScalarTypeDefinition
     > 2 |         scalar DateTime
         |                ^^^^^^^^ Type "DateTime" is unreachable
-      3 |         # EnumTypeDefinition
+      3 |
 
 💡 Suggestion: Remove DateTime
 
      1 |         # ScalarTypeDefinition
      2 |         
-     3 |         # EnumTypeDefinition
-     4 |         enum Role {
-     5 |           ADMIN
-     6 |           USER
-     7 |         }
-     8 |         # DirectiveDefinition
-     9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-    10 |         # UnionTypeDefinition
-    11 |         union Union = String | Boolean
-    12 |         # InputObjectTypeDefinition
-    13 |         input UsersFilter {
-    14 |           limit: Int
-    15 |         }
-    16 |         # InterfaceTypeDefinition
-    17 |         interface Address {
-    18 |           city: String
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         enum Role {
+     6 |           ADMIN
+     7 |           USER
+     8 |         }
+     9 |
+    10 |         # DirectiveDefinition
+    11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+    12 |
+    13 |         # UnionTypeDefinition
+    14 |         union Union = String | Boolean
+    15 |
+    16 |         # InputObjectTypeDefinition
+    17 |         input UsersFilter {
+    18 |           limit: Int
     19 |         }
-    20 |         # ObjectTypeDefinition
-    21 |         type User implements Address {
-    22 |           city: String
-    23 |         }
+    20 |
+    21 |         # InterfaceTypeDefinition
+    22 |         interface Address {
+    23 |           city: String
+    24 |         }
+    25 |
+    26 |         # ObjectTypeDefinition
+    27 |         type User implements Address {
+    28 |           city: String
+    29 |         }
 
 ❌ Error 2/7
 
-      3 |         # EnumTypeDefinition
-    > 4 |         enum Role {
+      4 |         # EnumTypeDefinition
+    > 5 |         enum Role {
         |              ^^^^ Type "Role" is unreachable
-      5 |           ADMIN
+      6 |           ADMIN
 
 💡 Suggestion: Remove Role
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
-     3 |         # EnumTypeDefinition
-     4 |         
-     5 |         # DirectiveDefinition
-     6 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-     7 |         # UnionTypeDefinition
-     8 |         union Union = String | Boolean
-     9 |         # InputObjectTypeDefinition
-    10 |         input UsersFilter {
-    11 |           limit: Int
-    12 |         }
-    13 |         # InterfaceTypeDefinition
-    14 |         interface Address {
-    15 |           city: String
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         
+     6 |
+     7 |         # DirectiveDefinition
+     8 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+     9 |
+    10 |         # UnionTypeDefinition
+    11 |         union Union = String | Boolean
+    12 |
+    13 |         # InputObjectTypeDefinition
+    14 |         input UsersFilter {
+    15 |           limit: Int
     16 |         }
-    17 |         # ObjectTypeDefinition
-    18 |         type User implements Address {
-    19 |           city: String
-    20 |         }
+    17 |
+    18 |         # InterfaceTypeDefinition
+    19 |         interface Address {
+    20 |           city: String
+    21 |         }
+    22 |
+    23 |         # ObjectTypeDefinition
+    24 |         type User implements Address {
+    25 |           city: String
+    26 |         }
 
 ❌ Error 3/7
 
-       8 |         # DirectiveDefinition
-    >  9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+      10 |         # DirectiveDefinition
+    > 11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
          |                    ^^^^ Type "auth" is unreachable
-      10 |         # UnionTypeDefinition
+      12 |
 
 💡 Suggestion: Remove auth
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
-     3 |         # EnumTypeDefinition
-     4 |         enum Role {
-     5 |           ADMIN
-     6 |           USER
-     7 |         }
-     8 |         # DirectiveDefinition
-     9 |         
-    10 |         # UnionTypeDefinition
-    11 |         union Union = String | Boolean
-    12 |         # InputObjectTypeDefinition
-    13 |         input UsersFilter {
-    14 |           limit: Int
-    15 |         }
-    16 |         # InterfaceTypeDefinition
-    17 |         interface Address {
-    18 |           city: String
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         enum Role {
+     6 |           ADMIN
+     7 |           USER
+     8 |         }
+     9 |
+    10 |         # DirectiveDefinition
+    11 |         
+    12 |
+    13 |         # UnionTypeDefinition
+    14 |         union Union = String | Boolean
+    15 |
+    16 |         # InputObjectTypeDefinition
+    17 |         input UsersFilter {
+    18 |           limit: Int
     19 |         }
-    20 |         # ObjectTypeDefinition
-    21 |         type User implements Address {
-    22 |           city: String
-    23 |         }
+    20 |
+    21 |         # InterfaceTypeDefinition
+    22 |         interface Address {
+    23 |           city: String
+    24 |         }
+    25 |
+    26 |         # ObjectTypeDefinition
+    27 |         type User implements Address {
+    28 |           city: String
+    29 |         }
 
 ❌ Error 4/7
 
-      10 |         # UnionTypeDefinition
-    > 11 |         union Union = String | Boolean
+      13 |         # UnionTypeDefinition
+    > 14 |         union Union = String | Boolean
          |               ^^^^^ Type "Union" is unreachable
-      12 |         # InputObjectTypeDefinition
+      15 |
 
 💡 Suggestion: Remove Union
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
-     3 |         # EnumTypeDefinition
-     4 |         enum Role {
-     5 |           ADMIN
-     6 |           USER
-     7 |         }
-     8 |         # DirectiveDefinition
-     9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-    10 |         # UnionTypeDefinition
-    11 |         
-    12 |         # InputObjectTypeDefinition
-    13 |         input UsersFilter {
-    14 |           limit: Int
-    15 |         }
-    16 |         # InterfaceTypeDefinition
-    17 |         interface Address {
-    18 |           city: String
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         enum Role {
+     6 |           ADMIN
+     7 |           USER
+     8 |         }
+     9 |
+    10 |         # DirectiveDefinition
+    11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+    12 |
+    13 |         # UnionTypeDefinition
+    14 |         
+    15 |
+    16 |         # InputObjectTypeDefinition
+    17 |         input UsersFilter {
+    18 |           limit: Int
     19 |         }
-    20 |         # ObjectTypeDefinition
-    21 |         type User implements Address {
-    22 |           city: String
-    23 |         }
+    20 |
+    21 |         # InterfaceTypeDefinition
+    22 |         interface Address {
+    23 |           city: String
+    24 |         }
+    25 |
+    26 |         # ObjectTypeDefinition
+    27 |         type User implements Address {
+    28 |           city: String
+    29 |         }
 
 ❌ Error 5/7
 
-      12 |         # InputObjectTypeDefinition
-    > 13 |         input UsersFilter {
+      16 |         # InputObjectTypeDefinition
+    > 17 |         input UsersFilter {
          |               ^^^^^^^^^^^ Type "UsersFilter" is unreachable
-      14 |           limit: Int
+      18 |           limit: Int
 
 💡 Suggestion: Remove UsersFilter
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
-     3 |         # EnumTypeDefinition
-     4 |         enum Role {
-     5 |           ADMIN
-     6 |           USER
-     7 |         }
-     8 |         # DirectiveDefinition
-     9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-    10 |         # UnionTypeDefinition
-    11 |         union Union = String | Boolean
-    12 |         # InputObjectTypeDefinition
-    13 |         
-    14 |         # InterfaceTypeDefinition
-    15 |         interface Address {
-    16 |           city: String
-    17 |         }
-    18 |         # ObjectTypeDefinition
-    19 |         type User implements Address {
-    20 |           city: String
-    21 |         }
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         enum Role {
+     6 |           ADMIN
+     7 |           USER
+     8 |         }
+     9 |
+    10 |         # DirectiveDefinition
+    11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+    12 |
+    13 |         # UnionTypeDefinition
+    14 |         union Union = String | Boolean
+    15 |
+    16 |         # InputObjectTypeDefinition
+    17 |         
+    18 |
+    19 |         # InterfaceTypeDefinition
+    20 |         interface Address {
+    21 |           city: String
+    22 |         }
+    23 |
+    24 |         # ObjectTypeDefinition
+    25 |         type User implements Address {
+    26 |           city: String
+    27 |         }
 
 ❌ Error 6/7
 
-      16 |         # InterfaceTypeDefinition
-    > 17 |         interface Address {
+      21 |         # InterfaceTypeDefinition
+    > 22 |         interface Address {
          |                   ^^^^^^^ Type "Address" is unreachable
-      18 |           city: String
+      23 |           city: String
 
 💡 Suggestion: Remove Address
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
-     3 |         # EnumTypeDefinition
-     4 |         enum Role {
-     5 |           ADMIN
-     6 |           USER
-     7 |         }
-     8 |         # DirectiveDefinition
-     9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-    10 |         # UnionTypeDefinition
-    11 |         union Union = String | Boolean
-    12 |         # InputObjectTypeDefinition
-    13 |         input UsersFilter {
-    14 |           limit: Int
-    15 |         }
-    16 |         # InterfaceTypeDefinition
-    17 |         
-    18 |         # ObjectTypeDefinition
-    19 |         type User implements Address {
-    20 |           city: String
-    21 |         }
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         enum Role {
+     6 |           ADMIN
+     7 |           USER
+     8 |         }
+     9 |
+    10 |         # DirectiveDefinition
+    11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+    12 |
+    13 |         # UnionTypeDefinition
+    14 |         union Union = String | Boolean
+    15 |
+    16 |         # InputObjectTypeDefinition
+    17 |         input UsersFilter {
+    18 |           limit: Int
+    19 |         }
+    20 |
+    21 |         # InterfaceTypeDefinition
+    22 |         
+    23 |
+    24 |         # ObjectTypeDefinition
+    25 |         type User implements Address {
+    26 |           city: String
+    27 |         }
 
 ❌ Error 7/7
 
-      20 |         # ObjectTypeDefinition
-    > 21 |         type User implements Address {
+      26 |         # ObjectTypeDefinition
+    > 27 |         type User implements Address {
          |              ^^^^ Type "User" is unreachable
-      22 |           city: String
+      28 |           city: String
 
 💡 Suggestion: Remove User
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
-     3 |         # EnumTypeDefinition
-     4 |         enum Role {
-     5 |           ADMIN
-     6 |           USER
-     7 |         }
-     8 |         # DirectiveDefinition
-     9 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-    10 |         # UnionTypeDefinition
-    11 |         union Union = String | Boolean
-    12 |         # InputObjectTypeDefinition
-    13 |         input UsersFilter {
-    14 |           limit: Int
-    15 |         }
-    16 |         # InterfaceTypeDefinition
-    17 |         interface Address {
-    18 |           city: String
+     3 |
+     4 |         # EnumTypeDefinition
+     5 |         enum Role {
+     6 |           ADMIN
+     7 |           USER
+     8 |         }
+     9 |
+    10 |         # DirectiveDefinition
+    11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
+    12 |
+    13 |         # UnionTypeDefinition
+    14 |         union Union = String | Boolean
+    15 |
+    16 |         # InputObjectTypeDefinition
+    17 |         input UsersFilter {
+    18 |           limit: Int
     19 |         }
-    20 |         # ObjectTypeDefinition
-    21 |         
+    20 |
+    21 |         # InterfaceTypeDefinition
+    22 |         interface Address {
+    23 |           city: String
+    24 |         }
+    25 |
+    26 |         # ObjectTypeDefinition
+    27 |         
 `;
 
 exports[` 3`] = `
@@ -354,17 +418,21 @@ exports[` 3`] = `
        1 |         interface User {
        2 |           id: String
        3 |         }
-       4 |         type SuperUser implements User {
-       5 |           id: String
-       6 |           superDetail: SuperDetail
-       7 |         }
-       8 |         type SuperDetail {
-       9 |           detail: String
-      10 |         }
-      11 |         type Query {
-      12 |           user: User!
-      13 |         }
-    > 14 |         scalar DateTime
+       4 |
+       5 |         type SuperUser implements User {
+       6 |           id: String
+       7 |           superDetail: SuperDetail
+       8 |         }
+       9 |
+      10 |         type SuperDetail {
+      11 |           detail: String
+      12 |         }
+      13 |
+      14 |         type Query {
+      15 |           user: User!
+      16 |         }
+      17 |
+    > 18 |         scalar DateTime
          |                ^^^^^^^^ Type "DateTime" is unreachable
 
 💡 Suggestion: Remove DateTime
@@ -372,17 +440,21 @@ exports[` 3`] = `
      1 |         interface User {
      2 |           id: String
      3 |         }
-     4 |         type SuperUser implements User {
-     5 |           id: String
-     6 |           superDetail: SuperDetail
-     7 |         }
-     8 |         type SuperDetail {
-     9 |           detail: String
-    10 |         }
-    11 |         type Query {
-    12 |           user: User!
-    13 |         }
-    14 |         
+     4 |
+     5 |         type SuperUser implements User {
+     6 |           id: String
+     7 |           superDetail: SuperDetail
+     8 |         }
+     9 |
+    10 |         type SuperDetail {
+    11 |           detail: String
+    12 |         }
+    13 |
+    14 |         type Query {
+    15 |           user: User!
+    16 |         }
+    17 |
+    18 |         
 `;
 
 exports[` 4`] = `
@@ -391,19 +463,23 @@ Code
        1 |         interface User {
        2 |           id: String
        3 |         }
-       4 |         interface AnotherUser {
-       5 |           createdAt: String
-       6 |         }
-       7 |         type SuperUser implements User {
-       8 |           id: String
-       9 |         }
-      10 |         # ObjectTypeExtension
-      11 |         extend type SuperUser {
-      12 |           detail: String
-      13 |         }
-      14 |         type Query {
-      15 |           user: AnotherUser!
+       4 |
+       5 |         interface AnotherUser {
+       6 |           createdAt: String
+       7 |         }
+       8 |
+       9 |         type SuperUser implements User {
+      10 |           id: String
+      11 |         }
+      12 |
+      13 |         # ObjectTypeExtension
+      14 |         extend type SuperUser {
+      15 |           detail: String
       16 |         }
+      17 |
+      18 |         type Query {
+      19 |           user: AnotherUser!
+      20 |         }
 
 ❌ Error 1/3
 
@@ -414,67 +490,79 @@ Code
 💡 Suggestion: Remove User
 
      1 |         
-     2 |         interface AnotherUser {
-     3 |           createdAt: String
-     4 |         }
-     5 |         type SuperUser implements User {
-     6 |           id: String
-     7 |         }
-     8 |         # ObjectTypeExtension
-     9 |         extend type SuperUser {
-    10 |           detail: String
-    11 |         }
-    12 |         type Query {
-    13 |           user: AnotherUser!
-    14 |         }
-
-❌ Error 2/3
-
-      6 |         }
-    > 7 |         type SuperUser implements User {
-        |              ^^^^^^^^^ Type "SuperUser" is unreachable
-      8 |           id: String
-
-💡 Suggestion: Remove SuperUser
-
-     1 |         interface User {
-     2 |           id: String
-     3 |         }
-     4 |         interface AnotherUser {
-     5 |           createdAt: String
-     6 |         }
-     7 |         
-     8 |         # ObjectTypeExtension
-     9 |         extend type SuperUser {
-    10 |           detail: String
-    11 |         }
-    12 |         type Query {
-    13 |           user: AnotherUser!
-    14 |         }
-
-❌ Error 3/3
-
-      10 |         # ObjectTypeExtension
-    > 11 |         extend type SuperUser {
-         |                     ^^^^^^^^^ Type "SuperUser" is unreachable
-      12 |           detail: String
-
-💡 Suggestion: Remove SuperUser
-
-     1 |         interface User {
-     2 |           id: String
-     3 |         }
-     4 |         interface AnotherUser {
-     5 |           createdAt: String
-     6 |         }
+     2 |
+     3 |         interface AnotherUser {
+     4 |           createdAt: String
+     5 |         }
+     6 |
      7 |         type SuperUser implements User {
      8 |           id: String
      9 |         }
-    10 |         # ObjectTypeExtension
-    11 |         
-    12 |         type Query {
-    13 |           user: AnotherUser!
+    10 |
+    11 |         # ObjectTypeExtension
+    12 |         extend type SuperUser {
+    13 |           detail: String
     14 |         }
+    15 |
+    16 |         type Query {
+    17 |           user: AnotherUser!
+    18 |         }
+
+❌ Error 2/3
+
+       8 |
+    >  9 |         type SuperUser implements User {
+         |              ^^^^^^^^^ Type "SuperUser" is unreachable
+      10 |           id: String
+
+💡 Suggestion: Remove SuperUser
+
+     1 |         interface User {
+     2 |           id: String
+     3 |         }
+     4 |
+     5 |         interface AnotherUser {
+     6 |           createdAt: String
+     7 |         }
+     8 |
+     9 |         
+    10 |
+    11 |         # ObjectTypeExtension
+    12 |         extend type SuperUser {
+    13 |           detail: String
+    14 |         }
+    15 |
+    16 |         type Query {
+    17 |           user: AnotherUser!
+    18 |         }
+
+❌ Error 3/3
+
+      13 |         # ObjectTypeExtension
+    > 14 |         extend type SuperUser {
+         |                     ^^^^^^^^^ Type "SuperUser" is unreachable
+      15 |           detail: String
+
+💡 Suggestion: Remove SuperUser
+
+     1 |         interface User {
+     2 |           id: String
+     3 |         }
+     4 |
+     5 |         interface AnotherUser {
+     6 |           createdAt: String
+     7 |         }
+     8 |
+     9 |         type SuperUser implements User {
+    10 |           id: String
+    11 |         }
+    12 |
+    13 |         # ObjectTypeExtension
+    14 |         
+    15 |
+    16 |         type Query {
+    17 |           user: AnotherUser!
+    18 |         }
 `;
 
 exports[` 5`] = `
@@ -483,19 +571,23 @@ exports[` 5`] = `
        1 |         type Query {
        2 |           node(id: ID!): Node!
        3 |         }
-       4 |         interface Node {
-       5 |           id: ID!
-       6 |         }
-       7 |         interface User implements Node {
-       8 |           id: ID!
-       9 |           name: String
-      10 |         }
-      11 |         type SuperUser implements User & Node {
-      12 |           id: ID!
-      13 |           name: String
-      14 |           address: String
-      15 |         }
-    > 16 |         scalar DateTime
+       4 |
+       5 |         interface Node {
+       6 |           id: ID!
+       7 |         }
+       8 |
+       9 |         interface User implements Node {
+      10 |           id: ID!
+      11 |           name: String
+      12 |         }
+      13 |
+      14 |         type SuperUser implements User & Node {
+      15 |           id: ID!
+      16 |           name: String
+      17 |           address: String
+      18 |         }
+      19 |
+    > 20 |         scalar DateTime
          |                ^^^^^^^^ Type "DateTime" is unreachable
 
 💡 Suggestion: Remove DateTime
@@ -503,17 +595,21 @@ exports[` 5`] = `
      1 |         type Query {
      2 |           node(id: ID!): Node!
      3 |         }
-     4 |         interface Node {
-     5 |           id: ID!
-     6 |         }
-     7 |         interface User implements Node {
-     8 |           id: ID!
-     9 |           name: String
-    10 |         }
-    11 |         type SuperUser implements User & Node {
-    12 |           id: ID!
-    13 |           name: String
-    14 |           address: String
-    15 |         }
-    16 |         
+     4 |
+     5 |         interface Node {
+     6 |           id: ID!
+     7 |         }
+     8 |
+     9 |         interface User implements Node {
+    10 |           id: ID!
+    11 |           name: String
+    12 |         }
+    13 |
+    14 |         type SuperUser implements User & Node {
+    15 |           id: ID!
+    16 |           name: String
+    17 |           address: String
+    18 |         }
+    19 |
+    20 |         
 `;

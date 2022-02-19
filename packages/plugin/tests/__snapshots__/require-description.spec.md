@@ -167,6 +167,15 @@ exports[` 12`] = `
     {
       "OperationDefinition": true
     }
+
+❌ Error
+
+      1 |         # linesBefore !== 1
+      2 |
+    > 3 |         query {
+        |         ^^^^^ Description is required for \`query\`.
+      4 |           foo
+      5 |         }
 `;
 
 exports[` 13`] = `
@@ -220,14 +229,15 @@ exports[` 16`] = `
 
 ❌ Error
 
-      1 |         # BAD
-      2 |         fragment UserFields on User {
-      3 |           id
-      4 |         }
-    > 5 |         query {
-        |         ^^^^^ Description is required for \`query\`.
-      6 |           user {
-      7 |             ...UserFields
-      8 |           }
-      9 |         }
+       1 |         # BAD
+       2 |         fragment UserFields on User {
+       3 |           id
+       4 |         }
+       5 |
+    >  6 |         query {
+         |         ^^^^^ Description is required for \`query\`.
+       7 |           user {
+       8 |             ...UserFields
+       9 |           }
+      10 |         }
 `;

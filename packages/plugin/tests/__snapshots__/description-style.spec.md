@@ -53,9 +53,10 @@ Code
       2 |   type CreateOneUserPayload {
       3 |     "Created document ID"
       4 |     recordId: MongoID
-      5 |     "Created document"
-      6 |     record: User
-      7 |   }
+      5 |
+      6 |     "Created document"
+      7 |     record: User
+      8 |   }
 
 ⚙️ Options
 
@@ -78,8 +79,8 @@ Code
 
 ❌ Error 3/3
 
-      4 |     recordId: MongoID
-    > 5 |     "Created document"
+      5 |
+    > 6 |     "Created document"
         |     ^^^^^^^^^^^^^^^^^^ Unexpected inline description
-      6 |     record: User
+      7 |     record: User
 `;

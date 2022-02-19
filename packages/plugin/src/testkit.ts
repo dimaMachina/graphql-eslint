@@ -156,7 +156,7 @@ export class GraphQLRuleTester extends RuleTester {
 }
 
 function removeTrailingBlankLines(text: string): string {
-  return text.replace(/^\s*\n/gm, '').trimEnd();
+  return text.replace(/^\s*\n/, '').trimEnd();
 }
 
 function printWithIndex(title: string, index: number, total: number, description?: string): string {

@@ -13,10 +13,11 @@ exports[` 2`] = `
 ❌ Error
 
       1 |         type Mutation
-      2 |         extend type Mutation {
-    > 3 |           createUser: Boolean!
+      2 |
+      3 |         extend type Mutation {
+    > 4 |           createUser: Boolean!
         |                       ^^^^^^^ Unexpected scalar result type "Boolean"
-      4 |         }
+      5 |         }
 `;
 
 exports[` 3`] = `
@@ -26,9 +27,10 @@ exports[` 3`] = `
     > 2 |           createUser: [Boolean]
         |                        ^^^^^^^ Unexpected scalar result type "Boolean"
       3 |         }
-      4 |         schema {
-      5 |           mutation: RootMutation
-      6 |         }
+      4 |
+      5 |         schema {
+      6 |           mutation: RootMutation
+      7 |         }
 `;
 
 exports[` 4`] = `
@@ -39,9 +41,10 @@ exports[` 4`] = `
     > 3 |           createUser: [Boolean]!
         |                        ^^^^^^^ Unexpected scalar result type "Boolean"
       4 |         }
-      5 |         schema {
-      6 |           mutation: RootMutation
-      7 |         }
+      5 |
+      6 |         schema {
+      7 |           mutation: RootMutation
+      8 |         }
 `;
 
 exports[` 5`] = `
