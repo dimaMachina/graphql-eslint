@@ -10,6 +10,7 @@ type NoRootTypeConfig = { disallow: typeof ROOT_TYPES };
 const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Schema',
       description: 'Disallow using root types `mutation` and/or `subscription`.',
@@ -84,7 +85,13 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
         const typeName = node.value;
         context.report({
           node,
-          message: `Root type "${typeName}" is forbidden`,
+          message: `Root type \`${typeName}\` is forbidden.`,
+          suggest: [
+            {
+              desc: `Remove \`${typeName}\` type`,
+              fix: fixer => fixer.remove((node as any).parent),
+            },
+          ],
         });
       },
     };

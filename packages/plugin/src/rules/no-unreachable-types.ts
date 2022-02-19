@@ -84,7 +84,7 @@ const rule: GraphQLESLintRule = {
             data: { typeName },
             suggest: [
               {
-                desc: `Remove ${typeName}`,
+                desc: `Remove \`${typeName}\``,
                 fix: fixer => fixer.remove(node as any),
               },
             ],

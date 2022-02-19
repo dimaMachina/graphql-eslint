@@ -5,6 +5,7 @@ import { GraphQLESLintRule } from '../types';
 const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-case-insensitive-enum-values-duplicates.md`,
       category: 'Schema',
@@ -47,7 +48,13 @@ const rule: GraphQLESLintRule = {
           const enumName = duplicate.name.value;
           context.report({
             node: duplicate.name,
-            message: `Case-insensitive enum values duplicates are not allowed! Found: "${enumName}"`,
+            message: `Case-insensitive enum values duplicates are not allowed! Found: \`${enumName}\`.`,
+            suggest: [
+              {
+                desc: `Remove \`${enumName}\` enum value`,
+                fix: fixer => fixer.remove(duplicate as any),
+              },
+            ],
           });
         }
       },
