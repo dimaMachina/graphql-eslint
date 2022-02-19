@@ -1,15 +1,18 @@
-import { Kind, isScalarType, NameNode } from 'graphql';
+import { isScalarType, NameNode } from 'graphql';
 import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
+const RULE_ID = 'no-scalar-result-type-on-mutation';
+
 const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Schema',
       description: 'Avoid scalar result type on mutation type to make sure to return a valid state.',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-scalar-result-type-on-mutation.md',
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
         {
@@ -33,14 +36,14 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext('no-scalar-result-type-on-mutation', context);
+    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const mutationType = schema.getMutationType();
     if (!mutationType) {
       return {};
     }
     const selector = [
-      `:matches(${Kind.OBJECT_TYPE_DEFINITION}, ${Kind.OBJECT_TYPE_EXTENSION})[name.value=${mutationType.name}]`,
-      `> ${Kind.FIELD_DEFINITION} > .gqlType ${Kind.NAME}`,
+      `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=${mutationType.name}]`,
+      '> FieldDefinition > .gqlType Name',
     ].join(' ');
 
     return {
@@ -50,7 +53,13 @@ const rule: GraphQLESLintRule = {
         if (isScalarType(graphQLType)) {
           context.report({
             node,
-            message: `Unexpected scalar result type "${typeName}"`,
+            message: `Unexpected scalar result type \`${typeName}\`.`,
+            suggest: [
+              {
+                desc: `Remove \`${typeName}\``,
+                fix: fixer => fixer.remove(node as any),
+              },
+            ],
           });
         }
       },

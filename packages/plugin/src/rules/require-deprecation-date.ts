@@ -1,5 +1,6 @@
+import { DirectiveNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { valueFromNode } from '../estree-parser/utils';
+import { GraphQLESTreeNode, valueFromNode } from '../estree-parser';
 
 // eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -12,6 +13,7 @@ const MESSAGE_CAN_BE_REMOVED = 'MESSAGE_CAN_BE_REMOVED';
 const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Schema',
       description:
@@ -67,7 +69,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
   },
   create(context) {
     return {
-      'Directive[name.value=deprecated]'(node) {
+      'Directive[name.value=deprecated]'(node: GraphQLESTreeNode<DirectiveNode>) {
         const argName = context.options[0]?.argumentName || 'deletionDate';
         const deletionDateNode = node.arguments.find(arg => arg.name.value === argName);
 
@@ -78,7 +80,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
           });
           return;
         }
-        const deletionDate = valueFromNode(deletionDateNode.value);
+        const deletionDate = valueFromNode(deletionDateNode.value as any);
         const isValidDate = DATE_REGEX.test(deletionDate);
 
         if (!isValidDate) {
@@ -104,12 +106,18 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
         const canRemove = Date.now() > deletionDateInMS;
 
         if (canRemove) {
+          const { parent } = node as any;
+          const nodeName = parent.name.value;
           context.report({
-            node: node.parent.name,
+            node: parent.name,
             messageId: MESSAGE_CAN_BE_REMOVED,
-            data: {
-              nodeName: node.parent.name.value,
-            },
+            data: { nodeName },
+            suggest: [
+              {
+                desc: `Remove \`${nodeName}\``,
+                fix: fixer => fixer.remove(parent),
+              },
+            ],
           });
         }
       },

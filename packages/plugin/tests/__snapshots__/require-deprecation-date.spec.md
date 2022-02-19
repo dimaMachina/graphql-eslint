@@ -5,6 +5,10 @@ exports[` 1`] = `
 
     > 1 | scalar Old @deprecated(deletionDate: "22/08/2021")
         |        ^^^ "Old" сan be removed
+
+💡 Suggestion: Remove \`Old\`
+
+    1 |
 `;
 
 exports[` 2`] = `
@@ -18,6 +22,10 @@ exports[` 2`] = `
 
     > 1 | scalar Old @deprecated(untilDate: "22/08/2021")
         |        ^^^ "Old" сan be removed
+
+💡 Suggestion: Remove \`Old\`
+
+    1 |
 `;
 
 exports[` 3`] = `

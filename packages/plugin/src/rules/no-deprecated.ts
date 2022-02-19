@@ -1,15 +1,18 @@
+import { EnumValueNode, FieldNode, Kind } from 'graphql';
 import { requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode } from '../estree-parser';
 
-const NO_DEPRECATED = 'NO_DEPRECATED';
+const RULE_ID = 'no-deprecated';
 
 const rule: GraphQLESLintRule<[], true> = {
   meta: {
     type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Operations',
       description: `Enforce that deprecated fields or enum values are not in use by operations.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-deprecated.md`,
+      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
         {
@@ -76,44 +79,47 @@ const rule: GraphQLESLintRule<[], true> = {
       recommended: true,
     },
     messages: {
-      [NO_DEPRECATED]: `This {{ type }} is marked as deprecated in your GraphQL schema {{ reason }}`,
+      [RULE_ID]: 'This {{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
     },
     schema: [],
   },
   create(context) {
+    requireGraphQLSchemaFromContext(RULE_ID, context);
+
+    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode>, reason: string): void {
+      const nodeName = node.type === Kind.ENUM ? node.value : node.name.value;
+      const nodeType = node.type === Kind.ENUM ? 'enum value' : 'field';
+      context.report({
+        node,
+        messageId: RULE_ID,
+        data: {
+          type: nodeType,
+          reason,
+        },
+        suggest: [
+          {
+            desc: `Remove \`${nodeName}\` ${nodeType}`,
+            fix: fixer => fixer.remove(node as any),
+          },
+        ],
+      });
+    }
+
     return {
       EnumValue(node) {
-        requireGraphQLSchemaFromContext('no-deprecated', context);
         const typeInfo = node.typeInfo();
+        const reason = typeInfo.enumValue?.deprecationReason;
 
-        if (typeInfo && typeInfo.enumValue) {
-          if (typeInfo.enumValue.deprecationReason) {
-            context.report({
-              node,
-              messageId: NO_DEPRECATED,
-              data: {
-                type: 'enum value',
-                reason: typeInfo.enumValue.deprecationReason ? `(reason: ${typeInfo.enumValue.deprecationReason})` : '',
-              },
-            });
-          }
+        if (reason) {
+          report(node, reason);
         }
       },
       Field(node) {
-        requireGraphQLSchemaFromContext('no-deprecated', context);
         const typeInfo = node.typeInfo();
+        const reason = typeInfo.fieldDef?.deprecationReason;
 
-        if (typeInfo && typeInfo.fieldDef) {
-          if (typeInfo.fieldDef.deprecationReason) {
-            context.report({
-              node: node.name,
-              messageId: NO_DEPRECATED,
-              data: {
-                type: 'field',
-                reason: typeInfo.fieldDef.deprecationReason ? `(reason: ${typeInfo.fieldDef.deprecationReason})` : '',
-              },
-            });
-          }
+        if (reason) {
+          report(node, reason);
         }
       },
     };
