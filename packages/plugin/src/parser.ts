@@ -6,7 +6,6 @@ import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
 import { loadGraphQLConfig } from './graphql-config';
-import { getReachableTypes, getUsedFields } from './graphql-ast';
 
 export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
   return parseForESLint(code, options).ast;
@@ -19,8 +18,6 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
     hasTypeInfo: schema !== null,
     schema,
     siblingOperations: getSiblingOperations(options, gqlConfig),
-    reachableTypes: getReachableTypes,
-    usedFields: getUsedFields,
   };
 
   try {
@@ -31,7 +28,10 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
       noLocation: false,
     });
 
-    const { rootTree, comments } = convertToESTree(graphqlAst.document as ASTNode, schema ? new TypeInfo(schema) : null);
+    const { rootTree, comments } = convertToESTree(
+      graphqlAst.document as ASTNode,
+      schema ? new TypeInfo(schema) : null
+    );
     const tokens = extractTokens(new Source(code, filePath));
 
     return {

@@ -160,9 +160,9 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         }
       `),
       errors: [
-        { message: `Type "Node" is unreachable` },
-        { message: `Type "User" is unreachable` },
-        { message: `Type "SuperUser" is unreachable` },
+        { message: 'Interface type `Node` is unreachable.' },
+        { message: 'Interface type `User` is unreachable.' },
+        { message: 'Object type `SuperUser` is unreachable.' },
       ],
     },
     {
@@ -198,13 +198,13 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         }
       `),
       errors: [
-        { message: 'Type "DateTime" is unreachable' },
-        { message: 'Type "Role" is unreachable' },
-        { message: 'Type "auth" is unreachable' },
-        { message: 'Type "Union" is unreachable' },
-        { message: `Type "UsersFilter" is unreachable` },
-        { message: 'Type "Address" is unreachable' },
-        { message: 'Type "User" is unreachable' },
+        { message: 'Scalar type `DateTime` is unreachable.' },
+        { message: 'Enum type `Role` is unreachable.' },
+        { message: 'Directive `auth` is unreachable.' },
+        { message: 'Union type `Union` is unreachable.' },
+        { message: 'Input object type `UsersFilter` is unreachable.' },
+        { message: 'Interface type `Address` is unreachable.' },
+        { message: 'Object type `User` is unreachable.' },
       ],
     },
     {
@@ -228,7 +228,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
 
         scalar DateTime
       `),
-      errors: [{ message: 'Type "DateTime" is unreachable' }],
+      errors: [{ message: 'Scalar type `DateTime` is unreachable.' }],
     },
     {
       ...useSchema(/* GraphQL */ `
@@ -254,9 +254,9 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         }
       `),
       errors: [
-        { message: `Type "User" is unreachable` },
-        { message: `Type "SuperUser" is unreachable` },
-        { message: `Type "SuperUser" is unreachable` },
+        { message: 'Interface type `User` is unreachable.' },
+        { message: 'Object type `SuperUser` is unreachable.' },
+        { message: 'Object type `SuperUser` is unreachable.' },
       ],
     },
     {
@@ -282,7 +282,7 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
 
         scalar DateTime
       `),
-      errors: [{ message: `Type "DateTime" is unreachable` }],
+      errors: [{ message: 'Scalar type `DateTime` is unreachable.' }],
     },
   ],
 });

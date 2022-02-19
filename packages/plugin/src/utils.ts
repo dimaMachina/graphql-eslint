@@ -7,7 +7,6 @@ import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
-import { ReachableTypes, UsedFields } from './graphql-ast';
 import type * as ESTree from 'estree';
 
 export function requireSiblingsOperations(
@@ -54,20 +53,6 @@ export const logger = {
   // eslint-disable-next-line no-console
   warn: (...args) => console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
 };
-
-export function requireReachableTypesFromContext(
-  ruleName: string,
-  context: GraphQLESLintRuleContext
-): ReachableTypes | never {
-  const schema = requireGraphQLSchemaFromContext(ruleName, context);
-  return context.parserServices.reachableTypes(schema);
-}
-
-export function requireUsedFieldsFromContext(ruleName: string, context: GraphQLESLintRuleContext): UsedFields | never {
-  const schema = requireGraphQLSchemaFromContext(ruleName, context);
-  const siblings = requireSiblingsOperations(ruleName, context);
-  return context.parserServices.usedFields(schema, siblings);
-}
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
 

@@ -30,7 +30,7 @@ Code
 
       4 |
     > 5 |         interface Node {
-        |                   ^^^^ Type "Node" is unreachable
+        |                   ^^^^ Interface type \`Node\` is unreachable.
       6 |           id: ID!
 
 💡 Suggestion: Remove \`Node\`
@@ -60,7 +60,7 @@ Code
 
       12 |
     > 13 |         interface User implements Node {
-         |                   ^^^^ Type "User" is unreachable
+         |                   ^^^^ Interface type \`User\` is unreachable.
       14 |           id: ID!
 
 💡 Suggestion: Remove \`User\`
@@ -89,7 +89,7 @@ Code
 
       17 |
     > 18 |         type SuperUser implements User & Node {
-         |              ^^^^^^^^^ Type "SuperUser" is unreachable
+         |              ^^^^^^^^^ Object type \`SuperUser\` is unreachable.
       19 |           id: ID!
 
 💡 Suggestion: Remove \`SuperUser\`
@@ -151,7 +151,7 @@ Code
 
       1 |         # ScalarTypeDefinition
     > 2 |         scalar DateTime
-        |                ^^^^^^^^ Type "DateTime" is unreachable
+        |                ^^^^^^^^ Scalar type \`DateTime\` is unreachable.
       3 |
 
 💡 Suggestion: Remove \`DateTime\`
@@ -190,7 +190,7 @@ Code
 
       4 |         # EnumTypeDefinition
     > 5 |         enum Role {
-        |              ^^^^ Type "Role" is unreachable
+        |              ^^^^ Enum type \`Role\` is unreachable.
       6 |           ADMIN
 
 💡 Suggestion: Remove \`Role\`
@@ -226,7 +226,7 @@ Code
 
       10 |         # DirectiveDefinition
     > 11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
-         |                    ^^^^ Type "auth" is unreachable
+         |                    ^^^^ Directive \`auth\` is unreachable.
       12 |
 
 💡 Suggestion: Remove \`auth\`
@@ -265,7 +265,7 @@ Code
 
       13 |         # UnionTypeDefinition
     > 14 |         union Union = String | Boolean
-         |               ^^^^^ Type "Union" is unreachable
+         |               ^^^^^ Union type \`Union\` is unreachable.
       15 |
 
 💡 Suggestion: Remove \`Union\`
@@ -304,7 +304,7 @@ Code
 
       16 |         # InputObjectTypeDefinition
     > 17 |         input UsersFilter {
-         |               ^^^^^^^^^^^ Type "UsersFilter" is unreachable
+         |               ^^^^^^^^^^^ Input object type \`UsersFilter\` is unreachable.
       18 |           limit: Int
 
 💡 Suggestion: Remove \`UsersFilter\`
@@ -341,7 +341,7 @@ Code
 
       21 |         # InterfaceTypeDefinition
     > 22 |         interface Address {
-         |                   ^^^^^^^ Type "Address" is unreachable
+         |                   ^^^^^^^ Interface type \`Address\` is unreachable.
       23 |           city: String
 
 💡 Suggestion: Remove \`Address\`
@@ -378,7 +378,7 @@ Code
 
       26 |         # ObjectTypeDefinition
     > 27 |         type User implements Address {
-         |              ^^^^ Type "User" is unreachable
+         |              ^^^^ Object type \`User\` is unreachable.
       28 |           city: String
 
 💡 Suggestion: Remove \`User\`
@@ -433,7 +433,7 @@ exports[` 3`] = `
       16 |         }
       17 |
     > 18 |         scalar DateTime
-         |                ^^^^^^^^ Type "DateTime" is unreachable
+         |                ^^^^^^^^ Scalar type \`DateTime\` is unreachable.
 
 💡 Suggestion: Remove \`DateTime\`
 
@@ -484,7 +484,7 @@ Code
 ❌ Error 1/3
 
     > 1 |         interface User {
-        |                   ^^^^ Type "User" is unreachable
+        |                   ^^^^ Interface type \`User\` is unreachable.
       2 |           id: String
 
 💡 Suggestion: Remove \`User\`
@@ -512,7 +512,7 @@ Code
 
        8 |
     >  9 |         type SuperUser implements User {
-         |              ^^^^^^^^^ Type "SuperUser" is unreachable
+         |              ^^^^^^^^^ Object type \`SuperUser\` is unreachable.
       10 |           id: String
 
 💡 Suggestion: Remove \`SuperUser\`
@@ -540,7 +540,7 @@ Code
 
       13 |         # ObjectTypeExtension
     > 14 |         extend type SuperUser {
-         |                     ^^^^^^^^^ Type "SuperUser" is unreachable
+         |                     ^^^^^^^^^ Object type \`SuperUser\` is unreachable.
       15 |           detail: String
 
 💡 Suggestion: Remove \`SuperUser\`
@@ -588,7 +588,7 @@ exports[` 5`] = `
       18 |         }
       19 |
     > 20 |         scalar DateTime
-         |                ^^^^^^^^ Type "DateTime" is unreachable
+         |                ^^^^^^^^ Scalar type \`DateTime\` is unreachable.
 
 💡 Suggestion: Remove \`DateTime\`
 
