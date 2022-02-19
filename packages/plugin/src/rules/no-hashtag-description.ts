@@ -6,8 +6,12 @@ const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
 const rule: GraphQLESLintRule = {
   meta: {
+    type: 'suggestion',
+    hasSuggestions: true,
+    schema: [],
     messages: {
-      [HASHTAG_COMMENT]: `Using hashtag (#) for adding GraphQL descriptions is not allowed. Prefer using """ for multiline, or " for a single line description.`,
+      [HASHTAG_COMMENT]:
+        'Using hashtag `#` for adding GraphQL descriptions is not allowed. Prefer using `"""` for multiline, or `"` for a single line description.',
     },
     docs: {
       description:
@@ -51,8 +55,6 @@ const rule: GraphQLESLintRule = {
       ],
       recommended: true,
     },
-    type: 'suggestion',
-    schema: [],
   },
   create(context) {
     const selector = 'Document[definitions.0.kind!=/^(OperationDefinition|FragmentDefinition)$/]';
@@ -61,9 +63,8 @@ const rule: GraphQLESLintRule = {
         const rawNode = node.rawNode();
         let token = rawNode.loc.startToken;
 
-        while (token !== null) {
+        while (token) {
           const { kind, prev, next, value, line, column } = token;
-
           if (kind === TokenKind.COMMENT && prev && next) {
             const isEslintComment = value.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
@@ -75,6 +76,14 @@ const rule: GraphQLESLintRule = {
                   line,
                   column: column - 1,
                 },
+                suggest: ['"""', '"'].map(descriptionSyntax => ({
+                  desc: `Replace with \`${descriptionSyntax}\` description syntax`,
+                  fix: fixer =>
+                    fixer.replaceTextRange(
+                      [token.start, token.end] as [number, number],
+                      [descriptionSyntax, value.trim(), descriptionSyntax].join('')
+                    ),
+                })),
               });
             }
           }

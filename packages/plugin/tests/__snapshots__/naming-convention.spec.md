@@ -17,7 +17,7 @@ Code
     > 1 | type b { test: String }
         |      ^ Type "b" should be in PascalCase format
 
-💡 Suggestion: Rename to "B"
+💡 Suggestion: Rename to \`B\`
 
     1 | type B { test: String }
 
@@ -26,7 +26,7 @@ Code
     > 1 | type b { test: String }
         |          ^^^^ Field "test" should be in PascalCase format
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
     1 | type b { Test: String }
 `;
@@ -48,7 +48,7 @@ Code
     > 1 | type __b { test__: String }
         |      ^^^ Leading underscores are not allowed
 
-💡 Suggestion: Rename to "b"
+💡 Suggestion: Rename to \`b\`
 
     1 | type b { test__: String }
 
@@ -57,7 +57,7 @@ Code
     > 1 | type __b { test__: String }
         |            ^^^^^^ Trailing underscores are not allowed
 
-💡 Suggestion: Rename to "test"
+💡 Suggestion: Rename to \`test\`
 
     1 | type __b { test: String }
 `;
@@ -74,7 +74,7 @@ exports[` 3`] = `
     > 1 | scalar BSONDecimal
         |        ^^^^^^^^^^^ Scalar "BSONDecimal" should be in snake_case format
 
-💡 Suggestion: Rename to "bson_decimal"
+💡 Suggestion: Rename to \`bson_decimal\`
 
     1 | scalar bson_decimal
 `;
@@ -1408,7 +1408,7 @@ Code
     > 1 | enum B { test }
         |      ^ Enumerator "B" should be in camelCase format
 
-💡 Suggestion: Rename to "b"
+💡 Suggestion: Rename to \`b\`
 
     1 | enum b { test }
 
@@ -1417,7 +1417,7 @@ Code
     > 1 | enum B { test }
         |          ^^^^ Enumeration value "test" should be in UPPER_CASE format
 
-💡 Suggestion: Rename to "TEST"
+💡 Suggestion: Rename to \`TEST\`
 
     1 | enum B { TEST }
 `;
@@ -1439,7 +1439,7 @@ Code
     > 1 | input test { _Value: String }
         |       ^^^^ Input type "test" should be in PascalCase format
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
     1 | input Test { _Value: String }
 
@@ -1448,7 +1448,7 @@ Code
     > 1 | input test { _Value: String }
         |              ^^^^^^ Input property "_Value" should be in snake_case format
 
-💡 Suggestion: Rename to "_value"
+💡 Suggestion: Rename to \`_value\`
 
     1 | input test { _value: String }
 
@@ -1457,7 +1457,7 @@ Code
     > 1 | input test { _Value: String }
         |              ^^^^^^ Leading underscores are not allowed
 
-💡 Suggestion: Rename to "Value"
+💡 Suggestion: Rename to \`Value\`
 
     1 | input test { Value: String }
 `;
@@ -1488,7 +1488,7 @@ Code
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |      ^^^^^^^ Type "TypeOne" should be in camelCase format
 
-💡 Suggestion: Rename to "typeOne"
+💡 Suggestion: Rename to \`typeOne\`
 
     1 | type typeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
 
@@ -1497,7 +1497,7 @@ Code
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |                ^^^^^^ Field "aField" should have "AAA" suffix
 
-💡 Suggestion: Rename to "aFieldAAA"
+💡 Suggestion: Rename to \`aFieldAAA\`
 
     1 | type TypeOne { aFieldAAA: String } enum Z { VALUE_ONE VALUE_TWO }
 
@@ -1506,7 +1506,7 @@ Code
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |                                          ^^^^^^^^^ Enumeration value "VALUE_ONE" should have "ENUM" suffix
 
-💡 Suggestion: Rename to "VALUE_ONEENUM"
+💡 Suggestion: Rename to \`VALUE_ONEENUM\`
 
     1 | type TypeOne { aField: String } enum Z { VALUE_ONEENUM VALUE_TWO }
 
@@ -1515,7 +1515,7 @@ Code
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |                                                    ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" suffix
 
-💡 Suggestion: Rename to "VALUE_TWOENUM"
+💡 Suggestion: Rename to \`VALUE_TWOENUM\`
 
     1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWOENUM }
 `;
@@ -1546,7 +1546,7 @@ Code
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
         |            ^^^^^^ Field "aField" should have "Field" prefix
 
-💡 Suggestion: Rename to "FieldaField"
+💡 Suggestion: Rename to \`FieldaField\`
 
     1 | type One { FieldaField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
 
@@ -1555,7 +1555,7 @@ Code
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
         |                                      ^^^^^^^^^^^^^^^^ Enumeration value "A_ENUM_VALUE_ONE" should have "ENUM" prefix
 
-💡 Suggestion: Rename to "ENUMA_ENUM_VALUE_ONE"
+💡 Suggestion: Rename to \`ENUMA_ENUM_VALUE_ONE\`
 
     1 | type One { aField: String } enum Z { ENUMA_ENUM_VALUE_ONE VALUE_TWO }
 
@@ -1564,7 +1564,7 @@ Code
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
         |                                                       ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" prefix
 
-💡 Suggestion: Rename to "ENUMVALUE_TWO"
+💡 Suggestion: Rename to \`ENUMVALUE_TWO\`
 
     1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE ENUMVALUE_TWO }
 `;
@@ -1607,7 +1607,7 @@ Code
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |      ^^^ Type "One" should not have "On" prefix
 
-💡 Suggestion: Rename to "e"
+💡 Suggestion: Rename to \`e\`
 
     1 | type e { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
 
@@ -1616,7 +1616,7 @@ Code
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |            ^^^^^^ Field "getFoo" should not have "Foo" suffix
 
-💡 Suggestion: Rename to "get"
+💡 Suggestion: Rename to \`get\`
 
     1 | type One { get: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
 
@@ -1625,7 +1625,7 @@ Code
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |                                                            ^^^^ Field "getA" should not have "get" prefix
 
-💡 Suggestion: Rename to "A"
+💡 Suggestion: Rename to \`A\`
 
     1 | type One { getFoo: String, queryBar: String } type Query { A(id: ID!): String, queryB: String } extend type Query { getC: String }
 
@@ -1634,7 +1634,7 @@ Code
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |                                                                                   ^^^^^^ Field "queryB" should not have "query" prefix
 
-💡 Suggestion: Rename to "B"
+💡 Suggestion: Rename to \`B\`
 
     1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, B: String } extend type Query { getC: String }
 
@@ -1643,7 +1643,7 @@ Code
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |                                                                                                                        ^^^^ Field "getC" should not have "get" prefix
 
-💡 Suggestion: Rename to "C"
+💡 Suggestion: Rename to \`C\`
 
     1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { C: String }
 `;
@@ -1669,7 +1669,7 @@ Code
     > 1 | query Foo { foo } query getBar { bar }
         |       ^^^ Operation "Foo" should be in camelCase format
 
-💡 Suggestion: Rename to "foo"
+💡 Suggestion: Rename to \`foo\`
 
     1 | query foo { foo } query getBar { bar }
 
@@ -1678,7 +1678,7 @@ Code
     > 1 | query Foo { foo } query getBar { bar }
         |                         ^^^^^^ Operation "getBar" should not have "get" prefix
 
-💡 Suggestion: Rename to "Bar"
+💡 Suggestion: Rename to \`Bar\`
 
     1 | query Foo { foo } query Bar { bar }
 `;
@@ -1745,7 +1745,7 @@ Code
         |           ^^^^^^^^^^ Field "fieldQuery" should not have "Query" suffix
       3 |           queryField: ID
 
-💡 Suggestion: Rename to "field"
+💡 Suggestion: Rename to \`field\`
 
      1 |         type Query {
      2 |           field: ID
@@ -1770,7 +1770,7 @@ Code
         |           ^^^^^^^^^^ Field "queryField" should not have "query" prefix
       4 |           getField: ID
 
-💡 Suggestion: Rename to "Field"
+💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -1795,7 +1795,7 @@ Code
         |           ^^^^^^^^ Field "getField" should not have "get" prefix
       5 |         }
 
-💡 Suggestion: Rename to "Field"
+💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -1820,7 +1820,7 @@ Code
         |           ^^^^^^^^^^^^^ Field "fieldMutation" should not have "Mutation" suffix
       9 |           mutationField: ID
 
-💡 Suggestion: Rename to "field"
+💡 Suggestion: Rename to \`field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -1845,7 +1845,7 @@ Code
          |           ^^^^^^^^^^^^^ Field "mutationField" should not have "mutation" prefix
       10 |         }
 
-💡 Suggestion: Rename to "Field"
+💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -1870,7 +1870,7 @@ Code
          |           ^^^^^^^^^^^^^^^^^ Field "fieldSubscription" should not have "Subscription" suffix
       14 |           subscriptionField: ID
 
-💡 Suggestion: Rename to "field"
+💡 Suggestion: Rename to \`field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -1895,7 +1895,7 @@ Code
          |           ^^^^^^^^^^^^^^^^^ Field "subscriptionField" should not have "subscription" prefix
       15 |         }
 
-💡 Suggestion: Rename to "Field"
+💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -1966,7 +1966,7 @@ Code
         |               ^^^^^^^^^ Operation "TestQuery" should not have "Query" suffix
       2 |         query QueryTest { test }
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query Test { test }
      2 |         query QueryTest { test }
@@ -1989,7 +1989,7 @@ Code
         |               ^^^^^^^^^ Operation "QueryTest" should not have "Query" prefix
       3 |         query GetQuery { test }
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query Test { test }
@@ -2012,7 +2012,7 @@ Code
         |               ^^^^^^^^ Operation "GetQuery" should not have "Get" prefix
       4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
 
-💡 Suggestion: Rename to "Query"
+💡 Suggestion: Rename to \`Query\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2035,7 +2035,7 @@ Code
         |                  ^^^^^^^^^^^^ Operation "TestMutation" should not have "Mutation" suffix
       7 |         mutation MutationTest { test }
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2058,7 +2058,7 @@ Code
         |                  ^^^^^^^^^^^^ Operation "MutationTest" should not have "Mutation" prefix
       8 |
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2081,7 +2081,7 @@ Code
          |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
       10 |         subscription SubscriptionTest { test }
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2104,7 +2104,7 @@ Code
          |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
       11 |
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2127,7 +2127,7 @@ Code
          |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
       13 |         fragment FragmentTest on Test { id }
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2149,7 +2149,7 @@ Code
     > 13 |         fragment FragmentTest on Test { id }
          |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not have "Fragment" prefix
 
-💡 Suggestion: Rename to "Test"
+💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -2185,7 +2185,7 @@ Code
         |             ^^^^^^^^^ Leading underscores are not allowed
       4 |             badAlias_: bar
 
-💡 Suggestion: Rename to "badAlias"
+💡 Suggestion: Rename to \`badAlias\`
 
     1 |         {
     2 |           test {
@@ -2203,7 +2203,7 @@ Code
         |             ^^^^^^^^^ Trailing underscores are not allowed
       5 |             _ok
 
-💡 Suggestion: Rename to "badAlias"
+💡 Suggestion: Rename to \`badAlias\`
 
     1 |         {
     2 |           test {

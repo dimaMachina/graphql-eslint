@@ -1,3 +1,4 @@
+import type { AST } from 'eslint';
 import { GraphQLESLintRule } from '../types';
 import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, FragmentDefinitionNode, GraphQLError, Kind, OperationDefinitionNode } from 'graphql';
@@ -5,12 +6,14 @@ import { GraphQLESTreeNode } from '../estree-parser';
 import { logger, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../sibling-operations';
 
-type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
+export type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
 
 const RULE_ID = 'selection-set-depth';
 
 const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
   meta: {
+    type: 'suggestion',
+    hasSuggestions: true,
     docs: {
       category: 'Operations',
       description: `Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).`,
@@ -60,7 +63,6 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       recommended: true,
       configOptions: [{ maxDepth: 7 }],
     },
-    type: 'suggestion',
     schema: {
       type: 'array',
       minItems: 1,
@@ -122,6 +124,22 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                   column: column - 1,
                 },
                 message: error.message,
+                suggest: [
+                  {
+                    desc: 'Remove selections',
+                    fix(fixer) {
+                      const { line, column } = error.locations[0];
+                      const ancestors = context.getAncestors();
+                      const token = (ancestors[0] as AST.Program).tokens.find(
+                        token => token.loc.start.line === line && token.loc.start.column === column - 1
+                      );
+                      const sourceCode = context.getSourceCode();
+                      const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
+                      const parentNode = foundNode.parent.parent;
+                      return fixer.remove(foundNode.kind === 'Name' ? parentNode.parent : parentNode);
+                    },
+                  },
+                ],
               });
             },
           });
