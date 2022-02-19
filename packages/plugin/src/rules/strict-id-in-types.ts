@@ -1,6 +1,6 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { requireGraphQLSchemaFromContext } from '../utils';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESTreeNode } from '../estree-parser';
 
 export type StrictIdInTypesRuleConfig = {
@@ -112,23 +112,13 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
             type: 'object',
             properties: {
               types: {
-                type: 'array',
-                uniqueItems: true,
-                minItems: 1,
+                ...ARRAY_DEFAULT_OPTIONS,
                 description: 'This is used to exclude types with names that match one of the specified values.',
-                items: {
-                  type: 'string',
-                },
               },
               suffixes: {
-                type: 'array',
-                uniqueItems: true,
-                minItems: 1,
+                ...ARRAY_DEFAULT_OPTIONS,
                 description:
                   'This is used to exclude types with names with suffixes that match one of the specified values.',
-                items: {
-                  type: 'string',
-                },
               },
             },
           },

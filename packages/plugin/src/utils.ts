@@ -162,3 +162,14 @@ export function getLocation(start: ESTree.Position, fieldName = ''): AST.SourceL
     },
   };
 }
+
+export const REPORT_ON_FIRST_CHARACTER = { column: 0, line: 1 };
+
+export const ARRAY_DEFAULT_OPTIONS = {
+  type: 'array',
+  uniqueItems: true,
+  minItems: 1,
+  items: {
+    type: 'string',
+  },
+} as const;

@@ -22,6 +22,7 @@ import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { GraphQLESLintRuleListener } from '../testkit';
+import { ARRAY_DEFAULT_OPTIONS } from '../utils';
 
 const RULE_ID = 'alphabetize';
 
@@ -168,45 +169,35 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         minProperties: 1,
         properties: {
           fields: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
+            ...ARRAY_DEFAULT_OPTIONS,
             items: {
               enum: fieldsEnum,
             },
             description: 'Fields of `type`, `interface`, and `input`.',
           },
           values: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
+            ...ARRAY_DEFAULT_OPTIONS,
             items: {
               enum: valuesEnum,
             },
             description: 'Values of `enum`.',
           },
           selections: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
+            ...ARRAY_DEFAULT_OPTIONS,
             items: {
               enum: selectionsEnum,
             },
             description: 'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
           },
           variables: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
+            ...ARRAY_DEFAULT_OPTIONS,
             items: {
               enum: variablesEnum,
             },
             description: 'Variables of operations `query`, `mutation` and `subscription`.',
           },
           arguments: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
+            ...ARRAY_DEFAULT_OPTIONS,
             items: {
               enum: argumentsEnum,
             },

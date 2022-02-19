@@ -3,7 +3,7 @@ import { GraphQLESLintRule } from '../types';
 import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, FragmentDefinitionNode, GraphQLError, Kind, OperationDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { logger, requireSiblingsOperations } from '../utils';
+import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../sibling-operations';
 
 export type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
@@ -75,14 +75,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
           maxDepth: {
             type: 'number',
           },
-          ignore: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
-            items: {
-              type: 'string',
-            },
-          },
+          ignore: ARRAY_DEFAULT_OPTIONS,
         },
       },
     },

@@ -11,11 +11,16 @@ import {
   visit,
   validate,
   visitWithTypeInfo,
-  TokenKind,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations, logger } from '../utils';
+import {
+  requireGraphQLSchemaFromContext,
+  requireSiblingsOperations,
+  logger,
+  REPORT_ON_FIRST_CHARACTER,
+  ARRAY_DEFAULT_OPTIONS,
+} from '../utils';
 
 function validateDocument(
   context: GraphQLESLintRuleContext,
@@ -44,9 +49,7 @@ function validateDocument(
       if (token) {
         loc =
           // if cursor on `@` symbol than use next node
-          (token.type as TokenKind) === TokenKind.AT
-            ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc
-            : token.loc;
+          (token.type as any) === '@' ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc : token.loc;
       }
 
       context.report({
@@ -56,8 +59,7 @@ function validateDocument(
     }
   } catch (e) {
     context.report({
-      // Report on first character
-      loc: { column: 0, line: 1 },
+      loc: REPORT_ON_FIRST_CHARACTER,
       message: e.message,
     });
   }
@@ -257,14 +259,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
         additionalProperties: false,
         required: ['ignoreClientDirectives'],
         properties: {
-          ignoreClientDirectives: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
-            items: {
-              type: 'string',
-            },
-          },
+          ignoreClientDirectives: ARRAY_DEFAULT_OPTIONS,
         },
       },
     }

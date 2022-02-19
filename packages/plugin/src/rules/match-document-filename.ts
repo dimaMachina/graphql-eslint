@@ -1,7 +1,7 @@
 import { basename, extname } from 'path';
 import { existsSync } from 'fs';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
-import { CaseStyle as _CaseStyle, convertCase } from '../utils';
+import { CaseStyle as _CaseStyle, convertCase, REPORT_ON_FIRST_CHARACTER } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
@@ -11,7 +11,14 @@ const MATCH_EXTENSION = 'MATCH_EXTENSION';
 const MATCH_STYLE = 'MATCH_STYLE';
 
 const ACCEPTED_EXTENSIONS: ['.gql', '.graphql'] = ['.gql', '.graphql'];
-const CASE_STYLES: CaseStyle[] = ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE', 'kebab-case', 'matchDocumentStyle'];
+const CASE_STYLES: CaseStyle[] = [
+  'camelCase',
+  'PascalCase',
+  'snake_case',
+  'UPPER_CASE',
+  'kebab-case',
+  'matchDocumentStyle',
+];
 
 type PropertySchema = {
   style?: CaseStyle;
@@ -173,8 +180,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
       Document(documentNode) {
         if (options.fileExtension && options.fileExtension !== fileExtension) {
           context.report({
-            // Report on first character
-            loc: { column: 0, line: 1 },
+            loc: REPORT_ON_FIRST_CHARACTER,
             messageId: MATCH_EXTENSION,
             data: {
               fileExtension,
@@ -223,8 +229,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
 
         if (expectedFilename !== filenameWithExtension) {
           context.report({
-            // Report on first character
-            loc: { column: 0, line: 1 },
+            loc: REPORT_ON_FIRST_CHARACTER,
             messageId: MATCH_STYLE,
             data: {
               expectedFilename,

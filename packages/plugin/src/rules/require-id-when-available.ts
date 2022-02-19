@@ -1,4 +1,4 @@
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
 import { GraphQLESLintRule, OmitRecursively } from '../types';
 import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionSetNode } from 'graphql';
 import { asArray } from '@graphql-tools/utils';
@@ -76,11 +76,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
         asString: {
           type: 'string',
         },
-        asArray: {
-          type: 'array',
-          minItems: 1,
-          uniqueItems: true,
-        },
+        asArray: ARRAY_DEFAULT_OPTIONS,
       },
       type: 'array',
       maxItems: 1,

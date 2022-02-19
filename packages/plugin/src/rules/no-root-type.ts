@@ -1,5 +1,5 @@
 import { NameNode } from 'graphql';
-import { requireGraphQLSchemaFromContext } from '../utils';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 
@@ -48,9 +48,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
         required: ['disallow'],
         properties: {
           disallow: {
-            type: 'array',
-            uniqueItems: true,
-            minItems: 1,
+            ...ARRAY_DEFAULT_OPTIONS,
             items: {
               enum: ROOT_TYPES,
             },
