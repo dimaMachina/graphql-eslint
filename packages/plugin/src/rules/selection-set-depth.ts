@@ -131,7 +131,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                       const { line, column } = error.locations[0];
                       const ancestors = context.getAncestors();
                       const token = (ancestors[0] as AST.Program).tokens.find(
-                        token => token.loc.start.line === line && token.loc.start.column === column
+                        token => token.loc.start.line === line && token.loc.start.column === column - 1
                       );
                       const sourceCode = context.getSourceCode();
                       const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
