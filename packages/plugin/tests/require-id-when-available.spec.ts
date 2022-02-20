@@ -274,16 +274,6 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id
     },
   ],
   invalid: [
-    // TODO: Improve this
-    // {
-    // name: 'should report an error about missing "posts.id" selection',
-    // code: '{ user { id ...UserFields } }',
-    // errors: [MESSAGE_ID],
-    // parserOptions: {
-    //   schema: USER_POST_SCHEMA,
-    //   operations: 'fragment UserFields on User { posts { title } }'
-    // },
-    // },
     {
       ...WITH_SCHEMA,
       code: '{ hasId { name } }',
@@ -328,6 +318,15 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id
         `,
       },
       errors: [MESSAGE_ID],
+    },
+    {
+      name: 'should report an error about missing `posts.id` selection',
+      code: '{ user { id ...UserFields } }',
+      errors: [MESSAGE_ID],
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: 'fragment UserFields on User { posts { title } }',
+      },
     },
   ],
 });

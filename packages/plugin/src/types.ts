@@ -1,10 +1,11 @@
-import { Rule, AST, Linter } from 'eslint';
-import { ASTNode, GraphQLSchema } from 'graphql';
-import { GraphQLParseOptions } from '@graphql-tools/utils';
-import { IExtensions, IGraphQLProject, DocumentPointer, SchemaPointer } from 'graphql-config';
-import { GraphQLESLintRuleListener } from './testkit';
-import { GraphQLESTreeNode } from './estree-parser';
-import { SiblingOperations } from './sibling-operations';
+import type { Rule, AST, Linter } from 'eslint';
+import type * as ESTree from 'estree';
+import type { ASTNode, GraphQLSchema } from 'graphql';
+import type { IExtensions, IGraphQLProject, DocumentPointer, SchemaPointer } from 'graphql-config';
+import type { GraphQLParseOptions } from '@graphql-tools/utils';
+import type { GraphQLESLintRuleListener } from './testkit';
+import type { GraphQLESTreeNode } from './estree-parser';
+import type { SiblingOperations } from './sibling-operations';
 
 export interface ParserOptions {
   schema?: SchemaPointer | Record<string, { headers: Record<string, string> }>;
@@ -32,16 +33,15 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
   services: ParserServices;
 };
 
+type ReportDescriptorLocation = { node: GraphQLESTreeNode<ASTNode> } | { loc: AST.SourceLocation | ESTree.Position };
+export type ReportDescriptor = Rule.ReportDescriptorMessage & Rule.ReportDescriptorOptions & ReportDescriptorLocation;
+
 export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,
   'parserServices' | 'report' | 'options'
 > & {
   options: Options;
-  report(
-    descriptor: Rule.ReportDescriptorMessage &
-      Rule.ReportDescriptorOptions &
-      ({ node: GraphQLESTreeNode<ASTNode> } | { loc: AST.SourceLocation | { line: number; column: number } })
-  ): void;
+  report(descriptor: ReportDescriptor): void;
   parserServices?: ParserServices;
 };
 
@@ -79,4 +79,7 @@ export type ValueOf<T> = T[keyof T];
 type Id<T> = {} & { [P in keyof T]: T[P] };
 // eslint-disable-next-line no-use-before-define
 type OmitDistributive<T, K extends PropertyKey> = T extends object ? Id<OmitRecursively<T, K>> : T;
-export type OmitRecursively<T extends object, K extends PropertyKey> = Omit<{ [P in keyof T]: OmitDistributive<T[P], K> }, K>;
+export type OmitRecursively<T extends object, K extends PropertyKey> = Omit<
+  { [P in keyof T]: OmitDistributive<T[P], K> },
+  K
+>;

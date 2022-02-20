@@ -4,7 +4,7 @@ exports[` 1`] = `
 ❌ Error
 
     > 1 | { hasId { name } }
-        |         ^ Field \`id\` must be selected when it's available on a type.
+        |         ^ Field \`hasId.id\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion: Add \`id\` selection
@@ -22,7 +22,7 @@ exports[` 2`] = `
 ❌ Error
 
     > 1 | { hasId { id } }
-        |         ^ Field \`name\` must be selected when it's available on a type.
+        |         ^ Field \`hasId.name\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion: Add \`name\` selection
@@ -43,7 +43,7 @@ exports[` 3`] = `
 ❌ Error
 
     > 1 | { hasId { name } }
-        |         ^ Fields \`id\` or \`_id\` must be selected when it's available on a type.
+        |         ^ Fields \`hasId.id\` or \`hasId._id\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion 1/2: Add \`id\` selection
@@ -60,7 +60,7 @@ exports[` 4`] = `
 
       1 |         query User {
     > 2 |           user {
-        |                ^ Field \`id\` must be selected when it's available on a type.
+        |                ^ Field \`user.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragments \`UserFullFields\`, \`UserMediumFields\`, or \`UserLightFields\`.
       3 |             ...UserFullFields
       4 |           }
@@ -73,4 +73,12 @@ exports[` 4`] = `
     3 |             id ...UserFullFields
     4 |           }
     5 |         }
+`;
+
+exports[` 5`] = `
+❌ Error
+
+    > 1 | { user { id ...UserFields } }
+        |             ^ Field \`posts.id\` must be selected when it's available on a type.
+    Include it in your selection set.
 `;
