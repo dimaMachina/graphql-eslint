@@ -118,7 +118,8 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       node: OmitRecursively<SelectionSetNode, 'loc'>,
       type: GraphQLOutputType,
       loc: ESTree.Position, // Provide fragment spread location instead location of selection in fragment
-      parent: any // Can't access to node.parent in GraphQL AST.Node
+      parent: any, // Can't access to node.parent in GraphQL AST.Node, so pass as argument
+      checkedFragmentSpreads = new Set<string>()
     ): void {
       const rawType = getBaseType(type);
       const isObjectType = rawType instanceof GraphQLObjectType;
@@ -131,8 +132,6 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       if (!hasIdFieldInType) {
         return;
       }
-
-      const checkedFragmentSpreads = new Set<string>();
 
       function hasIdField({ selections }: typeof node): boolean {
         return selections.some(selection => {
@@ -165,10 +164,15 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       for (const fragmentSpread of fragmentSpreads) {
         const [foundSpread] = siblings.getFragment(fragmentSpread.name.value);
         if (foundSpread) {
+          const checkedFragmentSpreads = new Set<string>();
           const visitor = visitWithTypeInfo(typeInfo, {
             SelectionSet(node, key, parent, path, ancestors) {
-              if (ancestors.length > 0 && 'kind' in parent && parent.kind !== Kind.INLINE_FRAGMENT) {
-                checkNode(node, typeInfo.getType(), fragmentSpread.loc.start, parent);
+              if ('kind' in parent) {
+                if (ancestors.length > 0 && parent.kind !== Kind.INLINE_FRAGMENT) {
+                  checkNode(node, typeInfo.getType(), fragmentSpread.loc.start, parent, checkedFragmentSpreads);
+                } else if (parent.kind === Kind.FRAGMENT_DEFINITION) {
+                  checkedFragmentSpreads.add(parent.name.value);
+                }
               }
             },
           });
@@ -181,7 +185,10 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       }
 
       const pluralSuffix = idNames.length > 1 ? 's' : '';
-      const fieldName = englishJoinWords(idNames.map(name => `\`${parent.name.value}.${name}\``));
+      const fieldName = englishJoinWords(
+        idNames.map(name => `\`${checkedFragmentSpreads.size > 0 ? `${parent.name.value}.` : ''}${name}\``)
+      );
+
       const addition =
         checkedFragmentSpreads.size === 0
           ? ''

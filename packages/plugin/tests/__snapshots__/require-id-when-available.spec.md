@@ -4,7 +4,7 @@ exports[` 1`] = `
 ❌ Error
 
     > 1 | { hasId { name } }
-        |         ^ Field \`hasId.id\` must be selected when it's available on a type.
+        |         ^ Field \`id\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion: Add \`id\` selection
@@ -22,7 +22,7 @@ exports[` 2`] = `
 ❌ Error
 
     > 1 | { hasId { id } }
-        |         ^ Field \`hasId.name\` must be selected when it's available on a type.
+        |         ^ Field \`name\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion: Add \`name\` selection
@@ -43,7 +43,7 @@ exports[` 3`] = `
 ❌ Error
 
     > 1 | { hasId { name } }
-        |         ^ Fields \`hasId.id\` or \`hasId._id\` must be selected when it's available on a type.
+        |         ^ Fields \`id\` or \`_id\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion 1/2: Add \`id\` selection
@@ -80,5 +80,5 @@ exports[` 5`] = `
 
     > 1 | { user { id ...UserFields } }
         |             ^ Field \`posts.id\` must be selected when it's available on a type.
-    Include it in your selection set.
+    Include it in your selection set or add to used fragment \`UserFields\`.
 `;
