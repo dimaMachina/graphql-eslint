@@ -4,7 +4,7 @@ exports[` 1`] = `
 ❌ Error
 
     > 1 | { hasId { name } }
-        |         ^ Field \`id\` must be selected when it's available on a type.
+        |         ^ Field \`hasId.id\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion: Add \`id\` selection
@@ -22,7 +22,7 @@ exports[` 2`] = `
 ❌ Error
 
     > 1 | { hasId { id } }
-        |         ^ Field \`name\` must be selected when it's available on a type.
+        |         ^ Field \`hasId.name\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion: Add \`name\` selection
@@ -43,7 +43,7 @@ exports[` 3`] = `
 ❌ Error
 
     > 1 | { hasId { name } }
-        |         ^ Fields \`id\` or \`_id\` must be selected when it's available on a type.
+        |         ^ Fields \`hasId.id\` or \`hasId._id\` must be selected when it's available on a type.
     Include it in your selection set.
 
 💡 Suggestion 1/2: Add \`id\` selection
@@ -81,4 +81,38 @@ exports[` 5`] = `
     > 1 | { user { id ...UserFields } }
         |             ^ Field \`posts.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragment \`UserFields\`.
+`;
+
+exports[` 6`] = `
+Code
+
+      1 | { user { ...UserFullFields } }
+
+❌ Error 1/4
+
+    > 1 | { user { ...UserFullFields } }
+        |        ^ Field \`user.id\` must be selected when it's available on a type.
+    Include it in your selection set or add to used fragment \`UserFullFields\`.
+
+💡 Suggestion: Add \`id\` selection
+
+    1 | { user { id ...UserFullFields } }
+
+❌ Error 2/4
+
+    > 1 | { user { ...UserFullFields } }
+        |          ^ Field \`posts.id\` must be selected when it's available on a type.
+    Include it in your selection set or add to used fragment \`UserFullFields\`.
+
+❌ Error 3/4
+
+    > 1 | { user { ...UserFullFields } }
+        |          ^ Field \`author.id\` must be selected when it's available on a type.
+    Include it in your selection set or add to used fragments \`UserFullFields\` or \`UserFields\`.
+
+❌ Error 4/4
+
+    > 1 | { user { ...UserFullFields } }
+        |          ^ Field \`authorPosts.id\` must be selected when it's available on a type.
+    Include it in your selection set or add to used fragments \`UserFullFields\` or \`UserFields\`.
 `;

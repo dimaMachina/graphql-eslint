@@ -48,6 +48,7 @@ const USER_POST_SCHEMA = /* GraphQL */ `
   type Post {
     id: ID
     title: String
+    author: [User!]!
   }
 
   type Query {
@@ -320,12 +321,35 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id
       errors: [MESSAGE_ID],
     },
     {
-      name: 'should report an error about missing `posts.id` selection',
+      name: 'should report an error about missing `posts.id` field in fragment',
       code: '{ user { id ...UserFields } }',
       errors: [MESSAGE_ID],
       parserOptions: {
         schema: USER_POST_SCHEMA,
         operations: 'fragment UserFields on User { posts { title } }',
+      },
+    },
+    {
+      name: 'should report an error about missing `user.id`, `posts.id`, `author.id` and `authorPosts.id` selection',
+      code: '{ user { ...UserFullFields } }',
+      errors: [MESSAGE_ID, MESSAGE_ID, MESSAGE_ID, MESSAGE_ID],
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        operations: /* GraphQL */ `
+          fragment UserFullFields on User {
+            posts {
+              author {
+                ...UserFields
+                authorPosts: posts {
+                  title
+                }
+              }
+            }
+          }
+          fragment UserFields on User {
+            name
+          }
+        `,
       },
     },
   ],

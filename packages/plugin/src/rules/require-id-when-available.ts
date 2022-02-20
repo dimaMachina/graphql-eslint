@@ -1,5 +1,5 @@
 import {
-  FragmentSpreadNode,
+  ASTNode,
   GraphQLInterfaceType,
   GraphQLObjectType,
   GraphQLOutputType,
@@ -33,6 +33,7 @@ const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunct
 const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
     type: 'suggestion',
+    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions
     hasSuggestions: true,
     docs: {
       category: 'Operations',
@@ -114,21 +115,52 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     const selector = 'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
     const typeInfo = new TypeInfo(schema);
 
-    function checkNode(
+    function checkFragments(node: GraphQLESTreeNode<SelectionSetNode>): void {
+      for (const selection of node.selections) {
+        if (selection.kind !== Kind.FRAGMENT_SPREAD) {
+          continue;
+        }
+
+        const [foundSpread] = siblings.getFragment(selection.name.value);
+        if (!foundSpread) {
+          continue;
+        }
+
+        const checkedFragmentSpreads = new Set<string>();
+        const visitor = visitWithTypeInfo(typeInfo, {
+          SelectionSet(node, key, parent: ASTNode) {
+            if (parent.kind === Kind.FRAGMENT_DEFINITION) {
+              checkedFragmentSpreads.add(parent.name.value);
+            } else if (parent.kind !== Kind.INLINE_FRAGMENT) {
+              checkSelections(node, typeInfo.getType(), selection.loc.start, parent, checkedFragmentSpreads);
+            }
+          },
+        });
+
+        visit(foundSpread.document, visitor);
+      }
+    }
+
+    function checkSelections(
       node: OmitRecursively<SelectionSetNode, 'loc'>,
       type: GraphQLOutputType,
-      loc: ESTree.Position, // Provide fragment spread location instead location of selection in fragment
-      parent: any, // Can't access to node.parent in GraphQL AST.Node, so pass as argument
+      // Fragment can be placed in separate file
+      // Provide actual fragment spread location instead of location in fragment
+      loc: ESTree.Position,
+      // Can't access to node.parent in GraphQL AST.Node, so pass as argument
+      parent: any,
       checkedFragmentSpreads = new Set<string>()
     ): void {
       const rawType = getBaseType(type);
       const isObjectType = rawType instanceof GraphQLObjectType;
       const isInterfaceType = rawType instanceof GraphQLInterfaceType;
+
       if (!isObjectType && !isInterfaceType) {
         return;
       }
       const fields = rawType.getFields();
       const hasIdFieldInType = idNames.some(name => fields[name]);
+
       if (!hasIdFieldInType) {
         return;
       }
@@ -157,37 +189,14 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
 
       const hasId = hasIdField(node);
 
-      const fragmentSpreads = node.selections.filter(
-        selection => selection.kind === Kind.FRAGMENT_SPREAD
-      ) as GraphQLESTreeNode<FragmentSpreadNode>[];
-
-      for (const fragmentSpread of fragmentSpreads) {
-        const [foundSpread] = siblings.getFragment(fragmentSpread.name.value);
-        if (foundSpread) {
-          const checkedFragmentSpreads = new Set<string>();
-          const visitor = visitWithTypeInfo(typeInfo, {
-            SelectionSet(node, key, parent, path, ancestors) {
-              if ('kind' in parent) {
-                if (ancestors.length > 0 && parent.kind !== Kind.INLINE_FRAGMENT) {
-                  checkNode(node, typeInfo.getType(), fragmentSpread.loc.start, parent, checkedFragmentSpreads);
-                } else if (parent.kind === Kind.FRAGMENT_DEFINITION) {
-                  checkedFragmentSpreads.add(parent.name.value);
-                }
-              }
-            },
-          });
-          visit(foundSpread.document, visitor);
-        }
-      }
+      checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
 
       if (hasId) {
         return;
       }
 
       const pluralSuffix = idNames.length > 1 ? 's' : '';
-      const fieldName = englishJoinWords(
-        idNames.map(name => `\`${checkedFragmentSpreads.size > 0 ? `${parent.name.value}.` : ''}${name}\``)
-      );
+      const fieldName = englishJoinWords(idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``));
 
       const addition =
         checkedFragmentSpreads.size === 0
@@ -220,7 +229,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       [selector](node: GraphQLESTreeNode<SelectionSetNode, true>) {
         const typeInfo = node.typeInfo();
         if (typeInfo.gqlType) {
-          checkNode(node, typeInfo.gqlType, node.loc.start, (node as any).parent);
+          checkSelections(node, typeInfo.gqlType, node.loc.start, (node as any).parent);
         }
       },
     };
