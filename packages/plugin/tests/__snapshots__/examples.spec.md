@@ -185,13 +185,21 @@ Array [
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
+      Object {
+        message: Field \`name\` already defined.,
+        ruleId: @graphql-eslint/no-duplicate-fields,
+      },
+      Object {
+        message: Field \`name\` already defined.,
+        ruleId: @graphql-eslint/no-duplicate-fields,
+      },
     ],
   },
   Object {
     filePath: examples/graphql-config/operations/user.fragment.graphql,
     messages: Array [
       Object {
-        message: Field \`name\` defined multiple times.,
+        message: Field \`name\` already defined.,
         ruleId: @graphql-eslint/no-duplicate-fields,
       },
     ],

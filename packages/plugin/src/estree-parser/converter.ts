@@ -7,11 +7,10 @@ import {
   Kind,
   DocumentNode,
   ASTVisitor,
-  Location,
 } from 'graphql';
-import { SourceLocation, Comment } from 'estree';
-import { extractCommentsFromAst } from './utils';
-import { GraphQLESTreeNode, TypeInformation } from './estree-ast';
+import type { Comment } from 'estree';
+import { extractCommentsFromAst, convertLocation } from './utils';
+import type { GraphQLESTreeNode, TypeInformation } from './estree-ast';
 
 export function convertToESTree<T extends ASTNode>(node: T, typeInfo?: TypeInfo) {
   const visitor: ASTVisitor = { leave: convertNode(typeInfo) };
@@ -23,32 +22,6 @@ export function convertToESTree<T extends ASTNode>(node: T, typeInfo?: TypeInfo)
 
 function hasTypeField<T extends ASTNode>(node: T): node is T & { readonly type: TypeNode } {
   return 'type' in node && Boolean(node.type);
-}
-
-function convertLocation(location: Location): SourceLocation {
-  const { startToken, endToken, source, start, end } = location;
-  /*
-   * ESLint has 0-based column number
-   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
-   */
-  const loc = {
-    start: {
-      /*
-       * Kind.Document has startToken: { line: 0, column: 0 }, we set line as 1 and column as 0
-       */
-      line: startToken.line === 0 ? 1 : startToken.line,
-      column: startToken.column === 0 ? 0 : startToken.column - 1,
-    },
-    end: {
-      line: endToken.line,
-      column: endToken.column - 1,
-    },
-    source: source.body,
-  };
-  if (loc.start.column === loc.end.column) {
-    loc.end.column += end - start;
-  }
-  return loc;
 }
 
 const convertNode =

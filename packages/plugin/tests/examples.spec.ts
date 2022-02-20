@@ -41,35 +41,35 @@ describe('Examples', () => {
   it('should work on `.graphql` files', () => {
     const cwd = join(process.cwd(), 'examples/basic');
     const results = getEslintOutput(cwd);
-    expect(countErrors(results)).toBe(6);
     testSnapshot(results);
+    expect(countErrors(results)).toBe(6);
   });
 
   it('should work on `.js` files', () => {
     const cwd = join(process.cwd(), 'examples/code-file');
     const results = getEslintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
     testSnapshot(results);
+    expect(countErrors(results)).toBe(2);
   });
 
   it('should work with `graphql-config`', () => {
     const cwd = join(process.cwd(), 'examples/graphql-config');
     const results = getEslintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
     testSnapshot(results);
+    expect(countErrors(results)).toBe(4);
   });
 
   it('should work with `graphql-config` on `.js` files', () => {
     const cwd = join(process.cwd(), 'examples/graphql-config-code-file');
     const results = getEslintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
     testSnapshot(results);
+    expect(countErrors(results)).toBe(2);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
     const cwd = join(process.cwd(), 'examples/prettier');
     const results = getEslintOutput(cwd);
-    expect(countErrors(results)).toBe(23);
     testSnapshot(results);
+    expect(countErrors(results)).toBe(23);
   });
 });

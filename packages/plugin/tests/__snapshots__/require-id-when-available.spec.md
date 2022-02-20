@@ -79,7 +79,7 @@ exports[` 5`] = `
 ❌ Error
 
     > 1 | { user { id ...UserFields } }
-        |             ^ Field \`posts.id\` must be selected when it's available on a type.
+        |                ^^^^^^^^^^ Field \`posts.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragment \`UserFields\`.
 `;
 
@@ -101,18 +101,18 @@ Code
 ❌ Error 2/4
 
     > 1 | { user { ...UserFullFields } }
-        |          ^ Field \`posts.id\` must be selected when it's available on a type.
+        |             ^^^^^^^^^^^^^^ Field \`posts.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragment \`UserFullFields\`.
 
 ❌ Error 3/4
 
     > 1 | { user { ...UserFullFields } }
-        |          ^ Field \`author.id\` must be selected when it's available on a type.
+        |             ^^^^^^^^^^^^^^ Field \`author.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragments \`UserFullFields\` or \`UserFields\`.
 
 ❌ Error 4/4
 
     > 1 | { user { ...UserFullFields } }
-        |          ^ Field \`authorPosts.id\` must be selected when it's available on a type.
+        |             ^^^^^^^^^^^^^^ Field \`authorPosts.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragments \`UserFullFields\` or \`UserFields\`.
 `;
