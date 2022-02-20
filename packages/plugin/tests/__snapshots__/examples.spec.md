@@ -209,7 +209,7 @@ Array [
         ruleId: @graphql-eslint/no-anonymous-operations,
       },
       Object {
-        message: Field \`id\` must be selected when it's available on a type.
+        message: Field \`user.id\` must be selected when it's available on a type.
 Include it in your selection set.,
         ruleId: @graphql-eslint/require-id-when-available,
       },
