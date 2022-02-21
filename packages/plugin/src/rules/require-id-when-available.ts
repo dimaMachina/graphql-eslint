@@ -1,7 +1,18 @@
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
-import { GraphQLESLintRule, OmitRecursively } from '../types';
-import { GraphQLInterfaceType, GraphQLObjectType, Kind, SelectionSetNode } from 'graphql';
+import {
+  ASTNode,
+  GraphQLInterfaceType,
+  GraphQLObjectType,
+  GraphQLOutputType,
+  Kind,
+  SelectionSetNode,
+  TypeInfo,
+  visit,
+  visitWithTypeInfo,
+} from 'graphql';
+import type * as ESTree from 'estree';
 import { asArray } from '@graphql-tools/utils';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
+import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types';
 import { getBaseType, GraphQLESTreeNode } from '../estree-parser';
 
 export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
@@ -22,6 +33,7 @@ const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunct
 const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
     type: 'suggestion',
+    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions
     hasSuggestions: true,
     docs: {
       category: 'Operations',
@@ -93,7 +105,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     },
   },
   create(context) {
-    requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const siblings = requireSiblingsOperations(RULE_ID, context);
     const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
     const idNames = asArray(fieldName);
@@ -101,74 +113,124 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     // Check selections only in OperationDefinition,
     // skip selections of OperationDefinition and InlineFragment
     const selector = 'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
+    const typeInfo = new TypeInfo(schema);
+
+    function checkFragments(node: GraphQLESTreeNode<SelectionSetNode>): void {
+      for (const selection of node.selections) {
+        if (selection.kind !== Kind.FRAGMENT_SPREAD) {
+          continue;
+        }
+
+        const [foundSpread] = siblings.getFragment(selection.name.value);
+        if (!foundSpread) {
+          continue;
+        }
+
+        const checkedFragmentSpreads = new Set<string>();
+        const visitor = visitWithTypeInfo(typeInfo, {
+          SelectionSet(node, key, parent: ASTNode) {
+            if (parent.kind === Kind.FRAGMENT_DEFINITION) {
+              checkedFragmentSpreads.add(parent.name.value);
+            } else if (parent.kind !== Kind.INLINE_FRAGMENT) {
+              checkSelections(node, typeInfo.getType(), selection.loc.start, parent, checkedFragmentSpreads);
+            }
+          },
+        });
+
+        visit(foundSpread.document, visitor);
+      }
+    }
+
+    function checkSelections(
+      node: OmitRecursively<SelectionSetNode, 'loc'>,
+      type: GraphQLOutputType,
+      // Fragment can be placed in separate file
+      // Provide actual fragment spread location instead of location in fragment
+      loc: ESTree.Position,
+      // Can't access to node.parent in GraphQL AST.Node, so pass as argument
+      parent: any,
+      checkedFragmentSpreads = new Set<string>()
+    ): void {
+      const rawType = getBaseType(type);
+      const isObjectType = rawType instanceof GraphQLObjectType;
+      const isInterfaceType = rawType instanceof GraphQLInterfaceType;
+
+      if (!isObjectType && !isInterfaceType) {
+        return;
+      }
+      const fields = rawType.getFields();
+      const hasIdFieldInType = idNames.some(name => fields[name]);
+
+      if (!hasIdFieldInType) {
+        return;
+      }
+
+      function hasIdField({ selections }: typeof node): boolean {
+        return selections.some(selection => {
+          if (selection.kind === Kind.FIELD) {
+            return idNames.includes(selection.name.value);
+          }
+
+          if (selection.kind === Kind.INLINE_FRAGMENT) {
+            return hasIdField(selection.selectionSet);
+          }
+
+          if (selection.kind === Kind.FRAGMENT_SPREAD) {
+            const [foundSpread] = siblings.getFragment(selection.name.value);
+            if (foundSpread) {
+              const fragmentSpread = foundSpread.document;
+              checkedFragmentSpreads.add(fragmentSpread.name.value);
+              return hasIdField(fragmentSpread.selectionSet);
+            }
+          }
+          return false;
+        });
+      }
+
+      const hasId = hasIdField(node);
+
+      checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
+
+      if (hasId) {
+        return;
+      }
+
+      const pluralSuffix = idNames.length > 1 ? 's' : '';
+      const fieldName = englishJoinWords(idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``));
+
+      const addition =
+        checkedFragmentSpreads.size === 0
+          ? ''
+          : ` or add to used fragment${checkedFragmentSpreads.size > 1 ? 's' : ''} ${englishJoinWords(
+              [...checkedFragmentSpreads].map(name => `\`${name}\``)
+            )}`;
+
+      const problem: ReportDescriptor = {
+        loc,
+        messageId: RULE_ID,
+        data: {
+          pluralSuffix,
+          fieldName,
+          addition,
+        },
+      };
+
+      // Don't provide suggestions for selections in fragments as fragment can be in a separate file
+      if ('type' in node) {
+        problem.suggest = idNames.map(idName => ({
+          desc: `Add \`${idName}\` selection`,
+          fix: fixer => fixer.insertTextBefore((node as any).selections[0], `${idName} `),
+        }));
+      }
+      context.report(problem);
+    }
 
     return {
       [selector](node: GraphQLESTreeNode<SelectionSetNode, true>) {
         const typeInfo = node.typeInfo();
-        if (!typeInfo.gqlType) {
-          return;
+        if (typeInfo.gqlType) {
+          checkSelections(node, typeInfo.gqlType, node.loc.start, (node as any).parent);
         }
-        const rawType = getBaseType(typeInfo.gqlType);
-        const isObjectType = rawType instanceof GraphQLObjectType;
-        const isInterfaceType = rawType instanceof GraphQLInterfaceType;
-        if (!isObjectType && !isInterfaceType) {
-          return;
-        }
-
-        const fields = rawType.getFields();
-        const hasIdFieldInType = idNames.some(name => fields[name]);
-        if (!hasIdFieldInType) {
-          return;
-        }
-        const checkedFragmentSpreads = new Set<string>();
-
-        const hasIdField = ({ selections }: OmitRecursively<SelectionSetNode, 'loc'>): boolean =>
-          selections.some(selection => {
-            if (selection.kind === Kind.FIELD) {
-              return idNames.includes(selection.name.value);
-            }
-
-            if (selection.kind === Kind.INLINE_FRAGMENT) {
-              return hasIdField(selection.selectionSet);
-            }
-
-            if (selection.kind === Kind.FRAGMENT_SPREAD) {
-              const [foundSpread] = siblings.getFragment(selection.name.value);
-              if (foundSpread) {
-                const fragmentSpread = foundSpread.document;
-                checkedFragmentSpreads.add(fragmentSpread.name.value);
-                return hasIdField(fragmentSpread.selectionSet);
-              }
-            }
-            return false;
-          });
-
-        if (hasIdField(node)) {
-          return;
-        }
-
-        const pluralSuffix = idNames.length > 1 ? 's' : '';
-        const fieldName = englishJoinWords(idNames.map(name => `\`${name}\``));
-        const addition =
-          checkedFragmentSpreads.size === 0
-            ? ''
-            : ` or add to used fragment${checkedFragmentSpreads.size > 1 ? 's' : ''} ${englishJoinWords(
-                [...checkedFragmentSpreads].map(name => `\`${name}\``)
-              )}`;
-
-        context.report({
-          loc: node.loc.start,
-          messageId: RULE_ID,
-          data: {
-            pluralSuffix,
-            fieldName,
-            addition,
-          },
-          suggest: idNames.map(idName => ({
-            desc: `Add \`${idName}\` selection`,
-            fix: fixer => fixer.insertTextBefore((node as any).selections[0], `${idName} `),
-          })),
-        });
       },
     };
   },

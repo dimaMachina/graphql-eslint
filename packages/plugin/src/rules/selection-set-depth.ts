@@ -101,7 +101,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       ) {
         try {
           const rawNode = node.rawNode();
-          const fragmentsInUse = siblings ? siblings.getFragmentsInUse(rawNode, true) : [];
+          const fragmentsInUse = siblings ? siblings.getFragmentsInUse(rawNode) : [];
           const document: DocumentNode = {
             kind: Kind.DOCUMENT,
             definitions: [rawNode, ...fragmentsInUse],

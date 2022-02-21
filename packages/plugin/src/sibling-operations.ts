@@ -1,7 +1,6 @@
 import { resolve } from 'path';
 import {
   FragmentDefinitionNode,
-  FragmentSpreadNode,
   Kind,
   OperationDefinitionNode,
   SelectionSetNode,
@@ -18,15 +17,15 @@ export type OperationSource = { filePath: string; document: OperationDefinitionN
 
 export type SiblingOperations = {
   available: boolean;
-  getOperations(): OperationSource[];
-  getFragments(): FragmentSource[];
   getFragment(fragmentName: string): FragmentSource[];
+  getFragments(): FragmentSource[];
   getFragmentByType(typeName: string): FragmentSource[];
   getFragmentsInUse(
     baseOperation: OperationDefinitionNode | FragmentDefinitionNode | SelectionSetNode,
-    recursive: boolean
+    recursive?: boolean
   ): FragmentDefinitionNode[];
   getOperation(operationName: string): OperationSource[];
+  getOperations(): OperationSource[];
   getOperationByType(operationType: OperationTypeNode): OperationSource[];
 };
 
@@ -91,13 +90,13 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
 
     return {
       available: false,
-      getFragments: noopWarn,
-      getOperations: noopWarn,
       getFragment: noopWarn,
+      getFragments: noopWarn,
       getFragmentByType: noopWarn,
-      getOperation: noopWarn,
-      getOperationByType: noopWarn,
       getFragmentsInUse: noopWarn,
+      getOperation: noopWarn,
+      getOperations: noopWarn,
+      getOperationByType: noopWarn,
     };
   }
 
@@ -113,11 +112,11 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
         const result: FragmentSource[] = [];
 
         for (const source of siblings) {
-          for (const definition of source.document.definitions || []) {
+          for (const definition of source.document.definitions) {
             if (definition.kind === Kind.FRAGMENT_DEFINITION) {
               result.push({
                 filePath: source.location,
-                document: definition as FragmentDefinitionNode,
+                document: definition,
               });
             }
           }
@@ -134,11 +133,11 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
         const result: OperationSource[] = [];
 
         for (const source of siblings) {
-          for (const definition of source.document.definitions || []) {
+          for (const definition of source.document.definitions) {
             if (definition.kind === Kind.OPERATION_DEFINITION) {
               result.push({
                 filePath: source.location,
-                document: definition as OperationDefinitionNode,
+                document: definition,
               });
             }
           }
@@ -152,25 +151,22 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
 
     const collectFragments = (
       selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
-      recursive = true,
-      collected: Map<string, FragmentDefinitionNode> = new Map()
+      recursive,
+      collected = new Map<string, FragmentDefinitionNode>()
     ) => {
       visit(selectable, {
-        FragmentSpread(spread: FragmentSpreadNode) {
-          const name = spread.name.value;
-          const fragmentInfo = getFragment(name);
+        FragmentSpread(spread) {
+          const fragmentName = spread.name.value;
+          const [fragment] = getFragment(fragmentName);
 
-          if (fragmentInfo.length === 0) {
+          if (!fragment) {
             logger.warn(
-              `Unable to locate fragment named "${name}", please make sure it's loaded using "parserOptions.operations"`
+              `Unable to locate fragment named "${fragmentName}", please make sure it's loaded using "parserOptions.operations"`
             );
             return;
           }
-          const fragment = fragmentInfo[0];
-          const alreadyVisited = collected.has(name);
-
-          if (!alreadyVisited) {
-            collected.set(name, fragment.document);
+          if (!collected.has(fragmentName)) {
+            collected.set(fragmentName, fragment.document);
             if (recursive) {
               collectFragments(fragment.document, recursive, collected);
             }
@@ -182,13 +178,13 @@ export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLC
 
     siblingOperations = {
       available: true,
-      getFragments,
-      getOperations,
       getFragment,
+      getFragments,
       getFragmentByType: typeName => getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
-      getOperation: name => getOperations().filter(o => o.document.name?.value === name),
-      getOperationByType: type => getOperations().filter(o => o.document.operation === type),
       getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
+      getOperation: name => getOperations().filter(o => o.document.name?.value === name),
+      getOperations,
+      getOperationByType: type => getOperations().filter(o => o.document.operation === type),
     };
 
     siblingOperationsCache.set(siblings, siblingOperations);
