@@ -146,7 +146,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
     {
       options: [{ arguments: ['DirectiveDefinition'] }],
       code: /* GraphQL */ `
-        directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
+        directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
       `,
       errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
     },
@@ -154,7 +154,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       options: [{ arguments: ['FieldDefinition'] }],
       code: /* GraphQL */ `
         type Query {
-          test(cc: Int, bb: Int, aa: Int): Int
+          test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
         }
       `,
       errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
@@ -196,7 +196,7 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
     {
       options: [{ variables: ['OperationDefinition'], arguments: ['Field'] }],
       code: /* GraphQL */ `
-        mutation ($cc: Int, $bb: Int, $aa: Int) {
+        mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
           test(ccc: $cc, bbb: $bb, aaa: $aa) {
             something
           }

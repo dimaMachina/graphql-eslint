@@ -242,6 +242,9 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     }
 
     function getRangeWithComments(node): AST.Range {
+      if (node.kind === Kind.VARIABLE) {
+        node = node.parent
+      }
       const [firstBeforeComment] = getBeforeComments(node);
       const [firstAfterComment] = sourceCode.getCommentsAfter(node);
       const from = firstBeforeComment || node;

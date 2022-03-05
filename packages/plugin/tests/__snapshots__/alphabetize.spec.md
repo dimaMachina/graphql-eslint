@@ -256,7 +256,7 @@ exports[` 7`] = `
 exports[` 8`] = `
 Code
 
-      1 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
+      1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
 
 ⚙️ Options
 
@@ -268,24 +268,24 @@ Code
 
 ❌ Error 1/2
 
-    > 1 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
-        |                                  ^^ \`bb\` should be before \`cc\`.
+    > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
+        |                                     ^^ \`bb\` should be before \`cc\`.
 
 ❌ Error 2/2
 
-    > 1 |         directive @test(cc: Int, bb: Int, aa: Int) on FIELD_DEFINITION
-        |                                           ^^ \`aa\` should be before \`bb\`.
+    > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
+        |                                                ^^ \`aa\` should be before \`bb\`.
 
 🔧 Autofix output
 
-      1 |         directive @test(aa: Int, bb: Int, cc: Int) on FIELD_DEFINITION
+      1 |         directive @test(aa: Aa!, bb: [Bb!], cc: [Cc!]!) on FIELD_DEFINITION
 `;
 
 exports[` 9`] = `
 Code
 
       1 |         type Query {
-      2 |           test(cc: Int, bb: Int, aa: Int): Int
+      2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
       3 |         }
 
 ⚙️ Options
@@ -299,21 +299,21 @@ Code
 ❌ Error 1/2
 
       1 |         type Query {
-    > 2 |           test(cc: Int, bb: Int, aa: Int): Int
-        |                         ^^ \`bb\` should be before \`cc\`.
+    > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
+        |                            ^^ \`bb\` should be before \`cc\`.
       3 |         }
 
 ❌ Error 2/2
 
       1 |         type Query {
-    > 2 |           test(cc: Int, bb: Int, aa: Int): Int
-        |                                  ^^ \`aa\` should be before \`bb\`.
+    > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
+        |                                       ^^ \`aa\` should be before \`bb\`.
       3 |         }
 
 🔧 Autofix output
 
       1 |         type Query {
-      2 |           test(aa: Int, bb: Int, cc: Int): Int
+      2 |           test(aa: Aa!, bb: [Bb!], cc: [Cc!]!): Int
       3 |         }
 `;
 
@@ -428,7 +428,7 @@ Code
 exports[` 12`] = `
 Code
 
-      1 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
+      1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
       3 |             something
       4 |           }
@@ -447,33 +447,33 @@ Code
 
 ❌ Error 1/4
 
-    > 1 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
-        |                              ^^ \`bb\` should be before \`cc\`.
+    > 1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
+        |                                 ^^ \`bb\` should be before \`cc\`.
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
 
 ❌ Error 2/4
 
-    > 1 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
-        |                                        ^^ \`aa\` should be before \`bb\`.
+    > 1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
+        |                                             ^^ \`aa\` should be before \`bb\`.
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
 
 ❌ Error 3/4
 
-      1 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
+      1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
     > 2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
         |                          ^^^ \`bbb\` should be before \`ccc\`.
       3 |             something
 
 ❌ Error 4/4
 
-      1 |         mutation ($cc: Int, $bb: Int, $aa: Int) {
+      1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
     > 2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
         |                                    ^^^ \`aaa\` should be before \`bbb\`.
       3 |             something
 
 🔧 Autofix output
 
-      1 |         mutation ($aa: Int, $bb: Int, $cc: Int) {
+      1 |         mutation ($aa: Aa!, $bb: [Bb!], $cc: [Cc!]!) {
       2 |           test(aaa: $aa, bbb: $bb, ccc: $cc) {
       3 |             something
       4 |           }
