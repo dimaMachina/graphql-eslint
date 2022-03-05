@@ -1,5 +1,22 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.9.0
+
+### Minor Changes
+
+- 9c575c6: feat: add `definitions` option for `alphabetize` rule
+- bcbda42: feat: add suggestions for `require-id-when-available`, `require-deprecation-date`, `no-deprecated` and `no-scalar-result-type-on-mutation` rules
+- 1f697f0: feat: add suggestions for `no-duplicate-fields`, `no-hashtag-description` and `selection-set-depth` rules
+- db22ba5: feat: add suggestions for `no-typename-prefix`, `no-root-type`, `no-case-insensitive-enum-values-duplicates` rules
+- b04a8d5: feat: add `ignoreClientDirectives` option for `known-directives` rule
+- 63c5c78: feat: add suggestions for `description-style`, `input-name` and `no-anonymous-operations` rules
+
+### Patch Changes
+
+- 58b5bfd: fix: false negative case when nested fragments used in `require-id-when-available` rule
+- 2cbaa60: fix: check nested selections in fragments in `require-id-when-available` rule
+- d9386ad: fix autofix sort for variables in `alphabetize` rule
+
 ## 3.8.0
 
 ### Minor Changes
