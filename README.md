@@ -193,6 +193,7 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 |[`schema-all`](packages/plugin/src/configs/schema-all.json)|enables all rules for schema (SDL) development, except for those that require `parserOptions.operations` option|
 |[`operations-recommended`](packages/plugin/src/configs/operations-recommended.json) |enables recommended rules for consuming GraphQL (operations) development|
 |[`operations-all`](packages/plugin/src/configs/operations-all.json)|enables all rules for consuming GraphQL (operations) development|
+|[`relay`](packages/plugin/src/configs/relay.json)|enables rules from Relay specification for schema (SDL) development|
 <!-- prettier-ignore-end -->
 
 > If you are in a project that develops the GraphQL schema, you'll need `schema` rules. 

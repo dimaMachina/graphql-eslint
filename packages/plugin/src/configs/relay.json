@@ -1,0 +1,8 @@
+{
+  "extends": "./base.json",
+  "rules": {
+    "@graphql-eslint/relay-connection-types": "error",
+    "@graphql-eslint/relay-edge-types": "error",
+    "@graphql-eslint/relay-page-info": "error"
+  }
+}

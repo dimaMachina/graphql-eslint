@@ -44,6 +44,9 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [possible-fragment-spread](rules/possible-fragment-spread.md)|A fragment spread is only valid if the type condition could ever possibly be true: if there is a non-empty intersection of the possible parent types, and possible types which pass the type condition.|![recommended][]|🔮|
 [possible-type-extension](rules/possible-type-extension.md)|A type extension is only valid if the type is defined and has the same kind.||🔮|
 [provided-required-arguments](rules/provided-required-arguments.md)|A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.|![recommended][]|🔮|
+[relay-connection-types](rules/relay-connection-types.md)|Set of rules to follow Relay specification for Connection types.||🚀|
+[relay-edge-types](rules/relay-edge-types.md)|Set of rules to follow Relay specification for Edge types.||🚀|
+[relay-page-info](rules/relay-page-info.md)|Set of rules to follow Relay specification for `PageInfo` object.||🚀|
 [require-deprecation-date](rules/require-deprecation-date.md)|Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.|![all][]|🚀|💡
 [require-deprecation-reason](rules/require-deprecation-reason.md)|Require all deprecation directives to specify a reason.|![recommended][]|🚀|
 [require-description](rules/require-description.md)|Enforce descriptions in type definitions and operations.|![recommended][]|🚀|

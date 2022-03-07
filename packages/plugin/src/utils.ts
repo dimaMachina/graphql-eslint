@@ -65,7 +65,7 @@ export const getOnDiskFilepath = (filepath: string): string => {
   return filepath;
 };
 
-export const getTypeName = node => ('type' in node ? getTypeName(node.type) : node.name.value);
+export const getTypeName = (node): string => ('type' in node ? getTypeName(node.type) : node.name.value);
 
 // Small workaround for the bug in older versions of @graphql-tools/load
 // Can be removed after graphql-config bumps to a new version
