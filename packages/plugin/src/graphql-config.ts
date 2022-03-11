@@ -24,9 +24,9 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
         extensions: [addCodeFileLoaderExtension],
       });
 
-  debug('options.skipGraphQLConfig:', options.skipGraphQLConfig);
-  if (!options.skipGraphQLConfig) {
-    debug('Has graphql-config:', Boolean(onDiskConfig));
+  debug('options.skipGraphQLConfig: %o', options.skipGraphQLConfig);
+  if (onDiskConfig) {
+    debug('Graphql-config path %o', onDiskConfig.filepath);
   }
 
   const configOptions = options.projects

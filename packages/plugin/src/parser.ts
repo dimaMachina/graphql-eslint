@@ -9,7 +9,7 @@ import { loadGraphQLConfig } from './graphql-config';
 
 const debug = debugFactory('graphql-eslint:parser');
 
-debug('cwd `%s`', process.cwd())
+debug('cwd %o', process.cwd())
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
   const gqlConfig = loadGraphQLConfig(options);

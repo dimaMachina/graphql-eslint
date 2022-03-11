@@ -2,6 +2,7 @@ import { GraphQLSchema } from 'graphql';
 import { GraphQLConfig } from 'graphql-config';
 import { asArray } from '@graphql-tools/utils';
 import debugFactory from 'debug'
+import fastGlob from 'fast-glob';
 import { ParserOptions } from './types';
 import { getOnDiskFilepath, loaderCache, logger } from './utils';
 
@@ -23,12 +24,18 @@ export function getSchema(options: ParserOptions = {}, gqlConfig: GraphQLConfig)
 
   let schema: GraphQLSchema | null;
   try {
-    debug('Loading schema `%s`', projectForFile.schema)
+    debug('Loading schema from %o', projectForFile.schema)
     schema = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', {
       cache: loaderCache,
       ...options.schemaOptions,
     });
-    debug('Schema loaded:', schema instanceof GraphQLSchema)
+    if (debug.enabled) {
+      debug('Schema loaded: %o', schema instanceof GraphQLSchema);
+      const schemaPaths = fastGlob.sync(projectForFile.schema as string | string[], {
+        absolute: true,
+      });
+      debug('Schema pointers %O', schemaPaths)
+    }
   } catch (e) {
     schema = null;
     logger.error('Error while loading schema\n', e);
