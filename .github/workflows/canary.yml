@@ -41,7 +41,7 @@ jobs:
       - name: Release Canary
         id: canary
         uses: 'kamilkisiela/release-canary@master'
-        if: github.repository == 'dotansimha/graphql-eslint'
+        if: github.repository == 'B2o5T/graphql-eslint'
         with:
           npm-token: ${{ secrets.NODE_AUTH_TOKEN }}
           npm-script: 'yarn release:canary'
