@@ -1,15 +1,15 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
 import { ASTNode, GraphQLError, TypeInfo, Source } from 'graphql';
-import { Linter } from 'eslint';
+import debugFactory from 'debug';
 import { convertToESTree, extractTokens } from './estree-parser';
 import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
 import { loadGraphQLConfig } from './graphql-config';
 
-export function parse(code: string, options?: ParserOptions): Linter.ESLintParseResult['ast'] {
-  return parseForESLint(code, options).ast;
-}
+const debug = debugFactory('graphql-eslint:parser');
+
+debug('cwd `%s`', process.cwd())
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
   const gqlConfig = loadGraphQLConfig(options);
@@ -36,15 +36,14 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
 
     return {
       services: parserServices,
-      parserServices,
       ast: {
-        type: 'Program',
-        body: [rootTree as any],
-        sourceType: 'script',
         comments,
+        tokens,
         loc: rootTree.loc,
         range: rootTree.range as [number, number],
-        tokens,
+        type: 'Program',
+        sourceType: 'script',
+        body: [rootTree as any],
       },
     };
   } catch (e) {

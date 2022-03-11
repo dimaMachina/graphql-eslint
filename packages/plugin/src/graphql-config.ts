@@ -1,8 +1,10 @@
+import { dirname } from 'path';
+import debugFactory from 'debug';
 import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync, SchemaPointer } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
-import { dirname } from 'path';
 
+const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
 
 export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
@@ -21,6 +23,11 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
         throwOnMissing: false,
         extensions: [addCodeFileLoaderExtension],
       });
+
+  debug('options.skipGraphQLConfig:', options.skipGraphQLConfig);
+  if (!options.skipGraphQLConfig) {
+    debug('Has graphql-config:', Boolean(onDiskConfig));
+  }
 
   const configOptions = options.projects
     ? { projects: options.projects }
