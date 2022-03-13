@@ -9,11 +9,15 @@ import {
 } from 'graphql';
 import { Source, asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
+import debugFactory from 'debug';
+import fastGlob from 'fast-glob';
 import { ParserOptions } from './types';
 import { getOnDiskFilepath, loaderCache, logger } from './utils';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
+
+const debug = debugFactory('graphql-eslint:operations');
 
 export type SiblingOperations = {
   available: boolean;
@@ -61,10 +65,18 @@ const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
   let siblings = operationsCache.get(documentsKey);
 
   if (!siblings) {
+    debug('Loading operations from %o', projectForFile.documents);
     const documents = projectForFile.loadDocumentsSync(projectForFile.documents, {
       skipGraphQLImport: true,
       cache: loaderCache,
     });
+    if (debug.enabled) {
+      debug('Loaded %d operations', documents.length);
+      const operationsPaths = fastGlob.sync(projectForFile.documents as string | string[], {
+        absolute: true
+      });
+      debug('Operations pointers %O', operationsPaths);
+    }
     siblings = handleVirtualPath(documents);
     operationsCache.set(documentsKey, siblings);
   }
