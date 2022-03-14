@@ -1,18 +1,14 @@
-const { writeFileSync } = require('fs');
-const { resolve } = require('path');
-const { argv } = require('process');
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
-const pkgPath = resolve(__dirname, '../package.json');
+const pkgPath = resolve(process.cwd(), 'package.json');
+const version = process.argv[2];
+const pkg = JSON.parse(readFileSync(pkgPath));
 
-const pkg = require(pkgPath);
-
-const version = argv[2];
-
-pkg.resolutions = pkg.resolutions || {};
 if (pkg.resolutions.graphql.startsWith(version)) {
   // eslint-disable-next-line no-console
   console.info(`GraphQL v${version} is match! Skipping.`);
-  return;
+  process.exit();
 }
 
 const npmVersion = version.includes('-') ? version : `^${version}`;

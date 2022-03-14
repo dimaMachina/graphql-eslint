@@ -60,7 +60,7 @@ jobs:
             ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node ./scripts/match-graphql.js ${{matrix.graphql_version}}
+        run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
       - name: Install Dependencies using Yarn
         run: yarn install && git checkout yarn.lock
       - name: Build
@@ -102,7 +102,7 @@ jobs:
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node ./scripts/match-graphql.js ${{matrix.graphql_version}}
+        run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
       - name: Use ESLint v${{matrix.eslint_version}}
         run: node scripts/match-eslint.mjs ${{matrix.eslint_version}}
       - name: Install Dependencies using Yarn
