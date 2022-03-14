@@ -17,7 +17,7 @@ const rule: GraphQLESLintRule = {
       description:
         'Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.\nAllows to use hashtag for comments, as long as it\'s not attached to an AST definition.',
       category: 'Schema',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-hashtag-description.md',
+      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-hashtag-description.md',
       examples: [
         {
           title: 'Incorrect',

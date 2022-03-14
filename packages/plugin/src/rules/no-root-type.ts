@@ -14,7 +14,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     docs: {
       category: 'Schema',
       description: 'Disallow using root types `mutation` and/or `subscription`.',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-root-type.md',
+      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-root-type.md',
       requiresSchema: true,
       isDisabledForAllConfig: true,
       examples: [

@@ -7,7 +7,7 @@ const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-case-insensitive-enum-values-duplicates.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-case-insensitive-enum-values-duplicates.md`,
       category: 'Schema',
       recommended: true,
       description: 'Disallow case-insensitive enum values duplicates.',

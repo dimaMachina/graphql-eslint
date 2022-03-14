@@ -475,8 +475,8 @@
 
   For more information, see:
 
-  - [Migration guide and example](https://github.com/dotansimha/graphql-eslint#prettier-rule)
-  - [Related PR](https://github.com/dotansimha/graphql-eslint/issues/395)
+  - [Migration guide and example](https://github.com/B2o5T/graphql-eslint#prettier-rule)
+  - [Related PR](https://github.com/B2o5T/graphql-eslint/issues/395)
 
 - 61251e7: BREAKING CHANGE: Remove deprecated rule `validate-against-schema`.
 

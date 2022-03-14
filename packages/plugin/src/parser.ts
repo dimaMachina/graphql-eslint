@@ -1,38 +1,42 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
-import { GraphQLError, Source } from 'graphql';
+import { GraphQLError } from 'graphql';
 import debugFactory from 'debug';
-import { convertToESTree, extractCommentsFromAst, extractTokens } from './estree-parser';
-import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types';
+import { convertToESTree, extractComments, extractTokens } from './estree-parser';
+import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
 import { loadGraphQLConfig } from './graphql-config';
+import { getOnDiskFilepath } from './utils';
 
 const debug = debugFactory('graphql-eslint:parser');
 
 debug('cwd %o', process.cwd());
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
+  const filePath = options.filePath || '';
+  const realFilepath = filePath && getOnDiskFilepath(filePath);
+
   const gqlConfig = loadGraphQLConfig(options);
-  const schema = getSchema(options, gqlConfig);
-  const parserServices: ParserServices = {
-    schema,
-    siblingOperations: getSiblingOperations(options, gqlConfig),
-  };
+  const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
+
+  const schema = getSchema(projectForFile, options);
+  const siblingOperations = getSiblingOperations(projectForFile);
 
   try {
-    const filePath = options.filePath || '';
-
-    const graphqlAst = parseGraphQLSDL(filePath, code, {
+    const { document } = parseGraphQLSDL(filePath, code, {
       ...options.graphQLParserOptions,
       noLocation: false,
     });
 
-    const comments = extractCommentsFromAst(graphqlAst.document.loc);
-    const tokens = extractTokens(new Source(code, filePath));
-    const rootTree = convertToESTree(graphqlAst.document, schema);
+    const comments = extractComments(document.loc);
+    const tokens = extractTokens(filePath, code);
+    const rootTree = convertToESTree(document, schema);
 
     return {
-      services: parserServices,
+      services: {
+        schema,
+        siblingOperations,
+      },
       ast: {
         comments,
         tokens,

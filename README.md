@@ -92,7 +92,7 @@ Under the hood, specifying the `@graphql-eslint/graphql` processor for code file
 
 ### Extended linting rules with GraphQL Schema
 
-Some rules require an understanding of the entire schema at once. For example, [no-unreachable-types](https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types) checks that all types are reachable by root-level fields.
+Some rules require an understanding of the entire schema at once. For example, [no-unreachable-types](https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types) checks that all types are reachable by root-level fields.
 
 To use these rules, you'll need to tell ESLint how to identify the entire set of schema definitions.
 

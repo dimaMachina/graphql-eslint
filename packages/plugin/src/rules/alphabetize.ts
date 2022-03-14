@@ -60,7 +60,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     docs: {
       category: ['Schema', 'Operations'],
       description: `Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Incorrect',

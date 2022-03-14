@@ -49,7 +49,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       description: `Requires all fields to be used at some level by siblings operations.`,
       category: 'Schema',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       requiresSchema: true,
       isDisabledForAllConfig: true,

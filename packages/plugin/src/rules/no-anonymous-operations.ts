@@ -14,7 +14,7 @@ const rule: GraphQLESLintRule = {
       description:
         'Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.',
       recommended: true,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Incorrect',

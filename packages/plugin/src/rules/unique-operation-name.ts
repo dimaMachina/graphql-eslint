@@ -10,7 +10,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       category: 'Operations',
       description: `Enforce unique operation names across your project.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
       requiresSiblings: true,
       examples: [
         {
