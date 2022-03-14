@@ -8,11 +8,10 @@ import {
   OperationTypeNode,
 } from 'graphql';
 import { Source, asArray } from '@graphql-tools/utils';
-import { GraphQLConfig } from 'graphql-config';
+import { GraphQLProjectConfig } from 'graphql-config';
 import debugFactory from 'debug';
 import fastGlob from 'fast-glob';
-import { ParserOptions } from './types';
-import { getOnDiskFilepath, loaderCache, logger } from './utils';
+import { loaderCache, logger } from './utils';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
@@ -53,9 +52,7 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
 const operationsCache: Map<string, Source[]> = new Map();
 const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
 
-const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
-  const realFilepath = filePath ? getOnDiskFilepath(filePath) : null;
-  const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
+const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
   const documentsKey = asArray(projectForFile.documents).sort().join(',');
 
   if (!documentsKey) {
@@ -73,7 +70,7 @@ const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
     if (debug.enabled) {
       debug('Loaded %d operations', documents.length);
       const operationsPaths = fastGlob.sync(projectForFile.documents as string | string[], {
-        absolute: true
+        absolute: true,
       });
       debug('Operations pointers %O', operationsPaths);
     }
@@ -84,8 +81,8 @@ const getSiblings = (filePath: string, gqlConfig: GraphQLConfig): Source[] => {
   return siblings;
 };
 
-export function getSiblingOperations(options: ParserOptions, gqlConfig: GraphQLConfig): SiblingOperations {
-  const siblings = getSiblings(options.filePath, gqlConfig);
+export function getSiblingOperations(projectForFile: GraphQLProjectConfig): SiblingOperations {
+  const siblings = getSiblings(projectForFile);
 
   if (siblings.length === 0) {
     let printed = false;

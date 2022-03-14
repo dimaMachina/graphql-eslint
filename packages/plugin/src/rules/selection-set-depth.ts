@@ -17,7 +17,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
     docs: {
       category: 'Operations',
       description: `Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       examples: [
         {
@@ -87,7 +87,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       siblings = requireSiblingsOperations(RULE_ID, context);
     } catch (e) {
       logger.warn(
-        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: http://bit.ly/graphql-eslint-operations`
+        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`
       );
     }
 
@@ -137,7 +137,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
           });
         } catch (e) {
           logger.warn(
-            `Rule "${RULE_ID}" check failed due to a missing siblings operations. For more info: http://bit.ly/graphql-eslint-operations`,
+            `Rule "${RULE_ID}" check failed due to a missing siblings operations. For more info: https://bit.ly/graphql-eslint-operations`,
             e
           );
         }

@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-❌ Error
+exports[`Invalid #1 1`] = `
+##### ❌ Error
 
     > 1 |         query test($v: String, $t: String, $v: String) {
         |                                             ^ Variable \`v\` defined multiple times.
       2 |           id
       3 |         }
 
-💡 Suggestion: Remove \`v\` variable
+##### 💡 Suggestion: Remove \`v\` variable
 
     1 |         query test($v: String, $t: String, ) {
     2 |           id
     3 |         }
 `;
 
-exports[` 2`] = `
-❌ Error
+exports[`Invalid #2 1`] = `
+##### ❌ Error
 
       1 |         query test {
     > 2 |           users(first: 100, after: 10, filter: "test", first: 50) {
@@ -25,7 +25,7 @@ exports[` 2`] = `
       4 |           }
       5 |         }
 
-💡 Suggestion: Remove \`first\` argument
+##### 💡 Suggestion: Remove \`first\` argument
 
     1 |         query test {
     2 |           users(first: 100, after: 10, filter: "test", ) {
@@ -34,8 +34,8 @@ exports[` 2`] = `
     5 |         }
 `;
 
-exports[` 3`] = `
-❌ Error
+exports[`Invalid #3 1`] = `
+##### ❌ Error
 
       1 |         query test {
       2 |           users {
@@ -47,7 +47,7 @@ exports[` 3`] = `
       7 |           }
       8 |         }
 
-💡 Suggestion: Remove \`name\` field
+##### 💡 Suggestion: Remove \`name\` field
 
     1 |         query test {
     2 |           users {
@@ -59,8 +59,8 @@ exports[` 3`] = `
     8 |         }
 `;
 
-exports[` 4`] = `
-❌ Error
+exports[`Invalid #4 1`] = `
+##### ❌ Error
 
       1 |         query test {
       2 |           users {
@@ -72,7 +72,7 @@ exports[` 4`] = `
       7 |           }
       8 |         }
 
-💡 Suggestion: Remove \`email\` field
+##### 💡 Suggestion: Remove \`email\` field
 
     1 |         query test {
     2 |           users {

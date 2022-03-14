@@ -5,46 +5,34 @@ import type { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
+import type * as ESTree from 'estree';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
-import type * as ESTree from 'estree';
 
 export function requireSiblingsOperations(
-  ruleName: string,
+  ruleId: string,
   context: GraphQLESLintRuleContext
 ): SiblingOperations | never {
-  if (!context.parserServices) {
+  const { siblingOperations } = context.parserServices;
+  if (!siblingOperations.available) {
     throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
+      `Rule '${ruleId}' requires 'parserOptions.operations' to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`
     );
   }
-
-  if (!context.parserServices.siblingOperations.available) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
-    );
-  }
-
-  return context.parserServices.siblingOperations;
+  return siblingOperations;
 }
 
 export function requireGraphQLSchemaFromContext(
-  ruleName: string,
+  ruleId: string,
   context: GraphQLESLintRuleContext
 ): GraphQLSchema | never {
-  if (!context.parserServices) {
+  const { schema } = context.parserServices;
+  if (!schema) {
     throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
+      `Rule '${ruleId}' requires 'parserOptions.schema' to be set and schema to be loaded. See https://bit.ly/graphql-eslint-schema for more info`
     );
   }
-
-  if (!context.parserServices.hasTypeInfo) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
-    );
-  }
-
-  return context.parserServices.schema;
+  return schema;
 }
 
 export const logger = {

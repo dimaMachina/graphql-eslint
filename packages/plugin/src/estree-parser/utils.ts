@@ -91,7 +91,8 @@ function getLexer(source: Source): Lexer {
   throw new Error('Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!');
 }
 
-export function extractTokens(source: Source): AST.Token[] {
+export function extractTokens(filePath: string, code: string): AST.Token[] {
+  const source = new Source(code, filePath);
   const lexer = getLexer(source);
   const tokens: AST.Token[] = [];
   let token = lexer.advance();
@@ -105,7 +106,7 @@ export function extractTokens(source: Source): AST.Token[] {
   return tokens;
 }
 
-export function extractCommentsFromAst(loc: Location): Comment[] {
+export function extractComments(loc: Location): Comment[] {
   if (!loc) {
     return [];
   }

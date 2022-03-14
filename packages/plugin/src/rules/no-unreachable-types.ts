@@ -89,7 +89,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       description: `Requires all types to be reachable at some level by root level fields.`,
       category: 'Schema',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
         {

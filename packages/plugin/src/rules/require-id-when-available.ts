@@ -38,7 +38,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     docs: {
       category: 'Operations',
       description: 'Enforce selecting specific fields when they are available on the GraphQL type.',
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       requiresSiblings: true,
       examples: [

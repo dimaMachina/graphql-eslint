@@ -24,7 +24,6 @@ export interface ParserOptions {
 }
 
 export type ParserServices = {
-  hasTypeInfo: boolean;
   schema: GraphQLSchema | null;
   siblingOperations: SiblingOperations;
 };

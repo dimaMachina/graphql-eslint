@@ -33,7 +33,7 @@ const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
       ],
       description: 'Require all comments to follow the same style (either block or inline).',
       category: 'Schema',
-      url: 'https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/description-style.md',
+      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/description-style.md',
       recommended: true,
     },
     schema: [

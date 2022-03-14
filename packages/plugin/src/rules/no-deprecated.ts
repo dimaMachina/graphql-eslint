@@ -12,7 +12,7 @@ const rule: GraphQLESLintRule<[], true> = {
     docs: {
       category: 'Operations',
       description: `Enforce that deprecated fields or enum values are not in use by operations.`,
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
         {
