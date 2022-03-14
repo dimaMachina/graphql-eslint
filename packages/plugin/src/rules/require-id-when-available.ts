@@ -9,6 +9,7 @@ import {
   visit,
   visitWithTypeInfo,
 } from 'graphql';
+import type { AST } from 'eslint';
 import type * as ESTree from 'estree';
 import { asArray } from '@graphql-tools/utils';
 import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
@@ -132,7 +133,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
             if (parent.kind === Kind.FRAGMENT_DEFINITION) {
               checkedFragmentSpreads.add(parent.name.value);
             } else if (parent.kind !== Kind.INLINE_FRAGMENT) {
-              checkSelections(node, typeInfo.getType(), selection.loc.start, parent, checkedFragmentSpreads);
+              checkSelections(node, typeInfo.getType(), selection.name.loc, parent, checkedFragmentSpreads);
             }
           },
         });
@@ -146,7 +147,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       type: GraphQLOutputType,
       // Fragment can be placed in separate file
       // Provide actual fragment spread location instead of location in fragment
-      loc: ESTree.Position,
+      loc: AST.SourceLocation | ESTree.Position,
       // Can't access to node.parent in GraphQL AST.Node, so pass as argument
       parent: any,
       checkedFragmentSpreads = new Set<string>()

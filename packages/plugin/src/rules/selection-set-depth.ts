@@ -85,9 +85,9 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
 
     try {
       siblings = requireSiblingsOperations(RULE_ID, context);
-    } catch (e) {
+    } catch {
       logger.warn(
-        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: http://bit.ly/graphql-eslint-operations`
+        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`
       );
     }
 
