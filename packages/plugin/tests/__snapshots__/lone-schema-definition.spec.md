@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-❌ Error
+exports[`Invalid #1 1`] = `
+##### ❌ Error
 
        1 |         type Query {
        2 |           foo: String

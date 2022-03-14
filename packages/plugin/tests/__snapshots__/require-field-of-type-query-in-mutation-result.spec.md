@@ -1,17 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-❌ Error
-
-      1 |         type Query
-      2 |         type Mutation {
-    > 3 |           createUser(a: User, b: User!, c: [User], d: [User]!, e: [User!]!): User
-        |                                                                              ^^^^ Mutation result type "User" must contain field of type "Query"
-      4 |         }
-`;
-
-exports[` 2`] = `
-❌ Error
+exports[`Invalid #2 1`] = `
+##### ❌ Error
 
       1 |         type Query
       2 |         type Mutation
@@ -22,8 +12,8 @@ exports[` 2`] = `
       6 |         }
 `;
 
-exports[` 3`] = `
-❌ Error
+exports[`Invalid #3 1`] = `
+##### ❌ Error
 
       1 |         type RootQuery
       2 |         type RootMutation {
@@ -37,8 +27,8 @@ exports[` 3`] = `
       9 |         }
 `;
 
-exports[` 4`] = `
-❌ Error
+exports[`Invalid #4 1`] = `
+##### ❌ Error
 
        1 |         type RootQuery
        2 |         type RootMutation
@@ -51,4 +41,14 @@ exports[` 4`] = `
        8 |           mutation: RootMutation
        9 |           query: RootQuery
       10 |         }
+`;
+
+exports[`should ignore arguments 1`] = `
+##### ❌ Error
+
+      1 |         type Query
+      2 |         type Mutation {
+    > 3 |           createUser(a: User, b: User!, c: [User], d: [User]!, e: [User!]!): User
+        |                                                                              ^^^^ Mutation result type "User" must contain field of type "Query"
+      4 |         }
 `;

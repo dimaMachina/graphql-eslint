@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-❌ Error
+exports[`Invalid #1 1`] = `
+##### ❌ Error
 
     > 1 |         # Bad
         |         ^ Using hashtag \`#\` for adding GraphQL descriptions is not allowed. Prefer using \`"""\` for multiline, or \`"\` for a single line description.
@@ -9,14 +9,14 @@ exports[` 1`] = `
       3 |           foo: String
       4 |         }
 
-💡 Suggestion 1/2: Replace with \`"""\` description syntax
+##### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
 
     1 |         """Bad"""
     2 |         type Query {
     3 |           foo: String
     4 |         }
 
-💡 Suggestion 2/2: Replace with \`"\` description syntax
+##### 💡 Suggestion 2/2: Replace with \`"\` description syntax
 
     1 |         "Bad"
     2 |         type Query {
@@ -24,8 +24,8 @@ exports[` 1`] = `
     4 |         }
 `;
 
-exports[` 2`] = `
-❌ Error
+exports[`Invalid #2 1`] = `
+##### ❌ Error
 
       1 |         # multiline
     > 2 |         # multiline
@@ -34,7 +34,7 @@ exports[` 2`] = `
       4 |           foo: String
       5 |         }
 
-💡 Suggestion 1/2: Replace with \`"""\` description syntax
+##### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
 
     1 |         # multiline
     2 |         """multiline"""
@@ -42,7 +42,7 @@ exports[` 2`] = `
     4 |           foo: String
     5 |         }
 
-💡 Suggestion 2/2: Replace with \`"\` description syntax
+##### 💡 Suggestion 2/2: Replace with \`"\` description syntax
 
     1 |         # multiline
     2 |         "multiline"
@@ -51,8 +51,8 @@ exports[` 2`] = `
     5 |         }
 `;
 
-exports[` 3`] = `
-❌ Error
+exports[`Invalid #3 1`] = `
+##### ❌ Error
 
       1 |         type Query {
     > 2 |           # Bad
@@ -60,14 +60,14 @@ exports[` 3`] = `
       3 |           foo: String
       4 |         }
 
-💡 Suggestion 1/2: Replace with \`"""\` description syntax
+##### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
 
     1 |         type Query {
     2 |           """Bad"""
     3 |           foo: String
     4 |         }
 
-💡 Suggestion 2/2: Replace with \`"\` description syntax
+##### 💡 Suggestion 2/2: Replace with \`"\` description syntax
 
     1 |         type Query {
     2 |           "Bad"
@@ -75,8 +75,8 @@ exports[` 3`] = `
     4 |         }
 `;
 
-exports[` 4`] = `
-❌ Error
+exports[`Invalid #4 1`] = `
+##### ❌ Error
 
       1 |         type Query {
       2 |           bar: ID
@@ -86,7 +86,7 @@ exports[` 4`] = `
       5 |           # Good
       6 |         }
 
-💡 Suggestion 1/2: Replace with \`"""\` description syntax
+##### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
 
     1 |         type Query {
     2 |           bar: ID
@@ -95,7 +95,7 @@ exports[` 4`] = `
     5 |           # Good
     6 |         }
 
-💡 Suggestion 2/2: Replace with \`"\` description syntax
+##### 💡 Suggestion 2/2: Replace with \`"\` description syntax
 
     1 |         type Query {
     2 |           bar: ID
@@ -105,8 +105,8 @@ exports[` 4`] = `
     6 |         }
 `;
 
-exports[` 5`] = `
-❌ Error
+exports[`Invalid #5 1`] = `
+##### ❌ Error
 
       1 |         type Query {
       2 |           user(
@@ -116,7 +116,7 @@ exports[` 5`] = `
       5 |           ): User
       6 |         }
 
-💡 Suggestion 1/2: Replace with \`"""\` description syntax
+##### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
 
     1 |         type Query {
     2 |           user(
@@ -125,7 +125,7 @@ exports[` 5`] = `
     5 |           ): User
     6 |         }
 
-💡 Suggestion 2/2: Replace with \`"\` description syntax
+##### 💡 Suggestion 2/2: Replace with \`"\` description syntax
 
     1 |         type Query {
     2 |           user(

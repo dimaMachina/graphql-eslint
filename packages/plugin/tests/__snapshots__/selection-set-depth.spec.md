@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-⚙️ Options
+exports[`Invalid #1 1`] = `
+##### ⚙️ Options
 
     {
       "maxDepth": 1
     }
 
-❌ Error
+##### ❌ Error
 
       1 |         query deep2 {
       2 |           viewer {
@@ -18,7 +18,7 @@ exports[` 1`] = `
       6 |           }
       7 |         }
 
-💡 Suggestion: Remove selections
+##### 💡 Suggestion: Remove selections
 
     1 |         query deep2 {
     2 |           viewer {
@@ -27,14 +27,14 @@ exports[` 1`] = `
     5 |         }
 `;
 
-exports[` 2`] = `
-⚙️ Options
+exports[`Invalid #2 1`] = `
+##### ⚙️ Options
 
     {
       "maxDepth": 1
     }
 
-❌ Error
+##### ❌ Error
 
       1 |         query deep2 {
       2 |           viewer {
@@ -45,7 +45,7 @@ exports[` 2`] = `
       6 |           }
       7 |         }
 
-💡 Suggestion: Remove selections
+##### 💡 Suggestion: Remove selections
 
     1 |         query deep2 {
     2 |           viewer {
@@ -54,14 +54,14 @@ exports[` 2`] = `
     5 |         }
 `;
 
-exports[` 3`] = `
-⚙️ Options
+exports[`suggestions should work with inline fragments 1`] = `
+##### ⚙️ Options
 
     {
       "maxDepth": 1
     }
 
-❌ Error
+##### ❌ Error
 
       1 |         query {
       2 |           viewer {
@@ -74,7 +74,7 @@ exports[` 3`] = `
       8 |           }
       9 |         }
 
-💡 Suggestion: Remove selections
+##### 💡 Suggestion: Remove selections
 
     1 |         query {
     2 |           viewer {

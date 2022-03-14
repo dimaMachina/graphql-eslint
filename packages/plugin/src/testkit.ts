@@ -65,63 +65,73 @@ export class GraphQLRuleTester extends RuleTester {
   }
 
   runGraphQLTests<Options, WithTypeInfo extends boolean = false>(
-    name: string,
+    ruleId: string,
     rule: GraphQLESLintRule<Options, WithTypeInfo>,
     tests: {
       valid: (string | GraphQLValidTestCase<Options>)[];
       invalid: GraphQLInvalidTestCase<Options>[];
     }
   ): void {
-    const ruleTests = Linter.version.startsWith('8')
-      ? tests
-      : {
-          valid: tests.valid.map(test => {
-            if (typeof test === 'string') {
-              return test;
-            }
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { name, ...testCaseOptions } = test;
-            return testCaseOptions;
-          }),
-          invalid: tests.invalid.map(test => {
-            // ESLint 7 throws an error on CI - Unexpected top-level property "name"
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { name, ...testCaseOptions } = test;
-            return testCaseOptions;
-          }),
-        };
-
-    super.run(name, rule as any, ruleTests);
-
-    // Skip snapshot testing if `expect` variable is not defined
-    if (typeof expect === 'undefined') {
-      return;
-    }
+    // const ruleTests = Linter.version.startsWith('8')
+    //   ? tests
+    //   : {
+    //       valid: tests.valid.map(test => {
+    //         if (typeof test === 'string') {
+    //           return test;
+    //         }
+    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    //         const { name, ...testCaseOptions } = test;
+    //         return testCaseOptions;
+    //       }),
+    //       invalid: tests.invalid.map(test => {
+    //         // ESLint 7 throws an error on CI - Unexpected top-level property "name"
+    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    //         const { name, ...testCaseOptions } = test;
+    //         return testCaseOptions;
+    //       }),
+    //     };
 
     const linter = new Linter();
-    linter.defineRule(name, rule as any);
+    linter.defineRule(ruleId, rule as any);
 
-    const hasOnlyTest = tests.invalid.some(t => t.only);
+    const hasOnlyTest = [...tests.valid, ...tests.invalid].some(t => typeof t !== 'string' && t.only);
 
-    for (const testCase of tests.invalid) {
-      const { only, filename, options } = testCase;
+    for (const [index, testCase] of tests.valid.entries()) {
+      const { name, code, filename, only }: RuleTester.ValidTestCase =
+        typeof testCase === 'string' ? { code: testCase } : testCase;
+
+      if (hasOnlyTest && !only) {
+        continue;
+      }
+
+      const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
+      defineParser(linter, verifyConfig.parser);
+
+      const messages = linter.verify(code, verifyConfig, { filename });
+      it(name || `Valid #${index + 1}\n${printCode(code)}`, () => {
+        expect(messages).toEqual([]);
+      });
+    }
+
+    for (const [idx, testCase] of tests.invalid.entries()) {
+      const { only, filename, options, name } = testCase;
       if (hasOnlyTest && !only) {
         continue;
       }
 
       const code = removeTrailingBlankLines(testCase.code);
-      const verifyConfig = getVerifyConfig(name, this.config, testCase);
+      const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
 
       const messages = linter.verify(code, verifyConfig, { filename });
       const messageForSnapshot: string[] = [];
       const hasMultipleMessages = messages.length > 1;
       if (hasMultipleMessages) {
-        messageForSnapshot.push('Code', indentCode(printCode(code)));
+        messageForSnapshot.push('##### ⌨️ Code', indentCode(printCode(code)));
       }
       if (options) {
         const opts = JSON.stringify(options, null, 2).slice(1, -1);
-        messageForSnapshot.push('⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
+        messageForSnapshot.push('##### ⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
       }
 
       for (const [index, message] of messages.entries()) {
@@ -130,7 +140,7 @@ export class GraphQLRuleTester extends RuleTester {
         }
 
         const codeWithMessage = visualizeEslintMessage(code, message, hasMultipleMessages ? 1 : undefined);
-        messageForSnapshot.push(printWithIndex('❌ Error', index, messages.length), indentCode(codeWithMessage));
+        messageForSnapshot.push(printWithIndex('##### ❌ Error', index, messages.length), indentCode(codeWithMessage));
 
         const { suggestions } = message;
 
@@ -138,7 +148,7 @@ export class GraphQLRuleTester extends RuleTester {
         if (suggestions && (code.match(/\n/g) || '').length < 1000) {
           for (const [i, suggestion] of message.suggestions.entries()) {
             const output = applyFix(code, suggestion.fix);
-            const title = printWithIndex('💡 Suggestion', i, suggestions.length, suggestion.desc);
+            const title = printWithIndex('##### 💡 Suggestion', i, suggestions.length, suggestion.desc);
             messageForSnapshot.push(title, indentCode(printCode(output), 2));
           }
         }
@@ -147,10 +157,12 @@ export class GraphQLRuleTester extends RuleTester {
       if (rule.meta.fixable) {
         const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
         if (fixed) {
-          messageForSnapshot.push('🔧 Autofix output', indentCode(codeFrameColumns(output, {} as any)));
+          messageForSnapshot.push('##### 🔧 Autofix output', indentCode(codeFrameColumns(output, {} as any)));
         }
       }
-      expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
+      it(name || `Invalid #${idx + 1}`, () => {
+        expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
+      });
     }
   }
 }

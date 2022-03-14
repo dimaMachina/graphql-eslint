@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-Code
+exports[`Invalid #1 1`] = `
+##### ⌨️ Code
 
        1 |         type Query {
        2 |           node(id: ID!): AnotherNode!
@@ -26,14 +26,14 @@ Code
       21 |           address: String
       22 |         }
 
-❌ Error 1/3
+##### ❌ Error 1/3
 
       4 |
     > 5 |         interface Node {
         |                   ^^^^ Interface type \`Node\` is unreachable.
       6 |           id: ID!
 
-💡 Suggestion: Remove \`Node\`
+##### 💡 Suggestion: Remove \`Node\`
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
@@ -56,14 +56,14 @@ Code
     19 |           address: String
     20 |         }
 
-❌ Error 2/3
+##### ❌ Error 2/3
 
       12 |
     > 13 |         interface User implements Node {
          |                   ^^^^ Interface type \`User\` is unreachable.
       14 |           id: ID!
 
-💡 Suggestion: Remove \`User\`
+##### 💡 Suggestion: Remove \`User\`
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
@@ -85,14 +85,14 @@ Code
     18 |           address: String
     19 |         }
 
-❌ Error 3/3
+##### ❌ Error 3/3
 
       17 |
     > 18 |         type SuperUser implements User & Node {
          |              ^^^^^^^^^ Object type \`SuperUser\` is unreachable.
       19 |           id: ID!
 
-💡 Suggestion: Remove \`SuperUser\`
+##### 💡 Suggestion: Remove \`SuperUser\`
 
      1 |         type Query {
      2 |           node(id: ID!): AnotherNode!
@@ -114,8 +114,8 @@ Code
     18 |         
 `;
 
-exports[` 2`] = `
-Code
+exports[`Invalid #2 1`] = `
+##### ⌨️ Code
 
        1 |         # ScalarTypeDefinition
        2 |         scalar DateTime
@@ -147,14 +147,14 @@ Code
       28 |           city: String
       29 |         }
 
-❌ Error 1/7
+##### ❌ Error 1/7
 
       1 |         # ScalarTypeDefinition
     > 2 |         scalar DateTime
         |                ^^^^^^^^ Scalar type \`DateTime\` is unreachable.
       3 |
 
-💡 Suggestion: Remove \`DateTime\`
+##### 💡 Suggestion: Remove \`DateTime\`
 
      1 |         # ScalarTypeDefinition
      2 |         
@@ -186,14 +186,14 @@ Code
     28 |           city: String
     29 |         }
 
-❌ Error 2/7
+##### ❌ Error 2/7
 
       4 |         # EnumTypeDefinition
     > 5 |         enum Role {
         |              ^^^^ Enum type \`Role\` is unreachable.
       6 |           ADMIN
 
-💡 Suggestion: Remove \`Role\`
+##### 💡 Suggestion: Remove \`Role\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -222,14 +222,14 @@ Code
     25 |           city: String
     26 |         }
 
-❌ Error 3/7
+##### ❌ Error 3/7
 
       10 |         # DirectiveDefinition
     > 11 |         directive @auth(role: [String!]!) on FIELD_DEFINITION
          |                    ^^^^ Directive \`auth\` is unreachable.
       12 |
 
-💡 Suggestion: Remove \`auth\`
+##### 💡 Suggestion: Remove \`auth\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -261,14 +261,14 @@ Code
     28 |           city: String
     29 |         }
 
-❌ Error 4/7
+##### ❌ Error 4/7
 
       13 |         # UnionTypeDefinition
     > 14 |         union Union = String | Boolean
          |               ^^^^^ Union type \`Union\` is unreachable.
       15 |
 
-💡 Suggestion: Remove \`Union\`
+##### 💡 Suggestion: Remove \`Union\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -300,14 +300,14 @@ Code
     28 |           city: String
     29 |         }
 
-❌ Error 5/7
+##### ❌ Error 5/7
 
       16 |         # InputObjectTypeDefinition
     > 17 |         input UsersFilter {
          |               ^^^^^^^^^^^ Input object type \`UsersFilter\` is unreachable.
       18 |           limit: Int
 
-💡 Suggestion: Remove \`UsersFilter\`
+##### 💡 Suggestion: Remove \`UsersFilter\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -337,14 +337,14 @@ Code
     26 |           city: String
     27 |         }
 
-❌ Error 6/7
+##### ❌ Error 6/7
 
       21 |         # InterfaceTypeDefinition
     > 22 |         interface Address {
          |                   ^^^^^^^ Interface type \`Address\` is unreachable.
       23 |           city: String
 
-💡 Suggestion: Remove \`Address\`
+##### 💡 Suggestion: Remove \`Address\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -374,14 +374,14 @@ Code
     26 |           city: String
     27 |         }
 
-❌ Error 7/7
+##### ❌ Error 7/7
 
       26 |         # ObjectTypeDefinition
     > 27 |         type User implements Address {
          |              ^^^^ Object type \`User\` is unreachable.
       28 |           city: String
 
-💡 Suggestion: Remove \`User\`
+##### 💡 Suggestion: Remove \`User\`
 
      1 |         # ScalarTypeDefinition
      2 |         scalar DateTime
@@ -412,8 +412,8 @@ Code
     27 |         
 `;
 
-exports[` 3`] = `
-❌ Error
+exports[`Invalid #3 1`] = `
+##### ❌ Error
 
        1 |         interface User {
        2 |           id: String
@@ -435,7 +435,7 @@ exports[` 3`] = `
     > 18 |         scalar DateTime
          |                ^^^^^^^^ Scalar type \`DateTime\` is unreachable.
 
-💡 Suggestion: Remove \`DateTime\`
+##### 💡 Suggestion: Remove \`DateTime\`
 
      1 |         interface User {
      2 |           id: String
@@ -457,8 +457,8 @@ exports[` 3`] = `
     18 |         
 `;
 
-exports[` 4`] = `
-Code
+exports[`Invalid #4 1`] = `
+##### ⌨️ Code
 
        1 |         interface User {
        2 |           id: String
@@ -481,13 +481,13 @@ Code
       19 |           user: AnotherUser!
       20 |         }
 
-❌ Error 1/3
+##### ❌ Error 1/3
 
     > 1 |         interface User {
         |                   ^^^^ Interface type \`User\` is unreachable.
       2 |           id: String
 
-💡 Suggestion: Remove \`User\`
+##### 💡 Suggestion: Remove \`User\`
 
      1 |         
      2 |
@@ -508,14 +508,14 @@ Code
     17 |           user: AnotherUser!
     18 |         }
 
-❌ Error 2/3
+##### ❌ Error 2/3
 
        8 |
     >  9 |         type SuperUser implements User {
          |              ^^^^^^^^^ Object type \`SuperUser\` is unreachable.
       10 |           id: String
 
-💡 Suggestion: Remove \`SuperUser\`
+##### 💡 Suggestion: Remove \`SuperUser\`
 
      1 |         interface User {
      2 |           id: String
@@ -536,14 +536,14 @@ Code
     17 |           user: AnotherUser!
     18 |         }
 
-❌ Error 3/3
+##### ❌ Error 3/3
 
       13 |         # ObjectTypeExtension
     > 14 |         extend type SuperUser {
          |                     ^^^^^^^^^ Object type \`SuperUser\` is unreachable.
       15 |           detail: String
 
-💡 Suggestion: Remove \`SuperUser\`
+##### 💡 Suggestion: Remove \`SuperUser\`
 
      1 |         interface User {
      2 |           id: String
@@ -565,8 +565,8 @@ Code
     18 |         }
 `;
 
-exports[` 5`] = `
-❌ Error
+exports[`Invalid #5 1`] = `
+##### ❌ Error
 
        1 |         type Query {
        2 |           node(id: ID!): Node!
@@ -590,7 +590,7 @@ exports[` 5`] = `
     > 20 |         scalar DateTime
          |                ^^^^^^^^ Scalar type \`DateTime\` is unreachable.
 
-💡 Suggestion: Remove \`DateTime\`
+##### 💡 Suggestion: Remove \`DateTime\`
 
      1 |         type Query {
      2 |           node(id: ID!): Node!

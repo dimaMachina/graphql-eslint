@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-❌ Error
+exports[`should not throw an error on undefined fragment 1`] = `
+##### ❌ Error
 
       1 | {
       2 |   user {

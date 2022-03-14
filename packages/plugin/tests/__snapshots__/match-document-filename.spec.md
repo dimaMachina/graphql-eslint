@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-⚙️ Options
+exports[`Invalid #1 1`] = `
+##### ⚙️ Options
 
     {
       "fileExtension": ".gql"
     }
 
-❌ Error
+##### ❌ Error
 
     > 1 | { me }
         | ^ File extension ".graphql" don't match extension ".gql"
 `;
 
-exports[` 2`] = `
-⚙️ Options
+exports[`Invalid #2 1`] = `
+##### ⚙️ Options
 
     {
       "query": {
@@ -22,14 +22,14 @@ exports[` 2`] = `
       }
     }
 
-❌ Error
+##### ❌ Error
 
     > 1 | query UserById { user { id } }
         | ^ Unexpected filename "user-by-id.gql". Rename it to "UserById.gql"
 `;
 
-exports[` 3`] = `
-⚙️ Options
+exports[`Invalid #3 1`] = `
+##### ⚙️ Options
 
     {
       "query": {
@@ -38,14 +38,14 @@ exports[` 3`] = `
       }
     }
 
-❌ Error
+##### ❌ Error
 
     > 1 | query UserById { user { id } }
         | ^ Unexpected filename "userById.gql". Rename it to "UserById.query.gql"
 `;
 
-exports[` 4`] = `
-⚙️ Options
+exports[`Invalid #4 1`] = `
+##### ⚙️ Options
 
     {
       "fragment": {
@@ -53,14 +53,14 @@ exports[` 4`] = `
       }
     }
 
-❌ Error
+##### ❌ Error
 
     > 1 | fragment UserFields on User { id }
         | ^ Unexpected filename "user-fields.gql". Rename it to "UserFields.gql"
 `;
 
-exports[` 5`] = `
-⚙️ Options
+exports[`compare only first operation name 1`] = `
+##### ⚙️ Options
 
     {
       "query": {
@@ -73,14 +73,14 @@ exports[` 5`] = `
       }
     }
 
-❌ Error
+##### ❌ Error
 
     > 1 | query getUsers { users } mutation createPost { createPost }
         | ^ Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"
 `;
 
-exports[` 6`] = `
-⚙️ Options
+exports[`compare only first operation name if fragment is present 1`] = `
+##### ⚙️ Options
 
     {
       "query": {
@@ -93,7 +93,7 @@ exports[` 6`] = `
       }
     }
 
-❌ Error
+##### ❌ Error
 
     > 1 |         fragment UserFields on User {
         | ^ Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"
