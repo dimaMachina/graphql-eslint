@@ -39,6 +39,89 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
         ],
       },
     },
+    {
+      name: 'should work when interface implemented',
+      code: /* GraphQL */ `
+        fragment Introduction on Introduction {
+          introText {
+            ...ContentUnit
+          }
+        }
+      `,
+      parserOptions: {
+        schema: /* GraphQL */ `
+          interface ContentUnit {
+            contentSets: Int
+          }
+
+          type IntroText implements ContentUnit {
+            contentSets: Int
+          }
+
+          type Introduction {
+            introText: IntroText
+          }
+
+          type Query {
+            foo: Int
+          }
+        `,
+        operations: /* GraphQL */ `
+          fragment ContentUnit on ContentUnit {
+            contentSets {
+              id
+            }
+          }
+        `,
+      },
+    },
+    {
+      name: 'should work when with union',
+      code: /* GraphQL */ `
+        query {
+          animal {
+            ...AnimalFields
+          }
+        }
+      `,
+      parserOptions: {
+        schema: /* GraphQL */ `
+          type Cat {
+            name: String
+          }
+
+          type Dog {
+            age: String
+          }
+
+          union AnimalUnion = Cat | Dog
+
+          type Animal {
+            animal: AnimalUnion
+          }
+
+          type Query {
+            animal: Animal
+          }
+        `,
+        operations: /* GraphQL */ `
+          fragment CatFields on Cat {
+            title
+          }
+
+          fragment DogFields on Dog {
+            url
+          }
+
+          fragment AnimalFields on AnimalUnion {
+            animal {
+              ...CatFields
+              ...DogFields
+            }
+          }
+        `,
+      },
+    },
   ],
   invalid: [
     {
