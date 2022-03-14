@@ -1,5 +1,12 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.9.1
+
+### Patch Changes
+
+- 56d6ff3: [known-fragment-names]: fix when fragment used on interface and union
+- 3fe3761: print debug information with `DEBUG` env variable, example `DEBUG=graphql-eslint:* eslint .`
+
 ## 3.9.0
 
 ### Minor Changes
