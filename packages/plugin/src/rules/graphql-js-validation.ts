@@ -2,7 +2,6 @@ import type { AST } from 'eslint';
 import type { JSONSchema4 } from 'json-schema';
 import {
   Kind,
-  TypeInfo,
   DocumentNode,
   GraphQLSchema,
   ValidationRule,
@@ -10,7 +9,7 @@ import {
   OperationDefinitionNode,
   visit,
   validate,
-  visitWithTypeInfo,
+  ASTVisitor,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
@@ -65,59 +64,47 @@ function validateDocument(
   }
 }
 
-type FragmentInfo = `${string}:${string}`;
+type GetFragmentDefsAndFragmentSpreads = {
+  fragmentDefs: Set<string>;
+  fragmentSpreads: Set<string>;
+};
 
-const getFragmentDefsAndFragmentSpreads = (
-  schema: GraphQLSchema,
-  node: DocumentNode
-): {
-  fragmentDefs: Set<FragmentInfo>;
-  fragmentSpreads: Set<FragmentInfo>;
-} => {
-  const typeInfo = new TypeInfo(schema);
-  const fragmentDefs = new Set<FragmentInfo>();
-  const fragmentSpreads = new Set<FragmentInfo>();
+const getFragmentDefsAndFragmentSpreads = (node: DocumentNode): GetFragmentDefsAndFragmentSpreads => {
+  const fragmentDefs = new Set<string>();
+  const fragmentSpreads = new Set<string>();
 
-  const visitor = visitWithTypeInfo(typeInfo, {
+  const visitor: ASTVisitor = {
     FragmentDefinition(node) {
-      fragmentDefs.add(`${node.name.value}:${node.typeCondition.name.value}`);
+      fragmentDefs.add(node.name.value);
     },
     FragmentSpread(node) {
-      const parentType = typeInfo.getParentType();
-      if (parentType) {
-        fragmentSpreads.add(`${node.name.value}:${parentType.name}`);
-      }
+      fragmentSpreads.add(node.name.value);
     },
-  });
+  };
 
   visit(node, visitor);
   return { fragmentDefs, fragmentSpreads };
 };
 
-const getMissingFragments = (schema: GraphQLSchema, node: DocumentNode): FragmentInfo[] => {
-  const { fragmentDefs, fragmentSpreads } = getFragmentDefsAndFragmentSpreads(schema, node);
+const getMissingFragments = (node: DocumentNode): string[] => {
+  const { fragmentDefs, fragmentSpreads } = getFragmentDefsAndFragmentSpreads(node);
   return [...fragmentSpreads].filter(name => !fragmentDefs.has(name));
 };
 
 type GetDocumentNode = (props: {
   ruleId: string;
   context: GraphQLESLintRuleContext;
-  schema: GraphQLSchema;
   node: DocumentNode;
 }) => DocumentNode;
 
-const handleMissingFragments: GetDocumentNode = ({ ruleId, context, schema, node }) => {
-  const missingFragments = getMissingFragments(schema, node);
+const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
+  const missingFragments = getMissingFragments(node);
   if (missingFragments.length > 0) {
     const siblings = requireSiblingsOperations(ruleId, context);
     const fragmentsToAdd: FragmentDefinitionNode[] = [];
 
-    for (const missingFragment of missingFragments) {
-      const [fragmentName, fragmentTypeName] = missingFragment.split(':');
-      const [foundFragment] = siblings
-        .getFragment(fragmentName)
-        .map(source => source.document)
-        .filter(fragment => fragment.typeCondition.name.value === fragmentTypeName);
+    for (const fragmentName of missingFragments) {
+      const [foundFragment] = siblings.getFragment(fragmentName).map(source => source.document);
       if (foundFragment) {
         fragmentsToAdd.push(foundFragment);
       }
@@ -128,7 +115,6 @@ const handleMissingFragments: GetDocumentNode = ({ ruleId, context, schema, node
       return handleMissingFragments({
         ruleId,
         context,
-        schema,
         node: {
           kind: Kind.DOCUMENT,
           definitions: [...node.definitions, ...fragmentsToAdd],
@@ -182,7 +168,7 @@ const validationToRule = (
             const schema = docs.requiresSchema ? requireGraphQLSchemaFromContext(ruleId, context) : null;
 
             const documentNode = getDocumentNode
-              ? getDocumentNode({ ruleId, context, schema, node: node.rawNode() })
+              ? getDocumentNode({ ruleId, context, node: node.rawNode() })
               : node.rawNode();
 
             validateDocument(context, schema, documentNode, ruleFn);
@@ -360,7 +346,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       requiresSchema: true,
       requiresSiblings: true,
     },
-    ({ ruleId, context, schema, node }) => {
+    ({ ruleId, context, node }) => {
       const siblings = requireSiblingsOperations(ruleId, context);
       const FilePathToDocumentsMap = [...siblings.getOperations(), ...siblings.getFragments()].reduce<
         Record<string, (OperationDefinitionNode | FragmentDefinitionNode)[]>
@@ -371,7 +357,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       }, Object.create(null));
 
       const getParentNode = (currentFilePath: string, node: DocumentNode): DocumentNode => {
-        const { fragmentDefs } = getFragmentDefsAndFragmentSpreads(schema, node);
+        const { fragmentDefs } = getFragmentDefsAndFragmentSpreads(node);
         if (fragmentDefs.size === 0) {
           return node;
         }
@@ -379,7 +365,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
         delete FilePathToDocumentsMap[currentFilePath];
 
         for (const [filePath, documents] of Object.entries(FilePathToDocumentsMap)) {
-          const missingFragments = getMissingFragments(schema, {
+          const missingFragments = getMissingFragments({
             kind: Kind.DOCUMENT,
             definitions: documents,
           });
