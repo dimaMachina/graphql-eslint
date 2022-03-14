@@ -1,7 +1,7 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
-import { ASTNode, GraphQLError, TypeInfo, Source } from 'graphql';
+import { GraphQLError, Source } from 'graphql';
 import debugFactory from 'debug';
-import { convertToESTree, extractTokens } from './estree-parser';
+import { convertToESTree, extractCommentsFromAst, extractTokens } from './estree-parser';
 import { GraphQLESLintParseResult, ParserOptions, ParserServices } from './types';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
@@ -9,13 +9,12 @@ import { loadGraphQLConfig } from './graphql-config';
 
 const debug = debugFactory('graphql-eslint:parser');
 
-debug('cwd %o', process.cwd())
+debug('cwd %o', process.cwd());
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
   const gqlConfig = loadGraphQLConfig(options);
   const schema = getSchema(options, gqlConfig);
   const parserServices: ParserServices = {
-    hasTypeInfo: schema !== null,
     schema,
     siblingOperations: getSiblingOperations(options, gqlConfig),
   };
@@ -28,11 +27,9 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
       noLocation: false,
     });
 
-    const { rootTree, comments } = convertToESTree(
-      graphqlAst.document as ASTNode,
-      schema ? new TypeInfo(schema) : null
-    );
+    const comments = extractCommentsFromAst(graphqlAst.document.loc);
     const tokens = extractTokens(new Source(code, filePath));
+    const rootTree = convertToESTree(graphqlAst.document, schema);
 
     return {
       services: parserServices,

@@ -4,7 +4,7 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
 
-> Created and maintained by [The Guild](http://the-guild.dev)
+> Created and maintained by [The Guild](https://the-guild.dev)
 
 ## Key Features
 

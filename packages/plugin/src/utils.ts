@@ -13,15 +13,9 @@ export function requireSiblingsOperations(
   ruleName: string,
   context: GraphQLESLintRuleContext
 ): SiblingOperations | never {
-  if (!context.parserServices) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
-    );
-  }
-
   if (!context.parserServices.siblingOperations.available) {
     throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See http://bit.ly/graphql-eslint-operations for more info`
+      `Rule '${ruleName}' requires 'parserOptions.operations' to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`
     );
   }
 
@@ -32,15 +26,9 @@ export function requireGraphQLSchemaFromContext(
   ruleName: string,
   context: GraphQLESLintRuleContext
 ): GraphQLSchema | never {
-  if (!context.parserServices) {
+  if (!context.parserServices.schema) {
     throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set. See http://bit.ly/graphql-eslint-schema for more info`
-    );
-  }
-
-  if (!context.parserServices.hasTypeInfo) {
-    throw new Error(
-      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See http://bit.ly/graphql-eslint-schema for more info`
+      `Rule '${ruleName}' requires 'parserOptions.schema' to be set and schema to be loaded. See https://bit.ly/graphql-eslint-schema for more info`
     );
   }
 
