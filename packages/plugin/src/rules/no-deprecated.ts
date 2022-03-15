@@ -86,7 +86,7 @@ const rule: GraphQLESLintRule<[], true> = {
   create(context) {
     requireGraphQLSchemaFromContext(RULE_ID, context);
 
-    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode>, reason: string): void {
+    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>, reason: string): void {
       const nodeName = node.type === Kind.ENUM ? node.value : node.name.value;
       const nodeType = node.type === Kind.ENUM ? 'enum value' : 'field';
       context.report({

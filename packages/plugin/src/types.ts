@@ -1,10 +1,9 @@
 import type { Rule, AST, Linter } from 'eslint';
 import type * as ESTree from 'estree';
-import type { ASTNode, GraphQLSchema } from 'graphql';
+import type { GraphQLSchema } from 'graphql';
 import type { IExtensions, IGraphQLProject, DocumentPointer, SchemaPointer } from 'graphql-config';
 import type { GraphQLParseOptions } from '@graphql-tools/utils';
 import type { GraphQLESLintRuleListener } from './testkit';
-import type { GraphQLESTreeNode } from './estree-parser';
 import type { SiblingOperations } from './sibling-operations';
 
 export interface ParserOptions {
@@ -32,7 +31,9 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
   services: ParserServices;
 };
 
-type ReportDescriptorLocation = { node: GraphQLESTreeNode<ASTNode> } | { loc: AST.SourceLocation | ESTree.Position };
+type Location = AST.SourceLocation | ESTree.Position;
+
+type ReportDescriptorLocation = { node: { loc: Location } } | { loc: Location };
 export type ReportDescriptor = Rule.ReportDescriptorMessage & Rule.ReportDescriptorOptions & ReportDescriptorLocation;
 
 export type GraphQLESLintRuleContext<Options = any[]> = Omit<

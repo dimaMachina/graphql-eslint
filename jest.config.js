@@ -1,5 +1,8 @@
 module.exports = {
   modulePathIgnorePatterns: ['/dist/'],
+  moduleNameMapper: {
+    '@graphql-eslint/eslint-plugin': '<rootDir>/packages/plugin/src/index.ts',
+  },
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },

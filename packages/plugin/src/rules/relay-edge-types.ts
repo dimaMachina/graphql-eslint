@@ -181,16 +181,16 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
       }
     };
 
-    const listeners: GraphQLESLintRuleListener = {
+    const listeners: GraphQLESLintRuleListener<true> = {
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/] > FieldDefinition[name.value=edges] > .gqlType Name'(
-        node: GraphQLESTreeNode<NameNode, true>
+        node: GraphQLESTreeNode<NameNode>
       ) {
         const type = schema.getType(node.value);
         if (!isObjectType(type)) {
           context.report({ node, messageId: MESSAGE_MUST_BE_OBJECT_TYPE });
         }
       },
-      ':matches(ObjectTypeDefinition, ObjectTypeExtension)'(node: GraphQLESTreeNode<ObjectTypeDefinitionNode, true>) {
+      ':matches(ObjectTypeDefinition, ObjectTypeExtension)'(node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) {
         const typeName = node.name.value;
         if (edgeTypes.has(typeName)) {
           checkNodeField(node);
@@ -203,7 +203,7 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
     };
 
     if (options.listTypeCanWrapOnlyEdgeType) {
-      listeners['FieldDefinition > .gqlType'] = (node: GraphQLESTreeNode<TypeNode, true>) => {
+      listeners['FieldDefinition > .gqlType'] = (node: GraphQLESTreeNode<TypeNode>) => {
         if (
           node.kind === Kind.LIST_TYPE ||
           (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.LIST_TYPE)

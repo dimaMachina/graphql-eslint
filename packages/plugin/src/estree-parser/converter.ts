@@ -1,47 +1,16 @@
 import {
-  ASTNode,
-  TypeNode,
   TypeInfo,
   visit,
   visitWithTypeInfo,
   Kind,
   DocumentNode,
   ASTVisitor,
-  Location,
   GraphQLSchema,
+  DefinitionNode,
 } from 'graphql';
-import { SourceLocation, Comment } from 'estree';
+import { Comment } from 'estree';
 import { GraphQLESTreeNode, TypeInformation } from './estree-ast';
-
-function convertLocation(location: Location): SourceLocation {
-  const { startToken, endToken, source, start, end } = location;
-  /*
-   * ESLint has 0-based column number
-   * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
-   */
-  const loc = {
-    start: {
-      /*
-       * Kind.Document has startToken: { line: 0, column: 0 }, we set line as 1 and column as 0
-       */
-      line: startToken.line === 0 ? 1 : startToken.line,
-      column: startToken.column === 0 ? 0 : startToken.column - 1,
-    },
-    end: {
-      line: endToken.line,
-      column: endToken.column - 1,
-    },
-    source: source.body,
-  };
-  if (loc.start.column === loc.end.column) {
-    loc.end.column += end - start;
-  }
-  return loc;
-}
-
-function hasTypeField<T extends ASTNode>(node: T): node is T & { readonly type: TypeNode } {
-  return 'type' in node && Boolean(node.type);
-}
+import { convertLocation } from './utils';
 
 export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema) {
   const typeInfo = schema ? new TypeInfo(schema) : null;
@@ -78,30 +47,33 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
         }
         return node.kind === Kind.DOCUMENT
           ? <DocumentNode>{
-              kind: node.kind,
-              loc: node.loc,
-              definitions: node.definitions.map(d => (d as any).rawNode()),
+              ...node,
+              definitions: node.definitions.map(definition =>
+                (definition as unknown as GraphQLESTreeNode<DefinitionNode>).rawNode()
+              ),
             }
           : node;
       };
 
-      const commonFields = {
+      // Omit 'kind' because don't know how to fix error
+      // Type 'Kind.NAME' is not assignable to type 'Kind.DOCUMENT'
+      const commonFields: Omit<GraphQLESTreeNode<typeof node>, 'kind'> = {
         ...node,
         type: node.kind,
         loc: convertLocation(node.loc),
         range: [node.loc.start, node.loc.end],
         leadingComments,
         // Use function to prevent RangeError: Maximum call stack size exceeded
-        typeInfo: () => calculatedTypeInfo,
+        typeInfo: () => calculatedTypeInfo as any, // Don't know if can fix error
         rawNode,
       };
 
-      return hasTypeField(node)
-        ? ({
+      return 'type' in node
+        ? {
             ...commonFields,
             gqlType: node.type,
-          } as any as GraphQLESTreeNode<T, true>)
-        : (commonFields as any as GraphQLESTreeNode<T>);
+          }
+        : commonFields;
     },
   };
 
