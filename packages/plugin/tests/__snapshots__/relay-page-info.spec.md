@@ -53,25 +53,25 @@ exports[`when extend type 1`] = `
 ##### ❌ Error 1/4
 
     > 1 |         type PageInfo
-        |              ^^^^^^^^ \`PageInfo\` must contain a field \`hasPreviousPage\`, that return non-null boolean.
+        |              ^^^^^^^^ \`PageInfo\` must contain a field \`hasPreviousPage\`, that return non-null Boolean.
       2 |         extend type PageInfo {
 
 ##### ❌ Error 2/4
 
     > 1 |         type PageInfo
-        |              ^^^^^^^^ \`PageInfo\` must contain a field \`hasNextPage\`, that return non-null boolean.
+        |              ^^^^^^^^ \`PageInfo\` must contain a field \`hasNextPage\`, that return non-null Boolean.
       2 |         extend type PageInfo {
 
 ##### ❌ Error 3/4
 
     > 1 |         type PageInfo
-        |              ^^^^^^^^ \`PageInfo\` must contain a field \`startCursor\`, that return non-null opaque string.
+        |              ^^^^^^^^ \`PageInfo\` must contain a field \`startCursor\`, that return non-null String or Scalar.
       2 |         extend type PageInfo {
 
 ##### ❌ Error 4/4
 
     > 1 |         type PageInfo
-        |              ^^^^^^^^ \`PageInfo\` must contain a field \`endCursor\`, that return non-null opaque string.
+        |              ^^^^^^^^ \`PageInfo\` must contain a field \`endCursor\`, that return non-null String or Scalar.
       2 |         extend type PageInfo {
 `;
 
@@ -86,27 +86,27 @@ exports[`when fields is missing or incorrect return type 1`] = `
 ##### ❌ Error 1/4
 
     > 1 |         type PageInfo {
-        |              ^^^^^^^^ \`PageInfo\` must contain a field \`hasNextPage\`, that return non-null boolean.
+        |              ^^^^^^^^ \`PageInfo\` must contain a field \`hasNextPage\`, that return non-null Boolean.
       2 |           hasPreviousPage: Boolean
 
 ##### ❌ Error 2/4
 
     > 1 |         type PageInfo {
-        |              ^^^^^^^^ \`PageInfo\` must contain a field \`endCursor\`, that return non-null opaque string.
+        |              ^^^^^^^^ \`PageInfo\` must contain a field \`endCursor\`, that return non-null String or Scalar.
       2 |           hasPreviousPage: Boolean
 
 ##### ❌ Error 3/4
 
       1 |         type PageInfo {
     > 2 |           hasPreviousPage: Boolean
-        |           ^^^^^^^^^^^^^^^ Field \`hasPreviousPage\` must return non-null boolean.
+        |           ^^^^^^^^^^^^^^^ Field \`hasPreviousPage\` must return non-null Boolean.
       3 |           startCursor: String
 
 ##### ❌ Error 4/4
 
       2 |           hasPreviousPage: Boolean
     > 3 |           startCursor: String
-        |           ^^^^^^^^^^^ Field \`startCursor\` must return non-null opaque string.
+        |           ^^^^^^^^^^^ Field \`startCursor\` must return non-null String or Scalar.
       4 |         }
 `;
 

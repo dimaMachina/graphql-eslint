@@ -22,6 +22,17 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         endCursor: String!
       }
     `),
+    {
+      name: 'startCursor/endCursor can be Scalar',
+      ...useSchema(/* GraphQL */ `
+        type PageInfo {
+          hasPreviousPage: Boolean!
+          hasNextPage: Boolean!
+          startCursor: Int!
+          endCursor: Float!
+        }
+      `),
+    },
   ],
   invalid: [
     {

@@ -8,8 +8,8 @@
 Set of rules to follow Relay specification for `PageInfo` object.
 
 - `PageInfo` must be an Object type
-- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, which return non-null booleans
-- `PageInfo` must contain fields `startCursor` and `endCursor`, which return non-null opaque strings
+- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, which return non-null Boolean
+- `PageInfo` must contain fields `startCursor` and `endCursor`, which return non-null String or Scalar
 
 ## Usage Examples
 

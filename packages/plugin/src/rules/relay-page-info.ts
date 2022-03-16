@@ -1,6 +1,6 @@
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
-import { Kind, ObjectTypeDefinitionNode } from 'graphql';
+import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { NON_OBJECT_TYPES } from './relay-connection-types';
 import { requireGraphQLSchemaFromContext } from '../utils';
 
@@ -20,10 +20,10 @@ const rule: GraphQLESLintRule = {
         'Set of rules to follow Relay specification for `PageInfo` object.',
         '',
         '- `PageInfo` must be an Object type',
-        '- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, which return non-null booleans',
-        '- `PageInfo` must contain fields `startCursor` and `endCursor`, which return non-null opaque strings',
+        '- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, which return non-null Boolean',
+        '- `PageInfo` must contain fields `startCursor` and `endCursor`, which return non-null String or Scalar',
       ].join('\n'),
-      url: `https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
           title: 'Correct',
@@ -47,8 +47,8 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
+    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     if (process.env.NODE_ENV === 'test' || !hasPageInfoChecked) {
-      const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
       const pageInfoType = schema.getType('PageInfo');
       if (!pageInfoType) {
         context.report({
@@ -72,13 +72,17 @@ const rule: GraphQLESLintRule = {
         ): void => {
           const field = fieldMap[fieldName];
           const hasField = Boolean(field);
-          const isNonNullBoolean =
+          const isStringType = typeName === 'String';
+
+          const isAllowedNonNullType =
             hasField &&
             field.gqlType.kind === Kind.NON_NULL_TYPE &&
             field.gqlType.gqlType.kind === Kind.NAMED_TYPE &&
-            field.gqlType.gqlType.name.value === typeName;
-          if (!isNonNullBoolean) {
-            const returnType = typeName === 'Boolean' ? 'boolean' : 'opaque string';
+            (field.gqlType.gqlType.name.value === typeName ||
+              (typeName === 'String' && isScalarType(schema.getType(field.gqlType.gqlType.name.value))));
+
+          if (!isAllowedNonNullType) {
+            const returnType = isStringType ? 'String or Scalar' : typeName;
             context.report({
               node: hasField ? field.name : node.name,
               message: hasField
@@ -87,13 +91,10 @@ const rule: GraphQLESLintRule = {
             });
           }
         };
-
-        for (const fieldName of ['hasPreviousPage', 'hasNextPage'] as const) {
-          checkField(fieldName, 'Boolean');
-        }
-        for (const fieldName of ['startCursor', 'endCursor'] as const) {
-          checkField(fieldName, 'String');
-        }
+        checkField('hasPreviousPage', 'Boolean');
+        checkField('hasNextPage', 'Boolean');
+        checkField('startCursor', 'String');
+        checkField('endCursor', 'String');
       },
     };
   },
