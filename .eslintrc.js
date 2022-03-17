@@ -27,6 +27,7 @@ module.exports = {
     'unicorn/no-useless-fallback-in-spread': 'error',
     'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { object: true }],
+    quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
   },
   overrides: [
     {

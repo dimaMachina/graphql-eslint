@@ -5,7 +5,7 @@ import type { AST } from 'eslint';
 import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
-import type * as ESTree from 'estree';
+import type { Position } from 'estree';
 import { GraphQLESLintRuleContext } from './types';
 import { SiblingOperations } from './sibling-operations';
 
@@ -16,7 +16,7 @@ export function requireSiblingsOperations(
   const { siblingOperations } = context.parserServices;
   if (!siblingOperations.available) {
     throw new Error(
-      `Rule '${ruleId}' requires 'parserOptions.operations' to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`
+      `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`
     );
   }
   return siblingOperations;
@@ -29,7 +29,7 @@ export function requireGraphQLSchemaFromContext(
   const { schema } = context.parserServices;
   if (!schema) {
     throw new Error(
-      `Rule '${ruleId}' requires 'parserOptions.schema' to be set and schema to be loaded. See https://bit.ly/graphql-eslint-schema for more info`
+      `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`
     );
   }
   return schema;
@@ -122,7 +122,7 @@ export const convertCase = (style: CaseStyle, str: string): string => {
   }
 };
 
-export function getLocation(start: ESTree.Position, fieldName = ''): AST.SourceLocation {
+export function getLocation(start: Position, fieldName = ''): AST.SourceLocation {
   const { line, column } = start;
   return {
     start: {

@@ -45,7 +45,7 @@ const rule: GraphQLESLintRule = {
     type: 'suggestion',
     docs: {
       category: 'Operations',
-      description: `Enforce unique fragment names across your project.`,
+      description: 'Enforce unique fragment names across your project.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
       requiresSiblings: true,
       examples: [

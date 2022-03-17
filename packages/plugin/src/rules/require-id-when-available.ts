@@ -81,7 +81,8 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       recommended: true,
     },
     messages: {
-      [RULE_ID]: `Field{{ pluralSuffix }} {{ fieldName }} must be selected when it's available on a type.\nInclude it in your selection set{{ addition }}.`,
+      [RULE_ID]:
+        "Field{{ pluralSuffix }} {{ fieldName }} must be selected when it's available on a type.\nInclude it in your selection set{{ addition }}.",
     },
     schema: {
       definitions: {

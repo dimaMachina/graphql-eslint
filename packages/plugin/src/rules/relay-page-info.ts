@@ -72,7 +72,6 @@ const rule: GraphQLESLintRule = {
           const field = fieldMap[fieldName];
           const hasField = Boolean(field);
           const isStringType = typeName === 'String';
-
           const isAllowedNonNullType =
             hasField &&
             field.gqlType.kind === Kind.NON_NULL_TYPE &&

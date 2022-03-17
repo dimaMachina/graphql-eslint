@@ -73,7 +73,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     }
 
     const selector = [
-      `:matches(ObjectTypeDefinition, ObjectTypeExtension)`,
+      ':matches(ObjectTypeDefinition, ObjectTypeExtension)',
       '>',
       `Name[value=/^(${rootTypeNames.join('|')})$/]`,
     ].join(' ');

@@ -109,7 +109,7 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
           withEdgeSuffix: {
             type: 'boolean',
             default: true,
-            description: `Edge type name must end in "Edge".`,
+            description: 'Edge type name must end in "Edge".',
           },
           shouldImplementNode: {
             type: 'boolean',

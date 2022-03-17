@@ -90,7 +90,7 @@ export function getSiblingOperations(projectForFile: GraphQLProjectConfig): Sibl
     const noopWarn = () => {
       if (!printed) {
         logger.warn(
-          `getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!`
+          'getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!'
         );
         printed = true;
       }

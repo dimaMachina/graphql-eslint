@@ -28,6 +28,10 @@ import type {
   InputObjectTypeDefinitionNode,
   InputObjectTypeExtensionNode,
   InlineFragmentNode,
+  VariableDefinitionNode,
+  ListTypeNode,
+  NonNullTypeNode,
+  OperationTypeDefinitionNode,
 } from 'graphql';
 import type { SourceLocation, Comment } from 'estree';
 import type { AST } from 'eslint';
@@ -63,6 +67,14 @@ type NodeWithName =
   | ArgumentNode
   | NamedTypeNode;
 
+type NodeWithType =
+  | FieldDefinitionNode
+  | InputValueDefinitionNode
+  | OperationTypeDefinitionNode
+  | NonNullTypeNode
+  | ListTypeNode
+  | VariableDefinitionNode;
+
 type ParentNode<T> = T extends DocumentNode
   ? AST.Program
   : T extends DefinitionNode
@@ -77,6 +89,8 @@ type ParentNode<T> = T extends DocumentNode
   ? ExecutableDefinitionNode | FieldNode | InlineFragmentNode
   : T extends SelectionNode
   ? SelectionSetNode
+  : T extends TypeNode
+  ? NodeWithType
   : T extends NameNode
   ? NodeWithName
   : unknown; // Explicitly show error to add new ternary with parent nodes

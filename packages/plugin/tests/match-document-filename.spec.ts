@@ -46,19 +46,19 @@ ruleTester.runGraphQLTests<[MatchDocumentFilenameRuleConfig]>('match-document-fi
       filename: 'src/queries/me.graphql',
       code: '{ me }',
       options: [{ fileExtension: '.gql' }],
-      errors: [{ message: `File extension ".graphql" don't match extension ".gql"` }],
+      errors: [{ message: 'File extension ".graphql" don\'t match extension ".gql"' }],
     },
     {
       filename: 'src/user-by-id.gql',
       code: 'query UserById { user { id } }',
       options: [{ query: { style: 'PascalCase' } }],
-      errors: [{ message: `Unexpected filename "user-by-id.gql". Rename it to "UserById.gql"` }],
+      errors: [{ message: 'Unexpected filename "user-by-id.gql". Rename it to "UserById.gql"' }],
     },
     {
       filename: 'src/userById.gql',
       code: 'query UserById { user { id } }',
       options: [{ query: { style: 'PascalCase', suffix: '.query' } }],
-      errors: [{ message: `Unexpected filename "userById.gql". Rename it to "UserById.query.gql"` }],
+      errors: [{ message: 'Unexpected filename "userById.gql". Rename it to "UserById.query.gql"' }],
     },
     {
       filename: 'src/user-fields.gql',

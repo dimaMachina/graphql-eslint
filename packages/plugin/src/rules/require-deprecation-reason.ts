@@ -4,9 +4,9 @@ import { valueFromNode } from '../estree-parser/utils';
 const rule: GraphQLESLintRule = {
   meta: {
     docs: {
-      description: `Require all deprecation directives to specify a reason.`,
+      description: 'Require all deprecation directives to specify a reason.',
       category: 'Schema',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/require-deprecation-reason.md`,
+      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/require-deprecation-reason.md',
       recommended: true,
       examples: [
         {

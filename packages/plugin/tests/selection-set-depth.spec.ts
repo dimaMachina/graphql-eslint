@@ -53,7 +53,7 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
   invalid: [
     {
       options: [{ maxDepth: 1 }],
-      errors: [{ message: `'deep2' exceeds maximum operation depth of 1` }],
+      errors: [{ message: "'deep2' exceeds maximum operation depth of 1" }],
       code: /* GraphQL */ `
         query deep2 {
           viewer {
@@ -67,7 +67,7 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
     {
       ...WITH_SIBLINGS,
       options: [{ maxDepth: 1 }],
-      errors: [{ message: `'deep2' exceeds maximum operation depth of 1` }],
+      errors: [{ message: "'deep2' exceeds maximum operation depth of 1" }],
       code: /* GraphQL */ `
         query deep2 {
           viewer {
@@ -82,7 +82,7 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
       name: 'suggestions should work with inline fragments',
       ...WITH_SIBLINGS,
       options: [{ maxDepth: 1 }],
-      errors: [{ message: `'' exceeds maximum operation depth of 1` }],
+      errors: [{ message: "'' exceeds maximum operation depth of 1" }],
       code: /* GraphQL */ `
         query {
           viewer {

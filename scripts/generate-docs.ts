@@ -49,7 +49,7 @@ function generateDocs(): void {
     const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
 
     if (deprecated) {
-      blocks.push(`- ❗ DEPRECATED ❗`);
+      blocks.push('- ❗ DEPRECATED ❗');
     }
     const categories = asArray(docs.category);
     if (docs.recommended) {
@@ -86,7 +86,7 @@ function generateDocs(): void {
     );
 
     if (docs.examples?.length > 0) {
-      blocks.push(BR, `## Usage Examples`);
+      blocks.push(BR, '## Usage Examples');
 
       for (const { usage, title, code } of docs.examples) {
         const isJsCode = ['gql`', '/* GraphQL */'].some(str => code.includes(str));
@@ -161,7 +161,7 @@ function generateDocs(): void {
   result.push({
     path: resolve(DOCS_PATH, 'README.md'),
     content: [
-      `## Available Rules`,
+      '## Available Rules',
       BR,
       'Each rule has emojis denoting:',
       BR,

@@ -66,7 +66,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       category: '${category}',
       description: '${description}',
-      url: \`https://github.com/dotansimha/graphql-eslint/blob/master/docs/rules/\${RULE_ID}.md\`,
+      url: \`https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/\${RULE_ID}.md\`,
       examples: [
         {
           title: 'Incorrect',

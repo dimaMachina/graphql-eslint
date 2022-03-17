@@ -44,10 +44,10 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
 const rule: GraphQLESLintRule = {
   meta: {
     messages: {
-      [RULE_ID]: `Field "{{fieldName}}" is unused`,
+      [RULE_ID]: 'Field "{{fieldName}}" is unused',
     },
     docs: {
-      description: `Requires all fields to be used at some level by siblings operations.`,
+      description: 'Requires all fields to be used at some level by siblings operations.',
       category: 'Schema',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
