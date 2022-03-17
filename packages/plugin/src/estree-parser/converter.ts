@@ -8,8 +8,8 @@ import {
   GraphQLSchema,
   DefinitionNode,
 } from 'graphql';
-import { Comment } from 'estree';
-import { GraphQLESTreeNode, TypeInformation } from './estree-ast';
+import type { Comment } from 'estree';
+import type { GraphQLESTreeNode, TypeInformation } from './types';
 import { convertLocation } from './utils';
 
 export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema) {
@@ -55,9 +55,7 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
           : node;
       };
 
-      // Omit 'kind' because don't know how to fix error
-      // Type 'Kind.NAME' is not assignable to type 'Kind.DOCUMENT'
-      const commonFields: Omit<GraphQLESTreeNode<typeof node>, 'kind'> = {
+      const commonFields: Omit<GraphQLESTreeNode<typeof node>, 'parent'> = {
         ...node,
         type: node.kind,
         loc: convertLocation(node.loc),

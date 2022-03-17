@@ -1,7 +1,7 @@
 import { ASTKindToNode, Kind, NameNode, TokenKind } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
 import { getLocation, TYPES_KINDS } from '../utils';
-import { GraphQLESTreeNode } from '../estree-parser/estree-ast';
+import { GraphQLESTreeNode } from '../estree-parser';
 
 const RULE_ID = 'require-description';
 

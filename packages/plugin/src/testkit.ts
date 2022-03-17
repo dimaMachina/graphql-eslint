@@ -2,10 +2,10 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
-import { ASTKindToNode } from 'graphql';
+import type { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
-import { GraphQLESTreeNode } from './estree-parser';
-import { GraphQLESLintRule, ParserOptions } from './types';
+import type { GraphQLESTreeNode } from './estree-parser';
+import type { GraphQLESLintRule, ParserOptions } from './types';
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
@@ -17,47 +17,33 @@ export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'opti
 };
 
 export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
-  errors: number | Array<RuleTester.TestCaseError | string>;
-  output?: string | null;
+  errors: number | (RuleTester.TestCaseError | string)[];
 };
 
 function indentCode(code: string, indent = 4): string {
   return code.replace(/^/gm, ' '.repeat(indent));
 }
 
-function printCode(code: string): string {
-  return codeFrameColumns(
-    code,
-    { start: { line: 0, column: 0 } },
-    {
-      linesAbove: Number.POSITIVE_INFINITY,
-      linesBelow: Number.POSITIVE_INFINITY,
-    }
-  );
-}
-
 // A simple version of `SourceCodeFixer.applyFixes`
 // https://github.com/eslint/eslint/issues/14936#issuecomment-906746754
-function applyFix(code: string, fix: Rule.Fix): string {
-  return [code.slice(0, fix.range[0]), fix.text, code.slice(fix.range[1])].join('');
+function applyFix(code: string, { range, text }: Rule.Fix): string {
+  return [code.slice(0, range[0]), text, code.slice(range[1])].join('');
 }
 
-export class GraphQLRuleTester extends RuleTester {
+export class GraphQLRuleTester {
   config: {
     parser: string;
     parserOptions: ParserOptions;
   };
 
   constructor(parserOptions: ParserOptions = {}) {
-    const config = {
+    this.config = {
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
         ...parserOptions,
         skipGraphQLConfig: true,
       },
     };
-    super(config);
-    this.config = config;
   }
 
   fromMockFile(path: string): string {
@@ -72,25 +58,6 @@ export class GraphQLRuleTester extends RuleTester {
       invalid: GraphQLInvalidTestCase<Options>[];
     }
   ): void {
-    // const ruleTests = Linter.version.startsWith('8')
-    //   ? tests
-    //   : {
-    //       valid: tests.valid.map(test => {
-    //         if (typeof test === 'string') {
-    //           return test;
-    //         }
-    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    //         const { name, ...testCaseOptions } = test;
-    //         return testCaseOptions;
-    //       }),
-    //       invalid: tests.invalid.map(test => {
-    //         // ESLint 7 throws an error on CI - Unexpected top-level property "name"
-    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    //         const { name, ...testCaseOptions } = test;
-    //         return testCaseOptions;
-    //       }),
-    //     };
-
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
@@ -108,7 +75,9 @@ export class GraphQLRuleTester extends RuleTester {
       defineParser(linter, verifyConfig.parser);
 
       const messages = linter.verify(code, verifyConfig, { filename });
-      it(name || `Valid #${index + 1}\n${printCode(code)}`, () => {
+      const codeFrame = printCode(code, { line: 0, column: 0 });
+
+      it(name || `Valid #${index + 1}\n${codeFrame}`, () => {
         expect(messages).toEqual([]);
       });
     }
@@ -127,7 +96,8 @@ export class GraphQLRuleTester extends RuleTester {
       const messageForSnapshot: string[] = [];
       const hasMultipleMessages = messages.length > 1;
       if (hasMultipleMessages) {
-        messageForSnapshot.push('##### ⌨️ Code', indentCode(printCode(code)));
+        const codeFrame = printCode(code, { line: 0, column: 0 });
+        messageForSnapshot.push('##### ⌨️ Code', indentCode(codeFrame));
       }
       if (options) {
         const opts = JSON.stringify(options, null, 2).slice(1, -1);
@@ -139,7 +109,7 @@ export class GraphQLRuleTester extends RuleTester {
           throw new Error(message.message);
         }
 
-        const codeWithMessage = visualizeEslintMessage(code, message, hasMultipleMessages ? 1 : undefined);
+        const codeWithMessage = printCode(code, message, hasMultipleMessages ? 1 : undefined);
         messageForSnapshot.push(printWithIndex('##### ❌ Error', index, messages.length), indentCode(codeWithMessage));
 
         const { suggestions } = message;
@@ -147,9 +117,10 @@ export class GraphQLRuleTester extends RuleTester {
         // Don't print suggestions in snapshots for too big codes
         if (suggestions && (code.match(/\n/g) || '').length < 1000) {
           for (const [i, suggestion] of message.suggestions.entries()) {
-            const output = applyFix(code, suggestion.fix);
             const title = printWithIndex('##### 💡 Suggestion', i, suggestions.length, suggestion.desc);
-            messageForSnapshot.push(title, indentCode(printCode(output), 2));
+            const output = applyFix(code, suggestion.fix);
+            const codeFrame = printCode(output, { line: 0, column: 0 });
+            messageForSnapshot.push(title, indentCode(codeFrame, 2));
           }
         }
       }
@@ -157,7 +128,7 @@ export class GraphQLRuleTester extends RuleTester {
       if (rule.meta.fixable) {
         const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
         if (fixed) {
-          messageForSnapshot.push('##### 🔧 Autofix output', indentCode(codeFrameColumns(output, {} as any)));
+          messageForSnapshot.push('##### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
       it(name || `Invalid #${idx + 1}`, () => {
@@ -214,18 +185,20 @@ function defineParser(linter: Linter, parser: string): void {
   }
 }
 
-function visualizeEslintMessage(
-  text: string,
-  result: Linter.LintMessage,
+function printCode(
+  code: string,
+  result: Partial<Linter.LintMessage> = {},
   linesOffset = Number.POSITIVE_INFINITY
 ): string {
   const { line, column, endLine, endColumn, message } = result;
-  const location: Partial<AST.SourceLocation> = {
-    start: {
+  const location = <AST.SourceLocation>{};
+
+  if (typeof line === 'number' && typeof column === 'number') {
+    location.start = {
       line,
       column,
-    },
-  };
+    };
+  }
 
   if (typeof endLine === 'number' && typeof endColumn === 'number') {
     location.end = {
@@ -234,7 +207,7 @@ function visualizeEslintMessage(
     };
   }
 
-  return codeFrameColumns(text, location as AST.SourceLocation, {
+  return codeFrameColumns(code, location, {
     linesAbove: linesOffset,
     linesBelow: linesOffset,
     message,

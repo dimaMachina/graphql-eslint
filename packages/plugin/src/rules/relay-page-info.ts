@@ -2,7 +2,7 @@ import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { NON_OBJECT_TYPES } from './relay-connection-types';
-import { requireGraphQLSchemaFromContext } from '../utils';
+import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils';
 
 const RULE_ID = 'relay-page-info';
 const MESSAGE_MUST_EXIST = 'MESSAGE_MUST_EXIST';
@@ -52,8 +52,7 @@ const rule: GraphQLESLintRule = {
       const pageInfoType = schema.getType('PageInfo');
       if (!pageInfoType) {
         context.report({
-          // Report on first character
-          loc: { column: 0, line: 1 },
+          loc: REPORT_ON_FIRST_CHARACTER,
           messageId: MESSAGE_MUST_EXIST,
         });
       }

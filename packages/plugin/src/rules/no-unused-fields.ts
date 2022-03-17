@@ -109,7 +109,7 @@ const rule: GraphQLESLintRule = {
     return {
       FieldDefinition(node) {
         const fieldName = node.name.value;
-        const parentTypeName = (node as any).parent.name.value;
+        const parentTypeName = node.parent.name.value;
         const isUsed = usedFields[parentTypeName]?.has(fieldName);
 
         if (isUsed) {
@@ -128,8 +128,7 @@ const rule: GraphQLESLintRule = {
                 const tokenBefore = sourceCode.getTokenBefore(node);
                 const tokenAfter = sourceCode.getTokenAfter(node);
                 const isEmptyType = tokenBefore.type === '{' && tokenAfter.type === '}';
-
-                return isEmptyType ? fixer.remove((node as any).parent) : fixer.remove(node as any);
+                return fixer.remove((isEmptyType ? node.parent : node) as any);
               },
             },
           ],

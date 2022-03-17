@@ -87,7 +87,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
           suggest: [
             {
               desc: `Remove \`${typeName}\` type`,
-              fix: fixer => fixer.remove((node as any).parent),
+              fix: fixer => fixer.remove(node.parent as any),
             },
           ],
         });

@@ -4,7 +4,7 @@ exports[`Invalid #1 1`] = `
 ##### ⌨️ Code
 
       1 |         # eslint-disable-next-line non-existing-rule
-      2 |         query {
+      2 |         {
       3 |           a
       4 |         }
 
@@ -12,12 +12,12 @@ exports[`Invalid #1 1`] = `
 
     > 1 |         # eslint-disable-next-line non-existing-rule
         |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Definition for rule 'non-existing-rule' was not found.
-      2 |         query {
+      2 |         {
 
 ##### ❌ Error 2/2
 
       1 |         # eslint-disable-next-line non-existing-rule
-    > 2 |         query {
+    > 2 |         {
         |         ^^^^^ Anonymous GraphQL operations are forbidden. Make sure to name your query!
       3 |           a
 
@@ -27,15 +27,4 @@ exports[`Invalid #1 1`] = `
     2 |         query a {
     3 |           a
     4 |         }
-`;
-
-exports[`Invalid #2 1`] = `
-##### ❌ Error
-
-    > 1 | query { a }
-        | ^^^^^ Anonymous GraphQL operations are forbidden. Make sure to name your query!
-
-##### 💡 Suggestion: Rename to \`a\`
-
-    1 | query a { a }
 `;

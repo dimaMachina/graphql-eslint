@@ -229,7 +229,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       [selector](node: GraphQLESTreeNode<SelectionSetNode, true>) {
         const typeInfo = node.typeInfo();
         if (typeInfo.gqlType) {
-          checkSelections(node, typeInfo.gqlType, node.loc.start, (node as any).parent);
+          checkSelections(node, typeInfo.gqlType, node.loc.start, node.parent);
         }
       },
     };

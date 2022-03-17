@@ -93,19 +93,11 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         additionalProperties: false,
         properties: {
           acceptedIdNames: {
-            type: 'array',
-            uniqueItems: true,
-            items: {
-              type: 'string',
-            },
+            ...ARRAY_DEFAULT_OPTIONS,
             default: ['id'],
           },
           acceptedIdTypes: {
-            type: 'array',
-            uniqueItems: true,
-            items: {
-              type: 'string',
-            },
+            ...ARRAY_DEFAULT_OPTIONS,
             default: ['ID'],
           },
           exceptions: {

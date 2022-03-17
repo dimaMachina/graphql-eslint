@@ -78,6 +78,7 @@ Default:
 
 Additional restrictions:
 
+* Minimum items: `1`
 * Unique items: `true`
 
 ### `acceptedIdTypes` (array)
@@ -94,6 +95,7 @@ Default:
 
 Additional restrictions:
 
+* Minimum items: `1`
 * Unique items: `true`
 
 ### `exceptions` (object)

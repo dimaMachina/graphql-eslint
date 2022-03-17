@@ -1,9 +1,12 @@
+import { processor } from './processor';
+
 export { rules } from './rules';
-export { processors } from './processors';
 export { parseForESLint } from './parser';
-export * from './types';
 export * from './testkit';
+export * from './types';
 export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils';
+
+export const processors = { graphql: processor }
 
 export const configs = Object.fromEntries(
   [
@@ -15,3 +18,4 @@ export const configs = Object.fromEntries(
     'relay',
   ].map(configName => [configName, { extends: `./configs/${configName}.json` }])
 );
+
