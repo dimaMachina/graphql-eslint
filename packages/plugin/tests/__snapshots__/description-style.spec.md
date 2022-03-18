@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |   enum EnumUserLanguagesSkill {
        2 |     """
@@ -18,20 +18,20 @@ exports[`Invalid #1 1`] = `
       13 |     native
       14 |   }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "style": "inline"
     }
 
-##### ❌ Error 1/3
+#### ❌ Error 1/3
 
       1 |   enum EnumUserLanguagesSkill {
     > 2 |     """
         |     ^ Unexpected block description.
       3 |     basic
 
-##### 💡 Suggestion: Change to inline style description
+#### 💡 Suggestion: Change to inline style description
 
      1 |   enum EnumUserLanguagesSkill {
      2 |     " basic "
@@ -46,14 +46,14 @@ exports[`Invalid #1 1`] = `
     11 |     native
     12 |   }
 
-##### ❌ Error 2/3
+#### ❌ Error 2/3
 
       5 |     basic
     > 6 |     """
         |     ^ Unexpected block description.
       7 |     fluent
 
-##### 💡 Suggestion: Change to inline style description
+#### 💡 Suggestion: Change to inline style description
 
      1 |   enum EnumUserLanguagesSkill {
      2 |     """
@@ -68,14 +68,14 @@ exports[`Invalid #1 1`] = `
     11 |     native
     12 |   }
 
-##### ❌ Error 3/3
+#### ❌ Error 3/3
 
        9 |     fluent
     > 10 |     """
          |     ^ Unexpected block description.
       11 |     native
 
-##### 💡 Suggestion: Change to inline style description
+#### 💡 Suggestion: Change to inline style description
 
      1 |   enum EnumUserLanguagesSkill {
      2 |     """
@@ -92,7 +92,7 @@ exports[`Invalid #1 1`] = `
 `;
 
 exports[`Invalid #2 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |   " Test "
       2 |   type CreateOneUserPayload {
@@ -103,19 +103,19 @@ exports[`Invalid #2 1`] = `
       7 |     record: User
       8 |   }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "style": "block"
     }
 
-##### ❌ Error 1/3
+#### ❌ Error 1/3
 
     > 1 |   " Test "
         |   ^^^^^^^^ Unexpected inline description.
       2 |   type CreateOneUserPayload {
 
-##### 💡 Suggestion: Change to block style description
+#### 💡 Suggestion: Change to block style description
 
     1 |   """ Test """
     2 |   type CreateOneUserPayload {
@@ -126,14 +126,14 @@ exports[`Invalid #2 1`] = `
     7 |     record: User
     8 |   }
 
-##### ❌ Error 2/3
+#### ❌ Error 2/3
 
       2 |   type CreateOneUserPayload {
     > 3 |     "Created document ID"
         |     ^^^^^^^^^^^^^^^^^^^^^ Unexpected inline description.
       4 |     recordId: MongoID
 
-##### 💡 Suggestion: Change to block style description
+#### 💡 Suggestion: Change to block style description
 
     1 |   " Test "
     2 |   type CreateOneUserPayload {
@@ -144,14 +144,14 @@ exports[`Invalid #2 1`] = `
     7 |     record: User
     8 |   }
 
-##### ❌ Error 3/3
+#### ❌ Error 3/3
 
       5 |
     > 6 |     "Created document"
         |     ^^^^^^^^^^^^^^^^^^ Unexpected inline description.
       7 |     record: User
 
-##### 💡 Suggestion: Change to block style description
+#### 💡 Suggestion: Change to block style description
 
     1 |   " Test "
     2 |   type CreateOneUserPayload {

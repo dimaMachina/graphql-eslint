@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ❌ Error
+#### ⌨️ Code
 
        1 |         type Query {
        2 |           foo: String
@@ -24,9 +24,15 @@ exports[`Invalid #1 1`] = `
       19 |           bar: Boolean
       20 |         }
       21 |
-    > 22 |         schema {
-         |         ^^^^^^ Must provide only one schema definition.
+      22 |         schema {
       23 |           query: RootQuery
       24 |           mutation: RootMutation
       25 |         }
+
+#### ❌ Error
+
+      21 |
+    > 22 |         schema {
+         |         ^^^^^^ Must provide only one schema definition.
+      23 |           query: RootQuery
 `;

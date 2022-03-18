@@ -30,20 +30,22 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
   return [code.slice(0, range[0]), text, code.slice(range[1])].join('');
 }
 
-export class GraphQLRuleTester {
+export class GraphQLRuleTester extends RuleTester {
   config: {
     parser: string;
     parserOptions: ParserOptions;
   };
 
   constructor(parserOptions: ParserOptions = {}) {
-    this.config = {
+    const config = {
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
         ...parserOptions,
         skipGraphQLConfig: true,
       },
     };
+    super(config);
+    this.config = config;
   }
 
   fromMockFile(path: string): string {
@@ -58,29 +60,49 @@ export class GraphQLRuleTester {
       invalid: GraphQLInvalidTestCase<Options>[];
     }
   ): void {
+    const ruleTests = Linter.version.startsWith('8')
+      ? tests
+      : {
+          valid: tests.valid.map(test => {
+            if (typeof test === 'string') {
+              return test;
+            }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { name, ...testCaseOptions } = test;
+            return testCaseOptions;
+          }),
+          invalid: tests.invalid.map(test => {
+            // ESLint 7 throws an error on CI - Unexpected top-level property "name"
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { name, ...testCaseOptions } = test;
+            return testCaseOptions;
+          }),
+        };
+    super.run(ruleId, rule as any, ruleTests);
+
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
     const hasOnlyTest = [...tests.valid, ...tests.invalid].some(t => typeof t !== 'string' && t.only);
 
-    for (const [index, testCase] of tests.valid.entries()) {
-      const { name, code, filename, only }: RuleTester.ValidTestCase =
-        typeof testCase === 'string' ? { code: testCase } : testCase;
-
-      if (hasOnlyTest && !only) {
-        continue;
-      }
-
-      const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
-      defineParser(linter, verifyConfig.parser);
-
-      const messages = linter.verify(code, verifyConfig, { filename });
-      const codeFrame = printCode(code, { line: 0, column: 0 });
-
-      it(name || `Valid #${index + 1}\n${codeFrame}`, () => {
-        expect(messages).toEqual([]);
-      });
-    }
+    // for (const [index, testCase] of tests.valid.entries()) {
+    //   const { name, code, filename, only }: RuleTester.ValidTestCase =
+    //     typeof testCase === 'string' ? { code: testCase } : testCase;
+    //
+    //   if (hasOnlyTest && !only) {
+    //     continue;
+    //   }
+    //
+    //   const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
+    //   defineParser(linter, verifyConfig.parser);
+    //
+    //   const messages = linter.verify(code, verifyConfig, { filename });
+    //   const codeFrame = printCode(code, { line: 0, column: 0 });
+    //
+    //   it(name || `Valid #${index + 1}\n${codeFrame}`, () => {
+    //     expect(messages).toEqual([]);
+    //   });
+    // }
 
     for (const [idx, testCase] of tests.invalid.entries()) {
       const { only, filename, options, name } = testCase;
@@ -92,16 +114,16 @@ export class GraphQLRuleTester {
       const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
 
-      const messages = linter.verify(code, verifyConfig, { filename });
-      const messageForSnapshot: string[] = [];
-      const hasMultipleMessages = messages.length > 1;
-      if (hasMultipleMessages) {
-        const codeFrame = printCode(code, { line: 0, column: 0 });
-        messageForSnapshot.push('##### ⌨️ Code', indentCode(codeFrame));
+      const messages = linter.verify(code, verifyConfig, filename);
+      if (messages.length === 0) {
+        throw new Error('Invalid case should have at least one error.');
       }
+      const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
+      const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
+
       if (options) {
         const opts = JSON.stringify(options, null, 2).slice(1, -1);
-        messageForSnapshot.push('##### ⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
+        messageForSnapshot.push('#### ⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
       }
 
       for (const [index, message] of messages.entries()) {
@@ -109,15 +131,15 @@ export class GraphQLRuleTester {
           throw new Error(message.message);
         }
 
-        const codeWithMessage = printCode(code, message, hasMultipleMessages ? 1 : undefined);
-        messageForSnapshot.push(printWithIndex('##### ❌ Error', index, messages.length), indentCode(codeWithMessage));
+        const codeWithMessage = printCode(code, message, 1);
+        messageForSnapshot.push(printWithIndex('#### ❌ Error', index, messages.length), indentCode(codeWithMessage));
 
         const { suggestions } = message;
 
         // Don't print suggestions in snapshots for too big codes
         if (suggestions && (code.match(/\n/g) || '').length < 1000) {
           for (const [i, suggestion] of message.suggestions.entries()) {
-            const title = printWithIndex('##### 💡 Suggestion', i, suggestions.length, suggestion.desc);
+            const title = printWithIndex('#### 💡 Suggestion', i, suggestions.length, suggestion.desc);
             const output = applyFix(code, suggestion.fix);
             const codeFrame = printCode(output, { line: 0, column: 0 });
             messageForSnapshot.push(title, indentCode(codeFrame, 2));
@@ -126,13 +148,12 @@ export class GraphQLRuleTester {
       }
 
       if (rule.meta.fixable) {
-        const { fixed, output } = linter.verifyAndFix(code, verifyConfig, { filename });
+        const { fixed, output } = linter.verifyAndFix(code, verifyConfig, filename);
         if (fixed) {
-          messageForSnapshot.push('##### 🔧 Autofix output', indentCode(printCode(output)));
+          messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
       it(name || `Invalid #${idx + 1}`, () => {
-        expect(messages).not.toEqual([]);
         expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
       });
     }

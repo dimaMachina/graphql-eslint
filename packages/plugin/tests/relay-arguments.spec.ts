@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/relay-arguments';
+import rule, { RelayArgumentsConfig } from '../src/rules/relay-arguments';
 
 const ruleTester = new GraphQLRuleTester();
 
@@ -16,7 +16,7 @@ function useSchema(code: string): { code: string; parserOptions: ParserOptions }
   };
 }
 
-ruleTester.runGraphQLTests('relay-arguments', rule, {
+ruleTester.runGraphQLTests<[RelayArgumentsConfig], true>('relay-arguments', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       type User {
@@ -28,6 +28,16 @@ ruleTester.runGraphQLTests('relay-arguments', rule, {
         ): PostConnection
       }
     `),
+    {
+      name: '`includeBoth` should not report about missing opposite pagination arguments',
+      options: [{ includeBoth: false }],
+      ...useSchema(/* GraphQL */ `
+        type User {
+          posts(after: String!, first: Int!): PostConnection
+          comments(before: Float, last: Int): PostConnection
+        }
+      `),
+    },
   ],
   invalid: [
     {
@@ -37,12 +47,22 @@ ruleTester.runGraphQLTests('relay-arguments', rule, {
           comments(after: [String!]!, first: Float, before: Query, last: [PostConnection]): PostConnection
         }
       `),
-      errors: 1,
+      errors: 5,
     },
     {
       ...useSchema(/* GraphQL */ `
         type User {
           posts(after: String, first: Int): PostConnection
+        }
+      `),
+      errors: 2,
+    },
+    {
+      name: 'should report about 2nd required argument if 1st was provided',
+      options: [{ includeBoth: false }],
+      ...useSchema(/* GraphQL */ `
+        type User {
+          posts(after: String, first: Int, before: Float): PostConnection
         }
       `),
       errors: 1,

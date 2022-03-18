@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should work only with Kind.FIELD 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 | scalar Foo @bad
+
+#### ⚙️ Options
 
     {
       "ignoreClientDirectives": [
@@ -9,7 +13,7 @@ exports[`should work only with Kind.FIELD 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
     > 1 | scalar Foo @bad
         |             ^^^ Unknown directive "@bad".

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Edge type must be Object type 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         type PageInfo
        2 |         type BConnection
@@ -27,35 +27,35 @@ exports[`Edge type must be Object type 1`] = `
       22 |           pageInfo: PageInfo!
       23 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "shouldImplementNode": false,
       "listTypeCanWrapOnlyEdgeType": false
     }
 
-##### ❌ Error 1/4
+#### ❌ Error 1/4
 
        8 |         type AConnection {
     >  9 |           edges: [AEdge]
          |                   ^^^^^ Edge type must be an Object type.
       10 |           pageInfo: PageInfo!
 
-##### ❌ Error 2/4
+#### ❌ Error 2/4
 
       12 |         extend type BConnection {
     > 13 |           edges: [BEdge!]
          |                   ^^^^^ Edge type must be an Object type.
       14 |           pageInfo: PageInfo!
 
-##### ❌ Error 3/4
+#### ❌ Error 3/4
 
       16 |         type CConnection {
     > 17 |           edges: [CEdge]!
          |                   ^^^^^ Edge type must be an Object type.
       18 |           pageInfo: PageInfo!
 
-##### ❌ Error 4/4
+#### ❌ Error 4/4
 
       20 |         extend type DConnection {
     > 21 |           edges: [DEdge!]!
@@ -64,7 +64,7 @@ exports[`Edge type must be Object type 1`] = `
 `;
 
 exports[`list type 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         type AEdge {
        2 |           node: Int!
@@ -80,34 +80,34 @@ exports[`list type 1`] = `
       12 |           posts: [Int!]!
       13 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "listTypeCanWrapOnlyEdgeType": true
     }
 
-##### ❌ Error 1/4
+#### ❌ Error 1/4
 
        8 |         type User {
     >  9 |           comments: [Int]
          |                     ^^^^ A list type should only wrap an edge type.
       10 |           likes: [Int!]
 
-##### ❌ Error 2/4
+#### ❌ Error 2/4
 
        9 |           comments: [Int]
     > 10 |           likes: [Int!]
          |                  ^^^^^ A list type should only wrap an edge type.
       11 |           messages: [Int]!
 
-##### ❌ Error 3/4
+#### ❌ Error 3/4
 
       10 |           likes: [Int!]
     > 11 |           messages: [Int]!
          |                     ^^^^^ A list type should only wrap an edge type.
       12 |           posts: [Int!]!
 
-##### ❌ Error 4/4
+#### ❌ Error 4/4
 
       11 |           messages: [Int]!
     > 12 |           posts: [Int!]!
@@ -116,29 +116,35 @@ exports[`list type 1`] = `
 `;
 
 exports[`should implements Node 1`] = `
-##### ⚙️ Options
-
-    {
-      "shouldImplementNode": true
-    }
-
-##### ❌ Error
+#### ⌨️ Code
 
        1 |         type User {
        2 |           id: ID!
        3 |         }
-    >  4 |         type AEdge {
-         |              ^^^^^ Edge type's field \`node\` must implement \`Node\` interface.
+       4 |         type AEdge {
        5 |           node: User!
        6 |           cursor: String!
        7 |         }
        8 |         type AConnection {
        9 |           edges: [AEdge]
       10 |         }
+
+#### ⚙️ Options
+
+    {
+      "shouldImplementNode": true
+    }
+
+#### ❌ Error
+
+      3 |         }
+    > 4 |         type AEdge {
+        |              ^^^^^ Edge type's field \`node\` must implement \`Node\` interface.
+      5 |           node: User!
 `;
 
 exports[`should report cursor when list is used 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         type PageInfo
       2 |         type AEdge {
@@ -150,21 +156,21 @@ exports[`should report cursor when list is used 1`] = `
       8 |           pageInfo: PageInfo!
       9 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "shouldImplementNode": false,
       "listTypeCanWrapOnlyEdgeType": false
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |         type AEdge {
     > 3 |           node: [PageInfo!]!
         |           ^^^^ Field \`node\` must return either a Scalar, Enum, Object, Interface, Union, or a non-null wrapper around one of those types.
       4 |           cursor: [PageInfo!]!
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       3 |           node: [PageInfo!]!
     > 4 |           cursor: [PageInfo!]!
@@ -173,7 +179,7 @@ exports[`should report cursor when list is used 1`] = `
 `;
 
 exports[`should report when fields is missing 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         type PageInfo
       2 |         type AEdge
@@ -182,14 +188,14 @@ exports[`should report when fields is missing 1`] = `
       5 |           pageInfo: PageInfo!
       6 |         }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       1 |         type PageInfo
     > 2 |         type AEdge
         |              ^^^^^ Edge type must contain a field \`node\` that return either a Scalar, Enum, Object, Interface, Union, or a non-null wrapper around one of those types.
       3 |         type AConnection {
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       1 |         type PageInfo
     > 2 |         type AEdge
@@ -198,21 +204,27 @@ exports[`should report when fields is missing 1`] = `
 `;
 
 exports[`should report when without Edge suffix 1`] = `
-##### ⚙️ Options
-
-    {
-      "withEdgeSuffix": true
-    }
-
-##### ❌ Error
+#### ⌨️ Code
 
       1 |         scalar Email
-    > 2 |         type Aedge {
-        |              ^^^^^ Edge type must have "Edge" suffix.
+      2 |         type Aedge {
       3 |           node: Email!
       4 |           cursor: Email!
       5 |         }
       6 |         type AConnection {
       7 |           edges: [Aedge]
       8 |         }
+
+#### ⚙️ Options
+
+    {
+      "withEdgeSuffix": true
+    }
+
+#### ❌ Error
+
+      1 |         scalar Email
+    > 2 |         type Aedge {
+        |              ^^^^^ Edge type must have "Edge" suffix.
+      3 |           node: Email!
 `;

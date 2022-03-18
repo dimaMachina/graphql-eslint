@@ -1,161 +1,165 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | type b { test: String }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "types": "PascalCase",
       "FieldDefinition": "PascalCase"
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
     > 1 | type b { test: String }
         |      ^ Type "b" should be in PascalCase format
 
-##### 💡 Suggestion: Rename to \`B\`
+#### 💡 Suggestion: Rename to \`B\`
 
     1 | type B { test: String }
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
     > 1 | type b { test: String }
         |          ^^^^ Field "test" should be in PascalCase format
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
     1 | type b { Test: String }
 `;
 
 exports[`Invalid #2 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | type __b { test__: String }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "allowLeadingUnderscore": false,
       "allowTrailingUnderscore": false
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
     > 1 | type __b { test__: String }
         |      ^^^ Leading underscores are not allowed
 
-##### 💡 Suggestion: Rename to \`b\`
+#### 💡 Suggestion: Rename to \`b\`
 
     1 | type b { test__: String }
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
     > 1 | type __b { test__: String }
         |            ^^^^^^ Trailing underscores are not allowed
 
-##### 💡 Suggestion: Rename to \`test\`
+#### 💡 Suggestion: Rename to \`test\`
 
     1 | type __b { test: String }
 `;
 
 exports[`Invalid #3 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 | scalar BSONDecimal
+
+#### ⚙️ Options
 
     {
       "ScalarTypeDefinition": "snake_case"
     }
 
-##### ❌ Error
+#### ❌ Error
 
     > 1 | scalar BSONDecimal
         |        ^^^^^^^^^^^ Scalar "BSONDecimal" should be in snake_case format
 
-##### 💡 Suggestion: Rename to \`bson_decimal\`
+#### 💡 Suggestion: Rename to \`bson_decimal\`
 
     1 | scalar bson_decimal
 `;
 
 exports[`Invalid #5 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | enum B { test }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "EnumTypeDefinition": "camelCase",
       "EnumValueDefinition": "UPPER_CASE"
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
     > 1 | enum B { test }
         |      ^ Enumerator "B" should be in camelCase format
 
-##### 💡 Suggestion: Rename to \`b\`
+#### 💡 Suggestion: Rename to \`b\`
 
     1 | enum b { test }
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
     > 1 | enum B { test }
         |          ^^^^ Enumeration value "test" should be in UPPER_CASE format
 
-##### 💡 Suggestion: Rename to \`TEST\`
+#### 💡 Suggestion: Rename to \`TEST\`
 
     1 | enum B { TEST }
 `;
 
 exports[`Invalid #6 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | input test { _Value: String }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "types": "PascalCase",
       "InputValueDefinition": "snake_case"
     }
 
-##### ❌ Error 1/3
+#### ❌ Error 1/3
 
     > 1 | input test { _Value: String }
         |       ^^^^ Input type "test" should be in PascalCase format
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
     1 | input Test { _Value: String }
 
-##### ❌ Error 2/3
+#### ❌ Error 2/3
 
     > 1 | input test { _Value: String }
         |              ^^^^^^ Input property "_Value" should be in snake_case format
 
-##### 💡 Suggestion: Rename to \`_value\`
+#### 💡 Suggestion: Rename to \`_value\`
 
     1 | input test { _value: String }
 
-##### ❌ Error 3/3
+#### ❌ Error 3/3
 
     > 1 | input test { _Value: String }
         |              ^^^^^^ Leading underscores are not allowed
 
-##### 💡 Suggestion: Rename to \`Value\`
+#### 💡 Suggestion: Rename to \`Value\`
 
     1 | input test { Value: String }
 `;
 
 exports[`Invalid #7 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "ObjectTypeDefinition": {
@@ -171,49 +175,49 @@ exports[`Invalid #7 1`] = `
       }
     }
 
-##### ❌ Error 1/4
+#### ❌ Error 1/4
 
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |      ^^^^^^^ Type "TypeOne" should be in camelCase format
 
-##### 💡 Suggestion: Rename to \`typeOne\`
+#### 💡 Suggestion: Rename to \`typeOne\`
 
     1 | type typeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
 
-##### ❌ Error 2/4
+#### ❌ Error 2/4
 
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |                ^^^^^^ Field "aField" should have "AAA" suffix
 
-##### 💡 Suggestion: Rename to \`aFieldAAA\`
+#### 💡 Suggestion: Rename to \`aFieldAAA\`
 
     1 | type TypeOne { aFieldAAA: String } enum Z { VALUE_ONE VALUE_TWO }
 
-##### ❌ Error 3/4
+#### ❌ Error 3/4
 
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |                                          ^^^^^^^^^ Enumeration value "VALUE_ONE" should have "ENUM" suffix
 
-##### 💡 Suggestion: Rename to \`VALUE_ONEENUM\`
+#### 💡 Suggestion: Rename to \`VALUE_ONEENUM\`
 
     1 | type TypeOne { aField: String } enum Z { VALUE_ONEENUM VALUE_TWO }
 
-##### ❌ Error 4/4
+#### ❌ Error 4/4
 
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
         |                                                    ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" suffix
 
-##### 💡 Suggestion: Rename to \`VALUE_TWOENUM\`
+#### 💡 Suggestion: Rename to \`VALUE_TWOENUM\`
 
     1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWOENUM }
 `;
 
 exports[`Invalid #8 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "ObjectTypeDefinition": {
@@ -229,40 +233,40 @@ exports[`Invalid #8 1`] = `
       }
     }
 
-##### ❌ Error 1/3
+#### ❌ Error 1/3
 
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
         |            ^^^^^^ Field "aField" should have "Field" prefix
 
-##### 💡 Suggestion: Rename to \`FieldaField\`
+#### 💡 Suggestion: Rename to \`FieldaField\`
 
     1 | type One { FieldaField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
 
-##### ❌ Error 2/3
+#### ❌ Error 2/3
 
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
         |                                      ^^^^^^^^^^^^^^^^ Enumeration value "A_ENUM_VALUE_ONE" should have "ENUM" prefix
 
-##### 💡 Suggestion: Rename to \`ENUMA_ENUM_VALUE_ONE\`
+#### 💡 Suggestion: Rename to \`ENUMA_ENUM_VALUE_ONE\`
 
     1 | type One { aField: String } enum Z { ENUMA_ENUM_VALUE_ONE VALUE_TWO }
 
-##### ❌ Error 3/3
+#### ❌ Error 3/3
 
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
         |                                                       ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" prefix
 
-##### 💡 Suggestion: Rename to \`ENUMVALUE_TWO\`
+#### 💡 Suggestion: Rename to \`ENUMVALUE_TWO\`
 
     1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE ENUMVALUE_TWO }
 `;
 
 exports[`Invalid #9 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "ObjectTypeDefinition": {
@@ -290,58 +294,58 @@ exports[`Invalid #9 1`] = `
       }
     }
 
-##### ❌ Error 1/5
+#### ❌ Error 1/5
 
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |      ^^^ Type "One" should not have "On" prefix
 
-##### 💡 Suggestion: Rename to \`e\`
+#### 💡 Suggestion: Rename to \`e\`
 
     1 | type e { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
 
-##### ❌ Error 2/5
+#### ❌ Error 2/5
 
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |            ^^^^^^ Field "getFoo" should not have "Foo" suffix
 
-##### 💡 Suggestion: Rename to \`get\`
+#### 💡 Suggestion: Rename to \`get\`
 
     1 | type One { get: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
 
-##### ❌ Error 3/5
+#### ❌ Error 3/5
 
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |                                                            ^^^^ Field "getA" should not have "get" prefix
 
-##### 💡 Suggestion: Rename to \`A\`
+#### 💡 Suggestion: Rename to \`A\`
 
     1 | type One { getFoo: String, queryBar: String } type Query { A(id: ID!): String, queryB: String } extend type Query { getC: String }
 
-##### ❌ Error 4/5
+#### ❌ Error 4/5
 
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |                                                                                   ^^^^^^ Field "queryB" should not have "query" prefix
 
-##### 💡 Suggestion: Rename to \`B\`
+#### 💡 Suggestion: Rename to \`B\`
 
     1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, B: String } extend type Query { getC: String }
 
-##### ❌ Error 5/5
+#### ❌ Error 5/5
 
     > 1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
         |                                                                                                                        ^^^^ Field "getC" should not have "get" prefix
 
-##### 💡 Suggestion: Rename to \`C\`
+#### 💡 Suggestion: Rename to \`C\`
 
     1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { C: String }
 `;
 
 exports[`Invalid #10 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | query Foo { foo } query getBar { bar }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "OperationDefinition": {
@@ -352,27 +356,27 @@ exports[`Invalid #10 1`] = `
       }
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
     > 1 | query Foo { foo } query getBar { bar }
         |       ^^^ Operation "Foo" should be in camelCase format
 
-##### 💡 Suggestion: Rename to \`foo\`
+#### 💡 Suggestion: Rename to \`foo\`
 
     1 | query foo { foo } query getBar { bar }
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
     > 1 | query Foo { foo } query getBar { bar }
         |                         ^^^^^^ Operation "getBar" should not have "get" prefix
 
-##### 💡 Suggestion: Rename to \`Bar\`
+#### 💡 Suggestion: Rename to \`Bar\`
 
     1 | query Foo { foo } query Bar { bar }
 `;
 
 exports[`large graphql file 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 | input _idOperatorsFilterFindManyUserInput {
        2 |   gt: MongoID
@@ -1484,7 +1488,7 @@ exports[`large graphql file 1`] = `
       1108 |   pageInfo: PaginationInfo!
       1109 | }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "allowLeadingUnderscore": true,
@@ -1494,188 +1498,188 @@ exports[`large graphql file 1`] = `
       "FragmentDefinition": "PascalCase"
     }
 
-##### ❌ Error 1/27
+#### ❌ Error 1/27
 
     > 1 | input _idOperatorsFilterFindManyUserInput {
         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format
       2 |   gt: MongoID
 
-##### ❌ Error 2/27
+#### ❌ Error 2/27
 
       10 |
     > 11 | input _idOperatorsFilterFindOneUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format
       12 |   gt: MongoID
 
-##### ❌ Error 3/27
+#### ❌ Error 3/27
 
       20 |
     > 21 | input _idOperatorsFilterRemoveManyUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format
       22 |   gt: MongoID
 
-##### ❌ Error 4/27
+#### ❌ Error 4/27
 
       30 |
     > 31 | input _idOperatorsFilterRemoveOneUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format
       32 |   gt: MongoID
 
-##### ❌ Error 5/27
+#### ❌ Error 5/27
 
       40 |
     > 41 | input _idOperatorsFilterUpdateManyUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format
       42 |   gt: MongoID
 
-##### ❌ Error 6/27
+#### ❌ Error 6/27
 
       50 |
     > 51 | input _idOperatorsFilterUpdateOneUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format
       52 |   gt: MongoID
 
-##### ❌ Error 7/27
+#### ❌ Error 7/27
 
       60 |
     > 61 | input _idOperatorsFilterUserInput {
          |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUserInput" should be in PascalCase format
       62 |   gt: MongoID
 
-##### ❌ Error 8/27
+#### ❌ Error 8/27
 
       207 | enum EnumUserGender {
     > 208 |   male
           |   ^^^^ Enumeration value "male" should be in UPPER_CASE format
       209 |   female
 
-##### ❌ Error 9/27
+#### ❌ Error 9/27
 
       208 |   male
     > 209 |   female
           |   ^^^^^^ Enumeration value "female" should be in UPPER_CASE format
       210 |   ladyboy
 
-##### ❌ Error 10/27
+#### ❌ Error 10/27
 
       209 |   female
     > 210 |   ladyboy
           |   ^^^^^^^ Enumeration value "ladyboy" should be in UPPER_CASE format
       211 | }
 
-##### ❌ Error 11/27
+#### ❌ Error 11/27
 
       213 | enum EnumUserLanguagesSkill {
     > 214 |   basic
           |   ^^^^^ Enumeration value "basic" should be in UPPER_CASE format
       215 |   fluent
 
-##### ❌ Error 12/27
+#### ❌ Error 12/27
 
       214 |   basic
     > 215 |   fluent
           |   ^^^^^^ Enumeration value "fluent" should be in UPPER_CASE format
       216 |   native
 
-##### ❌ Error 13/27
+#### ❌ Error 13/27
 
       215 |   fluent
     > 216 |   native
           |   ^^^^^^ Enumeration value "native" should be in UPPER_CASE format
       217 | }
 
-##### ❌ Error 14/27
+#### ❌ Error 14/27
 
       238 |   _operators: OperatorsFilterFindManyUserInput
     > 239 |   OR: [FilterFindManyUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       240 |   AND: [FilterFindManyUserInput!]
 
-##### ❌ Error 15/27
+#### ❌ Error 15/27
 
       239 |   OR: [FilterFindManyUserInput!]
     > 240 |   AND: [FilterFindManyUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
       241 |
 
-##### ❌ Error 16/27
+#### ❌ Error 16/27
 
       267 |   _operators: OperatorsFilterFindOneUserInput
     > 268 |   OR: [FilterFindOneUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       269 |   AND: [FilterFindOneUserInput!]
 
-##### ❌ Error 17/27
+#### ❌ Error 17/27
 
       268 |   OR: [FilterFindOneUserInput!]
     > 269 |   AND: [FilterFindOneUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
       270 | }
 
-##### ❌ Error 18/27
+#### ❌ Error 18/27
 
       291 |   _operators: OperatorsFilterRemoveManyUserInput
     > 292 |   OR: [FilterRemoveManyUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       293 |   AND: [FilterRemoveManyUserInput!]
 
-##### ❌ Error 19/27
+#### ❌ Error 19/27
 
       292 |   OR: [FilterRemoveManyUserInput!]
     > 293 |   AND: [FilterRemoveManyUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
       294 | }
 
-##### ❌ Error 20/27
+#### ❌ Error 20/27
 
       315 |   _operators: OperatorsFilterRemoveOneUserInput
     > 316 |   OR: [FilterRemoveOneUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       317 |   AND: [FilterRemoveOneUserInput!]
 
-##### ❌ Error 21/27
+#### ❌ Error 21/27
 
       316 |   OR: [FilterRemoveOneUserInput!]
     > 317 |   AND: [FilterRemoveOneUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
       318 | }
 
-##### ❌ Error 22/27
+#### ❌ Error 22/27
 
       339 |   _operators: OperatorsFilterUpdateManyUserInput
     > 340 |   OR: [FilterUpdateManyUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       341 |   AND: [FilterUpdateManyUserInput!]
 
-##### ❌ Error 23/27
+#### ❌ Error 23/27
 
       340 |   OR: [FilterUpdateManyUserInput!]
     > 341 |   AND: [FilterUpdateManyUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
       342 | }
 
-##### ❌ Error 24/27
+#### ❌ Error 24/27
 
       363 |   _operators: OperatorsFilterUpdateOneUserInput
     > 364 |   OR: [FilterUpdateOneUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       365 |   AND: [FilterUpdateOneUserInput!]
 
-##### ❌ Error 25/27
+#### ❌ Error 25/27
 
       364 |   OR: [FilterUpdateOneUserInput!]
     > 365 |   AND: [FilterUpdateOneUserInput!]
           |   ^^^ Input property "AND" should be in camelCase format
       366 | }
 
-##### ❌ Error 26/27
+#### ❌ Error 26/27
 
       387 |   _operators: OperatorsFilterUserInput
     > 388 |   OR: [FilterUserInput!]
           |   ^^ Input property "OR" should be in camelCase format
       389 |   AND: [FilterUserInput!]
 
-##### ❌ Error 27/27
+#### ❌ Error 27/27
 
       388 |   OR: [FilterUserInput!]
     > 389 |   AND: [FilterUserInput!]
@@ -1684,7 +1688,7 @@ exports[`large graphql file 1`] = `
 `;
 
 exports[`operations-recommended config 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         query TestQuery { test }
        2 |         query QueryTest { test }
@@ -1700,7 +1704,7 @@ exports[`operations-recommended config 1`] = `
       12 |         fragment TestFragment on Test { id }
       13 |         fragment FragmentTest on Test { id }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "VariableDefinition": "camelCase",
@@ -1729,13 +1733,13 @@ exports[`operations-recommended config 1`] = `
       }
     }
 
-##### ❌ Error 1/9
+#### ❌ Error 1/9
 
     > 1 |         query TestQuery { test }
         |               ^^^^^^^^^ Operation "TestQuery" should not have "Query" suffix
       2 |         query QueryTest { test }
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query Test { test }
      2 |         query QueryTest { test }
@@ -1751,14 +1755,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 2/9
+#### ❌ Error 2/9
 
       1 |         query TestQuery { test }
     > 2 |         query QueryTest { test }
         |               ^^^^^^^^^ Operation "QueryTest" should not have "Query" prefix
       3 |         query GetQuery { test }
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query Test { test }
@@ -1774,14 +1778,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 3/9
+#### ❌ Error 3/9
 
       2 |         query QueryTest { test }
     > 3 |         query GetQuery { test }
         |               ^^^^^^^^ Operation "GetQuery" should not have "Get" prefix
       4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
 
-##### 💡 Suggestion: Rename to \`Query\`
+#### 💡 Suggestion: Rename to \`Query\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1797,14 +1801,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 4/9
+#### ❌ Error 4/9
 
       5 |
     > 6 |         mutation TestMutation { test }
         |                  ^^^^^^^^^^^^ Operation "TestMutation" should not have "Mutation" suffix
       7 |         mutation MutationTest { test }
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1820,14 +1824,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 5/9
+#### ❌ Error 5/9
 
       6 |         mutation TestMutation { test }
     > 7 |         mutation MutationTest { test }
         |                  ^^^^^^^^^^^^ Operation "MutationTest" should not have "Mutation" prefix
       8 |
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1843,14 +1847,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 6/9
+#### ❌ Error 6/9
 
        8 |
     >  9 |         subscription TestSubscription { test }
          |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
       10 |         subscription SubscriptionTest { test }
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1866,14 +1870,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 7/9
+#### ❌ Error 7/9
 
        9 |         subscription TestSubscription { test }
     > 10 |         subscription SubscriptionTest { test }
          |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
       11 |
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1889,14 +1893,14 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment TestFragment on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 8/9
+#### ❌ Error 8/9
 
       11 |
     > 12 |         fragment TestFragment on Test { id }
          |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
       13 |         fragment FragmentTest on Test { id }
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1912,13 +1916,13 @@ exports[`operations-recommended config 1`] = `
     12 |         fragment Test on Test { id }
     13 |         fragment FragmentTest on Test { id }
 
-##### ❌ Error 9/9
+#### ❌ Error 9/9
 
       12 |         fragment TestFragment on Test { id }
     > 13 |         fragment FragmentTest on Test { id }
          |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not have "Fragment" prefix
 
-##### 💡 Suggestion: Rename to \`Test\`
+#### 💡 Suggestion: Rename to \`Test\`
 
      1 |         query TestQuery { test }
      2 |         query QueryTest { test }
@@ -1936,7 +1940,7 @@ exports[`operations-recommended config 1`] = `
 `;
 
 exports[`schema-recommended config 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         type Query {
        2 |           fieldQuery: ID
@@ -1954,7 +1958,7 @@ exports[`schema-recommended config 1`] = `
       14 |           subscriptionField: ID
       15 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "types": "PascalCase",
@@ -1990,14 +1994,14 @@ exports[`schema-recommended config 1`] = `
       }
     }
 
-##### ❌ Error 1/7
+#### ❌ Error 1/7
 
       1 |         type Query {
     > 2 |           fieldQuery: ID
         |           ^^^^^^^^^^ Field "fieldQuery" should not have "Query" suffix
       3 |           queryField: ID
 
-##### 💡 Suggestion: Rename to \`field\`
+#### 💡 Suggestion: Rename to \`field\`
 
      1 |         type Query {
      2 |           field: ID
@@ -2015,14 +2019,14 @@ exports[`schema-recommended config 1`] = `
     14 |           subscriptionField: ID
     15 |         }
 
-##### ❌ Error 2/7
+#### ❌ Error 2/7
 
       2 |           fieldQuery: ID
     > 3 |           queryField: ID
         |           ^^^^^^^^^^ Field "queryField" should not have "query" prefix
       4 |           getField: ID
 
-##### 💡 Suggestion: Rename to \`Field\`
+#### 💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -2040,14 +2044,14 @@ exports[`schema-recommended config 1`] = `
     14 |           subscriptionField: ID
     15 |         }
 
-##### ❌ Error 3/7
+#### ❌ Error 3/7
 
       3 |           queryField: ID
     > 4 |           getField: ID
         |           ^^^^^^^^ Field "getField" should not have "get" prefix
       5 |         }
 
-##### 💡 Suggestion: Rename to \`Field\`
+#### 💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -2065,14 +2069,14 @@ exports[`schema-recommended config 1`] = `
     14 |           subscriptionField: ID
     15 |         }
 
-##### ❌ Error 4/7
+#### ❌ Error 4/7
 
       7 |         type Mutation {
     > 8 |           fieldMutation: ID
         |           ^^^^^^^^^^^^^ Field "fieldMutation" should not have "Mutation" suffix
       9 |           mutationField: ID
 
-##### 💡 Suggestion: Rename to \`field\`
+#### 💡 Suggestion: Rename to \`field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -2090,14 +2094,14 @@ exports[`schema-recommended config 1`] = `
     14 |           subscriptionField: ID
     15 |         }
 
-##### ❌ Error 5/7
+#### ❌ Error 5/7
 
        8 |           fieldMutation: ID
     >  9 |           mutationField: ID
          |           ^^^^^^^^^^^^^ Field "mutationField" should not have "mutation" prefix
       10 |         }
 
-##### 💡 Suggestion: Rename to \`Field\`
+#### 💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -2115,14 +2119,14 @@ exports[`schema-recommended config 1`] = `
     14 |           subscriptionField: ID
     15 |         }
 
-##### ❌ Error 6/7
+#### ❌ Error 6/7
 
       12 |         type Subscription {
     > 13 |           fieldSubscription: ID
          |           ^^^^^^^^^^^^^^^^^ Field "fieldSubscription" should not have "Subscription" suffix
       14 |           subscriptionField: ID
 
-##### 💡 Suggestion: Rename to \`field\`
+#### 💡 Suggestion: Rename to \`field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -2140,14 +2144,14 @@ exports[`schema-recommended config 1`] = `
     14 |           subscriptionField: ID
     15 |         }
 
-##### ❌ Error 7/7
+#### ❌ Error 7/7
 
       13 |           fieldSubscription: ID
     > 14 |           subscriptionField: ID
          |           ^^^^^^^^^^^^^^^^^ Field "subscriptionField" should not have "subscription" prefix
       15 |         }
 
-##### 💡 Suggestion: Rename to \`Field\`
+#### 💡 Suggestion: Rename to \`Field\`
 
      1 |         type Query {
      2 |           fieldQuery: ID
@@ -2167,7 +2171,7 @@ exports[`schema-recommended config 1`] = `
 `;
 
 exports[`should ignore selections fields but check alias renaming 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         {
       2 |           test {
@@ -2178,14 +2182,14 @@ exports[`should ignore selections fields but check alias renaming 1`] = `
       7 |           }
       8 |         }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |           test {
     > 3 |             _badAlias: foo
         |             ^^^^^^^^^ Leading underscores are not allowed
       4 |             badAlias_: bar
 
-##### 💡 Suggestion: Rename to \`badAlias\`
+#### 💡 Suggestion: Rename to \`badAlias\`
 
     1 |         {
     2 |           test {
@@ -2196,14 +2200,14 @@ exports[`should ignore selections fields but check alias renaming 1`] = `
     7 |           }
     8 |         }
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       3 |             _badAlias: foo
     > 4 |             badAlias_: bar
         |             ^^^^^^^^^ Trailing underscores are not allowed
       5 |             _ok
 
-##### 💡 Suggestion: Rename to \`badAlias\`
+#### 💡 Suggestion: Rename to \`badAlias\`
 
     1 |         {
     2 |           test {

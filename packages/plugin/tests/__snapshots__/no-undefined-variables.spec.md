@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 | query User {
       2 |   user {
@@ -10,14 +10,14 @@ exports[`Invalid #1 1`] = `
       5 |   }
       6 | }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |   user {
     > 3 |     id
         |       ^ Variable "$limit" is not defined by operation "User".
       4 |     ...UserFields
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       2 |   user {
     > 3 |     id

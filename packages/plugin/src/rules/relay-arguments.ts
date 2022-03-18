@@ -1,4 +1,4 @@
-import { FieldDefinitionNode, InputValueDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
+import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-parser';
 import { requireGraphQLSchemaFromContext } from '../utils';
@@ -6,9 +6,9 @@ import { requireGraphQLSchemaFromContext } from '../utils';
 const RULE_ID = 'relay-arguments';
 const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
 
-type RelayArgumentsConfig = { includeBoth?: boolean };
+export type RelayArgumentsConfig = { includeBoth?: boolean };
 
-const rule: GraphQLESLintRule<[RelayArgumentsConfig]> = {
+const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -95,9 +95,6 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig]> = {
         function checkField(typeName: 'String' | 'Int', argumentName: 'first' | 'last' | 'after' | 'before'): void {
           const argument = args[argumentName];
           const hasArgument = Boolean(argument);
-          if (!includeBoth && !hasArgument) {
-            return;
-          }
           let type = argument as any;
           if (hasArgument && type.gqlType.kind === Kind.NON_NULL_TYPE) {
             type = type.gqlType;
@@ -119,10 +116,14 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig]> = {
           }
         }
 
-        checkField('Int', 'first');
-        checkField('Int', 'last');
-        checkField('String', 'after');
-        checkField('String', 'before');
+        if (includeBoth || args.first || args.after) {
+          checkField('Int', 'first');
+          checkField('String', 'after');
+        }
+        if (includeBoth || args.last || args.before) {
+          checkField('Int', 'last');
+          checkField('String', 'before');
+        }
       },
     };
   },

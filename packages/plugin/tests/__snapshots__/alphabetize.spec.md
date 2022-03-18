@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         type User {
       2 |           password: String
@@ -10,7 +10,7 @@ exports[`Invalid #1 1`] = `
       5 |           lastName: String!
       6 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "fields": [
@@ -18,21 +18,21 @@ exports[`Invalid #1 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |           password: String
     > 3 |           firstName: String!
         |           ^^^^^^^^^ \`firstName\` should be before \`password\`.
       4 |           age: Int
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       3 |           firstName: String!
     > 4 |           age: Int
         |           ^^^ \`age\` should be before \`firstName\`.
       5 |           lastName: String!
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         type User {
       2 |           age: Int
@@ -43,7 +43,16 @@ exports[`Invalid #1 1`] = `
 `;
 
 exports[`Invalid #2 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 |         extend type User {
+      2 |           age: Int
+      3 |           firstName: String!
+      4 |           password: String
+      5 |           lastName: String!
+      6 |         }
+
+#### ⚙️ Options
 
     {
       "fields": [
@@ -51,17 +60,14 @@ exports[`Invalid #2 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
-      1 |         extend type User {
-      2 |           age: Int
-      3 |           firstName: String!
       4 |           password: String
     > 5 |           lastName: String!
         |           ^^^^^^^^ \`lastName\` should be before \`password\`.
       6 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         extend type User {
       2 |           age: Int
@@ -72,7 +78,7 @@ exports[`Invalid #2 1`] = `
 `;
 
 exports[`Invalid #3 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         interface Test {
       2 |           cc: Int
@@ -80,7 +86,7 @@ exports[`Invalid #3 1`] = `
       4 |           aa: Int
       5 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "fields": [
@@ -88,21 +94,21 @@ exports[`Invalid #3 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |           cc: Int
     > 3 |           bb: Int
         |           ^^ \`bb\` should be before \`cc\`.
       4 |           aa: Int
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       3 |           bb: Int
     > 4 |           aa: Int
         |           ^^ \`aa\` should be before \`bb\`.
       5 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         interface Test {
       2 |           aa: Int
@@ -112,7 +118,7 @@ exports[`Invalid #3 1`] = `
 `;
 
 exports[`Invalid #4 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         input UserInput {
       2 |           password: String
@@ -121,7 +127,7 @@ exports[`Invalid #4 1`] = `
       5 |           lastName: String!
       6 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "fields": [
@@ -129,21 +135,21 @@ exports[`Invalid #4 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |           password: String
     > 3 |           firstName: String!
         |           ^^^^^^^^^ \`firstName\` should be before \`password\`.
       4 |           age: Int
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       3 |           firstName: String!
     > 4 |           age: Int
         |           ^^^ \`age\` should be before \`firstName\`.
       5 |           lastName: String!
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         input UserInput {
       2 |           age: Int
@@ -154,7 +160,16 @@ exports[`Invalid #4 1`] = `
 `;
 
 exports[`Invalid #5 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 |         extend input UserInput {
+      2 |           age: Int
+      3 |           firstName: String!
+      4 |           password: String
+      5 |           lastName: String!
+      6 |         }
+
+#### ⚙️ Options
 
     {
       "fields": [
@@ -162,17 +177,14 @@ exports[`Invalid #5 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
-      1 |         extend input UserInput {
-      2 |           age: Int
-      3 |           firstName: String!
       4 |           password: String
     > 5 |           lastName: String!
         |           ^^^^^^^^ \`lastName\` should be before \`password\`.
       6 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         extend input UserInput {
       2 |           age: Int
@@ -183,7 +195,7 @@ exports[`Invalid #5 1`] = `
 `;
 
 exports[`Invalid #6 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         enum Role {
       2 |           SUPER_ADMIN
@@ -192,7 +204,7 @@ exports[`Invalid #6 1`] = `
       5 |           GOD
       6 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "values": [
@@ -200,21 +212,21 @@ exports[`Invalid #6 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |           SUPER_ADMIN
     > 3 |           ADMIN
         |           ^^^^^ \`ADMIN\` should be before \`SUPER_ADMIN\`.
       4 |           USER
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       4 |           USER
     > 5 |           GOD
         |           ^^^ \`GOD\` should be before \`USER\`.
       6 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         enum Role {
       2 |           ADMIN
@@ -225,7 +237,16 @@ exports[`Invalid #6 1`] = `
 `;
 
 exports[`Invalid #7 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 |         extend enum Role {
+      2 |           ADMIN
+      3 |           SUPER_ADMIN
+      4 |           GOD
+      5 |           USER
+      6 |         }
+
+#### ⚙️ Options
 
     {
       "values": [
@@ -233,17 +254,14 @@ exports[`Invalid #7 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
-      1 |         extend enum Role {
-      2 |           ADMIN
       3 |           SUPER_ADMIN
     > 4 |           GOD
         |           ^^^ \`GOD\` should be before \`SUPER_ADMIN\`.
       5 |           USER
-      6 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         extend enum Role {
       2 |           ADMIN
@@ -254,11 +272,11 @@ exports[`Invalid #7 1`] = `
 `;
 
 exports[`Invalid #8 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "arguments": [
@@ -266,29 +284,29 @@ exports[`Invalid #8 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
     > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
         |                                     ^^ \`bb\` should be before \`cc\`.
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
     > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
         |                                                ^^ \`aa\` should be before \`bb\`.
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         directive @test(aa: Aa!, bb: [Bb!], cc: [Cc!]!) on FIELD_DEFINITION
 `;
 
 exports[`Invalid #9 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         type Query {
       2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
       3 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "arguments": [
@@ -296,21 +314,21 @@ exports[`Invalid #9 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       1 |         type Query {
     > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
         |                            ^^ \`bb\` should be before \`cc\`.
       3 |         }
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       1 |         type Query {
     > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
         |                                       ^^ \`aa\` should be before \`bb\`.
       3 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         type Query {
       2 |           test(aa: Aa!, bb: [Bb!], cc: [Cc!]!): Int
@@ -318,7 +336,7 @@ exports[`Invalid #9 1`] = `
 `;
 
 exports[`Invalid #10 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         fragment TestFields on Test {
       2 |           cc
@@ -326,7 +344,7 @@ exports[`Invalid #10 1`] = `
       4 |           aa
       5 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "selections": [
@@ -334,21 +352,21 @@ exports[`Invalid #10 1`] = `
       ]
     }
 
-##### ❌ Error 1/2
+#### ❌ Error 1/2
 
       2 |           cc
     > 3 |           bb
         |           ^^ \`bb\` should be before \`cc\`.
       4 |           aa
 
-##### ❌ Error 2/2
+#### ❌ Error 2/2
 
       3 |           bb
     > 4 |           aa
         |           ^^ \`aa\` should be before \`bb\`.
       5 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         fragment TestFields on Test {
       2 |           aa
@@ -358,7 +376,7 @@ exports[`Invalid #10 1`] = `
 `;
 
 exports[`Invalid #11 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         query {
        2 |           test {
@@ -373,7 +391,7 @@ exports[`Invalid #11 1`] = `
       11 |           }
       12 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "selections": [
@@ -381,35 +399,35 @@ exports[`Invalid #11 1`] = `
       ]
     }
 
-##### ❌ Error 1/4
+#### ❌ Error 1/4
 
       5 |               ccc
     > 6 |               bbb
         |               ^^^ \`bbb\` should be before \`ccc\`.
       7 |               aaa
 
-##### ❌ Error 2/4
+#### ❌ Error 2/4
 
       6 |               bbb
     > 7 |               aaa
         |               ^^^ \`aaa\` should be before \`bbb\`.
       8 |             }
 
-##### ❌ Error 3/4
+#### ❌ Error 3/4
 
        8 |             }
     >  9 |             bb
          |             ^^ \`bb\` should be before inline fragment.
       10 |             aa
 
-##### ❌ Error 4/4
+#### ❌ Error 4/4
 
        9 |             bb
     > 10 |             aa
          |             ^^ \`aa\` should be before \`bb\`.
       11 |           }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
        1 |         query {
        2 |           test {
@@ -426,7 +444,7 @@ exports[`Invalid #11 1`] = `
 `;
 
 exports[`Invalid #12 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
       1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
@@ -434,7 +452,7 @@ exports[`Invalid #12 1`] = `
       4 |           }
       5 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "variables": [
@@ -445,33 +463,33 @@ exports[`Invalid #12 1`] = `
       ]
     }
 
-##### ❌ Error 1/4
+#### ❌ Error 1/4
 
     > 1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
         |                                 ^^ \`bb\` should be before \`cc\`.
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
 
-##### ❌ Error 2/4
+#### ❌ Error 2/4
 
     > 1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
         |                                             ^^ \`aa\` should be before \`bb\`.
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
 
-##### ❌ Error 3/4
+#### ❌ Error 3/4
 
       1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
     > 2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
         |                          ^^^ \`bbb\` should be before \`ccc\`.
       3 |             something
 
-##### ❌ Error 4/4
+#### ❌ Error 4/4
 
       1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
     > 2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
         |                                    ^^^ \`aaa\` should be before \`bbb\`.
       3 |             something
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
       1 |         mutation ($aa: Aa!, $bb: [Bb!], $cc: [Cc!]!) {
       2 |           test(aaa: $aa, bbb: $bb, ccc: $cc) {
@@ -481,7 +499,7 @@ exports[`Invalid #12 1`] = `
 `;
 
 exports[`should compare with lexicographic order 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         enum Test {
        2 |           "qux"
@@ -495,7 +513,7 @@ exports[`should compare with lexicographic order 1`] = `
       10 |           bar
       11 |         }
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "values": [
@@ -503,28 +521,28 @@ exports[`should compare with lexicographic order 1`] = `
       ]
     }
 
-##### ❌ Error 1/3
+#### ❌ Error 1/3
 
       3 |           qux
     > 4 |           foo
         |           ^^^ \`foo\` should be before \`qux\`.
       5 |           "Bar"
 
-##### ❌ Error 2/3
+#### ❌ Error 2/3
 
       5 |           "Bar"
     > 6 |           Bar
         |           ^^^ \`Bar\` should be before \`foo\`.
       7 |           """
 
-##### ❌ Error 3/3
+#### ❌ Error 3/3
 
        9 |           """
     > 10 |           bar
          |           ^^^ \`bar\` should be before \`Bar\`.
       11 |         }
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
        1 |         enum Test {
        2 |           """
@@ -540,7 +558,7 @@ exports[`should compare with lexicographic order 1`] = `
 `;
 
 exports[`should move comment 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         type Test { # { character
        2 |           # before d 1
@@ -557,7 +575,7 @@ exports[`should move comment 1`] = `
       13 |           # end
       14 |         } # } character
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "fields": [
@@ -565,28 +583,28 @@ exports[`should move comment 1`] = `
       ]
     }
 
-##### ❌ Error 1/3
+#### ❌ Error 1/3
 
       6 |           # before c
     > 7 |           c: Float!
         |           ^ \`c\` should be before \`d\`.
       8 |           # before b 1
 
-##### ❌ Error 2/3
+#### ❌ Error 2/3
 
        9 |           # before b 2
     > 10 |           b: [String] # same b
          |           ^ \`b\` should be before \`c\`.
       11 |           # before a
 
-##### ❌ Error 3/3
+#### ❌ Error 3/3
 
       11 |           # before a
     > 12 |           a: [Int!]! # same a
          |           ^ \`a\` should be before \`b\`.
       13 |           # end
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
        1 |         type Test { # { character
        2 |           # before a
@@ -605,7 +623,7 @@ exports[`should move comment 1`] = `
 `;
 
 exports[`should sort definitions 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         # START
        2 |
@@ -667,76 +685,76 @@ exports[`should sort definitions 1`] = `
       58 |
       59 |         # END
 
-##### ⚙️ Options
+#### ⚙️ Options
 
     {
       "definitions": true
     }
 
-##### ❌ Error 1/9
+#### ❌ Error 1/9
 
       10 |         # before fragment UserFields
     > 11 |         fragment UserFields on User {
          |                  ^^^^^^^^^^ \`UserFields\` should be before \`UserInput\`.
       12 |           id
 
-##### ❌ Error 2/9
+#### ❌ Error 2/9
 
       14 |         # before type User
     > 15 |         type User # same type User
          |              ^^^^ \`User\` should be before \`UserFields\`.
       16 |         # before extend enum Role
 
-##### ❌ Error 3/9
+#### ❌ Error 3/9
 
       16 |         # before extend enum Role
     > 17 |         extend enum Role {
          |                     ^^^^ \`Role\` should be before \`User\`.
       18 |           SUPERMAN
 
-##### ❌ Error 4/9
+#### ❌ Error 4/9
 
       24 |         # before mutation CreateUser
     > 25 |         mutation CreateUser {
          |                  ^^^^^^^^^^ \`CreateUser\` should be before operation definition.
       26 |           createUser
 
-##### ❌ Error 5/9
+#### ❌ Error 5/9
 
       38 |         # before interface Node
     > 39 |         interface Node # same interface Node
          |                   ^^^^ \`Node\` should be before \`RootQuery\`.
       40 |         # before enum Role
 
-##### ❌ Error 6/9
+#### ❌ Error 6/9
 
       42 |         # before scalar Email
     > 43 |         scalar Email # same scalar Email
          |                ^^^^^ \`Email\` should be before \`Role\`.
       44 |         # before input UserInput
 
-##### ❌ Error 7/9
+#### ❌ Error 7/9
 
       46 |         # before extend type User
     > 47 |         extend type User {
          |                     ^^^^ \`User\` should be before \`UserInput\`.
       48 |           firstName: String!
 
-##### ❌ Error 8/9
+#### ❌ Error 8/9
 
       54 |         # before union Data
     > 55 |         union Data = User | Node # same union Data
          |               ^^^^ \`Data\` should be before schema definition.
       56 |         # before directive @auth
 
-##### ❌ Error 9/9
+#### ❌ Error 9/9
 
       56 |         # before directive @auth
     > 57 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
          |                    ^^^^ \`auth\` should be before \`Data\`.
       58 |
 
-##### 🔧 Autofix output
+#### 🔧 Autofix output
 
        1 |         # START
        2 |
