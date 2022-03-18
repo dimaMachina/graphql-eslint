@@ -6,7 +6,9 @@ import { requireGraphQLSchemaFromContext } from '../utils';
 const RULE_ID = 'relay-arguments';
 const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
 
-const rule: GraphQLESLintRule = {
+type RelayArgumentsConfig = { includeBoth?: boolean };
+
+const rule: GraphQLESLintRule<[RelayArgumentsConfig]> = {
   meta: {
     type: 'problem',
     docs: {
@@ -51,10 +53,26 @@ const rule: GraphQLESLintRule = {
       [MISSING_ARGUMENTS]:
         'A field that returns a Connection type must include forward pagination arguments (`first` and `after`), backward pagination arguments (`last` and `before`), or both.',
     },
-    schema: [],
+    schema: {
+      type: 'array',
+      maxItems: 1,
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        minProperties: 1,
+        properties: {
+          includeBoth: {
+            type: 'boolean',
+            default: true,
+            description: 'Enforce including both forward and backward pagination arguments',
+          },
+        },
+      },
+    },
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const { includeBoth = true } = context.options[0] || {};
 
     return {
       'FieldDefinition > .gqlType Name[value=/Connection$/]'(node: GraphQLESTreeNode<NameNode>) {
@@ -62,11 +80,9 @@ const rule: GraphQLESLintRule = {
         while (fieldNode.kind !== Kind.FIELD_DEFINITION) {
           fieldNode = fieldNode.parent as GraphQLESTreeNode<FieldDefinitionNode>;
         }
-        const { first, after, last, before } = Object.fromEntries(
-          fieldNode.arguments.map(argument => [argument.name.value, argument])
-        );
-        const hasForwardPagination = Boolean(first && after);
-        const hasBackwardPagination = Boolean(last && before);
+        const args = Object.fromEntries(fieldNode.arguments.map(argument => [argument.name.value, argument]));
+        const hasForwardPagination = Boolean(args.first && args.after);
+        const hasBackwardPagination = Boolean(args.last && args.before);
 
         if (!hasForwardPagination && !hasBackwardPagination) {
           context.report({
@@ -76,32 +92,37 @@ const rule: GraphQLESLintRule = {
           return;
         }
 
-        function checkField(typeName: 'String' | 'Int', argument?: GraphQLESTreeNode<InputValueDefinitionNode>) {
+        function checkField(typeName: 'String' | 'Int', argumentName: 'first' | 'last' | 'after' | 'before'): void {
+          const argument = args[argumentName];
+          const hasArgument = Boolean(argument);
+          if (!includeBoth && !hasArgument) {
+            return;
+          }
           let type = argument as any;
-          if (type && type.kind === Kind.NON_NULL_TYPE) {
+          if (hasArgument && type.gqlType.kind === Kind.NON_NULL_TYPE) {
             type = type.gqlType;
           }
           const isAllowedNonNullType =
-            Boolean(type) &&
+            hasArgument &&
             type.gqlType.kind === Kind.NAMED_TYPE &&
             (type.gqlType.name.value === typeName ||
               (typeName === 'String' && isScalarType(schema.getType(type.gqlType.name.value))));
 
           if (!isAllowedNonNullType) {
-            const argumentName = argument.name.value;
+            const returnType = typeName === 'String' ? 'String or Scalar' : typeName;
             context.report({
-              node: argument.name,
-              message: `Argument \`${argumentName}\` must return non-null ${
-                typeName === 'String' ? 'String or Scalar' : typeName
-              }.`,
+              node: (argument || fieldNode).name,
+              message: hasArgument
+                ? `Argument \`${argumentName}\` must return ${returnType}.`
+                : `Field \`${fieldNode.name.value}\` must contain an argument \`${argumentName}\`, that return ${returnType}.`,
             });
           }
         }
 
-        checkField('Int', first);
-        checkField('Int', last);
-        checkField('String', after);
-        checkField('String', before);
+        checkField('Int', 'first');
+        checkField('Int', 'last');
+        checkField('String', 'after');
+        checkField('String', 'before');
       },
     };
   },

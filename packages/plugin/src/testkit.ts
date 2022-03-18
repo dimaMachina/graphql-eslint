@@ -132,6 +132,7 @@ export class GraphQLRuleTester {
         }
       }
       it(name || `Invalid #${idx + 1}`, () => {
+        expect(messages).not.toEqual([]);
         expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
       });
     }

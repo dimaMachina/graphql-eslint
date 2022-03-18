@@ -21,8 +21,8 @@ ruleTester.runGraphQLTests('relay-arguments', rule, {
     useSchema(/* GraphQL */ `
       type User {
         posts(
-          after: String
-          first: Int
+          after: String!
+          first: Int!
           before: Float # should be fine as it's Scalar
           last: Int
         ): PostConnection
@@ -35,6 +35,14 @@ ruleTester.runGraphQLTests('relay-arguments', rule, {
         type User {
           posts: PostConnection
           comments(after: [String!]!, first: Float, before: Query, last: [PostConnection]): PostConnection
+        }
+      `),
+      errors: 1,
+    },
+    {
+      ...useSchema(/* GraphQL */ `
+        type User {
+          posts(after: String, first: Int): PostConnection
         }
       `),
       errors: 1,
