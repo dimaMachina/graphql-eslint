@@ -18,6 +18,7 @@ import noScalarResultTypeOnMutation from './no-scalar-result-type-on-mutation';
 import noTypenamePrefix from './no-typename-prefix';
 import noUnreachableTypes from './no-unreachable-types';
 import noUnusedFields from './no-unused-fields';
+import relayArguments from './relay-arguments';
 import relayConnectionTypes from './relay-connection-types';
 import relayEdgeTypes from './relay-edge-types';
 import relayPageInfo from './relay-page-info';
@@ -48,6 +49,7 @@ export const rules = {
   'no-typename-prefix': noTypenamePrefix,
   'no-unreachable-types': noUnreachableTypes,
   'no-unused-fields': noUnusedFields,
+  'relay-arguments': relayArguments,
   'relay-connection-types': relayConnectionTypes,
   'relay-edge-types': relayEdgeTypes,
   'relay-page-info': relayPageInfo,

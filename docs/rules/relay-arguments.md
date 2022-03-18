@@ -1,0 +1,57 @@
+# `relay-arguments`
+
+- Category: `Schema`
+- Rule name: `@graphql-eslint/relay-arguments`
+- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+
+Set of rules to follow Relay specification for Arguments.
+
+- A field that returns a Connection type must include forward pagination arguments (`first` and `after`), backward pagination arguments (`last` and `before`), or both
+
+Forward pagination arguments
+
+- `first` takes a non-negative integer
+- `after` takes the Cursor type
+
+Backward pagination arguments
+
+- `last` takes a non-negative integer
+- `before` takes the Cursor type
+
+## Usage Examples
+
+### Incorrect
+
+```graphql
+# eslint @graphql-eslint/relay-arguments: 'error'
+
+type User {
+  posts: PostConnection
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/relay-arguments: 'error'
+
+type User {
+  posts(after: String, first: Int, before: String, last: Int): PostConnection
+}
+```
+
+## Config Schema
+
+The schema defines the following properties:
+
+### `includeBoth` (boolean)
+
+Enforce including both forward and backward pagination arguments
+
+Default: `true`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/relay-arguments.ts)
+- [Test source](../../packages/plugin/tests/relay-arguments.spec.ts)
