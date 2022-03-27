@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 16
       - name: Cache Yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-16-8-16-node-modules-${{ hashFiles('yarn.lock') }}
@@ -52,7 +52,7 @@ jobs:
         with:
           node-version: 16
       - name: Cache Yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
@@ -94,7 +94,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
       - name: Cache Yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
@@ -108,7 +108,7 @@ jobs:
       - name: Install Dependencies using Yarn
         run: yarn install && git checkout yarn.lock
       - name: Cache Jest
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: .cache/jest
           key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-jest-${{hashFiles('yarn.lock')}}
