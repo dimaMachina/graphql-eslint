@@ -25,7 +25,7 @@ index 477552c..3f6fa1a 100644
  }
  
 -async function applyReleasePlan(releasePlan, packages, config$1 = config.defaultConfig, snapshot) {
-+async function applyReleasePlan(releasePlan, packages, config$1 = config.defaultConfig, snapshot, ignoreRange = false) {
++async function applyReleasePlan(releasePlan, packages, config$1 = config.defaultConfig, snapshot, ignoreRange) {
    let cwd = packages.root.dir, touchedFiles = [];
    const packagesByName = new Map(packages.packages.map((x => [ x.packageJson.name, x ])));
    let {releases: releases, changesets: changesets} = releasePlan, releasesWithPackage = releases.map((release => {
