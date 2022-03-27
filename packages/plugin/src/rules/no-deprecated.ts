@@ -11,7 +11,7 @@ const rule: GraphQLESLintRule<[], true> = {
     hasSuggestions: true,
     docs: {
       category: 'Operations',
-      description: `Enforce that deprecated fields or enum values are not in use by operations.`,
+      description: 'Enforce that deprecated fields or enum values are not in use by operations.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
@@ -86,7 +86,7 @@ const rule: GraphQLESLintRule<[], true> = {
   create(context) {
     requireGraphQLSchemaFromContext(RULE_ID, context);
 
-    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode>, reason: string): void {
+    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>, reason: string): void {
       const nodeName = node.type === Kind.ENUM ? node.value : node.name.value;
       const nodeType = node.type === Kind.ENUM ? 'enum value' : 'field';
       context.report({

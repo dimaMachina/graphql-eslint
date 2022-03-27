@@ -36,6 +36,7 @@
     "@typescript-eslint/parser": "5.11.0",
     "bob-the-bundler": "1.6.1",
     "dedent": "0.7.0",
+    "enquirer": "2.3.6",
     "eslint": "8.9.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",

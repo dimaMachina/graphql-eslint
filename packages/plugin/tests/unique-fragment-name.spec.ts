@@ -20,7 +20,7 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
   valid: [
     {
       ...SIBLING_FRAGMENTS(TEST_FRAGMENT),
-      code: `fragment Test on U { a b c }`,
+      code: 'fragment Test on U { a b c }',
     },
     {
       // Assert `skipGraphQLImport` is set to true
@@ -42,12 +42,12 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
   invalid: [
     {
       ...SIBLING_FRAGMENTS(TEST_FRAGMENT),
-      code: `fragment HasIdFields on U { a b c }`,
+      code: 'fragment HasIdFields on U { a b c }',
       errors: [{ messageId: 'UNIQUE_FRAGMENT_NAME' }],
     },
     {
-      ...SIBLING_FRAGMENTS(TEST_FRAGMENT, `fragment HasIdFields on U { t }`),
-      code: `fragment HasIdFields on U { a b c }`,
+      ...SIBLING_FRAGMENTS(TEST_FRAGMENT, 'fragment HasIdFields on U { t }'),
+      code: 'fragment HasIdFields on U { a b c }',
       errors: [{ messageId: 'UNIQUE_FRAGMENT_NAME' }],
     },
   ],

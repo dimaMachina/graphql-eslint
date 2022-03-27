@@ -118,7 +118,7 @@ export const rule = {
 }
 ```
 
-The structure of the return value of `.typeInfo()` is [defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-parser/converter.ts#L63-L71). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
+The structure of the return value of `.typeInfo()` is [defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-parser/converter.ts#L32-L40). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
 
 ## Testing your rules
 

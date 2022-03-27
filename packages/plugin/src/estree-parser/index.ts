@@ -1,3 +1,3 @@
 export * from './converter';
-export * from './estree-ast';
+export * from './types';
 export * from './utils';

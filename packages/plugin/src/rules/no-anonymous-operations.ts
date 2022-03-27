@@ -35,7 +35,7 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [RULE_ID]: `Anonymous GraphQL operations are forbidden. Make sure to name your {{ operation }}!`,
+      [RULE_ID]: 'Anonymous GraphQL operations are forbidden. Make sure to name your {{ operation }}!',
     },
     schema: [],
   },
@@ -44,7 +44,7 @@ const rule: GraphQLESLintRule = {
       'OperationDefinition[name=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {
         const [firstSelection] = node.selectionSet.selections;
         const suggestedName =
-          firstSelection.type === Kind.FIELD ? (firstSelection.alias || firstSelection.name).value : node.operation;
+          firstSelection.kind === Kind.FIELD ? (firstSelection.alias || firstSelection.name).value : node.operation;
 
         context.report({
           loc: getLocation(node.loc.start, node.operation),
@@ -55,8 +55,16 @@ const rule: GraphQLESLintRule = {
           suggest: [
             {
               desc: `Rename to \`${suggestedName}\``,
-              fix: fixer =>
-                fixer.insertTextAfterRange([node.range[0], node.range[0] + node.operation.length], ` ${suggestedName}`),
+              fix(fixer) {
+                const sourceCode = context.getSourceCode();
+                const withoutQueryKeyword =
+                  sourceCode.getText({ range: [node.range[0], node.range[0] + 1] } as any) === '{';
+
+                return fixer.insertTextAfterRange(
+                  [node.range[0], node.range[0] + (withoutQueryKeyword ? 0 : node.operation.length)],
+                  `${withoutQueryKeyword ? 'query' : ''} ${suggestedName}${withoutQueryKeyword ? ' ' : ''}`
+                );
+              },
             },
           ],
         });

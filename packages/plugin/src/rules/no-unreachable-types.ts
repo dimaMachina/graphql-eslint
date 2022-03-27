@@ -87,7 +87,7 @@ const rule: GraphQLESLintRule = {
       [RULE_ID]: '{{ type }} `{{ typeName }}` is unreachable.',
     },
     docs: {
-      description: `Requires all types to be reachable at some level by root level fields.`,
+      description: 'Requires all types to be reachable at some level by root level fields.',
       category: 'Schema',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
@@ -135,13 +135,13 @@ const rule: GraphQLESLintRule = {
         const typeName = node.name.value;
 
         if (!reachableTypes.has(typeName)) {
-          const type = lowerCase(node.kind.replace(/(Extension|Definition)$/, ''))
+          const type = lowerCase(node.kind.replace(/(Extension|Definition)$/, ''));
           context.report({
             node: node.name,
             messageId: RULE_ID,
             data: {
               type: type[0].toUpperCase() + type.slice(1),
-              typeName
+              typeName,
             },
             suggest: [
               {

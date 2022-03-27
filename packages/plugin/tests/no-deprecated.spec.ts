@@ -30,30 +30,30 @@ const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('no-deprecated', rule, {
   valid: [
-    { ...WITH_SCHEMA, code: `query { newField }` },
-    { ...WITH_SCHEMA, code: `mutation { something(t: NEW) }` },
+    { ...WITH_SCHEMA, code: 'query { newField }' },
+    { ...WITH_SCHEMA, code: 'mutation { something(t: NEW) }' },
   ],
   invalid: [
     {
       ...WITH_SCHEMA,
-      code: `mutation { something(t: OLD) }`,
+      code: 'mutation { something(t: OLD) }',
       errors: [
         { message: 'This enum value is marked as deprecated in your GraphQL schema (reason: No longer supported)' },
       ],
     },
     {
       ...WITH_SCHEMA,
-      code: `mutation { something(t: OLD_WITH_REASON) }`,
+      code: 'mutation { something(t: OLD_WITH_REASON) }',
       errors: [{ message: 'This enum value is marked as deprecated in your GraphQL schema (reason: test)' }],
     },
     {
       ...WITH_SCHEMA,
-      code: `query { oldField }`,
+      code: 'query { oldField }',
       errors: [{ message: 'This field is marked as deprecated in your GraphQL schema (reason: No longer supported)' }],
     },
     {
       ...WITH_SCHEMA,
-      code: `query { oldFieldWithReason }`,
+      code: 'query { oldFieldWithReason }',
       errors: [{ message: 'This field is marked as deprecated in your GraphQL schema (reason: test)' }],
     },
   ],

@@ -1,0 +1,56 @@
+# `relay-edge-types`
+
+- Category: `Schema`
+- Rule name: `@graphql-eslint/relay-edge-types`
+- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+
+Set of rules to follow Relay specification for Edge types.
+
+- A type that is returned in list form by a connection type's `edges` field is considered by this spec to be an Edge type
+- Edge type must be an Object type
+- Edge type must contain a field `node` that return either a Scalar, Enum, Object, Interface, Union, or a non-null wrapper around one of those types. Notably, this field cannot return a list
+- Edge type must contain a field `cursor` that return a String, Scalar, or a non-null wrapper wrapper around one of those types
+- Edge type name must end in "Edge" _(optional)_
+- Edge type's field `node` must implement `Node` interface _(optional)_
+- A list type should only wrap an edge type _(optional)_
+
+## Usage Examples
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/relay-edge-types: 'error'
+
+type UserConnection {
+  edges: [UserEdge]
+  pageInfo: PageInfo!
+}
+```
+
+## Config Schema
+
+The schema defines the following properties:
+
+### `withEdgeSuffix` (boolean)
+
+Edge type name must end in "Edge".
+
+Default: `true`
+
+### `shouldImplementNode` (boolean)
+
+Edge type's field `node` must implement `Node` interface.
+
+Default: `true`
+
+### `listTypeCanWrapOnlyEdgeType` (boolean)
+
+A list type should only wrap an edge type.
+
+Default: `true`
+
+## Resources
+
+- [Rule source](../../packages/plugin/src/rules/relay-edge-types.ts)
+- [Test source](../../packages/plugin/tests/relay-edge-types.spec.ts)

@@ -59,7 +59,8 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     fixable: 'code',
     docs: {
       category: ['Schema', 'Operations'],
-      description: `Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.`,
+      description:
+        'Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {
@@ -243,7 +244,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
 
     function getRangeWithComments(node): AST.Range {
       if (node.kind === Kind.VARIABLE) {
-        node = node.parent
+        node = node.parent;
       }
       const [firstBeforeComment] = getBeforeComments(node);
       const [firstAfterComment] = sourceCode.getCommentsAfter(node);

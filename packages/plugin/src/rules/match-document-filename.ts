@@ -43,7 +43,7 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
     docs: {
       category: 'Operations',
       description: 'This rule allows you to enforce that the file name should match the operation name.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/match-document-filename.md`,
+      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/match-document-filename.md',
       examples: [
         {
           title: 'Correct',
@@ -125,8 +125,8 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
       ],
     },
     messages: {
-      [MATCH_EXTENSION]: `File extension "{{ fileExtension }}" don't match extension "{{ expectedFileExtension }}"`,
-      [MATCH_STYLE]: `Unexpected filename "{{ filename }}". Rename it to "{{ expectedFilename }}"`,
+      [MATCH_EXTENSION]: 'File extension "{{ fileExtension }}" don\'t match extension "{{ expectedFileExtension }}"',
+      [MATCH_STYLE]: 'Unexpected filename "{{ filename }}". Rename it to "{{ expectedFilename }}"',
     },
     schema: {
       definitions: {

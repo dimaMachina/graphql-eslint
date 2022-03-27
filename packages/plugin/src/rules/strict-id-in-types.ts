@@ -18,7 +18,8 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: `Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.`,
+      description:
+        'Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.',
       category: 'Schema',
       recommended: true,
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
@@ -93,19 +94,11 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         additionalProperties: false,
         properties: {
           acceptedIdNames: {
-            type: 'array',
-            uniqueItems: true,
-            items: {
-              type: 'string',
-            },
+            ...ARRAY_DEFAULT_OPTIONS,
             default: ['id'],
           },
           acceptedIdTypes: {
-            type: 'array',
-            uniqueItems: true,
-            items: {
-              type: 'string',
-            },
+            ...ARRAY_DEFAULT_OPTIONS,
             default: ['ID'],
           },
           exceptions: {
@@ -126,7 +119,8 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
       },
     },
     messages: {
-      [RULE_ID]: `{{ typeName }} must have exactly one non-nullable unique identifier. Accepted name(s): {{ acceptedNamesString }}; Accepted type(s): {{ acceptedTypesString }}.`,
+      [RULE_ID]:
+        '{{ typeName }} must have exactly one non-nullable unique identifier. Accepted name(s): {{ acceptedNamesString }}; Accepted type(s): {{ acceptedTypesString }}.',
     },
   },
   create(context) {

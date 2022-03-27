@@ -24,29 +24,21 @@ ruleTester.runGraphQLTests('test-directives', noAnonymousOperations, {
   valid: [
     /* GraphQL */ `
       # eslint-disable-next-line
-      query {
+      {
         a
       }
     `,
     /* GraphQL */ `
       # eslint-disable-next-line test-directives
-      query {
+      {
         a
       }
     `,
-    `
-      query { # eslint-disable-line test-directives
-        a
-      }
-    `,
-    `
-      query { # eslint-disable-line
-        a
-      }
-    `,
+    '{ a } # eslint-disable-line test-directives',
+    '{ a } # eslint-disable-line',
     /* GraphQL */ `
       # eslint-disable
-      query {
+      {
         a
       }
     `,
@@ -59,7 +51,7 @@ ruleTester.runGraphQLTests('test-directives', noAnonymousOperations, {
     {
       code: /* GraphQL */ `
         # eslint-disable-next-line non-existing-rule
-        query {
+        {
           a
         }
       `,
@@ -67,10 +59,6 @@ ruleTester.runGraphQLTests('test-directives', noAnonymousOperations, {
         { message: "Definition for rule 'non-existing-rule' was not found." },
         { message: 'Anonymous GraphQL operations are forbidden. Make sure to name your query!' },
       ],
-    },
-    {
-      code: 'query { a }',
-      errors: [{ message: 'Anonymous GraphQL operations are forbidden. Make sure to name your query!' }],
     },
   ],
 });

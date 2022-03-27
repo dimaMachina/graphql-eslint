@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`disallow mutation 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 | type Mutation
+
+#### ⚙️ Options
 
     {
       "disallow": [
@@ -9,18 +13,22 @@ exports[`disallow mutation 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
     > 1 | type Mutation
         |      ^^^^^^^^ Root type \`Mutation\` is forbidden.
 
-##### 💡 Suggestion: Remove \`Mutation\` type
+#### 💡 Suggestion: Remove \`Mutation\` type
 
     1 |
 `;
 
 exports[`disallow subscription 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 | type Subscription
+
+#### ⚙️ Options
 
     {
       "disallow": [
@@ -28,18 +36,22 @@ exports[`disallow subscription 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
     > 1 | type Subscription
         |      ^^^^^^^^^^^^ Root type \`Subscription\` is forbidden.
 
-##### 💡 Suggestion: Remove \`Subscription\` type
+#### 💡 Suggestion: Remove \`Subscription\` type
 
     1 |
 `;
 
 exports[`disallow when root type name is renamed 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 | type MyMutation
+
+#### ⚙️ Options
 
     {
       "disallow": [
@@ -47,18 +59,22 @@ exports[`disallow when root type name is renamed 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
     > 1 | type MyMutation
         |      ^^^^^^^^^^ Root type \`MyMutation\` is forbidden.
 
-##### 💡 Suggestion: Remove \`MyMutation\` type
+#### 💡 Suggestion: Remove \`MyMutation\` type
 
     1 |
 `;
 
 exports[`disallow with extend 1`] = `
-##### ⚙️ Options
+#### ⌨️ Code
+
+      1 | extend type Mutation { foo: ID }
+
+#### ⚙️ Options
 
     {
       "disallow": [
@@ -66,12 +82,12 @@ exports[`disallow with extend 1`] = `
       ]
     }
 
-##### ❌ Error
+#### ❌ Error
 
     > 1 | extend type Mutation { foo: ID }
         |             ^^^^^^^^ Root type \`Mutation\` is forbidden.
 
-##### 💡 Suggestion: Remove \`Mutation\` type
+#### 💡 Suggestion: Remove \`Mutation\` type
 
     1 |
 `;

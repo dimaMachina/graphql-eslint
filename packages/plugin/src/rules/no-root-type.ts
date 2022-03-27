@@ -73,7 +73,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     }
 
     const selector = [
-      `:matches(ObjectTypeDefinition, ObjectTypeExtension)`,
+      ':matches(ObjectTypeDefinition, ObjectTypeExtension)',
       '>',
       `Name[value=/^(${rootTypeNames.join('|')})$/]`,
     ].join(' ');
@@ -87,7 +87,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
           suggest: [
             {
               desc: `Remove \`${typeName}\` type`,
-              fix: fixer => fixer.remove((node as any).parent),
+              fix: fixer => fixer.remove(node.parent as any),
             },
           ],
         });

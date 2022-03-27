@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ⌨️ Code
+#### ⌨️ Code
 
        1 |         type A {
        2 |           deprecatedWithoutReason: String @deprecated
@@ -22,35 +22,35 @@ exports[`Invalid #1 1`] = `
       17 |           item5: String @deprecated(reason: "  ")
       18 |         }
 
-##### ❌ Error 1/5
+#### ❌ Error 1/5
 
       1 |         type A {
     > 2 |           deprecatedWithoutReason: String @deprecated
         |                                            ^^^^^^^^^^ Directive "@deprecated" must have a reason!
       3 |           deprecatedWithReason: String @deprecated(reason: "Reason")
 
-##### ❌ Error 2/5
+#### ❌ Error 2/5
 
       7 |         enum testEnum {
     > 8 |           item1 @deprecated
         |                  ^^^^^^^^^^ Directive "@deprecated" must have a reason!
       9 |           item2 @deprecated(reason: "Reason")
 
-##### ❌ Error 3/5
+#### ❌ Error 3/5
 
       12 |         interface testInterface {
     > 13 |           item1: String @deprecated
          |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
       14 |           item2: Number @deprecated(reason: "Reason")
 
-##### ❌ Error 4/5
+#### ❌ Error 4/5
 
       15 |           item3: String
     > 16 |           item4: String @deprecated(reason: "")
          |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
       17 |           item5: String @deprecated(reason: "  ")
 
-##### ❌ Error 5/5
+#### ❌ Error 5/5
 
       16 |           item4: String @deprecated(reason: "")
     > 17 |           item5: String @deprecated(reason: "  ")

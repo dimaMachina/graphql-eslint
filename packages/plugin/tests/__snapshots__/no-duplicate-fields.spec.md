@@ -1,14 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ❌ Error
+#### ⌨️ Code
+
+      1 |         query test($v: String, $t: String, $v: String) {
+      2 |           id
+      3 |         }
+
+#### ❌ Error
 
     > 1 |         query test($v: String, $t: String, $v: String) {
         |                                             ^ Variable \`v\` defined multiple times.
       2 |           id
-      3 |         }
 
-##### 💡 Suggestion: Remove \`v\` variable
+#### 💡 Suggestion: Remove \`v\` variable
 
     1 |         query test($v: String, $t: String, ) {
     2 |           id
@@ -16,16 +21,22 @@ exports[`Invalid #1 1`] = `
 `;
 
 exports[`Invalid #2 1`] = `
-##### ❌ Error
+#### ⌨️ Code
+
+      1 |         query test {
+      2 |           users(first: 100, after: 10, filter: "test", first: 50) {
+      3 |             id
+      4 |           }
+      5 |         }
+
+#### ❌ Error
 
       1 |         query test {
     > 2 |           users(first: 100, after: 10, filter: "test", first: 50) {
         |                                                        ^^^^^ Argument \`first\` defined multiple times.
       3 |             id
-      4 |           }
-      5 |         }
 
-##### 💡 Suggestion: Remove \`first\` argument
+#### 💡 Suggestion: Remove \`first\` argument
 
     1 |         query test {
     2 |           users(first: 100, after: 10, filter: "test", ) {
@@ -35,19 +46,25 @@ exports[`Invalid #2 1`] = `
 `;
 
 exports[`Invalid #3 1`] = `
-##### ❌ Error
+#### ⌨️ Code
 
       1 |         query test {
       2 |           users {
       3 |             id
       4 |             name
       5 |             email
-    > 6 |             name
-        |             ^^^^ Field \`name\` defined multiple times.
+      6 |             name
       7 |           }
       8 |         }
 
-##### 💡 Suggestion: Remove \`name\` field
+#### ❌ Error
+
+      5 |             email
+    > 6 |             name
+        |             ^^^^ Field \`name\` defined multiple times.
+      7 |           }
+
+#### 💡 Suggestion: Remove \`name\` field
 
     1 |         query test {
     2 |           users {
@@ -60,19 +77,25 @@ exports[`Invalid #3 1`] = `
 `;
 
 exports[`Invalid #4 1`] = `
-##### ❌ Error
+#### ⌨️ Code
 
       1 |         query test {
       2 |           users {
       3 |             id
       4 |             name
       5 |             email
-    > 6 |             email: somethingElse
-        |             ^^^^^ Field \`email\` defined multiple times.
+      6 |             email: somethingElse
       7 |           }
       8 |         }
 
-##### 💡 Suggestion: Remove \`email\` field
+#### ❌ Error
+
+      5 |             email
+    > 6 |             email: somethingElse
+        |             ^^^^^ Field \`email\` defined multiple times.
+      7 |           }
+
+#### 💡 Suggestion: Remove \`email\` field
 
     1 |         query test {
     2 |           users {

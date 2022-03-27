@@ -29,21 +29,21 @@ ruleTester.runGraphQLTests('executable-definitions', GRAPHQL_JS_VALIDATIONS['exe
   valid: [
     {
       ...WITH_SCHEMA,
-      code: `query test2 { foo }`,
+      code: 'query test2 { foo }',
     },
     {
       ...WITH_SCHEMA,
-      code: `mutation test { foo }`,
+      code: 'mutation test { foo }',
     },
     {
       ...WITH_SCHEMA,
-      code: `fragment Test on T { foo }`,
+      code: 'fragment Test on T { foo }',
     },
   ],
   invalid: [
     {
       ...WITH_SCHEMA,
-      code: `type Query { t: String }`,
+      code: 'type Query { t: String }',
       errors: [{ message: 'The "Query" definition is not executable.' }],
     },
   ],

@@ -45,7 +45,7 @@ const ruleFilenames = readdirSync(join(SRC_PATH, 'rules'))
 
 function generateRules(): void {
   const code = [
-    `import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation'`,
+    "import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation'",
     ...ruleFilenames.map(ruleName => `import ${camelCase(ruleName)} from './${ruleName}'`),
     BR,
     'export const rules = {',

@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Invalid #1 1`] = `
-##### ❌ Error
+#### ⌨️ Code
+
+      1 | query test { bar }
+
+#### ❌ Error
 
     > 1 | query test { bar }
         |       ^^^^ Operation named "test" already defined in:
@@ -9,7 +13,11 @@ exports[`Invalid #1 1`] = `
 `;
 
 exports[`Invalid #2 1`] = `
-##### ❌ Error
+#### ⌨️ Code
+
+      1 | query test { bar }
+
+#### ❌ Error
 
     > 1 | query test { bar }
         |       ^^^^ Operation named "test" already defined in:
