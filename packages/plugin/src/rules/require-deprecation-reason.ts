@@ -1,5 +1,6 @@
-import { GraphQLESLintRule } from '../types';
-import { valueFromNode } from '../estree-parser/utils';
+import type { ArgumentNode, DirectiveNode } from 'graphql';
+import type { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode, valueFromNode } from '../estree-converter';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -40,10 +41,9 @@ const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      'Directive[name.value=deprecated]'(node) {
-        const args = node.arguments || [];
-        const reasonArg = args.find(arg => arg.name && arg.name.value === 'reason');
-        const value = reasonArg ? String(valueFromNode(reasonArg.value) || '').trim() : null;
+      'Directive[name.value=deprecated]'(node: GraphQLESTreeNode<DirectiveNode>) {
+        const reasonArgument = node.arguments.find(arg => arg.name.value === 'reason') as any as ArgumentNode;
+        const value = reasonArgument && String(valueFromNode(reasonArgument.value)).trim();
 
         if (!value) {
           context.report({

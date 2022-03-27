@@ -1,8 +1,7 @@
 import { GraphQLESLintRule } from '../types';
 import { checkNode } from './unique-fragment-name';
 
-const RULE_NAME = 'unique-operation-name';
-const UNIQUE_OPERATION_NAME = 'UNIQUE_OPERATION_NAME';
+const RULE_ID = 'unique-operation-name';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -10,7 +9,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       category: 'Operations',
       description: 'Enforce unique operation names across your project.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       examples: [
         {
@@ -52,14 +51,14 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [UNIQUE_OPERATION_NAME]: 'Operation named "{{ documentName }}" already defined in:\n{{ summary }}',
+      [RULE_ID]: 'Operation named "{{ documentName }}" already defined in:\n{{ summary }}',
     },
     schema: [],
   },
   create(context) {
     return {
       'OperationDefinition[name!=undefined]'(node) {
-        checkNode(context, node, RULE_NAME, UNIQUE_OPERATION_NAME);
+        checkNode(context, node, RULE_ID);
       },
     };
   },

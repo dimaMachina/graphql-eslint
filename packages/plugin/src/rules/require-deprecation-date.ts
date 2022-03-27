@@ -1,6 +1,6 @@
 import { DirectiveNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode, valueFromNode } from '../estree-parser';
+import { GraphQLESTreeNode, valueFromNode } from '../estree-converter';
 
 // eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -88,8 +88,8 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
           return;
         }
         let [day, month, year] = deletionDate.split('/');
-        day = day.toString().padStart(2, '0');
-        month = month.toString().padStart(2, '0');
+        day = day.padStart(2, '0');
+        month = month.padStart(2, '0');
         const deletionDateInMS = Date.parse(`${year}-${month}-${day}`);
 
         if (Number.isNaN(deletionDateInMS)) {

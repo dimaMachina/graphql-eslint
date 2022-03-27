@@ -1,7 +1,7 @@
 import { EnumValueNode, FieldNode, Kind } from 'graphql';
 import { requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import type { GraphQLESLintRule } from '../types';
+import type { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'no-deprecated';
 
@@ -87,8 +87,8 @@ const rule: GraphQLESLintRule<[], true> = {
     requireGraphQLSchemaFromContext(RULE_ID, context);
 
     function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>, reason: string): void {
-      const nodeName = node.type === Kind.ENUM ? node.value : node.name.value;
-      const nodeType = node.type === Kind.ENUM ? 'enum value' : 'field';
+      const nodeName = node.kind === Kind.ENUM ? node.value : node.name.value;
+      const nodeType = node.kind === Kind.ENUM ? 'enum value' : 'field';
       context.report({
         node,
         messageId: RULE_ID,

@@ -1,12 +1,9 @@
-/* eslint-disable no-console */
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
 import { spawn } from 'child_process';
 import { GraphQLSchema, printSchema } from 'graphql';
 import { getSchema } from '../src/schema';
 import { loadGraphQLConfig } from '../src/graphql-config';
-
-const noopFn = () => null;
 
 describe('schema', () => {
   const SCHEMA_GRAPHQL_PATH = resolve(__dirname, 'mocks/user-schema.graphql');
@@ -19,7 +16,7 @@ describe('schema', () => {
     const graphQLSchema = getSchema(gqlConfig.getDefault());
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
-    const sdlString = printSchema(graphQLSchema);
+    const sdlString = printSchema(graphQLSchema as GraphQLSchema);
     expect(sdlString.trim()).toBe(schemaOnDisk.trim());
   };
 
@@ -74,8 +71,6 @@ describe('schema', () => {
     describe('should passe headers', () => {
       let schemaUrl;
       let schemaOptions;
-      let consoleError;
-      const originalConsoleError = console.error;
 
       beforeAll(() => {
         schemaUrl = `${url}/my-headers`;
@@ -84,20 +79,6 @@ describe('schema', () => {
             authorization: 'Bearer Foo',
           },
         };
-        // Hide console.error in test
-        console.error = noopFn;
-      });
-
-      beforeEach(() => {
-        consoleError = jest.spyOn(console, 'error');
-      });
-
-      afterEach(() => {
-        consoleError.mockRestore();
-      });
-
-      afterAll(() => {
-        console.error = originalConsoleError;
       });
 
       // https://graphql-config.com/schema#passing-headers
@@ -107,50 +88,27 @@ describe('schema', () => {
             [schemaUrl]: schemaOptions,
           },
         });
-        getSchema(gqlConfig.getDefault());
-
-        expect(consoleError).toHaveBeenCalledTimes(1);
-        expect(consoleError.mock.calls[0][2]).toMatch('"authorization":"Bearer Foo"');
+        const error = getSchema(gqlConfig.getDefault()) as Error;
+        expect(error).toBeInstanceOf(Error);
+        expect(error.message).toMatch('"authorization":"Bearer Foo"');
       });
 
       // https://github.com/B2o5T/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
       it('with `parserOptions.schemaOptions`', () => {
         const gqlConfig = loadGraphQLConfig({ schema: schemaUrl });
-        getSchema(gqlConfig.getDefault(), { schemaOptions });
-
-        expect(consoleError).toHaveBeenCalledTimes(1);
-        expect(consoleError.mock.calls[0][2]).toMatch('"authorization":"Bearer Foo"');
+        const error = getSchema(gqlConfig.getDefault(), { schemaOptions }) as Error;
+        expect(error).toBeInstanceOf(Error);
+        expect(error.message).toMatch('"authorization":"Bearer Foo"');
       });
     });
   });
 
   describe('schema loading', () => {
-    const originalConsoleError = console.error;
-    const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql' });
-    let consoleError;
-
-    beforeAll(() => {
-      // Hide console.error in test
-      console.error = noopFn;
-      consoleError = jest.spyOn(console, 'error');
-    });
-
-    afterAll(() => {
-      console.error = originalConsoleError;
-      consoleError.mockRestore();
-    });
-
-    it('should not throw an error, but log an error in `console.error`', () => {
-      expect(consoleError).toHaveBeenCalledTimes(0);
-      expect(getSchema(gqlConfig.getDefault())).toBe(null);
-      expect(consoleError.mock.calls[0][2]).toMatch(
-        'Unable to find any GraphQL type definitions for the following pointers'
-      );
-    });
-
-    it('should not log second time error from same schema', () => {
-      expect(getSchema(gqlConfig.getDefault())).toBe(null);
-      expect(consoleError).toHaveBeenCalledTimes(1);
+    it('should return Error', () => {
+      const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql' });
+      const error = getSchema(gqlConfig.getDefault()) as Error;
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toMatch('Unable to find any GraphQL type definitions for the following pointers');
     });
   });
 
@@ -161,10 +119,10 @@ describe('schema', () => {
       filePath: resolve(__dirname, 'mocks/using-config/test.graphql'),
     });
 
-    const graphQLSchema = getSchema(gqlConfig.getDefault());
+    const graphQLSchema = getSchema(gqlConfig.getDefault()) as GraphQLSchema;
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
     const sdlString = printSchema(graphQLSchema);
-    expect(sdlString.trim()).toMatchInlineSnapshot(/* GraphQL */ `
+    expect(sdlString.trimEnd()).toMatchInlineSnapshot(/* GraphQL */ `
       type Query {
         hello: String
       }

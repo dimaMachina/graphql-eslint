@@ -1,7 +1,7 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types';
 import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS } from '../utils';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRuleListener } from '../testkit';
 
 const KindToDisplayName = {

@@ -1,7 +1,7 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, englishJoinWords } from '../utils';
+import { GraphQLESTreeNode } from '../estree-converter';
 
 export type StrictIdInTypesRuleConfig = {
   acceptedIdNames?: string[];
@@ -118,10 +118,6 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         },
       },
     },
-    messages: {
-      [RULE_ID]:
-        '{{ typeName }} must have exactly one non-nullable unique identifier. Accepted name(s): {{ acceptedNamesString }}; Accepted type(s): {{ acceptedTypesString }}.',
-    },
   },
   create(context) {
     const options: StrictIdInTypesRuleConfig = {
@@ -166,14 +162,13 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         // Some clients allow multiple fields to be used. If more people need this,
         // we can extend this rule later.
         if (validIds.length !== 1) {
+          const pluralNamesSuffix = options.acceptedIdNames.length > 1 ? 's' : '';
+          const pluralTypesSuffix = options.acceptedIdTypes.length > 1 ? 's' : '';
           context.report({
             node: node.name,
-            messageId: RULE_ID,
-            data: {
-              typeName,
-              acceptedNamesString: options.acceptedIdNames.join(', '),
-              acceptedTypesString: options.acceptedIdTypes.join(', '),
-            },
+            message: `${typeName} must have exactly one non-nullable unique identifier. Accepted name${pluralNamesSuffix}: ${englishJoinWords(
+              options.acceptedIdNames
+            )}. Accepted type${pluralTypesSuffix}: ${englishJoinWords(options.acceptedIdTypes)}.`,
           });
         }
       },

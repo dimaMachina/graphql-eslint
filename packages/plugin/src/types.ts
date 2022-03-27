@@ -1,18 +1,21 @@
 import type { Rule, AST, Linter } from 'eslint';
 import type * as ESTree from 'estree';
 import type { GraphQLSchema } from 'graphql';
-import type { IExtensions, IGraphQLProject, DocumentPointer, SchemaPointer } from 'graphql-config';
+import type { IExtensions, IGraphQLProject } from 'graphql-config';
 import type { GraphQLParseOptions } from '@graphql-tools/utils';
 import type { GraphQLESLintRuleListener } from './testkit';
 import type { SiblingOperations } from './sibling-operations';
 
+export type Schema = GraphQLSchema | Error | null;
+export type Pointer = string | string[];
+
 export interface ParserOptions {
-  schema?: SchemaPointer | Record<string, { headers: Record<string, string> }>;
-  documents?: DocumentPointer;
-  operations?: DocumentPointer; // legacy
+  schema?: Pointer | Record<string, { headers: Record<string, string> }>;
+  documents?: Pointer;
+  operations?: Pointer; // legacy
   extensions?: IExtensions;
-  include?: string | string[];
-  exclude?: string | string[];
+  include?: Pointer;
+  exclude?: Pointer;
   projects?: Record<string, IGraphQLProject>;
   schemaOptions?: Omit<GraphQLParseOptions, 'assumeValidSDL'> & {
     headers: Record<string, string>;
@@ -23,7 +26,7 @@ export interface ParserOptions {
 }
 
 export type ParserServices = {
-  schema: GraphQLSchema | null;
+  schema: Schema;
   siblingOperations: SiblingOperations;
 };
 

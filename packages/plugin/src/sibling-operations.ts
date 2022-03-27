@@ -11,7 +11,8 @@ import { Source, asArray } from '@graphql-tools/utils';
 import { GraphQLProjectConfig } from 'graphql-config';
 import debugFactory from 'debug';
 import fastGlob from 'fast-glob';
-import { loaderCache, logger } from './utils';
+import { logger } from './utils';
+import type { Pointer } from './types';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
@@ -49,8 +50,8 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
   });
 };
 
-const operationsCache: Map<string, Source[]> = new Map();
-const siblingOperationsCache: Map<Source[], SiblingOperations> = new Map();
+const operationsCache = new Map<string, Source[]>();
+const siblingOperationsCache = new Map<Source[], SiblingOperations>();
 
 const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
   const documentsKey = asArray(projectForFile.documents).sort().join(',');
@@ -65,11 +66,10 @@ const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
     debug('Loading operations from %o', projectForFile.documents);
     const documents = projectForFile.loadDocumentsSync(projectForFile.documents, {
       skipGraphQLImport: true,
-      cache: loaderCache,
     });
     if (debug.enabled) {
       debug('Loaded %d operations', documents.length);
-      const operationsPaths = fastGlob.sync(projectForFile.documents as string | string[], {
+      const operationsPaths = fastGlob.sync(projectForFile.documents as Pointer, {
         absolute: true,
       });
       debug('Operations pointers %O', operationsPaths);
@@ -112,91 +112,92 @@ export function getSiblingOperations(projectForFile: GraphQLProjectConfig): Sibl
   // Since the siblings array is cached, we can use it as cache key.
   // We should get the same array reference each time we get
   // to this point for the same graphql project
-  let siblingOperations = siblingOperationsCache.get(siblings);
-  if (!siblingOperations) {
-    let fragmentsCache: FragmentSource[] | null = null;
-
-    const getFragments = (): FragmentSource[] => {
-      if (fragmentsCache === null) {
-        const result: FragmentSource[] = [];
-
-        for (const source of siblings) {
-          for (const definition of source.document.definitions) {
-            if (definition.kind === Kind.FRAGMENT_DEFINITION) {
-              result.push({
-                filePath: source.location,
-                document: definition,
-              });
-            }
-          }
-        }
-        fragmentsCache = result;
-      }
-      return fragmentsCache;
-    };
-
-    let cachedOperations: OperationSource[] | null = null;
-
-    const getOperations = (): OperationSource[] => {
-      if (cachedOperations === null) {
-        const result: OperationSource[] = [];
-
-        for (const source of siblings) {
-          for (const definition of source.document.definitions) {
-            if (definition.kind === Kind.OPERATION_DEFINITION) {
-              result.push({
-                filePath: source.location,
-                document: definition,
-              });
-            }
-          }
-        }
-        cachedOperations = result;
-      }
-      return cachedOperations;
-    };
-
-    const getFragment = (name: string) => getFragments().filter(f => f.document.name?.value === name);
-
-    const collectFragments = (
-      selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
-      recursive,
-      collected = new Map<string, FragmentDefinitionNode>()
-    ) => {
-      visit(selectable, {
-        FragmentSpread(spread) {
-          const fragmentName = spread.name.value;
-          const [fragment] = getFragment(fragmentName);
-
-          if (!fragment) {
-            logger.warn(
-              `Unable to locate fragment named "${fragmentName}", please make sure it's loaded using "parserOptions.operations"`
-            );
-            return;
-          }
-          if (!collected.has(fragmentName)) {
-            collected.set(fragmentName, fragment.document);
-            if (recursive) {
-              collectFragments(fragment.document, recursive, collected);
-            }
-          }
-        },
-      });
-      return collected;
-    };
-
-    siblingOperations = {
-      available: true,
-      getFragment,
-      getFragments,
-      getFragmentByType: typeName => getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
-      getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
-      getOperation: name => getOperations().filter(o => o.document.name?.value === name),
-      getOperations,
-      getOperationByType: type => getOperations().filter(o => o.document.operation === type),
-    };
-
-    siblingOperationsCache.set(siblings, siblingOperations);
+  if (siblingOperationsCache.has(siblings)) {
+    return siblingOperationsCache.get(siblings);
   }
+
+  let fragmentsCache: FragmentSource[] | null = null;
+
+  const getFragments = (): FragmentSource[] => {
+    if (fragmentsCache === null) {
+      const result: FragmentSource[] = [];
+
+      for (const source of siblings) {
+        for (const definition of source.document.definitions) {
+          if (definition.kind === Kind.FRAGMENT_DEFINITION) {
+            result.push({
+              filePath: source.location,
+              document: definition,
+            });
+          }
+        }
+      }
+      fragmentsCache = result;
+    }
+    return fragmentsCache;
+  };
+
+  let cachedOperations: OperationSource[] | null = null;
+
+  const getOperations = (): OperationSource[] => {
+    if (cachedOperations === null) {
+      const result: OperationSource[] = [];
+
+      for (const source of siblings) {
+        for (const definition of source.document.definitions) {
+          if (definition.kind === Kind.OPERATION_DEFINITION) {
+            result.push({
+              filePath: source.location,
+              document: definition,
+            });
+          }
+        }
+      }
+      cachedOperations = result;
+    }
+    return cachedOperations;
+  };
+
+  const getFragment = (name: string) => getFragments().filter(f => f.document.name?.value === name);
+
+  const collectFragments = (
+    selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
+    recursive,
+    collected = new Map<string, FragmentDefinitionNode>()
+  ) => {
+    visit(selectable, {
+      FragmentSpread(spread) {
+        const fragmentName = spread.name.value;
+        const [fragment] = getFragment(fragmentName);
+
+        if (!fragment) {
+          logger.warn(
+            `Unable to locate fragment named "${fragmentName}", please make sure it's loaded using "parserOptions.operations"`
+          );
+          return;
+        }
+        if (!collected.has(fragmentName)) {
+          collected.set(fragmentName, fragment.document);
+          if (recursive) {
+            collectFragments(fragment.document, recursive, collected);
+          }
+        }
+      },
+    });
+    return collected;
+  };
+
+  const siblingOperations: SiblingOperations = {
+    available: true,
+    getFragment,
+    getFragments,
+    getFragmentByType: typeName => getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
+    getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
+    getOperation: name => getOperations().filter(o => o.document.name?.value === name),
+    getOperations,
+    getOperationByType: type => getOperations().filter(o => o.document.operation === type),
+  };
+
+  siblingOperationsCache.set(siblings, siblingOperations);
   return siblingOperations;
 }

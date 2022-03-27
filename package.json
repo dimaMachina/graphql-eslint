@@ -62,15 +62,8 @@
     "graphql": "16.3.0"
   },
   "lint-staged": {
-    "{packages,scripts}/**/*.{ts,tsx,js,jsx,cjs,mjs}": [
-      "eslint --fix",
-      "yarn generate:configs",
-      "git add packages/plugin/src/rules/index.ts",
-      "git add packages/plugin/src/configs",
-      "yarn generate:docs",
-      "git add docs"
-    ],
-    "*.{ts,tsx,js,jsx,cjs,mjs,gql,graphql,yml,yaml,json}": [
+    "**/*": [
+      "eslint",
       "prettier --write"
     ]
   }

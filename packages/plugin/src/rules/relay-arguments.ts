@@ -1,6 +1,6 @@
 import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { requireGraphQLSchemaFromContext } from '../utils';
 
 const RULE_ID = 'relay-arguments';

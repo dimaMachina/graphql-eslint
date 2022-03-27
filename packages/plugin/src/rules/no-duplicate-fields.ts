@@ -1,6 +1,6 @@
 import { Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import type { GraphQLESLintRule } from '../types';
+import type { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'no-duplicate-fields';
 
@@ -66,7 +66,7 @@ const rule: GraphQLESLintRule = {
     function checkNode(usedFields: Set<string>, node: GraphQLESTreeNode<NameNode>): void {
       const fieldName = node.value;
       if (usedFields.has(fieldName)) {
-        const { parent } = node as any;
+        const { parent } = node;
         context.report({
           node,
           messageId: RULE_ID,
@@ -78,7 +78,7 @@ const rule: GraphQLESLintRule = {
             {
               desc: `Remove \`${fieldName}\` ${parent.type.toLowerCase()}`,
               fix(fixer) {
-                return fixer.remove(parent.type === Kind.VARIABLE ? parent.parent : parent);
+                return fixer.remove((parent.type === Kind.VARIABLE ? parent.parent : parent) as any);
               },
             },
           ],

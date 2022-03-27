@@ -12,7 +12,7 @@ import {
 import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRuleListener } from '../testkit';
 
 const RULE_ID = 'relay-edge-types';

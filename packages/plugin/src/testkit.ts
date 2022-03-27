@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
 import type { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
-import type { GraphQLESTreeNode } from './estree-parser';
+import type { GraphQLESTreeNode } from './estree-converter';
 import type { GraphQLESLintRule, ParserOptions } from './types';
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {

@@ -1,7 +1,7 @@
-import { ASTKindToNode, Kind, NameNode, TokenKind } from 'graphql';
-import { GraphQLESLintRule, ValueOf } from '../types';
+import { ASTKindToNode, Kind, TokenKind } from 'graphql';
+import type { GraphQLESLintRule, ValueOf } from '../types';
 import { getLocation, TYPES_KINDS } from '../utils';
-import { GraphQLESTreeNode } from '../estree-parser';
+import type { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'require-description';
 
@@ -16,7 +16,7 @@ const ALLOWED_KINDS = [
 
 type AllowedKind = typeof ALLOWED_KINDS[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
-type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>> & { parent: { name: NameNode } };
+type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
 
 export type RequireDescriptionRuleConfig = {
   types?: boolean;
@@ -137,7 +137,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
   create(context) {
     const { types, ...restOptions } = context.options[0] || {};
 
-    const kinds: Set<string> = new Set(types ? TYPES_KINDS : []);
+    const kinds = new Set<string>(types ? TYPES_KINDS : []);
     for (const [kind, isEnabled] of Object.entries(restOptions)) {
       if (isEnabled) {
         kinds.add(kind);

@@ -1,13 +1,13 @@
 import { statSync } from 'fs';
 import { dirname } from 'path';
-import { GraphQLSchema, Kind } from 'graphql';
+import type { GraphQLSchema } from 'graphql';
+import { Kind } from 'graphql';
 import type { AST } from 'eslint';
-import { asArray, Source as LoaderSource } from '@graphql-tools/utils';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
 import type { Position } from 'estree';
-import { GraphQLESLintRuleContext } from './types';
-import { SiblingOperations } from './sibling-operations';
+import type { GraphQLESLintRuleContext } from './types';
+import type { SiblingOperations } from './sibling-operations';
 
 export function requireSiblingsOperations(
   ruleId: string,
@@ -31,6 +31,8 @@ export function requireGraphQLSchemaFromContext(
     throw new Error(
       `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`
     );
+  } else if (schema instanceof Error) {
+    throw schema;
   }
   return schema;
 }
@@ -66,24 +68,6 @@ export const getOnDiskFilepath = (filepath: string): string => {
 };
 
 export const getTypeName = (node): string => ('type' in node ? getTypeName(node.type) : node.name.value);
-
-// Small workaround for the bug in older versions of @graphql-tools/load
-// Can be removed after graphql-config bumps to a new version
-export const loaderCache: Record<string, LoaderSource[]> = new Proxy(Object.create(null), {
-  get(cache, key) {
-    const value = cache[key];
-    if (value) {
-      return asArray(value);
-    }
-    return undefined;
-  },
-  set(cache, key, value) {
-    if (value) {
-      cache[key] = asArray(value);
-    }
-    return true;
-  },
-});
 
 export const TYPES_KINDS = [
   Kind.OBJECT_TYPE_DEFINITION,
@@ -146,3 +130,13 @@ export const ARRAY_DEFAULT_OPTIONS = {
     type: 'string',
   },
 } as const;
+
+declare namespace Intl {
+  class ListFormat {
+    constructor(locales: string, options: any);
+
+    public format: (items: [string]) => string;
+  }
+}
+
+export const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);

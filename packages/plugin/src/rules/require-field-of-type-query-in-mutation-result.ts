@@ -1,9 +1,9 @@
-import { Kind, isObjectType, NameNode } from 'graphql';
+import { isObjectType, NameNode } from 'graphql';
 import { requireGraphQLSchemaFromContext, getTypeName } from '../utils';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import type { GraphQLESLintRule } from '../types';
+import type { GraphQLESTreeNode } from '../estree-converter';
 
-const RULE_NAME = 'require-field-of-type-query-in-mutation-result';
+const RULE_ID = 'require-field-of-type-query-in-mutation-result';
 
 const rule: GraphQLESLintRule = {
   meta: {
@@ -12,7 +12,7 @@ const rule: GraphQLESLintRule = {
       category: 'Schema',
       description:
         'Allow the client in one round-trip not only to call mutation but also to get a wagon of data to update their application.\n> Currently, no errors are reported for result type `union`, `interface` and `scalar`.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
         {
@@ -47,17 +47,14 @@ const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_NAME, context);
+    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const mutationType = schema.getMutationType();
     const queryType = schema.getQueryType();
 
     if (!mutationType || !queryType) {
       return {};
     }
-    const selector = [
-      `:matches(${Kind.OBJECT_TYPE_DEFINITION}, ${Kind.OBJECT_TYPE_EXTENSION})[name.value=${mutationType.name}]`,
-      `> ${Kind.FIELD_DEFINITION} > .gqlType ${Kind.NAME}`,
-    ].join(' ');
+    const selector = `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=${mutationType.name}] > FieldDefinition > .gqlType Name`;
 
     return {
       [selector](node: GraphQLESTreeNode<NameNode>) {

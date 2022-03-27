@@ -1,6 +1,6 @@
 import { StringValueNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 
 type DescriptionStyleRuleConfig = { style: 'inline' | 'block' };
 

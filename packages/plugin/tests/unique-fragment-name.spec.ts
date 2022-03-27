@@ -43,12 +43,12 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
     {
       ...SIBLING_FRAGMENTS(TEST_FRAGMENT),
       code: 'fragment HasIdFields on U { a b c }',
-      errors: [{ messageId: 'UNIQUE_FRAGMENT_NAME' }],
+      errors: [{ messageId: 'unique-fragment-name' }],
     },
     {
       ...SIBLING_FRAGMENTS(TEST_FRAGMENT, 'fragment HasIdFields on U { t }'),
       code: 'fragment HasIdFields on U { a b c }',
-      errors: [{ messageId: 'UNIQUE_FRAGMENT_NAME' }],
+      errors: [{ messageId: 'unique-fragment-name' }],
     },
   ],
 });

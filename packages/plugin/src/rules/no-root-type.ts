@@ -1,7 +1,7 @@
-import { NameNode } from 'graphql';
+import type { NameNode } from 'graphql';
 import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import type { GraphQLESLintRule } from '../types';
+import type { GraphQLESTreeNode } from '../estree-converter';
 
 const ROOT_TYPES: ('mutation' | 'subscription')[] = ['mutation', 'subscription'];
 
@@ -66,17 +66,14 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
       disallow.has('subscription') && schema.getSubscriptionType(),
     ]
       .filter(Boolean)
-      .map(type => type.name);
+      .map(type => type.name)
+      .join('|');
 
-    if (rootTypeNames.length === 0) {
+    if (!rootTypeNames) {
       return {};
     }
 
-    const selector = [
-      ':matches(ObjectTypeDefinition, ObjectTypeExtension)',
-      '>',
-      `Name[value=/^(${rootTypeNames.join('|')})$/]`,
-    ].join(' ');
+    const selector = `:matches(ObjectTypeDefinition, ObjectTypeExtension) > .name[value=/^(${rootTypeNames})$/]`;
 
     return {
       [selector](node: GraphQLESTreeNode<NameNode>) {
