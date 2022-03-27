@@ -6,10 +6,10 @@ import {
   GraphQLSchema,
   ValidationRule,
   FragmentDefinitionNode,
-  OperationDefinitionNode,
   visit,
   validate,
   ASTVisitor,
+  ExecutableDefinitionNode,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
@@ -158,7 +158,7 @@ const validationToRule = (
       create(context) {
         if (!ruleFn) {
           logger.warn(
-            `You rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql-js" version you are using. Skipping...`
+            `Rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql" version you are using. Skipping…`
           );
           return {};
         }
@@ -357,7 +357,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     ({ ruleId, context, node }) => {
       const siblings = requireSiblingsOperations(ruleId, context);
       const FilePathToDocumentsMap = [...siblings.getOperations(), ...siblings.getFragments()].reduce<
-        Record<string, (OperationDefinitionNode | FragmentDefinitionNode)[]>
+        Record<string, ExecutableDefinitionNode[]>
       >((map, { filePath, document }) => {
         map[filePath] ??= [];
         map[filePath].push(document);

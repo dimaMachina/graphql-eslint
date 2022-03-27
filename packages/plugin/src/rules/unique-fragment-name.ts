@@ -1,21 +1,19 @@
 import { relative } from 'path';
-import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
+import { ExecutableDefinitionNode, Kind } from 'graphql';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { normalizePath, requireSiblingsOperations, getOnDiskFilepath } from '../utils';
 import { FragmentSource, OperationSource } from '../sibling-operations';
 
-const RULE_NAME = 'unique-fragment-name';
-const UNIQUE_FRAGMENT_NAME = 'UNIQUE_FRAGMENT_NAME';
+const RULE_ID = 'unique-fragment-name';
 
 export const checkNode = (
   context: GraphQLESLintRuleContext,
-  node: GraphQLESTreeNode<OperationDefinitionNode | FragmentDefinitionNode>,
-  ruleName: string,
-  messageId: string
+  node: GraphQLESTreeNode<ExecutableDefinitionNode>,
+  ruleId: string
 ): void => {
   const documentName = node.name.value;
-  const siblings = requireSiblingsOperations(ruleName, context);
+  const siblings = requireSiblingsOperations(ruleId, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
     node.kind === Kind.FRAGMENT_DEFINITION ? siblings.getFragment(documentName) : siblings.getOperation(documentName);
   const filepath = context.getFilename();
@@ -28,7 +26,7 @@ export const checkNode = (
 
   if (conflictingDocuments.length > 0) {
     context.report({
-      messageId,
+      messageId: ruleId,
       data: {
         documentName,
         summary: conflictingDocuments
@@ -46,7 +44,7 @@ const rule: GraphQLESLintRule = {
     docs: {
       category: 'Operations',
       description: 'Enforce unique fragment names across your project.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_NAME}.md`,
+      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       examples: [
         {
@@ -84,14 +82,14 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [UNIQUE_FRAGMENT_NAME]: 'Fragment named "{{ documentName }}" already defined in:\n{{ summary }}',
+      [RULE_ID]: 'Fragment named "{{ documentName }}" already defined in:\n{{ summary }}',
     },
     schema: [],
   },
   create(context) {
     return {
       FragmentDefinition(node) {
-        checkNode(context, node, RULE_NAME, UNIQUE_FRAGMENT_NAME);
+        checkNode(context, node, RULE_ID);
       },
     };
   },

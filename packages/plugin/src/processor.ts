@@ -32,7 +32,7 @@ export const processor: Linter.Processor<Block | string> = {
     }));
     blocksMap.set(filePath, blocks);
 
-    return [...blocks, code /* For eslint-prettier-plugin */];
+    return [...blocks, code /* For eslint-plugin-prettier */];
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath);

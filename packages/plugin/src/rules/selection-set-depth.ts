@@ -1,8 +1,8 @@
 import type { AST } from 'eslint';
 import { GraphQLESLintRule } from '../types';
 import depthLimit from 'graphql-depth-limit';
-import { DocumentNode, FragmentDefinitionNode, GraphQLError, Kind, OperationDefinitionNode } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../sibling-operations';
 
@@ -17,7 +17,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
     docs: {
       category: 'Operations',
       description:
-        'Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://github.com/stems/graphql-depth-limit).',
+        'Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSiblings: true,
       examples: [
@@ -86,20 +86,17 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
 
     try {
       siblings = requireSiblingsOperations(RULE_ID, context);
-    } catch (e) {
+    } catch {
       logger.warn(
         `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`
       );
     }
 
-    const { maxDepth } = context.options[0];
-    const ignore = context.options[0].ignore || [];
+    const { maxDepth, ignore = [] } = context.options[0];
     const checkFn = depthLimit(maxDepth, { ignore });
 
     return {
-      'OperationDefinition, FragmentDefinition'(
-        node: GraphQLESTreeNode<OperationDefinitionNode | FragmentDefinitionNode>
-      ) {
+      'OperationDefinition, FragmentDefinition'(node: GraphQLESTreeNode<ExecutableDefinitionNode>) {
         try {
           const rawNode = node.rawNode();
           const fragmentsInUse = siblings ? siblings.getFragmentsInUse(rawNode) : [];

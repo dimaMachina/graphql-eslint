@@ -1,8 +1,8 @@
-import { ASTKindToNode, ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, visit } from 'graphql';
+import { ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, NameNode, visit } from 'graphql';
 import lowerCase from 'lodash.lowercase';
-import { GraphQLESLintRule, ValueOf } from '../types';
+import { GraphQLESLintRule } from '../types';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'no-unreachable-types';
 
@@ -21,9 +21,6 @@ const KINDS = [
   Kind.ENUM_TYPE_DEFINITION,
   Kind.ENUM_TYPE_EXTENSION,
 ] as const;
-
-type AllowedKind = typeof KINDS[number];
-type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 
 type ReachableTypes = Set<string>;
 
@@ -128,16 +125,15 @@ const rule: GraphQLESLintRule = {
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const reachableTypes = getReachableTypes(schema);
-    const selector = KINDS.join(',');
 
     return {
-      [selector](node: GraphQLESTreeNode<ValueOf<AllowedKindToNode>>) {
-        const typeName = node.name.value;
+      [`:matches(${KINDS}) > .name`](node: GraphQLESTreeNode<NameNode>) {
+        const typeName = node.value;
 
         if (!reachableTypes.has(typeName)) {
-          const type = lowerCase(node.kind.replace(/(Extension|Definition)$/, ''));
+          const type = lowerCase(node.parent.kind.replace(/(Extension|Definition)$/, ''));
           context.report({
-            node: node.name,
+            node,
             messageId: RULE_ID,
             data: {
               type: type[0].toUpperCase() + type.slice(1),
@@ -146,7 +142,7 @@ const rule: GraphQLESLintRule = {
             suggest: [
               {
                 desc: `Remove \`${typeName}\``,
-                fix: fixer => fixer.remove(node as any),
+                fix: fixer => fixer.remove(node.parent as any),
               },
             ],
           });

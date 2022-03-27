@@ -20,7 +20,7 @@ import type { SourceLocation, Comment } from 'estree';
 import type { AST } from 'eslint';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRuleListener } from '../testkit';
 import { ARRAY_DEFAULT_OPTIONS } from '../utils';
 

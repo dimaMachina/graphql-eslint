@@ -1,5 +1,5 @@
 import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRule } from '../types';
 
 const rule: GraphQLESLintRule = {

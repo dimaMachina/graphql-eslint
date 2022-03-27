@@ -1,4 +1,4 @@
-import { GraphQLRuleTester } from '../src/testkit';
+import { GraphQLRuleTester } from '../src';
 import rule from '../src/rules/require-deprecation-reason';
 
 const ruleTester = new GraphQLRuleTester();
@@ -21,14 +21,14 @@ ruleTester.runGraphQLTests('require-deprecation-reason', rule, {
 
       enum testEnum {
         item1 @authorized
-        item2 @deprecated(reason: "Reason")
+        item2 @deprecated(reason: 0)
         item3
       }
 
       interface testInterface {
         field1: String @authorized
         field2: Number
-        field3: String @deprecated(reason: "Reason")
+        field3: String @deprecated(reason: 1.5)
       }
     `,
   ],

@@ -11,24 +11,19 @@ import {
 } from 'graphql';
 import type * as ESTree from 'estree';
 import { asArray } from '@graphql-tools/utils';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  requireGraphQLSchemaFromContext,
+  requireSiblingsOperations,
+  englishJoinWords,
+} from '../utils';
 import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types';
-import { getBaseType, GraphQLESTreeNode } from '../estree-parser';
+import { getBaseType, GraphQLESTreeNode } from '../estree-converter';
 
 export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
 
 const RULE_ID = 'require-id-when-available';
 const DEFAULT_ID_FIELD_NAME = 'id';
-
-declare namespace Intl {
-  class ListFormat {
-    constructor(locales: string, options: any);
-
-    public format: (items: [string]) => string;
-  }
-}
-
-const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);
 
 const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {

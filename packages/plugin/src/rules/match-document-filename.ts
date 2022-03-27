@@ -3,7 +3,7 @@ import { existsSync } from 'fs';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { CaseStyle as _CaseStyle, convertCase, REPORT_ON_FIRST_CHARACTER } from '../utils';
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 
 type CaseStyle = _CaseStyle | 'matchDocumentStyle';
 

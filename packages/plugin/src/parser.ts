@@ -1,7 +1,7 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
-import { GraphQLError } from 'graphql';
+import { GraphQLError, GraphQLSchema } from 'graphql';
 import debugFactory from 'debug';
-import { convertToESTree, extractComments, extractTokens } from './estree-parser';
+import { convertToESTree, extractComments, extractTokens } from './estree-converter';
 import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { getSchema } from './schema';
 import { getSiblingOperations } from './sibling-operations';
@@ -13,16 +13,16 @@ const debug = debugFactory('graphql-eslint:parser');
 debug('cwd %o', process.cwd());
 
 export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
-  const filePath = options.filePath || '';
-  const realFilepath = filePath && getOnDiskFilepath(filePath);
-
-  const gqlConfig = loadGraphQLConfig(options);
-  const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
-
-  const schema = getSchema(projectForFile, options);
-  const siblingOperations = getSiblingOperations(projectForFile);
-
   try {
+    const filePath = options.filePath || '';
+    const realFilepath = filePath && getOnDiskFilepath(filePath);
+
+    const gqlConfig = loadGraphQLConfig(options);
+    const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
+
+    const schema = getSchema(projectForFile, options);
+    const siblingOperations = getSiblingOperations(projectForFile);
+
     const { document } = parseGraphQLSDL(filePath, code, {
       ...options.graphQLParserOptions,
       noLocation: false,
@@ -30,7 +30,7 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
 
     const comments = extractComments(document.loc);
     const tokens = extractTokens(filePath, code);
-    const rootTree = convertToESTree(document, schema);
+    const rootTree = convertToESTree(document, schema instanceof GraphQLSchema ? schema : null);
 
     return {
       services: {
@@ -47,19 +47,19 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
         body: [rootTree as any],
       },
     };
-  } catch (e) {
-    e.message = `[graphql-eslint] ${e.message}`;
+  } catch (error) {
+    error.message = `[graphql-eslint] ${error.message}`;
     // In case of GraphQL parser error, we report it to ESLint as a parser error that matches the requirements
     // of ESLint. This will make sure to display it correctly in IDEs and lint results.
-    if (e instanceof GraphQLError) {
+    if (error instanceof GraphQLError) {
       const eslintError = {
-        index: e.positions[0],
-        lineNumber: e.locations[0].line,
-        column: e.locations[0].column,
-        message: e.message,
+        index: error.positions[0],
+        lineNumber: error.locations[0].line,
+        column: error.locations[0].column,
+        message: error.message,
       };
       throw eslintError;
     }
-    throw e;
+    throw error;
   }
 }

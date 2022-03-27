@@ -1,5 +1,5 @@
 import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-parser';
+import { GraphQLESTreeNode } from '../estree-converter';
 import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { NON_OBJECT_TYPES } from './relay-connection-types';
 import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils';

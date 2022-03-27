@@ -35,12 +35,12 @@ ruleTester.runGraphQLTests('unique-operation-name', rule, {
     {
       ...SIBLING_OPERATIONS(TEST_OPERATION),
       code: 'query test { bar }',
-      errors: [{ messageId: 'UNIQUE_OPERATION_NAME' }],
+      errors: [{ messageId: 'unique-operation-name' }],
     },
     {
       ...SIBLING_OPERATIONS(TEST_OPERATION, 'query test { bar2 }'),
       code: 'query test { bar }',
-      errors: [{ messageId: 'UNIQUE_OPERATION_NAME' }],
+      errors: [{ messageId: 'unique-operation-name' }],
     },
   ],
 });
