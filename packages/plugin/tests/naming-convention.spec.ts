@@ -140,6 +140,26 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
         },
       ],
     },
+    {
+      name: 'should allow single letter for camelCase',
+      code: 'type t',
+      options: [{ ObjectTypeDefinition: 'camelCase' }]
+    },
+    {
+      name: 'should allow single letter for PascalCase',
+      code: 'type T',
+      options: [{ ObjectTypeDefinition: 'PascalCase' }]
+    },
+    {
+      name: 'should allow single letter for snake_case',
+      code: 'type t',
+      options: [{ ObjectTypeDefinition: 'snake_case' }]
+    },
+    {
+      name: 'should allow single letter for UPPER_CASE',
+      code: 'type T',
+      options: [{ ObjectTypeDefinition: 'UPPER_CASE' }]
+    }
   ],
   invalid: [
     {
