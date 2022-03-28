@@ -2,11 +2,9 @@ name: Tests
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   lint:
@@ -17,40 +15,45 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Use Node
         uses: actions/setup-node@master
         with:
           node-version: 16
+
       - name: Cache Yarn
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-16-8-16-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{ runner.os }}-16-8-16-node-modules-${{ hashFiles('yarn.lock') }}
-            ${{ runner.os }}-16-8-16-node-modules-
-      - name: Install Dependencies using Yarn
-        run: yarn install && git checkout yarn.lock
+            ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-16-8-16-node-modules-
+
+      - name: Install Dependencies
+        run: yarn
+
       - name: Lint
         run: yarn lint
+
   typecheck:
     name: TypeScript Type Checking
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        graphql_version:
-          # - 14
-          - 15
-          - 16
+        graphql_version: [15, 16]
+
     steps:
       - name: Checkout Master
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Use Node
         uses: actions/setup-node@master
         with:
           node-version: 16
+
       - name: Cache Yarn
         uses: actions/cache@v3
         with:
@@ -59,12 +62,16 @@ jobs:
           restore-keys: |
             ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-
+
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
-      - name: Install Dependencies using Yarn
-        run: yarn install && git checkout yarn.lock
+
+      - name: Install Dependencies
+        run: yarn
+
       - name: Build
         run: yarn build
+
       - name: Upload build artifact
         uses: actions/upload-artifact@master
         with:
@@ -80,19 +87,19 @@ jobs:
       matrix:
         node_version: [12, 16]
         eslint_version: [7.32.0, 8]
-        graphql_version:
-          # - 14
-          - 15
-          - 16
+        graphql_version: [15, 16]
+
     steps:
       - name: Checkout Master
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Use Node ${{matrix.node_version}}
         uses: actions/setup-node@master
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: ${{matrix.node_version}}
+
       - name: Cache Yarn
         uses: actions/cache@v3
         with:
@@ -101,12 +108,16 @@ jobs:
           restore-keys: |
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-
+
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
+        run: node scripts/match-graphql.mjs ${{matrix.graphql_version}}
+
       - name: Use ESLint v${{matrix.eslint_version}}
         run: node scripts/match-eslint.mjs ${{matrix.eslint_version}}
-      - name: Install Dependencies using Yarn
-        run: yarn install && git checkout yarn.lock
+
+      - name: Install Dependencies
+        run: yarn
+
       - name: Cache Jest
         uses: actions/cache@v3
         with:
@@ -115,6 +126,7 @@ jobs:
           restore-keys: |
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-jest-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-jest-
+
       # We need build for examples.spec.ts test
       # Otherwise we'll get error - Cannot find module 'node_modules/@graphql-eslint/eslint-plugin/dist/index.js'
       - name: Download build artifact
@@ -122,6 +134,7 @@ jobs:
         with:
           name: build-artifact
           path: packages/plugin/dist
+
       - name: Test
         run: yarn test
         env:

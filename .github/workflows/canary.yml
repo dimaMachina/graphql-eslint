@@ -2,50 +2,71 @@ name: Canary Release
 
 on:
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
+  changes:
+    name: Check Changeset
+    runs-on: ubuntu-latest
+    outputs:
+      # Set job outputs to value from filter step
+      wasChangesetChanged: ${{steps.filter.outputs.changeset}}
+    steps:
+      - name: Check if changeset has been modified
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            changeset:
+              - added|modified: .changeset/*.md
   publish-canary:
     name: Publish Canary
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: changes
+    if: github.event.pull_request.head.repo.full_name == github.repository && needs.changes.outputs.wasChangesetChanged == 'true'
     steps:
       - name: Checkout Master
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Use Node
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: 16
+
       - name: Configure Git Credentials
         run: |
           git config --global user.email "theguild-bot@users.noreply.github.com"
           git config --global user.name "theguild-bot"
           echo "machine github.com login theguild-bot password ${{secrets.GH_API_TOKEN}}" > ~/.netrc
+
       - name: Setup NPM credentials
         run: echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+
       - name: Cache Yarn
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-16-8-16-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{ runner.os }}-16-8-16-node-modules-${{ hashFiles('yarn.lock') }}
-            ${{ runner.os }}-16-8-16-node-modules-
-      - name: Install Dependencies using Yarn
-        run: yarn install && git checkout yarn.lock && yarn patch-package
+            ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-16-8-16-node-modules-
+
+      - name: Install Dependencies
+        run: yarn
+
       - name: Release Canary
         id: canary
         uses: 'kamilkisiela/release-canary@master'
         if: github.repository == 'B2o5T/graphql-eslint'
         with:
-          npm-token: ${{ secrets.NODE_AUTH_TOKEN }}
+          npm-token: ${{secrets.NODE_AUTH_TOKEN}}
           npm-script: 'yarn release:canary'
           changesets: true
+
       - name: Publish a message
         if: steps.canary.outputs.released
         uses: 'kamilkisiela/pr-comment@master'
@@ -53,17 +74,17 @@ jobs:
           message: |
             The latest changes of this PR are available as alpha in npm (based on the declared `changesets`):
             ```
-            ${{ steps.canary.outputs.changesetsPublishedPackages}}
+            ${{steps.canary.outputs.changesetsPublishedPackages}}
             ```
-          bot-token: ${{ secrets.GH_API_TOKEN }}
-          bot: 'theguild-bot'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish a empty message
+          bot-token: ${{secrets.GH_API_TOKEN}}
+          bot: theguild-bot
+          github-token: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Publish an empty message
         if: steps.canary.outputs.released == 'false'
         uses: 'kamilkisiela/pr-comment@master'
         with:
-          message: |
-            The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.
-          bot-token: ${{ secrets.GH_API_TOKEN }}
-          bot: 'theguild-bot'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          message: The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.
+          bot-token: ${{secrets.GH_API_TOKEN}}
+          bot: theguild-bot
+          github-token: ${{secrets.GITHUB_TOKEN}}
