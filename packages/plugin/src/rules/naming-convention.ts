@@ -30,8 +30,8 @@ type AllowedStyle = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
 const StyleToRegex: Record<AllowedStyle, RegExp> = {
   camelCase: /^[a-z][\dA-Za-z]*$/,
   PascalCase: /^[A-Z][\dA-Za-z]*$/,
-  snake_case: /^[a-z][\d_a-z]*[\da-z]$/,
-  UPPER_CASE: /^[A-Z][\dA-Z_]*[\dA-Z]$/,
+  snake_case: /^[a-z][\d_a-z]*[\da-z]*$/,
+  UPPER_CASE: /^[A-Z][\dA-Z_]*[\dA-Z]*$/,
 };
 
 const ALLOWED_KINDS = Object.keys(KindToDisplayName).sort() as AllowedKind[];
