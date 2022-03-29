@@ -1,5 +1,23 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.0
+
+### Minor Changes
+
+- 7251269: feat: new rule `relay-connection-types`\
+  feat: new rule `relay-edge-types`\
+  feat: new rule `relay-page-info`\
+  feat: new rule `relay-arguments`\
+  feat: new config `plugin:@graphql-eslint/relay`\
+  fix: adjust suggestion fix location for code-files
+- edbec90: feat: update `graphql-config` to fix loading schema via url
+
+### Patch Changes
+
+- 4bcee4a: fix: surface the original error while loading schema in ESLint server\
+  fix: clarify error message for outdated version of `graphql` package
+- 3e821de: fix: allow single letter for snake_case and UPPER_CASE in `naming-convention` rule
+
 ## 3.9.1
 
 ### Patch Changes
