@@ -35,13 +35,13 @@
   },
   "dependencies": {
     "@babel/code-frame": "7.16.7",
-    "@graphql-tools/code-file-loader": "7.2.8",
-    "@graphql-tools/graphql-tag-pluck": "7.2.0",
-    "@graphql-tools/utils": "8.6.5",
+    "@graphql-tools/code-file-loader": "^7.2.8",
+    "@graphql-tools/graphql-tag-pluck": "^7.2.0",
+    "@graphql-tools/utils": "^8.6.5",
     "chalk": "4.1.2",
     "debug": "4.3.4",
     "fast-glob": "3.2.11",
-    "graphql-config": "4.1.0",
+    "graphql-config": "^4.2.0",
     "graphql-depth-limit": "1.1.0",
     "lodash.lowercase": "4.3.0"
   },
