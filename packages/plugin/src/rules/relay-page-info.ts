@@ -21,7 +21,7 @@ const rule: GraphQLESLintRule = {
         '',
         '- `PageInfo` must be an Object type',
         '- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, that return non-null Boolean',
-        '- `PageInfo` must contain fields `startCursor` and `endCursor`, that return either String, Scalar, or a non-null wrapper around one of those types',
+        '- `PageInfo` must contain fields `startCursor` and `endCursor`, that return either String or Scalar, which can be null if there are no results',
       ].join('\n'),
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
@@ -70,30 +70,25 @@ const rule: GraphQLESLintRule = {
           typeName: 'Boolean' | 'String'
         ): void => {
           const field = fieldMap[fieldName];
-          const isStringType = typeName === 'String';
-
           let isAllowedType = false;
+
           if (field) {
-            let type = field.gqlType;
+            const type = field.gqlType;
             if (typeName === 'Boolean') {
               isAllowedType =
                 type.kind === Kind.NON_NULL_TYPE &&
                 type.gqlType.kind === Kind.NAMED_TYPE &&
                 type.gqlType.name.value === 'Boolean';
-            } else {
-              if (type.kind === Kind.NON_NULL_TYPE) {
-                type = type.gqlType;
-              }
-              if (type.kind === Kind.NAMED_TYPE) {
-                isAllowedType = type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
-              }
+            } else if (type.kind === Kind.NAMED_TYPE) {
+              isAllowedType = type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
             }
           }
 
           if (!isAllowedType) {
-            const returnType = isStringType
-              ? 'either String, Scalar, or a non-null wrapper around one of those types'
-              : 'non-null Boolean';
+            const returnType =
+              typeName === 'Boolean'
+                ? 'non-null Boolean'
+                : 'either String or Scalar, which can be null if there are no results';
             context.report({
               node: field ? field.name : node.name,
               message: field
