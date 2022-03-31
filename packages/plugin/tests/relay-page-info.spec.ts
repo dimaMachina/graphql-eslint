@@ -18,8 +18,8 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
       type PageInfo {
         hasPreviousPage: Boolean!
         hasNextPage: Boolean!
-        startCursor: String!
-        endCursor: String # can be null
+        startCursor: String
+        endCursor: String
       }
     `),
     {
@@ -28,8 +28,8 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         type PageInfo {
           hasPreviousPage: Boolean!
           hasNextPage: Boolean!
-          startCursor: Int # can be null
-          endCursor: Float!
+          startCursor: Int
+          endCursor: Float
         }
       `),
     },
@@ -61,8 +61,8 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         extend input PageInfo {
           hasPreviousPage: Boolean!
           hasNextPage: Boolean!
-          startCursor: String!
-          endCursor: String!
+          startCursor: String
+          endCursor: String
         }
       `),
       errors: 2,
@@ -87,8 +87,8 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         extend interface PageInfo {
           hasPreviousPage: Boolean!
           hasNextPage: Boolean!
-          startCursor: String!
-          endCursor: String!
+          startCursor: String
+          endCursor: String
         }
       `),
       errors: 2,
@@ -100,8 +100,8 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         extend type PageInfo {
           hasPreviousPage: Boolean!
           hasNextPage: Boolean!
-          startCursor: String!
-          endCursor: String!
+          startCursor: String
+          endCursor: String
         }
       `),
       errors: 4,
