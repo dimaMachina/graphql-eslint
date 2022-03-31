@@ -9,7 +9,7 @@ Set of rules to follow Relay specification for Connection types.
 
 - Any type whose name ends in "Connection" is considered by spec to be a `Connection type`
 - Connection type must be an Object type
-- Connection type must contain a field `edges` that return a list type which wraps an edge type
+- Connection type must contain a field `edges` that return a list type that wraps an edge type
 - Connection type must contain a field `pageInfo` that return a non-null `PageInfo` Object type
 
 ## Usage Examples
