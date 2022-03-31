@@ -74,25 +74,26 @@ const rule: GraphQLESLintRule = {
 
           let isAllowedType = false;
           if (field) {
-            const type = field.gqlType;
+            let type = field.gqlType;
             if (typeName === 'Boolean') {
               isAllowedType =
                 type.kind === Kind.NON_NULL_TYPE &&
                 type.gqlType.kind === Kind.NAMED_TYPE &&
                 type.gqlType.name.value === 'Boolean';
             } else {
+              if (type.kind === Kind.NON_NULL_TYPE) {
+                type = type.gqlType;
+              }
               if (type.kind === Kind.NAMED_TYPE) {
                 isAllowedType = type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
-              } else if (type.kind === Kind.NON_NULL_TYPE) {
-                isAllowedType =
-                  type.gqlType.kind === Kind.NAMED_TYPE &&
-                  (type.gqlType.name.value === 'String' || isScalarType(schema.getType(type.gqlType.name.value)));
               }
             }
           }
 
           if (!isAllowedType) {
-            const returnType = isStringType ? 'either String, Scalar, or a non-null wrapper around one of those types' : 'non-null Boolean';
+            const returnType = isStringType
+              ? 'either String, Scalar, or a non-null wrapper around one of those types'
+              : 'non-null Boolean';
             context.report({
               node: field ? field.name : node.name,
               message: field
