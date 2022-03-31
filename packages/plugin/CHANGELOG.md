@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.1
+
+### Patch Changes
+
+- cf687a5: [relay-page-info]: allow nullable `startCursor` and `endCursor` if there are no results
+
 ## 3.10.0
 
 ### Minor Changes
