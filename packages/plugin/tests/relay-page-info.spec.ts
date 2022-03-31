@@ -19,7 +19,7 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         hasPreviousPage: Boolean!
         hasNextPage: Boolean!
         startCursor: String!
-        endCursor: String!
+        endCursor: String # can be null
       }
     `),
     {
@@ -28,7 +28,7 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
         type PageInfo {
           hasPreviousPage: Boolean!
           hasNextPage: Boolean!
-          startCursor: Int!
+          startCursor: Int # can be null
           endCursor: Float!
         }
       `),
@@ -110,8 +110,8 @@ ruleTester.runGraphQLTests('relay-page-info', rule, {
       name: 'when fields is missing or incorrect return type',
       ...useSchema(/* GraphQL */ `
         type PageInfo {
-          hasPreviousPage: Boolean
-          startCursor: String
+          hasPreviousPage: [Boolean!]!
+          startCursor: [String]
         }
       `),
       errors: 4,

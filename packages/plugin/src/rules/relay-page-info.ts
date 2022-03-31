@@ -1,5 +1,5 @@
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import type { GraphQLESLintRule } from '../types';
+import type { GraphQLESTreeNode } from '../estree-converter';
 import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { NON_OBJECT_TYPES } from './relay-connection-types';
 import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils';
@@ -20,8 +20,8 @@ const rule: GraphQLESLintRule = {
         'Set of rules to follow Relay specification for `PageInfo` object.',
         '',
         '- `PageInfo` must be an Object type',
-        '- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, which return non-null Boolean',
-        '- `PageInfo` must contain fields `startCursor` and `endCursor`, which return non-null String or Scalar',
+        '- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, that return non-null Boolean',
+        '- `PageInfo` must contain fields `startCursor` and `endCursor`, that return either String, Scalar, or a non-null wrapper around one of those types',
       ].join('\n'),
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
@@ -70,22 +70,35 @@ const rule: GraphQLESLintRule = {
           typeName: 'Boolean' | 'String'
         ): void => {
           const field = fieldMap[fieldName];
-          const hasField = Boolean(field);
           const isStringType = typeName === 'String';
-          const isAllowedNonNullType =
-            hasField &&
-            field.gqlType.kind === Kind.NON_NULL_TYPE &&
-            field.gqlType.gqlType.kind === Kind.NAMED_TYPE &&
-            (field.gqlType.gqlType.name.value === typeName ||
-              (typeName === 'String' && isScalarType(schema.getType(field.gqlType.gqlType.name.value))));
 
-          if (!isAllowedNonNullType) {
-            const returnType = isStringType ? 'String or Scalar' : typeName;
+          let isAllowedType = false;
+          if (field) {
+            let type = field.gqlType;
+            if (typeName === 'Boolean') {
+              isAllowedType =
+                type.kind === Kind.NON_NULL_TYPE &&
+                type.gqlType.kind === Kind.NAMED_TYPE &&
+                type.gqlType.name.value === 'Boolean';
+            } else {
+              if (type.kind === Kind.NON_NULL_TYPE) {
+                type = type.gqlType;
+              }
+              if (type.kind === Kind.NAMED_TYPE) {
+                isAllowedType = type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
+              }
+            }
+          }
+
+          if (!isAllowedType) {
+            const returnType = isStringType
+              ? 'either String, Scalar, or a non-null wrapper around one of those types'
+              : 'non-null Boolean';
             context.report({
-              node: hasField ? field.name : node.name,
-              message: hasField
-                ? `Field \`${fieldName}\` must return non-null ${returnType}.`
-                : `\`PageInfo\` must contain a field \`${fieldName}\`, that return non-null ${returnType}.`,
+              node: field ? field.name : node.name,
+              message: field
+                ? `Field \`${fieldName}\` must return ${returnType}.`
+                : `\`PageInfo\` must contain a field \`${fieldName}\`, that return ${returnType}.`,
             });
           }
         };

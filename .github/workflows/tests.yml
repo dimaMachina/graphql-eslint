@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Use Node
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -50,7 +50,7 @@ jobs:
           fetch-depth: 0
 
       - name: Use Node
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -73,7 +73,7 @@ jobs:
         run: yarn build
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3
         with:
           name: build-artifact
           path: packages/plugin/dist
@@ -96,7 +96,7 @@ jobs:
           fetch-depth: 0
 
       - name: Use Node ${{matrix.node_version}}
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node_version}}
 
@@ -130,7 +130,7 @@ jobs:
       # We need build for examples.spec.ts test
       # Otherwise we'll get error - Cannot find module 'node_modules/@graphql-eslint/eslint-plugin/dist/index.js'
       - name: Download build artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: packages/plugin/dist
