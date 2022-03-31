@@ -60,7 +60,7 @@ jobs:
 
       - name: Release Canary
         id: canary
-        uses: 'kamilkisiela/release-canary@master'
+        uses: kamilkisiela/release-canary@master
         if: github.repository == 'B2o5T/graphql-eslint'
         with:
           npm-token: ${{secrets.NODE_AUTH_TOKEN}}
@@ -69,7 +69,7 @@ jobs:
 
       - name: Publish a message
         if: steps.canary.outputs.released
-        uses: 'kamilkisiela/pr-comment@master'
+        uses: kamilkisiela/pr-comment@master
         with:
           message: |
             The latest changes of this PR are available as alpha in npm (based on the declared `changesets`):
@@ -82,7 +82,7 @@ jobs:
 
       - name: Publish an empty message
         if: steps.canary.outputs.released == 'false'
-        uses: 'kamilkisiela/pr-comment@master'
+        uses: kamilkisiela/pr-comment@master
         with:
           message: The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.
           bot-token: ${{secrets.GH_API_TOKEN}}

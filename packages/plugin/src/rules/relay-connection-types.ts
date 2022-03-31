@@ -1,6 +1,6 @@
 import { Kind, ObjectTypeDefinitionNode, TypeNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import type { GraphQLESLintRule } from '../types';
+import type { GraphQLESTreeNode } from '../estree-converter';
 
 const MUST_BE_OBJECT_TYPE = 'MUST_BE_OBJECT_TYPE';
 const MUST_CONTAIN_FIELD_EDGES = 'MUST_CONTAIN_FIELD_EDGES';
@@ -38,7 +38,7 @@ const rule: GraphQLESLintRule = {
         '',
         '- Any type whose name ends in "Connection" is considered by spec to be a `Connection type`',
         '- Connection type must be an Object type',
-        '- Connection type must contain a field `edges` that return a list type which wraps an edge type',
+        '- Connection type must contain a field `edges` that return a list type that wraps an edge type',
         '- Connection type must contain a field `pageInfo` that return a non-null `PageInfo` Object type',
       ].join('\n'),
       url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/relay-connection-types.md',
