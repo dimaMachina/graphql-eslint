@@ -48,7 +48,7 @@ describe('Examples', () => {
   it('should work on `.js` files', () => {
     const cwd = join(process.cwd(), 'examples/code-file');
     const results = getEslintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
+    expect(countErrors(results)).toBe(3);
     testSnapshot(results);
   });
 

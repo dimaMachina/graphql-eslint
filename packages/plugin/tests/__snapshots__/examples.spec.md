@@ -54,6 +54,15 @@ Array [
 exports[`Examples should work on \`.js\` files 1`] = `
 Array [
   Object {
+    filePath: examples/code-file/not-query.js,
+    messages: Array [
+      Object {
+        message: Unexpected console statement.,
+        ruleId: no-console,
+      },
+    ],
+  },
+  Object {
     filePath: examples/code-file/query.js,
     messages: Array [
       Object {
