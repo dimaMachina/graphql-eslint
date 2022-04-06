@@ -13,7 +13,7 @@ export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
     if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
-      return [];
+      return [code];
     }
     const extractedDocuments = parseCode({
       code,
@@ -32,11 +32,11 @@ export const processor: Linter.Processor<Block | string> = {
     }));
     blocksMap.set(filePath, blocks);
 
-    return [...blocks, code /* For eslint-plugin-prettier */];
+    return [code, ...blocks];
   },
   postprocess(messages, filePath) {
-    const blocks = blocksMap.get(filePath);
-    for (let i = 0; i < blocks?.length; i += 1) {
+    const blocks = blocksMap.get(filePath) || [];
+    for (let i = 0; i < blocks.length; i += 1) {
       const { lineOffset, offset } = blocks[i];
 
       for (const message of messages[i]) {

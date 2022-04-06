@@ -9,6 +9,9 @@ module.exports = {
         node: true,
         es6: true,
       },
+      rules: {
+        'no-console': 'error',
+      },
     },
     {
       files: ['*.graphql'],

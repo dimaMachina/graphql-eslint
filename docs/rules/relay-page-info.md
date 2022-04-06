@@ -21,8 +21,8 @@ Set of rules to follow Relay specification for `PageInfo` object.
 type PageInfo {
   hasPreviousPage: Boolean!
   hasNextPage: Boolean!
-  startCursor: String!
-  endCursor: String!
+  startCursor: String
+  endCursor: String
 }
 ```
 

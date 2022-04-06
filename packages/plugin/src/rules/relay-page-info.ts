@@ -31,8 +31,8 @@ const rule: GraphQLESLintRule = {
             type PageInfo {
               hasPreviousPage: Boolean!
               hasNextPage: Boolean!
-              startCursor: String!
-              endCursor: String!
+              startCursor: String
+              endCursor: String
             }
           `,
         },
