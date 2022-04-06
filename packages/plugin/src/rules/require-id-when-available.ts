@@ -70,6 +70,13 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
                 name
               }
             }
+
+            # Selecting \`id\` with an alias is also valid
+            query {
+              user {
+                id: name
+              }
+            }
           `,
         },
       ],
@@ -164,6 +171,10 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       function hasIdField({ selections }: typeof node): boolean {
         return selections.some(selection => {
           if (selection.kind === Kind.FIELD) {
+            if (selection.alias && idNames.includes(selection.alias.value)) {
+              return true;
+            }
+
             return idNames.includes(selection.name.value);
           }
 
