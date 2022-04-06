@@ -1,5 +1,12 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.2
+
+### Patch Changes
+
+- daa04bb: feat: support select `id` field with an alias in `require-id-when-available` rule
+- 2efc772: fix: processor should always return code string in preprocess method
+
 ## 3.10.1
 
 ### Patch Changes
