@@ -70,6 +70,13 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
                 name
               }
             }
+
+            # Selecting \`id\` with an alias is also valid
+            query {
+              user {
+                id: name
+              }
+            }
           `,
         },
       ],
