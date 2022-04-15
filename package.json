@@ -50,7 +50,7 @@
     "jest": "27.5.1",
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
-    "lint-staged": "12.3.7",
+    "lint-staged": "12.3.8",
     "patch-package": "6.4.7",
     "prettier": "2.6.2",
     "rimraf": "3.0.2",
