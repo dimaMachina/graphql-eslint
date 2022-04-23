@@ -25,10 +25,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
-            ${{runner.os}}-16-8-16-node-modules-
+            ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-16-16-node-modules-
 
       - name: Install Dependencies
         run: yarn
@@ -58,10 +58,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
-            ${{runner.os}}-16-8-${{matrix.graphql_version}}-node-modules-
+            ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-
 
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
@@ -79,14 +79,13 @@ jobs:
           path: packages/plugin/dist
 
   test:
-    name: Testing on Node ${{matrix.node_version}} with ESLint v${{matrix.eslint_version}} and GraphQL v${{matrix.graphql_version}}
+    name: Testing on Node ${{matrix.node_version}} with GraphQL v${{matrix.graphql_version}} and ESLint v8
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: [typecheck]
     strategy:
       matrix:
         node_version: [12, 16]
-        eslint_version: [7.32.0, 8]
         graphql_version: [15, 16]
 
     steps:
@@ -104,16 +103,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
-            ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-${{matrix.graphql_version}}-node-modules-
+            ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-
 
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node scripts/match-graphql.mjs ${{matrix.graphql_version}}
-
-      - name: Use ESLint v${{matrix.eslint_version}}
-        run: node scripts/match-eslint.mjs ${{matrix.eslint_version}}
 
       - name: Install Dependencies
         run: yarn
@@ -122,10 +118,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .cache/jest
-          key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-jest-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-jest-${{hashFiles('yarn.lock')}}
-            ${{runner.os}}-${{matrix.node_version}}-${{matrix.eslint_version}}-jest-
+            ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-${{matrix.node_version}}-jest-
 
       # We need build for examples.spec.ts test
       # Otherwise we'll get error - Cannot find module 'node_modules/@graphql-eslint/eslint-plugin/dist/index.js'
