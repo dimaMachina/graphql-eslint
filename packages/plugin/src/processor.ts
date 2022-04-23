@@ -6,7 +6,7 @@ type Block = Linter.ProcessorFile & {
   offset: number;
 };
 
-const RELEVANT_KEYWORDS = ['gql`', 'graphql`', '/* GraphQL */'] as const;
+const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'] as const;
 const blocksMap = new Map<string, Block[]>();
 
 export const processor: Linter.Processor<Block | string> = {
@@ -32,7 +32,7 @@ export const processor: Linter.Processor<Block | string> = {
     }));
     blocksMap.set(filePath, blocks);
 
-    return [code, ...blocks];
+    return [...blocks, code];
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath) || [];

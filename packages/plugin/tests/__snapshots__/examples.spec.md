@@ -129,8 +129,8 @@ Array [
       Object {
         column: 3,
         endColumn: 8,
-        endLine: 12,
-        line: 12,
+        endLine: 4,
+        line: 4,
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         messageId: no-anonymous-operations,
         nodeType: null,
@@ -141,8 +141,8 @@ Array [
             desc: Rename to \`user\`,
             fix: Object {
               range: Array [
-                164,
-                164,
+                77,
+                77,
               ],
               text:  user,
             },
@@ -152,8 +152,8 @@ Array [
       Object {
         column: 9,
         endColumn: 18,
-        endLine: 2,
-        line: 2,
+        endLine: 12,
+        line: 12,
         message: Operation "UserQuery" should not have "Query" suffix,
         nodeType: Name,
         ruleId: @graphql-eslint/naming-convention,
@@ -163,8 +163,8 @@ Array [
             desc: Rename to \`User\`,
             fix: Object {
               range: Array [
-                9,
-                18,
+                165,
+                174,
               ],
               text: User,
             },
@@ -315,16 +315,16 @@ Array [
       Object {
         column: 33,
         endColumn: 58,
-        endLine: 3,
+        endLine: 2,
         fix: Object {
           range: Array [
-            150,
-            175,
+            75,
+            100,
           ],
           text: 
   query User($userId: ,
         },
-        line: 3,
+        line: 2,
         message: Replace \`query·User($userId:······\` with \`⏎··query·User($userId:·\`,
         messageId: replace,
         nodeType: null,
@@ -334,15 +334,15 @@ Array [
       Object {
         column: 1,
         endColumn: 1,
-        endLine: 4,
+        endLine: 3,
         fix: Object {
           range: Array [
-            182,
-            182,
+            107,
+            107,
           ],
           text:   ,
         },
-        line: 4,
+        line: 3,
         message: Insert \`··\`,
         messageId: insert,
         nodeType: null,
@@ -352,15 +352,15 @@ Array [
       Object {
         column: 1,
         endColumn: 8,
-        endLine: 5,
+        endLine: 4,
         fix: Object {
           range: Array [
-            204,
-            211,
+            129,
+            136,
           ],
           text:       id,
         },
-        line: 5,
+        line: 4,
         message: Replace \`····id,\` with \`······id\`,
         messageId: replace,
         nodeType: null,
@@ -370,15 +370,15 @@ Array [
       Object {
         column: 1,
         endColumn: 10,
-        endLine: 6,
+        endLine: 5,
         fix: Object {
           range: Array [
-            212,
-            221,
+            137,
+            146,
           ],
           text:       name,
         },
-        line: 6,
+        line: 5,
         message: Replace \`····name,\` with \`······name\`,
         messageId: replace,
         nodeType: null,
@@ -388,15 +388,15 @@ Array [
       Object {
         column: 1,
         endColumn: 20,
-        endLine: 7,
+        endLine: 6,
         fix: Object {
           range: Array [
-            222,
-            241,
+            147,
+            166,
           ],
           text:       isViewerFriend,
         },
-        line: 7,
+        line: 6,
         message: Replace \`····isViewerFriend,\` with \`······isViewerFriend\`,
         messageId: replace,
         nodeType: null,
@@ -406,15 +406,15 @@ Array [
       Object {
         column: 1,
         endColumn: 30,
-        endLine: 8,
+        endLine: 7,
         fix: Object {
           range: Array [
-            242,
-            271,
+            167,
+            196,
           ],
           text:       profilePicture(size: 50),
         },
-        line: 8,
+        line: 7,
         message: Replace \`····profilePicture(size:·50)·\` with \`······profilePicture(size:·50)\`,
         messageId: replace,
         nodeType: null,
@@ -424,11 +424,29 @@ Array [
       Object {
         column: 7,
         endColumn: 7,
+        endLine: 8,
+        fix: Object {
+          range: Array [
+            205,
+            205,
+          ],
+          text:   ,
+        },
+        line: 8,
+        message: Insert \`··\`,
+        messageId: insert,
+        nodeType: null,
+        ruleId: prettier/prettier,
+        severity: 2,
+      },
+      Object {
+        column: 5,
+        endColumn: 5,
         endLine: 9,
         fix: Object {
           range: Array [
-            280,
-            280,
+            226,
+            226,
           ],
           text:   ,
         },
@@ -440,13 +458,13 @@ Array [
         severity: 2,
       },
       Object {
-        column: 5,
-        endColumn: 5,
+        column: 1,
+        endColumn: 1,
         endLine: 10,
         fix: Object {
           range: Array [
-            301,
-            301,
+            228,
+            228,
           ],
           text:   ,
         },
@@ -463,8 +481,8 @@ Array [
         endLine: 11,
         fix: Object {
           range: Array [
-            303,
-            303,
+            232,
+            232,
           ],
           text:   ,
         },
@@ -478,33 +496,15 @@ Array [
       Object {
         column: 1,
         endColumn: 1,
-        endLine: 12,
+        endLine: 13,
         fix: Object {
           range: Array [
-            307,
-            307,
+            235,
+            235,
           ],
           text:   ,
         },
-        line: 12,
-        message: Insert \`··\`,
-        messageId: insert,
-        nodeType: null,
-        ruleId: prettier/prettier,
-        severity: 2,
-      },
-      Object {
-        column: 1,
-        endColumn: 1,
-        endLine: 14,
-        fix: Object {
-          range: Array [
-            310,
-            310,
-          ],
-          text:   ,
-        },
-        line: 14,
+        line: 13,
         message: Insert \`··\`,
         messageId: insert,
         nodeType: null,
@@ -514,15 +514,15 @@ Array [
       Object {
         column: 1,
         endColumn: 7,
-        endLine: 15,
+        endLine: 14,
         fix: Object {
           range: Array [
-            346,
-            352,
+            271,
+            277,
           ],
           text:     uri,
         },
-        line: 15,
+        line: 14,
         message: Replace \`··uri,\` with \`····uri\`,
         messageId: replace,
         nodeType: null,
@@ -532,15 +532,15 @@ Array [
       Object {
         column: 1,
         endColumn: 9,
-        endLine: 16,
+        endLine: 15,
         fix: Object {
           range: Array [
-            353,
-            361,
+            278,
+            286,
           ],
           text:     width,
         },
-        line: 16,
+        line: 15,
         message: Replace \`··width,\` with \`····width\`,
         messageId: replace,
         nodeType: null,
@@ -550,11 +550,29 @@ Array [
       Object {
         column: 3,
         endColumn: 3,
+        endLine: 16,
+        fix: Object {
+          range: Array [
+            289,
+            289,
+          ],
+          text:   ,
+        },
+        line: 16,
+        message: Insert \`··\`,
+        messageId: insert,
+        nodeType: null,
+        ruleId: prettier/prettier,
+        severity: 2,
+      },
+      Object {
+        column: 1,
+        endColumn: 1,
         endLine: 17,
         fix: Object {
           range: Array [
-            364,
-            364,
+            296,
+            296,
           ],
           text:   ,
         },
@@ -566,35 +584,17 @@ Array [
         severity: 2,
       },
       Object {
-        column: 1,
-        endColumn: 1,
+        column: 2,
+        endColumn: 2,
         endLine: 18,
         fix: Object {
           range: Array [
-            371,
-            371,
-          ],
-          text:   ,
-        },
-        line: 18,
-        message: Insert \`··\`,
-        messageId: insert,
-        nodeType: null,
-        ruleId: prettier/prettier,
-        severity: 2,
-      },
-      Object {
-        column: 2,
-        endColumn: 2,
-        endLine: 19,
-        fix: Object {
-          range: Array [
-            374,
-            374,
+            299,
+            299,
           ],
           text: ;,
         },
-        line: 19,
+        line: 18,
         message: Insert \`;\`,
         messageId: insert,
         nodeType: null,
@@ -675,8 +675,8 @@ Array [
       Object {
         column: 3,
         endColumn: 8,
-        endLine: 2,
-        line: 2,
+        endLine: 5,
+        line: 5,
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         messageId: no-anonymous-operations,
         nodeType: null,
@@ -687,8 +687,8 @@ Array [
             desc: Rename to \`user\`,
             fix: Object {
               range: Array [
-                8,
-                8,
+                109,
+                109,
               ],
               text:  user,
             },
@@ -697,7 +697,8 @@ Array [
       },
       Object {
         column: 10,
-        line: 3,
+        endLine: null,
+        line: 6,
         message: Field \`user.id\` must be selected when it's available on a type.
 Include it in your selection set.,
         messageId: require-id-when-available,
@@ -709,8 +710,8 @@ Include it in your selection set.,
             desc: Add \`id\` selection,
             fix: Object {
               range: Array [
-                28,
-                28,
+                129,
+                129,
               ],
               text: id ,
             },
