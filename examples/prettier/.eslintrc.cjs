@@ -6,7 +6,6 @@ module.exports = {
       processor: '@graphql-eslint/graphql',
       extends: ['eslint:recommended', 'plugin:prettier/recommended'],
       env: {
-        node: true,
         es6: true,
       },
     },

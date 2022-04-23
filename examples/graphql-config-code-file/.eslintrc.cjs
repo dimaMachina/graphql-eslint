@@ -3,22 +3,18 @@ module.exports = {
   overrides: [
     {
       files: ['*.js'],
+      processor: '@graphql-eslint/graphql',
       extends: ['eslint:recommended'],
       env: {
-        node: true,
+        es6: true,
       },
     },
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
-      parserOptions: {
-        operations: ['query.graphql', 'fragment.graphql', 'fragment2.graphql'],
-        schema: 'schema.graphql',
-      },
       rules: {
-        '@graphql-eslint/require-id-when-available': ['error', { fieldName: '_id' }],
-        '@graphql-eslint/unique-fragment-name': 'error',
+        '@graphql-eslint/require-id-when-available': 'error',
         '@graphql-eslint/no-anonymous-operations': 'error',
         '@graphql-eslint/naming-convention': [
           'error',
@@ -30,8 +26,6 @@ module.exports = {
             },
           },
         ],
-        '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
-        '@graphql-eslint/require-description': ['error', { FieldDefinition: true }],
       },
     },
   ],

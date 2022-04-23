@@ -6,7 +6,7 @@ type Block = Linter.ProcessorFile & {
   offset: number;
 };
 
-const RELEVANT_KEYWORDS = ['gql`', 'graphql`', '/* GraphQL */'] as const;
+const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'] as const;
 const blocksMap = new Map<string, Block[]>();
 
 export const processor: Linter.Processor<Block | string> = {
@@ -32,7 +32,7 @@ export const processor: Linter.Processor<Block | string> = {
     }));
     blocksMap.set(filePath, blocks);
 
-    return [code, ...blocks];
+    return [...blocks, code /* source code must be provided and be last */];
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath) || [];
@@ -41,7 +41,10 @@ export const processor: Linter.Processor<Block | string> = {
 
       for (const message of messages[i]) {
         message.line += lineOffset;
-        message.endLine += lineOffset;
+        // endLine can not exist if only `loc: { start, column }` was provided to context.report
+        if (typeof message.endLine === 'number') {
+          message.endLine += lineOffset;
+        }
         if (message.fix) {
           message.fix.range[0] += offset;
           message.fix.range[1] += offset;
