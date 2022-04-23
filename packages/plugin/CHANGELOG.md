@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.3
+
+### Patch Changes
+
+- 8a3b584: fix broken report highlighting when processor is used
+
 ## 3.10.2
 
 ### Patch Changes
