@@ -2,6 +2,8 @@ import { spawnSync } from 'child_process';
 import { relative, join } from 'path';
 import type { ESLint } from 'eslint';
 
+const ROOT_CWD = process.cwd()
+
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: { fatalErrorCount: number } & ESLint.LintResult) => {
     if (curr.fatalErrorCount > 0) {
@@ -11,7 +13,7 @@ function countErrors(results: ESLint.LintResult[]): number {
   }, 0);
 }
 
-function getEslintOutput(cwd: string): ESLint.LintResult[] {
+function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
   const errorOutput = stderr.toString();
   if (errorOutput) {
@@ -26,11 +28,8 @@ function getEslintOutput(cwd: string): ESLint.LintResult[] {
 function testSnapshot(results: ESLint.LintResult[]): void {
   const normalizedResults = results
     .map(result => ({
-      filePath: relative(process.cwd(), result.filePath),
-      messages: result.messages.map(msg => ({
-        ruleId: msg.ruleId,
-        message: msg.message,
-      })),
+      filePath: relative(ROOT_CWD, result.filePath),
+      messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
 
@@ -39,36 +38,36 @@ function testSnapshot(results: ESLint.LintResult[]): void {
 
 describe('Examples', () => {
   it('should work on `.graphql` files', () => {
-    const cwd = join(process.cwd(), 'examples/basic');
-    const results = getEslintOutput(cwd);
+    const cwd = join(ROOT_CWD, 'examples/basic');
+    const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(6);
     testSnapshot(results);
   });
 
   it('should work on `.js` files', () => {
-    const cwd = join(process.cwd(), 'examples/code-file');
-    const results = getEslintOutput(cwd);
+    const cwd = join(ROOT_CWD, 'examples/code-file');
+    const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(3);
     testSnapshot(results);
   });
 
   it('should work with `graphql-config`', () => {
-    const cwd = join(process.cwd(), 'examples/graphql-config');
-    const results = getEslintOutput(cwd);
+    const cwd = join(ROOT_CWD, 'examples/graphql-config');
+    const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work with `graphql-config` on `.js` files', () => {
-    const cwd = join(process.cwd(), 'examples/graphql-config-code-file');
-    const results = getEslintOutput(cwd);
+    const cwd = join(ROOT_CWD, 'examples/graphql-config-code-file');
+    const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
-    const cwd = join(process.cwd(), 'examples/prettier');
-    const results = getEslintOutput(cwd);
+    const cwd = join(ROOT_CWD, 'examples/prettier');
+    const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(23);
     testSnapshot(results);
   });
