@@ -41,7 +41,10 @@ export const processor: Linter.Processor<Block | string> = {
 
       for (const message of messages[i]) {
         message.line += lineOffset;
-        message.endLine += lineOffset;
+        // endLine can not exist if only `loc: { start, column }` was provided
+        if (typeof message.endLine === 'number') {
+          message.endLine += lineOffset;
+        }
         if (message.fix) {
           message.fix.range[0] += offset;
           message.fix.range[1] += offset;
