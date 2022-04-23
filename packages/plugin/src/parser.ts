@@ -55,7 +55,7 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
       const eslintError = {
         index: error.positions[0],
         lineNumber: error.locations[0].line,
-        column: error.locations[0].column,
+        column: error.locations[0].column - 1,
         message: error.message,
       };
       throw eslintError;

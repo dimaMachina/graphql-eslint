@@ -32,7 +32,7 @@ export const processor: Linter.Processor<Block | string> = {
     }));
     blocksMap.set(filePath, blocks);
 
-    return [...blocks, code];
+    return [...blocks, code /* source code must be provided and be last */];
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath) || [];
@@ -41,7 +41,7 @@ export const processor: Linter.Processor<Block | string> = {
 
       for (const message of messages[i]) {
         message.line += lineOffset;
-        // endLine can not exist if only `loc: { start, column }` was provided
+        // endLine can not exist if only `loc: { start, column }` was provided to context.report
         if (typeof message.endLine === 'number') {
           message.endLine += lineOffset;
         }
