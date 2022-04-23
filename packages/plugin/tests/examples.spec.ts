@@ -47,7 +47,7 @@ describe('Examples', () => {
   it('should work on `.js` files', () => {
     const cwd = join(ROOT_CWD, 'examples/code-file');
     const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(3);
+    expect(countErrors(results)).toBe(4);
     testSnapshot(results);
   });
 
@@ -61,7 +61,7 @@ describe('Examples', () => {
   it('should work with `graphql-config` on `.js` files', () => {
     const cwd = join(ROOT_CWD, 'examples/graphql-config-code-file');
     const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
+    expect(countErrors(results)).toBe(3);
     testSnapshot(results);
   });
 

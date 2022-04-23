@@ -4,9 +4,6 @@ module.exports = {
     {
       files: ['*.js'],
       extends: ['eslint:recommended'],
-      env: {
-        node: true,
-      },
     },
     {
       files: ['*.graphql'],
