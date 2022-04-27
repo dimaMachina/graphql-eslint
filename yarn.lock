@@ -1916,10 +1916,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/node@*", "@types/node@16.11.30":
-  version "16.11.30"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.30.tgz#895ca1078aa682c78e0fe30280b952e69e48ab61"
-  integrity sha512-cw8NVA2xHXysO4dmSxePZybEoMWhnrimf5+b1vOh5SV7QB8ZnGm2yTvGllXuwwMQNYpYwGB4HCrVJkZD3o9Oew==
+"@types/node@*", "@types/node@16.11.31":
+  version "16.11.31"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.31.tgz#1dad8138efee6808809bb80f9e66bbe3e46c9277"
+  integrity sha512-wh/d0pcu/Ie2mqTIqh4tjd0mLAB4JWxOjHQtLN20HS7sjMHiV4Afr+90hITTyZcxowwha5wjv32jGEn1zkEFMg==
 
 "@types/node@^12.7.1":
   version "12.20.19"
