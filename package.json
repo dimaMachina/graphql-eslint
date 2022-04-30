@@ -23,8 +23,8 @@
     "prettier": "prettier --ignore-path .gitignore --write --list-different \"**/*.{ts,tsx,graphql,yml}\""
   },
   "devDependencies": {
-    "@babel/core": "7.17.9",
-    "@babel/preset-env": "7.16.11",
+    "@babel/core": "7.17.10",
+    "@babel/preset-env": "7.17.10",
     "@babel/preset-typescript": "7.16.7",
     "@changesets/cli": "2.22.0",
     "@swc/core": "1.2.173",
@@ -46,7 +46,7 @@
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-unicorn": "42.0.0",
     "husky": "7.0.4",
-    "jest": "28.0.2",
+    "jest": "28.0.3",
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
     "lint-staged": "12.4.1",
