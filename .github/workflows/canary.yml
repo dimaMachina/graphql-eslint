@@ -52,7 +52,6 @@ jobs:
           path: '**/node_modules'
           key: ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-16-16-node-modules-
 
       - name: Install Dependencies
@@ -61,7 +60,7 @@ jobs:
       - name: Release Canary
         id: canary
         uses: kamilkisiela/release-canary@master
-        if: github.repository == B2o5T/graphql-eslint
+        if: github.repository == 'B2o5T/graphql-eslint'
         with:
           npm-token: ${{secrets.NODE_AUTH_TOKEN}}
           npm-script: 'yarn release:canary'
@@ -76,15 +75,15 @@ jobs:
             ```
             ${{steps.canary.outputs.changesetsPublishedPackages}}
             ```
-          bot-token: ${{secrets.GH_API_TOKEN}}
           bot: theguild-bot
+          bot-token: ${{secrets.GH_API_TOKEN}}
           github-token: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish an empty message
         if: steps.canary.outputs.released == 'false'
         uses: kamilkisiela/pr-comment@master
         with:
-          message: The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.
-          bot-token: ${{secrets.GH_API_TOKEN}}
           bot: theguild-bot
+          bot-token: ${{secrets.GH_API_TOKEN}}
           github-token: ${{secrets.GITHUB_TOKEN}}
+          message: The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.

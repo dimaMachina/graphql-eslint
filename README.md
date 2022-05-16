@@ -147,17 +147,9 @@ To provide that, we are using `graphql-tools` loaders to load your sibling opera
 
 ### VSCode Integration
 
-By default, [ESLint VSCode plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) will not lint files with extensions other than `js`, `jsx`, `ts` and `tsx`.
+Use [ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) to integrate ESLint into VSCode.
 
-In order to enable it processing other extensions, add the following section in `settings.json` or workspace configuration.
-
-```json
-{
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"]
-}
-```
-
-Currently, you also need a GraphQL IDE extension for syntax highlighting installed (which may potentially have its own linting) - for example [GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
+For syntax highlighting you need a GraphQL extension (which may potentially have its own linting), for example [GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
 
 ### Disabling Rules
 

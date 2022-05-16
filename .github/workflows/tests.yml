@@ -27,7 +27,6 @@ jobs:
           path: '**/node_modules'
           key: ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-16-16-node-modules-
 
       - name: Install Dependencies
@@ -60,7 +59,6 @@ jobs:
           path: '**/node_modules'
           key: ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-
 
       - name: Use GraphQL v${{matrix.graphql_version}}
@@ -105,7 +103,6 @@ jobs:
           path: '**/node_modules'
           key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-
 
       - name: Use GraphQL v${{matrix.graphql_version}}
@@ -120,7 +117,6 @@ jobs:
           path: .cache/jest
           key: ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('yarn.lock')}}
             ${{runner.os}}-${{matrix.node_version}}-jest-
 
       # We need build for examples.spec.ts test
