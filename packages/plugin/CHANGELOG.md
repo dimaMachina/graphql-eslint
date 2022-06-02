@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.4
+
+### Patch Changes
+
+- 5593891: fix(known-directives): support `ignoreClientDirectives` for `OperationDefinition`
+
 ## 3.10.3
 
 ### Patch Changes
