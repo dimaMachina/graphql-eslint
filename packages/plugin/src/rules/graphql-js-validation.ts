@@ -10,6 +10,7 @@ import {
   validate,
   ASTVisitor,
   ExecutableDefinitionNode,
+  DirectiveNode,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
 import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
@@ -231,13 +232,15 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       if (ignoreClientDirectives.length === 0) {
         return documentNode;
       }
+
+      const filterDirectives = (node: { directives?: ReadonlyArray<DirectiveNode> }) => ({
+        ...node,
+        directives: node.directives.filter(directive => !ignoreClientDirectives.includes(directive.name.value)),
+      });
+
       return visit(documentNode, {
-        Field(node) {
-          return {
-            ...node,
-            directives: node.directives.filter(directive => !ignoreClientDirectives.includes(directive.name.value)),
-          };
-        },
+        Field: filterDirectives,
+        OperationDefinition: filterDirectives,
       });
     },
     {
