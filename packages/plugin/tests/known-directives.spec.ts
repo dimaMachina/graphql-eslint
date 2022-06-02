@@ -34,6 +34,14 @@ ruleTester.runGraphQLTests<[{ ignoreClientDirectives: string[] }]>('known-direct
       `,
       options: [{ ignoreClientDirectives: ['rest'] }],
     },
+    {
+      code: /* GraphQL */ `
+        query @api {
+          test
+        }
+      `,
+      options: [{ ignoreClientDirectives: ['api'] }],
+    },
   ],
   invalid: [
     {
