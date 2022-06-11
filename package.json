@@ -26,7 +26,7 @@
     "@babel/core": "7.17.10",
     "@babel/preset-env": "7.17.10",
     "@babel/preset-typescript": "7.16.7",
-    "@changesets/cli": "2.22.0",
+    "@changesets/cli": "2.23.0",
     "@swc/core": "1.2.183",
     "@swc/jest": "0.2.21",
     "@types/dedent": "0.7.0",
