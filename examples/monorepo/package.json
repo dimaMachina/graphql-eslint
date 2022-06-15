@@ -1,15 +1,14 @@
 {
-  "name": "@graphql-eslint/example-basic",
-  "private": true,
+  "name": "monorepo",
   "version": "0.0.1",
-  "repository": "https://github.com/B2o5T/graphql-eslint",
-  "author": "Dotan Simha <dotansimha@gmail.com>",
+  "private": true,
   "license": "MIT",
+  "author": "Dimitri POSTOLOV",
   "scripts": {
     "lint": "eslint ."
   },
   "dependencies": {
-    "graphql": "16.0.1"
+    "graphql": "16.5.0"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "3.10.4",

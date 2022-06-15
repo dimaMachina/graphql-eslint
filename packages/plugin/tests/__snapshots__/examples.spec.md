@@ -1,5 +1,127 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Examples should work in monorepo 1`] = `
+Array [
+  Object {
+    filePath: examples/monorepo/client/graphql/query.users.gql,
+    messages: Array [
+      Object {
+        column: 7,
+        endColumn: 15,
+        endLine: 1,
+        line: 1,
+        message: Operation "getUsers" should be in PascalCase format,
+        nodeType: Name,
+        ruleId: @graphql-eslint/naming-convention,
+        severity: 2,
+        suggestions: Array [
+          Object {
+            desc: Rename to \`GetUsers\`,
+            fix: Object {
+              range: Array [
+                6,
+                14,
+              ],
+              text: GetUsers,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  Object {
+    filePath: examples/monorepo/client/pages/index.tsx,
+    messages: Array [
+      Object {
+        column: 9,
+        endColumn: 18,
+        endLine: 9,
+        line: 9,
+        message: Cannot query field "firstname" on type "User". Did you mean "firstName" or "lastName"?,
+        nodeType: null,
+        ruleId: @graphql-eslint/fields-on-correct-type,
+        severity: 2,
+      },
+      Object {
+        column: 7,
+        endColumn: 16,
+        endLine: 1,
+        line: 1,
+        message: 'GET_POSTS' is assigned a value but never used.,
+        messageId: unusedVar,
+        nodeType: Identifier,
+        ruleId: no-unused-vars,
+        severity: 2,
+      },
+    ],
+  },
+  Object {
+    filePath: examples/monorepo/server/types/post.gql,
+    messages: Array [
+      Object {
+        column: 6,
+        endColumn: 10,
+        endLine: 1,
+        line: 1,
+        message: Description is required for \`type Post\`.,
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
+      },
+    ],
+  },
+  Object {
+    filePath: examples/monorepo/server/types/root.gql,
+    messages: Array [
+      Object {
+        column: 6,
+        endColumn: 11,
+        endLine: 1,
+        line: 1,
+        message: Description is required for \`type Query\`.,
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
+      },
+    ],
+  },
+  Object {
+    filePath: examples/monorepo/server/types/scalar.gql,
+    messages: Array [
+      Object {
+        column: 8,
+        endColumn: 16,
+        endLine: 1,
+        line: 1,
+        message: Description is required for \`scalar DateTime\`.,
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
+      },
+    ],
+  },
+  Object {
+    filePath: examples/monorepo/server/types/user.gql,
+    messages: Array [
+      Object {
+        column: 6,
+        endColumn: 10,
+        endLine: 1,
+        line: 1,
+        message: Description is required for \`type User\`.,
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
+      },
+    ],
+  },
+]
+`;
+
 exports[`Examples should work on \`.graphql\` files 1`] = `
 Array [
   Object {

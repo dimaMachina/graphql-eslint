@@ -71,4 +71,11 @@ describe('Examples', () => {
     expect(countErrors(results)).toBe(23);
     testSnapshot(results);
   });
+
+  it('should work in monorepo', () => {
+    const cwd = join(ROOT_CWD, 'examples/monorepo');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(7);
+    testSnapshot(results);
+  });
 });
