@@ -7,6 +7,19 @@ const WITH_SIBLINGS = {
   },
 };
 
+const WITH_SIBLINGS_DEEP = {
+  parserOptions: <ParserOptions>{
+    operations: `
+      fragment AlbumFields on Album {
+        id
+        modifier {
+          date
+        }
+      }
+    `,
+  },
+};
+
 const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth', rule, {
@@ -90,6 +103,21 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
               ... on Album {
                 id
               }
+            }
+          }
+        }
+      `,
+    },
+    {
+      name: 'suggestions should work with error depth in inline fragments',
+      ...WITH_SIBLINGS_DEEP,
+      options: [{ maxDepth: 2 }],
+      errors: [{ message: "'' exceeds maximum operation depth of 2" }],
+      code: /* GraphQL */ `
+        query {
+          viewer {
+            albums {
+              ...AlbumFields
             }
           }
         }
