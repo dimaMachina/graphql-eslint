@@ -12,27 +12,32 @@ const blocksMap = new Map<string, Block[]>();
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
-    if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
+    try {
+      if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
+        return [code];
+      }
+      const extractedDocuments = parseCode({
+        code,
+        filePath,
+        options: {
+          globalGqlIdentifierName: ['gql', 'graphql'],
+          skipIndent: true,
+        },
+      });
+
+      const blocks: Block[] = extractedDocuments.map(item => ({
+        filename: 'document.graphql',
+        text: item.content,
+        lineOffset: item.loc.start.line - 1,
+        offset: item.start + 1,
+      }));
+      blocksMap.set(filePath, blocks);
+
+      return [...blocks, code /* source code must be provided and be last */];
+    } catch {
+      // Bail and return original code if error is thrown.
       return [code];
     }
-    const extractedDocuments = parseCode({
-      code,
-      filePath,
-      options: {
-        globalGqlIdentifierName: ['gql', 'graphql'],
-        skipIndent: true,
-      },
-    });
-
-    const blocks: Block[] = extractedDocuments.map(item => ({
-      filename: 'document.graphql',
-      text: item.content,
-      lineOffset: item.loc.start.line - 1,
-      offset: item.start + 1,
-    }));
-    blocksMap.set(filePath, blocks);
-
-    return [...blocks, code /* source code must be provided and be last */];
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath) || [];
