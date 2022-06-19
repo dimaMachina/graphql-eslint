@@ -192,7 +192,7 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 
 > If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll need `operations` rules.
 
-> If you are in a monorepo project, you probably need both sets of rules.
+> If you are in a monorepo project, you probably need both sets of rules, see [example of configuration](examples/monorepo/.eslintrc.cjs).
 
 ### Config usage
 

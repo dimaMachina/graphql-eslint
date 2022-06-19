@@ -1,0 +1,12 @@
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+extend type Query {
+  user(id: ID!): User!
+  users: [User!]!
+}
