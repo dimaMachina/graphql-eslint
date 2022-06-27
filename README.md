@@ -63,7 +63,7 @@ To get started, define an override in your ESLint config to apply this plugin to
 }
 ```
 
-If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that apply to individual files, you should be good to go 👍. If you would like use a remote schema or use rules that apply across the entire collection of definitions at once, see [here](#using-a-remote-schema-or-rules-with-constraints-that-span-the-entire-schema).
+If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that apply to individual files, you should be good to go 👍. If you would like use a remote schema or use rules that apply across the entire collection of definitions at once, see [here](#extended-linting-rules-with-graphql-schema).
 
 ### Apply this plugin to GraphQL definitions defined in code files
 
