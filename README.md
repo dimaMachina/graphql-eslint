@@ -219,7 +219,7 @@ For example, to enable the `schema-recommended` config, enable it in your `.esli
 
 ### `prettier` rule
 
-`eslint-plugin-prettier` supports `.graphql` files, and `v4.1.0` supports `graphql` blocks event better. You need to do the following:
+`eslint-plugin-prettier` supports `.graphql` files, and `v4.1.0` supports `graphql` blocks even better. You need to do the following:
 
 ```js
 module.exports = {
@@ -241,7 +241,7 @@ module.exports = {
 }
 ```
 
-You can take [`examples/prettier`](examples/prettier/.eslintrc.js) as example.
+You can take [`examples/prettier`](examples/prettier/.eslintrc.cjs) as example.
 
 ## Further Reading
 
