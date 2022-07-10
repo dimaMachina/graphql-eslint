@@ -97,7 +97,7 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
     },
     {
       name: 'suggestions should not throw error when fragment is located in different file',
-      parserOptions: <ParserOptions>{
+      parserOptions: {
         operations: /* GraphQL */ `
           fragment AlbumFields on Album {
             id
