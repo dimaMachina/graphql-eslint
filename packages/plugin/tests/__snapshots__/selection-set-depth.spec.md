@@ -66,10 +66,35 @@ exports[`Invalid #2 1`] = `
     5 |         }
 `;
 
+exports[`suggestions should not throw error when fragment is located in different file 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           viewer {
+      3 |             albums {
+      4 |               ...AlbumFields
+      5 |             }
+      6 |           }
+      7 |         }
+
+#### ⚙️ Options
+
+    {
+      "maxDepth": 2
+    }
+
+#### ❌ Error
+
+      4 |               ...AlbumFields
+    > 5 |             }
+        |              ^ '' exceeds maximum operation depth of 2
+      6 |           }
+`;
+
 exports[`suggestions should work with inline fragments 1`] = `
 #### ⌨️ Code
 
-      1 |         query {
+      1 |         {
       2 |           viewer {
       3 |             albums {
       4 |               ... on Album {
@@ -94,7 +119,7 @@ exports[`suggestions should work with inline fragments 1`] = `
 
 #### 💡 Suggestion: Remove selections
 
-    1 |         query {
+    1 |         {
     2 |           viewer {
     3 |             
     4 |           }

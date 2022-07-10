@@ -14,7 +14,7 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
     {
       options: [{ maxDepth: 2 }],
       code: `
-        query {
+        {
           viewer { # Level 0
             albums { # Level 1
               title # Level 2
@@ -84,12 +84,36 @@ ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth',
       options: [{ maxDepth: 1 }],
       errors: [{ message: "'' exceeds maximum operation depth of 1" }],
       code: /* GraphQL */ `
-        query {
+        {
           viewer {
             albums {
               ... on Album {
                 id
               }
+            }
+          }
+        }
+      `,
+    },
+    {
+      name: 'suggestions should not throw error when fragment is located in different file',
+      parserOptions: {
+        operations: /* GraphQL */ `
+          fragment AlbumFields on Album {
+            id
+            modifier {
+              date
+            }
+          }
+        `,
+      },
+      options: [{ maxDepth: 2 }],
+      errors: [{ message: "'' exceeds maximum operation depth of 2" }],
+      code: /* GraphQL */ `
+        {
+          viewer {
+            albums {
+              ...AlbumFields
             }
           }
         }
