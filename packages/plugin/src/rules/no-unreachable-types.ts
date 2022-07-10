@@ -26,7 +26,7 @@ type ReachableTypes = Set<string>;
 
 let reachableTypesCache: ReachableTypes;
 
-const RequestDirectiveLocations = new Set([
+const RequestDirectiveLocations = new Set<string>([
   DirectiveLocation.QUERY,
   DirectiveLocation.MUTATION,
   DirectiveLocation.SUBSCRIPTION,
