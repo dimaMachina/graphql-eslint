@@ -1,4 +1,4 @@
-import { ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, NameNode, visit } from 'graphql';
+import { ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, NameNode, visit, DirectiveLocation } from 'graphql';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule } from '../types';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
@@ -25,6 +25,17 @@ const KINDS = [
 type ReachableTypes = Set<string>;
 
 let reachableTypesCache: ReachableTypes;
+
+const RequestDirectiveLocations = new Set([
+  DirectiveLocation.QUERY,
+  DirectiveLocation.MUTATION,
+  DirectiveLocation.SUBSCRIPTION,
+  DirectiveLocation.FIELD,
+  DirectiveLocation.FRAGMENT_DEFINITION,
+  DirectiveLocation.FRAGMENT_SPREAD,
+  DirectiveLocation.INLINE_FRAGMENT,
+  DirectiveLocation.VARIABLE_DEFINITION,
+]);
 
 function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   // We don't want cache reachableTypes on test environment
@@ -74,6 +85,13 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
       visit(type.astNode, visitor);
     }
   }
+
+  for (const node of schema.getDirectives()) {
+    if (node.locations.some(location => RequestDirectiveLocations.has(location))) {
+      reachableTypes.add(node.name);
+    }
+  }
+
   reachableTypesCache = reachableTypes;
   return reachableTypesCache;
 }
