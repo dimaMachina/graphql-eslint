@@ -123,6 +123,9 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                       const token = (ancestors[0] as AST.Program).tokens.find(
                         token => token.loc.start.line === line && token.loc.start.column === column - 1
                       );
+                      if (!token) {
+                        return null;
+                      }
                       const sourceCode = context.getSourceCode();
                       const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
                       const parentNode = foundNode.parent.parent;
