@@ -132,6 +132,20 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         directive @good on SCHEMA
       `),
     },
+    {
+      name: 'should ignore directive with request locations',
+      ...useSchema(/* GraphQL */ `
+        directive @q on QUERY
+        directive @w on MUTATION
+        directive @e on SUBSCRIPTION
+        directive @r on FIELD
+        directive @t on FRAGMENT_DEFINITION
+        directive @y on FRAGMENT_SPREAD
+        directive @u on INLINE_FRAGMENT
+        directive @i on VARIABLE_DEFINITION
+        type Query
+      `),
+    },
   ],
   invalid: [
     {
