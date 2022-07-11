@@ -12,7 +12,7 @@
     "graphql": "16.0.1"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "3.10.4",
+    "@graphql-eslint/eslint-plugin": "3.10.5",
     "eslint": "8.18.0"
   }
 }
