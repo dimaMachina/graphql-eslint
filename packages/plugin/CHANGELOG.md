@@ -1,5 +1,12 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.5
+
+### Patch Changes
+
+- 712a8fe: fix(selection-set-depth): fix `TypeError` from ESLint suggestions, don't provide suggestions for fragment that can be in a separate file
+- 01421ae: fix(no-unreachable-types): ignore directives with Request Definitions locations
+
 ## 3.10.4
 
 ### Patch Changes
