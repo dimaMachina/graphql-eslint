@@ -109,30 +109,32 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
             getDocument: () => document,
             reportError(error: GraphQLError) {
               const { line, column } = error.locations[0];
+
+              const ancestors = context.getAncestors();
+              const token = (ancestors[0] as AST.Program).tokens.find(
+                token => token.loc.start.line === line && token.loc.start.column === column - 1
+              );
+
               context.report({
                 loc: {
                   line,
                   column: column - 1,
                 },
                 message: error.message,
-                suggest: [
-                  {
-                    desc: 'Remove selections',
-                    fix(fixer) {
-                      const ancestors = context.getAncestors();
-                      const token = (ancestors[0] as AST.Program).tokens.find(
-                        token => token.loc.start.line === line && token.loc.start.column === column - 1
-                      );
-                      if (!token) {
-                        return null;
-                      }
-                      const sourceCode = context.getSourceCode();
-                      const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
-                      const parentNode = foundNode.parent.parent;
-                      return fixer.remove(foundNode.kind === 'Name' ? parentNode.parent : parentNode);
+                // Don't provide suggestions for fragment that can be in a separate file
+                ...(token && {
+                  suggest: [
+                    {
+                      desc: 'Remove selections',
+                      fix(fixer) {
+                        const sourceCode = context.getSourceCode();
+                        const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
+                        const parentNode = foundNode.parent.parent;
+                        return fixer.remove(foundNode.kind === 'Name' ? parentNode.parent : parentNode);
+                      },
                     },
-                  },
-                ],
+                  ],
+                }),
               });
             },
           });
