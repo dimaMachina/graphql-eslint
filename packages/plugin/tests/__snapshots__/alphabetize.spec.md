@@ -817,7 +817,7 @@ exports[`should sort definitions 1`] = `
       59 |         # END
 `;
 
-exports[`should sort with aliases 1`] = `
+exports[`should sort when selection is aliased 1`] = `
 #### ⌨️ Code
 
       1 |         { # start
