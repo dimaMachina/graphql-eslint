@@ -332,5 +332,21 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
         { message: '`auth` should be before `Data`.' },
       ],
     },
+    {
+      name: 'should sort when selection is aliased',
+      options: [{ selections: ['OperationDefinition'] }],
+      code: /* GraphQL */ `
+        { # start
+          lastName: lastname # lastName comment
+          fullName: fullname # fullName comment
+          firsName: firstname # firsName comment
+          # end
+        }
+      `,
+      errors: [
+        { message: '`fullName` should be before `lastName`.' },
+        { message: '`firsName` should be before `fullName`.' },
+      ],
+    },
   ],
 });

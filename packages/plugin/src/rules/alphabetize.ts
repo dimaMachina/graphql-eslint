@@ -257,14 +257,14 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       // Starts from 1, ignore nodes.length <= 1
       for (let i = 1; i < nodes.length; i += 1) {
         const currNode = nodes[i];
-        const currName = 'name' in currNode && currNode.name?.value;
+        const currName = ('alias' in currNode && currNode.alias?.value) || ('name' in currNode && currNode.name?.value);
         if (!currName) {
           // we don't move unnamed current nodes
           continue;
         }
 
         const prevNode = nodes[i - 1];
-        const prevName = 'name' in prevNode && prevNode.name?.value;
+        const prevName = ('alias' in prevNode && prevNode.alias?.value) || ('name' in prevNode && prevNode.name?.value);
         if (prevName) {
           // Compare with lexicographic order
           const compareResult = prevName.localeCompare(currName);
@@ -278,7 +278,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
         }
 
         context.report({
-          node: currNode.name,
+          node: ('alias' in currNode && currNode.alias) || currNode.name,
           messageId: RULE_ID,
           data: {
             currName,
@@ -340,12 +340,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
 
     if (selectionsSelector) {
       listeners[`:matches(${selectionsSelector}) SelectionSet`] = (node: GraphQLESTreeNode<SelectionSetNode>) => {
-        checkNodes(
-          node.selections.map(selection =>
-            // sort by alias is field is renamed
-            'alias' in selection && selection.alias ? ({ name: selection.alias } as any) : selection
-          )
-        );
+        checkNodes(node.selections);
       };
     }
 
