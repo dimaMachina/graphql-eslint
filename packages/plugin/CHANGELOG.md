@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.6
+
+### Patch Changes
+
+- 39ab684: fix(alphabetize): should not fail when selection is aliased
+
 ## 3.10.5
 
 ### Patch Changes
