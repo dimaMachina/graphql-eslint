@@ -816,3 +816,45 @@ exports[`should sort definitions 1`] = `
       58 |
       59 |         # END
 `;
+
+exports[`should sort with aliases 1`] = `
+#### ⌨️ Code
+
+      1 |         { # start
+      2 |           lastName: lastname # lastName comment
+      3 |           fullName: fullname # fullName comment
+      4 |           firsName: firstname # firsName comment
+      5 |           # end
+      6 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ]
+    }
+
+#### ❌ Error 1/2
+
+      2 |           lastName: lastname # lastName comment
+    > 3 |           fullName: fullname # fullName comment
+        |           ^^^^^^^^ \`fullName\` should be before \`lastName\`.
+      4 |           firsName: firstname # firsName comment
+
+#### ❌ Error 2/2
+
+      3 |           fullName: fullname # fullName comment
+    > 4 |           firsName: firstname # firsName comment
+        |           ^^^^^^^^ \`firsName\` should be before \`fullName\`.
+      5 |           # end
+
+#### 🔧 Autofix output
+
+      1 |         { # start
+      2 |           firsName: firstname # firsName comment
+      3 |           fullName: fullname # fullName comment
+      4 |           lastName: lastname # lastName comment
+      5 |           # end
+      6 |         }
+`;
