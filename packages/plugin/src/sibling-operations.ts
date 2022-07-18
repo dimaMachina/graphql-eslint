@@ -33,27 +33,41 @@ export type SiblingOperations = {
   getOperationByType(operationType: OperationTypeNode): OperationSource[];
 };
 
-const handleVirtualPath = (documents: Source[]): Source[] => {
-  const filepathMap: Record<string, number> = Object.create(null);
+type VirtualSource = Source & { realLocation: string };
 
-  return documents.map(source => {
+function setArrayMap(key, value, map) {
+  if (!map.has(key)) map.set(key, []);
+  map.get(key).push(value);
+}
+
+const handleVirtualPath = (documents: Source[]): Map<string, VirtualSource[]> => {
+  const filepathMap: Map<string, VirtualSource[]> = new Map();
+
+  documents.forEach(source => {
     const { location } = source;
     if (['.gql', '.graphql'].some(extension => location.endsWith(extension))) {
-      return source;
+      setArrayMap(source.location, source, filepathMap);
+      return;
     }
     filepathMap[location] ??= -1;
     const index = (filepathMap[location] += 1);
-    return {
-      ...source,
-      location: resolve(location, `${index}_document.graphql`),
-    };
+    setArrayMap(
+      source.location,
+      {
+        ...source,
+        location: resolve(location, `${index}_document.graphql`),
+      },
+      filepathMap
+    );
   });
+
+  return filepathMap;
 };
 
-const operationsCache = new Map<string, Source[]>();
-const siblingOperationsCache = new Map<Source[], SiblingOperations>();
+const operationsCache = new Map<string, Map<string, VirtualSource[]>>();
+const siblingOperationsCache = new Map<VirtualSource[], SiblingOperations>();
 
-const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
+const getSiblings = (projectForFile: GraphQLProjectConfig, realFilepath: string): VirtualSource[] => {
   const documentsKey = asArray(projectForFile.documents).sort().join(',');
 
   if (!documentsKey) {
@@ -61,7 +75,6 @@ const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
   }
 
   let siblings = operationsCache.get(documentsKey);
-
   if (!siblings) {
     debug('Loading operations from %o', projectForFile.documents);
     const documents = projectForFile.loadDocumentsSync(projectForFile.documents, {
@@ -76,13 +89,22 @@ const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
     }
     siblings = handleVirtualPath(documents);
     operationsCache.set(documentsKey, siblings);
+  } else {
+    siblings = operationsCache.get(documentsKey);
+    if (siblings.get(realFilepath)) {
+      const documents = projectForFile.loadDocumentsSync(realFilepath, {
+        skipGraphQLImport: true,
+      });
+      const operationsForFile = handleVirtualPath(documents).get(realFilepath);
+      siblings.set(realFilepath, operationsForFile);
+    }
   }
 
-  return siblings;
+  return Array.from(siblings.values()).flat();
 };
 
-export function getSiblingOperations(projectForFile: GraphQLProjectConfig): SiblingOperations {
-  const siblings = getSiblings(projectForFile);
+export function getSiblingOperations(projectForFile: GraphQLProjectConfig, realFilepath: string): SiblingOperations {
+  const siblings = getSiblings(projectForFile, realFilepath);
 
   if (siblings.length === 0) {
     let printed = false;

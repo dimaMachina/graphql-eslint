@@ -21,7 +21,7 @@ export function parseForESLint(code: string, options: ParserOptions = {}): Graph
     const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
 
     const schema = getSchema(projectForFile, options);
-    const siblingOperations = getSiblingOperations(projectForFile);
+    const siblingOperations = getSiblingOperations(projectForFile, realFilepath);
 
     const { document } = parseGraphQLSDL(filePath, code, {
       ...options.graphQLParserOptions,
