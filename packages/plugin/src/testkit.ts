@@ -18,7 +18,7 @@ export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'opti
 
 export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
   errors: number | (RuleTester.TestCaseError | string)[];
-  output?: string | null | undefined;
+  output?: string | null;
 };
 
 function indentCode(code: string, indent = 4): string {
