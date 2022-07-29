@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.10.7
+
+### Patch Changes
+
+- b6de7ff: fix(GraphQLRuleTester): provide output field for `GraphQLInvalidTestCase` type
+
 ## 3.10.6
 
 ### Patch Changes
