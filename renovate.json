@@ -1,35 +1,3 @@
 {
-  "extends": ["config:base"],
-  "postUpdateOptions": ["yarnDedupeFewer"],
-  "automerge": false,
-  "labels": ["dependencies"],
-  "packageRules": [
-    {
-      "matchDepTypes": ["devDependencies"],
-      "prPriority": -1
-    },
-    {
-      "matchPackagePatterns": ["^@theguild/", "^@guild-docs/"],
-      "prPriority": 5
-    },
-    {
-      "excludePackageNames": [
-        "@changesets/cli",
-        "@changesets/apply-release-plan",
-        "@changesets/assemble-release-plan",
-        "typescript"
-      ],
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
-    },
-    {
-      "matchPackageNames": "typescript",
-      "automerge": false
-    }
-  ],
-  "timezone": "Europe/Warsaw",
-  "schedule": ["after 10pm and before 6:00am"],
-  "ignorePaths": ["**/__tests__/**", "**/test/**", "**/tests/**", "**/__fixtures__/**"]
+  "extends": ["github>the-guild-org/shared-config:renovate"]
 }
