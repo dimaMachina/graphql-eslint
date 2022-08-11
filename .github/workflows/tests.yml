@@ -35,7 +35,7 @@ jobs:
         run: yarn lint
 
   typecheck:
-    name: graphql v${{matrix.graphql_version}}
+    name: typecheck / graphql v${{matrix.graphql_version}}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -76,7 +76,7 @@ jobs:
           path: packages/plugin/dist
 
   test:
-    name: node v${{matrix.node_version}} / graphql v${{matrix.graphql_version}} / eslint v8
+    name: jest / node v${{matrix.node_version}} / graphql v${{matrix.graphql_version}} / eslint v8
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: [typecheck]
