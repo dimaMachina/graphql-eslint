@@ -8,10 +8,11 @@ import {
   Token,
   Source,
   Lexer,
+  valueFromASTUntyped,
+  versionInfo,
 } from 'graphql';
 import type { Comment, SourceLocation } from 'estree';
 import type { AST } from 'eslint';
-import { valueFromASTUntyped } from 'graphql/utilities/valueFromASTUntyped';
 
 export const valueFromNode = (...args: Parameters<typeof valueFromASTUntyped>): any => {
   return valueFromASTUntyped(...args);
@@ -77,9 +78,11 @@ export function convertToken<T extends 'Line' | 'Block' | TokenKindValue>(
 
 function getLexer(source: Source): Lexer {
   // GraphQL v14
-  const gqlLanguage = require('graphql/language');
-  if (gqlLanguage && gqlLanguage.createLexer) {
-    return gqlLanguage.createLexer(source, {});
+  if (versionInfo.major <= 14) {
+    const gqlLanguage = require('graphql/language');
+    if (gqlLanguage && gqlLanguage.createLexer) {
+      return gqlLanguage.createLexer(source, {});
+    }
   }
 
   // GraphQL v15
@@ -98,6 +101,7 @@ export function extractTokens(filePath: string, code: string): AST.Token[] {
   let token = lexer.advance();
 
   while (token && token.kind !== TokenKind.EOF) {
+    // @ts-expect-error TODO DEBUG ME
     const result = convertToken(token, token.kind) as AST.Token;
     tokens.push(result);
     token = lexer.advance();

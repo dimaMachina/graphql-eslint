@@ -57,7 +57,7 @@
     "typescript": "4.7.4"
   },
   "resolutions": {
-    "graphql": "16.5.0"
+    "graphql": "npm:@graphql-tools/graphql@0.1.0-alpha-20220815173503-a11014cc"
   },
   "lint-staged": {
     "**/*": [

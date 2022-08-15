@@ -11,8 +11,8 @@ import {
   ASTVisitor,
   ExecutableDefinitionNode,
   DirectiveNode,
+  validateSDL,
 } from 'graphql';
-import { validateSDL } from 'graphql/validation/validate';
 import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import {
   requireGraphQLSchemaFromContext,

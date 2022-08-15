@@ -3853,10 +3853,10 @@ graphql-ws@^5.4.1:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.5.5.tgz#f375486d3f196e2a2527b503644693ae3a8670a9"
   integrity sha512-hvyIS71vs4Tu/yUYHPvGXsTgo0t3arU820+lT5VjZS2go0ewp2LqyCgxEN56CzOG7Iys52eRhHBiD1gGRdiQtw==
 
-graphql@16.0.1, graphql@16.5.0, graphql@^14.5.3:
-  version "16.5.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.5.0.tgz#41b5c1182eaac7f3d47164fb247f61e4dfb69c85"
-  integrity sha512-qbHgh8Ix+j/qY+a/ZcJnFQ+j8ezakqPiHwPiZhV/3PgGlgf96QMBB5/f2rkiC9sgLoy/xvT6TSiaf2nTHJh5iA==
+graphql@16.0.1, graphql@16.5.0, graphql@^14.5.3, "graphql@npm:@graphql-tools/graphql@0.1.0-alpha-20220815173503-a11014cc":
+  version "0.1.0-alpha-20220815173503-a11014cc"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/graphql/-/graphql-0.1.0-alpha-20220815173503-a11014cc.tgz#4c0cdd241aff9f214cdf48b094f74499b76a31d0"
+  integrity sha512-n/4DgdvCpUXhUVWzONA9+K8sRM3R175gfD+ClScQ+nYIMXDWfRtTxG0L+yPjh8ixToDpi9qoAd6+bfNM7igr/A==
 
 hard-rejection@^2.1.0:
   version "2.1.0"
