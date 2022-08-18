@@ -36,6 +36,9 @@ jobs:
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
 
+      - name: Install Dependencies
+        run: yarn
+
       - name: Build
         run: yarn build
 
@@ -68,6 +71,9 @@ jobs:
 
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node scripts/match-graphql.mjs ${{matrix.graphql_version}}
+
+      - name: Install Dependencies
+        run: yarn
 
       - name: Cache Jest
         uses: actions/cache@v3
