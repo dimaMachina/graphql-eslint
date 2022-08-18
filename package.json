@@ -12,6 +12,7 @@
     "generate:docs": "ts-node scripts/generate-docs.ts",
     "postinstall": "patch-package",
     "lint": "eslint --ignore-path .gitignore --ext ts,js .",
+    "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
     "prebuild": "rimraf packages/*/dist ./tsconfig.tsbuildinfo",
     "transpile-ts": "tsc --project tsconfig.json",
     "build": "yarn transpile-ts && bob build",
@@ -57,7 +58,7 @@
     "typescript": "4.7.4"
   },
   "resolutions": {
-    "graphql": "16.5.0"
+    "graphql": "npm:@graphql-tools/graphql@0.1.0-alpha-20220815173503-a11014cc"
   },
   "lint-staged": {
     "**/*": [
