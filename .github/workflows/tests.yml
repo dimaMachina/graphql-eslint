@@ -8,31 +8,12 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Master
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Use Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Cache Yarn
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{runner.os}}-16-16-node-modules-${{hashFiles('yarn.lock')}}
-          restore-keys: |
-            ${{runner.os}}-16-16-node-modules-
-
-      - name: Install Dependencies
-        run: yarn
-
-      - name: Lint
-        run: yarn lint
+    name: Lint
+    uses: the-guild-org/shared-config/.github/workflows/lint.yml@main
+    with:
+      script: yarn ci:lint
+    secrets:
+      githubToken: ${{ secrets.GITHUB_TOKEN }}
 
   typecheck:
     name: typecheck / graphql v${{matrix.graphql_version}}
@@ -47,18 +28,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Use Node
-        uses: actions/setup-node@v3
+      - name: Setup env
+        uses: the-guild-org/shared-config/setup@main
         with:
-          node-version: 18
-
-      - name: Cache Yarn
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
-          restore-keys: |
-            ${{runner.os}}-16-${{matrix.graphql_version}}-node-modules-
+          nodeVersion: 18
 
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
@@ -91,18 +64,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Use Node ${{matrix.node_version}}
-        uses: actions/setup-node@v3
+      - name: Setup env
+        uses: the-guild-org/shared-config/setup@main
         with:
-          node-version: ${{matrix.node_version}}
-
-      - name: Cache Yarn
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-${{hashFiles('yarn.lock')}}
-          restore-keys: |
-            ${{runner.os}}-${{matrix.node_version}}-${{matrix.graphql_version}}-node-modules-
+          nodeVersion: ${{matrix.node-version}}
 
       - name: Use GraphQL v${{matrix.graphql_version}}
         run: node scripts/match-graphql.mjs ${{matrix.graphql_version}}
