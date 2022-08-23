@@ -17,6 +17,50 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       `,
     },
     {
+      options: [{ fields: ['ObjectTypeDefinition'], ignorePrefix: ['password'] }],
+      code: /* GraphQL */ `
+        type User {
+          age: Int
+          firstName: String!
+          password: String
+          lastName: String!
+        }
+      `,
+    },
+    {
+      options: [{ fields: ['ObjectTypeDefinition'], ignorePrefix: ['pass'] }],
+      code: /* GraphQL */ `
+        type User {
+          age: Int
+          firstName: String!
+          password: String
+          lastName: String!
+        }
+      `,
+    },
+    {
+      options: [{ fields: ['ObjectTypeDefinition'], ignoreSuffix: ['Name'] }],
+      code: /* GraphQL */ `
+        type User {
+          age: Int
+          password: String
+          lastName: String!
+          firstName: String!
+        }
+      `,
+    },
+    {
+      options: [{ fields: ['ObjectTypeDefinition'], ignoreSuffix: ['word'] }],
+      code: /* GraphQL */ `
+        type User {
+          age: Int
+          password: String
+          firstName: String!
+          lastName: String!
+        }
+      `,
+    },
+    {
       options: [{ fields: ['InputObjectTypeDefinition'] }],
       code: /* GraphQL */ `
         input UserInput {
@@ -25,6 +69,18 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
           lastName: String!
           password: String
           zip: String
+        }
+      `,
+    },
+    {
+      options: [{ fields: ['InputObjectTypeDefinition'], ignorePrefix: ['password'], ignoreSuffix: ['zip'] }],
+      code: /* GraphQL */ `
+        input UserInput {
+          zip: String
+          password: String
+          age: Int
+          firstName: String!
+          lastName: String!
         }
       `,
     },
@@ -70,6 +126,36 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       ],
     },
     {
+      options: [{ fields: ['ObjectTypeDefinition'], ignorePrefix: ['ID'] }],
+      code: /* GraphQL */ `
+        type User {
+          password: String
+          firstName: String!
+          age: Int
+          lastName: String!
+        }
+      `,
+      errors: [
+        { message: '`firstName` should be before `password`.' },
+        { message: '`age` should be before `firstName`.' },
+      ],
+    },
+    {
+      options: [{ fields: ['ObjectTypeDefinition'], ignoreSuffix: ['ID'] }],
+      code: /* GraphQL */ `
+        type User {
+          password: String
+          firstName: String!
+          age: Int
+          lastName: String!
+        }
+      `,
+      errors: [
+        { message: '`firstName` should be before `password`.' },
+        { message: '`age` should be before `firstName`.' },
+      ],
+    },
+    {
       options: [{ fields: ['ObjectTypeDefinition'] }],
       code: /* GraphQL */ `
         extend type User {
@@ -97,6 +183,36 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
     },
     {
       options: [{ fields: ['InputObjectTypeDefinition'] }],
+      code: /* GraphQL */ `
+        input UserInput {
+          password: String
+          firstName: String!
+          age: Int
+          lastName: String!
+        }
+      `,
+      errors: [
+        { message: '`firstName` should be before `password`.' },
+        { message: '`age` should be before `firstName`.' },
+      ],
+    },
+    {
+      options: [{ fields: ['InputObjectTypeDefinition'], ignorePrefix: ['ID'] }],
+      code: /* GraphQL */ `
+        input UserInput {
+          password: String
+          firstName: String!
+          age: Int
+          lastName: String!
+        }
+      `,
+      errors: [
+        { message: '`firstName` should be before `password`.' },
+        { message: '`age` should be before `firstName`.' },
+      ],
+    },
+    {
+      options: [{ fields: ['InputObjectTypeDefinition'], ignoreSuffix: ['ID'] }],
       code: /* GraphQL */ `
         input UserInput {
           password: String
@@ -230,7 +346,6 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       code: /* GraphQL */ `
         type Test { # { character
           # before d 1
-
           # before d 2
           d: Int # same d
           # before c
@@ -276,7 +391,6 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       options: [{ definitions: true }],
       code: /* GraphQL */ `
         # START
-
         # before1 extend union Data
         # before2 extend union Data
         extend union Data = Role # same extend union Data
@@ -332,7 +446,6 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         union Data = User | Node # same union Data
         # before directive @auth
         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
-
         # END
       `,
       errors: [

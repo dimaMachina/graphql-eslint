@@ -100,6 +100,8 @@ const schema = {
           'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
         default: false,
       },
+      ignorePrefix: ARRAY_DEFAULT_OPTIONS,
+      ignoreSuffix: ARRAY_DEFAULT_OPTIONS,
     },
   },
 } as const;
@@ -275,9 +277,34 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           ('alias' in prevNode && prevNode.alias?.value) ||
           ('name' in prevNode && prevNode.name?.value);
         if (prevName) {
+          if ((opts.ignorePrefix || []).length > 0) {
+            const shouldSkipIgnorePrefix = opts.ignorePrefix.some(
+              prefix =>
+                prefix === prevName ||
+                prefix === currName ||
+                prevName.startsWith(prefix) ||
+                currName.startsWith(prefix),
+            );
+            if (shouldSkipIgnorePrefix) {
+              continue;
+            }
+          }
+          if ((opts.ignoreSuffix || []).length > 0) {
+            const shouldSkipIgnoreSuffix = opts.ignoreSuffix.some(
+              suffix =>
+                suffix === prevName ||
+                suffix === currName ||
+                prevName.endsWith(suffix) ||
+                currName.endsWith(suffix),
+            );
+            if (shouldSkipIgnoreSuffix) {
+              continue;
+            }
+          }
           // Compare with lexicographic order
           const compareResult = prevName.localeCompare(currName);
           const shouldSort = compareResult === 1;
+
           if (!shouldSort) {
             const isSameName = compareResult === 0;
             if (

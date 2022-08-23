@@ -176,6 +176,24 @@ Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `dir
 
 Default: `false`
 
+### `ignorePrefix` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
+### `ignoreSuffix` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
 ## Resources
 
 - [Rule source](../../packages/plugin/src/rules/alphabetize.ts)
