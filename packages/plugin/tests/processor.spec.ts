@@ -1,8 +1,27 @@
 import { processor } from '../src/processor';
 
-const QUERY = 'query foo { id }';
+jest.mock('graphql-config', () => ({
+  loadConfigSync: () => ({
+    getDefault: () => ({
+      documents: '*.{ts, js}',
+      extensions: {
+        graphqlTagPluck: {
+          modules: [
+            {
+              name: 'custom-gql-tag',
+              identifier: 'customGqlTag',
+            },
+          ],
+          globalGqlIdentifierName: 'customGqlTag',
+        },
+      },
+    }),
+  }),
+}));
 
-describe('Processor', () => {
+describe('processor', () => {
+  const QUERY = 'query users { id }';
+
   it('preprocess finds gql tag', () => {
     const code = `
       import { gql } from 'graphql'
@@ -11,22 +30,20 @@ describe('Processor', () => {
     const filePath = 'queries.ts';
 
     const blocks = processor.preprocess(code, filePath);
+
     expect(blocks).toMatchSnapshot();
     expect(blocks[0].text).toBe(QUERY);
   });
 
-  it('preprocess finds custom tag', () => {
+  it('preprocess finds custom gql tag', () => {
     const code = `
       import { customGqlTag } from 'custom-gql-tag'
-      const fooQuery = customGqlTag\`
-        query foo {
-          id
-        }
-      \`
+      const fooQuery = customGqlTag\`${QUERY}\`
     `;
     const filePath = 'queries.ts';
 
     const blocks = processor.preprocess(code, filePath);
+
     expect(blocks).toMatchSnapshot();
     expect(blocks[0].text).toBe(QUERY);
   });
