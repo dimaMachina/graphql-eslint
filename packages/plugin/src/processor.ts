@@ -19,13 +19,15 @@ const graphqlTagModuleIdentifiers =
 const graphqlTagModuleNames = graphqlTagPluckOptions?.modules.map(({ name }) => name).filter(name => name) ?? [];
 const gqlMagicComment = graphqlTagPluckOptions?.gqlMagicComment;
 const RELEVANT_KEYWORDS = [
-  'gql',
-  'graphql',
-  '/* GraphQL */',
-  ...graphqlTagModuleIdentifiers,
-  ...graphqlTagModuleNames,
-  ...globalGqlIdentifierNames,
-  ...(gqlMagicComment ? [gqlMagicComment] : []),
+  ...new Set([
+    'gql',
+    'graphql',
+    '/* GraphQL */',
+    ...graphqlTagModuleIdentifiers,
+    ...graphqlTagModuleNames,
+    ...globalGqlIdentifierNames,
+    ...(gqlMagicComment ? [gqlMagicComment] : []),
+  ]),
 ] as const;
 const blocksMap = new Map<string, Block[]>();
 
@@ -43,6 +45,7 @@ export const processor: Linter.Processor<Block | string> = {
         ...graphqlTagPluckOptions,
       },
     });
+    console.log('HERE', code, filePath, RELEVANT_KEYWORDS, extractedDocuments);
 
     const blocks: Block[] = extractedDocuments.map(item => ({
       filename: 'document.graphql',
