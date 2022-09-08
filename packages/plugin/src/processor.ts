@@ -1,12 +1,32 @@
 import type { Linter } from 'eslint';
-import { parseCode } from '@graphql-tools/graphql-tag-pluck';
+import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import graphqlConfig from 'graphql-config';
 
 type Block = Linter.ProcessorFile & {
   lineOffset: number;
   offset: number;
 };
 
-const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'] as const;
+const graphqlTagPluckOptions = graphqlConfig.loadConfigSync({}).getDefault().extensions
+  .graphqlTagPluck as GraphQLTagPluckOptions;
+const globalGqlIdentifierNames = graphqlTagPluckOptions?.globalGqlIdentifierName
+  ? Array.isArray(graphqlTagPluckOptions.globalGqlIdentifierName)
+    ? graphqlTagPluckOptions.globalGqlIdentifierName
+    : [graphqlTagPluckOptions.globalGqlIdentifierName]
+  : [];
+const graphqlTagModuleIdentifiers =
+  graphqlTagPluckOptions?.modules.map(({ identifier }) => identifier).filter(identifier => identifier) ?? [];
+const graphqlTagModuleNames = graphqlTagPluckOptions?.modules.map(({ name }) => name).filter(name => name) ?? [];
+const gqlMagicComment = graphqlTagPluckOptions?.gqlMagicComment;
+const RELEVANT_KEYWORDS = [
+  'gql',
+  'graphql',
+  '/* GraphQL */',
+  ...graphqlTagModuleIdentifiers,
+  ...graphqlTagModuleNames,
+  ...globalGqlIdentifierNames,
+  ...(gqlMagicComment ? [gqlMagicComment] : []),
+] as const;
 const blocksMap = new Map<string, Block[]>();
 
 export const processor: Linter.Processor<Block | string> = {
@@ -19,8 +39,8 @@ export const processor: Linter.Processor<Block | string> = {
       code,
       filePath,
       options: {
-        globalGqlIdentifierName: ['gql', 'graphql'],
         skipIndent: true,
+        ...graphqlTagPluckOptions,
       },
     });
 
