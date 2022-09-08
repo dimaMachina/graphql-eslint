@@ -9,20 +9,17 @@ type Block = Linter.ProcessorFile & {
 
 const defaultGraphqlConfig = loadConfigSync({ throwOnMissing: false })?.getDefault();
 const graphqlTagPluckOptions = defaultGraphqlConfig?.extensions?.graphqlTagPluck as GraphQLTagPluckOptions;
+const graphqlTagModuleIdentifiers =
+  graphqlTagPluckOptions?.modules.map(({ identifier }) => identifier).filter(identifier => identifier) ?? [];
+const graphqlTagModuleNames = graphqlTagPluckOptions?.modules.map(({ name }) => name).filter(name => name) ?? [];
 const globalGqlIdentifierNames = graphqlTagPluckOptions?.globalGqlIdentifierName
   ? Array.isArray(graphqlTagPluckOptions.globalGqlIdentifierName)
     ? graphqlTagPluckOptions.globalGqlIdentifierName
     : [graphqlTagPluckOptions.globalGqlIdentifierName]
-  : [];
-const graphqlTagModuleIdentifiers =
-  graphqlTagPluckOptions?.modules.map(({ identifier }) => identifier).filter(identifier => identifier) ?? [];
-const graphqlTagModuleNames = graphqlTagPluckOptions?.modules.map(({ name }) => name).filter(name => name) ?? [];
-const gqlMagicComment = graphqlTagPluckOptions?.gqlMagicComment;
+  : ['gql', 'graphql'];
+const gqlMagicComment = graphqlTagPluckOptions?.gqlMagicComment ?? '/* GraphQL */';
 const RELEVANT_KEYWORDS = [
   ...new Set([
-    'gql',
-    'graphql',
-    '/* GraphQL */',
     ...graphqlTagModuleIdentifiers,
     ...graphqlTagModuleNames,
     ...globalGqlIdentifierNames,
@@ -30,6 +27,12 @@ const RELEVANT_KEYWORDS = [
   ]),
 ] as const;
 const blocksMap = new Map<string, Block[]>();
+console.log(
+  'HERE',
+  loadConfigSync,
+  loadConfigSync({ throwOnMissing: false }),
+  loadConfigSync({ throwOnMissing: false })?.getDefault()
+);
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
@@ -45,7 +48,6 @@ export const processor: Linter.Processor<Block | string> = {
         ...graphqlTagPluckOptions,
       },
     });
-    console.log('HERE', code, filePath, RELEVANT_KEYWORDS, extractedDocuments);
 
     const blocks: Block[] = extractedDocuments.map(item => ({
       filename: 'document.graphql',

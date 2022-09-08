@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`processor preprocess finds custom gql tag 1`] = `
-Array [
-  
-      import { customGqlTag } from 'custom-gql-tag'
-      const fooQuery = customGqlTag\`query users { id }\`
-    ,
-]
-`;
-
 exports[`processor preprocess finds gql tag 1`] = `
 Array [
   Object {

@@ -1,21 +1,8 @@
+import { loadConfigSync } from 'graphql-config';
 import { processor } from '../src/processor';
 
 jest.mock('graphql-config', () => ({
-  loadConfigSync: jest.fn(() => ({
-    getDefault: jest.fn(() => ({
-      extensions: {
-        graphqlTagPluck: {
-          modules: [
-            {
-              name: 'custom-gql-tag',
-              identifier: 'customGqlTag',
-            },
-          ],
-          globalGqlIdentifierName: 'customGqlTag',
-        },
-      },
-    })),
-  })),
+  loadConfigSync: jest.fn(),
 }));
 
 describe('processor', () => {
@@ -34,10 +21,27 @@ describe('processor', () => {
     expect(blocks).toMatchSnapshot();
   });
 
-  it('preprocess finds custom gql tag', () => {
+  it('preprocess finds custom tag', () => {
+    loadConfigSync.mockImplementation(() => ({
+      getDefault: () => ({
+        extensions: {
+          graphqlTagPluck: {
+            modules: [
+              {
+                name: 'custom-gql-tag',
+                identifier: 'custom',
+              },
+            ],
+            globalGqlIdentifierName: ['custom'],
+          },
+        },
+      }),
+    }));
+    jest.resetModules();
+
     const code = `
-      import { customGqlTag } from 'custom-gql-tag'
-      const fooQuery = customGqlTag\`${QUERY}\`
+      import { custom } from 'custom-gql-tag'
+      const fooQuery = custom\`${QUERY}\`
     `;
 
     const blocks = processor.preprocess(code, filePath);
