@@ -1,14 +1,14 @@
 import type { Linter } from 'eslint';
 import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
-import graphqlConfig from 'graphql-config';
+import { loadConfigSync } from 'graphql-config';
 
 type Block = Linter.ProcessorFile & {
   lineOffset: number;
   offset: number;
 };
 
-const graphqlTagPluckOptions = graphqlConfig.loadConfigSync({}).getDefault().extensions
-  .graphqlTagPluck as GraphQLTagPluckOptions;
+const defaultGraphqlConfig = loadConfigSync({ throwOnMissing: false })?.getDefault();
+const graphqlTagPluckOptions = defaultGraphqlConfig?.extensions?.graphqlTagPluck as GraphQLTagPluckOptions;
 const globalGqlIdentifierNames = graphqlTagPluckOptions?.globalGqlIdentifierName
   ? Array.isArray(graphqlTagPluckOptions.globalGqlIdentifierName)
     ? graphqlTagPluckOptions.globalGqlIdentifierName
