@@ -1,8 +1,21 @@
-import { loadConfigSync } from 'graphql-config';
 import { processor } from '../src/processor';
 
-jest.mock('graphql-config', () => ({
-  loadConfigSync: jest.fn(),
+jest.mock('../src/graphql-config', () => ({
+  loadGraphQLConfig: jest.fn(() => ({
+    getDefault: () => ({
+      extensions: {
+        graphqlTagPluck: {
+          modules: [
+            {
+              name: 'custom-gql-tag',
+              identifier: 'custom',
+            },
+          ],
+          globalGqlIdentifierName: ['custom', 'gql'],
+        },
+      },
+    }),
+  })),
 }));
 
 describe('processor', () => {
@@ -22,23 +35,6 @@ describe('processor', () => {
   });
 
   it('preprocess finds custom tag', () => {
-    loadConfigSync.mockImplementation(() => ({
-      getDefault: () => ({
-        extensions: {
-          graphqlTagPluck: {
-            modules: [
-              {
-                name: 'custom-gql-tag',
-                identifier: 'custom',
-              },
-            ],
-            globalGqlIdentifierName: ['custom'],
-          },
-        },
-      }),
-    }));
-    jest.resetModules();
-
     const code = `
       import { custom } from 'custom-gql-tag'
       const fooQuery = custom\`${QUERY}\`

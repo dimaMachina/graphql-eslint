@@ -1,13 +1,13 @@
 import type { Linter } from 'eslint';
 import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
-import { loadConfigSync } from 'graphql-config';
+import { loadGraphQLConfig } from './graphql-config';
 
 type Block = Linter.ProcessorFile & {
   lineOffset: number;
   offset: number;
 };
 
-const defaultGraphqlConfig = loadConfigSync({ throwOnMissing: false })?.getDefault();
+const defaultGraphqlConfig = loadGraphQLConfig({})?.getDefault();
 const graphqlTagPluckOptions = defaultGraphqlConfig?.extensions?.graphqlTagPluck as GraphQLTagPluckOptions;
 const graphqlTagModuleIdentifiers =
   graphqlTagPluckOptions?.modules.map(({ identifier }) => identifier).filter(identifier => identifier) ?? [];
@@ -25,14 +25,8 @@ const RELEVANT_KEYWORDS = [
     ...globalGqlIdentifierNames,
     ...(gqlMagicComment ? [gqlMagicComment] : []),
   ]),
-] as const;
+];
 const blocksMap = new Map<string, Block[]>();
-console.log(
-  'HERE',
-  loadConfigSync,
-  loadConfigSync({ throwOnMissing: false }),
-  loadConfigSync({ throwOnMissing: false })?.getDefault()
-);
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
