@@ -26,7 +26,11 @@ import { ARRAY_DEFAULT_OPTIONS } from '../utils';
 
 const RULE_ID = 'alphabetize';
 
-const fieldsEnum: ('ObjectTypeDefinition' | 'InterfaceTypeDefinition' | 'InputObjectTypeDefinition')[] = [
+const fieldsEnum: (
+  | 'ObjectTypeDefinition'
+  | 'InterfaceTypeDefinition'
+  | 'InputObjectTypeDefinition'
+)[] = [
   Kind.OBJECT_TYPE_DEFINITION,
   Kind.INTERFACE_TYPE_DEFINITION,
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
@@ -188,7 +192,8 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             items: {
               enum: selectionsEnum,
             },
-            description: 'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
+            description:
+              'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
           },
           variables: {
             ...ARRAY_DEFAULT_OPTIONS,
@@ -206,7 +211,8 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
           },
           definitions: {
             type: 'boolean',
-            description: 'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
+            description:
+              'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
             default: false,
           },
         },
@@ -249,7 +255,10 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       const [firstBeforeComment] = getBeforeComments(node);
       const [firstAfterComment] = sourceCode.getCommentsAfter(node);
       const from = firstBeforeComment || node;
-      const to = firstAfterComment && isNodeAndCommentOnSameLine(node, firstAfterComment) ? firstAfterComment : node;
+      const to =
+        firstAfterComment && isNodeAndCommentOnSameLine(node, firstAfterComment)
+          ? firstAfterComment
+          : node;
       return [from.range[0], to.range[1]];
     }
 
@@ -257,21 +266,29 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       // Starts from 1, ignore nodes.length <= 1
       for (let i = 1; i < nodes.length; i += 1) {
         const currNode = nodes[i];
-        const currName = ('alias' in currNode && currNode.alias?.value) || ('name' in currNode && currNode.name?.value);
+        const currName =
+          ('alias' in currNode && currNode.alias?.value) ||
+          ('name' in currNode && currNode.name?.value);
         if (!currName) {
           // we don't move unnamed current nodes
           continue;
         }
 
         const prevNode = nodes[i - 1];
-        const prevName = ('alias' in prevNode && prevNode.alias?.value) || ('name' in prevNode && prevNode.name?.value);
+        const prevName =
+          ('alias' in prevNode && prevNode.alias?.value) ||
+          ('name' in prevNode && prevNode.name?.value);
         if (prevName) {
           // Compare with lexicographic order
           const compareResult = prevName.localeCompare(currName);
           const shouldSort = compareResult === 1;
           if (!shouldSort) {
             const isSameName = compareResult === 0;
-            if (!isSameName || !prevNode.kind.endsWith('Extension') || currNode.kind.endsWith('Extension')) {
+            if (
+              !isSameName ||
+              !prevNode.kind.endsWith('Extension') ||
+              currNode.kind.endsWith('Extension')
+            ) {
               continue;
             }
           }
@@ -287,8 +304,14 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
           *fix(fixer) {
             const prevRange = getRangeWithComments(prevNode);
             const currRange = getRangeWithComments(currNode);
-            yield fixer.replaceTextRange(prevRange, sourceCode.getText({ range: currRange } as any));
-            yield fixer.replaceTextRange(currRange, sourceCode.getText({ range: prevRange } as any));
+            yield fixer.replaceTextRange(
+              prevRange,
+              sourceCode.getText({ range: currRange } as any)
+            );
+            yield fixer.replaceTextRange(
+              currRange,
+              sourceCode.getText({ range: prevRange } as any)
+            );
           },
         });
       }
@@ -299,8 +322,14 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     const listeners: GraphQLESLintRuleListener = {};
 
     const kinds = [
-      fields.has(Kind.OBJECT_TYPE_DEFINITION) && [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION],
-      fields.has(Kind.INTERFACE_TYPE_DEFINITION) && [Kind.INTERFACE_TYPE_DEFINITION, Kind.INTERFACE_TYPE_EXTENSION],
+      fields.has(Kind.OBJECT_TYPE_DEFINITION) && [
+        Kind.OBJECT_TYPE_DEFINITION,
+        Kind.OBJECT_TYPE_EXTENSION,
+      ],
+      fields.has(Kind.INTERFACE_TYPE_DEFINITION) && [
+        Kind.INTERFACE_TYPE_DEFINITION,
+        Kind.INTERFACE_TYPE_EXTENSION,
+      ],
       fields.has(Kind.INPUT_OBJECT_TYPE_DEFINITION) && [
         Kind.INPUT_OBJECT_TYPE_DEFINITION,
         Kind.INPUT_OBJECT_TYPE_EXTENSION,
@@ -333,13 +362,17 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
 
     if (hasEnumValues) {
       const enumValuesSelector = [Kind.ENUM_TYPE_DEFINITION, Kind.ENUM_TYPE_EXTENSION].join(',');
-      listeners[enumValuesSelector] = (node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>) => {
+      listeners[enumValuesSelector] = (
+        node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>
+      ) => {
         checkNodes(node.values);
       };
     }
 
     if (selectionsSelector) {
-      listeners[`:matches(${selectionsSelector}) SelectionSet`] = (node: GraphQLESTreeNode<SelectionSetNode>) => {
+      listeners[`:matches(${selectionsSelector}) SelectionSet`] = (
+        node: GraphQLESTreeNode<SelectionSetNode>
+      ) => {
         checkNodes(node.selections);
       };
     }
@@ -352,7 +385,9 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
 
     if (argumentsSelector) {
       listeners[argumentsSelector] = (
-        node: GraphQLESTreeNode<FieldDefinitionNode | FieldNode | DirectiveDefinitionNode | DirectiveNode>
+        node: GraphQLESTreeNode<
+          FieldDefinitionNode | FieldNode | DirectiveDefinitionNode | DirectiveNode
+        >
       ) => {
         checkNodes(node.arguments);
       };

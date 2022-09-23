@@ -1,4 +1,13 @@
-import { ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, NameNode, visit, DirectiveLocation } from 'graphql';
+import {
+  ASTNode,
+  ASTVisitor,
+  GraphQLSchema,
+  isInterfaceType,
+  Kind,
+  NameNode,
+  visit,
+  DirectiveLocation,
+} from 'graphql';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule } from '../types';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';

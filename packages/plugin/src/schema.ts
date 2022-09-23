@@ -9,7 +9,10 @@ import type { ParserOptions, Schema, Pointer } from './types';
 const schemaCache = new Map<string, GraphQLSchema | Error>();
 const debug = debugFactory('graphql-eslint:schema');
 
-export function getSchema(projectForFile: GraphQLProjectConfig, options: ParserOptions = {}): Schema {
+export function getSchema(
+  projectForFile: GraphQLProjectConfig,
+  options: ParserOptions = {}
+): Schema {
   const schemaKey = asArray(projectForFile.schema).sort().join(',');
 
   if (!schemaKey) {
@@ -24,7 +27,11 @@ export function getSchema(projectForFile: GraphQLProjectConfig, options: ParserO
 
   try {
     debug('Loading schema from %o', projectForFile.schema);
-    schema = projectForFile.loadSchemaSync(projectForFile.schema, 'GraphQLSchema', options.schemaOptions);
+    schema = projectForFile.loadSchemaSync(
+      projectForFile.schema,
+      'GraphQLSchema',
+      options.schemaOptions
+    );
     if (debug.enabled) {
       debug('Schema loaded: %o', schema instanceof GraphQLSchema);
       const schemaPaths = fastGlob.sync(projectForFile.schema as Pointer, {

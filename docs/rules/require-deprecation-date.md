@@ -39,7 +39,8 @@ type User {
 # eslint @graphql-eslint/require-deprecation-date: 'error'
 
 type User {
-  firstname: String @deprecated(reason: "Use 'firstName' instead", deletionDate: "25/12/2022")
+  firstname: String
+    @deprecated(reason: "Use 'firstName' instead", deletionDate: "25/12/2022")
   firstName: String
 }
 ```

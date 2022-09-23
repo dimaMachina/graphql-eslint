@@ -53,7 +53,9 @@ const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
     const { style = 'block' } = context.options[0] || {};
     const isBlock = style === 'block';
     return {
-      [`.description[type=StringValue][block!=${isBlock}]`](node: GraphQLESTreeNode<StringValueNode>) {
+      [`.description[type=StringValue][block!=${isBlock}]`](
+        node: GraphQLESTreeNode<StringValueNode>
+      ) {
         context.report({
           loc: isBlock ? node.loc : node.loc.start,
           message: `Unexpected ${isBlock ? 'inline' : 'block'} description.`,

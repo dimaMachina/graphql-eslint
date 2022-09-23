@@ -67,7 +67,8 @@ export const getOnDiskFilepath = (filepath: string): string => {
   return filepath;
 };
 
-export const getTypeName = (node): string => ('type' in node ? getTypeName(node.type) : node.name.value);
+export const getTypeName = (node): string =>
+  'type' in node ? getTypeName(node.type) : node.name.value;
 
 export const TYPES_KINDS = [
   Kind.OBJECT_TYPE_DEFINITION,
@@ -139,4 +140,5 @@ declare namespace Intl {
   }
 }
 
-export const englishJoinWords = words => new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);
+export const englishJoinWords = words =>
+  new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);

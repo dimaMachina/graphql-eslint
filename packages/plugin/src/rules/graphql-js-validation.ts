@@ -40,7 +40,9 @@ function validateDocument(
       const { line, column } = error.locations[0];
       const sourceCode = context.getSourceCode();
       const { tokens } = sourceCode.ast;
-      const token = tokens.find(token => token.loc.start.line === line && token.loc.start.column === column - 1);
+      const token = tokens.find(
+        token => token.loc.start.line === line && token.loc.start.column === column - 1
+      );
 
       let loc: { line: number; column: number } | AST.SourceLocation = {
         line,
@@ -49,7 +51,9 @@ function validateDocument(
       if (token) {
         loc =
           // if cursor on `@` symbol than use next node
-          (token.type as any) === '@' ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc : token.loc;
+          (token.type as any) === '@'
+            ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc
+            : token.loc;
       }
 
       context.report({
@@ -70,7 +74,9 @@ type GetFragmentDefsAndFragmentSpreads = {
   fragmentSpreads: Set<string>;
 };
 
-const getFragmentDefsAndFragmentSpreads = (node: DocumentNode): GetFragmentDefsAndFragmentSpreads => {
+const getFragmentDefsAndFragmentSpreads = (
+  node: DocumentNode
+): GetFragmentDefsAndFragmentSpreads => {
   const fragmentDefs = new Set<string>();
   const fragmentSpreads = new Set<string>();
 
@@ -166,7 +172,9 @@ const validationToRule = (
 
         return {
           Document(node) {
-            const schema = docs.requiresSchema ? requireGraphQLSchemaFromContext(ruleId, context) : null;
+            const schema = docs.requiresSchema
+              ? requireGraphQLSchemaFromContext(ruleId, context)
+              : null;
 
             const documentNode = getDocumentNode
               ? getDocumentNode({ ruleId, context, node: node.rawNode() })
@@ -202,7 +210,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   }),
   validationToRule('known-argument-names', 'KnownArgumentNames', {
     category: ['Schema', 'Operations'],
-    description: 'A GraphQL field is only valid if all supplied arguments are defined by that field.',
+    description:
+      'A GraphQL field is only valid if all supplied arguments are defined by that field.',
     requiresSchema: true,
   }),
   validationToRule(
@@ -235,7 +244,9 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
 
       const filterDirectives = (node: { directives?: ReadonlyArray<DirectiveNode> }) => ({
         ...node,
-        directives: node.directives.filter(directive => !ignoreClientDirectives.includes(directive.name.value)),
+        directives: node.directives.filter(
+          directive => !ignoreClientDirectives.includes(directive.name.value)
+        ),
       });
 
       return visit(documentNode, {
@@ -332,7 +343,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   }),
   validationToRule('no-fragment-cycles', 'NoFragmentCycles', {
     category: 'Operations',
-    description: 'A GraphQL fragment is only valid when it does not have cycles in fragments usage.',
+    description:
+      'A GraphQL fragment is only valid when it does not have cycles in fragments usage.',
     requiresSchema: true,
   }),
   validationToRule(
@@ -359,9 +371,10 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     },
     ({ ruleId, context, node }) => {
       const siblings = requireSiblingsOperations(ruleId, context);
-      const FilePathToDocumentsMap = [...siblings.getOperations(), ...siblings.getFragments()].reduce<
-        Record<string, ExecutableDefinitionNode[]>
-      >((map, { filePath, document }) => {
+      const FilePathToDocumentsMap = [
+        ...siblings.getOperations(),
+        ...siblings.getFragments(),
+      ].reduce<Record<string, ExecutableDefinitionNode[]>>((map, { filePath, document }) => {
         map[filePath] ??= [];
         map[filePath].push(document);
         return map;
@@ -380,7 +393,9 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
             kind: Kind.DOCUMENT,
             definitions: documents,
           });
-          const isCurrentFileImportFragment = missingFragments.some(fragment => fragmentDefs.has(fragment));
+          const isCurrentFileImportFragment = missingFragments.some(fragment =>
+            fragmentDefs.has(fragment)
+          );
 
           if (isCurrentFileImportFragment) {
             return getParentNode(filePath, {
@@ -446,7 +461,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   }),
   validationToRule('unique-argument-names', 'UniqueArgumentNames', {
     category: 'Operations',
-    description: 'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.',
+    description:
+      'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.',
     requiresSchema: true,
   }),
   validationToRule('unique-directive-names', 'UniqueDirectiveNames', {
@@ -471,7 +487,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   }),
   validationToRule('unique-input-field-names', 'UniqueInputFieldNames', {
     category: 'Operations',
-    description: 'A GraphQL input object value is only valid if all supplied fields are uniquely named.',
+    description:
+      'A GraphQL input object value is only valid if all supplied fields are uniquely named.',
   }),
   validationToRule('unique-operation-types', 'UniqueOperationTypes', {
     category: 'Schema',
@@ -488,7 +505,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   }),
   validationToRule('value-literals-of-correct-type', 'ValuesOfCorrectType', {
     category: 'Operations',
-    description: 'A GraphQL document is only valid if all value literals are of the type expected at their position.',
+    description:
+      'A GraphQL document is only valid if all value literals are of the type expected at their position.',
     requiresSchema: true,
   }),
   validationToRule('variables-are-input-types', 'VariablesAreInputTypes', {

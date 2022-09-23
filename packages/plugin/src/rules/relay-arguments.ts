@@ -80,7 +80,9 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
         while (fieldNode.kind !== Kind.FIELD_DEFINITION) {
           fieldNode = fieldNode.parent as GraphQLESTreeNode<FieldDefinitionNode>;
         }
-        const args = Object.fromEntries(fieldNode.arguments.map(argument => [argument.name.value, argument]));
+        const args = Object.fromEntries(
+          fieldNode.arguments.map(argument => [argument.name.value, argument])
+        );
         const hasForwardPagination = Boolean(args.first && args.after);
         const hasBackwardPagination = Boolean(args.last && args.before);
 
@@ -92,7 +94,10 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
           return;
         }
 
-        function checkField(typeName: 'String' | 'Int', argumentName: 'first' | 'last' | 'after' | 'before'): void {
+        function checkField(
+          typeName: 'String' | 'Int',
+          argumentName: 'first' | 'last' | 'after' | 'before'
+        ): void {
           const argument = args[argumentName];
           const hasArgument = Boolean(argument);
           let type = argument as any;

@@ -15,7 +15,9 @@ export const checkNode = (
   const documentName = node.name.value;
   const siblings = requireSiblingsOperations(ruleId, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
-    node.kind === Kind.FRAGMENT_DEFINITION ? siblings.getFragment(documentName) : siblings.getOperation(documentName);
+    node.kind === Kind.FRAGMENT_DEFINITION
+      ? siblings.getFragment(documentName)
+      : siblings.getOperation(documentName);
   const filepath = context.getFilename();
 
   const conflictingDocuments = siblingDocuments.filter(f => {

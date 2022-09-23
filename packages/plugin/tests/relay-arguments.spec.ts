@@ -44,7 +44,12 @@ ruleTester.runGraphQLTests<[RelayArgumentsConfig], true>('relay-arguments', rule
       ...useSchema(/* GraphQL */ `
         type User {
           posts: PostConnection
-          comments(after: [String!]!, first: Float, before: Query, last: [PostConnection]): PostConnection
+          comments(
+            after: [String!]!
+            first: Float
+            before: Query
+            last: [PostConnection]
+          ): PostConnection
         }
       `),
       errors: 5,

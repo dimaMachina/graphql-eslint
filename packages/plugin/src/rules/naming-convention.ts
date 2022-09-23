@@ -250,7 +250,11 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       return typeof style === 'object' ? style : { style };
     }
 
-    function report(node: GraphQLESTreeNode<NameNode>, message: string, suggestedName: string): void {
+    function report(
+      node: GraphQLESTreeNode<NameNode>,
+      message: string,
+      suggestedName: string
+    ): void {
       context.report({
         node,
         message,
@@ -331,21 +335,29 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
       const suggestedName = node.value.replace(isLeading ? /^_+/ : /_+$/, '');
-      report(node, `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`, suggestedName);
+      report(
+        node,
+        `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
+        suggestedName
+      );
     };
 
     const listeners: GraphQLESLintRuleListener = {};
 
     if (!allowLeadingUnderscore) {
-      listeners['Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] =
-        checkUnderscore(true);
+      listeners[
+        'Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'
+      ] = checkUnderscore(true);
     }
     if (!allowTrailingUnderscore) {
-      listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] =
-        checkUnderscore(false);
+      listeners[
+        'Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'
+      ] = checkUnderscore(false);
     }
 
-    const selectors = new Set([types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean));
+    const selectors = new Set(
+      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean)
+    );
 
     for (const selector of selectors) {
       listeners[selector] = checkNode(selector);

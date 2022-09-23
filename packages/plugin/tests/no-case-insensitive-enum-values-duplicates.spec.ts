@@ -8,11 +8,15 @@ ruleTester.runGraphQLTests('no-case-insensitive-enum-values-duplicates', rule, {
   invalid: [
     {
       code: 'enum A { TEST TesT }',
-      errors: [{ message: 'Case-insensitive enum values duplicates are not allowed! Found: `TesT`.' }],
+      errors: [
+        { message: 'Case-insensitive enum values duplicates are not allowed! Found: `TesT`.' },
+      ],
     },
     {
       code: 'extend enum A { TEST TesT }',
-      errors: [{ message: 'Case-insensitive enum values duplicates are not allowed! Found: `TesT`.' }],
+      errors: [
+        { message: 'Case-insensitive enum values duplicates are not allowed! Found: `TesT`.' },
+      ],
     },
   ],
 });

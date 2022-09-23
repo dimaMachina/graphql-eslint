@@ -1,4 +1,10 @@
-import { Kind, NamedTypeNode, ObjectTypeExtensionNode, ObjectTypeDefinitionNode, NameNode } from 'graphql';
+import {
+  Kind,
+  NamedTypeNode,
+  ObjectTypeExtensionNode,
+  ObjectTypeDefinitionNode,
+  NameNode,
+} from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRuleListener } from '../testkit';
@@ -14,8 +20,10 @@ type ObjectTypeNode = GraphQLESTreeNode<ObjectTypeDefinitionNode | ObjectTypeExt
 
 const isObjectType = (node: ObjectTypeNode): boolean =>
   [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION].includes(node.type);
-const isQueryType = (node: ObjectTypeNode): boolean => isObjectType(node) && node.name.value === 'Query';
-const isMutationType = (node: ObjectTypeNode): boolean => isObjectType(node) && node.name.value === 'Mutation';
+const isQueryType = (node: ObjectTypeNode): boolean =>
+  isObjectType(node) && node.name.value === 'Query';
+const isMutationType = (node: ObjectTypeNode): boolean =>
+  isObjectType(node) && node.name.value === 'Mutation';
 
 const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
   meta: {
@@ -64,7 +72,8 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
           checkInputType: {
             type: 'boolean',
             default: false,
-            description: 'Check that the input type name follows the convention <mutationName>Input',
+            description:
+              'Check that the input type name follows the convention <mutationName>Input',
           },
           caseSensitiveInputType: {
             type: 'boolean',
@@ -95,10 +104,13 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
     };
 
     const shouldCheckType = node =>
-      (options.checkMutations && isMutationType(node)) || (options.checkQueries && isQueryType(node));
+      (options.checkMutations && isMutationType(node)) ||
+      (options.checkQueries && isQueryType(node));
 
     const listeners: GraphQLESLintRuleListener = {
-      'FieldDefinition > InputValueDefinition[name.value!=input] > Name'(node: GraphQLESTreeNode<NameNode>) {
+      'FieldDefinition > InputValueDefinition[name.value!=input] > Name'(
+        node: GraphQLESTreeNode<NameNode>
+      ) {
         if (shouldCheckType((node as any).parent.parent.parent)) {
           const inputName = node.value;
           context.report({
@@ -116,7 +128,9 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
     };
 
     if (options.checkInputType) {
-      listeners['FieldDefinition > InputValueDefinition NamedType'] = (node: GraphQLESTreeNode<NamedTypeNode>) => {
+      listeners['FieldDefinition > InputValueDefinition NamedType'] = (
+        node: GraphQLESTreeNode<NamedTypeNode>
+      ) => {
         const findInputType = item => {
           let currentNode = item;
           while (currentNode.type !== Kind.INPUT_VALUE_DEFINITION) {
