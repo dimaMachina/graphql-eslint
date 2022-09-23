@@ -9,11 +9,11 @@
     "lint": "eslint --ext graphql,js ."
   },
   "dependencies": {
-    "graphql": "16.0.1",
+    "graphql": "16.6.0",
     "graphql-tag": "2.12.6"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "3.10.7",
-    "eslint": "8.18.0"
+    "eslint": "8.23.1"
   }
 }

@@ -9,11 +9,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "graphql": "16.0.1"
+    "graphql": "16.6.0"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "3.10.7",
-    "eslint": "8.18.0",
+    "eslint": "8.23.1",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.1.0",
     "prettier": "2.7.1"
