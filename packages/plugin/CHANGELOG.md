@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.11.0
+
+### Minor Changes
+
+- [#1156](https://github.com/B2o5T/graphql-eslint/pull/1156) [`6ac42cf`](https://github.com/B2o5T/graphql-eslint/commit/6ac42cfe59e77c07fde8ba7d1623c4a1677af221) Thanks [@JimmyPaolini](https://github.com/JimmyPaolini)! - Using configuration options for `graphql-tag-pluck` through `graphql-config`
+  Allow setup custom `globalGqlIdentifierName`, `modules.identifier` and `gqlMagicComment`
+
+- [#1163](https://github.com/B2o5T/graphql-eslint/pull/1163) [`0d3fe5b`](https://github.com/B2o5T/graphql-eslint/commit/0d3fe5b1f021ed687e4285bd44f14f98a4287020) Thanks [@B2o5T](https://github.com/B2o5T)! - improve `RuleDocsInfo` type, set `description` and `url` as required fields
+
 ## 3.10.7
 
 ### Patch Changes
