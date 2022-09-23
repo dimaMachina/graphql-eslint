@@ -1,12 +1,32 @@
-import type { Linter } from 'eslint';
-import { parseCode } from '@graphql-tools/graphql-tag-pluck';
+import { Linter } from 'eslint';
+import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import { asArray } from '@graphql-tools/utils';
+import { loadGraphQLConfig } from './graphql-config';
 
-type Block = Linter.ProcessorFile & {
+export type Block = Linter.ProcessorFile & {
   lineOffset: number;
   offset: number;
 };
 
-const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'] as const;
+const graphQLTagPluckOptions: GraphQLTagPluckOptions =
+  loadGraphQLConfig().getDefault()?.extensions?.graphqlTagPluck;
+
+const {
+  modules = [],
+  globalGqlIdentifierName = ['gql', 'graphql'],
+  gqlMagicComment = 'GraphQL',
+} = graphQLTagPluckOptions || {};
+
+const RELEVANT_KEYWORDS = [
+  ...new Set(
+    [
+      ...modules.map(({ identifier }) => identifier),
+      ...asArray(globalGqlIdentifierName),
+      gqlMagicComment,
+    ].filter(Boolean)
+  ),
+];
+
 const blocksMap = new Map<string, Block[]>();
 
 export const processor: Linter.Processor<Block | string> = {
@@ -19,8 +39,8 @@ export const processor: Linter.Processor<Block | string> = {
       code,
       filePath,
       options: {
-        globalGqlIdentifierName: ['gql', 'graphql'],
         skipIndent: true,
+        ...graphQLTagPluckOptions,
       },
     });
 
