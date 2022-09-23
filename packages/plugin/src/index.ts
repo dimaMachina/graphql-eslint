@@ -6,7 +6,7 @@ export * from './testkit';
 export * from './types';
 export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils';
 
-export const processors = { graphql: processor }
+export const processors = { graphql: processor };
 
 export const configs = Object.fromEntries(
   [
@@ -18,4 +18,3 @@ export const configs = Object.fromEntries(
     'relay',
   ].map(configName => [configName, { extends: `./configs/${configName}.json` }])
 );
-

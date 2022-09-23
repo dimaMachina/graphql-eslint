@@ -71,5 +71,6 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [variables-are-input-types](rules/variables-are-input-types.md)|A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).|![recommended][]|🔮|
 [variables-in-allowed-position](rules/variables-in-allowed-position.md)|Variables passed to field arguments conform to type.|![recommended][]|🔮|
 <!-- prettier-ignore-end -->
+
 [recommended]: https://img.shields.io/badge/-recommended-green.svg
 [all]: https://img.shields.io/badge/-all-blue.svg

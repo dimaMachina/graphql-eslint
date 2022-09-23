@@ -20,7 +20,7 @@
     "test": "jest --no-watchman --forceExit --noStackTrace --detectOpenHandles",
     "prerelease": "yarn build",
     "release": "changeset publish",
-    "prettier": "prettier --ignore-path .gitignore --write --list-different \"**/*.{ts,tsx,graphql,yml}\""
+    "prettier": "prettier --write --list-different ."
   },
   "devDependencies": {
     "@babel/core": "7.18.5",

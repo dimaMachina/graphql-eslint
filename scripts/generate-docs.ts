@@ -181,6 +181,7 @@ function generateDocs(): void {
         ],
         sortedRules
       ),
+      BR,
       '[recommended]: https://img.shields.io/badge/-recommended-green.svg',
       '[all]: https://img.shields.io/badge/-all-blue.svg',
       BR,

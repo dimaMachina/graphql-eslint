@@ -9,7 +9,7 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 ## Key Features
 
 - 🚀 Integrates with ESLint core (as a ESTree parser)
-- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
+- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
 - 🚀 Lints both GraphQL schema and GraphQL operations
 - 🚀 Extended type info for more advanced usages
 - 🚀 Supports ESLint directives (for example: `eslint-disable-next-line`)
@@ -188,7 +188,7 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 |[`relay`](packages/plugin/src/configs/relay.json)|enables rules from Relay specification for schema (SDL) development|
 <!-- prettier-ignore-end -->
 
-> If you are in a project that develops the GraphQL schema, you'll need `schema` rules. 
+> If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
 
 > If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll need `operations` rules.
 

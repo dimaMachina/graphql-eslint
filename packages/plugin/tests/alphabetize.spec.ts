@@ -336,7 +336,8 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       name: 'should sort when selection is aliased',
       options: [{ selections: ['OperationDefinition'] }],
       code: /* GraphQL */ `
-        { # start
+        {
+          # start
           lastName: lastname # lastName comment
           fullName: fullname # fullName comment
           firsName: firstname # firsName comment

@@ -273,7 +273,7 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id
         `,
       },
     },
-    {name: 'should work when `id` is selected by an alias', ...WITH_SCHEMA, code: '{ hasId {  id: name } }' },
+    { name: 'should work when `id` is selected by an alias', ...WITH_SCHEMA, code: '{ hasId {  id: name } }' },
   ],
   invalid: [
     {
