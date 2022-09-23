@@ -53,29 +53,32 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
 export type CategoryType = 'Schema' | 'Operations';
 
 export type RuleDocsInfo<T> = {
-  docs: Omit<Rule.RuleMetaData['docs'], 'category'> & {
-    category: CategoryType | CategoryType[];
-    requiresSchema?: true;
-    requiresSiblings?: true;
-    examples?: {
-      title: string;
-      code: string;
-      usage?: T;
-    }[];
-    configOptions?:
-      | T
-      | {
-          schema?: T;
-          operations?: T;
-        };
-    graphQLJSRuleName?: string;
-    isDisabledForAllConfig?: true;
-  };
+  description: string;
+  category: CategoryType | CategoryType[];
+  recommended?: boolean;
+  url: string;
+  requiresSchema?: true;
+  requiresSiblings?: true;
+  examples?: {
+    title: string;
+    code: string;
+    usage?: T;
+  }[];
+  configOptions?:
+    | T
+    | {
+        schema?: T;
+        operations?: T;
+      };
+  graphQLJSRuleName?: string;
+  isDisabledForAllConfig?: true;
 };
 
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
-  meta: Omit<Rule.RuleMetaData, 'docs'> & RuleDocsInfo<Options>;
+  meta: Omit<Rule.RuleMetaData, 'docs'> & {
+    docs: RuleDocsInfo<Options>
+  };
 };
 
 export type ValueOf<T> = T[keyof T];
