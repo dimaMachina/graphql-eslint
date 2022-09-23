@@ -115,7 +115,8 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
 
     // Check selections only in OperationDefinition,
     // skip selections of OperationDefinition and InlineFragment
-    const selector = 'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
+    const selector =
+      'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
     const typeInfo = new TypeInfo(schema);
 
     function checkFragments(node: GraphQLESTreeNode<SelectionSetNode>): void {
@@ -135,7 +136,13 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
             if (parent.kind === Kind.FRAGMENT_DEFINITION) {
               checkedFragmentSpreads.add(parent.name.value);
             } else if (parent.kind !== Kind.INLINE_FRAGMENT) {
-              checkSelections(node, typeInfo.getType(), selection.loc.start, parent, checkedFragmentSpreads);
+              checkSelections(
+                node,
+                typeInfo.getType(),
+                selection.loc.start,
+                parent,
+                checkedFragmentSpreads
+              );
             }
           },
         });
@@ -203,14 +210,16 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       }
 
       const pluralSuffix = idNames.length > 1 ? 's' : '';
-      const fieldName = englishJoinWords(idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``));
+      const fieldName = englishJoinWords(
+        idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``)
+      );
 
       const addition =
         checkedFragmentSpreads.size === 0
           ? ''
-          : ` or add to used fragment${checkedFragmentSpreads.size > 1 ? 's' : ''} ${englishJoinWords(
-              [...checkedFragmentSpreads].map(name => `\`${name}\``)
-            )}`;
+          : ` or add to used fragment${
+              checkedFragmentSpreads.size > 1 ? 's' : ''
+            } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
 
       const problem: ReportDescriptor = {
         loc,

@@ -35,7 +35,8 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [RULE_ID]: 'Anonymous GraphQL operations are forbidden. Make sure to name your {{ operation }}!',
+      [RULE_ID]:
+        'Anonymous GraphQL operations are forbidden. Make sure to name your {{ operation }}!',
     },
     schema: [],
   },
@@ -44,7 +45,9 @@ const rule: GraphQLESLintRule = {
       'OperationDefinition[name=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {
         const [firstSelection] = node.selectionSet.selections;
         const suggestedName =
-          firstSelection.kind === Kind.FIELD ? (firstSelection.alias || firstSelection.name).value : node.operation;
+          firstSelection.kind === Kind.FIELD
+            ? (firstSelection.alias || firstSelection.name).value
+            : node.operation;
 
         context.report({
           loc: getLocation(node.loc.start, node.operation),

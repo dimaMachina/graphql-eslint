@@ -141,7 +141,7 @@ ruleTester.runGraphQLTests('my-rule', rule, {
   invalid: [
     {
       code: 'query invalid { foo }',
-      errors: [{ message: 'Your error message.' }],
+      errors: [{ message: 'Your error message.' }]
     }
   ]
 })

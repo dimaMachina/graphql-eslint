@@ -68,11 +68,13 @@ const rule: GraphQLESLintRule = {
       // Connection types
       [MUST_BE_OBJECT_TYPE]: 'Connection type must be an Object type.',
       [MUST_HAVE_CONNECTION_SUFFIX]: 'Connection type must have `Connection` suffix.',
-      [MUST_CONTAIN_FIELD_EDGES]: 'Connection type must contain a field `edges` that return a list type.',
+      [MUST_CONTAIN_FIELD_EDGES]:
+        'Connection type must contain a field `edges` that return a list type.',
       [MUST_CONTAIN_FIELD_PAGE_INFO]:
         'Connection type must contain a field `pageInfo` that return a non-null `PageInfo` Object type.',
       [EDGES_FIELD_MUST_RETURN_LIST_TYPE]: '`edges` field must return a list type.',
-      [PAGE_INFO_FIELD_MUST_RETURN_NON_NULL_TYPE]: '`pageInfo` field must return a non-null `PageInfo` Object type.',
+      [PAGE_INFO_FIELD_MUST_RETURN_NON_NULL_TYPE]:
+        '`pageInfo` field must return a non-null `PageInfo` Object type.',
     },
     schema: [],
   },
@@ -102,7 +104,8 @@ const rule: GraphQLESLintRule = {
         node: GraphQLESTreeNode<TypeNode>
       ) {
         const isListType =
-          node.kind === Kind.LIST_TYPE || (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.LIST_TYPE);
+          node.kind === Kind.LIST_TYPE ||
+          (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.LIST_TYPE);
         if (!isListType) {
           context.report({ node, messageId: EDGES_FIELD_MUST_RETURN_LIST_TYPE });
         }

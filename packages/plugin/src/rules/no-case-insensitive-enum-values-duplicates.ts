@@ -42,7 +42,8 @@ const rule: GraphQLESLintRule = {
       [selector](node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>) {
         const duplicates = node.values.filter(
           (item, index, array) =>
-            array.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !== index
+            array.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !==
+            index
         );
         for (const duplicate of duplicates) {
           const enumName = duplicate.name.value;

@@ -53,7 +53,9 @@ function generateDocs(): void {
     }
     const categories = asArray(docs.category);
     if (docs.recommended) {
-      const configNames = categories.map(category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`);
+      const configNames = categories.map(
+        category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`
+      );
       blocks.push(
         `${Icon.RECOMMENDED} The \`"extends": ${configNames.join(
           '` and `'
@@ -181,6 +183,7 @@ function generateDocs(): void {
         ],
         sortedRules
       ),
+      BR,
       '[recommended]: https://img.shields.io/badge/-recommended-green.svg',
       '[all]: https://img.shields.io/badge/-all-blue.svg',
       BR,

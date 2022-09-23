@@ -820,12 +820,13 @@ exports[`should sort definitions 1`] = `
 exports[`should sort when selection is aliased 1`] = `
 #### ⌨️ Code
 
-      1 |         { # start
-      2 |           lastName: lastname # lastName comment
-      3 |           fullName: fullname # fullName comment
-      4 |           firsName: firstname # firsName comment
-      5 |           # end
-      6 |         }
+      1 |         {
+      2 |           # start
+      3 |           lastName: lastname # lastName comment
+      4 |           fullName: fullname # fullName comment
+      5 |           firsName: firstname # firsName comment
+      6 |           # end
+      7 |         }
 
 #### ⚙️ Options
 
@@ -837,24 +838,25 @@ exports[`should sort when selection is aliased 1`] = `
 
 #### ❌ Error 1/2
 
-      2 |           lastName: lastname # lastName comment
-    > 3 |           fullName: fullname # fullName comment
+      3 |           lastName: lastname # lastName comment
+    > 4 |           fullName: fullname # fullName comment
         |           ^^^^^^^^ \`fullName\` should be before \`lastName\`.
-      4 |           firsName: firstname # firsName comment
+      5 |           firsName: firstname # firsName comment
 
 #### ❌ Error 2/2
 
-      3 |           fullName: fullname # fullName comment
-    > 4 |           firsName: firstname # firsName comment
+      4 |           fullName: fullname # fullName comment
+    > 5 |           firsName: firstname # firsName comment
         |           ^^^^^^^^ \`firsName\` should be before \`fullName\`.
-      5 |           # end
+      6 |           # end
 
 #### 🔧 Autofix output
 
-      1 |         { # start
+      1 |         {
       2 |           firsName: firstname # firsName comment
       3 |           fullName: fullname # fullName comment
-      4 |           lastName: lastname # lastName comment
-      5 |           # end
-      6 |         }
+      4 |           # start
+      5 |           lastName: lastname # lastName comment
+      6 |           # end
+      7 |         }
 `;

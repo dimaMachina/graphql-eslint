@@ -99,8 +99,8 @@ export default rule;
 `;
   await writeFile(RULE_PATH, RULE_CONTENT.trimStart());
 
-    const TEST_PATH = join(CWD, `packages/plugin/tests/${ruleId}.spec.ts`);
-    const TEST_CONTENT = `
+  const TEST_PATH = join(CWD, `packages/plugin/tests/${ruleId}.spec.ts`);
+  const TEST_CONTENT = `
 import { GraphQLRuleTester, ParserOptions } from '../src';
 import rule from '../src/rules/${ruleId}';
 
@@ -131,5 +131,5 @@ ruleTester.runGraphQLTests('${ruleId}', rule, {
   ],
 });
 `;
-    await writeFile(TEST_PATH, TEST_CONTENT.trimStart());
+  await writeFile(TEST_PATH, TEST_CONTENT.trimStart());
 });

@@ -119,7 +119,9 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
       ],
     },
     {
-      ...useSchema('type A { id: ID! } type AError { message: String! } type AResult { payload: A! }'),
+      ...useSchema(
+        'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }'
+      ),
       options: [
         {
           acceptedIdNames: ['id'],

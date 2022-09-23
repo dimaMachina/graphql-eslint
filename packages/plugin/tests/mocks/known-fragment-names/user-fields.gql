@@ -5,7 +5,7 @@ fragment UserFields on User {
   }
   posts {
     ... on Post {
-      ... PostFields
+      ...PostFields
     }
   }
 }

@@ -41,27 +41,27 @@ exports[`Invalid #2 1`] = `
 exports[`should not work with n nested fragments if you never get the id 1`] = `
 #### ⌨️ Code
 
-      1 |         query User {
-      2 |           user {
-      3 |             ...UserFullFields
-      4 |           }
-      5 |         }
+      1 |           query User {
+      2 |             user {
+      3 |               ...UserFullFields
+      4 |             }
+      5 |           }
 
 #### ❌ Error
 
-      1 |         query User {
-    > 2 |           user {
-        |                ^ Field \`user.id\` must be selected when it's available on a type.
+      1 |           query User {
+    > 2 |             user {
+        |                  ^ Field \`user.id\` must be selected when it's available on a type.
     Include it in your selection set or add to used fragments \`UserFullFields\`, \`UserMediumFields\`, or \`UserLightFields\`.
-      3 |             ...UserFullFields
+      3 |               ...UserFullFields
 
 #### 💡 Suggestion: Add \`id\` selection
 
-    1 |         query User {
-    2 |           user {
-    3 |             id ...UserFullFields
-    4 |           }
-    5 |         }
+    1 |           query User {
+    2 |             user {
+    3 |               id ...UserFullFields
+    4 |             }
+    5 |           }
 `;
 
 exports[`should report an error about missing \`posts.id\` field in fragment 1`] = `

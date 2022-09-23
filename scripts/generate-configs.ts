@@ -21,7 +21,7 @@ const writeFormattedFile: WriteFile = (filePath, code): void => {
   const formattedCode = isJson
     ? format(JSON.stringify(code), {
         parser: 'json',
-        printWidth: 80,
+        ...prettierOptions,
       })
     : [
         '/*',
@@ -50,7 +50,9 @@ function generateRules(): void {
     BR,
     'export const rules = {',
     '...GRAPHQL_JS_VALIDATIONS,',
-    ruleFilenames.map(ruleName => (ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName)),
+    ruleFilenames.map(ruleName =>
+      ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName
+    ),
     '}',
   ].join('\n');
 
@@ -62,7 +64,10 @@ type RuleOptions = 'error' | ['error', ...any];
 async function generateConfigs(): Promise<void> {
   const { rules } = await import('../packages/plugin/src');
 
-  const getRulesConfig = (categoryType: CategoryType, isRecommended: boolean): Record<string, RuleOptions> => {
+  const getRulesConfig = (
+    categoryType: CategoryType,
+    isRecommended: boolean
+  ): Record<string, RuleOptions> => {
     const getRuleOptions = (ruleId, rule: GraphQLESLintRule): RuleOptions => {
       const { configOptions } = rule.meta.docs;
       if (!configOptions) {

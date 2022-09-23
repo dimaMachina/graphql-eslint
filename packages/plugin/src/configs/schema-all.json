@@ -4,18 +4,9 @@
     "@graphql-eslint/alphabetize": [
       "error",
       {
-        "fields": [
-          "ObjectTypeDefinition",
-          "InterfaceTypeDefinition",
-          "InputObjectTypeDefinition"
-        ],
+        "fields": ["ObjectTypeDefinition", "InterfaceTypeDefinition", "InputObjectTypeDefinition"],
         "values": ["EnumTypeDefinition"],
-        "arguments": [
-          "FieldDefinition",
-          "Field",
-          "DirectiveDefinition",
-          "Directive"
-        ]
+        "arguments": ["FieldDefinition", "Field", "DirectiveDefinition", "Directive"]
       }
     ],
     "@graphql-eslint/input-name": "error",

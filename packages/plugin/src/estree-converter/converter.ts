@@ -75,5 +75,8 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
     },
   };
 
-  return visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor) as GraphQLESTreeNode<T>;
+  return visit(
+    node,
+    typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor
+  ) as GraphQLESTreeNode<T>;
 }

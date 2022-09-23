@@ -42,7 +42,9 @@ const rule: GraphQLESLintRule = {
   create(context) {
     return {
       'Directive[name.value=deprecated]'(node: GraphQLESTreeNode<DirectiveNode>) {
-        const reasonArgument = node.arguments.find(arg => arg.name.value === 'reason') as any as ArgumentNode;
+        const reasonArgument = node.arguments.find(
+          arg => arg.name.value === 'reason'
+        ) as any as ArgumentNode;
         const value = reasonArgument && String(valueFromNode(reasonArgument.value)).trim();
 
         if (!value) {

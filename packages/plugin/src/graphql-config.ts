@@ -1,6 +1,11 @@
 import { dirname } from 'path';
 import debugFactory from 'debug';
-import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync, SchemaPointer } from 'graphql-config';
+import {
+  GraphQLConfig,
+  GraphQLExtensionDeclaration,
+  loadConfigSync,
+  SchemaPointer,
+} from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
 

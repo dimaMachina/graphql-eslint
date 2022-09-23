@@ -62,7 +62,9 @@ const rule: GraphQLESLintRule = {
       [notPageInfoTypesSelector](node) {
         context.report({ node, messageId: MESSAGE_MUST_BE_OBJECT_TYPE });
       },
-      'ObjectTypeDefinition[name.value=PageInfo]'(node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) {
+      'ObjectTypeDefinition[name.value=PageInfo]'(
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+      ) {
         const fieldMap = Object.fromEntries(node.fields.map(field => [field.name.value, field]));
 
         const checkField = (
@@ -80,7 +82,8 @@ const rule: GraphQLESLintRule = {
                 type.gqlType.kind === Kind.NAMED_TYPE &&
                 type.gqlType.name.value === 'Boolean';
             } else if (type.kind === Kind.NAMED_TYPE) {
-              isAllowedType = type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
+              isAllowedType =
+                type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
             }
           }
 

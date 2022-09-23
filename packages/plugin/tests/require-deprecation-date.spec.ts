@@ -48,6 +48,6 @@ ruleTester.runGraphQLTests('require-deprecation-date', rule, {
     {
       code: 'type Old { oldField: ID @deprecated }',
       errors: [{ message: 'Directive "@deprecated" must have a deletion date' }],
-    }
+    },
   ],
 });

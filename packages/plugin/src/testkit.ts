@@ -11,7 +11,10 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
 } & Record<string, any>;
 
-export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'options' | 'parserOptions'> & {
+export type GraphQLValidTestCase<Options> = Omit<
+  RuleTester.ValidTestCase,
+  'options' | 'parserOptions'
+> & {
   options?: Options;
   parserOptions?: ParserOptions;
 };
@@ -84,7 +87,9 @@ export class GraphQLRuleTester extends RuleTester {
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
-    const hasOnlyTest = [...tests.valid, ...tests.invalid].some(t => typeof t !== 'string' && t.only);
+    const hasOnlyTest = [...tests.valid, ...tests.invalid].some(
+      t => typeof t !== 'string' && t.only
+    );
 
     // for (const [index, testCase] of tests.valid.entries()) {
     //   const { name, code, filename, only }: RuleTester.ValidTestCase =
@@ -133,14 +138,22 @@ export class GraphQLRuleTester extends RuleTester {
         }
 
         const codeWithMessage = printCode(code, message, 1);
-        messageForSnapshot.push(printWithIndex('#### ❌ Error', index, messages.length), indentCode(codeWithMessage));
+        messageForSnapshot.push(
+          printWithIndex('#### ❌ Error', index, messages.length),
+          indentCode(codeWithMessage)
+        );
 
         const { suggestions } = message;
 
         // Don't print suggestions in snapshots for too big codes
         if (suggestions && (code.match(/\n/g) || '').length < 1000) {
           for (const [i, suggestion] of message.suggestions.entries()) {
-            const title = printWithIndex('#### 💡 Suggestion', i, suggestions.length, suggestion.desc);
+            const title = printWithIndex(
+              '#### 💡 Suggestion',
+              i,
+              suggestions.length,
+              suggestion.desc
+            );
             const output = applyFix(code, suggestion.fix);
             const codeFrame = printCode(output, { line: 0, column: 0 });
             messageForSnapshot.push(title, indentCode(codeFrame, 2));

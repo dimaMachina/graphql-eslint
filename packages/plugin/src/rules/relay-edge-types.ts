@@ -136,7 +136,8 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
     };
 
     const isNamedOrNonNullNamed = (node: GraphQLESTreeNode<TypeNode>): boolean =>
-      node.kind === Kind.NAMED_TYPE || (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.NAMED_TYPE);
+      node.kind === Kind.NAMED_TYPE ||
+      (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.NAMED_TYPE);
 
     const checkNodeField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>): void => {
       const nodeField = node.fields.find(field => field.name.value === 'node');
@@ -164,7 +165,8 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
 
     const checkCursorField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>): void => {
       const cursorField = node.fields.find(field => field.name.value === 'cursor');
-      const message = 'return either a String, Scalar, or a non-null wrapper wrapper around one of those types.';
+      const message =
+        'return either a String, Scalar, or a non-null wrapper wrapper around one of those types.';
       if (!cursorField) {
         context.report({
           node: node.name,
@@ -190,7 +192,9 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
           context.report({ node, messageId: MESSAGE_MUST_BE_OBJECT_TYPE });
         }
       },
-      ':matches(ObjectTypeDefinition, ObjectTypeExtension)'(node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) {
+      ':matches(ObjectTypeDefinition, ObjectTypeExtension)'(
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+      ) {
         const typeName = node.name.value;
         if (edgeTypes.has(typeName)) {
           checkNodeField(node);

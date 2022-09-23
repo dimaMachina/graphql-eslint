@@ -10,7 +10,7 @@ about: Create a bug report to help us improve
 _Progress of the issue based on the [Contributor Workflow](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md#a-typical-contributor-workflow)_
 
 - [ ] 1. The issue provides a reproduction available on GitHub, Stackblitz or CodeSandbox
-> Please make sure the graphql-eslint version under `package.json` matches yours.
+     > Please make sure the graphql-eslint version under `package.json` matches yours.
 - [ ] 2. A failing test has been provided
 - [ ] 3. A local solution has been provided
 - [ ] 4. A pull request is pending review

@@ -131,7 +131,9 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                         const sourceCode = context.getSourceCode();
                         const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
                         const parentNode = foundNode.parent.parent;
-                        return fixer.remove(foundNode.kind === 'Name' ? parentNode.parent : parentNode);
+                        return fixer.remove(
+                          foundNode.kind === 'Name' ? parentNode.parent : parentNode
+                        );
                       },
                     },
                   ],

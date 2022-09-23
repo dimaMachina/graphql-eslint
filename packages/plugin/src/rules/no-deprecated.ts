@@ -79,14 +79,18 @@ const rule: GraphQLESLintRule<[], true> = {
       recommended: true,
     },
     messages: {
-      [RULE_ID]: 'This {{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
+      [RULE_ID]:
+        'This {{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
     },
     schema: [],
   },
   create(context) {
     requireGraphQLSchemaFromContext(RULE_ID, context);
 
-    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>, reason: string): void {
+    function report(
+      node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>,
+      reason: string
+    ): void {
       const nodeName = node.kind === Kind.ENUM ? node.value : node.name.value;
       const nodeType = node.kind === Kind.ENUM ? 'enum value' : 'field';
       context.report({

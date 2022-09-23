@@ -78,7 +78,9 @@ const rule: GraphQLESLintRule = {
             {
               desc: `Remove \`${fieldName}\` ${parent.type.toLowerCase()}`,
               fix(fixer) {
-                return fixer.remove((parent.type === Kind.VARIABLE ? parent.parent : parent) as any);
+                return fixer.remove(
+                  (parent.type === Kind.VARIABLE ? parent.parent : parent) as any
+                );
               },
             },
           ],

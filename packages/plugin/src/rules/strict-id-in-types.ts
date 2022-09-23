@@ -106,7 +106,8 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
             properties: {
               types: {
                 ...ARRAY_DEFAULT_OPTIONS,
-                description: 'This is used to exclude types with names that match one of the specified values.',
+                description:
+                  'This is used to exclude types with names that match one of the specified values.',
               },
               suffixes: {
                 ...ARRAY_DEFAULT_OPTIONS,
@@ -128,7 +129,11 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
     };
 
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-    const rootTypeNames = [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]
+    const rootTypeNames = [
+      schema.getQueryType(),
+      schema.getMutationType(),
+      schema.getSubscriptionType(),
+    ]
       .filter(Boolean)
       .map(type => type.name);
     const selector = `ObjectTypeDefinition[name.value!=/^(${rootTypeNames.join('|')})$/]`;
@@ -151,7 +156,10 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
 
           // To be a valid type, it must be non-null and one of the accepted types.
           let isValidIdType = false;
-          if (fieldNode.type.kind === Kind.NON_NULL_TYPE && fieldNode.type.type.kind === Kind.NAMED_TYPE) {
+          if (
+            fieldNode.type.kind === Kind.NON_NULL_TYPE &&
+            fieldNode.type.type.kind === Kind.NAMED_TYPE
+          ) {
             isValidIdType = options.acceptedIdTypes.includes(fieldNode.type.type.name.value);
           }
 

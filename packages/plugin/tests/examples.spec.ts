@@ -2,7 +2,7 @@ import { spawnSync } from 'child_process';
 import { relative, join } from 'path';
 import type { ESLint } from 'eslint';
 
-const ROOT_CWD = process.cwd()
+const ROOT_CWD = process.cwd();
 
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: { fatalErrorCount: number } & ESLint.LintResult) => {

@@ -125,7 +125,8 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             [...ALLOWED_KINDS].sort().map(kind => {
               let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
               if (kind === Kind.OPERATION_DEFINITION) {
-                description += '\n\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
+                description +=
+                  '\n\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
               }
               return [kind, { type: 'boolean', description }];
             })

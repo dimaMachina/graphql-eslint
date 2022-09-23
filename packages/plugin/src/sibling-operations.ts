@@ -191,8 +191,10 @@ export function getSiblingOperations(projectForFile: GraphQLProjectConfig): Sibl
     available: true,
     getFragment,
     getFragments,
-    getFragmentByType: typeName => getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
-    getFragmentsInUse: (selectable, recursive = true) => Array.from(collectFragments(selectable, recursive).values()),
+    getFragmentByType: typeName =>
+      getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
+    getFragmentsInUse: (selectable, recursive = true) =>
+      Array.from(collectFragments(selectable, recursive).values()),
     getOperation: name => getOperations().filter(o => o.document.name?.value === name),
     getOperations,
     getOperationByType: type => getOperations().filter(o => o.document.operation === type),

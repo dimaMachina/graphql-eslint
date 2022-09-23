@@ -90,7 +90,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           aa: Int
         }
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ fields: ['InputObjectTypeDefinition'] }],
@@ -129,7 +132,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           GOD
         }
       `,
-      errors: [{ message: '`ADMIN` should be before `SUPER_ADMIN`.' }, { message: '`GOD` should be before `USER`.' }],
+      errors: [
+        { message: '`ADMIN` should be before `SUPER_ADMIN`.' },
+        { message: '`GOD` should be before `USER`.' },
+      ],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -148,7 +154,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       code: /* GraphQL */ `
         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ arguments: ['FieldDefinition'] }],
@@ -157,7 +166,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
         }
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ selections: ['FragmentDefinition'] }],
@@ -168,7 +180,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           aa
         }
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ selections: ['OperationDefinition'] }],
@@ -336,7 +351,8 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       name: 'should sort when selection is aliased',
       options: [{ selections: ['OperationDefinition'] }],
       code: /* GraphQL */ `
-        { # start
+        {
+          # start
           lastName: lastname # lastName comment
           fullName: fullname # fullName comment
           firsName: firstname # firsName comment

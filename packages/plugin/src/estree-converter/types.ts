@@ -82,9 +82,17 @@ type ParentNode<T> = T extends DocumentNode
   : T extends EnumValueDefinitionNode
   ? EnumTypeDefinitionNode | EnumTypeExtensionNode
   : T extends InputValueDefinitionNode
-  ? InputObjectTypeDefinitionNode | InputObjectTypeExtensionNode | FieldDefinitionNode | DirectiveDefinitionNode
+  ?
+      | InputObjectTypeDefinitionNode
+      | InputObjectTypeExtensionNode
+      | FieldDefinitionNode
+      | DirectiveDefinitionNode
   : T extends FieldDefinitionNode
-  ? ObjectTypeDefinitionNode | ObjectTypeExtensionNode | InterfaceTypeDefinitionNode | InterfaceTypeExtensionNode
+  ?
+      | ObjectTypeDefinitionNode
+      | ObjectTypeExtensionNode
+      | InterfaceTypeDefinitionNode
+      | InterfaceTypeExtensionNode
   : T extends SelectionSetNode
   ? ExecutableDefinitionNode | FieldNode | InlineFragmentNode
   : T extends SelectionNode
