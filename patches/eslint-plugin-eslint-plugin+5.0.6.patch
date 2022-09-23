@@ -1,7 +1,16 @@
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-index caa646e..c3fb975 100644
+index caa646e..29b5177 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
+@@ -36,7 +36,7 @@ module.exports = {
+ 
+               const onlyProperty = test.properties.find(
+                 (property) =>
+-                  property.key.type === 'Identifier' &&
++                  property.key?.type === 'Identifier' &&
+                   property.key.name === 'only' &&
+                   property.value.type === 'Literal' &&
+                   property.value.value
 @@ -82,7 +82,7 @@ module.exports = {
                test.type === 'CallExpression' &&
                test.callee.type === 'MemberExpression' &&
@@ -11,8 +20,21 @@ index caa646e..c3fb975 100644
                test.callee.property.type === 'Identifier' &&
                test.callee.property.name === 'only'
              ) {
+diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/prefer-output-null.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/prefer-output-null.js
+index 0716d91..2bee9f4 100644
+--- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/prefer-output-null.js
++++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/prefer-output-null.js
+@@ -48,7 +48,7 @@ module.exports = {
+              */
+             function getTestInfo(key) {
+               if (test.type === 'ObjectExpression') {
+-                return test.properties.find((item) => item.key.name === key);
++                return test.properties.find((item) => item.key?.name === key);
+               }
+               return null;
+             }
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-index 3129903..be85e4a 100644
+index 3129903..c7e1d88 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 @@ -25,10 +25,10 @@ function isNormalFunctionExpression(node) {
@@ -28,3 +50,12 @@ index 3129903..be85e4a 100644
    );
  }
  
+@@ -534,7 +534,7 @@ module.exports = {
+         (isRuleTesterConstruction(expression.callee.object) ||
+           variableIdentifiers.has(expression.callee.object)) &&
+         expression.callee.property.type === 'Identifier' &&
+-        expression.callee.property.name === 'run'
++        expression.callee.property.name === 'runGraphQLTests'
+       ) {
+         runCalls.push(expression);
+       }
