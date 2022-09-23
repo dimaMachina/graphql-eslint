@@ -7,7 +7,7 @@ import { ParserOptions } from './types';
 const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
 
-export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
+export function loadGraphQLConfig(options: ParserOptions = {}): GraphQLConfig {
   // We don't want cache config on test environment
   // Otherwise schema and documents will be same for all tests
   if (process.env.NODE_ENV !== 'test' && graphQLConfig) {

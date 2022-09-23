@@ -1,31 +1,32 @@
-import type { Linter } from 'eslint';
+import { Linter } from 'eslint';
 import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import { asArray } from '@graphql-tools/utils';
 import { loadGraphQLConfig } from './graphql-config';
 
-type Block = Linter.ProcessorFile & {
+export type Block = Linter.ProcessorFile & {
   lineOffset: number;
   offset: number;
 };
 
-const defaultGraphqlConfig = loadGraphQLConfig({})?.getDefault();
-const graphqlTagPluckOptions = defaultGraphqlConfig?.extensions?.graphqlTagPluck as GraphQLTagPluckOptions;
-const graphqlTagModuleIdentifiers =
-  graphqlTagPluckOptions?.modules.map(({ identifier }) => identifier).filter(identifier => identifier) ?? [];
-const graphqlTagModuleNames = graphqlTagPluckOptions?.modules.map(({ name }) => name).filter(name => name) ?? [];
-const globalGqlIdentifierNames = graphqlTagPluckOptions?.globalGqlIdentifierName
-  ? Array.isArray(graphqlTagPluckOptions.globalGqlIdentifierName)
-    ? graphqlTagPluckOptions.globalGqlIdentifierName
-    : [graphqlTagPluckOptions.globalGqlIdentifierName]
-  : ['gql', 'graphql'];
-const gqlMagicComment = graphqlTagPluckOptions?.gqlMagicComment ?? '/* GraphQL */';
+const graphQLTagPluckOptions: GraphQLTagPluckOptions =
+  loadGraphQLConfig().getDefault()?.extensions?.graphqlTagPluck;
+
+const {
+  modules = [],
+  globalGqlIdentifierName = ['gql', 'graphql'],
+  gqlMagicComment = 'GraphQL',
+} = graphQLTagPluckOptions || {};
+
 const RELEVANT_KEYWORDS = [
-  ...new Set([
-    ...graphqlTagModuleIdentifiers,
-    ...graphqlTagModuleNames,
-    ...globalGqlIdentifierNames,
-    ...(gqlMagicComment ? [gqlMagicComment] : []),
-  ]),
+  ...new Set(
+    [
+      ...modules.map(({ identifier }) => identifier),
+      ...asArray(globalGqlIdentifierName),
+      gqlMagicComment,
+    ].filter(Boolean)
+  ),
 ];
+
 const blocksMap = new Map<string, Block[]>();
 
 export const processor: Linter.Processor<Block | string> = {
@@ -39,7 +40,7 @@ export const processor: Linter.Processor<Block | string> = {
       filePath,
       options: {
         skipIndent: true,
-        ...graphqlTagPluckOptions,
+        ...graphQLTagPluckOptions,
       },
     });
 
