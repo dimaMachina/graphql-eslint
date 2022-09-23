@@ -13,7 +13,6 @@ const RULE_ID = 'selection-set-depth';
 const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
   meta: {
     type: 'suggestion',
-    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions -- optional since we can't provide fixes for fragments located in separate files
     hasSuggestions: true,
     docs: {
       category: 'Operations',

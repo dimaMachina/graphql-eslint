@@ -1,18 +1,18 @@
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-index caa646e..40f6c69 100644
+index caa646e..c3fb975 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/rules/no-only-tests.js
-@@ -36,7 +36,7 @@ module.exports = {
- 
-               const onlyProperty = test.properties.find(
-                 (property) =>
--                  property.key.type === 'Identifier' &&
-+                  property.key?.type === 'Identifier' &&
-                   property.key.name === 'only' &&
-                   property.value.type === 'Literal' &&
-                   property.value.value
+@@ -82,7 +82,7 @@ module.exports = {
+               test.type === 'CallExpression' &&
+               test.callee.type === 'MemberExpression' &&
+               test.callee.object.type === 'Identifier' &&
+-              test.callee.object.name === 'RuleTester' &&
++              test.callee.object.name === 'GraphQLRuleTester' &&
+               test.callee.property.type === 'Identifier' &&
+               test.callee.property.name === 'only'
+             ) {
 diff --git a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
-index 646b472..1e58ed7 100644
+index 3129903..be85e4a 100644
 --- a/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 +++ b/node_modules/eslint-plugin-eslint-plugin/lib/utils.js
 @@ -25,10 +25,10 @@ function isNormalFunctionExpression(node) {
@@ -28,12 +28,3 @@ index 646b472..1e58ed7 100644
    );
  }
  
-@@ -410,7 +410,7 @@ module.exports = {
-         (isRuleTesterConstruction(statement.expression.callee.object) ||
-           variableIdentifiers.has(statement.expression.callee.object)) &&
-         statement.expression.callee.property.type === 'Identifier' &&
--        statement.expression.callee.property.name === 'run'
-+        statement.expression.callee.property.name === 'runGraphQLTests'
-       ) {
-         runCalls.push(statement.expression);
-       }

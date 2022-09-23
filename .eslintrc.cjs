@@ -39,6 +39,7 @@ module.exports = {
           'error',
           { pattern: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
         ],
+        'eslint-plugin/prefer-message-ids': 'off',
       },
     },
     {

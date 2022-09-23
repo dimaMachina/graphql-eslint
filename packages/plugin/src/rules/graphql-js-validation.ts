@@ -135,7 +135,7 @@ const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
 const validationToRule = (
   ruleId: string,
   ruleName: string,
-  docs: GraphQLESLintRule['meta']['docs'],
+  docs: Omit<GraphQLESLintRule['meta']['docs'], 'url'>,
   getDocumentNode?: GetDocumentNode,
   schema: JSONSchema4 | JSONSchema4[] = []
 ): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
