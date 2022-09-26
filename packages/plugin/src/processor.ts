@@ -1,7 +1,7 @@
 import { Linter } from 'eslint';
 import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
 import { asArray } from '@graphql-tools/utils';
-import { loadGraphQLConfig } from './graphql-config';
+import { loadOnDiskGraphQLConfig } from './graphql-config';
 
 export type Block = Linter.ProcessorFile & {
   lineOffset: number;
@@ -17,7 +17,8 @@ export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
     if (!RELEVANT_KEYWORDS) {
-      graphQLTagPluckOptions = loadGraphQLConfig().getDefault()?.extensions?.graphqlTagPluck;
+      graphQLTagPluckOptions =
+        loadOnDiskGraphQLConfig(filePath)?.getDefault()?.extensions?.graphqlTagPluck;
 
       const {
         modules = [],

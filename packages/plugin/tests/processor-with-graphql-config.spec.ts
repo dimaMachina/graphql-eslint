@@ -1,7 +1,7 @@
 import { Block, processor } from '../src/processor';
 
 jest.mock('../src/graphql-config', () => ({
-  loadGraphQLConfig: jest.fn(() => ({
+  loadOnDiskGraphQLConfig: jest.fn(() => ({
     getDefault: () => ({
       extensions: {
         graphqlTagPluck: {

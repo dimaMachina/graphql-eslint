@@ -1,10 +1,9 @@
 {
   "name": "@graphql-eslint/example-graphql-config",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "lint": "eslint ."
   },
