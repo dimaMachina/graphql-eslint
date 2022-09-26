@@ -15,7 +15,7 @@ let graphQLConfig: GraphQLConfig;
 export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
   return loadConfigSync({
     // load config relative to the file being linted
-    rootDir: dirname(filePath),
+    rootDir: filePath ? dirname(filePath) : undefined,
     throwOnEmpty: false,
     throwOnMissing: false,
     extensions: [addCodeFileLoaderExtension],
