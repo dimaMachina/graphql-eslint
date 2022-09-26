@@ -18,7 +18,7 @@ export const processor: Linter.Processor<Block | string> = {
   preprocess(code, filePath) {
     onDiskConfig ||= loadOnDiskGraphQLConfig(filePath);
     const graphQLTagPluckOptions: GraphQLTagPluckOptions =
-      onDiskConfig?.getProjectForFile(filePath)?.extensions?.graphqlTagPluck;
+      onDiskConfig?.getProjectForFile?.(filePath)?.extensions?.graphqlTagPluck;
     const {
       modules = [],
       globalGqlIdentifierName = ['gql', 'graphql'],
