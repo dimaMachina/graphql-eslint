@@ -39,24 +39,30 @@ export const processor: Linter.Processor<Block | string> = {
     if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
       return [code];
     }
-    const extractedDocuments = parseCode({
-      code,
-      filePath,
-      options: {
-        skipIndent: true,
-        ...graphQLTagPluckOptions,
-      },
-    });
 
-    const blocks: Block[] = extractedDocuments.map(item => ({
-      filename: 'document.graphql',
-      text: item.content,
-      lineOffset: item.loc.start.line - 1,
-      offset: item.start + 1,
-    }));
-    blocksMap.set(filePath, blocks);
+    try {
+      const extractedDocuments = parseCode({
+        code,
+        filePath,
+        options: {
+          skipIndent: true,
+          ...graphQLTagPluckOptions,
+        },
+      });
 
-    return [...blocks, code /* source code must be provided and be last */];
+      const blocks: Block[] = extractedDocuments.map(item => ({
+        filename: 'document.graphql',
+        text: item.content,
+        lineOffset: item.loc.start.line - 1,
+        offset: item.start + 1,
+      }));
+      blocksMap.set(filePath, blocks);
+
+      return [...blocks, code /* source code must be provided and be last */];
+    } catch {
+      // in case of parsing error return code as is
+      return [code];
+    }
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath) || [];
@@ -80,6 +86,8 @@ export const processor: Linter.Processor<Block | string> = {
       }
     }
 
-    return messages.flat();
+    const result = messages.flat();
+    // sort eslint/graphql-eslint messages by line/column
+    return result.sort((a, b) => a.line - b.line || a.column - b.column);
   },
 };
