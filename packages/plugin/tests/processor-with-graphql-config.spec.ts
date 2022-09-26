@@ -2,7 +2,7 @@ import { Block, processor } from '../src/processor';
 
 jest.mock('../src/graphql-config', () => ({
   loadOnDiskGraphQLConfig: jest.fn(() => ({
-    getDefault: () => ({
+    getProjectForFile: () => ({
       extensions: {
         graphqlTagPluck: {
           modules: [{ name: 'custom-gql-tag', identifier: 'custom' }],
