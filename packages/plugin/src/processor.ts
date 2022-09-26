@@ -8,30 +8,34 @@ export type Block = Linter.ProcessorFile & {
   offset: number;
 };
 
-const graphQLTagPluckOptions: GraphQLTagPluckOptions =
-  loadGraphQLConfig().getDefault()?.extensions?.graphqlTagPluck;
-
-const {
-  modules = [],
-  globalGqlIdentifierName = ['gql', 'graphql'],
-  gqlMagicComment = 'GraphQL',
-} = graphQLTagPluckOptions || {};
-
-const RELEVANT_KEYWORDS = [
-  ...new Set(
-    [
-      ...modules.map(({ identifier }) => identifier),
-      ...asArray(globalGqlIdentifierName),
-      gqlMagicComment,
-    ].filter(Boolean)
-  ),
-];
+let RELEVANT_KEYWORDS: string[];
+let graphQLTagPluckOptions: GraphQLTagPluckOptions;
 
 const blocksMap = new Map<string, Block[]>();
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
+    if (!RELEVANT_KEYWORDS) {
+      graphQLTagPluckOptions = loadGraphQLConfig().getDefault()?.extensions?.graphqlTagPluck;
+
+      const {
+        modules = [],
+        globalGqlIdentifierName = ['gql', 'graphql'],
+        gqlMagicComment = 'GraphQL',
+      } = graphQLTagPluckOptions || {};
+
+      RELEVANT_KEYWORDS = [
+        ...new Set(
+          [
+            ...modules.map(({ identifier }) => identifier),
+            ...asArray(globalGqlIdentifierName),
+            gqlMagicComment,
+          ].filter(Boolean)
+        ),
+      ];
+    }
+
     if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
       return [code];
     }
