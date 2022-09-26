@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.11.1
+
+### Patch Changes
+
+- [#1168](https://github.com/B2o5T/graphql-eslint/pull/1168) [`9bc4e1b`](https://github.com/B2o5T/graphql-eslint/commit/9bc4e1b707439fb35fe4948a02f68bafc452bd8b) Thanks [@B2o5T](https://github.com/B2o5T)! - return code as-is in `preprocess` in case of parsing error, sort eslint/graphql-eslint errors in `postprocess` by line/column
+
+- [#1165](https://github.com/B2o5T/graphql-eslint/pull/1165) [`eab5492`](https://github.com/B2o5T/graphql-eslint/commit/eab54927a327f1d8c0c9e30428da38884add4d32) Thanks [@B2o5T](https://github.com/B2o5T)! - fix race condition of `loadGraphQLConfig()`
+
+- [#1167](https://github.com/B2o5T/graphql-eslint/pull/1167) [`2f6c02f`](https://github.com/B2o5T/graphql-eslint/commit/2f6c02fe201b307fc8261d7fb0ac783a5586e66d) Thanks [@B2o5T](https://github.com/B2o5T)! - make `RuleDocsInfo` type optional
+
 ## 3.11.0
 
 ### Minor Changes
