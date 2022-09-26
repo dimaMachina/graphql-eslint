@@ -1,8 +1,8 @@
 import { Block, processor } from '../src/processor';
 
 jest.mock('../src/graphql-config', () => ({
-  loadGraphQLConfig: jest.fn(() => ({
-    getDefault: () => ({
+  loadOnDiskGraphQLConfig: jest.fn(() => ({
+    getProjectForFile: () => ({
       extensions: {
         graphqlTagPluck: {
           modules: [{ name: 'custom-gql-tag', identifier: 'custom' }],

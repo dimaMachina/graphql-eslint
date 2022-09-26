@@ -12,6 +12,16 @@ import { ParserOptions } from './types';
 const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
 
+export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
+  return loadConfigSync({
+    // load config relative to the file being linted
+    rootDir: filePath ? dirname(filePath) : undefined,
+    throwOnEmpty: false,
+    throwOnMissing: false,
+    extensions: [addCodeFileLoaderExtension],
+  });
+}
+
 export function loadGraphQLConfig(options: ParserOptions = {}): GraphQLConfig {
   // We don't want cache config on test environment
   // Otherwise schema and documents will be same for all tests
@@ -19,15 +29,7 @@ export function loadGraphQLConfig(options: ParserOptions = {}): GraphQLConfig {
     return graphQLConfig;
   }
 
-  const onDiskConfig = options.skipGraphQLConfig
-    ? null
-    : loadConfigSync({
-        // load config relative to the file being linted
-        rootDir: options.filePath ? dirname(options.filePath) : undefined,
-        throwOnEmpty: false,
-        throwOnMissing: false,
-        extensions: [addCodeFileLoaderExtension],
-      });
+  const onDiskConfig = !options.skipGraphQLConfig && loadOnDiskGraphQLConfig(options.filePath);
 
   debug('options.skipGraphQLConfig: %o', options.skipGraphQLConfig);
   if (onDiskConfig) {

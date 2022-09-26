@@ -1,10 +1,9 @@
 {
   "name": "@graphql-eslint/example-prettier",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "JounQin <admin@1stg.me>",
-  "license": "MIT",
   "scripts": {
     "lint": "eslint ."
   },
