@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.11.2
+
+### Patch Changes
+
+- [#1170](https://github.com/B2o5T/graphql-eslint/pull/1170) [`0b8acdc`](https://github.com/B2o5T/graphql-eslint/commit/0b8acdc64cae77e7b09597dccdcb2b5c38ff3b6e) Thanks [@B2o5T](https://github.com/B2o5T)! - fix race condition of loading `loadGraphQLConfig()` when `processor.preprocess()` can be called before `parseForESLint()`
+
 ## 3.11.1
 
 ### Patch Changes
