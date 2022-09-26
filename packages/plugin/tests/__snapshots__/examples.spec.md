@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Examples should work in monorepo 1`] = `
-Array [
-  Object {
+[
+  {
     filePath: examples/monorepo/client/graphql/query.users.gql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 7,
         endColumn: 15,
         endLine: 1,
@@ -14,11 +14,11 @@ Array [
         nodeType: Name,
         ruleId: @graphql-eslint/naming-convention,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Rename to \`GetUsers\`,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 6,
                 14,
               ],
@@ -29,10 +29,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/monorepo/client/pages/index.tsx,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 9,
         endColumn: 18,
         endLine: 9,
@@ -42,7 +42,7 @@ Array [
         ruleId: @graphql-eslint/fields-on-correct-type,
         severity: 2,
       },
-      Object {
+      {
         column: 7,
         endColumn: 16,
         endLine: 1,
@@ -55,10 +55,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/monorepo/server/types/post.gql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 6,
         endColumn: 10,
         endLine: 1,
@@ -71,10 +71,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/monorepo/server/types/root.gql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 6,
         endColumn: 11,
         endLine: 1,
@@ -87,10 +87,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/monorepo/server/types/scalar.gql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 8,
         endColumn: 16,
         endLine: 1,
@@ -103,10 +103,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/monorepo/server/types/user.gql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 6,
         endColumn: 10,
         endLine: 1,
@@ -123,11 +123,11 @@ Array [
 `;
 
 exports[`Examples should work on \`.graphql\` files 1`] = `
-Array [
-  Object {
+[
+  {
     filePath: examples/basic/fragment.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 10,
         endColumn: 14,
         endLine: 1,
@@ -141,10 +141,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/basic/fragment2.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 10,
         endColumn: 14,
         endLine: 1,
@@ -158,10 +158,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/basic/query.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 1,
         endColumn: 6,
         endLine: 1,
@@ -171,11 +171,11 @@ Array [
         nodeType: null,
         ruleId: @graphql-eslint/no-anonymous-operations,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Rename to \`user\`,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 5,
                 5,
               ],
@@ -186,10 +186,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/basic/schema.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 3,
         endColumn: 7,
         endLine: 2,
@@ -200,7 +200,7 @@ Array [
         ruleId: @graphql-eslint/require-description,
         severity: 2,
       },
-      Object {
+      {
         column: 3,
         endColumn: 5,
         endLine: 6,
@@ -211,7 +211,7 @@ Array [
         ruleId: @graphql-eslint/require-description,
         severity: 2,
       },
-      Object {
+      {
         column: 3,
         endColumn: 7,
         endLine: 7,
@@ -228,11 +228,11 @@ Array [
 `;
 
 exports[`Examples should work on \`.js\` files 1`] = `
-Array [
-  Object {
+[
+  {
     filePath: examples/code-file/not-query.js,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 1,
         endColumn: 12,
         endLine: 1,
@@ -243,7 +243,7 @@ Array [
         ruleId: no-console,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 8,
         endLine: 1,
@@ -256,10 +256,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/code-file/query.js,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 3,
         endColumn: 8,
         endLine: 4,
@@ -269,11 +269,11 @@ Array [
         nodeType: null,
         ruleId: @graphql-eslint/no-anonymous-operations,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Rename to \`user\`,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 77,
                 77,
               ],
@@ -282,7 +282,7 @@ Array [
           },
         ],
       },
-      Object {
+      {
         column: 9,
         endColumn: 18,
         endLine: 12,
@@ -291,11 +291,11 @@ Array [
         nodeType: Name,
         ruleId: @graphql-eslint/naming-convention,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Rename to \`User\`,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 165,
                 174,
               ],
@@ -310,16 +310,16 @@ Array [
 `;
 
 exports[`Examples should work with \`eslint-plugin-prettier\` 1`] = `
-Array [
-  Object {
+[
+  {
     filePath: examples/prettier/invalid.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 21,
         endColumn: 26,
         endLine: 1,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             20,
             25,
           ],
@@ -332,12 +332,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 7,
         endColumn: 8,
         endLine: 3,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             60,
             61,
           ],
@@ -350,12 +350,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 9,
         endColumn: 10,
         endLine: 4,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             70,
             71,
           ],
@@ -368,12 +368,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 19,
         endColumn: 20,
         endLine: 5,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             90,
             91,
           ],
@@ -386,12 +386,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 29,
         endColumn: 30,
         endLine: 6,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             120,
             121,
           ],
@@ -404,12 +404,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 6,
         endColumn: 7,
         endLine: 13,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             201,
             202,
           ],
@@ -422,12 +422,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 8,
         endColumn: 9,
         endLine: 14,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             210,
             211,
           ],
@@ -442,15 +442,15 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/prettier/invalid.js,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 33,
         endColumn: 58,
         endLine: 2,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             75,
             100,
           ],
@@ -464,12 +464,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 1,
         endLine: 3,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             107,
             107,
           ],
@@ -482,12 +482,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 8,
         endLine: 4,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             129,
             136,
           ],
@@ -500,12 +500,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 10,
         endLine: 5,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             137,
             146,
           ],
@@ -518,12 +518,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 20,
         endLine: 6,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             147,
             166,
           ],
@@ -536,12 +536,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 30,
         endLine: 7,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             167,
             196,
           ],
@@ -554,12 +554,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 7,
         endColumn: 7,
         endLine: 8,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             205,
             205,
           ],
@@ -572,12 +572,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 5,
         endColumn: 5,
         endLine: 9,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             226,
             226,
           ],
@@ -590,12 +590,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 1,
         endLine: 10,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             228,
             228,
           ],
@@ -608,12 +608,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 1,
         endLine: 11,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             232,
             232,
           ],
@@ -626,12 +626,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 1,
         endLine: 13,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             235,
             235,
           ],
@@ -644,12 +644,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 7,
         endLine: 14,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             271,
             277,
           ],
@@ -662,12 +662,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 9,
         endLine: 15,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             278,
             286,
           ],
@@ -680,12 +680,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 3,
         endColumn: 3,
         endLine: 16,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             289,
             289,
           ],
@@ -698,12 +698,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 1,
         endColumn: 1,
         endLine: 17,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             296,
             296,
           ],
@@ -716,12 +716,12 @@ Array [
         ruleId: prettier/prettier,
         severity: 2,
       },
-      Object {
+      {
         column: 2,
         endColumn: 2,
         endLine: 18,
-        fix: Object {
-          range: Array [
+        fix: {
+          range: [
             299,
             299,
           ],
@@ -740,11 +740,11 @@ Array [
 `;
 
 exports[`Examples should work with \`graphql-config\` 1`] = `
-Array [
-  Object {
+[
+  {
     filePath: examples/graphql-config/operations/query.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 1,
         endColumn: 6,
         endLine: 1,
@@ -754,11 +754,11 @@ Array [
         nodeType: null,
         ruleId: @graphql-eslint/no-anonymous-operations,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Rename to \`user\`,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 5,
                 5,
               ],
@@ -769,10 +769,10 @@ Array [
       },
     ],
   },
-  Object {
+  {
     filePath: examples/graphql-config/operations/user.fragment.graphql,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 3,
         endColumn: 7,
         endLine: 4,
@@ -782,11 +782,11 @@ Array [
         nodeType: Name,
         ruleId: @graphql-eslint/no-duplicate-fields,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Remove \`name\` field,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 44,
                 48,
               ],
@@ -801,11 +801,11 @@ Array [
 `;
 
 exports[`Examples should work with \`graphql-config\` on \`.js\` files 1`] = `
-Array [
-  Object {
+[
+  {
     filePath: examples/graphql-config-code-file/query.js,
-    messages: Array [
-      Object {
+    messages: [
+      {
         column: 3,
         endColumn: 8,
         endLine: 4,
@@ -815,11 +815,11 @@ Array [
         nodeType: null,
         ruleId: @graphql-eslint/no-anonymous-operations,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Rename to \`user\`,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 66,
                 66,
               ],
@@ -828,7 +828,7 @@ Array [
           },
         ],
       },
-      Object {
+      {
         column: 10,
         line: 5,
         message: Field \`user.id\` must be selected when it's available on a type.
@@ -837,11 +837,11 @@ Include it in your selection set.,
         nodeType: null,
         ruleId: @graphql-eslint/require-id-when-available,
         severity: 2,
-        suggestions: Array [
-          Object {
+        suggestions: [
+          {
             desc: Add \`id\` selection,
-            fix: Object {
-              range: Array [
+            fix: {
+              range: [
                 86,
                 86,
               ],
@@ -850,7 +850,7 @@ Include it in your selection set.,
           },
         ],
       },
-      Object {
+      {
         column: 13,
         endColumn: 20,
         endLine: 1,
@@ -861,7 +861,7 @@ Include it in your selection set.,
         ruleId: no-undef,
         severity: 2,
       },
-      Object {
+      {
         column: 7,
         endColumn: 15,
         endLine: 3,
