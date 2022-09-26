@@ -52,11 +52,8 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
 
 export type CategoryType = 'Schema' | 'Operations';
 
-export type RuleDocsInfo<T> = {
-  description: string;
+export type RuleDocsInfo<T> = Omit<Rule.RuleMetaData['docs'], 'category' | 'suggestion'> & {
   category: CategoryType | CategoryType[];
-  recommended?: boolean;
-  url: string;
   requiresSchema?: true;
   requiresSiblings?: true;
   examples?: {
@@ -77,7 +74,7 @@ export type RuleDocsInfo<T> = {
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
   meta: Omit<Rule.RuleMetaData, 'docs'> & {
-    docs: RuleDocsInfo<Options>;
+    docs?: RuleDocsInfo<Options>;
   };
 };
 
