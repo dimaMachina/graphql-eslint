@@ -24,8 +24,8 @@ describe('processor.preprocess() with graphql-config', () => {
 
     expect(blocks[0].text).toBe(QUERY);
     expect(blocks).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           filename: document.graphql,
           lineOffset: 2,
           offset: 77,
@@ -45,8 +45,8 @@ describe('processor.preprocess() with graphql-config', () => {
 
     expect(blocks[0].text).toBe(QUERY);
     expect(blocks).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           filename: document.graphql,
           lineOffset: 0,
           offset: 16,
