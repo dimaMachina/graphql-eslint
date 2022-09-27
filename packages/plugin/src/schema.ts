@@ -11,7 +11,7 @@ const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(
   projectForFile: GraphQLProjectConfig,
-  options: ParserOptions = {}
+  options: Omit<ParserOptions, 'filePath'> = {}
 ): Schema {
   const schemaKey = asArray(projectForFile.schema).sort().join(',');
 

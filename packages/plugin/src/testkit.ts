@@ -37,10 +37,10 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
 export class GraphQLRuleTester extends RuleTester {
   config: {
     parser: string;
-    parserOptions: ParserOptions;
+    parserOptions: Omit<ParserOptions, 'filePath'>;
   };
 
-  constructor(parserOptions: ParserOptions = {}) {
+  constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
     const config = {
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {

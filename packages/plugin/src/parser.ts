@@ -12,13 +12,10 @@ const debug = debugFactory('graphql-eslint:parser');
 
 debug('cwd %o', process.cwd());
 
-export function parseForESLint(
-  code: string,
-  options: ParserOptions = {}
-): GraphQLESLintParseResult {
+export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
-    const filePath = options.filePath || '';
-    const realFilepath = filePath && getOnDiskFilepath(filePath);
+    const { filePath } = options;
+    const realFilepath = getOnDiskFilepath(filePath);
 
     const gqlConfig = loadGraphQLConfig(options);
     const projectForFile = realFilepath

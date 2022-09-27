@@ -4,7 +4,7 @@ jest.mock('../src/graphql-config', () => ({
   loadOnDiskGraphQLConfig: jest.fn(() => ({
     getProjectForFile: () => ({
       extensions: {
-        graphqlTagPluck: {
+        pluckConfig: {
           modules: [{ name: 'custom-gql-tag', identifier: 'custom' }],
           gqlMagicComment: 'CustoM',
         },

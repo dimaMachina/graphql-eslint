@@ -22,7 +22,7 @@ export interface ParserOptions {
   };
   graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   skipGraphQLConfig?: boolean;
-  filePath?: string;
+  filePath: string;
 }
 
 export type ParserServices = {

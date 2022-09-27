@@ -6,6 +6,7 @@ import {
   loadConfigSync,
   SchemaPointer,
 } from 'graphql-config';
+import { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
 
@@ -13,16 +14,24 @@ const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
 
 export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
-  return loadConfigSync({
+  const rootDir = dirname(filePath);
+  const config = loadConfigSync({
     // load config relative to the file being linted
-    rootDir: filePath ? dirname(filePath) : undefined,
+    rootDir,
     throwOnEmpty: false,
     throwOnMissing: false,
-    extensions: [addCodeFileLoaderExtension],
+  });
+  if (!config) {
+    return null;
+  }
+  const project = config.getProjectForFile(filePath);
+  return loadConfigSync({
+    rootDir,
+    extensions: [codeFileLoaderExtension(project.extensions.pluckConfig)],
   });
 }
 
-export function loadGraphQLConfig(options: ParserOptions = {}): GraphQLConfig {
+export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   // We don't want cache config on test environment
   // Otherwise schema and documents will be same for all tests
   if (process.env.NODE_ENV !== 'test' && graphQLConfig) {
@@ -53,14 +62,17 @@ export function loadGraphQLConfig(options: ParserOptions = {}): GraphQLConfig {
         config: configOptions,
         filepath: 'virtual-config',
       },
-      [addCodeFileLoaderExtension]
+      [codeFileLoaderExtension(options.extensions?.pluckConfig)]
     );
 
   return graphQLConfig;
 }
 
-const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
-  api.loaders.schema.register(new CodeFileLoader());
-  api.loaders.documents.register(new CodeFileLoader());
-  return { name: 'graphql-eslint-loaders' };
-};
+const codeFileLoaderExtension =
+  (pluckConfig: GraphQLTagPluckOptions): GraphQLExtensionDeclaration =>
+  api => {
+    const { schema, documents } = api.loaders;
+    schema.register(new CodeFileLoader({ pluckConfig }));
+    documents.register(new CodeFileLoader({ pluckConfig }));
+    return { name: 'graphql-eslint-loaders' };
+  };

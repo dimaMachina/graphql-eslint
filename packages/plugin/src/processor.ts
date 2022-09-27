@@ -12,28 +12,37 @@ export type Block = Linter.ProcessorFile & {
 const blocksMap = new Map<string, Block[]>();
 
 let onDiskConfig: GraphQLConfig;
+let pluckConfig: GraphQLTagPluckOptions;
+let RELEVANT_KEYWORDS: string[];
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
-    onDiskConfig ||= loadOnDiskGraphQLConfig(filePath);
-    const graphQLTagPluckOptions: GraphQLTagPluckOptions =
-      onDiskConfig?.getProjectForFile?.(filePath)?.extensions?.graphqlTagPluck;
-    const {
-      modules = [],
-      globalGqlIdentifierName = ['gql', 'graphql'],
-      gqlMagicComment = 'GraphQL',
-    } = graphQLTagPluckOptions || {};
+    if (!pluckConfig) {
+      onDiskConfig = loadOnDiskGraphQLConfig(filePath);
+      const {
+        modules = [],
+        globalGqlIdentifierName = ['gql', 'graphql'],
+        gqlMagicComment = 'GraphQL',
+      } = onDiskConfig?.getProjectForFile(filePath).extensions.pluckConfig || {};
 
-    const RELEVANT_KEYWORDS: string[] = [
-      ...new Set(
-        [
-          ...modules.map(({ identifier }) => identifier),
-          ...asArray(globalGqlIdentifierName),
-          gqlMagicComment,
-        ].filter(Boolean)
-      ),
-    ];
+      pluckConfig = {
+        skipIndent: true,
+        modules,
+        globalGqlIdentifierName,
+        gqlMagicComment,
+      };
+
+      RELEVANT_KEYWORDS = [
+        ...new Set(
+          [
+            ...modules.map(({ identifier }) => identifier),
+            ...asArray(globalGqlIdentifierName),
+            gqlMagicComment,
+          ].filter(Boolean)
+        ),
+      ];
+    }
 
     if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
       return [code];
@@ -43,10 +52,7 @@ export const processor: Linter.Processor<Block | string> = {
       const extractedDocuments = parseCode({
         code,
         filePath,
-        options: {
-          skipIndent: true,
-          ...graphQLTagPluckOptions,
-        },
+        options: pluckConfig,
       });
 
       const blocks: Block[] = extractedDocuments.map(item => ({
