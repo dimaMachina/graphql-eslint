@@ -22,6 +22,9 @@
     "release": "changeset publish",
     "prettier": "prettier --write --list-different ."
   },
+  "dependencies": {
+    "typescript": "4.8.4"
+  },
   "devDependencies": {
     "@babel/core": "7.19.3",
     "@babel/preset-env": "7.19.3",
@@ -54,8 +57,7 @@
     "patch-package": "6.4.7",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
-    "ts-node": "10.9.1",
-    "typescript": "4.8.4"
+    "ts-node": "10.9.1"
   },
   "resolutions": {
     "graphql": "16.6.0"
