@@ -15,44 +15,44 @@ export type Block = Linter.ProcessorFile & {
 const blocksMap = new Map<string, Block[]>();
 
 let onDiskConfig: GraphQLConfig;
-let pluckConfig: GraphQLTagPluckOptions;
-let RELEVANT_KEYWORDS: string[];
+let onDiskConfigLoaded = false;
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
-    if (!pluckConfig) {
+    if (!onDiskConfigLoaded) {
       onDiskConfig = loadOnDiskGraphQLConfig(filePath);
-      const {
-        modules = [],
-        globalGqlIdentifierName = ['gql', 'graphql'],
-        gqlMagicComment = 'GraphQL',
-      } = onDiskConfig?.getProjectForFile(filePath).extensions.pluckConfig || {};
-
-      pluckConfig = {
-        skipIndent: true,
-        modules,
-        globalGqlIdentifierName,
-        gqlMagicComment,
-      };
-
-      RELEVANT_KEYWORDS = [
-        ...new Set(
-          [
-            ...modules.map(({ identifier }) => identifier),
-            ...asArray(globalGqlIdentifierName),
-            gqlMagicComment,
-          ].filter(Boolean),
-        ),
-      ];
+      onDiskConfigLoaded = true;
     }
+
+    const pluckConfig: GraphQLTagPluckOptions =
+      onDiskConfig?.getProjectForFile(filePath).extensions?.pluckConfig;
+    const {
+      modules = [],
+      globalGqlIdentifierName = ['gql', 'graphql'],
+      gqlMagicComment = 'GraphQL',
+    } = pluckConfig || {};
+
+    const RELEVANT_KEYWORDS: string[] = [
+      ...new Set(
+        [
+          ...modules.map(({ identifier }) => identifier),
+          ...asArray(globalGqlIdentifierName),
+          gqlMagicComment,
+        ].filter(Boolean),
+      ),
+    ];
+
     if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
       return [code];
     }
 
     try {
-      const sources = gqlPluckFromCodeStringSync(filePath, code, pluckConfig);
-      const isSvelte = filePath.endsWith('.svelte')
+      const sources = gqlPluckFromCodeStringSync(filePath, code, {
+        skipIndent: true,
+        ...pluckConfig,
+      });
+      const isSvelte = filePath.endsWith('.svelte');
 
       const blocks: Block[] = sources.map(item => ({
         filename: 'document.graphql',
