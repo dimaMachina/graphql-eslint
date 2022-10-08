@@ -26,7 +26,7 @@ function validateDocument(
   context: GraphQLESLintRuleContext,
   schema: GraphQLSchema | null = null,
   documentNode: DocumentNode,
-  rule: ValidationRule
+  rule: ValidationRule,
 ): void {
   if (documentNode.definitions.length === 0) {
     return;
@@ -41,7 +41,7 @@ function validateDocument(
       const sourceCode = context.getSourceCode();
       const { tokens } = sourceCode.ast;
       const token = tokens.find(
-        token => token.loc.start.line === line && token.loc.start.column === column - 1
+        token => token.loc.start.line === line && token.loc.start.column === column - 1,
       );
 
       let loc: { line: number; column: number } | AST.SourceLocation = {
@@ -75,7 +75,7 @@ type GetFragmentDefsAndFragmentSpreads = {
 };
 
 const getFragmentDefsAndFragmentSpreads = (
-  node: DocumentNode
+  node: DocumentNode,
 ): GetFragmentDefsAndFragmentSpreads => {
   const fragmentDefs = new Set<string>();
   const fragmentSpreads = new Set<string>();
@@ -137,7 +137,7 @@ const validationToRule = (
   ruleName: string,
   docs: Omit<GraphQLESLintRule['meta']['docs'], 'url'>,
   getDocumentNode?: GetDocumentNode,
-  schema: JSONSchema4 | JSONSchema4[] = []
+  schema: JSONSchema4 | JSONSchema4[] = [],
 ): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
 
@@ -165,7 +165,7 @@ const validationToRule = (
       create(context) {
         if (!ruleFn) {
           logger.warn(
-            `Rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql" version you are using. Skipping…`
+            `Rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql" version you are using. Skipping…`,
           );
           return {};
         }
@@ -245,7 +245,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       const filterDirectives = (node: { directives?: ReadonlyArray<DirectiveNode> }) => ({
         ...node,
         directives: node.directives.filter(
-          directive => !ignoreClientDirectives.includes(directive.name.value)
+          directive => !ignoreClientDirectives.includes(directive.name.value),
         ),
       });
 
@@ -265,7 +265,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
           ignoreClientDirectives: ARRAY_DEFAULT_OPTIONS,
         },
       },
-    }
+    },
   ),
   validationToRule(
     'known-fragment-names',
@@ -323,7 +323,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
         },
       ],
     },
-    handleMissingFragments
+    handleMissingFragments,
   ),
   validationToRule('known-type-names', 'KnownTypeNames', {
     category: ['Schema', 'Operations'],
@@ -357,7 +357,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       requiresSchema: true,
       requiresSiblings: true,
     },
-    handleMissingFragments
+    handleMissingFragments,
   ),
   validationToRule(
     'no-unused-fragments',
@@ -394,7 +394,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
             definitions: documents,
           });
           const isCurrentFileImportFragment = missingFragments.some(fragment =>
-            fragmentDefs.has(fragment)
+            fragmentDefs.has(fragment),
           );
 
           if (isCurrentFileImportFragment) {
@@ -408,7 +408,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       };
 
       return getParentNode(context.getFilename(), node);
-    }
+    },
   ),
   validationToRule(
     'no-unused-variables',
@@ -420,7 +420,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       requiresSchema: true,
       requiresSiblings: true,
     },
-    handleMissingFragments
+    handleMissingFragments,
   ),
   validationToRule('overlapping-fields-can-be-merged', 'OverlappingFieldsCanBeMerged', {
     category: 'Operations',
@@ -519,5 +519,5 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     category: 'Operations',
     description: 'Variables passed to field arguments conform to type.',
     requiresSchema: true,
-  })
+  }),
 );

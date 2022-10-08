@@ -306,11 +306,11 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
             const currRange = getRangeWithComments(currNode);
             yield fixer.replaceTextRange(
               prevRange,
-              sourceCode.getText({ range: currRange } as any)
+              sourceCode.getText({ range: currRange } as any),
             );
             yield fixer.replaceTextRange(
               currRange,
-              sourceCode.getText({ range: prevRange } as any)
+              sourceCode.getText({ range: prevRange } as any),
             );
           },
         });
@@ -354,7 +354,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
           | InterfaceTypeExtensionNode
           | InputObjectTypeDefinitionNode
           | InputObjectTypeExtensionNode
-        >
+        >,
       ) => {
         checkNodes(node.fields);
       };
@@ -363,7 +363,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     if (hasEnumValues) {
       const enumValuesSelector = [Kind.ENUM_TYPE_DEFINITION, Kind.ENUM_TYPE_EXTENSION].join(',');
       listeners[enumValuesSelector] = (
-        node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>
+        node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>,
       ) => {
         checkNodes(node.values);
       };
@@ -371,7 +371,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
 
     if (selectionsSelector) {
       listeners[`:matches(${selectionsSelector}) SelectionSet`] = (
-        node: GraphQLESTreeNode<SelectionSetNode>
+        node: GraphQLESTreeNode<SelectionSetNode>,
       ) => {
         checkNodes(node.selections);
       };
@@ -387,7 +387,7 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
       listeners[argumentsSelector] = (
         node: GraphQLESTreeNode<
           FieldDefinitionNode | FieldNode | DirectiveDefinitionNode | DirectiveNode
-        >
+        >,
       ) => {
         checkNodes(node.arguments);
       };

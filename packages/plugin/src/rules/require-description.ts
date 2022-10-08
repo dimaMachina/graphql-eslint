@@ -129,7 +129,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
                   '\n\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
               }
               return [kind, { type: 'boolean', description }];
-            })
+            }),
           ),
         },
       },

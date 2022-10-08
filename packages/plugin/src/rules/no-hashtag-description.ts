@@ -86,7 +86,7 @@ const rule: GraphQLESLintRule = {
                   fix: fixer =>
                     fixer.replaceTextRange(
                       [token.start, token.end] as [number, number],
-                      [descriptionSyntax, value.trim(), descriptionSyntax].join('')
+                      [descriptionSyntax, value.trim(), descriptionSyntax].join(''),
                     ),
                 })),
               });

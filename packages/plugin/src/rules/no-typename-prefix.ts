@@ -52,7 +52,7 @@ const rule: GraphQLESLintRule = {
           | ObjectTypeExtensionNode
           | InterfaceTypeDefinitionNode
           | InterfaceTypeExtensionNode
-        >
+        >,
       ) {
         const typeName = node.name.value;
         const lowerTypeName = typeName.toLowerCase();
@@ -74,7 +74,7 @@ const rule: GraphQLESLintRule = {
                   fix: fixer =>
                     fixer.replaceText(
                       field.name as any,
-                      fieldName.replace(new RegExp(`^${typeName}`, 'i'), '')
+                      fieldName.replace(new RegExp(`^${typeName}`, 'i'), ''),
                     ),
                 },
               ],

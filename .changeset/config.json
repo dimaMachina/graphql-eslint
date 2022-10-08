@@ -5,14 +5,13 @@
   "access": "restricted",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "@graphql-eslint/example-code-file",
-    "@graphql-eslint/example-basic",
-    "@graphql-eslint/example-graphql-config",
-    "@graphql-eslint/example-graphql-config-code-file",
-    "@graphql-eslint/example-prettier"
+  "ignore": ["@graphql-eslint/example-*"],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "B2o5T/graphql-eslint"
+    }
   ],
-  "changelog": ["@changesets/changelog-github", { "repo": "B2o5T/graphql-eslint" }],
   "snapshot": {
     "useCalculatedVersion": true,
     "prereleaseTemplate": "{tag}-{datetime}-{commit}"

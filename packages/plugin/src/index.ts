@@ -16,5 +16,5 @@ export const configs = Object.fromEntries(
     'operations-recommended',
     'operations-all',
     'relay',
-  ].map(configName => [configName, { extends: `./configs/${configName}.json` }])
+  ].map(configName => [configName, { extends: `./configs/${configName}.json` }]),
 );

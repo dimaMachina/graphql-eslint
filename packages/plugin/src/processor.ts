@@ -1,5 +1,8 @@
 import { Linter } from 'eslint';
-import { parseCode, GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import {
+  gqlPluckFromCodeStringSync,
+  GraphQLTagPluckOptions,
+} from '@graphql-tools/graphql-tag-pluck';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
 import { loadOnDiskGraphQLConfig } from './graphql-config';
@@ -39,27 +42,23 @@ export const processor: Linter.Processor<Block | string> = {
             ...modules.map(({ identifier }) => identifier),
             ...asArray(globalGqlIdentifierName),
             gqlMagicComment,
-          ].filter(Boolean)
+          ].filter(Boolean),
         ),
       ];
     }
-
     if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
       return [code];
     }
 
     try {
-      const extractedDocuments = parseCode({
-        code,
-        filePath,
-        options: pluckConfig,
-      });
+      const sources = gqlPluckFromCodeStringSync(filePath, code, pluckConfig);
 
-      const blocks: Block[] = extractedDocuments.map(item => ({
+      const blocks: Block[] = sources.map(item => ({
         filename: 'document.graphql',
-        text: item.content,
-        lineOffset: item.loc.start.line - 1,
-        offset: item.start + 1,
+        text: item.body,
+        lineOffset: item.locationOffset.line - 1,
+        // @ts-expect-error -- `index` field exist but show ts error
+        offset: item.locationOffset.index + 1,
       }));
       blocksMap.set(filePath, blocks);
 

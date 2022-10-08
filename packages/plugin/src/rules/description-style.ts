@@ -54,7 +54,7 @@ const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
     const isBlock = style === 'block';
     return {
       [`.description[type=StringValue][block!=${isBlock}]`](
-        node: GraphQLESTreeNode<StringValueNode>
+        node: GraphQLESTreeNode<StringValueNode>,
       ) {
         context.report({
           loc: isBlock ? node.loc : node.loc.start,

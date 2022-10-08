@@ -185,7 +185,7 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
 
     const listeners: GraphQLESLintRuleListener<true> = {
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/] > FieldDefinition[name.value=edges] > .gqlType Name'(
-        node: GraphQLESTreeNode<NameNode>
+        node: GraphQLESTreeNode<NameNode>,
       ) {
         const type = schema.getType(node.value);
         if (!isObjectType(type)) {
@@ -193,7 +193,7 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)'(
-        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         const typeName = node.name.value;
         if (edgeTypes.has(typeName)) {

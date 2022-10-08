@@ -31,7 +31,7 @@ ruleTester.runGraphQLTests('possible-type-extension', rules['possible-type-exten
       name: 'when schema is separate into graphql files',
       filename: join(
         __dirname,
-        'mocks/possible-type-extension/separate-graphql-files/type-user.gql'
+        'mocks/possible-type-extension/separate-graphql-files/type-user.gql',
       ),
       code: ruleTester.fromMockFile('possible-type-extension/separate-graphql-files/type-user.gql'),
       parserOptions: {

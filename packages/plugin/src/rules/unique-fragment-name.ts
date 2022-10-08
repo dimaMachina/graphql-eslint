@@ -10,7 +10,7 @@ const RULE_ID = 'unique-fragment-name';
 export const checkNode = (
   context: GraphQLESLintRuleContext,
   node: GraphQLESTreeNode<ExecutableDefinitionNode>,
-  ruleId: string
+  ruleId: string,
 ): void => {
   const documentName = node.name.value;
   const siblings = requireSiblingsOperations(ruleId, context);

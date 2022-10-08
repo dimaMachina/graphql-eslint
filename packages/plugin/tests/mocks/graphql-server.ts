@@ -41,7 +41,7 @@ class TestGraphQLServer {
         res.end(
           JSON.stringify({
             data: introspectionQueryResult,
-          })
+          }),
         );
       }
     } else if (pathname === '/my-headers') {

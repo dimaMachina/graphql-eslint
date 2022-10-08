@@ -3,7 +3,7 @@ import { ParserOptions } from '../src';
 
 function getESLintWithConfig(
   configName: 'schema-all' | 'operations-all' | 'relay',
-  parserOptions?: ParserOptions
+  parserOptions?: ParserOptions,
 ): ESLint {
   return new ESLint({
     useEslintrc: false,

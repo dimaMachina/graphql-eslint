@@ -110,7 +110,7 @@ describe('schema', () => {
       const error = getSchema(gqlConfig.getDefault()) as Error;
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toMatch(
-        'Unable to find any GraphQL type definitions for the following pointers'
+        'Unable to find any GraphQL type definitions for the following pointers',
       );
     });
   });

@@ -63,13 +63,13 @@ const rule: GraphQLESLintRule = {
         context.report({ node, messageId: MESSAGE_MUST_BE_OBJECT_TYPE });
       },
       'ObjectTypeDefinition[name.value=PageInfo]'(
-        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         const fieldMap = Object.fromEntries(node.fields.map(field => [field.name.value, field]));
 
         const checkField = (
           fieldName: 'hasPreviousPage' | 'hasNextPage' | 'startCursor' | 'endCursor',
-          typeName: 'Boolean' | 'String'
+          typeName: 'Boolean' | 'String',
         ): void => {
           const field = fieldMap[fieldName];
           let isAllowedType = false;

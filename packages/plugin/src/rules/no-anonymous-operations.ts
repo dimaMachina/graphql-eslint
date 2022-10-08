@@ -65,7 +65,7 @@ const rule: GraphQLESLintRule = {
 
                 return fixer.insertTextAfterRange(
                   [node.range[0], node.range[0] + (hasQueryKeyword ? node.operation.length : 0)],
-                  `${hasQueryKeyword ? '' : 'query'} ${suggestedName}${hasQueryKeyword ? '' : ' '}`
+                  `${hasQueryKeyword ? '' : 'query'} ${suggestedName}${hasQueryKeyword ? '' : ' '}`,
                 );
               },
             },

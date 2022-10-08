@@ -49,7 +49,7 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
           ? <DocumentNode>{
               ...node,
               definitions: node.definitions.map(definition =>
-                (definition as unknown as GraphQLESTreeNode<DefinitionNode>).rawNode()
+                (definition as unknown as GraphQLESTreeNode<DefinitionNode>).rawNode(),
               ),
             }
           : node;
@@ -77,6 +77,6 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
 
   return visit(
     node,
-    typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor
+    typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor,
   ) as GraphQLESTreeNode<T>;
 }

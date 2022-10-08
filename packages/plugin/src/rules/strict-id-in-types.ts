@@ -175,7 +175,7 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
           context.report({
             node: node.name,
             message: `${typeName} must have exactly one non-nullable unique identifier. Accepted name${pluralNamesSuffix}: ${englishJoinWords(
-              options.acceptedIdNames
+              options.acceptedIdNames,
             )}. Accepted type${pluralTypesSuffix}: ${englishJoinWords(options.acceptedIdTypes)}.`,
           });
         }

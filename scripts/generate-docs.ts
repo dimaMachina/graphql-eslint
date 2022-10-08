@@ -54,25 +54,25 @@ function generateDocs(): void {
     const categories = asArray(docs.category);
     if (docs.recommended) {
       const configNames = categories.map(
-        category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`
+        category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`,
       );
       blocks.push(
         `${Icon.RECOMMENDED} The \`"extends": ${configNames.join(
-          '` and `'
+          '` and `',
         )}\` property in a configuration file enables this rule.`,
-        BR
+        BR,
       );
     }
     if (fixable) {
       blocks.push(
         `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
-        BR
+        BR,
       );
     }
     if (hasSuggestions) {
       blocks.push(
         `${Icon.HAS_SUGGESTIONS} This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
-        BR
+        BR,
       );
     }
 
@@ -84,7 +84,7 @@ function generateDocs(): void {
       `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)`,
       `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)`,
       BR,
-      docs.description
+      docs.description,
     );
 
     if (docs.examples?.length > 0) {
@@ -128,12 +128,12 @@ function generateDocs(): void {
     if (graphQLJSRuleName) {
       blocks.push(
         `- [Rule source](https://github.com/graphql/graphql-js/blob/main/src/validation/rules/${graphQLJSRuleName}Rule.ts)`,
-        `- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/${graphQLJSRuleName}Rule-test.ts)`
+        `- [Test source](https://github.com/graphql/graphql-js/tree/main/src/validation/__tests__/${graphQLJSRuleName}Rule-test.ts)`,
       );
     } else {
       blocks.push(
         `- [Rule source](../../packages/plugin/src/rules/${ruleName}.ts)`,
-        `- [Test source](../../packages/plugin/tests/${ruleName}.spec.ts)`
+        `- [Test source](../../packages/plugin/tests/${ruleName}.spec.ts)`,
       );
     }
 
@@ -181,7 +181,7 @@ function generateDocs(): void {
           { name: `${Icon.GRAPHQL_ESLINT}${NBSP}/${NBSP}${Icon.GRAPHQL_JS}`, align: 'center' },
           { name: `${Icon.FIXABLE}${NBSP}/${NBSP}${Icon.HAS_SUGGESTIONS}`, align: 'center' },
         ],
-        sortedRules
+        sortedRules,
       ),
       BR,
       '[recommended]: https://img.shields.io/badge/-recommended-green.svg',

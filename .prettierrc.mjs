@@ -1,5 +1,4 @@
-module.exports = {
-  trailingComma: 'es5',
+export default {
   printWidth: 100,
   singleQuote: true,
   arrowParens: 'avoid',

@@ -62,7 +62,7 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
         config: configOptions,
         filepath: 'virtual-config',
       },
-      [codeFileLoaderExtension(options.extensions?.pluckConfig)]
+      [codeFileLoaderExtension(options.extensions?.pluckConfig)],
     );
 
   return graphQLConfig;

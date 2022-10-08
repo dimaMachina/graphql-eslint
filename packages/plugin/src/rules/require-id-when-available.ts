@@ -141,7 +141,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
                 typeInfo.getType(),
                 selection.loc.start,
                 parent,
-                checkedFragmentSpreads
+                checkedFragmentSpreads,
               );
             }
           },
@@ -159,7 +159,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       loc: ESTree.Position,
       // Can't access to node.parent in GraphQL AST.Node, so pass as argument
       parent: any,
-      checkedFragmentSpreads = new Set<string>()
+      checkedFragmentSpreads = new Set<string>(),
     ): void {
       const rawType = getBaseType(type);
       const isObjectType = rawType instanceof GraphQLObjectType;
@@ -211,7 +211,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
 
       const pluralSuffix = idNames.length > 1 ? 's' : '';
       const fieldName = englishJoinWords(
-        idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``)
+        idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
       );
 
       const addition =
