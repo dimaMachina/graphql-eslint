@@ -12,7 +12,7 @@ describe('schema', () => {
   const schemaOnDisk = readFileSync(SCHEMA_GRAPHQL_PATH, 'utf8');
 
   const testSchema = (schema: string) => {
-    const gqlConfig = loadGraphQLConfig({ schema });
+    const gqlConfig = loadGraphQLConfig({ schema, filePath: '' });
     const graphQLSchema = getSchema(gqlConfig.getDefault());
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
@@ -87,6 +87,7 @@ describe('schema', () => {
           schema: {
             [schemaUrl]: schemaOptions,
           },
+          filePath: '',
         });
         const error = getSchema(gqlConfig.getDefault()) as Error;
         expect(error).toBeInstanceOf(Error);
@@ -95,7 +96,7 @@ describe('schema', () => {
 
       // https://github.com/B2o5T/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
       it('with `parserOptions.schemaOptions`', () => {
-        const gqlConfig = loadGraphQLConfig({ schema: schemaUrl });
+        const gqlConfig = loadGraphQLConfig({ schema: schemaUrl, filePath: '' });
         const error = getSchema(gqlConfig.getDefault(), { schemaOptions }) as Error;
         expect(error).toBeInstanceOf(Error);
         expect(error.message).toMatch('"authorization":"Bearer Foo"');
@@ -105,7 +106,7 @@ describe('schema', () => {
 
   describe('schema loading', () => {
     it('should return Error', () => {
-      const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql' });
+      const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql', filePath: '' });
       const error = getSchema(gqlConfig.getDefault()) as Error;
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toMatch(
@@ -115,9 +116,8 @@ describe('schema', () => {
   });
 
   it('should load the graphql-config rc file relative to the linted file', () => {
-    const schema = resolve(__dirname, 'mocks/using-config/schema.graphql');
     const gqlConfig = loadGraphQLConfig({
-      schema,
+      schema: resolve(__dirname, 'mocks/using-config/schema.graphql'),
       filePath: resolve(__dirname, 'mocks/using-config/test.graphql'),
     });
 
