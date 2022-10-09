@@ -84,14 +84,14 @@ const rule: GraphQLESLintRule = {
         context.report({ node, messageId: MUST_BE_OBJECT_TYPE });
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value!=/Connection$/]'(
-        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         if (hasEdgesField(node) && hasPageInfoField(node)) {
           context.report({ node: node.name, messageId: MUST_HAVE_CONNECTION_SUFFIX });
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/]'(
-        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         if (!hasEdgesField(node)) {
           context.report({ node: node.name, messageId: MUST_CONTAIN_FIELD_EDGES });
@@ -101,7 +101,7 @@ const rule: GraphQLESLintRule = {
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/] > FieldDefinition[name.value=edges] > .gqlType'(
-        node: GraphQLESTreeNode<TypeNode>
+        node: GraphQLESTreeNode<TypeNode>,
       ) {
         const isListType =
           node.kind === Kind.LIST_TYPE ||
@@ -111,7 +111,7 @@ const rule: GraphQLESLintRule = {
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/] > FieldDefinition[name.value=pageInfo] > .gqlType'(
-        node: GraphQLESTreeNode<TypeNode>
+        node: GraphQLESTreeNode<TypeNode>,
       ) {
         const isNonNullPageInfoType =
           node.kind === Kind.NON_NULL_TYPE &&

@@ -5,7 +5,7 @@
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "scripts": {
-    "lint": "eslint --ext graphql,js ."
+    "lint": "eslint ."
   },
   "dependencies": {
     "graphql": "16.6.0",

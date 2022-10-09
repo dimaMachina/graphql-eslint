@@ -88,7 +88,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       siblings = requireSiblingsOperations(RULE_ID, context);
     } catch {
       logger.warn(
-        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`
+        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`,
       );
     }
 
@@ -112,7 +112,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
 
               const ancestors = context.getAncestors();
               const token = (ancestors[0] as AST.Program).tokens.find(
-                token => token.loc.start.line === line && token.loc.start.column === column - 1
+                token => token.loc.start.line === line && token.loc.start.column === column - 1,
               );
 
               context.report({
@@ -131,7 +131,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                         const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
                         const parentNode = foundNode.parent.parent;
                         return fixer.remove(
-                          foundNode.kind === 'Name' ? parentNode.parent : parentNode
+                          foundNode.kind === 'Name' ? parentNode.parent : parentNode,
                         );
                       },
                     },
@@ -143,7 +143,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
         } catch (e) {
           logger.warn(
             `Rule "${RULE_ID}" check failed due to a missing siblings operations. For more info: https://bit.ly/graphql-eslint-operations`,
-            e
+            e,
           );
         }
       },

@@ -50,5 +50,5 @@ ruleTester.runGraphQLTests(
         errors: [{ message: 'The "Query" definition is not executable.' }],
       },
     ],
-  }
+  },
 );

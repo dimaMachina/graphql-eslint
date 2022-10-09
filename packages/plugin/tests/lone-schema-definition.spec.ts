@@ -40,5 +40,5 @@ ruleTester.runGraphQLTests(
         errors: [{ message: 'Must provide only one schema definition.' }],
       },
     ],
-  }
+  },
 );

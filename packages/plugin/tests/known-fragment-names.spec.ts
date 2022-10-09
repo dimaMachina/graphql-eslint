@@ -132,7 +132,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
         schema: join(__dirname, 'mocks/user-schema.graphql'),
         operations: join(
           __dirname,
-          'mocks/known-fragment-names/operation-with-undefined-fragment.gql'
+          'mocks/known-fragment-names/operation-with-undefined-fragment.gql',
         ),
       },
       errors: [{ message: 'Unknown fragment "DoesNotExist".' }],

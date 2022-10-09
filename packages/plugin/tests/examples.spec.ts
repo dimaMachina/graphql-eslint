@@ -78,4 +78,18 @@ describe('Examples', () => {
     expect(countErrors(results)).toBe(7);
     testSnapshot(results);
   });
+
+  it('should work in svelte', () => {
+    const cwd = join(ROOT_CWD, 'examples/svelte-code-file');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(2);
+    testSnapshot(results);
+  });
+
+  it('should work in vue', () => {
+    const cwd = join(ROOT_CWD, 'examples/vue-code-file');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(2);
+    testSnapshot(results);
+  });
 });

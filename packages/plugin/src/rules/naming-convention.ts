@@ -217,7 +217,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
                 ...schemaOption,
                 description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
               },
-            ])
+            ]),
           ),
           allowLeadingUnderscore: {
             type: 'boolean',
@@ -253,7 +253,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     function report(
       node: GraphQLESTreeNode<NameNode>,
       message: string,
-      suggestedName: string
+      suggestedName: string,
     ): void {
       context.report({
         node,
@@ -338,7 +338,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       report(
         node,
         `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
-        suggestedName
+        suggestedName,
       );
     };
 
@@ -356,7 +356,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     }
 
     const selectors = new Set(
-      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean)
+      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean),
     );
 
     for (const selector of selectors) {

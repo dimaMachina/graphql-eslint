@@ -54,5 +54,5 @@ ruleTester.runGraphQLTests<[{ ignoreClientDirectives: string[] }]>(
         errors: [{ message: 'Unknown directive "@bad".' }],
       },
     ],
-  }
+  },
 );

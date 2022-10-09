@@ -7,7 +7,7 @@ describe('processor.preprocess() without graphql-config', () => {
       import { gql } from 'graphql'
       const fooQuery = gql\`${QUERY}\`
     `;
-    const blocks = processor.preprocess(code, '') as Block[];
+    const blocks = processor.preprocess(code, 'test.js') as Block[];
 
     expect(blocks[0].text).toBe(QUERY);
     expect(blocks).toMatchInlineSnapshot(`
@@ -28,7 +28,7 @@ describe('processor.preprocess() without graphql-config', () => {
 
   it('should find /* GraphQL */ magic comment', () => {
     const code = `/*  GraphQL  */ \`${QUERY}\``;
-    const blocks = processor.preprocess(code, '') as Block[];
+    const blocks = processor.preprocess(code, 'test.js') as Block[];
 
     expect(blocks[0].text).toBe(QUERY);
     expect(blocks).toMatchInlineSnapshot(`

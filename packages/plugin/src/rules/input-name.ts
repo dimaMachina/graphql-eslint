@@ -109,7 +109,7 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
 
     const listeners: GraphQLESLintRuleListener = {
       'FieldDefinition > InputValueDefinition[name.value!=input] > Name'(
-        node: GraphQLESTreeNode<NameNode>
+        node: GraphQLESTreeNode<NameNode>,
       ) {
         if (shouldCheckType((node as any).parent.parent.parent)) {
           const inputName = node.value;
@@ -129,7 +129,7 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
 
     if (options.checkInputType) {
       listeners['FieldDefinition > InputValueDefinition NamedType'] = (
-        node: GraphQLESTreeNode<NamedTypeNode>
+        node: GraphQLESTreeNode<NamedTypeNode>,
       ) => {
         const findInputType = item => {
           let currentNode = item;

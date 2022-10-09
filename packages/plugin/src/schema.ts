@@ -11,7 +11,7 @@ const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(
   projectForFile: GraphQLProjectConfig,
-  options: Omit<ParserOptions, 'filePath'> = {}
+  options: Omit<ParserOptions, 'filePath'> = {},
 ): Schema {
   const schemaKey = asArray(projectForFile.schema).sort().join(',');
 
@@ -30,7 +30,7 @@ export function getSchema(
     schema = projectForFile.loadSchemaSync(
       projectForFile.schema,
       'GraphQLSchema',
-      options.schemaOptions
+      options.schemaOptions,
     );
     if (debug.enabled) {
       debug('Schema loaded: %o', schema instanceof GraphQLSchema);

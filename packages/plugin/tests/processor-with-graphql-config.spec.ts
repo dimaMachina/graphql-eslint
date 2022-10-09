@@ -20,7 +20,7 @@ describe('processor.preprocess() with graphql-config', () => {
       import { custom } from 'custom-gql-tag'
       const fooQuery = custom\`${QUERY}\`
     `;
-    const blocks = processor.preprocess(code, '') as Block[];
+    const blocks = processor.preprocess(code, 'test.js') as Block[];
 
     expect(blocks[0].text).toBe(QUERY);
     expect(blocks).toMatchInlineSnapshot(`
@@ -41,7 +41,7 @@ describe('processor.preprocess() with graphql-config', () => {
 
   it('should find /* CustoM */ magic comment', () => {
     const code = `/*  CustoM  */ \`${QUERY}\``;
-    const blocks = processor.preprocess(code, '') as Block[];
+    const blocks = processor.preprocess(code, 'test.js') as Block[];
 
     expect(blocks[0].text).toBe(QUERY);
     expect(blocks).toMatchInlineSnapshot(`

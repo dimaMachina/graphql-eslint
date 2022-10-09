@@ -68,7 +68,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }'
+        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
       ),
       options: [
         {
@@ -94,7 +94,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }'
+        'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }',
       ),
       options: [
         {
@@ -120,7 +120,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }'
+        'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }',
       ),
       options: [
         {
@@ -190,7 +190,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }'
+        'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }',
       ),
       options: [
         {
@@ -202,7 +202,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }'
+        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
       ),
       options: [
         {

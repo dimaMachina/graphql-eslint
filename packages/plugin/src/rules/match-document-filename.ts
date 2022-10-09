@@ -192,10 +192,10 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         }
 
         const firstOperation = documentNode.definitions.find(
-          n => n.kind === Kind.OPERATION_DEFINITION
+          n => n.kind === Kind.OPERATION_DEFINITION,
         ) as GraphQLESTreeNode<OperationDefinitionNode>;
         const firstFragment = documentNode.definitions.find(
-          n => n.kind === Kind.FRAGMENT_DEFINITION
+          n => n.kind === Kind.FRAGMENT_DEFINITION,
         ) as GraphQLESTreeNode<FragmentDefinitionNode>;
 
         const node = firstOperation || firstFragment;

@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-eslint/example-monorepo",
+  "name": "@graphql-eslint/example-svelte-code-file",
   "version": "0.0.0",
   "private": true,
   "author": "Dimitri POSTOLOV",
@@ -11,6 +11,9 @@
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "3.11.2",
-    "eslint": "8.25.0"
+    "eslint": "8.24.0",
+    "svelte": "3.50.1",
+    "svelte-eslint-parser": "0.18.4",
+    "svelte2tsx": "0.5.19"
   }
 }

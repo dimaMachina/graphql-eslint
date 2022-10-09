@@ -11,12 +11,12 @@ import type { SiblingOperations } from './sibling-operations';
 
 export function requireSiblingsOperations(
   ruleId: string,
-  context: GraphQLESLintRuleContext
+  context: GraphQLESLintRuleContext,
 ): SiblingOperations | never {
   const { siblingOperations } = context.parserServices;
   if (!siblingOperations.available) {
     throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`
+      `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`,
     );
   }
   return siblingOperations;
@@ -24,12 +24,12 @@ export function requireSiblingsOperations(
 
 export function requireGraphQLSchemaFromContext(
   ruleId: string,
-  context: GraphQLESLintRuleContext
+  context: GraphQLESLintRuleContext,
 ): GraphQLSchema | never {
   const { schema } = context.parserServices;
   if (!schema) {
     throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`
+      `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
     );
   } else if (schema instanceof Error) {
     throw schema;

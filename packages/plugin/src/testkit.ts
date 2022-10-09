@@ -62,7 +62,7 @@ export class GraphQLRuleTester extends RuleTester {
     tests: {
       valid: (string | GraphQLValidTestCase<Options>)[];
       invalid: GraphQLInvalidTestCase<Options>[];
-    }
+    },
   ): void {
     const ruleTests = Linter.version.startsWith('8')
       ? tests
@@ -88,7 +88,7 @@ export class GraphQLRuleTester extends RuleTester {
     linter.defineRule(ruleId, rule as any);
 
     const hasOnlyTest = [...tests.valid, ...tests.invalid].some(
-      t => typeof t !== 'string' && t.only
+      t => typeof t !== 'string' && t.only,
     );
 
     // for (const [index, testCase] of tests.valid.entries()) {
@@ -140,7 +140,7 @@ export class GraphQLRuleTester extends RuleTester {
         const codeWithMessage = printCode(code, message, 1);
         messageForSnapshot.push(
           printWithIndex('#### ❌ Error', index, messages.length),
-          indentCode(codeWithMessage)
+          indentCode(codeWithMessage),
         );
 
         const { suggestions } = message;
@@ -152,7 +152,7 @@ export class GraphQLRuleTester extends RuleTester {
               '#### 💡 Suggestion',
               i,
               suggestions.length,
-              suggestion.desc
+              suggestion.desc,
             );
             const output = applyFix(code, suggestion.fix);
             const codeFrame = printCode(output, { line: 0, column: 0 });
@@ -224,7 +224,7 @@ function defineParser(linter: Linter, parser: string): void {
 function printCode(
   code: string,
   result: Partial<Linter.LintMessage> = {},
-  linesOffset = Number.POSITIVE_INFINITY
+  linesOffset = Number.POSITIVE_INFINITY,
 ): string {
   const { line, column, endLine, endColumn, message } = result;
   const location = <AST.SourceLocation>{};

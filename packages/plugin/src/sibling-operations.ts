@@ -26,7 +26,7 @@ export type SiblingOperations = {
   getFragmentByType(typeName: string): FragmentSource[];
   getFragmentsInUse(
     baseOperation: OperationDefinitionNode | FragmentDefinitionNode | SelectionSetNode,
-    recursive?: boolean
+    recursive?: boolean,
   ): FragmentDefinitionNode[];
   getOperation(operationName: string): OperationSource[];
   getOperations(): OperationSource[];
@@ -90,7 +90,7 @@ export function getSiblingOperations(projectForFile: GraphQLProjectConfig): Sibl
     const noopWarn = () => {
       if (!printed) {
         logger.warn(
-          'getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!'
+          'getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!',
         );
         printed = true;
       }
@@ -163,7 +163,7 @@ export function getSiblingOperations(projectForFile: GraphQLProjectConfig): Sibl
   const collectFragments = (
     selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
     recursive,
-    collected = new Map<string, FragmentDefinitionNode>()
+    collected = new Map<string, FragmentDefinitionNode>(),
   ) => {
     visit(selectable, {
       FragmentSpread(spread) {
@@ -172,7 +172,7 @@ export function getSiblingOperations(projectForFile: GraphQLProjectConfig): Sibl
 
         if (!fragment) {
           logger.warn(
-            `Unable to locate fragment named "${fragmentName}", please make sure it's loaded using "parserOptions.operations"`
+            `Unable to locate fragment named "${fragmentName}", please make sure it's loaded using "parserOptions.operations"`,
           );
           return;
         }

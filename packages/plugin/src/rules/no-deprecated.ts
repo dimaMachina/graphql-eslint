@@ -89,7 +89,7 @@ const rule: GraphQLESLintRule<[], true> = {
 
     function report(
       node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>,
-      reason: string
+      reason: string,
     ): void {
       const nodeName = node.kind === Kind.ENUM ? node.value : node.name.value;
       const nodeType = node.kind === Kind.ENUM ? 'enum value' : 'field';

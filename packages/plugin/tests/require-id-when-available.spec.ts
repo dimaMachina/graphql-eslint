@@ -361,5 +361,5 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>(
         },
       },
     ],
-  }
+  },
 );

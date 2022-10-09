@@ -26,7 +26,7 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
       // Assert `skipGraphQLImport` is set to true
       ...SIBLING_FRAGMENTS(
         join(__dirname, 'mocks/user-fields.graphql'),
-        join(__dirname, 'mocks/user.graphql')
+        join(__dirname, 'mocks/user.graphql'),
       ),
       filename: join(__dirname, 'mocks/user-fields.graphql'),
       code: ruleTester.fromMockFile('user-fields.graphql'),

@@ -43,7 +43,7 @@ const rule: GraphQLESLintRule = {
         const duplicates = node.values.filter(
           (item, index, array) =>
             array.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !==
-            index
+            index,
         );
         for (const duplicate of duplicates) {
           const enumName = duplicate.name.value;

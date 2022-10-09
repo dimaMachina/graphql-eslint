@@ -51,7 +51,7 @@ type TokenKindValue =
 
 export function convertToken<T extends 'Line' | 'Block' | TokenKindValue>(
   token: Token,
-  type: T
+  type: T,
 ): Omit<AST.Token, 'type'> & { type: T } {
   const { line, column, end, start, value } = token;
   return {
@@ -118,7 +118,7 @@ export function extractComments(loc: Location): Comment[] {
       const comment = convertToken(
         token,
         // `eslint-disable` directive works only with `Block` type comment
-        token.value.trimStart().startsWith('eslint') ? 'Block' : 'Line'
+        token.value.trimStart().startsWith('eslint') ? 'Block' : 'Line',
       );
       comments.push(comment);
     }

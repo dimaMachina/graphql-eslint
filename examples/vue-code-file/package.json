@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-eslint/example-monorepo",
+  "name": "@graphql-eslint/example-vue-code-file",
   "version": "0.0.0",
   "private": true,
   "author": "Dimitri POSTOLOV",
@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "3.11.2",
-    "eslint": "8.25.0"
+    "@vue/compiler-sfc": "3.2.40",
+    "eslint": "8.24.0",
+    "vue-eslint-parser": "9.1.0"
   }
 }

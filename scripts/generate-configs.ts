@@ -51,7 +51,7 @@ function generateRules(): void {
     'export const rules = {',
     '...GRAPHQL_JS_VALIDATIONS,',
     ruleFilenames.map(ruleName =>
-      ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName
+      ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName,
     ),
     '}',
   ].join('\n');
@@ -66,7 +66,7 @@ async function generateConfigs(): Promise<void> {
 
   const getRulesConfig = (
     categoryType: CategoryType,
-    isRecommended: boolean
+    isRecommended: boolean,
   ): Record<string, RuleOptions> => {
     const getRuleOptions = (ruleId, rule: GraphQLESLintRule): RuleOptions => {
       const { configOptions } = rule.meta.docs;
@@ -94,7 +94,7 @@ async function generateConfigs(): Promise<void> {
     return Object.fromEntries(
       filteredRules
         .filter(ruleId => !rules[ruleId].meta.docs.isDisabledForAllConfig)
-        .map(ruleId => [`@graphql-eslint/${ruleId}`, getRuleOptions(ruleId, rules[ruleId])])
+        .map(ruleId => [`@graphql-eslint/${ruleId}`, getRuleOptions(ruleId, rules[ruleId])]),
     );
   };
 
