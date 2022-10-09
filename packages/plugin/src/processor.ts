@@ -52,13 +52,14 @@ export const processor: Linter.Processor<Block | string> = {
 
     try {
       const sources = gqlPluckFromCodeStringSync(filePath, code, pluckConfig);
+      const isSvelte = filePath.endsWith('.svelte')
 
       const blocks: Block[] = sources.map(item => ({
         filename: 'document.graphql',
         text: item.body,
-        lineOffset: item.locationOffset.line - 1,
+        lineOffset: item.locationOffset.line - (isSvelte ? 3 : 1),
         // @ts-expect-error -- `index` field exist but show ts error
-        offset: item.locationOffset.index + 1,
+        offset: item.locationOffset.index + (isSvelte ? -52 : 1),
       }));
       blocksMap.set(filePath, blocks);
 

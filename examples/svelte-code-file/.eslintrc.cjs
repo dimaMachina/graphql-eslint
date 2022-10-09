@@ -20,6 +20,17 @@ module.exports = {
       plugins: ['@graphql-eslint'],
       rules: {
         '@graphql-eslint/no-anonymous-operations': 'error',
+        '@graphql-eslint/no-duplicate-fields': 'error',
+        '@graphql-eslint/naming-convention': [
+          'error',
+          {
+            OperationDefinition: {
+              style: 'PascalCase',
+              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+            },
+          },
+        ],
       },
     },
   ],

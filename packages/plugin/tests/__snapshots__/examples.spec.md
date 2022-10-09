@@ -128,19 +128,8 @@ exports[`Examples should work in svelte 1`] = `
     filePath: examples/svelte-code-file/test.svelte,
     messages: [
       {
-        column: 9,
-        endColumn: 12,
-        endLine: 2,
-        line: 2,
-        message: 'foo' is assigned a value but never used.,
-        messageId: unusedVar,
-        nodeType: Identifier,
-        ruleId: no-unused-vars,
-        severity: 2,
-      },
-      {
-        column: 5,
-        endColumn: 10,
+        column: 3,
+        endColumn: 8,
         endLine: 5,
         line: 5,
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
@@ -150,13 +139,35 @@ exports[`Examples should work in svelte 1`] = `
         severity: 2,
         suggestions: [
           {
-            desc: Rename to \`foo\`,
+            desc: Rename to \`user\`,
             fix: {
               range: [
-                88,
-                88,
+                78,
+                78,
               ],
-              text: query foo ,
+              text:  user,
+            },
+          },
+        ],
+      },
+      {
+        column: 9,
+        endColumn: 18,
+        endLine: 13,
+        line: 13,
+        message: Operation "UserQuery" should not have "Query" suffix,
+        nodeType: Name,
+        ruleId: @graphql-eslint/naming-convention,
+        severity: 2,
+        suggestions: [
+          {
+            desc: Rename to \`User\`,
+            fix: {
+              range: [
+                166,
+                175,
+              ],
+              text: User,
             },
           },
         ],
@@ -172,21 +183,10 @@ exports[`Examples should work in vue 1`] = `
     filePath: examples/vue-code-file/test.vue,
     messages: [
       {
-        column: 7,
-        endColumn: 10,
-        endLine: 2,
-        line: 2,
-        message: 'foo' is assigned a value but never used.,
-        messageId: unusedVar,
-        nodeType: Identifier,
-        ruleId: no-unused-vars,
-        severity: 2,
-      },
-      {
         column: 3,
         endColumn: 8,
-        endLine: 3,
-        line: 3,
+        endLine: 5,
+        line: 5,
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         messageId: no-anonymous-operations,
         nodeType: null,
@@ -194,13 +194,35 @@ exports[`Examples should work in vue 1`] = `
         severity: 2,
         suggestions: [
           {
-            desc: Rename to \`foo\`,
+            desc: Rename to \`user\`,
             fix: {
               range: [
-                31,
-                31,
+                78,
+                78,
               ],
-              text: query foo ,
+              text:  user,
+            },
+          },
+        ],
+      },
+      {
+        column: 9,
+        endColumn: 18,
+        endLine: 13,
+        line: 13,
+        message: Operation "UserQuery" should not have "Query" suffix,
+        nodeType: Name,
+        ruleId: @graphql-eslint/naming-convention,
+        severity: 2,
+        suggestions: [
+          {
+            desc: Rename to \`User\`,
+            fix: {
+              range: [
+                166,
+                175,
+              ],
+              text: User,
             },
           },
         ],
