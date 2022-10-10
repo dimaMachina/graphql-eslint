@@ -6304,10 +6304,10 @@ svelte-eslint-parser@0.18.4:
     eslint-visitor-keys "^3.0.0"
     espree "^9.0.0"
 
-svelte2tsx@0.5.19:
-  version "0.5.19"
-  resolved "https://registry.yarnpkg.com/svelte2tsx/-/svelte2tsx-0.5.19.tgz#305c9c735594718bd2c99720cbfc260bd772906b"
-  integrity sha512-PvhcjG3fVhFmoO7XWYYqWYkg7lQzO8Q9/T4RQiCAsTZ+lK+9jCAPV8rbeQD8M4AN44u3JqgvaxHrmh095SaxBA==
+svelte2tsx@0.5.20:
+  version "0.5.20"
+  resolved "https://registry.yarnpkg.com/svelte2tsx/-/svelte2tsx-0.5.20.tgz#0ac5411b53d6b6913b12e12a02c03ce9eb13e945"
+  integrity sha512-yNHmN/uoAnJ7d1XqVohiNA6TMFOxibHyEddUAHVt1PiLXtbwAJF3WaGYlg8QbOdoXzOVsVNCAlqRUIdULUm+OA==
   dependencies:
     dedent-js "^1.0.1"
     pascal-case "^3.1.1"
