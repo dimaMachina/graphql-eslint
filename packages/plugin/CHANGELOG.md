@@ -1,5 +1,21 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.12.0
+
+### Minor Changes
+
+- [#1200](https://github.com/B2o5T/graphql-eslint/pull/1200) [`f193b5e`](https://github.com/B2o5T/graphql-eslint/commit/f193b5e53d9b9f6683f40afac4a8a2e9f4e9f639) Thanks [@B2o5T](https://github.com/B2o5T)! - support extracting GraphQL documents from `*.vue`/`*.svelte` code-files
+
+### Patch Changes
+
+- [#1201](https://github.com/B2o5T/graphql-eslint/pull/1201) [`ba26511`](https://github.com/B2o5T/graphql-eslint/commit/ba265113078345c0622b8eed6ce71dc82a705089) Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
+
+  - Updated dependency [`graphql-config@^4.3.6` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.3.6) (from `^4.3.5`, in `dependencies`)
+
+- [#1198](https://github.com/B2o5T/graphql-eslint/pull/1198) [`2886adf`](https://github.com/B2o5T/graphql-eslint/commit/2886adf70e96a5c8b9a1ad320d35406691b7d487) Thanks [@B2o5T](https://github.com/B2o5T)! - fix passing pluck config via `graphql-config#extensions` field
+  rename `extensions.graphqlTagPluck` to `extensions.pluckConfig`
+  fix performance regression while using `processor: '@graphql-eslint/graphql'`
+
 ## 3.11.2
 
 ### Patch Changes
