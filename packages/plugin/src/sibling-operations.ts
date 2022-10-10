@@ -53,8 +53,8 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
 const operationsCache = new Map<string, Source[]>();
 const siblingOperationsCache = new Map<Source[], SiblingOperations>();
 
-const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
-  const documentsKey = asArray(projectForFile.documents).sort().join(',');
+const getSiblings = (project: GraphQLProjectConfig): Source[] => {
+  const documentsKey = asArray(project.documents).sort().join(',');
 
   if (!documentsKey) {
     return [];
@@ -63,13 +63,14 @@ const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
   let siblings = operationsCache.get(documentsKey);
 
   if (!siblings) {
-    debug('Loading operations from %o', projectForFile.documents);
-    const documents = projectForFile.loadDocumentsSync(projectForFile.documents, {
+    debug('Loading operations from %o', project.documents);
+    const documents = project.loadDocumentsSync(project.documents, {
       skipGraphQLImport: true,
+      pluckConfig: project.extensions.pluckConfig,
     });
     if (debug.enabled) {
       debug('Loaded %d operations', documents.length);
-      const operationsPaths = fastGlob.sync(projectForFile.documents as Pointer, {
+      const operationsPaths = fastGlob.sync(project.documents as Pointer, {
         absolute: true,
       });
       debug('Operations pointers %O', operationsPaths);
@@ -81,8 +82,8 @@ const getSiblings = (projectForFile: GraphQLProjectConfig): Source[] => {
   return siblings;
 };
 
-export function getSiblingOperations(projectForFile: GraphQLProjectConfig): SiblingOperations {
-  const siblings = getSiblings(projectForFile);
+export function getSiblingOperations(project: GraphQLProjectConfig): SiblingOperations {
+  const siblings = getSiblings(project);
 
   if (siblings.length === 0) {
     let printed = false;

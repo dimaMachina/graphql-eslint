@@ -11,6 +11,7 @@ const config: IGraphQLConfig = {
       schema: 'schema.second-project.graphql',
       documents: 'query.second-project.js',
       extensions: {
+        // in case you want to use different names for magic comment and module identifier
         pluckConfig: <GraphQLTagPluckOptions>{
           modules: [{ name: 'custom-graphql-tag', identifier: 'custom' }],
           globalGqlIdentifierName: 'custom',

@@ -92,4 +92,11 @@ describe('Examples', () => {
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
+
+  it('should work in multiple projects', () => {
+    const cwd = join(ROOT_CWD, 'examples/multiple-projects-graphql-config');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(4);
+    testSnapshot(results);
+  });
 });
