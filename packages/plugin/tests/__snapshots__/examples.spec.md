@@ -122,6 +122,97 @@ exports[`Examples should work in monorepo 1`] = `
 ]
 `;
 
+exports[`Examples should work in multiple projects 1`] = `
+[
+  {
+    filePath: examples/multiple-projects-graphql-config/query.first-project.js,
+    messages: [
+      {
+        column: 3,
+        endColumn: 8,
+        endLine: 11,
+        line: 11,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
+        messageId: no-anonymous-operations,
+        nodeType: null,
+        ruleId: @graphql-eslint/no-anonymous-operations,
+        severity: 2,
+        suggestions: [
+          {
+            desc: Rename to \`user\`,
+            fix: {
+              range: [
+                126,
+                126,
+              ],
+              text: query user ,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    filePath: examples/multiple-projects-graphql-config/query.second-project.js,
+    messages: [
+      {
+        column: 3,
+        endColumn: 8,
+        endLine: 11,
+        line: 11,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
+        messageId: no-anonymous-operations,
+        nodeType: null,
+        ruleId: @graphql-eslint/no-anonymous-operations,
+        severity: 2,
+        suggestions: [
+          {
+            desc: Rename to \`users\`,
+            fix: {
+              range: [
+                141,
+                141,
+              ],
+              text: query users ,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    filePath: examples/multiple-projects-graphql-config/schema.first-project.graphql,
+    messages: [
+      {
+        column: 6,
+        endColumn: 10,
+        endLine: 1,
+        line: 1,
+        message: User must have exactly one non-nullable unique identifier. Accepted name: id. Accepted type: ID.,
+        nodeType: Name,
+        ruleId: @graphql-eslint/strict-id-in-types,
+        severity: 2,
+      },
+    ],
+  },
+  {
+    filePath: examples/multiple-projects-graphql-config/schema.second-project.graphql,
+    messages: [
+      {
+        column: 6,
+        endColumn: 10,
+        endLine: 1,
+        line: 1,
+        message: User must have exactly one non-nullable unique identifier. Accepted name: id. Accepted type: ID.,
+        nodeType: Name,
+        ruleId: @graphql-eslint/strict-id-in-types,
+        severity: 2,
+      },
+    ],
+  },
+]
+`;
+
 exports[`Examples should work in svelte 1`] = `
 [
   {

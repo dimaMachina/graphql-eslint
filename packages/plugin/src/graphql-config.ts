@@ -1,12 +1,6 @@
 import { dirname } from 'path';
 import debugFactory from 'debug';
-import {
-  GraphQLConfig,
-  GraphQLExtensionDeclaration,
-  loadConfigSync,
-  SchemaPointer,
-} from 'graphql-config';
-import { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import { GraphQLConfig, loadConfigSync, SchemaPointer } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types';
 
@@ -14,20 +8,12 @@ const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
 
 export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
-  const rootDir = dirname(filePath);
-  const config = loadConfigSync({
+  return loadConfigSync({
     // load config relative to the file being linted
-    rootDir,
+    rootDir: dirname(filePath),
     throwOnEmpty: false,
     throwOnMissing: false,
-  });
-  if (!config) {
-    return null;
-  }
-  const project = config.getProjectForFile(filePath);
-  return loadConfigSync({
-    rootDir,
-    extensions: [codeFileLoaderExtension(project.extensions.pluckConfig)],
+    extensions: [codeFileLoaderExtension],
   });
 }
 
@@ -62,17 +48,15 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
         config: configOptions,
         filepath: 'virtual-config',
       },
-      [codeFileLoaderExtension(options.extensions?.pluckConfig)],
+      [codeFileLoaderExtension],
     );
 
   return graphQLConfig;
 }
 
-const codeFileLoaderExtension =
-  (pluckConfig: GraphQLTagPluckOptions): GraphQLExtensionDeclaration =>
-  api => {
-    const { schema, documents } = api.loaders;
-    schema.register(new CodeFileLoader({ pluckConfig }));
-    documents.register(new CodeFileLoader({ pluckConfig }));
-    return { name: 'graphql-eslint-loaders' };
-  };
+const codeFileLoaderExtension = api => {
+  const { schema, documents } = api.loaders;
+  schema.register(new CodeFileLoader());
+  documents.register(new CodeFileLoader());
+  return { name: 'graphql-eslint-loaders' };
+};

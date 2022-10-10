@@ -10,10 +10,10 @@ const schemaCache = new Map<string, GraphQLSchema | Error>();
 const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(
-  projectForFile: GraphQLProjectConfig,
+  project: GraphQLProjectConfig,
   options: Omit<ParserOptions, 'filePath'> = {},
 ): Schema {
-  const schemaKey = asArray(projectForFile.schema).sort().join(',');
+  const schemaKey = asArray(project.schema).sort().join(',');
 
   if (!schemaKey) {
     return null;
@@ -26,15 +26,14 @@ export function getSchema(
   let schema: Schema;
 
   try {
-    debug('Loading schema from %o', projectForFile.schema);
-    schema = projectForFile.loadSchemaSync(
-      projectForFile.schema,
-      'GraphQLSchema',
-      options.schemaOptions,
-    );
+    debug('Loading schema from %o', project.schema);
+    schema = project.loadSchemaSync(project.schema, 'GraphQLSchema', {
+      ...options.schemaOptions,
+      pluckConfig: project.extensions.pluckConfig,
+    });
     if (debug.enabled) {
       debug('Schema loaded: %o', schema instanceof GraphQLSchema);
-      const schemaPaths = fastGlob.sync(projectForFile.schema as Pointer, {
+      const schemaPaths = fastGlob.sync(project.schema as Pointer, {
         absolute: true,
       });
       debug('Schema pointers %O', schemaPaths);

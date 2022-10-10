@@ -15,28 +15,30 @@ export type Block = Linter.ProcessorFile & {
 const blocksMap = new Map<string, Block[]>();
 
 let onDiskConfig: GraphQLConfig;
-let pluckConfig: GraphQLTagPluckOptions;
-let RELEVANT_KEYWORDS: string[];
+let onDiskConfigLoaded = false;
+
+const RELEVANT_KEYWORDS = ['gql', 'graphql', 'GraphQL'] as const;
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
-    if (!pluckConfig) {
+    if (!onDiskConfigLoaded) {
       onDiskConfig = loadOnDiskGraphQLConfig(filePath);
+      onDiskConfigLoaded = true;
+    }
+
+    let keywords: readonly string[] = RELEVANT_KEYWORDS;
+    const pluckConfig: GraphQLTagPluckOptions =
+      onDiskConfig?.getProjectForFile(filePath).extensions.pluckConfig;
+
+    if (pluckConfig) {
       const {
         modules = [],
         globalGqlIdentifierName = ['gql', 'graphql'],
         gqlMagicComment = 'GraphQL',
-      } = onDiskConfig?.getProjectForFile(filePath).extensions.pluckConfig || {};
+      } = pluckConfig || {};
 
-      pluckConfig = {
-        skipIndent: true,
-        modules,
-        globalGqlIdentifierName,
-        gqlMagicComment,
-      };
-
-      RELEVANT_KEYWORDS = [
+      keywords = [
         ...new Set(
           [
             ...modules.map(({ identifier }) => identifier),
@@ -46,13 +48,17 @@ export const processor: Linter.Processor<Block | string> = {
         ),
       ];
     }
-    if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
+
+    if (keywords.every(keyword => !code.includes(keyword))) {
       return [code];
     }
 
     try {
-      const sources = gqlPluckFromCodeStringSync(filePath, code, pluckConfig);
-      const isSvelte = filePath.endsWith('.svelte')
+      const sources = gqlPluckFromCodeStringSync(filePath, code, {
+        skipIndent: true,
+        ...pluckConfig,
+      });
+      const isSvelte = filePath.endsWith('.svelte');
 
       const blocks: Block[] = sources.map(item => ({
         filename: 'document.graphql',
