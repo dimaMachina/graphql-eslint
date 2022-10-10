@@ -36,7 +36,7 @@ export const processor: Linter.Processor<Block | string> = {
         modules = [],
         globalGqlIdentifierName = ['gql', 'graphql'],
         gqlMagicComment = 'GraphQL',
-      } = pluckConfig || {};
+      } = pluckConfig;
 
       keywords = [
         ...new Set(
