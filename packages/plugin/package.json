@@ -92,7 +92,8 @@
       "graphql/validation/rules/ValuesOfCorrectTypeRule",
       "graphql/validation/rules/VariablesAreInputTypesRule",
       "graphql/validation/rules/VariablesInAllowedPositionRule",
-      "graphql/language"
+      "graphql/language",
+      "minimatch"
     ]
   },
   "publishConfig": {

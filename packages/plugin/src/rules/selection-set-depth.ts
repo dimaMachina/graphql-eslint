@@ -4,7 +4,7 @@ import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils';
-import { SiblingOperations } from '../sibling-operations';
+import { SiblingOperations } from '../documents';
 
 export type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
 

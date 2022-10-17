@@ -2,8 +2,8 @@ import { relative } from 'path';
 import { ExecutableDefinitionNode, Kind } from 'graphql';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
-import { normalizePath, requireSiblingsOperations, getOnDiskFilepath } from '../utils';
-import { FragmentSource, OperationSource } from '../sibling-operations';
+import { normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX, CWD } from '../utils';
+import { FragmentSource, OperationSource } from '../documents';
 
 const RULE_ID = 'unique-fragment-name';
 
@@ -32,7 +32,7 @@ export const checkNode = (
       data: {
         documentName,
         summary: conflictingDocuments
-          .map(f => `\t${relative(process.cwd(), getOnDiskFilepath(f.filePath))}`)
+          .map(f => `\t${relative(CWD, f.filePath.replace(VIRTUAL_DOCUMENT_REGEX, ''))}`)
           .join('\n'),
       },
       node: node.name,
