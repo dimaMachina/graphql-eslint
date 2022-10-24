@@ -60,7 +60,7 @@ const getSiblings = (project: GraphQLProjectConfig): Source[] => {
     return [];
   }
 
-  let siblings = operationsCache.get(project.name);
+  let siblings = operationsCache.get(documentsKey);
 
   if (!siblings) {
     debug('Loading operations from %o', project.documents);
