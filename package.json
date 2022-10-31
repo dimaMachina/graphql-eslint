@@ -51,7 +51,7 @@
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
     "lint-staged": "13.0.3",
-    "patch-package": "6.4.7",
+    "patch-package": "6.5.0",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
     "ts-node": "10.9.1",
