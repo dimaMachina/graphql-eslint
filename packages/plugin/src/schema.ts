@@ -6,7 +6,7 @@ import chalk from 'chalk';
 import { ParserOptions, Schema, Pointer } from './types';
 import { ModuleCache } from './cache';
 
-export const schemaCache = new ModuleCache<GraphQLSchema | Error>();
+const schemaCache = new ModuleCache<GraphQLSchema | Error>();
 const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(
