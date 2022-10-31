@@ -32,7 +32,7 @@
     "@swc/jest": "0.2.23",
     "@types/dedent": "0.7.0",
     "@types/jest": "29.2.0",
-    "@types/node": "16.18.3",
+    "@types/node": "18.11.8",
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
     "bob-the-bundler": "1.7.3",
