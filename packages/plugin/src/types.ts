@@ -1,10 +1,10 @@
-import type { Rule, AST, Linter } from 'eslint';
-import type * as ESTree from 'estree';
-import type { GraphQLSchema } from 'graphql';
-import type { IExtensions, IGraphQLProject } from 'graphql-config';
-import type { GraphQLParseOptions } from '@graphql-tools/utils';
-import type { GraphQLESLintRuleListener } from './testkit';
-import type { SiblingOperations } from './sibling-operations';
+import { Rule, AST, Linter } from 'eslint';
+import * as ESTree from 'estree';
+import { GraphQLSchema } from 'graphql';
+import { IExtensions, IGraphQLProject } from 'graphql-config';
+import { GraphQLParseOptions } from '@graphql-tools/utils';
+import { GraphQLESLintRuleListener } from './testkit';
+import { SiblingOperations } from './documents';
 
 export type Schema = GraphQLSchema | Error | null;
 export type Pointer = string | string[];

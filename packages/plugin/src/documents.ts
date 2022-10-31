@@ -7,12 +7,13 @@ import {
   visit,
   OperationTypeNode,
 } from 'graphql';
-import { Source, asArray } from '@graphql-tools/utils';
+import { Source } from '@graphql-tools/utils';
 import { GraphQLProjectConfig } from 'graphql-config';
 import debugFactory from 'debug';
-import fastGlob from 'fast-glob';
+import fg from 'fast-glob';
 import { logger } from './utils';
-import type { Pointer } from './types';
+import { Pointer } from './types';
+import { ModuleCache } from './cache';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };
@@ -50,12 +51,11 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
   });
 };
 
-const operationsCache = new Map<string, Source[]>();
+const operationsCache = new ModuleCache<Source[]>();
 const siblingOperationsCache = new Map<Source[], SiblingOperations>();
 
 const getSiblings = (project: GraphQLProjectConfig): Source[] => {
-  const documentsKey = asArray(project.documents).sort().join(',');
-
+  const documentsKey = project.documents;
   if (!documentsKey) {
     return [];
   }
@@ -70,9 +70,7 @@ const getSiblings = (project: GraphQLProjectConfig): Source[] => {
     });
     if (debug.enabled) {
       debug('Loaded %d operations', documents.length);
-      const operationsPaths = fastGlob.sync(project.documents as Pointer, {
-        absolute: true,
-      });
+      const operationsPaths = fg.sync(project.documents as Pointer, { absolute: true });
       debug('Operations pointers %O', operationsPaths);
     }
     siblings = handleVirtualPath(documents);
@@ -82,7 +80,7 @@ const getSiblings = (project: GraphQLProjectConfig): Source[] => {
   return siblings;
 };
 
-export function getSiblingOperations(project: GraphQLProjectConfig): SiblingOperations {
+export function getDocuments(project: GraphQLProjectConfig): SiblingOperations {
   const siblings = getSiblings(project);
 
   if (siblings.length === 0) {

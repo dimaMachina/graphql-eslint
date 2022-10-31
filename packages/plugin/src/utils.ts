@@ -1,13 +1,10 @@
-import { statSync } from 'fs';
-import { dirname } from 'path';
-import type { GraphQLSchema } from 'graphql';
-import { Kind } from 'graphql';
-import type { AST } from 'eslint';
+import { GraphQLSchema, Kind } from 'graphql';
+import { AST } from 'eslint';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
-import type { Position } from 'estree';
-import type { GraphQLESLintRuleContext } from './types';
-import type { SiblingOperations } from './sibling-operations';
+import { Position } from 'estree';
+import { GraphQLESLintRuleContext } from './types';
+import { SiblingOperations } from './documents';
 
 export function requireSiblingsOperations(
   ruleId: string,
@@ -46,26 +43,9 @@ export const logger = {
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
 
-/**
- * https://github.com/prettier/eslint-plugin-prettier/blob/76bd45ece6d56eb52f75db6b4a1efdd2efb56392/eslint-plugin-prettier.js#L71
- * Given a filepath, get the nearest path that is a regular file.
- * The filepath provided by eslint may be a virtual filepath rather than a file
- * on disk. This attempts to transform a virtual path into an on-disk path
- */
-export const getOnDiskFilepath = (filepath: string): string => {
-  try {
-    if (statSync(filepath).isFile()) {
-      return filepath;
-    }
-  } catch (err) {
-    // https://github.com/eslint/eslint/issues/11989
-    if (err.code === 'ENOTDIR') {
-      return getOnDiskFilepath(dirname(filepath));
-    }
-  }
+export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
 
-  return filepath;
-};
+export const CWD = process.cwd();
 
 export const getTypeName = (node): string =>
   'type' in node ? getTypeName(node.type) : node.name.value;

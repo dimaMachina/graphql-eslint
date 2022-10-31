@@ -4,44 +4,38 @@ import debugFactory from 'debug';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter';
 import { GraphQLESLintParseResult, ParserOptions } from './types';
 import { getSchema } from './schema';
-import { getSiblingOperations } from './sibling-operations';
+import { getDocuments } from './documents';
 import { loadGraphQLConfig } from './graphql-config';
-import { getOnDiskFilepath } from './utils';
+import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils';
 
 const debug = debugFactory('graphql-eslint:parser');
 
-debug('cwd %o', process.cwd());
+debug('cwd %o', CWD);
 
 export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
     const { filePath } = options;
-    const realFilepath = getOnDiskFilepath(filePath);
-
-    const gqlConfig = loadGraphQLConfig(options);
-    const projectForFile = realFilepath
-      ? gqlConfig.getProjectForFile(realFilepath)
-      : gqlConfig.getDefault();
-
-    const schema = getSchema(projectForFile, options);
-    const siblingOperations = getSiblingOperations(projectForFile);
-
+    // First parse code from file, in case of syntax error do not try load schema,
+    // documents or even graphql-config instance
     const { document } = parseGraphQLSDL(filePath, code, {
       ...options.graphQLParserOptions,
       noLocation: false,
     });
+    const gqlConfig = loadGraphQLConfig(options);
+    const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
+    const project = gqlConfig.getProjectForFile(realFilepath);
 
-    const comments = extractComments(document.loc);
-    const tokens = extractTokens(filePath, code);
+    const schema = getSchema(project, options.schemaOptions);
     const rootTree = convertToESTree(document, schema instanceof GraphQLSchema ? schema : null);
 
     return {
       services: {
         schema,
-        siblingOperations,
+        siblingOperations: getDocuments(project),
       },
       ast: {
-        comments,
-        tokens,
+        comments: extractComments(document.loc),
+        tokens: extractTokens(filePath, code),
         loc: rootTree.loc,
         range: rootTree.range as [number, number],
         type: 'Program',

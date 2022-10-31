@@ -1,26 +1,28 @@
 import { GraphQLSchema } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
-import { asArray } from '@graphql-tools/utils';
 import debugFactory from 'debug';
-import fastGlob from 'fast-glob';
+import fg from 'fast-glob';
 import chalk from 'chalk';
-import type { ParserOptions, Schema, Pointer } from './types';
+import { ParserOptions, Schema, Pointer } from './types';
+import { ModuleCache } from './cache';
 
-const schemaCache = new Map<string, GraphQLSchema | Error>();
+const schemaCache = new ModuleCache<GraphQLSchema | Error>();
 const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(
   project: GraphQLProjectConfig,
-  options: Omit<ParserOptions, 'filePath'> = {},
+  schemaOptions?: ParserOptions['schemaOptions'],
 ): Schema {
-  const schemaKey = asArray(project.schema).sort().join(',');
+  const schemaKey = project.schema;
 
   if (!schemaKey) {
     return null;
   }
 
-  if (schemaCache.has(schemaKey)) {
-    return schemaCache.get(schemaKey);
+  const cache = schemaCache.get(schemaKey);
+
+  if (cache) {
+    return cache;
   }
 
   let schema: Schema;
@@ -28,21 +30,19 @@ export function getSchema(
   try {
     debug('Loading schema from %o', project.schema);
     schema = project.loadSchemaSync(project.schema, 'GraphQLSchema', {
-      ...options.schemaOptions,
+      ...schemaOptions,
       pluckConfig: project.extensions.pluckConfig,
     });
     if (debug.enabled) {
       debug('Schema loaded: %o', schema instanceof GraphQLSchema);
-      const schemaPaths = fastGlob.sync(project.schema as Pointer, {
-        absolute: true,
-      });
+      const schemaPaths = fg.sync(project.schema as Pointer, { absolute: true });
       debug('Schema pointers %O', schemaPaths);
     }
+    // Do not set error to cache, since cache reload will be done after some `lifetime` seconds
+    schemaCache.set(schemaKey, schema);
   } catch (error) {
     error.message = chalk.red(`Error while loading schema: ${error.message}`);
     schema = error as Error;
   }
-
-  schemaCache.set(schemaKey, schema);
   return schema;
 }
