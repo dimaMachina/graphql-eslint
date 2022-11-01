@@ -1,5 +1,11 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.13.0
+
+### Minor Changes
+
+- [#1222](https://github.com/B2o5T/graphql-eslint/pull/1222) [`cf59b0a`](https://github.com/B2o5T/graphql-eslint/commit/cf59b0a4b67fd958cf2f86238c48abbf3ce6ebf4) Thanks [@B2o5T](https://github.com/B2o5T)! - feat: reload schema/documents cache (only for **current project**) in VSCode
+
 ## 3.12.0
 
 ### Minor Changes
