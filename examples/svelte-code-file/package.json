@@ -13,7 +13,7 @@
     "@graphql-eslint/eslint-plugin": "3.13.0",
     "eslint": "8.26.0",
     "svelte": "3.52.0",
-    "svelte-eslint-parser": "0.19.3",
+    "svelte-eslint-parser": "0.20.0",
     "svelte2tsx": "0.5.20"
   }
 }
