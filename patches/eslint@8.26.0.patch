@@ -1,7 +1,7 @@
-diff --git a/node_modules/eslint/lib/linter/linter.js b/node_modules/eslint/lib/linter/linter.js
+diff --git a/lib/linter/linter.js b/lib/linter/linter.js
 index a29ce92..a574871 100644
---- a/node_modules/eslint/lib/linter/linter.js
-+++ b/node_modules/eslint/lib/linter/linter.js
+--- a/lib/linter/linter.js
++++ b/lib/linter/linter.js
 @@ -41,7 +41,8 @@ const { getRuleFromConfig } = require("../config/flat-config-helpers");
  const { FlatConfigArray } = require("../config/flat-config-array");
 
@@ -12,10 +12,10 @@ index a29ce92..a574871 100644
  const DEFAULT_PARSER_NAME = "espree";
  const DEFAULT_ECMA_VERSION = 5;
  const commentParser = new ConfigCommentParser();
-diff --git a/node_modules/eslint/lib/rule-tester/rule-tester.js b/node_modules/eslint/lib/rule-tester/rule-tester.js
+diff --git a/lib/rule-tester/rule-tester.js b/lib/rule-tester/rule-tester.js
 index 2af272b..738f80f 100644
---- a/node_modules/eslint/lib/rule-tester/rule-tester.js
-+++ b/node_modules/eslint/lib/rule-tester/rule-tester.js
+--- a/lib/rule-tester/rule-tester.js
++++ b/lib/rule-tester/rule-tester.js
 @@ -1005,11 +1005,12 @@ class RuleTester {
                      assert.strictEqual(result.output, item.output, "Output is incorrect.");
                  }

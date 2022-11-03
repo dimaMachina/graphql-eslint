@@ -16,6 +16,7 @@ jobs:
       npmTag: alpha
       buildScript: build
       nodeVersion: 18
+      packageManager: pnpm
     secrets:
       githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
       npmToken: ${{ secrets.NPM_TOKEN }}

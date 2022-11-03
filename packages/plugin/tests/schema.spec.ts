@@ -91,7 +91,7 @@ describe('schema', () => {
         });
         const error = getSchema(gqlConfig.getDefault()) as Error;
         expect(error).toBeInstanceOf(Error);
-        expect(error.message).toMatch('"authorization":"Bearer Foo"');
+        expect(error.message).toMatch('authorization: "Bearer Foo"');
       });
 
       // https://github.com/B2o5T/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
@@ -99,7 +99,7 @@ describe('schema', () => {
         const gqlConfig = loadGraphQLConfig({ schema: schemaUrl, filePath: '' });
         const error = getSchema(gqlConfig.getDefault(), schemaOptions) as Error;
         expect(error).toBeInstanceOf(Error);
-        expect(error.message).toMatch('"authorization":"Bearer Foo"');
+        expect(error.message).toMatch('authorization: "Bearer Foo"');
       });
     });
   });

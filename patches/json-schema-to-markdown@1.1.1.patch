@@ -1,7 +1,7 @@
-diff --git a/node_modules/json-schema-to-markdown/index.js b/node_modules/json-schema-to-markdown/index.js
+diff --git a/index.js b/index.js
 index 6b805f9..eea11d2 100644
---- a/node_modules/json-schema-to-markdown/index.js
-+++ b/node_modules/json-schema-to-markdown/index.js
+--- a/index.js
++++ b/index.js
 @@ -13,18 +13,14 @@ function generateElementTitle(octothorpes, elementName, elementType, isRequired,
  	if(elementName) {
  		text.push(' `' + elementName + '`')

@@ -3,14 +3,9 @@
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
-  "workspaces": [
-    "./packages/*",
-    "./examples/*"
-  ],
   "scripts": {
     "generate:configs": "ts-node scripts/generate-configs.ts",
     "generate:docs": "ts-node scripts/generate-docs.ts",
-    "postinstall": "patch-package",
     "lint": "eslint --ignore-path .gitignore --ext ts,js .",
     "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
     "prebuild": "rimraf packages/*/dist ./tsconfig.tsbuildinfo",
@@ -51,7 +46,6 @@
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
     "lint-staged": "13.0.3",
-    "patch-package": "6.5.0",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
     "ts-node": "10.9.1",
@@ -65,5 +59,12 @@
       "eslint",
       "prettier --write"
     ]
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint@8.26.0": "patches/eslint@8.26.0.patch",
+      "eslint-plugin-eslint-plugin@5.0.6": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
+      "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch"
+    }
   }
 }
