@@ -10,7 +10,7 @@
     "graphql": "16.6.0"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "3.13.0",
+    "@graphql-eslint/eslint-plugin": "workspace:*",
     "@vue/compiler-sfc": "3.2.41",
     "eslint": "8.26.0",
     "vue-eslint-parser": "9.1.0"
