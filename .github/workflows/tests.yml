@@ -39,7 +39,7 @@ jobs:
         run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
 
       - name: Install Dependencies
-        run: pnpm i
+        run: pnpm i --no-frozen-lockfile
 
       - name: Build
         run: pnpm build
