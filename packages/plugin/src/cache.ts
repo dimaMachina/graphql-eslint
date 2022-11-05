@@ -19,7 +19,10 @@ export class ModuleCache<T, K = any> {
     }
     const { lastSeen, result } = this.map.get(cacheKey);
     // check freshness
-    if (process.hrtime(lastSeen)[0] < settings.lifetime) {
+    if (
+      process.env.NODE /* don't check for ESLint CLI */ ||
+      process.hrtime(lastSeen)[0] < settings.lifetime
+    ) {
       return result;
     }
   }
