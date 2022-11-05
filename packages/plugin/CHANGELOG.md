@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.13.1
+
+### Patch Changes
+
+- [#1240](https://github.com/B2o5T/graphql-eslint/pull/1240) [`6a27f2a`](https://github.com/B2o5T/graphql-eslint/commit/6a27f2ab3153aa808774b1ced34215af055e1f32) Thanks [@renovate](https://github.com/apps/renovate)! - dependencies updates:
+
+  - Updated dependency [`@graphql-tools/utils@^9.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/utils/v/9.0.0) (from `^8.12.0`, in `dependencies`)
+
+- [#1251](https://github.com/B2o5T/graphql-eslint/pull/1251) [`cf659f3`](https://github.com/B2o5T/graphql-eslint/commit/cf659f3aa7569e3898bb45d6301611a73fff46b6) Thanks [@B2o5T](https://github.com/B2o5T)! - fix increased memory usage for ESLint CLI
+
 ## 3.13.0
 
 ### Minor Changes
