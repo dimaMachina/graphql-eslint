@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@types/babel__code-frame": "7.0.3",
-    "@types/eslint": "8.4.9",
+    "@types/eslint": "8.4.10",
     "@types/estree": "1.0.0",
     "@types/graphql-depth-limit": "1.1.3",
     "@types/json-schema": "7.0.11",

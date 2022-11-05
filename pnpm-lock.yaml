@@ -208,7 +208,7 @@ importers:
       '@graphql-tools/graphql-tag-pluck': ^7.3.6
       '@graphql-tools/utils': ^9.0.0
       '@types/babel__code-frame': 7.0.3
-      '@types/eslint': 8.4.9
+      '@types/eslint': 8.4.10
       '@types/estree': 1.0.0
       '@types/graphql-depth-limit': 1.1.3
       '@types/json-schema': 7.0.11
@@ -233,7 +233,7 @@ importers:
       lodash.lowercase: 4.3.0
     devDependencies:
       '@types/babel__code-frame': 7.0.3
-      '@types/eslint': 8.4.9
+      '@types/eslint': 8.4.10
       '@types/estree': 1.0.0
       '@types/graphql-depth-limit': 1.1.3
       '@types/json-schema': 7.0.11
@@ -2512,8 +2512,8 @@ packages:
     resolution: {integrity: sha512-EGlKlgMhnLt/cM4DbUSafFdrkeJoC9Mvnj0PUCU7tFmTjMjNRT957kXCx0wYm3JuEq4o4ZsS5vG+NlkM2DMd2A==}
     dev: true
 
-  /@types/eslint/8.4.9:
-    resolution: {integrity: sha512-jFCSo4wJzlHQLCpceUhUnXdrPuCNOjGFMQ8Eg6JXxlz3QaCKOb7eGi2cephQdM4XTYsNej69P9JDJ1zqNIbncQ==}
+  /@types/eslint/8.4.10:
+    resolution: {integrity: sha512-Sl/HOqN8NKPmhWo2VBEPm0nvHnu2LL3v9vKo8MEq0EtbJ4eVzGPl41VNPvn5E1i5poMk4/XD8UriLHpJvEP/Nw==}
     dependencies:
       '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
