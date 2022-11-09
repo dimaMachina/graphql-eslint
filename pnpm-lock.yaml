@@ -38,7 +38,7 @@ importers:
       eslint-config-standard: 17.0.0
       eslint-plugin-eslint-plugin: 5.0.6
       eslint-plugin-import: 2.26.0
-      eslint-plugin-n: 15.5.0
+      eslint-plugin-n: 15.5.1
       eslint-plugin-promise: 6.1.1
       eslint-plugin-unicorn: 44.0.2
       husky: 8.0.2
@@ -68,10 +68,10 @@ importers:
       enquirer: 2.3.6
       eslint: 8.26.0_v7lv2hbnxmm2b22qo3sob3rjvq
       eslint-config-prettier: 8.5.0_eslint@8.26.0
-      eslint-config-standard: 17.0.0_i3unwy7fzv3sbwjzvzvkg4x2ja
+      eslint-config-standard: 17.0.0_677bjaabkzok6stxnqf6xrnpyi
       eslint-plugin-eslint-plugin: 5.0.6_cdhdgvmsbh3fbusrlxsl6de2he_eslint@8.26.0
       eslint-plugin-import: 2.26.0_4czasfasypgspfipyojgzaoex4
-      eslint-plugin-n: 15.5.0_eslint@8.26.0
+      eslint-plugin-n: 15.5.1_eslint@8.26.0
       eslint-plugin-promise: 6.1.1_eslint@8.26.0
       eslint-plugin-unicorn: 44.0.2_eslint@8.26.0
       husky: 8.0.2
@@ -4016,7 +4016,7 @@ packages:
       eslint: 8.26.0_v7lv2hbnxmm2b22qo3sob3rjvq
     dev: true
 
-  /eslint-config-standard/17.0.0_i3unwy7fzv3sbwjzvzvkg4x2ja:
+  /eslint-config-standard/17.0.0_677bjaabkzok6stxnqf6xrnpyi:
     resolution: {integrity: sha512-/2ks1GKyqSOkH7JFvXJicu0iMpoojkwB+f5Du/1SC0PtBL+s8v30k9njRZ21pm2drKYm2342jFnGWzttxPmZVg==}
     peerDependencies:
       eslint: ^8.0.1
@@ -4026,7 +4026,7 @@ packages:
     dependencies:
       eslint: 8.26.0_v7lv2hbnxmm2b22qo3sob3rjvq
       eslint-plugin-import: 2.26.0_4czasfasypgspfipyojgzaoex4
-      eslint-plugin-n: 15.5.0_eslint@8.26.0
+      eslint-plugin-n: 15.5.1_eslint@8.26.0
       eslint-plugin-promise: 6.1.1_eslint@8.26.0
     dev: true
 
@@ -4122,8 +4122,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-n/15.5.0_eslint@8.26.0:
-    resolution: {integrity: sha512-VCqQiZDpdm1Q9grnvy+XsENZoXDgTLqPHRQwgl9qFNNgTKR4YEnQOMN0pFB/9TbmrQ88jdeTnqTcNwRvjqMOtg==}
+  /eslint-plugin-n/15.5.1_eslint@8.26.0:
+    resolution: {integrity: sha512-kAd+xhZm7brHoFLzKLB7/FGRFJNg/srmv67mqb7tto22rpr4wv/LV6RuXzAfv3jbab7+k1wi42PsIhGviywaaw==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       eslint: '>=7.0.0'
