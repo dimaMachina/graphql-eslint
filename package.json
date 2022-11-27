@@ -63,7 +63,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "eslint@8.26.0": "patches/eslint@8.26.0.patch",
+      "eslint@8.28.0": "patches/eslint@8.28.0.patch",
       "eslint-plugin-eslint-plugin@5.0.6": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch"
     }
