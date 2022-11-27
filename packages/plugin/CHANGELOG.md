@@ -4,58 +4,92 @@
 
 ### Patch Changes
 
-- [#1240](https://github.com/B2o5T/graphql-eslint/pull/1240) [`6a27f2a`](https://github.com/B2o5T/graphql-eslint/commit/6a27f2ab3153aa808774b1ced34215af055e1f32) Thanks [@renovate](https://github.com/apps/renovate)! - dependencies updates:
+- [#1240](https://github.com/B2o5T/graphql-eslint/pull/1240)
+  [`6a27f2a`](https://github.com/B2o5T/graphql-eslint/commit/6a27f2ab3153aa808774b1ced34215af055e1f32)
+  Thanks [@renovate](https://github.com/apps/renovate)! - dependencies updates:
 
-  - Updated dependency [`@graphql-tools/utils@^9.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/utils/v/9.0.0) (from `^8.12.0`, in `dependencies`)
+  - Updated dependency
+    [`@graphql-tools/utils@^9.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/utils/v/9.0.0)
+    (from `^8.12.0`, in `dependencies`)
 
-- [#1251](https://github.com/B2o5T/graphql-eslint/pull/1251) [`cf659f3`](https://github.com/B2o5T/graphql-eslint/commit/cf659f3aa7569e3898bb45d6301611a73fff46b6) Thanks [@B2o5T](https://github.com/B2o5T)! - fix increased memory usage for ESLint CLI
+- [#1251](https://github.com/B2o5T/graphql-eslint/pull/1251)
+  [`cf659f3`](https://github.com/B2o5T/graphql-eslint/commit/cf659f3aa7569e3898bb45d6301611a73fff46b6)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix increased memory usage for ESLint CLI
 
 ## 3.13.0
 
 ### Minor Changes
 
-- [#1222](https://github.com/B2o5T/graphql-eslint/pull/1222) [`cf59b0a`](https://github.com/B2o5T/graphql-eslint/commit/cf59b0a4b67fd958cf2f86238c48abbf3ce6ebf4) Thanks [@B2o5T](https://github.com/B2o5T)! - feat: reload schema/documents cache (only for **current project**) in VSCode
+- [#1222](https://github.com/B2o5T/graphql-eslint/pull/1222)
+  [`cf59b0a`](https://github.com/B2o5T/graphql-eslint/commit/cf59b0a4b67fd958cf2f86238c48abbf3ce6ebf4)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - feat: reload schema/documents cache (only for
+  **current project**) in VSCode
 
 ## 3.12.0
 
 ### Minor Changes
 
-- [#1200](https://github.com/B2o5T/graphql-eslint/pull/1200) [`f193b5e`](https://github.com/B2o5T/graphql-eslint/commit/f193b5e53d9b9f6683f40afac4a8a2e9f4e9f639) Thanks [@B2o5T](https://github.com/B2o5T)! - support extracting GraphQL documents from `*.vue`/`*.svelte` code-files
+- [#1200](https://github.com/B2o5T/graphql-eslint/pull/1200)
+  [`f193b5e`](https://github.com/B2o5T/graphql-eslint/commit/f193b5e53d9b9f6683f40afac4a8a2e9f4e9f639)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - support extracting GraphQL documents from
+  `*.vue`/`*.svelte` code-files
 
 ### Patch Changes
 
-- [#1201](https://github.com/B2o5T/graphql-eslint/pull/1201) [`ba26511`](https://github.com/B2o5T/graphql-eslint/commit/ba265113078345c0622b8eed6ce71dc82a705089) Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
+- [#1201](https://github.com/B2o5T/graphql-eslint/pull/1201)
+  [`ba26511`](https://github.com/B2o5T/graphql-eslint/commit/ba265113078345c0622b8eed6ce71dc82a705089)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
 
-  - Updated dependency [`graphql-config@^4.3.6` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.3.6) (from `^4.3.5`, in `dependencies`)
+  - Updated dependency
+    [`graphql-config@^4.3.6` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.3.6) (from
+    `^4.3.5`, in `dependencies`)
 
-- [#1198](https://github.com/B2o5T/graphql-eslint/pull/1198) [`2886adf`](https://github.com/B2o5T/graphql-eslint/commit/2886adf70e96a5c8b9a1ad320d35406691b7d487) Thanks [@B2o5T](https://github.com/B2o5T)! - fix passing pluck config via `graphql-config#extensions` field
-  rename `extensions.graphqlTagPluck` to `extensions.pluckConfig`
+- [#1198](https://github.com/B2o5T/graphql-eslint/pull/1198)
+  [`2886adf`](https://github.com/B2o5T/graphql-eslint/commit/2886adf70e96a5c8b9a1ad320d35406691b7d487)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix passing pluck config via
+  `graphql-config#extensions` field rename `extensions.graphqlTagPluck` to `extensions.pluckConfig`
   fix performance regression while using `processor: '@graphql-eslint/graphql'`
 
 ## 3.11.2
 
 ### Patch Changes
 
-- [#1170](https://github.com/B2o5T/graphql-eslint/pull/1170) [`0b8acdc`](https://github.com/B2o5T/graphql-eslint/commit/0b8acdc64cae77e7b09597dccdcb2b5c38ff3b6e) Thanks [@B2o5T](https://github.com/B2o5T)! - fix race condition of loading `loadGraphQLConfig()` when `processor.preprocess()` can be called before `parseForESLint()`
+- [#1170](https://github.com/B2o5T/graphql-eslint/pull/1170)
+  [`0b8acdc`](https://github.com/B2o5T/graphql-eslint/commit/0b8acdc64cae77e7b09597dccdcb2b5c38ff3b6e)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix race condition of loading `loadGraphQLConfig()`
+  when `processor.preprocess()` can be called before `parseForESLint()`
 
 ## 3.11.1
 
 ### Patch Changes
 
-- [#1168](https://github.com/B2o5T/graphql-eslint/pull/1168) [`9bc4e1b`](https://github.com/B2o5T/graphql-eslint/commit/9bc4e1b707439fb35fe4948a02f68bafc452bd8b) Thanks [@B2o5T](https://github.com/B2o5T)! - return code as-is in `preprocess` in case of parsing error, sort eslint/graphql-eslint errors in `postprocess` by line/column
+- [#1168](https://github.com/B2o5T/graphql-eslint/pull/1168)
+  [`9bc4e1b`](https://github.com/B2o5T/graphql-eslint/commit/9bc4e1b707439fb35fe4948a02f68bafc452bd8b)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - return code as-is in `preprocess` in case of parsing
+  error, sort eslint/graphql-eslint errors in `postprocess` by line/column
 
-- [#1165](https://github.com/B2o5T/graphql-eslint/pull/1165) [`eab5492`](https://github.com/B2o5T/graphql-eslint/commit/eab54927a327f1d8c0c9e30428da38884add4d32) Thanks [@B2o5T](https://github.com/B2o5T)! - fix race condition of `loadGraphQLConfig()`
+- [#1165](https://github.com/B2o5T/graphql-eslint/pull/1165)
+  [`eab5492`](https://github.com/B2o5T/graphql-eslint/commit/eab54927a327f1d8c0c9e30428da38884add4d32)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix race condition of `loadGraphQLConfig()`
 
-- [#1167](https://github.com/B2o5T/graphql-eslint/pull/1167) [`2f6c02f`](https://github.com/B2o5T/graphql-eslint/commit/2f6c02fe201b307fc8261d7fb0ac783a5586e66d) Thanks [@B2o5T](https://github.com/B2o5T)! - make `RuleDocsInfo` type optional
+- [#1167](https://github.com/B2o5T/graphql-eslint/pull/1167)
+  [`2f6c02f`](https://github.com/B2o5T/graphql-eslint/commit/2f6c02fe201b307fc8261d7fb0ac783a5586e66d)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - make `RuleDocsInfo` type optional
 
 ## 3.11.0
 
 ### Minor Changes
 
-- [#1156](https://github.com/B2o5T/graphql-eslint/pull/1156) [`6ac42cf`](https://github.com/B2o5T/graphql-eslint/commit/6ac42cfe59e77c07fde8ba7d1623c4a1677af221) Thanks [@JimmyPaolini](https://github.com/JimmyPaolini)! - Using configuration options for `graphql-tag-pluck` through `graphql-config`
-  Allow setup custom `globalGqlIdentifierName`, `modules.identifier` and `gqlMagicComment`
+- [#1156](https://github.com/B2o5T/graphql-eslint/pull/1156)
+  [`6ac42cf`](https://github.com/B2o5T/graphql-eslint/commit/6ac42cfe59e77c07fde8ba7d1623c4a1677af221)
+  Thanks [@JimmyPaolini](https://github.com/JimmyPaolini)! - Using configuration options for
+  `graphql-tag-pluck` through `graphql-config` Allow setup custom `globalGqlIdentifierName`,
+  `modules.identifier` and `gqlMagicComment`
 
-- [#1163](https://github.com/B2o5T/graphql-eslint/pull/1163) [`0d3fe5b`](https://github.com/B2o5T/graphql-eslint/commit/0d3fe5b1f021ed687e4285bd44f14f98a4287020) Thanks [@B2o5T](https://github.com/B2o5T)! - improve `RuleDocsInfo` type, set `description` and `url` as required fields
+- [#1163](https://github.com/B2o5T/graphql-eslint/pull/1163)
+  [`0d3fe5b`](https://github.com/B2o5T/graphql-eslint/commit/0d3fe5b1f021ed687e4285bd44f14f98a4287020)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - improve `RuleDocsInfo` type, set `description` and
+  `url` as required fields
 
 ## 3.10.7
 
@@ -73,7 +107,8 @@
 
 ### Patch Changes
 
-- 712a8fe: fix(selection-set-depth): fix `TypeError` from ESLint suggestions, don't provide suggestions for fragment that can be in a separate file
+- 712a8fe: fix(selection-set-depth): fix `TypeError` from ESLint suggestions, don't provide
+  suggestions for fragment that can be in a separate file
 - 01421ae: fix(no-unreachable-types): ignore directives with Request Definitions locations
 
 ## 3.10.4
@@ -126,18 +161,23 @@ Special thanks to @connorjs
 ### Patch Changes
 
 - 56d6ff3: [known-fragment-names]: fix when fragment used on interface and union
-- 3fe3761: print debug information with `DEBUG` env variable, example `DEBUG=graphql-eslint:* eslint .`
+- 3fe3761: print debug information with `DEBUG` env variable, example
+  `DEBUG=graphql-eslint:* eslint .`
 
 ## 3.9.0
 
 ### Minor Changes
 
 - 9c575c6: feat: add `definitions` option for `alphabetize` rule
-- bcbda42: feat: add suggestions for `require-id-when-available`, `require-deprecation-date`, `no-deprecated` and `no-scalar-result-type-on-mutation` rules
-- 1f697f0: feat: add suggestions for `no-duplicate-fields`, `no-hashtag-description` and `selection-set-depth` rules
-- db22ba5: feat: add suggestions for `no-typename-prefix`, `no-root-type`, `no-case-insensitive-enum-values-duplicates` rules
+- bcbda42: feat: add suggestions for `require-id-when-available`, `require-deprecation-date`,
+  `no-deprecated` and `no-scalar-result-type-on-mutation` rules
+- 1f697f0: feat: add suggestions for `no-duplicate-fields`, `no-hashtag-description` and
+  `selection-set-depth` rules
+- db22ba5: feat: add suggestions for `no-typename-prefix`, `no-root-type`,
+  `no-case-insensitive-enum-values-duplicates` rules
 - b04a8d5: feat: add `ignoreClientDirectives` option for `known-directives` rule
-- 63c5c78: feat: add suggestions for `description-style`, `input-name` and `no-anonymous-operations` rules
+- 63c5c78: feat: add suggestions for `description-style`, `input-name` and `no-anonymous-operations`
+  rules
 
 ### Patch Changes
 
@@ -181,7 +221,8 @@ Special thanks to @connorjs
 
 ### Minor Changes
 
-- 75ec7d1: fix false positive case in `possible-type-extension` rule when schema is separate into multiple files
+- 75ec7d1: fix false positive case in `possible-type-extension` rule when schema is separate into
+  multiple files
 
 ## 3.3.0
 
@@ -228,13 +269,15 @@ Special thanks to @connorjs
 
   Split `recommended` config to 2 modes: "schema" and "operations".
 
-  > This was done in order to use `recommended` and `all` configs in `schema-only` projects where it is not possible to provide operations.
+  > This was done in order to use `recommended` and `all` configs in `schema-only` projects where it
+  > is not possible to provide operations.
 
   `recommended` and `all` configs were divided to 4 configs:
 
   - `schema-recommended` - enables recommended rules for schema (SDL) development
   - `schema-all` - enables all rules for schema (SDL) development
-  - `operations-recommended` - enables recommended rules for consuming GraphQL (operations) development
+  - `operations-recommended` - enables recommended rules for consuming GraphQL (operations)
+    development
   - `operations-all` - enables all rules for consuming GraphQL (operations) development
 
   If you are migrating from v2 where `recommended` was introduced, please change the following:
@@ -257,7 +300,8 @@ Special thanks to @connorjs
 
   > If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
 
-  > If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll need `operations` rules.
+  > If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll
+  > need `operations` rules.
 
   > If you are in a monorepo project, you probably need both sets of rules.
 
@@ -276,7 +320,8 @@ Special thanks to @connorjs
 
   All rules that had a `avoid` prefix now have a `no` prefix.
 
-  Rules `avoid-operation-name-prefix` and `no-operation-name-suffix` were removed because the same things can be validated by `naming-convention` rule.
+  Rules `avoid-operation-name-prefix` and `no-operation-name-suffix` were removed because the same
+  things can be validated by `naming-convention` rule.
 
   ### Before
 
@@ -328,7 +373,8 @@ Special thanks to @connorjs
   - `DirectiveDefinition`
   - `VariableDefinition`
 
-  Option `QueryDefinition` was removed in favor of `AST` specific selector `FieldDefinition[parent.name.value=Query]`.
+  Option `QueryDefinition` was removed in favor of `AST` specific selector
+  `FieldDefinition[parent.name.value=Query]`.
 
   ### Before
 
@@ -433,7 +479,8 @@ Special thanks to @connorjs
 ### Minor Changes
 
 - 64c302c: feat: add new rule `no-root-type`
-- c837c99: fix false positive case in `no-unreachable-types` rule when directive on root schema is used
+- c837c99: fix false positive case in `no-unreachable-types` rule when directive on root schema is
+  used
 - 1914d6a: fix false positive case in `known-fragment-names` when import nested fragment
 
 ### Patch Changes
@@ -457,7 +504,8 @@ Special thanks to @connorjs
 ### Patch Changes
 
 - 86b3709: fix error report for `no-unused-fields` and `no-unreachable-types` rule
-- cf3cc4f: fix error report for `require-deprecation-reason` and `require-field-of-type-query-in-mutation-result` rule
+- cf3cc4f: fix error report for `require-deprecation-reason` and
+  `require-field-of-type-query-in-mutation-result` rule
 - 578b890: fix error report for `require-deprecation-date` rule
 - ebab010: fix error report for `alphabetize` rule
 - 7dacfe5: fix error report for `avoid-scalar-result-type-on-mutation` rule
@@ -466,7 +514,8 @@ Special thanks to @connorjs
 - 46f03f7: fix error report for `description-style` rule
 - b36a32c: fix error report for `strict-id-in-types` and `naming-convention` rule
 - 7aa8157: fix error report for `input-name` rule
-- a285de3: fix error report for `require-deprecation-reason` and `require-field-of-type-query-in-mutation-result` rule
+- a285de3: fix error report for `require-deprecation-reason` and
+  `require-field-of-type-query-in-mutation-result` rule
 - ced6789: fix error report for `no-deprecated` rule
 
 ## 2.3.1
@@ -592,7 +641,8 @@ Special thanks to @connorjs
 
   ### BREAKING CHANGE: Remove `prettier` Rule
 
-  Since prettier itself support now linting GraphQL code and syntax, we removed the need for this rule from this package.
+  Since prettier itself support now linting GraphQL code and syntax, we removed the need for this
+  rule from this package.
 
   For more information, see:
 
@@ -603,9 +653,11 @@ Special thanks to @connorjs
 
   ### BREAKING CHANGE: Remove deprecated rule `validate-against-schema`.
 
-  If you are using `validate-against-schema`, please remove it and specify the exact rules that you need.
+  If you are using `validate-against-schema`, please remove it and specify the exact rules that you
+  need.
 
-  As a drop-in replacement for the whole set of rules we had in `validate-against-schema`, you can use this:
+  As a drop-in replacement for the whole set of rules we had in `validate-against-schema`, you can
+  use this:
 
 ```
       "@graphql-eslint/executable-definitions": "error",
@@ -654,9 +706,11 @@ Special thanks to @connorjs
 
   Related #88
 
-  ESLint supports `text` directly, no need to use the hacky way. See https://github.com/eslint/eslint/blob/master/lib/linter/linter.js#L1298
+  ESLint supports `text` directly, no need to use the hacky way. See
+  https://github.com/eslint/eslint/blob/master/lib/linter/linter.js#L1298
 
-  Related `eslint-plugin-prettier`'s issue hae been fixed at https://github.com/prettier/eslint-plugin-prettier/pull/401
+  Related `eslint-plugin-prettier`'s issue hae been fixed at
+  https://github.com/prettier/eslint-plugin-prettier/pull/401
 
 - 6d4a356: Fix loadSiblings file location
 - 388a0bf: Support OperationDefinition in naming-convention rule
@@ -674,7 +728,8 @@ Special thanks to @connorjs
 
 ### Minor Changes
 
-- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique indentifier field unless being in exceptions
+- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique
+  indentifier field unless being in exceptions
 
 ## 0.8.1
 
@@ -689,7 +744,8 @@ Special thanks to @connorjs
 ### Minor Changes
 
 - 5b35139: Add options to input-name rule.
-- 46d759e: [naming-convention] Add forbiddenPrefixes and forbiddenSuffixes options. Add QueryDefinition which targets queries ( may break existing config if FieldDefinition is used )
+- 46d759e: [naming-convention] Add forbiddenPrefixes and forbiddenSuffixes options. Add
+  QueryDefinition which targets queries ( may break existing config if FieldDefinition is used )
 
 ### Patch Changes
 
@@ -716,7 +772,9 @@ Special thanks to @connorjs
 - b093f88: NEW RULE: selection-set-depth
 - 2df9134: NEW RULE: no-hashtag-description
 - 625f083: New rule: no-unreachable-types
-- 174a66f: [naming-convention] Allow each definition to take either a strng or object. Object can take the following keys: style (naming style), prefix (value must have prefix) and suffix (value must have suffix)
+- 174a66f: [naming-convention] Allow each definition to take either a strng or object. Object can
+  take the following keys: style (naming style), prefix (value must have prefix) and suffix (value
+  must have suffix)
 - d3ff768: NEW RULE: no-deprecated
 - 63cecdd: Added code file compatibility for graphql-config projects
 
@@ -740,7 +798,8 @@ Special thanks to @connorjs
 
 ### Patch Changes
 
-- e9d1d53: Fix issues with AST converter and root Document causing to invalid ASTs when rawNode is called
+- e9d1d53: Fix issues with AST converter and root Document causing to invalid ASTs when rawNode is
+  called
 - e9d1d53: Fix issue with siblings operations and getOperation method
 
 ## 0.5.0
@@ -762,8 +821,7 @@ Special thanks to @connorjs
 
 ### Patch Changes
 
-- c9bbdbe: Added `supportsAutofix` to the processor.
-  Fixes can be applied in JS,TS files now.
+- c9bbdbe: Added `supportsAutofix` to the processor. Fixes can be applied in JS,TS files now.
 
 ## 0.4.3
 

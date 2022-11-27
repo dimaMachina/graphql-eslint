@@ -1,8 +1,8 @@
 {
   "name": "@graphql-eslint/example-svelte-code-file",
   "version": "0.0.0",
-  "private": true,
   "author": "Dimitri POSTOLOV",
+  "private": true,
   "scripts": {
     "lint": "eslint ."
   },
