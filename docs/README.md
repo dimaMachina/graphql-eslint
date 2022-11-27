@@ -4,8 +4,10 @@ Each rule has emojis denoting:
 
 - 🚀 `graphql-eslint` rule
 - 🔮 `graphql-js` rule
-- 🔧 if some problems reported by the rule are automatically fixable by the `--fix` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option
-- 💡 if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+- 🔧 if some problems reported by the rule are automatically fixable by the `--fix`
+  [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option
+- 💡 if some problems reported by the rule are manually fixable by editor
+  [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 <!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->
 <!-- prettier-ignore-start -->
