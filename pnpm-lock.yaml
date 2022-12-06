@@ -46,7 +46,7 @@ importers:
       jest: 29.3.1
       jest-snapshot-serializer-raw: 1.2.0
       json-schema-to-markdown: 1.1.1
-      lint-staged: 13.0.4
+      lint-staged: 13.1.0
       prettier: 2.8.0
       rimraf: 3.0.2
       ts-node: 10.9.1
@@ -80,7 +80,7 @@ importers:
       jest: 29.3.1_odkjkoia5xunhxkdrka32ib6vi
       jest-snapshot-serializer-raw: 1.2.0
       json-schema-to-markdown: 1.1.1_beglqnggvhpsclgwbdw27hzvu4
-      lint-staged: 13.0.4_enquirer@2.3.6
+      lint-staged: 13.1.0_enquirer@2.3.6
       prettier: 2.8.0
       rimraf: 3.0.2
       ts-node: 10.9.1_ynn263r5r6vh5bdwgm4umyf45m
@@ -5734,8 +5734,8 @@ packages:
   /lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  /lint-staged/13.0.4_enquirer@2.3.6:
-    resolution: {integrity: sha512-HxlHCXoYRsq9QCby5wFozmZW00hMs/9e3l+/dz6Qr8Kle4UH0kJTdABAbqhzG+3pcG6QjL9kz7NgGBfph+a5dw==}
+  /lint-staged/13.1.0_enquirer@2.3.6:
+    resolution: {integrity: sha512-pn/sR8IrcF/T0vpWLilih8jmVouMlxqXxKuAojmbiGX5n/gDnz+abdPptlj0vYnbfE0SQNl3CY/HwtM0+yfOVQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
