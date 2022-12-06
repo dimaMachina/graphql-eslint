@@ -27,7 +27,7 @@
     "@swc/jest": "0.2.23",
     "@theguild/prettier-config": "1.0.0",
     "@types/dedent": "0.7.0",
-    "@types/jest": "29.2.3",
+    "@types/jest": "29.2.4",
     "@types/node": "18.11.11",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
