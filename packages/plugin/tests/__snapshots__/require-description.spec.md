@@ -204,6 +204,40 @@ exports[`Invalid #18 1`] = `
         |              ^^^^^ Description is required for \`Query.users\`.
 `;
 
+exports[`Invalid #19 1`] = `
+#### ⌨️ Code
+
+      1 | type Mutation { createUser(user: UserInput): User! }
+
+#### ⚙️ Options
+
+    {
+      "operationFieldDefinition": true
+    }
+
+#### ❌ Error
+
+    > 1 | type Mutation { createUser(user: UserInput): User! }
+        |                 ^^^^^^^^^^ Description is required for \`Mutation.createUser\`.
+`;
+
+exports[`Invalid #20 1`] = `
+#### ⌨️ Code
+
+      1 | type Subscription { users: [User!] }
+
+#### ⚙️ Options
+
+    {
+      "operationFieldDefinition": true
+    }
+
+#### ❌ Error
+
+    > 1 | type Subscription { users: [User!] }
+        |                     ^^^^^ Description is required for \`Subscription.users\`.
+`;
+
 exports[`should disable description for ObjectTypeDefinition 1`] = `
 #### ⌨️ Code
 

@@ -79,6 +79,9 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
           "Get user"
           user(id: ID!): User
         }
+        type User {
+          name: String
+        }
       `,
       options: [{ operationFieldDefinition: true }],
     },
@@ -224,6 +227,16 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       code: 'type Query { users: [User!]! }',
       options: [{ operationFieldDefinition: true }],
       errors: [{ message: 'Description is required for `Query.users`.' }],
+    },
+    {
+      code: 'type Mutation { createUser(user: UserInput): User! }',
+      options: [{ operationFieldDefinition: true }],
+      errors: [{ message: 'Description is required for `Mutation.createUser`.' }],
+    },
+    {
+      code: 'type Subscription { users: [User!] }',
+      options: [{ operationFieldDefinition: true }],
+      errors: [{ message: 'Description is required for `Subscription.users`.' }],
     },
   ],
 });

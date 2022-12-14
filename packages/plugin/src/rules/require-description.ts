@@ -163,7 +163,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     }
 
     if (operationFieldDefinition) {
-      kinds.add(':matches(ObjectTypeDefinition, ObjectTypeExtension) > FieldDefinition');
+      kinds.add(':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Query|Mutation|Subscription/] > FieldDefinition');
     }
 
     const selector = [...kinds].join(',');
