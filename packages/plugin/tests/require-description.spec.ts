@@ -73,6 +73,24 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       `,
       options: [OPERATION],
     },
+    {
+      code: /* GraphQL */ `
+        type Query {
+          "Get user"
+          user(id: ID!): User
+        }
+      `,
+      options: [{ operationFieldDefinition: true }],
+    },
+    {
+      code: /* GraphQL */ `
+        type Query {
+          "Get users"
+          user: [User!]!
+        }
+      `,
+      options: [{ operationFieldDefinition: true }],
+    },
   ],
   invalid: [
     {
@@ -196,6 +214,16 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       `,
       options: [OPERATION],
       errors: [{ message: 'Description is required for `query`.' }],
+    },
+    {
+      code: 'type Query { user(id: String!): User! }',
+      options: [{ operationFieldDefinition: true }],
+      errors: [{ message: 'Description is required for `Query.user`.' }],
+    },
+    {
+      code: 'type Query { users: [User!]! }',
+      options: [{ operationFieldDefinition: true }],
+      errors: [{ message: 'Description is required for `Query.users`.' }],
     },
   ],
 });

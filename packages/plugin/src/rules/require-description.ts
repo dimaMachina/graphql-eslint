@@ -20,9 +20,10 @@ type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
 
 export type RequireDescriptionRuleConfig = {
   types?: boolean;
+  operationFieldDefinition?: boolean;
 } & {
-  [key in AllowedKind]?: boolean;
-};
+    [key in AllowedKind]?: boolean;
+  };
 
 function getNodeName(node: SelectorNode) {
   const DisplayNodeNameMap = {
@@ -95,6 +96,16 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [{ operationFieldDefinition: true }],
+          code: /* GraphQL */ `
+            type Mutation {
+              "Create a new user"
+              createUser: User
+            }
+          `,
+        },
       ],
       configOptions: [
         {
@@ -121,6 +132,10 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             type: 'boolean',
             description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
+          operationFieldDefinition: {
+            type: 'boolean',
+            description: 'Definitions within Query, Mutation, and Subscription'
+          },
           ...Object.fromEntries(
             [...ALLOWED_KINDS].sort().map(kind => {
               let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
@@ -136,7 +151,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     },
   },
   create(context) {
-    const { types, ...restOptions } = context.options[0] || {};
+    const { types, operationFieldDefinition, ...restOptions } = context.options[0] || {};
 
     const kinds = new Set<string>(types ? TYPES_KINDS : []);
     for (const [kind, isEnabled] of Object.entries(restOptions)) {
@@ -145,6 +160,10 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
       } else {
         kinds.delete(kind);
       }
+    }
+
+    if (operationFieldDefinition) {
+      kinds.add(':matches(ObjectTypeDefinition, ObjectTypeExtension) > FieldDefinition');
     }
 
     const selector = [...kinds].join(',');

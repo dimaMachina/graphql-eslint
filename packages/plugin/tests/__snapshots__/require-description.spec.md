@@ -170,6 +170,40 @@ exports[`Invalid #10 1`] = `
         |             ^^^^^ Description is required for \`Role.ADMIN\`.
 `;
 
+exports[`Invalid #17 1`] = `
+#### ⌨️ Code
+
+      1 | type Query { user(id: String!): User! }
+
+#### ⚙️ Options
+
+    {
+      "operationFieldDefinition": true
+    }
+
+#### ❌ Error
+
+    > 1 | type Query { user(id: String!): User! }
+        |              ^^^^ Description is required for \`Query.user\`.
+`;
+
+exports[`Invalid #18 1`] = `
+#### ⌨️ Code
+
+      1 | type Query { users: [User!]! }
+
+#### ⚙️ Options
+
+    {
+      "operationFieldDefinition": true
+    }
+
+#### ❌ Error
+
+    > 1 | type Query { users: [User!]! }
+        |              ^^^^^ Description is required for \`Query.users\`.
+`;
+
 exports[`should disable description for ObjectTypeDefinition 1`] = `
 #### ⌨️ Code
 
