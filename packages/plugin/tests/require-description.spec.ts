@@ -89,7 +89,7 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       code: /* GraphQL */ `
         type Query {
           "Get users"
-          user: [User!]!
+          users: [User!]!
         }
       `,
       options: [{ operationFieldDefinition: true }],
