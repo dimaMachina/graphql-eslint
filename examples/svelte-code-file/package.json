@@ -13,7 +13,7 @@
     "@graphql-eslint/eslint-plugin": "workspace:*",
     "eslint": "8.28.0",
     "svelte": "3.54.0",
-    "svelte-eslint-parser": "0.22.1",
+    "svelte-eslint-parser": "0.22.2",
     "svelte2tsx": "0.5.22"
   }
 }
