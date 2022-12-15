@@ -20,7 +20,7 @@ type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
 
 export type RequireDescriptionRuleConfig = {
   types?: boolean;
-  operationFieldDefinition?: boolean;
+  rootField?: boolean;
 } & {
     [key in AllowedKind]?: boolean;
   };
@@ -98,11 +98,15 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
         },
         {
           title: 'Correct',
-          usage: [{ operationFieldDefinition: true }],
+          usage: [{ rootField: true }],
           code: /* GraphQL */ `
             type Mutation {
               "Create a new user"
               createUser: User
+            }
+
+            type User {
+              name: String
             }
           `,
         },
@@ -132,7 +136,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
             type: 'boolean',
             description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
-          operationFieldDefinition: {
+          rootField: {
             type: 'boolean',
             description: 'Definitions within Query, Mutation, and Subscription'
           },
@@ -151,7 +155,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     },
   },
   create(context) {
-    const { types, operationFieldDefinition, ...restOptions } = context.options[0] || {};
+    const { types, rootField, ...restOptions } = context.options[0] || {};
 
     const kinds = new Set<string>(types ? TYPES_KINDS : []);
     for (const [kind, isEnabled] of Object.entries(restOptions)) {
@@ -162,8 +166,10 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
       }
     }
 
-    if (operationFieldDefinition) {
-      kinds.add(':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Query|Mutation|Subscription/] > FieldDefinition');
+    const rootTypeNames = 'Query|Mutation|Subscription'
+
+    if (rootField) {
+      kinds.add(`:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${rootTypeNames})$/] > FieldDefinition`);
     }
 
     const selector = [...kinds].join(',');

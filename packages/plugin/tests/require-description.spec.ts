@@ -83,7 +83,7 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
           name: String
         }
       `,
-      options: [{ operationFieldDefinition: true }],
+      options: [{ rootField: true }],
     },
     {
       code: /* GraphQL */ `
@@ -92,7 +92,15 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
           users: [User!]!
         }
       `,
-      options: [{ operationFieldDefinition: true }],
+      options: [{ rootField: true }],
+    },
+    {
+      code: /* GraphQL */ `
+        type User {
+          name: String
+        }
+      `,
+      options: [{ rootField: true }],
     },
   ],
   invalid: [
@@ -220,22 +228,17 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
     },
     {
       code: 'type Query { user(id: String!): User! }',
-      options: [{ operationFieldDefinition: true }],
+      options: [{ rootField: true }],
       errors: [{ message: 'Description is required for `Query.user`.' }],
     },
     {
-      code: 'type Query { users: [User!]! }',
-      options: [{ operationFieldDefinition: true }],
-      errors: [{ message: 'Description is required for `Query.users`.' }],
-    },
-    {
       code: 'type Mutation { createUser(user: UserInput): User! }',
-      options: [{ operationFieldDefinition: true }],
+      options: [{ rootField: true }],
       errors: [{ message: 'Description is required for `Mutation.createUser`.' }],
     },
     {
       code: 'type Subscription { users: [User!] }',
-      options: [{ operationFieldDefinition: true }],
+      options: [{ rootField: true }],
       errors: [{ message: 'Description is required for `Subscription.users`.' }],
     },
   ],
