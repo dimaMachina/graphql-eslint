@@ -3,7 +3,8 @@
 - Category: `Operations`
 - Rule name: `@graphql-eslint/unique-operation-name`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `true`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Enforce unique operation names across your project.
 

@@ -1,13 +1,16 @@
 # `known-fragment-names`
 
-✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
+enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/known-fragment-names`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `true`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.
+A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in
+the same document.
 
 > This rule is a wrapper around a `graphql-js` validation function.
 

@@ -2,10 +2,11 @@ import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
-import { format } from 'prettier';
+import { format, resolveConfig } from 'prettier';
 import { asArray } from '@graphql-tools/utils';
 import { rules } from '../packages/plugin/src';
 
+const BR = '';
 const NBSP = '&nbsp;';
 const DOCS_PATH = resolve(process.cwd(), 'docs');
 
@@ -33,12 +34,18 @@ function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]
     alignRow.push(alignSymbol);
   }
 
-  return [headerRow.join('|'), alignRow.join('|'), ...dataSource.map(row => row.join('|'))].join(
-    '\n',
-  );
+  return [
+    '<!-- prettier-ignore-start -->',
+    headerRow.join('|'),
+    alignRow.join('|'),
+    ...dataSource.map(row => row.join('|')),
+    '<!-- prettier-ignore-end -->',
+  ].join('\n');
 }
 
-function generateDocs(): void {
+async function generateDocs(): Promise<void> {
+  const prettierConfig = await resolveConfig('./docs/README.md');
+
   const result = Object.entries(rules).map(([ruleName, rule]) => {
     const blocks: string[] = [`# \`${ruleName}\``];
     const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
@@ -59,11 +66,13 @@ function generateDocs(): void {
     }
     if (fixable) {
       blocks.push(
+        BR,
         `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
       );
     }
     if (hasSuggestions) {
       blocks.push(
+        BR,
         `${Icon.HAS_SUGGESTIONS} This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
       );
     }
@@ -75,6 +84,7 @@ function generateDocs(): void {
       `- Rule name: \`@graphql-eslint/${ruleName}\``,
       `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)`,
       `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)`,
+      BR,
       docs.description,
     );
 
@@ -95,7 +105,7 @@ function generateDocs(): void {
                   printWidth: Infinity,
                 }).replace(';\n', '')
               : "'error'";
-          blocks.push(`# eslint @graphql-eslint/${ruleName}: ${options}`);
+          blocks.push(`# eslint @graphql-eslint/${ruleName}: ${options}`, BR);
         }
         blocks.push(dedent(code), '```');
       }
@@ -158,6 +168,7 @@ function generateDocs(): void {
       `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
       `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
       `- ${Icon.HAS_SUGGESTIONS} if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
+      BR,
       '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
       printMarkdownTable(
         [
@@ -179,6 +190,7 @@ function generateDocs(): void {
       r.path,
       format(r.content, {
         parser: 'markdown',
+        ...prettierConfig,
       }),
     );
   }

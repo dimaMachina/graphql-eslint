@@ -1,13 +1,17 @@
 # `naming-convention`
 
-✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and `"plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and
+`"plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this
+rule.
 
-💡 This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+💡 This rule provides
+[suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 - Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/naming-convention`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Require names to follow specified conventions.
 
@@ -87,11 +91,14 @@ type Product {
 
 ## Config Schema
 
-> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.
+> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts
+> with allowed `ASTNode` names which are described below.
 >
-> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.
+> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the
+> generated AST to compose your selector.
 >
-> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.
+> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for
+> type `Query`.
 
 The schema defines the following properties:
 
@@ -122,7 +129,8 @@ The object must be one of the following types:
 
 ### `DirectiveDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
 
 The object must be one of the following types:
 
@@ -131,7 +139,8 @@ The object must be one of the following types:
 
 ### `EnumTypeDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
 
 The object must be one of the following types:
 
@@ -140,7 +149,8 @@ The object must be one of the following types:
 
 ### `EnumValueDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
 
 The object must be one of the following types:
 
@@ -149,7 +159,8 @@ The object must be one of the following types:
 
 ### `FieldDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
 
 The object must be one of the following types:
 
@@ -158,7 +169,8 @@ The object must be one of the following types:
 
 ### `FragmentDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#FragmentDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#FragmentDefinition).
 
 The object must be one of the following types:
 
@@ -167,7 +179,8 @@ The object must be one of the following types:
 
 ### `InputObjectTypeDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
 
 The object must be one of the following types:
 
@@ -176,7 +189,8 @@ The object must be one of the following types:
 
 ### `InputValueDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
 
 The object must be one of the following types:
 
@@ -185,7 +199,8 @@ The object must be one of the following types:
 
 ### `InterfaceTypeDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
 
 The object must be one of the following types:
 
@@ -194,7 +209,8 @@ The object must be one of the following types:
 
 ### `ObjectTypeDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
 
 The object must be one of the following types:
 
@@ -203,7 +219,8 @@ The object must be one of the following types:
 
 ### `OperationDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
 
 The object must be one of the following types:
 
@@ -212,7 +229,8 @@ The object must be one of the following types:
 
 ### `ScalarTypeDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
 
 The object must be one of the following types:
 
@@ -221,7 +239,8 @@ The object must be one of the following types:
 
 ### `UnionTypeDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
 
 The object must be one of the following types:
 
@@ -230,7 +249,8 @@ The object must be one of the following types:
 
 ### `VariableDefinition`
 
-Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#VariableDefinition).
+Read more about this kind on
+[spec.graphql.org](https://spec.graphql.org/October2021/#VariableDefinition).
 
 The object must be one of the following types:
 

@@ -3,9 +3,11 @@
 - Category: `Schema`
 - Rule name: `@graphql-eslint/require-field-of-type-query-in-mutation-result`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Allow the client in one round-trip not only to call mutation but also to get a wagon of data to update their application.
+Allow the client in one round-trip not only to call mutation but also to get a wagon of data to
+update their application.
 
 > Currently, no errors are reported for result type `union`, `interface` and `scalar`.
 

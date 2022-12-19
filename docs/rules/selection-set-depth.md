@@ -1,15 +1,19 @@
 # `selection-set-depth`
 
-✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
+enables this rule.
 
-💡 This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+💡 This rule provides
+[suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/selection-set-depth`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `true`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).
+Limit the complexity of the GraphQL operations solely by their depth. Based on
+[graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).
 
 ## Usage Examples
 
