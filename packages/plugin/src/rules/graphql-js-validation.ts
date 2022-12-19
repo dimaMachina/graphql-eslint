@@ -1,5 +1,5 @@
-import type { AST } from 'eslint';
-import type { JSONSchema4 } from 'json-schema';
+import { AST } from 'eslint';
+import { JSONSchema4 } from 'json-schema';
 import {
   Kind,
   DocumentNode,
@@ -13,7 +13,7 @@ import {
   DirectiveNode,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
-import type { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
 import {
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
@@ -133,11 +133,18 @@ const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
 };
 
 const validationToRule = (
-  ruleId: string,
-  ruleName: string,
+  {
+    ruleId,
+    ruleName,
+    getDocumentNode,
+    schema = [],
+  }: {
+    ruleId: string;
+    ruleName: string;
+    getDocumentNode?: GetDocumentNode;
+    schema?: JSONSchema4 | JSONSchema4[];
+  },
   docs: Omit<GraphQLESLintRule['meta']['docs'], 'url'>,
-  getDocumentNode?: GetDocumentNode,
-  schema: JSONSchema4 | JSONSchema4[] = [],
 ): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
   let ruleFn: null | ValidationRule = null;
 
@@ -190,33 +197,89 @@ const validationToRule = (
 
 export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.assign(
   {},
-  validationToRule('executable-definitions', 'ExecutableDefinitions', {
-    category: 'Operations',
-    description:
-      'A GraphQL document is only valid for execution if all definitions are either operation or fragment definitions.',
-    requiresSchema: true,
-  }),
-  validationToRule('fields-on-correct-type', 'FieldsOnCorrectType', {
-    category: 'Operations',
-    description:
-      'A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as `__typename`.',
-    requiresSchema: true,
-  }),
-  validationToRule('fragments-on-composite-type', 'FragmentsOnCompositeTypes', {
-    category: 'Operations',
-    description:
-      'Fragments use a type condition to determine if they apply, since fragments can only be spread into a composite type (object, interface, or union), the type condition must also be a composite type.',
-    requiresSchema: true,
-  }),
-  validationToRule('known-argument-names', 'KnownArgumentNames', {
-    category: ['Schema', 'Operations'],
-    description:
-      'A GraphQL field is only valid if all supplied arguments are defined by that field.',
-    requiresSchema: true,
-  }),
   validationToRule(
-    'known-directives',
-    'KnownDirectives',
+    {
+      ruleId: 'executable-definitions',
+      ruleName: 'ExecutableDefinitions',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL document is only valid for execution if all definitions are either operation or fragment definitions.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'fields-on-correct-type',
+      ruleName: 'FieldsOnCorrectType',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as `__typename`.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'fragments-on-composite-type',
+      ruleName: 'FragmentsOnCompositeTypes',
+    },
+    {
+      category: 'Operations',
+      description:
+        'Fragments use a type condition to determine if they apply, since fragments can only be spread into a composite type (object, interface, or union), the type condition must also be a composite type.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'known-argument-names',
+      ruleName: 'KnownArgumentNames',
+    },
+    {
+      category: ['Schema', 'Operations'],
+      description:
+        'A GraphQL field is only valid if all supplied arguments are defined by that field.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'known-directives',
+      ruleName: 'KnownDirectives',
+      getDocumentNode({ context, node: documentNode }) {
+        const { ignoreClientDirectives = [] } = context.options[0] || {};
+        if (ignoreClientDirectives.length === 0) {
+          return documentNode;
+        }
+
+        const filterDirectives = (node: { directives?: ReadonlyArray<DirectiveNode> }) => ({
+          ...node,
+          directives: node.directives.filter(
+            directive => !ignoreClientDirectives.includes(directive.name.value),
+          ),
+        });
+
+        return visit(documentNode, {
+          Field: filterDirectives,
+          OperationDefinition: filterDirectives,
+        });
+      },
+      schema: {
+        type: 'array',
+        maxItems: 1,
+        items: {
+          type: 'object',
+          additionalProperties: false,
+          required: ['ignoreClientDirectives'],
+          properties: {
+            ignoreClientDirectives: ARRAY_DEFAULT_OPTIONS,
+          },
+        },
+      },
+    },
     {
       category: ['Schema', 'Operations'],
       description:
@@ -236,40 +299,13 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
         },
       ],
     },
-    ({ context, node: documentNode }) => {
-      const { ignoreClientDirectives = [] } = context.options[0] || {};
-      if (ignoreClientDirectives.length === 0) {
-        return documentNode;
-      }
-
-      const filterDirectives = (node: { directives?: ReadonlyArray<DirectiveNode> }) => ({
-        ...node,
-        directives: node.directives.filter(
-          directive => !ignoreClientDirectives.includes(directive.name.value),
-        ),
-      });
-
-      return visit(documentNode, {
-        Field: filterDirectives,
-        OperationDefinition: filterDirectives,
-      });
-    },
-    {
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['ignoreClientDirectives'],
-        properties: {
-          ignoreClientDirectives: ARRAY_DEFAULT_OPTIONS,
-        },
-      },
-    },
   ),
   validationToRule(
-    'known-fragment-names',
-    'KnownFragmentNames',
+    {
+      ruleId: 'known-fragment-names',
+      ruleName: 'KnownFragmentNames',
+      getDocumentNode: handleMissingFragments,
+    },
     {
       category: 'Operations',
       description:
@@ -323,33 +359,59 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
         },
       ],
     },
-    handleMissingFragments,
   ),
-  validationToRule('known-type-names', 'KnownTypeNames', {
-    category: ['Schema', 'Operations'],
-    description:
-      'A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.',
-    requiresSchema: true,
-  }),
-  validationToRule('lone-anonymous-operation', 'LoneAnonymousOperation', {
-    category: 'Operations',
-    description:
-      'A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition.',
-    requiresSchema: true,
-  }),
-  validationToRule('lone-schema-definition', 'LoneSchemaDefinition', {
-    category: 'Schema',
-    description: 'A GraphQL document is only valid if it contains only one schema definition.',
-  }),
-  validationToRule('no-fragment-cycles', 'NoFragmentCycles', {
-    category: 'Operations',
-    description:
-      'A GraphQL fragment is only valid when it does not have cycles in fragments usage.',
-    requiresSchema: true,
-  }),
   validationToRule(
-    'no-undefined-variables',
-    'NoUndefinedVariables',
+    {
+      ruleId: 'known-type-names',
+      ruleName: 'KnownTypeNames',
+    },
+    {
+      category: ['Schema', 'Operations'],
+      description:
+        'A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'lone-anonymous-operation',
+      ruleName: 'LoneAnonymousOperation',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'lone-schema-definition',
+      ruleName: 'LoneSchemaDefinition',
+    },
+    {
+      category: 'Schema',
+      description: 'A GraphQL document is only valid if it contains only one schema definition.',
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'no-fragment-cycles',
+      ruleName: 'NoFragmentCycles',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL fragment is only valid when it does not have cycles in fragments usage.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'no-undefined-variables',
+      ruleName: 'NoUndefinedVariables',
+      getDocumentNode: handleMissingFragments,
+    },
     {
       category: 'Operations',
       description:
@@ -357,11 +419,52 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       requiresSchema: true,
       requiresSiblings: true,
     },
-    handleMissingFragments,
   ),
   validationToRule(
-    'no-unused-fragments',
-    'NoUnusedFragments',
+    {
+      ruleId: 'no-unused-fragments',
+      ruleName: 'NoUnusedFragments',
+      getDocumentNode: ({ ruleId, context, node }) => {
+        const siblings = requireSiblingsOperations(ruleId, context);
+        const FilePathToDocumentsMap = [
+          ...siblings.getOperations(),
+          ...siblings.getFragments(),
+        ].reduce<Record<string, ExecutableDefinitionNode[]>>((map, { filePath, document }) => {
+          map[filePath] ??= [];
+          map[filePath].push(document);
+          return map;
+        }, Object.create(null));
+
+        const getParentNode = (currentFilePath: string, node: DocumentNode): DocumentNode => {
+          const { fragmentDefs } = getFragmentDefsAndFragmentSpreads(node);
+          if (fragmentDefs.size === 0) {
+            return node;
+          }
+          // skip iteration over documents for current filepath
+          delete FilePathToDocumentsMap[currentFilePath];
+
+          for (const [filePath, documents] of Object.entries(FilePathToDocumentsMap)) {
+            const missingFragments = getMissingFragments({
+              kind: Kind.DOCUMENT,
+              definitions: documents,
+            });
+            const isCurrentFileImportFragment = missingFragments.some(fragment =>
+              fragmentDefs.has(fragment),
+            );
+
+            if (isCurrentFileImportFragment) {
+              return getParentNode(filePath, {
+                kind: Kind.DOCUMENT,
+                definitions: [...node.definitions, ...documents],
+              });
+            }
+          }
+          return node;
+        };
+
+        return getParentNode(context.getFilename(), node);
+      },
+    },
     {
       category: 'Operations',
       description:
@@ -369,50 +472,13 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       requiresSchema: true,
       requiresSiblings: true,
     },
-    ({ ruleId, context, node }) => {
-      const siblings = requireSiblingsOperations(ruleId, context);
-      const FilePathToDocumentsMap = [
-        ...siblings.getOperations(),
-        ...siblings.getFragments(),
-      ].reduce<Record<string, ExecutableDefinitionNode[]>>((map, { filePath, document }) => {
-        map[filePath] ??= [];
-        map[filePath].push(document);
-        return map;
-      }, Object.create(null));
-
-      const getParentNode = (currentFilePath: string, node: DocumentNode): DocumentNode => {
-        const { fragmentDefs } = getFragmentDefsAndFragmentSpreads(node);
-        if (fragmentDefs.size === 0) {
-          return node;
-        }
-        // skip iteration over documents for current filepath
-        delete FilePathToDocumentsMap[currentFilePath];
-
-        for (const [filePath, documents] of Object.entries(FilePathToDocumentsMap)) {
-          const missingFragments = getMissingFragments({
-            kind: Kind.DOCUMENT,
-            definitions: documents,
-          });
-          const isCurrentFileImportFragment = missingFragments.some(fragment =>
-            fragmentDefs.has(fragment),
-          );
-
-          if (isCurrentFileImportFragment) {
-            return getParentNode(filePath, {
-              kind: Kind.DOCUMENT,
-              definitions: [...node.definitions, ...documents],
-            });
-          }
-        }
-        return node;
-      };
-
-      return getParentNode(context.getFilename(), node);
-    },
   ),
   validationToRule(
-    'no-unused-variables',
-    'NoUnusedVariables',
+    {
+      ruleId: 'no-unused-variables',
+      ruleName: 'NoUnusedVariables',
+      getDocumentNode: handleMissingFragments,
+    },
     {
       category: 'Operations',
       description:
@@ -420,104 +486,211 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       requiresSchema: true,
       requiresSiblings: true,
     },
-    handleMissingFragments,
   ),
-  validationToRule('overlapping-fields-can-be-merged', 'OverlappingFieldsCanBeMerged', {
-    category: 'Operations',
-    description:
-      'A selection set is only valid if all fields (including spreading any fragments) either correspond to distinct response names or can be merged without ambiguity.',
-    requiresSchema: true,
-  }),
-  validationToRule('possible-fragment-spread', 'PossibleFragmentSpreads', {
-    category: 'Operations',
-    description:
-      'A fragment spread is only valid if the type condition could ever possibly be true: if there is a non-empty intersection of the possible parent types, and possible types which pass the type condition.',
-    requiresSchema: true,
-  }),
-  validationToRule('possible-type-extension', 'PossibleTypeExtensions', {
-    category: 'Schema',
-    description: 'A type extension is only valid if the type is defined and has the same kind.',
-    // TODO: add in graphql-eslint v4
-    recommended: false,
-    requiresSchema: true,
-    isDisabledForAllConfig: true,
-  }),
-  validationToRule('provided-required-arguments', 'ProvidedRequiredArguments', {
-    category: ['Schema', 'Operations'],
-    description:
-      'A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.',
-    requiresSchema: true,
-  }),
-  validationToRule('scalar-leafs', 'ScalarLeafs', {
-    category: 'Operations',
-    description:
-      'A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.',
-    requiresSchema: true,
-  }),
-  validationToRule('one-field-subscriptions', 'SingleFieldSubscriptions', {
-    category: 'Operations',
-    description: 'A GraphQL subscription is valid only if it contains a single root field.',
-    requiresSchema: true,
-  }),
-  validationToRule('unique-argument-names', 'UniqueArgumentNames', {
-    category: 'Operations',
-    description:
-      'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.',
-    requiresSchema: true,
-  }),
-  validationToRule('unique-directive-names', 'UniqueDirectiveNames', {
-    category: 'Schema',
-    description: 'A GraphQL document is only valid if all defined directives have unique names.',
-  }),
-  validationToRule('unique-directive-names-per-location', 'UniqueDirectivesPerLocation', {
-    category: ['Schema', 'Operations'],
-    description:
-      'A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.',
-    requiresSchema: true,
-  }),
-  validationToRule('unique-enum-value-names', 'UniqueEnumValueNames', {
-    category: 'Schema',
-    description: 'A GraphQL enum type is only valid if all its values are uniquely named.',
-    recommended: false,
-    isDisabledForAllConfig: true,
-  }),
-  validationToRule('unique-field-definition-names', 'UniqueFieldDefinitionNames', {
-    category: 'Schema',
-    description: 'A GraphQL complex type is only valid if all its fields are uniquely named.',
-  }),
-  validationToRule('unique-input-field-names', 'UniqueInputFieldNames', {
-    category: 'Operations',
-    description:
-      'A GraphQL input object value is only valid if all supplied fields are uniquely named.',
-  }),
-  validationToRule('unique-operation-types', 'UniqueOperationTypes', {
-    category: 'Schema',
-    description: 'A GraphQL document is only valid if it has only one type per operation.',
-  }),
-  validationToRule('unique-type-names', 'UniqueTypeNames', {
-    category: 'Schema',
-    description: 'A GraphQL document is only valid if all defined types have unique names.',
-  }),
-  validationToRule('unique-variable-names', 'UniqueVariableNames', {
-    category: 'Operations',
-    description: 'A GraphQL operation is only valid if all its variables are uniquely named.',
-    requiresSchema: true,
-  }),
-  validationToRule('value-literals-of-correct-type', 'ValuesOfCorrectType', {
-    category: 'Operations',
-    description:
-      'A GraphQL document is only valid if all value literals are of the type expected at their position.',
-    requiresSchema: true,
-  }),
-  validationToRule('variables-are-input-types', 'VariablesAreInputTypes', {
-    category: 'Operations',
-    description:
-      'A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).',
-    requiresSchema: true,
-  }),
-  validationToRule('variables-in-allowed-position', 'VariablesInAllowedPosition', {
-    category: 'Operations',
-    description: 'Variables passed to field arguments conform to type.',
-    requiresSchema: true,
-  }),
+  validationToRule(
+    {
+      ruleId: 'overlapping-fields-can-be-merged',
+      ruleName: 'OverlappingFieldsCanBeMerged',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A selection set is only valid if all fields (including spreading any fragments) either correspond to distinct response names or can be merged without ambiguity.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'possible-fragment-spread',
+      ruleName: 'PossibleFragmentSpreads',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A fragment spread is only valid if the type condition could ever possibly be true: if there is a non-empty intersection of the possible parent types, and possible types which pass the type condition.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'possible-type-extension',
+      ruleName: 'PossibleTypeExtensions',
+    },
+    {
+      category: 'Schema',
+      description: 'A type extension is only valid if the type is defined and has the same kind.',
+      // TODO: add in graphql-eslint v4
+      recommended: false,
+      requiresSchema: true,
+      isDisabledForAllConfig: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'provided-required-arguments',
+      ruleName: 'ProvidedRequiredArguments',
+    },
+    {
+      category: ['Schema', 'Operations'],
+      description:
+        'A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'scalar-leafs',
+      ruleName: 'ScalarLeafs',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'one-field-subscriptions',
+      ruleName: 'SingleFieldSubscriptions',
+    },
+    {
+      category: 'Operations',
+      description: 'A GraphQL subscription is valid only if it contains a single root field.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-argument-names',
+      ruleName: 'UniqueArgumentNames',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-directive-names',
+      ruleName: 'UniqueDirectiveNames',
+    },
+    {
+      category: 'Schema',
+      description: 'A GraphQL document is only valid if all defined directives have unique names.',
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-directive-names-per-location',
+      ruleName: 'UniqueDirectivesPerLocation',
+    },
+    {
+      category: ['Schema', 'Operations'],
+      description:
+        'A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-enum-value-names',
+      ruleName: 'UniqueEnumValueNames',
+    },
+    {
+      category: 'Schema',
+      description: 'A GraphQL enum type is only valid if all its values are uniquely named.',
+      recommended: false,
+      isDisabledForAllConfig: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-field-definition-names',
+      ruleName: 'UniqueFieldDefinitionNames',
+    },
+    {
+      category: 'Schema',
+      description: 'A GraphQL complex type is only valid if all its fields are uniquely named.',
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-input-field-names',
+      ruleName: 'UniqueInputFieldNames',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL input object value is only valid if all supplied fields are uniquely named.',
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-operation-types',
+      ruleName: 'UniqueOperationTypes',
+    },
+    {
+      category: 'Schema',
+      description: 'A GraphQL document is only valid if it has only one type per operation.',
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-type-names',
+      ruleName: 'UniqueTypeNames',
+    },
+    {
+      category: 'Schema',
+      description: 'A GraphQL document is only valid if all defined types have unique names.',
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'unique-variable-names',
+      ruleName: 'UniqueVariableNames',
+    },
+    {
+      category: 'Operations',
+      description: 'A GraphQL operation is only valid if all its variables are uniquely named.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'value-literals-of-correct-type',
+      ruleName: 'ValuesOfCorrectType',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL document is only valid if all value literals are of the type expected at their position.',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'variables-are-input-types',
+      ruleName: 'VariablesAreInputTypes',
+    },
+    {
+      category: 'Operations',
+      description:
+        'A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).',
+      requiresSchema: true,
+    },
+  ),
+  validationToRule(
+    {
+      ruleId: 'variables-in-allowed-position',
+      ruleName: 'VariablesInAllowedPosition',
+    },
+    {
+      category: 'Operations',
+      description: 'Variables passed to field arguments conform to type.',
+      requiresSchema: true,
+    },
+  ),
 );
