@@ -411,7 +411,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       category: 'Operations',
       description:
-        'A GraphQL document is only valid if when it contains an anonymous operation (the query short-hand) that it contains only that one operation definition.',
+        'A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if it contains only that one operation definition.',
       requiresSchema: true,
     },
   ),
