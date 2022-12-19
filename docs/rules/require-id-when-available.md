@@ -67,8 +67,8 @@ The schema defines the following properties:
 
 The object must be one of the following types:
 
-* `asString`
-* `asArray`
+- `asString`
+- `asArray`
 
 Default: `"id"`
 

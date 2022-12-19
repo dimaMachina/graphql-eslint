@@ -37,7 +37,8 @@ type MyType {
 # eslint @graphql-eslint/require-deprecation-reason: 'error'
 
 type MyType {
-  name: String @deprecated(reason: "no longer relevant, please use fullName field")
+  name: String
+    @deprecated(reason: "no longer relevant, please use fullName field")
 }
 ```
 

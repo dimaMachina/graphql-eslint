@@ -99,29 +99,29 @@ This element must be one of the following enum values:
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `mutation`
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `subscription`
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `fragment`
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ---
 

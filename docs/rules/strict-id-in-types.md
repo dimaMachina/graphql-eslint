@@ -71,15 +71,13 @@ The object is an array with all elements of the type `string`.
 Default:
 
 ```json
-[
-  "id"
-]
+["id"]
 ```
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `acceptedIdTypes` (array)
 
@@ -88,15 +86,13 @@ The object is an array with all elements of the type `string`.
 Default:
 
 ```json
-[
-  "ID"
-]
+["ID"]
 ```
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `exceptions` (object)
 
@@ -110,8 +106,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 #### `suffixes` (array)
 
@@ -121,8 +117,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ## Resources
 

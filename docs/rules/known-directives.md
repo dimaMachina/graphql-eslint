@@ -35,8 +35,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ## Resources
 

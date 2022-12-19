@@ -107,8 +107,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `values` (array)
 
@@ -120,8 +120,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `selections` (array)
 
@@ -134,8 +134,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `variables` (array)
 
@@ -147,8 +147,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `arguments` (array)
 
@@ -163,8 +163,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `definitions` (boolean)
 

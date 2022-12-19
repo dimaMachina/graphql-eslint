@@ -44,8 +44,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ## Resources
 

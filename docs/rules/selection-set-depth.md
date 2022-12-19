@@ -19,8 +19,10 @@ Limit the complexity of the GraphQL operations solely by their depth. Based on [
 # eslint @graphql-eslint/selection-set-depth: ['error', { maxDepth: 1 }]
 
 query deep2 {
-  viewer { # Level 0
-    albums { # Level 1
+  viewer {
+    # Level 0
+    albums {
+      # Level 1
       title # Level 2
     }
   }
@@ -33,8 +35,10 @@ query deep2 {
 # eslint @graphql-eslint/selection-set-depth: ['error', { maxDepth: 4 }]
 
 query deep2 {
-  viewer { # Level 0
-    albums { # Level 1
+  viewer {
+    # Level 0
+    albums {
+      # Level 1
       title # Level 2
     }
   }
@@ -47,8 +51,10 @@ query deep2 {
 # eslint @graphql-eslint/selection-set-depth: ['error', { maxDepth: 1, ignore: ['albums'] }]
 
 query deep2 {
-  viewer { # Level 0
-    albums { # Level 1
+  viewer {
+    # Level 0
+    albums {
+      # Level 1
       title # Level 2
     }
   }
@@ -67,8 +73,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ## Resources
 

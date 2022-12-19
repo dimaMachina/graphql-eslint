@@ -108,8 +108,8 @@ Includes:
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `Argument`
 
@@ -117,8 +117,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `DirectiveDefinition`
 
@@ -126,8 +126,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `EnumTypeDefinition`
 
@@ -135,8 +135,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `EnumValueDefinition`
 
@@ -144,8 +144,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `FieldDefinition`
 
@@ -153,8 +153,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `FragmentDefinition`
 
@@ -162,8 +162,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `InputObjectTypeDefinition`
 
@@ -171,8 +171,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `InputValueDefinition`
 
@@ -180,8 +180,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `InterfaceTypeDefinition`
 
@@ -189,8 +189,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `ObjectTypeDefinition`
 
@@ -198,8 +198,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `OperationDefinition`
 
@@ -207,8 +207,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `ScalarTypeDefinition`
 
@@ -216,8 +216,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `UnionTypeDefinition`
 
@@ -225,8 +225,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `VariableDefinition`
 
@@ -234,8 +234,8 @@ Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `allowLeadingUnderscore` (boolean)
 
@@ -278,8 +278,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `forbiddenSuffixes` (array)
 
@@ -287,8 +287,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `ignorePattern` (string)
 
