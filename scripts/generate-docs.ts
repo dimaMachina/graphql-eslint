@@ -1,5 +1,6 @@
-import { writeFileSync } from 'fs';
-import { resolve } from 'path';
+/* eslint-disable no-console */
+import { writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import { format, resolveConfig } from 'prettier';
@@ -185,17 +186,22 @@ async function generateDocs(): Promise<void> {
     ].join('\n'),
   });
 
-  for (const r of result) {
-    writeFileSync(
-      r.path,
-      format(r.content, {
-        parser: 'markdown',
-        ...prettierConfig,
-      }),
-    );
-  }
-  // eslint-disable-next-line no-console
+  await Promise.all(
+    result.map(r =>
+      writeFile(
+        r.path,
+        format(r.content, {
+          parser: 'markdown',
+          ...prettierConfig,
+        }),
+      ),
+    ),
+  );
+
   console.log('✅  Documentation generated');
 }
 
-generateDocs();
+console.time('done');
+generateDocs().then(() => {
+  console.timeEnd('done');
+});
