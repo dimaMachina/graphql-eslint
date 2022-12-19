@@ -28,4 +28,8 @@ exports[`should highlight selection on single line 1`] = `
 
     > 1 | fragment UserFields on User { id bad age }
         |                                  ^^^ Cannot query field "bad" on type "User". Did you mean "id"?
+
+#### 💡 Suggestion: Rename to \`id\`
+
+    1 | fragment UserFields on User { id id age }
 `;

@@ -22,12 +22,19 @@ import {
   ARRAY_DEFAULT_OPTIONS,
 } from '../utils';
 
-function validateDocument(
-  context: GraphQLESLintRuleContext,
-  schema: GraphQLSchema | null = null,
-  documentNode: DocumentNode,
-  rule: ValidationRule,
-): void {
+function validateDocument({
+  context,
+  schema = null,
+  documentNode,
+  rule,
+  hasDidYouMeanSuggestions,
+}: {
+  context: GraphQLESLintRuleContext;
+  schema: GraphQLSchema | null;
+  documentNode: DocumentNode;
+  rule: ValidationRule;
+  hasDidYouMeanSuggestions: boolean;
+}): void {
   if (documentNode.definitions.length === 0) {
     return;
   }
@@ -55,10 +62,22 @@ function validateDocument(
             ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc
             : token.loc;
       }
+      const didYouMeanContent = error.message.match(/Did you mean (?<content>.*)\?$/)?.groups
+        .content;
+      const matches = didYouMeanContent ? [...didYouMeanContent.matchAll(/"(?<name>[^"]*)"/g)] : [];
 
       context.report({
         loc,
         message: error.message,
+        suggest: hasDidYouMeanSuggestions
+          ? matches.map(match => {
+              const { name } = match.groups;
+              return {
+                desc: `Rename to \`${name}\``,
+                fix: fixer => fixer.replaceText(token, name),
+              };
+            })
+          : [],
       });
     }
   } catch (e) {
@@ -138,11 +157,13 @@ const validationToRule = (
     ruleName,
     getDocumentNode,
     schema = [],
+    hasDidYouMeanSuggestions,
   }: {
     ruleId: string;
     ruleName: string;
     getDocumentNode?: GetDocumentNode;
     schema?: JSONSchema4 | JSONSchema4[];
+    hasDidYouMeanSuggestions?: boolean;
   },
   docs: Omit<GraphQLESLintRule['meta']['docs'], 'url'>,
 ): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
@@ -168,6 +189,7 @@ const validationToRule = (
           description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
         },
         schema,
+        hasSuggestions: hasDidYouMeanSuggestions,
       },
       create(context) {
         if (!ruleFn) {
@@ -187,7 +209,13 @@ const validationToRule = (
               ? getDocumentNode({ ruleId, context, node: node.rawNode() })
               : node.rawNode();
 
-            validateDocument(context, schema, documentNode, ruleFn);
+            validateDocument({
+              context,
+              schema,
+              documentNode,
+              rule: ruleFn,
+              hasDidYouMeanSuggestions,
+            });
           },
         };
       },
@@ -213,6 +241,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'fields-on-correct-type',
       ruleName: 'FieldsOnCorrectType',
+      hasDidYouMeanSuggestions: true,
     },
     {
       category: 'Operations',
@@ -237,6 +266,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'known-argument-names',
       ruleName: 'KnownArgumentNames',
+      hasDidYouMeanSuggestions: true,
     },
     {
       category: ['Schema', 'Operations'],
@@ -364,6 +394,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'known-type-names',
       ruleName: 'KnownTypeNames',
+      hasDidYouMeanSuggestions: true,
     },
     {
       category: ['Schema', 'Operations'],
@@ -515,6 +546,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'possible-type-extension',
       ruleName: 'PossibleTypeExtensions',
+      hasDidYouMeanSuggestions: true,
     },
     {
       category: 'Schema',
@@ -541,6 +573,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'scalar-leafs',
       ruleName: 'ScalarLeafs',
+      hasDidYouMeanSuggestions: true,
     },
     {
       category: 'Operations',
@@ -662,6 +695,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'value-literals-of-correct-type',
       ruleName: 'ValuesOfCorrectType',
+      hasDidYouMeanSuggestions: true,
     },
     {
       category: 'Operations',
