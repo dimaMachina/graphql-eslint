@@ -28,7 +28,6 @@ const DEFAULT_ID_FIELD_NAME = 'id';
 export const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
     type: 'suggestion',
-    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions
     hasSuggestions: true,
     docs: {
       category: 'Operations',
