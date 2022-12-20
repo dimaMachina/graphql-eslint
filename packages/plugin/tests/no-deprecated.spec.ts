@@ -1,6 +1,5 @@
-import { GraphQLRuleTester } from '../src/testkit';
-import rule from '../src/rules/no-deprecated';
-import { ParserOptions } from '../src/types';
+import { GraphQLRuleTester, ParserOptions } from '../src';
+import { rule } from '../src/rules/no-deprecated';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {

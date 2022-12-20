@@ -1,9 +1,9 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { RelayArgumentsConfig } from '../src/rules/relay-arguments';
+import { rule, RelayArgumentsConfig } from '../src/rules/relay-arguments';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string): { code: string; parserOptions: ParserOptions } {
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {
     code,
     parserOptions: {

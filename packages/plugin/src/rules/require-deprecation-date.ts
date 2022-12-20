@@ -10,7 +10,7 @@ const MESSAGE_INVALID_FORMAT = 'MESSAGE_INVALID_FORMAT';
 const MESSAGE_INVALID_DATE = 'MESSAGE_INVALID_DATE';
 const MESSAGE_CAN_BE_REMOVED = 'MESSAGE_CAN_BE_REMOVED';
 
-const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
+export const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -125,5 +125,3 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
     };
   },
 };
-
-export default rule;

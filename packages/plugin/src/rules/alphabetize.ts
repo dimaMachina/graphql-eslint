@@ -57,7 +57,7 @@ export type AlphabetizeConfig = {
   definitions?: boolean;
 };
 
-const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
+export const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
   meta: {
     type: 'suggestion',
     fixable: 'code',
@@ -402,5 +402,3 @@ const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     return listeners;
   },
 };
-
-export default rule;

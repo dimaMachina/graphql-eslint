@@ -50,6 +50,21 @@ mutation createUser {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/require-description: ['error', { rootField: true }]
+
+type Mutation {
+  "Create a new user"
+  createUser: User
+}
+
+type User {
+  name: String
+}
+```
+
 ## Config Schema
 
 The schema defines the following properties:
@@ -64,6 +79,10 @@ Includes:
 - `ScalarTypeDefinition`
 - `InputObjectTypeDefinition`
 - `UnionTypeDefinition`
+
+### `rootField` (boolean)
+
+Definitions within `Query`, `Mutation`, and `Subscription` root types
 
 ### `DirectiveDefinition` (boolean)
 

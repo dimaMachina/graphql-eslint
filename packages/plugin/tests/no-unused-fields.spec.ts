@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/no-unused-fields';
+import { rule } from '../src/rules/no-unused-fields';
 
 const SCHEMA = /* GraphQL */ `
   type User {

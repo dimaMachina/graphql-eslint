@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { SelectionSetDepthRuleConfig } from '../src/rules/selection-set-depth';
+import { rule, SelectionSetDepthRuleConfig } from '../src/rules/selection-set-depth';
 
 const WITH_SIBLINGS = {
   parserOptions: <ParserOptions>{

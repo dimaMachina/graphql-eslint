@@ -4,7 +4,7 @@ import { GraphQLESTreeNode } from '../estree-converter';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -98,5 +98,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

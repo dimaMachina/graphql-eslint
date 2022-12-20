@@ -1,11 +1,13 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/unique-operation-name';
+import { rule } from '../src/rules/unique-operation-name';
 import { join } from 'path';
 
 const TEST_OPERATION = 'query test { foo }';
 
-const SIBLING_OPERATIONS = (...operations: string[]) => ({
-  parserOptions: <ParserOptions>{
+const SIBLING_OPERATIONS = (
+  ...operations: string[]
+): { parserOptions: Pick<ParserOptions, 'operations'> } => ({
+  parserOptions: {
     operations,
   },
 });

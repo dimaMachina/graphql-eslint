@@ -1,6 +1,6 @@
 import { GraphQLRuleTester, rules, ParserOptions } from '../src';
 
-const parserOptions: ParserOptions = {
+const parserOptions: Pick<ParserOptions, 'schema'> = {
   schema: /* GraphQL */ `
     type User {
       id: ID

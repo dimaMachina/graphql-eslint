@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule, { AlphabetizeConfig } from '../src/rules/alphabetize';
+import { rule, AlphabetizeConfig } from '../src/rules/alphabetize';
 
 const ruleTester = new GraphQLRuleTester();
 

@@ -37,7 +37,7 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 };
 
-const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
+export const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -244,5 +244,3 @@ const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
     };
   },
 };
-
-export default rule;

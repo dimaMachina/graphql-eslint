@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule, { MatchDocumentFilenameRuleConfig } from '../src/rules/match-document-filename';
+import { rule, MatchDocumentFilenameRuleConfig } from '../src/rules/match-document-filename';
 
 const ruleTester = new GraphQLRuleTester();
 

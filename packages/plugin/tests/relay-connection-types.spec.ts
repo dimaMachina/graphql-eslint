@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/relay-connection-types';
+import { rule } from '../src/rules/relay-connection-types';
 
 const ruleTester = new GraphQLRuleTester();
 

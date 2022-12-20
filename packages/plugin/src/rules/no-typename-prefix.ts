@@ -9,7 +9,7 @@ import { GraphQLESLintRule } from '../types';
 
 const NO_TYPENAME_PREFIX = 'NO_TYPENAME_PREFIX';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -85,5 +85,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

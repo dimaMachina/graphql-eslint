@@ -14,7 +14,7 @@ export type StrictIdInTypesRuleConfig = {
 
 const RULE_ID = 'strict-id-in-types';
 
-const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
+export const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -183,5 +183,3 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
     };
   },
 };
-
-export default rule;

@@ -5,7 +5,7 @@ import type { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'no-deprecated';
 
-const rule: GraphQLESLintRule<[], true> = {
+export const rule: GraphQLESLintRule<[], true> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -129,5 +129,3 @@ const rule: GraphQLESLintRule<[], true> = {
     };
   },
 };
-
-export default rule;

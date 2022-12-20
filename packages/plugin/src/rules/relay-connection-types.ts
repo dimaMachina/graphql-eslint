@@ -28,7 +28,7 @@ const hasEdgesField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) =>
 const hasPageInfoField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) =>
   node.fields.some(field => field.name.value === 'pageInfo');
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'problem',
     docs: {
@@ -124,5 +124,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

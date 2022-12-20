@@ -1,7 +1,9 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/no-scalar-result-type-on-mutation';
+import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
 
-const useSchema = (code: string): { code: string; parserOptions: ParserOptions } => ({
+const useSchema = (
+  code: string,
+): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => ({
   code,
   parserOptions: {
     schema: /* GraphQL */ `

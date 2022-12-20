@@ -8,7 +8,7 @@ const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
 
 export type RelayArgumentsConfig = { includeBoth?: boolean };
 
-const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
+export const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -133,5 +133,3 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
     };
   },
 };
-
-export default rule;

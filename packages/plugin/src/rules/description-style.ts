@@ -4,7 +4,7 @@ import { GraphQLESTreeNode } from '../estree-converter';
 
 type DescriptionStyleRuleConfig = { style: 'inline' | 'block' };
 
-const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
+export const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -77,5 +77,3 @@ const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
     };
   },
 };
-
-export default rule;

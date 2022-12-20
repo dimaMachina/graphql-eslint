@@ -40,7 +40,7 @@ export const checkNode = (
   }
 };
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -96,5 +96,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

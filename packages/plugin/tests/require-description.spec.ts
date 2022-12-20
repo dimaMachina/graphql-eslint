@@ -1,5 +1,5 @@
-import { GraphQLRuleTester } from '../src';
-import rule, { RequireDescriptionRuleConfig } from '../src/rules/require-description';
+import { GraphQLRuleTester, ParserOptions } from '../src';
+import { rule, RequireDescriptionRuleConfig } from '../src/rules/require-description';
 
 const ruleTester = new GraphQLRuleTester();
 const OPERATION = { OperationDefinition: true };
@@ -72,6 +72,19 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
         }
       `,
       options: [OPERATION],
+    },
+    {
+      ...useSchema(/* GraphQL */ `
+        type Query {
+          "Get user"
+          user(id: ID!): User
+        }
+      `),
+      options: [{ rootField: true }],
+    },
+    {
+      ...useSchema('type Query'),
+      options: [{ rootField: true }],
     },
   ],
   invalid: [
@@ -197,5 +210,42 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       options: [OPERATION],
       errors: [{ message: 'Description is required for `query`.' }],
     },
+    {
+      ...useSchema('type Query { user(id: String!): User! }'),
+      options: [{ rootField: true }],
+      errors: [{ message: 'Description is required for `Query.user`.' }],
+    },
+    {
+      ...useSchema('type Mutation { createUser(id: [ID!]!): User! }'),
+      options: [{ rootField: true }],
+      errors: [{ message: 'Description is required for `Mutation.createUser`.' }],
+    },
+    {
+      ...useSchema(/* GraphQL */ `
+        type MySubscription {
+          users: [User!]!
+        }
+        schema {
+          subscription: MySubscription
+        }
+      `),
+      options: [{ rootField: true }],
+      errors: [{ message: 'Description is required for `MySubscription.users`.' }],
+    },
   ],
 });
+
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
+  return {
+    code,
+    parserOptions: {
+      schema: /* GraphQL */ `
+        type User {
+          id: ID!
+        }
+
+        ${code}
+      `,
+    },
+  };
+}

@@ -25,7 +25,7 @@ const isQueryType = (node: ObjectTypeNode): boolean =>
 const isMutationType = (node: ObjectTypeNode): boolean =>
   isObjectType(node) && node.name.value === 'Mutation';
 
-const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
+export const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -164,5 +164,3 @@ const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
     return listeners;
   },
 };
-
-export default rule;

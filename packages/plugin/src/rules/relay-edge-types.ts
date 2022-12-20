@@ -61,7 +61,7 @@ export type EdgeTypesConfig = {
   listTypeCanWrapOnlyEdgeType?: boolean;
 };
 
-const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
+export const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -223,5 +223,3 @@ const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
     return listeners;
   },
 };
-
-export default rule;

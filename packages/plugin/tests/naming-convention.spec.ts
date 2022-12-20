@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule, { NamingConventionRuleConfig } from '../src/rules/naming-convention';
+import { rule, NamingConventionRuleConfig } from '../src/rules/naming-convention';
 
 const ruleTester = new GraphQLRuleTester();
 

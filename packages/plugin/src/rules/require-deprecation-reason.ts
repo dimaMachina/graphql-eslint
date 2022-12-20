@@ -2,7 +2,7 @@ import type { ArgumentNode, DirectiveNode } from 'graphql';
 import type { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode, valueFromNode } from '../estree-converter';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     docs: {
       description: 'Require all deprecation directives to specify a reason.',
@@ -57,5 +57,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

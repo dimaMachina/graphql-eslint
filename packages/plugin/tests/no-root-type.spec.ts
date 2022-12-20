@@ -1,7 +1,10 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/no-root-type';
+import { rule } from '../src/rules/no-root-type';
 
-const useSchema = (code: string, schema = ''): { code: string; parserOptions: ParserOptions } => ({
+const useSchema = (
+  code: string,
+  schema = '',
+): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => ({
   code,
   parserOptions: {
     schema: schema + code,

@@ -7,7 +7,7 @@ const ROOT_TYPES: ('mutation' | 'subscription')[] = ['mutation', 'subscription']
 
 type NoRootTypeConfig = { disallow: typeof ROOT_TYPES };
 
-const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
+export const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -92,5 +92,3 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     };
   },
 };
-
-export default rule;
