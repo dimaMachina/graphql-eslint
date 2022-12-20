@@ -105,7 +105,7 @@ const schema = {
   },
 } as const
 
-export type Schema = FromSchema<typeof schema>
+export type RuleOptions = FromSchema<typeof schema>
 
 type PropertySchema = {
   style?: AllowedStyle;
@@ -120,7 +120,7 @@ type Options = AllowedStyle | PropertySchema;
 
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 
-export const rule: GraphQLESLintRule<Schema> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {

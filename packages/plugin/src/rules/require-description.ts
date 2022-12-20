@@ -81,7 +81,7 @@ const schema = {
 } as const;
 
 // TODO try import { FromSchema } from 'json-schema-to-ts';
-export type Schema = [
+export type RuleOptions = [
   {
     types?: boolean;
     rootField?: boolean;
@@ -90,7 +90,7 @@ export type Schema = [
   },
 ];
 
-export const rule: GraphQLESLintRule<Schema> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     docs: {
       category: 'Schema',

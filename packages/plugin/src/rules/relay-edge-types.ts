@@ -83,9 +83,9 @@ const schema = {
   },
 } as const
 
-export type Schema = FromSchema<typeof schema>
+export type RuleOptions = FromSchema<typeof schema>
 
-export const rule: GraphQLESLintRule<Schema, true> = {
+export const rule: GraphQLESLintRule<RuleOptions, true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -127,7 +127,7 @@ export const rule: GraphQLESLintRule<Schema, true> = {
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const edgeTypes = getEdgeTypes(schema);
-    const options: Schema[0] = {
+    const options: RuleOptions[0] = {
       withEdgeSuffix: true,
       shouldImplementNode: true,
       listTypeCanWrapOnlyEdgeType: true,

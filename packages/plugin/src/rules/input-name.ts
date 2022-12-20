@@ -41,7 +41,7 @@ const schema = {
   },
 } as const;
 
-export type Schema = FromSchema<typeof schema>;
+export type RuleOptions = FromSchema<typeof schema>;
 
 type ObjectTypeNode = GraphQLESTreeNode<ObjectTypeDefinitionNode | ObjectTypeExtensionNode>;
 
@@ -52,7 +52,7 @@ const isQueryType = (node: ObjectTypeNode): boolean =>
 const isMutationType = (node: ObjectTypeNode): boolean =>
   isObjectType(node) && node.name.value === 'Mutation';
 
-export const rule: GraphQLESLintRule<Schema> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -94,7 +94,7 @@ export const rule: GraphQLESLintRule<Schema> = {
     schema,
   },
   create(context) {
-    const options: Schema[0] = {
+    const options: RuleOptions[0] = {
       checkInputType: false,
       caseSensitiveInputType: true,
       checkQueries: false,
