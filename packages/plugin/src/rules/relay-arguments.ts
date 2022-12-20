@@ -2,13 +2,31 @@ import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { requireGraphQLSchemaFromContext } from '../utils';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'relay-arguments';
 const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
 
-export type RelayArgumentsConfig = { includeBoth?: boolean };
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      includeBoth: {
+        type: 'boolean',
+        default: true,
+        description: 'Enforce including both forward and backward pagination arguments',
+      },
+    },
+  },
+} as const;
 
-export const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
+export type Schema = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<Schema, true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -53,22 +71,7 @@ export const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
       [MISSING_ARGUMENTS]:
         'A field that returns a Connection type must include forward pagination arguments (`first` and `after`), backward pagination arguments (`last` and `before`), or both.',
     },
-    schema: {
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        minProperties: 1,
-        properties: {
-          includeBoth: {
-            type: 'boolean',
-            default: true,
-            description: 'Enforce including both forward and backward pagination arguments',
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);

@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import { rule, RelayArgumentsConfig } from '../src/rules/relay-arguments';
+import { rule, Schema } from '../src/rules/relay-arguments';
 
 const ruleTester = new GraphQLRuleTester();
 
@@ -16,7 +16,7 @@ function useSchema(code: string): { code: string; parserOptions: Pick<ParserOpti
   };
 }
 
-ruleTester.runGraphQLTests<[RelayArgumentsConfig], true>('relay-arguments', rule, {
+ruleTester.runGraphQLTests<Schema, true>('relay-arguments', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       type User {
