@@ -176,6 +176,18 @@ Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `dir
 
 Default: `false`
 
+### `groups` (array)
+
+Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything
+else.
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+- Minimum items: `2`
+- Unique items: `true`
+
 ## Resources
 
 - [Rule source](../../packages/plugin/src/rules/alphabetize.ts)

@@ -3,6 +3,21 @@ import { rule, RuleOptions } from '../src/rules/alphabetize';
 
 const ruleTester = new GraphQLRuleTester();
 
+const GROUP_ORDER_TEST = /* GraphQL */ `
+  type User {
+    firstName: Int
+    createdAt: DateTime
+    author: Int
+    wagon: Int
+    id: ID
+    foo: Int
+    updatedAt: DateTime
+    bar: Int
+    nachos: Int
+    guild: Int
+  }
+`
+
 ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
   valid: [
     {
@@ -362,6 +377,54 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       errors: [
         { message: '`fullName` should be before `lastName`.' },
         { message: '`firsName` should be before `fullName`.' },
+      ],
+    },
+    {
+      name: 'should sort by group when `*` is between',
+      options: [
+        {
+          fields: ['ObjectTypeDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt'],
+        },
+      ],
+      code: GROUP_ORDER_TEST,
+      errors: [
+        { message: '`author` should be before `createdAt`.' },
+        { message: '`id` should be before `wagon`.' },
+        { message: '`bar` should be before `updatedAt`.' },
+        { message: '`guild` should be before `nachos`.' },
+      ],
+    },
+    {
+      name: 'should sort by group when `*` is at the end',
+      options: [
+        {
+          fields: ['ObjectTypeDefinition'],
+          groups: ['updatedAt', 'id', 'createdAt', '*'],
+        },
+      ],
+      code: GROUP_ORDER_TEST,
+      errors: [
+        { message: '`createdAt` should be before `firstName`.' },
+        { message: '`id` should be before `wagon`.' },
+        { message: '`updatedAt` should be before `foo`.' },
+        { message: '`guild` should be before `nachos`.' },
+      ],
+    },
+    {
+      name: 'should sort by group when `*` at the start',
+      options: [
+        {
+          fields: ['ObjectTypeDefinition'],
+          groups: ['*', 'updatedAt', 'id', 'createdAt'],
+        },
+      ],
+      code: GROUP_ORDER_TEST,
+      errors: [
+        { message: '`author` should be before `createdAt`.' },
+        { message: '`foo` should be before `id`.' },
+        { message: '`bar` should be before `updatedAt`.' },
+        { message: '`guild` should be before `nachos`.' },
       ],
     },
   ],

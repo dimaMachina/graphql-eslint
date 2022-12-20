@@ -100,6 +100,12 @@ const schema = {
           'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
         default: false,
       },
+      groups: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        minItems: 2,
+        description:
+          "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything else.",
+      },
     },
   },
 } as const;
@@ -199,6 +205,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             arguments: argumentsEnum,
             // TODO: add in graphql-eslint v4
             // definitions: true,
+            // groups: ['id', '*', 'createdAt', 'updatedAt']
           },
         ],
         operations: [
@@ -277,8 +284,26 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         if (prevName) {
           // Compare with lexicographic order
           const compareResult = prevName.localeCompare(currName);
+
+          const { groups } = opts;
+          let shouldSortByGroup = false;
+
+          if (groups?.length) {
+            if (!groups.includes('*')) {
+              throw new Error('`groups` option should contain `*` string.');
+            }
+            let indexForPrev = groups.indexOf(prevName);
+            if (indexForPrev === -1) indexForPrev = groups.indexOf('*');
+            let indexForCurr = groups.indexOf(currName);
+            if (indexForCurr === -1) indexForCurr = groups.indexOf('*');
+            shouldSortByGroup = indexForPrev - indexForCurr > 0;
+            if (indexForPrev < indexForCurr) {
+              continue;
+            }
+          }
+
           const shouldSort = compareResult === 1;
-          if (!shouldSort) {
+          if (!shouldSortByGroup && !shouldSort) {
             const isSameName = compareResult === 0;
             if (
               !isSameName ||

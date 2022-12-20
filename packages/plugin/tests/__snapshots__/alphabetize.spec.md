@@ -622,6 +622,228 @@ exports[`should move comment 1`] = `
       14 |         } # } character
 `;
 
+exports[`should sort by group when \`*\` at the start 1`] = `
+#### ⌨️ Code
+
+       1 |   type User {
+       2 |     firstName: Int
+       3 |     createdAt: DateTime
+       4 |     author: Int
+       5 |     wagon: Int
+       6 |     id: ID
+       7 |     foo: Int
+       8 |     updatedAt: DateTime
+       9 |     bar: Int
+      10 |     nachos: Int
+      11 |     guild: Int
+      12 |   }
+
+#### ⚙️ Options
+
+    {
+      "fields": [
+        "ObjectTypeDefinition"
+      ],
+      "groups": [
+        "*",
+        "updatedAt",
+        "id",
+        "createdAt"
+      ]
+    }
+
+#### ❌ Error 1/4
+
+      3 |     createdAt: DateTime
+    > 4 |     author: Int
+        |     ^^^^^^ \`author\` should be before \`createdAt\`.
+      5 |     wagon: Int
+
+#### ❌ Error 2/4
+
+      6 |     id: ID
+    > 7 |     foo: Int
+        |     ^^^ \`foo\` should be before \`id\`.
+      8 |     updatedAt: DateTime
+
+#### ❌ Error 3/4
+
+       8 |     updatedAt: DateTime
+    >  9 |     bar: Int
+         |     ^^^ \`bar\` should be before \`updatedAt\`.
+      10 |     nachos: Int
+
+#### ❌ Error 4/4
+
+      10 |     nachos: Int
+    > 11 |     guild: Int
+         |     ^^^^^ \`guild\` should be before \`nachos\`.
+      12 |   }
+
+#### 🔧 Autofix output
+
+       1 |   type User {
+       2 |     author: Int
+       3 |     bar: Int
+       4 |     firstName: Int
+       5 |     foo: Int
+       6 |     guild: Int
+       7 |     nachos: Int
+       8 |     wagon: Int
+       9 |     updatedAt: DateTime
+      10 |     id: ID
+      11 |     createdAt: DateTime
+      12 |   }
+`;
+
+exports[`should sort by group when \`*\` is at the end 1`] = `
+#### ⌨️ Code
+
+       1 |   type User {
+       2 |     firstName: Int
+       3 |     createdAt: DateTime
+       4 |     author: Int
+       5 |     wagon: Int
+       6 |     id: ID
+       7 |     foo: Int
+       8 |     updatedAt: DateTime
+       9 |     bar: Int
+      10 |     nachos: Int
+      11 |     guild: Int
+      12 |   }
+
+#### ⚙️ Options
+
+    {
+      "fields": [
+        "ObjectTypeDefinition"
+      ],
+      "groups": [
+        "updatedAt",
+        "id",
+        "createdAt",
+        "*"
+      ]
+    }
+
+#### ❌ Error 1/4
+
+      2 |     firstName: Int
+    > 3 |     createdAt: DateTime
+        |     ^^^^^^^^^ \`createdAt\` should be before \`firstName\`.
+      4 |     author: Int
+
+#### ❌ Error 2/4
+
+      5 |     wagon: Int
+    > 6 |     id: ID
+        |     ^^ \`id\` should be before \`wagon\`.
+      7 |     foo: Int
+
+#### ❌ Error 3/4
+
+      7 |     foo: Int
+    > 8 |     updatedAt: DateTime
+        |     ^^^^^^^^^ \`updatedAt\` should be before \`foo\`.
+      9 |     bar: Int
+
+#### ❌ Error 4/4
+
+      10 |     nachos: Int
+    > 11 |     guild: Int
+         |     ^^^^^ \`guild\` should be before \`nachos\`.
+      12 |   }
+
+#### 🔧 Autofix output
+
+       1 |   type User {
+       2 |     updatedAt: DateTime
+       3 |     id: ID
+       4 |     createdAt: DateTime
+       5 |     author: Int
+       6 |     bar: Int
+       7 |     firstName: Int
+       8 |     foo: Int
+       9 |     guild: Int
+      10 |     nachos: Int
+      11 |     wagon: Int
+      12 |   }
+`;
+
+exports[`should sort by group when \`*\` is between 1`] = `
+#### ⌨️ Code
+
+       1 |   type User {
+       2 |     firstName: Int
+       3 |     createdAt: DateTime
+       4 |     author: Int
+       5 |     wagon: Int
+       6 |     id: ID
+       7 |     foo: Int
+       8 |     updatedAt: DateTime
+       9 |     bar: Int
+      10 |     nachos: Int
+      11 |     guild: Int
+      12 |   }
+
+#### ⚙️ Options
+
+    {
+      "fields": [
+        "ObjectTypeDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+
+#### ❌ Error 1/4
+
+      3 |     createdAt: DateTime
+    > 4 |     author: Int
+        |     ^^^^^^ \`author\` should be before \`createdAt\`.
+      5 |     wagon: Int
+
+#### ❌ Error 2/4
+
+      5 |     wagon: Int
+    > 6 |     id: ID
+        |     ^^ \`id\` should be before \`wagon\`.
+      7 |     foo: Int
+
+#### ❌ Error 3/4
+
+       8 |     updatedAt: DateTime
+    >  9 |     bar: Int
+         |     ^^^ \`bar\` should be before \`updatedAt\`.
+      10 |     nachos: Int
+
+#### ❌ Error 4/4
+
+      10 |     nachos: Int
+    > 11 |     guild: Int
+         |     ^^^^^ \`guild\` should be before \`nachos\`.
+      12 |   }
+
+#### 🔧 Autofix output
+
+       1 |   type User {
+       2 |     id: ID
+       3 |     author: Int
+       4 |     bar: Int
+       5 |     firstName: Int
+       6 |     foo: Int
+       7 |     guild: Int
+       8 |     nachos: Int
+       9 |     wagon: Int
+      10 |     createdAt: DateTime
+      11 |     updatedAt: DateTime
+      12 |   }
+`;
+
 exports[`should sort definitions 1`] = `
 #### ⌨️ Code
 
