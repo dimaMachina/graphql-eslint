@@ -12,6 +12,9 @@ have special handlers for code-files, since `graphql-eslint` extracts usages of 
 `/* GraphQL */` comments automatically, and runs it through the parser, and eventually it knows to
 adjust errors location to fit in your code files original location.
 
+You can explore the GraphQL AST for a given input on
+[astexplorer.net](https://astexplorer.net/#/gist/e72aaccc1e57cbba41659d73cabbf75c/f10ee29317a31ff8012a21762a382c4a03c34d40).
+
 ## Getting Started
 
 Start by creating a
