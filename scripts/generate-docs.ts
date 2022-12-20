@@ -150,11 +150,17 @@ async function generateDocs(): Promise<void> {
     .map(([ruleName, rule]) => {
       const link = `[${ruleName}](rules/${ruleName}.md)`;
       const { docs } = rule.meta;
+      let config = '';
+      if (ruleName.startsWith('relay-')) {
+        config = 'relay';
+      } else if (!docs.isDisabledForAllConfig) {
+        config = docs.recommended ? 'recommended' : 'all';
+      }
 
       return [
         link,
         docs.description.split('\n')[0],
-        docs.isDisabledForAllConfig ? '' : docs.recommended ? '![recommended][]' : '![all][]',
+        config && `![${config}][]`,
         docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
         rule.meta.hasSuggestions ? Icon.HAS_SUGGESTIONS : rule.meta.fixable ? Icon.FIXABLE : '',
       ];
@@ -183,6 +189,7 @@ async function generateDocs(): Promise<void> {
       ),
       '[recommended]: https://img.shields.io/badge/-recommended-green.svg',
       '[all]: https://img.shields.io/badge/-all-blue.svg',
+      '[relay]: https://img.shields.io/badge/-relay-orange.svg',
     ].join('\n'),
   });
 

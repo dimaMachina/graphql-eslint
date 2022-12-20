@@ -12,7 +12,7 @@
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/",
     "prebuild": "rimraf packages/*/dist ./tsconfig.tsbuildinfo",
     "prerelease": "yarn build",
-    "prettier": "prettier --write --list-different .",
+    "prettier": "prettier --cache --write --list-different .",
     "release": "changeset publish",
     "test": "jest --no-watchman --forceExit --noStackTrace --detectOpenHandles",
     "transpile-ts": "tsc --project tsconfig.json"
