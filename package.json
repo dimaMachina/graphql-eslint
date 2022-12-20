@@ -36,10 +36,10 @@
     "chalk": "^4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
-    "eslint": "8.28.0",
+    "eslint": "8.30.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard": "17.0.0",
-    "eslint-plugin-eslint-plugin": "5.0.6",
+    "eslint-plugin-eslint-plugin": "5.0.7",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.6.0",
     "eslint-plugin-promise": "6.1.1",
@@ -66,8 +66,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "eslint@8.28.0": "patches/eslint@8.28.0.patch",
-      "eslint-plugin-eslint-plugin@5.0.6": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
+      "eslint@8.30.0": "patches/eslint@8.28.0.patch",
+      "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch"
     }
   }
