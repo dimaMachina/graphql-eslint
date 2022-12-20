@@ -1,16 +1,16 @@
 import { GraphQLESLintRule } from '../types';
-import { ExecutableDefinitionNode } from 'graphql';
+import { ExecutableDefinitionNode, OperationTypeNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { ARRAY_DEFAULT_OPTIONS, pascalCase, getLocation } from '../utils';
 
 const RULE_ID = 'lone-executable-definition';
 
-type Definition = 'fragment' | 'query' | 'mutation' | 'subscription';
+type Definition = 'fragment' | OperationTypeNode;
 
-const types: Definition[] = ['fragment', 'query', 'mutation', 'subscription'];
+const types: Definition[] = ['fragment', ...Object.values(OperationTypeNode)];
 
 export interface LoneExecutableDefinitionConfig {
-  ignore?: typeof types;
+  ignore?: Definition[];
 }
 
 type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
