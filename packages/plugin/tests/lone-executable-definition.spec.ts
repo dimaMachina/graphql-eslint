@@ -85,6 +85,18 @@ ruleTester.runGraphQLTests('lone-executable-definition', rule, {
         }
       `,
     },
+    {
+      name: 'should ignore definitions even if they are first in the document',
+      options: [{ ignore: ['fragment'] }],
+      code: /* GraphQL */ `
+        fragment Bar on Bar {
+          id
+        }
+        query Foo {
+          id
+        }
+      `,
+    },
   ],
   invalid: [
     {

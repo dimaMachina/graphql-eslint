@@ -82,13 +82,13 @@ const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
     return {
       Document(node) {
         const definitions = node.definitions
-          .slice(1) // ignore first definition
           .filter(isDefinitionNode)
           .map(node => ({
             node,
             type: 'operation' in node ? node.operation : ('fragment' as const),
           }))
-          .filter(({ type }) => !ignore.has(type));
+          .filter(({ type }) => !ignore.has(type))
+          .slice(1); // ignore first definition
 
         for (const { node, type } of definitions) {
           const typeName = uppercaseFirst(type);
