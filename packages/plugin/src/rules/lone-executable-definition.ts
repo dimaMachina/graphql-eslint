@@ -10,7 +10,7 @@ type Definition = 'fragment' | 'query' | 'mutation' | 'subscription';
 const types: Definition[] = ['fragment', 'query', 'mutation', 'subscription'];
 
 export interface LoneExecutableDefinitionConfig {
-  ignore?: typeof types[number][];
+  ignore?: typeof types;
 }
 
 type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
