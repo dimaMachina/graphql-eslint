@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   modulePathIgnorePatterns: ['/dist/'],
   moduleNameMapper: {
     '@graphql-eslint/eslint-plugin': '<rootDir>/packages/plugin/src/index.ts',
@@ -7,5 +7,5 @@ module.exports = {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
   snapshotSerializers: ['jest-snapshot-serializer-raw/always'],
-  snapshotResolver: './snapshot-resolver.js',
+  snapshotResolver: './snapshot-resolver.cjs',
 };

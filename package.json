@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
@@ -6,6 +7,7 @@
   "scripts": {
     "build": "yarn transpile-ts && bob build",
     "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
+    "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
     "generate:docs": "tsx scripts/generate-docs.ts",
     "lint": "eslint --ignore-path .gitignore --ext ts,js .",
@@ -51,7 +53,6 @@
     "lint-staged": "13.1.0",
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
-    "ts-node": "^10.9.1",
     "tsx": "^3.12.1",
     "typescript": "4.9.4"
   },

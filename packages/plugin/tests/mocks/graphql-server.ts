@@ -1,7 +1,10 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
-import { createServer, Server, IncomingMessage, ServerResponse } from 'http';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { createServer, Server, IncomingMessage, ServerResponse } from 'node:http';
 import { buildSchema, introspectionFromSchema } from 'graphql';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const sdlSchema = readFileSync(resolve(__dirname, 'user-schema.graphql'), 'utf8');
 const graphqlSchemaObj = buildSchema(sdlSchema);

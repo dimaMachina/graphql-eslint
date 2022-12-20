@@ -3,9 +3,12 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
-import { format, resolveConfig } from 'prettier';
+import prettier from 'prettier';
 import { asArray } from '@graphql-tools/utils';
-import { rules } from '../packages/plugin/src';
+import pkg from '../packages/plugin/src';
+
+const { rules } = pkg;
+const { format, resolveConfig } = prettier;
 
 const BR = '';
 const NBSP = '&nbsp;';
@@ -224,6 +227,5 @@ async function generateDocs(): Promise<void> {
 }
 
 console.time('done');
-generateDocs().then(() => {
-  console.timeEnd('done');
-});
+await generateDocs();
+console.timeEnd('done');
