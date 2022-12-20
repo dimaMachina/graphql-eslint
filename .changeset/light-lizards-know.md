@@ -2,4 +2,4 @@
 '@graphql-eslint/eslint-plugin': minor
 ---
 
-add prefix option to `match-document-filename` - minor
+add new option `prefix` for `match-document-filename` rule

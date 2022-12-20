@@ -140,27 +140,21 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct',
-          usage: [{ fragment: { style: 'kebab-case', suffix: 'Mutation', prefix: 'mutation.' } }],
-          name: 'mutation.add-alert.graphql',
+          usage: [{ fragment: { style: 'kebab-case', prefix: 'mutation.' } }],
           code: /* GraphQL */ `
             # mutation.add-alert.graphql
-            mutation addAlert($input: AddAlertInput!) {
-              addAlert(input: $input) {
-                ...AlertFields
-              }
+            mutation addAlert {
+              foo
             }
           `,
         },
         {
           title: 'Correct',
           usage: [{ fragment: { prefix: 'query.' } }],
-          name: 'query.me.graphql',
           code: /* GraphQL */ `
             # query.me.graphql
             query me {
-              me {
-                ...UserFields
-              }
+              foo
             }
           `,
         },
@@ -241,7 +235,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         let expectedFilename = option.prefix || '';
 
         if (option.style) {
-          expectedFilename =
+          expectedFilename +=
             option.style === 'matchDocumentStyle' ? docName : convertCase(option.style, docName);
         } else {
           expectedFilename += filename;
