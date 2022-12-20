@@ -62,7 +62,7 @@ export type NamingConventionRuleConfig = {
 
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 
-const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
+export const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -208,7 +208,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
         properties: {
           types: {
             ...schemaOption,
-            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+            description: `Includes:\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
           ...Object.fromEntries(
             ALLOWED_KINDS.map(kind => [
@@ -365,5 +365,3 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     return listeners;
   },
 };
-
-export default rule;

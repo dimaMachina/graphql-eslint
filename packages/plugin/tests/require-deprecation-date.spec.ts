@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/require-deprecation-date';
+import { rule } from '../src/rules/require-deprecation-date';
 
 const now = new Date();
 now.setDate(now.getDate() + 1);

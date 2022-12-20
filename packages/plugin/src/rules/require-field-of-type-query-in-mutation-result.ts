@@ -5,7 +5,7 @@ import type { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'require-field-of-type-query-in-mutation-result';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -75,5 +75,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

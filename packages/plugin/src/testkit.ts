@@ -16,7 +16,7 @@ export type GraphQLValidTestCase<Options> = Omit<
   'options' | 'parserOptions'
 > & {
   options?: Options;
-  parserOptions?: ParserOptions;
+  parserOptions?: Omit<ParserOptions, 'filePath'>;
 };
 
 export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {

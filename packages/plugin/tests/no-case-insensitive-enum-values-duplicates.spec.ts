@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/no-case-insensitive-enum-values-duplicates';
+import { rule } from '../src/rules/no-case-insensitive-enum-values-duplicates';
 
 const ruleTester = new GraphQLRuleTester();
 

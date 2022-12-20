@@ -1,12 +1,12 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { StrictIdInTypesRuleConfig } from '../src/rules/strict-id-in-types';
+import { rule, StrictIdInTypesRuleConfig } from '../src/rules/strict-id-in-types';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string) {
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {
     code,
-    parserOptions: <ParserOptions>{
+    parserOptions: {
       schema: code,
     },
   };

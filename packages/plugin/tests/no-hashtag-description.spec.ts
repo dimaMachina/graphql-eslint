@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/no-hashtag-description';
+import { rule } from '../src/rules/no-hashtag-description';
 
 const ruleTester = new GraphQLRuleTester();
 

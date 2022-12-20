@@ -1,5 +1,5 @@
-import { GraphQLRuleTester } from '../src/testkit';
-import rule from '../src/rules/description-style';
+import { GraphQLRuleTester } from '../src';
+import { rule } from '../src/rules/description-style';
 
 const ruleTester = new GraphQLRuleTester();
 

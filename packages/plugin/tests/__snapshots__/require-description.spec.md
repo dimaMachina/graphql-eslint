@@ -190,7 +190,7 @@ exports[`Invalid #17 1`] = `
 exports[`Invalid #18 1`] = `
 #### ⌨️ Code
 
-      1 | type Mutation { createUser(user: UserInput): User! }
+      1 | type Mutation { createUser(id: [ID!]!): User! }
 
 #### ⚙️ Options
 
@@ -200,14 +200,19 @@ exports[`Invalid #18 1`] = `
 
 #### ❌ Error
 
-    > 1 | type Mutation { createUser(user: UserInput): User! }
+    > 1 | type Mutation { createUser(id: [ID!]!): User! }
         |                 ^^^^^^^^^^ Description is required for \`Mutation.createUser\`.
 `;
 
 exports[`Invalid #19 1`] = `
 #### ⌨️ Code
 
-      1 | type Subscription { users: [User!] }
+      1 |         type MySubscription {
+      2 |           users: [User!]!
+      3 |         }
+      4 |         schema {
+      5 |           subscription: MySubscription
+      6 |         }
 
 #### ⚙️ Options
 
@@ -217,8 +222,10 @@ exports[`Invalid #19 1`] = `
 
 #### ❌ Error
 
-    > 1 | type Subscription { users: [User!] }
-        |                     ^^^^^ Description is required for \`Subscription.users\`.
+      1 |         type MySubscription {
+    > 2 |           users: [User!]!
+        |           ^^^^^ Description is required for \`MySubscription.users\`.
+      3 |         }
 `;
 
 exports[`should disable description for ObjectTypeDefinition 1`] = `

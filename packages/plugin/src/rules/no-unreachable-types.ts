@@ -105,7 +105,7 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   return reachableTypesCache;
 }
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     messages: {
       [RULE_ID]: '{{ type }} `{{ typeName }}` is unreachable.',
@@ -178,5 +178,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

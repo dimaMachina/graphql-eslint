@@ -158,7 +158,7 @@ const validationToRule = (
           ...docs,
           graphQLJSRuleName: ruleName,
           url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${ruleId}.md`,
-          description: `${docs.description}\n\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
+          description: `${docs.description}\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
         },
         schema,
       },

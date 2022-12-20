@@ -1,5 +1,5 @@
-import { GraphQLRuleTester } from '../src';
-import rule, { RequireDescriptionRuleConfig } from '../src/rules/require-description';
+import { GraphQLRuleTester, ParserOptions } from '../src';
+import { rule, RequireDescriptionRuleConfig } from '../src/rules/require-description';
 
 const ruleTester = new GraphQLRuleTester();
 const OPERATION = { OperationDefinition: true };
@@ -74,32 +74,16 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       options: [OPERATION],
     },
     {
-      code: /* GraphQL */ `
+      ...useSchema(/* GraphQL */ `
         type Query {
           "Get user"
           user(id: ID!): User
         }
-        type User {
-          name: String
-        }
-      `,
+      `),
       options: [{ rootField: true }],
     },
     {
-      code: /* GraphQL */ `
-        type Query {
-          "Get users"
-          users: [User!]!
-        }
-      `,
-      options: [{ rootField: true }],
-    },
-    {
-      code: /* GraphQL */ `
-        type User {
-          name: String
-        }
-      `,
+      ...useSchema('type Query'),
       options: [{ rootField: true }],
     },
   ],
@@ -227,19 +211,41 @@ ruleTester.runGraphQLTests<[RequireDescriptionRuleConfig]>('require-description'
       errors: [{ message: 'Description is required for `query`.' }],
     },
     {
-      code: 'type Query { user(id: String!): User! }',
+      ...useSchema('type Query { user(id: String!): User! }'),
       options: [{ rootField: true }],
       errors: [{ message: 'Description is required for `Query.user`.' }],
     },
     {
-      code: 'type Mutation { createUser(user: UserInput): User! }',
+      ...useSchema('type Mutation { createUser(id: [ID!]!): User! }'),
       options: [{ rootField: true }],
       errors: [{ message: 'Description is required for `Mutation.createUser`.' }],
     },
     {
-      code: 'type Subscription { users: [User!] }',
+      ...useSchema(/* GraphQL */ `
+        type MySubscription {
+          users: [User!]!
+        }
+        schema {
+          subscription: MySubscription
+        }
+      `),
       options: [{ rootField: true }],
-      errors: [{ message: 'Description is required for `Subscription.users`.' }],
+      errors: [{ message: 'Description is required for `MySubscription.users`.' }],
     },
   ],
 });
+
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
+  return {
+    code,
+    parserOptions: {
+      schema: /* GraphQL */ `
+        type User {
+          id: ID!
+        }
+
+        ${code}
+      `,
+    },
+  };
+}

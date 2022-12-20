@@ -5,7 +5,7 @@ import { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'no-anonymous-operations';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -75,5 +75,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

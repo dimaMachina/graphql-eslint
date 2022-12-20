@@ -25,7 +25,7 @@ export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
 const RULE_ID = 'require-id-when-available';
 const DEFAULT_ID_FIELD_NAME = 'id';
 
-const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
+export const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
   meta: {
     type: 'suggestion',
     // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions
@@ -251,5 +251,3 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     };
   },
 };
-
-export default rule;

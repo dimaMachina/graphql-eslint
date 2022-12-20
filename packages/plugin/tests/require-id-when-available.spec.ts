@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { RequireIdWhenAvailableRuleConfig } from '../src/rules/require-id-when-available';
+import { rule, RequireIdWhenAvailableRuleConfig } from '../src/rules/require-id-when-available';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {

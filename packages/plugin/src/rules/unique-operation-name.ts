@@ -3,7 +3,7 @@ import { checkNode } from './unique-fragment-name';
 
 const RULE_ID = 'unique-operation-name';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -63,5 +63,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

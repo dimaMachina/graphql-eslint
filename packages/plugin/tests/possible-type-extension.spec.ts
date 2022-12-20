@@ -3,10 +3,10 @@ import { GraphQLRuleTester, rules, ParserOptions } from '../src';
 
 const ruleTester = new GraphQLRuleTester();
 
-const useUserSchema = (code: string) => {
+const useUserSchema = (code: string): { code: string, parserOptions: Pick<ParserOptions, 'schema'> } => {
   return {
     code,
-    parserOptions: <ParserOptions>{
+    parserOptions: {
       schema: /* GraphQL */ `
         type User {
           id: ID

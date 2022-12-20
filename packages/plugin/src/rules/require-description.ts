@@ -1,7 +1,8 @@
 import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import type { GraphQLESLintRule, ValueOf } from '../types';
-import { getLocation, TYPES_KINDS } from '../utils';
+import { getLocation, requireGraphQLSchemaFromContext, TYPES_KINDS } from '../utils';
 import type { GraphQLESTreeNode } from '../estree-converter';
+import { getRootTypeNames } from '@graphql-tools/utils';
 
 const RULE_ID = 'require-description';
 
@@ -22,8 +23,8 @@ export type RequireDescriptionRuleConfig = {
   types?: boolean;
   rootField?: boolean;
 } & {
-    [key in AllowedKind]?: boolean;
-  };
+  [key in AllowedKind]?: boolean;
+};
 
 function getNodeName(node: SelectorNode) {
   const DisplayNodeNameMap = {
@@ -55,7 +56,7 @@ function getNodeName(node: SelectorNode) {
   }
 }
 
-const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
+export const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
   meta: {
     docs: {
       category: 'Schema',
@@ -115,6 +116,7 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
         {
           types: true,
           [Kind.DIRECTIVE_DEFINITION]: true,
+          // rootField: true TODO enable in graphql-eslint v4
         },
       ],
       recommended: true,
@@ -134,18 +136,18 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
         properties: {
           types: {
             type: 'boolean',
-            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+            description: `Includes:\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
           },
           rootField: {
             type: 'boolean',
-            description: 'Definitions within Query, Mutation, and Subscription'
+            description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types',
           },
           ...Object.fromEntries(
             [...ALLOWED_KINDS].sort().map(kind => {
               let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
               if (kind === Kind.OPERATION_DEFINITION) {
                 description +=
-                  '\n\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
+                  '\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
               }
               return [kind, { type: 'boolean', description }];
             }),
@@ -166,10 +168,14 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
       }
     }
 
-    const rootTypeNames = 'Query|Mutation|Subscription'
-
     if (rootField) {
-      kinds.add(`:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${rootTypeNames})$/] > FieldDefinition`);
+      const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+      const rootTypeNames = getRootTypeNames(schema);
+      kinds.add(
+        `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${[
+          ...rootTypeNames,
+        ].join(',')})$/] > FieldDefinition`,
+      );
     }
 
     const selector = [...kinds].join(',');
@@ -205,5 +211,3 @@ const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     };
   },
 };
-
-export default rule;

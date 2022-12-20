@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { GraphQLRuleTester } from '../src';
-import noAnonymousOperations from '../src/rules/no-anonymous-operations';
-import noTypenamePrefix from '../src/rules/no-typename-prefix';
+import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
+import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';
 
 const ruleTester = new GraphQLRuleTester();
 

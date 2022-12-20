@@ -3,34 +3,34 @@
  */
 
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
-import alphabetize from './alphabetize';
-import descriptionStyle from './description-style';
-import inputName from './input-name';
-import matchDocumentFilename from './match-document-filename';
-import namingConvention from './naming-convention';
-import noAnonymousOperations from './no-anonymous-operations';
-import noCaseInsensitiveEnumValuesDuplicates from './no-case-insensitive-enum-values-duplicates';
-import noDeprecated from './no-deprecated';
-import noDuplicateFields from './no-duplicate-fields';
-import noHashtagDescription from './no-hashtag-description';
-import noRootType from './no-root-type';
-import noScalarResultTypeOnMutation from './no-scalar-result-type-on-mutation';
-import noTypenamePrefix from './no-typename-prefix';
-import noUnreachableTypes from './no-unreachable-types';
-import noUnusedFields from './no-unused-fields';
-import relayArguments from './relay-arguments';
-import relayConnectionTypes from './relay-connection-types';
-import relayEdgeTypes from './relay-edge-types';
-import relayPageInfo from './relay-page-info';
-import requireDeprecationDate from './require-deprecation-date';
-import requireDeprecationReason from './require-deprecation-reason';
-import requireDescription from './require-description';
-import requireFieldOfTypeQueryInMutationResult from './require-field-of-type-query-in-mutation-result';
-import requireIdWhenAvailable from './require-id-when-available';
-import selectionSetDepth from './selection-set-depth';
-import strictIdInTypes from './strict-id-in-types';
-import uniqueFragmentName from './unique-fragment-name';
-import uniqueOperationName from './unique-operation-name';
+import { rule as alphabetize } from './alphabetize';
+import { rule as descriptionStyle } from './description-style';
+import { rule as inputName } from './input-name';
+import { rule as matchDocumentFilename } from './match-document-filename';
+import { rule as namingConvention } from './naming-convention';
+import { rule as noAnonymousOperations } from './no-anonymous-operations';
+import { rule as noCaseInsensitiveEnumValuesDuplicates } from './no-case-insensitive-enum-values-duplicates';
+import { rule as noDeprecated } from './no-deprecated';
+import { rule as noDuplicateFields } from './no-duplicate-fields';
+import { rule as noHashtagDescription } from './no-hashtag-description';
+import { rule as noRootType } from './no-root-type';
+import { rule as noScalarResultTypeOnMutation } from './no-scalar-result-type-on-mutation';
+import { rule as noTypenamePrefix } from './no-typename-prefix';
+import { rule as noUnreachableTypes } from './no-unreachable-types';
+import { rule as noUnusedFields } from './no-unused-fields';
+import { rule as relayArguments } from './relay-arguments';
+import { rule as relayConnectionTypes } from './relay-connection-types';
+import { rule as relayEdgeTypes } from './relay-edge-types';
+import { rule as relayPageInfo } from './relay-page-info';
+import { rule as requireDeprecationDate } from './require-deprecation-date';
+import { rule as requireDeprecationReason } from './require-deprecation-reason';
+import { rule as requireDescription } from './require-description';
+import { rule as requireFieldOfTypeQueryInMutationResult } from './require-field-of-type-query-in-mutation-result';
+import { rule as requireIdWhenAvailable } from './require-id-when-available';
+import { rule as selectionSetDepth } from './selection-set-depth';
+import { rule as strictIdInTypes } from './strict-id-in-types';
+import { rule as uniqueFragmentName } from './unique-fragment-name';
+import { rule as uniqueOperationName } from './unique-operation-name';
 
 export const rules = {
   ...GRAPHQL_JS_VALIDATIONS,

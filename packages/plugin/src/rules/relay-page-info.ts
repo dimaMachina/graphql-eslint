@@ -11,7 +11,7 @@ const notPageInfoTypesSelector = `:matches(${NON_OBJECT_TYPES})[name.value=PageI
 
 let hasPageInfoChecked = false;
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'problem',
     docs: {
@@ -108,5 +108,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

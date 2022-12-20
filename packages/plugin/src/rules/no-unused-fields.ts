@@ -41,7 +41,7 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
   return usedFieldsCache;
 }
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     messages: {
       [RULE_ID]: 'Field "{{fieldName}}" is unused',
@@ -137,5 +137,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

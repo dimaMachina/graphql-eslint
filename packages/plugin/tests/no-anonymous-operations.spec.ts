@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/no-anonymous-operations';
+import { rule } from '../src/rules/no-anonymous-operations';
 
 const ruleTester = new GraphQLRuleTester();
 

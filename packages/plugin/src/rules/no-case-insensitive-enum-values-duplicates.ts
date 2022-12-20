@@ -2,7 +2,7 @@ import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRule } from '../types';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -62,5 +62,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

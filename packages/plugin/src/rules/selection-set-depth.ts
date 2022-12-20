@@ -10,7 +10,7 @@ export type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] 
 
 const RULE_ID = 'selection-set-depth';
 
-const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
+export const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -150,5 +150,3 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
     };
   },
 };
-
-export default rule;

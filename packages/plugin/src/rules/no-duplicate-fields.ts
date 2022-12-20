@@ -4,7 +4,7 @@ import type { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'no-duplicate-fields';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -114,5 +114,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

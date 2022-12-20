@@ -1,7 +1,7 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/no-unreachable-types';
+import { rule } from '../src/rules/no-unreachable-types';
 
-const useSchema = (schema: string): { code: string; parserOptions: ParserOptions } => {
+const useSchema = (schema: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => {
   return {
     parserOptions: { schema },
     code: schema,
