@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import { rule, SelectionSetDepthRuleConfig } from '../src/rules/selection-set-depth';
+import { rule, Schema } from '../src/rules/selection-set-depth';
 
 const WITH_SIBLINGS = {
   parserOptions: <ParserOptions>{
@@ -9,7 +9,7 @@ const WITH_SIBLINGS = {
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<[SelectionSetDepthRuleConfig]>('selection-set-depth', rule, {
+ruleTester.runGraphQLTests<Schema>('selection-set-depth', rule, {
   valid: [
     {
       options: [{ maxDepth: 2 }],

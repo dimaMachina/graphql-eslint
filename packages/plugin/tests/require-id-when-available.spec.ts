@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import { rule, RequireIdWhenAvailableRuleConfig } from '../src/rules/require-id-when-available';
+import { rule, Schema } from '../src/rules/require-id-when-available';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -66,7 +66,7 @@ const WITH_SCHEMA = {
 const ruleTester = new GraphQLRuleTester();
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
 
-ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>(
+ruleTester.runGraphQLTests<Schema, true>(
   'require-id-when-available',
   rule,
   {

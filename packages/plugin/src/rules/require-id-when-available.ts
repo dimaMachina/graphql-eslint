@@ -19,13 +19,35 @@ import {
 } from '../utils';
 import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types';
 import { getBaseType, GraphQLESTreeNode } from '../estree-converter';
-
-export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'require-id-when-available';
 const DEFAULT_ID_FIELD_NAME = 'id';
 
-export const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
+const schema = {
+  definitions: {
+    asString: {
+      type: 'string',
+    },
+    asArray: ARRAY_DEFAULT_OPTIONS,
+  },
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      fieldName: {
+        oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asArray' }],
+        default: DEFAULT_ID_FIELD_NAME,
+      },
+    },
+  },
+} as const
+
+export type Schema = FromSchema<typeof schema>
+
+export const rule: GraphQLESLintRule<Schema, true> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -85,26 +107,7 @@ export const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> =
       [RULE_ID]:
         "Field{{ pluralSuffix }} {{ fieldName }} must be selected when it's available on a type.\nInclude it in your selection set{{ addition }}.",
     },
-    schema: {
-      definitions: {
-        asString: {
-          type: 'string',
-        },
-        asArray: ARRAY_DEFAULT_OPTIONS,
-      },
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          fieldName: {
-            oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asArray' }],
-            default: DEFAULT_ID_FIELD_NAME,
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
