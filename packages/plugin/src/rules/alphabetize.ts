@@ -100,8 +100,12 @@ const schema = {
           'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
         default: false,
       },
-      ignorePrefix: ARRAY_DEFAULT_OPTIONS,
-      ignoreSuffix: ARRAY_DEFAULT_OPTIONS,
+      groups: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        minItems: 2,
+        description:
+          "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything else.",
+      },
     },
   },
 } as const;
@@ -201,6 +205,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             arguments: argumentsEnum,
             // TODO: add in graphql-eslint v4
             // definitions: true,
+            // groups: ['id', '*', 'createdAt', 'updatedAt']
           },
         ],
         operations: [
@@ -277,35 +282,28 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           ('alias' in prevNode && prevNode.alias?.value) ||
           ('name' in prevNode && prevNode.name?.value);
         if (prevName) {
-          if ((opts.ignorePrefix || []).length > 0) {
-            const shouldSkipIgnorePrefix = opts.ignorePrefix.some(
-              prefix =>
-                prefix === prevName ||
-                prefix === currName ||
-                prevName.startsWith(prefix) ||
-                currName.startsWith(prefix),
-            );
-            if (shouldSkipIgnorePrefix) {
-              continue;
-            }
-          }
-          if ((opts.ignoreSuffix || []).length > 0) {
-            const shouldSkipIgnoreSuffix = opts.ignoreSuffix.some(
-              suffix =>
-                suffix === prevName ||
-                suffix === currName ||
-                prevName.endsWith(suffix) ||
-                currName.endsWith(suffix),
-            );
-            if (shouldSkipIgnoreSuffix) {
-              continue;
-            }
-          }
           // Compare with lexicographic order
           const compareResult = prevName.localeCompare(currName);
-          const shouldSort = compareResult === 1;
 
-          if (!shouldSort) {
+          const { groups } = opts;
+          let shouldSortByGroup = false;
+
+          if (groups?.length) {
+            if (!groups.includes('*')) {
+              throw new Error('`groups` option should contain `*` string.');
+            }
+            let indexForPrev = groups.indexOf(prevName);
+            if (indexForPrev === -1) indexForPrev = groups.indexOf('*');
+            let indexForCurr = groups.indexOf(currName);
+            if (indexForCurr === -1) indexForCurr = groups.indexOf('*');
+            shouldSortByGroup = indexForPrev - indexForCurr > 0;
+            if (indexForPrev < indexForCurr) {
+              continue;
+            }
+          }
+
+          const shouldSort = compareResult === 1;
+          if (!shouldSortByGroup && !shouldSort) {
             const isSameName = compareResult === 0;
             if (
               !isSameName ||
