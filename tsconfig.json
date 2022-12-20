@@ -27,10 +27,5 @@
     }
   },
   "include": ["packages"],
-  "exclude": ["**/dist", "**/temp", "**/tests"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+  "exclude": ["**/dist", "**/temp", "**/tests"]
 }

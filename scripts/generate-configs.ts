@@ -2,10 +2,15 @@
 import { readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { format, resolveConfig } from 'prettier';
+import prettier from 'prettier';
 import chalk from 'chalk';
-import { camelCase } from '../packages/plugin/src/utils';
+import utils from '../packages/plugin/src/utils';
 import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src';
+import { fileURLToPath } from 'url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+const { format, resolveConfig } = prettier;
 
 const BR = '';
 const prettierOptions = resolveConfig.sync(__dirname);
@@ -44,22 +49,22 @@ const ruleFilenames = readdirSync(join(SRC_PATH, 'rules'))
   .filter(filename => filename.endsWith('.ts') && !IGNORE_FILES.includes(filename))
   .map(filename => filename.replace(/\.ts$/, ''));
 
-function generateRules(): void {
+async function generateRules(): Promise<void> {
   const code = [
     "import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation'",
     ...ruleFilenames.map(
-      ruleName => `import { rule as ${camelCase(ruleName)} } from './${ruleName}'`,
+      ruleName => `import { rule as ${utils.camelCase(ruleName)} } from './${ruleName}'`,
     ),
     BR,
     'export const rules = {',
     '...GRAPHQL_JS_VALIDATIONS,',
     ruleFilenames.map(ruleName =>
-      ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName,
+      ruleName.includes('-') ? `'${ruleName}': ${utils.camelCase(ruleName)}` : ruleName,
     ),
     '}',
   ].join('\n');
 
-  writeFormattedFile('rules/index.ts', code);
+  await writeFormattedFile('rules/index.ts', code);
 }
 
 type RuleOptions = 'error' | ['error', ...any];
@@ -122,7 +127,6 @@ async function generateConfigs(): Promise<void> {
 }
 
 console.time('done');
-generateRules();
-generateConfigs().then(() => {
-  console.timeLog('done');
-});
+await generateRules();
+await generateConfigs();
+console.timeLog('done');

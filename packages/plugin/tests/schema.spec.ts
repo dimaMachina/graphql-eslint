@@ -43,7 +43,7 @@ describe('schema', () => {
     let url;
 
     beforeAll(done => {
-      const tsNodeCommand = resolve(process.cwd(), 'node_modules/.bin/ts-node');
+      const tsNodeCommand = resolve(process.cwd(), 'node_modules/.bin/tsx');
       const serverPath = resolve(__dirname, 'mocks/graphql-server.ts');
 
       // Import `TestGraphQLServer` and run it in this file will don't work
@@ -60,7 +60,7 @@ describe('schema', () => {
     });
 
     afterAll(done => {
-      local.on('close', done);
+      local.on('close', () => done());
       local.kill();
     });
 
