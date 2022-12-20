@@ -227,7 +227,7 @@ importers:
       graphql: 16.6.0
       graphql-config: ^4.3.6
       graphql-depth-limit: ^1.1.0
-      json-schema-to-ts: ^2.6.2
+      json-schema-to-ts: 2.6.2
       lodash.lowercase: ^4.3.0
     dependencies:
       '@babel/code-frame': 7.18.6
