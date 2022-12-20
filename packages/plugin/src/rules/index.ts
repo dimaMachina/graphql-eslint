@@ -37,6 +37,7 @@ export const rules = {
   alphabetize,
   'description-style': descriptionStyle,
   'input-name': inputName,
+  'lone-executable-definition': loneExecutableDefinition,
   'match-document-filename': matchDocumentFilename,
   'naming-convention': namingConvention,
   'no-anonymous-operations': noAnonymousOperations,

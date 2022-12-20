@@ -9,6 +9,7 @@
         "arguments": ["Field", "Directive"]
       }
     ],
+    "@graphql-eslint/lone-executable-definition": "error",
     "@graphql-eslint/match-document-filename": [
       "error",
       {
