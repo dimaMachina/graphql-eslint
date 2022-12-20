@@ -181,7 +181,7 @@ async function generateDocs(): Promise<void> {
   result.push({
     path: resolve(DOCS_PATH, 'README.md'),
     content: [
-      '## Available Rules',
+      '# Available Rules',
       'Each rule has emojis denoting:',
       `- ${Icon.SCHEMA} if the rule applies to schema documents`,
       `- ${Icon.OPERATIONS} if the rule applies to operations`,

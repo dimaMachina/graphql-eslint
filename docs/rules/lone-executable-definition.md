@@ -37,14 +37,14 @@ query Foo {
 
 The schema defines the following properties:
 
-### `ignores` (array)
+### `ignore` (array)
 
 Allow certain definitions to be placed alongside others.
 
 The elements of the array can contain the following enum values:
 
-- `query`
 - `fragment`
+- `query`
 - `mutation`
 - `subscription`
 

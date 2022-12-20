@@ -82,7 +82,7 @@ Includes:
 
 ### `rootField` (boolean)
 
-Definitions within `Query`, `Mutation`, and `Subscription` root types
+Definitions within `Query`, `Mutation`, and `Subscription` root types.
 
 ### `DirectiveDefinition` (boolean)
 

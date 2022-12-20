@@ -140,7 +140,7 @@ export const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
           },
           rootField: {
             type: 'boolean',
-            description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types',
+            description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types.',
           },
           ...Object.fromEntries(
             [...ALLOWED_KINDS].sort().map(kind => {

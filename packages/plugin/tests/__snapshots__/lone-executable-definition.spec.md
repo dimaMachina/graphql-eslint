@@ -25,17 +25,10 @@ exports[`should allow fragments if they are ignored 1`] = `
 
 #### ❌ Error
 
-       6 |         }
-    >  7 |         mutation Baz($name: String!) {
-         |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    >  8 |           createFoo {
-         | ^^^^^^^^^^^^^^^^^^^^^
-    >  9 |             name
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 10 |           }
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 11 |         }
-         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Mutation "Baz" should be in a separate file.
+      6 |         }
+    > 7 |         mutation Baz($name: String!) {
+        |                  ^^^ Mutation "Baz" should be in a separate file.
+      8 |           createFoo {
 `;
 
 exports[`should report additional definitions 1`] = `
@@ -44,7 +37,7 @@ exports[`should report additional definitions 1`] = `
        1 |         query Valid {
        2 |           id
        3 |         }
-       4 |         query Foo {
+       4 |         {
        5 |           id
        6 |         }
        7 |         fragment Bar on Bar {
@@ -70,75 +63,44 @@ exports[`should report additional definitions 1`] = `
 #### ❌ Error 1/6
 
       3 |         }
-    > 4 |         query Foo {
-        |         ^^^^^^^^^^^
-    > 5 |           id
-        | ^^^^^^^^^^^^
-    > 6 |         }
-        | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Query "Foo" should be in a separate file.
-      7 |         fragment Bar on Bar {
+    > 4 |         {
+        |         ^^^^^ Query should be in a separate file.
+      5 |           id
 
 #### ❌ Error 2/6
 
-       6 |         }
-    >  7 |         fragment Bar on Bar {
-         |         ^^^^^^^^^^^^^^^^^^^^^
-    >  8 |           id
-         | ^^^^^^^^^^^^
-    >  9 |         }
-         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Fragment "Bar" should be in a separate file.
-      10 |         mutation ($name: String!) {
+      6 |         }
+    > 7 |         fragment Bar on Bar {
+        |                  ^^^ Fragment "Bar" should be in a separate file.
+      8 |           id
 
 #### ❌ Error 3/6
 
        9 |         }
     > 10 |         mutation ($name: String!) {
-         |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    > 11 |           createFoo {
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 12 |             name
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 13 |           }
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 14 |         }
-         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Mutation should be in a separate file.
-      15 |         mutation Baz($name: String!) {
+         |         ^^^^^^^^ Mutation should be in a separate file.
+      11 |           createFoo {
 
 #### ❌ Error 4/6
 
       14 |         }
     > 15 |         mutation Baz($name: String!) {
-         |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    > 16 |           createFoo {
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 17 |             name
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 18 |           }
-         | ^^^^^^^^^^^^^^^^^^^^^
-    > 19 |         }
-         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Mutation "Baz" should be in a separate file.
-      20 |         subscription {
+         |                  ^^^ Mutation "Baz" should be in a separate file.
+      16 |           createFoo {
 
 #### ❌ Error 5/6
 
       19 |         }
     > 20 |         subscription {
-         |         ^^^^^^^^^^^^^^
-    > 21 |           id
-         | ^^^^^^^^^^^^
-    > 22 |         }
-         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Subscription should be in a separate file.
-      23 |         subscription Sub {
+         |         ^^^^^^^^^^^^ Subscription should be in a separate file.
+      21 |           id
 
 #### ❌ Error 6/6
 
       22 |         }
     > 23 |         subscription Sub {
-         |         ^^^^^^^^^^^^^^^^^^
-    > 24 |           id
-         | ^^^^^^^^^^^^
-    > 25 |         }
-         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Subscription "Sub" should be in a separate file.
+         |                      ^^^ Subscription "Sub" should be in a separate file.
+      24 |           id
 `;
 
 exports[`should report definitions after short-hand query 1`] = `
@@ -155,9 +117,6 @@ exports[`should report definitions after short-hand query 1`] = `
 
       3 |         }
     > 4 |         fragment Bar on Bar {
-        |         ^^^^^^^^^^^^^^^^^^^^^
-    > 5 |           id
-        | ^^^^^^^^^^^^
-    > 6 |         }
-        | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Fragment "Bar" should be in a separate file.
+        |                  ^^^ Fragment "Bar" should be in a separate file.
+      5 |           id
 `;

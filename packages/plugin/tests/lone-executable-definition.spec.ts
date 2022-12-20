@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/lone-executable-definition';
+import { rule } from '../src/rules/lone-executable-definition';
 
 const ruleTester = new GraphQLRuleTester();
 
@@ -105,7 +105,7 @@ ruleTester.runGraphQLTests('lone-executable-definition', rule, {
         query Valid {
           id
         }
-        query Foo {
+        {
           id
         }
         fragment Bar on Bar {
@@ -129,7 +129,7 @@ ruleTester.runGraphQLTests('lone-executable-definition', rule, {
         }
       `,
       errors: [
-        { message: 'Query "Foo" should be in a separate file.' },
+        { message: 'Query should be in a separate file.' },
         { message: 'Fragment "Bar" should be in a separate file.' },
         { message: 'Mutation should be in a separate file.' },
         { message: 'Mutation "Baz" should be in a separate file.' },

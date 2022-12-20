@@ -1,30 +1,26 @@
 import { GraphQLESLintRule } from '../types';
-import { OperationDefinitionNode, FragmentDefinitionNode, Kind } from 'graphql';
+import { ExecutableDefinitionNode, OperationTypeNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter';
-import { ARRAY_DEFAULT_OPTIONS } from '../utils';
+import { ARRAY_DEFAULT_OPTIONS, pascalCase, getLocation } from '../utils';
 
 const RULE_ID = 'lone-executable-definition';
-const definitionsEnum = [
-  'query' as const,
-  'fragment' as const,
-  'mutation' as const,
-  'subscription' as const,
+
+type Definition = 'fragment' | OperationTypeNode;
+
+const types: Definition[] = [
+  'fragment',
+  OperationTypeNode.QUERY,
+  OperationTypeNode.MUTATION,
+  OperationTypeNode.SUBSCRIPTION,
 ];
 
 export interface LoneExecutableDefinitionConfig {
-  ignore?: typeof definitionsEnum[number][];
+  ignore?: typeof types[number][];
 }
 
-type DefinitionESTreeNode =
-  | GraphQLESTreeNode<OperationDefinitionNode>
-  | GraphQLESTreeNode<FragmentDefinitionNode>;
+type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
 
-const uppercaseFirst = (string: string) => string.slice(0, 1).toUpperCase() + string.slice(1);
-
-const isDefinitionNode = (node: { kind: string }): node is DefinitionESTreeNode =>
-  node.kind === Kind.OPERATION_DEFINITION || node.kind === Kind.FRAGMENT_DEFINITION;
-
-const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
+export const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -64,11 +60,13 @@ const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
       items: {
         type: 'object',
         minProperties: 1,
+        additionalProperties: false,
         properties: {
-          ignores: {
+          ignore: {
             ...ARRAY_DEFAULT_OPTIONS,
+            maxItems: 3, // ignore all 4 types is redundant
             items: {
-              enum: definitionsEnum,
+              enum: types,
             },
             description: 'Allow certain definitions to be placed alongside others.',
           },
@@ -77,35 +75,29 @@ const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
     },
   },
   create(context) {
-    const ignore = new Set(context.options[0]?.ignore ?? []);
-
+    const ignore = new Set(context.options[0]?.ignore || []);
+    const definitions: { type: Definition; node: DefinitionESTreeNode }[] = [];
     return {
-      Document(node) {
-        const definitions = node.definitions
-          .filter(isDefinitionNode)
-          .map(node => ({
-            node,
-            type: 'operation' in node ? node.operation : ('fragment' as const),
-          }))
-          .filter(({ type }) => !ignore.has(type))
-          .slice(1); // ignore first definition
-
-        for (const { node, type } of definitions) {
-          const typeName = uppercaseFirst(type);
+      ':matches(OperationDefinition, FragmentDefinition)'(node: DefinitionESTreeNode) {
+        const type = 'operation' in node ? node.operation : 'fragment';
+        if (!ignore.has(type)) {
+          definitions.push({ type, node });
+        }
+      },
+      'Program:exit'() {
+        for (const { node, type } of definitions.slice(1) /* ignore first definition */) {
+          let name = pascalCase(type);
           const definitionName = node.name?.value;
-          const name = definitionName ? `${typeName} "${definitionName}"` : typeName;
-
+          if (definitionName) {
+            name += ` "${definitionName}"`;
+          }
           context.report({
-            node,
+            loc: node.name?.loc || getLocation(node.loc.start, type),
             messageId: RULE_ID,
-            data: {
-              name,
-            },
+            data: { name },
           });
         }
       },
     };
   },
 };
-
-export default rule;
