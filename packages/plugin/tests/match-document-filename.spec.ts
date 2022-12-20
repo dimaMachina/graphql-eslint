@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import { rule, Schema } from '../src/rules/match-document-filename';
+import { rule, RuleOptions } from '../src/rules/match-document-filename';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<Schema>('match-document-filename', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('match-document-filename', rule, {
   valid: [
     {
       filename: 'src/me.gql',

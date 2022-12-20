@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import { rule, Schema } from '../src/rules/strict-id-in-types';
+import { rule, RuleOptions } from '../src/rules/strict-id-in-types';
 
 const ruleTester = new GraphQLRuleTester();
 
@@ -12,7 +12,7 @@ function useSchema(code: string): { code: string; parserOptions: Pick<ParserOpti
   };
 }
 
-ruleTester.runGraphQLTests<Schema>('strict-id-in-types', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('strict-id-in-types', rule, {
   valid: [
     useSchema('type A { id: ID! }'),
     {

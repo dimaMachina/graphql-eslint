@@ -41,9 +41,9 @@ const schema = {
   },
 } as const;
 
-export type Schema = FromSchema<typeof schema>;
+export type RuleOptions = FromSchema<typeof schema>;
 
-export const rule: GraphQLESLintRule<Schema> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -118,7 +118,7 @@ export const rule: GraphQLESLintRule<Schema> = {
     schema,
   },
   create(context) {
-    const options: Schema[0] = {
+    const options: RuleOptions[0] = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
       exceptions: {},
