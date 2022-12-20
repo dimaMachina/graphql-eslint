@@ -227,6 +227,7 @@ importers:
       graphql: 16.6.0
       graphql-config: ^4.3.6
       graphql-depth-limit: ^1.1.0
+      json-schema-to-ts: 2.6.2
       lodash.lowercase: ^4.3.0
     dependencies:
       '@babel/code-frame': 7.18.6
@@ -247,6 +248,7 @@ importers:
       '@types/json-schema': 7.0.11
       '@types/lodash.lowercase': 4.3.7
       graphql: 16.6.0
+      json-schema-to-ts: 2.6.2
     publishDirectory: dist
 
 packages:
@@ -5939,6 +5941,16 @@ packages:
     dev: true
     patched: true
 
+  /json-schema-to-ts/2.6.2:
+    resolution: {integrity: sha512-RrcvhZUcTAtfMVSvHIq3h/tELToha68V/1kGeQ2ggBv/4Bv31Zjbqis+b+Hiwibj6GO5WLA9PE4X93C8VTJ1TA==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@babel/runtime': 7.20.6
+      '@types/json-schema': 7.0.11
+      ts-algebra: 1.1.1
+      ts-toolbelt: 9.6.0
+    dev: true
+
   /json-schema-traverse/0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
     dev: true
@@ -7452,6 +7464,12 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /ts-algebra/1.1.1:
+    resolution: {integrity: sha512-W43a3/BN0Tp4SgRNERQF/QPVuY1rnHkgCr/fISLY0Ycu05P0NWPYRuViU8JFn+pFZuY6/zp9TgET1fxMzppR/Q==}
+    dependencies:
+      ts-toolbelt: 9.6.0
+    dev: true
+
   /ts-interface-checker/0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
@@ -7515,6 +7533,10 @@ packages:
       typescript: 4.9.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: true
+
+  /ts-toolbelt/9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: true
 
   /tsconfig-paths/3.14.1:

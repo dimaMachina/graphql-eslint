@@ -1,5 +1,4 @@
 import { AST } from 'eslint';
-import { JSONSchema4 } from 'json-schema';
 import {
   Kind,
   DocumentNode,
@@ -21,6 +20,7 @@ import {
   REPORT_ON_FIRST_CHARACTER,
   ARRAY_DEFAULT_OPTIONS,
 } from '../utils';
+import { JSONSchema } from 'json-schema-to-ts';
 
 function validateDocument({
   context,
@@ -162,7 +162,7 @@ const validationToRule = (
     ruleId: string;
     ruleName: string;
     getDocumentNode?: GetDocumentNode;
-    schema?: JSONSchema4 | JSONSchema4[];
+    schema?: JSONSchema | [];
     hasDidYouMeanSuggestions?: boolean;
   },
   docs: Omit<GraphQLESLintRule['meta']['docs'], 'url'>,

@@ -5,12 +5,30 @@ import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'grap
 import { GraphQLESTreeNode } from '../estree-converter';
 import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils';
 import { SiblingOperations } from '../documents';
-
-export type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'selection-set-depth';
 
-export const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
+const schema = {
+  type: 'array',
+  minItems: 1,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['maxDepth'],
+    properties: {
+      maxDepth: {
+        type: 'number',
+      },
+      ignore: ARRAY_DEFAULT_OPTIONS,
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -64,22 +82,7 @@ export const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       recommended: true,
       configOptions: [{ maxDepth: 7 }],
     },
-    schema: {
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['maxDepth'],
-        properties: {
-          maxDepth: {
-            type: 'number',
-          },
-          ignore: ARRAY_DEFAULT_OPTIONS,
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     let siblings: SiblingOperations | null = null;

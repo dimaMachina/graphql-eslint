@@ -103,12 +103,6 @@ exports[`Invalid #2 1`] = `
       7 |     record: User
       8 |   }
 
-#### ⚙️ Options
-
-    {
-      "style": "block"
-    }
-
 #### ❌ Error 1/3
 
     > 1 |   " Test "

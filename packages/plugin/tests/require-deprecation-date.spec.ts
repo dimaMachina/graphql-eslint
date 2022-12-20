@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import { rule } from '../src/rules/require-deprecation-date';
+import { rule, RuleOptions } from '../src/rules/require-deprecation-date';
 
 const now = new Date();
 now.setDate(now.getDate() + 1);
@@ -12,7 +12,7 @@ const tomorrow = `${day}/${month}/${year}`;
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('require-deprecation-date', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('require-deprecation-date', rule, {
   valid: [
     'type User { firstName: String }',
     `scalar Old @deprecated(deletionDate: "${tomorrow}")`,

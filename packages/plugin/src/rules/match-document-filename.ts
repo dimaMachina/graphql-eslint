@@ -4,13 +4,13 @@ import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { CaseStyle as _CaseStyle, convertCase, REPORT_ON_FIRST_CHARACTER } from '../utils';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
+import { FromSchema } from 'json-schema-to-ts';
 
 type CaseStyle = _CaseStyle | 'matchDocumentStyle';
 
 const MATCH_EXTENSION = 'MATCH_EXTENSION';
 const MATCH_STYLE = 'MATCH_STYLE';
 
-const ACCEPTED_EXTENSIONS: ['.gql', '.graphql'] = ['.gql', '.graphql'];
 const CASE_STYLES: CaseStyle[] = [
   'camelCase',
   'PascalCase',
@@ -20,24 +20,46 @@ const CASE_STYLES: CaseStyle[] = [
   'matchDocumentStyle',
 ];
 
-type PropertySchema = {
-  style?: CaseStyle;
-  suffix?: string;
-};
-
-export type MatchDocumentFilenameRuleConfig = {
-  fileExtension?: typeof ACCEPTED_EXTENSIONS[number];
-  query?: CaseStyle | PropertySchema;
-  mutation?: CaseStyle | PropertySchema;
-  subscription?: CaseStyle | PropertySchema;
-  fragment?: CaseStyle | PropertySchema;
-};
-
 const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
-};
+} as const;
 
-export const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
+const schema = {
+  definitions: {
+    asString: {
+      enum: CASE_STYLES,
+      description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
+    },
+    asObject: {
+      type: 'object',
+      additionalProperties: false,
+      minProperties: 1,
+      properties: {
+        style: { enum: CASE_STYLES },
+        suffix: { type: 'string' },
+      },
+    },
+  },
+  type: 'array',
+  minItems: 1,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      fileExtension: { enum: ['.gql', '.graphql'] },
+      query: schemaOption,
+      mutation: schemaOption,
+      subscription: schemaOption,
+      fragment: schemaOption,
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -130,41 +152,10 @@ export const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         'File extension "{{ fileExtension }}" don\'t match extension "{{ expectedFileExtension }}"',
       [MATCH_STYLE]: 'Unexpected filename "{{ filename }}". Rename it to "{{ expectedFilename }}"',
     },
-    schema: {
-      definitions: {
-        asString: {
-          enum: CASE_STYLES,
-          description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
-        },
-        asObject: {
-          type: 'object',
-          additionalProperties: false,
-          minProperties: 1,
-          properties: {
-            style: { enum: CASE_STYLES },
-            suffix: { type: 'string' },
-          },
-        },
-      },
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        minProperties: 1,
-        properties: {
-          fileExtension: { enum: ACCEPTED_EXTENSIONS },
-          query: schemaOption,
-          mutation: schemaOption,
-          subscription: schemaOption,
-          fragment: schemaOption,
-        },
-      },
-    },
+    schema,
   },
   create(context) {
-    const options: MatchDocumentFilenameRuleConfig = context.options[0] || {
+    const options = context.options[0] || {
       fileExtension: null,
     };
     const filePath = context.getFilename();
@@ -217,7 +208,7 @@ export const rule: GraphQLESLintRule<[MatchDocumentFilenameRuleConfig]> = {
         }
 
         if (typeof option === 'string') {
-          option = { style: option } as PropertySchema;
+          option = { style: option };
         }
         const expectedExtension = options.fileExtension || fileExtension;
         let expectedFilename: string;

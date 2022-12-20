@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import { rule, AlphabetizeConfig } from '../src/rules/alphabetize';
+import { rule, RuleOptions } from '../src/rules/alphabetize';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
   valid: [
     {
       options: [{ fields: ['ObjectTypeDefinition'] }],

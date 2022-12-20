@@ -1,10 +1,27 @@
 import { StringValueNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
+import { FromSchema } from 'json-schema-to-ts';
 
-type DescriptionStyleRuleConfig = { style: 'inline' | 'block' };
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      style: {
+        enum: ['block', 'inline'],
+        default: 'block',
+      },
+    },
+  },
+} as const;
 
-export const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -36,18 +53,7 @@ export const rule: GraphQLESLintRule<[DescriptionStyleRuleConfig]> = {
       url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/description-style.md',
       recommended: true,
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          style: {
-            enum: ['block', 'inline'],
-            default: 'block',
-          },
-        },
-      },
-    ],
+    schema,
   },
   create(context) {
     const { style = 'block' } = context.options[0] || {};

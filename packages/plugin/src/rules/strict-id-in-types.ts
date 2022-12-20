@@ -2,19 +2,48 @@ import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types';
 import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, englishJoinWords } from '../utils';
 import { GraphQLESTreeNode } from '../estree-converter';
-
-export type StrictIdInTypesRuleConfig = {
-  acceptedIdNames?: string[];
-  acceptedIdTypes?: string[];
-  exceptions?: {
-    types?: string[];
-    suffixes?: string[];
-  };
-};
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'strict-id-in-types';
 
-export const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      acceptedIdNames: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        default: ['id'],
+      },
+      acceptedIdTypes: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        default: ['ID'],
+      },
+      exceptions: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          types: {
+            ...ARRAY_DEFAULT_OPTIONS,
+            description:
+              'This is used to exclude types with names that match one of the specified values.',
+          },
+          suffixes: {
+            ...ARRAY_DEFAULT_OPTIONS,
+            description:
+              'This is used to exclude types with names with suffixes that match one of the specified values.',
+          },
+        },
+      },
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -86,42 +115,10 @@ export const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         },
       ],
     },
-    schema: {
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          acceptedIdNames: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            default: ['id'],
-          },
-          acceptedIdTypes: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            default: ['ID'],
-          },
-          exceptions: {
-            type: 'object',
-            properties: {
-              types: {
-                ...ARRAY_DEFAULT_OPTIONS,
-                description:
-                  'This is used to exclude types with names that match one of the specified values.',
-              },
-              suffixes: {
-                ...ARRAY_DEFAULT_OPTIONS,
-                description:
-                  'This is used to exclude types with names with suffixes that match one of the specified values.',
-              },
-            },
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
-    const options: StrictIdInTypesRuleConfig = {
+    const options: RuleOptions[0] = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
       exceptions: {},

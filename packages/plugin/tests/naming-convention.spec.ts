@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import { rule, NamingConventionRuleConfig } from '../src/rules/naming-convention';
+import { rule, RuleOptions } from '../src/rules/naming-convention';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
   valid: [
     {
       code: /* GraphQL */ `

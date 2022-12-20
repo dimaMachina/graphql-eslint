@@ -5,6 +5,7 @@ import { IExtensions, IGraphQLProject } from 'graphql-config';
 import { GraphQLParseOptions } from '@graphql-tools/utils';
 import { GraphQLESLintRuleListener } from './testkit';
 import { SiblingOperations } from './documents';
+import { JSONSchema } from 'json-schema-to-ts';
 
 export type Schema = GraphQLSchema | Error | null;
 export type Pointer = string | string[];
@@ -73,8 +74,9 @@ export type RuleDocsInfo<T> = Omit<Rule.RuleMetaData['docs'], 'category' | 'sugg
 
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
-  meta: Omit<Rule.RuleMetaData, 'docs'> & {
+  meta: Omit<Rule.RuleMetaData, 'docs' | 'schema'> & {
     docs?: RuleDocsInfo<Options>;
+    schema: Readonly<JSONSchema> | [];
   };
 };
 

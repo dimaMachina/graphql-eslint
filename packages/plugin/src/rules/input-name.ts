@@ -8,13 +8,40 @@ import {
 import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRuleListener } from '../testkit';
+import { FromSchema } from 'json-schema-to-ts';
 
-type InputNameRuleConfig = {
-  checkInputType?: boolean;
-  caseSensitiveInputType?: boolean;
-  checkQueries?: boolean;
-  checkMutations?: boolean;
-};
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      checkInputType: {
+        type: 'boolean',
+        default: false,
+        description: 'Check that the input type name follows the convention <mutationName>Input',
+      },
+      caseSensitiveInputType: {
+        type: 'boolean',
+        default: true,
+        description: 'Allow for case discrepancies in the input type name',
+      },
+      checkQueries: {
+        type: 'boolean',
+        default: false,
+        description: 'Apply the rule to Queries',
+      },
+      checkMutations: {
+        type: 'boolean',
+        default: true,
+        description: 'Apply the rule to Mutations',
+      },
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
 
 type ObjectTypeNode = GraphQLESTreeNode<ObjectTypeDefinitionNode | ObjectTypeExtensionNode>;
 
@@ -25,7 +52,7 @@ const isQueryType = (node: ObjectTypeNode): boolean =>
 const isMutationType = (node: ObjectTypeNode): boolean =>
   isObjectType(node) && node.name.value === 'Mutation';
 
-export const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -64,38 +91,10 @@ export const rule: GraphQLESLintRule<[InputNameRuleConfig]> = {
         },
       ],
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          checkInputType: {
-            type: 'boolean',
-            default: false,
-            description:
-              'Check that the input type name follows the convention <mutationName>Input',
-          },
-          caseSensitiveInputType: {
-            type: 'boolean',
-            default: true,
-            description: 'Allow for case discrepancies in the input type name',
-          },
-          checkQueries: {
-            type: 'boolean',
-            default: false,
-            description: 'Apply the rule to Queries',
-          },
-          checkMutations: {
-            type: 'boolean',
-            default: true,
-            description: 'Apply the rule to Mutations',
-          },
-        },
-      },
-    ],
+    schema,
   },
   create(context) {
-    const options: InputNameRuleConfig = {
+    const options: RuleOptions[0] = {
       checkInputType: false,
       caseSensitiveInputType: true,
       checkQueries: false,
