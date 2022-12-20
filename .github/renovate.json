@@ -3,8 +3,6 @@
   "extends": ["github>the-guild-org/shared-config:renovate"],
   "lockFileMaintenance": {
     "enabled": true,
-    "automerge": true,
-    "automergeType": "pr",
-    "platformAutomerge": true
+    "automerge": true
   }
 }
