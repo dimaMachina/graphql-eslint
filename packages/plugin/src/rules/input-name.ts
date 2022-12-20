@@ -94,7 +94,7 @@ export const rule: GraphQLESLintRule<Schema> = {
     schema,
   },
   create(context) {
-    const options: Schema[number] = {
+    const options: Schema[0] = {
       checkInputType: false,
       caseSensitiveInputType: true,
       checkQueries: false,

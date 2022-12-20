@@ -19,13 +19,6 @@ type AllowedKind = typeof ALLOWED_KINDS[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
 
-export type RequireDescriptionRuleConfig = {
-  types?: boolean;
-  rootField?: boolean;
-} & {
-  [key in AllowedKind]?: boolean;
-};
-
 function getNodeName(node: SelectorNode) {
   const DisplayNodeNameMap = {
     [Kind.OBJECT_TYPE_DEFINITION]: 'type',
@@ -56,7 +49,48 @@ function getNodeName(node: SelectorNode) {
   }
 }
 
-export const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
+const schema = {
+  type: 'array',
+  minItems: 1,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      types: {
+        type: 'boolean',
+        description: `Includes:\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+      },
+      rootField: {
+        type: 'boolean',
+        description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types.',
+      },
+      ...Object.fromEntries(
+        [...ALLOWED_KINDS].map(kind => {
+          let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
+          if (kind === Kind.OPERATION_DEFINITION) {
+            description +=
+              '\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
+          }
+          return [kind, { type: 'boolean', description }];
+        }),
+      ),
+    },
+  },
+} as const;
+
+// TODO try import { FromSchema } from 'json-schema-to-ts';
+export type Schema = [
+  {
+    types?: boolean;
+    rootField?: boolean;
+  } & {
+    [key in AllowedKind]?: boolean;
+  },
+];
+
+export const rule: GraphQLESLintRule<Schema> = {
   meta: {
     docs: {
       category: 'Schema',
@@ -125,36 +159,7 @@ export const rule: GraphQLESLintRule<[RequireDescriptionRuleConfig]> = {
     messages: {
       [RULE_ID]: 'Description is required for `{{ nodeName }}`.',
     },
-    schema: {
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        minProperties: 1,
-        properties: {
-          types: {
-            type: 'boolean',
-            description: `Includes:\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
-          },
-          rootField: {
-            type: 'boolean',
-            description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types.',
-          },
-          ...Object.fromEntries(
-            [...ALLOWED_KINDS].sort().map(kind => {
-              let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
-              if (kind === Kind.OPERATION_DEFINITION) {
-                description +=
-                  '\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
-              }
-              return [kind, { type: 'boolean', description }];
-            }),
-          ),
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const { types, rootField, ...restOptions } = context.options[0] || {};

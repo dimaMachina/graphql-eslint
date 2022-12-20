@@ -14,6 +14,7 @@ import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
 import type { GraphQLESLintRule } from '../types';
 import type { GraphQLESTreeNode } from '../estree-converter';
 import type { GraphQLESLintRuleListener } from '../testkit';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'relay-edge-types';
 const MESSAGE_MUST_BE_OBJECT_TYPE = 'MESSAGE_MUST_BE_OBJECT_TYPE';
@@ -55,13 +56,36 @@ function getEdgeTypes(schema: GraphQLSchema): EdgeTypes {
   return edgeTypesCache;
 }
 
-export type EdgeTypesConfig = {
-  withEdgeSuffix?: boolean;
-  shouldImplementNode?: boolean;
-  listTypeCanWrapOnlyEdgeType?: boolean;
-};
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      withEdgeSuffix: {
+        type: 'boolean',
+        default: true,
+        description: 'Edge type name must end in "Edge".',
+      },
+      shouldImplementNode: {
+        type: 'boolean',
+        default: true,
+        description: "Edge type's field `node` must implement `Node` interface.",
+      },
+      listTypeCanWrapOnlyEdgeType: {
+        type: 'boolean',
+        default: true,
+        description: 'A list type should only wrap an edge type.',
+      },
+    },
+  },
+} as const
 
-export const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
+export type Schema = FromSchema<typeof schema>
+
+export const rule: GraphQLESLintRule<Schema, true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -98,37 +122,12 @@ export const rule: GraphQLESLintRule<[EdgeTypesConfig], true> = {
       [MESSAGE_LIST_TYPE_ONLY_EDGE_TYPE]: 'A list type should only wrap an edge type.',
       [MESSAGE_SHOULD_IMPLEMENTS_NODE]: "Edge type's field `node` must implement `Node` interface.",
     },
-    schema: {
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        minProperties: 1,
-        properties: {
-          withEdgeSuffix: {
-            type: 'boolean',
-            default: true,
-            description: 'Edge type name must end in "Edge".',
-          },
-          shouldImplementNode: {
-            type: 'boolean',
-            default: true,
-            description: "Edge type's field `node` must implement `Node` interface.",
-          },
-          listTypeCanWrapOnlyEdgeType: {
-            type: 'boolean',
-            default: true,
-            description: 'A list type should only wrap an edge type.',
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const edgeTypes = getEdgeTypes(schema);
-    const options: EdgeTypesConfig = {
+    const options: Schema[0] = {
       withEdgeSuffix: true,
       shouldImplementNode: true,
       listTypeCanWrapOnlyEdgeType: true,
