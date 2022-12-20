@@ -1,5 +1,7 @@
-import { readdirSync, writeFileSync } from 'fs';
-import { join } from 'path';
+/* eslint-disable no-console */
+import { readdirSync } from 'node:fs';
+import { writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { format, resolveConfig } from 'prettier';
 import chalk from 'chalk';
 import { camelCase } from '../packages/plugin/src/utils';
@@ -11,11 +13,11 @@ const SRC_PATH = join(process.cwd(), 'packages/plugin/src');
 const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
 
 type WriteFile = {
-  (filePath: `${string}.ts`, code: string): void;
-  (filePath: `configs/${string}.json`, code: Record<string, unknown>): void;
+  (filePath: `${string}.ts`, code: string): Promise<void>;
+  (filePath: `configs/${string}.json`, code: Record<string, unknown>): Promise<void>;
 };
 
-const writeFormattedFile: WriteFile = (filePath, code): void => {
+const writeFormattedFile: WriteFile = async (filePath, code) => {
   const isJson = filePath.endsWith('.json');
 
   const formattedCode = isJson
@@ -34,8 +36,7 @@ const writeFormattedFile: WriteFile = (filePath, code): void => {
         }),
       ].join('\n');
 
-  writeFileSync(join(SRC_PATH, filePath), formattedCode);
-  // eslint-disable-next-line no-console
+  await writeFile(join(SRC_PATH, filePath), formattedCode);
   console.log(`✅  ${chalk.green(filePath)} file generated`);
 };
 
@@ -98,26 +99,28 @@ async function generateConfigs(): Promise<void> {
     );
   };
 
-  writeFormattedFile('configs/schema-recommended.json', {
-    extends: './base.json',
-    rules: getRulesConfig('Schema', true),
-  });
-
-  writeFormattedFile('configs/operations-recommended.json', {
-    extends: './base.json',
-    rules: getRulesConfig('Operations', true),
-  });
-
-  writeFormattedFile('configs/schema-all.json', {
-    extends: ['./base.json', './schema-recommended.json'],
-    rules: getRulesConfig('Schema', false),
-  });
-
-  writeFormattedFile('configs/operations-all.json', {
-    extends: ['./base.json', './operations-recommended.json'],
-    rules: getRulesConfig('Operations', false),
-  });
+  await Promise.all([
+    writeFormattedFile('configs/schema-recommended.json', {
+      extends: './base.json',
+      rules: getRulesConfig('Schema', true),
+    }),
+    writeFormattedFile('configs/operations-recommended.json', {
+      extends: './base.json',
+      rules: getRulesConfig('Operations', true),
+    }),
+    writeFormattedFile('configs/schema-all.json', {
+      extends: ['./base.json', './schema-recommended.json'],
+      rules: getRulesConfig('Schema', false),
+    }),
+    writeFormattedFile('configs/operations-all.json', {
+      extends: ['./base.json', './operations-recommended.json'],
+      rules: getRulesConfig('Operations', false),
+    }),
+  ]);
 }
 
+console.time('done');
 generateRules();
-generateConfigs();
+generateConfigs().then(() => {
+  console.timeLog('done');
+});

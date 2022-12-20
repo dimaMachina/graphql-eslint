@@ -1,11 +1,13 @@
 # `no-root-type`
 
-💡 This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+💡 This rule provides
+[suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/no-root-type`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Disallow using root types `mutation` and/or `subscription`.
 
@@ -44,8 +46,8 @@ The elements of the array can contain the following enum values:
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ## Resources
 

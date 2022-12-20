@@ -52,6 +52,28 @@ exports[`Examples should work in monorepo 1`] = `
         nodeType: null,
         ruleId: @graphql-eslint/fields-on-correct-type,
         severity: 2,
+        suggestions: [
+          {
+            desc: Rename to \`firstName\`,
+            fix: {
+              range: [
+                164,
+                173,
+              ],
+              text: firstName,
+            },
+          },
+          {
+            desc: Rename to \`lastName\`,
+            fix: {
+              range: [
+                164,
+                173,
+              ],
+              text: lastName,
+            },
+          },
+        ],
       },
     ],
   },

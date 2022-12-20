@@ -1,13 +1,16 @@
 # `no-unused-variables`
 
-✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
+enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/no-unused-variables`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `true` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `true`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.
+A GraphQL operation is only valid if all variables defined by an operation are used, either directly
+or within a spread fragment.
 
 > This rule is a wrapper around a `graphql-js` validation function.
 

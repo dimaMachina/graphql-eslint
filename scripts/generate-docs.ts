@@ -1,8 +1,9 @@
-import { writeFileSync } from 'fs';
-import { resolve } from 'path';
+/* eslint-disable no-console */
+import { writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
-import { format } from 'prettier';
+import { format, resolveConfig } from 'prettier';
 import { asArray } from '@graphql-tools/utils';
 import { rules } from '../packages/plugin/src';
 
@@ -43,9 +44,11 @@ function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]
   ].join('\n');
 }
 
-function generateDocs(): void {
+async function generateDocs(): Promise<void> {
+  const prettierConfig = await resolveConfig('./docs/README.md');
+
   const result = Object.entries(rules).map(([ruleName, rule]) => {
-    const blocks: string[] = [`# \`${ruleName}\``, BR];
+    const blocks: string[] = [`# \`${ruleName}\``];
     const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
 
     if (deprecated) {
@@ -60,19 +63,18 @@ function generateDocs(): void {
         `${Icon.RECOMMENDED} The \`"extends": ${configNames.join(
           '` and `',
         )}\` property in a configuration file enables this rule.`,
-        BR,
       );
     }
     if (fixable) {
       blocks.push(
-        `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
         BR,
+        `${Icon.FIXABLE} The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.`,
       );
     }
     if (hasSuggestions) {
       blocks.push(
-        `${Icon.HAS_SUGGESTIONS} This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
         BR,
+        `${Icon.HAS_SUGGESTIONS} This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
       );
     }
 
@@ -88,11 +90,11 @@ function generateDocs(): void {
     );
 
     if (docs.examples?.length > 0) {
-      blocks.push(BR, '## Usage Examples');
+      blocks.push('## Usage Examples');
 
       for (const { usage, title, code } of docs.examples) {
         const isJsCode = ['gql`', '/* GraphQL */'].some(str => code.includes(str));
-        blocks.push(BR, `### ${title}`, BR, '```' + (isJsCode ? 'js' : 'graphql'));
+        blocks.push(`### ${title}`, '```' + (isJsCode ? 'js' : 'graphql'));
 
         if (!isJsCode) {
           const options =
@@ -120,10 +122,10 @@ function generateDocs(): void {
             }
           : jsonSchema;
 
-      blocks.push(BR, '## Config Schema', BR, md(jsonSchema, '##'));
+      blocks.push('## Config Schema', md(jsonSchema, '##'));
     }
 
-    blocks.push(BR, '## Resources', BR);
+    blocks.push('## Resources');
 
     if (graphQLJSRuleName) {
       blocks.push(
@@ -136,8 +138,6 @@ function generateDocs(): void {
         `- [Test source](../../packages/plugin/tests/${ruleName}.spec.ts)`,
       );
     }
-
-    blocks.push(BR);
     return {
       path: resolve(DOCS_PATH, `rules/${ruleName}.md`),
       content: blocks.join('\n'),
@@ -150,11 +150,17 @@ function generateDocs(): void {
     .map(([ruleName, rule]) => {
       const link = `[${ruleName}](rules/${ruleName}.md)`;
       const { docs } = rule.meta;
+      let config = '';
+      if (ruleName.startsWith('relay-')) {
+        config = 'relay';
+      } else if (!docs.isDisabledForAllConfig) {
+        config = docs.recommended ? 'recommended' : 'all';
+      }
 
       return [
         link,
         docs.description.split('\n')[0],
-        docs.isDisabledForAllConfig ? '' : docs.recommended ? '![recommended][]' : '![all][]',
+        config && `![${config}][]`,
         docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
         rule.meta.hasSuggestions ? Icon.HAS_SUGGESTIONS : rule.meta.fixable ? Icon.FIXABLE : '',
       ];
@@ -164,9 +170,7 @@ function generateDocs(): void {
     path: resolve(DOCS_PATH, 'README.md'),
     content: [
       '## Available Rules',
-      BR,
       'Each rule has emojis denoting:',
-      BR,
       `- ${Icon.GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
       `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
       `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
@@ -183,18 +187,28 @@ function generateDocs(): void {
         ],
         sortedRules,
       ),
-      BR,
       '[recommended]: https://img.shields.io/badge/-recommended-green.svg',
       '[all]: https://img.shields.io/badge/-all-blue.svg',
-      BR,
+      '[relay]: https://img.shields.io/badge/-relay-orange.svg',
     ].join('\n'),
   });
 
-  for (const r of result) {
-    writeFileSync(r.path, r.content);
-  }
-  // eslint-disable-next-line no-console
+  await Promise.all(
+    result.map(r =>
+      writeFile(
+        r.path,
+        format(r.content, {
+          parser: 'markdown',
+          ...prettierConfig,
+        }),
+      ),
+    ),
+  );
+
   console.log('✅  Documentation generated');
 }
 
-generateDocs();
+console.time('done');
+generateDocs().then(() => {
+  console.timeEnd('done');
+});

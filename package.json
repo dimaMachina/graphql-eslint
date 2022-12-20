@@ -6,13 +6,13 @@
   "scripts": {
     "build": "yarn transpile-ts && bob build",
     "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
-    "generate:configs": "ts-node scripts/generate-configs.ts",
-    "generate:docs": "ts-node scripts/generate-docs.ts",
+    "generate:configs": "tsx scripts/generate-configs.ts",
+    "generate:docs": "tsx scripts/generate-docs.ts",
     "lint": "eslint --ignore-path .gitignore --ext ts,js .",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/",
     "prebuild": "rimraf packages/*/dist ./tsconfig.tsbuildinfo",
     "prerelease": "yarn build",
-    "prettier": "prettier --write --list-different .",
+    "prettier": "prettier --cache --write --list-different .",
     "release": "changeset publish",
     "test": "jest --no-watchman --forceExit --noStackTrace --detectOpenHandles",
     "transpile-ts": "tsc --project tsconfig.json"
@@ -23,6 +23,7 @@
     "@babel/preset-typescript": "7.18.6",
     "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.0",
+    "@graphql-tools/utils": "^9.0.0",
     "@swc/core": "1.3.23",
     "@swc/jest": "0.2.24",
     "@theguild/prettier-config": "1.0.0",
@@ -32,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
     "bob-the-bundler": "1.7.3",
+    "chalk": "^4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
     "eslint": "8.28.0",
@@ -49,7 +51,8 @@
     "lint-staged": "13.1.0",
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
-    "ts-node": "10.9.1",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.1",
     "typescript": "4.9.4"
   },
   "resolutions": {

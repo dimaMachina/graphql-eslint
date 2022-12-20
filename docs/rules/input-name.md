@@ -1,14 +1,18 @@
 # `input-name`
 
-💡 This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+💡 This rule provides
+[suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/input-name`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".
-Using the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.
+Require mutation argument to be always called "input" and input type to be called Mutation name +
+"Input". Using the same name for all input parameters will make your schemas easier to consume and
+more predictable. Using the same name as mutation for InputType will make it easier to find
+mutations that InputType belongs to.
 
 ## Usage Examples
 
