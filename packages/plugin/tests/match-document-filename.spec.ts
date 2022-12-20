@@ -105,5 +105,20 @@ ruleTester.runGraphQLTests<RuleOptions>('match-document-filename', rule, {
         { message: 'Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"' },
       ],
     },
+    {
+      filename: 'add-alert-channel.graphql',
+      code: /* GraphQL */ `
+        mutation addAlertChannel {
+          foo
+        }
+      `,
+      options: [{ mutation: { prefix: 'mutation.' } }],
+      errors: [
+        {
+          message:
+            'Unexpected filename "add-alert-channel.graphql". Rename it to "mutation.add-alert-channel.graphql"',
+        },
+      ],
+    },
   ],
 });

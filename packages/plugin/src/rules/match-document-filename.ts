@@ -37,6 +37,7 @@ const schema = {
       properties: {
         style: { enum: CASE_STYLES },
         suffix: { type: 'string' },
+        prefix: { type: 'string' },
       },
     },
   },
@@ -137,6 +138,26 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [{ fragment: { style: 'kebab-case', prefix: 'mutation.' } }],
+          code: /* GraphQL */ `
+            # mutation.add-alert.graphql
+            mutation addAlert {
+              foo
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [{ fragment: { prefix: 'query.' } }],
+          code: /* GraphQL */ `
+            # query.me.graphql
+            query me {
+              foo
+            }
+          `,
+        },
       ],
       configOptions: [
         {
@@ -211,12 +232,13 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           option = { style: option };
         }
         const expectedExtension = options.fileExtension || fileExtension;
-        let expectedFilename: string;
+        let expectedFilename = option.prefix || '';
+
         if (option.style) {
-          expectedFilename =
+          expectedFilename +=
             option.style === 'matchDocumentStyle' ? docName : convertCase(option.style, docName);
         } else {
-          expectedFilename = filename;
+          expectedFilename += filename;
         }
         expectedFilename += (option.suffix || '') + expectedExtension;
         const filenameWithExtension = filename + expectedExtension;

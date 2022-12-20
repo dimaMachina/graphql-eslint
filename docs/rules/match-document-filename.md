@@ -85,6 +85,28 @@ query UserById {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/match-document-filename: ['error', { fragment: { style: 'kebab-case', prefix: 'mutation.' } }]
+
+# mutation.add-alert.graphql
+mutation addAlert {
+  foo
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/match-document-filename: ['error', { fragment: { prefix: 'query.' } }]
+
+# query.me.graphql
+query me {
+  foo
+}
+```
+
 ## Config Schema
 
 The schema defines the following properties:
@@ -150,6 +172,8 @@ This element must be one of the following enum values:
 - `matchDocumentStyle`
 
 ### `suffix` (string)
+
+### `prefix` (string)
 
 ## Resources
 

@@ -75,6 +75,28 @@ exports[`Invalid #4 1`] = `
         | ^ Unexpected filename "user-fields.gql". Rename it to "UserFields.gql"
 `;
 
+exports[`Invalid #7 1`] = `
+#### ⌨️ Code
+
+      1 |         mutation addAlertChannel {
+      2 |           foo
+      3 |         }
+
+#### ⚙️ Options
+
+    {
+      "mutation": {
+        "prefix": "mutation."
+      }
+    }
+
+#### ❌ Error
+
+    > 1 |         mutation addAlertChannel {
+        | ^ Unexpected filename "add-alert-channel.graphql". Rename it to "mutation.add-alert-channel.graphql"
+      2 |           foo
+`;
+
 exports[`compare only first operation name 1`] = `
 #### ⌨️ Code
 
