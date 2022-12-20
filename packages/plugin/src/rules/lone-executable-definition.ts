@@ -2,20 +2,38 @@ import { GraphQLESLintRule } from '../types';
 import { ExecutableDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { ARRAY_DEFAULT_OPTIONS, pascalCase, getLocation } from '../utils';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'lone-executable-definition';
 
 type Definition = 'fragment' | 'query' | 'mutation' | 'subscription';
 
-const types: Definition[] = ['fragment', 'query', 'mutation', 'subscription'];
-
-export interface LoneExecutableDefinitionConfig {
-  ignore?: typeof types;
-}
-
 type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
 
-export const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
+const schema = {
+  type: 'array',
+  minItems: 0,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    minProperties: 1,
+    additionalProperties: false,
+    properties: {
+      ignore: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        maxItems: 3, // ignore all 4 types is redundant
+        items: {
+          enum: ['fragment', 'query', 'mutation', 'subscription'],
+        },
+        description: 'Allow certain definitions to be placed alongside others.',
+      },
+    },
+  },
+} as const;
+
+export type Schema = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<Schema> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -48,26 +66,7 @@ export const rule: GraphQLESLintRule<[LoneExecutableDefinitionConfig]> = {
     messages: {
       [RULE_ID]: '{{name}} should be in a separate file.',
     },
-    schema: {
-      type: 'array',
-      minItems: 0,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        minProperties: 1,
-        additionalProperties: false,
-        properties: {
-          ignore: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            maxItems: 3, // ignore all 4 types is redundant
-            items: {
-              enum: types,
-            },
-            description: 'Allow certain definitions to be placed alongside others.',
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const ignore = new Set(context.options[0]?.ignore || []);

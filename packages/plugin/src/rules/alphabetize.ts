@@ -23,6 +23,7 @@ import { GraphQLESLintRule } from '../types';
 import { GraphQLESTreeNode } from '../estree-converter';
 import { GraphQLESLintRuleListener } from '../testkit';
 import { ARRAY_DEFAULT_OPTIONS } from '../utils';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'alphabetize';
 
@@ -48,16 +49,64 @@ const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Dir
   Kind.DIRECTIVE,
 ];
 
-export type AlphabetizeConfig = {
-  fields?: typeof fieldsEnum;
-  values?: typeof valuesEnum;
-  selections?: typeof selectionsEnum;
-  variables?: typeof variablesEnum;
-  arguments?: typeof argumentsEnum;
-  definitions?: boolean;
-};
+const schema = {
+  type: 'array',
+  minItems: 1,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      fields: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        items: {
+          enum: fieldsEnum,
+        },
+        description: 'Fields of `type`, `interface`, and `input`.',
+      },
+      values: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        items: {
+          enum: valuesEnum,
+        },
+        description: 'Values of `enum`.',
+      },
+      selections: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        items: {
+          enum: selectionsEnum,
+        },
+        description:
+          'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
+      },
+      variables: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        items: {
+          enum: variablesEnum,
+        },
+        description: 'Variables of operations `query`, `mutation` and `subscription`.',
+      },
+      arguments: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        items: {
+          enum: argumentsEnum,
+        },
+        description: 'Arguments of fields and directives.',
+      },
+      definitions: {
+        type: 'boolean',
+        description:
+          'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
+        default: false,
+      },
+    },
+  },
+} as const;
 
-export const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
+export type Schema = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<Schema> = {
   meta: {
     type: 'suggestion',
     fixable: 'code',
@@ -164,60 +213,7 @@ export const rule: GraphQLESLintRule<[AlphabetizeConfig]> = {
     messages: {
       [RULE_ID]: '`{{ currName }}` should be before {{ prevName }}.',
     },
-    schema: {
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        minProperties: 1,
-        properties: {
-          fields: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            items: {
-              enum: fieldsEnum,
-            },
-            description: 'Fields of `type`, `interface`, and `input`.',
-          },
-          values: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            items: {
-              enum: valuesEnum,
-            },
-            description: 'Values of `enum`.',
-          },
-          selections: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            items: {
-              enum: selectionsEnum,
-            },
-            description:
-              'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
-          },
-          variables: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            items: {
-              enum: variablesEnum,
-            },
-            description: 'Variables of operations `query`, `mutation` and `subscription`.',
-          },
-          arguments: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            items: {
-              enum: argumentsEnum,
-            },
-            description: 'Arguments of fields and directives.',
-          },
-          definitions: {
-            type: 'boolean',
-            description:
-              'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
-            default: false,
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const sourceCode = context.getSourceCode();

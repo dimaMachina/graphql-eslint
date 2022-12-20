@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import { rule } from '../src/rules/lone-executable-definition';
+import { rule, Schema } from '../src/rules/lone-executable-definition';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('lone-executable-definition', rule, {
+ruleTester.runGraphQLTests<Schema>('lone-executable-definition', rule, {
   valid: [
     {
       name: 'should allow single short-hand query',
