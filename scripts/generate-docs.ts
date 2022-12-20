@@ -12,6 +12,8 @@ const NBSP = '&nbsp;';
 const DOCS_PATH = resolve(process.cwd(), 'docs');
 
 enum Icon {
+  SCHEMA = '📄',
+  OPERATIONS = '📦',
   GRAPHQL_ESLINT = '🚀',
   GRAPHQL_JS = '🔮',
   FIXABLE = '🔧',
@@ -156,11 +158,21 @@ async function generateDocs(): Promise<void> {
       } else if (!docs.isDisabledForAllConfig) {
         config = docs.recommended ? 'recommended' : 'all';
       }
+      const categoryIcons = asArray(docs.category).map(item => {
+        if (item === 'Schema') {
+          return Icon.SCHEMA;
+        }
+        if (item === 'Operations') {
+          return Icon.OPERATIONS;
+        }
+        return '';
+      });
 
       return [
         link,
         docs.description.split('\n')[0],
         config && `![${config}][]`,
+        categoryIcons.join(' '),
         docs.graphQLJSRuleName ? Icon.GRAPHQL_JS : Icon.GRAPHQL_ESLINT,
         rule.meta.hasSuggestions ? Icon.HAS_SUGGESTIONS : rule.meta.fixable ? Icon.FIXABLE : '',
       ];
@@ -171,6 +183,8 @@ async function generateDocs(): Promise<void> {
     content: [
       '## Available Rules',
       'Each rule has emojis denoting:',
+      `- ${Icon.SCHEMA} if the rule applies to schema documents`,
+      `- ${Icon.OPERATIONS} if the rule applies to operations`,
       `- ${Icon.GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
       `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
       `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
@@ -182,6 +196,7 @@ async function generateDocs(): Promise<void> {
           `Name${NBSP.repeat(20)}`,
           'Description',
           { name: `${NBSP.repeat(4)}Config${NBSP.repeat(4)}`, align: 'center' },
+          { name: `${Icon.SCHEMA}${NBSP}/${NBSP}${Icon.OPERATIONS}`, align: 'center' },
           { name: `${Icon.GRAPHQL_ESLINT}${NBSP}/${NBSP}${Icon.GRAPHQL_JS}`, align: 'center' },
           { name: `${Icon.FIXABLE}${NBSP}/${NBSP}${Icon.HAS_SUGGESTIONS}`, align: 'center' },
         ],
