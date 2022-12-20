@@ -6,6 +6,7 @@ import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
 import { rule as alphabetize } from './alphabetize';
 import { rule as descriptionStyle } from './description-style';
 import { rule as inputName } from './input-name';
+import { rule as loneExecutableDefinition } from './lone-executable-definition';
 import { rule as matchDocumentFilename } from './match-document-filename';
 import { rule as namingConvention } from './naming-convention';
 import { rule as noAnonymousOperations } from './no-anonymous-operations';
@@ -37,6 +38,7 @@ export const rules = {
   alphabetize,
   'description-style': descriptionStyle,
   'input-name': inputName,
+  'lone-executable-definition': loneExecutableDefinition,
   'match-document-filename': matchDocumentFilename,
   'naming-convention': namingConvention,
   'no-anonymous-operations': noAnonymousOperations,

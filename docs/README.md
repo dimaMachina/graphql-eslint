@@ -1,4 +1,4 @@
-## Available Rules
+# Available Rules
 
 Each rule has emojis denoting:
 
@@ -26,6 +26,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [known-fragment-names](rules/known-fragment-names.md)|A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.|![recommended][]|📦|🔮|
 [known-type-names](rules/known-type-names.md)|A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.|![recommended][]|📄 📦|🔮|💡
 [lone-anonymous-operation](rules/lone-anonymous-operation.md)|A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if it contains only that one operation definition.|![recommended][]|📦|🔮|
+[lone-executable-definition](rules/lone-executable-definition.md)|Require all queries, mutations, subscriptions and fragments to be located in separate files.|![all][]|📦|🚀|
 [lone-schema-definition](rules/lone-schema-definition.md)|A GraphQL document is only valid if it contains only one schema definition.|![recommended][]|📄|🔮|
 [match-document-filename](rules/match-document-filename.md)|This rule allows you to enforce that the file name should match the operation name.|![all][]|📦|🚀|
 [naming-convention](rules/naming-convention.md)|Require names to follow specified conventions.|![recommended][]|📄 📦|🚀|💡

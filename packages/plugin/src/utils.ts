@@ -61,7 +61,7 @@ export const TYPES_KINDS = [
 
 export type CaseStyle = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE' | 'kebab-case';
 
-const pascalCase = (str: string): string =>
+export const pascalCase = (str: string): string =>
   lowerCase(str)
     .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
