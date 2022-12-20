@@ -103,9 +103,9 @@ const schema = {
       '> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.',
     ].join('\n'),
   },
-} as const
+} as const;
 
-export type RuleOptions = FromSchema<typeof schema>
+export type RuleOptions = FromSchema<typeof schema>;
 
 type PropertySchema = {
   style?: AllowedStyle;

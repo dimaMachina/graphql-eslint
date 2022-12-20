@@ -67,7 +67,7 @@ const schema = {
         description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types.',
       },
       ...Object.fromEntries(
-        [...ALLOWED_KINDS].map(kind => {
+        [...ALLOWED_KINDS].sort().map(kind => {
           let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
           if (kind === Kind.OPERATION_DEFINITION) {
             description +=

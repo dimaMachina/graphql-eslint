@@ -39,7 +39,7 @@ const schema = {
       },
     },
   },
-} as const
+} as const;
 
 export type Schema = FromSchema<typeof schema>;
 

@@ -43,9 +43,9 @@ const schema = {
       },
     },
   },
-} as const
+} as const;
 
-export type RuleOptions = FromSchema<typeof schema>
+export type RuleOptions = FromSchema<typeof schema>;
 
 export const rule: GraphQLESLintRule<RuleOptions, true> = {
   meta: {

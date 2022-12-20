@@ -55,9 +55,9 @@ const schema = {
       fragment: schemaOption,
     },
   },
-} as const
+} as const;
 
-export type Schema = FromSchema<typeof schema>
+export type Schema = FromSchema<typeof schema>;
 
 export const rule: GraphQLESLintRule<Schema> = {
   meta: {
