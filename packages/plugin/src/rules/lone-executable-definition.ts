@@ -12,7 +12,6 @@ type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
 
 const schema = {
   type: 'array',
-  minItems: 0,
   maxItems: 1,
   items: {
     type: 'object',
