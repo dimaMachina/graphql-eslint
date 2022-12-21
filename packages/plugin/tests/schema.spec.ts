@@ -1,15 +1,16 @@
-import { resolve } from 'path';
-import { readFileSync } from 'fs';
+import path from 'path';
+import { readFile } from 'node:fs/promises';
 import { spawn } from 'child_process';
 import { GraphQLSchema, printSchema } from 'graphql';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { getSchema } from '../src/schema';
 import { loadGraphQLConfig } from '../src/graphql-config';
 
-describe('schema', () => {
-  const SCHEMA_GRAPHQL_PATH = resolve(__dirname, 'mocks/user-schema.graphql');
-  const SCHEMA_CODE_PATH = resolve(__dirname, 'mocks/user-schema.ts');
-  const SCHEMA_JSON_PATH = resolve(__dirname, 'mocks/user-schema.json');
-  const schemaOnDisk = readFileSync(SCHEMA_GRAPHQL_PATH, 'utf8');
+describe('schema', async () => {
+  const SCHEMA_GRAPHQL_PATH = path.resolve(__dirname, 'mocks/user-schema.graphql');
+  const SCHEMA_CODE_PATH = path.resolve(__dirname, 'mocks/user-schema.ts');
+  const SCHEMA_JSON_PATH = path.resolve(__dirname, 'mocks/user-schema.json');
+  const schemaOnDisk = await readFile(SCHEMA_GRAPHQL_PATH, 'utf8');
 
   const testSchema = (schema: string) => {
     const gqlConfig = loadGraphQLConfig({ schema, filePath: '' });
@@ -43,8 +44,8 @@ describe('schema', () => {
     let url;
 
     beforeAll(() => new Promise(resolve => {
-      const tsNodeCommand = resolve(process.cwd(), 'node_modules/.bin/tsx');
-      const serverPath = resolve(__dirname, 'mocks/graphql-server.ts');
+      const tsNodeCommand = path.resolve(process.cwd(), 'node_modules/.bin/tsx');
+      const serverPath = path.resolve(__dirname, 'mocks/graphql-server.ts');
 
       // Import `TestGraphQLServer` and run it in this file will don't work
       // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
@@ -117,8 +118,8 @@ describe('schema', () => {
 
   it('should load the graphql-config rc file relative to the linted file', () => {
     const gqlConfig = loadGraphQLConfig({
-      schema: resolve(__dirname, 'mocks/using-config/schema.graphql'),
-      filePath: resolve(__dirname, 'mocks/using-config/test.graphql'),
+      schema: path.resolve(__dirname, 'mocks/using-config/schema.graphql'),
+      filePath: path.resolve(__dirname, 'mocks/using-config/test.graphql'),
     });
 
     const graphQLSchema = getSchema(gqlConfig.getDefault()) as GraphQLSchema;
