@@ -36,7 +36,7 @@ jobs:
           packageManager: pnpm
 
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node ./scripts/match-graphql.js ${{matrix.graphql_version}}
+        run: tsx scripts/match-graphql.ts ${{matrix.graphql_version}}
 
       - name: Install Dependencies
         run: pnpm i --no-frozen-lockfile
@@ -73,7 +73,7 @@ jobs:
           packageManager: pnpm
 
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node scripts/match-graphql.js ${{matrix.graphql_version}}
+        run: tsx scripts/match-graphql.ts ${{matrix.graphql_version}}
 
       - name: Install Dependencies
         run: pnpm i --no-frozen-lockfile
