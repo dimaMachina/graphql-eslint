@@ -8,13 +8,4 @@ export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './ut
 
 export const processors = { graphql: processor };
 
-export const configs = Object.fromEntries(
-  [
-    // Configs to extend from `configs` directory
-    'schema-recommended',
-    'schema-all',
-    'operations-recommended',
-    'operations-all',
-    'relay',
-  ].map(configName => [configName, { extends: `./configs/${configName}.json` }]),
-);
+export { configs } from './legacy-configs';

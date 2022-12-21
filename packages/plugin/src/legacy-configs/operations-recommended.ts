@@ -2,7 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
-module.exports = {
+export default {
   extends: './base.js',
   rules: {
     '@graphql-eslint/executable-definitions': 'error',
