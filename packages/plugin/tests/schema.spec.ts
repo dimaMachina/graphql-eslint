@@ -42,7 +42,7 @@ describe('schema', () => {
     let local;
     let url;
 
-    beforeAll(() => new Promise(done => {
+    beforeAll(() => new Promise(resolve => {
       const tsNodeCommand = resolve(process.cwd(), 'node_modules/.bin/tsx');
       const serverPath = resolve(__dirname, 'mocks/graphql-server.ts');
 
@@ -52,15 +52,15 @@ describe('schema', () => {
       local = spawn(tsNodeCommand, [serverPath]);
       local.stdout.on('data', chunk => {
         url = chunk.toString().trimRight();
-        done();
+        resolve();
       });
       local.stderr.on('data', chunk => {
         throw new Error(chunk.toString().trimRight());
       });
     }));
 
-    afterAll(() => new Promise(done => {
-      local.on('close', () => done());
+    afterAll(() => new Promise(resolve => {
+      local.on('close', () => resolve());
       local.kill();
     }));
 

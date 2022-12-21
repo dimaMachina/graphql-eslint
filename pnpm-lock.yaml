@@ -4,18 +4,18 @@ overrides:
   graphql: 16.6.0
 
 patchedDependencies:
-  eslint-plugin-eslint-plugin@5.0.7:
-    hash: cdhdgvmsbh3fbusrlxsl6de2he
-    path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
   eslint@8.30.0:
     hash: v7lv2hbnxmm2b22qo3sob3rjvq
     path: patches/eslint@8.28.0.patch
-  vitest@0.26.1:
-    hash: zc4tq4trjx66w3jsulktt7l3bu
-    path: patches/vitest@0.26.1.patch
+  eslint-plugin-eslint-plugin@5.0.7:
+    hash: cdhdgvmsbh3fbusrlxsl6de2he
+    path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
   json-schema-to-markdown@1.1.1:
     hash: beglqnggvhpsclgwbdw27hzvu4
     path: patches/json-schema-to-markdown@1.1.1.patch
+  vitest@0.26.1:
+    hash: l5hk4pilwtkmsbdby3ixxf4qjy
+    path: patches/vitest@0.26.1.patch
 
 importers:
 
@@ -79,7 +79,7 @@ importers:
       rimraf: 3.0.2
       tsx: 3.12.1
       typescript: 4.9.4
-      vitest: 0.26.1_zc4tq4trjx66w3jsulktt7l3bu
+      vitest: 0.26.1_l5hk4pilwtkmsbdby3ixxf4qjy
 
   examples/basic:
     specifiers:
@@ -5453,7 +5453,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.26.1_zc4tq4trjx66w3jsulktt7l3bu:
+  /vitest/0.26.1_l5hk4pilwtkmsbdby3ixxf4qjy:
     resolution: {integrity: sha512-qTLRnjYmjmJpHlLUtErxtlRqGCe8WItFhGXKklpWivu7CLP9KXN9iTezROe+vf51Kb+BB/fzxK6fUG9DvFGL5Q==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
