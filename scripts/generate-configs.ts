@@ -19,27 +19,24 @@ const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
 
 type WriteFile = {
   (filePath: `${string}.ts`, code: string): Promise<void>;
-  (filePath: `configs/${string}.json`, code: Record<string, unknown>): Promise<void>;
+  (filePath: `legacy-configs/${string}.js`, code: Record<string, unknown>): Promise<void>;
 };
 
 const writeFormattedFile: WriteFile = async (filePath, code) => {
-  const isJson = filePath.endsWith('.json');
+  if (filePath.startsWith('legacy-configs')) {
+    code = `module.exports = ${JSON.stringify(code)}`;
+  }
 
-  const formattedCode = isJson
-    ? format(JSON.stringify(code), {
-        parser: 'json',
-        ...prettierOptions,
-      })
-    : [
-        '/*',
-        ' * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`',
-        ' */',
-        BR,
-        format(code, {
-          ...prettierOptions,
-          parser: 'typescript',
-        }),
-      ].join('\n');
+  const formattedCode = [
+    '/*',
+    ' * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`',
+    ' */',
+    BR,
+    format(code, {
+      ...prettierOptions,
+      parser: 'typescript',
+    }),
+  ].join('\n');
 
   await writeFile(join(SRC_PATH, filePath), formattedCode);
   console.log(`✅  ${chalk.green(filePath)} file generated`);
@@ -107,20 +104,20 @@ async function generateConfigs(): Promise<void> {
   };
 
   await Promise.all([
-    writeFormattedFile('configs/schema-recommended.json', {
-      extends: './base.json',
+    writeFormattedFile('legacy-configs/schema-recommended.js', {
+      extends: './base.js',
       rules: getRulesConfig('Schema', true),
     }),
-    writeFormattedFile('configs/operations-recommended.json', {
-      extends: './base.json',
+    writeFormattedFile('legacy-configs/operations-recommended.js', {
+      extends: './base.js',
       rules: getRulesConfig('Operations', true),
     }),
-    writeFormattedFile('configs/schema-all.json', {
-      extends: ['./base.json', './schema-recommended.json'],
+    writeFormattedFile('legacy-configs/schema-all.js', {
+      extends: ['./base.js', './schema-recommended.js'],
       rules: getRulesConfig('Schema', false),
     }),
-    writeFormattedFile('configs/operations-all.json', {
-      extends: ['./base.json', './operations-recommended.json'],
+    writeFormattedFile('legacy-configs/operations-all.js', {
+      extends: ['./base.js', './operations-recommended.js'],
       rules: getRulesConfig('Operations', false),
     }),
   ]);
