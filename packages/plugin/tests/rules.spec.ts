@@ -1,43 +1,51 @@
-import { ESLint } from 'eslint';
+import eslintExperimentalApis from 'eslint/use-at-your-own-risk';
+import { describe, it, expect } from 'vitest';
+import { rules, parseForESLint } from '@graphql-eslint/eslint-plugin';
 import { ParserOptions } from '../src';
+import schemaAllConfig from '../src/configs/schema-all.json';
+import operationsAllConfig from '../src/configs/operations-all.json';
+import relayConfig from '../src/configs/relay.json';
 
-function getESLintWithConfig(
-  configName: 'schema-all' | 'operations-all' | 'relay',
-  parserOptions?: ParserOptions,
-): ESLint {
-  return new ESLint({
-    useEslintrc: false,
-    baseConfig: {
-      overrides: [
-        {
-          files: '*.graphql',
-          extends: `plugin:@graphql-eslint/${configName}`,
+const { FlatESLint } = eslintExperimentalApis;
+
+function getESLintWithConfig(config: any, parserOptions?: Omit<ParserOptions, 'filePath'>) {
+  return new FlatESLint({
+    overrideConfigFile: true,
+    overrideConfig: [
+      {
+        files: ['*.graphql'],
+        languageOptions: {
+          parser: { parseForESLint },
           parserOptions: {
             schema: 'type Query { foo: Int }',
             skipGraphQLConfig: true,
             ...parserOptions,
           },
         },
-      ],
-    },
+        plugins: {
+          '@graphql-eslint': { rules },
+        },
+        rules: config.rules,
+      },
+    ],
   });
 }
 
-describe.skip('Rules', () => {
+describe('Rules', () => {
   it('should load all rules properly from `schema-all` config', async () => {
-    const eslint = getESLintWithConfig('schema-all');
+    const eslint = getESLintWithConfig(schemaAllConfig);
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });
 
   it('should load all rules properly from `operations-all` config', async () => {
-    const eslint = getESLintWithConfig('operations-all', { operations: '{ foo }' });
+    const eslint = getESLintWithConfig(operationsAllConfig, { operations: '{ foo }' });
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });
 
   it('should load all rules properly from `relay` config', async () => {
-    const eslint = getESLintWithConfig('relay', { operations: '{ foo }' });
+    const eslint = getESLintWithConfig(relayConfig, { operations: '{ foo }' });
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });
