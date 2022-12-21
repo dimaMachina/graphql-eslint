@@ -12,6 +12,7 @@
     "generate:docs": "tsx scripts/generate-docs.ts",
     "lint": "eslint --ignore-path .gitignore --ext ts,js .",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/",
+    "postinstall": "node patch-graphql.js",
     "prebuild": "rimraf packages/*/dist ./tsconfig.tsbuildinfo",
     "prerelease": "pnpm build",
     "prettier": "prettier --cache --write --list-different .",
