@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Examples should work in monorepo 1`] = `
+exports[`Examples > should work in monorepo 1`] = `
 [
   {
     filePath: examples/monorepo/client/graphql/query.users.gql,
@@ -144,7 +144,7 @@ exports[`Examples should work in monorepo 1`] = `
 ]
 `;
 
-exports[`Examples should work in multiple projects 1`] = `
+exports[`Examples > should work in multiple projects 1`] = `
 [
   {
     filePath: examples/multiple-projects-graphql-config/query.first-project.js,
@@ -235,7 +235,7 @@ exports[`Examples should work in multiple projects 1`] = `
 ]
 `;
 
-exports[`Examples should work in svelte 1`] = `
+exports[`Examples > should work in svelte 1`] = `
 [
   {
     filePath: examples/svelte-code-file/test.svelte,
@@ -290,7 +290,7 @@ exports[`Examples should work in svelte 1`] = `
 ]
 `;
 
-exports[`Examples should work in vue 1`] = `
+exports[`Examples > should work in vue 1`] = `
 [
   {
     filePath: examples/vue-code-file/test.vue,
@@ -345,7 +345,7 @@ exports[`Examples should work in vue 1`] = `
 ]
 `;
 
-exports[`Examples should work on \`.graphql\` files 1`] = `
+exports[`Examples > should work on \`.graphql\` files 1`] = `
 [
   {
     filePath: examples/basic/fragment.graphql,
@@ -450,7 +450,7 @@ exports[`Examples should work on \`.graphql\` files 1`] = `
 ]
 `;
 
-exports[`Examples should work on \`.js\` files 1`] = `
+exports[`Examples > should work on \`.js\` files 1`] = `
 [
   {
     filePath: examples/code-file/not-query.js,
@@ -532,7 +532,7 @@ exports[`Examples should work on \`.js\` files 1`] = `
 ]
 `;
 
-exports[`Examples should work with \`eslint-plugin-prettier\` 1`] = `
+exports[`Examples > should work with \`eslint-plugin-prettier\` 1`] = `
 [
   {
     filePath: examples/prettier/invalid.graphql,
@@ -962,7 +962,7 @@ exports[`Examples should work with \`eslint-plugin-prettier\` 1`] = `
 ]
 `;
 
-exports[`Examples should work with \`graphql-config\` 1`] = `
+exports[`Examples > should work with \`graphql-config\` 1`] = `
 [
   {
     filePath: examples/graphql-config/operations/query.graphql,
@@ -1023,7 +1023,7 @@ exports[`Examples should work with \`graphql-config\` 1`] = `
 ]
 `;
 
-exports[`Examples should work with \`graphql-config\` on \`.js\` files 1`] = `
+exports[`Examples > should work with \`graphql-config\` on \`.js\` files 1`] = `
 [
   {
     filePath: examples/graphql-config-code-file/query.js,

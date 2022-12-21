@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`should allow fragments if they are ignored 1`] = `
 #### ⌨️ Code

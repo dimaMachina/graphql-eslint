@@ -167,7 +167,9 @@ export class GraphQLRuleTester extends RuleTester {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
+      // @ts-expect-error -- we should import `vitest` but somebody could use globals from `jest`
       it(name || `Invalid #${idx + 1}`, () => {
+        // @ts-expect-error -- ^ same
         expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
       });
     }

@@ -23,7 +23,7 @@ function getESLintWithConfig(
   });
 }
 
-describe('Rules', () => {
+describe.skip('Rules', () => {
   it('should load all rules properly from `schema-all` config', async () => {
     const eslint = getESLintWithConfig('schema-all');
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });

@@ -1,7 +1,7 @@
 import { Block, processor } from '../src/processor';
 
-jest.mock('../src/graphql-config', () => ({
-  loadOnDiskGraphQLConfig: jest.fn(() => ({
+vi.mock('../src/graphql-config', () => ({
+  loadOnDiskGraphQLConfig: vi.fn(() => ({
     getProjectForFile: () => ({
       extensions: {
         pluckConfig: {
