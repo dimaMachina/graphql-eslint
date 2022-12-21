@@ -8,7 +8,8 @@ import { unlink } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+const require = createRequire(path.resolve('./packages/plugin/src'));
+
 try {
-  const require = createRequire(path.resolve('./packages/plugin/src'));
   await unlink(require.resolve('graphql').replace(/\.js$/, '.mjs'));
 } catch {}
