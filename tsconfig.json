@@ -19,7 +19,7 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
@@ -27,5 +27,5 @@
     }
   },
   "include": ["packages"],
-  "exclude": ["**/dist", "**/temp", "**/tests"]
+  "exclude": ["**/tests"]
 }

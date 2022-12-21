@@ -4,8 +4,11 @@
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "pnpm transpile-ts && bob build",
+    "build": "tsc && bob build",
     "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
@@ -17,8 +20,7 @@
     "prerelease": "pnpm build",
     "prettier": "prettier --cache --write --list-different .",
     "release": "changeset publish",
-    "test": "vitest .",
-    "transpile-ts": "tsc --project tsconfig.json"
+    "test": "vitest ."
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
@@ -29,7 +31,7 @@
     "@types/node": "18.11.17",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
-    "bob-the-bundler": "1.7.3",
+    "bob-the-bundler": "4.1.1",
     "chalk": "^4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
@@ -49,9 +51,10 @@
     "rimraf": "3.0.2",
     "tsx": "^3.12.1",
     "typescript": "4.9.4",
-    "vitest": "0.26.1"
+    "vitest": "0.26.2"
   },
   "resolutions": {
+    "execa": "5.1.1",
     "graphql": "16.6.0"
   },
   "lint-staged": {
@@ -65,7 +68,7 @@
       "eslint@8.30.0": "patches/eslint@8.28.0.patch",
       "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch",
-      "vitest@0.26.1": "patches/vitest@0.26.1.patch"
+      "vitest@0.26.2": "patches/vitest@0.26.2.patch"
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Block, processor } from '../src/processor';
+import { describe, it, expect } from 'vitest';
 
 describe('processor.preprocess() without graphql-config', () => {
   const QUERY = 'query users { id }';

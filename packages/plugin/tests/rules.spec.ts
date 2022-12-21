@@ -6,6 +6,7 @@ import schemaAllConfig from '../src/configs/schema-all.json';
 import operationsAllConfig from '../src/configs/operations-all.json';
 import relayConfig from '../src/configs/relay.json';
 
+// @ts-expect-error we need to wait when ESLint publish correct types
 const { FlatESLint } = eslintExperimentalApis;
 
 function getESLintWithConfig(config: any, parserOptions?: Omit<ParserOptions, 'filePath'>) {
