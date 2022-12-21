@@ -1,6 +1,6 @@
-import path from 'path';
+import path from 'node:path';
 import { readFile } from 'node:fs/promises';
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 import { GraphQLSchema, printSchema } from 'graphql';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { getSchema } from '../src/schema';
