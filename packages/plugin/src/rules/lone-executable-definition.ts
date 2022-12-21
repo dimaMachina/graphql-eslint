@@ -6,8 +6,9 @@ import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'lone-executable-definition';
 
-type Definition = 'fragment' | 'query' | 'mutation' | 'subscription';
+const definitionTypes = ['fragment', 'query', 'mutation', 'subscription'] as const;
 
+type Definition = (typeof definitionTypes)[number];
 type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
 
 const schema = {
@@ -22,7 +23,7 @@ const schema = {
         ...ARRAY_DEFAULT_OPTIONS,
         maxItems: 3, // ignore all 4 types is redundant
         items: {
-          enum: ['fragment', 'query', 'mutation', 'subscription'],
+          enum: definitionTypes,
         },
         description: 'Allow certain definitions to be placed alongside others.',
       },
