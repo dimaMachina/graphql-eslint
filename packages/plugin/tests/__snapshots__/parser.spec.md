@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Parser parseForESLint() should return ast and tokens 1`] = `
+exports[`Parser > parseForESLint() should return ast and tokens 1`] = `
 {
   body: [
     {

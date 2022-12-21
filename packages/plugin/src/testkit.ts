@@ -167,7 +167,9 @@ export class GraphQLRuleTester extends RuleTester {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
+      // @ts-expect-error
       it(name || `Invalid #${idx + 1}`, () => {
+        // @ts-expect-error
         expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
       });
     }

@@ -1,0 +1,13 @@
+diff --git a/dist/chunk-runtime-setup.9cdedce6.js b/dist/chunk-runtime-setup.9cdedce6.js
+index e96a6dfa44c602145cdb7d52657ce7ba09e20283..acee42960a108f4152a39a2df8b553cdbefa7173 100644
+--- a/dist/chunk-runtime-setup.9cdedce6.js
++++ b/dist/chunk-runtime-setup.9cdedce6.js
+@@ -482,7 +482,7 @@ async function runSuite(suite) {
+     if (!hasTests(suite)) {
+       suite.result.state = "fail";
+       if (!suite.result.error)
+-        suite.result.error = new Error(`No test found in suite ${suite.name}`);
++        suite.result.state = "pass";
+     } else if (hasFailed(suite)) {
+       suite.result.state = "fail";
+     } else {

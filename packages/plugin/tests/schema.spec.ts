@@ -42,7 +42,7 @@ describe('schema', () => {
     let local;
     let url;
 
-    beforeAll(done => {
+    beforeAll(() => new Promise(done => {
       const tsNodeCommand = resolve(process.cwd(), 'node_modules/.bin/tsx');
       const serverPath = resolve(__dirname, 'mocks/graphql-server.ts');
 
@@ -57,12 +57,12 @@ describe('schema', () => {
       local.stderr.on('data', chunk => {
         throw new Error(chunk.toString().trimRight());
       });
-    });
+    }));
 
-    afterAll(done => {
+    afterAll(() => new Promise(done => {
       local.on('close', () => done());
       local.kill();
-    });
+    }));
 
     it('should load schema from URL', () => {
       testSchema(url);

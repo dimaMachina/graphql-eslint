@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`\`edges\` field should return a list type that wraps an edge type 1`] = `
 #### ⌨️ Code
