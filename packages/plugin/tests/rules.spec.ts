@@ -42,7 +42,7 @@ describe('Rules', () => {
   });
 
   it('should load all rules properly from `relay` config', async () => {
-    const eslint = getESLintWithConfig(configs['relay'], { operations: '{ foo }' });
+    const eslint = getESLintWithConfig(configs.relay, { operations: '{ foo }' });
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });

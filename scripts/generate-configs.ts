@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';

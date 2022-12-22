@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import dedent from 'dedent';

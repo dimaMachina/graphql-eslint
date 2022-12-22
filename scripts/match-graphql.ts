@@ -6,7 +6,6 @@ const pkgPath = path.resolve(process.cwd(), 'package.json');
 const version = process.argv[2];
 
 if (pkg.resolutions.graphql.startsWith(version)) {
-  // eslint-disable-next-line no-console
   console.info(`GraphQL v${version} is match! Skipping.`);
   process.exit();
 }
