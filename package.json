@@ -28,7 +28,7 @@
     "@types/node": "18.11.17",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
-    "bob-the-bundler": "4.2.0-alpha-20221222123652-a454f30",
+    "bob-the-bundler": "4.2.0-alpha-20221222140753-fcf5286",
     "chalk": "^4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",

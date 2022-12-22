@@ -17,5 +17,6 @@ export default {
     '@graphql-eslint/no-scalar-result-type-on-mutation': 'error',
     '@graphql-eslint/require-deprecation-date': 'error',
     '@graphql-eslint/require-field-of-type-query-in-mutation-result': 'error',
+    '@graphql-eslint/require-nullable-fields-with-oneof': 'error',
   },
 };

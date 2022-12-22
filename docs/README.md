@@ -58,6 +58,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [require-description](rules/require-description.md)|Enforce descriptions in type definitions and operations.|![recommended][]|📄|🚀|
 [require-field-of-type-query-in-mutation-result](rules/require-field-of-type-query-in-mutation-result.md)|Allow the client in one round-trip not only to call mutation but also to get a wagon of data to update their application.|![all][]|📄|🚀|
 [require-id-when-available](rules/require-id-when-available.md)|Enforce selecting specific fields when they are available on the GraphQL type.|![recommended][]|📦|🚀|💡
+[require-nullable-fields-with-oneof](rules/require-nullable-fields-with-oneof.md)|Require are `input` or `type` fields be non nullable with `@oneOf` directive.|![all][]|📄|🚀|
 [scalar-leafs](rules/scalar-leafs.md)|A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.|![recommended][]|📦|🔮|💡
 [selection-set-depth](rules/selection-set-depth.md)|Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).|![recommended][]|📦|🚀|💡
 [strict-id-in-types](rules/strict-id-in-types.md)|Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.|![recommended][]|📄|🚀|

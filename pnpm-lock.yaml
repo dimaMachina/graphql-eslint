@@ -29,7 +29,7 @@ importers:
       '@types/node': 18.11.17
       '@typescript-eslint/eslint-plugin': 5.47.0
       '@typescript-eslint/parser': 5.47.0
-      bob-the-bundler: 4.2.0-alpha-20221222123652-a454f30
+      bob-the-bundler: 4.2.0-alpha-20221222140753-fcf5286
       chalk: ^4.1.2
       dedent: 0.7.0
       enquirer: 2.3.6
@@ -59,7 +59,7 @@ importers:
       '@types/node': 18.11.17
       '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
       '@typescript-eslint/parser': 5.47.0_lzzuuodtsqwxnvqeq4g4likcqa
-      bob-the-bundler: 4.2.0-alpha-20221222123652-a454f30_typescript@4.9.4
+      bob-the-bundler: 4.2.0-alpha-20221222140753-fcf5286_typescript@4.9.4
       chalk: 4.1.2
       dedent: 0.7.0
       enquirer: 2.3.6
@@ -1545,8 +1545,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /bob-the-bundler/4.2.0-alpha-20221222123652-a454f30_typescript@4.9.4:
-    resolution: {integrity: sha512-vh9K99vhm5FYtu26BDHMDijQzKg+Ev72OGOoYGK+aAtLMvcMT9TyGbh/FoP89kdubpyaPLwOFDZHlSKInPU5Vw==}
+  /bob-the-bundler/4.2.0-alpha-20221222140753-fcf5286_typescript@4.9.4:
+    resolution: {integrity: sha512-s3wSq6CKQpnworGAx+SXghrlTx62sWHeHUQ1Z/11XCVOxutyy7i8byCuD0ZwfpU9FgVirpW80axfp8V6JmyD0Q==}
     hasBin: true
     peerDependencies:
       typescript: ^4.7.4
@@ -1554,13 +1554,13 @@ packages:
       '@vercel/ncc': 0.36.0
       consola: 2.15.3
       dependency-graph: 0.11.0
-      execa: 5.1.1
+      execa: 6.1.0
       fs-extra: 11.1.0
-      globby: 11.1.0
+      globby: 13.1.3
       js-yaml: 4.1.0
       lodash.get: 4.4.2
       mkdirp: 1.0.4
-      p-limit: 3.1.0
+      p-limit: 4.0.0
       resolve.exports: 1.1.0
       tslib: 2.4.1
       tsup: 6.5.0_typescript@4.9.4
@@ -2934,6 +2934,17 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
 
+  /globby/13.1.3:
+    resolution: {integrity: sha512-8krCNHXvlCgHDpegPzleMq07yMYTO2sXKASmZmquEYWEmCx6J5UTRbp5RwMJkTJGtcQ44YpiUYUiN0b9mzy8Bw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      dir-glob: 3.0.1
+      fast-glob: 3.2.12
+      ignore: 5.2.4
+      merge2: 1.4.1
+      slash: 4.0.0
+    dev: true
+
   /globrex/0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
@@ -3896,6 +3907,13 @@ packages:
     dependencies:
       yocto-queue: 0.1.0
 
+  /p-limit/4.0.0:
+    resolution: {integrity: sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      yocto-queue: 1.0.0
+    dev: true
+
   /p-locate/4.1.0:
     resolution: {integrity: sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==}
     engines: {node: '>=8'}
@@ -4375,6 +4393,11 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+
+  /slash/4.0.0:
+    resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
+    engines: {node: '>=12'}
+    dev: true
 
   /slice-ansi/3.0.0:
     resolution: {integrity: sha512-pSyv7bSTC7ig9Dcgbw9AuRNUb5k5V6oDudjZoMBSr13qpLBG7tB+zgCkARjq7xIUgdz5P1Qe8u+rSGdouOOIyQ==}
@@ -5280,6 +5303,11 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  /yocto-queue/1.0.0:
+    resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
+    engines: {node: '>=12.20'}
+    dev: true
 
   /zod/3.20.2:
     resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
