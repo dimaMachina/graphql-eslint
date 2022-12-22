@@ -23,6 +23,7 @@ export default {
         fragment: 'kebab-case',
       },
     ],
+    '@graphql-eslint/no-one-place-fragments': 'error',
     '@graphql-eslint/unique-fragment-name': 'error',
     '@graphql-eslint/unique-operation-name': 'error',
   },
