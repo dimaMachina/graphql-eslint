@@ -4,10 +4,6 @@
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
   "scripts": {
     "build": "tsc && bob build",
     "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
@@ -32,7 +28,7 @@
     "@types/node": "18.11.17",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
-    "bob-the-bundler": "4.1.1",
+    "bob-the-bundler": "4.2.0-alpha-20221222123652-a454f30",
     "chalk": "^4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
@@ -55,7 +51,6 @@
     "vitest": "0.26.2"
   },
   "resolutions": {
-    "execa": "5.1.1",
     "graphql": "16.6.0"
   },
   "lint-staged": {
