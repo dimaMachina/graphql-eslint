@@ -14,6 +14,7 @@ import { rule as noCaseInsensitiveEnumValuesDuplicates } from './no-case-insensi
 import { rule as noDeprecated } from './no-deprecated';
 import { rule as noDuplicateFields } from './no-duplicate-fields';
 import { rule as noHashtagDescription } from './no-hashtag-description';
+import { rule as noOnePlaceFragments } from './no-one-place-fragments';
 import { rule as noRootType } from './no-root-type';
 import { rule as noScalarResultTypeOnMutation } from './no-scalar-result-type-on-mutation';
 import { rule as noTypenamePrefix } from './no-typename-prefix';
@@ -48,6 +49,7 @@ export const rules = {
   'no-deprecated': noDeprecated,
   'no-duplicate-fields': noDuplicateFields,
   'no-hashtag-description': noHashtagDescription,
+  'no-one-place-fragments': noOnePlaceFragments,
   'no-root-type': noRootType,
   'no-scalar-result-type-on-mutation': noScalarResultTypeOnMutation,
   'no-typename-prefix': noTypenamePrefix,

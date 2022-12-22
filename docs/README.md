@@ -36,6 +36,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [no-duplicate-fields](rules/no-duplicate-fields.md)|Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.|![recommended][]|📦|🚀|💡
 [no-fragment-cycles](rules/no-fragment-cycles.md)|A GraphQL fragment is only valid when it does not have cycles in fragments usage.|![recommended][]|📦|🔮|
 [no-hashtag-description](rules/no-hashtag-description.md)|Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.|![recommended][]|📄|🚀|💡
+[no-one-place-fragments](rules/no-one-place-fragments.md)|Disallow fragments that are used only in one place.|![all][]|📦|🚀|
 [no-root-type](rules/no-root-type.md)|Disallow using root types `mutation` and/or `subscription`.||📄|🚀|💡
 [no-scalar-result-type-on-mutation](rules/no-scalar-result-type-on-mutation.md)|Avoid scalar result type on mutation type to make sure to return a valid state.|![all][]|📄|🚀|💡
 [no-typename-prefix](rules/no-typename-prefix.md)|Enforces users to avoid using the type name in a field name while defining your schema.|![recommended][]|📄|🚀|💡
