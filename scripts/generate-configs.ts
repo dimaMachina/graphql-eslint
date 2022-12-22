@@ -49,7 +49,7 @@ async function generateRules(): Promise<void> {
   const code = [
     "import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation'",
     ...ruleFilenames.map(
-      ruleName => `import { rule as ${utils.camelCase(ruleName)} } from './${ruleName}'`,
+      ruleName => `import { rule as ${utils.camelCase(ruleName)} } from './${ruleName}.js'`,
     ),
     BR,
     'export const rules = {',

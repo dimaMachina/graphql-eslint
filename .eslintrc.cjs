@@ -63,6 +63,12 @@ module.exports = {
       rules: {
         'no-console': 'off'
       }
+    },
+    {
+      files: ['packages/plugin/src/**'],
+      rules: {
+        'import/extensions': ['error', 'ignorePackages'],
+      },
     }
   ],
 };

@@ -1,23 +1,9 @@
-import pkgJson from '../packages/plugin/dist/package.json';
 import { writeFile, rm, appendFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const DIST_DIR = path.resolve(process.cwd(), './packages/plugin/dist');
 
-const withoutEsmPkgJson = {
-  ...pkgJson,
-  module: undefined,
-  exports: {
-    ...pkgJson.exports,
-    '.': {
-      require: pkgJson.exports['.'].require,
-    },
-  },
-};
-
 console.time('done');
-await writeFile(`${DIST_DIR}/package.json`, JSON.stringify(withoutEsmPkgJson, null, 2));
-await rm(`${DIST_DIR}/esm/`, { recursive: true, force: true });
 
 await Promise.all(
   // ESLint in commonjs import configs as `module.exports`, but bob bundles them as `exports.default`
@@ -37,4 +23,8 @@ await Promise.all(
 // cjs/package.json provokes error Cannot find module '@graphql-eslint/eslint-plugin'
 // so we remove it
 await rm(`${DIST_DIR}/cjs/package.json`);
+
+// add package.json with type: module to esm directory because ESLint throws an error
+// SyntaxError: Cannot use import statement outside a module
+await writeFile(`${DIST_DIR}/esm/package.json`, '{ "type": "module" }\n')
 console.timeEnd('done');

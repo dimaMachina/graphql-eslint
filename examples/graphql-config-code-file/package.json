@@ -4,6 +4,7 @@
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "private": true,
+  "type": "module",
   "scripts": {
     "lint": "eslint ."
   },
