@@ -39,17 +39,19 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      'Directive[name.value=oneOf]'(node: {
+      'Directive[name.value=oneOf]'({
+        parent,
+      }: {
         parent: GraphQLESTreeNode<InputObjectTypeDefinitionNode | ObjectTypeDefinitionNode>;
       }) {
         const isTypeOrInput = [
           Kind.OBJECT_TYPE_DEFINITION,
           Kind.INPUT_OBJECT_TYPE_DEFINITION,
-        ].includes(node.parent.kind);
+        ].includes(parent.kind);
         if (!isTypeOrInput) {
           return;
         }
-        for (const field of node.parent.fields) {
+        for (const field of parent.fields) {
           if (field.gqlType.kind === Kind.NON_NULL_TYPE) {
             context.report({
               node: field.name,
