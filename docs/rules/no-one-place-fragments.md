@@ -22,6 +22,9 @@ fragment UserFields on User {
 {
   user {
     ...UserFields
+    friends {
+      ...UserFields
+    }
   }
 }
 ```
@@ -38,9 +41,6 @@ fragment UserFields on User {
 {
   user {
     ...UserFields
-    friends {
-      ...UserFields
-    }
   }
 }
 ```

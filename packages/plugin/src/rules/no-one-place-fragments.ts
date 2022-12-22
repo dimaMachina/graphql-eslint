@@ -25,6 +25,9 @@ export const rule: GraphQLESLintRule = {
             {
               user {
                 ...UserFields
+                friends {
+                  ...UserFields
+                }
               }
             }
           `,
@@ -39,9 +42,6 @@ export const rule: GraphQLESLintRule = {
             {
               user {
                 ...UserFields
-                friends {
-                  ...UserFields
-                }
               }
             }
           `,
