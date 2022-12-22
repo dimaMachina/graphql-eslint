@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import pkg from '../package.json';
+import pkg from '../package.json' assert { type: 'json' };
 
 const pkgPath = path.resolve(process.cwd(), 'package.json');
 const version = process.argv[2];
