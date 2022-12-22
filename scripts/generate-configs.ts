@@ -19,11 +19,11 @@ const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
 
 type WriteFile = {
   (filePath: `${string}.ts`, code: string): Promise<void>;
-  (filePath: `legacy-configs/${string}.ts`, code: Record<string, unknown>): Promise<void>;
+  (filePath: `configs/${string}.ts`, code: Record<string, unknown>): Promise<void>;
 };
 
 const writeFormattedFile: WriteFile = async (filePath, code) => {
-  if (filePath.startsWith('legacy-configs')) {
+  if (filePath.startsWith('configs')) {
     code = `export default ${JSON.stringify(code)}`;
   }
 
@@ -104,20 +104,20 @@ async function generateConfigs(): Promise<void> {
   };
 
   await Promise.all([
-    writeFormattedFile('legacy-configs/schema-recommended.ts', {
-      extends: './base.js',
+    writeFormattedFile('configs/schema-recommended.ts', {
+      extends: './configs/base',
       rules: getRulesConfig('Schema', true),
     }),
-    writeFormattedFile('legacy-configs/operations-recommended.ts', {
-      extends: './base.js',
+    writeFormattedFile('configs/operations-recommended.ts', {
+      extends: './configs/base',
       rules: getRulesConfig('Operations', true),
     }),
-    writeFormattedFile('legacy-configs/schema-all.ts', {
-      extends: ['./base.js', './schema-recommended.js'],
+    writeFormattedFile('configs/schema-all.ts', {
+      extends: ['./configs/base', './configs/schema-recommended'],
       rules: getRulesConfig('Schema', false),
     }),
-    writeFormattedFile('legacy-configs/operations-all.ts', {
-      extends: ['./base.js', './operations-recommended.js'],
+    writeFormattedFile('configs/operations-all.ts', {
+      extends: ['./configs/base', './configs/operations-recommended'],
       rules: getRulesConfig('Operations', false),
     }),
   ]);

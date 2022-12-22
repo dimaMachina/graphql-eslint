@@ -3,7 +3,7 @@
  */
 
 export default {
-  extends: './base.js',
+  extends: './configs/base',
   rules: {
     '@graphql-eslint/executable-definitions': 'error',
     '@graphql-eslint/fields-on-correct-type': 'error',

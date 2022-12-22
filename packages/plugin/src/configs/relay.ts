@@ -1,5 +1,5 @@
 export default {
-  extends: './base.json',
+  extends: './configs/base',
   rules: {
     '@graphql-eslint/relay-arguments': 'error',
     '@graphql-eslint/relay-connection-types': 'error',
