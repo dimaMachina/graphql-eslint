@@ -28,3 +28,9 @@ await rm(`${DIST_DIR}/cjs/package.json`);
 // SyntaxError: Cannot use import statement outside a module
 await writeFile(`${DIST_DIR}/esm/package.json`, '{ "type": "module" }\n')
 console.timeEnd('done');
+
+function addCreateRequireBanner() {
+  ['packages/plugin/src/estree-converter/utils.ts',
+  'packages/plugin/src/rules/graphql-js-validation.ts',
+  'packages/plugin/src/testkit.ts']
+}

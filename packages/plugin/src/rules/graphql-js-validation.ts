@@ -11,7 +11,7 @@ import {
   ExecutableDefinitionNode,
   DirectiveNode,
 } from 'graphql';
-import { validateSDL } from 'graphql/validation/validate';
+import { validateSDL } from 'graphql/validation/validate.js';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
 import {
   requireGraphQLSchemaFromContext,

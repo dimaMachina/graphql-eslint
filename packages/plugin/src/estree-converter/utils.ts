@@ -11,7 +11,7 @@ import {
 } from 'graphql';
 import { Comment, SourceLocation } from 'estree';
 import { AST } from 'eslint';
-import { valueFromASTUntyped } from 'graphql/utilities/valueFromASTUntyped';
+import { valueFromASTUntyped } from 'graphql/utilities/valueFromASTUntyped.js';
 
 export const valueFromNode = (...args: Parameters<typeof valueFromASTUntyped>): any => {
   return valueFromASTUntyped(...args);

@@ -2,7 +2,7 @@ import { AST } from 'eslint';
 import { GraphQLESLintRule } from '../types.js';
 import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js;
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils.js';
 import { SiblingOperations } from '../documents.js';
 import { FromSchema } from 'json-schema-to-ts';

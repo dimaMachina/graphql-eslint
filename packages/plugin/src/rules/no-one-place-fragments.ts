@@ -1,6 +1,5 @@
 import { GraphQLESLintRule } from '../types.js';
-import { requireSiblingsOperations } from '@graphql-eslint/eslint-plugin';
-import { CWD } from '../utils.js';
+import { CWD, requireSiblingsOperations } from '../utils.js';
 import { relative } from 'path';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { NameNode, visit } from 'graphql';
