@@ -61,7 +61,7 @@ import { GraphQLESLintRule } from '../types';
 
 const RULE_ID = '${ruleId}';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: '${type}',
     docs: {
@@ -95,8 +95,6 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;
 `;
 
 await writeFile(RULE_PATH, RULE_CONTENT.trimStart());
@@ -104,11 +102,11 @@ await writeFile(RULE_PATH, RULE_CONTENT.trimStart());
 const TEST_PATH = join(CWD, `packages/plugin/tests/${ruleId}.spec.ts`);
 const TEST_CONTENT = `
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/${ruleId}';
+import { rule } from '../src/rules/${ruleId}';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string): { code: string; parserOptions: ParserOptions } {
+function useSchema(code: string): { code: string; parserOptions: Omit<ParserOptions, 'filePath'> } {
   return {
     code,
     parserOptions: {
