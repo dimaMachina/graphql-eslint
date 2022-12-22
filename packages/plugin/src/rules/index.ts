@@ -29,6 +29,7 @@ import { rule as requireDescription } from './require-description';
 import { rule as requireFieldOfTypeQueryInMutationResult } from './require-field-of-type-query-in-mutation-result';
 import { rule as requireIdWhenAvailable } from './require-id-when-available';
 import { rule as requireNullableFieldsWithOneof } from './require-nullable-fields-with-oneof';
+import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof';
 import { rule as selectionSetDepth } from './selection-set-depth';
 import { rule as strictIdInTypes } from './strict-id-in-types';
 import { rule as uniqueFragmentName } from './unique-fragment-name';
@@ -62,6 +63,7 @@ export const rules = {
   'require-field-of-type-query-in-mutation-result': requireFieldOfTypeQueryInMutationResult,
   'require-id-when-available': requireIdWhenAvailable,
   'require-nullable-fields-with-oneof': requireNullableFieldsWithOneof,
+  'require-type-pattern-with-oneof': requireTypePatternWithOneof,
   'selection-set-depth': selectionSetDepth,
   'strict-id-in-types': strictIdInTypes,
   'unique-fragment-name': uniqueFragmentName,
