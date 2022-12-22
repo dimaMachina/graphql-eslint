@@ -1,6 +1,6 @@
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESLintRule } from '../types.js';
 import { InputObjectTypeDefinitionNode, Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'require-nullable-fields-with-oneof';
 

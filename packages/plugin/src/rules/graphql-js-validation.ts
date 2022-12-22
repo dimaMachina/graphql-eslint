@@ -12,14 +12,14 @@ import {
   DirectiveNode,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
 import {
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
   logger,
   REPORT_ON_FIRST_CHARACTER,
   ARRAY_DEFAULT_OPTIONS,
-} from '../utils';
+} from '../utils.js';
 import { JSONSchema } from 'json-schema-to-ts';
 
 function validateDocument({

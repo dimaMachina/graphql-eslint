@@ -1,7 +1,7 @@
 import { EnumValueNode, FieldNode, Kind } from 'graphql';
-import { requireGraphQLSchemaFromContext } from '../utils';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-deprecated';
 

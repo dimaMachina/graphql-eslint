@@ -1,6 +1,6 @@
 import { StringValueNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const schema = {

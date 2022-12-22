@@ -1,8 +1,8 @@
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESLintRule } from '../types.js';
 import { requireSiblingsOperations } from '@graphql-eslint/eslint-plugin';
-import { CWD } from '../utils';
+import { CWD } from '../utils.js';
 import { relative } from 'path';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { NameNode, visit } from 'graphql';
 
 const RULE_ID = 'no-one-place-fragments';

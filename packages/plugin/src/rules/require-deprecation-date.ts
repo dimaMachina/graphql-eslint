@@ -1,6 +1,6 @@
 import { DirectiveNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode, valueFromNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 // eslint-disable-next-line unicorn/better-regex

@@ -2,7 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
-import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
+import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation.js';
 import { rule as alphabetize } from './alphabetize.js';
 import { rule as descriptionStyle } from './description-style.js';
 import { rule as inputName } from './input-name.js';

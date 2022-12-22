@@ -8,9 +8,9 @@ import {
   GraphQLSchema,
   DefinitionNode,
 } from 'graphql';
-import type { Comment } from 'estree';
-import type { GraphQLESTreeNode, TypeInformation } from './types';
-import { convertLocation } from './utils';
+import { Comment } from 'estree';
+import { GraphQLESTreeNode, TypeInformation } from './types.js';
+import { convertLocation } from './utils.js';
 
 export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema) {
   const typeInfo = schema ? new TypeInfo(schema) : null;

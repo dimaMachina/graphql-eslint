@@ -1,8 +1,8 @@
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { NON_OBJECT_TYPES } from './relay-connection-types';
-import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils';
+import { NON_OBJECT_TYPES } from './relay-connection-types.js';
+import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'relay-page-info';
 const MESSAGE_MUST_EXIST = 'MESSAGE_MUST_EXIST';

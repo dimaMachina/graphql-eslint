@@ -9,16 +9,16 @@ import {
   visit,
   visitWithTypeInfo,
 } from 'graphql';
-import type * as ESTree from 'estree';
+import * as ESTree from 'estree';
 import { asArray } from '@graphql-tools/utils';
 import {
   ARRAY_DEFAULT_OPTIONS,
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
   englishJoinWords,
-} from '../utils';
-import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types';
-import { getBaseType, GraphQLESTreeNode } from '../estree-converter';
+} from '../utils.js';
+import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types.js';
+import { getBaseType, GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'require-id-when-available';

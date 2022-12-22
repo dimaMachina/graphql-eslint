@@ -1,13 +1,13 @@
-import { processor } from './processor';
+import { processor } from './processor.js';
 
-export { rules } from './rules';
-export { parseForESLint } from './parser';
+export { rules } from './rules/index.js';
+export { parseForESLint } from './parser.js';
 
-export * from './testkit';
-export * from './types';
-export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils';
+export * from './testkit.js';
+export * from './types.js';
+export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils.js';
 
 export const processors = { graphql: processor };
 
-export { configs } from './configs';
-export { flatConfigs } from './flat-configs';
+export { configs } from './configs/index.js';
+export { flatConfigs } from './flat-configs.js';

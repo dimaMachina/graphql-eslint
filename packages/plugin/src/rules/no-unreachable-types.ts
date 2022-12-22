@@ -9,9 +9,9 @@ import {
   DirectiveLocation,
 } from 'graphql';
 import lowerCase from 'lodash.lowercase';
-import { GraphQLESLintRule } from '../types';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-unreachable-types';
 

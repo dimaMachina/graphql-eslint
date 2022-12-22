@@ -1,6 +1,6 @@
 import { DocumentNode, TokenKind } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 

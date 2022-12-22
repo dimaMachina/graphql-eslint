@@ -5,7 +5,7 @@ import {
 } from '@graphql-tools/graphql-tag-pluck';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
-import { loadOnDiskGraphQLConfig } from './graphql-config';
+import { loadOnDiskGraphQLConfig } from './graphql-config.js';
 
 export type Block = Linter.ProcessorFile & {
   lineOffset: number;

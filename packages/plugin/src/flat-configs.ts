@@ -1,6 +1,6 @@
-import { parseForESLint } from './parser';
-import { rules } from './rules';
-import { configs } from './configs';
+import { parseForESLint } from './parser.js';
+import { rules } from './rules/index.js';
+import { configs } from './configs/index.js';
 
 const baseOptions = {
   parser: { parseForESLint },

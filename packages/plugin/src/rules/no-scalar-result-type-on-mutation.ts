@@ -1,7 +1,7 @@
 import { isScalarType, NameNode } from 'graphql';
-import { requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-scalar-result-type-on-mutation';
 
