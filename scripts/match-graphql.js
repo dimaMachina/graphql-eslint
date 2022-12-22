@@ -1,12 +1,11 @@
-import { readFileSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import pkg from '../package.json' assert { type: 'json' };
 
-const pkgPath = resolve(process.cwd(), 'package.json');
+const pkgPath = path.resolve(process.cwd(), 'package.json');
 const version = process.argv[2];
-const pkg = JSON.parse(readFileSync(pkgPath));
 
 if (pkg.resolutions.graphql.startsWith(version)) {
-  // eslint-disable-next-line no-console
   console.info(`GraphQL v${version} is match! Skipping.`);
   process.exit();
 }
@@ -14,4 +13,4 @@ if (pkg.resolutions.graphql.startsWith(version)) {
 const npmVersion = version.includes('-') ? version : `^${version}`;
 pkg.resolutions.graphql = npmVersion;
 
-writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), 'utf8');
+await writeFile(pkgPath, JSON.stringify(pkg, null, 2), 'utf8');
