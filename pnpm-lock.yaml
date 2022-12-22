@@ -173,7 +173,7 @@ importers:
       graphql: 16.6.0
       svelte: 3.55.0
       svelte-eslint-parser: 0.22.2
-      svelte2tsx: 0.5.23
+      svelte2tsx: 0.6.0
     dependencies:
       graphql: 16.6.0
     devDependencies:
@@ -181,7 +181,7 @@ importers:
       eslint: 8.30.0_v7lv2hbnxmm2b22qo3sob3rjvq
       svelte: 3.55.0
       svelte-eslint-parser: 0.22.2_svelte@3.55.0
-      svelte2tsx: 0.5.23_svelte@3.55.0
+      svelte2tsx: 0.6.0_svelte@3.55.0
 
   examples/vue-code-file:
     specifiers:
@@ -4648,11 +4648,11 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.5.23_svelte@3.55.0:
-    resolution: {integrity: sha512-jYFnugTQRFmUpvLXPQrKzVYcW5ErT+0QCxg027Zx9BuvYefMZFuoBSTDYe7viPEFGrPPiLgT2m7f5n9khE7f7Q==}
+  /svelte2tsx/0.6.0_svelte@3.55.0:
+    resolution: {integrity: sha512-TrxfQkO7CKi8Pu2eC/FyteDCdk3OOeQV5u6z7OjYAsOhsd0ClzAKqxJdvp6xxNQLrbFzf/XvCi9Fy8MQ1MleFA==}
     peerDependencies:
-      svelte: ^3.24
-      typescript: ^4.1.2
+      svelte: ^3.55
+      typescript: ^4.9.4
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
