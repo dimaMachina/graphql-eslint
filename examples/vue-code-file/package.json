@@ -1,9 +1,9 @@
 {
   "name": "@graphql-eslint/example-vue-code-file",
   "version": "0.0.0",
+  "type": "module",
   "author": "Dimitri POSTOLOV",
   "private": true,
-  "type": "module",
   "scripts": {
     "lint": "eslint ."
   },

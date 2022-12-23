@@ -1,6 +1,10 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, englishJoinWords } from '../utils.js';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  requireGraphQLSchemaFromContext,
+  englishJoinWords,
+} from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
 
