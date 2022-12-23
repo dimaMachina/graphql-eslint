@@ -1,7 +1,11 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, englishJoinWords } from '../utils';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  requireGraphQLSchemaFromContext,
+  englishJoinWords,
+} from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'strict-id-in-types';

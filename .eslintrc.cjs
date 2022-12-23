@@ -61,8 +61,14 @@ module.exports = {
     {
       files: ['scripts/**'],
       rules: {
-        'no-console': 'off'
-      }
-    }
+        'no-console': 'off',
+      },
+    },
+    {
+      files: ['packages/plugin/src/**'],
+      rules: {
+        'import/extensions': ['error', 'ignorePackages'],
+      },
+    },
   ],
 };

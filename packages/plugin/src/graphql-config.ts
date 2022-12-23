@@ -2,7 +2,7 @@ import { dirname } from 'path';
 import debugFactory from 'debug';
 import { GraphQLConfig, loadConfigSync, SchemaPointer } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
-import { ParserOptions } from './types';
+import { ParserOptions } from './types.js';
 
 const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;

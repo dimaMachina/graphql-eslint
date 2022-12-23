@@ -3,8 +3,8 @@ import { GraphQLProjectConfig } from 'graphql-config';
 import debugFactory from 'debug';
 import fg from 'fast-glob';
 import chalk from 'chalk';
-import { ParserOptions, Schema, Pointer } from './types';
-import { ModuleCache } from './cache';
+import { ParserOptions, Schema, Pointer } from './types.js';
+import { ModuleCache } from './cache.js';
 
 const schemaCache = new ModuleCache<GraphQLSchema | Error>();
 const debug = debugFactory('graphql-eslint:schema');

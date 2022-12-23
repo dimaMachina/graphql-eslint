@@ -16,7 +16,7 @@ const GROUP_ORDER_TEST = /* GraphQL */ `
     nachos: Int
     guild: Int
   }
-`
+`;
 
 ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
   valid: [

@@ -4,8 +4,8 @@ import {
   ObjectTypeDefinitionNode,
   ObjectTypeExtensionNode,
 } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
 const NO_TYPENAME_PREFIX = 'NO_TYPENAME_PREFIX';
 

@@ -9,9 +9,9 @@ import {
   Source,
   Lexer,
 } from 'graphql';
-import type { Comment, SourceLocation } from 'estree';
-import type { AST } from 'eslint';
-import { valueFromASTUntyped } from 'graphql/utilities/valueFromASTUntyped';
+import { Comment, SourceLocation } from 'estree';
+import { AST } from 'eslint';
+import { valueFromASTUntyped } from 'graphql/utilities/valueFromASTUntyped.js';
 
 export const valueFromNode = (...args: Parameters<typeof valueFromASTUntyped>): any => {
   return valueFromASTUntyped(...args);

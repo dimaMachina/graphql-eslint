@@ -16,13 +16,13 @@ import {
   SelectionSetNode,
   ASTNode,
 } from 'graphql';
-import type { SourceLocation, Comment } from 'estree';
-import type { AST } from 'eslint';
+import { SourceLocation, Comment } from 'estree';
+import { AST } from 'eslint';
 import lowerCase from 'lodash.lowercase';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRuleListener } from '../testkit';
-import { ARRAY_DEFAULT_OPTIONS } from '../utils';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRuleListener } from '../testkit.js';
+import { ARRAY_DEFAULT_OPTIONS } from '../utils.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'alphabetize';

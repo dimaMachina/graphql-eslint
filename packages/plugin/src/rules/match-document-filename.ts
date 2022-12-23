@@ -1,9 +1,9 @@
 import { basename, extname } from 'path';
 import { existsSync } from 'fs';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
-import { CaseStyle as _CaseStyle, convertCase, REPORT_ON_FIRST_CHARACTER } from '../utils';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { CaseStyle as _CaseStyle, convertCase, REPORT_ON_FIRST_CHARACTER } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 type CaseStyle = _CaseStyle | 'matchDocumentStyle';

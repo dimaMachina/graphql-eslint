@@ -457,17 +457,6 @@ exports[`Examples > should work on \`.js\` files 1`] = `
     messages: [
       {
         column: 1,
-        endColumn: 12,
-        endLine: 1,
-        line: 1,
-        message: Unexpected console statement.,
-        messageId: unexpected,
-        nodeType: MemberExpression,
-        ruleId: no-console,
-        severity: 2,
-      },
-      {
-        column: 1,
         endColumn: 8,
         endLine: 1,
         line: 1,
@@ -475,6 +464,17 @@ exports[`Examples > should work on \`.js\` files 1`] = `
         messageId: undef,
         nodeType: Identifier,
         ruleId: no-undef,
+        severity: 2,
+      },
+      {
+        column: 1,
+        endColumn: 12,
+        endLine: 1,
+        line: 1,
+        message: Unexpected console statement.,
+        messageId: unexpected,
+        nodeType: MemberExpression,
+        ruleId: no-console,
         severity: 2,
       },
     ],
@@ -1029,17 +1029,6 @@ exports[`Examples > should work with \`graphql-config\` on \`.js\` files 1`] = `
     filePath: examples/graphql-config-code-file/query.js,
     messages: [
       {
-        column: 13,
-        endColumn: 20,
-        endLine: 1,
-        line: 1,
-        message: 'require' is not defined.,
-        messageId: undef,
-        nodeType: Identifier,
-        ruleId: no-undef,
-        severity: 2,
-      },
-      {
         column: 7,
         endColumn: 15,
         endLine: 3,
@@ -1065,8 +1054,8 @@ exports[`Examples > should work with \`graphql-config\` on \`.js\` files 1`] = `
             desc: Rename to \`user\`,
             fix: {
               range: [
-                66,
-                66,
+                61,
+                61,
               ],
               text:  user,
             },
@@ -1087,8 +1076,8 @@ Include it in your selection set.,
             desc: Add \`id\` selection,
             fix: {
               range: [
-                86,
-                86,
+                81,
+                81,
               ],
               text: id ,
             },

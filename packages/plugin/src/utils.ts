@@ -3,8 +3,8 @@ import { AST } from 'eslint';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
 import { Position } from 'estree';
-import { GraphQLESLintRuleContext } from './types';
-import { SiblingOperations } from './documents';
+import { GraphQLESLintRuleContext } from './types.js';
+import { SiblingOperations } from './documents.js';
 
 export function requireSiblingsOperations(
   ruleId: string,

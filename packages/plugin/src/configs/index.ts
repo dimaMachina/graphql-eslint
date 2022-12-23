@@ -1,8 +1,8 @@
-import schemaRecommendedConfig from './schema-recommended';
-import schemaAllConfig from './schema-all';
-import operationsRecommendedConfig from './operations-recommended';
-import operationsAllConfig from './operations-all';
-import relayConfig from './relay';
+import schemaRecommendedConfig from './schema-recommended.js';
+import schemaAllConfig from './schema-all.js';
+import operationsRecommendedConfig from './operations-recommended.js';
+import operationsAllConfig from './operations-all.js';
+import relayConfig from './relay.js';
 
 export const configs = {
   'schema-recommended': schemaRecommendedConfig,

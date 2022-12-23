@@ -1,6 +1,7 @@
 {
   "name": "@graphql-eslint/example-prettier",
   "version": "0.0.0",
+  "type": "module",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "JounQin <admin@1stg.me>",
   "private": true,

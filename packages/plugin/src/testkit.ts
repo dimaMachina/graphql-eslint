@@ -2,10 +2,10 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
-import type { ASTKindToNode } from 'graphql';
+import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
-import type { GraphQLESTreeNode } from './estree-converter';
-import type { GraphQLESLintRule, ParserOptions } from './types';
+import { GraphQLESTreeNode } from './estree-converter/index.js';
+import { GraphQLESLintRule, ParserOptions } from './types.js';
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;

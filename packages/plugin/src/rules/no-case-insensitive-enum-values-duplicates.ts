@@ -1,6 +1,6 @@
 import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
 export const rule: GraphQLESLintRule = {
   meta: {

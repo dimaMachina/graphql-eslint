@@ -1,6 +1,6 @@
 import { Kind, ObjectTypeDefinitionNode, TypeNode } from 'graphql';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const MUST_BE_OBJECT_TYPE = 'MUST_BE_OBJECT_TYPE';
 const MUST_CONTAIN_FIELD_EDGES = 'MUST_CONTAIN_FIELD_EDGES';

@@ -3,8 +3,8 @@ import * as ESTree from 'estree';
 import { GraphQLSchema } from 'graphql';
 import { IExtensions, IGraphQLProject } from 'graphql-config';
 import { GraphQLParseOptions } from '@graphql-tools/utils';
-import { GraphQLESLintRuleListener } from './testkit';
-import { SiblingOperations } from './documents';
+import { GraphQLESLintRuleListener } from './testkit.js';
+import { SiblingOperations } from './documents.js';
 import { JSONSchema } from 'json-schema-to-ts';
 
 export type Schema = GraphQLSchema | Error | null;

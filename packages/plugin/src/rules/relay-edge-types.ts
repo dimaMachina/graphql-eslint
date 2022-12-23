@@ -10,10 +10,10 @@ import {
   isScalarType,
 } from 'graphql';
 import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
-import type { GraphQLESLintRuleListener } from '../testkit';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRuleListener } from '../testkit.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'relay-edge-types';

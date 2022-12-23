@@ -1,4 +1,4 @@
-import type {
+import {
   ASTNode,
   TypeInfo,
   TypeNode,
@@ -33,8 +33,8 @@ import type {
   NonNullTypeNode,
   OperationTypeDefinitionNode,
 } from 'graphql';
-import type { SourceLocation, Comment } from 'estree';
-import type { AST } from 'eslint';
+import { SourceLocation, Comment } from 'estree';
+import { AST } from 'eslint';
 
 type SafeGraphQLType<T extends ASTNode> = T extends { type: TypeNode }
   ? Omit<T, 'loc' | 'type'> & { gqlType: T['type'] }

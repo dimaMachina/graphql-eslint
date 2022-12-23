@@ -5,9 +5,9 @@ import {
   ObjectTypeDefinitionNode,
   NameNode,
 } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRuleListener } from '../testkit';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRuleListener } from '../testkit.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const schema = {

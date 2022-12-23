@@ -1,7 +1,7 @@
 import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { requireGraphQLSchemaFromContext } from '../utils';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'relay-arguments';

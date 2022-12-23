@@ -1,5 +1,5 @@
-import { GraphQLESLintRule } from '../types';
-import { checkNode } from './unique-fragment-name';
+import { GraphQLESLintRule } from '../types.js';
+import { checkNode } from './unique-fragment-name.js';
 
 const RULE_ID = 'unique-operation-name';
 
