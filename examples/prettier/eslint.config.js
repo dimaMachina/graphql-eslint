@@ -1,21 +1,32 @@
-module.exports = {
-  root: true,
-  overrides: [
-    {
-      files: ['*.js'],
-      processor: '@graphql-eslint/graphql',
-      extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-      env: {
-        es6: true,
-      },
+import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import prettierPlugin from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
+
+export default [
+  'eslint:recommended',
+  {
+    plugins: {
+      prettier: prettierPlugin,
     },
-    {
-      files: ['*.graphql'],
-      parser: '@graphql-eslint/eslint-plugin',
-      plugins: ['@graphql-eslint'],
-      rules: {
-        'prettier/prettier': 'error',
-      },
+  },
+  {
+    files: ['**/*.js'],
+    processor: graphqlESLint.processors.graphql,
+    rules: {
+      ...prettierConfig.rules,
+      ...prettierPlugin.configs.recommended.rules,
     },
-  ],
-};
+  },
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlESLint,
+    },
+    plugins: {
+      '@graphql-eslint': graphqlESLint,
+    },
+    rules: {
+      'prettier/prettier': 'error',
+    },
+  },
+];
