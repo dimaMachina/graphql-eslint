@@ -27,7 +27,6 @@ await rm(`${DIST_DIR}/cjs/package.json`);
 // add package.json with type: module to esm directory because ESLint throws an error
 // SyntaxError: Cannot use import statement outside a module
 await writeFile(`${DIST_DIR}/esm/package.json`, '{ "type": "module" }\n');
-console.timeEnd('done');
 
 async function addCreateRequireBanner(): Promise<void> {
   const filePaths = ['estree-converter/utils.js', 'rules/graphql-js-validation.js', 'testkit.js'];
@@ -47,3 +46,4 @@ ${content}`.trimStart(),
 }
 
 await addCreateRequireBanner();
+console.timeEnd('done');
