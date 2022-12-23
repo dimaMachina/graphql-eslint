@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "author": "Dimitri POSTOLOV",
   "private": true,
-  "type": "module",
   "scripts": {
     "lint": "eslint ."
   },
