@@ -1,39 +1,35 @@
 import { parseForESLint } from './parser.js';
-import { rules } from './rules/index.js';
 import { configs } from './configs/index.js';
 
-const baseOptions = {
+const languageOptions = {
   parser: { parseForESLint },
-  plugins: {
-    '@graphql-eslint': { rules },
-  },
 };
 
 export const flatConfigs = {
   'operations-all': {
-    ...baseOptions,
+    languageOptions,
     rules: {
       ...configs['operations-recommended'].rules,
       ...configs['operations-all'].rules,
     },
   },
   'operations-recommended': {
-    ...baseOptions,
+    languageOptions,
     rules: configs['operations-recommended'].rules,
   },
   relay: {
-    ...baseOptions,
+    languageOptions,
     rules: configs.relay.rules,
   },
   'schema-all': {
-    ...baseOptions,
+    languageOptions,
     rules: {
       ...configs['schema-recommended'].rules,
       ...configs['schema-all'].rules,
     },
   },
   'schema-recommended': {
-    ...baseOptions,
+    languageOptions,
     rules: configs['schema-recommended'].rules,
   },
 };

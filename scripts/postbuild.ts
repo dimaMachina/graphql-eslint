@@ -1,4 +1,4 @@
-import { writeFile, rm, appendFile } from 'node:fs/promises';
+import { writeFile, rm, appendFile, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const DIST_DIR = path.resolve(process.cwd(), './packages/plugin/dist');
@@ -26,11 +26,24 @@ await rm(`${DIST_DIR}/cjs/package.json`);
 
 // add package.json with type: module to esm directory because ESLint throws an error
 // SyntaxError: Cannot use import statement outside a module
-await writeFile(`${DIST_DIR}/esm/package.json`, '{ "type": "module" }\n')
+await writeFile(`${DIST_DIR}/esm/package.json`, '{ "type": "module" }\n');
 console.timeEnd('done');
 
-function addCreateRequireBanner() {
-  ['packages/plugin/src/estree-converter/utils.ts',
-  'packages/plugin/src/rules/graphql-js-validation.ts',
-  'packages/plugin/src/testkit.ts']
+async function addCreateRequireBanner(): Promise<void> {
+  const filePaths = ['estree-converter/utils.js', 'rules/graphql-js-validation.js', 'testkit.js'];
+  await Promise.all(
+    filePaths.map(async filePath => {
+      const fullPath = `${DIST_DIR}/esm/${filePath}`;
+      const content = await readFile(fullPath, 'utf8');
+      await writeFile(
+        fullPath,
+        `
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+${content}`.trimStart(),
+      );
+    }),
+  );
 }
+
+await addCreateRequireBanner();
