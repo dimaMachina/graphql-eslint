@@ -3,7 +3,7 @@ import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
 export default [
   'eslint:recommended',
   {
-    files: ['*.graphql'],
+    files: ['**/*.graphql'],
     plugins: {
       '@graphql-eslint': graphqlESLint,
     },
