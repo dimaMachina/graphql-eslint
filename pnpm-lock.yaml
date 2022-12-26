@@ -172,7 +172,7 @@ importers:
       eslint: 8.30.0
       graphql: 16.6.0
       svelte: 3.55.0
-      svelte-eslint-parser: 0.22.2
+      svelte-eslint-parser: 0.22.3
       svelte2tsx: 0.6.0
     dependencies:
       graphql: 16.6.0
@@ -180,7 +180,7 @@ importers:
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.30.0_v7lv2hbnxmm2b22qo3sob3rjvq
       svelte: 3.55.0
-      svelte-eslint-parser: 0.22.2_svelte@3.55.0
+      svelte-eslint-parser: 0.22.3_svelte@3.55.0
       svelte2tsx: 0.6.0_svelte@3.55.0
 
   examples/vue-code-file:
@@ -4631,8 +4631,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-eslint-parser/0.22.2_svelte@3.55.0:
-    resolution: {integrity: sha512-GVdJam5196n3Tu5QFQWFdOo+OMtOpMw8oFpZgJN3Ry8H9/EYJ22eOucG3pxpbeQxbF/1m/nkjOwVDUAc+CqDnQ==}
+  /svelte-eslint-parser/0.22.3_svelte@3.55.0:
+    resolution: {integrity: sha512-l9M1QbQ8YsF92FNtwHYKoJWnJvBAKB89jmiKLCG9R5GOlidehFzvmxzdK4lsJjzx5UylrTKuKlR815RFopq1Vw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       svelte: ^3.37.0
