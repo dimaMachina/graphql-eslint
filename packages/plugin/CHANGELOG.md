@@ -1,5 +1,72 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.14.0
+
+### Minor Changes
+
+- [#1335](https://github.com/B2o5T/graphql-eslint/pull/1335)
+  [`2e4dfa0`](https://github.com/B2o5T/graphql-eslint/commit/2e4dfa0b82705e5fe6d91e2d742896b638e2eeec)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - support new ESLint flat config system, export
+  `flatConfigs`
+
+- [#1330](https://github.com/B2o5T/graphql-eslint/pull/1330)
+  [`bab45cc`](https://github.com/B2o5T/graphql-eslint/commit/bab45cc003ff95a39692166785b6b59b33bd6a71)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - add new rule `require-nullable-fields-with-oneof`
+
+- [#1331](https://github.com/B2o5T/graphql-eslint/pull/1331)
+  [`0f7afa5`](https://github.com/B2o5T/graphql-eslint/commit/0f7afa50f5dbf65f4c7a089f91f4de97e096af95)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - add new rule `require-type-pattern-with-oneof`
+
+- [#1144](https://github.com/B2o5T/graphql-eslint/pull/1144)
+  [`43e2861`](https://github.com/B2o5T/graphql-eslint/commit/43e286162e1e70ae39b75b8010991fc5eb6c2c72)
+  Thanks [@TuvalSimha](https://github.com/TuvalSimha)! - Add new option `groups` to `alphabetize`
+  rule
+
+- [#1303](https://github.com/B2o5T/graphql-eslint/pull/1303)
+  [`c6d5bb7`](https://github.com/B2o5T/graphql-eslint/commit/c6d5bb7c81f3336b7739c691610df597470739bb)
+  Thanks [@tshedor](https://github.com/tshedor)! - [require-description] add `rootField` option for
+  only field definitions within `Query`, `Mutation`, and `Subscription` root types
+
+- [#1141](https://github.com/B2o5T/graphql-eslint/pull/1141)
+  [`b1f2730`](https://github.com/B2o5T/graphql-eslint/commit/b1f27304a4531819f31c0a3705afb390607e23d0)
+  Thanks [@TuvalSimha](https://github.com/TuvalSimha)! - add new option `prefix` for
+  `match-document-filename` rule
+
+- [#1314](https://github.com/B2o5T/graphql-eslint/pull/1314)
+  [`a4f885a`](https://github.com/B2o5T/graphql-eslint/commit/a4f885a93fca8ff6ad2300bec8e666370799c897)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - add ESLint suggestions for following `graphql-js`
+  rules:
+
+  - `fields-on-correct-type`
+  - `known-argument-names`
+  - `known-type-names`
+  - `possible-type-extension`
+  - `scalar-leafs`
+  - `value-literals-of-correct-type`
+
+- [#1316](https://github.com/B2o5T/graphql-eslint/pull/1316)
+  [`1f21fc8`](https://github.com/B2o5T/graphql-eslint/commit/1f21fc8276d4cc67a9e8d897d24c5df67092629b)
+  Thanks [@FloEdelmann](https://github.com/FloEdelmann)! - feat: add `lone-executable-definition` to
+  require all queries, mutations, subscriptions and fragments to be located in separate files
+
+- [#1338](https://github.com/B2o5T/graphql-eslint/pull/1338)
+  [`fedec34`](https://github.com/B2o5T/graphql-eslint/commit/fedec34fe2d477296bc0dc9306b7fa2cdaf1fc4c)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - update `graphql-config` to v4.4.0 that no longer
+  requires `typescript` to be installed
+
+- [#1334](https://github.com/B2o5T/graphql-eslint/pull/1334)
+  [`abcfc14`](https://github.com/B2o5T/graphql-eslint/commit/abcfc1411d35c0f6edb5d11779eeae98f1937c98)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - add new rule `no-one-place-fragments`
+
+### Patch Changes
+
+- [#1338](https://github.com/B2o5T/graphql-eslint/pull/1338)
+  [`fedec34`](https://github.com/B2o5T/graphql-eslint/commit/fedec34fe2d477296bc0dc9306b7fa2cdaf1fc4c)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
+  - Updated dependency
+    [`graphql-config@^4.4.0` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.4.0) (from
+    `^4.3.6`, in `dependencies`)
+
 ## 3.13.1
 
 ### Patch Changes
