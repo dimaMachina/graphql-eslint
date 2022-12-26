@@ -25,7 +25,7 @@
     "@graphql-tools/utils": "^9.0.0",
     "@theguild/prettier-config": "1.0.0",
     "@types/dedent": "0.7.0",
-    "@types/node": "18.11.17",
+    "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "bob-the-bundler": "4.2.0-alpha-20221222140753-fcf5286",
