@@ -1,5 +1,6 @@
 export default {
-  extends: './configs/base',
+  parser: '@graphql-eslint/eslint-plugin',
+  plugins: ['@graphql-eslint'],
   rules: {
     '@graphql-eslint/relay-arguments': 'error',
     '@graphql-eslint/relay-connection-types': 'error',

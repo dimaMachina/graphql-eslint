@@ -3,7 +3,7 @@
  */
 
 export default {
-  extends: ['./configs/base', './configs/schema-recommended'],
+  extends: './configs/schema-recommended',
   rules: {
     '@graphql-eslint/alphabetize': [
       'error',

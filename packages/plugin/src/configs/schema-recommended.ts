@@ -3,7 +3,8 @@
  */
 
 export default {
-  extends: './configs/base',
+  parser: '@graphql-eslint/eslint-plugin',
+  plugins: ['@graphql-eslint'],
   rules: {
     '@graphql-eslint/description-style': 'error',
     '@graphql-eslint/known-argument-names': 'error',
