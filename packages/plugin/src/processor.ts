@@ -105,8 +105,9 @@ export const processor: Linter.Processor<Block | string> = {
           message.fix.range[1] += offset;
         }
         for (const suggestion of message.suggestions || []) {
-          suggestion.fix.range[0] += offset;
-          suggestion.fix.range[1] += offset;
+          // DO NOT mutate until https://github.com/eslint/eslint/issues/16716
+          const [start, end] = suggestion.fix.range;
+          suggestion.fix.range = [start + offset, end + offset];
         }
       }
     }
