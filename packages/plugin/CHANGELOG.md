@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.14.2
+
+### Patch Changes
+
+- [#1346](https://github.com/B2o5T/graphql-eslint/pull/1346)
+  [`f031f56`](https://github.com/B2o5T/graphql-eslint/commit/f031f56130d6b6d82bbee8de5008755ad095cc20)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - report errors on first character for
+  `*.vue`/`*.svelte` code, due graphql-tag-pluck limitation we can't know right location
+
 ## 3.14.1
 
 ### Patch Changes
