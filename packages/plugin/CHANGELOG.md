@@ -1,5 +1,21 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.14.1
+
+### Patch Changes
+
+- [#1344](https://github.com/B2o5T/graphql-eslint/pull/1344)
+  [`8e40946`](https://github.com/B2o5T/graphql-eslint/commit/8e4094631b967bb195141467f90c40ff05412edb)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
+
+  - Added dependency [`tslib@^2.4.1` ↗︎](https://www.npmjs.com/package/tslib/v/2.4.1) (to
+    `dependencies`)
+
+- [#1344](https://github.com/B2o5T/graphql-eslint/pull/1344)
+  [`8e40946`](https://github.com/B2o5T/graphql-eslint/commit/8e4094631b967bb195141467f90c40ff05412edb)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix `schema-all`/`operations-all` configs error -
+  ESLint couldn't find the config "./configs/base" add `tslib` to dependencies
+
 ## 3.14.0
 
 ### Minor Changes
