@@ -1,3 +1,6 @@
+<template>
+  <span>test</span>
+</template>
 <script>
 /* eslint-disable no-unused-vars */
 

@@ -6,6 +6,7 @@ import {
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
 import { loadOnDiskGraphQLConfig } from './graphql-config.js';
+import { REPORT_ON_FIRST_CHARACTER } from './utils.js';
 
 export type Block = Linter.ProcessorFile & {
   lineOffset: number;
@@ -58,19 +59,20 @@ export const processor: Linter.Processor<Block | string> = {
         skipIndent: true,
         ...pluckConfig,
       });
-      const isSvelte = filePath.endsWith('.svelte');
 
       const blocks: Block[] = sources.map(item => ({
         filename: 'document.graphql',
         text: item.body,
-        lineOffset: item.locationOffset.line - (isSvelte ? 3 : 1),
+        lineOffset: item.locationOffset.line - 1,
         // @ts-expect-error -- `index` field exist but show ts error
-        offset: item.locationOffset.index + (isSvelte ? -52 : 1),
+        offset: item.locationOffset.index + 1,
       }));
       blocksMap.set(filePath, blocks);
 
       return [...blocks, code /* source code must be provided and be last */];
-    } catch {
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
       // in case of parsing error return code as is
       return [code];
     }
@@ -80,7 +82,19 @@ export const processor: Linter.Processor<Block | string> = {
     for (let i = 0; i < blocks.length; i += 1) {
       const { lineOffset, offset } = blocks[i];
 
-      for (const message of messages[i]) {
+      for (const message of messages[i] || []) {
+        const isVueOrSvelte = /\.(vue|svelte)$/.test(filePath);
+        if (isVueOrSvelte) {
+          // We can't show correct report location because after processing with
+          // graphql-tag-pluck location is incorrect, disable fixes as well
+          delete message.endLine;
+          delete message.endColumn;
+          delete message.fix;
+          delete message.suggestions;
+          Object.assign(message, REPORT_ON_FIRST_CHARACTER);
+          continue;
+        }
+
         message.line += lineOffset;
         // endLine can not exist if only `loc: { start, column }` was provided to context.report
         if (typeof message.endLine === 'number') {

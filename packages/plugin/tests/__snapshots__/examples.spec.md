@@ -241,49 +241,21 @@ exports[`Examples > should work in svelte 1`] = `
     filePath: examples/svelte-code-file/test.svelte,
     messages: [
       {
-        column: 3,
-        endColumn: 8,
-        endLine: 5,
-        line: 5,
+        column: 0,
+        line: 1,
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         messageId: no-anonymous-operations,
         nodeType: null,
         ruleId: @graphql-eslint/no-anonymous-operations,
         severity: 2,
-        suggestions: [
-          {
-            desc: Rename to \`user\`,
-            fix: {
-              range: [
-                78,
-                78,
-              ],
-              text:  user,
-            },
-          },
-        ],
       },
       {
-        column: 9,
-        endColumn: 18,
-        endLine: 13,
-        line: 13,
+        column: 0,
+        line: 1,
         message: Operation "UserQuery" should not have "Query" suffix,
         nodeType: Name,
         ruleId: @graphql-eslint/naming-convention,
         severity: 2,
-        suggestions: [
-          {
-            desc: Rename to \`User\`,
-            fix: {
-              range: [
-                166,
-                175,
-              ],
-              text: User,
-            },
-          },
-        ],
       },
     ],
   },
@@ -296,49 +268,21 @@ exports[`Examples > should work in vue 1`] = `
     filePath: examples/vue-code-file/test.vue,
     messages: [
       {
-        column: 3,
-        endColumn: 8,
-        endLine: 5,
-        line: 5,
+        column: 0,
+        line: 1,
         message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
         messageId: no-anonymous-operations,
         nodeType: null,
         ruleId: @graphql-eslint/no-anonymous-operations,
         severity: 2,
-        suggestions: [
-          {
-            desc: Rename to \`user\`,
-            fix: {
-              range: [
-                78,
-                78,
-              ],
-              text:  user,
-            },
-          },
-        ],
       },
       {
-        column: 9,
-        endColumn: 18,
-        endLine: 13,
-        line: 13,
+        column: 0,
+        line: 1,
         message: Operation "UserQuery" should not have "Query" suffix,
         nodeType: Name,
         ruleId: @graphql-eslint/naming-convention,
         severity: 2,
-        suggestions: [
-          {
-            desc: Rename to \`User\`,
-            fix: {
-              range: [
-                166,
-                175,
-              ],
-              text: User,
-            },
-          },
-        ],
       },
     ],
   },
