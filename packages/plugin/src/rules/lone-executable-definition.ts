@@ -39,7 +39,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     docs: {
       category: 'Operations',
       description:
-        'Require all queries, mutations, subscriptions and fragments to be located in separate files.',
+        'Require queries, mutations, subscriptions or fragments to be located in separate files.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {

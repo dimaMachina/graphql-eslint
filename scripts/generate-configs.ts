@@ -102,21 +102,27 @@ async function generateConfigs(): Promise<void> {
     );
   };
 
+  // Can't extend in `all` config, throws `ESLint couldn't find the config "./configs/base" to extend from`
+  const baseConfig = {
+    parser: '@graphql-eslint/eslint-plugin',
+    plugins: ['@graphql-eslint'],
+  }
+
   await Promise.all([
     writeFormattedFile('configs/schema-recommended.ts', {
-      extends: './configs/base',
+      ...baseConfig,
       rules: getRulesConfig('Schema', true),
     }),
     writeFormattedFile('configs/operations-recommended.ts', {
-      extends: './configs/base',
+      ...baseConfig,
       rules: getRulesConfig('Operations', true),
     }),
     writeFormattedFile('configs/schema-all.ts', {
-      extends: ['./configs/base', './configs/schema-recommended'],
+      extends: './configs/schema-recommended',
       rules: getRulesConfig('Schema', false),
     }),
     writeFormattedFile('configs/operations-all.ts', {
-      extends: ['./configs/base', './configs/operations-recommended'],
+      extends: './configs/operations-recommended',
       rules: getRulesConfig('Operations', false),
     }),
   ]);

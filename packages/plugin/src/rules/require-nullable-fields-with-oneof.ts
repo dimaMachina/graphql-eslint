@@ -9,7 +9,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     docs: {
       category: 'Schema',
-      description: 'Require are `input` or `type` fields be non nullable with `@oneOf` directive.',
+      description: 'Require `input` or `type` fields to be non-nullable with `@oneOf` directive.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       examples: [
         {

@@ -6,17 +6,11 @@ const DIST_DIR = path.resolve(process.cwd(), './packages/plugin/dist');
 console.time('done');
 
 await Promise.all(
-  // ESLint in commonjs import configs as `module.exports`, but bob bundles them as `exports.default`
+  // ESLint in commonjs import configs as `module.exports`, but tsc in bob bundles them as `exports.default`
   // variable
-  [
-    'base',
-    'operations-all',
-    'operations-recommended',
-    'relay',
-    'schema-all',
-    'schema-recommended',
-  ].map(filename =>
-    appendFile(`${DIST_DIR}/cjs/configs/${filename}.js`, 'module.exports = exports.default;\n'),
+  ['operations-all', 'operations-recommended', 'relay', 'schema-all', 'schema-recommended'].map(
+    filename =>
+      appendFile(`${DIST_DIR}/cjs/configs/${filename}.js`, 'module.exports = exports.default;\n'),
   ),
 );
 
