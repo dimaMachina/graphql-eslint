@@ -86,10 +86,8 @@ importers:
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.30.0
       graphql: 16.6.0
-      tslib: ^2.4.1
     dependencies:
       graphql: 16.6.0
-      tslib: 2.4.1
     devDependencies:
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.30.0_v7lv2hbnxmm2b22qo3sob3rjvq
