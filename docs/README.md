@@ -26,7 +26,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [known-fragment-names](rules/known-fragment-names.md)|A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.|![recommended][]|📦|🔮|
 [known-type-names](rules/known-type-names.md)|A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.|![recommended][]|📄 📦|🔮|💡
 [lone-anonymous-operation](rules/lone-anonymous-operation.md)|A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if it contains only that one operation definition.|![recommended][]|📦|🔮|
-[lone-executable-definition](rules/lone-executable-definition.md)|Require all queries, mutations, subscriptions and fragments to be located in separate files.|![all][]|📦|🚀|
+[lone-executable-definition](rules/lone-executable-definition.md)|Require queries, mutations, subscriptions or fragments to be located in separate files.|![all][]|📦|🚀|
 [lone-schema-definition](rules/lone-schema-definition.md)|A GraphQL document is only valid if it contains only one schema definition.|![recommended][]|📄|🔮|
 [match-document-filename](rules/match-document-filename.md)|This rule allows you to enforce that the file name should match the operation name.|![all][]|📦|🚀|
 [naming-convention](rules/naming-convention.md)|Require names to follow specified conventions.|![recommended][]|📄 📦|🚀|💡
@@ -59,7 +59,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [require-description](rules/require-description.md)|Enforce descriptions in type definitions and operations.|![recommended][]|📄|🚀|
 [require-field-of-type-query-in-mutation-result](rules/require-field-of-type-query-in-mutation-result.md)|Allow the client in one round-trip not only to call mutation but also to get a wagon of data to update their application.|![all][]|📄|🚀|
 [require-id-when-available](rules/require-id-when-available.md)|Enforce selecting specific fields when they are available on the GraphQL type.|![recommended][]|📦|🚀|💡
-[require-nullable-fields-with-oneof](rules/require-nullable-fields-with-oneof.md)|Require are `input` or `type` fields be non nullable with `@oneOf` directive.|![all][]|📄|🚀|
+[require-nullable-fields-with-oneof](rules/require-nullable-fields-with-oneof.md)|Require `input` or `type` fields to be non-nullable with `@oneOf` directive.|![all][]|📄|🚀|
 [require-type-pattern-with-oneof](rules/require-type-pattern-with-oneof.md)|Enforce types with `@oneOf` directive have `error` and `ok` fields.|![all][]|📄|🚀|
 [scalar-leafs](rules/scalar-leafs.md)|A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.|![recommended][]|📦|🔮|💡
 [selection-set-depth](rules/selection-set-depth.md)|Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).|![recommended][]|📦|🚀|💡

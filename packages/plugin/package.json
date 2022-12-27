@@ -44,7 +44,8 @@
     "fast-glob": "^3.2.12",
     "graphql-config": "^4.4.0",
     "graphql-depth-limit": "^1.1.0",
-    "lodash.lowercase": "^4.3.0"
+    "lodash.lowercase": "^4.3.0",
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
     "@types/babel__code-frame": "7.0.3",

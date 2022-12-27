@@ -6,7 +6,7 @@
 - Requires GraphQL Operations: `false`
   [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Require all queries, mutations, subscriptions and fragments to be located in separate files.
+Require queries, mutations, subscriptions or fragments to be located in separate files.
 
 ## Usage Examples
 

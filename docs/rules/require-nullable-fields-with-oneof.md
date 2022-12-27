@@ -6,7 +6,7 @@
 - Requires GraphQL Operations: `false`
   [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Require are `input` or `type` fields be non nullable with `@oneOf` directive.
+Require `input` or `type` fields to be non-nullable with `@oneOf` directive.
 
 ## Usage Examples
 
