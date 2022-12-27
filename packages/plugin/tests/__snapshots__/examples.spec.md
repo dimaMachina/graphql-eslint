@@ -57,8 +57,8 @@ exports[`Examples > should work in monorepo 1`] = `
             desc: Rename to \`firstName\`,
             fix: {
               range: [
-                164,
-                173,
+                131,
+                140,
               ],
               text: firstName,
             },
@@ -67,8 +67,8 @@ exports[`Examples > should work in monorepo 1`] = `
             desc: Rename to \`lastName\`,
             fix: {
               range: [
-                164,
-                173,
+                131,
+                140,
               ],
               text: lastName,
             },
