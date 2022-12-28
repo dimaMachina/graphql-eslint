@@ -1,4 +1,5 @@
 import { Linter } from 'eslint';
+import { relative } from 'path';
 import {
   gqlPluckFromCodeStringSync,
   GraphQLTagPluckOptions,
@@ -6,7 +7,7 @@ import {
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
 import { loadOnDiskGraphQLConfig } from './graphql-config.js';
-import { REPORT_ON_FIRST_CHARACTER } from './utils.js';
+import { CWD, REPORT_ON_FIRST_CHARACTER } from './utils.js';
 
 export type Block = Linter.ProcessorFile & {
   lineOffset: number;
@@ -70,9 +71,13 @@ export const processor: Linter.Processor<Block | string> = {
       blocksMap.set(filePath, blocks);
 
       return [...blocks, code /* source code must be provided and be last */];
-    } catch (e) {
+    } catch (error) {
+      error.message = `[graphql-eslint] Error while preprocessing "${relative(
+        CWD,
+        filePath,
+      )}" file\n\n${error.message}`;
       // eslint-disable-next-line no-console
-      console.error(e);
+      console.error(error);
       // in case of parsing error return code as is
       return [code];
     }
