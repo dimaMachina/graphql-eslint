@@ -1,17 +1,17 @@
 {
-  "name": "monorepo",
-  "version": "0.0.1",
-  "private": true,
-  "license": "MIT",
+  "name": "@graphql-eslint/example-monorepo",
+  "version": "0.0.0",
+  "type": "module",
   "author": "Dimitri POSTOLOV",
+  "private": true,
   "scripts": {
     "lint": "eslint ."
   },
   "dependencies": {
-    "graphql": "16.5.0"
+    "graphql": "16.6.0"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "3.10.7",
-    "eslint": "8.18.0"
+    "@graphql-eslint/eslint-plugin": "workspace:*",
+    "eslint": "8.30.0"
   }
 }

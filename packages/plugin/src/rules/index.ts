@@ -2,41 +2,46 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
-import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation';
-import alphabetize from './alphabetize';
-import descriptionStyle from './description-style';
-import inputName from './input-name';
-import matchDocumentFilename from './match-document-filename';
-import namingConvention from './naming-convention';
-import noAnonymousOperations from './no-anonymous-operations';
-import noCaseInsensitiveEnumValuesDuplicates from './no-case-insensitive-enum-values-duplicates';
-import noDeprecated from './no-deprecated';
-import noDuplicateFields from './no-duplicate-fields';
-import noHashtagDescription from './no-hashtag-description';
-import noRootType from './no-root-type';
-import noScalarResultTypeOnMutation from './no-scalar-result-type-on-mutation';
-import noTypenamePrefix from './no-typename-prefix';
-import noUnreachableTypes from './no-unreachable-types';
-import noUnusedFields from './no-unused-fields';
-import relayArguments from './relay-arguments';
-import relayConnectionTypes from './relay-connection-types';
-import relayEdgeTypes from './relay-edge-types';
-import relayPageInfo from './relay-page-info';
-import requireDeprecationDate from './require-deprecation-date';
-import requireDeprecationReason from './require-deprecation-reason';
-import requireDescription from './require-description';
-import requireFieldOfTypeQueryInMutationResult from './require-field-of-type-query-in-mutation-result';
-import requireIdWhenAvailable from './require-id-when-available';
-import selectionSetDepth from './selection-set-depth';
-import strictIdInTypes from './strict-id-in-types';
-import uniqueFragmentName from './unique-fragment-name';
-import uniqueOperationName from './unique-operation-name';
+import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation.js';
+import { rule as alphabetize } from './alphabetize.js';
+import { rule as descriptionStyle } from './description-style.js';
+import { rule as inputName } from './input-name.js';
+import { rule as loneExecutableDefinition } from './lone-executable-definition.js';
+import { rule as matchDocumentFilename } from './match-document-filename.js';
+import { rule as namingConvention } from './naming-convention.js';
+import { rule as noAnonymousOperations } from './no-anonymous-operations.js';
+import { rule as noCaseInsensitiveEnumValuesDuplicates } from './no-case-insensitive-enum-values-duplicates.js';
+import { rule as noDeprecated } from './no-deprecated.js';
+import { rule as noDuplicateFields } from './no-duplicate-fields.js';
+import { rule as noHashtagDescription } from './no-hashtag-description.js';
+import { rule as noOnePlaceFragments } from './no-one-place-fragments.js';
+import { rule as noRootType } from './no-root-type.js';
+import { rule as noScalarResultTypeOnMutation } from './no-scalar-result-type-on-mutation.js';
+import { rule as noTypenamePrefix } from './no-typename-prefix.js';
+import { rule as noUnreachableTypes } from './no-unreachable-types.js';
+import { rule as noUnusedFields } from './no-unused-fields.js';
+import { rule as relayArguments } from './relay-arguments.js';
+import { rule as relayConnectionTypes } from './relay-connection-types.js';
+import { rule as relayEdgeTypes } from './relay-edge-types.js';
+import { rule as relayPageInfo } from './relay-page-info.js';
+import { rule as requireDeprecationDate } from './require-deprecation-date.js';
+import { rule as requireDeprecationReason } from './require-deprecation-reason.js';
+import { rule as requireDescription } from './require-description.js';
+import { rule as requireFieldOfTypeQueryInMutationResult } from './require-field-of-type-query-in-mutation-result.js';
+import { rule as requireIdWhenAvailable } from './require-id-when-available.js';
+import { rule as requireNullableFieldsWithOneof } from './require-nullable-fields-with-oneof.js';
+import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof.js';
+import { rule as selectionSetDepth } from './selection-set-depth.js';
+import { rule as strictIdInTypes } from './strict-id-in-types.js';
+import { rule as uniqueFragmentName } from './unique-fragment-name.js';
+import { rule as uniqueOperationName } from './unique-operation-name.js';
 
 export const rules = {
   ...GRAPHQL_JS_VALIDATIONS,
   alphabetize,
   'description-style': descriptionStyle,
   'input-name': inputName,
+  'lone-executable-definition': loneExecutableDefinition,
   'match-document-filename': matchDocumentFilename,
   'naming-convention': namingConvention,
   'no-anonymous-operations': noAnonymousOperations,
@@ -44,6 +49,7 @@ export const rules = {
   'no-deprecated': noDeprecated,
   'no-duplicate-fields': noDuplicateFields,
   'no-hashtag-description': noHashtagDescription,
+  'no-one-place-fragments': noOnePlaceFragments,
   'no-root-type': noRootType,
   'no-scalar-result-type-on-mutation': noScalarResultTypeOnMutation,
   'no-typename-prefix': noTypenamePrefix,
@@ -58,6 +64,8 @@ export const rules = {
   'require-description': requireDescription,
   'require-field-of-type-query-in-mutation-result': requireFieldOfTypeQueryInMutationResult,
   'require-id-when-available': requireIdWhenAvailable,
+  'require-nullable-fields-with-oneof': requireNullableFieldsWithOneof,
+  'require-type-pattern-with-oneof': requireTypePatternWithOneof,
   'selection-set-depth': selectionSetDepth,
   'strict-id-in-types': strictIdInTypes,
   'unique-fragment-name': uniqueFragmentName,

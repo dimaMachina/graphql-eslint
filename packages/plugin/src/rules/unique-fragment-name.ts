@@ -1,21 +1,23 @@
 import { relative } from 'path';
 import { ExecutableDefinitionNode, Kind } from 'graphql';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { normalizePath, requireSiblingsOperations, getOnDiskFilepath } from '../utils';
-import { FragmentSource, OperationSource } from '../sibling-operations';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX, CWD } from '../utils.js';
+import { FragmentSource, OperationSource } from '../documents.js';
 
 const RULE_ID = 'unique-fragment-name';
 
 export const checkNode = (
   context: GraphQLESLintRuleContext,
   node: GraphQLESTreeNode<ExecutableDefinitionNode>,
-  ruleId: string
+  ruleId: string,
 ): void => {
   const documentName = node.name.value;
   const siblings = requireSiblingsOperations(ruleId, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
-    node.kind === Kind.FRAGMENT_DEFINITION ? siblings.getFragment(documentName) : siblings.getOperation(documentName);
+    node.kind === Kind.FRAGMENT_DEFINITION
+      ? siblings.getFragment(documentName)
+      : siblings.getOperation(documentName);
   const filepath = context.getFilename();
 
   const conflictingDocuments = siblingDocuments.filter(f => {
@@ -30,7 +32,7 @@ export const checkNode = (
       data: {
         documentName,
         summary: conflictingDocuments
-          .map(f => `\t${relative(process.cwd(), getOnDiskFilepath(f.filePath))}`)
+          .map(f => `\t${relative(CWD, f.filePath.replace(VIRTUAL_DOCUMENT_REGEX, ''))}`)
           .join('\n'),
       },
       node: node.name,
@@ -38,7 +40,7 @@ export const checkNode = (
   }
 };
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -94,5 +96,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

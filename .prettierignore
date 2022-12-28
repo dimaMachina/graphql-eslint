@@ -1,0 +1,6 @@
+dist/
+packages/plugin/tests/__snapshots__/
+examples/prettier/invalid.graphql
+examples/prettier/invalid.js
+pnpm-lock.yaml
+.bob/

@@ -1,0 +1,19 @@
+{
+  "name": "@graphql-eslint/example-vue-code-file",
+  "version": "0.0.0",
+  "type": "module",
+  "author": "Dimitri POSTOLOV",
+  "private": true,
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "graphql": "16.6.0"
+  },
+  "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "workspace:*",
+    "@vue/compiler-sfc": "3.2.45",
+    "eslint": "8.30.0",
+    "vue-eslint-parser": "9.1.0"
+  }
+}

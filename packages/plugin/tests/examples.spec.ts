@@ -1,8 +1,9 @@
-import { spawnSync } from 'child_process';
-import { relative, join } from 'path';
-import type { ESLint } from 'eslint';
+import { spawnSync } from 'node:child_process';
+import { relative, join } from 'node:path';
+import { ESLint } from 'eslint';
+import { expect, describe, it } from 'vitest';
 
-const ROOT_CWD = process.cwd()
+const ROOT_CWD = process.cwd();
 
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: { fatalErrorCount: number } & ESLint.LintResult) => {
@@ -61,7 +62,7 @@ describe('Examples', () => {
   it('should work with `graphql-config` on `.js` files', () => {
     const cwd = join(ROOT_CWD, 'examples/graphql-config-code-file');
     const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(4);
+    expect(countErrors(results)).toBe(3);
     testSnapshot(results);
   });
 
@@ -76,6 +77,27 @@ describe('Examples', () => {
     const cwd = join(ROOT_CWD, 'examples/monorepo');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(7);
+    testSnapshot(results);
+  });
+
+  it('should work in svelte', () => {
+    const cwd = join(ROOT_CWD, 'examples/svelte-code-file');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(2);
+    testSnapshot(results);
+  });
+
+  it('should work in vue', () => {
+    const cwd = join(ROOT_CWD, 'examples/vue-code-file');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(2);
+    testSnapshot(results);
+  });
+
+  it('should work in multiple projects', () => {
+    const cwd = join(ROOT_CWD, 'examples/multiple-projects-graphql-config');
+    const results = getESLintOutput(cwd);
+    expect(countErrors(results)).toBe(4);
     testSnapshot(results);
   });
 });

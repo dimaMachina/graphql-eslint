@@ -1,4 +1,5 @@
 import { parseForESLint } from '../src';
+import { describe, it, expect } from 'vitest';
 
 describe('Parser', () => {
   it('parseForESLint() should return ast and tokens', () => {
@@ -18,7 +19,7 @@ describe('Parser', () => {
     const code = 'Hello World!';
 
     expect(() => {
-      parseForESLint(code);
+      parseForESLint(code, { filePath: '' });
     }).toThrow();
   });
 

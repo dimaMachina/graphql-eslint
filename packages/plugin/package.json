@@ -1,102 +1,68 @@
 {
   "name": "@graphql-eslint/eslint-plugin",
-  "version": "3.10.7",
+  "version": "3.14.3",
+  "description": "GraphQL plugin for ESLint",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
-  "description": "GraphQL plugin for ESLint",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": {
+        "types": "./dist/typings/index.d.cts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/typings/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "default": {
+        "types": "./dist/typings/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
+    }
+  },
+  "typings": "dist/typings/index.d.ts",
   "keywords": [
     "eslint",
     "eslintplugin",
     "eslint-plugin",
     "graphql"
   ],
-  "sideEffects": false,
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
-    },
-    "./*": {
-      "require": "./dist/*.js",
-      "import": "./dist/*.mjs"
-    }
-  },
-  "typings": "dist/index.d.ts",
-  "typescript": {
-    "definition": "dist/index.d.ts"
-  },
-  "scripts": {
-    "test": "jest",
-    "prepack": "bob prepack"
-  },
-  "dependencies": {
-    "@babel/code-frame": "^7.16.7",
-    "@graphql-tools/code-file-loader": "^7.2.14",
-    "@graphql-tools/graphql-tag-pluck": "^7.2.6",
-    "@graphql-tools/utils": "^8.6.9",
-    "chalk": "^4.1.2",
-    "debug": "^4.3.4",
-    "fast-glob": "^3.2.11",
-    "graphql-config": "^4.3.0",
-    "graphql-depth-limit": "^1.1.0",
-    "lodash.lowercase": "^4.3.0"
-  },
-  "devDependencies": {
-    "@types/babel__code-frame": "7.0.3",
-    "@types/eslint": "8.4.3",
-    "@types/graphql-depth-limit": "1.1.3",
-    "@types/lodash.lowercase": "4.3.7",
-    "graphql": "16.5.0"
-  },
   "peerDependencies": {
     "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
-  "buildOptions": {
-    "input": "./src/index.ts",
-    "copy": "./src/configs",
-    "external": [
-      "eslint",
-      "graphql",
-      "graphql/validation/rules/ExecutableDefinitionsRule",
-      "graphql/validation/rules/FieldsOnCorrectTypeRule",
-      "graphql/validation/rules/FragmentsOnCompositeTypesRule",
-      "graphql/validation/rules/KnownArgumentNamesRule",
-      "graphql/validation/rules/KnownDirectivesRule",
-      "graphql/validation/rules/KnownFragmentNamesRule",
-      "graphql/validation/rules/KnownTypeNamesRule",
-      "graphql/validation/rules/LoneAnonymousOperationRule",
-      "graphql/validation/rules/LoneSchemaDefinition",
-      "graphql/validation/rules/NoFragmentCyclesRule",
-      "graphql/validation/rules/NoUndefinedVariablesRule",
-      "graphql/validation/rules/NoUnusedFragmentsRule",
-      "graphql/validation/rules/NoUnusedVariablesRule",
-      "graphql/validation/rules/OverlappingFieldsCanBeMergedRule",
-      "graphql/validation/rules/PossibleFragmentSpreadsRule",
-      "graphql/validation/rules/PossibleTypeExtensionsRule",
-      "graphql/validation/rules/ProvidedRequiredArgumentsRule",
-      "graphql/validation/rules/ScalarLeafsRule",
-      "graphql/validation/rules/SingleFieldSubscriptionsRule",
-      "graphql/validation/rules/UniqueArgumentNamesRule",
-      "graphql/validation/rules/UniqueDirectiveNamesRule",
-      "graphql/validation/rules/UniqueDirectivesPerLocationRule",
-      "graphql/validation/rules/UniqueEnumValueNamesRule",
-      "graphql/validation/rules/UniqueFieldDefinitionNamesRule",
-      "graphql/validation/rules/UniqueInputFieldNamesRule",
-      "graphql/validation/rules/UniqueOperationTypesRule",
-      "graphql/validation/rules/UniqueTypeNamesRule",
-      "graphql/validation/rules/UniqueVariableNamesRule",
-      "graphql/validation/rules/ValuesOfCorrectTypeRule",
-      "graphql/validation/rules/VariablesAreInputTypesRule",
-      "graphql/validation/rules/VariablesInAllowedPositionRule",
-      "graphql/language"
-    ]
+  "dependencies": {
+    "@babel/code-frame": "^7.18.6",
+    "@graphql-tools/code-file-loader": "^7.3.6",
+    "@graphql-tools/graphql-tag-pluck": "^7.3.6",
+    "@graphql-tools/utils": "^9.0.0",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.4",
+    "fast-glob": "^3.2.12",
+    "graphql-config": "^4.4.0",
+    "graphql-depth-limit": "^1.1.0",
+    "lodash.lowercase": "^4.3.0",
+    "tslib": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/babel__code-frame": "7.0.3",
+    "@types/eslint": "8.4.10",
+    "@types/estree": "1.0.0",
+    "@types/graphql-depth-limit": "1.1.3",
+    "@types/json-schema": "7.0.11",
+    "@types/lodash.lowercase": "4.3.7",
+    "graphql": "16.6.0",
+    "json-schema-to-ts": "2.6.2"
   },
   "publishConfig": {
     "directory": "dist",
     "access": "public"
+  },
+  "sideEffects": false,
+  "typescript": {
+    "definition": "dist/typings/index.d.ts"
   }
 }

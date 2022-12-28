@@ -1,11 +1,11 @@
 import { EnumValueNode, FieldNode, Kind } from 'graphql';
-import { requireGraphQLSchemaFromContext } from '../utils';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-deprecated';
 
-const rule: GraphQLESLintRule<[], true> = {
+export const rule: GraphQLESLintRule<[], true> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -79,14 +79,18 @@ const rule: GraphQLESLintRule<[], true> = {
       recommended: true,
     },
     messages: {
-      [RULE_ID]: 'This {{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
+      [RULE_ID]:
+        'This {{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
     },
     schema: [],
   },
   create(context) {
     requireGraphQLSchemaFromContext(RULE_ID, context);
 
-    function report(node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>, reason: string): void {
+    function report(
+      node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>,
+      reason: string,
+    ): void {
       const nodeName = node.kind === Kind.ENUM ? node.value : node.name.value;
       const nodeType = node.kind === Kind.ENUM ? 'enum value' : 'field';
       context.report({
@@ -125,5 +129,3 @@ const rule: GraphQLESLintRule<[], true> = {
     };
   },
 };
-
-export default rule;

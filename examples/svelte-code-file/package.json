@@ -1,0 +1,20 @@
+{
+  "name": "@graphql-eslint/example-svelte-code-file",
+  "version": "0.0.0",
+  "type": "module",
+  "author": "Dimitri POSTOLOV",
+  "private": true,
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "graphql": "16.6.0"
+  },
+  "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "workspace:*",
+    "eslint": "8.30.0",
+    "svelte": "3.55.0",
+    "svelte-eslint-parser": "0.22.3",
+    "svelte2tsx": "0.6.0"
+  }
+}

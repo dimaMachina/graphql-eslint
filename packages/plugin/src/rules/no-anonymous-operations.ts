@@ -1,11 +1,11 @@
 import { Kind, OperationDefinitionNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { getLocation } from '../utils';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { getLocation } from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-anonymous-operations';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -35,7 +35,8 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [RULE_ID]: 'Anonymous GraphQL operations are forbidden. Make sure to name your {{ operation }}!',
+      [RULE_ID]:
+        'Anonymous GraphQL operations are forbidden. Make sure to name your {{ operation }}!',
     },
     schema: [],
   },
@@ -44,7 +45,9 @@ const rule: GraphQLESLintRule = {
       'OperationDefinition[name=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {
         const [firstSelection] = node.selectionSet.selections;
         const suggestedName =
-          firstSelection.kind === Kind.FIELD ? (firstSelection.alias || firstSelection.name).value : node.operation;
+          firstSelection.kind === Kind.FIELD
+            ? (firstSelection.alias || firstSelection.name).value
+            : node.operation;
 
         context.report({
           loc: getLocation(node.loc.start, node.operation),
@@ -62,7 +65,7 @@ const rule: GraphQLESLintRule = {
 
                 return fixer.insertTextAfterRange(
                   [node.range[0], node.range[0] + (hasQueryKeyword ? node.operation.length : 0)],
-                  `${hasQueryKeyword ? '' : 'query'} ${suggestedName}${hasQueryKeyword ? '' : ' '}`
+                  `${hasQueryKeyword ? '' : 'query'} ${suggestedName}${hasQueryKeyword ? '' : ' '}`,
                 );
               },
             },
@@ -72,5 +75,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

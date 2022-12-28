@@ -4,18 +4,19 @@ import {
   ObjectTypeDefinitionNode,
   ObjectTypeExtensionNode,
 } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
 const NO_TYPENAME_PREFIX = 'NO_TYPENAME_PREFIX';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
       category: 'Schema',
-      description: 'Enforces users to avoid using the type name in a field name while defining your schema.',
+      description:
+        'Enforces users to avoid using the type name in a field name while defining your schema.',
       recommended: true,
       url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-typename-prefix.md',
       examples: [
@@ -38,7 +39,8 @@ const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [NO_TYPENAME_PREFIX]: 'Field "{{ fieldName }}" starts with the name of the parent type "{{ typeName }}"',
+      [NO_TYPENAME_PREFIX]:
+        'Field "{{ fieldName }}" starts with the name of the parent type "{{ typeName }}"',
     },
     schema: [],
   },
@@ -46,8 +48,11 @@ const rule: GraphQLESLintRule = {
     return {
       'ObjectTypeDefinition, ObjectTypeExtension, InterfaceTypeDefinition, InterfaceTypeExtension'(
         node: GraphQLESTreeNode<
-          ObjectTypeDefinitionNode | ObjectTypeExtensionNode | InterfaceTypeDefinitionNode | InterfaceTypeExtensionNode
-        >
+          | ObjectTypeDefinitionNode
+          | ObjectTypeExtensionNode
+          | InterfaceTypeDefinitionNode
+          | InterfaceTypeExtensionNode
+        >,
       ) {
         const typeName = node.name.value;
         const lowerTypeName = typeName.toLowerCase();
@@ -67,7 +72,10 @@ const rule: GraphQLESLintRule = {
                 {
                   desc: `Remove \`${fieldName.slice(0, typeName.length)}\` prefix`,
                   fix: fixer =>
-                    fixer.replaceText(field.name as any, fieldName.replace(new RegExp(`^${typeName}`, 'i'), '')),
+                    fixer.replaceText(
+                      field.name as any,
+                      fieldName.replace(new RegExp(`^${typeName}`, 'i'), ''),
+                    ),
                 },
               ],
             });
@@ -77,5 +85,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

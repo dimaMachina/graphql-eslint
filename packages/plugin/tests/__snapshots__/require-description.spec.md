@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`Invalid #1 1`] = `
 #### ⌨️ Code
@@ -168,6 +168,64 @@ exports[`Invalid #10 1`] = `
 
     > 1 | enum Role { ADMIN }
         |             ^^^^^ Description is required for \`Role.ADMIN\`.
+`;
+
+exports[`Invalid #17 1`] = `
+#### ⌨️ Code
+
+      1 | type Query { user(id: String!): User! }
+
+#### ⚙️ Options
+
+    {
+      "rootField": true
+    }
+
+#### ❌ Error
+
+    > 1 | type Query { user(id: String!): User! }
+        |              ^^^^ Description is required for \`Query.user\`.
+`;
+
+exports[`Invalid #18 1`] = `
+#### ⌨️ Code
+
+      1 | type Mutation { createUser(id: [ID!]!): User! }
+
+#### ⚙️ Options
+
+    {
+      "rootField": true
+    }
+
+#### ❌ Error
+
+    > 1 | type Mutation { createUser(id: [ID!]!): User! }
+        |                 ^^^^^^^^^^ Description is required for \`Mutation.createUser\`.
+`;
+
+exports[`Invalid #19 1`] = `
+#### ⌨️ Code
+
+      1 |         type MySubscription {
+      2 |           users: [User!]!
+      3 |         }
+      4 |         schema {
+      5 |           subscription: MySubscription
+      6 |         }
+
+#### ⚙️ Options
+
+    {
+      "rootField": true
+    }
+
+#### ❌ Error
+
+      1 |         type MySubscription {
+    > 2 |           users: [User!]!
+        |           ^^^^^ Description is required for \`MySubscription.users\`.
+      3 |         }
 `;
 
 exports[`should disable description for ObjectTypeDefinition 1`] = `

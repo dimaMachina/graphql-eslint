@@ -2,18 +2,21 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
-import type { ASTKindToNode } from 'graphql';
+import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
-import type { GraphQLESTreeNode } from './estree-converter';
-import type { GraphQLESLintRule, ParserOptions } from './types';
+import { GraphQLESTreeNode } from './estree-converter/index.js';
+import { GraphQLESLintRule, ParserOptions } from './types.js';
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
 } & Record<string, any>;
 
-export type GraphQLValidTestCase<Options> = Omit<RuleTester.ValidTestCase, 'options' | 'parserOptions'> & {
+export type GraphQLValidTestCase<Options> = Omit<
+  RuleTester.ValidTestCase,
+  'options' | 'parserOptions'
+> & {
   options?: Options;
-  parserOptions?: ParserOptions;
+  parserOptions?: Omit<ParserOptions, 'filePath'>;
 };
 
 export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
@@ -34,10 +37,10 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
 export class GraphQLRuleTester extends RuleTester {
   config: {
     parser: string;
-    parserOptions: ParserOptions;
+    parserOptions: Omit<ParserOptions, 'filePath'>;
   };
 
-  constructor(parserOptions: ParserOptions = {}) {
+  constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
     const config = {
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
@@ -59,7 +62,7 @@ export class GraphQLRuleTester extends RuleTester {
     tests: {
       valid: (string | GraphQLValidTestCase<Options>)[];
       invalid: GraphQLInvalidTestCase<Options>[];
-    }
+    },
   ): void {
     const ruleTests = Linter.version.startsWith('8')
       ? tests
@@ -84,7 +87,9 @@ export class GraphQLRuleTester extends RuleTester {
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
-    const hasOnlyTest = [...tests.valid, ...tests.invalid].some(t => typeof t !== 'string' && t.only);
+    const hasOnlyTest = [...tests.valid, ...tests.invalid].some(
+      t => typeof t !== 'string' && t.only,
+    );
 
     // for (const [index, testCase] of tests.valid.entries()) {
     //   const { name, code, filename, only }: RuleTester.ValidTestCase =
@@ -133,14 +138,22 @@ export class GraphQLRuleTester extends RuleTester {
         }
 
         const codeWithMessage = printCode(code, message, 1);
-        messageForSnapshot.push(printWithIndex('#### ❌ Error', index, messages.length), indentCode(codeWithMessage));
+        messageForSnapshot.push(
+          printWithIndex('#### ❌ Error', index, messages.length),
+          indentCode(codeWithMessage),
+        );
 
         const { suggestions } = message;
 
         // Don't print suggestions in snapshots for too big codes
         if (suggestions && (code.match(/\n/g) || '').length < 1000) {
           for (const [i, suggestion] of message.suggestions.entries()) {
-            const title = printWithIndex('#### 💡 Suggestion', i, suggestions.length, suggestion.desc);
+            const title = printWithIndex(
+              '#### 💡 Suggestion',
+              i,
+              suggestions.length,
+              suggestion.desc,
+            );
             const output = applyFix(code, suggestion.fix);
             const codeFrame = printCode(output, { line: 0, column: 0 });
             messageForSnapshot.push(title, indentCode(codeFrame, 2));
@@ -154,7 +167,9 @@ export class GraphQLRuleTester extends RuleTester {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
+      // @ts-expect-error -- we should import `vitest` but somebody could use globals from `jest`
       it(name || `Invalid #${idx + 1}`, () => {
+        // @ts-expect-error -- ^ same
         expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
       });
     }
@@ -211,7 +226,7 @@ function defineParser(linter: Linter, parser: string): void {
 function printCode(
   code: string,
   result: Partial<Linter.LintMessage> = {},
-  linesOffset = Number.POSITIVE_INFINITY
+  linesOffset = Number.POSITIVE_INFINITY,
 ): string {
   const { line, column, endLine, endColumn, message } = result;
   const location = <AST.SourceLocation>{};

@@ -1,1 +1,1 @@
-console.log('should report `no-console` error')
+console.log('should report `no-console` error');

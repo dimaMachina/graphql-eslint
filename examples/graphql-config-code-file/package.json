@@ -1,19 +1,19 @@
 {
   "name": "@graphql-eslint/example-graphql-config-code-file",
-  "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "type": "module",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "lint": "eslint --ext graphql,js ."
+    "lint": "eslint ."
   },
   "dependencies": {
-    "graphql": "16.0.1",
+    "graphql": "16.6.0",
     "graphql-tag": "2.12.6"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "3.10.7",
-    "eslint": "8.18.0"
+    "@graphql-eslint/eslint-plugin": "workspace:*",
+    "eslint": "8.30.0"
   }
 }

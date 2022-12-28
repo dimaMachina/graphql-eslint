@@ -1,6 +1,7 @@
 import { DirectiveNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode, valueFromNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
+import { FromSchema } from 'json-schema-to-ts';
 
 // eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -10,7 +11,23 @@ const MESSAGE_INVALID_FORMAT = 'MESSAGE_INVALID_FORMAT';
 const MESSAGE_INVALID_DATE = 'MESSAGE_INVALID_DATE';
 const MESSAGE_CAN_BE_REMOVED = 'MESSAGE_CAN_BE_REMOVED';
 
-const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      argumentName: {
+        type: 'string',
+      },
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -42,7 +59,8 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
           title: 'Correct',
           code: /* GraphQL */ `
             type User {
-              firstname: String @deprecated(reason: "Use 'firstName' instead", deletionDate: "25/12/2022")
+              firstname: String
+                @deprecated(reason: "Use 'firstName' instead", deletionDate: "25/12/2022")
               firstName: String
             }
           `,
@@ -55,17 +73,7 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
       [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date',
       [MESSAGE_CAN_BE_REMOVED]: '"{{ nodeName }}" сan be removed',
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          argumentName: {
-            type: 'string',
-          },
-        },
-      },
-    ],
+    schema,
   },
   create(context) {
     return {
@@ -124,5 +132,3 @@ const rule: GraphQLESLintRule<[{ argumentName?: string }]> = {
     };
   },
 };
-
-export default rule;

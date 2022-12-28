@@ -3,7 +3,8 @@
 - Category: `Operations`
 - Rule name: `@graphql-eslint/match-document-filename`
 - Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 This rule allows you to enforce that the file name should match the operation name.
 
@@ -84,6 +85,28 @@ query UserById {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/match-document-filename: ['error', { fragment: { style: 'kebab-case', prefix: 'mutation.' } }]
+
+# mutation.add-alert.graphql
+mutation addAlert {
+  foo
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/match-document-filename: ['error', { fragment: { prefix: 'query.' } }]
+
+# query.me.graphql
+query me {
+  foo
+}
+```
+
 ## Config Schema
 
 The schema defines the following properties:
@@ -99,29 +122,29 @@ This element must be one of the following enum values:
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `mutation`
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `subscription`
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ### `fragment`
 
 The object must be one of the following types:
 
-* `asString`
-* `asObject`
+- `asString`
+- `asObject`
 
 ---
 
@@ -149,6 +172,8 @@ This element must be one of the following enum values:
 - `matchDocumentStyle`
 
 ### `suffix` (string)
+
+### `prefix` (string)
 
 ## Resources
 

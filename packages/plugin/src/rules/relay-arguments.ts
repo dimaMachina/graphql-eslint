@@ -1,14 +1,32 @@
 import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { requireGraphQLSchemaFromContext } from '../utils';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'relay-arguments';
 const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
 
-export type RelayArgumentsConfig = { includeBoth?: boolean };
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    minProperties: 1,
+    properties: {
+      includeBoth: {
+        type: 'boolean',
+        default: true,
+        description: 'Enforce including both forward and backward pagination arguments',
+      },
+    },
+  },
+} as const;
 
-const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions, true> = {
   meta: {
     type: 'problem',
     docs: {
@@ -53,22 +71,7 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
       [MISSING_ARGUMENTS]:
         'A field that returns a Connection type must include forward pagination arguments (`first` and `after`), backward pagination arguments (`last` and `before`), or both.',
     },
-    schema: {
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        minProperties: 1,
-        properties: {
-          includeBoth: {
-            type: 'boolean',
-            default: true,
-            description: 'Enforce including both forward and backward pagination arguments',
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
@@ -80,7 +83,9 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
         while (fieldNode.kind !== Kind.FIELD_DEFINITION) {
           fieldNode = fieldNode.parent as GraphQLESTreeNode<FieldDefinitionNode>;
         }
-        const args = Object.fromEntries(fieldNode.arguments.map(argument => [argument.name.value, argument]));
+        const args = Object.fromEntries(
+          fieldNode.arguments.map(argument => [argument.name.value, argument]),
+        );
         const hasForwardPagination = Boolean(args.first && args.after);
         const hasBackwardPagination = Boolean(args.last && args.before);
 
@@ -92,7 +97,10 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
           return;
         }
 
-        function checkField(typeName: 'String' | 'Int', argumentName: 'first' | 'last' | 'after' | 'before'): void {
+        function checkField(
+          typeName: 'String' | 'Int',
+          argumentName: 'first' | 'last' | 'after' | 'before',
+        ): void {
           const argument = args[argumentName];
           const hasArgument = Boolean(argument);
           let type = argument as any;
@@ -128,5 +136,3 @@ const rule: GraphQLESLintRule<[RelayArgumentsConfig], true> = {
     };
   },
 };
-
-export default rule;

@@ -1,17 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Parser parseForESLint() should return ast and tokens 1`] = `
-Object {
-  body: Array [
-    Object {
-      definitions: Array [
-        Object {
-          description: Object {
+exports[`Parser > parseForESLint() should return ast and tokens 1`] = `
+{
+  body: [
+    {
+      definitions: [
+        {
+          description: {
             block: true,
             kind: StringValue,
-            leadingComments: Array [],
-            loc: Object {
-              end: Object {
+            leadingComments: [],
+            loc: {
+              end: {
                 column: 51,
                 line: 2,
               },
@@ -21,12 +21,12 @@ Object {
       """
       type Query
     ,
-              start: Object {
+              start: {
                 column: 6,
                 line: 2,
               },
             },
-            range: Array [
+            range: [
               7,
               52,
             ],
@@ -35,18 +35,18 @@ Object {
             typeInfo: [Function],
             value: generic query placeholder,
           },
-          directives: Array [],
-          fields: Array [],
-          interfaces: Array [],
+          directives: [],
+          fields: [],
+          interfaces: [],
           kind: ObjectTypeDefinition,
-          leadingComments: Array [
-            Object {
+          leadingComments: [
+            {
               type: Block,
               value: generic query placeholder,
             },
           ],
-          loc: Object {
-            end: Object {
+          loc: {
+            end: {
               column: 11,
               line: 5,
             },
@@ -56,16 +56,16 @@ Object {
       """
       type Query
     ,
-            start: Object {
+            start: {
               column: 6,
               line: 2,
             },
           },
-          name: Object {
+          name: {
             kind: Name,
-            leadingComments: Array [],
-            loc: Object {
-              end: Object {
+            leadingComments: [],
+            loc: {
+              end: {
                 column: 16,
                 line: 5,
               },
@@ -75,12 +75,12 @@ Object {
       """
       type Query
     ,
-              start: Object {
+              start: {
                 column: 11,
                 line: 5,
               },
             },
-            range: Array [
+            range: [
               64,
               69,
             ],
@@ -89,7 +89,7 @@ Object {
             typeInfo: [Function],
             value: Query,
           },
-          range: Array [
+          range: [
             7,
             69,
           ],
@@ -99,9 +99,9 @@ Object {
         },
       ],
       kind: Document,
-      leadingComments: Array [],
-      loc: Object {
-        end: Object {
+      leadingComments: [],
+      loc: {
+        end: {
           column: 4,
           line: 6,
         },
@@ -111,12 +111,12 @@ Object {
       """
       type Query
     ,
-        start: Object {
+        start: {
           column: 0,
           line: 1,
         },
       },
-      range: Array [
+      range: [
         0,
         74,
       ],
@@ -125,9 +125,9 @@ Object {
       typeInfo: [Function],
     },
   ],
-  comments: Array [],
-  loc: Object {
-    end: Object {
+  comments: [],
+  loc: {
+    end: {
       column: 4,
       line: 6,
     },
@@ -137,65 +137,65 @@ Object {
       """
       type Query
     ,
-    start: Object {
+    start: {
       column: 0,
       line: 1,
     },
   },
-  range: Array [
+  range: [
     0,
     74,
   ],
   sourceType: script,
-  tokens: Array [
-    Object {
-      loc: Object {
-        end: Object {
+  tokens: [
+    {
+      loc: {
+        end: {
           column: 51,
           line: 2,
         },
-        start: Object {
+        start: {
           column: 6,
           line: 2,
         },
       },
-      range: Array [
+      range: [
         7,
         52,
       ],
       type: BlockString,
       value: generic query placeholder,
     },
-    Object {
-      loc: Object {
-        end: Object {
+    {
+      loc: {
+        end: {
           column: 10,
           line: 5,
         },
-        start: Object {
+        start: {
           column: 6,
           line: 5,
         },
       },
-      range: Array [
+      range: [
         59,
         63,
       ],
       type: Name,
       value: type,
     },
-    Object {
-      loc: Object {
-        end: Object {
+    {
+      loc: {
+        end: {
           column: 16,
           line: 5,
         },
-        start: Object {
+        start: {
           column: 11,
           line: 5,
         },
       },
-      range: Array [
+      range: [
         64,
         69,
       ],

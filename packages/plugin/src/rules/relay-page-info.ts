@@ -1,8 +1,8 @@
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { NON_OBJECT_TYPES } from './relay-connection-types';
-import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils';
+import { NON_OBJECT_TYPES } from './relay-connection-types.js';
+import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'relay-page-info';
 const MESSAGE_MUST_EXIST = 'MESSAGE_MUST_EXIST';
@@ -11,7 +11,7 @@ const notPageInfoTypesSelector = `:matches(${NON_OBJECT_TYPES})[name.value=PageI
 
 let hasPageInfoChecked = false;
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'problem',
     docs: {
@@ -62,12 +62,14 @@ const rule: GraphQLESLintRule = {
       [notPageInfoTypesSelector](node) {
         context.report({ node, messageId: MESSAGE_MUST_BE_OBJECT_TYPE });
       },
-      'ObjectTypeDefinition[name.value=PageInfo]'(node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) {
+      'ObjectTypeDefinition[name.value=PageInfo]'(
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
+      ) {
         const fieldMap = Object.fromEntries(node.fields.map(field => [field.name.value, field]));
 
         const checkField = (
           fieldName: 'hasPreviousPage' | 'hasNextPage' | 'startCursor' | 'endCursor',
-          typeName: 'Boolean' | 'String'
+          typeName: 'Boolean' | 'String',
         ): void => {
           const field = fieldMap[fieldName];
           let isAllowedType = false;
@@ -80,7 +82,8 @@ const rule: GraphQLESLintRule = {
                 type.gqlType.kind === Kind.NAMED_TYPE &&
                 type.gqlType.name.value === 'Boolean';
             } else if (type.kind === Kind.NAMED_TYPE) {
-              isAllowedType = type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
+              isAllowedType =
+                type.name.value === 'String' || isScalarType(schema.getType(type.name.value));
             }
           }
 
@@ -105,5 +108,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

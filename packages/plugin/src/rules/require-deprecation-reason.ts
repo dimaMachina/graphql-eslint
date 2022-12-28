@@ -1,8 +1,8 @@
-import type { ArgumentNode, DirectiveNode } from 'graphql';
-import type { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode, valueFromNode } from '../estree-converter';
+import { ArgumentNode, DirectiveNode } from 'graphql';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     docs: {
       description: 'Require all deprecation directives to specify a reason.',
@@ -42,7 +42,9 @@ const rule: GraphQLESLintRule = {
   create(context) {
     return {
       'Directive[name.value=deprecated]'(node: GraphQLESTreeNode<DirectiveNode>) {
-        const reasonArgument = node.arguments.find(arg => arg.name.value === 'reason') as any as ArgumentNode;
+        const reasonArgument = node.arguments.find(
+          arg => arg.name.value === 'reason',
+        ) as any as ArgumentNode;
         const value = reasonArgument && String(valueFromNode(reasonArgument.value)).trim();
 
         if (!value) {
@@ -55,5 +57,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import rule, { NamingConventionRuleConfig } from '../src/rules/naming-convention';
+import { rule, RuleOptions } from '../src/rules/naming-convention';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
   valid: [
     {
       code: /* GraphQL */ `
@@ -143,23 +143,23 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
     {
       name: 'should allow single letter for camelCase',
       code: 'type t',
-      options: [{ ObjectTypeDefinition: 'camelCase' }]
+      options: [{ ObjectTypeDefinition: 'camelCase' }],
     },
     {
       name: 'should allow single letter for PascalCase',
       code: 'type T',
-      options: [{ ObjectTypeDefinition: 'PascalCase' }]
+      options: [{ ObjectTypeDefinition: 'PascalCase' }],
     },
     {
       name: 'should allow single letter for snake_case',
       code: 'type t',
-      options: [{ ObjectTypeDefinition: 'snake_case' }]
+      options: [{ ObjectTypeDefinition: 'snake_case' }],
     },
     {
       name: 'should allow single letter for UPPER_CASE',
       code: 'type T',
-      options: [{ ObjectTypeDefinition: 'UPPER_CASE' }]
-    }
+      options: [{ ObjectTypeDefinition: 'UPPER_CASE' }],
+    },
   ],
   invalid: [
     {
@@ -173,7 +173,10 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
     {
       code: 'type __b { test__: String }',
       options: [{ allowLeadingUnderscore: false, allowTrailingUnderscore: false }],
-      errors: [{ message: 'Leading underscores are not allowed' }, { message: 'Trailing underscores are not allowed' }],
+      errors: [
+        { message: 'Leading underscores are not allowed' },
+        { message: 'Trailing underscores are not allowed' },
+      ],
     },
     {
       code: 'scalar BSONDecimal',
@@ -193,12 +196,29 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
         },
       ],
       errors: [
-        { message: 'Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format' },
-        { message: 'Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format' },
-        { message: 'Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format' },
-        { message: 'Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format' },
-        { message: 'Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format' },
-        { message: 'Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format' },
+        {
+          message:
+            'Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format',
+        },
+        {
+          message: 'Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format',
+        },
+        {
+          message:
+            'Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format',
+        },
+        {
+          message:
+            'Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format',
+        },
+        {
+          message:
+            'Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format',
+        },
+        {
+          message:
+            'Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format',
+        },
         { message: 'Input type "_idOperatorsFilterUserInput" should be in PascalCase format' },
         { message: 'Enumeration value "male" should be in UPPER_CASE format' },
         { message: 'Enumeration value "female" should be in UPPER_CASE format' },
@@ -379,7 +399,10 @@ ruleTester.runGraphQLTests<[NamingConventionRuleConfig]>('naming-convention', ru
           }
         }
       `,
-      errors: [{ message: 'Leading underscores are not allowed' }, { message: 'Trailing underscores are not allowed' }],
+      errors: [
+        { message: 'Leading underscores are not allowed' },
+        { message: 'Trailing underscores are not allowed' },
+      ],
     },
   ],
 });

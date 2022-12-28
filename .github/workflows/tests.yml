@@ -11,7 +11,8 @@ jobs:
     name: Lint
     uses: the-guild-org/shared-config/.github/workflows/lint.yml@main
     with:
-      script: yarn ci:lint
+      script: pnpm ci:lint
+      packageManager: pnpm
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -32,15 +33,16 @@ jobs:
         uses: the-guild-org/shared-config/setup@main
         with:
           nodeVersion: 18
+          packageManager: pnpm
 
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node ./scripts/match-graphql.mjs ${{matrix.graphql_version}}
+        run: node scripts/match-graphql.js ${{matrix.graphql_version}}
 
       - name: Install Dependencies
-        run: yarn
+        run: pnpm i --no-frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
@@ -68,18 +70,19 @@ jobs:
         uses: the-guild-org/shared-config/setup@main
         with:
           nodeVersion: ${{matrix.node-version}}
+          packageManager: pnpm
 
       - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node scripts/match-graphql.mjs ${{matrix.graphql_version}}
+        run: node scripts/match-graphql.js ${{matrix.graphql_version}}
 
       - name: Install Dependencies
-        run: yarn
+        run: pnpm i --no-frozen-lockfile
 
       - name: Cache Jest
         uses: actions/cache@v3
         with:
           path: .cache/jest
-          key: ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('pnpm-lock.yaml')}}
           restore-keys: |
             ${{runner.os}}-${{matrix.node_version}}-jest-
 
@@ -92,6 +95,6 @@ jobs:
           path: packages/plugin/dist
 
       - name: Test
-        run: yarn test
+        run: pnpm test
         env:
           CI: true

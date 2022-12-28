@@ -9,26 +9,47 @@ import {
   visit,
   visitWithTypeInfo,
 } from 'graphql';
-import type * as ESTree from 'estree';
+import * as ESTree from 'estree';
 import { asArray } from '@graphql-tools/utils';
 import {
   ARRAY_DEFAULT_OPTIONS,
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
   englishJoinWords,
-} from '../utils';
-import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types';
-import { getBaseType, GraphQLESTreeNode } from '../estree-converter';
-
-export type RequireIdWhenAvailableRuleConfig = { fieldName: string | string[] };
+} from '../utils.js';
+import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types.js';
+import { getBaseType, GraphQLESTreeNode } from '../estree-converter/index.js';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'require-id-when-available';
 const DEFAULT_ID_FIELD_NAME = 'id';
 
-const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
+const schema = {
+  definitions: {
+    asString: {
+      type: 'string',
+    },
+    asArray: ARRAY_DEFAULT_OPTIONS,
+  },
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      fieldName: {
+        oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asArray' }],
+        default: DEFAULT_ID_FIELD_NAME,
+      },
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions, true> = {
   meta: {
     type: 'suggestion',
-    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions
     hasSuggestions: true,
     docs: {
       category: 'Operations',
@@ -86,26 +107,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       [RULE_ID]:
         "Field{{ pluralSuffix }} {{ fieldName }} must be selected when it's available on a type.\nInclude it in your selection set{{ addition }}.",
     },
-    schema: {
-      definitions: {
-        asString: {
-          type: 'string',
-        },
-        asArray: ARRAY_DEFAULT_OPTIONS,
-      },
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          fieldName: {
-            oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asArray' }],
-            default: DEFAULT_ID_FIELD_NAME,
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
@@ -115,7 +117,8 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
 
     // Check selections only in OperationDefinition,
     // skip selections of OperationDefinition and InlineFragment
-    const selector = 'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
+    const selector =
+      'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
     const typeInfo = new TypeInfo(schema);
 
     function checkFragments(node: GraphQLESTreeNode<SelectionSetNode>): void {
@@ -135,7 +138,13 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
             if (parent.kind === Kind.FRAGMENT_DEFINITION) {
               checkedFragmentSpreads.add(parent.name.value);
             } else if (parent.kind !== Kind.INLINE_FRAGMENT) {
-              checkSelections(node, typeInfo.getType(), selection.loc.start, parent, checkedFragmentSpreads);
+              checkSelections(
+                node,
+                typeInfo.getType(),
+                selection.loc.start,
+                parent,
+                checkedFragmentSpreads,
+              );
             }
           },
         });
@@ -152,7 +161,7 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       loc: ESTree.Position,
       // Can't access to node.parent in GraphQL AST.Node, so pass as argument
       parent: any,
-      checkedFragmentSpreads = new Set<string>()
+      checkedFragmentSpreads = new Set<string>(),
     ): void {
       const rawType = getBaseType(type);
       const isObjectType = rawType instanceof GraphQLObjectType;
@@ -203,14 +212,16 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
       }
 
       const pluralSuffix = idNames.length > 1 ? 's' : '';
-      const fieldName = englishJoinWords(idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``));
+      const fieldName = englishJoinWords(
+        idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
+      );
 
       const addition =
         checkedFragmentSpreads.size === 0
           ? ''
-          : ` or add to used fragment${checkedFragmentSpreads.size > 1 ? 's' : ''} ${englishJoinWords(
-              [...checkedFragmentSpreads].map(name => `\`${name}\``)
-            )}`;
+          : ` or add to used fragment${
+              checkedFragmentSpreads.size > 1 ? 's' : ''
+            } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
 
       const problem: ReportDescriptor = {
         loc,
@@ -242,5 +253,3 @@ const rule: GraphQLESLintRule<[RequireIdWhenAvailableRuleConfig], true> = {
     };
   },
 };
-
-export default rule;

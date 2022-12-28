@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`Invalid #1 1`] = `
 #### ⌨️ Code
@@ -102,12 +102,6 @@ exports[`Invalid #2 1`] = `
       6 |     "Created document"
       7 |     record: User
       8 |   }
-
-#### ⚙️ Options
-
-    {
-      "style": "block"
-    }
 
 #### ❌ Error 1/3
 

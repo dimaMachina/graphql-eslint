@@ -1,4 +1,4 @@
-import type {
+import {
   ASTNode,
   TypeInfo,
   TypeNode,
@@ -33,8 +33,8 @@ import type {
   NonNullTypeNode,
   OperationTypeDefinitionNode,
 } from 'graphql';
-import type { SourceLocation, Comment } from 'estree';
-import type { AST } from 'eslint';
+import { SourceLocation, Comment } from 'estree';
+import { AST } from 'eslint';
 
 type SafeGraphQLType<T extends ASTNode> = T extends { type: TypeNode }
   ? Omit<T, 'loc' | 'type'> & { gqlType: T['type'] }
@@ -82,9 +82,17 @@ type ParentNode<T> = T extends DocumentNode
   : T extends EnumValueDefinitionNode
   ? EnumTypeDefinitionNode | EnumTypeExtensionNode
   : T extends InputValueDefinitionNode
-  ? InputObjectTypeDefinitionNode | InputObjectTypeExtensionNode | FieldDefinitionNode | DirectiveDefinitionNode
+  ?
+      | InputObjectTypeDefinitionNode
+      | InputObjectTypeExtensionNode
+      | FieldDefinitionNode
+      | DirectiveDefinitionNode
   : T extends FieldDefinitionNode
-  ? ObjectTypeDefinitionNode | ObjectTypeExtensionNode | InterfaceTypeDefinitionNode | InterfaceTypeExtensionNode
+  ?
+      | ObjectTypeDefinitionNode
+      | ObjectTypeExtensionNode
+      | InterfaceTypeDefinitionNode
+      | InterfaceTypeExtensionNode
   : T extends SelectionSetNode
   ? ExecutableDefinitionNode | FieldNode | InlineFragmentNode
   : T extends SelectionNode

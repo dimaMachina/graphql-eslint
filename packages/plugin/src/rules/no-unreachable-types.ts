@@ -1,8 +1,17 @@
-import { ASTNode, ASTVisitor, GraphQLSchema, isInterfaceType, Kind, NameNode, visit, DirectiveLocation } from 'graphql';
+import {
+  ASTNode,
+  ASTVisitor,
+  GraphQLSchema,
+  isInterfaceType,
+  Kind,
+  NameNode,
+  visit,
+  DirectiveLocation,
+} from 'graphql';
 import lowerCase from 'lodash.lowercase';
-import { GraphQLESLintRule } from '../types';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-unreachable-types';
 
@@ -96,7 +105,7 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   return reachableTypesCache;
 }
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     messages: {
       [RULE_ID]: '{{ type }} `{{ typeName }}` is unreachable.',
@@ -169,5 +178,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

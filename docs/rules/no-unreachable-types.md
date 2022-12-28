@@ -1,13 +1,16 @@
 # `no-unreachable-types`
 
-✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file
+enables this rule.
 
-💡 This rule provides [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+💡 This rule provides
+[suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/no-unreachable-types`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 Requires all types to be reachable at some level by root level fields.
 

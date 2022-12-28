@@ -1,0 +1,61 @@
+diff --git a/lib/rules/no-only-tests.js b/lib/rules/no-only-tests.js
+index caa646e..29b5177 100644
+--- a/lib/rules/no-only-tests.js
++++ b/lib/rules/no-only-tests.js
+@@ -36,7 +36,7 @@ module.exports = {
+ 
+               const onlyProperty = test.properties.find(
+                 (property) =>
+-                  property.key.type === 'Identifier' &&
++                  property.key?.type === 'Identifier' &&
+                   property.key.name === 'only' &&
+                   property.value.type === 'Literal' &&
+                   property.value.value
+@@ -82,7 +82,7 @@ module.exports = {
+               test.type === 'CallExpression' &&
+               test.callee.type === 'MemberExpression' &&
+               test.callee.object.type === 'Identifier' &&
+-              test.callee.object.name === 'RuleTester' &&
++              test.callee.object.name === 'GraphQLRuleTester' &&
+               test.callee.property.type === 'Identifier' &&
+               test.callee.property.name === 'only'
+             ) {
+diff --git a/lib/rules/prefer-output-null.js b/lib/rules/prefer-output-null.js
+index 0716d91..2bee9f4 100644
+--- a/lib/rules/prefer-output-null.js
++++ b/lib/rules/prefer-output-null.js
+@@ -48,7 +48,7 @@ module.exports = {
+              */
+             function getTestInfo(key) {
+               if (test.type === 'ObjectExpression') {
+-                return test.properties.find((item) => item.key.name === key);
++                return test.properties.find((item) => item.key?.name === key);
+               }
+               return null;
+             }
+diff --git a/lib/utils.js b/lib/utils.js
+index 3129903..c7e1d88 100644
+--- a/lib/utils.js
++++ b/lib/utils.js
+@@ -25,10 +25,10 @@ function isNormalFunctionExpression(node) {
+ function isRuleTesterConstruction(node) {
+   return (
+     node.type === 'NewExpression' &&
+-    ((node.callee.type === 'Identifier' && node.callee.name === 'RuleTester') ||
++    ((node.callee.type === 'Identifier' && node.callee.name === 'GraphQLRuleTester') ||
+       (node.callee.type === 'MemberExpression' &&
+         node.callee.property.type === 'Identifier' &&
+-        node.callee.property.name === 'RuleTester'))
++        node.callee.property.name === 'GraphQLRuleTester'))
+   );
+ }
+ 
+@@ -534,7 +534,7 @@ module.exports = {
+         (isRuleTesterConstruction(expression.callee.object) ||
+           variableIdentifiers.has(expression.callee.object)) &&
+         expression.callee.property.type === 'Identifier' &&
+-        expression.callee.property.name === 'run'
++        expression.callee.property.name === 'runGraphQLTests'
+       ) {
+         runCalls.push(expression);
+       }

@@ -1,45 +1,105 @@
-import type { Linter } from 'eslint';
-import { parseCode } from '@graphql-tools/graphql-tag-pluck';
+import { Linter } from 'eslint';
+import { relative } from 'path';
+import {
+  gqlPluckFromCodeStringSync,
+  GraphQLTagPluckOptions,
+} from '@graphql-tools/graphql-tag-pluck';
+import { asArray } from '@graphql-tools/utils';
+import { GraphQLConfig } from 'graphql-config';
+import { loadOnDiskGraphQLConfig } from './graphql-config.js';
+import { CWD, REPORT_ON_FIRST_CHARACTER } from './utils.js';
 
-type Block = Linter.ProcessorFile & {
+export type Block = Linter.ProcessorFile & {
   lineOffset: number;
   offset: number;
 };
 
-const RELEVANT_KEYWORDS = ['gql', 'graphql', '/* GraphQL */'] as const;
 const blocksMap = new Map<string, Block[]>();
+
+let onDiskConfig: GraphQLConfig;
+let onDiskConfigLoaded = false;
+
+const RELEVANT_KEYWORDS = ['gql', 'graphql', 'GraphQL'] as const;
 
 export const processor: Linter.Processor<Block | string> = {
   supportsAutofix: true,
   preprocess(code, filePath) {
-    if (RELEVANT_KEYWORDS.every(keyword => !code.includes(keyword))) {
+    if (!onDiskConfigLoaded) {
+      onDiskConfig = loadOnDiskGraphQLConfig(filePath);
+      onDiskConfigLoaded = true;
+    }
+
+    let keywords: readonly string[] = RELEVANT_KEYWORDS;
+    const pluckConfig: GraphQLTagPluckOptions =
+      onDiskConfig?.getProjectForFile(filePath).extensions.pluckConfig;
+
+    if (pluckConfig) {
+      const {
+        modules = [],
+        globalGqlIdentifierName = ['gql', 'graphql'],
+        gqlMagicComment = 'GraphQL',
+      } = pluckConfig;
+
+      keywords = [
+        ...new Set(
+          [
+            ...modules.map(({ identifier }) => identifier),
+            ...asArray(globalGqlIdentifierName),
+            gqlMagicComment,
+          ].filter(Boolean),
+        ),
+      ];
+    }
+
+    if (keywords.every(keyword => !code.includes(keyword))) {
       return [code];
     }
-    const extractedDocuments = parseCode({
-      code,
-      filePath,
-      options: {
-        globalGqlIdentifierName: ['gql', 'graphql'],
+
+    try {
+      const sources = gqlPluckFromCodeStringSync(filePath, code, {
         skipIndent: true,
-      },
-    });
+        ...pluckConfig,
+      });
 
-    const blocks: Block[] = extractedDocuments.map(item => ({
-      filename: 'document.graphql',
-      text: item.content,
-      lineOffset: item.loc.start.line - 1,
-      offset: item.start + 1,
-    }));
-    blocksMap.set(filePath, blocks);
+      const blocks: Block[] = sources.map(item => ({
+        filename: 'document.graphql',
+        text: item.body,
+        lineOffset: item.locationOffset.line - 1,
+        // @ts-expect-error -- `index` field exist but show ts error
+        offset: item.locationOffset.index + 1,
+      }));
+      blocksMap.set(filePath, blocks);
 
-    return [...blocks, code /* source code must be provided and be last */];
+      return [...blocks, code /* source code must be provided and be last */];
+    } catch (error) {
+      error.message = `[graphql-eslint] Error while preprocessing "${relative(
+        CWD,
+        filePath,
+      )}" file\n\n${error.message}`;
+      // eslint-disable-next-line no-console
+      console.error(error);
+      // in case of parsing error return code as is
+      return [code];
+    }
   },
   postprocess(messages, filePath) {
     const blocks = blocksMap.get(filePath) || [];
     for (let i = 0; i < blocks.length; i += 1) {
       const { lineOffset, offset } = blocks[i];
 
-      for (const message of messages[i]) {
+      for (const message of messages[i] || []) {
+        const isVueOrSvelte = /\.(vue|svelte)$/.test(filePath);
+        if (isVueOrSvelte) {
+          // We can't show correct report location because after processing with
+          // graphql-tag-pluck location is incorrect, disable fixes as well
+          delete message.endLine;
+          delete message.endColumn;
+          delete message.fix;
+          delete message.suggestions;
+          Object.assign(message, REPORT_ON_FIRST_CHARACTER);
+          continue;
+        }
+
         message.line += lineOffset;
         // endLine can not exist if only `loc: { start, column }` was provided to context.report
         if (typeof message.endLine === 'number') {
@@ -50,12 +110,15 @@ export const processor: Linter.Processor<Block | string> = {
           message.fix.range[1] += offset;
         }
         for (const suggestion of message.suggestions || []) {
-          suggestion.fix.range[0] += offset;
-          suggestion.fix.range[1] += offset;
+          // DO NOT mutate until https://github.com/eslint/eslint/issues/16716
+          const [start, end] = suggestion.fix.range;
+          suggestion.fix.range = [start + offset, end + offset];
         }
       }
     }
 
-    return messages.flat();
+    const result = messages.flat();
+    // sort eslint/graphql-eslint messages by line/column
+    return result.sort((a, b) => a.line - b.line || a.column - b.column);
   },
 };

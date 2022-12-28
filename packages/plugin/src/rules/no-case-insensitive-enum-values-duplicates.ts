@@ -1,8 +1,8 @@
 import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRule } from '../types';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -42,7 +42,8 @@ const rule: GraphQLESLintRule = {
       [selector](node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>) {
         const duplicates = node.values.filter(
           (item, index, array) =>
-            array.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !== index
+            array.findIndex(v => v.name.value.toLowerCase() === item.name.value.toLowerCase()) !==
+            index,
         );
         for (const duplicate of duplicates) {
           const enumName = duplicate.name.value;
@@ -61,5 +62,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

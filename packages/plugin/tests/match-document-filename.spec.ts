@@ -1,9 +1,9 @@
 import { GraphQLRuleTester } from '../src';
-import rule, { MatchDocumentFilenameRuleConfig } from '../src/rules/match-document-filename';
+import { rule, RuleOptions } from '../src/rules/match-document-filename';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<[MatchDocumentFilenameRuleConfig]>('match-document-filename', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('match-document-filename', rule, {
   valid: [
     {
       filename: 'src/me.gql',
@@ -58,7 +58,9 @@ ruleTester.runGraphQLTests<[MatchDocumentFilenameRuleConfig]>('match-document-fi
       filename: 'src/userById.gql',
       code: 'query UserById { user { id } }',
       options: [{ query: { style: 'PascalCase', suffix: '.query' } }],
-      errors: [{ message: 'Unexpected filename "userById.gql". Rename it to "UserById.query.gql"' }],
+      errors: [
+        { message: 'Unexpected filename "userById.gql". Rename it to "UserById.query.gql"' },
+      ],
     },
     {
       filename: 'src/user-fields.gql',
@@ -76,7 +78,9 @@ ruleTester.runGraphQLTests<[MatchDocumentFilenameRuleConfig]>('match-document-fi
           mutation: { style: 'PascalCase', suffix: '.mutation' },
         },
       ],
-      errors: [{ message: 'Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"' }],
+      errors: [
+        { message: 'Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"' },
+      ],
     },
     {
       name: 'compare only first operation name if fragment is present',
@@ -97,7 +101,24 @@ ruleTester.runGraphQLTests<[MatchDocumentFilenameRuleConfig]>('match-document-fi
           fragment: { style: 'PascalCase', suffix: '.fragment' },
         },
       ],
-      errors: [{ message: 'Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"' }],
+      errors: [
+        { message: 'Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"' },
+      ],
+    },
+    {
+      filename: 'add-alert-channel.graphql',
+      code: /* GraphQL */ `
+        mutation addAlertChannel {
+          foo
+        }
+      `,
+      options: [{ mutation: { prefix: 'mutation.' } }],
+      errors: [
+        {
+          message:
+            'Unexpected filename "add-alert-channel.graphql". Rename it to "mutation.add-alert-channel.graphql"',
+        },
+      ],
     },
   ],
 });

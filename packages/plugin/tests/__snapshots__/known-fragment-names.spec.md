@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`should not throw an error on undefined fragment 1`] = `
 #### ⌨️ Code

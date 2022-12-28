@@ -1,5 +1,5 @@
-import { GraphQLRuleTester } from '../src/testkit';
-import rule from '../src/rules/no-duplicate-fields';
+import { GraphQLRuleTester } from '../src';
+import { rule } from '../src/rules/no-duplicate-fields';
 
 const ruleTester = new GraphQLRuleTester();
 

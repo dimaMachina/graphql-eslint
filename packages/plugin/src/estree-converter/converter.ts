@@ -8,9 +8,9 @@ import {
   GraphQLSchema,
   DefinitionNode,
 } from 'graphql';
-import type { Comment } from 'estree';
-import type { GraphQLESTreeNode, TypeInformation } from './types';
-import { convertLocation } from './utils';
+import { Comment } from 'estree';
+import { GraphQLESTreeNode, TypeInformation } from './types.js';
+import { convertLocation } from './utils.js';
 
 export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema) {
   const typeInfo = schema ? new TypeInfo(schema) : null;
@@ -49,7 +49,7 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
           ? <DocumentNode>{
               ...node,
               definitions: node.definitions.map(definition =>
-                (definition as unknown as GraphQLESTreeNode<DefinitionNode>).rawNode()
+                (definition as unknown as GraphQLESTreeNode<DefinitionNode>).rawNode(),
               ),
             }
           : node;
@@ -75,5 +75,8 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
     },
   };
 
-  return visit(node, typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor) as GraphQLESTreeNode<T>;
+  return visit(
+    node,
+    typeInfo ? visitWithTypeInfo(typeInfo, visitor) : visitor,
+  ) as GraphQLESTreeNode<T>;
 }

@@ -1,10 +1,10 @@
 import { DocumentNode, TokenKind } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -69,7 +69,12 @@ const rule: GraphQLESLintRule = {
             const isEslintComment = value.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
 
-            if (!isEslintComment && line !== prev.line && next.kind === TokenKind.NAME && linesAfter < 2) {
+            if (
+              !isEslintComment &&
+              line !== prev.line &&
+              next.kind === TokenKind.NAME &&
+              linesAfter < 2
+            ) {
               context.report({
                 messageId: HASHTAG_COMMENT,
                 loc: {
@@ -81,7 +86,7 @@ const rule: GraphQLESLintRule = {
                   fix: fixer =>
                     fixer.replaceTextRange(
                       [token.start, token.end] as [number, number],
-                      [descriptionSyntax, value.trim(), descriptionSyntax].join('')
+                      [descriptionSyntax, value.trim(), descriptionSyntax].join(''),
                     ),
                 })),
               });
@@ -93,5 +98,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

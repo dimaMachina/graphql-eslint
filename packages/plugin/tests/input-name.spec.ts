@@ -1,9 +1,9 @@
-import { GraphQLRuleTester } from '../src/testkit';
-import rule from '../src/rules/input-name';
+import { GraphQLRuleTester } from '../src';
+import { rule, RuleOptions } from '../src/rules/input-name';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests('input-name', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('input-name', rule, {
   valid: [
     {
       code: 'type Mutation { SetMessage(input: SetMessageInput): String }',

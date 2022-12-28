@@ -1,19 +1,36 @@
-import type { AST } from 'eslint';
-import { GraphQLESLintRule } from '../types';
+import { AST } from 'eslint';
+import { GraphQLESLintRule } from '../types.js';
 import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils';
-import { SiblingOperations } from '../sibling-operations';
-
-export type SelectionSetDepthRuleConfig = { maxDepth: number; ignore?: string[] };
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils.js';
+import { SiblingOperations } from '../documents.js';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'selection-set-depth';
 
-const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
+const schema = {
+  type: 'array',
+  minItems: 1,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['maxDepth'],
+    properties: {
+      maxDepth: {
+        type: 'number',
+      },
+      ignore: ARRAY_DEFAULT_OPTIONS,
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
-    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions -- optional since we can't provide fixes for fragments located in separate files
     hasSuggestions: true,
     docs: {
       category: 'Operations',
@@ -65,22 +82,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       recommended: true,
       configOptions: [{ maxDepth: 7 }],
     },
-    schema: {
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['maxDepth'],
-        properties: {
-          maxDepth: {
-            type: 'number',
-          },
-          ignore: ARRAY_DEFAULT_OPTIONS,
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     let siblings: SiblingOperations | null = null;
@@ -89,7 +91,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
       siblings = requireSiblingsOperations(RULE_ID, context);
     } catch {
       logger.warn(
-        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`
+        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`,
       );
     }
 
@@ -113,7 +115,7 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
 
               const ancestors = context.getAncestors();
               const token = (ancestors[0] as AST.Program).tokens.find(
-                token => token.loc.start.line === line && token.loc.start.column === column - 1
+                token => token.loc.start.line === line && token.loc.start.column === column - 1,
               );
 
               context.report({
@@ -131,7 +133,9 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
                         const sourceCode = context.getSourceCode();
                         const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;
                         const parentNode = foundNode.parent.parent;
-                        return fixer.remove(foundNode.kind === 'Name' ? parentNode.parent : parentNode);
+                        return fixer.remove(
+                          foundNode.kind === 'Name' ? parentNode.parent : parentNode,
+                        );
                       },
                     },
                   ],
@@ -142,12 +146,10 @@ const rule: GraphQLESLintRule<[SelectionSetDepthRuleConfig]> = {
         } catch (e) {
           logger.warn(
             `Rule "${RULE_ID}" check failed due to a missing siblings operations. For more info: https://bit.ly/graphql-eslint-operations`,
-            e
+            e,
           );
         }
       },
     };
   },
 };
-
-export default rule;

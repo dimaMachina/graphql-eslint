@@ -1,18 +1,19 @@
-import { resolve } from 'path';
-import { readFileSync } from 'fs';
-import { spawn } from 'child_process';
+import path from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { spawn } from 'node:child_process';
 import { GraphQLSchema, printSchema } from 'graphql';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { getSchema } from '../src/schema';
 import { loadGraphQLConfig } from '../src/graphql-config';
 
-describe('schema', () => {
-  const SCHEMA_GRAPHQL_PATH = resolve(__dirname, 'mocks/user-schema.graphql');
-  const SCHEMA_CODE_PATH = resolve(__dirname, 'mocks/user-schema.ts');
-  const SCHEMA_JSON_PATH = resolve(__dirname, 'mocks/user-schema.json');
-  const schemaOnDisk = readFileSync(SCHEMA_GRAPHQL_PATH, 'utf8');
+describe('schema', async () => {
+  const SCHEMA_GRAPHQL_PATH = path.resolve(__dirname, 'mocks/user-schema.graphql');
+  const SCHEMA_CODE_PATH = path.resolve(__dirname, 'mocks/user-schema.ts');
+  const SCHEMA_JSON_PATH = path.resolve(__dirname, 'mocks/user-schema.json');
+  const schemaOnDisk = await readFile(SCHEMA_GRAPHQL_PATH, 'utf8');
 
   const testSchema = (schema: string) => {
-    const gqlConfig = loadGraphQLConfig({ schema });
+    const gqlConfig = loadGraphQLConfig({ schema, filePath: '' });
     const graphQLSchema = getSchema(gqlConfig.getDefault());
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
@@ -42,27 +43,33 @@ describe('schema', () => {
     let local;
     let url;
 
-    beforeAll(done => {
-      const tsNodeCommand = resolve(process.cwd(), 'node_modules/.bin/ts-node');
-      const serverPath = resolve(__dirname, 'mocks/graphql-server.ts');
+    beforeAll(
+      () =>
+        new Promise(resolve => {
+          const tsNodeCommand = path.resolve(process.cwd(), 'node_modules/.bin/tsx');
+          const serverPath = path.resolve(__dirname, 'mocks/graphql-server.ts');
 
-      // Import `TestGraphQLServer` and run it in this file will don't work
-      // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
-      // `child_process.execFileSync` that block Node.js event loop
-      local = spawn(tsNodeCommand, [serverPath]);
-      local.stdout.on('data', chunk => {
-        url = chunk.toString().trimRight();
-        done();
-      });
-      local.stderr.on('data', chunk => {
-        throw new Error(chunk.toString().trimRight());
-      });
-    });
+          // Import `TestGraphQLServer` and run it in this file will don't work
+          // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
+          // `child_process.execFileSync` that block Node.js event loop
+          local = spawn(tsNodeCommand, [serverPath]);
+          local.stdout.on('data', chunk => {
+            url = chunk.toString().trimRight();
+            resolve();
+          });
+          local.stderr.on('data', chunk => {
+            throw new Error(chunk.toString().trimRight());
+          });
+        }),
+    );
 
-    afterAll(done => {
-      local.on('close', done);
-      local.kill();
-    });
+    afterAll(
+      () =>
+        new Promise(resolve => {
+          local.on('close', () => resolve());
+          local.kill();
+        }),
+    );
 
     it('should load schema from URL', () => {
       testSchema(url);
@@ -87,36 +94,38 @@ describe('schema', () => {
           schema: {
             [schemaUrl]: schemaOptions,
           },
+          filePath: '',
         });
         const error = getSchema(gqlConfig.getDefault()) as Error;
         expect(error).toBeInstanceOf(Error);
-        expect(error.message).toMatch('"authorization":"Bearer Foo"');
+        expect(error.message).toMatch('authorization: "Bearer Foo"');
       });
 
       // https://github.com/B2o5T/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
       it('with `parserOptions.schemaOptions`', () => {
-        const gqlConfig = loadGraphQLConfig({ schema: schemaUrl });
-        const error = getSchema(gqlConfig.getDefault(), { schemaOptions }) as Error;
+        const gqlConfig = loadGraphQLConfig({ schema: schemaUrl, filePath: '' });
+        const error = getSchema(gqlConfig.getDefault(), schemaOptions) as Error;
         expect(error).toBeInstanceOf(Error);
-        expect(error.message).toMatch('"authorization":"Bearer Foo"');
+        expect(error.message).toMatch('authorization: "Bearer Foo"');
       });
     });
   });
 
   describe('schema loading', () => {
     it('should return Error', () => {
-      const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql' });
+      const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql', filePath: '' });
       const error = getSchema(gqlConfig.getDefault()) as Error;
       expect(error).toBeInstanceOf(Error);
-      expect(error.message).toMatch('Unable to find any GraphQL type definitions for the following pointers');
+      expect(error.message).toMatch(
+        'Unable to find any GraphQL type definitions for the following pointers',
+      );
     });
   });
 
   it('should load the graphql-config rc file relative to the linted file', () => {
-    const schema = resolve(__dirname, 'mocks/using-config/schema.graphql');
     const gqlConfig = loadGraphQLConfig({
-      schema,
-      filePath: resolve(__dirname, 'mocks/using-config/test.graphql'),
+      schema: path.resolve(__dirname, 'mocks/using-config/schema.graphql'),
+      filePath: path.resolve(__dirname, 'mocks/using-config/test.graphql'),
     });
 
     const graphQLSchema = getSchema(gqlConfig.getDefault()) as GraphQLSchema;

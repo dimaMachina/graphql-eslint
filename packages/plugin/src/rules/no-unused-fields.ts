@@ -1,7 +1,7 @@
 import { GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils';
-import { SiblingOperations } from '../sibling-operations';
+import { GraphQLESLintRule } from '../types.js';
+import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils.js';
+import { SiblingOperations } from '../documents.js';
 
 const RULE_ID = 'no-unused-fields';
 
@@ -41,7 +41,7 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
   return usedFieldsCache;
 }
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     messages: {
       [RULE_ID]: 'Field "{{fieldName}}" is unused',
@@ -137,5 +137,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

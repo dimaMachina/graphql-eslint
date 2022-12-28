@@ -1,45 +1,41 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
 import { GraphQLError, GraphQLSchema } from 'graphql';
 import debugFactory from 'debug';
-import { convertToESTree, extractComments, extractTokens } from './estree-converter';
-import { GraphQLESLintParseResult, ParserOptions } from './types';
-import { getSchema } from './schema';
-import { getSiblingOperations } from './sibling-operations';
-import { loadGraphQLConfig } from './graphql-config';
-import { getOnDiskFilepath } from './utils';
+import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
+import { GraphQLESLintParseResult, ParserOptions } from './types.js';
+import { getSchema } from './schema.js';
+import { getDocuments } from './documents.js';
+import { loadGraphQLConfig } from './graphql-config.js';
+import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
 
 const debug = debugFactory('graphql-eslint:parser');
 
-debug('cwd %o', process.cwd());
+debug('cwd %o', CWD);
 
-export function parseForESLint(code: string, options: ParserOptions = {}): GraphQLESLintParseResult {
+export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
-    const filePath = options.filePath || '';
-    const realFilepath = filePath && getOnDiskFilepath(filePath);
-
-    const gqlConfig = loadGraphQLConfig(options);
-    const projectForFile = realFilepath ? gqlConfig.getProjectForFile(realFilepath) : gqlConfig.getDefault();
-
-    const schema = getSchema(projectForFile, options);
-    const siblingOperations = getSiblingOperations(projectForFile);
-
+    const { filePath } = options;
+    // First parse code from file, in case of syntax error do not try load schema,
+    // documents or even graphql-config instance
     const { document } = parseGraphQLSDL(filePath, code, {
       ...options.graphQLParserOptions,
       noLocation: false,
     });
+    const gqlConfig = loadGraphQLConfig(options);
+    const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
+    const project = gqlConfig.getProjectForFile(realFilepath);
 
-    const comments = extractComments(document.loc);
-    const tokens = extractTokens(filePath, code);
+    const schema = getSchema(project, options.schemaOptions);
     const rootTree = convertToESTree(document, schema instanceof GraphQLSchema ? schema : null);
 
     return {
       services: {
         schema,
-        siblingOperations,
+        siblingOperations: getDocuments(project),
       },
       ast: {
-        comments,
-        tokens,
+        comments: extractComments(document.loc),
+        tokens: extractTokens(filePath, code),
         loc: rootTree.loc,
         range: rootTree.range as [number, number],
         type: 'Program',

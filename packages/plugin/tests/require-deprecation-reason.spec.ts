@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import rule from '../src/rules/require-deprecation-reason';
+import { rule } from '../src/rules/require-deprecation-reason';
 
 const ruleTester = new GraphQLRuleTester();
 

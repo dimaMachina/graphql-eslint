@@ -1,20 +1,53 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { GraphQLESLintRule } from '../types';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, englishJoinWords } from '../utils';
-import { GraphQLESTreeNode } from '../estree-converter';
-
-export type StrictIdInTypesRuleConfig = {
-  acceptedIdNames?: string[];
-  acceptedIdTypes?: string[];
-  exceptions?: {
-    types?: string[];
-    suffixes?: string[];
-  };
-};
+import { GraphQLESLintRule } from '../types.js';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  requireGraphQLSchemaFromContext,
+  englishJoinWords,
+} from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'strict-id-in-types';
 
-const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      acceptedIdNames: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        default: ['id'],
+      },
+      acceptedIdTypes: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        default: ['ID'],
+      },
+      exceptions: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          types: {
+            ...ARRAY_DEFAULT_OPTIONS,
+            description:
+              'This is used to exclude types with names that match one of the specified values.',
+          },
+          suffixes: {
+            ...ARRAY_DEFAULT_OPTIONS,
+            description:
+              'This is used to exclude types with names with suffixes that match one of the specified values.',
+          },
+        },
+      },
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
+
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -86,41 +119,10 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
         },
       ],
     },
-    schema: {
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          acceptedIdNames: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            default: ['id'],
-          },
-          acceptedIdTypes: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            default: ['ID'],
-          },
-          exceptions: {
-            type: 'object',
-            properties: {
-              types: {
-                ...ARRAY_DEFAULT_OPTIONS,
-                description: 'This is used to exclude types with names that match one of the specified values.',
-              },
-              suffixes: {
-                ...ARRAY_DEFAULT_OPTIONS,
-                description:
-                  'This is used to exclude types with names with suffixes that match one of the specified values.',
-              },
-            },
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
-    const options: StrictIdInTypesRuleConfig = {
+    const options: RuleOptions[0] = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
       exceptions: {},
@@ -128,7 +130,11 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
     };
 
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-    const rootTypeNames = [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]
+    const rootTypeNames = [
+      schema.getQueryType(),
+      schema.getMutationType(),
+      schema.getSubscriptionType(),
+    ]
       .filter(Boolean)
       .map(type => type.name);
     const selector = `ObjectTypeDefinition[name.value!=/^(${rootTypeNames.join('|')})$/]`;
@@ -151,7 +157,10 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
 
           // To be a valid type, it must be non-null and one of the accepted types.
           let isValidIdType = false;
-          if (fieldNode.type.kind === Kind.NON_NULL_TYPE && fieldNode.type.type.kind === Kind.NAMED_TYPE) {
+          if (
+            fieldNode.type.kind === Kind.NON_NULL_TYPE &&
+            fieldNode.type.type.kind === Kind.NAMED_TYPE
+          ) {
             isValidIdType = options.acceptedIdTypes.includes(fieldNode.type.type.name.value);
           }
 
@@ -167,7 +176,7 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
           context.report({
             node: node.name,
             message: `${typeName} must have exactly one non-nullable unique identifier. Accepted name${pluralNamesSuffix}: ${englishJoinWords(
-              options.acceptedIdNames
+              options.acceptedIdNames,
             )}. Accepted type${pluralTypesSuffix}: ${englishJoinWords(options.acceptedIdTypes)}.`,
           });
         }
@@ -175,5 +184,3 @@ const rule: GraphQLESLintRule<[StrictIdInTypesRuleConfig]> = {
     };
   },
 };
-
-export default rule;

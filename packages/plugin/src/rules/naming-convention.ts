@@ -1,8 +1,9 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule, ValueOf } from '../types';
-import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS } from '../utils';
-import { GraphQLESTreeNode } from '../estree-converter';
-import { GraphQLESLintRuleListener } from '../testkit';
+import { GraphQLESLintRule, ValueOf } from '../types.js';
+import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS } from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRuleListener } from '../testkit.js';
+import { FromSchema } from 'json-schema-to-ts';
 
 const KindToDisplayName = {
   // types
@@ -39,7 +40,72 @@ const ALLOWED_STYLES = Object.keys(StyleToRegex) as AllowedStyle[];
 
 const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
-};
+} as const;
+
+const schema = {
+  definitions: {
+    asString: {
+      enum: ALLOWED_STYLES,
+      description: `One of: ${ALLOWED_STYLES.map(t => `\`${t}\``).join(', ')}`,
+    },
+    asObject: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        style: { enum: ALLOWED_STYLES },
+        prefix: { type: 'string' },
+        suffix: { type: 'string' },
+        forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
+        forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
+        ignorePattern: {
+          type: 'string',
+          description: 'Option to skip validation of some words, e.g. acronyms',
+        },
+      },
+    },
+  },
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      types: {
+        ...schemaOption,
+        description: `Includes:\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
+      },
+      ...Object.fromEntries(
+        ALLOWED_KINDS.map(kind => [
+          kind,
+          {
+            ...schemaOption,
+            description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
+          },
+        ]),
+      ),
+      allowLeadingUnderscore: {
+        type: 'boolean',
+        default: false,
+      },
+      allowTrailingUnderscore: {
+        type: 'boolean',
+        default: false,
+      },
+    },
+    patternProperties: {
+      [`^(${ALLOWED_KINDS.join('|')})(.+)?$`]: schemaOption,
+    },
+    description: [
+      "> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.",
+      '>',
+      '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
+      '>',
+      '> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.',
+    ].join('\n'),
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
 
 type PropertySchema = {
   style?: AllowedStyle;
@@ -52,17 +118,9 @@ type PropertySchema = {
 
 type Options = AllowedStyle | PropertySchema;
 
-export type NamingConventionRuleConfig = {
-  allowLeadingUnderscore?: boolean;
-  allowTrailingUnderscore?: boolean;
-  types?: Options;
-} & {
-  [key in `${AllowedKind}${string}`]?: Options;
-};
-
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 
-const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -178,68 +236,7 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       },
     },
     hasSuggestions: true,
-    schema: {
-      definitions: {
-        asString: {
-          enum: ALLOWED_STYLES,
-          description: `One of: ${ALLOWED_STYLES.map(t => `\`${t}\``).join(', ')}`,
-        },
-        asObject: {
-          type: 'object',
-          additionalProperties: false,
-          properties: {
-            style: { enum: ALLOWED_STYLES },
-            prefix: { type: 'string' },
-            suffix: { type: 'string' },
-            forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
-            forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
-            ignorePattern: {
-              type: 'string',
-              description: 'Option to skip validation of some words, e.g. acronyms',
-            },
-          },
-        },
-      },
-      type: 'array',
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          types: {
-            ...schemaOption,
-            description: `Includes:\n\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
-          },
-          ...Object.fromEntries(
-            ALLOWED_KINDS.map(kind => [
-              kind,
-              {
-                ...schemaOption,
-                description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
-              },
-            ])
-          ),
-          allowLeadingUnderscore: {
-            type: 'boolean',
-            default: false,
-          },
-          allowTrailingUnderscore: {
-            type: 'boolean',
-            default: false,
-          },
-        },
-        patternProperties: {
-          [`^(${ALLOWED_KINDS.join('|')})(.+)?$`]: schemaOption,
-        },
-        description: [
-          "> It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts with allowed `ASTNode` names which are described below.",
-          '>',
-          '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
-          '>',
-          '> Example: pattern property `FieldDefinition[parent.name.value=Query]` will match only fields for type `Query`.',
-        ].join('\n'),
-      },
-    },
+    schema,
   },
   create(context) {
     const options = context.options[0] || {};
@@ -250,7 +247,11 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
       return typeof style === 'object' ? style : { style };
     }
 
-    function report(node: GraphQLESTreeNode<NameNode>, message: string, suggestedName: string): void {
+    function report(
+      node: GraphQLESTreeNode<NameNode>,
+      message: string,
+      suggestedName: string,
+    ): void {
       context.report({
         node,
         message,
@@ -331,21 +332,29 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
       const suggestedName = node.value.replace(isLeading ? /^_+/ : /_+$/, '');
-      report(node, `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`, suggestedName);
+      report(
+        node,
+        `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
+        suggestedName,
+      );
     };
 
     const listeners: GraphQLESLintRuleListener = {};
 
     if (!allowLeadingUnderscore) {
-      listeners['Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] =
-        checkUnderscore(true);
+      listeners[
+        'Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'
+      ] = checkUnderscore(true);
     }
     if (!allowTrailingUnderscore) {
-      listeners['Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'] =
-        checkUnderscore(false);
+      listeners[
+        'Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'
+      ] = checkUnderscore(false);
     }
 
-    const selectors = new Set([types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean));
+    const selectors = new Set(
+      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean),
+    );
 
     for (const selector of selectors) {
       listeners[selector] = checkNode(selector);
@@ -353,5 +362,3 @@ const rule: GraphQLESLintRule<[NamingConventionRuleConfig]> = {
     return listeners;
   },
 };
-
-export default rule;

@@ -1,13 +1,16 @@
 # `strict-id-in-types`
 
-✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file
+enables this rule.
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/strict-id-in-types`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
-Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.
+Requires output types to have one unique identifier unless they do not have a logical one.
+Exceptions can be used to ignore output types that do not have unique identifiers.
 
 ## Usage Examples
 
@@ -71,15 +74,13 @@ The object is an array with all elements of the type `string`.
 Default:
 
 ```json
-[
-  "id"
-]
+["id"]
 ```
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `acceptedIdTypes` (array)
 
@@ -88,15 +89,13 @@ The object is an array with all elements of the type `string`.
 Default:
 
 ```json
-[
-  "ID"
-]
+["ID"]
 ```
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ### `exceptions` (object)
 
@@ -110,8 +109,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 #### `suffixes` (array)
 
@@ -121,8 +120,8 @@ The object is an array with all elements of the type `string`.
 
 Additional restrictions:
 
-* Minimum items: `1`
-* Unique items: `true`
+- Minimum items: `1`
+- Unique items: `true`
 
 ## Resources
 

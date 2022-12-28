@@ -1,6 +1,6 @@
 import { Kind, ObjectTypeDefinitionNode, TypeNode } from 'graphql';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const MUST_BE_OBJECT_TYPE = 'MUST_BE_OBJECT_TYPE';
 const MUST_CONTAIN_FIELD_EDGES = 'MUST_CONTAIN_FIELD_EDGES';
@@ -28,7 +28,7 @@ const hasEdgesField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) =>
 const hasPageInfoField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) =>
   node.fields.some(field => field.name.value === 'pageInfo');
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'problem',
     docs: {
@@ -68,11 +68,13 @@ const rule: GraphQLESLintRule = {
       // Connection types
       [MUST_BE_OBJECT_TYPE]: 'Connection type must be an Object type.',
       [MUST_HAVE_CONNECTION_SUFFIX]: 'Connection type must have `Connection` suffix.',
-      [MUST_CONTAIN_FIELD_EDGES]: 'Connection type must contain a field `edges` that return a list type.',
+      [MUST_CONTAIN_FIELD_EDGES]:
+        'Connection type must contain a field `edges` that return a list type.',
       [MUST_CONTAIN_FIELD_PAGE_INFO]:
         'Connection type must contain a field `pageInfo` that return a non-null `PageInfo` Object type.',
       [EDGES_FIELD_MUST_RETURN_LIST_TYPE]: '`edges` field must return a list type.',
-      [PAGE_INFO_FIELD_MUST_RETURN_NON_NULL_TYPE]: '`pageInfo` field must return a non-null `PageInfo` Object type.',
+      [PAGE_INFO_FIELD_MUST_RETURN_NON_NULL_TYPE]:
+        '`pageInfo` field must return a non-null `PageInfo` Object type.',
     },
     schema: [],
   },
@@ -82,14 +84,14 @@ const rule: GraphQLESLintRule = {
         context.report({ node, messageId: MUST_BE_OBJECT_TYPE });
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value!=/Connection$/]'(
-        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         if (hasEdgesField(node) && hasPageInfoField(node)) {
           context.report({ node: node.name, messageId: MUST_HAVE_CONNECTION_SUFFIX });
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/]'(
-        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         if (!hasEdgesField(node)) {
           context.report({ node: node.name, messageId: MUST_CONTAIN_FIELD_EDGES });
@@ -99,16 +101,17 @@ const rule: GraphQLESLintRule = {
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/] > FieldDefinition[name.value=edges] > .gqlType'(
-        node: GraphQLESTreeNode<TypeNode>
+        node: GraphQLESTreeNode<TypeNode>,
       ) {
         const isListType =
-          node.kind === Kind.LIST_TYPE || (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.LIST_TYPE);
+          node.kind === Kind.LIST_TYPE ||
+          (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.LIST_TYPE);
         if (!isListType) {
           context.report({ node, messageId: EDGES_FIELD_MUST_RETURN_LIST_TYPE });
         }
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/Connection$/] > FieldDefinition[name.value=pageInfo] > .gqlType'(
-        node: GraphQLESTreeNode<TypeNode>
+        node: GraphQLESTreeNode<TypeNode>,
       ) {
         const isNonNullPageInfoType =
           node.kind === Kind.NON_NULL_TYPE &&
@@ -121,5 +124,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

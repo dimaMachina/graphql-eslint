@@ -1,9 +1,13 @@
 # `possible-type-extension`
 
+💡 This rule provides
+[suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
+
 - Category: `Schema`
 - Rule name: `@graphql-eslint/possible-type-extension`
 - Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
-- Requires GraphQL Operations: `false` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+- Requires GraphQL Operations: `false`
+  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
 
 A type extension is only valid if the type is defined and has the same kind.
 

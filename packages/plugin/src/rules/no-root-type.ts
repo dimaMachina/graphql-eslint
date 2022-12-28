@@ -1,13 +1,31 @@
-import type { NameNode } from 'graphql';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext } from '../utils';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { NameNode } from 'graphql';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { FromSchema } from 'json-schema-to-ts';
 
-const ROOT_TYPES: ('mutation' | 'subscription')[] = ['mutation', 'subscription'];
+const schema = {
+  type: 'array',
+  minItems: 1,
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['disallow'],
+    properties: {
+      disallow: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        items: {
+          enum: ['mutation', 'subscription'],
+        },
+      },
+    },
+  },
+} as const;
 
-type NoRootTypeConfig = { disallow: typeof ROOT_TYPES };
+export type RuleOptions = FromSchema<typeof schema>;
 
-const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -38,24 +56,7 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
         },
       ],
     },
-    schema: {
-      type: 'array',
-      minItems: 1,
-      maxItems: 1,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['disallow'],
-        properties: {
-          disallow: {
-            ...ARRAY_DEFAULT_OPTIONS,
-            items: {
-              enum: ROOT_TYPES,
-            },
-          },
-        },
-      },
-    },
+    schema,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext('no-root-type', context);
@@ -92,5 +93,3 @@ const rule: GraphQLESLintRule<[NoRootTypeConfig]> = {
     };
   },
 };
-
-export default rule;

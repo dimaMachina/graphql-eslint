@@ -1,11 +1,21 @@
 import { dirname } from 'path';
 import debugFactory from 'debug';
-import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync, SchemaPointer } from 'graphql-config';
+import { GraphQLConfig, loadConfigSync, SchemaPointer } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
-import { ParserOptions } from './types';
+import { ParserOptions } from './types.js';
 
 const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
+
+export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
+  return loadConfigSync({
+    // load config relative to the file being linted
+    rootDir: dirname(filePath),
+    throwOnEmpty: false,
+    throwOnMissing: false,
+    extensions: [codeFileLoaderExtension],
+  });
+}
 
 export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   // We don't want cache config on test environment
@@ -14,15 +24,7 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
     return graphQLConfig;
   }
 
-  const onDiskConfig = options.skipGraphQLConfig
-    ? null
-    : loadConfigSync({
-        // load config relative to the file being linted
-        rootDir: options.filePath ? dirname(options.filePath) : undefined,
-        throwOnEmpty: false,
-        throwOnMissing: false,
-        extensions: [addCodeFileLoaderExtension],
-      });
+  const onDiskConfig = !options.skipGraphQLConfig && loadOnDiskGraphQLConfig(options.filePath);
 
   debug('options.skipGraphQLConfig: %o', options.skipGraphQLConfig);
   if (onDiskConfig) {
@@ -46,14 +48,15 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
         config: configOptions,
         filepath: 'virtual-config',
       },
-      [addCodeFileLoaderExtension]
+      [codeFileLoaderExtension],
     );
 
   return graphQLConfig;
 }
 
-const addCodeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
-  api.loaders.schema.register(new CodeFileLoader());
-  api.loaders.documents.register(new CodeFileLoader());
+const codeFileLoaderExtension = api => {
+  const { schema, documents } = api.loaders;
+  schema.register(new CodeFileLoader());
+  documents.register(new CodeFileLoader());
   return { name: 'graphql-eslint-loaders' };
 };

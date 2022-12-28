@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { prompt } from 'enquirer';
+import enquirer from 'enquirer';
 import { CategoryType } from '../packages/plugin/src';
 
 type Answer = {
@@ -13,7 +13,7 @@ type Answer = {
 
 const CWD = process.cwd();
 
-prompt<Answer>([
+const answer = await enquirer.prompt<Answer>([
   {
     type: 'input',
     name: 'ruleId',
@@ -51,16 +51,17 @@ prompt<Answer>([
     message: 'Type:',
     choices: ['Schema', 'Operations'],
   },
-]).then(async answer => {
-  const { ruleId, type, category } = answer;
-  const description = answer.description.replace(/\.*$/, '.');
-  const RULE_PATH = join(CWD, `packages/plugin/src/rules/${ruleId}.ts`);
-  const RULE_CONTENT = `
+]);
+
+const { ruleId, type, category } = answer;
+const description = answer.description.replace(/\.*$/, '.');
+const RULE_PATH = join(CWD, `packages/plugin/src/rules/${ruleId}.ts`);
+const RULE_CONTENT = `
 import { GraphQLESLintRule } from '../types';
 
 const RULE_ID = '${ruleId}';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: '${type}',
     docs: {
@@ -94,19 +95,18 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;
 `;
-  await writeFile(RULE_PATH, RULE_CONTENT.trimStart());
 
-    const TEST_PATH = join(CWD, `packages/plugin/tests/${ruleId}.spec.ts`);
-    const TEST_CONTENT = `
+await writeFile(RULE_PATH, RULE_CONTENT.trimStart());
+
+const TEST_PATH = join(CWD, `packages/plugin/tests/${ruleId}.spec.ts`);
+const TEST_CONTENT = `
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/${ruleId}';
+import { rule } from '../src/rules/${ruleId}';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string): { code: string; parserOptions: ParserOptions } {
+function useSchema(code: string): { code: string; parserOptions: Omit<ParserOptions, 'filePath'> } {
   return {
     code,
     parserOptions: {
@@ -131,5 +131,5 @@ ruleTester.runGraphQLTests('${ruleId}', rule, {
   ],
 });
 `;
-    await writeFile(TEST_PATH, TEST_CONTENT.trimStart());
-});
+
+await writeFile(TEST_PATH, TEST_CONTENT.trimStart());

@@ -5,16 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
-      "name": "Debug Tests", 
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "name": "Debug Tests",
+      "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": [
-      ]
+      "outFiles": []
     }
   ]
 }

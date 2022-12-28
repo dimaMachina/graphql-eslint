@@ -1,9 +1,9 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { EdgeTypesConfig } from '../src/rules/relay-edge-types';
+import { rule, RuleOptions } from '../src/rules/relay-edge-types';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string): { code: string; parserOptions: ParserOptions } {
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {
     code,
     parserOptions: {
@@ -12,7 +12,7 @@ function useSchema(code: string): { code: string; parserOptions: ParserOptions }
   };
 }
 
-ruleTester.runGraphQLTests<[EdgeTypesConfig], true>('relay-edge-types', rule, {
+ruleTester.runGraphQLTests<RuleOptions, true>('relay-edge-types', rule, {
   valid: [
     {
       name: 'when cursor returns string',

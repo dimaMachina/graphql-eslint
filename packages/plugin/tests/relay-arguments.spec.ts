@@ -1,9 +1,9 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { RelayArgumentsConfig } from '../src/rules/relay-arguments';
+import { rule, RuleOptions } from '../src/rules/relay-arguments';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string): { code: string; parserOptions: ParserOptions } {
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {
     code,
     parserOptions: {
@@ -16,7 +16,7 @@ function useSchema(code: string): { code: string; parserOptions: ParserOptions }
   };
 }
 
-ruleTester.runGraphQLTests<[RelayArgumentsConfig], true>('relay-arguments', rule, {
+ruleTester.runGraphQLTests<RuleOptions, true>('relay-arguments', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       type User {
@@ -44,7 +44,12 @@ ruleTester.runGraphQLTests<[RelayArgumentsConfig], true>('relay-arguments', rule
       ...useSchema(/* GraphQL */ `
         type User {
           posts: PostConnection
-          comments(after: [String!]!, first: Float, before: Query, last: [PostConnection]): PostConnection
+          comments(
+            after: [String!]!
+            first: Float
+            before: Query
+            last: [PostConnection]
+          ): PostConnection
         }
       `),
       errors: 5,

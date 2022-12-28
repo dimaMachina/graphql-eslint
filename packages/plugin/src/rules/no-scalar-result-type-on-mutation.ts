@@ -1,17 +1,18 @@
 import { isScalarType, NameNode } from 'graphql';
-import { requireGraphQLSchemaFromContext } from '../utils';
-import { GraphQLESLintRule } from '../types';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-scalar-result-type-on-mutation';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
       category: 'Schema',
-      description: 'Avoid scalar result type on mutation type to make sure to return a valid state.',
+      description:
+        'Avoid scalar result type on mutation type to make sure to return a valid state.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
       requiresSchema: true,
       examples: [
@@ -66,5 +67,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;

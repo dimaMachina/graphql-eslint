@@ -7,13 +7,13 @@ about: Create a bug report to help us improve
 
 <!-- PLEASE DO NOT REMOVE THIS SECTION -->
 
-_Progress of the issue based on the [Contributor Workflow](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md#a-typical-contributor-workflow)_
+_Progress of the issue based on the
+[Contributor Workflow](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md#a-typical-contributor-workflow)_
 
-- [ ] 1. The issue provides a reproduction available on GitHub, Stackblitz or CodeSandbox.
-  > For example, you can start off by editng the ['basic' example on Stackblitz](
-https://stackblitz.com/github/B2o5T/graphql-eslint/tree/master/examples/basic).
 
-  > Please make sure the graphql-eslint version under `package.json` matches yours.
+- [ ] 1. The issue provides a reproduction available on GitHub, Stackblitz or CodeSandbox
+     > For example, you can start off by editng the ['basic' example on Stackblitz](https://stackblitz.com/github/B2o5T/graphql-eslint/tree/master/examples/basic).
+     > Please make sure the graphql-eslint version under `package.json` matches yours.
 - [ ] 2. A failing test has been provided
 - [ ] 3. A local solution has been provided
 - [ ] 4. A pull request is pending review
@@ -24,8 +24,7 @@ https://stackblitz.com/github/B2o5T/graphql-eslint/tree/master/examples/basic).
 
 <!-- A clear and concise description of what the bug is. -->
 
-**To Reproduce**
-Steps to reproduce the behavior:
+**To Reproduce** Steps to reproduce the behavior:
 
 <!-- Adding a codesandbox can help us understand the bug better and speed up things -->
 

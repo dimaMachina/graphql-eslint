@@ -1,18 +1,18 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { StrictIdInTypesRuleConfig } from '../src/rules/strict-id-in-types';
+import { rule, RuleOptions } from '../src/rules/strict-id-in-types';
 
 const ruleTester = new GraphQLRuleTester();
 
-function useSchema(code: string) {
+function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {
     code,
-    parserOptions: <ParserOptions>{
+    parserOptions: {
       schema: code,
     },
   };
 }
 
-ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', rule, {
+ruleTester.runGraphQLTests<RuleOptions>('strict-id-in-types', rule, {
   valid: [
     useSchema('type A { id: ID! }'),
     {
@@ -68,7 +68,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }'
+        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
       ),
       options: [
         {
@@ -94,7 +94,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }'
+        'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }',
       ),
       options: [
         {
@@ -119,7 +119,9 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
       ],
     },
     {
-      ...useSchema('type A { id: ID! } type AError { message: String! } type AResult { payload: A! }'),
+      ...useSchema(
+        'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }',
+      ),
       options: [
         {
           acceptedIdNames: ['id'],
@@ -188,7 +190,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }'
+        'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }',
       ),
       options: [
         {
@@ -200,7 +202,7 @@ ruleTester.runGraphQLTests<[StrictIdInTypesRuleConfig]>('strict-id-in-types', ru
     },
     {
       ...useSchema(
-        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }'
+        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
       ),
       options: [
         {

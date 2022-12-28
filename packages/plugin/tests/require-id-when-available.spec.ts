@@ -1,5 +1,5 @@
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule, { RequireIdWhenAvailableRuleConfig } from '../src/rules/require-id-when-available';
+import { rule, RuleOptions } from '../src/rules/require-id-when-available';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -66,7 +66,7 @@ const WITH_SCHEMA = {
 const ruleTester = new GraphQLRuleTester();
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
 
-ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id-when-available', rule, {
+ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule, {
   valid: [
     {
       name: 'should completely ignore FragmentDefinition',
@@ -273,7 +273,11 @@ ruleTester.runGraphQLTests<[RequireIdWhenAvailableRuleConfig], true>('require-id
         `,
       },
     },
-    {name: 'should work when `id` is selected by an alias', ...WITH_SCHEMA, code: '{ hasId {  id: name } }' },
+    {
+      name: 'should work when `id` is selected by an alias',
+      ...WITH_SCHEMA,
+      code: '{ hasId {  id: name } }',
+    },
   ],
   invalid: [
     {

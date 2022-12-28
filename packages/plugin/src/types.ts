@@ -1,10 +1,11 @@
-import type { Rule, AST, Linter } from 'eslint';
-import type * as ESTree from 'estree';
-import type { GraphQLSchema } from 'graphql';
-import type { IExtensions, IGraphQLProject } from 'graphql-config';
-import type { GraphQLParseOptions } from '@graphql-tools/utils';
-import type { GraphQLESLintRuleListener } from './testkit';
-import type { SiblingOperations } from './sibling-operations';
+import { Rule, AST, Linter } from 'eslint';
+import * as ESTree from 'estree';
+import { GraphQLSchema } from 'graphql';
+import { IExtensions, IGraphQLProject } from 'graphql-config';
+import { GraphQLParseOptions } from '@graphql-tools/utils';
+import { GraphQLESLintRuleListener } from './testkit.js';
+import { SiblingOperations } from './documents.js';
+import { JSONSchema } from 'json-schema-to-ts';
 
 export type Schema = GraphQLSchema | Error | null;
 export type Pointer = string | string[];
@@ -22,7 +23,7 @@ export interface ParserOptions {
   };
   graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   skipGraphQLConfig?: boolean;
-  filePath?: string;
+  filePath: string;
 }
 
 export type ParserServices = {
@@ -37,7 +38,9 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
 type Location = AST.SourceLocation | ESTree.Position;
 
 type ReportDescriptorLocation = { node: { loc: Location } } | { loc: Location };
-export type ReportDescriptor = Rule.ReportDescriptorMessage & Rule.ReportDescriptorOptions & ReportDescriptorLocation;
+export type ReportDescriptor = Rule.ReportDescriptorMessage &
+  Rule.ReportDescriptorOptions &
+  ReportDescriptorLocation;
 
 export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,
@@ -50,30 +53,32 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
 
 export type CategoryType = 'Schema' | 'Operations';
 
-export type RuleDocsInfo<T> = {
-  docs: Omit<Rule.RuleMetaData['docs'], 'category'> & {
-    category: CategoryType | CategoryType[];
-    requiresSchema?: true;
-    requiresSiblings?: true;
-    examples?: {
-      title: string;
-      code: string;
-      usage?: T;
-    }[];
-    configOptions?:
-      | T
-      | {
-          schema?: T;
-          operations?: T;
-        };
-    graphQLJSRuleName?: string;
-    isDisabledForAllConfig?: true;
-  };
+type RuleMetaDataDocs = Required<Rule.RuleMetaData>['docs']
+export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> & {
+  category: CategoryType | CategoryType[];
+  requiresSchema?: true;
+  requiresSiblings?: true;
+  examples?: {
+    title: string;
+    code: string;
+    usage?: T;
+  }[];
+  configOptions?:
+    | T
+    | {
+        schema?: T;
+        operations?: T;
+      };
+  graphQLJSRuleName?: string;
+  isDisabledForAllConfig?: true;
 };
 
 export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
-  meta: Omit<Rule.RuleMetaData, 'docs'> & RuleDocsInfo<Options>;
+  meta: Omit<Rule.RuleMetaData, 'docs' | 'schema'> & {
+    docs?: RuleDocsInfo<Options>;
+    schema: Readonly<JSONSchema> | [];
+  };
 };
 
 export type ValueOf<T> = T[keyof T];

@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { GraphQLRuleTester, ParserOptions } from '../src';
-import rule from '../src/rules/unique-fragment-name';
+import { rule } from '../src/rules/unique-fragment-name';
 
 const TEST_FRAGMENT = /* GraphQL */ `
   fragment HasIdFields on HasId {
@@ -8,8 +8,10 @@ const TEST_FRAGMENT = /* GraphQL */ `
   }
 `;
 
-const SIBLING_FRAGMENTS = (...operations: string[]) => ({
-  parserOptions: <ParserOptions>{
+const SIBLING_FRAGMENTS = (
+  ...operations: string[]
+): { parserOptions: Pick<ParserOptions, 'operations'> } => ({
+  parserOptions: {
     operations,
   },
 });
@@ -24,7 +26,10 @@ ruleTester.runGraphQLTests('unique-fragment-name', rule, {
     },
     {
       // Assert `skipGraphQLImport` is set to true
-      ...SIBLING_FRAGMENTS(join(__dirname, 'mocks/user-fields.graphql'), join(__dirname, 'mocks/user.graphql')),
+      ...SIBLING_FRAGMENTS(
+        join(__dirname, 'mocks/user-fields.graphql'),
+        join(__dirname, 'mocks/user.graphql'),
+      ),
       filename: join(__dirname, 'mocks/user-fields.graphql'),
       code: ruleTester.fromMockFile('user-fields.graphql'),
     },

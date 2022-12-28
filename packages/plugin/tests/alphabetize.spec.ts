@@ -1,9 +1,24 @@
 import { GraphQLRuleTester } from '../src';
-import rule, { AlphabetizeConfig } from '../src/rules/alphabetize';
+import { rule, RuleOptions } from '../src/rules/alphabetize';
 
 const ruleTester = new GraphQLRuleTester();
 
-ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
+const GROUP_ORDER_TEST = /* GraphQL */ `
+  type User {
+    firstName: Int
+    createdAt: DateTime
+    author: Int
+    wagon: Int
+    id: ID
+    foo: Int
+    updatedAt: DateTime
+    bar: Int
+    nachos: Int
+    guild: Int
+  }
+`;
+
+ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
   valid: [
     {
       options: [{ fields: ['ObjectTypeDefinition'] }],
@@ -90,7 +105,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           aa: Int
         }
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ fields: ['InputObjectTypeDefinition'] }],
@@ -129,7 +147,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           GOD
         }
       `,
-      errors: [{ message: '`ADMIN` should be before `SUPER_ADMIN`.' }, { message: '`GOD` should be before `USER`.' }],
+      errors: [
+        { message: '`ADMIN` should be before `SUPER_ADMIN`.' },
+        { message: '`GOD` should be before `USER`.' },
+      ],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -148,7 +169,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       code: /* GraphQL */ `
         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ arguments: ['FieldDefinition'] }],
@@ -157,7 +181,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
         }
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ selections: ['FragmentDefinition'] }],
@@ -168,7 +195,10 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
           aa
         }
       `,
-      errors: [{ message: '`bb` should be before `cc`.' }, { message: '`aa` should be before `bb`.' }],
+      errors: [
+        { message: '`bb` should be before `cc`.' },
+        { message: '`aa` should be before `bb`.' },
+      ],
     },
     {
       options: [{ selections: ['OperationDefinition'] }],
@@ -336,7 +366,8 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       name: 'should sort when selection is aliased',
       options: [{ selections: ['OperationDefinition'] }],
       code: /* GraphQL */ `
-        { # start
+        {
+          # start
           lastName: lastname # lastName comment
           fullName: fullname # fullName comment
           firsName: firstname # firsName comment
@@ -346,6 +377,54 @@ ruleTester.runGraphQLTests<[AlphabetizeConfig]>('alphabetize', rule, {
       errors: [
         { message: '`fullName` should be before `lastName`.' },
         { message: '`firsName` should be before `fullName`.' },
+      ],
+    },
+    {
+      name: 'should sort by group when `*` is between',
+      options: [
+        {
+          fields: ['ObjectTypeDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt'],
+        },
+      ],
+      code: GROUP_ORDER_TEST,
+      errors: [
+        { message: '`author` should be before `createdAt`.' },
+        { message: '`id` should be before `wagon`.' },
+        { message: '`bar` should be before `updatedAt`.' },
+        { message: '`guild` should be before `nachos`.' },
+      ],
+    },
+    {
+      name: 'should sort by group when `*` is at the end',
+      options: [
+        {
+          fields: ['ObjectTypeDefinition'],
+          groups: ['updatedAt', 'id', 'createdAt', '*'],
+        },
+      ],
+      code: GROUP_ORDER_TEST,
+      errors: [
+        { message: '`createdAt` should be before `firstName`.' },
+        { message: '`id` should be before `wagon`.' },
+        { message: '`updatedAt` should be before `foo`.' },
+        { message: '`guild` should be before `nachos`.' },
+      ],
+    },
+    {
+      name: 'should sort by group when `*` at the start',
+      options: [
+        {
+          fields: ['ObjectTypeDefinition'],
+          groups: ['*', 'updatedAt', 'id', 'createdAt'],
+        },
+      ],
+      code: GROUP_ORDER_TEST,
+      errors: [
+        { message: '`author` should be before `createdAt`.' },
+        { message: '`foo` should be before `id`.' },
+        { message: '`bar` should be before `updatedAt`.' },
+        { message: '`guild` should be before `nachos`.' },
       ],
     },
   ],

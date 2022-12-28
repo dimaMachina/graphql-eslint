@@ -1,10 +1,10 @@
 import { Kind, NameNode } from 'graphql';
-import type { GraphQLESLintRule } from '../types';
-import type { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-duplicate-fields';
 
-const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     hasSuggestions: true,
@@ -78,7 +78,9 @@ const rule: GraphQLESLintRule = {
             {
               desc: `Remove \`${fieldName}\` ${parent.type.toLowerCase()}`,
               fix(fixer) {
-                return fixer.remove((parent.type === Kind.VARIABLE ? parent.parent : parent) as any);
+                return fixer.remove(
+                  (parent.type === Kind.VARIABLE ? parent.parent : parent) as any,
+                );
               },
             },
           ],
@@ -112,5 +114,3 @@ const rule: GraphQLESLintRule = {
     };
   },
 };
-
-export default rule;
