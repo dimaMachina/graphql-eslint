@@ -11,6 +11,7 @@ _Progress of the issue based on the
 [Contributor Workflow](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md#a-typical-contributor-workflow)_
 
 - [ ] 1. The issue provides a reproduction available on GitHub, Stackblitz or CodeSandbox
+     > For example, you can start off by editng the ['basic' example on Stackblitz](https://stackblitz.com/github/B2o5T/graphql-eslint/tree/master/examples/basic).
      > Please make sure the graphql-eslint version under `package.json` matches yours.
 - [ ] 2. A failing test has been provided
 - [ ] 3. A local solution has been provided
