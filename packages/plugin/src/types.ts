@@ -53,7 +53,8 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
 
 export type CategoryType = 'Schema' | 'Operations';
 
-export type RuleDocsInfo<T> = Omit<Rule.RuleMetaData['docs'], 'category' | 'suggestion'> & {
+type RuleMetaDataDocs = Required<Rule.RuleMetaData>['docs']
+export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> & {
   category: CategoryType | CategoryType[];
   requiresSchema?: true;
   requiresSiblings?: true;
