@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.14.3
+
+### Patch Changes
+
+- [#1349](https://github.com/B2o5T/graphql-eslint/pull/1349)
+  [`6ce6dbb`](https://github.com/B2o5T/graphql-eslint/commit/6ce6dbb6eabbce66736c74a8990171501f30af27)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix broken suggestions on code files when there are
+  multiple choices
+
 ## 3.14.2
 
 ### Patch Changes
