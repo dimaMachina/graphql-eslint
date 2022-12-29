@@ -1,4 +1,4 @@
-import { DocumentNode, TokenKind } from 'graphql';
+import { DocumentNode, Token, TokenKind } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
@@ -61,7 +61,7 @@ export const rule: GraphQLESLintRule = {
     return {
       [selector](node: GraphQLESTreeNode<DocumentNode>) {
         const rawNode = node.rawNode();
-        let token = rawNode.loc.startToken;
+        let token: Token = rawNode.loc!.startToken;
 
         while (token) {
           const { kind, prev, next, value, line, column } = token;
@@ -91,6 +91,9 @@ export const rule: GraphQLESLintRule = {
                 })),
               });
             }
+          }
+          if (!next) {
+            break;
           }
           token = next;
         }
