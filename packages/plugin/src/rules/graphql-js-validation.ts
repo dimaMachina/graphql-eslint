@@ -12,7 +12,7 @@ import {
   DirectiveNode,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate.js';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
+import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
 import {
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
@@ -33,7 +33,7 @@ function validateDocument({
   schema: GraphQLSchema | null;
   documentNode: DocumentNode;
   rule: ValidationRule;
-  hasDidYouMeanSuggestions: boolean;
+  hasDidYouMeanSuggestions?: boolean;
 }): void {
   if (documentNode.definitions.length === 0) {
     return;
@@ -44,7 +44,7 @@ function validateDocument({
       : validateSDL(documentNode, null, [rule as any]);
 
     for (const error of validationErrors) {
-      const { line, column } = error.locations[0];
+      const { line, column } = error.locations![0];
       const sourceCode = context.getSourceCode();
       const { tokens } = sourceCode.ast;
       const token = tokens.find(
@@ -59,10 +59,10 @@ function validateDocument({
         loc =
           // if cursor on `@` symbol than use next node
           (token.type as any) === '@'
-            ? sourceCode.getNodeByRangeIndex(token.range[1] + 1).loc
+            ? sourceCode.getNodeByRangeIndex(token.range[1] + 1)!.loc!
             : token.loc;
       }
-      const didYouMeanContent = error.message.match(/Did you mean (?<content>.*)\?$/)?.groups
+      const didYouMeanContent = error.message.match(/Did you mean (?<content>.*)\?$/)?.groups!
         .content;
       const matches = didYouMeanContent ? [...didYouMeanContent.matchAll(/"(?<name>[^"]*)"/g)] : [];
 
@@ -71,19 +71,19 @@ function validateDocument({
         message: error.message,
         suggest: hasDidYouMeanSuggestions
           ? matches.map(match => {
-              const { name } = match.groups;
+              const { name } = match.groups!;
               return {
                 desc: `Rename to \`${name}\``,
-                fix: fixer => fixer.replaceText(token, name),
+                fix: fixer => fixer.replaceText(token!, name),
               };
             })
           : [],
       });
     }
-  } catch (e) {
+  } catch (error) {
     context.report({
       loc: REPORT_ON_FIRST_CHARACTER,
-      message: e.message,
+      message: (error as Error).message,
     });
   }
 }
@@ -165,8 +165,8 @@ const validationToRule = (
     schema?: JSONSchema | [];
     hasDidYouMeanSuggestions?: boolean;
   },
-  docs: Omit<GraphQLESLintRule['meta']['docs'], 'url'>,
-): Record<typeof ruleId, GraphQLESLintRule<any, true>> => {
+  docs: RuleDocsInfo<any>,
+): Record<typeof ruleId, GraphQLESLintRule<[], true>> => {
   let ruleFn: null | ValidationRule = null;
 
   try {
@@ -213,7 +213,7 @@ const validationToRule = (
               context,
               schema,
               documentNode,
-              rule: ruleFn,
+              rule: ruleFn!,
               hasDidYouMeanSuggestions,
             });
           },
@@ -287,7 +287,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
 
         const filterDirectives = (node: { directives?: ReadonlyArray<DirectiveNode> }) => ({
           ...node,
-          directives: node.directives.filter(
+          directives: node.directives?.filter(
             directive => !ignoreClientDirectives.includes(directive.name.value),
           ),
         });
