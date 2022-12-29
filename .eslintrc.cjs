@@ -1,6 +1,12 @@
 module.exports = {
   ignorePatterns: ['examples'],
-  extends: ['@theguild', '@theguild/eslint-config/json', '@theguild/eslint-config/yml'],
+  extends: [
+    '@theguild',
+    // '@theguild/eslint-config/react', // TODO: enable with new website
+    '@theguild/eslint-config/json',
+    '@theguild/eslint-config/yml',
+    '@theguild/eslint-config/mdx',
+  ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off', // too strict
     '@typescript-eslint/no-non-null-assertion': 'off', // too strict

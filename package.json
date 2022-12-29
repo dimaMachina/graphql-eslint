@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "build": "tsc && bob build",
-    "ci:lint": "eslint --ignore-path .gitignore --ext ts,js . --output-file eslint_report.json --format json",
+    "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
     "generate:docs": "tsx scripts/generate-docs.ts",
-    "lint": "eslint --ignore-path .gitignore --ext ts,js .",
+    "lint": "eslint --ignore-path .gitignore .",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/ && tsx scripts/postbuild.ts",
     "postinstall": "tsx scripts/patch-graphql.ts",
     "prebuild": "rimraf ./tsconfig.tsbuildinfo",
