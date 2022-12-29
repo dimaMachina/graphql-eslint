@@ -13,6 +13,7 @@ module.exports = {
     'object-shorthand': ['error', 'always'],
     'no-unused-vars': 'off', // disable base rule as it can report incorrect errors
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
+    'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-empty-interface': 'off',

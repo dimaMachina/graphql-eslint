@@ -1,6 +1,11 @@
 import { dirname } from 'path';
 import debugFactory from 'debug';
-import { GraphQLConfig, loadConfigSync, SchemaPointer } from 'graphql-config';
+import {
+  GraphQLConfig,
+  GraphQLExtensionDeclaration,
+  loadConfigSync,
+  SchemaPointer,
+} from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types.js';
 
@@ -54,7 +59,7 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
   return graphQLConfig;
 }
 
-const codeFileLoaderExtension = api => {
+const codeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
   const { schema, documents } = api.loaders;
   schema.register(new CodeFileLoader());
   documents.register(new CodeFileLoader());

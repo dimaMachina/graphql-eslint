@@ -2,6 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "baseUrl": ".",
+    "strict": true,
     "outDir": "dist",
     "rootDir": "packages",
     "esModuleInterop": true,
@@ -10,7 +11,7 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "target": "es2018",
-    "lib": ["es6", "esnext", "es2015", "dom"],
+    "lib": ["es2021"],
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,

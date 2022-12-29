@@ -13,7 +13,7 @@ import { GraphQLESTreeNode, TypeInformation } from './types.js';
 import { convertLocation } from './utils.js';
 
 export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema) {
-  const typeInfo = schema ? new TypeInfo(schema) : null;
+  const typeInfo = schema && new TypeInfo(schema);
 
   const visitor: ASTVisitor = {
     leave(node, key, parent) {
@@ -58,8 +58,8 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
       const commonFields: Omit<GraphQLESTreeNode<typeof node>, 'parent'> = {
         ...node,
         type: node.kind,
-        loc: convertLocation(node.loc),
-        range: [node.loc.start, node.loc.end],
+        loc: convertLocation(node.loc!),
+        range: [node.loc!.start, node.loc!.end],
         leadingComments,
         // Use function to prevent RangeError: Maximum call stack size exceeded
         typeInfo: () => calculatedTypeInfo as any, // Don't know if can fix error

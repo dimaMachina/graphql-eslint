@@ -106,12 +106,12 @@ export function extractTokens(filePath: string, code: string): AST.Token[] {
   return tokens;
 }
 
-export function extractComments(loc: Location): Comment[] {
+export function extractComments(loc?: Location): Comment[] {
   if (!loc) {
     return [];
   }
   const comments: Comment[] = [];
-  let token = loc.startToken;
+  let token: Token | null = loc.startToken;
 
   while (token) {
     if (token.kind === TokenKind.COMMENT) {
