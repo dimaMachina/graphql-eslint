@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { GraphQLRuleTester, rules, ParserOptions } from '../src';
+import { GraphQLRuleTester, ParserOptions, rules } from '../src';
 
 const ruleTester = new GraphQLRuleTester();
 

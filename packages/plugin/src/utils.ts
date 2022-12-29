@@ -1,10 +1,10 @@
-import { ASTNode, GraphQLSchema, Kind } from 'graphql';
-import { AST } from 'eslint';
-import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
+import { AST } from 'eslint';
 import { Position } from 'estree';
-import { GraphQLESLintRuleContext } from './types.js';
+import { ASTNode, GraphQLSchema, Kind } from 'graphql';
+import lowerCase from 'lodash.lowercase';
 import { SiblingOperations } from './documents.js';
+import { GraphQLESLintRuleContext } from './types.js';
 
 export function requireSiblingsOperations(
   ruleId: string,

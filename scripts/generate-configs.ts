@@ -1,11 +1,11 @@
 import { readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import prettier from 'prettier';
-import chalk from 'chalk';
-import utils from '../packages/plugin/src/utils';
-import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src';
 import { fileURLToPath } from 'url';
+import chalk from 'chalk';
+import prettier from 'prettier';
+import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src';
+import utils from '../packages/plugin/src/utils';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 

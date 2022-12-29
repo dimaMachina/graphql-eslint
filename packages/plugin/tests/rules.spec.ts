@@ -1,5 +1,5 @@
+import { configs, parseForESLint, ParserOptions, rules } from '@graphql-eslint/eslint-plugin';
 import eslintExperimentalApis from 'eslint/use-at-your-own-risk';
-import { rules, parseForESLint, ParserOptions, configs } from '@graphql-eslint/eslint-plugin';
 
 // @ts-expect-error we need to wait when ESLint publish correct types
 const { FlatESLint } = eslintExperimentalApis;

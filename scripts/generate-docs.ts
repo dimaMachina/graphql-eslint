@@ -1,9 +1,9 @@
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { asArray } from '@graphql-tools/utils';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import prettier from 'prettier';
-import { asArray } from '@graphql-tools/utils';
 import pkg from '../packages/plugin/src';
 
 const { rules } = pkg;

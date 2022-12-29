@@ -1,6 +1,6 @@
+import { join } from 'path';
 import { GraphQLRuleTester, ParserOptions } from '../src';
 import { rule } from '../src/rules/unique-operation-name';
-import { join } from 'path';
 
 const TEST_OPERATION = 'query test { foo }';
 

@@ -1,5 +1,4 @@
 module.exports = {
-  reportUnusedDisableDirectives: true,
   ignorePatterns: ['examples'],
   extends: ['@theguild'],
   rules: {
@@ -73,8 +72,8 @@ module.exports = {
       files: ['packages/plugin/src/**'],
       rules: {
         // remove in v4 major
-        'unicorn/prefer-node-protocol': 'off'
-      }
-    }
+        'unicorn/prefer-node-protocol': 'off',
+      },
+    },
   ],
 };

@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { relative, join } from 'node:path';
+import { join, relative } from 'node:path';
 import { ESLint } from 'eslint';
 
 const ROOT_CWD = process.cwd();

@@ -1,9 +1,9 @@
 /* eslint-env vitest */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { RuleTester, AST, Linter, Rule } from 'eslint';
-import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
+import { AST, Linter, Rule, RuleTester } from 'eslint';
+import { ASTKindToNode } from 'graphql';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { GraphQLESLintRule, ParserOptions } from './types.js';
 
