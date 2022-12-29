@@ -191,8 +191,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         const isOperation = node.kind === Kind.OPERATION_DEFINITION;
         if (isOperation) {
           const rawNode = node.rawNode();
-          const { prev, line } = rawNode.loc.startToken;
-          if (prev.kind === TokenKind.COMMENT) {
+          const { prev, line } = rawNode.loc!.startToken;
+          if (prev?.kind === TokenKind.COMMENT) {
             const value = prev.value.trim();
             const linesBefore = line - prev.line;
             if (!value.startsWith('eslint') && linesBefore === 1) {
