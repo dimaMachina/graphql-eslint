@@ -4,7 +4,7 @@ import { asArray } from '@graphql-tools/utils';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import prettier from 'prettier';
-import pkg from '../packages/plugin/src';
+import pkg from '../packages/plugin/src/index.js';
 
 const { rules } = pkg;
 const { format, resolveConfig } = prettier;

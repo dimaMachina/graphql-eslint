@@ -4,8 +4,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
 import prettier from 'prettier';
-import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src';
-import utils from '../packages/plugin/src/utils';
+import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src/index.js';
+import utils from '../packages/plugin/src/utils.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -66,7 +66,7 @@ async function generateRules(): Promise<void> {
 type RuleOptions = 'error' | ['error', ...any];
 
 async function generateConfigs(): Promise<void> {
-  const { rules } = await import('../packages/plugin/src');
+  const { rules } = await import('../packages/plugin/src/index.js');
 
   const getRulesConfig = (
     categoryType: CategoryType,
