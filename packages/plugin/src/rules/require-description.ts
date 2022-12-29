@@ -193,7 +193,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           const rawNode = node.rawNode();
           const { prev, line } = rawNode.loc!.startToken;
           if (prev?.kind === TokenKind.COMMENT) {
-            const value = prev.value.trim();
+            const value = prev.value!.trim(); // TODO: remove `!` when drop support of graphql@15
             const linesBefore = line - prev.line;
             if (!value.startsWith('eslint') && linesBefore === 1) {
               description = value;

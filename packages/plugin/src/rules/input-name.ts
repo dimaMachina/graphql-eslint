@@ -49,7 +49,8 @@ export type RuleOptions = FromSchema<typeof schema>;
 type ObjectTypeNode = GraphQLESTreeNode<ObjectTypeDefinitionNode | ObjectTypeExtensionNode>;
 
 const isObjectType = (node: GraphQLESTreeNode<ASTNode>): node is ObjectTypeNode =>
-  [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION].includes(node.type);
+  // TODO: remove `as any` when drop support of graphql@15
+  [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION].includes(node.type as any);
 const isQueryType = (node: GraphQLESTreeNode<ASTNode>): boolean =>
   isObjectType(node) && node.name.value === 'Query';
 const isMutationType = (node: GraphQLESTreeNode<ASTNode>): boolean =>
