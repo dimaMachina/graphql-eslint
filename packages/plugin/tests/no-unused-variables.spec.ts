@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join } from 'node:path';
 import { GraphQLRuleTester, rules } from '../src';
 
 const ruleTester = new GraphQLRuleTester();

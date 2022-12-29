@@ -41,7 +41,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.{spec,test}.{ts,js}'],
+      files: ['*.{spec,test}.ts'],
       env: {
         jest: true,
       },
@@ -61,11 +61,8 @@ module.exports = {
       rules: {
         'no-console': 'off',
       },
-    },
-    {
-      files: ['packages/plugin/src/**'],
-      rules: {
-        'import/extensions': ['error', 'ignorePackages'],
+      env: {
+        node: true,
       },
     },
     {
@@ -73,6 +70,20 @@ module.exports = {
       rules: {
         // remove in v4 major
         'unicorn/prefer-node-protocol': 'off',
+      },
+    },
+    {
+      files: ['packages/plugin/src/rules/index.ts'],
+      rules: {
+        // file is generated
+        'simple-import-sort/imports': 'off',
+      },
+    },
+    {
+      files: ['packages/plugin/src/configs/*.ts'],
+      rules: {
+        // eslint looks for export default
+        'import/no-default-export': 'off',
       },
     },
   ],

@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join } from 'node:path';
 import { GraphQLRuleTester, ParserOptions } from '../src';
 import { rule } from '../src/rules/unique-operation-name';
 
