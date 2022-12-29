@@ -1,4 +1,3 @@
-/* eslint-env vitest */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { codeFrameColumns } from '@babel/code-frame';
