@@ -1,11 +1,10 @@
 module.exports = {
   ignorePatterns: ['examples'],
-  extends: ['@theguild'],
+  extends: ['@theguild', '@theguild/eslint-config/json', '@theguild/eslint-config/yml'],
   rules: {
+    '@typescript-eslint/no-explicit-any': 'off', // too strict
+    '@typescript-eslint/no-non-null-assertion': 'off', // too strict
     'no-restricted-globals': ['error', { name: 'isNaN', message: 'Use Number.isNaN instead' }],
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
     'unicorn/prefer-array-some': 'error',
     'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { object: true }],

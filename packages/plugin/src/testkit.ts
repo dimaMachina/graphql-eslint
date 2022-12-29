@@ -221,6 +221,7 @@ function defineParser(linter: Linter, parser: string): void {
   const defined = parsers.get(linter);
   if (!defined.has(parser)) {
     defined.add(parser);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     linter.defineParser(parser, require(parser));
   }
 }
