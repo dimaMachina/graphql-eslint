@@ -1,9 +1,7 @@
 module.exports = {
   reportUnusedDisableDirectives: true,
   ignorePatterns: ['examples'],
-  parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'standard', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['unicorn'],
+  extends: ['@theguild'],
   rules: {
     'no-empty': 'off',
     'no-console': 'error',
@@ -71,5 +69,12 @@ module.exports = {
         'import/extensions': ['error', 'ignorePackages'],
       },
     },
+    {
+      files: ['packages/plugin/src/**'],
+      rules: {
+        // remove in v4 major
+        'unicorn/prefer-node-protocol': 'off'
+      }
+    }
   ],
 };
