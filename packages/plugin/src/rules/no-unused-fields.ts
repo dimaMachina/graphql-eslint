@@ -1,7 +1,7 @@
 import { GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
+import { SiblingOperations } from '../documents.js';
 import { GraphQLESLintRule } from '../types.js';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils.js';
-import { SiblingOperations } from '../documents.js';
 
 const RULE_ID = 'no-unused-fields';
 

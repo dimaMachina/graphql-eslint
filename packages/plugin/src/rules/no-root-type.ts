@@ -1,8 +1,8 @@
 import { NameNode } from 'graphql';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, truthy } from '../utils.js';
-import { GraphQLESLintRule } from '../types.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, truthy } from '../utils.js';
 
 const schema = {
   type: 'array',

@@ -1,9 +1,9 @@
 import { relative } from 'path';
 import { ExecutableDefinitionNode, Kind } from 'graphql';
-import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX, CWD } from '../utils.js';
 import { FragmentSource, OperationSource } from '../documents.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
+import { CWD, normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX } from '../utils.js';
 
 const RULE_ID = 'unique-fragment-name';
 

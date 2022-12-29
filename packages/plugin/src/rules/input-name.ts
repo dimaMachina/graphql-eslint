@@ -1,17 +1,17 @@
 import {
-  Kind,
-  NamedTypeNode,
-  ObjectTypeExtensionNode,
-  ObjectTypeDefinitionNode,
-  NameNode,
   ASTNode,
   FieldDefinitionNode,
   InputValueDefinitionNode,
+  Kind,
+  NamedTypeNode,
+  NameNode,
+  ObjectTypeDefinitionNode,
+  ObjectTypeExtensionNode,
 } from 'graphql';
-import { GraphQLESLintRule } from '../types.js';
+import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
-import { FromSchema } from 'json-schema-to-ts';
+import { GraphQLESLintRule } from '../types.js';
 
 const schema = {
   type: 'array',

@@ -1,3 +1,5 @@
+import { asArray } from '@graphql-tools/utils';
+import * as ESTree from 'estree';
 import {
   ASTNode,
   GraphQLInterfaceType,
@@ -9,17 +11,15 @@ import {
   visit,
   visitWithTypeInfo,
 } from 'graphql';
-import * as ESTree from 'estree';
-import { asArray } from '@graphql-tools/utils';
+import { FromSchema } from 'json-schema-to-ts';
+import { getBaseType, GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
+  englishJoinWords,
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
-  englishJoinWords,
 } from '../utils.js';
-import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types.js';
-import { getBaseType, GraphQLESTreeNode } from '../estree-converter/index.js';
-import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'require-id-when-available';
 const DEFAULT_ID_FIELD_NAME = 'id';

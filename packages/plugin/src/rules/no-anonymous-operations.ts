@@ -1,7 +1,7 @@
 import { Kind, OperationDefinitionNode } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import { getLocation } from '../utils.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-anonymous-operations';
 

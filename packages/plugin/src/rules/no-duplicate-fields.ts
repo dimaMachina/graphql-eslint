@@ -1,6 +1,6 @@
 import { Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
 const RULE_ID = 'no-duplicate-fields';
 

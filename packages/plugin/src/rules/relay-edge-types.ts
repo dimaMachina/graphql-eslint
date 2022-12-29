@@ -1,20 +1,20 @@
-import {
-  GraphQLSchema,
-  visit,
-  ASTVisitor,
-  NameNode,
-  isObjectType,
-  ObjectTypeDefinitionNode,
-  Kind,
-  TypeNode,
-  isScalarType,
-} from 'graphql';
 import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
-import { GraphQLESLintRule } from '../types.js';
+import {
+  ASTVisitor,
+  GraphQLSchema,
+  isObjectType,
+  isScalarType,
+  Kind,
+  NameNode,
+  ObjectTypeDefinitionNode,
+  TypeNode,
+  visit,
+} from 'graphql';
+import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
-import { FromSchema } from 'json-schema-to-ts';
+import { GraphQLESLintRule } from '../types.js';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'relay-edge-types';
 const MESSAGE_MUST_BE_OBJECT_TYPE = 'MESSAGE_MUST_BE_OBJECT_TYPE';

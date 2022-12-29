@@ -1,8 +1,8 @@
+import { relative } from 'path';
+import { NameNode, visit } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import { CWD, requireSiblingsOperations } from '../utils.js';
-import { relative } from 'path';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { NameNode, visit } from 'graphql';
 
 const RULE_ID = 'no-one-place-fragments';
 

@@ -1,26 +1,26 @@
 import { AST } from 'eslint';
 import {
-  Kind,
-  DocumentNode,
-  GraphQLSchema,
-  ValidationRule,
-  FragmentDefinitionNode,
-  visit,
-  validate,
   ASTVisitor,
-  ExecutableDefinitionNode,
   DirectiveNode,
+  DocumentNode,
+  ExecutableDefinitionNode,
+  FragmentDefinitionNode,
+  GraphQLSchema,
+  Kind,
+  validate,
+  ValidationRule,
+  visit,
 } from 'graphql';
 import { validateSDL } from 'graphql/validation/validate.js';
+import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
 import {
-  requireGraphQLSchemaFromContext,
-  requireSiblingsOperations,
+  ARRAY_DEFAULT_OPTIONS,
   logger,
   REPORT_ON_FIRST_CHARACTER,
-  ARRAY_DEFAULT_OPTIONS,
+  requireGraphQLSchemaFromContext,
+  requireSiblingsOperations,
 } from '../utils.js';
-import { JSONSchema } from 'json-schema-to-ts';
 
 function validateDocument({
   context,

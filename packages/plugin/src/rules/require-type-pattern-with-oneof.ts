@@ -1,6 +1,6 @@
-import { GraphQLESLintRule } from '../types.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { ObjectTypeDefinitionNode } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
 const RULE_ID = 'require-type-pattern-with-oneof';
 

@@ -1,17 +1,17 @@
 import {
   ASTNode,
   ASTVisitor,
+  DirectiveLocation,
   GraphQLSchema,
   isInterfaceType,
   Kind,
   NameNode,
   visit,
-  DirectiveLocation,
 } from 'graphql';
 import lowerCase from 'lodash.lowercase';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'no-unreachable-types';
 
