@@ -41,7 +41,9 @@ export function getSchema(
     // Do not set error to cache, since cache reload will be done after some `lifetime` seconds
     schemaCache.set(schemaKey, schema);
   } catch (error) {
-    error.message = chalk.red(`Error while loading schema: ${error.message}`);
+    if (error instanceof Error) {
+      error.message = chalk.red(`Error while loading schema: ${error.message}`);
+    }
     schema = error as Error;
   }
   return schema;

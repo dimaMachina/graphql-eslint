@@ -7,7 +7,7 @@ import {
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLConfig } from 'graphql-config';
 import { loadOnDiskGraphQLConfig } from './graphql-config.js';
-import { CWD, REPORT_ON_FIRST_CHARACTER } from './utils.js';
+import { CWD, REPORT_ON_FIRST_CHARACTER, truthy } from './utils.js';
 
 export type Block = Linter.ProcessorFile & {
   lineOffset: number;
@@ -46,7 +46,7 @@ export const processor: Linter.Processor<Block | string> = {
             ...modules.map(({ identifier }) => identifier),
             ...asArray(globalGqlIdentifierName),
             gqlMagicComment,
-          ].filter(Boolean),
+          ].filter(truthy),
         ),
       ];
     }
@@ -72,10 +72,12 @@ export const processor: Linter.Processor<Block | string> = {
 
       return [...blocks, code /* source code must be provided and be last */];
     } catch (error) {
-      error.message = `[graphql-eslint] Error while preprocessing "${relative(
-        CWD,
-        filePath,
-      )}" file\n\n${error.message}`;
+      if (error instanceof Error) {
+        error.message = `[graphql-eslint] Error while preprocessing "${relative(
+          CWD,
+          filePath,
+        )}" file\n\n${error.message}`;
+      }
       // eslint-disable-next-line no-console
       console.error(error);
       // in case of parsing error return code as is

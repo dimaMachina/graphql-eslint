@@ -12,12 +12,13 @@ export class ModuleCache<T, K = any> {
     log('setting entry for', cacheKey);
   }
 
-  get(cacheKey, settings = { lifetime: 10 /* seconds */ }): void | T {
-    if (!this.map.has(cacheKey)) {
+  get(cacheKey: K, settings = { lifetime: 10 /* seconds */ }): void | T {
+    const value = this.map.get(cacheKey);
+    if (!value) {
       log('cache miss for', cacheKey);
       return;
     }
-    const { lastSeen, result } = this.map.get(cacheKey);
+    const { lastSeen, result } = value;
     // check freshness
     if (
       process.env.NODE /* don't check for ESLint CLI */ ||
