@@ -82,8 +82,8 @@ objects.
 Here's an example for using original `graphql-js` validate method to validate `OperationDefinition`:
 
 ```ts
-import { validate } from 'graphql'
 import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
+import { validate } from 'graphql'
 
 export const rule = {
   create(context) {
