@@ -1,4 +1,4 @@
-import { writeFile, appendFile } from 'node:fs/promises';
+import { appendFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import pkg from '../package.json' assert { type: 'json' };
 
