@@ -134,13 +134,14 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
 
         const checkedFragmentSpreads = new Set<string>();
         const visitor = visitWithTypeInfo(typeInfo, {
-          SelectionSet(node, key, parent: ASTNode) {
+          SelectionSet(node, key, _parent) {
+            const parent = _parent as ASTNode;
             if (parent.kind === Kind.FRAGMENT_DEFINITION) {
               checkedFragmentSpreads.add(parent.name.value);
             } else if (parent.kind !== Kind.INLINE_FRAGMENT) {
               checkSelections(
                 node,
-                typeInfo.getType(),
+                typeInfo.getType()!,
                 selection.loc.start,
                 parent,
                 checkedFragmentSpreads,

@@ -1,5 +1,5 @@
 import { GraphQLESLintRule } from '../types.js';
-import { InputObjectTypeDefinitionNode, Kind, ObjectTypeDefinitionNode } from 'graphql';
+import { DirectiveNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'require-nullable-fields-with-oneof';
@@ -39,11 +39,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      'Directive[name.value=oneOf]'({
-        parent,
-      }: {
-        parent: GraphQLESTreeNode<InputObjectTypeDefinitionNode | ObjectTypeDefinitionNode>;
-      }) {
+      'Directive[name.value=oneOf]'({ parent }: GraphQLESTreeNode<DirectiveNode>) {
         const isTypeOrInput = [
           Kind.OBJECT_TYPE_DEFINITION,
           Kind.INPUT_OBJECT_TYPE_DEFINITION,
@@ -51,7 +47,8 @@ export const rule: GraphQLESLintRule = {
         if (!isTypeOrInput) {
           return;
         }
-        for (const field of parent.fields) {
+
+        for (const field of parent.fields || []) {
           if (field.gqlType.kind === Kind.NON_NULL_TYPE) {
             context.report({
               node: field.name,
