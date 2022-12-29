@@ -49,8 +49,8 @@ export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
 
 export const CWD = process.cwd();
 
-export const getTypeName = (node): string =>
-  'type' in node ? getTypeName(node.type) : node.name.value;
+export const getTypeName = (node: ASTNode): string =>
+  'type' in node ? getTypeName(node.type) : 'name' in node && node.name ? node.name.value : '';
 
 export const TYPES_KINDS = [
   Kind.OBJECT_TYPE_DEFINITION,
