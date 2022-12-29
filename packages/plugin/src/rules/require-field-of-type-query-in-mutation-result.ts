@@ -1,4 +1,4 @@
-import { isObjectType, NameNode } from 'graphql';
+import { isObjectType, NameNode, ObjectTypeDefinitionNode } from 'graphql';
 import { requireGraphQLSchemaFromContext, getTypeName } from '../utils.js';
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
@@ -62,8 +62,8 @@ export const rule: GraphQLESLintRule = {
         const graphQLType = schema.getType(typeName);
 
         if (isObjectType(graphQLType)) {
-          const { fields } = graphQLType.astNode;
-          const hasQueryType = fields.some(field => getTypeName(field) === queryType.name);
+          const { fields } = graphQLType.astNode as ObjectTypeDefinitionNode;
+          const hasQueryType = fields?.some(field => getTypeName(field) === queryType.name);
           if (!hasQueryType) {
             context.report({
               node,

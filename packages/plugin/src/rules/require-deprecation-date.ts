@@ -79,7 +79,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     return {
       'Directive[name.value=deprecated]'(node: GraphQLESTreeNode<DirectiveNode>) {
         const argName = context.options[0]?.argumentName || 'deletionDate';
-        const deletionDateNode = node.arguments.find(arg => arg.name.value === argName);
+        const deletionDateNode = node.arguments?.find(arg => arg.name.value === argName);
 
         if (!deletionDateNode) {
           context.report({
