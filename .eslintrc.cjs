@@ -32,7 +32,7 @@ module.exports = {
     {
       files: ['*.{spec,test}.ts'],
       env: {
-        jest: true,
+        vitest: true,
       },
       extends: ['plugin:eslint-plugin/tests-recommended'],
       rules: {
