@@ -2,21 +2,11 @@ module.exports = {
   ignorePatterns: ['examples'],
   extends: ['@theguild'],
   rules: {
-    'no-console': 'error',
     'no-restricted-globals': ['error', { name: 'isNaN', message: 'Use Number.isNaN instead' }],
-    'object-shorthand': ['error', 'always'],
-    'no-unused-vars': 'off', // disable base rule as it can report incorrect errors
-    '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
-    '@typescript-eslint/no-namespace': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/ban-ts-ignore': 'off',
     'unicorn/prefer-array-some': 'error',
-    'unicorn/prefer-includes': 'error',
-    'unicorn/no-useless-fallback-in-spread': 'error',
     'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { object: true }],
     quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
