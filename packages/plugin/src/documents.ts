@@ -1,19 +1,19 @@
 import { resolve } from 'path';
+import { Source } from '@graphql-tools/utils';
+import debugFactory from 'debug';
+import fg from 'fast-glob';
 import {
   FragmentDefinitionNode,
   Kind,
   OperationDefinitionNode,
+  OperationTypeNode,
   SelectionSetNode,
   visit,
-  OperationTypeNode,
 } from 'graphql';
-import { Source } from '@graphql-tools/utils';
 import { GraphQLProjectConfig } from 'graphql-config';
-import debugFactory from 'debug';
-import fg from 'fast-glob';
-import { logger } from './utils.js';
-import { Pointer } from './types.js';
 import { ModuleCache } from './cache.js';
+import { Pointer } from './types.js';
+import { logger } from './utils.js';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
 export type OperationSource = { filePath: string; document: OperationDefinitionNode };

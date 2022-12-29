@@ -1,7 +1,7 @@
 import { isObjectType, NameNode, ObjectTypeDefinitionNode } from 'graphql';
-import { requireGraphQLSchemaFromContext, getTypeName } from '../utils.js';
-import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'require-field-of-type-query-in-mutation-result';
 

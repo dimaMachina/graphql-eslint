@@ -1,16 +1,17 @@
-import {
-  Location,
-  TokenKind,
-  GraphQLOutputType,
-  GraphQLNamedType,
-  isNonNullType,
-  isListType,
-  Token,
-  Source,
-  Lexer,
-} from 'graphql';
-import { Comment, SourceLocation } from 'estree';
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { AST } from 'eslint';
+import { Comment, SourceLocation } from 'estree';
+import {
+  GraphQLNamedType,
+  GraphQLOutputType,
+  isListType,
+  isNonNullType,
+  Lexer,
+  Location,
+  Source,
+  Token,
+  TokenKind,
+} from 'graphql';
 import { valueFromASTUntyped } from 'graphql/utilities/valueFromASTUntyped.js';
 
 export const valueFromNode = (...args: Parameters<typeof valueFromASTUntyped>): any => {

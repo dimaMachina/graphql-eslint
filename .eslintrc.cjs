@@ -1,31 +1,17 @@
 module.exports = {
-  reportUnusedDisableDirectives: true,
   ignorePatterns: ['examples'],
-  parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'standard', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['unicorn'],
+  extends: [
+    '@theguild',
+    // '@theguild/eslint-config/react', // TODO: enable with new website
+    '@theguild/eslint-config/json',
+    '@theguild/eslint-config/yml',
+    '@theguild/eslint-config/mdx',
+  ],
   rules: {
-    'no-empty': 'off',
-    'no-console': 'error',
-    'no-prototype-builtins': 'off',
+    '@typescript-eslint/no-explicit-any': 'off', // too strict
+    '@typescript-eslint/no-non-null-assertion': 'off', // too strict
     'no-restricted-globals': ['error', { name: 'isNaN', message: 'Use Number.isNaN instead' }],
-    'no-useless-constructor': 'off',
-    'object-shorthand': ['error', 'always'],
-    'no-unused-vars': 'off', // disable base rule as it can report incorrect errors
-    '@typescript-eslint/no-unused-vars': ['warn', { args: 'none' }],
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/no-namespace': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/ban-ts-ignore': 'off',
     'unicorn/prefer-array-some': 'error',
-    'unicorn/prefer-includes': 'error',
-    'unicorn/no-useless-fallback-in-spread': 'error',
     'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { object: true }],
     quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
@@ -44,7 +30,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.{spec,test}.{ts,js}'],
+      files: ['*.{spec,test}.ts'],
       env: {
         jest: true,
       },
@@ -64,11 +50,50 @@ module.exports = {
       rules: {
         'no-console': 'off',
       },
+      env: {
+        node: true,
+      },
     },
     {
       files: ['packages/plugin/src/**'],
       rules: {
-        'import/extensions': ['error', 'ignorePackages'],
+        // remove in v4 major
+        'unicorn/prefer-node-protocol': 'off',
+      },
+    },
+    {
+      files: ['packages/plugin/src/rules/index.ts'],
+      rules: {
+        // file is generated
+        'simple-import-sort/imports': 'off',
+      },
+    },
+    {
+      files: ['packages/plugin/src/configs/*.ts'],
+      rules: {
+        // eslint looks for export default
+        'import/no-default-export': 'off',
+      },
+    },
+    {
+      files: ['.vscode/launch.json'],
+      rules: {
+        // false positive
+        'jsonc/no-comments': 'off',
+      },
+    },
+    {
+      files: ['.github/ISSUE_TEMPLATE/bug_report.md', '.github/PULL_REQUEST_TEMPLATE.md'],
+      rules: {
+        // ignore for above files
+        'unicorn/filename-case': 'off',
+      },
+    },
+    {
+      files: ['**/*.md/*.{js,ts}'],
+      rules: {
+        // extensions in code-blocks should be ignored
+        'import/extensions': 'off',
       },
     },
   ],

@@ -1,5 +1,5 @@
-import { parseForESLint } from './parser.js';
 import { configs } from './configs/index.js';
+import { parseForESLint } from './parser.js';
 
 const languageOptions = {
   parser: { parseForESLint },

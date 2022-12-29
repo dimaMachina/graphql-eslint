@@ -1,7 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import enquirer from 'enquirer';
-import { CategoryType } from '../packages/plugin/src';
+import { CategoryType } from '../packages/plugin/src/index.js';
 
 type Answer = {
   ruleId: string;

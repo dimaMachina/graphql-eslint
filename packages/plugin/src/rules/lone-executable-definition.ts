@@ -1,8 +1,8 @@
-import { GraphQLESLintRule } from '../types.js';
 import { ExecutableDefinitionNode } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { ARRAY_DEFAULT_OPTIONS, pascalCase, getLocation } from '../utils.js';
 import { FromSchema } from 'json-schema-to-ts';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
+import { ARRAY_DEFAULT_OPTIONS, getLocation, pascalCase } from '../utils.js';
 
 const RULE_ID = 'lone-executable-definition';
 

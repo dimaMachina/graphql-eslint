@@ -1,9 +1,8 @@
-/* eslint-env vitest */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { RuleTester, AST, Linter, Rule } from 'eslint';
-import { ASTKindToNode } from 'graphql';
 import { codeFrameColumns } from '@babel/code-frame';
+import { AST, Linter, Rule, RuleTester } from 'eslint';
+import { ASTKindToNode } from 'graphql';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { GraphQLESLintRule, ParserOptions } from './types.js';
 
@@ -221,6 +220,7 @@ function defineParser(linter: Linter, parser: string): void {
   const defined = parsers.get(linter);
   if (!defined.has(parser)) {
     defined.add(parser);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     linter.defineParser(parser, require(parser));
   }
 }

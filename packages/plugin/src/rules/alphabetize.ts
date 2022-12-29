@@ -1,29 +1,29 @@
+import { AST } from 'eslint';
+import { Comment, SourceLocation } from 'estree';
 import {
+  ASTNode,
+  DirectiveDefinitionNode,
+  DirectiveNode,
+  EnumTypeDefinitionNode,
+  EnumTypeExtensionNode,
+  FieldDefinitionNode,
+  FieldNode,
+  InputObjectTypeDefinitionNode,
+  InputObjectTypeExtensionNode,
+  InterfaceTypeDefinitionNode,
+  InterfaceTypeExtensionNode,
   Kind,
   ObjectTypeDefinitionNode,
   ObjectTypeExtensionNode,
-  InterfaceTypeDefinitionNode,
-  InterfaceTypeExtensionNode,
-  InputObjectTypeDefinitionNode,
-  InputObjectTypeExtensionNode,
-  FieldDefinitionNode,
-  EnumTypeDefinitionNode,
-  EnumTypeExtensionNode,
-  DirectiveDefinitionNode,
   OperationDefinitionNode,
-  FieldNode,
-  DirectiveNode,
   SelectionSetNode,
-  ASTNode,
 } from 'graphql';
-import { SourceLocation, Comment } from 'estree';
-import { AST } from 'eslint';
+import { FromSchema } from 'json-schema-to-ts';
 import lowerCase from 'lodash.lowercase';
-import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
+import { GraphQLESLintRule } from '../types.js';
 import { ARRAY_DEFAULT_OPTIONS, truthy } from '../utils.js';
-import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'alphabetize';
 

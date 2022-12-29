@@ -1,4 +1,5 @@
 import { dirname } from 'path';
+import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import debugFactory from 'debug';
 import {
   GraphQLConfig,
@@ -6,7 +7,6 @@ import {
   loadConfigSync,
   SchemaPointer,
 } from 'graphql-config';
-import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import { ParserOptions } from './types.js';
 
 const debug = debugFactory('graphql-eslint:graphql-config');

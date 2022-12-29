@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join } from 'node:path';
 import { GraphQLRuleTester } from '../src';
 import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
 import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';

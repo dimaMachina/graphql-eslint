@@ -1,4 +1,4 @@
-import { GraphQLRuleTester, rules, ParserOptions } from '../src';
+import { GraphQLRuleTester, ParserOptions, rules } from '../src';
 
 const parserOptions: Pick<ParserOptions, 'schema'> = {
   schema: /* GraphQL */ `

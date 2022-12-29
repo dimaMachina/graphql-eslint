@@ -1,6 +1,6 @@
 import { ArgumentNode, DirectiveNode } from 'graphql';
-import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
 
 export const rule: GraphQLESLintRule = {
   meta: {

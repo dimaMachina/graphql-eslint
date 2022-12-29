@@ -1,9 +1,9 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule, ValueOf } from '../types.js';
-import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS, truthy } from '../utils.js';
+import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
-import { FromSchema } from 'json-schema-to-ts';
+import { GraphQLESLintRule, ValueOf } from '../types.js';
+import { ARRAY_DEFAULT_OPTIONS, convertCase, truthy, TYPES_KINDS } from '../utils.js';
 
 const KindToDisplayName = {
   // types

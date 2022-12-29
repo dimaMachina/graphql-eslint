@@ -1,4 +1,4 @@
-import { writeFile, rm, appendFile, readFile } from 'node:fs/promises';
+import { appendFile, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const DIST_DIR = path.resolve(process.cwd(), './packages/plugin/dist');

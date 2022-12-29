@@ -1,11 +1,11 @@
 import { AST } from 'eslint';
-import { GraphQLESLintRule } from '../types.js';
-import depthLimit from 'graphql-depth-limit';
 import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils.js';
-import { SiblingOperations } from '../documents.js';
+import depthLimit from 'graphql-depth-limit';
 import { FromSchema } from 'json-schema-to-ts';
+import { SiblingOperations } from '../documents.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
+import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils.js';
 
 const RULE_ID = 'selection-set-depth';
 

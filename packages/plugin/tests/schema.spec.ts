@@ -1,9 +1,9 @@
-import path from 'node:path';
-import { readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { GraphQLSchema, printSchema } from 'graphql';
-import { getSchema } from '../src/schema';
 import { loadGraphQLConfig } from '../src/graphql-config';
+import { getSchema } from '../src/schema';
 
 describe('schema', async () => {
   const SCHEMA_GRAPHQL_PATH = path.resolve(__dirname, 'mocks/user-schema.graphql');

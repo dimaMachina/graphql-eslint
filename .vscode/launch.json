@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Debug Tests",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "program": "${workspaceFolder}/node_modules/.bin/vitest",
       "preLaunchTask": "tsc: build - tsconfig.json",
       "outFiles": []
     }

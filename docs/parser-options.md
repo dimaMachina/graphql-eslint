@@ -17,9 +17,11 @@ automatically use that to load your default GraphQL schema.
 You can disable this behaviour using `skipGraphQLConfig: true` in the `parserOptions`:
 
 ```json
+{
   "parserOptions": {
     "skipGraphQLConfig": true
   }
+}
 ```
 
 ## `schema`
@@ -32,37 +34,43 @@ files.
 Here are a few examples for a valid setup:
 
 ```json
+{
   "parserOptions": {
     "schema": "./schema.graphql"
   }
+}
 ```
 
 ```json
+{
   "parserOptions": {
     "schema": "./schema.json"
   }
+}
 ```
 
 ```json
+{
   "parserOptions": {
     "schema": "http://my-server/graphql"
   }
+}
 ```
 
 ```json
+{
   "parserOptions": {
     "schema": "./src/**/*.graphql"
   }
+}
 ```
 
 ```json
+{
   "parserOptions": {
-    "schema": [
-      "src/schema-a.graphql",
-      "src/schema-b.graphql",
-      "src/schema-c.graphql"
-    ]
+    "schema": ["src/schema-a.graphql", "src/schema-b.graphql", "src/schema-c.graphql"]
   }
+}
 ```
 
 ## `schemaOptions`
@@ -71,6 +79,7 @@ If you wish to send additional configuration for the `graphql-tools` loaders tha
 you can specify `schemaOptions` object:
 
 ```json
+{
   "parserOptions": {
     "schema": "http://my-server/graphql",
     "schemaOptions": {
@@ -79,15 +88,18 @@ you can specify `schemaOptions` object:
       }
     }
   }
+}
 ```
 
 ```json
+{
   "parserOptions": {
     "schema": "./src/**/*.graphql",
     "schemaOptions": {
       "assumeValid": true
     }
   }
+}
 ```
 
 > The configuration here is flexible, and will be sent to `graphql-tools` and it's loaders. So

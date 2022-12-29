@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
+import { createServer, IncomingMessage, Server, ServerResponse } from 'node:http';
 import { resolve } from 'node:path';
-import { createServer, Server, IncomingMessage, ServerResponse } from 'node:http';
-import { buildSchema, introspectionFromSchema } from 'graphql';
 import { fileURLToPath } from 'node:url';
+import { buildSchema, introspectionFromSchema } from 'graphql';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 

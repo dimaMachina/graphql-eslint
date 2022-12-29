@@ -1,11 +1,11 @@
-import { Rule, AST, Linter } from 'eslint';
+import { GraphQLParseOptions } from '@graphql-tools/utils';
+import { AST, Linter, Rule } from 'eslint';
 import * as ESTree from 'estree';
 import { GraphQLSchema } from 'graphql';
 import { IExtensions, IGraphQLProject } from 'graphql-config';
-import { GraphQLParseOptions } from '@graphql-tools/utils';
-import { GraphQLESLintRuleListener } from './testkit.js';
-import { SiblingOperations } from './documents.js';
 import { JSONSchema } from 'json-schema-to-ts';
+import { SiblingOperations } from './documents.js';
+import { GraphQLESLintRuleListener } from './testkit.js';
 
 export type Schema = GraphQLSchema | Error | null;
 export type Pointer = string | string[];

@@ -1,14 +1,14 @@
+import { Comment } from 'estree';
 import {
+  ASTVisitor,
+  DefinitionNode,
+  DocumentNode,
+  GraphQLSchema,
+  Kind,
   TypeInfo,
   visit,
   visitWithTypeInfo,
-  Kind,
-  DocumentNode,
-  ASTVisitor,
-  GraphQLSchema,
-  DefinitionNode,
 } from 'graphql';
-import { Comment } from 'estree';
 import { GraphQLESTreeNode, TypeInformation } from './types.js';
 import { convertLocation } from './utils.js';
 

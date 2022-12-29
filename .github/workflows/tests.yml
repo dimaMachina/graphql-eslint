@@ -51,7 +51,7 @@ jobs:
           path: packages/plugin/dist
 
   test:
-    name: jest / node v${{matrix.node_version}} / graphql v${{matrix.graphql_version}} / eslint v8
+    name: Vitest / node v${{matrix.node_version}} / graphql v${{matrix.graphql_version}} / eslint v8
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: [typecheck]
@@ -78,14 +78,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm i --no-frozen-lockfile
 
-      - name: Cache Jest
-        uses: actions/cache@v3
-        with:
-          path: .cache/jest
-          key: ${{runner.os}}-${{matrix.node_version}}-jest-${{hashFiles('pnpm-lock.yaml')}}
-          restore-keys: |
-            ${{runner.os}}-${{matrix.node_version}}-jest-
-
       # We need build for examples.spec.ts test
       # Otherwise we'll get error - Cannot find module 'node_modules/@graphql-eslint/eslint-plugin/dist/index.js'
       - name: Download build artifact
@@ -98,3 +90,9 @@ jobs:
         run: pnpm test
         env:
           CI: true
+
+      - name: Lint ESLint
+        run: pnpm lint
+
+      - name: Lint Prettier
+        run: pnpm lint:prettier

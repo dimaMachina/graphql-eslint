@@ -1,8 +1,8 @@
 import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
-import { GraphQLESLintRule } from '../types.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { requireGraphQLSchemaFromContext } from '../utils.js';
 import { FromSchema } from 'json-schema-to-ts';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { GraphQLESLintRule } from '../types.js';
+import { requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'relay-arguments';
 const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
