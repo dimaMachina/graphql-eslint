@@ -32,6 +32,7 @@ import {
   ListTypeNode,
   NonNullTypeNode,
   OperationTypeDefinitionNode,
+  DirectiveNode,
 } from 'graphql';
 import { SourceLocation, Comment } from 'estree';
 import { AST } from 'eslint';
@@ -101,6 +102,10 @@ type ParentNode<T> = T extends DocumentNode
   ? NodeWithType
   : T extends NameNode
   ? NodeWithName
+  : T extends DirectiveNode
+  ? InputObjectTypeDefinitionNode | ObjectTypeDefinitionNode
+  : T extends VariableNode
+  ? VariableDefinitionNode
   : unknown; // Explicitly show error to add new ternary with parent nodes
 
 type Node<T extends ASTNode, WithTypeInfo extends boolean> =
@@ -112,7 +117,7 @@ type Node<T extends ASTNode, WithTypeInfo extends boolean> =
     leadingComments: Comment[];
     typeInfo: () => WithTypeInfo extends true ? TypeInformation : Record<string, never>;
     rawNode: () => T;
-    parent: ParentNode<T>;
+    parent: GraphQLESTreeNode<ParentNode<T>>;
   };
 
 export type GraphQLESTreeNode<T, W extends boolean = false> =
@@ -120,7 +125,7 @@ export type GraphQLESTreeNode<T, W extends boolean = false> =
   T extends ASTNode
     ? {
         // Loop recursively over object values
-        [K in keyof Node<T, W>]: Node<T, W>[K] extends ReadonlyArray<infer ArrayItem> // If readonly array => loop over array items
+        [K in keyof Node<T, W>]: Node<T, W>[K] extends ReadonlyArray<infer ArrayItem> | undefined // If optional readonly array => loop over array items
           ? GraphQLESTreeNode<ArrayItem, W>[]
           : GraphQLESTreeNode<Node<T, W>[K], W>;
       }

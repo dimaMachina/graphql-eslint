@@ -39,7 +39,7 @@ function getEdgeTypes(schema: GraphQLSchema): EdgeTypes {
       if (!hasConnectionSuffix) {
         return;
       }
-      const edges = node.fields.find(field => field.name.value === 'edges');
+      const edges = node.fields?.find(field => field.name.value === 'edges');
       if (edges) {
         const edgesTypeName = getTypeName(edges);
         const edgesType = schema.getType(edgesTypeName);
@@ -139,7 +139,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
       (node.kind === Kind.NON_NULL_TYPE && node.gqlType.kind === Kind.NAMED_TYPE);
 
     const checkNodeField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>): void => {
-      const nodeField = node.fields.find(field => field.name.value === 'node');
+      const nodeField = node.fields?.find(field => field.name.value === 'node');
       const message =
         'return either a Scalar, Enum, Object, Interface, Union, or a non-null wrapper around one of those types.';
       if (!nodeField) {
@@ -155,7 +155,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         if (!isObjectType(type)) {
           return;
         }
-        const implementsNode = type.astNode.interfaces.some(n => n.name.value === 'Node');
+        const implementsNode = type.astNode!.interfaces?.some(n => n.name.value === 'Node');
         if (!implementsNode) {
           context.report({ node: node.name, messageId: MESSAGE_SHOULD_IMPLEMENTS_NODE });
         }
@@ -163,7 +163,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
     };
 
     const checkCursorField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>): void => {
-      const cursorField = node.fields.find(field => field.name.value === 'cursor');
+      const cursorField = node.fields?.find(field => field.name.value === 'cursor');
       const message =
         'return either a String, Scalar, or a non-null wrapper wrapper around one of those types.';
       if (!cursorField) {

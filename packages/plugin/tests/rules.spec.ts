@@ -1,5 +1,4 @@
 import eslintExperimentalApis from 'eslint/use-at-your-own-risk';
-import { describe, it, expect } from 'vitest';
 import { rules, parseForESLint, ParserOptions, configs } from '@graphql-eslint/eslint-plugin';
 
 // @ts-expect-error we need to wait when ESLint publish correct types

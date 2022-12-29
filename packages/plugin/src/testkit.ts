@@ -1,4 +1,4 @@
-/* eslint-env jest */
+/* eslint-env vitest */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { RuleTester, AST, Linter, Rule } from 'eslint';
@@ -34,11 +34,13 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
   return [code.slice(0, range[0]), text, code.slice(range[1])].join('');
 }
 
+type RuleTesterConfig = {
+  parser: string;
+  parserOptions: Omit<ParserOptions, 'filePath'>;
+};
+
 export class GraphQLRuleTester extends RuleTester {
-  config: {
-    parser: string;
-    parserOptions: Omit<ParserOptions, 'filePath'>;
-  };
+  config: RuleTesterConfig;
 
   constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
     const config = {
@@ -99,7 +101,7 @@ export class GraphQLRuleTester extends RuleTester {
     //     continue;
     //   }
     //
-    //   const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
+    //   const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
     //   defineParser(linter, verifyConfig.parser);
     //
     //   const messages = linter.verify(code, verifyConfig, { filename });
@@ -117,7 +119,7 @@ export class GraphQLRuleTester extends RuleTester {
       }
 
       const code = removeTrailingBlankLines(testCase.code);
-      const verifyConfig = getVerifyConfig(ruleId, this.config, testCase);
+      const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
 
       const messages = linter.verify(code, verifyConfig, filename);
@@ -143,15 +145,13 @@ export class GraphQLRuleTester extends RuleTester {
           indentCode(codeWithMessage),
         );
 
-        const { suggestions } = message;
-
         // Don't print suggestions in snapshots for too big codes
-        if (suggestions && (code.match(/\n/g) || '').length < 1000) {
+        if (message.suggestions && (code.match(/\n/g) || '').length < 1000) {
           for (const [i, suggestion] of message.suggestions.entries()) {
             const title = printWithIndex(
               '#### 💡 Suggestion',
               i,
-              suggestions.length,
+              message.suggestions.length,
               suggestion.desc,
             );
             const output = applyFix(code, suggestion.fix);
@@ -167,9 +167,7 @@ export class GraphQLRuleTester extends RuleTester {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
-      // @ts-expect-error -- we should import `vitest` but somebody could use globals from `jest`
       it(name || `Invalid #${idx + 1}`, () => {
-        // @ts-expect-error -- ^ same
         expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
       });
     }
@@ -190,7 +188,11 @@ function printWithIndex(title: string, index: number, total: number, description
   return title;
 }
 
-function getVerifyConfig(ruleId: string, testerConfig, testCase) {
+function getVerifyConfig<Options>(
+  ruleId: string,
+  testerConfig: RuleTesterConfig,
+  testCase: GraphQLInvalidTestCase<Options>,
+): Omit<Linter.Config, 'parser'> & { parser: string } {
   const { parser = testerConfig.parser, parserOptions, options } = testCase;
 
   return {

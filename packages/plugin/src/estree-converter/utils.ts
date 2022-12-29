@@ -56,7 +56,7 @@ export function convertToken<T extends 'Line' | 'Block' | TokenKindValue>(
   const { line, column, end, start, value } = token;
   return {
     type,
-    value,
+    value: value!, // TODO: remove `!` when drop support of graphql@15,
     /*
      * ESLint has 0-based column number
      * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
@@ -106,19 +106,20 @@ export function extractTokens(filePath: string, code: string): AST.Token[] {
   return tokens;
 }
 
-export function extractComments(loc: Location): Comment[] {
+export function extractComments(loc?: Location): Comment[] {
   if (!loc) {
     return [];
   }
   const comments: Comment[] = [];
-  let token = loc.startToken;
+  let token: Token | null = loc.startToken;
 
   while (token) {
     if (token.kind === TokenKind.COMMENT) {
       const comment = convertToken(
         token,
         // `eslint-disable` directive works only with `Block` type comment
-        token.value.trimStart().startsWith('eslint') ? 'Block' : 'Line',
+        // TODO: remove `!` when drop support of graphql@15
+        token.value!.trimStart().startsWith('eslint') ? 'Block' : 'Line',
       );
       comments.push(comment);
     }

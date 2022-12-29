@@ -4,6 +4,9 @@ import {
   ObjectTypeExtensionNode,
   ObjectTypeDefinitionNode,
   NameNode,
+  ASTNode,
+  FieldDefinitionNode,
+  InputValueDefinitionNode,
 } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
@@ -45,11 +48,12 @@ export type RuleOptions = FromSchema<typeof schema>;
 
 type ObjectTypeNode = GraphQLESTreeNode<ObjectTypeDefinitionNode | ObjectTypeExtensionNode>;
 
-const isObjectType = (node: ObjectTypeNode): boolean =>
-  [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION].includes(node.type);
-const isQueryType = (node: ObjectTypeNode): boolean =>
+const isObjectType = (node: GraphQLESTreeNode<ASTNode>): node is ObjectTypeNode =>
+  // TODO: remove `as any` when drop support of graphql@15
+  [Kind.OBJECT_TYPE_DEFINITION, Kind.OBJECT_TYPE_EXTENSION].includes(node.type as any);
+const isQueryType = (node: GraphQLESTreeNode<ASTNode>): boolean =>
   isObjectType(node) && node.name.value === 'Query';
-const isMutationType = (node: ObjectTypeNode): boolean =>
+const isMutationType = (node: GraphQLESTreeNode<ASTNode>): boolean =>
   isObjectType(node) && node.name.value === 'Mutation';
 
 export const rule: GraphQLESLintRule<RuleOptions> = {
@@ -97,20 +101,22 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const options: RuleOptions[0] = {
       checkInputType: false,
       caseSensitiveInputType: true,
-      checkQueries: false,
       checkMutations: true,
       ...context.options[0],
     };
 
-    const shouldCheckType = node =>
+    const shouldCheckType = (node: GraphQLESTreeNode<ASTNode>): boolean =>
       (options.checkMutations && isMutationType(node)) ||
-      (options.checkQueries && isQueryType(node));
+      (options.checkQueries && isQueryType(node)) ||
+      false;
 
     const listeners: GraphQLESLintRuleListener = {
       'FieldDefinition > InputValueDefinition[name.value!=input] > Name'(
         node: GraphQLESTreeNode<NameNode>,
       ) {
-        if (shouldCheckType((node as any).parent.parent.parent)) {
+        if (
+          shouldCheckType((node.parent.parent as GraphQLESTreeNode<FieldDefinitionNode>).parent)
+        ) {
           const inputName = node.value;
           context.report({
             node,
@@ -130,9 +136,12 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       listeners['FieldDefinition > InputValueDefinition NamedType'] = (
         node: GraphQLESTreeNode<NamedTypeNode>,
       ) => {
-        const findInputType = item => {
+        const findInputType = (
+          item: GraphQLESTreeNode<ASTNode>,
+        ): GraphQLESTreeNode<InputValueDefinitionNode> => {
           let currentNode = item;
           while (currentNode.type !== Kind.INPUT_VALUE_DEFINITION) {
+            // @ts-expect-error TODO try fix type error
             currentNode = currentNode.parent;
           }
           return currentNode;

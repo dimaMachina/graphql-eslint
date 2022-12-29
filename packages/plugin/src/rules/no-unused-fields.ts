@@ -25,7 +25,7 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
         // skip visiting this node if field is not defined in schema
         return false;
       }
-      const parentTypeName = typeInfo.getParentType().name;
+      const parentTypeName = typeInfo.getParentType()!.name;
       const fieldName = node.name.value;
 
       usedFields[parentTypeName] ??= new Set();

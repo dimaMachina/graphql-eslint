@@ -49,7 +49,7 @@ export const rule: GraphQLESLintRule = {
       }) {
         const requiredFields = ['error', 'ok'];
         for (const fieldName of requiredFields) {
-          if (!parent.fields.some(field => field.name.value === fieldName)) {
+          if (!parent.fields?.some(field => field.name.value === fieldName)) {
             context.report({
               node: parent.name,
               messageId: RULE_ID,

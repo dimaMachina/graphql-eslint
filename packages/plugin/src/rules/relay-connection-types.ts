@@ -1,4 +1,4 @@
-import { Kind, ObjectTypeDefinitionNode, TypeNode } from 'graphql';
+import { Kind, NameNode, ObjectTypeDefinitionNode, TypeNode } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
@@ -24,9 +24,9 @@ export const NON_OBJECT_TYPES = [
 const notConnectionTypesSelector = `:matches(${NON_OBJECT_TYPES})[name.value=/Connection$/] > .name`;
 
 const hasEdgesField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) =>
-  node.fields.some(field => field.name.value === 'edges');
+  node.fields?.some(field => field.name.value === 'edges');
 const hasPageInfoField = (node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) =>
-  node.fields.some(field => field.name.value === 'pageInfo');
+  node.fields?.some(field => field.name.value === 'pageInfo');
 
 export const rule: GraphQLESLintRule = {
   meta: {
@@ -80,7 +80,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      [notConnectionTypesSelector](node) {
+      [notConnectionTypesSelector](node: GraphQLESTreeNode<NameNode>) {
         context.report({ node, messageId: MUST_BE_OBJECT_TYPE });
       },
       ':matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value!=/Connection$/]'(

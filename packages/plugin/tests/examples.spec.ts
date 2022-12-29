@@ -1,7 +1,6 @@
 import { spawnSync } from 'node:child_process';
 import { relative, join } from 'node:path';
 import { ESLint } from 'eslint';
-import { expect, describe, it } from 'vitest';
 
 const ROOT_CWD = process.cwd();
 

@@ -38,7 +38,7 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
   const filepathMap: Record<string, number> = Object.create(null);
 
   return documents.map(source => {
-    const { location } = source;
+    const location = source.location!;
     if (['.gql', '.graphql'].some(extension => location.endsWith(extension))) {
       return source;
     }
@@ -111,8 +111,10 @@ export function getDocuments(project: GraphQLProjectConfig): SiblingOperations {
   // Since the siblings array is cached, we can use it as cache key.
   // We should get the same array reference each time we get
   // to this point for the same graphql project
-  if (siblingOperationsCache.has(siblings)) {
-    return siblingOperationsCache.get(siblings);
+  const value = siblingOperationsCache.get(siblings);
+
+  if (value) {
+    return value;
   }
 
   let fragmentsCache: FragmentSource[] | null = null;
@@ -122,10 +124,10 @@ export function getDocuments(project: GraphQLProjectConfig): SiblingOperations {
       const result: FragmentSource[] = [];
 
       for (const source of siblings) {
-        for (const definition of source.document.definitions) {
+        for (const definition of source.document?.definitions || []) {
           if (definition.kind === Kind.FRAGMENT_DEFINITION) {
             result.push({
-              filePath: source.location,
+              filePath: source.location!,
               document: definition,
             });
           }
@@ -143,10 +145,10 @@ export function getDocuments(project: GraphQLProjectConfig): SiblingOperations {
       const result: OperationSource[] = [];
 
       for (const source of siblings) {
-        for (const definition of source.document.definitions) {
+        for (const definition of source.document?.definitions || []) {
           if (definition.kind === Kind.OPERATION_DEFINITION) {
             result.push({
-              filePath: source.location,
+              filePath: source.location!,
               document: definition,
             });
           }
@@ -161,7 +163,7 @@ export function getDocuments(project: GraphQLProjectConfig): SiblingOperations {
 
   const collectFragments = (
     selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
-    recursive,
+    recursive: boolean,
     collected = new Map<string, FragmentDefinitionNode>(),
   ) => {
     visit(selectable, {

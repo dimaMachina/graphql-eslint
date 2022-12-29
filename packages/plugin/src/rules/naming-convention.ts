@@ -1,6 +1,6 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { GraphQLESLintRule, ValueOf } from '../types.js';
-import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS } from '../utils.js';
+import { TYPES_KINDS, convertCase, ARRAY_DEFAULT_OPTIONS, truthy } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
 import { FromSchema } from 'json-schema-to-ts';
@@ -243,7 +243,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const { allowLeadingUnderscore, allowTrailingUnderscore, types, ...restOptions } = options;
 
     function normalisePropertyOption(kind: string): PropertySchema {
-      const style: Options = restOptions[kind] || types;
+      const style = (restOptions[kind] || types) as Options;
       return typeof style === 'object' ? style : { style };
     }
 
@@ -276,8 +276,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       const error = getError();
       if (error) {
         const { errorMessage, renameToName } = error;
-        const [leadingUnderscores] = nodeName.match(/^_*/);
-        const [trailingUnderscores] = nodeName.match(/_*$/);
+        const [leadingUnderscores] = nodeName.match(/^_*/) as RegExpMatchArray;
+        const [trailingUnderscores] = nodeName.match(/_*$/) as RegExpMatchArray;
         const suggestedName = leadingUnderscores + renameToName + trailingUnderscores;
         report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedName);
       }
@@ -353,7 +353,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
 
     const selectors = new Set(
-      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(Boolean),
+      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(truthy),
     );
 
     for (const selector of selectors) {

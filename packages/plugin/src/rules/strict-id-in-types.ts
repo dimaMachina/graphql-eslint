@@ -4,6 +4,7 @@ import {
   ARRAY_DEFAULT_OPTIONS,
   requireGraphQLSchemaFromContext,
   englishJoinWords,
+  truthy,
 } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FromSchema } from 'json-schema-to-ts';
@@ -122,7 +123,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    const options: RuleOptions[0] = {
+    const options = {
       acceptedIdNames: ['id'],
       acceptedIdTypes: ['ID'],
       exceptions: {},
@@ -135,7 +136,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       schema.getMutationType(),
       schema.getSubscriptionType(),
     ]
-      .filter(Boolean)
+      .filter(truthy)
       .map(type => type.name);
     const selector = `ObjectTypeDefinition[name.value!=/^(${rootTypeNames.join('|')})$/]`;
 
@@ -151,7 +152,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           return;
         }
 
-        const validIds = node.fields.filter(field => {
+        const validIds = node.fields?.filter(field => {
           const fieldNode = field.rawNode();
           const isValidIdName = options.acceptedIdNames.includes(fieldNode.name.value);
 
@@ -170,7 +171,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         // Usually, there should be only one unique identifier field per type.
         // Some clients allow multiple fields to be used. If more people need this,
         // we can extend this rule later.
-        if (validIds.length !== 1) {
+        if (validIds?.length !== 1) {
           const pluralNamesSuffix = options.acceptedIdNames.length > 1 ? 's' : '';
           const pluralTypesSuffix = options.acceptedIdTypes.length > 1 ? 's' : '';
           context.report({

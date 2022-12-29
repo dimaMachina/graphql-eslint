@@ -1,5 +1,7 @@
 import { GraphQLESLintRule } from '../types.js';
 import { checkNode } from './unique-fragment-name.js';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { OperationDefinitionNode } from 'graphql';
 
 const RULE_ID = 'unique-operation-name';
 
@@ -57,7 +59,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     return {
-      'OperationDefinition[name!=undefined]'(node) {
+      'OperationDefinition[name!=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {
         checkNode(context, node, RULE_ID);
       },
     };

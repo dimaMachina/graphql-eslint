@@ -84,7 +84,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           fieldNode = fieldNode.parent as GraphQLESTreeNode<FieldDefinitionNode>;
         }
         const args = Object.fromEntries(
-          fieldNode.arguments.map(argument => [argument.name.value, argument]),
+          fieldNode.arguments?.map(argument => [argument.name.value, argument]) || [],
         );
         const hasForwardPagination = Boolean(args.first && args.after);
         const hasBackwardPagination = Boolean(args.last && args.before);
@@ -119,7 +119,9 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
               node: (argument || fieldNode).name,
               message: hasArgument
                 ? `Argument \`${argumentName}\` must return ${returnType}.`
-                : `Field \`${fieldNode.name.value}\` must contain an argument \`${argumentName}\`, that return ${returnType}.`,
+                : `Field \`${
+                    fieldNode.name!.value
+                  }\` must contain an argument \`${argumentName}\`, that return ${returnType}.`,
             });
           }
         }

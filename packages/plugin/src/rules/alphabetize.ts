@@ -22,7 +22,7 @@ import lowerCase from 'lodash.lowercase';
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
-import { ARRAY_DEFAULT_OPTIONS } from '../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, truthy } from '../utils.js';
 import { FromSchema } from 'json-schema-to-ts';
 
 const RULE_ID = 'alphabetize';
@@ -226,15 +226,15 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const sourceCode = context.getSourceCode();
 
     function isNodeAndCommentOnSameLine(node: { loc: SourceLocation }, comment: Comment): boolean {
-      return node.loc.end.line === comment.loc.start.line;
+      return node.loc.end.line === comment.loc!.start.line;
     }
 
-    function getBeforeComments(node): Comment[] {
-      const commentsBefore = sourceCode.getCommentsBefore(node);
+    function getBeforeComments(node: GraphQLESTreeNode<ASTNode>): Comment[] {
+      const commentsBefore = sourceCode.getCommentsBefore(node as any);
       if (commentsBefore.length === 0) {
         return [];
       }
-      const tokenBefore = sourceCode.getTokenBefore(node);
+      const tokenBefore = sourceCode.getTokenBefore(node as any);
       if (tokenBefore) {
         return commentsBefore.filter(comment => !isNodeAndCommentOnSameLine(tokenBefore, comment));
       }
@@ -243,7 +243,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       // Break on comment that not attached to node
       for (let i = commentsBefore.length - 1; i >= 0; i -= 1) {
         const comment = commentsBefore[i];
-        if (nodeLine - comment.loc.start.line - filteredComments.length > 1) {
+        if (nodeLine - comment.loc!.start.line - filteredComments.length > 1) {
           break;
         }
         filteredComments.unshift(comment);
@@ -251,21 +251,21 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       return filteredComments;
     }
 
-    function getRangeWithComments(node): AST.Range {
+    function getRangeWithComments(node: GraphQLESTreeNode<ASTNode>): AST.Range {
       if (node.kind === Kind.VARIABLE) {
         node = node.parent;
       }
       const [firstBeforeComment] = getBeforeComments(node);
-      const [firstAfterComment] = sourceCode.getCommentsAfter(node);
+      const [firstAfterComment] = sourceCode.getCommentsAfter(node as any);
       const from = firstBeforeComment || node;
       const to =
         firstAfterComment && isNodeAndCommentOnSameLine(node, firstAfterComment)
           ? firstAfterComment
           : node;
-      return [from.range[0], to.range[1]];
+      return [from!.range![0], to!.range![1]];
     }
 
-    function checkNodes(nodes: GraphQLESTreeNode<ASTNode>[]) {
+    function checkNodes(nodes: GraphQLESTreeNode<ASTNode>[] = []) {
       // Starts from 1, ignore nodes.length <= 1
       for (let i = 1; i < nodes.length; i += 1) {
         const currNode = nodes[i];
@@ -316,6 +316,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         }
 
         context.report({
+          // @ts-expect-error can't be undefined
           node: ('alias' in currNode && currNode.alias) || currNode.name,
           messageId: RULE_ID,
           data: {
@@ -356,7 +357,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         Kind.INPUT_OBJECT_TYPE_EXTENSION,
       ],
     ]
-      .filter(Boolean)
+      .filter(truthy)
       .flat();
 
     const fieldsSelector = kinds.join(',');
@@ -400,7 +401,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     if (hasVariables) {
       listeners.OperationDefinition = (node: GraphQLESTreeNode<OperationDefinitionNode>) => {
-        checkNodes(node.variableDefinitions.map(varDef => varDef.variable));
+        checkNodes(node.variableDefinitions?.map(varDef => varDef.variable));
       };
     }
 

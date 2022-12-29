@@ -26,7 +26,10 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     const project = gqlConfig.getProjectForFile(realFilepath);
 
     const schema = getSchema(project, options.schemaOptions);
-    const rootTree = convertToESTree(document, schema instanceof GraphQLSchema ? schema : null);
+    const rootTree = convertToESTree(
+      document,
+      schema instanceof GraphQLSchema ? schema : undefined,
+    );
 
     return {
       services: {
@@ -44,14 +47,16 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
       },
     };
   } catch (error) {
-    error.message = `[graphql-eslint] ${error.message}`;
+    if (error instanceof Error) {
+      error.message = `[graphql-eslint] ${error.message}`;
+    }
     // In case of GraphQL parser error, we report it to ESLint as a parser error that matches the requirements
     // of ESLint. This will make sure to display it correctly in IDEs and lint results.
     if (error instanceof GraphQLError) {
       const eslintError = {
-        index: error.positions[0],
-        lineNumber: error.locations[0].line,
-        column: error.locations[0].column - 1,
+        index: error.positions![0],
+        lineNumber: error.locations![0].line,
+        column: error.locations![0].column - 1,
         message: error.message,
       };
       throw eslintError;

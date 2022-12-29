@@ -65,9 +65,9 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
     if (isInterfaceType(type)) {
       const { objects, interfaces } = schema.getImplementations(type);
       for (const { astNode } of [...objects, ...interfaces]) {
-        visit(astNode, visitor);
+        visit(astNode!, visitor);
       }
-    } else if (type.astNode) {
+    } else if (type?.astNode) {
       // astNode can be undefined for ID, String, Boolean
       visit(type.astNode, visitor);
     }

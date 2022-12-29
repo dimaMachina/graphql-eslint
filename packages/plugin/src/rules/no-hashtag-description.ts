@@ -1,4 +1,4 @@
-import { DocumentNode, TokenKind } from 'graphql';
+import { DocumentNode, Token, TokenKind } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
@@ -61,12 +61,13 @@ export const rule: GraphQLESLintRule = {
     return {
       [selector](node: GraphQLESTreeNode<DocumentNode>) {
         const rawNode = node.rawNode();
-        let token = rawNode.loc.startToken;
+        let token: Token = rawNode.loc!.startToken;
 
         while (token) {
           const { kind, prev, next, value, line, column } = token;
           if (kind === TokenKind.COMMENT && prev && next) {
-            const isEslintComment = value.trimStart().startsWith('eslint');
+            // TODO: remove `!` when drop support of graphql@15
+            const isEslintComment = value!.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
 
             if (
@@ -86,11 +87,15 @@ export const rule: GraphQLESLintRule = {
                   fix: fixer =>
                     fixer.replaceTextRange(
                       [token.start, token.end] as [number, number],
-                      [descriptionSyntax, value.trim(), descriptionSyntax].join(''),
+                      // TODO: remove `!` when drop support of graphql@15
+                      [descriptionSyntax, value!.trim(), descriptionSyntax].join(''),
                     ),
                 })),
               });
             }
+          }
+          if (!next) {
+            break;
           }
           token = next;
         }

@@ -1,13 +1,14 @@
 import { GraphQLESLintRule } from '../types.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { isScalarType, Kind, ObjectTypeDefinitionNode } from 'graphql';
+import { isScalarType, Kind, NameNode, ObjectTypeDefinitionNode } from 'graphql';
 import { NON_OBJECT_TYPES } from './relay-connection-types.js';
 import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'relay-page-info';
 const MESSAGE_MUST_EXIST = 'MESSAGE_MUST_EXIST';
 const MESSAGE_MUST_BE_OBJECT_TYPE = 'MESSAGE_MUST_BE_OBJECT_TYPE';
-const notPageInfoTypesSelector = `:matches(${NON_OBJECT_TYPES})[name.value=PageInfo] > .name`;
+const notPageInfoTypesSelector =
+  `:matches(${NON_OBJECT_TYPES})[name.value=PageInfo] > .name` as const;
 
 let hasPageInfoChecked = false;
 
@@ -59,13 +60,15 @@ export const rule: GraphQLESLintRule = {
       hasPageInfoChecked = true;
     }
     return {
-      [notPageInfoTypesSelector](node) {
+      [notPageInfoTypesSelector](node: GraphQLESTreeNode<NameNode>) {
         context.report({ node, messageId: MESSAGE_MUST_BE_OBJECT_TYPE });
       },
       'ObjectTypeDefinition[name.value=PageInfo]'(
         node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
-        const fieldMap = Object.fromEntries(node.fields.map(field => [field.name.value, field]));
+        const fieldMap = Object.fromEntries(
+          node.fields?.map(field => [field.name.value, field]) || [],
+        );
 
         const checkField = (
           fieldName: 'hasPreviousPage' | 'hasNextPage' | 'startCursor' | 'endCursor',

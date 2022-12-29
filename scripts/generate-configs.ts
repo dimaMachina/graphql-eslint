@@ -106,7 +106,7 @@ async function generateConfigs(): Promise<void> {
   const baseConfig = {
     parser: '@graphql-eslint/eslint-plugin',
     plugins: ['@graphql-eslint'],
-  }
+  };
 
   await Promise.all([
     writeFormattedFile('configs/schema-recommended.ts', {

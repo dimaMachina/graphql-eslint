@@ -48,12 +48,13 @@ export type GraphQLESLintRuleContext<Options = any[]> = Omit<
 > & {
   options: Options;
   report(descriptor: ReportDescriptor): void;
-  parserServices?: ParserServices;
+  parserServices: ParserServices;
 };
 
 export type CategoryType = 'Schema' | 'Operations';
 
-type RuleMetaDataDocs = Required<Rule.RuleMetaData>['docs']
+type RuleMetaDataDocs = Required<Rule.RuleMetaData>['docs'];
+
 export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> & {
   category: CategoryType | CategoryType[];
   requiresSchema?: true;
@@ -73,7 +74,7 @@ export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> 
   isDisabledForAllConfig?: true;
 };
 
-export type GraphQLESLintRule<Options = any[], WithTypeInfo extends boolean = false> = {
+export type GraphQLESLintRule<Options = [], WithTypeInfo extends boolean = false> = {
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
   meta: Omit<Rule.RuleMetaData, 'docs' | 'schema'> & {
     docs?: RuleDocsInfo<Options>;
@@ -85,7 +86,7 @@ export type ValueOf<T> = T[keyof T];
 
 // eslint-disable-next-line @typescript-eslint/ban-types -- Cosmetic use only, makes the tooltips expand the type can be removed
 type Id<T> = {} & { [P in keyof T]: T[P] };
-// eslint-disable-next-line no-use-before-define
+
 type OmitDistributive<T, K extends PropertyKey> = T extends object ? Id<OmitRecursively<T, K>> : T;
 export type OmitRecursively<T extends object, K extends PropertyKey> = Omit<
   { [P in keyof T]: OmitDistributive<T[P], K> },
