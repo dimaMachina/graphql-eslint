@@ -119,7 +119,9 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
               node: (argument || fieldNode).name,
               message: hasArgument
                 ? `Argument \`${argumentName}\` must return ${returnType}.`
-                : `Field \`${fieldNode.name!.value}\` must contain an argument \`${argumentName}\`, that return ${returnType}.`,
+                : `Field \`${
+                    fieldNode.name!.value
+                  }\` must contain an argument \`${argumentName}\`, that return ${returnType}.`,
             });
           }
         }
