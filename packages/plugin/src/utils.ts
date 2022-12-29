@@ -1,4 +1,4 @@
-import { GraphQLSchema, Kind } from 'graphql';
+import { ASTNode, GraphQLSchema, Kind } from 'graphql';
 import { AST } from 'eslint';
 import lowerCase from 'lodash.lowercase';
 import chalk from 'chalk';
@@ -35,10 +35,12 @@ export function requireGraphQLSchemaFromContext(
 }
 
 export const logger = {
-  // eslint-disable-next-line no-console
-  error: (...args) => console.error(chalk.red('error'), '[graphql-eslint]', chalk(...args)),
-  // eslint-disable-next-line no-console
-  warn: (...args) => console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
+  error: (...args: unknown[]) =>
+    // eslint-disable-next-line no-console
+    console.error(chalk.red('error'), '[graphql-eslint]', chalk(...args)),
+  warn: (...args: unknown[]) =>
+    // eslint-disable-next-line no-console
+    console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
 };
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
@@ -112,13 +114,11 @@ export const ARRAY_DEFAULT_OPTIONS = {
   },
 } as const;
 
-declare namespace Intl {
-  class ListFormat {
-    constructor(locales: string, options: any);
-
-    public format: (items: [string]) => string;
-  }
-}
-
-export const englishJoinWords = words =>
+export const englishJoinWords = (words: string[]): string =>
   new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);
+
+type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T; // from lodash
+
+export function truthy<T>(value: T): value is Truthy<T> {
+  return Boolean(value);
+}

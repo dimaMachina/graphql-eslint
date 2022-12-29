@@ -12,7 +12,7 @@ export const checkNode = (
   node: GraphQLESTreeNode<ExecutableDefinitionNode>,
   ruleId: string,
 ): void => {
-  const documentName = node.name.value;
+  const documentName = node.name!.value;
   const siblings = requireSiblingsOperations(ruleId, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
     node.kind === Kind.FRAGMENT_DEFINITION
@@ -35,6 +35,7 @@ export const checkNode = (
           .map(f => `\t${relative(CWD, f.filePath.replace(VIRTUAL_DOCUMENT_REGEX, ''))}`)
           .join('\n'),
       },
+      // @ts-expect-error name will exist
       node: node.name,
     });
   }
