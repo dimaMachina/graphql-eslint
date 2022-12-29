@@ -111,7 +111,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           checkFn({
             getDocument: () => document,
             reportError(error: GraphQLError) {
-              const { line, column } = error.locations[0];
+              const { line, column } = error.locations![0];
 
               const ancestors = context.getAncestors();
               const token = (ancestors[0] as AST.Program).tokens.find(
