@@ -226,11 +226,11 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const sourceCode = context.getSourceCode();
 
     function isNodeAndCommentOnSameLine(node: { loc: SourceLocation }, comment: Comment): boolean {
-      return node.loc.end.line === comment.loc.start.line;
+      return node.loc.end.line === comment.loc!.start.line;
     }
 
-    function getBeforeComments(node): Comment[] {
-      const commentsBefore = sourceCode.getCommentsBefore(node);
+    function getBeforeComments(node: GraphQLESTreeNode<ASTNode>): Comment[] {
+      const commentsBefore = sourceCode.getCommentsBefore(node as any);
       if (commentsBefore.length === 0) {
         return [];
       }
@@ -251,7 +251,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       return filteredComments;
     }
 
-    function getRangeWithComments(node): AST.Range {
+    function getRangeWithComments(node: GraphQLESTreeNode<ASTNode>): AST.Range {
       if (node.kind === Kind.VARIABLE) {
         node = node.parent;
       }
@@ -401,7 +401,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     if (hasVariables) {
       listeners.OperationDefinition = (node: GraphQLESTreeNode<OperationDefinitionNode>) => {
-        checkNodes(node.variableDefinitions.map(varDef => varDef.variable));
+        checkNodes(node.variableDefinitions?.map(varDef => varDef.variable));
       };
     }
 
