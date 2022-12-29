@@ -98,3 +98,9 @@ jobs:
         run: pnpm test
         env:
           CI: true
+
+      - name: Lint ESLint
+        run: pnpm lint
+
+      - name: Lint Prettier
+        run: pnpm lint:prettier

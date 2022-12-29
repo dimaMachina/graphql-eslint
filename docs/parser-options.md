@@ -68,11 +68,7 @@ Here are a few examples for a valid setup:
 ```json
 {
   "parserOptions": {
-    "schema": [
-      "src/schema-a.graphql",
-      "src/schema-b.graphql",
-      "src/schema-c.graphql"
-    ]
+    "schema": ["src/schema-a.graphql", "src/schema-b.graphql", "src/schema-c.graphql"]
   }
 }
 ```
