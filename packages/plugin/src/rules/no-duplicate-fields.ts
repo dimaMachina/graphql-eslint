@@ -93,13 +93,13 @@ export const rule: GraphQLESLintRule = {
     return {
       OperationDefinition(node) {
         const set = new Set<string>();
-        for (const varDef of node.variableDefinitions) {
+        for (const varDef of node.variableDefinitions || []) {
           checkNode(set, varDef.variable.name);
         }
       },
       Field(node) {
         const set = new Set<string>();
-        for (const arg of node.arguments) {
+        for (const arg of node.arguments || []) {
           checkNode(set, arg.name);
         }
       },

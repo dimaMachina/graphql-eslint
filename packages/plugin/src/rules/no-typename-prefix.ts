@@ -57,7 +57,7 @@ export const rule: GraphQLESLintRule = {
         const typeName = node.name.value;
         const lowerTypeName = typeName.toLowerCase();
 
-        for (const field of node.fields) {
+        for (const field of node.fields || []) {
           const fieldName = field.name.value;
 
           if (fieldName.toLowerCase().startsWith(lowerTypeName)) {
