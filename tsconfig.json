@@ -23,6 +23,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "types": ["vitest/globals"],
     "paths": {
       "@graphql-eslint/eslint-plugin": ["packages/plugin/src/index.ts"]
     }

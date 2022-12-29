@@ -1,5 +1,4 @@
 import { Block, processor } from '../src/processor';
-import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('../src/graphql-config', () => ({
   loadOnDiskGraphQLConfig: vi.fn(() => ({

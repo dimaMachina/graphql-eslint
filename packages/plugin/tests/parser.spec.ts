@@ -1,5 +1,4 @@
 import { parseForESLint } from '../src';
-import { describe, it, expect } from 'vitest';
 
 describe('Parser', () => {
   it('parseForESLint() should return ast and tokens', () => {
