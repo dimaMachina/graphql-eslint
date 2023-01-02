@@ -4,6 +4,9 @@ overrides:
   graphql: 16.6.0
 
 patchedDependencies:
+  eslint@8.30.0:
+    hash: v7lv2hbnxmm2b22qo3sob3rjvq
+    path: patches/eslint@8.28.0.patch
   eslint-plugin-eslint-plugin@5.0.7:
     hash: cdhdgvmsbh3fbusrlxsl6de2he
     path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
@@ -13,9 +16,6 @@ patchedDependencies:
   vitest@0.26.2:
     hash: r2kp2comxrdu4bec6csruv33bm
     path: patches/vitest@0.26.2.patch
-  eslint@8.30.0:
-    hash: v7lv2hbnxmm2b22qo3sob3rjvq
-    path: patches/eslint@8.28.0.patch
 
 importers:
 
