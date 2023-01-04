@@ -1,7 +1,7 @@
-diff --git a/dist/chunk-runtime-setup.f79addc3.js b/dist/chunk-runtime-setup.f79addc3.js
+diff --git a/dist/chunk-runtime-setup.a06d5c72.js b/dist/chunk-runtime-setup.a06d5c72.js
 index 706897e9584170e82fe449d2edcc663247597d67..954833f0531db9d4f0f685b9429266b8099c5432 100644
---- a/dist/chunk-runtime-setup.f79addc3.js
-+++ b/dist/chunk-runtime-setup.f79addc3.js
+--- a/dist/chunk-runtime-setup.a06d5c72.js
++++ b/dist/chunk-runtime-setup.a06d5c72.js
 @@ -483,7 +483,7 @@ async function runSuite(suite) {
      if (!hasTests(suite)) {
        suite.result.state = "fail";

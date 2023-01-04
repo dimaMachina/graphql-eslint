@@ -76,24 +76,10 @@ module.exports = {
       },
     },
     {
-      files: ['.vscode/launch.json'],
-      rules: {
-        // false positive
-        'jsonc/no-comments': 'off',
-      },
-    },
-    {
       files: ['.github/ISSUE_TEMPLATE/bug_report.md', '.github/PULL_REQUEST_TEMPLATE.md'],
       rules: {
         // ignore for above files
         'unicorn/filename-case': 'off',
-      },
-    },
-    {
-      files: ['**/*.md/*.{js,ts}'],
-      rules: {
-        // extensions in code-blocks should be ignored
-        'import/extensions': 'off',
       },
     },
   ],
