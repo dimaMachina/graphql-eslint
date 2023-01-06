@@ -1,0 +1,37 @@
+{
+  "name": "website",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "analyze": "ANALYZE=true yarn build",
+    "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
+    "dev": "next",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@theguild/components": "4.4.5-alpha-20230106014709-85f671c",
+    "next": "13.1.1",
+    "next-sitemap": "3.1.44",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@theguild/algolia": "1.0.2",
+    "@theguild/tailwind-config": "0.2.1",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
