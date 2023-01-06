@@ -1,0 +1,67 @@
+# GraphQL-ESLint Parser
+
+The `graphql-eslint` parser is works in the following way:
+
+1. Loads all relevant GraphQL code using ESLint core (either from `.graphql` files, or using
+   [ESLint `processor`](https://eslint.org/docs/developer-guide/working-with-plugins#processors-in-plugins)
+   to find in code-files).
+1. Is uses `graphql-js` (and `graphql-tools`) to parse the found string into a `DocumentNode`.
+1. Extracts all comments (marked as `# ...`) from the parsed AST, and provides to ESLint as
+   directives hints.
+1. If `graphql-config` is used, or `schema` field is provided, the schema is being loaded and
+   provided to the rules using `parserServices`.
+1. Converts the `DocumentNode` to ESTree structure (and enrich the nodes with `typeInfo`, if schema
+   is loaded).
+
+## ESTree Conversion
+
+The GraphQL AST structure is very similar to ESTree structure, but there are a few differences that
+the `parser` does.
+
+Here's a list of changes that the parser performs, in order to make the GraphQL AST compatible with
+ESTree:
+
+---
+
+**Problem**: GraphQL uses `kind` field to define the kind of the AST node, while ESTree uses `type`.
+
+**Solution**: The parser adds `type` field on each node, and just copies the value from `kind`
+field.
+
+---
+
+**Problem**: Some GraphQL AST nodes are using `type` field (which conflicts with the ESTree kind).
+
+**Solution**: AST nodes that has `type` field are being transformed, and the `type` field changes to
+`gqlType`.
+
+---
+
+**Problem**: GraphQL AST structure allows circular JSON links (while ESTree might fail on
+`Maximum call stack exceeded`).
+
+**Solution**: The parser removes circular JSONs (specifically around GraphQL `Location` and the
+`Lexer`)
+
+---
+
+**Problem**: GraphQL uses `location` field to store the AST locations, while ESTree also uses it in
+a different structure.
+
+**Solution**: The parser creates a new `location` field that is compatible with ESTree.
+
+### Loading GraphQL Schema
+
+If you are using [`graphql-config`](https://graphql-config.com) in your project, the parser will
+automatically use that to load your default GraphQL schema (you can disable this behaviour using
+`skipGraphQLConfig: true` in the `parserOptions`).
+
+If you are not using `graphql-config`, you can specify `parserOptions.schema` to load your GraphQL
+schema. The parser uses `graphql-tools` and it's loaders, that means you can either specify a URL, a
+path to a local `.json` (introspection) file, or a path to a local `.graphql` file(s). You can also
+use Glob expressions to load multiple files.
+
+[You can find more detail on the `parserOptions` config here](parser-options.md)
+
+Providing the schema will make sure that rules that needs it will be able to access it, and it
+enriches every converted AST node with `typeInfo`.
