@@ -1,1 +1,1 @@
-website/src/pages/docs/deprecated-rules.mdx
+website/src/pages/rules/deprecated-rules.mdx

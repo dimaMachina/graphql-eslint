@@ -27,11 +27,6 @@ If you are in a monorepo project, you probably need both sets of rules, see
 For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the
 `extends` option:
 
-<Callout>
-All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
-`@graphql-eslint` to `plugins` array, so you don't need to specify them.
-</Callout>
-
 ```diff filename=".eslintrc.json"
 {
   "overrides": [
@@ -48,3 +43,8 @@ All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and a
   ]
 }
 ```
+
+<Callout>
+All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
+`@graphql-eslint` to `plugins` array, so you don't need to specify them.
+</Callout>

@@ -9,9 +9,14 @@
   },
   "docs": {
     "title": "Docs",
-    "type": "page",
-    "theme": {
-      "toc": true
-    }
+    "type": "page"
+  },
+  "rules": {
+    "title": "Rules",
+    "type": "page"
+  },
+  "playground": {
+    "title": "Playground",
+    "type": "page"
   }
 }

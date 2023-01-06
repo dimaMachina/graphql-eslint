@@ -1,1 +1,1 @@
-website/src/pages/docs/getting-started/custom-rules.mdx
+website/src/pages/docs/custom-rules.mdx

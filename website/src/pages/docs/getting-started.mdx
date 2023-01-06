@@ -138,16 +138,6 @@ just specify a glob expression(s) that points to your code/`.graphql` files:
 }
 ```
 
-### VSCode Integration
-
-Use
-[ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-to integrate ESLint into VSCode.
-
-For syntax highlighting you need a GraphQL extension (which may potentially have its own linting),
-for example
-[GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
-
 ### Disabling Rules
 
 The `graphql-eslint` parser looks for GraphQL comments syntax (marked with `#`) and will send it to
@@ -169,15 +159,21 @@ You can also specify specific rules to disable, apply it over the entire file,
 You can find a list of
 [ESLint directives here](https://eslint.org/docs/2.13.1/user-guide/configuring#disabling-rules-with-inline-comments).
 
-### Deprecated Rules
+### VSCode Integration
 
-See [docs/deprecated-rules.md](docs/deprecated-rules.md).
+Use
+[ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+to integrate ESLint into VSCode.
+
+For syntax highlighting you need a GraphQL extension (which may potentially have its own linting),
+for example
+[GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
 
 ## Further Reading
 
 If you wish to learn more about this project, how the parser works, how to add custom rules and more
 please refer to the below links:
 
-- [Writing Custom Rules](docs/custom-rules.md)
-- [How the parser works?](docs/parser.md)
-- [`parserOptions`](docs/parser-options.md)
+- [Writing Custom Rules](/docs/custom-rules)
+- [How the parser works?](/docs/getting-started/parser)
+- [`parserOptions`](/docs/getting-started/parser-options)

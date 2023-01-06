@@ -1,1 +1,1 @@
-website/src/pages/docs/rules.mdx
+website/src/pages/rules/index.mdx
