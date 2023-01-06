@@ -1,9 +1,8 @@
-## Getting Started
+import { Callout } from '@theguild/components'
 
-- [Introducing GraphQL-ESLint!](https://the-guild.dev/blog/introducing-graphql-eslint) @
-  `the-guild.dev`
+# Getting Started
 
-### Installation
+## Installation
 
 Start by installing the plugin package, which includes everything you need:
 
@@ -17,7 +16,9 @@ Or, with NPM:
 npm install --save-dev @graphql-eslint/eslint-plugin
 ```
 
-> Make sure you have `graphql` dependency in your project.
+<Callout type="warning">
+Make sure you have [`graphql`](https://www.npmjs.com/package/graphql) dependency in your project.
+</Callout>
 
 ## Configuration
 
@@ -47,7 +48,7 @@ apply to individual files, you should be good to go 👍. If you would like use 
 rules that apply across the entire collection of definitions at once, see
 [here](#extended-linting-rules-with-graphql-schema).
 
-### Apply this plugin to GraphQL definitions defined in code files
+### Apply This Plugin to GraphQL Definitions Defined in Code Files
 
 If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an
 additional override to extend the functionality of this plugin to the schema and operations in those
@@ -78,7 +79,7 @@ virtual GraphQL documents with `.graphql` extensions. This will allow the overri
 for `.graphql` files, via `"files": ["*.graphql"]`, to get applied to the definitions defined in
 your code files.
 
-### Extended linting rules with GraphQL Schema
+### Extended Linting Rules with GraphQL Schema
 
 Some rules require an understanding of the entire schema at once. For example,
 [no-unreachable-types](https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types)
@@ -114,7 +115,7 @@ configuration file:
 
 > Some rules require type information to operate, it's marked in the docs for each rule!
 
-### Extended linting rules with siblings operations
+### Extended Linting Rules with Siblings Operations
 
 While implementing this tool, we had to find solutions for a better integration of the GraphQL
 ecosystem and ESLint core.
@@ -174,10 +175,6 @@ You can also specify specific rules to disable, apply it over the entire file,
 
 You can find a list of
 [ESLint directives here](https://eslint.org/docs/2.13.1/user-guide/configuring#disabling-rules-with-inline-comments).
-
-## Available Rules
-
-You can find a complete list of [all available rules here](docs/README.md).
 
 ### Deprecated Rules
 
