@@ -33,14 +33,14 @@ type. But if you wish to use JavaScript - that's fine :)
 
 Here's an example for a simple rule that reports on anonymous GraphQL operations:
 
-```ts
+```ts filename="your-rule-name.ts"
 import { GraphQLESLintRule } from '@graphql-eslint/eslint-plugin'
 
 const rule: GraphQLESLintRule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        if (!node.name || !node.name.value) {
+        if (!node.name?.value) {
           context.report({
             node,
             message: 'Oops, name is required!'
@@ -61,12 +61,12 @@ So what happens here?
 1. Our custom rule asks ESLint to run our function for every `OperationDefinition` found.
 1. If the `OperationDefinition` node doesn't have a valid `name` - we report an error to ESLint.
 
-#### More Examples
+### More Examples
 
 You can scan the `packages/plugin/src/rules` directory in this repo for references for implementing
 rules. It coverts most of the use-cases and concepts of rules.
 
-## Accessing original GraphQL AST nodes
+## Accessing Original GraphQL AST Nodes
 
 Since our parser converts GraphQL AST to ESTree structure, there are some minor differences in the
 structure of the objects. If you are using TypeScript, and you typed your rule with
@@ -81,7 +81,7 @@ objects.
 
 Here's an example for using original `graphql-js` validate method to validate `OperationDefinition`:
 
-```ts
+```ts filename="your-rule-name.ts"
 import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
 import { validate } from 'graphql'
 
@@ -130,7 +130,7 @@ call `requireGraphQLSchemaFromContext` - it will validate that the schema is loa
 `typeInfo` is provided on every node, based on the type of that node, for example, to access the
 `GraphQLOutputType` while you are visiting a `SelectionSet` node, you can do:
 
-```ts
+```ts filename="your-rule-name.ts"
 import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
 
 export const rule = {
@@ -150,10 +150,9 @@ export const rule = {
 ```
 
 The structure of the return value of `.typeInfo()` is
-[defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-converter/converter.ts#L32-L40).
-So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
+[defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-converter/converter.ts#L32-L40). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
 
-## Testing your rules
+## Testing Your Rules
 
 To test your rules, you can either use the wrapped `GraphQLRuleTester` from this library, or use the
 built-it [`RuleTester`](https://eslint.org/docs/developer-guide/working-with-rules#rule-unit-tests)
@@ -162,14 +161,14 @@ of ESLint.
 The wrapped `GraphQLRuleTester` provides built-in configured parser, and a schema loader, if you
 need to test your rule with a loaded schema.
 
-```ts
+```ts filename="your-rule-name.spec.ts"
 import { GraphQLRuleTester } from '@graphql-eslint/eslint-plugin'
 import { rule } from './my-rule'
 
 const ruleTester = new GraphQLRuleTester()
 
-ruleTester.runGraphQLTests('my-rule', rule, {
-  valid: [
+ruleTester.runGraphQLTests('your-rule-name', rule, {
+    valid: [
     {
       code: 'query something { foo }'
     }
