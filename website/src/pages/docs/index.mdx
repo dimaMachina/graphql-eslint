@@ -1,6 +1,6 @@
 This project integrates GraphQL and ESLint, for a better developer experience.
 
-<img height="150" src="./logo.png">
+![](./logo.png)
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
 
@@ -8,16 +8,16 @@ This project integrates GraphQL and ESLint, for a better developer experience.
 
 ## Key Features
 
-- 🚀 Integrates with ESLint core (as a ESTree parser)
-- 🚀 Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
-- 🚀 Lints both GraphQL schema and GraphQL operations
-- 🚀 Extended type info for more advanced usages
-- 🚀 Supports ESLint directives (for example: `eslint-disable-next-line`)
-- 🚀 Easily extendable - supports custom rules based on GraphQL's AST and ESLint API
-- 🚀 Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL
+- Integrates with ESLint core (as a ESTree parser)
+- Works on `.graphql` files, `gql` usages and `/* GraphQL */` magic comments
+- Lints both GraphQL schema and GraphQL operations
+- Extended type info for more advanced usages
+- Supports ESLint directives (for example: `eslint-disable-next-line`)
+- Easily extendable - supports custom rules based on GraphQL's AST and ESLint API
+- Validates, lints, prettifies and checks for best practices across GraphQL schema and GraphQL
   operations
-- 🚀 Integrates with [`graphql-config`](https://graphql-config.com)
-- 🚀 Integrates and visualizes lint issues in popular IDEs (VSCode / WebStorm)
+- Integrates with [`graphql-config`](https://graphql-config.com)
+- Integrates and visualizes lint issues in popular IDEs (VSCode / WebStorm)
 
 > Special thanks to [ilyavolodin](https://github.com/ilyavolodin) for his work on a similar project!
 
@@ -228,7 +228,7 @@ See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 > If you are in a monorepo project, you probably need both sets of rules, see
 > [example of configuration](examples/monorepo/eslint.config.js).
 
-### Config usage
+### Config Usage
 
 For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the
 `extends` option:
@@ -253,7 +253,7 @@ For example, to enable the `schema-recommended` config, enable it in your `.esli
 }
 ```
 
-### `prettier` rule
+### `prettier` Rule
 
 `eslint-plugin-prettier` supports `.graphql` files, and `v4.1.0` supports `graphql` blocks even
 better. You need to do the following:
@@ -288,22 +288,3 @@ please refer to the below links:
 - [Writing Custom Rules](docs/custom-rules.md)
 - [How the parser works?](docs/parser.md)
 - [`parserOptions`](docs/parser-options.md)
-
-## Contributions
-
-Contributions, issues and feature requests are very welcome. If you are using this package and fixed
-a bug for yourself, please consider submitting a PR!
-
-And if this is your first time contributing to this project, please do read our
-[Contributor Workflow Guide](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md)
-before you get started off.
-
-### Code of Conduct
-
-Help us keep GraphQL ESLint open and inclusive. Please read and follow our
-[Code of Conduct](https://github.com/the-guild-org/Stack/blob/master/CODE_OF_CONDUCT.md) as adopted
-from [Contributor Covenant](https://contributor-covenant.org).
-
-## License
-
-Released under the [MIT license](LICENSE).
