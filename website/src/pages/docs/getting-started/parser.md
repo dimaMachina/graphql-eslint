@@ -54,7 +54,7 @@ a different structure.
 
 If you are using [`graphql-config`](https://graphql-config.com) in your project, the parser will
 automatically use that to load your default GraphQL schema (you can disable this behaviour using
-`skipGraphQLConfig: true` in the `parserOptions`).
+`skipGraphQLConfig: true{:json}` in the `parserOptions`).
 
 If you are not using `graphql-config`, you can specify `parserOptions.schema` to load your GraphQL
 schema. The parser uses `graphql-tools` and it's loaders, that means you can either specify a URL, a
