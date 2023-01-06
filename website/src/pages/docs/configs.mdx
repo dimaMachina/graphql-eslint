@@ -1,4 +1,6 @@
-## Available Configs
+import { Callout } from '@theguild/components'
+
+# Available Configs
 
 {/* prettier-ignore-start */}
 |Name|Description|
@@ -10,21 +12,25 @@
 |[`relay`](packages/plugin/src/configs/relay.ts)|enables rules from Relay specification for schema (SDL) development|
 {/* prettier-ignore-end */}
 
-> If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
+<Callout type="warning">
+If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
 
-> If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll
-> need `operations` rules.
+If you are in a project that develops GraphQL operations (`query`/`mutation`/`subscription`), you'll
+need `operations` rules.
 
-> If you are in a monorepo project, you probably need both sets of rules, see
-> [example of configuration](examples/monorepo/eslint.config.js).
+If you are in a monorepo project, you probably need both sets of rules, see
+[example of configuration](https://github.com/B2o5T/graphql-eslint/tree/master/examples/monorepo/eslint.config.js).
+</Callout>
 
-### Config Usage
+## Config Usage
 
 For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the
 `extends` option:
 
-> All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
-> `@graphql-eslint` to `plugins` array, so you don't need to specify them.
+<Callout>
+All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
+`@graphql-eslint` to `plugins` array, so you don't need to specify them.
+</Callout>
 
 ```diff filename=".eslintrc.json"
 {

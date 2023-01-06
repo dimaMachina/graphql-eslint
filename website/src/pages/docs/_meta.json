@@ -2,5 +2,6 @@
   "index": "Introduction",
   "getting-started": "Getting Started",
   "rules": "Rules",
-  "configs": "Configs"
+  "configs": "Configs",
+  "prettier": "Integration with eslint-plugin-prettier"
 }
