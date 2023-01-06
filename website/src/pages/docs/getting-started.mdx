@@ -1,4 +1,4 @@
-import { Callout } from '@theguild/components'
+import { Callout, PackageCmd } from '@theguild/components'
 
 # Getting Started
 
@@ -6,29 +6,22 @@ import { Callout } from '@theguild/components'
 
 Start by installing the plugin package, which includes everything you need:
 
-```sh
-yarn add -D @graphql-eslint/eslint-plugin
-```
-
-Or, with NPM:
-
-```sh
-npm install --save-dev @graphql-eslint/eslint-plugin
-```
+<PackageCmd packages={['-D @graphql-eslint/eslint-plugin']} />
 
 <Callout type="warning">
-Make sure you have [`graphql`](https://www.npmjs.com/package/graphql) dependency in your project.
+Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
 </Callout>
 
 ## Configuration
 
 To get started, define an override in your ESLint config to apply this plugin to `.graphql` files.
-Add the [rules](docs/README.md) you want applied.
+Add the [rules](/docs/rules) you want applied.
 
-> 🚨 Important! This step is necessary even if you are declaring operations and/or schema in code
-> files.
+<Callout type="error" emoji="🚨">
+**Note**: This step is necessary even if you are declaring operations and/or schema in code files.
+</Callout>
 
-```json
+```json filename=".eslintrc.json"
 {
   "overrides": [
     {
@@ -48,13 +41,13 @@ apply to individual files, you should be good to go 👍. If you would like use 
 rules that apply across the entire collection of definitions at once, see
 [here](#extended-linting-rules-with-graphql-schema).
 
-### Apply This Plugin to GraphQL Definitions Defined in Code Files
+### Apply Plugin to GraphQL Definitions Defined in Code Files
 
 If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an
 additional override to extend the functionality of this plugin to the schema and operations in those
 files.
 
-```diff
+```diff filename=".eslintrc.json"
 {
   "overrides": [
 +   {
@@ -97,7 +90,7 @@ The parser allows you to specify a json file / graphql files(s) / url / raw stri
 schema (We are using `graphql-tools` to do that). Just add `parserOptions.schema` to your
 configuration file:
 
-```diff
+```diff filename=".eslintrc.json"
 {
   "files": ["*.graphql"],
   "parser": "@graphql-eslint/eslint-plugin",
@@ -130,7 +123,7 @@ making it available for rules while doing the actual linting.
 To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
 just specify a glob expression(s) that points to your code/`.graphql` files:
 
-```diff
+```diff filename=".eslintrc.json"
 {
   "files": ["*.graphql"],
   "parser": "@graphql-eslint/eslint-plugin",
@@ -208,7 +201,7 @@ For example, to enable the `schema-recommended` config, enable it in your `.esli
 > All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
 > `@graphql-eslint` to `plugins` array, so you don't need to specify them.
 
-```diff
+```diff filename=".eslintrc.json"
 {
   "overrides": [
     {
@@ -230,8 +223,8 @@ For example, to enable the `schema-recommended` config, enable it in your `.esli
 `eslint-plugin-prettier` supports `.graphql` files, and `v4.1.0` supports `graphql` blocks even
 better. You need to do the following:
 
-```js
-module.exports = {
+```json filename= ".eslintrc.json"
+{
   overrides: [
     {
       files: ['*.js'],
