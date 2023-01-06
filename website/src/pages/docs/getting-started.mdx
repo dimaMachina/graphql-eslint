@@ -9,7 +9,7 @@ Start by installing the plugin package, which includes everything you need:
 <PackageCmd packages={['-D @graphql-eslint/eslint-plugin']} />
 
 <Callout type="warning">
-Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
+  Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
 </Callout>
 
 ## Configuration
@@ -18,7 +18,7 @@ To get started, define an override in your ESLint config to apply this plugin to
 Add the [rules](/docs/rules) you want applied.
 
 <Callout type="error" emoji="🚨">
-**Note**: This step is necessary even if you are declaring operations and/or schema in code files.
+  **Note**: This step is necessary even if you are declaring operations and/or schema in code files.
 </Callout>
 
 ```json filename=".eslintrc.json"
@@ -173,51 +173,6 @@ You can find a list of
 
 See [docs/deprecated-rules.md](docs/deprecated-rules.md).
 
-## Available Configs
-
-{/* prettier-ignore-start */}
-|Name|Description|
-|:-:|-|
-|[`schema-recommended`](packages/plugin/src/configs/schema-recommended.ts)|enables recommended rules for schema (SDL) development|
-|[`schema-all`](packages/plugin/src/configs/schema-all.ts)|enables all rules for schema (SDL) development, except for those that require `parserOptions.operations` option|
-|[`operations-recommended`](packages/plugin/src/configs/operations-recommended.ts) |enables recommended rules for consuming GraphQL (operations) development|
-|[`operations-all`](packages/plugin/src/configs/operations-all.ts)|enables all rules for consuming GraphQL (operations) development|
-|[`relay`](packages/plugin/src/configs/relay.ts)|enables rules from Relay specification for schema (SDL) development|
-{/* prettier-ignore-end */}
-
-> If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
-
-> If you are in a project that develops GraphQL operations (query/mutation/subscription), you'll
-> need `operations` rules.
-
-> If you are in a monorepo project, you probably need both sets of rules, see
-> [example of configuration](examples/monorepo/eslint.config.js).
-
-### Config Usage
-
-For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the
-`extends` option:
-
-> All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
-> `@graphql-eslint` to `plugins` array, so you don't need to specify them.
-
-```diff filename=".eslintrc.json"
-{
-  "overrides": [
-    {
-      "files": ["*.js"],
-      "processor": "@graphql-eslint/graphql"
-    },
-    {
-      "files": ["*.graphql"],
--     "parser": "@graphql-eslint/eslint-plugin",
--     "plugins": ["@graphql-eslint"],
-+     "extends": "plugin:@graphql-eslint/schema-recommended"
-    }
-  ]
-}
-```
-
 ### `prettier` Rule
 
 `eslint-plugin-prettier` supports `.graphql` files, and `v4.1.0` supports `graphql` blocks even
@@ -225,18 +180,18 @@ better. You need to do the following:
 
 ```json filename= ".eslintrc.json"
 {
-  overrides: [
+  "overrides": [
     {
-      files: ['*.js'],
-      processor: '@graphql-eslint/graphql',
-      extends: ['plugin:prettier/recommended']
+      "files": ["*.js"],
+      "processor": "@graphql-eslint/graphql",
+      "extends": ["plugin:prettier/recommended"]
     },
     {
-      files: ['*.graphql'],
-      parser: '@graphql-eslint/eslint-plugin',
-      plugins: ['@graphql-eslint'],
-      rules: {
-        'prettier/prettier': 'error'
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "prettier/prettier": "error"
       }
     }
   ]
