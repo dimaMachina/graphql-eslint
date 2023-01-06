@@ -1,22 +1,24 @@
+import { Callout } from '@theguild/components'
+
 # Parser Options
 
 ## `graphQLParserOptions`
 
 With this configuration, you can specify custom configurations for GraphQL's `parse` method. By
-default, `graphql-eslint` parser just adds `noLocation: false` to make sure all parsed AST has
+default, `graphql-eslint` parser just adds `noLocation: false{:json}` to make sure all parsed AST has
 `location` set, since we need this for tokenizing and for converting the GraphQL AST into ESTree.
 
 You can find the
-[complete set of options for this object here](https://github.com/graphql/graphql-js/blob/6e48d16f92b9a6df8638b1486354c6be2537033b/src/language/parser.ts#L73)
+[complete set of options for this object here](https://github.com/graphql/graphql-js/blob/6e48d16f92b9a6df8638b1486354c6be2537033b/src/language/parser.ts#L73).
 
 ## `skipGraphQLConfig`
 
-If you are using [`graphql-config`](https://graphql-config.com) in your project, the parser will
+If you are using [`graphql-config`](https://the-guild.dev/graphql/config) in your project, the parser will
 automatically use that to load your default GraphQL schema.
 
-You can disable this behaviour using `skipGraphQLConfig: true` in the `parserOptions`:
+You can disable this behaviour using `skipGraphQLConfig: true{:json}` in the `parserOptions`:
 
-```json
+```json filename=".eslintrc.json"
 {
   "parserOptions": {
     "skipGraphQLConfig": true
@@ -33,7 +35,7 @@ files.
 
 Here are a few examples for a valid setup:
 
-```json
+```json filename=".eslintrc.json"
 {
   "parserOptions": {
     "schema": "./schema.graphql"
@@ -41,7 +43,7 @@ Here are a few examples for a valid setup:
 }
 ```
 
-```json
+```json filename=".eslintrc.json"
 {
   "parserOptions": {
     "schema": "./schema.json"
@@ -49,7 +51,7 @@ Here are a few examples for a valid setup:
 }
 ```
 
-```json
+```json filename=".eslintrc.json"
 {
   "parserOptions": {
     "schema": "http://my-server/graphql"
@@ -57,7 +59,7 @@ Here are a few examples for a valid setup:
 }
 ```
 
-```json
+```json filename=".eslintrc.json"
 {
   "parserOptions": {
     "schema": "./src/**/*.graphql"
@@ -65,7 +67,7 @@ Here are a few examples for a valid setup:
 }
 ```
 
-```json
+```json filename=".eslintrc.json"
 {
   "parserOptions": {
     "schema": ["src/schema-a.graphql", "src/schema-b.graphql", "src/schema-c.graphql"]
@@ -78,7 +80,7 @@ Here are a few examples for a valid setup:
 If you wish to send additional configuration for the `graphql-tools` loaders that loads your schema,
 you can specify `schemaOptions` object:
 
-```json
+```json filename=".eslintrc.json" {4-8}
 {
   "parserOptions": {
     "schema": "http://my-server/graphql",
@@ -91,7 +93,7 @@ you can specify `schemaOptions` object:
 }
 ```
 
-```json
+```json filename=".eslintrc.json" {4-6}s
 {
   "parserOptions": {
     "schema": "./src/**/*.graphql",
@@ -102,6 +104,9 @@ you can specify `schemaOptions` object:
 }
 ```
 
-> The configuration here is flexible, and will be sent to `graphql-tools` and it's loaders. So
-> depends on the schema source, the options may vary.
-> [You can read more about these loaders and their configuration here](https://graphql-tools.com/docs/api/interfaces/loaders_graphql_file_src.GraphQLFileLoaderOptions#properties).
+<Callout>
+The configuration here is flexible, and will be sent to `graphql-tools` and it's loaders. So
+depends on the schema source, the options may vary.
+
+You can read more about these loaders and their configuration [here](https://graphql-tools.com/docs/api/interfaces/loaders_graphql_file_src.GraphQLFileLoaderOptions#properties).
+</Callout>

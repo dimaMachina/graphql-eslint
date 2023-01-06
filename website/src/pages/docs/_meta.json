@@ -3,5 +3,6 @@
   "getting-started": "Getting Started",
   "rules": "Rules",
   "configs": "Configs",
-  "prettier": "Integration with eslint-plugin-prettier"
+  "prettier": "Integration With eslint-plugin-prettier",
+  "deprecated-rules": "Deprecated Rules"
 }
