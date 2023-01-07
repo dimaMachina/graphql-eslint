@@ -79,7 +79,7 @@ export function convertToken<T extends 'Line' | 'Block' | TokenKindValue>(
 function getLexer(source: Source): Lexer {
   // GraphQL v14
   const gqlLanguage = require('graphql/language');
-  if (gqlLanguage && gqlLanguage.createLexer) {
+  if (gqlLanguage?.createLexer) {
     return gqlLanguage.createLexer(source, {});
   }
 
