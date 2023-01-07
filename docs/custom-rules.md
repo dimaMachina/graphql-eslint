@@ -40,7 +40,7 @@ const rule: GraphQLESLintRule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        if (!node.name || !node.name.value) {
+        if (!node.name?.value) {
           context.report({
             node,
             message: 'Oops, name is required!'
