@@ -15,7 +15,7 @@ const ALLOWED_KINDS = [
   Kind.OPERATION_DEFINITION,
 ] as const;
 
-type AllowedKind = typeof ALLOWED_KINDS[number];
+type AllowedKind = (typeof ALLOWED_KINDS)[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
 

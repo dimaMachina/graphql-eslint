@@ -8,7 +8,7 @@ const RULE_ID = 'lone-executable-definition';
 
 const definitionTypes = ['fragment', 'query', 'mutation', 'subscription'] as const;
 
-type Definition = typeof definitionTypes[number];
+type Definition = (typeof definitionTypes)[number];
 type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;
 
 const schema = {
