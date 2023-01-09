@@ -13,7 +13,6 @@
     "lint": "eslint --ignore-path .gitignore .",
     "lint:prettier": "prettier --cache --check .",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/ && tsx scripts/postbuild.ts",
-    "postinstall": "tsx scripts/patch-graphql.ts",
     "prebuild": "rimraf ./tsconfig.tsbuildinfo",
     "prerelease": "pnpm build",
     "prettier": "prettier --cache --write --list-different .",
@@ -58,7 +57,9 @@
       "eslint@8.31.0": "patches/eslint@8.31.0.patch",
       "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch",
-      "vitest@0.26.3": "patches/vitest@0.26.3.patch"
+      "vitest@0.26.3": "patches/vitest@0.26.3.patch",
+      "esquery@1.4.0": "patches/esquery@1.4.0.patch",
+      "graphql@16.6.0": "patches/graphql@16.6.0.patch"
     }
   }
 }

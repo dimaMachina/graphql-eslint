@@ -25,22 +25,38 @@ await patch('/index.js', str => {
 });
 
 await patch('/parser.js', str => {
-  return str
-    .replace("import { loadGraphQLConfig } from './graphql-config.js'", commentLine)
-    .replace('const gqlConfig = loadGraphQLConfig(options)', commentLine)
-    .replace('const project = gqlConfig.getProjectForFile(realFilepath)', commentLine)
-    .replace(
-      'const schema = getSchema(project, options.schemaOptions)',
-      () => `const schema = null`,
-    )
-    .replace('siblingOperations: getDocuments(project),', () => `siblingOperations: [],`);
+  return (
+    "import { buildSchema } from 'graphql'\n" +
+    str
+      .replace("import { loadGraphQLConfig } from './graphql-config.js'", commentLine)
+      .replace('const gqlConfig = loadGraphQLConfig(options)', commentLine)
+      .replace(
+        'const project = gqlConfig.getProjectForFile(realFilepath)',
+        () => 'const project = options.documents',
+      )
+      .replace(
+        'const schema = getSchema(project, options.schemaOptions)',
+        () => `const schema = buildSchema(options.schema)`,
+      )
+  );
 });
 
 await patch('/documents.js', str => {
-  return str
-    .replace("import fg from 'fast-glob'", commentLine)
-    .replace('const operationsPaths = fg.sync(project.documents, { absolute: true })', commentLine)
-    .replace("debug('Operations pointers %O', operationsPaths)", commentLine);
+  return (
+    "import { parseGraphQLSDL } from '@graphql-tools/utils'\n" +
+    str
+      .replace("import fg from 'fast-glob'", commentLine)
+      .replace(
+        'const operationsPaths = fg.sync(project.documents, { absolute: true })',
+        commentLine,
+      )
+      .replace("debug('Operations pointers %O', operationsPaths)", commentLine)
+      .replace(
+        'const siblings = getSiblings(project)',
+        () =>
+          "const siblings = [parseGraphQLSDL('operation.graphql', project, { noLocation: true })]",
+      )
+  );
 });
 
 await patch('/schema.js', str => {
@@ -56,13 +72,13 @@ await patch('/estree-converter/utils.js', str => {
     .replace('const require = createRequire(import.meta.url)', commentLine)
     .replace(
       'function getLexer(source) {',
-      m => `import { Lexer } from 'graphql'\n${m}\n    return Lexer(source)`,
+      m => `import { Lexer } from 'graphql'\n${m}\n    return new Lexer(source)`,
     );
 });
 
 await patch('/rules/graphql-js-validation.js', str => {
   return (
-    "import * as allGraphQLJSRules from 'graphql/validation'\n" +
+    "import * as allGraphQLJSRules from 'graphql/validation/index.js'\n" +
     str
       .replace("import { createRequire } from 'module'", commentLine)
       .replace('const require = createRequire(import.meta.url)', commentLine)
@@ -79,7 +95,7 @@ await patch('/rules/graphql-js-validation.js', str => {
             ruleFn = require('graphql/validation')[\`\${ruleName}Rule\`];
         }
     }`,
-        '    let ruleFn = allGraphQLJSRules[\`\${ruleName}Rule\`]',
+        '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
       )
   );
 });
