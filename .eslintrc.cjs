@@ -2,7 +2,7 @@ module.exports = {
   ignorePatterns: ['examples', 'packages/plugin/tests/__snapshots__'],
   extends: [
     '@theguild',
-    // '@theguild/eslint-config/react', // TODO: enable with new website
+    '@theguild/eslint-config/react',
     '@theguild/eslint-config/json',
     '@theguild/eslint-config/yml',
     '@theguild/eslint-config/mdx',

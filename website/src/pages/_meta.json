@@ -15,8 +15,11 @@
     "title": "Rules",
     "type": "page"
   },
-  "playground": {
+  "play": {
     "title": "Playground",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "layout": "full"
+    }
   }
 }
