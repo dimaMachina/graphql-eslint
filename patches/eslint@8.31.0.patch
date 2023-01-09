@@ -1,3 +1,15 @@
+diff --git a/package.json b/package.json
+index 19e4fa3271a65f66a3712707a69686212a263509..39d2e0e71f0b97319cc497996de3d85c93a059b2 100644
+--- a/package.json
++++ b/package.json
+@@ -10,6 +10,7 @@
+   "exports": {
+     "./package.json": "./package.json",
+     ".": "./lib/api.js",
++    "./linter": "./lib/linter/index.js",
+     "./use-at-your-own-risk": "./lib/unsupported-api.js"
+   },
+   "scripts": {
 diff --git a/lib/linter/linter.js b/lib/linter/linter.js
 index a29ce92..a574871 100644
 --- a/lib/linter/linter.js

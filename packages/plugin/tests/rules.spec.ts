@@ -4,7 +4,10 @@ import eslintExperimentalApis from 'eslint/use-at-your-own-risk';
 // @ts-expect-error we need to wait when ESLint publish correct types
 const { FlatESLint } = eslintExperimentalApis;
 
-function getESLintWithConfig(config: any, parserOptions?: Omit<ParserOptions, 'filePath'>) {
+export function getESLintWithConfig(
+  config: Record<string, any>,
+  parserOptions?: Omit<ParserOptions, 'filePath'>,
+) {
   return new FlatESLint({
     overrideConfigFile: true,
     overrideConfig: [
