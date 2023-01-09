@@ -28,7 +28,7 @@ importers:
       '@theguild/prettier-config': 1.0.0
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
-      bob-the-bundler: 4.2.0-alpha-20221222140753-fcf5286
+      bob-the-bundler: 5.0.0
       chalk: ^4.1.2
       dedent: 0.7.0
       enquirer: 2.3.6
@@ -51,7 +51,7 @@ importers:
       '@theguild/prettier-config': 1.0.0_prettier@2.8.2
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
-      bob-the-bundler: 4.2.0-alpha-20221222140753-fcf5286_typescript@4.9.4
+      bob-the-bundler: 5.0.0_typescript@4.9.4
       chalk: 4.1.2
       dedent: 0.7.0
       enquirer: 2.3.6
@@ -1854,8 +1854,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /bob-the-bundler/4.2.0-alpha-20221222140753-fcf5286_typescript@4.9.4:
-    resolution: {integrity: sha512-s3wSq6CKQpnworGAx+SXghrlTx62sWHeHUQ1Z/11XCVOxutyy7i8byCuD0ZwfpU9FgVirpW80axfp8V6JmyD0Q==}
+  /bob-the-bundler/5.0.0_typescript@4.9.4:
+    resolution: {integrity: sha512-4PQslU5EdID0Lwf4dZTJ9PWsA7k+ogvvd/1wK/GTZAqSaxaXGc544Aia15vMzSQsh82J+Ff7iETTYa3gDcPv2Q==}
     hasBin: true
     peerDependencies:
       typescript: ^4.7.4
