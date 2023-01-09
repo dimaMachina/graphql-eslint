@@ -28,7 +28,7 @@
     "@theguild/prettier-config": "1.0.0",
     "@types/dedent": "0.7.0",
     "@types/node": "18.11.18",
-    "bob-the-bundler": "4.2.0-alpha-20221222140753-fcf5286",
+    "bob-the-bundler": "4.2.0-alpha-20230109120841-67f064d",
     "chalk": "^4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
