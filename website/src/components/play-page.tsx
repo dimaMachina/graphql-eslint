@@ -112,15 +112,6 @@ export function PlayPage(): ReactElement {
           </span>
         </div>
         <div>
-          <h3 className={classes.heading}>SCHEMA RULES</h3>
-          <Select
-            options={schemaRulesOptions}
-            value={schemaRule}
-            onChange={setSchemaRule}
-            placeholder="Choose a schema rule"
-          />
-        </div>
-        <div>
           <h3 className={classes.heading}>SCHEMA CONFIG</h3>
           <Select
             options={schemaConfigsOptions}
@@ -130,12 +121,12 @@ export function PlayPage(): ReactElement {
           />
         </div>
         <div>
-          <h3 className={classes.heading}>OPERATION RULES</h3>
+          <h3 className={classes.heading}>SCHEMA RULE</h3>
           <Select
-            options={operationsRulesOptions}
-            value={operationRule}
-            onChange={setOperationRule}
-            placeholder="Choose an operation rule"
+            options={schemaRulesOptions}
+            value={schemaRule}
+            onChange={setSchemaRule}
+            placeholder="Choose a schema rule"
           />
         </div>
         <div>
@@ -145,6 +136,15 @@ export function PlayPage(): ReactElement {
             value={operationConfig}
             onChange={setOperationConfig}
             placeholder="Choose an operation config"
+          />
+        </div>
+        <div>
+          <h3 className={classes.heading}>OPERATION RULE</h3>
+          <Select
+            options={operationsRulesOptions}
+            value={operationRule}
+            onChange={setOperationRule}
+            placeholder="Choose an operation rule"
           />
         </div>
         <Button className="mt-6">Download this config</Button>
@@ -168,8 +168,8 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
-          ...(operationRule && flatConfigs[operationRule].rules),
-          ...(operationConfig && flatConfigs['operations-all'].rules[operationConfig]),
+          ...(operationConfig && flatConfigs[operationConfig].rules),
+          ...(operationRule && flatConfigs['operations-all'].rules[operationRule]),
         }}
         onChange={setOperation}
       />
