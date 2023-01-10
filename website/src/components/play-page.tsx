@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import eslintPkgJson from 'eslint/package.json';
 import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
 import { Select } from '@theguild/components';
@@ -58,9 +58,6 @@ type SelectOption = {
 };
 
 export function PlayPage(): ReactElement {
-  const schemaEditorRef = useRef<any>(null);
-  const operationEditorRef = useRef<any>(null);
-
   const [selectedSchemaRule, setSelectedSchemaRule] = useState<SelectOption>({
     key: '',
     name: 'Choose a schema rule',
@@ -79,24 +76,6 @@ export function PlayPage(): ReactElement {
   });
   const [schema, setSchema] = useState(SCHEMA);
   const [operation, setOperation] = useState(OPERATION);
-
-  useEffect(() => {
-    // console.log(schemaEditorRef.current);
-    // var model = schemaEditorRef.current?.getModel();
-    // console.log(model, model?.deltaDecorations);
-    // model?.deltaDecorations(
-    //   [],
-    //   [
-    //     {
-    //       range: [0, 10],
-    //       options: {
-    //         isWholeLine: true,
-    //         inlineClassName: 'highlight',
-    //       },
-    //     },
-    //   ],
-    // );
-  }, [schemaEditorRef.current]);
   return (
     <div className="flex flex-col md:flex-row h-[calc(100vh-var(--nextra-navbar-height)-68px)]">
       <div className="w-[350px] p-6">
@@ -151,6 +130,7 @@ export function PlayPage(): ReactElement {
           ...(selectedSchemaConfig.key && flatConfigs[selectedSchemaConfig.key].rules),
           ...(selectedSchemaRule.key && flatConfigs['schema-all'].rules[selectedSchemaRule.key]),
         }}
+        onChange={(value = '') => setSchema(value)}
       />
       <GraphQLEditor
         height="calc(50% - 17px)"
@@ -164,18 +144,8 @@ export function PlayPage(): ReactElement {
           ...(selectedOperationRule.key &&
             flatConfigs['operations-all'].rules[selectedOperationRule.key]),
         }}
+        onChange={(value = '') => setOperation(value)}
       />
     </div>
   );
 }
-
-// onMount={(editor, monaco) => {
-//   // here is the editor instance
-//   // you can store it in `useRef` for further usage
-//   if (key === 'schema') {
-//     schemaEditorRef.current = editor;
-//   } else {
-//     operationEditorRef.current = editor;
-//   }
-// }}
-// onChange={key === 'schema' ? setSchema : setOperation}

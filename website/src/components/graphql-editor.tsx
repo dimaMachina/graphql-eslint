@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import Editor from '@monaco-editor/react';
+import { ReactElement, useEffect, useRef } from 'react';
+import Editor, { OnMount } from '@monaco-editor/react';
 import { Callout, useTheme, Anchor } from '@theguild/components';
 import { Linter } from 'eslint';
 // @ts-ignore -- we patched this export
@@ -23,6 +23,7 @@ type GraphQLEditorProps = {
   code: string;
   selectedRules: RulesRecord;
   height: string;
+  onChange: (value?: string) => void;
 };
 
 export function GraphQLEditor({
@@ -32,9 +33,11 @@ export function GraphQLEditor({
   code,
   selectedRules,
   height,
+  onChange,
 }: GraphQLEditorProps): ReactElement {
   const { resolvedTheme } = useTheme();
-
+  const editorRef = useRef<Parameters<OnMount>[0]>(null);
+  const monacoRef = useRef<Parameters<OnMount>[1]>(null);
   const lintMessages = linter.verify(
     code,
     {
@@ -45,6 +48,27 @@ export function GraphQLEditor({
     },
     fileName,
   );
+
+  useEffect(() => {
+    const model = editorRef.current?.getModel();
+    const monaco = monacoRef.current;
+    if (!model) return;
+
+    monaco.editor.setModelMarkers(
+      model,
+      'graphql-eslint',
+      lintMessages.map(message => ({
+        code: null,
+        source: null,
+        startColumn: message.endColumn == null ? (message.column += 1) : message.column,
+        startLineNumber: message.line,
+        endColumn: message.endColumn || message.column,
+        endLineNumber: message.endLine || message.line,
+        severity: 8,
+        message: message.message,
+      })),
+    );
+  }, [lintMessages, editorRef.current, monacoRef.current]);
 
   return (
     <div className="grow w-0 nx-bg-primary-700/5 dark:nx-bg-primary-300/10 overflow-hidden border-l dark:nx-border-neutral-800">
@@ -59,9 +83,17 @@ export function GraphQLEditor({
             minimap: {
               enabled: false,
             },
+            fixedOverflowWidgets: true,
           }}
           height={height}
           defaultValue={code}
+          onMount={(editor, monaco) => {
+            // here is the editor instance
+            // you can store it in `useRef` for further usage
+            editorRef.current = editor;
+            monacoRef.current = monaco;
+          }}
+          onChange={onChange}
         />
         <div
           className={clsx(
@@ -77,9 +109,11 @@ export function GraphQLEditor({
               emoji={
                 <div className="flex items-center mt-1 gap-1">
                   <InformationCircleIcon />
-                  <span className="text-xs font-sans underline underline-offset-4 font-bold">
-                    {line}:{column}
-                  </span>
+                  {typeof line === 'number' && typeof column === 'number' && (
+                    <span className="text-xs font-sans underline underline-offset-4 font-bold">
+                      {line}:{column}
+                    </span>
+                  )}
                 </div>
               }
             >
