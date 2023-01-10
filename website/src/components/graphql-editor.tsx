@@ -73,7 +73,7 @@ export function GraphQLEditor({
         message: message.message,
       })),
     );
-  }, [lintMessages, editorRef.current, monacoRef.current]);
+  }, [lintMessages]);
 
   return (
     <div className="w-0 grow overflow-hidden border-l dark:border-neutral-800">

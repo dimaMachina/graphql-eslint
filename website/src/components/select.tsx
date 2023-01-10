@@ -1,91 +1,51 @@
-import { forwardRef } from 'react';
+import { ReactElement } from "react";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
-import {
-  Content,
-  Group,
-  Icon,
-  Item,
-  ItemIndicator,
-  ItemText,
-  Label,
-  Portal,
-  Root,
-  ScrollDownButton,
-  ScrollUpButton,
-  SelectItemProps,
-  Separator,
-  Trigger,
-  Value,
-  Viewport,
-} from '@radix-ui/react-select';
+import * as S from '@radix-ui/react-select';
 import { clsx } from 'clsx';
+import { Button } from './button';
 
-const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
-  ({ children, className, ...props }, forwardedRef) => {
-    return (
-      <Item className={clsx('SelectItem', className)} {...props} ref={forwardedRef}>
-        <ItemText>{children}</ItemText>
-        <ItemIndicator className="SelectItemIndicator">
-          <CheckIcon />
-        </ItemIndicator>
-      </Item>
-    );
-  },
-);
-SelectItem.displayName = 'SelectItem';
+type Props = {};
 
-export function Select() {
+export const Select = (props: Props): ReactElement => {
   return (
-    <Root>
-      <Trigger className="SelectTrigger" aria-label="Food">
-        <Value placeholder="Select a fruit…" />
-        <Icon className="SelectIcon">
-          <ChevronDownIcon />
-        </Icon>
-      </Trigger>
-      <Portal>
-        <Content className="SelectContent">
-          <ScrollUpButton className="SelectScrollButton">
-            <ChevronUpIcon />
-          </ScrollUpButton>
-          <Viewport className="SelectViewport">
-            <Group>
-              <Label className="SelectLabel">Fruits</Label>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
-            </Group>
-
-            <Separator className="SelectSeparator" />
-
-            <Group>
-              <Label className="SelectLabel">Vegetables</Label>
-              <SelectItem value="aubergine">Aubergine</SelectItem>
-              <SelectItem value="broccoli">Broccoli</SelectItem>
-              <SelectItem value="carrot" disabled>
-                Carrot
-              </SelectItem>
-              <SelectItem value="courgette">Courgette</SelectItem>
-              <SelectItem value="leek">leek</SelectItem>
-            </Group>
-
-            <Separator className="SelectSeparator" />
-
-            <Group>
-              <Label className="SelectLabel">Meat</Label>
-              <SelectItem value="beef">Beef</SelectItem>
-              <SelectItem value="chicken">Chicken</SelectItem>
-              <SelectItem value="lamb">Lamb</SelectItem>
-              <SelectItem value="pork">Pork</SelectItem>
-            </Group>
-          </Viewport>
-          <ScrollDownButton className="SelectScrollButton">
+    <S.Root defaultValue="blueberry">
+      <S.Trigger asChild aria-label="Food">
+        <Button>
+          <S.Value />
+          <S.Icon className="ml-2">
             <ChevronDownIcon />
-          </ScrollDownButton>
-        </Content>
-      </Portal>
-    </Root>
+          </S.Icon>
+        </Button>
+      </S.Trigger>
+      <S.Content>
+        <S.ScrollUpButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
+          <ChevronUpIcon />
+        </S.ScrollUpButton>
+        <S.Viewport className="rounded-lg bg-white p-2 shadow-lg dark:bg-gray-800">
+          <S.Group>
+            {['Apple', 'Banana', 'Blueberry', 'Strawberry', 'Grapes'].map((f, i) => (
+              <S.Item
+                disabled={f === 'Grapes'}
+                key={`${f}-${i}`}
+                value={f.toLowerCase()}
+                className={clsx(
+                  'relative flex items-center rounded-md px-8 py-2 text-sm font-medium text-gray-700 focus:bg-gray-100 dark:text-gray-300 dark:focus:bg-gray-900',
+                  'radix-disabled:opacity-50',
+                  'select-none focus:outline-none',
+                )}
+              >
+                <S.ItemText>{f}</S.ItemText>
+                <S.ItemIndicator className="absolute left-2 inline-flex items-center">
+                  <CheckIcon />
+                </S.ItemIndicator>
+              </S.Item>
+            ))}
+          </S.Group>
+        </S.Viewport>
+        <S.ScrollDownButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
+          <ChevronDownIcon />
+        </S.ScrollDownButton>
+      </S.Content>
+    </S.Root>
   );
-}
+};

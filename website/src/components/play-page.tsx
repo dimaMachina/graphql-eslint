@@ -8,6 +8,7 @@ import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
+import { Button } from './button';
 import { Select2, SelectOption } from './select2';
 
 const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
@@ -156,7 +157,7 @@ export function PlayPage(): ReactElement {
           />
         </div>
 
-        <button className="mt-6">Download this config</button>
+        <Button className="mt-6">Download this config</Button>
 
         <Select />
       </div>
