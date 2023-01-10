@@ -90,6 +90,7 @@ module.exports = {
         'tailwindcss/enforces-shorthand': 'error',
         'tailwindcss/migration-from-tailwind-2': 'error',
         'tailwindcss/no-custom-classname': 'error',
+        'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }],
       },
       settings: {
         tailwindcss: {

@@ -78,7 +78,7 @@ export function GraphQLEditor({
   return (
     <div className="w-0 grow overflow-hidden border-l dark:border-neutral-800">
       <div className="h-full">
-        <div className="truncate border-b py-2 px-4 text-xs text-gray-700 dark:border-neutral-800 dark:text-gray-200">
+        <div className="truncate border-b bg-gray-100 py-2 px-4 text-xs text-gray-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-gray-200">
           {fileName}
         </div>
         <Editor
@@ -125,7 +125,7 @@ export function GraphQLEditor({
               {message}
               {ruleId && (
                 <>
-                  {' \n\n'}
+                  {' \n'}
                   <Anchor
                     href={`/rules/${ruleId.replace('@graphql-eslint/', '')}`}
                     className="text-primary-600 underline decoration-from-font [text-underline-position:from-font]"

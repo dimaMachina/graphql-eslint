@@ -42,7 +42,7 @@ export const Select = ({
                 className={clsx(
                   'relative flex items-center rounded-md py-2 pl-8 pr-4 text-sm font-medium text-gray-700 focus:bg-gray-100 dark:text-gray-300 dark:focus:bg-gray-900',
                   'radix-disabled:opacity-50',
-                  'select-none focus:outline-none',
+                  'select-none focus:outline-none cursor-pointer',
                 )}
               >
                 <S.ItemText>{option.name}</S.ItemText>

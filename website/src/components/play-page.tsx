@@ -70,36 +70,26 @@ const classes = {
   heading: clsx('font-medium mb-2'),
 };
 
+const emptyString = withDefault(StringParam, '');
+
 export function PlayPage(): ReactElement {
   console.info(++i, 'rerender');
-  const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams(
-    'schemaConfig',
-    withDefault(StringParam, ''),
-  );
-  const [operationConfig, setOperationConfig] = useDebouncedQueryParams(
-    'operationConfig',
-    withDefault(StringParam, ''),
-  );
-  const [schemaRule, setSchemaRule] = useDebouncedQueryParams(
-    'schemaRule',
-    withDefault(StringParam, ''),
-  );
-  const [operationRule, setOperationRule] = useDebouncedQueryParams(
-    'operationRule',
-    withDefault(StringParam, ''),
-  );
+  const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams('sc', emptyString);
+  const [schemaRule, setSchemaRule] = useDebouncedQueryParams('sr', emptyString);
+  const [operationConfig, setOperationConfig] = useDebouncedQueryParams('oc', emptyString);
+  const [operationRule, setOperationRule] = useDebouncedQueryParams('or', emptyString);
   const [schema, setSchema] = useDebouncedQueryParams(
-    'schema',
+    's',
     withDefault(StringParam, DEFAULT_SCHEMA),
   );
   const [operation, setOperation] = useDebouncedQueryParams(
-    'operation',
+    'o',
     withDefault(StringParam, DEFAULT_OPERATION),
   );
 
   return (
-    <div className="flex h-[calc(100vh-var(--nextra-navbar-height)-68px)] flex-col bg-gradient-to-br from-pink-300/20 via-fuchsia-200/20 to-purple-300/20 dark:from-pink-800/20 dark:via-fuchsia-900/20 dark:to-purple-800/20 md:flex-row">
-      <div className="nextra-scrollbar flex w-[300px] flex-col gap-4 overflow-y-auto p-6 text-xs">
+    <div className="flex h-[calc(100vh-var(--nextra-navbar-height)-68px)] flex-col bg-gradient-to-br from-pink-300/40 via-fuchsia-200/40 to-purple-300/40 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 md:flex-row">
+      <div className="nextra-scrollbar flex w-72 flex-col gap-4 overflow-y-auto p-5 text-xs">
         <div>
           <h3 className={classes.heading}>VERSIONING</h3>
           <span className="flex justify-between text-sm">
@@ -147,7 +137,7 @@ export function PlayPage(): ReactElement {
             placeholder="Choose an operation rule"
           />
         </div>
-        <Button className="mt-6">Download this config</Button>
+        {/*<Button className="mt-auto">Download this config</Button>*/}
       </div>
       <GraphQLEditor
         height="calc(50% - 17px)"
