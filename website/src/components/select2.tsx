@@ -1,7 +1,7 @@
 import { Fragment, ReactElement } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import clsx from 'clsx';
 import { CheckIcon } from '@theguild/components';
+import clsx from 'clsx';
 
 export type SelectOption = {
   key: string;
@@ -14,7 +14,7 @@ export type SelectProps = {
   options: SelectOption[];
 };
 
-export function Select({ options, selected, onChange }: SelectProps): ReactElement {
+export function Select2({ options, selected, onChange }: SelectProps): ReactElement {
   return (
     <Listbox value={selected} onChange={onChange}>
       {({ open }) => (

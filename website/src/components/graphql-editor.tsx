@@ -1,10 +1,10 @@
 import { ReactElement, useEffect, useRef } from 'react';
+import { parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
 import Editor, { OnMount } from '@monaco-editor/react';
-import { Callout, useTheme, Anchor } from '@theguild/components';
+import { Anchor, Callout, useTheme } from '@theguild/components';
 import { Linter } from 'eslint';
-// @ts-ignore -- we patched this export
+// @ts-expect-error -- we patched this export
 import pkg from 'eslint/linter';
-import { rules, parseForESLint } from '@graphql-eslint/eslint-plugin';
 import RulesRecord = Linter.RulesRecord;
 import clsx from 'clsx';
 import { InformationCircleIcon } from 'nextra/icons';
@@ -76,9 +76,9 @@ export function GraphQLEditor({
   }, [lintMessages, editorRef.current, monacoRef.current]);
 
   return (
-    <div className="grow w-0 overflow-hidden border-l dark:border-neutral-800">
+    <div className="w-0 grow overflow-hidden border-l dark:border-neutral-800">
       <div className="h-full">
-        <div className="border-b dark:border-neutral-800 truncate py-2 px-4 text-xs text-gray-700 dark:text-gray-200">
+        <div className="truncate border-b py-2 px-4 text-xs text-gray-700 dark:border-neutral-800 dark:text-gray-200">
           {fileName}
         </div>
         <Editor
@@ -102,8 +102,8 @@ export function GraphQLEditor({
         />
         <div
           className={clsx(
-            'flex h-1/2 flex-col gap-2 p-4 overflow-y-auto nextra-scrollbar border-t dark:border-neutral-800',
-            '[&>div]:mt-0 [&>div>div:last-child]:leading-5 [&>div]:whitespace-pre-wrap',
+            'nextra-scrollbar flex h-1/2 flex-col gap-2 overflow-y-auto border-t p-4 dark:border-neutral-800',
+            '[&>div]:mt-0 [&>div]:whitespace-pre-wrap [&>div>div:last-child]:leading-5',
           )}
           style={{ height }}
         >
@@ -115,7 +115,7 @@ export function GraphQLEditor({
                 <div className="flex items-center gap-1">
                   <InformationCircleIcon />
                   {typeof line === 'number' && typeof column === 'number' && (
-                    <span className="text-xs font-sans underline underline-offset-4 font-bold">
+                    <span className="font-sans text-xs font-bold underline underline-offset-4">
                       {line}:{column}
                     </span>
                   )}

@@ -28,7 +28,7 @@ export default defineConfig({
   //   );
   // },
   footer: {
-    component() {
+    component: function Footer() {
       const { route } = useRouter();
       return route === '/play' ? null : <FooterExtended />;
     },

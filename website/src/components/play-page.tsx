@@ -1,13 +1,14 @@
 import { ReactElement, useRef } from 'react';
-import { useQueryParam, StringParam, withDefault } from 'use-query-params';
-import { asArray } from '@graphql-tools/utils';
-import { rules, flatConfigs } from '@graphql-eslint/eslint-plugin';
+import { flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
 import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
-import eslintPkgJson from 'eslint/package.json';
-import { GraphQLEditor } from './graphql-editor';
-import { Select, SelectOption } from './select2';
+import { asArray } from '@graphql-tools/utils';
 import { clsx } from 'clsx';
+import eslintPkgJson from 'eslint/package.json';
 import debounce from 'lodash.debounce';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { GraphQLEditor } from './graphql-editor';
+import { Select } from './select';
+import { Select2, SelectOption } from './select2';
 
 const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
 const operationsConfigs = ['operations-recommended', 'operations-all'];
@@ -108,24 +109,23 @@ export function PlayPage(): ReactElement {
     ? { key: operationConfig, name: operationConfig }
     : { key: '', name: 'Choose an operation config' };
 
-  console.info(++i, 'rerender');
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--nextra-navbar-height)-68px)]">
-      <div className="w-[300px] p-6 text-xs flex flex-col gap-4 overflow-y-auto nextra-scrollbar">
+    <div className="flex h-[calc(100vh-var(--nextra-navbar-height)-68px)] flex-col md:flex-row">
+      <div className="nextra-scrollbar flex w-[300px] flex-col gap-4 overflow-y-auto p-6 text-xs">
         <div>
           <h3 className={classes.heading}>VERSIONING</h3>
-          <span className="text-sm flex justify-between">
+          <span className="flex justify-between text-sm">
             <span>ESLint</span>
             <span>{eslintPkgJson.version}</span>
           </span>
-          <span className="text-sm flex justify-between">
+          <span className="flex justify-between text-sm">
             <span>GraphQL-ESLint</span>
             <span>{graphqlESLintPkgJson.version}</span>
           </span>
         </div>
         <div>
           <h3 className={classes.heading}>SCHEMA RULES</h3>
-          <Select
+          <Select2
             options={schemaRulesOptions}
             selected={selectedSchemaRule}
             onChange={({ key }) => setSchemaRule(key)}
@@ -133,7 +133,7 @@ export function PlayPage(): ReactElement {
         </div>
         <div>
           <h3 className={classes.heading}>SCHEMA CONFIG</h3>
-          <Select
+          <Select2
             options={schemaConfigsOptions}
             selected={selectedSchemaConfig}
             onChange={({ key }) => setSchemaConfig(key)}
@@ -141,7 +141,7 @@ export function PlayPage(): ReactElement {
         </div>
         <div>
           <h3 className={classes.heading}>OPERATION RULES</h3>
-          <Select
+          <Select2
             options={operationsRulesOptions}
             selected={selectedOperationRule}
             onChange={({ key }) => setOperationRule(key)}
@@ -149,7 +149,7 @@ export function PlayPage(): ReactElement {
         </div>
         <div>
           <h3 className={classes.heading}>OPERATION CONFIG</h3>
-          <Select
+          <Select2
             options={operationsConfigsOptions}
             selected={selectedOperationConfig}
             onChange={({ key }) => setOperationConfig(key)}
@@ -157,6 +157,8 @@ export function PlayPage(): ReactElement {
         </div>
 
         <button className="mt-6">Download this config</button>
+
+        <Select />
       </div>
       <GraphQLEditor
         height="calc(50% - 17px)"

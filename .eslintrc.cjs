@@ -83,7 +83,23 @@ module.exports = {
     },
     {
       files: ['website/**'],
-      extends: '@theguild/eslint-config/react',
+      extends: ['@theguild/eslint-config/react', 'plugin:tailwindcss/recommended'],
+      rules: {
+        'tailwindcss/classnames-order': 'off',
+        'tailwindcss/enforces-negative-arbitrary-values': 'error',
+        'tailwindcss/enforces-shorthand': 'error',
+        'tailwindcss/migration-from-tailwind-2': 'error',
+        'tailwindcss/no-custom-classname': 'error',
+      },
+      settings: {
+        tailwindcss: {
+          config: 'website/tailwind.config.cjs',
+          cssFiles: [
+            'website/src/**/*.css',
+            'node_modules/.pnpm/node_modules/nextra-theme-docs/style.css',
+          ],
+        },
+      },
     },
   ],
 };

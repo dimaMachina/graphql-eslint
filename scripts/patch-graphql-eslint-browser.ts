@@ -1,5 +1,5 @@
-import path from 'node:path';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 
 const CWD = process.cwd();
 const ROOT_DIR = path.join(CWD, 'packages', 'plugin', 'dist', 'esm');
@@ -37,7 +37,7 @@ await patch('/parser.js', str => {
       )
       .replace(
         'const schema = getSchema(project, options.schemaOptions)',
-        () => `const schema = buildSchema(options.schema)`,
+        () => 'const schema = buildSchema(options.schema)',
       )
   );
 });
