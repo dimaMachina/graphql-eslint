@@ -9,11 +9,10 @@ import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
 import { Button } from './button';
-import { Select2, SelectOption } from './select2';
 
 const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
 const operationsConfigs = ['operations-recommended', 'operations-all'];
-
+let i = 0;
 const schemaRulesOptions = Object.entries(rules)
   .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
   .map(([ruleId]) => ({ key: ruleId, name: ruleId }));
@@ -72,6 +71,7 @@ const classes = {
 };
 
 export function PlayPage(): ReactElement {
+  console.info(++i, 'rerender');
   const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams(
     'schemaConfig',
     withDefault(StringParam, ''),
@@ -97,21 +97,8 @@ export function PlayPage(): ReactElement {
     withDefault(StringParam, DEFAULT_OPERATION),
   );
 
-  const selectedSchemaRule: SelectOption = schemaRule
-    ? { key: schemaRule, name: schemaRule }
-    : { key: '', name: 'Choose a schema rule' };
-  const selectedSchemaConfig: SelectOption = schemaConfig
-    ? { key: schemaConfig, name: schemaConfig }
-    : { key: '', name: 'Choose a schema config' };
-  const selectedOperationRule: SelectOption = operationRule
-    ? { key: operationRule, name: operationRule }
-    : { key: '', name: 'Choose an operation rule' };
-  const selectedOperationConfig: SelectOption = operationConfig
-    ? { key: operationConfig, name: operationConfig }
-    : { key: '', name: 'Choose an operation config' };
-
   return (
-    <div className="flex h-[calc(100vh-var(--nextra-navbar-height)-68px)] flex-col md:flex-row">
+    <div className="flex h-[calc(100vh-var(--nextra-navbar-height)-68px)] flex-col bg-gradient-to-br from-pink-300/20 via-fuchsia-200/20 to-purple-300/20 dark:from-pink-800/20 dark:via-fuchsia-900/20 dark:to-purple-800/20 md:flex-row">
       <div className="nextra-scrollbar flex w-[300px] flex-col gap-4 overflow-y-auto p-6 text-xs">
         <div>
           <h3 className={classes.heading}>VERSIONING</h3>
@@ -126,40 +113,41 @@ export function PlayPage(): ReactElement {
         </div>
         <div>
           <h3 className={classes.heading}>SCHEMA RULES</h3>
-          <Select2
+          <Select
             options={schemaRulesOptions}
-            selected={selectedSchemaRule}
-            onChange={({ key }) => setSchemaRule(key)}
+            value={schemaRule}
+            onChange={setSchemaRule}
+            placeholder="Choose a schema rule"
           />
         </div>
         <div>
           <h3 className={classes.heading}>SCHEMA CONFIG</h3>
-          <Select2
+          <Select
             options={schemaConfigsOptions}
-            selected={selectedSchemaConfig}
-            onChange={({ key }) => setSchemaConfig(key)}
+            value={schemaConfig}
+            onChange={setSchemaConfig}
+            placeholder="Choose a schema config"
           />
         </div>
         <div>
           <h3 className={classes.heading}>OPERATION RULES</h3>
-          <Select2
+          <Select
             options={operationsRulesOptions}
-            selected={selectedOperationRule}
-            onChange={({ key }) => setOperationRule(key)}
+            value={operationRule}
+            onChange={setOperationRule}
+            placeholder="Choose an operation rule"
           />
         </div>
         <div>
           <h3 className={classes.heading}>OPERATION CONFIG</h3>
-          <Select2
+          <Select
             options={operationsConfigsOptions}
-            selected={selectedOperationConfig}
-            onChange={({ key }) => setOperationConfig(key)}
+            value={operationConfig}
+            onChange={setOperationConfig}
+            placeholder="Choose an operation config"
           />
         </div>
-
         <Button className="mt-6">Download this config</Button>
-
-        <Select />
       </div>
       <GraphQLEditor
         height="calc(50% - 17px)"
@@ -168,8 +156,8 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
-          ...(selectedSchemaConfig.key && flatConfigs[selectedSchemaConfig.key].rules),
-          ...(selectedSchemaRule.key && flatConfigs['schema-all'].rules[selectedSchemaRule.key]),
+          ...(schemaConfig && flatConfigs[schemaConfig].rules),
+          ...(schemaRule && flatConfigs['schema-all'].rules[schemaRule]),
         }}
         onChange={setSchema}
       />
@@ -180,9 +168,8 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
-          ...(selectedOperationConfig.key && flatConfigs[selectedOperationConfig.key].rules),
-          ...(selectedOperationRule.key &&
-            flatConfigs['operations-all'].rules[selectedOperationRule.key]),
+          ...(operationRule && flatConfigs[operationRule].rules),
+          ...(operationConfig && flatConfigs['operations-all'].rules[operationConfig]),
         }}
         onChange={setOperation}
       />
