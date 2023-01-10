@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router';
-import { defineConfig, Giscus, useTheme } from '@theguild/components';
+import { defineConfig, FooterExtended } from '@theguild/components';
 
 export default defineConfig({
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
@@ -28,5 +27,11 @@ export default defineConfig({
   //     </>
   //   );
   // },
+  footer: {
+    component() {
+      const { route } = useRouter();
+      return route === '/play' ? null : <FooterExtended />;
+    },
+  },
   siteName: 'ESLINT',
 });

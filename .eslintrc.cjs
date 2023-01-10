@@ -2,7 +2,6 @@ module.exports = {
   ignorePatterns: ['examples', 'packages/plugin/tests/__snapshots__'],
   extends: [
     '@theguild',
-    '@theguild/eslint-config/react',
     '@theguild/eslint-config/json',
     '@theguild/eslint-config/yml',
     '@theguild/eslint-config/mdx',
@@ -81,6 +80,10 @@ module.exports = {
         // ignore for above files
         'unicorn/filename-case': 'off',
       },
+    },
+    {
+      files: ['website/**'],
+      extends: '@theguild/eslint-config/react',
     },
   ],
 };
