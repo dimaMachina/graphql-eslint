@@ -19,7 +19,7 @@
     "title": "Playground",
     "type": "page",
     "theme": {
-      "layout": "full"
+      "layout": "raw"
     }
   }
 }

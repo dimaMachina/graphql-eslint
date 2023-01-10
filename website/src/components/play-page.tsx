@@ -2,14 +2,28 @@ import { ReactElement, KeyboardEvent, useEffect, useRef, useState, useCallback }
 import Editor, { OnMount } from '@monaco-editor/react';
 import { useTheme } from '@theguild/components';
 import eslintPkgJson from 'eslint/package.json';
-import { ESLint } from 'eslint';
+import { Linter } from 'eslint';
 import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
 import { Select, Callout } from '@theguild/components';
-import * as graphqlESLint from '@graphql-eslint/eslint-plugin'
-import { Linter } from 'eslint/linter'
-console.log({Linter})
-const rules = Object.keys(graphqlESLint.rules)
-const configs = Object.keys(graphqlESLint.configs)
+import { rules, flatConfigs, parseForESLint } from '@graphql-eslint/eslint-plugin';
+// @ts-ignore -- we patched this export
+import pkg from 'eslint/linter';
+import { asArray } from '@graphql-tools/utils';
+
+const _Linter: typeof Linter = pkg.Linter;
+
+const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
+const operationsConfigs = ['operations-recommended', 'operations-all'];
+
+const schemaRulesOptions = Object.entries(rules)
+  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
+  .map(([ruleId]) => ({ key: ruleId, name: ruleId }));
+const operationsRulesOptions = Object.entries(rules)
+  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
+  .map(([ruleId]) => ({ key: ruleId, name: ruleId }));
+
+const schemaConfigsOptions = schemaConfigs.map(name => ({ key: name, name }));
+const operationsConfigsOptions = operationsConfigs.map(name => ({ key: name, name }));
 
 function dedent(code: string) {
   return code
@@ -84,39 +98,78 @@ type SelectOption = {
   name: ReactElement | string;
 };
 
-type PlayPageProps = {
-  schemaOutput: ESLint.LintResult[];
-  operationOutput: ESLint.LintResult[];
-};
-export function PlayPage({
-  schemaOutput = [],
-  operationOutput = [],
-  ...props
-}: PlayPageProps): ReactElement {
+const linter = new _Linter();
+linter.defineParser('@graphql-eslint/eslint-plugin', { parseForESLint });
+for (const [ruleId, rule] of Object.entries(rules)) {
+  linter.defineRule(`@graphql-eslint/${ruleId}`, rule as any);
+}
+
+export function PlayPage(): ReactElement {
   const schemaEditorRef = useRef<any>(null);
   const operationEditorRef = useRef<any>(null);
 
-  const rulesOptions = rules.map(ruleId => ({ key: ruleId, name: ruleId }));
-  const configsOptions = configs.map(configName => ({ key: configName, name: configName }));
-
   const { resolvedTheme } = useTheme();
-  const [selectedRule, setSelectedRule] = useState<SelectOption>({
+  const [selectedSchemaRule, setSelectedSchemaRule] = useState<SelectOption>({
     key: '',
-    name: 'Choose a rule'
+    name: 'Choose a schema rule',
   });
-  const [selectedConfig, setSelectedConfig] = useState<SelectOption>({
+  const [selectedSchemaConfig, setSelectedSchemaConfig] = useState<SelectOption>({
     key: '',
-    name: 'Choose a config'
+    name: 'Choose a schema config',
   });
-  const handleRuleChange = useCallback((option: SelectOption) => {}, []);
-  const handleConfigChange = useCallback((option: SelectOption) => {}, []);
+  const [selectedOperationRule, setSelectedOperationRule] = useState<SelectOption>({
+    key: '',
+    name: 'Choose a schema rule',
+  });
+  const [selectedOperationConfig, setSelectedOperationConfig] = useState<SelectOption>({
+    key: '',
+    name: 'Choose a schema config',
+  });
+  const [schema, setSchema] = useState(SCHEMA);
+  const [operation, setOperation] = useState(OPERATION);
+  // const handleSchemaRuleChange = useCallback((option: SelectOption) => {}, []);
+  // const handleSchemaConfigChange = useCallback((option: SelectOption) => {}, []);
+  // const handleOperationRuleChange = useCallback((option: SelectOption) => {}, []);
+  // const handleOperationConfigChange = useCallback((option: SelectOption) => {}, []);
+
+  let schemaResult = linter.verify(
+    schema,
+    {
+      parser: '@graphql-eslint/eslint-plugin',
+      // extends: `plugin:@graphql-eslint/schema-recommended`,
+      parserOptions: {
+        schema,
+        documents: operation,
+      },
+      rules: {
+        ...(selectedSchemaConfig.key && flatConfigs[selectedSchemaConfig.key].rules),
+        ...(selectedSchemaRule.key && flatConfigs['schema-all'].rules[selectedSchemaRule.key]),
+      },
+    },
+    'schema.graphql',
+  );
+  let operationResult = linter.verify(
+    operation,
+    {
+      parser: '@graphql-eslint/eslint-plugin',
+      // extends: `plugin:@graphql-eslint/schema-recommended`,
+      parserOptions: {
+        schema,
+        documents: operation,
+      },
+      rules: {
+        ...(selectedOperationConfig.key && flatConfigs[selectedOperationConfig.key].rules),
+        ...(selectedOperationConfig.key &&
+          flatConfigs['operations-all'].rules[selectedOperationConfig.key]),
+      },
+    },
+    'operation.graphql',
+  );
+
   useEffect(() => {
     // console.log(schemaEditorRef.current);
     // var model = schemaEditorRef.current?.getModel();
     // console.log(model, model?.deltaDecorations);
-    for (const msg of schemaOutput[0]?.messages || []) {
-      console.log(msg);
-    }
     // model?.deltaDecorations(
     //   [],
     //   [
@@ -130,68 +183,92 @@ export function PlayPage({
     //   ],
     // );
   }, [schemaEditorRef.current]);
-
+  console.log(schemaResult);
   return (
-    <>
-      {/*<style global jsx>*/}
-      {/*  {`*/}
-      {/*    .highlight {*/}
-      {/*      background: red;*/}
-      {/*    }*/}
-      {/*  `}*/}
-      {/*</style>*/}
-      <div className="flex flex-col md:flex-row gap-0.5">
-        {Object.entries({ SCHEMA, OPERATION }).map(([key, value]) => (
-          <div
-            key={key}
-            className="grow nx-bg-primary-700/5 dark:nx-bg-primary-300/10 nx-rounded-t-xl overflow-hidden"
-          >
+    <div className="flex flex-col md:flex-row h-[calc(100vh-var(--nextra-navbar-height)*2)]">
+      <div className="w-[350px] p-6">
+        <div>
+          Versioning
+          <p>ESLint Version {eslintPkgJson.version}</p>
+          <p>GraphQL-ESLint Version {graphqlESLintPkgJson.version}</p>
+        </div>
+        <div>
+          Schema Rules
+          <Select
+            options={schemaRulesOptions}
+            selected={selectedSchemaRule}
+            onChange={setSelectedSchemaRule}
+          />
+        </div>
+        <div>
+          Schema Config
+          <Select
+            options={schemaConfigsOptions}
+            selected={selectedSchemaConfig}
+            onChange={setSelectedSchemaConfig}
+          />
+        </div>
+        <div>
+          Operation Rules
+          <Select
+            options={operationsRulesOptions}
+            selected={selectedOperationRule}
+            onChange={setSelectedOperationRule}
+          />
+        </div>
+        <div>
+          Operation Config
+          <Select
+            options={operationsConfigsOptions}
+            selected={selectedOperationConfig}
+            onChange={setSelectedOperationConfig}
+          />
+        </div>
+
+        <button className="mt-6">Download this config</button>
+      </div>
+      {Object.entries({ schema, operation }).map(([key, value]) => (
+        <div
+          key={key}
+          className="grow w-0 nx-bg-primary-700/5 dark:nx-bg-primary-300/10 overflow-hidden border-l dark:nx-border-neutral-800"
+        >
+          <div className="h-full">
             <div className="nx-truncate nx-bg-primary-700/5 nx-py-2 nx-px-4 nx-text-xs nx-text-gray-700 dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
               {`${key.toLowerCase()}.graphql`}
             </div>
             <Editor
-              height={400}
+              height="calc(50% - 17px)"
               language="graphql"
               theme={resolvedTheme === 'dark' ? 'vs-dark' : 'light'}
               defaultValue={value}
               onMount={(editor, monaco) => {
                 // here is the editor instance
                 // you can store it in `useRef` for further usage
-                if (key === 'SCHEMA') {
+                if (key === 'schema') {
                   schemaEditorRef.current = editor;
                 } else {
                   operationEditorRef.current = editor;
                 }
               }}
+              onChange={key === 'schema' ? setSchema : setOperation}
+              options={{
+                minimap: {
+                  enabled: false,
+                },
+              }}
             />
-          </div>
-        ))}
-      </div>
-      <div className="container flex">
-        <div className="grow w-0">
-          <div>
-            Versioning
-            <p>ESLint Version {eslintPkgJson.version}</p>
-            <p>GraphQL-ESLint Version {graphqlESLintPkgJson.version}</p>
-          </div>
-          <div>
-            Rules
-            <Select options={rulesOptions} selected={selectedRule} onChange={handleRuleChange} />
-            Total rules: {rules.length}
-          </div>
-          <div>
-            Config
-            <Select options={configsOptions} selected={selectedConfig} onChange={handleConfigChange} />
+            <div className="px-6 h-[calc(50%-17px)] overflow-y-auto nextra-scrollbar border-t dark:nx-border-neutral-800">
+              {(key === 'schema' ? schemaResult : operationResult).map(
+                ({ message, line, column }) => (
+                  <Callout key={`${message}-${line}-${column}`} type="error" emoji="❌">
+                    {message}
+                  </Callout>
+                ),
+              )}
+            </div>
           </div>
         </div>
-        <div className="grow w-0">
-          {schemaOutput[0]?.messages.map(({ message }) => (
-            <Callout type="error" emoji="❌">
-              {message}
-            </Callout>
-          ))}
-        </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }

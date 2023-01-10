@@ -1,16 +1,17 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
-const ROOT_DIR = path.join(process.cwd(), 'packages', 'plugin', 'dist', 'esm');
+const CWD = process.cwd();
+const ROOT_DIR = path.join(CWD, 'packages', 'plugin', 'dist', 'esm');
 
-async function patch(filePath: string, replace: (fileContent: string) => string) {
+async function patch(filePath: string, replace: (fileContent: string) => string): Promise<void> {
   const fullPath = `${ROOT_DIR}${filePath}`;
   const fileContent = await fs.readFile(fullPath, 'utf8');
   const patchComment = '// GRAPHQL-ESLINT BROWSER PATCH\n';
   const isAlreadyPatched = fileContent.startsWith(patchComment);
   const newContent = isAlreadyPatched ? fileContent : patchComment + replace(fileContent);
   await fs.writeFile(fullPath, newContent, 'utf8');
-  console.log(`✅${filePath} ${isAlreadyPatched ? 'already ' : ''}patched!`);
+  console.log(`✅ ${path.relative(CWD, fullPath)} ${isAlreadyPatched ? 'already ' : ''}patched!`);
 }
 
 function commentLine(str: string): string {
@@ -68,7 +69,6 @@ await patch('/schema.js', str => {
 
 await patch('/estree-converter/utils.js', str => {
   return str
-    .replace("import { createRequire } from 'module'", commentLine)
     .replace('const require = createRequire(import.meta.url)', commentLine)
     .replace(
       'function getLexer(source) {',
@@ -79,11 +79,8 @@ await patch('/estree-converter/utils.js', str => {
 await patch('/rules/graphql-js-validation.js', str => {
   return (
     "import * as allGraphQLJSRules from 'graphql/validation/index.js'\n" +
-    str
-      .replace("import { createRequire } from 'module'", commentLine)
-      .replace('const require = createRequire(import.meta.url)', commentLine)
-      .replace(
-        `    let ruleFn = null;
+    str.replace('const require = createRequire(import.meta.url)', commentLine).replace(
+      `    let ruleFn = null;
     try {
         ruleFn = require(\`graphql/validation/rules/\${ruleName}Rule\`)[\`\${ruleName}Rule\`];
     }
@@ -95,8 +92,8 @@ await patch('/rules/graphql-js-validation.js', str => {
             ruleFn = require('graphql/validation')[\`\${ruleName}Rule\`];
         }
     }`,
-        '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
-      )
+      '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
+    )
   );
 });
 
