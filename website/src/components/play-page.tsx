@@ -1,10 +1,13 @@
-import { ReactElement, useState } from 'react';
-import eslintPkgJson from 'eslint/package.json';
-import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
-import { Select } from '@theguild/components';
-import { rules, flatConfigs } from '@graphql-eslint/eslint-plugin';
+import { ReactElement, useRef } from 'react';
+import { useQueryParam, StringParam, withDefault } from 'use-query-params';
 import { asArray } from '@graphql-tools/utils';
+import { rules, flatConfigs } from '@graphql-eslint/eslint-plugin';
+import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
+import eslintPkgJson from 'eslint/package.json';
 import { GraphQLEditor } from './graphql-editor';
+import { Select, SelectOption } from './select2';
+import { clsx } from 'clsx';
+import debounce from 'lodash.debounce';
 
 const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
 const operationsConfigs = ['operations-recommended', 'operations-all'];
@@ -27,7 +30,7 @@ function dedent(code: string) {
     .trimStart();
 }
 
-const SCHEMA = dedent(/* GraphQL*/ `
+const DEFAULT_SCHEMA = dedent(/* GraphQL*/ `
   scalar DateTime
 
   type Post {
@@ -43,7 +46,7 @@ const SCHEMA = dedent(/* GraphQL*/ `
   }
 `);
 
-const OPERATION = dedent(/* GraphQL */ `
+const DEFAULT_OPERATION = dedent(/* GraphQL */ `
   query {
     posts {
       id
@@ -52,68 +55,104 @@ const OPERATION = dedent(/* GraphQL */ `
   }
 `);
 
-type SelectOption = {
-  key: string;
-  name: ReactElement | string;
+function useDebouncedQueryParams<TypeToEncode, TypeFromDecode = TypeToEncode>(
+  ...args: Parameters<typeof useQueryParam<TypeToEncode, TypeFromDecode>>
+): ReturnType<typeof useQueryParam<TypeToEncode, TypeFromDecode>> {
+  const [query, setQuery] = useQueryParam(...args);
+  const fn = useRef<typeof setQuery>();
+  fn.current ||= debounce(setQuery, 500);
+
+  return [query, fn.current];
+}
+
+const classes = {
+  heading: clsx('font-medium mb-2'),
 };
 
 export function PlayPage(): ReactElement {
-  const [selectedSchemaRule, setSelectedSchemaRule] = useState<SelectOption>({
-    key: '',
-    name: 'Choose a schema rule',
-  });
-  const [selectedSchemaConfig, setSelectedSchemaConfig] = useState<SelectOption>({
-    key: '',
-    name: 'Choose a schema config',
-  });
-  const [selectedOperationRule, setSelectedOperationRule] = useState<SelectOption>({
-    key: '',
-    name: 'Choose a schema rule',
-  });
-  const [selectedOperationConfig, setSelectedOperationConfig] = useState<SelectOption>({
-    key: '',
-    name: 'Choose a schema config',
-  });
-  const [schema, setSchema] = useState(SCHEMA);
-  const [operation, setOperation] = useState(OPERATION);
+  const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams(
+    'schemaConfig',
+    withDefault(StringParam, ''),
+  );
+  const [operationConfig, setOperationConfig] = useDebouncedQueryParams(
+    'operationConfig',
+    withDefault(StringParam, ''),
+  );
+  const [schemaRule, setSchemaRule] = useDebouncedQueryParams(
+    'schemaRule',
+    withDefault(StringParam, ''),
+  );
+  const [operationRule, setOperationRule] = useDebouncedQueryParams(
+    'operationRule',
+    withDefault(StringParam, ''),
+  );
+  const [schema, setSchema] = useDebouncedQueryParams(
+    'schema',
+    withDefault(StringParam, DEFAULT_SCHEMA),
+  );
+  const [operation, setOperation] = useDebouncedQueryParams(
+    'operation',
+    withDefault(StringParam, DEFAULT_OPERATION),
+  );
+
+  const selectedSchemaRule: SelectOption = schemaRule
+    ? { key: schemaRule, name: schemaRule }
+    : { key: '', name: 'Choose a schema rule' };
+  const selectedSchemaConfig: SelectOption = schemaConfig
+    ? { key: schemaConfig, name: schemaConfig }
+    : { key: '', name: 'Choose a schema config' };
+  const selectedOperationRule: SelectOption = operationRule
+    ? { key: operationRule, name: operationRule }
+    : { key: '', name: 'Choose an operation rule' };
+  const selectedOperationConfig: SelectOption = operationConfig
+    ? { key: operationConfig, name: operationConfig }
+    : { key: '', name: 'Choose an operation config' };
+
+  console.info(++i, 'rerender');
   return (
     <div className="flex flex-col md:flex-row h-[calc(100vh-var(--nextra-navbar-height)-68px)]">
-      <div className="w-[350px] p-6">
+      <div className="w-[300px] p-6 text-xs flex flex-col gap-4 overflow-y-auto nextra-scrollbar">
         <div>
-          Versioning
-          <p>ESLint Version {eslintPkgJson.version}</p>
-          <p>GraphQL-ESLint Version {graphqlESLintPkgJson.version}</p>
+          <h3 className={classes.heading}>VERSIONING</h3>
+          <span className="text-sm flex justify-between">
+            <span>ESLint</span>
+            <span>{eslintPkgJson.version}</span>
+          </span>
+          <span className="text-sm flex justify-between">
+            <span>GraphQL-ESLint</span>
+            <span>{graphqlESLintPkgJson.version}</span>
+          </span>
         </div>
         <div>
-          Schema Rules
+          <h3 className={classes.heading}>SCHEMA RULES</h3>
           <Select
             options={schemaRulesOptions}
             selected={selectedSchemaRule}
-            onChange={setSelectedSchemaRule}
+            onChange={({ key }) => setSchemaRule(key)}
           />
         </div>
         <div>
-          Schema Config
+          <h3 className={classes.heading}>SCHEMA CONFIG</h3>
           <Select
             options={schemaConfigsOptions}
             selected={selectedSchemaConfig}
-            onChange={setSelectedSchemaConfig}
+            onChange={({ key }) => setSchemaConfig(key)}
           />
         </div>
         <div>
-          Operation Rules
+          <h3 className={classes.heading}>OPERATION RULES</h3>
           <Select
             options={operationsRulesOptions}
             selected={selectedOperationRule}
-            onChange={setSelectedOperationRule}
+            onChange={({ key }) => setOperationRule(key)}
           />
         </div>
         <div>
-          Operation Config
+          <h3 className={classes.heading}>OPERATION CONFIG</h3>
           <Select
             options={operationsConfigsOptions}
             selected={selectedOperationConfig}
-            onChange={setSelectedOperationConfig}
+            onChange={({ key }) => setOperationConfig(key)}
           />
         </div>
 
@@ -126,11 +165,10 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
-          ...flatConfigs['schema-all'].rules,
           ...(selectedSchemaConfig.key && flatConfigs[selectedSchemaConfig.key].rules),
           ...(selectedSchemaRule.key && flatConfigs['schema-all'].rules[selectedSchemaRule.key]),
         }}
-        onChange={(value = '') => setSchema(value)}
+        onChange={setSchema}
       />
       <GraphQLEditor
         height="calc(50% - 17px)"
@@ -139,12 +177,11 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
-          ...flatConfigs['operations-all'].rules,
           ...(selectedOperationConfig.key && flatConfigs[selectedOperationConfig.key].rules),
           ...(selectedOperationRule.key &&
             flatConfigs['operations-all'].rules[selectedOperationRule.key]),
         }}
-        onChange={(value = '') => setOperation(value)}
+        onChange={setOperation}
       />
     </div>
   );

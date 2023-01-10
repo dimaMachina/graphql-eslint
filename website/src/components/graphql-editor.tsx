@@ -23,7 +23,7 @@ type GraphQLEditorProps = {
   code: string;
   selectedRules: RulesRecord;
   height: string;
-  onChange: (value?: string) => void;
+  onChange: (value: string) => void;
 };
 
 export function GraphQLEditor({
@@ -38,16 +38,21 @@ export function GraphQLEditor({
   const { resolvedTheme } = useTheme();
   const editorRef = useRef<Parameters<OnMount>[0]>(null);
   const monacoRef = useRef<Parameters<OnMount>[1]>(null);
-  const lintMessages = linter.verify(
-    code,
-    {
-      parser: '@graphql-eslint/eslint-plugin',
-      // extends: `plugin:@graphql-eslint/schema-recommended`,
-      parserOptions: { schema, documents },
-      rules: selectedRules,
-    },
-    fileName,
-  );
+  const lintMessages = linter
+    .verify(
+      code,
+      {
+        parser: '@graphql-eslint/eslint-plugin',
+        // extends: `plugin:@graphql-eslint/schema-recommended`,
+        parserOptions: { schema, documents },
+        rules: selectedRules,
+      },
+      fileName,
+    )
+    .map(message => ({
+      ...message,
+      message: message.message.replace('Parsing error: [graphql-eslint]', 'Parsing error:'),
+    }));
 
   useEffect(() => {
     const model = editorRef.current?.getModel();
@@ -71,9 +76,9 @@ export function GraphQLEditor({
   }, [lintMessages, editorRef.current, monacoRef.current]);
 
   return (
-    <div className="grow w-0 nx-bg-primary-700/5 dark:nx-bg-primary-300/10 overflow-hidden border-l dark:nx-border-neutral-800">
+    <div className="grow w-0 overflow-hidden border-l dark:border-neutral-800">
       <div className="h-full">
-        <div className="nx-truncate nx-bg-primary-700/5 nx-py-2 nx-px-4 nx-text-xs nx-text-gray-700 dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
+        <div className="border-b dark:border-neutral-800 truncate py-2 px-4 text-xs text-gray-700 dark:text-gray-200">
           {fileName}
         </div>
         <Editor
@@ -93,12 +98,12 @@ export function GraphQLEditor({
             editorRef.current = editor;
             monacoRef.current = monaco;
           }}
-          onChange={onChange}
+          onChange={(value = '') => onChange(value)}
         />
         <div
           className={clsx(
-            'flex h-1/2 flex-col gap-2 p-4 overflow-y-auto nextra-scrollbar border-t dark:nx-border-neutral-800',
-            '[&>div]:mt-0 [&>div]:py-1',
+            'flex h-1/2 flex-col gap-2 p-4 overflow-y-auto nextra-scrollbar border-t dark:border-neutral-800',
+            '[&>div]:mt-0 [&>div>div:last-child]:leading-5 [&>div]:whitespace-pre-wrap',
           )}
           style={{ height }}
         >
@@ -107,7 +112,7 @@ export function GraphQLEditor({
               key={`${message}-${line}-${column}`}
               type="error"
               emoji={
-                <div className="flex items-center mt-1 gap-1">
+                <div className="flex items-center gap-1">
                   <InformationCircleIcon />
                   {typeof line === 'number' && typeof column === 'number' && (
                     <span className="text-xs font-sans underline underline-offset-4 font-bold">
@@ -117,10 +122,10 @@ export function GraphQLEditor({
                 </div>
               }
             >
-              {message}{' '}
+              {message}
               {ruleId && (
                 <>
-                  <br />
+                  {' \n\n'}
                   <Anchor
                     href={`/rules/${ruleId.replace('@graphql-eslint/', '')}`}
                     className="text-primary-600 underline decoration-from-font [text-underline-position:from-font]"
