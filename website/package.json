@@ -6,8 +6,9 @@
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
     "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
-    "dev": "next",
-    "prebuild": "tsx ../scripts/generate-docs.ts",
+    "dev": "pnpm patch-browser && next",
+    "prebuild": "tsx ../scripts/generate-docs.ts && pnpm patch-browser",
+    "patch-browser": "tsx ../scripts/patch-graphql-eslint-browser.ts",
     "start": "next start"
   },
   "dependencies": {

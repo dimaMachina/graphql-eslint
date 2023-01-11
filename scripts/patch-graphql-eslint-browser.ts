@@ -1,7 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const CWD = process.cwd();
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const CWD = path.resolve(__dirname, '..')
 const ROOT_DIR = path.join(CWD, 'packages', 'plugin', 'dist', 'esm');
 
 async function patch(filePath: string, replace: (fileContent: string) => string): Promise<void> {
