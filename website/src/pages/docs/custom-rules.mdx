@@ -150,7 +150,8 @@ export const rule = {
 ```
 
 The structure of the return value of `.typeInfo()` is
-[defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-converter/converter.ts#L32-L40). So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
+[defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-converter/converter.ts#L32-L40).
+So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
 
 ## Testing Your Rules
 
@@ -168,7 +169,7 @@ import { rule } from './my-rule'
 const ruleTester = new GraphQLRuleTester()
 
 ruleTester.runGraphQLTests('your-rule-name', rule, {
-    valid: [
+  valid: [
     {
       code: 'query something { foo }'
     }
