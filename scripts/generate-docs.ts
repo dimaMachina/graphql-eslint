@@ -11,7 +11,7 @@ const { format, resolveConfig } = prettier;
 
 const BR = '';
 const NBSP = '&nbsp;';
-const DOCS_PATH = resolve(process.cwd(), 'docs');
+const RULES_PATH = resolve(process.cwd(), 'website', 'src', 'pages', 'rules');
 
 enum Icon {
   SCHEMA = '📄',
@@ -143,7 +143,7 @@ async function generateDocs(): Promise<void> {
       );
     }
     return {
-      path: resolve(DOCS_PATH, `rules/${ruleName}.md`),
+      path: resolve(RULES_PATH, `${ruleName}.md`),
       content: blocks.join('\n'),
     };
   });
@@ -181,7 +181,7 @@ async function generateDocs(): Promise<void> {
     });
 
   result.push({
-    path: resolve(DOCS_PATH, 'README.md'),
+    path: resolve(RULES_PATH, 'index.md'),
     content: [
       '# Available Rules',
       'Each rule has emojis denoting:',

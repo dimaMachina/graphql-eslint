@@ -11,8 +11,8 @@ Each rule has emojis denoting:
 - 💡 if some problems reported by the rule are manually fixable by editor
   [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
-{/* 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` */}
-{/* prettier-ignore-start */}
+<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->
+<!-- prettier-ignore-start -->
 Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Description|&nbsp;&nbsp;&nbsp;&nbsp;Config&nbsp;&nbsp;&nbsp;&nbsp;|📄&nbsp;/&nbsp;📦|🚀&nbsp;/&nbsp;🔮|🔧&nbsp;/&nbsp;💡
 -|-|:-:|:-:|:-:|:-:
 [alphabetize](rules/alphabetize.md)|Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation selections and more.|![all][]|📄 📦|🚀|🔧
@@ -78,7 +78,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [value-literals-of-correct-type](rules/value-literals-of-correct-type.md)|A GraphQL document is only valid if all value literals are of the type expected at their position.|![recommended][]|📦|🔮|💡
 [variables-are-input-types](rules/variables-are-input-types.md)|A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).|![recommended][]|📦|🔮|
 [variables-in-allowed-position](rules/variables-in-allowed-position.md)|Variables passed to field arguments conform to type.|![recommended][]|📦|🔮|
-{/* prettier-ignore-end */}
+<!-- prettier-ignore-end -->
 
 [recommended]: https://img.shields.io/badge/-recommended-green.svg
 [all]: https://img.shields.io/badge/-all-blue.svg
