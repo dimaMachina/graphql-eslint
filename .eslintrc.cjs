@@ -5,6 +5,7 @@ module.exports = {
     '@theguild/eslint-config/json',
     '@theguild/eslint-config/yml',
     '@theguild/eslint-config/mdx',
+    'plugin:import/typescript',
   ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off', // too strict
@@ -91,6 +92,7 @@ module.exports = {
         'tailwindcss/migration-from-tailwind-2': 'error',
         'tailwindcss/no-custom-classname': 'error',
         'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }],
+        'import/extensions': ['error', 'ignorePackages', { 'tsx': 'never' }],
       },
       settings: {
         tailwindcss: {
