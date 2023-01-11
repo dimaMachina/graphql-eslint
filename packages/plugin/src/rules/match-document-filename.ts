@@ -7,7 +7,7 @@ import {
   CaseStyle as _CaseStyle,
   convertCase,
   REPORT_ON_FIRST_CHARACTER,
-  VIRTUAL_DOCUMENT_REGEX
+  VIRTUAL_DOCUMENT_REGEX,
 } from '../utils.js';
 
 type CaseStyle = _CaseStyle | 'matchDocumentStyle';

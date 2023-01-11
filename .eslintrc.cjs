@@ -92,7 +92,7 @@ module.exports = {
         'tailwindcss/migration-from-tailwind-2': 'error',
         'tailwindcss/no-custom-classname': 'error',
         'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }],
-        'import/extensions': ['error', 'ignorePackages', { 'tsx': 'never' }],
+        'import/extensions': ['error', 'ignorePackages', { tsx: 'never' }],
       },
       settings: {
         tailwindcss: {
