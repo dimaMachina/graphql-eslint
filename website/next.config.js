@@ -18,8 +18,15 @@ export default withGuildDocs({
       ...config.resolve.alias,
       // fixes TypeError: esquery.parse is not a function in browser
       esquery: require.resolve('esquery'),
-      // fixes from @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
-      eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js')
+      // fixes for @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
+      eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js'),
+      // fixes for processor.js – Module not found: Can't resolve 'velocityjs' and other 36 modules
+      '@graphql-tools/graphql-tag-pluck': false,
+      '@graphql-tools/code-file-loader': false,
+      // fixes for graphql-config.js TypeError: (0 , module__WEBPACK_IMPORTED_MODULE_0__.createRequire) is not a function
+      'graphql-config': false,
+      // fixes for schema.js and documents.js TypeError: Cannot read properties of undefined (reading 'split')
+      'fast-glob': false
     };
 
     config.resolve.fallback = {

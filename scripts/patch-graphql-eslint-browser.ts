@@ -18,46 +18,32 @@ function commentLine(str: string): string {
   return `// ${str}`;
 }
 
-await patch('/index.js', str => {
-  return str
-    .replace("import { processor } from './processor.js'", commentLine)
-    .replace("export * from './testkit.js'", commentLine)
-    .replace('export const processors = { graphql: processor }', commentLine);
-});
+await patch('/testkit.js', str =>
+  str.replace('const require = createRequire(import.meta.url)', commentLine),
+);
 
-await patch('/parser.js', str => {
-  return str
-    .replace("import { loadGraphQLConfig } from './graphql-config.js'", commentLine)
+await patch('/parser.js', str =>
+  str
     .replace('const gqlConfig = loadGraphQLConfig(options)', commentLine)
-    .replace('const project = gqlConfig.getProjectForFile(realFilepath)', 'let project');
-});
+    .replace('const project = gqlConfig.getProjectForFile(realFilepath)', 'let project'),
+);
 
-await patch('/siblings.js', str => {
-  return str
-    .replace("import fg from 'fast-glob'", commentLine)
-    .replace('const operationsPaths = fg.sync(project.documents, { absolute: true })', commentLine);
-});
-
-await patch('/schema.js', str => {
-  return str
-    .replace("import fg from 'fast-glob'", commentLine)
-    .replace('const schemaPaths = fg.sync(project.schema, { absolute: true })', commentLine);
-});
-
-await patch('/estree-converter/utils.js', str => {
-  return str
+await patch('/estree-converter/utils.js', str =>
+  str
     .replace('const require = createRequire(import.meta.url)', commentLine)
     .replace(
       'function getLexer(source) {',
       m => `import { Lexer } from 'graphql'\n${m}\n    return new Lexer(source)`,
-    );
-});
+    ),
+);
 
-await patch('/rules/graphql-js-validation.js', str => {
-  return (
+await patch(
+  '/rules/graphql-js-validation.js',
+  str =>
     "import * as allGraphQLJSRules from 'graphql/validation/index.js'\n" +
-    str.replace('const require = createRequire(import.meta.url)', commentLine).replace(
-      `    let ruleFn = null;
+    str
+      .replace(
+        `    let ruleFn = null;
     try {
         ruleFn = require(\`graphql/validation/rules/\${ruleName}Rule\`)[\`\${ruleName}Rule\`];
     }
@@ -69,7 +55,7 @@ await patch('/rules/graphql-js-validation.js', str => {
             ruleFn = require('graphql/validation')[\`\${ruleName}Rule\`];
         }
     }`,
-      '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
-    )
-  );
-});
+        '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
+      )
+      .replace('const require = createRequire(import.meta.url)', commentLine),
+);
