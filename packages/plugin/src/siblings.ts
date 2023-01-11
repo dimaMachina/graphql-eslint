@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { Source } from '@graphql-tools/utils';
+import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
 import debugFactory from 'debug';
 import fg from 'fast-glob';
 import {
@@ -12,7 +12,7 @@ import {
 } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
 import { ModuleCache } from './cache.js';
-import { Pointer } from './types.js';
+import { ParserOptions, Pointer } from './types.js';
 import { logger } from './utils.js';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
@@ -54,7 +54,7 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
 const operationsCache = new ModuleCache<Source[]>();
 const siblingOperationsCache = new Map<Source[], SiblingOperations>();
 
-const getSiblings = (project: GraphQLProjectConfig): Source[] => {
+const getDocuments = (project: GraphQLProjectConfig): Source[] => {
   const documentsKey = project.documents;
   if (!documentsKey) {
     return [];
@@ -80,8 +80,15 @@ const getSiblings = (project: GraphQLProjectConfig): Source[] => {
   return siblings;
 };
 
-export function getDocuments(project: GraphQLProjectConfig): SiblingOperations {
-  const siblings = getSiblings(project);
+export function getSiblings(
+  project?: GraphQLProjectConfig,
+  documents?: ParserOptions['documents'],
+): SiblingOperations {
+  const siblings = project
+    ? getDocuments(project)
+    : typeof documents === 'string'
+    ? [parseGraphQLSDL('operation.graphql', documents, { noLocation: true })]
+    : [];
 
   if (siblings.length === 0) {
     let printed = false;

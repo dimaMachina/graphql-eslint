@@ -26,45 +26,22 @@ await patch('/index.js', str => {
 });
 
 await patch('/parser.js', str => {
-  return (
-    "import { buildSchema } from 'graphql'\n" +
-    str
-      .replace("import { loadGraphQLConfig } from './graphql-config.js'", commentLine)
-      .replace('const gqlConfig = loadGraphQLConfig(options)', commentLine)
-      .replace(
-        'const project = gqlConfig.getProjectForFile(realFilepath)',
-        () => 'const project = options.documents',
-      )
-      .replace(
-        'const schema = getSchema(project, options.schemaOptions)',
-        () => 'const schema = buildSchema(options.schema)',
-      )
-  );
+  return str
+    .replace("import { loadGraphQLConfig } from './graphql-config.js'", commentLine)
+    .replace('const gqlConfig = loadGraphQLConfig(options)', commentLine)
+    .replace('const project = gqlConfig.getProjectForFile(realFilepath)', 'let project');
 });
 
-await patch('/documents.js', str => {
-  return (
-    "import { parseGraphQLSDL } from '@graphql-tools/utils'\n" +
-    str
-      .replace("import fg from 'fast-glob'", commentLine)
-      .replace(
-        'const operationsPaths = fg.sync(project.documents, { absolute: true })',
-        commentLine,
-      )
-      .replace("debug('Operations pointers %O', operationsPaths)", commentLine)
-      .replace(
-        'const siblings = getSiblings(project)',
-        () =>
-          "const siblings = [parseGraphQLSDL('operation.graphql', project, { noLocation: true })]",
-      )
-  );
+await patch('/siblings.js', str => {
+  return str
+    .replace("import fg from 'fast-glob'", commentLine)
+    .replace('const operationsPaths = fg.sync(project.documents, { absolute: true })', commentLine);
 });
 
 await patch('/schema.js', str => {
   return str
     .replace("import fg from 'fast-glob'", commentLine)
-    .replace('const schemaPaths = fg.sync(project.schema, { absolute: true })', commentLine)
-    .replace("debug('Schema pointers %O', schemaPaths)", commentLine);
+    .replace('const schemaPaths = fg.sync(project.schema, { absolute: true })', commentLine);
 });
 
 await patch('/estree-converter/utils.js', str => {

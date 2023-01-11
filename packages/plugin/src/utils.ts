@@ -3,7 +3,7 @@ import { AST } from 'eslint';
 import { Position } from 'estree';
 import { ASTNode, GraphQLSchema, Kind } from 'graphql';
 import lowerCase from 'lodash.lowercase';
-import { SiblingOperations } from './documents.js';
+import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleContext } from './types.js';
 
 export function requireSiblingsOperations(

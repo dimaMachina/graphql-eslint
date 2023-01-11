@@ -89,7 +89,7 @@ export function PlayPage(): ReactElement {
     <div
       className={clsx(
         'h-[calc(100vh-var(--nextra-navbar-height)-54px)] md:h-[calc(100vh-var(--nextra-navbar-height)-68px)]',
-        'flex flex-row bg-gradient-to-br from-pink-300/40 via-fuchsia-200/40 to-purple-300/40 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
+        'flex flex-row bg-gradient-to-br via-pink-300/60 from-fuchsia-200/60 to-purple-300/60 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
       )}
     >
       <style>{`

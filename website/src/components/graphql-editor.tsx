@@ -1,13 +1,12 @@
 import { ReactElement, useEffect, useRef } from 'react';
 import { parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
 import Editor, { OnMount } from '@monaco-editor/react';
-import { Anchor, Callout, useTheme } from '@theguild/components';
+import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
 import { Linter } from 'eslint';
 // @ts-expect-error -- we patched this export
 import pkg from 'eslint/linter';
 import RulesRecord = Linter.RulesRecord;
-import clsx from 'clsx';
-import { InformationCircleIcon } from 'nextra/icons';
+import { clsx } from 'clsx';
 
 const linter: Linter = new pkg.Linter();
 

@@ -1,5 +1,5 @@
 import { GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
-import { SiblingOperations } from '../documents.js';
+import { SiblingOperations } from '../siblings.js';
 import { GraphQLESLintRule } from '../types.js';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils.js';
 

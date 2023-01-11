@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router';
-import { defineConfig, FooterExtended } from '@theguild/components';
+import { defineConfig, FooterExtended, Header,Navbar } from '@theguild/components';
 
 export default defineConfig({
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
@@ -34,5 +34,13 @@ export default defineConfig({
     },
   },
   logoLink: '/docs',
+  navbar: {
+    component: props => (
+      <>
+        <Header accentColor="#1cc8ee" search={false} />
+        <Navbar {...props} />
+      </>
+    ),
+  },
   siteName: 'ESLINT',
 });
