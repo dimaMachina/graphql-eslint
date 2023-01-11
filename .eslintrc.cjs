@@ -1,5 +1,5 @@
 module.exports = {
-  ignorePatterns: ['examples'],
+  ignorePatterns: ['examples', 'packages/plugin/tests/__snapshots__'],
   extends: [
     '@theguild',
     // '@theguild/eslint-config/react', // TODO: enable with new website

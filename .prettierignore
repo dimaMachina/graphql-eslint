@@ -5,3 +5,4 @@ examples/prettier/invalid.js
 pnpm-lock.yaml
 .bob/
 .next/
+out/
