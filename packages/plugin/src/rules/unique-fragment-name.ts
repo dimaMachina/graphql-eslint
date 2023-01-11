@@ -1,7 +1,7 @@
 import { relative } from 'path';
 import { ExecutableDefinitionNode, Kind } from 'graphql';
-import { FragmentSource, OperationSource } from '../siblings.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { FragmentSource, OperationSource } from '../siblings.js';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
 import { CWD, normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX } from '../utils.js';
 
