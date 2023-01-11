@@ -42,11 +42,11 @@ export const Select = ({
                 className={clsx(
                   'relative flex items-center rounded-md py-2 pl-8 pr-4 text-sm font-medium text-gray-700 focus:bg-gray-100 dark:text-gray-300 dark:focus:bg-gray-900',
                   'radix-disabled:opacity-50',
-                  'select-none focus:outline-none cursor-pointer',
+                  'cursor-pointer select-none focus:outline-none',
                 )}
               >
                 <S.ItemText>{option.name}</S.ItemText>
-                <S.ItemIndicator className="absolute left-2 inline-flex items-center" asChild>
+                <S.ItemIndicator className="absolute left-2 inline-flex items-center">
                   <CheckIcon />
                 </S.ItemIndicator>
               </S.Item>

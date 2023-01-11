@@ -17,7 +17,7 @@ type GraphQLEditorProps = {
   schema: string;
   documents: string;
   code: string;
-  selectedRules: Linter.RulesRecord;
+  selectedRules: Record<string, any>;
   height: string;
   onChange: (value: string) => void;
 };
@@ -102,9 +102,9 @@ export function GraphQLEditor({
         )}
         style={{ height }}
       >
-        {lintMessages.map(({ message, line, column, ruleId }) => (
+        {lintMessages.map(({ message, line, column, ruleId }, i) => (
           <Callout
-            key={`${message}-${line}-${column}`}
+            key={`${message}-${i}`}
             type="error"
             emoji={
               <div className="flex items-center gap-1">

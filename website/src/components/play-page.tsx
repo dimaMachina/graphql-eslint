@@ -9,15 +9,17 @@ import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
 
-const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
-const operationsConfigs = ['operations-recommended', 'operations-all'];
+const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'] as const;
+const operationsConfigs = ['operations-recommended', 'operations-all'] as const;
 
 const schemaRulesOptions = Object.entries(rules)
   .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
-  .map(([ruleId]) => ({ key: ruleId, name: ruleId }));
+  .map(([ruleId]) => ({ key: ruleId, name: ruleId }))
+  .sort(({ key: a }, { key: b }) => a.localeCompare(b));
 const operationsRulesOptions = Object.entries(rules)
-  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
-  .map(([ruleId]) => ({ key: ruleId, name: ruleId }));
+  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Operations'))
+  .map(([ruleId]) => ({ key: ruleId, name: ruleId }))
+  .sort(({ key: a }, { key: b }) => a.localeCompare(b));
 
 const schemaConfigsOptions = schemaConfigs.map(name => ({ key: name, name }));
 const operationsConfigsOptions = operationsConfigs.map(name => ({ key: name, name }));
@@ -89,7 +91,7 @@ export function PlayPage(): ReactElement {
     <div
       className={clsx(
         'h-[calc(100vh-var(--nextra-navbar-height)-54px)] md:h-[calc(100vh-var(--nextra-navbar-height)-68px)]',
-        'flex flex-row bg-gradient-to-br via-pink-300/60 from-fuchsia-200/60 to-purple-300/60 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
+        'flex flex-row bg-gradient-to-br from-fuchsia-200/60 via-pink-300/60 to-purple-300/60 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
       )}
     >
       <style>{`
@@ -155,8 +157,13 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
+          // @ts-expect-error -- TODO: fix type error
           ...(schemaConfig && flatConfigs[schemaConfig].rules),
-          ...(schemaRule && flatConfigs['schema-all'].rules[schemaRule]),
+          ...(schemaRule && {
+            [`@graphql-eslint/${schemaRule}`]:
+              // @ts-expect-error -- TODO: fix type error
+              flatConfigs['schema-all'].rules[`@graphql-eslint/${schemaRule}`],
+          }),
         }}
         onChange={setSchema}
       />
@@ -167,8 +174,13 @@ export function PlayPage(): ReactElement {
         schema={schema}
         documents={operation}
         selectedRules={{
+          // @ts-expect-error -- TODO: fix type error
           ...(operationConfig && flatConfigs[operationConfig].rules),
-          ...(operationRule && flatConfigs['operations-all'].rules[operationRule]),
+          ...(operationRule && {
+            [`@graphql-eslint/${operationRule}`]:
+              // @ts-expect-error -- TODO: fix type error
+              flatConfigs['operations-all'].rules[`@graphql-eslint/${operationRule}`],
+          }),
         }}
         onChange={setOperation}
       />
