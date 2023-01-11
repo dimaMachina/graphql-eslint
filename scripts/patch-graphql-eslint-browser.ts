@@ -18,9 +18,7 @@ function commentLine(str: string): string {
   return `// ${str}`;
 }
 
-await patch('/testkit.js', str =>
-  str.replace('const require = createRequire(import.meta.url)', commentLine),
-);
+await patch('/index.js', str => str.replace("export * from './testkit.js'", commentLine));
 
 await patch('/parser.js', str =>
   str
@@ -30,6 +28,7 @@ await patch('/parser.js', str =>
 
 await patch('/estree-converter/utils.js', str =>
   str
+    .replace("import { createRequire } from 'module'", commentLine)
     .replace('const require = createRequire(import.meta.url)', commentLine)
     .replace(
       'function getLexer(source) {',
@@ -42,6 +41,8 @@ await patch(
   str =>
     "import * as allGraphQLJSRules from 'graphql/validation/index.js'\n" +
     str
+      .replace("import { createRequire } from 'module'", commentLine)
+      .replace('const require = createRequire(import.meta.url)', commentLine)
       .replace(
         `    let ruleFn = null;
     try {
@@ -56,6 +57,5 @@ await patch(
         }
     }`,
         '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
-      )
-      .replace('const require = createRequire(import.meta.url)', commentLine),
+      ),
 );

@@ -1,7 +1,4 @@
-// import { createRequire } from 'node:module';
 import { withGuildDocs } from '@theguild/components/next.config';
-
-// const require = createRequire(import.meta.url);
 
 /** @type {import("next").Config} */
 export default withGuildDocs({
@@ -26,14 +23,7 @@ export default withGuildDocs({
       // fixes for graphql-config.js TypeError: (0 , module__WEBPACK_IMPORTED_MODULE_0__.createRequire) is not a function
       'graphql-config': false,
       // fixes for schema.js and documents.js TypeError: Cannot read properties of undefined (reading 'split')
-      'fast-glob': false
-    };
-
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      // ESLint throws an error in browser for below deps - Module not found: Can't resolve …
-      fs: false,
-      module: false,
+      'fast-glob': false,
     };
 
     return config;
