@@ -13,7 +13,7 @@ export const rule: GraphQLESLintRule = {
       category: 'Schema',
       description:
         'Avoid scalar result type on mutation type to make sure to return a valid state.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,
       examples: [
         {

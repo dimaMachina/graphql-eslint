@@ -4,6 +4,7 @@ import Editor, { OnMount } from '@monaco-editor/react';
 import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
 import { clsx } from 'clsx';
 import { Linter } from 'eslint';
+import uniqWith from 'lodash.uniqwith';
 
 const linter = new Linter();
 
@@ -34,21 +35,24 @@ export function GraphQLEditor({
   const { resolvedTheme } = useTheme();
   const editorRef = useRef<Parameters<OnMount>[0]>(null);
   const monacoRef = useRef<Parameters<OnMount>[1]>(null);
-  const lintMessages = linter
-    .verify(
-      code,
-      {
-        parser: '@graphql-eslint/eslint-plugin',
-        // extends: `plugin:@graphql-eslint/schema-recommended`,
-        parserOptions: { schema, documents },
-        rules: selectedRules,
-      },
-      fileName,
-    )
-    .map(message => ({
-      ...message,
-      message: message.message.replace('Parsing error: [graphql-eslint]', 'Parsing error:'),
-    }));
+  let lintMessages = linter.verify(
+    code,
+    {
+      parser: '@graphql-eslint/eslint-plugin',
+      // extends: `plugin:@graphql-eslint/schema-recommended`,
+      parserOptions: { schema, documents },
+      rules: selectedRules,
+    },
+    fileName,
+  );
+  lintMessages = uniqWith(
+    // remove duplicates of graphql-js messages
+    lintMessages,
+    (a, b) => b.message === a.message && b.line === a.line && b.column === a.column,
+  ).map(message => ({
+    ...message,
+    message: message.message.replace('Parsing error: [graphql-eslint]', 'Parsing error:'),
+  }));
 
   useEffect(() => {
     const model = editorRef.current?.getModel();
@@ -102,9 +106,9 @@ export function GraphQLEditor({
         )}
         style={{ height }}
       >
-        {lintMessages.map(({ message, line, column, ruleId }, i) => (
+        {lintMessages.map(({ message, line, column, ruleId }) => (
           <Callout
-            key={`${message}-${i}`}
+            key={`${line}:${column}:${message}`}
             type="error"
             emoji={
               <div className="flex items-center gap-1">

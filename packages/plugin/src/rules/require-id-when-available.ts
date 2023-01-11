@@ -54,7 +54,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
     docs: {
       category: 'Operations',
       description: 'Enforce selecting specific fields when they are available on the GraphQL type.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,
       requiresSiblings: true,
       examples: [

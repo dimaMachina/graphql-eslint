@@ -1,8 +1,19 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router';
-import { defineConfig, FooterExtended, Header,Navbar } from '@theguild/components';
+import { Anchor, defineConfig, FooterExtended, Header, Navbar } from '@theguild/components';
 
 export default defineConfig({
+  banner: {
+    key: 'new-website',
+    text: (
+      <>
+        🎉 Welcome to the new GraphQL-ESLint website. Try{' '}
+        <Anchor href="/play" className="text-primary-600">
+          new playground page →
+        </Anchor>{' '}
+      </>
+    ),
+  },
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
   // main({ children }) {
   //   const { resolvedTheme } = useTheme();

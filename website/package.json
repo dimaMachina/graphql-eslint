@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
-    "prebuild": "tsx ../scripts/generate-docs.ts",
     "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
     "dev": "next",
+    "prebuild": "tsx ../scripts/generate-docs.ts",
     "start": "next start"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "clsx": "1.2.1",
     "graphql": "16.6.0",
     "lodash.debounce": "4.0.8",
+    "lodash.uniqwith": "4.5.0",
     "next": "13.1.1",
     "next-query-params": "4.1.0",
     "next-sitemap": "3.1.44",
@@ -30,6 +31,7 @@
     "@theguild/algolia": "1.0.2",
     "@theguild/tailwind-config": "0.2.1",
     "@types/lodash.debounce": "4.0.7",
+    "@types/lodash.uniqwith": "4.5.7",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "tailwindcss-radix": "2.6.2"

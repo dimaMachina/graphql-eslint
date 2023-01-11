@@ -24,7 +24,7 @@ export const rule: GraphQLESLintRule = {
         '- `PageInfo` must contain fields `hasPreviousPage` and `hasNextPage`, that return non-null Boolean',
         '- `PageInfo` must contain fields `startCursor` and `endCursor`, that return either String or Scalar, which can be null if there are no results',
       ].join('\n'),
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [
         {
           title: 'Correct',

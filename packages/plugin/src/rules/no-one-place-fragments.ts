@@ -12,7 +12,7 @@ export const rule: GraphQLESLintRule = {
     docs: {
       category: 'Operations',
       description: 'Disallow fragments that are used only in one place.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [
         {
           title: 'Incorrect',

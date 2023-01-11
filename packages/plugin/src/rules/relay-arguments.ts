@@ -46,7 +46,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         '- `last` takes a non-negative integer',
         '- `before` takes the Cursor type',
       ].join('\n'),
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [
         {
           title: 'Incorrect',

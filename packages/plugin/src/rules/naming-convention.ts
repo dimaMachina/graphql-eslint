@@ -127,7 +127,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       description: 'Require names to follow specified conventions.',
       category: ['Schema', 'Operations'],
       recommended: true,
-      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/naming-convention.md',
+      url: 'https://the-guild.dev/graphql/eslint/rules/naming-convention',
       examples: [
         {
           title: 'Incorrect',
