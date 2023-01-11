@@ -38,13 +38,13 @@ describe('Rules', () => {
   });
 
   it('should load all rules properly from `operations-all` config', async () => {
-    const eslint = getESLintWithConfig(configs['operations-all'], { operations: '{ foo }' });
+    const eslint = getESLintWithConfig(configs['operations-all'], { documents: '{ foo }' });
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });
 
   it('should load all rules properly from `relay` config', async () => {
-    const eslint = getESLintWithConfig(configs.relay, { operations: '{ foo }' });
+    const eslint = getESLintWithConfig(configs.relay, { documents: '{ foo }' });
     const results = await eslint.lintText('{ foo }', { filePath: 'foo.graphql' });
     expect(results).toHaveLength(1);
   });

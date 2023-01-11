@@ -9,10 +9,10 @@ const TEST_FRAGMENT = /* GraphQL */ `
 `;
 
 const SIBLING_FRAGMENTS = (
-  ...operations: string[]
-): { parserOptions: Pick<ParserOptions, 'operations'> } => ({
+  ...documents: string[]
+): { parserOptions: Pick<ParserOptions, 'documents'> } => ({
   parserOptions: {
-    operations,
+    documents,
   },
 });
 

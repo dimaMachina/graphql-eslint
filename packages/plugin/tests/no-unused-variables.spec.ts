@@ -10,7 +10,7 @@ ruleTester.runGraphQLTests('no-unused-variables', rules['no-unused-variables'], 
       code: ruleTester.fromMockFile('no-unused-variables.gql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: join(__dirname, 'mocks/user-fields-with-variables.gql'),
+        documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
       },
     },
   ],

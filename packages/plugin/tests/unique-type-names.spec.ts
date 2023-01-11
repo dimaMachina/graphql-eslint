@@ -11,7 +11,7 @@ const TEST_SCHEMA = /* GraphQL */ `
 const WITH_SCHEMA = {
   parserOptions: <ParserOptions>{
     schema: TEST_SCHEMA,
-    operations: [],
+    documents: [],
   },
 };
 

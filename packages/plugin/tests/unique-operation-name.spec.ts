@@ -5,10 +5,10 @@ import { rule } from '../src/rules/unique-operation-name';
 const TEST_OPERATION = 'query test { foo }';
 
 const SIBLING_OPERATIONS = (
-  ...operations: string[]
-): { parserOptions: Pick<ParserOptions, 'operations'> } => ({
+  ...documents: string[]
+): { parserOptions: Pick<ParserOptions, 'documents'> } => ({
   parserOptions: {
-    operations,
+    documents,
   },
 });
 

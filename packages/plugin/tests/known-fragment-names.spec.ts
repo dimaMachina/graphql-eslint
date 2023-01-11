@@ -10,7 +10,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
       code: ruleTester.fromMockFile('user.graphql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: join(__dirname, 'mocks/user-fields-with-variables.gql'),
+        documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
       },
     },
     {
@@ -24,7 +24,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
       `,
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: join(__dirname, 'mocks/known-fragment-names.ts'),
+        documents: join(__dirname, 'mocks/known-fragment-names.ts'),
       },
     },
     {
@@ -33,7 +33,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
       code: ruleTester.fromMockFile('known-fragment-names/user.gql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: [
+        documents: [
           join(__dirname, 'mocks/known-fragment-names/user.gql'),
           join(__dirname, 'mocks/known-fragment-names/user-fields.gql'),
         ],
@@ -66,7 +66,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
             foo: Int
           }
         `,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment ContentUnit on ContentUnit {
             contentSets {
               id
@@ -104,7 +104,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
             animal: Animal
           }
         `,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment CatFields on Cat {
             title
           }
@@ -130,7 +130,7 @@ ruleTester.runGraphQLTests('known-fragment-names', rules['known-fragment-names']
       code: ruleTester.fromMockFile('known-fragment-names/operation-with-undefined-fragment.gql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: join(
+        documents: join(
           __dirname,
           'mocks/known-fragment-names/operation-with-undefined-fragment.gql',
         ),

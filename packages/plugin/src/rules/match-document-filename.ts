@@ -1,10 +1,14 @@
-import { existsSync } from 'fs';
 import { basename, extname } from 'path';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
-import { CaseStyle as _CaseStyle, convertCase, REPORT_ON_FIRST_CHARACTER } from '../utils.js';
+import {
+  CaseStyle as _CaseStyle,
+  convertCase,
+  REPORT_ON_FIRST_CHARACTER,
+  VIRTUAL_DOCUMENT_REGEX
+} from '../utils.js';
 
 type CaseStyle = _CaseStyle | 'matchDocumentStyle';
 
@@ -180,7 +184,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       fileExtension: null,
     };
     const filePath = context.getFilename();
-    const isVirtualFile = !existsSync(filePath);
+    const isVirtualFile = VIRTUAL_DOCUMENT_REGEX.test(filePath);
 
     if (process.env.NODE_ENV !== 'test' && isVirtualFile) {
       // Skip validation for code files

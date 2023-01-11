@@ -96,9 +96,3 @@ await patch('/rules/graphql-js-validation.js', str => {
     )
   );
 });
-
-await patch('/rules/match-document-filename.js', str => {
-  return str
-    .replace("import { existsSync } from 'fs'", commentLine)
-    .replace('const isVirtualFile = !existsSync(filePath)', () => 'const isVirtualFile = false');
-});

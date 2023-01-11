@@ -11,7 +11,7 @@ ruleTester.runGraphQLTests('no-unused-fragments', rules['no-unused-fragments'], 
       code: ruleTester.fromMockFile('user-fields.graphql'),
       parserOptions: {
         schema: join(__dirname, 'mocks/user-schema.graphql'),
-        operations: [
+        documents: [
           join(__dirname, 'mocks/user-fields.graphql'),
           join(__dirname, 'mocks/post-fields.graphql'),
           join(__dirname, 'mocks/post.graphql'),

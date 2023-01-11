@@ -59,7 +59,7 @@ const USER_POST_SCHEMA = /* GraphQL */ `
 const WITH_SCHEMA = {
   parserOptions: <ParserOptions>{
     schema: TEST_SCHEMA,
-    operations: '{ foo }',
+    documents: '{ foo }',
   },
 };
 
@@ -80,7 +80,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: '{ foo }',
+        documents: '{ foo }',
       },
     },
     {
@@ -88,7 +88,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       code: '{ foo }',
       parserOptions: {
         schema: 'type Query { id: ID }',
-        operations: '{ foo }',
+        documents: '{ foo }',
       },
     },
     { ...WITH_SCHEMA, code: '{ noId { name } }' },
@@ -98,7 +98,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       code: '{ hasId { ...HasIdFields } }',
       parserOptions: {
         schema: TEST_SCHEMA,
-        operations: 'fragment HasIdFields on HasId { id }',
+        documents: 'fragment HasIdFields on HasId { id }',
       },
     },
     { ...WITH_SCHEMA, code: '{ vehicles { id ...on Car { id mileage } } }' },
@@ -130,7 +130,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserLightFields on User {
             id
           }
@@ -152,7 +152,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserLightFields on User {
             id
           }
@@ -178,7 +178,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserLightFields on User {
             ... on User {
               id
@@ -204,7 +204,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserFields on User {
             id
           }
@@ -236,7 +236,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserFields on User {
             name
           }
@@ -260,7 +260,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserFields on User {
             name
           }
@@ -309,7 +309,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       `,
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserLightFields on User {
             name
           }
@@ -331,7 +331,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       errors: [MESSAGE_ID],
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: 'fragment UserFields on User { posts { title } }',
+        documents: 'fragment UserFields on User { posts { title } }',
       },
     },
     {
@@ -340,7 +340,7 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
       errors: [MESSAGE_ID, MESSAGE_ID, MESSAGE_ID, MESSAGE_ID],
       parserOptions: {
         schema: USER_POST_SCHEMA,
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment UserFullFields on User {
             posts {
               author {
