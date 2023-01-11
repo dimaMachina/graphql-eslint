@@ -16,6 +16,10 @@ export default withGuildDocs({
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
+      // fixes TypeError: esquery.parse is not a function in browser
+      esquery: require.resolve('esquery'),
+      // fixes from @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
+      eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js')
     };
 
     config.resolve.fallback = {

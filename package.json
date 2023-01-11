@@ -54,8 +54,7 @@
       "eslint@8.31.0": "patches/eslint@8.31.0.patch",
       "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch",
-      "vitest@0.26.3": "patches/vitest@0.26.3.patch",
-      "esquery@1.4.0": "patches/esquery@1.4.0.patch"
+      "vitest@0.26.3": "patches/vitest@0.26.3.patch"
     }
   }
 }

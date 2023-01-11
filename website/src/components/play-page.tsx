@@ -3,7 +3,7 @@ import { flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
 import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
 import { asArray } from '@graphql-tools/utils';
 import { clsx } from 'clsx';
-import eslintPkgJson from 'eslint/package.json';
+import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { GraphQLEditor } from './graphql-editor';
@@ -103,7 +103,7 @@ export function PlayPage(): ReactElement {
           <h3 className={classes.heading}>VERSIONING</h3>
           <span className="flex justify-between text-sm">
             <span>ESLint</span>
-            <span>{eslintPkgJson.version}</span>
+            <span>{Linter.version}</span>
           </span>
           <span className="flex justify-between text-sm">
             <span>GraphQL-ESLint</span>

@@ -2,13 +2,10 @@ import { ReactElement, useEffect, useRef } from 'react';
 import { parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
 import Editor, { OnMount } from '@monaco-editor/react';
 import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
-import { Linter } from 'eslint';
-// @ts-expect-error -- we patched this export
-import pkg from 'eslint/linter';
-import RulesRecord = Linter.RulesRecord;
 import { clsx } from 'clsx';
+import { Linter } from 'eslint';
 
-const linter: Linter = new pkg.Linter();
+const linter = new Linter();
 
 linter.defineParser('@graphql-eslint/eslint-plugin', { parseForESLint });
 for (const [ruleId, rule] of Object.entries(rules)) {
@@ -20,7 +17,7 @@ type GraphQLEditorProps = {
   schema: string;
   documents: string;
   code: string;
-  selectedRules: RulesRecord;
+  selectedRules: Linter.RulesRecord;
   height: string;
   onChange: (value: string) => void;
 };
