@@ -4,11 +4,11 @@ import { withGuildDocs } from '@theguild/components/next.config';
 export default withGuildDocs({
   redirects: () =>
     Object.entries({
-      '/': '/docs', // add landing page latter
+      '/': '/docs', // TODO: add landing page latter
     }).map(([from, to]) => ({
       source: from,
       destination: to,
-      permanent: false,
+      permanent: false, // TODO: set to true
     })),
   webpack(config) {
     config.resolve.fallback = {

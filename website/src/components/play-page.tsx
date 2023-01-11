@@ -11,7 +11,7 @@ import { Select } from './select';
 
 const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
 const operationsConfigs = ['operations-recommended', 'operations-all'];
-let i = 0;
+
 const schemaRulesOptions = Object.entries(rules)
   .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
   .map(([ruleId]) => ({ key: ruleId, name: ruleId }));
@@ -72,7 +72,6 @@ const classes = {
 const emptyString = withDefault(StringParam, '');
 
 export function PlayPage(): ReactElement {
-  console.info(++i, 'rerender');
   const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams('sc', emptyString);
   const [schemaRule, setSchemaRule] = useDebouncedQueryParams('sr', emptyString);
   const [operationConfig, setOperationConfig] = useDebouncedQueryParams('oc', emptyString);
@@ -90,7 +89,7 @@ export function PlayPage(): ReactElement {
     <div
       className={clsx(
         'h-[calc(100vh-var(--nextra-navbar-height)-54px)] md:h-[calc(100vh-var(--nextra-navbar-height)-68px)]',
-        'flex flex-row bg-gradient-to-br from-pink-300/40 via-fuchsia-200/40 to-purple-300/40 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-fit',
+        'flex flex-row bg-gradient-to-br from-pink-300/40 via-fuchsia-200/40 to-purple-300/40 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
       )}
     >
       <style>{`

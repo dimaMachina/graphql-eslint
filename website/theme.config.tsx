@@ -33,5 +33,6 @@ export default defineConfig({
       return route === '/play' ? null : <FooterExtended />;
     },
   },
+  logoLink: '/docs',
   siteName: 'ESLINT',
 });
