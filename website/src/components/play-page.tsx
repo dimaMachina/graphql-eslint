@@ -8,7 +8,6 @@ import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
-import { Button } from './button';
 
 const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'];
 const operationsConfigs = ['operations-recommended', 'operations-all'];
@@ -88,7 +87,18 @@ export function PlayPage(): ReactElement {
   );
 
   return (
-    <div className="flex h-[calc(100vh-var(--nextra-navbar-height)-68px)] flex-col bg-gradient-to-br from-pink-300/40 via-fuchsia-200/40 to-purple-300/40 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 md:flex-row">
+    <div
+      className={clsx(
+        'h-[calc(100vh-var(--nextra-navbar-height)-54px)] md:h-[calc(100vh-var(--nextra-navbar-height)-68px)]',
+        'flex flex-row bg-gradient-to-br from-pink-300/40 via-fuchsia-200/40 to-purple-300/40 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-fit',
+      )}
+    >
+      <style>{`
+        .nx-w-full.nx-overflow-x-hidden {
+          /* to allow scroll on mobile */
+          overflow-x: auto;
+        }
+      `}</style>
       <div className="nextra-scrollbar flex w-72 flex-col gap-4 overflow-y-auto p-5 text-xs">
         <div>
           <h3 className={classes.heading}>VERSIONING</h3>
