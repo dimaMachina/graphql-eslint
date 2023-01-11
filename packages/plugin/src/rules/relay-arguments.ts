@@ -86,8 +86,8 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         const args = Object.fromEntries(
           fieldNode.arguments?.map(argument => [argument.name.value, argument]) || [],
         );
-        const hasForwardPagination = Boolean(args.first && args.after);
-        const hasBackwardPagination = Boolean(args.last && args.before);
+        const hasForwardPagination = !!(args.first && args.after);
+        const hasBackwardPagination = !!(args.last && args.before);
 
         if (!hasForwardPagination && !hasBackwardPagination) {
           context.report({
@@ -102,7 +102,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           argumentName: 'first' | 'last' | 'after' | 'before',
         ): void {
           const argument = args[argumentName];
-          const hasArgument = Boolean(argument);
+          const hasArgument = !!argument;
           let type = argument as any;
           if (hasArgument && type.gqlType.kind === Kind.NON_NULL_TYPE) {
             type = type.gqlType;

@@ -90,7 +90,7 @@ async function generateConfigs(): Promise<void> {
         if (deprecated || !categories.has(categoryType)) {
           return false;
         }
-        return isRecommended === Boolean(docs.recommended);
+        return isRecommended === !!docs.recommended;
       })
       .map(([ruleName]) => ruleName)
       .sort();
