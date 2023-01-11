@@ -26,7 +26,7 @@ type Mutation {
 }
 ```
 
-### Correct (with checkInputType)
+### Correct (with `checkInputType`)
 
 ```graphql
 # eslint @graphql-eslint/input-name: ['error', { checkInputType: true }]
@@ -36,7 +36,7 @@ type Mutation {
 }
 ```
 
-### Correct (without checkInputType)
+### Correct (without `checkInputType`)
 
 ```graphql
 # eslint @graphql-eslint/input-name: ['error', { checkInputType: false }]
@@ -52,7 +52,7 @@ The schema defines the following properties:
 
 ### `checkInputType` (boolean)
 
-Check that the input type name follows the convention <mutationName>Input
+Check that the input type name follows the convention \<mutationName>Input
 
 Default: `false`
 
@@ -76,5 +76,5 @@ Default: `true`
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/input-name.ts)
-- [Test source](../../packages/plugin/tests/input-name.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/input-name.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/input-name.spec.ts)

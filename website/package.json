@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
+    "prebuild": "tsx ../scripts/generate-docs.ts",
     "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
     "dev": "next",
     "start": "next start"

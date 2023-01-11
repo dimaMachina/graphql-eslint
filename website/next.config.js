@@ -30,4 +30,7 @@ export default withGuildDocs({
     };
     return config;
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  }
 });

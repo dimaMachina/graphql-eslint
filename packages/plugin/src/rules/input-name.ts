@@ -23,7 +23,7 @@ const schema = {
       checkInputType: {
         type: 'boolean',
         default: false,
-        description: 'Check that the input type name follows the convention <mutationName>Input',
+        description: 'Check that the input type name follows the convention \\<mutationName>Input',
       },
       caseSensitiveInputType: {
         type: 'boolean',
@@ -76,7 +76,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           `,
         },
         {
-          title: 'Correct (with checkInputType)',
+          title: 'Correct (with `checkInputType`)',
           usage: [{ checkInputType: true }],
           code: /* GraphQL */ `
             type Mutation {
@@ -85,7 +85,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           `,
         },
         {
-          title: 'Correct (without checkInputType)',
+          title: 'Correct (without `checkInputType`)',
           usage: [{ checkInputType: false }],
           code: /* GraphQL */ `
             type Mutation {

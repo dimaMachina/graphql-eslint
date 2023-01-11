@@ -24,7 +24,7 @@ module.exports = {
         'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.$' }], // force to put a point at the end
         'eslint-plugin/require-meta-docs-url': [
           'error',
-          { pattern: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
+          { pattern: 'https://the-guild.dev/graphql/eslint/rules/{{name}}' },
         ],
         'eslint-plugin/prefer-message-ids': 'off',
       },
