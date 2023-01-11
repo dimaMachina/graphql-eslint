@@ -13,6 +13,7 @@ export type Pointer = string | string[];
 export interface ParserOptions {
   schema?: Pointer | Record<string, { headers: Record<string, string> }>;
   documents?: Pointer;
+  /** @deprecated Use `documents` instead */
   operations?: Pointer; // legacy
   extensions?: IExtensions;
   include?: Pointer;

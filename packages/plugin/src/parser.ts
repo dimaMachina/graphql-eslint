@@ -15,6 +15,8 @@ debug('cwd %o', CWD);
 export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
     const { filePath } = options;
+    // TODO: remove in graphql-eslint v4
+    options.documents ||= options.operations
     // First parse code from file, in case of syntax error do not try load schema,
     // documents or even graphql-config instance
     const { document } = parseGraphQLSDL(filePath, code, {
