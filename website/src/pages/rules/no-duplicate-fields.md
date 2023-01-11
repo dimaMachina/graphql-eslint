@@ -65,5 +65,5 @@ query (
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/no-duplicate-fields.ts)
-- [Test source](../../packages/plugin/tests/no-duplicate-fields.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-duplicate-fields.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-duplicate-fields.spec.ts)

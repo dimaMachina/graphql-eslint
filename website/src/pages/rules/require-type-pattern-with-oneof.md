@@ -35,5 +35,5 @@ type DoSomethingSuccess {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/require-type-pattern-with-oneof.ts)
-- [Test source](../../packages/plugin/tests/require-type-pattern-with-oneof.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-type-pattern-with-oneof.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/require-type-pattern-with-oneof.spec.ts)

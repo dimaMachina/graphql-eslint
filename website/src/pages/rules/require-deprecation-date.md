@@ -55,5 +55,5 @@ The schema defines the following properties:
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/require-deprecation-date.ts)
-- [Test source](../../packages/plugin/tests/require-deprecation-date.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-deprecation-date.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/require-deprecation-date.spec.ts)

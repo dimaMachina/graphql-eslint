@@ -58,5 +58,5 @@ type User {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/no-hashtag-description.ts)
-- [Test source](../../packages/plugin/tests/no-hashtag-description.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-hashtag-description.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-hashtag-description.spec.ts)

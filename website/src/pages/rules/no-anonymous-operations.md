@@ -39,5 +39,5 @@ query user {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/no-anonymous-operations.ts)
-- [Test source](../../packages/plugin/tests/no-anonymous-operations.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-anonymous-operations.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-anonymous-operations.spec.ts)

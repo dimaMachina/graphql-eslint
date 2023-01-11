@@ -48,5 +48,5 @@ type Query {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/no-unreachable-types.ts)
-- [Test source](../../packages/plugin/tests/no-unreachable-types.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-unreachable-types.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-unreachable-types.spec.ts)

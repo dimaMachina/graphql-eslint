@@ -46,5 +46,5 @@ type Mutation {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/require-field-of-type-query-in-mutation-result.ts)
-- [Test source](../../packages/plugin/tests/require-field-of-type-query-in-mutation-result.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-field-of-type-query-in-mutation-result.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/require-field-of-type-query-in-mutation-result.spec.ts)

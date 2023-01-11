@@ -30,5 +30,5 @@ type PageInfo {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/relay-page-info.ts)
-- [Test source](../../packages/plugin/tests/relay-page-info.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/relay-page-info.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/relay-page-info.spec.ts)

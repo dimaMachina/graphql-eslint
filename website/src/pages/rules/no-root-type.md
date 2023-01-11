@@ -51,5 +51,5 @@ Additional restrictions:
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/no-root-type.ts)
-- [Test source](../../packages/plugin/tests/no-root-type.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-root-type.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-root-type.spec.ts)

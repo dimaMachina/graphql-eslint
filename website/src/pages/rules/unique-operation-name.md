@@ -52,5 +52,5 @@ query me {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/unique-operation-name.ts)
-- [Test source](../../packages/plugin/tests/unique-operation-name.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/unique-operation-name.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/unique-operation-name.spec.ts)

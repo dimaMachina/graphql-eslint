@@ -45,5 +45,5 @@ type MyType {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/require-deprecation-reason.ts)
-- [Test source](../../packages/plugin/tests/require-deprecation-reason.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-deprecation-reason.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/require-deprecation-reason.spec.ts)

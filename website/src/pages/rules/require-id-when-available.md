@@ -87,5 +87,5 @@ The schema defines the following additional types:
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/require-id-when-available.ts)
-- [Test source](../../packages/plugin/tests/require-id-when-available.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-id-when-available.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/require-id-when-available.spec.ts)

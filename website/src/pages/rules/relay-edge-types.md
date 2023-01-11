@@ -56,5 +56,5 @@ Default: `true`
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/relay-edge-types.ts)
-- [Test source](../../packages/plugin/tests/relay-edge-types.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/relay-edge-types.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/relay-edge-types.spec.ts)

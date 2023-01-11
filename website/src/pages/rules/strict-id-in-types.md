@@ -125,5 +125,5 @@ Additional restrictions:
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/strict-id-in-types.ts)
-- [Test source](../../packages/plugin/tests/strict-id-in-types.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/strict-id-in-types.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/strict-id-in-types.spec.ts)

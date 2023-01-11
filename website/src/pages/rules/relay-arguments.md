@@ -55,5 +55,5 @@ Default: `true`
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/relay-arguments.ts)
-- [Test source](../../packages/plugin/tests/relay-arguments.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/relay-arguments.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/relay-arguments.spec.ts)

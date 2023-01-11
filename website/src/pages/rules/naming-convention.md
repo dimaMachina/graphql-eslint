@@ -316,5 +316,5 @@ Option to skip validation of some words, e.g. acronyms
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/naming-convention.ts)
-- [Test source](../../packages/plugin/tests/naming-convention.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/naming-convention.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/naming-convention.spec.ts)

@@ -190,5 +190,5 @@ Additional restrictions:
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/alphabetize.ts)
-- [Test source](../../packages/plugin/tests/alphabetize.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/alphabetize.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/alphabetize.spec.ts)

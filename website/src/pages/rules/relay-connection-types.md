@@ -39,5 +39,5 @@ type UserConnection {
 
 ## Resources
 
-- [Rule source](../../packages/plugin/src/rules/relay-connection-types.ts)
-- [Test source](../../packages/plugin/tests/relay-connection-types.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/relay-connection-types.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/relay-connection-types.spec.ts)
