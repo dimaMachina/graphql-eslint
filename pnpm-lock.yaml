@@ -24,7 +24,7 @@ importers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': ^9.0.0
-      '@theguild/eslint-config': 0.5.0
+      '@theguild/eslint-config': 0.6.0
       '@theguild/prettier-config': 1.0.0
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
@@ -47,7 +47,7 @@ importers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.1.3
-      '@theguild/eslint-config': 0.5.0_iukboom6ndih5an6iafl45j2fe
+      '@theguild/eslint-config': 0.6.0_iukboom6ndih5an6iafl45j2fe
       '@theguild/prettier-config': 1.0.0_prettier@2.8.2
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
@@ -1249,8 +1249,8 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
 
-  /@theguild/eslint-config/0.5.0_iukboom6ndih5an6iafl45j2fe:
-    resolution: {integrity: sha512-aSiN3Eg6lH5Uq0LjHRt764trs3uYHMsvr2UDRA6/RK/ThPHMvBwnfi1xI7vdwXabE9vSZosnlJ/e/skj43FnKQ==}
+  /@theguild/eslint-config/0.6.0_iukboom6ndih5an6iafl45j2fe:
+    resolution: {integrity: sha512-KvhPwf1X7Ra775dwdl4ZP2jlqUWpvQPxAm8MSX5QCT5sJu3I/FkW/i1eNgtKiWlu7bqCaqhCMuBmrzDgIFxy7Q==}
     peerDependencies:
       eslint: ^8.24.0
     dependencies:
