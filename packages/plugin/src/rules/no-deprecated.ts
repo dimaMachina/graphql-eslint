@@ -86,7 +86,7 @@ export const rule: GraphQLESLintRule<[], true> = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(context);
-    if (!schema) return {}
+    if (!schema) return {};
 
     function report(
       node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>,

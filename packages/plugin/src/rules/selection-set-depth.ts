@@ -84,7 +84,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    const siblings = requireSiblingsOperations(context, false)
+    const siblings = requireSiblingsOperations(context, false);
     if (!siblings) {
       logger.warn(
         `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`,

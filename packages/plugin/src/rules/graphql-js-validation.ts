@@ -127,7 +127,7 @@ const handleMissingFragments: GetDocumentNode = ({ context, node }) => {
   const missingFragments = getMissingFragments(node);
   if (missingFragments.length > 0) {
     const siblings = requireSiblingsOperations(context);
-    if (!siblings) return null
+    if (!siblings) return null;
     const fragmentsToAdd: FragmentDefinitionNode[] = [];
 
     for (const fragmentName of missingFragments) {
@@ -201,16 +201,16 @@ const validationToRule = (
 
         return {
           Document(node) {
-            let schema: GraphQLSchema | null = null
+            let schema: GraphQLSchema | null = null;
             if (docs.requiresSchema) {
-              schema = requireGraphQLSchemaFromContext(context)
-              if (!schema) return
+              schema = requireGraphQLSchemaFromContext(context);
+              if (!schema) return;
             }
 
             const documentNode = getDocumentNode
               ? getDocumentNode({ ruleId, context, node: node.rawNode() })
               : node.rawNode();
-            if (!documentNode) return
+            if (!documentNode) return;
             validateDocument({
               context,
               schema,
@@ -459,7 +459,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       ruleName: 'NoUnusedFragments',
       getDocumentNode: ({ context, node }) => {
         const siblings = requireSiblingsOperations(context);
-        if (!siblings) return null
+        if (!siblings) return null;
         const FilePathToDocumentsMap = [
           ...siblings.getOperations(),
           ...siblings.getFragments(),

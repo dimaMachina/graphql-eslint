@@ -75,7 +75,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(context);
-    if (!schema) return {}
+    if (!schema) return {};
     const { includeBoth = true } = context.options[0] || {};
 
     return {

@@ -112,7 +112,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   create(context) {
     const schema = requireGraphQLSchemaFromContext(context);
     const siblings = requireSiblingsOperations(context);
-    if (!schema || !siblings) return {}
+    if (!schema || !siblings) return {};
     const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
     const idNames = asArray(fieldName);
 

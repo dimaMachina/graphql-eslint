@@ -55,7 +55,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const siblings = requireSiblingsOperations(context);
-    if (!siblings) return {}
+    if (!siblings) return {};
     const allDocuments = [...siblings.getOperations(), ...siblings.getFragments()];
 
     const usedFragmentsMap: Record<string, string[]> = Object.create(null);

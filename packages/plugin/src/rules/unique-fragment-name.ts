@@ -91,7 +91,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const siblings = requireSiblingsOperations(context);
-    if (!siblings) return {}
+    if (!siblings) return {};
     return {
       FragmentDefinition(node) {
         checkNode(context, node, RULE_ID, siblings);

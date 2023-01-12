@@ -104,7 +104,7 @@ export const rule: GraphQLESLintRule = {
   create(context) {
     const schema = requireGraphQLSchemaFromContext(context);
     const siblings = requireSiblingsOperations(context);
-    if (!schema || !siblings) return {}
+    if (!schema || !siblings) return {};
     const usedFields = getUsedFields(schema, siblings);
 
     return {
