@@ -244,7 +244,7 @@ importers:
       '@monaco-editor/react': 4.4.6
       '@radix-ui/react-icons': 1.1.1
       '@radix-ui/react-select': 1.1.2
-      '@theguild/algolia': 1.0.2
+      '@theguild/algolia': 1.1.0
       '@theguild/components': 4.5.0
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
@@ -279,7 +279,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       use-query-params: 2.1.2_biqbaboplfbrettd7655fr4n2y
     devDependencies:
-      '@theguild/algolia': 1.0.2
+      '@theguild/algolia': 1.1.0
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
       '@types/lodash.uniqwith': 4.5.7
@@ -2066,8 +2066,8 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@theguild/algolia/1.0.2:
-    resolution: {integrity: sha512-4h8g9i25MijzkTt8EjOH+B8Ano7BAJpGLjRfY8Rxvpfs+XRaQNgNFyZzz2NycE81T1EulkY2s0Aq+FyHTwfVHg==}
+  /@theguild/algolia/1.1.0:
+    resolution: {integrity: sha512-FBkCizVRVL1xpm5PKKAlYqwGOrC5npS88IrI2bEeJobVoUoNktkrDXfFDPjR0zvu7LLiqSdBRAQ8MRi01PRflw==}
     hasBin: true
     dependencies:
       algoliasearch: 4.14.3
@@ -2075,7 +2075,8 @@ packages:
       github-slugger: 2.0.0
       glob: 8.0.3
       gray-matter: 4.0.3
-      lodash: 4.17.21
+      lodash.map: 4.6.0
+      lodash.sortby: 4.7.0
       remove-markdown: 0.5.0
     dev: true
 
@@ -6104,6 +6105,10 @@ packages:
   /lodash.lowercase/4.3.0:
     resolution: {integrity: sha512-UcvP1IZYyDKyEL64mmrwoA1AbFu5ahojhTtkOUr1K9dbuxzS9ev8i4TxMMGCqRC9TE8uDaSoufNAXxRPNTseVA==}
     dev: false
+
+  /lodash.map/4.6.0:
+    resolution: {integrity: sha512-worNHGKLDetmcEYDvh2stPCrrQRkP20E4l0iIS7F8EvzMqBBi7ltvFN5m1HvTf1P7Jk1txKhvFcmYsCr8O2F1Q==}
+    dev: true
 
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
