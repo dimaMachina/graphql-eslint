@@ -5,7 +5,6 @@ module.exports = {
     '@theguild/eslint-config/json',
     '@theguild/eslint-config/yml',
     '@theguild/eslint-config/mdx',
-    'plugin:import/typescript',
   ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off', // too strict
@@ -76,15 +75,12 @@ module.exports = {
       },
     },
     {
-      files: ['.github/ISSUE_TEMPLATE/bug_report.md', '.github/PULL_REQUEST_TEMPLATE.md'],
-      rules: {
-        // ignore for above files
-        'unicorn/filename-case': 'off',
-      },
-    },
-    {
       files: ['website/**'],
-      extends: ['@theguild/eslint-config/react', 'plugin:tailwindcss/recommended'],
+      extends: [
+        '@theguild/eslint-config/react',
+        '@theguild/eslint-config/mdx',
+        'plugin:tailwindcss/recommended',
+      ],
       rules: {
         'tailwindcss/classnames-order': 'off',
         'tailwindcss/enforces-negative-arbitrary-values': 'error',
@@ -101,14 +97,6 @@ module.exports = {
             'node_modules/.pnpm/node_modules/nextra-theme-docs/style.css',
           ],
         },
-      },
-    },
-    {
-      // TODO: fix in guild eslint config
-      files: ['website/**'],
-      excludedFiles: ['**/*.mdx/*'],
-      rules: {
-        'import/extensions': ['error', 'ignorePackages', { tsx: 'never' }],
       },
     },
   ],
