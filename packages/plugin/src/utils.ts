@@ -8,14 +8,17 @@ import { GraphQLESLintRuleContext } from './types.js';
 
 export function requireSiblingsOperations(
   context: GraphQLESLintRuleContext,
+  shouldReport = true,
 ): SiblingOperations | null {
   const { siblingOperations } = context.parserServices;
   if (!siblingOperations.available) {
-    context.report({
-      loc: REPORT_ON_FIRST_CHARACTER,
-      message:
-        'Rule requires `parserOptions.operations` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info',
-    });
+    if (shouldReport) {
+      context.report({
+        loc: REPORT_ON_FIRST_CHARACTER,
+        message:
+          'Rule requires `parserOptions.operations` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info',
+      });
+    }
     return null;
   }
   return siblingOperations;

@@ -1,7 +1,7 @@
-import { requireSiblingsOperations } from '@graphql-eslint/eslint-plugin';
 import { OperationDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { requireSiblingsOperations } from '../utils.js';
 import { checkNode } from './unique-fragment-name.js';
 
 const RULE_ID = 'unique-operation-name';

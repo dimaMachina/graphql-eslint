@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import debugFactory from 'debug';
 import fg from 'fast-glob';
 import { GraphQLSchema } from 'graphql';
@@ -42,7 +41,7 @@ export function getSchema(
     schemaCache.set(schemaKey, schema);
   } catch (error) {
     if (error instanceof Error) {
-      error.message = chalk.red(`Error while loading schema: ${error.message}`);
+      error.message = `Error while loading schema: ${error.message}`;
     }
     schema = error as Error;
   }
