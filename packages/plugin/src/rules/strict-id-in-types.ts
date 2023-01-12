@@ -130,7 +130,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ...context.options[0],
     };
 
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchemaFromContext(context);
     if (!schema) return {};
     const rootTypeNames = [
       schema.getQueryType(),

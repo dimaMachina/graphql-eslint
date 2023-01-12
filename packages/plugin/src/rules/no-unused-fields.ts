@@ -102,8 +102,8 @@ export const rule: GraphQLESLintRule = {
     hasSuggestions: true,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-    const siblings = requireSiblingsOperations(RULE_ID, context);
+    const schema = requireGraphQLSchemaFromContext(context);
+    const siblings = requireSiblingsOperations(context);
     if (!schema || !siblings) return {}
     const usedFields = getUsedFields(schema, siblings);
 

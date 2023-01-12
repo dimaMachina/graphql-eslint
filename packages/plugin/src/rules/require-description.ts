@@ -174,7 +174,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
 
     if (rootField) {
-      const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+      const schema = requireGraphQLSchemaFromContext(context);
       if (schema) {
         const rootTypeNames = getRootTypeNames(schema);
         kinds.add(

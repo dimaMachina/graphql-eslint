@@ -3,7 +3,6 @@ import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'grap
 import depthLimit from 'graphql-depth-limit';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { SiblingOperations } from '../siblings.js';
 import { GraphQLESLintRule } from '../types.js';
 import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils.js';
 
@@ -85,11 +84,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    let siblings: SiblingOperations | null = null;
-
-    try {
-      siblings = requireSiblingsOperations(RULE_ID, context);
-    } catch {
+    const siblings = requireSiblingsOperations(context)
+    if (!siblings) {
       logger.warn(
         `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`,
       );

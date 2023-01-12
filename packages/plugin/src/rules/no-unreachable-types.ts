@@ -150,7 +150,7 @@ export const rule: GraphQLESLintRule = {
     hasSuggestions: true,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchemaFromContext(context);
     if (!schema) return {}
     const reachableTypes = getReachableTypes(schema);
 

@@ -59,7 +59,7 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const siblings = requireSiblingsOperations(RULE_ID, context);
+    const siblings = requireSiblingsOperations(context);
     if (!siblings) return {};
     return {
       'OperationDefinition[name!=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {

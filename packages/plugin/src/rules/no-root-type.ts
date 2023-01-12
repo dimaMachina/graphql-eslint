@@ -59,7 +59,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext('no-root-type', context);
+    const schema = requireGraphQLSchemaFromContext(context);
     if (!schema) return {}
     const disallow = new Set(context.options[0].disallow);
 

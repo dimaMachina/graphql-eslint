@@ -7,14 +7,14 @@ import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleContext } from './types.js';
 
 export function requireSiblingsOperations(
-  ruleId: string,
   context: GraphQLESLintRuleContext,
 ): SiblingOperations | null {
   const { siblingOperations } = context.parserServices;
   if (!siblingOperations.available) {
     context.report({
       loc: REPORT_ON_FIRST_CHARACTER,
-      message: `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`,
+      message:
+        'Rule requires `parserOptions.operations` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info',
     });
     return null;
   }
@@ -22,14 +22,14 @@ export function requireSiblingsOperations(
 }
 
 export function requireGraphQLSchemaFromContext(
-  ruleId: string,
   context: GraphQLESLintRuleContext,
 ): GraphQLSchema | null {
   const { schema } = context.parserServices;
   if (!schema) {
     context.report({
       loc: REPORT_ON_FIRST_CHARACTER,
-      message: `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
+      message:
+        'Rule requires `parserOptions.schema` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info',
     });
     return null;
   }
