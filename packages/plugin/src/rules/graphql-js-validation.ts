@@ -206,10 +206,10 @@ const validationToRule = (
               schema = requireGraphQLSchemaFromContext(context);
               if (!schema) return;
             }
-
+            const rawNode = node.rawNode();
             const documentNode = getDocumentNode
-              ? getDocumentNode({ ruleId, context, node: node.rawNode() })
-              : node.rawNode();
+              ? getDocumentNode({ context, node: rawNode })
+              : rawNode;
             if (!documentNode) return;
             validateDocument({
               context,
