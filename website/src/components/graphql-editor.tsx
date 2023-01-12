@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import { parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
 import Editor, { OnMount } from '@monaco-editor/react';
 import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
@@ -35,6 +35,7 @@ export function GraphQLEditor({
   const { resolvedTheme } = useTheme();
   const editorRef = useRef<Parameters<OnMount>[0]>(null);
   const monacoRef = useRef<Parameters<OnMount>[1]>(null);
+  const [editorMounted, setEditorMounted] = useState(false);
   let lintMessages = linter.verify(
     code,
     {
@@ -58,7 +59,6 @@ export function GraphQLEditor({
     const model = editorRef.current?.getModel();
     const monaco = monacoRef.current;
     if (!model) return;
-
     monaco.editor.setModelMarkers(
       model,
       'graphql-eslint',
@@ -73,7 +73,7 @@ export function GraphQLEditor({
         message: message.message,
       })),
     );
-  }, [lintMessages]);
+  }, [lintMessages, editorMounted]);
 
   return (
     <div className="grow overflow-hidden border-l dark:border-neutral-800 md:w-0">
@@ -96,6 +96,7 @@ export function GraphQLEditor({
           // you can store it in `useRef` for further usage
           editorRef.current = editor;
           monacoRef.current = monaco;
+          setEditorMounted(true);
         }}
         onChange={(value = '') => onChange(value)}
       />
@@ -122,7 +123,7 @@ export function GraphQLEditor({
             }
           >
             {message}
-            {ruleId && (
+            {!!ruleId && (
               <>
                 {' \n'}
                 <Anchor

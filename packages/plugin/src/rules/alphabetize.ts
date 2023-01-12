@@ -262,7 +262,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         firstAfterComment && isNodeAndCommentOnSameLine(node, firstAfterComment)
           ? firstAfterComment
           : node;
-      return [from!.range![0], to!.range![1]];
+      return [from.range![0], to.range![1]];
     }
 
     function checkNodes(nodes: GraphQLESTreeNode<ASTNode>[] = []) {

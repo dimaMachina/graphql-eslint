@@ -9,13 +9,22 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 'off', // too strict
     '@typescript-eslint/no-non-null-assertion': 'off', // too strict
-    'no-restricted-globals': ['error', { name: 'isNaN', message: 'Use Number.isNaN instead' }],
     'unicorn/prefer-array-some': 'error',
     'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { object: true }],
     quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
   },
   overrides: [
+    {
+      files: ['**/*.{,c,m}ts{,x}'],
+      excludedFiles: ['**/*.md{,x}/*'],
+      rules: {
+        '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+      },
+      parserOptions: {
+        project: ['tsconfig.json', 'website/tsconfig.json', 'tsconfig.eslint.json'],
+      },
+    },
     {
       files: ['**/rules/*.ts'],
       extends: ['plugin:eslint-plugin/rules-recommended'],
@@ -29,7 +38,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.{spec,test}.ts'],
+      files: ['**/*.{spec,test}.ts'],
       env: {
         jest: true,
       },
