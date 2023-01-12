@@ -119,12 +119,11 @@ const getMissingFragments = (node: DocumentNode): string[] => {
 };
 
 type GetDocumentNode = (props: {
-  ruleId: string;
   context: GraphQLESLintRuleContext;
   node: DocumentNode;
 }) => DocumentNode | null;
 
-const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
+const handleMissingFragments: GetDocumentNode = ({ context, node }) => {
   const missingFragments = getMissingFragments(node);
   if (missingFragments.length > 0) {
     const siblings = requireSiblingsOperations(context);
@@ -141,7 +140,6 @@ const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
     if (fragmentsToAdd.length > 0) {
       // recall fn to make sure to add fragments inside fragments
       return handleMissingFragments({
-        ruleId,
         context,
         node: {
           kind: Kind.DOCUMENT,
@@ -459,7 +457,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       ruleId: 'no-unused-fragments',
       ruleName: 'NoUnusedFragments',
-      getDocumentNode: ({ ruleId, context, node }) => {
+      getDocumentNode: ({ context, node }) => {
         const siblings = requireSiblingsOperations(context);
         if (!siblings) return null
         const FilePathToDocumentsMap = [
