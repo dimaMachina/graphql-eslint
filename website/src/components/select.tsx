@@ -15,11 +15,12 @@ type SelectProps = {
 export const Select = ({
   options,
   defaultValue,
+  value,
   onChange,
   placeholder,
 }: SelectProps): ReactElement => {
   return (
-    <S.Root defaultValue={defaultValue} onValueChange={onChange}>
+    <S.Root defaultValue={defaultValue} value={value} onValueChange={onChange}>
       <S.Trigger asChild aria-label={placeholder}>
         <Button>
           <S.Value placeholder={placeholder} />

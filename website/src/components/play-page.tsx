@@ -71,13 +71,17 @@ const classes = {
   heading: clsx('font-medium mb-2'),
 };
 
-const emptyString = withDefault(StringParam, '');
-
 export function PlayPage(): ReactElement {
-  const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams('sc', emptyString);
-  const [schemaRule, setSchemaRule] = useDebouncedQueryParams('sr', emptyString);
-  const [operationConfig, setOperationConfig] = useDebouncedQueryParams('oc', emptyString);
-  const [operationRule, setOperationRule] = useDebouncedQueryParams('or', emptyString);
+  const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams(
+    'sc',
+    withDefault(StringParam, 'schema-recommended'),
+  );
+  const [schemaRule, setSchemaRule] = useDebouncedQueryParams<string>('sr');
+  const [operationConfig, setOperationConfig] = useDebouncedQueryParams(
+    'oc',
+    withDefault(StringParam, 'operations-recommended'),
+  );
+  const [operationRule, setOperationRule] = useDebouncedQueryParams<string>('or');
   const [schema, setSchema] = useDebouncedQueryParams(
     's',
     withDefault(StringParam, DEFAULT_SCHEMA),
@@ -130,6 +134,7 @@ export function PlayPage(): ReactElement {
             placeholder="Choose a schema rule"
           />
         </div>
+        <hr className="dark:border-neutral-800" />
         <div>
           <h3 className={classes.heading}>OPERATION CONFIG</h3>
           <Select

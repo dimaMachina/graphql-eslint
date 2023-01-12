@@ -66,7 +66,7 @@ export const rule: GraphQLESLintRule = {
         while (token) {
           const { kind, prev, next, value, line, column } = token;
           if (kind === TokenKind.COMMENT && prev && next) {
-            // TODO: remove `!` when drop support of graphql@15
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
             const isEslintComment = value!.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
 
@@ -87,7 +87,7 @@ export const rule: GraphQLESLintRule = {
                   fix: fixer =>
                     fixer.replaceTextRange(
                       [token.start, token.end] as [number, number],
-                      // TODO: remove `!` when drop support of graphql@15
+                      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
                       [descriptionSyntax, value!.trim(), descriptionSyntax].join(''),
                     ),
                 })),
