@@ -112,6 +112,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const siblings = requireSiblingsOperations(RULE_ID, context);
+    if (!schema || !siblings) return {}
     const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
     const idNames = asArray(fieldName);
 
@@ -127,7 +128,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           continue;
         }
 
-        const [foundSpread] = siblings.getFragment(selection.name.value);
+        const [foundSpread] = siblings!.getFragment(selection.name.value);
         if (!foundSpread) {
           continue;
         }
@@ -193,7 +194,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           }
 
           if (selection.kind === Kind.FRAGMENT_SPREAD) {
-            const [foundSpread] = siblings.getFragment(selection.name.value);
+            const [foundSpread] = siblings!.getFragment(selection.name.value);
             if (foundSpread) {
               const fragmentSpread = foundSpread.document;
               checkedFragmentSpreads.add(fragmentSpread.name.value);

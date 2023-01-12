@@ -75,6 +75,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    if (!schema) return {}
     const { includeBoth = true } = context.options[0] || {};
 
     return {
@@ -111,7 +112,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
             hasArgument &&
             type.gqlType.kind === Kind.NAMED_TYPE &&
             (type.gqlType.name.value === typeName ||
-              (typeName === 'String' && isScalarType(schema.getType(type.gqlType.name.value))));
+              (typeName === 'String' && isScalarType(schema!.getType(type.gqlType.name.value))));
 
           if (!isAllowedNonNullType) {
             const returnType = typeName === 'String' ? 'String or Scalar' : typeName;

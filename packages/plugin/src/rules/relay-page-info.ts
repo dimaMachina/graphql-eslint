@@ -49,6 +49,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    if (!schema) return {}
     if (process.env.NODE_ENV === 'test' || !hasPageInfoChecked) {
       const pageInfoType = schema.getType('PageInfo');
       if (!pageInfoType) {

@@ -1,3 +1,4 @@
+import { requireSiblingsOperations } from '@graphql-eslint/eslint-plugin';
 import { OperationDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
@@ -58,9 +59,11 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
+    const siblings = requireSiblingsOperations(RULE_ID, context);
+    if (!siblings) return {};
     return {
       'OperationDefinition[name!=undefined]'(node: GraphQLESTreeNode<OperationDefinitionNode>) {
-        checkNode(context, node, RULE_ID);
+        checkNode(context, node, RULE_ID, siblings);
       },
     };
   },

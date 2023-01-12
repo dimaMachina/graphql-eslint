@@ -1,7 +1,7 @@
 import { relative } from 'path';
 import { ExecutableDefinitionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { FragmentSource, OperationSource } from '../siblings.js';
+import { FragmentSource, OperationSource, SiblingOperations } from '../siblings.js';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../types.js';
 import { CWD, normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX } from '../utils.js';
 
@@ -11,9 +11,9 @@ export const checkNode = (
   context: GraphQLESLintRuleContext,
   node: GraphQLESTreeNode<ExecutableDefinitionNode>,
   ruleId: string,
+  siblings: SiblingOperations,
 ): void => {
   const documentName = node.name!.value;
-  const siblings = requireSiblingsOperations(ruleId, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
     node.kind === Kind.FRAGMENT_DEFINITION
       ? siblings.getFragment(documentName)
@@ -90,9 +90,11 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
+    const siblings = requireSiblingsOperations(RULE_ID, context);
+    if (!siblings) return {}
     return {
       FragmentDefinition(node) {
-        checkNode(context, node, RULE_ID);
+        checkNode(context, node, RULE_ID, siblings);
       },
     };
   },

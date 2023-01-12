@@ -175,12 +175,14 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     if (rootField) {
       const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-      const rootTypeNames = getRootTypeNames(schema);
-      kinds.add(
-        `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${[
-          ...rootTypeNames,
-        ].join(',')})$/] > FieldDefinition`,
-      );
+      if (schema) {
+        const rootTypeNames = getRootTypeNames(schema);
+        kinds.add(
+          `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${[
+            ...rootTypeNames,
+          ].join(',')})$/] > FieldDefinition`,
+        );
+      }
     }
 
     const selector = [...kinds].join(',');

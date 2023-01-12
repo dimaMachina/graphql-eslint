@@ -48,6 +48,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    if (!schema) return {}
     const mutationType = schema.getMutationType();
     const queryType = schema.getQueryType();
 

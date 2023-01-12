@@ -126,6 +126,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    if (!schema) return {}
     const edgeTypes = getEdgeTypes(schema);
     const options: RuleOptions[0] = {
       withEdgeSuffix: true,

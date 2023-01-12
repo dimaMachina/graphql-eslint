@@ -9,12 +9,14 @@ import { GraphQLESLintRuleContext } from './types.js';
 export function requireSiblingsOperations(
   ruleId: string,
   context: GraphQLESLintRuleContext,
-): SiblingOperations | never {
+): SiblingOperations | null {
   const { siblingOperations } = context.parserServices;
   if (!siblingOperations.available) {
-    throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`,
-    );
+    context.report({
+      loc: REPORT_ON_FIRST_CHARACTER,
+      message: `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`,
+    });
+    return null;
   }
   return siblingOperations;
 }
@@ -22,14 +24,21 @@ export function requireSiblingsOperations(
 export function requireGraphQLSchemaFromContext(
   ruleId: string,
   context: GraphQLESLintRuleContext,
-): GraphQLSchema | never {
+): GraphQLSchema | null {
   const { schema } = context.parserServices;
   if (!schema) {
-    throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
-    );
-  } else if (schema instanceof Error) {
-    throw schema;
+    context.report({
+      loc: REPORT_ON_FIRST_CHARACTER,
+      message: `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
+    });
+    return null;
+  }
+  if (schema instanceof Error) {
+    context.report({
+      loc: REPORT_ON_FIRST_CHARACTER,
+      message: schema.message,
+    });
+    return null;
   }
   return schema;
 }

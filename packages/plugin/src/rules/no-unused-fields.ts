@@ -103,8 +103,9 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-    const siblingsOperations = requireSiblingsOperations(RULE_ID, context);
-    const usedFields = getUsedFields(schema, siblingsOperations);
+    const siblings = requireSiblingsOperations(RULE_ID, context);
+    if (!schema || !siblings) return {}
+    const usedFields = getUsedFields(schema, siblings);
 
     return {
       FieldDefinition(node) {
