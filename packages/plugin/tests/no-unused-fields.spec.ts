@@ -45,7 +45,7 @@ ruleTester.runGraphQLTests('no-unused-fields', rule, {
     {
       code: SCHEMA,
       parserOptions: {
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           {
             user(id: 1) {
               ... on User {
@@ -93,7 +93,7 @@ ruleTester.runGraphQLTests('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           {
             user(id: 1) {
               id
@@ -114,7 +114,7 @@ ruleTester.runGraphQLTests('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           {
             user(id: 1) {
               id

@@ -95,7 +95,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     docs: {
       category: 'Schema',
       description: 'Enforce descriptions in type definitions and operations.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [
         {
           title: 'Incorrect',

@@ -10,7 +10,7 @@ ruleTester.runGraphQLTests('no-one-place-fragments', rule, {
       name: 'ok when spread 2 times',
       code: ruleTester.fromMockFile('no-one-place-fragments.graphql'),
       parserOptions: {
-        operations: join(__dirname, 'mocks/no-one-place-fragments.graphql'),
+        documents: join(__dirname, 'mocks/no-one-place-fragments.graphql'),
       },
     },
   ],
@@ -22,7 +22,7 @@ ruleTester.runGraphQLTests('no-one-place-fragments', rule, {
         { message: 'Fragment `UserFields` used only once. Inline him in "-877628611.graphql".' },
       ],
       parserOptions: {
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           {
             user {
               ...UserFields

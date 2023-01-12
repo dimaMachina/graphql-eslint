@@ -2,8 +2,8 @@ import { AST } from 'eslint';
 import { DocumentNode, ExecutableDefinitionNode, GraphQLError, Kind } from 'graphql';
 import depthLimit from 'graphql-depth-limit';
 import { FromSchema } from 'json-schema-to-ts';
-import { SiblingOperations } from '../documents.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
+import { SiblingOperations } from '../siblings.js';
 import { GraphQLESLintRule } from '../types.js';
 import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../utils.js';
 
@@ -36,7 +36,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       category: 'Operations',
       description:
         'Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSiblings: true,
       examples: [
         {

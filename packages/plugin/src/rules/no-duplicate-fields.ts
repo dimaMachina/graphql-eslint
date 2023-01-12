@@ -12,7 +12,7 @@ export const rule: GraphQLESLintRule = {
       description:
         'Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.',
       category: 'Operations',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       recommended: true,
       examples: [
         {

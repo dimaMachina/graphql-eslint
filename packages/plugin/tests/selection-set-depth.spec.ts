@@ -3,7 +3,7 @@ import { rule, RuleOptions } from '../src/rules/selection-set-depth';
 
 const WITH_SIBLINGS = {
   parserOptions: <ParserOptions>{
-    operations: 'fragment AlbumFields on Album { id }',
+    documents: 'fragment AlbumFields on Album { id }',
   },
 };
 
@@ -98,7 +98,7 @@ ruleTester.runGraphQLTests<RuleOptions>('selection-set-depth', rule, {
     {
       name: 'suggestions should not throw error when fragment is located in different file',
       parserOptions: {
-        operations: /* GraphQL */ `
+        documents: /* GraphQL */ `
           fragment AlbumFields on Album {
             id
             modifier {

@@ -11,7 +11,7 @@ export const rule: GraphQLESLintRule = {
     docs: {
       category: 'Operations',
       description: 'Enforce unique operation names across your project.',
-      url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSiblings: true,
       examples: [
         {

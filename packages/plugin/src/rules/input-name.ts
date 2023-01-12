@@ -23,7 +23,7 @@ const schema = {
       checkInputType: {
         type: 'boolean',
         default: false,
-        description: 'Check that the input type name follows the convention <mutationName>Input',
+        description: 'Check that the input type name follows the convention \\<mutationName>Input',
       },
       caseSensitiveInputType: {
         type: 'boolean',
@@ -64,7 +64,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       description:
         'Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".\nUsing the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.',
       category: 'Schema',
-      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/input-name.md',
+      url: 'https://the-guild.dev/graphql/eslint/rules/input-name',
       examples: [
         {
           title: 'Incorrect',
@@ -76,7 +76,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           `,
         },
         {
-          title: 'Correct (with checkInputType)',
+          title: 'Correct (with `checkInputType`)',
           usage: [{ checkInputType: true }],
           code: /* GraphQL */ `
             type Mutation {
@@ -85,7 +85,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           `,
         },
         {
-          title: 'Correct (without checkInputType)',
+          title: 'Correct (without `checkInputType`)',
           usage: [{ checkInputType: false }],
           code: /* GraphQL */ `
             type Mutation {

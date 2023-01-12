@@ -1,0 +1,184 @@
+# Writing Custom Rules
+
+To get started with your own rules, start by understanding how
+[ESLint custom rules works](https://eslint.org/docs/developer-guide/working-with-rules).
+
+`graphql-eslint` converts the [GraphQL AST](https://graphql.org/graphql-js/language) into
+[ESTree structure](https://github.com/estree/estree), so it allows you to easily travel the GraphQL
+AST tree easily.
+
+You can visit any GraphQL AST node in your custom rules, and report this as error. You don't need to
+have special handlers for code-files, since `graphql-eslint` extracts usages of `gql` and magic
+`/* GraphQL */` comments automatically, and runs it through the parser, and eventually it knows to
+adjust errors location to fit in your code files original location.
+
+You can explore the GraphQL AST for a given input on
+[astexplorer.net](https://astexplorer.net/#/gist/e72aaccc1e57cbba41659d73cabbf75c/f10ee29317a31ff8012a21762a382c4a03c34d40).
+
+## Getting Started
+
+Start by creating a
+[simple ESLint rule file](https://eslint.org/docs/developer-guide/working-with-rules), and choose
+the AST nodes you wish to visit. It can either be a
+[simple AST node `Kind`](https://github.com/graphql/graphql-js/blob/master/src/language/kinds.d.ts)
+or a complex [ESLint selector](https://eslint.org/docs/developer-guide/selectors) that allows you to
+travel and filter AST nodes.
+
+We recommend you to read the [graphql-eslint parser documentation](parser.md) before getting
+started, to understand the differences between the AST structures.
+
+The `graphql-eslint` comes with a TypeScript wrapper for ESLint rules, and provides a testkit to
+simplify testing process with GraphQL schemas, so you can use that by importing `GraphQLESLintRule`
+type. But if you wish to use JavaScript - that's fine :)
+
+Here's an example for a simple rule that reports on anonymous GraphQL operations:
+
+```ts filename="your-rule-name.ts"
+import { GraphQLESLintRule } from '@graphql-eslint/eslint-plugin'
+
+const rule: GraphQLESLintRule = {
+  create(context) {
+    return {
+      OperationDefinition(node) {
+        if (!node.name?.value) {
+          context.report({
+            node,
+            message: 'Oops, name is required!'
+          })
+        }
+      }
+    }
+  }
+}
+```
+
+So what happens here?
+
+1. `@graphql-eslint/eslint-plugin` handles the parsing process for your GraphQL content. It will
+   load the GraphQL files (either from code files or from `.graphql` files with SDL), parse it using
+   GraphQL parser, converts it to ESTree structure and let ESLint do the rest.
+1. Your rule is being loaded by ESLint, and executes just like any other ESLint rule.
+1. Our custom rule asks ESLint to run our function for every `OperationDefinition` found.
+1. If the `OperationDefinition` node doesn't have a valid `name` - we report an error to ESLint.
+
+### More Examples
+
+You can scan the `packages/plugin/src/rules` directory in this repo for references for implementing
+rules. It coverts most of the use-cases and concepts of rules.
+
+## Accessing Original GraphQL AST Nodes
+
+Since our parser converts GraphQL AST to ESTree structure, there are some minor differences in the
+structure of the objects. If you are using TypeScript, and you typed your rule with
+`GraphQLESLintRule` - you'll see that each `node` is a bit different from the AST nodes of GraphQL
+(you can read more about that in [graphql-eslint parser documentation](parser.md)).
+
+If you need access to the original GraphQL AST `node`, you can use `.rawNode()` method on each node
+you get from the AST structure of ESLint.
+
+This is useful if you wish to use other GraphQL tools that works with the original GraphQL AST
+objects.
+
+Here's an example for using original `graphql-js` validate method to validate `OperationDefinition`:
+
+```ts filename="your-rule-name.ts"
+import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
+import { validate } from 'graphql'
+
+export const rule = {
+  create(context) {
+    return {
+      OperationDefinition(node) {
+        const schema = requireGraphQLSchemaFromContext(context)
+
+        validate(context, schema, {
+          kind: Kind.DOCUMENT,
+          definitions: [node.rawNode()]
+        })
+      }
+    }
+  }
+}
+```
+
+## `TypeInfo` / `GraphQLSchema`
+
+If you provide GraphQL schema in your ESLint configuration, it will get loaded automatically, and
+become available in your rules in two ways:
+
+1. You'll be able to access the loaded `GraphQLSchema` object.
+2. In every visited node, you'll be able to use `.typeInfo()` method to get an object with complete
+   type information on your visited node (see
+   [TypeInfo documentation](https://graphql.org/graphql-js/utilities/#typeinfo)).
+
+#### Getting `GraphQLSchema`
+
+To mark your ESLint rules as a rule that needs access to GraphQL schema, start by running
+`requireGraphQLSchemaFromContext` from the plugin package, it will make sure to return a schema, or
+throw an error for the user about the missing schema.
+
+```ts
+const schema = requireGraphQLSchemaFromContext(context)
+```
+
+#### Accessing TypeInfo
+
+If schema is provided and loaded successfully, the `typeInfo` will be available to use. Otherwise -
+it will be `undefined`. If your plugin requires `typeInfo` in order to operate and run, make sure to
+call `requireGraphQLSchemaFromContext` - it will validate that the schema is loaded.
+
+`typeInfo` is provided on every node, based on the type of that node, for example, to access the
+`GraphQLOutputType` while you are visiting a `SelectionSet` node, you can do:
+
+```ts filename="your-rule-name.ts"
+import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
+
+export const rule = {
+  create(context) {
+    requireGraphQLSchemaFromContext('your-rule-name', context)
+
+    return {
+      SelectionSet(node) {
+        const typeInfo = node.typeInfo()
+        if (typeInfo.gqlType) {
+          console.log(`The GraphQLOutputType is: ${typeInfo.gqlType}`)
+        }
+      }
+    }
+  }
+}
+```
+
+The structure of the return value of `.typeInfo()` is
+[defined here](https://github.com/B2o5T/graphql-eslint/blob/master/packages/plugin/src/estree-converter/converter.ts#L32-L40).
+So based on the `node` you are using, you'll get a different values on `.typeInfo()` result.
+
+## Testing Your Rules
+
+To test your rules, you can either use the wrapped `GraphQLRuleTester` from this library, or use the
+built-it [`RuleTester`](https://eslint.org/docs/developer-guide/working-with-rules#rule-unit-tests)
+of ESLint.
+
+The wrapped `GraphQLRuleTester` provides built-in configured parser, and a schema loader, if you
+need to test your rule with a loaded schema.
+
+```ts filename="your-rule-name.spec.ts"
+import { GraphQLRuleTester } from '@graphql-eslint/eslint-plugin'
+import { rule } from './my-rule'
+
+const ruleTester = new GraphQLRuleTester()
+
+ruleTester.runGraphQLTests('your-rule-name', rule, {
+  valid: [
+    {
+      code: 'query something { foo }'
+    }
+  ],
+  invalid: [
+    {
+      code: 'query invalid { foo }',
+      errors: [{ message: 'Your error message.' }]
+    }
+  ]
+})
+```

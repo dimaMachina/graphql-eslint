@@ -1,10 +1,10 @@
 import { parseGraphQLSDL } from '@graphql-tools/utils';
 import debugFactory from 'debug';
-import { GraphQLError, GraphQLSchema } from 'graphql';
-import { getDocuments } from './documents.js';
+import { buildSchema, GraphQLError, GraphQLSchema } from 'graphql';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
 import { loadGraphQLConfig } from './graphql-config.js';
 import { getSchema } from './schema.js';
+import { getSiblings } from './siblings.js';
 import { GraphQLESLintParseResult, ParserOptions } from './types.js';
 import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
 
@@ -15,6 +15,8 @@ debug('cwd %o', CWD);
 export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
     const { filePath } = options;
+    // TODO: remove in graphql-eslint v4
+    options.documents ||= options.operations;
     // First parse code from file, in case of syntax error do not try load schema,
     // documents or even graphql-config instance
     const { document } = parseGraphQLSDL(filePath, code, {
@@ -25,7 +27,12 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
     const project = gqlConfig.getProjectForFile(realFilepath);
 
-    const schema = getSchema(project, options.schemaOptions);
+    const schema = project
+      ? getSchema(project, options.schemaOptions)
+      : typeof options.schema === 'string'
+      ? buildSchema(options.schema)
+      : null;
+
     const rootTree = convertToESTree(
       document,
       schema instanceof GraphQLSchema ? schema : undefined,
@@ -34,7 +41,7 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     return {
       services: {
         schema,
-        siblingOperations: getDocuments(project),
+        siblingOperations: getSiblings(project, options.documents),
       },
       ast: {
         comments: extractComments(document.loc),

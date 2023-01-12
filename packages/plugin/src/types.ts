@@ -4,7 +4,7 @@ import * as ESTree from 'estree';
 import { GraphQLSchema } from 'graphql';
 import { IExtensions, IGraphQLProject } from 'graphql-config';
 import { JSONSchema } from 'json-schema-to-ts';
-import { SiblingOperations } from './documents.js';
+import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleListener } from './testkit.js';
 
 export type Schema = GraphQLSchema | Error | null;
@@ -13,7 +13,6 @@ export type Pointer = string | string[];
 export interface ParserOptions {
   schema?: Pointer | Record<string, { headers: Record<string, string> }>;
   documents?: Pointer;
-  operations?: Pointer; // legacy
   extensions?: IExtensions;
   include?: Pointer;
   exclude?: Pointer;
@@ -24,6 +23,8 @@ export interface ParserOptions {
   graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   skipGraphQLConfig?: boolean;
   filePath: string;
+  /** @deprecated Use `documents` instead */
+  operations?: Pointer;
 }
 
 export type ParserServices = {

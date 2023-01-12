@@ -3,7 +3,7 @@ import { AST } from 'eslint';
 import { Position } from 'estree';
 import { ASTNode, GraphQLSchema, Kind } from 'graphql';
 import lowerCase from 'lodash.lowercase';
-import { SiblingOperations } from './documents.js';
+import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleContext } from './types.js';
 
 export function requireSiblingsOperations(
@@ -48,6 +48,8 @@ export const normalizePath = (path: string): string => (path || '').replace(/\\/
 export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
 
 export const CWD = process.cwd();
+
+export const IS_BROWSER = typeof window !== 'undefined';
 
 export const getTypeName = (node: ASTNode): string =>
   'type' in node ? getTypeName(node.type) : 'name' in node && node.name ? node.name.value : '';

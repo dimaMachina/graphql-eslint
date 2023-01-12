@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { asArray } from '@graphql-tools/utils';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
@@ -11,7 +12,8 @@ const { format, resolveConfig } = prettier;
 
 const BR = '';
 const NBSP = '&nbsp;';
-const DOCS_PATH = resolve(process.cwd(), 'docs');
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const RULES_PATH = resolve(__dirname, '..', 'website', 'src', 'pages', 'rules');
 
 enum Icon {
   SCHEMA = '📄',
@@ -40,11 +42,11 @@ function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]
   }
 
   return [
-    '<!-- prettier-ignore-start -->',
+    // '<!-- prettier-ignore-start -->',
     headerRow.join('|'),
     alignRow.join('|'),
     ...dataSource.map(row => row.join('|')),
-    '<!-- prettier-ignore-end -->',
+    // '<!-- prettier-ignore-end -->',
   ].join('\n');
 }
 
@@ -138,12 +140,12 @@ async function generateDocs(): Promise<void> {
       );
     } else {
       blocks.push(
-        `- [Rule source](../../packages/plugin/src/rules/${ruleName}.ts)`,
-        `- [Test source](../../packages/plugin/tests/${ruleName}.spec.ts)`,
+        `- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/${ruleName}.ts)`,
+        `- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/${ruleName}.spec.ts)`,
       );
     }
     return {
-      path: resolve(DOCS_PATH, `rules/${ruleName}.md`),
+      path: resolve(RULES_PATH, `${ruleName}.md`),
       content: blocks.join('\n'),
     };
   });
@@ -181,9 +183,9 @@ async function generateDocs(): Promise<void> {
     });
 
   result.push({
-    path: resolve(DOCS_PATH, 'README.md'),
+    path: resolve(RULES_PATH, 'index.md'),
     content: [
-      '# Available Rules',
+      '# Overview',
       'Each rule has emojis denoting:',
       `- ${Icon.SCHEMA} if the rule applies to schema documents`,
       `- ${Icon.OPERATIONS} if the rule applies to operations`,
@@ -192,7 +194,7 @@ async function generateDocs(): Promise<void> {
       `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
       `- ${Icon.HAS_SUGGESTIONS} if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
       BR,
-      '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
+      // '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
       printMarkdownTable(
         [
           `Name${NBSP.repeat(20)}`,
@@ -220,6 +222,55 @@ async function generateDocs(): Promise<void> {
         }),
       ),
     ),
+  );
+
+  const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entries(rules)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .reduce<{
+      schemaRules: string[];
+      operationsRules: string[];
+      schemaAndOperationsRules: [];
+    }>(
+      (acc, [ruleId, curr]) => {
+        const { category } = curr.meta.docs;
+        if (category === 'Schema') {
+          acc.schemaRules.push(ruleId);
+        } else if (category === 'Operations') {
+          acc.operationsRules.push(ruleId);
+        } else {
+          acc.schemaAndOperationsRules.push(ruleId);
+        }
+        return acc;
+      },
+      { schemaRules: [], operationsRules: [], schemaAndOperationsRules: [] },
+    );
+  const metaJson = {
+    index: 'Overview',
+    prettier: '`prettier` Rule',
+    'deprecated-rules': 'Deprecated Rules',
+    '---1': {
+      title: 'Schema & Operations Rules',
+      type: 'separator',
+    },
+    ...Object.fromEntries(schemaAndOperationsRules.map(key => [key, ''])),
+    '---2': {
+      title: 'Schema Rules',
+      type: 'separator',
+    },
+    ...Object.fromEntries(schemaRules.map(key => [key, ''])),
+    '---3': {
+      title: 'Operations Rules',
+      type: 'separator',
+    },
+    ...Object.fromEntries(operationsRules.map(key => [key, ''])),
+  };
+
+  writeFile(
+    resolve(RULES_PATH, '_meta.json'),
+    format(JSON.stringify(metaJson), {
+      parser: 'json',
+      ...prettierConfig,
+    }),
   );
 
   console.log('✅  Documentation generated');

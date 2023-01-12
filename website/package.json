@@ -1,0 +1,52 @@
+{
+  "name": "website",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "analyze": "ANALYZE=true yarn build",
+    "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
+    "dev": "pnpm patch-browser && next",
+    "patch-browser": "tsx ../scripts/patch-graphql-eslint-browser.ts",
+    "prebuild": "tsx ../scripts/generate-docs.ts && pnpm patch-browser",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@graphql-eslint/eslint-plugin": "workspace:*",
+    "@monaco-editor/react": "4.4.6",
+    "@radix-ui/react-icons": "1.1.1",
+    "@radix-ui/react-select": "1.1.2",
+    "@theguild/components": "4.4.5-alpha-20230111171806-2242141",
+    "clsx": "1.2.1",
+    "graphql": "16.6.0",
+    "lodash.debounce": "4.0.8",
+    "lodash.uniqwith": "4.5.0",
+    "next": "13.1.1",
+    "next-query-params": "4.1.0",
+    "next-sitemap": "3.1.44",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "use-query-params": "2.1.2"
+  },
+  "devDependencies": {
+    "@theguild/algolia": "1.0.2",
+    "@theguild/tailwind-config": "0.2.1",
+    "@types/lodash.debounce": "4.0.7",
+    "@types/lodash.uniqwith": "4.5.7",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "tailwindcss-radix": "2.6.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

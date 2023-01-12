@@ -41,7 +41,7 @@ export const rule: GraphQLESLintRule = {
         '- Connection type must contain a field `edges` that return a list type that wraps an edge type',
         '- Connection type must contain a field `pageInfo` that return a non-null `PageInfo` Object type',
       ].join('\n'),
-      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/relay-connection-types.md',
+      url: 'https://the-guild.dev/graphql/eslint/rules/relay-connection-types',
       isDisabledForAllConfig: true,
       examples: [
         {

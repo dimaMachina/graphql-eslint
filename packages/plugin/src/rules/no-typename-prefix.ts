@@ -18,7 +18,7 @@ export const rule: GraphQLESLintRule = {
       description:
         'Enforces users to avoid using the type name in a field name while defining your schema.',
       recommended: true,
-      url: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-typename-prefix.md',
+      url: 'https://the-guild.dev/graphql/eslint/rules/no-typename-prefix',
       examples: [
         {
           title: 'Incorrect',

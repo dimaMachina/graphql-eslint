@@ -6,3 +6,5 @@ pnpm-lock.yaml
 .bob/
 .next/
 out/
+# prettier ignore doesn't work
+website/src/pages/docs/configs.mdx

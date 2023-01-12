@@ -25,7 +25,7 @@ export function getSchema(
     return cache;
   }
 
-  let schema: Schema;
+  let schema: GraphQLSchema | Error;
 
   try {
     debug('Loading schema from %o', project.schema);

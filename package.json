@@ -9,7 +9,6 @@
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
-    "generate:docs": "tsx scripts/generate-docs.ts",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:prettier": "prettier --cache --check .",
     "postbuild": "cp -r README.md docs ./packages/plugin/dist/ && tsx scripts/postbuild.ts",
@@ -23,35 +22,30 @@
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.0",
-    "@graphql-tools/utils": "^9.0.0",
-    "@theguild/eslint-config": "0.6.0",
+    "@graphql-tools/utils": "9.0.0",
+    "@theguild/eslint-config": "0.7.0-alpha-20230112171733-cd37126",
     "@theguild/prettier-config": "1.0.0",
     "@types/dedent": "0.7.0",
     "@types/node": "18.11.18",
     "bob-the-bundler": "5.0.0",
-    "chalk": "^4.1.2",
+    "chalk": "4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
     "eslint": "8.31.0",
     "eslint-plugin-eslint-plugin": "5.0.7",
+    "eslint-plugin-tailwindcss": "3.8.0",
     "husky": "8.0.3",
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
-    "lint-staged": "13.1.0",
     "prettier": "2.8.2",
+    "prettier-plugin-tailwindcss": "0.2.1",
     "rimraf": "3.0.2",
-    "tsx": "^3.12.1",
+    "tsx": "3.12.1",
     "typescript": "4.9.4",
     "vitest": "0.26.3"
   },
   "resolutions": {
     "graphql": "16.6.0"
-  },
-  "lint-staged": {
-    "**/*": [
-      "eslint",
-      "prettier --write"
-    ]
   },
   "pnpm": {
     "patchedDependencies": {

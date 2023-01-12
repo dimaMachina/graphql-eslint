@@ -40,7 +40,7 @@ export function loadGraphQLConfig(options: ParserOptions): GraphQLConfig {
     ? { projects: options.projects }
     : {
         schema: (options.schema || '') as SchemaPointer, // if `schema` is `undefined` will throw error `Project 'default' not found`
-        documents: options.documents || options.operations,
+        documents: options.documents,
         extensions: options.extensions,
         include: options.include,
         exclude: options.exclude,

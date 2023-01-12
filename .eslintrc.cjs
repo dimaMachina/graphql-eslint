@@ -2,7 +2,6 @@ module.exports = {
   ignorePatterns: ['examples', 'packages/plugin/tests/__snapshots__'],
   extends: [
     '@theguild',
-    // '@theguild/eslint-config/react', // TODO: enable with new website
     '@theguild/eslint-config/json',
     '@theguild/eslint-config/yml',
     '@theguild/eslint-config/mdx',
@@ -24,7 +23,7 @@ module.exports = {
         'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.$' }], // force to put a point at the end
         'eslint-plugin/require-meta-docs-url': [
           'error',
-          { pattern: 'https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/{{name}}.md' },
+          { pattern: 'https://the-guild.dev/graphql/eslint/rules/{{name}}' },
         ],
         'eslint-plugin/prefer-message-ids': 'off',
       },
@@ -76,10 +75,28 @@ module.exports = {
       },
     },
     {
-      files: ['.github/ISSUE_TEMPLATE/bug_report.md', '.github/PULL_REQUEST_TEMPLATE.md'],
+      files: ['website/**'],
+      extends: [
+        '@theguild/eslint-config/react',
+        '@theguild/eslint-config/mdx',
+        'plugin:tailwindcss/recommended',
+      ],
       rules: {
-        // ignore for above files
-        'unicorn/filename-case': 'off',
+        'tailwindcss/classnames-order': 'off',
+        'tailwindcss/enforces-negative-arbitrary-values': 'error',
+        'tailwindcss/enforces-shorthand': 'error',
+        'tailwindcss/migration-from-tailwind-2': 'error',
+        'tailwindcss/no-custom-classname': 'error',
+        'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }],
+      },
+      settings: {
+        tailwindcss: {
+          config: 'website/tailwind.config.cjs',
+          cssFiles: [
+            'website/src/**/*.css',
+            'node_modules/.pnpm/node_modules/nextra-theme-docs/style.css',
+          ],
+        },
       },
     },
   ],
