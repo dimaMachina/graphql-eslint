@@ -23,7 +23,7 @@ importers:
     specifiers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
-      '@graphql-tools/utils': 9.0.0
+      '@graphql-tools/utils': 9.1.4
       '@theguild/eslint-config': 0.7.0-alpha-20230112195815-23c9c7e
       '@theguild/prettier-config': 1.0.0
       '@types/dedent': 0.7.0
@@ -47,7 +47,7 @@ importers:
     devDependencies:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
-      '@graphql-tools/utils': 9.0.0
+      '@graphql-tools/utils': 9.1.4
       '@theguild/eslint-config': 0.7.0-alpha-20230112195815-23c9c7e_iukboom6ndih5an6iafl45j2fe
       '@theguild/prettier-config': 1.0.0_prettier@2.8.2
       '@types/dedent': 0.7.0
@@ -1277,16 +1277,25 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@graphql-tools/utils/9.0.0:
-    resolution: {integrity: sha512-kaCwyWnURxMsYbxzkfylLqFFelu83jKk3BJOOy0GIuxEtgXVS9v7Y/tojljo69Q+jaZ2YxAi3+d8IpM+hx768A==}
+  /@graphql-tools/utils/9.1.3_graphql@16.6.0:
+    resolution: {integrity: sha512-bbJyKhs6awp1/OmP+WKA1GOyu9UbgZGkhIj5srmiMGLHohEOKMjW784Sk0BZil1w2x95UPu0WHw6/d/HVCACCg==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      graphql: 16.6.0
+      tslib: 2.4.1
+    dev: false
+
+  /@graphql-tools/utils/9.1.4:
+    resolution: {integrity: sha512-hgIeLt95h9nQgQuzbbdhuZmh+8WV7RZ/6GbTj6t3IU4Zd2zs9yYJ2jgW/krO587GMOY8zCwrjNOMzD40u3l7Vg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       tslib: 2.4.1
     dev: true
 
-  /@graphql-tools/utils/9.1.3_graphql@16.6.0:
-    resolution: {integrity: sha512-bbJyKhs6awp1/OmP+WKA1GOyu9UbgZGkhIj5srmiMGLHohEOKMjW784Sk0BZil1w2x95UPu0WHw6/d/HVCACCg==}
+  /@graphql-tools/utils/9.1.4_graphql@16.6.0:
+    resolution: {integrity: sha512-hgIeLt95h9nQgQuzbbdhuZmh+8WV7RZ/6GbTj6t3IU4Zd2zs9yYJ2jgW/krO587GMOY8zCwrjNOMzD40u3l7Vg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
@@ -5248,7 +5257,7 @@ packages:
       '@graphql-tools/load': 7.8.8_graphql@16.6.0
       '@graphql-tools/merge': 8.3.14_graphql@16.6.0
       '@graphql-tools/url-loader': 7.16.29_graphql@16.6.0
-      '@graphql-tools/utils': 9.1.3_graphql@16.6.0
+      '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       cosmiconfig: 8.0.0
       graphql: 16.6.0
       minimatch: 4.2.1
