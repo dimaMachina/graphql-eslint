@@ -29,7 +29,7 @@
     "use-query-params": "2.1.2"
   },
   "devDependencies": {
-    "@theguild/algolia": "1.0.2",
+    "@theguild/algolia": "1.1.0",
     "@theguild/tailwind-config": "0.2.1",
     "@types/lodash.debounce": "4.0.7",
     "@types/lodash.uniqwith": "4.5.7",
