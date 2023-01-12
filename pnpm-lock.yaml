@@ -245,7 +245,7 @@ importers:
       '@radix-ui/react-icons': 1.1.1
       '@radix-ui/react-select': 1.1.2
       '@theguild/algolia': 1.0.2
-      '@theguild/components': 4.4.5-alpha-20230111171806-2242141
+      '@theguild/components': 4.5.0
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
       '@types/lodash.uniqwith': 4.5.7
@@ -267,7 +267,7 @@ importers:
       '@monaco-editor/react': 4.4.6_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-icons': 1.1.1_react@18.2.0
       '@radix-ui/react-select': 1.1.2_ib3m5ricvtkl2cll7qpr2f6lvq
-      '@theguild/components': 4.4.5-alpha-20230111171806-2242141_q76c2b4vyoegvsbrcwkfvimnai
+      '@theguild/components': 4.5.0_q76c2b4vyoegvsbrcwkfvimnai
       clsx: 1.2.1
       graphql: 16.6.0
       lodash.debounce: 4.0.8
@@ -2079,8 +2079,8 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components/4.4.5-alpha-20230111171806-2242141_q76c2b4vyoegvsbrcwkfvimnai:
-    resolution: {integrity: sha512-wRsAWc68c/U2L+VrK9PCEpeOx3Gqs5McdQaNQARoaE1yiyTKRXNQClcrJBnFr/R17JANUmeCpkxGivVOAJE4bQ==}
+  /@theguild/components/4.5.0_q76c2b4vyoegvsbrcwkfvimnai:
+    resolution: {integrity: sha512-pOvJBnfsZPCrFrhMDEoyNhv7GTRfraFCkFER3bw4YpEVhBC+sI40Y1SgzRQRnOm89arZuokArqwLxIw2c8Y4vA==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
       react: ^18.2.0
@@ -2104,7 +2104,7 @@ packages:
       nextra-theme-docs: 2.0.3_q76c2b4vyoegvsbrcwkfvimnai
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-instantsearch-dom: 6.38.2_lcvw2wliyvolumce2ki4t5bwom
+      react-instantsearch-dom: 6.38.3_lcvw2wliyvolumce2ki4t5bwom
       react-paginate: 8.1.4_react@18.2.0
       react-player: 2.11.0_react@18.2.0
       remark-mdx-disable-explicit-jsx: 0.1.0
@@ -8001,8 +8001,8 @@ packages:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
     dev: false
 
-  /react-instantsearch-core/6.38.2_67xkusp2uelphus2k7ikyhm6rq:
-    resolution: {integrity: sha512-eX1FJQ7648mZgY+B79EghggjCHLLxiv/otQ7kgkXiHpU2XNfqEhweufqgwSEJH5gUgGUo4JsgHHWLoX56YvrDQ==}
+  /react-instantsearch-core/6.38.3_67xkusp2uelphus2k7ikyhm6rq:
+    resolution: {integrity: sha512-m7sL8NR5SlqctZJqoRYyBUFSUplK221EHESC+g6+fZ9Vd1fUX07MNvnbZ9+8Uyn0v+Hi8nL/3qGesJZ/xbJ/dg==}
     peerDependencies:
       algoliasearch: '>= 3.1 < 5'
       react: '>= 16.3.0 < 19'
@@ -8015,8 +8015,8 @@ packages:
       react-fast-compare: 3.2.0
     dev: false
 
-  /react-instantsearch-dom/6.38.2_lcvw2wliyvolumce2ki4t5bwom:
-    resolution: {integrity: sha512-etNAo0xRhpb8BAzV5Gt21mAt831bMMata71PDAQDLY7fzUjon9nM4s2Ad7cyPFDAU2wd5rp6wbveDyhlaw1hJw==}
+  /react-instantsearch-dom/6.38.3_lcvw2wliyvolumce2ki4t5bwom:
+    resolution: {integrity: sha512-1VQxMq23pAaeJjyBdTuC+U2DHa35ygnKd4fCTWHv0YK/GwneoSOubxKf24QtNLsHfswJ/qjpW21xXv6IVRA90g==}
     peerDependencies:
       algoliasearch: '>= 3.1 < 5'
       react: '>= 16.3.0 < 19'
@@ -8030,7 +8030,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-fast-compare: 3.2.0
-      react-instantsearch-core: 6.38.2_67xkusp2uelphus2k7ikyhm6rq
+      react-instantsearch-core: 6.38.3_67xkusp2uelphus2k7ikyhm6rq
     dev: false
 
   /react-is/16.13.1:
