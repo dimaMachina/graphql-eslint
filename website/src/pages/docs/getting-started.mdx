@@ -15,7 +15,7 @@ Start by installing the plugin package, which includes everything you need:
 ## Configuration
 
 To get started, define an override in your ESLint config to apply this plugin to `.graphql` files.
-Add the [rules](/docs/rules) you want applied.
+Add the [rules](/rules) you want applied.
 
 <Callout type="error" emoji="🚨">
   **Note**: This step is necessary even if you are declaring operations and/or schema in code files.
@@ -75,12 +75,12 @@ your code files.
 ### Extended Linting Rules with GraphQL Schema
 
 Some rules require an understanding of the entire schema at once. For example,
-[no-unreachable-types](https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/no-unreachable-types.md#no-unreachable-types)
+[no-unreachable-types](https://the-guild.dev/graphql/eslint/rules/no-unreachable-types)
 checks that all types are reachable by root-level fields.
 
 To use these rules, you'll need to tell ESLint how to identify the entire set of schema definitions.
 
-If you are using [`graphql-config`](https://graphql-config.com), you are good to go.
+If you are using [`graphql-config`](https://the-guild.dev/graphql/config), you are good to go.
 `graphql-eslint` integrates with it automatically and will use it to load your schema!
 
 Alternatively, you can define `parserOptions.schema` in the `*.graphql` override in your ESLint
@@ -104,7 +104,7 @@ configuration file:
 }
 ```
 
-> You can find a complete [documentation of the `parserOptions` here](docs/parser-options.md).
+> You can find a complete [documentation of the `parserOptions` here](/docs/parser-options).
 
 > Some rules require type information to operate, it's marked in the docs for each rule!
 
@@ -157,7 +157,7 @@ You can also specify specific rules to disable, apply it over the entire file,
 `eslint-disable-next-line` or current `eslint-disable-line`.
 
 You can find a list of
-[ESLint directives here](https://eslint.org/docs/2.13.1/user-guide/configuring#disabling-rules-with-inline-comments).
+[ESLint directives here](https://eslint.org/docs/latest/user-guide/configuring/rules#using-configuration-comments-1).
 
 ### VSCode Integration
 
