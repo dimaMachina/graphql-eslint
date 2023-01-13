@@ -27,16 +27,22 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
     const project = gqlConfig.getProjectForFile(realFilepath);
 
-    const schema = project
-      ? getSchema(project, options.schemaOptions)
-      : typeof options.schema === 'string'
-      ? buildSchema(options.schema)
-      : null;
+    let schema: GraphQLSchema | null = null;
 
-    const rootTree = convertToESTree(
-      document,
-      schema instanceof GraphQLSchema ? schema : undefined,
-    );
+    try {
+      schema = project
+        ? getSchema(project, options.schemaOptions)
+        : typeof options.schema === 'string'
+        ? buildSchema(options.schema)
+        : null;
+    } catch (error) {
+      if (error instanceof Error) {
+        error.message = `Error while loading schema: ${error.message}`;
+      }
+      throw error;
+    }
+
+    const rootTree = convertToESTree(document, schema);
 
     return {
       services: {
