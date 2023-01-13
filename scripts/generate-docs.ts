@@ -30,9 +30,9 @@ type Column = {
   align: 'center' | 'right';
 };
 
-function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]): string {
+function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]): string {
   const headerRow: string[] = [];
-  const alignRow: ('-' | '-:' | ':-:')[] = [];
+  const alignRow: ('-:' | '-' | ':-:')[] = [];
 
   for (let column of columns) {
     column = typeof column === 'string' ? ({ name: column } as Column) : column;

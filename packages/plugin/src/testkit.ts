@@ -6,9 +6,12 @@ import { ASTKindToNode } from 'graphql';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { GraphQLESLintRule, ParserOptions } from './types.js';
 
-export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = {
+export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Record<
+  string,
+  any
+> & {
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
-} & Record<string, any>;
+};
 
 export type GraphQLValidTestCase<Options> = Omit<
   RuleTester.ValidTestCase,
@@ -19,7 +22,7 @@ export type GraphQLValidTestCase<Options> = Omit<
 };
 
 export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
-  errors: number | (RuleTester.TestCaseError | string)[];
+  errors: (RuleTester.TestCaseError | string)[] | number;
   output?: string | null;
 };
 
@@ -61,7 +64,7 @@ export class GraphQLRuleTester extends RuleTester {
     ruleId: string,
     rule: GraphQLESLintRule<Options, WithTypeInfo>,
     tests: {
-      valid: (string | GraphQLValidTestCase<Options>)[];
+      valid: (GraphQLValidTestCase<Options> | string)[];
       invalid: GraphQLInvalidTestCase<Options>[];
     },
   ): void {

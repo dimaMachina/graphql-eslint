@@ -63,7 +63,7 @@ export const TYPES_KINDS = [
   Kind.UNION_TYPE_DEFINITION,
 ] as const;
 
-export type CaseStyle = 'camelCase' | 'PascalCase' | 'snake_case' | 'UPPER_CASE' | 'kebab-case';
+export type CaseStyle = 'camelCase' | 'kebab-case' | 'PascalCase' | 'snake_case' | 'UPPER_CASE';
 
 export const pascalCase = (str: string): string =>
   lowerCase(str)
@@ -119,7 +119,7 @@ export const ARRAY_DEFAULT_OPTIONS = {
 export const englishJoinWords = (words: string[]): string =>
   new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);
 
-type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T; // from lodash
+type Truthy<T> = T extends '' | 0 | false | null | undefined ? never : T; // from lodash
 
 export function truthy<T>(value: T): value is Truthy<T> {
   return !!value;

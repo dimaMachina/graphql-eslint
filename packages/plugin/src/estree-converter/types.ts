@@ -56,24 +56,24 @@ export type TypeInformation = {
 };
 
 type NodeWithName =
-  | TypeDefinitionNode
-  | TypeExtensionNode
-  | ExecutableDefinitionNode
+  | ArgumentNode
   | DirectiveDefinitionNode
-  | FieldDefinitionNode
   | EnumValueDefinitionNode
+  | ExecutableDefinitionNode
+  | FieldDefinitionNode
   | FieldNode
   | FragmentSpreadNode
-  | VariableNode
-  | ArgumentNode
-  | NamedTypeNode;
+  | NamedTypeNode
+  | TypeDefinitionNode
+  | TypeExtensionNode
+  | VariableNode;
 
 type NodeWithType =
   | FieldDefinitionNode
   | InputValueDefinitionNode
-  | OperationTypeDefinitionNode
-  | NonNullTypeNode
   | ListTypeNode
+  | NonNullTypeNode
+  | OperationTypeDefinitionNode
   | VariableDefinitionNode;
 
 type ParentNode<T> = T extends DocumentNode
@@ -84,16 +84,16 @@ type ParentNode<T> = T extends DocumentNode
   ? EnumTypeDefinitionNode | EnumTypeExtensionNode
   : T extends InputValueDefinitionNode
   ?
+      | DirectiveDefinitionNode
+      | FieldDefinitionNode
       | InputObjectTypeDefinitionNode
       | InputObjectTypeExtensionNode
-      | FieldDefinitionNode
-      | DirectiveDefinitionNode
   : T extends FieldDefinitionNode
   ?
-      | ObjectTypeDefinitionNode
-      | ObjectTypeExtensionNode
       | InterfaceTypeDefinitionNode
       | InterfaceTypeExtensionNode
+      | ObjectTypeDefinitionNode
+      | ObjectTypeExtensionNode
   : T extends SelectionSetNode
   ? ExecutableDefinitionNode | FieldNode | InlineFragmentNode
   : T extends SelectionNode

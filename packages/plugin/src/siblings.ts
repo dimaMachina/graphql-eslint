@@ -21,7 +21,7 @@ export type SiblingOperations = {
   getFragments(): FragmentSource[];
   getFragmentByType(typeName: string): FragmentSource[];
   getFragmentsInUse(
-    baseOperation: OperationDefinitionNode | FragmentDefinitionNode | SelectionSetNode,
+    baseOperation: FragmentDefinitionNode | OperationDefinitionNode | SelectionSetNode,
     recursive?: boolean,
   ): FragmentDefinitionNode[];
   getOperation(operationName: string): OperationSource[];
@@ -120,7 +120,7 @@ export function getSiblings(
   const getFragment = (name: string) => getFragments().filter(f => f.document.name?.value === name);
 
   const collectFragments = (
-    selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
+    selectable: FragmentDefinitionNode | OperationDefinitionNode | SelectionSetNode,
     recursive: boolean,
     collected = new Map<string, FragmentDefinitionNode>(),
   ) => {

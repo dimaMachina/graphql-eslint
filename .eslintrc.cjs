@@ -18,6 +18,12 @@ module.exports = {
     {
       files: ['**/*.{,c,m}ts{,x}'],
       excludedFiles: ['**/*.md{,x}/*'],
+      extends: [
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/strict',
+        'plugin:@typescript-eslint/all',
+        'prettier'
+      ],
       rules: {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       },

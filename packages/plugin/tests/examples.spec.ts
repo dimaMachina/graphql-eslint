@@ -5,7 +5,7 @@ import { ESLint } from 'eslint';
 const ROOT_CWD = process.cwd();
 
 function countErrors(results: ESLint.LintResult[]): number {
-  return results.reduce<number>((acc, curr: { fatalErrorCount: number } & ESLint.LintResult) => {
+  return results.reduce<number>((acc, curr: ESLint.LintResult & { fatalErrorCount: number }) => {
     if (curr.fatalErrorCount > 0) {
       throw new Error('Found fatal error');
     }

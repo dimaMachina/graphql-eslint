@@ -7,8 +7,8 @@ import { JSONSchema } from 'json-schema-to-ts';
 import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleListener } from './testkit.js';
 
-export type Schema = GraphQLSchema | Error | null;
-export type Pointer = string | string[];
+export type Schema = Error | GraphQLSchema | null;
+export type Pointer = string[] | string;
 
 export interface ParserOptions {
   schema?: Pointer | Record<string, { headers: Record<string, string> }>;
@@ -38,21 +38,19 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
 
 type Location = AST.SourceLocation | ESTree.Position;
 
-type ReportDescriptorLocation = { node: { loc: Location } } | { loc: Location };
-export type ReportDescriptor = Rule.ReportDescriptorMessage &
-  Rule.ReportDescriptorOptions &
-  ReportDescriptorLocation;
+type ReportDescriptorLocation = { loc: Location } | { node: { loc: Location } };
+export type ReportDescriptor = ReportDescriptorLocation & Rule.ReportDescriptorMessage & Rule.ReportDescriptorOptions;
 
 export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,
-  'parserServices' | 'report' | 'options'
+  'options' | 'parserServices' | 'report'
 > & {
   options: Options;
-  report(descriptor: ReportDescriptor): void;
   parserServices: ParserServices;
+  report(descriptor: ReportDescriptor): void;
 };
 
-export type CategoryType = 'Schema' | 'Operations';
+export type CategoryType = 'Operations' | 'Schema';
 
 type RuleMetaDataDocs = Required<Rule.RuleMetaData>['docs'];
 
@@ -76,17 +74,17 @@ export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> 
 };
 
 export type GraphQLESLintRule<Options = [], WithTypeInfo extends boolean = false> = {
-  create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
   meta: Omit<Rule.RuleMetaData, 'docs' | 'schema'> & {
     docs?: RuleDocsInfo<Options>;
     schema: Readonly<JSONSchema> | [];
   };
+  create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
 };
 
 export type ValueOf<T> = T[keyof T];
 
 // eslint-disable-next-line @typescript-eslint/ban-types -- Cosmetic use only, makes the tooltips expand the type can be removed
-type Id<T> = {} & { [P in keyof T]: T[P] };
+type Id<T> = { [P in keyof T]: T[P] } & {};
 
 type OmitDistributive<T, K extends PropertyKey> = T extends object ? Id<OmitRecursively<T, K>> : T;
 export type OmitRecursively<T extends object, K extends PropertyKey> = Omit<

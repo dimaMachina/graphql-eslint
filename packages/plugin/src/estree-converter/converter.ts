@@ -27,7 +27,7 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
             ]
           : [];
 
-      const calculatedTypeInfo: TypeInformation | Record<string, never> = typeInfo
+      const calculatedTypeInfo: Record<string, never> | TypeInformation = typeInfo
         ? {
             argument: typeInfo.getArgument(),
             defaultValue: typeInfo.getDefaultValue(),
