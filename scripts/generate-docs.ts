@@ -154,7 +154,7 @@ async function generateDocs(): Promise<void> {
     .filter(([, rule]) => !rule.meta.deprecated)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([ruleName, rule]) => {
-      const link = `[${ruleName}](rules/${ruleName}.md)`;
+      const link = `[${ruleName}](/rules/${ruleName})`;
       const { docs } = rule.meta;
       let config = '';
       if (ruleName.startsWith('relay-')) {
