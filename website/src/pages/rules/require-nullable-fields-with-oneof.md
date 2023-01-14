@@ -2,9 +2,10 @@
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/require-nullable-fields-with-oneof`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Require `input` or `type` fields to be non-nullable with `@oneOf` directive.
 

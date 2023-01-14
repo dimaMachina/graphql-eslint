@@ -8,9 +8,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/value-literals-of-correct-type`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A GraphQL document is only valid if all value literals are of the type expected at their position.
 

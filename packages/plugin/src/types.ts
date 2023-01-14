@@ -39,7 +39,9 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
 type Location = AST.SourceLocation | ESTree.Position;
 
 type ReportDescriptorLocation = { loc: Location } | { node: { loc: Location } };
-export type ReportDescriptor = ReportDescriptorLocation & Rule.ReportDescriptorMessage & Rule.ReportDescriptorOptions;
+export type ReportDescriptor = ReportDescriptorLocation &
+  Rule.ReportDescriptorMessage &
+  Rule.ReportDescriptorOptions;
 
 export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,

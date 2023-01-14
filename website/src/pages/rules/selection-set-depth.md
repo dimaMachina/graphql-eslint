@@ -8,9 +8,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/selection-set-depth`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Limit the complexity of the GraphQL operations solely by their depth. Based on
 [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).

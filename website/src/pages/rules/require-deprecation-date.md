@@ -5,9 +5,10 @@
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/require-deprecation-date`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Require deletion date on `@deprecated` directive. Suggest removing deprecated things after
 deprecated date.

@@ -117,7 +117,7 @@ export function getSiblings(
     return cachedOperations;
   };
 
-  const getFragment = (name: string) => getFragments().filter(f => f.document.name?.value === name);
+  const getFragment = (name: string) => getFragments().filter(f => f.document.name.value === name);
 
   const collectFragments = (
     selectable: FragmentDefinitionNode | OperationDefinitionNode | SelectionSetNode,
@@ -151,7 +151,7 @@ export function getSiblings(
     getFragment,
     getFragments,
     getFragmentByType: typeName =>
-      getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
+      getFragments().filter(f => f.document.typeCondition.name.value === typeName),
     getFragmentsInUse: (selectable, recursive = true) =>
       Array.from(collectFragments(selectable, recursive).values()),
     getOperation: name => getOperations().filter(o => o.document.name?.value === name),

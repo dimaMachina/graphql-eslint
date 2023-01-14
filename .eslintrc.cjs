@@ -7,8 +7,6 @@ module.exports = {
     '@theguild/eslint-config/mdx',
   ],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'off', // too strict
-    '@typescript-eslint/no-non-null-assertion': 'off', // too strict
     'unicorn/prefer-array-some': 'error',
     'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { object: true }],
@@ -18,14 +16,17 @@ module.exports = {
     {
       files: ['**/*.{,c,m}ts{,x}'],
       excludedFiles: ['**/*.md{,x}/*'],
-      extends: [
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:@typescript-eslint/strict',
-        'plugin:@typescript-eslint/all',
-        'prettier'
-      ],
+      // extends: [
+      //   'plugin:@typescript-eslint/recommended-requiring-type-checking',
+      //   'plugin:@typescript-eslint/strict',
+      //   'prettier',
+      // ],
       rules: {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+        '@typescript-eslint/no-explicit-any': 'off', // too strict
+        '@typescript-eslint/no-non-null-assertion': 'off', // too strict
+        '@typescript-eslint/array-type': ['error', { readonly: 'generic' }],
+        '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'no-type-imports' }],
       },
       parserOptions: {
         project: ['tsconfig.json', 'website/tsconfig.json', 'tsconfig.eslint.json'],

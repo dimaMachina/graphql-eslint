@@ -89,8 +89,8 @@ async function generateDocs(): Promise<void> {
     blocks.push(
       `- Category: \`${categories.join(' & ')}\``,
       `- Rule name: \`@graphql-eslint/${ruleName}\``,
-      `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)`,
-      `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)`,
+      `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)`,
+      `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)`,
       BR,
       docs.description,
     );

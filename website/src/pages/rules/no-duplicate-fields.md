@@ -8,9 +8,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/no-duplicate-fields`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Checks for duplicate fields in selection set, variables in operation definition, or in arguments set
 of a field.
