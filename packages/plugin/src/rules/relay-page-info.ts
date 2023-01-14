@@ -71,7 +71,7 @@ export const rule: GraphQLESLintRule = {
         );
 
         const checkField = (
-          fieldName: 'hasPreviousPage' | 'hasNextPage' | 'startCursor' | 'endCursor',
+          fieldName: 'endCursor' | 'hasNextPage' | 'hasPreviousPage' | 'startCursor',
           typeName: 'Boolean' | 'String',
         ): void => {
           const field = fieldMap[fieldName];

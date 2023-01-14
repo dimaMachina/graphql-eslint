@@ -29,7 +29,7 @@ export const processor: Linter.Processor<Block | string> = {
       onDiskConfigLoaded = true;
     }
 
-    let keywords: readonly string[] = RELEVANT_KEYWORDS;
+    let keywords: ReadonlyArray<string> = RELEVANT_KEYWORDS;
     const pluckConfig: GraphQLTagPluckOptions =
       onDiskConfig?.getProjectForFile(filePath).extensions.pluckConfig;
 

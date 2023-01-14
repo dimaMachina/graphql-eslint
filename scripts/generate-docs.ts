@@ -30,9 +30,9 @@ type Column = {
   align: 'center' | 'right';
 };
 
-function printMarkdownTable(columns: (string | Column)[], dataSource: string[][]): string {
+function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]): string {
   const headerRow: string[] = [];
-  const alignRow: ('-' | '-:' | ':-:')[] = [];
+  const alignRow: ('-:' | '-' | ':-:')[] = [];
 
   for (let column of columns) {
     column = typeof column === 'string' ? ({ name: column } as Column) : column;
@@ -89,8 +89,8 @@ async function generateDocs(): Promise<void> {
     blocks.push(
       `- Category: \`${categories.join(' & ')}\``,
       `- Rule name: \`@graphql-eslint/${ruleName}\``,
-      `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)`,
-      `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)`,
+      `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)`,
+      `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)`,
       BR,
       docs.description,
     );
@@ -154,7 +154,7 @@ async function generateDocs(): Promise<void> {
     .filter(([, rule]) => !rule.meta.deprecated)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([ruleName, rule]) => {
-      const link = `[${ruleName}](rules/${ruleName}.md)`;
+      const link = `[${ruleName}](/rules/${ruleName})`;
       const { docs } = rule.meta;
       let config = '';
       if (ruleName.startsWith('relay-')) {

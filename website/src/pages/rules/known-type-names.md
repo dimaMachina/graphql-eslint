@@ -9,9 +9,10 @@ rule.
 
 - Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/known-type-names`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A GraphQL document is only valid if referenced types (specifically variable definitions and fragment
 conditions) are defined by the type schema.

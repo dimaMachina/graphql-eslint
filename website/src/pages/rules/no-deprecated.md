@@ -8,9 +8,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/no-deprecated`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Enforce that deprecated fields or enum values are not in use by operations.
 

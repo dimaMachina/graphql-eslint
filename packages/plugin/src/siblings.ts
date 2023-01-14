@@ -21,7 +21,7 @@ export type SiblingOperations = {
   getFragments(): FragmentSource[];
   getFragmentByType(typeName: string): FragmentSource[];
   getFragmentsInUse(
-    baseOperation: OperationDefinitionNode | FragmentDefinitionNode | SelectionSetNode,
+    baseOperation: FragmentDefinitionNode | OperationDefinitionNode | SelectionSetNode,
     recursive?: boolean,
   ): FragmentDefinitionNode[];
   getOperation(operationName: string): OperationSource[];
@@ -117,10 +117,10 @@ export function getSiblings(
     return cachedOperations;
   };
 
-  const getFragment = (name: string) => getFragments().filter(f => f.document.name?.value === name);
+  const getFragment = (name: string) => getFragments().filter(f => f.document.name.value === name);
 
   const collectFragments = (
-    selectable: SelectionSetNode | OperationDefinitionNode | FragmentDefinitionNode,
+    selectable: FragmentDefinitionNode | OperationDefinitionNode | SelectionSetNode,
     recursive: boolean,
     collected = new Map<string, FragmentDefinitionNode>(),
   ) => {
@@ -151,7 +151,7 @@ export function getSiblings(
     getFragment,
     getFragments,
     getFragmentByType: typeName =>
-      getFragments().filter(f => f.document.typeCondition?.name?.value === typeName),
+      getFragments().filter(f => f.document.typeCondition.name.value === typeName),
     getFragmentsInUse: (selectable, recursive = true) =>
       Array.from(collectFragments(selectable, recursive).values()),
     getOperation: name => getOperations().filter(o => o.document.name?.value === name),

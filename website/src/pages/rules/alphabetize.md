@@ -6,9 +6,10 @@ fix some of the problems reported by this rule.
 
 - Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/alphabetize`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation
 selections and more.

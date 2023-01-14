@@ -2,9 +2,10 @@
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/no-one-place-fragments`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Disallow fragments that are used only in one place.
 

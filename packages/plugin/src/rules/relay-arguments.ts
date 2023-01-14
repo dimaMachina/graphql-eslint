@@ -98,8 +98,8 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         }
 
         function checkField(
-          typeName: 'String' | 'Int',
-          argumentName: 'first' | 'last' | 'after' | 'before',
+          typeName: 'Int' | 'String',
+          argumentName: 'after' | 'before' | 'first' | 'last',
         ): void {
           const argument = args[argumentName];
           const hasArgument = !!argument;

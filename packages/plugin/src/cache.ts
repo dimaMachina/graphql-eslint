@@ -12,7 +12,7 @@ export class ModuleCache<T, K = any> {
     log('setting entry for', cacheKey);
   }
 
-  get(cacheKey: K, settings = { lifetime: 10 /* seconds */ }): void | T {
+  get(cacheKey: K, settings = { lifetime: 10 /* seconds */ }): T | void {
     const value = this.map.get(cacheKey);
     if (!value) {
       log('cache miss for', cacheKey);

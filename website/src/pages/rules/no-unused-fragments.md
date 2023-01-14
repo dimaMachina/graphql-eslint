@@ -5,9 +5,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/no-unused-fragments`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A GraphQL document is only valid if all fragment definitions are spread within operations, or spread
 within other fragments spread within operations.

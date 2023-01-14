@@ -8,9 +8,10 @@ enables this rule.
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/no-hashtag-description`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Requires to use `"""` or `"` for adding a GraphQL description instead of `#`. Allows to use hashtag
 for comments, as long as it's not attached to an AST definition.

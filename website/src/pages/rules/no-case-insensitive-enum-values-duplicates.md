@@ -8,9 +8,10 @@ enables this rule.
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/no-case-insensitive-enum-values-duplicates`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Disallow case-insensitive enum values duplicates.
 

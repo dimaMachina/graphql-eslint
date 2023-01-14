@@ -9,9 +9,10 @@ rule.
 
 - Category: `Schema & Operations`
 - Rule name: `@graphql-eslint/known-argument-names`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A GraphQL field is only valid if all supplied arguments are defined by that field.
 

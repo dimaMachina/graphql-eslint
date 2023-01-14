@@ -28,21 +28,21 @@ import { ARRAY_DEFAULT_OPTIONS, truthy } from '../utils.js';
 const RULE_ID = 'alphabetize';
 
 const fieldsEnum: (
-  | 'ObjectTypeDefinition'
-  | 'InterfaceTypeDefinition'
   | 'InputObjectTypeDefinition'
+  | 'InterfaceTypeDefinition'
+  | 'ObjectTypeDefinition'
 )[] = [
   Kind.OBJECT_TYPE_DEFINITION,
   Kind.INTERFACE_TYPE_DEFINITION,
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
 ];
 const valuesEnum: ['EnumTypeDefinition'] = [Kind.ENUM_TYPE_DEFINITION];
-const selectionsEnum: ('OperationDefinition' | 'FragmentDefinition')[] = [
+const selectionsEnum: ('FragmentDefinition' | 'OperationDefinition')[] = [
   Kind.OPERATION_DEFINITION,
   Kind.FRAGMENT_DEFINITION,
 ];
 const variablesEnum: ['OperationDefinition'] = [Kind.OPERATION_DEFINITION];
-const argumentsEnum: ('FieldDefinition' | 'Field' | 'DirectiveDefinition' | 'Directive')[] = [
+const argumentsEnum: ('Directive' | 'DirectiveDefinition' | 'Field' | 'FieldDefinition')[] = [
   Kind.FIELD_DEFINITION,
   Kind.FIELD,
   Kind.DIRECTIVE_DEFINITION,
@@ -370,12 +370,12 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     if (fieldsSelector) {
       listeners[fieldsSelector] = (
         node: GraphQLESTreeNode<
-          | ObjectTypeDefinitionNode
-          | ObjectTypeExtensionNode
-          | InterfaceTypeDefinitionNode
-          | InterfaceTypeExtensionNode
           | InputObjectTypeDefinitionNode
           | InputObjectTypeExtensionNode
+          | InterfaceTypeDefinitionNode
+          | InterfaceTypeExtensionNode
+          | ObjectTypeDefinitionNode
+          | ObjectTypeExtensionNode
         >,
       ) => {
         checkNodes(node.fields);
@@ -408,7 +408,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     if (argumentsSelector) {
       listeners[argumentsSelector] = (
         node: GraphQLESTreeNode<
-          FieldDefinitionNode | FieldNode | DirectiveDefinitionNode | DirectiveNode
+          DirectiveDefinitionNode | DirectiveNode | FieldDefinitionNode | FieldNode
         >,
       ) => {
         checkNodes(node.arguments);

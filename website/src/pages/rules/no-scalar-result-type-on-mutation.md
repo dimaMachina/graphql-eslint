@@ -5,9 +5,10 @@
 
 - Category: `Schema`
 - Rule name: `@graphql-eslint/no-scalar-result-type-on-mutation`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 Avoid scalar result type on mutation type to make sure to return a valid state.
 

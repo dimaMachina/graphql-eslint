@@ -5,9 +5,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/executable-definitions`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A GraphQL document is only valid for execution if all definitions are either operation or fragment
 definitions.

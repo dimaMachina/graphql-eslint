@@ -5,9 +5,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/possible-fragment-spread`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A fragment spread is only valid if the type condition could ever possibly be true: if there is a
 non-empty intersection of the possible parent types, and possible types which pass the type

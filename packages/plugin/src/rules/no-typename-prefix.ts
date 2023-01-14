@@ -48,10 +48,10 @@ export const rule: GraphQLESLintRule = {
     return {
       'ObjectTypeDefinition, ObjectTypeExtension, InterfaceTypeDefinition, InterfaceTypeExtension'(
         node: GraphQLESTreeNode<
-          | ObjectTypeDefinitionNode
-          | ObjectTypeExtensionNode
           | InterfaceTypeDefinitionNode
           | InterfaceTypeExtensionNode
+          | ObjectTypeDefinitionNode
+          | ObjectTypeExtensionNode
         >,
       ) {
         const typeName = node.name.value;

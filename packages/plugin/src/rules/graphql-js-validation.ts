@@ -52,7 +52,7 @@ function validateDocument({
         token => token.loc.start.line === line && token.loc.start.column === column - 1,
       );
 
-      let loc: { line: number; column: number } | AST.SourceLocation = {
+      let loc: AST.SourceLocation | { line: number; column: number } = {
         line,
         column: column - 1,
       };
@@ -168,7 +168,7 @@ const validationToRule = (
   },
   docs: RuleDocsInfo<any>,
 ): Record<typeof ruleId, GraphQLESLintRule<[], true>> => {
-  let ruleFn: null | ValidationRule = null;
+  let ruleFn: ValidationRule | null = null;
 
   try {
     ruleFn = require(`graphql/validation/rules/${ruleName}Rule`)[`${ruleName}Rule`];

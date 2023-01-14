@@ -5,9 +5,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/unique-input-field-names`
-- Requires GraphQL Schema: `false` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `false`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A GraphQL input object value is only valid if all supplied fields are uniquely named.
 

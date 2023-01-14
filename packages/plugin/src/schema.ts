@@ -6,7 +6,7 @@ import { GraphQLProjectConfig } from 'graphql-config';
 import { ModuleCache } from './cache.js';
 import { ParserOptions, Pointer, Schema } from './types.js';
 
-const schemaCache = new ModuleCache<GraphQLSchema | Error>();
+const schemaCache = new ModuleCache<Error | GraphQLSchema>();
 const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(
@@ -25,7 +25,7 @@ export function getSchema(
     return cache;
   }
 
-  let schema: GraphQLSchema | Error;
+  let schema: Error | GraphQLSchema;
 
   try {
     debug('Loading schema from %o', project.schema);

@@ -5,9 +5,10 @@ enables this rule.
 
 - Category: `Operations`
 - Rule name: `@graphql-eslint/overlapping-fields-can-be-merged`
-- Requires GraphQL Schema: `true` [ℹ️](../../README.md#extended-linting-rules-with-graphql-schema)
+- Requires GraphQL Schema: `true`
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `false`
-  [ℹ️](../../README.md#extended-linting-rules-with-siblings-operations)
+  [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
 A selection set is only valid if all fields (including spreading any fragments) either correspond to
 distinct response names or can be merged without ambiguity.

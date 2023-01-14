@@ -83,10 +83,10 @@ const schema = {
 // TODO try import { FromSchema } from 'json-schema-to-ts';
 export type RuleOptions = [
   {
+    [key in AllowedKind]?: boolean;
+  } & {
     types?: boolean;
     rootField?: boolean;
-  } & {
-    [key in AllowedKind]?: boolean;
   },
 ];
 
