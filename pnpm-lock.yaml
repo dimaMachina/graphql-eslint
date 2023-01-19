@@ -260,7 +260,7 @@ importers:
       next-sitemap: 3.1.45
       react: 18.2.0
       react-dom: 18.2.0
-      tailwindcss-radix: 2.6.2
+      tailwindcss-radix: 2.7.0
       use-query-params: 2.1.2
     dependencies:
       '@graphql-eslint/eslint-plugin': link:../packages/plugin
@@ -285,7 +285,7 @@ importers:
       '@types/lodash.uniqwith': 4.5.7
       '@types/node': 18.11.18
       '@types/react': 18.0.27
-      tailwindcss-radix: 2.6.2
+      tailwindcss-radix: 2.7.0
 
 packages:
 
@@ -8902,8 +8902,8 @@ packages:
     resolution: {integrity: sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==}
     dev: false
 
-  /tailwindcss-radix/2.6.2:
-    resolution: {integrity: sha512-+pqIyqY9mjMXtJHyDlkiJYMfpa8+Gkt2UE6VrmbYjbLAqva7Lg4q2Rffe9JFNv9dBFfoDTVML7gQd4BDJXOrCg==}
+  /tailwindcss-radix/2.7.0:
+    resolution: {integrity: sha512-fIVkT5zQYdsjT9+/Mvp+DTlJDdTFpRDuyS5+PLuJDAIIVr9+rWYKhK6rsB9QtjwUwwb0YF+BkAJN6CjZivOfLA==}
     dev: true
 
   /tailwindcss/3.2.4:
