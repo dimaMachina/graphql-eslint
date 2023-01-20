@@ -257,7 +257,7 @@ importers:
       lodash.uniqwith: 4.5.0
       next: 13.1.2
       next-query-params: 4.1.0
-      next-sitemap: 3.1.45
+      next-sitemap: 3.1.47
       react: 18.2.0
       react-dom: 18.2.0
       tailwindcss-radix: 2.6.2
@@ -274,7 +274,7 @@ importers:
       lodash.uniqwith: 4.5.0
       next: 13.1.2_biqbaboplfbrettd7655fr4n2y
       next-query-params: 4.1.0_dovozze3bcf3u3kxejptlj7alm
-      next-sitemap: 3.1.45_next@13.1.2
+      next-sitemap: 3.1.47_next@13.1.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-query-params: 2.1.2_biqbaboplfbrettd7655fr4n2y
@@ -6946,8 +6946,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /next-sitemap/3.1.45_next@13.1.2:
-    resolution: {integrity: sha512-8vyvWC8KT8RIEUL9Vfiae9yGuIIiJ1IpepzbFtwZx43BaKsoi/Zk9OlmPKuQouVY726xwN7uLZPtgl2l2U+9Ug==}
+  /next-sitemap/3.1.47_next@13.1.2:
+    resolution: {integrity: sha512-LZxCWZ6lhQBfv1cuGob3tnsaHWffQM7VDmkXXp8u3n4LD7EJAR/SamlMj3mpHa8bFeuR6TjjRqrq/7e4WSOcLQ==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
