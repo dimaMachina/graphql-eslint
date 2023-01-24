@@ -244,8 +244,8 @@ importers:
       '@monaco-editor/react': 4.4.6
       '@radix-ui/react-icons': 1.1.1
       '@radix-ui/react-select': 1.2.0
-      '@theguild/algolia': 1.1.0
-      '@theguild/components': 4.5.1
+      '@theguild/algolia': 1.1.1
+      '@theguild/components': 4.5.2
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
       '@types/lodash.uniqwith': 4.5.7
@@ -267,7 +267,7 @@ importers:
       '@monaco-editor/react': 4.4.6_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-icons': 1.1.1_react@18.2.0
       '@radix-ui/react-select': 1.2.0_5ndqzdd6t4rivxsukjv3i3ak2q
-      '@theguild/components': 4.5.1_s6zlkfvllybxhmcq5pkr2zsuza
+      '@theguild/components': 4.5.2_s6zlkfvllybxhmcq5pkr2zsuza
       clsx: 1.2.1
       graphql: 16.6.0
       lodash.debounce: 4.0.8
@@ -279,7 +279,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       use-query-params: 2.1.2_biqbaboplfbrettd7655fr4n2y
     devDependencies:
-      '@theguild/algolia': 1.1.0
+      '@theguild/algolia': 1.1.1
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
       '@types/lodash.uniqwith': 4.5.7
@@ -1770,8 +1770,8 @@ packages:
       '@napi-rs/simple-git-win32-x64-msvc': 0.1.8
     dev: false
 
-  /@next/bundle-analyzer/13.1.2:
-    resolution: {integrity: sha512-wY/ZEmnFDbn/eJiGzOxTppTDZWfsiXz/QqdJ8cqU7mByAJg6TEY35b3JFDu5AxSf2g1e7yQ6LfRrPr7sy07ogw==}
+  /@next/bundle-analyzer/13.1.5:
+    resolution: {integrity: sha512-Z+1gyS0Hy+Lpt2k/067YIxmYoKQt0RtHy3EMyR3SMZyZGmx3muZPUBS0Aj+tdfdReVNOK2nQdT8ghSZG9Lwmbw==}
     dependencies:
       webpack-bundle-analyzer: 4.7.0
     transitivePeerDependencies:
@@ -2315,8 +2315,8 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@theguild/algolia/1.1.0:
-    resolution: {integrity: sha512-FBkCizVRVL1xpm5PKKAlYqwGOrC5npS88IrI2bEeJobVoUoNktkrDXfFDPjR0zvu7LLiqSdBRAQ8MRi01PRflw==}
+  /@theguild/algolia/1.1.1:
+    resolution: {integrity: sha512-FRidmSY/RY9SUpsueerO337eSujNzIH14c578ftPfPmOxPeRzQLjsLNGScHTAeDbJPL1fmmZ9BBoqFNRdg8wOQ==}
     hasBin: true
     dependencies:
       algoliasearch: 4.14.3
@@ -2329,8 +2329,8 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components/4.5.1_s6zlkfvllybxhmcq5pkr2zsuza:
-    resolution: {integrity: sha512-Sbjh9EbKFO/LyeJvbFniZ3BHSkD3WlspCJhJra+IoTMZCxSJpTSD7l9R59YpKvpowFpy92f2jfI0sSedic4e2g==}
+  /@theguild/components/4.5.2_s6zlkfvllybxhmcq5pkr2zsuza:
+    resolution: {integrity: sha512-pK7f6w91aSl8APHGG0a2Ru88yBZwkTwhW8+xlD6lQcLlbaaScnI3WIJvBRNZsm5ai+WCYesmQAqzHapgMcqXlA==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
       react: ^18.2.0
@@ -2341,7 +2341,7 @@ packages:
       '@algolia/autocomplete-plugin-query-suggestions': 1.7.4_algoliasearch@4.14.3
       '@algolia/autocomplete-theme-classic': 1.7.4
       '@giscus/react': 2.2.6_biqbaboplfbrettd7655fr4n2y
-      '@next/bundle-analyzer': 13.1.2
+      '@next/bundle-analyzer': 13.1.5
       '@radix-ui/react-navigation-menu': 1.1.1_biqbaboplfbrettd7655fr4n2y
       algoliasearch: 4.14.3
       clsx: 1.2.1
@@ -2350,8 +2350,8 @@ packages:
       mermaid: 9.3.0
       next: 13.1.5_biqbaboplfbrettd7655fr4n2y
       next-videos: 1.5.0
-      nextra: 2.2.4_s6zlkfvllybxhmcq5pkr2zsuza
-      nextra-theme-docs: 2.2.4_s6zlkfvllybxhmcq5pkr2zsuza
+      nextra: 2.2.13_s6zlkfvllybxhmcq5pkr2zsuza
+      nextra-theme-docs: 2.2.13_u4tphabj4vpmhng6dlk6pn4key
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-instantsearch-dom: 6.38.3_lcvw2wliyvolumce2ki4t5bwom
@@ -6385,7 +6385,6 @@ packages:
 
   /lodash.get/4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
-    dev: true
 
   /lodash.lowercase/4.3.0:
     resolution: {integrity: sha512-UcvP1IZYyDKyEL64mmrwoA1AbFu5ahojhTtkOUr1K9dbuxzS9ev8i4TxMMGCqRC9TE8uDaSoufNAXxRPNTseVA==}
@@ -7318,10 +7317,11 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /nextra-theme-docs/2.2.4_s6zlkfvllybxhmcq5pkr2zsuza:
-    resolution: {integrity: sha512-Q+erj04aN/MFT3qvq0+vYaNzFtnPRJUzJVmbIVRG7+VsnZwO/nC3MhZ6iSPBmCKKPumpTMf7bJVdGrO/HrYVRQ==}
+  /nextra-theme-docs/2.2.13_u4tphabj4vpmhng6dlk6pn4key:
+    resolution: {integrity: sha512-cMjxK/ooLaobm/3xxioKnyUrdTXcejMh1hB0bJirKZ7Vm5GdI3hHsvlE4hCj3mV3/JvusEaUx8VvApb2LsJ/FQ==}
     peerDependencies:
       next: '>=9.5.3'
+      nextra: 2.2.13
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
@@ -7336,14 +7336,15 @@ packages:
       next: 13.1.5_biqbaboplfbrettd7655fr4n2y
       next-seo: 5.15.0_s6zlkfvllybxhmcq5pkr2zsuza
       next-themes: 0.2.1_s6zlkfvllybxhmcq5pkr2zsuza
+      nextra: 2.2.13_s6zlkfvllybxhmcq5pkr2zsuza
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       scroll-into-view-if-needed: 3.0.4
       zod: 3.20.2
     dev: false
 
-  /nextra/2.2.4_s6zlkfvllybxhmcq5pkr2zsuza:
-    resolution: {integrity: sha512-aDTiFj2JGIYwiTdxf7TQQsdb9ZM1y6eWRcRBXAKpy8LrsZU/TSePPc+LPV0hA3rKhOq+2Q361Mwwff0uUyTCyg==}
+  /nextra/2.2.13_s6zlkfvllybxhmcq5pkr2zsuza:
+    resolution: {integrity: sha512-COTh3Dw00qkiOMKynJlJlWNbhjHwawoL3oc206+C9x8V0zRmWg0bbwpRYpVeJXw7E627G/zL2jw8iZG01pk8ZQ==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7356,6 +7357,7 @@ packages:
       graceful-fs: 4.2.10
       gray-matter: 4.0.3
       katex: 0.16.4
+      lodash.get: 4.4.2
       next: 13.1.5_biqbaboplfbrettd7655fr4n2y
       next-mdx-remote: 4.2.1_biqbaboplfbrettd7655fr4n2y
       p-limit: 3.1.0
@@ -7369,6 +7371,7 @@ packages:
       shiki: 0.12.1
       slash: 3.0.0
       title: 3.5.3
+      unist-util-remove: 3.1.1
       unist-util-visit: 4.1.1
     transitivePeerDependencies:
       - supports-color
@@ -9598,6 +9601,14 @@ packages:
     dependencies:
       '@types/unist': 2.0.6
       unist-util-visit: 4.1.1
+
+  /unist-util-remove/3.1.1:
+    resolution: {integrity: sha512-kfCqZK5YVY5yEa89tvpl7KnBBHu2c6CzMkqHUrlOqaRgGOMp0sMvwWOVrbAtj03KhovQB7i96Gda72v/EFE0vw==}
+    dependencies:
+      '@types/unist': 2.0.6
+      unist-util-is: 5.1.1
+      unist-util-visit-parents: 5.1.1
+    dev: false
 
   /unist-util-stringify-position/2.0.3:
     resolution: {integrity: sha512-3faScn5I+hy9VleOq/qNbAd6pAx7iH5jYBMS9I1HgQVijz/4mv5Bvw5iw1sC/90CODiKo81G/ps8AJrISn687g==}

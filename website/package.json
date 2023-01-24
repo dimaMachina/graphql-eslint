@@ -16,7 +16,7 @@
     "@monaco-editor/react": "4.4.6",
     "@radix-ui/react-icons": "1.1.1",
     "@radix-ui/react-select": "1.2.0",
-    "@theguild/components": "4.5.1",
+    "@theguild/components": "4.5.2",
     "clsx": "1.2.1",
     "graphql": "16.6.0",
     "lodash.debounce": "4.0.8",
@@ -29,7 +29,7 @@
     "use-query-params": "2.1.2"
   },
   "devDependencies": {
-    "@theguild/algolia": "1.1.0",
+    "@theguild/algolia": "1.1.1",
     "@theguild/tailwind-config": "0.2.1",
     "@types/lodash.debounce": "4.0.7",
     "@types/lodash.uniqwith": "4.5.7",
