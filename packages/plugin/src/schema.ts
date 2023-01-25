@@ -34,7 +34,6 @@ export function getSchema(
     const schemaPaths = fg.sync(project.schema as Pointer, { absolute: true });
     debug('Schema pointers %O', schemaPaths);
   }
-  // Do not set error to cache, since cache reload will be done after some `lifetime` seconds
   schemaCache.set(schemaKey, schema);
 
   return schema;
