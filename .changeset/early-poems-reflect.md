@@ -1,5 +1,11 @@
 ---
-'@graphql-eslint/eslint-plugin': patch
+'@graphql-eslint/eslint-plugin': minor
 ---
 
-do not crash ESLint when schema/siblings contains validation errors
+The new version no longer crashes on VSCode-ESLint, when schema/siblings contain validation errors,
+also, GraphQL-ESLint now has `strict: true` in `tsconfig.json` and extends `@typescript-eslint`
+recommended config 🚀
+
+P.S. GraphQL-ESLint now has its own website, all documentation moved here. Also, it contains a new
+fancy playground page 💅 for both schema/operations testing
+https://the-guild.dev/graphql/eslint/play
