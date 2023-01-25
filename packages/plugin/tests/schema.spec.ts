@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { GraphQLSchema, printSchema } from 'graphql';
@@ -39,8 +39,8 @@ describe('schema', async () => {
   });
 
   describe('UrlLoader', () => {
-    let local;
-    let url;
+    let local: ChildProcessWithoutNullStreams;
+    let url: string;
 
     beforeAll(
       () =>
@@ -64,8 +64,8 @@ describe('schema', async () => {
 
     afterAll(
       () =>
-        new Promise(resolve => {
-          local.on('close', () => resolve());
+        new Promise(done => {
+          local.on('close', () => done());
           local.kill();
         }),
     );
@@ -75,7 +75,7 @@ describe('schema', async () => {
     });
 
     describe('should passe headers', () => {
-      let schemaUrl;
+      let schemaUrl: string;
       let schemaOptions;
 
       beforeAll(() => {
@@ -95,17 +95,15 @@ describe('schema', async () => {
           },
           filePath: '',
         });
-        const error = getSchema(gqlConfig.getDefault()) as Error;
-        expect(error).toBeInstanceOf(Error);
-        expect(error.message).toMatch('authorization: "Bearer Foo"');
+        expect(() => getSchema(gqlConfig.getDefault())).toThrow('authorization: "Bearer Foo"');
       });
 
       // https://github.com/B2o5T/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
       it('with `parserOptions.schemaOptions`', () => {
         const gqlConfig = loadGraphQLConfig({ schema: schemaUrl, filePath: '' });
-        const error = getSchema(gqlConfig.getDefault(), schemaOptions) as Error;
-        expect(error).toBeInstanceOf(Error);
-        expect(error.message).toMatch('authorization: "Bearer Foo"');
+        expect(() => getSchema(gqlConfig.getDefault(), schemaOptions)).toThrow(
+          'authorization: "Bearer Foo"',
+        );
       });
     });
   });
@@ -113,9 +111,7 @@ describe('schema', async () => {
   describe('schema loading', () => {
     it('should return Error', () => {
       const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql', filePath: '' });
-      const error = getSchema(gqlConfig.getDefault()) as Error;
-      expect(error).toBeInstanceOf(Error);
-      expect(error.message).toMatch(
+      expect(() => getSchema(gqlConfig.getDefault())).toThrow(
         'Unable to find any GraphQL type definitions for the following pointers',
       );
     });

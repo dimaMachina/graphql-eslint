@@ -28,8 +28,6 @@ export function requireGraphQLSchemaFromContext(
     throw new Error(
       `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
     );
-  } else if (schema instanceof Error) {
-    throw schema;
   }
   return schema;
 }

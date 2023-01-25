@@ -7,8 +7,8 @@ import { JSONSchema } from 'json-schema-to-ts';
 import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleListener } from './testkit.js';
 
-export type Schema = Error | GraphQLSchema | null;
-export type Pointer = string[] | string;
+export type Schema = GraphQLSchema | null;
+export type Pointer = string | string[];
 
 export interface ParserOptions {
   schema?: Pointer | Record<string, { headers: Record<string, string> }>;

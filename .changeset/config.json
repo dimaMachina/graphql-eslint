@@ -5,7 +5,7 @@
   "access": "restricted",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["@graphql-eslint/example-*"],
+  "ignore": ["@graphql-eslint/example-*", "website"],
   "changelog": [
     "@changesets/changelog-github",
     {

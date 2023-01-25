@@ -12,7 +12,7 @@ import {
 import { GraphQLESTreeNode, TypeInformation } from './types.js';
 import { convertLocation } from './utils.js';
 
-export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema) {
+export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQLSchema | null) {
   const typeInfo = schema && new TypeInfo(schema);
 
   const visitor: ASTVisitor = {
