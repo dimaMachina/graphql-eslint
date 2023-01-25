@@ -1,5 +1,29 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.15.0
+
+### Minor Changes
+
+- [#1386](https://github.com/B2o5T/graphql-eslint/pull/1386)
+  [`c5fb2dc`](https://github.com/B2o5T/graphql-eslint/commit/c5fb2dc5b81471f4d36cab108987f310f77ed454)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - The new version no longer crashes on VSCode-ESLint,
+  when schema/siblings contain validation errors, also, GraphQL-ESLint now has `strict: true` in
+  `tsconfig.json` and extends `@typescript-eslint` recommended config 🚀
+
+  P.S. GraphQL-ESLint now has its own website, all documentation moved here. Also, it contains a new
+  fancy playground page 💅 for both schema/operations testing
+  https://the-guild.dev/graphql/eslint/play
+
+### Patch Changes
+
+- [#1352](https://github.com/B2o5T/graphql-eslint/pull/1352)
+  [`ed8ab2a`](https://github.com/B2o5T/graphql-eslint/commit/ed8ab2ad7df780f125caf7647693c2df0ff4f467)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - add `"strict": true` in `tsconfig.json`
+
+- [#1176](https://github.com/B2o5T/graphql-eslint/pull/1176)
+  [`876e536`](https://github.com/B2o5T/graphql-eslint/commit/876e5361959cbab418c4feee8c85e288c75e3e0e)
+  Thanks [@Berger92](https://github.com/Berger92)! - Fix `RuleDocsInfo` type
+
 ## 3.14.3
 
 ### Patch Changes
