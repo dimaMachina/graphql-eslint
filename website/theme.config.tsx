@@ -1,13 +1,6 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router';
-import {
-  Anchor,
-  defineConfig,
-  FooterExtended,
-  Header,
-  Navbar,
-  useConfig,
-} from '@theguild/components';
+import { Anchor, defineConfig, FooterExtended, Header, Navbar } from '@theguild/components';
 
 export default defineConfig({
   banner: {
@@ -61,15 +54,4 @@ export default defineConfig({
     ),
   },
   siteName: 'ESLINT',
-  useNextSeoProps() {
-    const { title } = useConfig();
-    return {
-      additionalMetaTags: [
-        {
-          content: `https://og-image.the-guild.dev/?product=GUILD&title=${encodeURI(title)}`,
-          name: 'twitter:image',
-        },
-      ],
-    };
-  },
 });
