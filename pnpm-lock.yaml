@@ -25,7 +25,7 @@ importers:
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.1.4
       '@theguild/eslint-config': 0.7.0-alpha-20230112195815-23c9c7e
-      '@theguild/prettier-config': 1.1.0
+      '@theguild/prettier-config': 1.1.1
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
       bob-the-bundler: 5.0.0
@@ -49,7 +49,7 @@ importers:
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.1.4
       '@theguild/eslint-config': 0.7.0-alpha-20230112195815-23c9c7e_7uibuqfxkfaozanbtbziikiqje
-      '@theguild/prettier-config': 1.1.0_prettier@2.8.3
+      '@theguild/prettier-config': 1.1.1_prettier@2.8.3
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
       bob-the-bundler: 5.0.0_typescript@4.9.4
@@ -483,14 +483,14 @@ packages:
     dependencies:
       '@ampproject/remapping': 2.2.0
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.17.7
+      '@babel/generator': 7.20.14
       '@babel/helper-compilation-targets': 7.20.7_@babel+core@7.17.8
       '@babel/helper-module-transforms': 7.20.11
       '@babel/helpers': 7.20.13
-      '@babel/parser': 7.18.9
+      '@babel/parser': 7.20.13
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.17.3
-      '@babel/types': 7.17.0
+      '@babel/traverse': 7.20.13
+      '@babel/types': 7.20.7
       convert-source-map: 1.9.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -504,7 +504,7 @@ packages:
     resolution: {integrity: sha512-oLcVCTeIFadUoArDTwpluncplrYBmTCCZZgXCbgNGvOBBiSDDK3eWO4b/+eOTli5tKv1lg+a5/NAXg+nTcei1w==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.20.7
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: true
@@ -626,7 +626,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.20.7
     dev: true
 
   /@babel/parser/7.20.13:
@@ -664,13 +664,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.17.7
+      '@babel/generator': 7.20.14
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.19.0
       '@babel/helper-hoist-variables': 7.18.6
       '@babel/helper-split-export-declaration': 7.18.6
-      '@babel/parser': 7.18.9
-      '@babel/types': 7.17.0
+      '@babel/parser': 7.20.13
+      '@babel/types': 7.20.7
       debug: 4.3.4
       globals: 11.12.0
     transitivePeerDependencies:
@@ -2390,8 +2390,8 @@ packages:
       - typescript
     dev: true
 
-  /@theguild/prettier-config/1.1.0_prettier@2.8.3:
-    resolution: {integrity: sha512-+8Cmd85O3Ourz4YBurN9TKuokCrlW/1ogNwA6EqAAFKHN7FSCJPErofhhNiwF6wMxC0BLkbIac0FowCAiVxdQA==}
+  /@theguild/prettier-config/1.1.1_prettier@2.8.3:
+    resolution: {integrity: sha512-tcMAzhyWLORFKCoG97uYGyRW2HIzroba2ie+V5tsOGRlgAesv+86cPVf6DSfb6J/KHqDLsu8jU0iaBgkjgCERw==}
     peerDependencies:
       prettier: ^2
     dependencies:
