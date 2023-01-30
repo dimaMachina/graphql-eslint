@@ -1255,8 +1255,8 @@ packages:
       - supports-color
     dev: false
 
-  /@graphql-tools/delegate/9.0.23_graphql@16.6.0:
-    resolution: {integrity: sha512-pTmC2ZUGRp/j4bwQRccZV+J2ETMeHYF9RmEXHHdj0S7/LOpyfFE3mGvRV2+n6MzXpPCPp+mh037LWF+q4wLcJw==}
+  /@graphql-tools/delegate/9.0.24_graphql@16.6.0:
+    resolution: {integrity: sha512-8+ircuaz51+yLip2qBBYenNlV8xiP7i44C+H+kO82ARmo2h47/q488K38DMbOL5//7G2Qt0GEZwTEF4h8ICGJQ==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
@@ -1266,7 +1266,7 @@ packages:
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       dataloader: 2.1.0
       graphql: 16.6.0
-      tslib: 2.4.1
+      tslib: 2.5.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -1423,18 +1423,18 @@ packages:
       value-or-promise: 1.0.12
     dev: false
 
-  /@graphql-tools/url-loader/7.17.4_graphql@16.6.0:
-    resolution: {integrity: sha512-nB2fhkn4LTYjU2qoTOBZYmWQRVYsCI0K2LScwD49QVMNAPWthg/lHao4hFUe70aTInT8oquvl8d0rIb7fRWOvA==}
+  /@graphql-tools/url-loader/7.17.5_graphql@16.6.0:
+    resolution: {integrity: sha512-Crd1Pgv6H/TouzxfeVA3JSQ7yc27sFOCmHQ5thIr6OIyXkzVzZ7odLxLhfZ1w7nlJHg0IHCNFUte4TIMJvzDdw==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       '@ardatan/sync-fetch': 0.0.1
-      '@graphql-tools/delegate': 9.0.23_graphql@16.6.0
+      '@graphql-tools/delegate': 9.0.24_graphql@16.6.0
       '@graphql-tools/executor-graphql-ws': 0.0.7_graphql@16.6.0
       '@graphql-tools/executor-http': 0.1.1_graphql@16.6.0
       '@graphql-tools/executor-legacy-ws': 0.0.6_graphql@16.6.0
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
-      '@graphql-tools/wrap': 9.3.2_graphql@16.6.0
+      '@graphql-tools/wrap': 9.3.3_graphql@16.6.0
       '@types/ws': 8.5.4
       '@whatwg-node/fetch': 0.6.2
       graphql: 16.6.0
@@ -1466,12 +1466,12 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@graphql-tools/wrap/9.3.2_graphql@16.6.0:
-    resolution: {integrity: sha512-jqBMJZyKFATxWA3alPhGRWh/ZluaPWrXFumXRaqAwK9QdCAxM24jG8Kmy3FrTfeyxNqDyzDlHZobtwwDKurm5g==}
+  /@graphql-tools/wrap/9.3.3_graphql@16.6.0:
+    resolution: {integrity: sha512-KN+mWFXqUAZVYWotp396lAestMZx7SYwvCWwi6D9HNy89PLK2XYBfXKlvTUYZ5zEC5s2Qhc/DbnHJ3hSFyX7Gg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/delegate': 9.0.23_graphql@16.6.0
+      '@graphql-tools/delegate': 9.0.24_graphql@16.6.0
       '@graphql-tools/schema': 9.0.14_graphql@16.6.0
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       graphql: 16.6.0
@@ -2378,7 +2378,7 @@ packages:
       eslint-plugin-mdx: 2.0.5_eslint@8.32.0
       eslint-plugin-n: 15.6.1_eslint@8.32.0
       eslint-plugin-promise: 6.1.1_eslint@8.32.0
-      eslint-plugin-react: 7.32.1_eslint@8.32.0
+      eslint-plugin-react: 7.32.2_eslint@8.32.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
       eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       eslint-plugin-sonarjs: 0.18.0_eslint@8.32.0
@@ -3987,8 +3987,8 @@ packages:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
     dev: true
 
-  /deepmerge/4.2.2:
-    resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
+  /deepmerge/4.3.0:
+    resolution: {integrity: sha512-z2wJZXrmeHdvYJp/Ux55wIjqo81G5Bp4c+oELTW+7ar6SogWHajt5a9gO3s3IDaGSAXjDk0vlQKN3rms8ab3og==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -4778,8 +4778,8 @@ packages:
       eslint: 8.32.0_v7lv2hbnxmm2b22qo3sob3rjvq
     dev: true
 
-  /eslint-plugin-react/7.32.1_eslint@8.32.0:
-    resolution: {integrity: sha512-vOjdgyd0ZHBXNsmvU+785xY8Bfe57EFbTYYk8XrROzWpr9QBvpjITvAXt9xqcE6+8cjR/g1+mfumPToxsl1www==}
+  /eslint-plugin-react/7.32.2_eslint@8.32.0:
+    resolution: {integrity: sha512-t2fBMa+XzonrrNkyVirzKlvn5RXzzPwRHtMvLAtVZrt8oxgnTQaYbU6SXTOO1mwQgp1y5+toMSKInnzGr0Knqg==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -5527,7 +5527,7 @@ packages:
       '@graphql-tools/json-file-loader': 7.4.15_graphql@16.6.0
       '@graphql-tools/load': 7.8.10_graphql@16.6.0
       '@graphql-tools/merge': 8.3.16_graphql@16.6.0
-      '@graphql-tools/url-loader': 7.17.4_graphql@16.6.0
+      '@graphql-tools/url-loader': 7.17.5_graphql@16.6.0
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       cosmiconfig: 8.0.0
       graphql: 16.6.0
@@ -6540,8 +6540,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /mdast-util-gfm-autolink-literal/1.0.2:
-    resolution: {integrity: sha512-FzopkOd4xTTBeGXhXSBU0OCDDh5lUj2rd+HQqG92Ld+jL4lpUfgX2AT2OHAVP9aEeDKp7G92fuooSZcYJA3cRg==}
+  /mdast-util-gfm-autolink-literal/1.0.3:
+    resolution: {integrity: sha512-My8KJ57FYEy2W2LyNom4n3E7hKTuQk/0SES0u16tjA9Z3oFkF4RrC/hPAPgjlSpezsOvI8ObcXcElo92wn5IGA==}
     dependencies:
       '@types/mdast': 3.0.10
       ccount: 2.0.1
@@ -6586,7 +6586,7 @@ packages:
     resolution: {integrity: sha512-42yHBbfWIFisaAfV1eixlabbsa6q7vHeSPY+cg+BBjX51M8xhgMacqH9g6TftB/9+YkcI0ooV4ncfrJslzm/RQ==}
     dependencies:
       mdast-util-from-markdown: 1.3.0
-      mdast-util-gfm-autolink-literal: 1.0.2
+      mdast-util-gfm-autolink-literal: 1.0.3
       mdast-util-gfm-footnote: 1.0.2
       mdast-util-gfm-strikethrough: 1.0.2
       mdast-util-gfm-table: 1.0.6
@@ -8410,7 +8410,7 @@ packages:
     peerDependencies:
       react: '>=16.6.0'
     dependencies:
-      deepmerge: 4.2.2
+      deepmerge: 4.3.0
       load-script: 1.0.0
       memoize-one: 5.2.1
       prop-types: 15.8.1
@@ -9452,10 +9452,6 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
-
-  /tslib/2.4.1:
-    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
-    dev: false
 
   /tslib/2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
