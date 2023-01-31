@@ -24,7 +24,7 @@ importers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.1.4
-      '@theguild/eslint-config': 0.7.0-alpha-20230112195815-23c9c7e
+      '@theguild/eslint-config': 0.8.0
       '@theguild/prettier-config': 1.1.1
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
@@ -48,7 +48,7 @@ importers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.1.4
-      '@theguild/eslint-config': 0.7.0-alpha-20230112195815-23c9c7e_et5x32uxl7z5ldub3ye5rhlyqm
+      '@theguild/eslint-config': 0.8.0_et5x32uxl7z5ldub3ye5rhlyqm
       '@theguild/prettier-config': 1.1.1_prettier@2.8.3
       '@types/dedent': 0.7.0
       '@types/node': 18.11.18
@@ -2361,8 +2361,8 @@ packages:
       - webpack
     dev: false
 
-  /@theguild/eslint-config/0.7.0-alpha-20230112195815-23c9c7e_et5x32uxl7z5ldub3ye5rhlyqm:
-    resolution: {integrity: sha512-Phzu/QE36C0SKKcSx5PB1cfTIy5Bd/0sH+xH/15q6BLIKK4ibpPFTgoekoYzMSS5DgiHevFog1eN662VAOV19w==}
+  /@theguild/eslint-config/0.8.0_et5x32uxl7z5ldub3ye5rhlyqm:
+    resolution: {integrity: sha512-OAXxluL5yA0z85t+zIJf4tibzOfEhY/RyD4AaI7NJc8iZ88mDIBasdiErBFhlRMa4GLfg6hvKdqeI6x/2ZGf7Q==}
     peerDependencies:
       eslint: ^8.24.0
     dependencies:
@@ -2380,7 +2380,6 @@ packages:
       eslint-plugin-promise: 6.1.1_eslint@8.32.0
       eslint-plugin-react: 7.32.2_eslint@8.32.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.32.0
-      eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
       eslint-plugin-sonarjs: 0.18.0_eslint@8.32.0
       eslint-plugin-unicorn: 45.0.2_eslint@8.32.0
       eslint-plugin-yml: 1.4.0_eslint@8.32.0
@@ -4800,14 +4799,6 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
-    dev: true
-
-  /eslint-plugin-simple-import-sort/8.0.0_eslint@8.32.0:
-    resolution: {integrity: sha512-bXgJQ+lqhtQBCuWY/FUWdB27j4+lqcvXv5rUARkzbeWLwea+S5eBZEQrhnO+WgX3ZoJHVj0cn943iyXwByHHQw==}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 8.32.0_v7lv2hbnxmm2b22qo3sob3rjvq
     dev: true
 
   /eslint-plugin-sonarjs/0.18.0_eslint@8.32.0:
