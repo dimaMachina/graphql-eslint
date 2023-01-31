@@ -34,7 +34,7 @@ importers:
       enquirer: 2.3.6
       eslint: 8.32.0
       eslint-plugin-eslint-plugin: 5.0.7
-      eslint-plugin-tailwindcss: 3.8.2
+      eslint-plugin-tailwindcss: 3.8.3
       husky: 8.0.3
       jest-snapshot-serializer-raw: 1.2.0
       json-schema-to-markdown: 1.1.1
@@ -58,7 +58,7 @@ importers:
       enquirer: 2.3.6
       eslint: 8.32.0_v7lv2hbnxmm2b22qo3sob3rjvq
       eslint-plugin-eslint-plugin: 5.0.7_cdhdgvmsbh3fbusrlxsl6de2he_eslint@8.32.0
-      eslint-plugin-tailwindcss: 3.8.2_et5x32uxl7z5ldub3ye5rhlyqm
+      eslint-plugin-tailwindcss: 3.8.3
       husky: 8.0.3
       jest-snapshot-serializer-raw: 1.2.0
       json-schema-to-markdown: 1.1.1_beglqnggvhpsclgwbdw27hzvu4
@@ -439,22 +439,6 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
-    dev: true
-
-  /@angular-eslint/bundled-angular-compiler/15.2.0:
-    resolution: {integrity: sha512-a0bfXxYyGoWJHrVQ4QER0HdRgselcTtJeyqiFPAxID2ZxF0IBGKLNTtugUTXekEmiLev8yGLX9TqAtthN57fEg==}
-    dev: true
-
-  /@angular-eslint/template-parser/15.2.0_et5x32uxl7z5ldub3ye5rhlyqm:
-    resolution: {integrity: sha512-xnnxPfV/G0Ll3B0HGrF1ucsc/DHmNE6UhhmWxYPTERq0McbZGRiATa66hCoOZ/Rdylun4ogBfsRKAG8XxEvlvw==}
-    peerDependencies:
-      eslint: ^7.20.0 || ^8.0.0
-      typescript: '*'
-    dependencies:
-      '@angular-eslint/bundled-angular-compiler': 15.2.0
-      eslint: 8.32.0_v7lv2hbnxmm2b22qo3sob3rjvq
-      eslint-scope: 7.1.1
-      typescript: 4.9.5
     dev: true
 
   /@ardatan/sync-fetch/0.0.1:
@@ -4810,21 +4794,14 @@ packages:
       eslint: 8.32.0_v7lv2hbnxmm2b22qo3sob3rjvq
     dev: true
 
-  /eslint-plugin-tailwindcss/3.8.2_et5x32uxl7z5ldub3ye5rhlyqm:
-    resolution: {integrity: sha512-99DPr//xTFNls1xjXX+1p45OEvG87B+SiNkSi0DfeatKBnckjCO5831lUfwCisXSgzXd9p//gNKQJGq1ewCLJQ==}
+  /eslint-plugin-tailwindcss/3.8.3:
+    resolution: {integrity: sha512-wfzfCmc9yONNW+TqfR+QWZ+syFPQ8zMOrIGx500lS4XITEm0HJYGyKh1sC1tQ9+Wmt58bnHzW3Yc31vy5RlJww==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
       tailwindcss: ^3.2.2
     dependencies:
-      '@angular-eslint/template-parser': 15.2.0_et5x32uxl7z5ldub3ye5rhlyqm
-      '@typescript-eslint/parser': 5.49.0_et5x32uxl7z5ldub3ye5rhlyqm
       fast-glob: 3.2.12
       postcss: 8.4.21
-      vue-eslint-parser: 9.1.0_eslint@8.32.0
-    transitivePeerDependencies:
-      - eslint
-      - supports-color
-      - typescript
     dev: true
 
   /eslint-plugin-unicorn/45.0.2_eslint@8.32.0:
