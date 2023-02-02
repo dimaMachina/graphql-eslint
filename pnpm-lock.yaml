@@ -23,7 +23,7 @@ importers:
     specifiers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
-      '@graphql-tools/utils': 9.1.4
+      '@graphql-tools/utils': 9.2.0
       '@theguild/eslint-config': 0.8.0
       '@theguild/prettier-config': 1.1.1
       '@types/dedent': 0.7.0
@@ -47,7 +47,7 @@ importers:
     devDependencies:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
-      '@graphql-tools/utils': 9.1.4
+      '@graphql-tools/utils': 9.2.0
       '@theguild/eslint-config': 0.8.0_et5x32uxl7z5ldub3ye5rhlyqm
       '@theguild/prettier-config': 1.1.1_prettier@2.8.3
       '@types/dedent': 0.7.0
@@ -1433,14 +1433,6 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@graphql-tools/utils/9.1.4:
-    resolution: {integrity: sha512-hgIeLt95h9nQgQuzbbdhuZmh+8WV7RZ/6GbTj6t3IU4Zd2zs9yYJ2jgW/krO587GMOY8zCwrjNOMzD40u3l7Vg==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      tslib: 2.5.0
-    dev: true
-
   /@graphql-tools/utils/9.1.4_graphql@16.6.0:
     resolution: {integrity: sha512-hgIeLt95h9nQgQuzbbdhuZmh+8WV7RZ/6GbTj6t3IU4Zd2zs9yYJ2jgW/krO587GMOY8zCwrjNOMzD40u3l7Vg==}
     peerDependencies:
@@ -1449,6 +1441,15 @@ packages:
       graphql: 16.6.0
       tslib: 2.5.0
     dev: false
+
+  /@graphql-tools/utils/9.2.0:
+    resolution: {integrity: sha512-s3lEG1iYkyYEnKCWrIFECX3XH2wmZvbg6Ir3udCvIDynq+ydaO7JQXobclpPtwSJtjlS353haF//6V7mnBQ4bg==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      '@graphql-typed-document-node/core': 3.1.1
+      tslib: 2.5.0
+    dev: true
 
   /@graphql-tools/wrap/9.3.3_graphql@16.6.0:
     resolution: {integrity: sha512-KN+mWFXqUAZVYWotp396lAestMZx7SYwvCWwi6D9HNy89PLK2XYBfXKlvTUYZ5zEC5s2Qhc/DbnHJ3hSFyX7Gg==}
@@ -1462,6 +1463,12 @@ packages:
       tslib: 2.5.0
       value-or-promise: 1.0.12
     dev: false
+
+  /@graphql-typed-document-node/core/3.1.1:
+    resolution: {integrity: sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    dev: true
 
   /@graphql-typed-document-node/core/3.1.1_graphql@16.6.0:
     resolution: {integrity: sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==}
