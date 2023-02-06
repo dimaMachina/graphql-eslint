@@ -1,5 +1,5 @@
 {
-  "index": "Overview",
+  "index": { "title": "Overview", "theme": { "layout": "full" } },
   "prettier": "`prettier` Rule",
   "deprecated-rules": "Deprecated Rules",
   "---1": { "title": "Schema & Operations Rules", "type": "separator" },

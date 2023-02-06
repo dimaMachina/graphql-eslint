@@ -245,7 +245,12 @@ async function generateDocs(): Promise<void> {
       { schemaRules: [], operationsRules: [], schemaAndOperationsRules: [] },
     );
   const metaJson = {
-    index: 'Overview',
+    index: {
+      title: 'Overview',
+      theme: {
+        layout: 'full',
+      },
+    },
     prettier: '`prettier` Rule',
     'deprecated-rules': 'Deprecated Rules',
     '---1': {

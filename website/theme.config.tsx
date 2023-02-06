@@ -48,7 +48,7 @@ export default defineConfig({
   navbar: {
     component: props => (
       <>
-        <Header accentColor="#1cc8ee" search={false} />
+        <Header accentColor="#1cc8ee" />
         <Navbar {...props} />
       </>
     ),

@@ -31,7 +31,7 @@
     "chalk": "4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
-    "eslint": "8.32.0",
+    "eslint": "8.33.0",
     "eslint-plugin-eslint-plugin": "5.0.7",
     "eslint-plugin-tailwindcss": "3.8.3",
     "husky": "8.0.3",
@@ -49,7 +49,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "eslint@8.32.0": "patches/eslint@8.31.0.patch",
+      "eslint@8.33.0": "patches/eslint@8.31.0.patch",
       "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch",
       "vitest@0.26.3": "patches/vitest@0.26.3.patch"
