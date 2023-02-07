@@ -13,6 +13,7 @@
     "lint:prettier": "prettier --cache --check .",
     "postbuild": "cp -r README.md ./packages/plugin/dist/ && tsx scripts/postbuild.ts",
     "prebuild": "rimraf ./tsconfig.tsbuildinfo",
+    "postinstall": "tsx scripts/patch-graphql.ts",
     "prerelease": "pnpm build",
     "prettier": "prettier --cache --write --list-different .",
     "release": "changeset publish",

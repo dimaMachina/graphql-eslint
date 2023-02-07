@@ -9,9 +9,5 @@ export default defineConfig({
     alias: {
       '@graphql-eslint/eslint-plugin': 'packages/plugin/src/index.ts',
     },
-    deps: {
-      // fixes `graphql` Duplicate "graphql" modules cannot be used at the same time since different
-      fallbackCJS: true,
-    },
   },
 });
