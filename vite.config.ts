@@ -5,7 +5,7 @@ export default defineConfig({
     globals: true,
     resolveSnapshotPath: testPath =>
       testPath.replace('tests/', 'tests/__snapshots__/').replace(/\.ts$/, '.md'),
-    setupFiles: ['./serializer.js'],
+    setupFiles: ['./serializer.ts'],
     alias: {
       '@graphql-eslint/eslint-plugin': 'packages/plugin/src/index.ts',
     },

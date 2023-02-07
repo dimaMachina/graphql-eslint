@@ -1,0 +1,15 @@
+# vitest's `--passWithNoTests` flag doesn't work when valid/invalid cases contain empty array 🤷‍
+
+diff --git a/dist/index.js b/dist/index.js
+index 14cbb2afd10bc64465281c25dc85a766fa3912ac..1fcd699d8ed69c8263ec6952467c0d6e94b516aa 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -545,7 +545,7 @@ async function runSuite(suite, runner) {
+     if (!hasTests(suite)) {
+       suite.result.state = "fail";
+       if (!suite.result.error) {
+-        const error = processError(new Error(`No test found in suite ${suite.name}`));
++        // const error = processError(new Error(`No test found in suite ${suite.name}`));
+         suite.result.error = error;
+         suite.result.errors = [error];
+       }

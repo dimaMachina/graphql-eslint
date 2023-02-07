@@ -68,26 +68,7 @@ export class GraphQLRuleTester extends RuleTester {
       invalid: GraphQLInvalidTestCase<Options>[];
     },
   ): void {
-    const ruleTests = Linter.version.startsWith('8')
-      ? tests
-      : {
-          valid: tests.valid.map(test => {
-            if (typeof test === 'string') {
-              return test;
-            }
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { name, ...testCaseOptions } = test;
-            return testCaseOptions;
-          }),
-          invalid: tests.invalid.map(test => {
-            // ESLint 7 throws an error on CI - Unexpected top-level property "name"
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { name, ...testCaseOptions } = test;
-            return testCaseOptions;
-          }),
-        };
-    super.run(ruleId, rule as any, ruleTests);
-
+    super.run(ruleId, rule as any, tests);
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
