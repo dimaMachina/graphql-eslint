@@ -17,6 +17,17 @@ exports[`should report fragments when there are no appropriately named import ex
     > 5 |             ...Foo
         |                ^^^ Expected 'Foo' fragment to be imported.
       6 |           }
+
+#### 💡 Suggestion: Add import expression for 'Foo'
+
+    1 | # import Foo from 'PLEASE_CHANGE.graphql'
+    2 |         # import Bar from 'foo.graphql'
+    3 |
+    4 |         query MyQuery {
+    5 |           fooField {
+    6 |             ...Foo
+    7 |           }
+    8 |         }
 `;
 
 exports[`should report fragments when there are no import expressions 1`] = `
@@ -34,6 +45,15 @@ exports[`should report fragments when there are no import expressions 1`] = `
     > 3 |             ...Foo
         |                ^^^ Expected 'Foo' fragment to be imported.
       4 |           }
+
+#### 💡 Suggestion: Add import expression for 'Foo'
+
+    1 | # import Foo from 'PLEASE_CHANGE.graphql'
+    2 |         query MyQuery {
+    3 |           fooField {
+    4 |             ...Foo
+    5 |           }
+    6 |         }
 `;
 
 exports[`should report fragments when there are no named import expressions 1`] = `
@@ -53,4 +73,15 @@ exports[`should report fragments when there are no named import expressions 1`] 
     > 5 |             ...Foo
         |                ^^^ Expected 'Foo' fragment to be imported.
       6 |           }
+
+#### 💡 Suggestion: Add import expression for 'Foo'
+
+    1 | # import Foo from 'PLEASE_CHANGE.graphql'
+    2 |         # import 'foo.graphql'
+    3 |
+    4 |         query MyQuery {
+    5 |           fooField {
+    6 |             ...Foo
+    7 |           }
+    8 |         }
 `;

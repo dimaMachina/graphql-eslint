@@ -3,6 +3,7 @@ import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 
 const RULE_ID = 'require-import-fragment';
+const SUGGESTION_ID = 'add-import-expression';
 
 export const rule: GraphQLESLintRule = {
   meta: {
@@ -49,8 +50,10 @@ export const rule: GraphQLESLintRule = {
         },
       ],
     },
+    hasSuggestions: true,
     messages: {
       [RULE_ID]: "Expected '{{name}}' fragment to be imported.",
+      [SUGGESTION_ID]: "Add import expression for '{{name}}'",
     },
     schema: [],
   },
@@ -59,8 +62,8 @@ export const rule: GraphQLESLintRule = {
     const fragmentSpreadNodes = new Set<GraphQLESTreeNode<FragmentSpreadNode>>();
     const comments = context.getSourceCode().getAllComments();
 
-    function checkFragmentSpreadNode(node: GraphQLESTreeNode<FragmentSpreadNode>) {
-      const fragmentName = node.name.value;
+    function checkFragmentSpreadNode(fragmentSpreadNode: GraphQLESTreeNode<FragmentSpreadNode>) {
+      const fragmentName = fragmentSpreadNode.name.value;
 
       if (knownFragmentNames.has(fragmentName)) {
         return;
@@ -76,24 +79,36 @@ export const rule: GraphQLESLintRule = {
       }
 
       context.report({
-        node: node.name,
+        node: fragmentSpreadNode.name,
         messageId: RULE_ID,
         data: {
           name: fragmentName,
         },
+        suggest: [
+          {
+            messageId: SUGGESTION_ID,
+            data: { name: fragmentName },
+            fix(fixer) {
+              return fixer.insertTextBeforeRange(
+                [0, 0],
+                `# import ${fragmentName} from 'PLEASE_CHANGE.graphql'\n`,
+              );
+            },
+          },
+        ],
       });
     }
 
     return {
-      FragmentSpread(node) {
-        fragmentSpreadNodes.add(node);
+      FragmentSpread(fragmentSpreadNode) {
+        fragmentSpreadNodes.add(fragmentSpreadNode);
       },
-      FragmentDefinition(node) {
-        knownFragmentNames.add(node.name.value);
+      FragmentDefinition(fragmentDefinitionNode) {
+        knownFragmentNames.add(fragmentDefinitionNode.name.value);
       },
       'Document:exit'() {
-        for (const node of fragmentSpreadNodes) {
-          checkFragmentSpreadNode(node);
+        for (const fragmentSpreadNode of fragmentSpreadNodes) {
+          checkFragmentSpreadNode(fragmentSpreadNode);
         }
       },
     };
