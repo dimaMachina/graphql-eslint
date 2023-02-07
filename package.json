@@ -12,7 +12,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "lint:prettier": "prettier --cache --check .",
     "postbuild": "cp -r README.md ./packages/plugin/dist/ && tsx scripts/postbuild.ts",
-    "postinstall": "tsx scripts/patch-graphql.ts",
+    "//postinstall": "tsx scripts/patch-graphql.ts",
     "prebuild": "rimraf ./tsconfig.tsbuildinfo",
     "prerelease": "pnpm build",
     "prettier": "prettier --cache --write --list-different .",
