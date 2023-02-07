@@ -56,7 +56,7 @@ exports[`should report fragments when there are no import expressions 1`] = `
     6 |         }
 `;
 
-exports[`should report fragments when there are no named import expressions 1`] = `
+exports[`should report fragments when there are only invalid import expressions 1`] = `
 #### ⌨️ Code
 
       1 |         # import 'foo.graphql'

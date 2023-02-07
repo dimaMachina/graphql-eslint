@@ -45,7 +45,7 @@ ruleTester.runGraphQLTests('require-import-fragment', rule, {
       errors: [{ message: "Expected 'Foo' fragment to be imported." }],
     },
     {
-      name: 'should report fragments when there are no named import expressions',
+      name: 'should report fragments when there are only invalid import expressions',
       code: /* GraphQL */ `
         # import 'foo.graphql'
 
