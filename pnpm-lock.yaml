@@ -4,18 +4,18 @@ overrides:
   graphql: 16.6.0
 
 patchedDependencies:
-  eslint@8.33.0:
-    hash: v7lv2hbnxmm2b22qo3sob3rjvq
-    path: patches/eslint@8.31.0.patch
   json-schema-to-markdown@1.1.1:
     hash: beglqnggvhpsclgwbdw27hzvu4
     path: patches/json-schema-to-markdown@1.1.1.patch
-  '@vitest/runner@0.28.4':
-    hash: 3ok2d3dfhy44umnildhav2tdui
-    path: patches/@vitest__runner@0.28.4.patch
   eslint-plugin-eslint-plugin@5.0.7:
     hash: cdhdgvmsbh3fbusrlxsl6de2he
     path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
+  eslint@8.33.0:
+    hash: v7lv2hbnxmm2b22qo3sob3rjvq
+    path: patches/eslint@8.31.0.patch
+  '@vitest/runner@0.28.4':
+    hash: 22k4fsskoeieob62btkupydhfa
+    path: patches/@vitest__runner@0.28.4.patch
 
 importers:
 
@@ -2750,7 +2750,7 @@ packages:
       chai: 4.3.7
     dev: true
 
-  /@vitest/runner/0.28.4_3ok2d3dfhy44umnildhav2tdui:
+  /@vitest/runner/0.28.4_22k4fsskoeieob62btkupydhfa:
     resolution: {integrity: sha512-Q8UV6GjDvBSTfUoq0QXVCNpNOUrWu4P2qvRq7ssJWzn0+S0ojbVOxEjMt+8a32X6SdkhF8ak+2nkppsqV0JyNQ==}
     dependencies:
       '@vitest/utils': 0.28.4
@@ -10027,7 +10027,7 @@ packages:
       '@types/chai-subset': 1.3.3
       '@types/node': 18.13.0
       '@vitest/expect': 0.28.4
-      '@vitest/runner': 0.28.4_3ok2d3dfhy44umnildhav2tdui
+      '@vitest/runner': 0.28.4_22k4fsskoeieob62btkupydhfa
       '@vitest/spy': 0.28.4
       '@vitest/utils': 0.28.4
       acorn: 8.8.2
