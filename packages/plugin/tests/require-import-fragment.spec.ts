@@ -17,6 +17,20 @@ ruleTester.runGraphQLTests('require-import-fragment', rule, {
         }
       `,
     },
+    {
+      name: 'should not report fragments from the same file',
+      code: /* GraphQL */ `
+        query MyQuery {
+          fooField {
+            ...Foo
+          }
+        }
+
+        fragment Foo on Bar {
+          baz
+        }
+      `,
+    },
   ],
   invalid: [
     {

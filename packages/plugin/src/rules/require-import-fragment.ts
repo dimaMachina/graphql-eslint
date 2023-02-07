@@ -1,4 +1,4 @@
-import { NameNode } from 'graphql';
+import { FragmentSpreadNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 
@@ -55,27 +55,46 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    return {
-      'FragmentSpread > Name'(node: GraphQLESTreeNode<NameNode>) {
-        const fragmentName = node.value;
-        const comments = context.getSourceCode().getAllComments();
+    const knownFragmentNames = new Set<string>();
+    const fragmentSpreadNodes = new Set<GraphQLESTreeNode<FragmentSpreadNode>>();
+    const comments = context.getSourceCode().getAllComments();
 
-        for (const comment of comments) {
-          if (
-            comment.type === 'Line' &&
-            comment.value.trim().startsWith(`import ${fragmentName} from `)
-          ) {
-            return;
-          }
+    function checkFragmentSpreadNode(node: GraphQLESTreeNode<FragmentSpreadNode>) {
+      const fragmentName = node.name.value;
+
+      if (knownFragmentNames.has(fragmentName)) {
+        return;
+      }
+
+      for (const comment of comments) {
+        if (
+          comment.type === 'Line' &&
+          comment.value.trim().startsWith(`import ${fragmentName} from `)
+        ) {
+          return;
         }
+      }
 
-        context.report({
-          node,
-          messageId: RULE_ID,
-          data: {
-            name: fragmentName,
-          },
-        });
+      context.report({
+        node: node.name,
+        messageId: RULE_ID,
+        data: {
+          name: fragmentName,
+        },
+      });
+    }
+
+    return {
+      FragmentSpread(node) {
+        fragmentSpreadNodes.add(node);
+      },
+      FragmentDefinition(node) {
+        knownFragmentNames.add(node.name.value);
+      },
+      'Document:exit'() {
+        for (const node of fragmentSpreadNodes) {
+          checkFragmentSpreadNode(node);
+        }
       },
     };
   },
