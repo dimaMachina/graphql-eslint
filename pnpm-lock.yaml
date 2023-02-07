@@ -23,7 +23,7 @@ importers:
     specifiers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
-      '@graphql-tools/utils': 9.2.0
+      '@graphql-tools/utils': 9.2.1
       '@theguild/eslint-config': 0.8.0
       '@theguild/prettier-config': 1.1.1
       '@types/dedent': 0.7.0
@@ -47,7 +47,7 @@ importers:
     devDependencies:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
-      '@graphql-tools/utils': 9.2.0
+      '@graphql-tools/utils': 9.2.1
       '@theguild/eslint-config': 0.8.0_4vsywjlpuriuw3tl5oq6zy5a64
       '@theguild/prettier-config': 1.1.1_prettier@2.8.3
       '@types/dedent': 0.7.0
@@ -1432,15 +1432,6 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@graphql-tools/utils/9.2.0:
-    resolution: {integrity: sha512-s3lEG1iYkyYEnKCWrIFECX3XH2wmZvbg6Ir3udCvIDynq+ydaO7JQXobclpPtwSJtjlS353haF//6V7mnBQ4bg==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@graphql-typed-document-node/core': 3.1.1
-      tslib: 2.5.0
-    dev: true
-
   /@graphql-tools/utils/9.2.0_graphql@16.6.0:
     resolution: {integrity: sha512-s3lEG1iYkyYEnKCWrIFECX3XH2wmZvbg6Ir3udCvIDynq+ydaO7JQXobclpPtwSJtjlS353haF//6V7mnBQ4bg==}
     peerDependencies:
@@ -1450,6 +1441,15 @@ packages:
       graphql: 16.6.0
       tslib: 2.5.0
     dev: false
+
+  /@graphql-tools/utils/9.2.1:
+    resolution: {integrity: sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      '@graphql-typed-document-node/core': 3.1.1
+      tslib: 2.5.0
+    dev: true
 
   /@graphql-tools/wrap/9.3.4_graphql@16.6.0:
     resolution: {integrity: sha512-MJY6lZqi+j96izjOYOLk5fys34oiLt7U34SQ4Wd6V/sy1utVMbh2H7XiZAuDJ38JIKmr72qN7kLgNcnNOxXjHQ==}
