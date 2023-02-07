@@ -72,7 +72,7 @@ export const rule: GraphQLESLintRule = {
       for (const comment of comments) {
         if (
           comment.type === 'Line' &&
-          comment.value.trim().startsWith(`import ${fragmentName} from `)
+          comment.value.trimStart().startsWith(`import ${fragmentName} from `)
         ) {
           return;
         }
