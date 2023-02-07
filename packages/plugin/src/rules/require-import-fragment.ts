@@ -1,4 +1,4 @@
-import { FragmentSpreadNode } from 'graphql';
+import { NameNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 
@@ -59,11 +59,11 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const knownFragmentNames = new Set<string>();
-    const fragmentSpreadNodes = new Set<GraphQLESTreeNode<FragmentSpreadNode>>();
+    const fragmentSpreadNameNodes = new Set<GraphQLESTreeNode<NameNode>>();
     const comments = context.getSourceCode().getAllComments();
 
-    function checkFragmentSpreadNode(fragmentSpreadNode: GraphQLESTreeNode<FragmentSpreadNode>) {
-      const fragmentName = fragmentSpreadNode.name.value;
+    function checkFragmentSpreadNameNode(node: GraphQLESTreeNode<NameNode>) {
+      const fragmentName = node.value;
 
       if (knownFragmentNames.has(fragmentName)) {
         return;
@@ -79,7 +79,7 @@ export const rule: GraphQLESLintRule = {
       }
 
       context.report({
-        node: fragmentSpreadNode.name,
+        node,
         messageId: RULE_ID,
         data: {
           name: fragmentName,
@@ -101,14 +101,14 @@ export const rule: GraphQLESLintRule = {
 
     return {
       FragmentSpread(fragmentSpreadNode) {
-        fragmentSpreadNodes.add(fragmentSpreadNode);
+        fragmentSpreadNameNodes.add(fragmentSpreadNode.name);
       },
       FragmentDefinition(fragmentDefinitionNode) {
         knownFragmentNames.add(fragmentDefinitionNode.name.value);
       },
       'Document:exit'() {
-        for (const fragmentSpreadNode of fragmentSpreadNodes) {
-          checkFragmentSpreadNode(fragmentSpreadNode);
+        for (const fragmentSpreadNameNode of fragmentSpreadNameNodes) {
+          checkFragmentSpreadNameNode(fragmentSpreadNameNode);
         }
       },
     };
