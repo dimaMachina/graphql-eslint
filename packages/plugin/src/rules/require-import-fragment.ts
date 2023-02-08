@@ -1,6 +1,6 @@
-import path from 'node:path';
+import path from 'path';
 import { NameNode } from 'graphql';
-import { requireSiblingsOperations } from '@graphql-eslint/eslint-plugin';
+import { requireSiblingsOperations } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 
