@@ -113,7 +113,7 @@ export const rule: GraphQLESLintRule = {
             data: { fragmentName },
             fix(fixer) {
               const suggestedPath = fragmentsFromSiblings.length
-                ? path.relative(path.dirname(filePath), fragmentsFromSiblings[0]?.filePath)
+                ? path.relative(path.dirname(filePath), fragmentsFromSiblings[0].filePath)
                 : 'CHANGE_ME.graphql';
               return fixer.insertTextBeforeRange(
                 [0, 0],
