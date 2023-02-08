@@ -76,7 +76,6 @@ export const rule: GraphQLESLintRule = {
 
     function checkFragmentSpreadNameNode(node: GraphQLESTreeNode<NameNode>): void {
       const fragmentName = node.value;
-
       const fragmentsFromSiblings = siblings.getFragment(fragmentName);
 
       for (const comment of comments) {
@@ -93,13 +92,11 @@ export const rule: GraphQLESLintRule = {
         if (!extractedImportPath) continue;
 
         const importPath = path.join(path.dirname(filePath), extractedImportPath);
-
         const hasInSiblings = fragmentsFromSiblings.some(source => importPath === source.filePath);
         if (hasInSiblings) return;
       }
 
-      const fragmentInSameFile = fragmentsFromSiblings.some(source => source.filePath === filePath)
-      
+      const fragmentInSameFile = fragmentsFromSiblings.some(source => source.filePath === filePath);
       if (fragmentInSameFile) return;
 
       context.report({
