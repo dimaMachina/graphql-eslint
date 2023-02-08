@@ -20,8 +20,8 @@ Require fragments to be imported via an import expression.
 # eslint @graphql-eslint/require-import-fragment: 'error'
 
 query {
-  foo {
-    ...FooFields
+  user {
+    ...UserFields
   }
 }
 ```
@@ -31,10 +31,10 @@ query {
 ```graphql
 # eslint @graphql-eslint/require-import-fragment: 'error'
 
-# import 'bar.graphql'
+# import 'post-fields.fragment.graphql'
 query {
-  foo {
-    ...FooFields
+  user {
+    ...UserFields
   }
 }
 ```
@@ -44,10 +44,10 @@ query {
 ```graphql
 # eslint @graphql-eslint/require-import-fragment: 'error'
 
-# import FooFields from 'bar.graphql'
+# import UserFields from 'post-fields.fragment.graphql'
 query {
-  foo {
-    ...FooFields
+  user {
+    ...UserFields
   }
 }
 ```
@@ -57,10 +57,10 @@ query {
 ```graphql
 # eslint @graphql-eslint/require-import-fragment: 'error'
 
-# import FooFields from 'foo.graphql'
+# import UserFields from 'user-fields.fragment.graphql'
 query {
-  foo {
-    ...FooFields
+  user {
+    ...UserFields
   }
 }
 ```

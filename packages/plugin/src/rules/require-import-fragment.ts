@@ -19,8 +19,8 @@ export const rule: GraphQLESLintRule = {
           title: 'Incorrect',
           code: /* GraphQL */ `
             query {
-              foo {
-                ...FooFields
+              user {
+                ...UserFields
               }
             }
           `,
@@ -28,10 +28,10 @@ export const rule: GraphQLESLintRule = {
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            # import 'bar.graphql'
+            # import 'post-fields.fragment.graphql'
             query {
-              foo {
-                ...FooFields
+              user {
+                ...UserFields
               }
             }
           `,
@@ -39,10 +39,10 @@ export const rule: GraphQLESLintRule = {
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            # import FooFields from 'bar.graphql'
+            # import UserFields from 'post-fields.fragment.graphql'
             query {
-              foo {
-                ...FooFields
+              user {
+                ...UserFields
               }
             }
           `,
@@ -50,10 +50,10 @@ export const rule: GraphQLESLintRule = {
         {
           title: 'Correct',
           code: /* GraphQL */ `
-            # import FooFields from 'foo.graphql'
+            # import UserFields from 'user-fields.fragment.graphql'
             query {
-              foo {
-                ...FooFields
+              user {
+                ...UserFields
               }
             }
           `,
@@ -69,7 +69,6 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const definedFragments = new Set<string>();
     const fragmentSpreadNameNodes = new Set<GraphQLESTreeNode<NameNode>>();
     const comments = context.getSourceCode().getAllComments();
     const siblings = requireSiblingsOperations(RULE_ID, context);
@@ -77,10 +76,6 @@ export const rule: GraphQLESLintRule = {
 
     function checkFragmentSpreadNameNode(node: GraphQLESTreeNode<NameNode>): void {
       const fragmentName = node.value;
-
-      if (definedFragments.has(fragmentName)) {
-        return;
-      }
 
       const fragmentsFromSiblings = siblings.getFragment(fragmentName);
 
@@ -99,38 +94,36 @@ export const rule: GraphQLESLintRule = {
 
         const importPath = path.join(path.dirname(filePath), extractedImportPath);
 
-        const hasInSiblings = fragmentsFromSiblings.some(source => source.filePath === importPath);
+        const hasInSiblings = fragmentsFromSiblings.some(source => importPath === source.filePath);
         if (hasInSiblings) return;
       }
+
+      const fragmentInSameFile = fragmentsFromSiblings.some(source => source.filePath === filePath)
+      
+      if (fragmentInSameFile) return;
 
       context.report({
         node,
         messageId: RULE_ID,
         data: { fragmentName },
-        suggest: [
-          {
-            messageId: SUGGESTION_ID,
-            data: { fragmentName },
-            fix(fixer) {
-              const suggestedPath = fragmentsFromSiblings.length
-                ? path.relative(path.dirname(filePath), fragmentsFromSiblings[0].filePath)
-                : 'CHANGE_ME.graphql';
-              return fixer.insertTextBeforeRange(
-                [0, 0],
-                `# import ${fragmentName} from '${suggestedPath}'\n`,
-              );
-            },
-          },
-        ],
+        suggest: (fragmentsFromSiblings.length
+          ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
+          : ['CHANGE_ME.graphql']
+        ).map(suggestedPath => ({
+          messageId: SUGGESTION_ID,
+          data: { fragmentName },
+          fix: fixer =>
+            fixer.insertTextBeforeRange(
+              [0, 0],
+              `# import ${fragmentName} from '${suggestedPath}'\n`,
+            ),
+        })),
       });
     }
 
     return {
       'FragmentSpread .name'(node: GraphQLESTreeNode<NameNode>) {
         fragmentSpreadNameNodes.add(node);
-      },
-      'FragmentDefinition .name'(node: GraphQLESTreeNode<NameNode>) {
-        definedFragments.add(node.value);
       },
       'Document:exit'() {
         for (const fragmentSpreadNameNode of fragmentSpreadNameNodes) {

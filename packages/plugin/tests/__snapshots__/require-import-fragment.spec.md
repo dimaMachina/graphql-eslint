@@ -3,27 +3,27 @@
 exports[`should report fragments when there are no import expressions 1`] = `
 #### ⌨️ Code
 
-      1 |         {
-      2 |           foo {
-      3 |             ...FooFields
-      4 |           }
-      5 |         }
+      1 | {
+      2 |   foo {
+      3 |     ...FooFields
+      4 |   }
+      5 | }
 
 #### ❌ Error
 
-      2 |           foo {
-    > 3 |             ...FooFields
-        |                ^^^^^^^^^ Expected "FooFields" fragment to be imported.
-      4 |           }
+      2 |   foo {
+    > 3 |     ...FooFields
+        |        ^^^^^^^^^ Expected "FooFields" fragment to be imported.
+      4 |   }
 
 #### 💡 Suggestion: Add import expression for "FooFields".
 
-    1 | # import FooFields from 'CHANGE_ME.graphql'
-    2 |         {
-    3 |           foo {
-    4 |             ...FooFields
-    5 |           }
-    6 |         }
+    1 | # import FooFields from 'foo-fragment.gql'
+    2 | {
+    3 |   foo {
+    4 |     ...FooFields
+    5 |   }
+    6 | }
 `;
 
 exports[`should report with default import 1`] = `
