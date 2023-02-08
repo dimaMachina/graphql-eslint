@@ -69,63 +69,57 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const fragmentSpreadNameNodes = new Set<GraphQLESTreeNode<NameNode>>();
     const comments = context.getSourceCode().getAllComments();
     const siblings = requireSiblingsOperations(RULE_ID, context);
     const filePath = context.getFilename();
 
-    function checkFragmentSpreadNameNode(node: GraphQLESTreeNode<NameNode>): void {
-      const fragmentName = node.value;
-      const fragmentsFromSiblings = siblings.getFragment(fragmentName);
-
-      for (const comment of comments) {
-        if (comment.type !== 'Line') continue;
-
-        // 1. could start with extra whitespace
-        // 2. match both named/default import
-        const isPossibleImported = new RegExp(
-          `^\\s*import\\s+(${fragmentName}\\s+from\\s+)?['"]`,
-        ).test(comment.value);
-        if (!isPossibleImported) continue;
-
-        const extractedImportPath = comment.value.match(/(["'])((?:\1|.)*?)\1/)?.[2];
-        if (!extractedImportPath) continue;
-
-        const importPath = path.join(path.dirname(filePath), extractedImportPath);
-        const hasInSiblings = fragmentsFromSiblings.some(source => importPath === source.filePath);
-        if (hasInSiblings) return;
-      }
-
-      const fragmentInSameFile = fragmentsFromSiblings.some(source => source.filePath === filePath);
-      if (fragmentInSameFile) return;
-
-      context.report({
-        node,
-        messageId: RULE_ID,
-        data: { fragmentName },
-        suggest: (fragmentsFromSiblings.length
-          ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
-          : ['CHANGE_ME.graphql']
-        ).map(suggestedPath => ({
-          messageId: SUGGESTION_ID,
-          data: { fragmentName },
-          fix: fixer =>
-            fixer.insertTextBeforeRange(
-              [0, 0],
-              `# import ${fragmentName} from '${suggestedPath}'\n`,
-            ),
-        })),
-      });
-    }
-
     return {
       'FragmentSpread .name'(node: GraphQLESTreeNode<NameNode>) {
-        fragmentSpreadNameNodes.add(node);
-      },
-      'Document:exit'() {
-        for (const fragmentSpreadNameNode of fragmentSpreadNameNodes) {
-          checkFragmentSpreadNameNode(fragmentSpreadNameNode);
+        const fragmentName = node.value;
+        const fragmentsFromSiblings = siblings.getFragment(fragmentName);
+
+        for (const comment of comments) {
+          if (comment.type !== 'Line') continue;
+
+          // 1. could start with extra whitespace
+          // 2. match both named/default import
+          const isPossibleImported = new RegExp(
+            `^\\s*import\\s+(${fragmentName}\\s+from\\s+)?['"]`,
+          ).test(comment.value);
+          if (!isPossibleImported) continue;
+
+          const extractedImportPath = comment.value.match(/(["'])((?:\1|.)*?)\1/)?.[2];
+          if (!extractedImportPath) continue;
+
+          const importPath = path.join(path.dirname(filePath), extractedImportPath);
+          const hasInSiblings = fragmentsFromSiblings.some(
+            source => importPath === source.filePath,
+          );
+          if (hasInSiblings) return;
         }
+
+        const fragmentInSameFile = fragmentsFromSiblings.some(
+          source => source.filePath === filePath,
+        );
+        if (fragmentInSameFile) return;
+
+        context.report({
+          node,
+          messageId: RULE_ID,
+          data: { fragmentName },
+          suggest: (fragmentsFromSiblings.length
+            ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
+            : ['CHANGE_ME.graphql']
+          ).map(suggestedPath => ({
+            messageId: SUGGESTION_ID,
+            data: { fragmentName },
+            fix: fixer =>
+              fixer.insertTextBeforeRange(
+                [0, 0],
+                `# import ${fragmentName} from '${suggestedPath}'\n`,
+              ),
+          })),
+        });
       },
     };
   },

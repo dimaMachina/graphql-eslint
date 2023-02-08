@@ -13,7 +13,7 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Re
   [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
 };
 
-export type GraphQLValidTestCase<Options> = Omit<
+export type GraphQLValidTestCase<Options = []> = Omit<
   RuleTester.ValidTestCase,
   'options' | 'parserOptions'
 > & {
@@ -21,7 +21,7 @@ export type GraphQLValidTestCase<Options> = Omit<
   parserOptions?: Omit<ParserOptions, 'filePath'>;
 };
 
-export type GraphQLInvalidTestCase<T> = GraphQLValidTestCase<T> & {
+export type GraphQLInvalidTestCase<T = []> = GraphQLValidTestCase<T> & {
   errors: (RuleTester.TestCaseError | string)[] | number;
   output?: string | null;
 };
