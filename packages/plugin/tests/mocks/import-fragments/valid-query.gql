@@ -1,0 +1,9 @@
+# Imports could have extra whitespace and double/single quotes
+
+#  import  FooFields  from  "foo-fragment.gql"
+
+query {
+  foo {
+    ...FooFields
+  }
+}

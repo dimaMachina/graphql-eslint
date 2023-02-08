@@ -1,0 +1,3 @@
+fragment BarFields on Bar {
+  id
+}

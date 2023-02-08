@@ -78,7 +78,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           definitions.push({ type, node });
         }
       },
-      'Program:exit'() {
+      'Document:exit'() {
         for (const { node, type } of definitions.slice(1) /* ignore first definition */) {
           let name = pascalCase(type);
           const definitionName = node.name?.value;

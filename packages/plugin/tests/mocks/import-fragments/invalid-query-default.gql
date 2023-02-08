@@ -1,0 +1,6 @@
+#import 'bar-fragment.gql'
+query {
+  foo {
+    ...FooFields
+  }
+}

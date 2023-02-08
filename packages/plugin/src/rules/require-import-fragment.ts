@@ -1,4 +1,6 @@
+import path from 'node:path';
 import { NameNode } from 'graphql';
+import { requireSiblingsOperations } from '@graphql-eslint/eslint-plugin';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 
@@ -16,9 +18,9 @@ export const rule: GraphQLESLintRule = {
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            query MyQuery {
-              fooField {
-                ...Foo
+            query {
+              foo {
+                ...FooFields
               }
             }
           `,
@@ -26,12 +28,21 @@ export const rule: GraphQLESLintRule = {
         {
           title: 'Incorrect',
           code: /* GraphQL */ `
-            # import Bar from 'bar.graphql'
-            # import 'foo.graphql'
-
-            query MyQuery {
-              fooField {
-                ...Foo
+            # import 'bar.graphql'
+            query {
+              foo {
+                ...FooFields
+              }
+            }
+          `,
+        },
+        {
+          title: 'Incorrect',
+          code: /* GraphQL */ `
+            # import FooFields from 'bar.graphql'
+            query {
+              foo {
+                ...FooFields
               }
             }
           `,
@@ -39,59 +50,74 @@ export const rule: GraphQLESLintRule = {
         {
           title: 'Correct',
           code: /* GraphQL */ `
-            # import Foo from 'foo.graphql'
-
-            query MyQuery {
-              fooField {
-                ...Foo
+            # import FooFields from 'foo.graphql'
+            query {
+              foo {
+                ...FooFields
               }
             }
           `,
         },
       ],
+      requiresSiblings: true,
     },
     hasSuggestions: true,
     messages: {
-      [RULE_ID]: "Expected '{{name}}' fragment to be imported.",
-      [SUGGESTION_ID]: "Add import expression for '{{name}}'",
+      [RULE_ID]: 'Expected "{{fragmentName}}" fragment to be imported.',
+      [SUGGESTION_ID]: 'Add import expression for "{{fragmentName}}".',
     },
     schema: [],
   },
   create(context) {
-    const knownFragmentNames = new Set<string>();
+    const definedFragments = new Set<string>();
     const fragmentSpreadNameNodes = new Set<GraphQLESTreeNode<NameNode>>();
     const comments = context.getSourceCode().getAllComments();
+    const siblings = requireSiblingsOperations(RULE_ID, context);
+    const filePath = context.getFilename();
 
-    function checkFragmentSpreadNameNode(node: GraphQLESTreeNode<NameNode>) {
+    function checkFragmentSpreadNameNode(node: GraphQLESTreeNode<NameNode>): void {
       const fragmentName = node.value;
 
-      if (knownFragmentNames.has(fragmentName)) {
+      if (definedFragments.has(fragmentName)) {
         return;
       }
 
+      const fragmentsFromSiblings = siblings.getFragment(fragmentName);
+
       for (const comment of comments) {
-        if (
-          comment.type === 'Line' &&
-          comment.value.trimStart().startsWith(`import ${fragmentName} from `)
-        ) {
-          return;
-        }
+        if (comment.type !== 'Line') continue;
+
+        // 1. could start with extra whitespace
+        // 2. match both named/default import
+        const isPossibleImported = new RegExp(
+          `^\\s*import\\s+(${fragmentName}\\s+from\\s+)?['"]`,
+        ).test(comment.value);
+        if (!isPossibleImported) continue;
+
+        const extractedImportPath = comment.value.match(/(["'])((?:\1|.)*?)\1/)?.[2];
+        if (!extractedImportPath) continue;
+
+        const importPath = path.join(path.dirname(filePath), extractedImportPath);
+
+        const hasInSiblings = fragmentsFromSiblings.some(source => source.filePath === importPath);
+        if (hasInSiblings) return;
       }
 
       context.report({
         node,
         messageId: RULE_ID,
-        data: {
-          name: fragmentName,
-        },
+        data: { fragmentName },
         suggest: [
           {
             messageId: SUGGESTION_ID,
-            data: { name: fragmentName },
+            data: { fragmentName },
             fix(fixer) {
+              const suggestedPath = fragmentsFromSiblings.length
+                ? path.relative(path.dirname(filePath), fragmentsFromSiblings[0]?.filePath)
+                : 'CHANGE_ME.graphql';
               return fixer.insertTextBeforeRange(
                 [0, 0],
-                `# import ${fragmentName} from 'PLEASE_CHANGE.graphql'\n`,
+                `# import ${fragmentName} from '${suggestedPath}'\n`,
               );
             },
           },
@@ -100,11 +126,11 @@ export const rule: GraphQLESLintRule = {
     }
 
     return {
-      FragmentSpread(fragmentSpreadNode) {
-        fragmentSpreadNameNodes.add(fragmentSpreadNode.name);
+      'FragmentSpread .name'(node: GraphQLESTreeNode<NameNode>) {
+        fragmentSpreadNameNodes.add(node);
       },
-      FragmentDefinition(fragmentDefinitionNode) {
-        knownFragmentNames.add(fragmentDefinitionNode.name.value);
+      'FragmentDefinition .name'(node: GraphQLESTreeNode<NameNode>) {
+        definedFragments.add(node.value);
       },
       'Document:exit'() {
         for (const fragmentSpreadNameNode of fragmentSpreadNameNodes) {
