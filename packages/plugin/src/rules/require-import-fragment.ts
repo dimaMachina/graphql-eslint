@@ -60,6 +60,7 @@ export const rule: GraphQLESLintRule = {
         },
       ],
       requiresSiblings: true,
+      isDisabledForAllConfig: true,
     },
     hasSuggestions: true,
     messages: {
@@ -74,7 +75,7 @@ export const rule: GraphQLESLintRule = {
     const filePath = context.getFilename();
 
     return {
-      'FragmentSpread .name'(node: GraphQLESTreeNode<NameNode>) {
+      'FragmentSpread > .name'(node: GraphQLESTreeNode<NameNode>) {
         const fragmentName = node.value;
         const fragmentsFromSiblings = siblings.getFragment(fragmentName);
 
@@ -93,7 +94,7 @@ export const rule: GraphQLESLintRule = {
 
           const importPath = path.join(path.dirname(filePath), extractedImportPath);
           const hasInSiblings = fragmentsFromSiblings.some(
-            source => importPath === source.filePath,
+            source => source.filePath === importPath,
           );
           if (hasInSiblings) return;
         }
@@ -103,14 +104,15 @@ export const rule: GraphQLESLintRule = {
         );
         if (fragmentInSameFile) return;
 
+        const suggestedFilePaths = fragmentsFromSiblings.length
+          ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
+          : ['CHANGE_ME.graphql'];
+
         context.report({
           node,
           messageId: RULE_ID,
           data: { fragmentName },
-          suggest: (fragmentsFromSiblings.length
-            ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
-            : ['CHANGE_ME.graphql']
-          ).map(suggestedPath => ({
+          suggest: suggestedFilePaths.map(suggestedPath => ({
             messageId: SUGGESTION_ID,
             data: { fragmentName },
             fix: fixer =>

@@ -24,7 +24,6 @@ export default {
       },
     ],
     '@graphql-eslint/no-one-place-fragments': 'error',
-    '@graphql-eslint/require-import-fragment': 'error',
     '@graphql-eslint/unique-fragment-name': 'error',
     '@graphql-eslint/unique-operation-name': 'error',
   },
