@@ -58,6 +58,7 @@
   "overlapping-fields-can-be-merged": "",
   "possible-fragment-spread": "",
   "require-id-when-available": "",
+  "require-import-fragment": "",
   "scalar-leafs": "",
   "selection-set-depth": "",
   "unique-argument-names": "",

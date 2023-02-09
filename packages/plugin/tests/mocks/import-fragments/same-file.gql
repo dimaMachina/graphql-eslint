@@ -1,0 +1,9 @@
+{
+  foo {
+    ...FooFields
+  }
+}
+
+fragment FooFields on Foo {
+  id
+}

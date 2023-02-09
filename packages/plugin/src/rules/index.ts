@@ -29,6 +29,7 @@ import { rule as requireDeprecationReason } from './require-deprecation-reason.j
 import { rule as requireDescription } from './require-description.js';
 import { rule as requireFieldOfTypeQueryInMutationResult } from './require-field-of-type-query-in-mutation-result.js';
 import { rule as requireIdWhenAvailable } from './require-id-when-available.js';
+import { rule as requireImportFragment } from './require-import-fragment.js';
 import { rule as requireNullableFieldsWithOneof } from './require-nullable-fields-with-oneof.js';
 import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof.js';
 import { rule as selectionSetDepth } from './selection-set-depth.js';
@@ -64,6 +65,7 @@ export const rules = {
   'require-description': requireDescription,
   'require-field-of-type-query-in-mutation-result': requireFieldOfTypeQueryInMutationResult,
   'require-id-when-available': requireIdWhenAvailable,
+  'require-import-fragment': requireImportFragment,
   'require-nullable-fields-with-oneof': requireNullableFieldsWithOneof,
   'require-type-pattern-with-oneof': requireTypePatternWithOneof,
   'selection-set-depth': selectionSetDepth,
