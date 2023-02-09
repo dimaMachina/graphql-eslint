@@ -261,7 +261,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       tailwindcss-radix: 2.7.0
-      use-query-params: 2.1.2
+      use-query-params: 2.2.0
     dependencies:
       '@graphql-eslint/eslint-plugin': link:../packages/plugin
       '@monaco-editor/react': 4.4.6_biqbaboplfbrettd7655fr4n2y
@@ -273,11 +273,11 @@ importers:
       lodash.debounce: 4.0.8
       lodash.uniqwith: 4.5.0
       next: 13.1.6_biqbaboplfbrettd7655fr4n2y
-      next-query-params: 4.1.0_3ihssrti5cp64p6r3nkpxugu4a
+      next-query-params: 4.1.0_kxwbbzh4agphvfcz5jwanvdjty
       next-sitemap: 3.1.50_next@13.1.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      use-query-params: 2.1.2_biqbaboplfbrettd7655fr4n2y
+      use-query-params: 2.2.0_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@theguild/algolia': 1.1.2
       '@theguild/tailwind-config': 0.2.1
@@ -7273,7 +7273,7 @@ packages:
       - supports-color
     dev: false
 
-  /next-query-params/4.1.0_3ihssrti5cp64p6r3nkpxugu4a:
+  /next-query-params/4.1.0_kxwbbzh4agphvfcz5jwanvdjty:
     resolution: {integrity: sha512-jjoQByM9s2d4wCUBUazhgHNVztm18meCtVoDj6v45+LZIQfxAF5QYVFKCbDYarI3iXD4xcZprztqLtALiiV8nQ==}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
@@ -7283,7 +7283,7 @@ packages:
       next: 13.1.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       tslib: 2.5.0
-      use-query-params: 2.1.2_biqbaboplfbrettd7655fr4n2y
+      use-query-params: 2.2.0_biqbaboplfbrettd7655fr4n2y
     dev: false
 
   /next-seo/5.15.0_3vryta7zmbcsw4rrqf4axjqggm:
@@ -9854,8 +9854,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /use-query-params/2.1.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-evg64srKaILvKyRQ1zpXvekTC7rktAT7OAekU7x6naHrOMqLHtq0MHR/PtKIQAP4d7HrkYNVOS8exHhiWy7m3A==}
+  /use-query-params/2.2.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-MPBwXVZYzFeJEdjv0YgPNFsafUOM8WTpwBEZfNEMlyzbTsf2c+ZpOBkdM95/w4rxzk4eVO3E4DW7v33+VDbiQw==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
