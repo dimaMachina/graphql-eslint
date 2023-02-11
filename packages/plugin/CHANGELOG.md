@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.16.0
+
+### Minor Changes
+
+- [#1443](https://github.com/B2o5T/graphql-eslint/pull/1443)
+  [`9916d8d`](https://github.com/B2o5T/graphql-eslint/commit/9916d8dd15112a9f71d712b9a5c63d8708fc608c)
+  Thanks [@FloEdelmann](https://github.com/FloEdelmann)! - Add new `require-import-fragment` rule
+  that reports fragments which were not imported via an import expression.
+
 ## 3.15.0
 
 ### Minor Changes
