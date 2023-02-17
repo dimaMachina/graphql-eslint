@@ -14,7 +14,7 @@
   "dependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
     "@monaco-editor/react": "4.4.6",
-    "@radix-ui/react-icons": "1.1.1",
+    "@radix-ui/react-icons": "1.2.0",
     "@radix-ui/react-select": "1.2.0",
     "@theguild/components": "4.5.4",
     "clsx": "1.2.1",
