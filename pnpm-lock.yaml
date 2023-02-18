@@ -242,7 +242,7 @@ importers:
     specifiers:
       '@graphql-eslint/eslint-plugin': workspace:*
       '@monaco-editor/react': 4.4.6
-      '@radix-ui/react-icons': 1.1.1
+      '@radix-ui/react-icons': 1.2.0
       '@radix-ui/react-select': 1.2.0
       '@theguild/algolia': 1.1.2
       '@theguild/components': 4.5.4
@@ -265,7 +265,7 @@ importers:
     dependencies:
       '@graphql-eslint/eslint-plugin': link:../packages/plugin
       '@monaco-editor/react': 4.4.6_biqbaboplfbrettd7655fr4n2y
-      '@radix-ui/react-icons': 1.1.1_react@18.2.0
+      '@radix-ui/react-icons': 1.2.0_react@18.2.0
       '@radix-ui/react-select': 1.2.0_zula6vjvt3wdocc4mwcxqa6nzi
       '@theguild/components': 4.5.4_3vryta7zmbcsw4rrqf4axjqggm
       clsx: 1.2.1
@@ -2050,8 +2050,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@radix-ui/react-icons/1.1.1_react@18.2.0:
-    resolution: {integrity: sha512-xc3wQC59rsFylVbSusQCrrM+6695ppF730Q6yqzhRdqDcRNWIm2R6ngpzBoSOQMcwnq4p805F+Gr7xo4fmtN1A==}
+  /@radix-ui/react-icons/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-NqrZxn+Ig6c6MypUt84/Nab9WBFXH75T1mhEhFjPlIYaNkp113pqlo6QdK5r7zb3b7RckDAPgUQACes0aKwcFA==}
     peerDependencies:
       react: ^16.x || ^17.x || ^18.x
     dependencies:
