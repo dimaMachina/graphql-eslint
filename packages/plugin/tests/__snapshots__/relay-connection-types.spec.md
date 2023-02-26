@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`\`edges\` field should return a list type that wraps an edge type 1`] = `
 #### ⌨️ Code

@@ -71,39 +71,46 @@ importers:
 
   examples/basic:
     specifiers:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.33.0
       graphql: 16.6.0
     dependencies:
       graphql: 16.6.0
     devDependencies:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.33.0
 
   examples/code-file:
     specifiers:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.33.0
       graphql: 16.6.0
     dependencies:
       graphql: 16.6.0
     devDependencies:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.33.0
 
   examples/graphql-config:
     specifiers:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.33.0
       graphql: 16.6.0
     dependencies:
       graphql: 16.6.0
     devDependencies:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.33.0
 
   examples/graphql-config-code-file:
     specifiers:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.33.0
       graphql: 16.6.0
@@ -112,17 +119,20 @@ importers:
       graphql: 16.6.0
       graphql-tag: 2.12.6_graphql@16.6.0
     devDependencies:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.33.0
 
   examples/monorepo:
     specifiers:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.33.0
       graphql: 16.6.0
     dependencies:
       graphql: 16.6.0
     devDependencies:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.33.0
 
@@ -145,6 +155,7 @@ importers:
 
   examples/prettier:
     specifiers:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.33.0
       eslint-config-prettier: 8.6.0
@@ -154,6 +165,7 @@ importers:
     dependencies:
       graphql: 16.6.0
     devDependencies:
+      '@eslint/js': 8.35.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.33.0
       eslint-config-prettier: 8.6.0_eslint@8.33.0

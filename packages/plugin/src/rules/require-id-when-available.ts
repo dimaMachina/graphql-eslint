@@ -249,7 +249,14 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         if ('type' in node) {
           problem.suggest = idNames.map(idName => ({
             desc: `Add \`${idName}\` selection`,
-            fix: fixer => fixer.insertTextBefore((node as any).selections[0], `${idName} `),
+            fix: fixer => {
+              let insertNode = (node as any).selections[0];
+              insertNode =
+                insertNode.kind === Kind.INLINE_FRAGMENT
+                  ? insertNode.selectionSet.selections[0]
+                  : insertNode;
+              return fixer.insertTextBefore(insertNode, `${idName} `);
+            },
           }));
         }
         context.report(problem);

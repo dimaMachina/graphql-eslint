@@ -1,10 +1,14 @@
 import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import js from '@eslint/js';
 
 const SCHEMA_PATH = 'server/**/*.gql';
 const OPERATIONS_PATH = 'client/**/*.{tsx,gql}';
 
 export default [
-  'eslint:recommended',
+  {
+    files: ['**/*.{js,tsx}'],
+    rules: js.configs.recommended.rules,
+  },
   {
     files: ['client/**/*.tsx'],
     // Setup processor for operations/fragments definitions on code-files

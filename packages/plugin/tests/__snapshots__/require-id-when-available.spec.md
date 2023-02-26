@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Invalid #1 1`] = `
 #### ⌨️ Code
@@ -133,8 +133,8 @@ exports[`should report an error with union 1`] = `
 
     1 |   {
     2 |     userOrPost {
-    3 |       id ... on User {
-    4 |         title
+    3 |       ... on User {
+    4 |         id title
     5 |       }
     6 |     }
     7 |   }
