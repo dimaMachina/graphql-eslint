@@ -103,7 +103,7 @@ export function GraphQLEditor({
       <div
         className={clsx(
           'nextra-scrollbar flex flex-col gap-2 overflow-y-auto border-t p-4 dark:border-neutral-800',
-          '[&>div]:mt-0 [&>div]:whitespace-pre-wrap [&>div>div:last-child]:leading-5',
+          '[&>div>div:last-child]:leading-5 [&>div]:mt-0 [&>div]:whitespace-pre-wrap',
         )}
         style={{ height }}
       >
