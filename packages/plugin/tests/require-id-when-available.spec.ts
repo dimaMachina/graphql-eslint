@@ -379,5 +379,26 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
         documents: DOCUMENT_WITH_UNION,
       },
     },
+    {
+      name: 'should report an error with union and fragment spread',
+      errors: [MESSAGE_ID],
+      code: /* GraphQL */ `
+        {
+          userOrPost {
+            ... on User {
+              ...UserFields
+            }
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        documents: /* GraphQL */ `
+          fragment UserFields on User {
+            name
+          }
+        `,
+      },
+    },
   ],
 });

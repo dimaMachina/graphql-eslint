@@ -140,6 +140,36 @@ exports[`should report an error with union 1`] = `
     7 |   }
 `;
 
+exports[`should report an error with union and fragment spread 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           userOrPost {
+      3 |             ... on User {
+      4 |               ...UserFields
+      5 |             }
+      6 |           }
+      7 |         }
+
+#### ❌ Error
+
+      1 |         {
+    > 2 |           userOrPost {
+        |                      ^ Field \`userOrPost.id\` must be selected when it's available on a type.
+    Include it in your selection set or add to used fragment \`UserFields\`.
+      3 |             ... on User {
+
+#### 💡 Suggestion: Add \`id\` selection
+
+    1 |         {
+    2 |           userOrPost {
+    3 |             ... on User {
+    4 |               id ...UserFields
+    5 |             }
+    6 |           }
+    7 |         }
+`;
+
 exports[`support multiple id field names 1`] = `
 #### ⌨️ Code
 
