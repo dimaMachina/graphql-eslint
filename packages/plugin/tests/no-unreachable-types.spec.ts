@@ -148,6 +148,17 @@ ruleTester.runGraphQLTests('no-unreachable-types', rule, {
         type Query
       `),
     },
+    {
+      name: 'should ignore types from directive arguments with request locations',
+      ...useSchema(/* GraphQL */ `
+        enum Enum {
+          A
+          B
+        }
+        directive @q(arg: Enum = A) on QUERY
+        type Query
+      `),
+    },
   ],
   invalid: [
     {

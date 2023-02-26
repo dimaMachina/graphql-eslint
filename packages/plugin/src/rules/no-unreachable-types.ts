@@ -98,6 +98,12 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   for (const node of schema.getDirectives()) {
     if (node.locations.some(location => RequestDirectiveLocations.has(location))) {
       reachableTypes.add(node.name);
+      for (const arg of node.args) {
+        const argTypeName = 'name' in arg.type && arg.type.name;
+        if (argTypeName) {
+          reachableTypes.add(argTypeName);
+        }
+      }
     }
   }
 
