@@ -1,10 +1,11 @@
 import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import js from '@eslint/js';
 
 export default [
-  'eslint:recommended',
   {
     files: ['**/*.js'],
     processor: graphqlESLint.processors.graphql,
+    rules: js.configs.recommended.rules,
   },
   {
     files: ['**/*.graphql'],

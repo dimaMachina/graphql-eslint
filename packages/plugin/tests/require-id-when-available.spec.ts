@@ -53,7 +53,10 @@ const USER_POST_SCHEMA = /* GraphQL */ `
 
   type Query {
     user: User
+    userOrPost: UserOrPost
   }
+
+  union UserOrPost = User | Post
 `;
 
 const WITH_SCHEMA = {
@@ -65,6 +68,16 @@ const WITH_SCHEMA = {
 
 const ruleTester = new GraphQLRuleTester();
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
+
+const DOCUMENT_WITH_UNION = /* GraphQL */ `
+  {
+    userOrPost {
+      ... on User {
+        title
+      }
+    }
+  }
+`;
 
 ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule, {
   valid: [
@@ -351,6 +364,36 @@ ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule,
               }
             }
           }
+          fragment UserFields on User {
+            name
+          }
+        `,
+      },
+    },
+    {
+      name: 'should report an error with union',
+      errors: [MESSAGE_ID],
+      code: DOCUMENT_WITH_UNION,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        documents: DOCUMENT_WITH_UNION,
+      },
+    },
+    {
+      name: 'should report an error with union and fragment spread',
+      errors: [MESSAGE_ID],
+      code: /* GraphQL */ `
+        {
+          userOrPost {
+            ... on User {
+              ...UserFields
+            }
+          }
+        }
+      `,
+      parserOptions: {
+        schema: USER_POST_SCHEMA,
+        documents: /* GraphQL */ `
           fragment UserFields on User {
             name
           }

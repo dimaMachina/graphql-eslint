@@ -5,6 +5,7 @@ import {
   GraphQLInterfaceType,
   GraphQLObjectType,
   GraphQLOutputType,
+  GraphQLUnionType,
   Kind,
   SelectionSetNode,
   TypeInfo,
@@ -165,83 +166,101 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
       checkedFragmentSpreads = new Set<string>(),
     ): void {
       const rawType = getBaseType(type);
-      const isObjectType = rawType instanceof GraphQLObjectType;
-      const isInterfaceType = rawType instanceof GraphQLInterfaceType;
 
-      if (!isObjectType && !isInterfaceType) {
-        return;
-      }
-      const fields = rawType.getFields();
-      const hasIdFieldInType = idNames.some(name => fields[name]);
-
-      if (!hasIdFieldInType) {
-        return;
-      }
-
-      function hasIdField({ selections }: typeof node): boolean {
-        return selections.some(selection => {
-          if (selection.kind === Kind.FIELD) {
-            if (selection.alias && idNames.includes(selection.alias.value)) {
-              return true;
-            }
-
-            return idNames.includes(selection.name.value);
-          }
-
+      if (rawType instanceof GraphQLObjectType || rawType instanceof GraphQLInterfaceType) {
+        checkFields(rawType);
+      } else if (rawType instanceof GraphQLUnionType) {
+        for (const selection of node.selections) {
           if (selection.kind === Kind.INLINE_FRAGMENT) {
-            return hasIdField(selection.selectionSet);
-          }
-
-          if (selection.kind === Kind.FRAGMENT_SPREAD) {
-            const [foundSpread] = siblings.getFragment(selection.name.value);
-            if (foundSpread) {
-              const fragmentSpread = foundSpread.document;
-              checkedFragmentSpreads.add(fragmentSpread.name.value);
-              return hasIdField(fragmentSpread.selectionSet);
+            const types = rawType.getTypes();
+            const t = types.find(t => t.name === selection.typeCondition!.name.value);
+            if (t) {
+              checkFields(t);
             }
           }
-          return false;
-        });
+        }
       }
 
-      const hasId = hasIdField(node);
+      function checkFields(rawType: GraphQLInterfaceType | GraphQLObjectType) {
+        const fields = rawType.getFields();
+        const hasIdFieldInType = idNames.some(name => fields[name]);
 
-      checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
+        if (!hasIdFieldInType) {
+          return;
+        }
 
-      if (hasId) {
-        return;
+        function hasIdField({ selections }: typeof node): boolean {
+          return selections.some(selection => {
+            if (selection.kind === Kind.FIELD) {
+              if (selection.alias && idNames.includes(selection.alias.value)) {
+                return true;
+              }
+
+              return idNames.includes(selection.name.value);
+            }
+
+            if (selection.kind === Kind.INLINE_FRAGMENT) {
+              return hasIdField(selection.selectionSet);
+            }
+
+            if (selection.kind === Kind.FRAGMENT_SPREAD) {
+              const [foundSpread] = siblings.getFragment(selection.name.value);
+              if (foundSpread) {
+                const fragmentSpread = foundSpread.document;
+                checkedFragmentSpreads.add(fragmentSpread.name.value);
+                return hasIdField(fragmentSpread.selectionSet);
+              }
+            }
+            return false;
+          });
+        }
+
+        const hasId = hasIdField(node);
+
+        checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
+
+        if (hasId) {
+          return;
+        }
+
+        const pluralSuffix = idNames.length > 1 ? 's' : '';
+        const fieldName = englishJoinWords(
+          idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
+        );
+
+        const addition =
+          checkedFragmentSpreads.size === 0
+            ? ''
+            : ` or add to used fragment${
+                checkedFragmentSpreads.size > 1 ? 's' : ''
+              } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
+
+        const problem: ReportDescriptor = {
+          loc,
+          messageId: RULE_ID,
+          data: {
+            pluralSuffix,
+            fieldName,
+            addition,
+          },
+        };
+
+        // Don't provide suggestions for selections in fragments as fragment can be in a separate file
+        if ('type' in node) {
+          problem.suggest = idNames.map(idName => ({
+            desc: `Add \`${idName}\` selection`,
+            fix: fixer => {
+              let insertNode = (node as any).selections[0];
+              insertNode =
+                insertNode.kind === Kind.INLINE_FRAGMENT
+                  ? insertNode.selectionSet.selections[0]
+                  : insertNode;
+              return fixer.insertTextBefore(insertNode, `${idName} `);
+            },
+          }));
+        }
+        context.report(problem);
       }
-
-      const pluralSuffix = idNames.length > 1 ? 's' : '';
-      const fieldName = englishJoinWords(
-        idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
-      );
-
-      const addition =
-        checkedFragmentSpreads.size === 0
-          ? ''
-          : ` or add to used fragment${
-              checkedFragmentSpreads.size > 1 ? 's' : ''
-            } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
-
-      const problem: ReportDescriptor = {
-        loc,
-        messageId: RULE_ID,
-        data: {
-          pluralSuffix,
-          fieldName,
-          addition,
-        },
-      };
-
-      // Don't provide suggestions for selections in fragments as fragment can be in a separate file
-      if ('type' in node) {
-        problem.suggest = idNames.map(idName => ({
-          desc: `Add \`${idName}\` selection`,
-          fix: fixer => fixer.insertTextBefore((node as any).selections[0], `${idName} `),
-        }));
-      }
-      context.report(problem);
     }
 
     return {

@@ -1,9 +1,9 @@
 import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import js from '@eslint/js';
 
 export default [
-  'eslint:recommended',
   {
     plugins: {
       prettier: prettierPlugin,
@@ -13,6 +13,7 @@ export default [
     files: ['**/*.js'],
     processor: graphqlESLint.processors.graphql,
     rules: {
+      ...js.configs.recommended.rules,
       ...prettierConfig.rules,
       ...prettierPlugin.configs.recommended.rules,
     },
