@@ -1,6 +1,6 @@
 {
   "name": "@graphql-eslint/eslint-plugin",
-  "version": "3.16.0",
+  "version": "3.16.1",
   "description": "GraphQL plugin for ESLint",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
