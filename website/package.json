@@ -35,7 +35,7 @@
     "@types/lodash.uniqwith": "4.5.7",
     "@types/node": "18.14.2",
     "@types/react": "18.0.28",
-    "tailwindcss-radix": "2.7.0"
+    "tailwindcss-radix": "2.8.0"
   },
   "browserslist": {
     "production": [
