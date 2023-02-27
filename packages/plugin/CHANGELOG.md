@@ -1,5 +1,18 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.16.1
+
+### Patch Changes
+
+- [#1467](https://github.com/B2o5T/graphql-eslint/pull/1467)
+  [`12f802c`](https://github.com/B2o5T/graphql-eslint/commit/12f802c354c389c13fb2f220a652683a2153da28)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix `require-id-when-available` check unions as well
+
+- [#1469](https://github.com/B2o5T/graphql-eslint/pull/1469)
+  [`6b4e20c`](https://github.com/B2o5T/graphql-eslint/commit/6b4e20c922132c00961a90c17185fffcda2cdad2)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix `no-unreachable-types` ignore types from
+  directive arguments with request locations
+
 ## 3.16.0
 
 ### Minor Changes
