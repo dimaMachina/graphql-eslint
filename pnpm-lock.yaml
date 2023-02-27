@@ -34,7 +34,7 @@ importers:
       enquirer: 2.3.6
       eslint: 8.35.0
       eslint-plugin-eslint-plugin: 5.0.7
-      eslint-plugin-tailwindcss: 3.9.0
+      eslint-plugin-tailwindcss: 3.10.0
       husky: 8.0.3
       jest-snapshot-serializer-raw: 1.2.0
       json-schema-to-markdown: 1.1.1
@@ -58,7 +58,7 @@ importers:
       enquirer: 2.3.6
       eslint: 8.35.0_v7lv2hbnxmm2b22qo3sob3rjvq
       eslint-plugin-eslint-plugin: 5.0.7_cdhdgvmsbh3fbusrlxsl6de2he_eslint@8.35.0
-      eslint-plugin-tailwindcss: 3.9.0
+      eslint-plugin-tailwindcss: 3.10.0
       husky: 8.0.3
       jest-snapshot-serializer-raw: 1.2.0
       json-schema-to-markdown: 1.1.1_beglqnggvhpsclgwbdw27hzvu4
@@ -4815,8 +4815,8 @@ packages:
       eslint: 8.35.0_v7lv2hbnxmm2b22qo3sob3rjvq
     dev: true
 
-  /eslint-plugin-tailwindcss/3.9.0:
-    resolution: {integrity: sha512-uA2/Q0g22i1uGFI/FTBkLCvpc5VpzMZjAJn3/hPqhongG0V7aaRHrFx4LyfOje/b9Q/t9iarx40InrXKf2jC6w==}
+  /eslint-plugin-tailwindcss/3.10.0:
+    resolution: {integrity: sha512-6fqvo9Dp3BqGntQoMHH3ri/nWKwUnYDqx67eKUgNPscaNxqjDEJvV6Cj8zgmCjJBAMrU+Cu6Eh4INKsgEwEbDQ==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
       tailwindcss: ^3.2.2
