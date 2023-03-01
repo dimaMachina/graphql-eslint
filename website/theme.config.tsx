@@ -45,13 +45,5 @@ export default defineConfig({
     },
   },
   logoLink: '/docs',
-  navbar: {
-    component: props => (
-      <>
-        <Header accentColor="#1cc8ee" />
-        <Navbar {...props} />
-      </>
-    ),
-  },
   siteName: 'ESLINT',
 });
