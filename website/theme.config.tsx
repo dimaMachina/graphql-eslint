@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router';
-import { Anchor, defineConfig, FooterExtended, Header, Navbar } from '@theguild/components';
+import { Anchor, defineConfig, FooterExtended } from '@theguild/components';
 
 export default defineConfig({
   banner: {
