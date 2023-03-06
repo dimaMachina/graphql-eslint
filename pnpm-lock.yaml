@@ -3385,7 +3385,7 @@ packages:
       tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
       yargs: 17.7.1
-      zod: 3.21.0
+      zod: 3.21.1
     transitivePeerDependencies:
       - '@swc/core'
       - postcss
@@ -7468,7 +7468,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       scroll-into-view-if-needed: 3.0.6
-      zod: 3.21.0
+      zod: 3.21.1
     dev: false
 
   /nextra/2.2.16_nvzgbose6yf6w7ijjprgspqefi:
@@ -10452,8 +10452,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zod/3.21.0:
-    resolution: {integrity: sha512-UYdykTcVxB6lfdyLzAqLyyYAlOcpoluECvjsdoaqfQmz9p+3LRaIqYcNiL/J2kFYp66fBM8wwBvIGVEjq7KtZw==}
+  /zod/3.21.1:
+    resolution: {integrity: sha512-+dTu2m6gmCbO9Ahm4ZBDapx2O6ZY9QSPXst2WXjcznPMwf2YNpn3RevLx4KkZp1OPW/ouFcoBtBzFz/LeY69oA==}
 
   /zwitch/2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
