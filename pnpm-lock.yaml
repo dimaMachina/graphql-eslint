@@ -41,7 +41,7 @@ importers:
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4
       rimraf: 4.4.0
-      tsx: 3.12.3
+      tsx: 3.12.5
       typescript: 4.9.5
       vitest: 0.29.1
     devDependencies:
@@ -65,7 +65,7 @@ importers:
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
       rimraf: 4.4.0
-      tsx: 3.12.3
+      tsx: 3.12.5
       typescript: 4.9.5
       vitest: 0.29.1
 
@@ -9653,8 +9653,8 @@ packages:
       typescript: 4.9.5
     dev: true
 
-  /tsx/3.12.3:
-    resolution: {integrity: sha512-Wc5BFH1xccYTXaQob+lEcimkcb/Pq+0en2s+ruiX0VEIC80nV7/0s7XRahx8NnsoCnpCVUPz8wrqVSPi760LkA==}
+  /tsx/3.12.5:
+    resolution: {integrity: sha512-/TLj30xF1zcN9JkoFCyROtIQUi8cRQG+AFchsg5YkWou3+RXxTZS/ffWB3nCxyZPoBqF2+8ohs07N815dNb1wQ==}
     hasBin: true
     dependencies:
       '@esbuild-kit/cjs-loader': 2.4.2
