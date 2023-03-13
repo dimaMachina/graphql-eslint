@@ -177,7 +177,7 @@ importers:
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.35.0
       graphql: 16.6.0
-      svelte: 3.55.1
+      svelte: 3.56.0
       svelte-eslint-parser: 0.23.0
       svelte2tsx: 0.6.3
     dependencies:
@@ -185,9 +185,9 @@ importers:
     devDependencies:
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.35.0_v7lv2hbnxmm2b22qo3sob3rjvq
-      svelte: 3.55.1
-      svelte-eslint-parser: 0.23.0_svelte@3.55.1
-      svelte2tsx: 0.6.3_svelte@3.55.1
+      svelte: 3.56.0
+      svelte-eslint-parser: 0.23.0_svelte@3.56.0
+      svelte2tsx: 0.6.3_svelte@3.56.0
 
   examples/vue-code-file:
     specifiers:
@@ -9344,7 +9344,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-eslint-parser/0.23.0_svelte@3.55.1:
+  /svelte-eslint-parser/0.23.0_svelte@3.56.0:
     resolution: {integrity: sha512-1BJBYGDzlhxmBvbx0ZXdwfPkEP+9sOn63ei6HgkWNNx/J1LH04Ykw+ZHx9Bf5Rh3zzZqjVvy23vmx+WIjCu7CA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -9353,15 +9353,15 @@ packages:
       eslint-scope: 7.1.1
       eslint-visitor-keys: 3.3.0
       espree: 9.5.0
-      svelte: 3.55.1
+      svelte: 3.56.0
     dev: true
 
-  /svelte/3.55.1:
-    resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}
+  /svelte/3.56.0:
+    resolution: {integrity: sha512-LvXiJbjdvJKwB/0CQyYpDX0q+hFqCyWmybzC2G6eK1tJJA/RSRCytTfNmjHv+RHlLuA70vWG7nXp6gbeErYvRA==}
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.6.3_svelte@3.55.1:
+  /svelte2tsx/0.6.3_svelte@3.56.0:
     resolution: {integrity: sha512-2e0rB9l7oih3CEa5S8OEYm1FvlXKj6c444hAVRMqt7LZgOm6oTu3FqfzIPXViDNh7LmU9Yb3PiYWhS7a7D7zow==}
     peerDependencies:
       svelte: ^3.55
@@ -9369,7 +9369,7 @@ packages:
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 3.55.1
+      svelte: 3.56.0
     dev: true
 
   /svgo/2.8.0:
