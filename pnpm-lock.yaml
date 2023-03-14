@@ -4,18 +4,18 @@ overrides:
   graphql: 16.6.0
 
 patchedDependencies:
-  eslint@8.35.0:
-    hash: v7lv2hbnxmm2b22qo3sob3rjvq
-    path: patches/eslint@8.31.0.patch
-  eslint-plugin-eslint-plugin@5.0.7:
-    hash: cdhdgvmsbh3fbusrlxsl6de2he
-    path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
-  json-schema-to-markdown@1.1.1:
-    hash: beglqnggvhpsclgwbdw27hzvu4
-    path: patches/json-schema-to-markdown@1.1.1.patch
   '@vitest/runner@0.29.1':
     hash: 22k4fsskoeieob62btkupydhfa
     path: patches/@vitest__runner@0.28.4.patch
+  eslint-plugin-eslint-plugin@5.0.7:
+    hash: cdhdgvmsbh3fbusrlxsl6de2he
+    path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
+  eslint@8.35.0:
+    hash: v7lv2hbnxmm2b22qo3sob3rjvq
+    path: patches/eslint@8.31.0.patch
+  json-schema-to-markdown@1.1.1:
+    hash: beglqnggvhpsclgwbdw27hzvu4
+    path: patches/json-schema-to-markdown@1.1.1.patch
 
 importers:
 
@@ -27,7 +27,7 @@ importers:
       '@theguild/eslint-config': 0.8.0
       '@theguild/prettier-config': 1.1.2
       '@types/dedent': 0.7.0
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
       bob-the-bundler: 5.0.1
       chalk: 4.1.2
       dedent: 0.7.0
@@ -51,7 +51,7 @@ importers:
       '@theguild/eslint-config': 0.8.0_ycpbpc6yetojsgtrx3mwntkhsu
       '@theguild/prettier-config': 1.1.2_prettier@2.8.4
       '@types/dedent': 0.7.0
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
       bob-the-bundler: 5.0.1_typescript@4.9.5
       chalk: 4.1.2
       dedent: 0.7.0
@@ -261,7 +261,7 @@ importers:
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
       '@types/lodash.uniqwith': 4.5.7
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
       '@types/react': 18.0.28
       clsx: 1.2.1
       graphql: 16.6.0
@@ -295,7 +295,7 @@ importers:
       '@theguild/tailwind-config': 0.2.1
       '@types/lodash.debounce': 4.0.7
       '@types/lodash.uniqwith': 4.5.7
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
       '@types/react': 18.0.28
       tailwindcss-radix: 2.8.0
 
@@ -2714,8 +2714,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node/18.15.2:
-    resolution: {integrity: sha512-sDPHm2wfx2QhrMDK0pOt2J4KLJMAcerqWNvnED0itPRJWvI+bK+uNHzcH1dFsBlf7G3u8tqXmRF3wkvL9yUwMw==}
+  /@types/node/18.15.3:
+    resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -2756,7 +2756,7 @@ packages:
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
     dev: false
 
   /@typescript-eslint/eslint-plugin/5.54.1_mlk7dnz565t663n4razh6a6v6i:
@@ -9999,7 +9999,7 @@ packages:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
-  /vite-node/0.29.1_@types+node@18.15.2:
+  /vite-node/0.29.1_@types+node@18.15.3:
     resolution: {integrity: sha512-Ey9bTlQOQrCxQN0oJ7sTg+GrU4nTMLg44iKTFCKf31ry60csqQz4E+Q04hdWhwE4cTgpxUC+zEB1kHbf5jNkFA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -10009,7 +10009,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.1.4_@types+node@18.15.2
+      vite: 4.1.4_@types+node@18.15.3
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -10020,7 +10020,7 @@ packages:
       - terser
     dev: true
 
-  /vite/4.1.4_@types+node@18.15.2:
+  /vite/4.1.4_@types+node@18.15.3:
     resolution: {integrity: sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -10045,7 +10045,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
@@ -10078,7 +10078,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.4
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.15.2
+      '@types/node': 18.15.3
       '@vitest/expect': 0.29.1
       '@vitest/runner': 0.29.1_22k4fsskoeieob62btkupydhfa
       '@vitest/spy': 0.29.1
@@ -10097,8 +10097,8 @@ packages:
       tinybench: 2.4.0
       tinypool: 0.3.1
       tinyspy: 1.1.1
-      vite: 4.1.4_@types+node@18.15.2
-      vite-node: 0.29.1_@types+node@18.15.2
+      vite: 4.1.4_@types+node@18.15.3
+      vite-node: 0.29.1_@types+node@18.15.3
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
