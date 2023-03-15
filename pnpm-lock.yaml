@@ -4,18 +4,18 @@ overrides:
   graphql: 16.6.0
 
 patchedDependencies:
-  eslint-plugin-eslint-plugin@5.0.7:
-    hash: cdhdgvmsbh3fbusrlxsl6de2he
-    path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
-  json-schema-to-markdown@1.1.1:
-    hash: beglqnggvhpsclgwbdw27hzvu4
-    path: patches/json-schema-to-markdown@1.1.1.patch
-  eslint@8.36.0:
-    hash: v7lv2hbnxmm2b22qo3sob3rjvq
-    path: patches/eslint@8.31.0.patch
   '@vitest/runner@0.29.2':
     hash: 22k4fsskoeieob62btkupydhfa
     path: patches/@vitest__runner@0.28.4.patch
+  eslint-plugin-eslint-plugin@5.0.7:
+    hash: cdhdgvmsbh3fbusrlxsl6de2he
+    path: patches/eslint-plugin-eslint-plugin@5.0.6.patch
+  eslint@8.36.0:
+    hash: v7lv2hbnxmm2b22qo3sob3rjvq
+    path: patches/eslint@8.31.0.patch
+  json-schema-to-markdown@1.1.1:
+    hash: beglqnggvhpsclgwbdw27hzvu4
+    path: patches/json-schema-to-markdown@1.1.1.patch
 
 importers:
 
@@ -179,7 +179,7 @@ importers:
       graphql: 16.6.0
       svelte: 3.56.0
       svelte-eslint-parser: 0.24.0
-      svelte2tsx: 0.6.9
+      svelte2tsx: 0.6.10
     dependencies:
       graphql: 16.6.0
     devDependencies:
@@ -187,7 +187,7 @@ importers:
       eslint: 8.36.0_v7lv2hbnxmm2b22qo3sob3rjvq
       svelte: 3.56.0
       svelte-eslint-parser: 0.24.0_svelte@3.56.0
-      svelte2tsx: 0.6.9_svelte@3.56.0
+      svelte2tsx: 0.6.10_svelte@3.56.0
 
   examples/vue-code-file:
     specifiers:
@@ -9364,11 +9364,11 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.6.9_svelte@3.56.0:
-    resolution: {integrity: sha512-yQT83cQMztgRTkJPEUYgrHYnJA8WmFC1TqOGabZ2DgSlmuqZK1qI6uxCFF1IEQRxgvkVPvYR5+H0W51ujSia2Q==}
+  /svelte2tsx/0.6.10_svelte@3.56.0:
+    resolution: {integrity: sha512-7CtUexhSHppSpLwVX7yI9OxJp7+esCNTuOF/CaVxWTgWp88QF/2/dCbpND/cTZmBxht5cFFQBwoLXXqFLdYe3Q==}
     peerDependencies:
       svelte: ^3.55
-      typescript: ^4.9.4
+      typescript: ^4.9.4 || ^5.0.0
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
