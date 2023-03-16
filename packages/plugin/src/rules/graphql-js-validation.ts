@@ -180,7 +180,7 @@ const validationToRule = (
       try {
         ruleFn = require('graphql/validation')[ruleKey];
       } catch {
-        const specifiedRules = require('graphql').specifiedRules;
+        const { specifiedRules } = require('graphql');
 
         ruleFn = specifiedRules.find((ruleFn: any) => ruleFn.name === ruleKey);
       }
