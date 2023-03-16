@@ -180,15 +180,15 @@ const validationToRule = (
       try {
         ruleFn = require('graphql/validation')[ruleKey];
       } catch {
-        const { specifiedRules } = require('graphql');
+        try {
+          const { specifiedRules } = require('graphql');
 
-        ruleFn = specifiedRules.find((ruleFn: any) => ruleFn.name === ruleKey);
+          ruleFn = specifiedRules.find((ruleFn: any) => ruleFn.name === ruleKey);
+        } catch {
+          ruleFn = null;
+        }
       }
     }
-  }
-
-  if (!ruleFn) {
-    throw new Error(`Failed to locate rule "${ruleName}" in "graphql-js" package!`);
   }
 
   return {
