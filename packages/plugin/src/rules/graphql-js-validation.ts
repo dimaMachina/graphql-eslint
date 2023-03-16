@@ -169,16 +169,28 @@ const validationToRule = (
   docs: RuleDocsInfo<any>,
 ): Record<typeof ruleId, GraphQLESLintRule<[], true>> => {
   let ruleFn: ValidationRule | null = null;
+  const ruleKey = `${ruleName}Rule`;
 
   try {
-    ruleFn = require(`graphql/validation/rules/${ruleName}Rule`)[`${ruleName}Rule`];
+    ruleFn = require(`graphql/validation/rules/${ruleKey}`)[ruleKey];
   } catch {
     try {
-      ruleFn = require(`graphql/validation/rules/${ruleName}`)[`${ruleName}Rule`];
+      ruleFn = require(`graphql/validation/rules/${ruleName}`)[ruleKey];
     } catch {
-      ruleFn = require('graphql/validation')[`${ruleName}Rule`];
+      try {
+        ruleFn = require('graphql/validation')[ruleKey];
+      } catch {
+        const specifiedRules = require('graphql').specifiedRules;
+
+        ruleFn = specifiedRules.find((ruleFn: any) => ruleFn.name === ruleKey);
+      }
     }
   }
+
+  if (!ruleFn) {
+    throw new Error(`Failed to locate rule "${ruleName}" in "graphql-js" package!`);
+  }
+
   return {
     [ruleId]: {
       meta: {
