@@ -24,7 +24,7 @@ importers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.2.1
-      '@theguild/eslint-config': 0.8.0
+      '@theguild/eslint-config': 0.8.1
       '@theguild/prettier-config': 1.1.3
       '@types/dedent': 0.7.0
       '@types/node': 18.15.3
@@ -48,7 +48,7 @@ importers:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.26.0
       '@graphql-tools/utils': 9.2.1
-      '@theguild/eslint-config': 0.8.0_vgl77cfdswitgr47lm5swmv43m
+      '@theguild/eslint-config': 0.8.1_vgl77cfdswitgr47lm5swmv43m
       '@theguild/prettier-config': 1.1.3_prettier@2.8.4
       '@types/dedent': 0.7.0
       '@types/node': 18.15.3
@@ -2498,8 +2498,8 @@ packages:
       - webpack
     dev: false
 
-  /@theguild/eslint-config/0.8.0_vgl77cfdswitgr47lm5swmv43m:
-    resolution: {integrity: sha512-OAXxluL5yA0z85t+zIJf4tibzOfEhY/RyD4AaI7NJc8iZ88mDIBasdiErBFhlRMa4GLfg6hvKdqeI6x/2ZGf7Q==}
+  /@theguild/eslint-config/0.8.1_vgl77cfdswitgr47lm5swmv43m:
+    resolution: {integrity: sha512-ZQVfnaT3HtYsuCQ+IlbvhUUArq/ZoOWgAoYm28aTy0f+Guc2Gf7aqDEUtcnfusSeZttPO9DshNePmlkd1B8vMg==}
     peerDependencies:
       eslint: ^8.24.0
     dependencies:
@@ -2518,7 +2518,7 @@ packages:
       eslint-plugin-react: 7.32.2_eslint@8.36.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.36.0
       eslint-plugin-sonarjs: 0.18.0_eslint@8.36.0
-      eslint-plugin-unicorn: 45.0.2_eslint@8.36.0
+      eslint-plugin-unicorn: 46.0.0_eslint@8.36.0
       eslint-plugin-yml: 1.5.0_eslint@8.36.0
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
@@ -4891,8 +4891,8 @@ packages:
       postcss: 8.4.21
     dev: true
 
-  /eslint-plugin-unicorn/45.0.2_eslint@8.36.0:
-    resolution: {integrity: sha512-Y0WUDXRyGDMcKLiwgL3zSMpHrXI00xmdyixEGIg90gHnj0PcHY4moNv3Ppje/kDivdAy5vUeUr7z211ImPv2gw==}
+  /eslint-plugin-unicorn/46.0.0_eslint@8.36.0:
+    resolution: {integrity: sha512-j07WkC+PFZwk8J33LYp6JMoHa1lXc1u6R45pbSAipjpfpb7KIGr17VE2D685zCxR5VL4cjrl65kTJflziQWMDA==}
     engines: {node: '>=14.18'}
     peerDependencies:
       eslint: '>=8.28.0'
