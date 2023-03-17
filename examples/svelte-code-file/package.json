@@ -14,7 +14,7 @@
     "@graphql-eslint/eslint-plugin": "workspace:*",
     "eslint": "8.36.0",
     "svelte": "3.57.0",
-    "svelte-eslint-parser": "0.24.0",
+    "svelte-eslint-parser": "0.24.2",
     "svelte2tsx": "0.6.10"
   }
 }
