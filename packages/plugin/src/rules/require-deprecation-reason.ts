@@ -50,6 +50,9 @@ export const rule: GraphQLESLintRule = {
         if (!value) {
           context.report({
             node: node.name,
+            data: {
+              test: 'test',
+            },
             message: 'Directive "@deprecated" must have a reason!',
           });
         }
