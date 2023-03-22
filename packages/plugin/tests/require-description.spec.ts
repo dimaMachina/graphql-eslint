@@ -153,10 +153,7 @@ ruleTester.runGraphQLTests<RuleOptions>('require-description', rule, {
           FieldDefinition: true,
         },
       ],
-      errors: [
-        { messageId: RULE_ID },
-        { messageId: RULE_ID },
-      ],
+      errors: [{ messageId: RULE_ID }, { messageId: RULE_ID }],
     },
     {
       name: 'should report because of linesBefore !== 1',

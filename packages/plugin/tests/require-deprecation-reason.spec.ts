@@ -53,10 +53,9 @@ ruleTester.runGraphQLTests('require-deprecation-reason', rule, {
           item4: String @deprecated(reason: "")
           item5: String @deprecated(reason: "  ")
         }
-        
-        
+
         type MyQuery @deprecated
-        
+
         input MyInput {
           foo: String! @deprecated
         }
