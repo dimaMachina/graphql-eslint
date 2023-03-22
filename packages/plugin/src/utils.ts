@@ -156,5 +156,5 @@ export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
     case Kind.OPERATION_DEFINITION:
       return node.name ? `${node.operation} "${node.name.value}"` : node.operation;
   }
-  return ''
+  return '';
 }
