@@ -2,7 +2,12 @@ import { getRootTypeNames } from '@graphql-tools/utils';
 import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../types.js';
-import { getLocation, requireGraphQLSchemaFromContext, TYPES_KINDS } from '../utils.js';
+import {
+  getLocation,
+  getNodeName,
+  requireGraphQLSchemaFromContext,
+  TYPES_KINDS,
+} from '../utils.js';
 
 const RULE_ID = 'require-description';
 
@@ -18,36 +23,6 @@ const ALLOWED_KINDS = [
 type AllowedKind = (typeof ALLOWED_KINDS)[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
-
-function getNodeName(node: SelectorNode) {
-  const DisplayNodeNameMap = {
-    [Kind.OBJECT_TYPE_DEFINITION]: 'type',
-    [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
-    [Kind.ENUM_TYPE_DEFINITION]: 'enum',
-    [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
-    [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
-    [Kind.UNION_TYPE_DEFINITION]: 'union',
-    [Kind.DIRECTIVE_DEFINITION]: 'directive',
-  } as const;
-
-  switch (node.kind) {
-    case Kind.OBJECT_TYPE_DEFINITION:
-    case Kind.INTERFACE_TYPE_DEFINITION:
-    case Kind.ENUM_TYPE_DEFINITION:
-    case Kind.SCALAR_TYPE_DEFINITION:
-    case Kind.INPUT_OBJECT_TYPE_DEFINITION:
-    case Kind.UNION_TYPE_DEFINITION:
-      return `${DisplayNodeNameMap[node.kind]} ${node.name.value}`;
-    case Kind.DIRECTIVE_DEFINITION:
-      return `${DisplayNodeNameMap[node.kind]} @${node.name.value}`;
-    case Kind.FIELD_DEFINITION:
-    case Kind.INPUT_VALUE_DEFINITION:
-    case Kind.ENUM_VALUE_DEFINITION:
-      return `${node.parent.name.value}.${node.name.value}`;
-    case Kind.OPERATION_DEFINITION:
-      return node.name ? `${node.operation} ${node.name.value}` : node.operation;
-  }
-}
 
 const schema = {
   type: 'array',

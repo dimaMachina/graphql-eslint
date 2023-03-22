@@ -41,12 +41,12 @@ ruleTester.runGraphQLTests('require-deprecation-reason', rule, {
           notDeprecated: String
         }
 
-        enum testEnum {
+        enum TestEnum {
           item1 @deprecated
           item2 @deprecated(reason: "Reason")
         }
 
-        interface testInterface {
+        interface TestInterface {
           item1: String @deprecated
           item2: Number @deprecated(reason: "Reason")
           item3: String

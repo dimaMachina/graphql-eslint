@@ -122,3 +122,33 @@ type Truthy<T> = T extends '' | 0 | false | null | undefined ? never : T; // fro
 export function truthy<T>(value: T): value is Truthy<T> {
   return !!value;
 }
+
+export function getNodeName(node: any) {
+  const DisplayNodeNameMap = {
+    [Kind.OBJECT_TYPE_DEFINITION]: 'type',
+    [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
+    [Kind.ENUM_TYPE_DEFINITION]: 'enum',
+    [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
+    [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
+    [Kind.UNION_TYPE_DEFINITION]: 'union',
+    [Kind.DIRECTIVE_DEFINITION]: 'directive',
+  } as const;
+
+  switch (node.kind) {
+    case Kind.OBJECT_TYPE_DEFINITION:
+    case Kind.INTERFACE_TYPE_DEFINITION:
+    case Kind.ENUM_TYPE_DEFINITION:
+    case Kind.SCALAR_TYPE_DEFINITION:
+    case Kind.INPUT_OBJECT_TYPE_DEFINITION:
+    case Kind.UNION_TYPE_DEFINITION:
+      return `${DisplayNodeNameMap[node.kind]} ${node.name.value}`;
+    case Kind.DIRECTIVE_DEFINITION:
+      return `${DisplayNodeNameMap[node.kind]} @${node.name.value}`;
+    case Kind.FIELD_DEFINITION:
+    case Kind.INPUT_VALUE_DEFINITION:
+    case Kind.ENUM_VALUE_DEFINITION:
+      return `${node.parent.name.value}.${node.name.value}`;
+    case Kind.OPERATION_DEFINITION:
+      return node.name ? `${node.operation} ${node.name.value}` : node.operation;
+  }
+}
