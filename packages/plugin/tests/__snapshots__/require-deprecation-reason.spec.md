@@ -21,13 +21,12 @@ exports[`Invalid #1 1`] = `
       16 |           item4: String @deprecated(reason: "")
       17 |           item5: String @deprecated(reason: "  ")
       18 |         }
-      19 |         
-      20 |         
-      21 |         type MyQuery @deprecated
-      22 |         
-      23 |         input MyInput {
-      24 |           foo: String! @deprecated
-      25 |         }
+      19 |
+      20 |         type MyQuery @deprecated
+      21 |
+      22 |         input MyInput {
+      23 |           foo: String! @deprecated
+      24 |         }
 
 #### ❌ Error 1/7
 
@@ -66,15 +65,15 @@ exports[`Invalid #1 1`] = `
 
 #### ❌ Error 6/7
 
-      20 |         
-    > 21 |         type MyQuery @deprecated
+      19 |
+    > 20 |         type MyQuery @deprecated
          |                       ^^^^^^^^^^ Deprecation reason is required for type "MyQuery".
-      22 |         
+      21 |
 
 #### ❌ Error 7/7
 
-      23 |         input MyInput {
-    > 24 |           foo: String! @deprecated
+      22 |         input MyInput {
+    > 23 |           foo: String! @deprecated
          |                         ^^^^^^^^^^ Deprecation reason is required for value "foo" in input "MyInput".
-      25 |         }
+      24 |         }
 `;
