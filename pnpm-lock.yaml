@@ -158,7 +158,7 @@ importers:
       '@eslint/js': 8.36.0
       '@graphql-eslint/eslint-plugin': workspace:*
       eslint: 8.36.0
-      eslint-config-prettier: 8.7.0
+      eslint-config-prettier: 8.8.0
       eslint-plugin-prettier: 4.2.1
       graphql: 16.6.0
       prettier: 2.8.6
@@ -168,8 +168,8 @@ importers:
       '@eslint/js': 8.36.0
       '@graphql-eslint/eslint-plugin': link:../../packages/plugin
       eslint: 8.36.0_v7lv2hbnxmm2b22qo3sob3rjvq
-      eslint-config-prettier: 8.7.0_eslint@8.36.0
-      eslint-plugin-prettier: 4.2.1_w3shflqoegspmha2z74hzwkfbm
+      eslint-config-prettier: 8.8.0_eslint@8.36.0
+      eslint-plugin-prettier: 4.2.1_ose2zoovovx4ulolhifz3tfzx4
       prettier: 2.8.6
 
   examples/svelte-code-file:
@@ -2313,7 +2313,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.55.0_342y7v4tc7ytrrysmit6jo4wri
       '@typescript-eslint/parser': 5.55.0_vgl77cfdswitgr47lm5swmv43m
       eslint: 8.36.0_v7lv2hbnxmm2b22qo3sob3rjvq
-      eslint-config-prettier: 8.7.0_eslint@8.36.0
+      eslint-config-prettier: 8.8.0_eslint@8.36.0
       eslint-import-resolver-typescript: 3.5.3_eakrjjutlgqjxe5ydhtnd4qdmy
       eslint-plugin-import: 2.27.5_v7jo3sddp7aqau7pajjy572cju
       eslint-plugin-jsonc: 2.7.0_eslint@8.36.0
@@ -4353,8 +4353,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /eslint-config-prettier/8.7.0_eslint@8.36.0:
-    resolution: {integrity: sha512-HHVXLSlVUhMSmyW4ZzEuvjpwqamgmlfkutD53cYXLikh4pt/modINRcCIApJ84czDxM4GZInwUrromsDdTImTA==}
+  /eslint-config-prettier/8.8.0_eslint@8.36.0:
+    resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -4588,7 +4588,7 @@ packages:
       semver: 7.3.8
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_w3shflqoegspmha2z74hzwkfbm:
+  /eslint-plugin-prettier/4.2.1_ose2zoovovx4ulolhifz3tfzx4:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -4600,7 +4600,7 @@ packages:
         optional: true
     dependencies:
       eslint: 8.36.0_v7lv2hbnxmm2b22qo3sob3rjvq
-      eslint-config-prettier: 8.7.0_eslint@8.36.0
+      eslint-config-prettier: 8.8.0_eslint@8.36.0
       prettier: 2.8.6
       prettier-linter-helpers: 1.0.0
     dev: true
