@@ -36,7 +36,7 @@ exports[`Invalid #1 1`] = `
 
       7 |         enum TestEnum {
     > 8 |           item1 @deprecated
-        |                  ^^^^^^^^^^ Deprecation reason is required for undefined "item1" in enum "TestEnum".
+        |                  ^^^^^^^^^^ Deprecation reason is required for enum value "item1" in enum "TestEnum".
       9 |           item2 @deprecated(reason: "Reason")
 
 #### ❌ Error 3/6

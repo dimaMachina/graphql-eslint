@@ -133,6 +133,7 @@ export function getNodeName(node: any) {
     [Kind.UNION_TYPE_DEFINITION]: 'union',
     [Kind.DIRECTIVE_DEFINITION]: 'directive',
     [Kind.FIELD_DEFINITION]: 'field',
+    [Kind.ENUM_VALUE_DEFINITION]: 'enum value',
   } as const;
 
   switch (node.kind) {
