@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.16.2
+
+### Patch Changes
+
+- [#1531](https://github.com/B2o5T/graphql-eslint/pull/1531)
+  [`7f88174`](https://github.com/B2o5T/graphql-eslint/commit/7f8817400f31633913cd00330253b8ac2abe1af1)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - improve error message for require-deprecation-reason
+
 ## 3.16.1
 
 ### Patch Changes
