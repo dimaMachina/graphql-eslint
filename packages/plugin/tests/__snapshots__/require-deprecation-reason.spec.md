@@ -21,39 +21,48 @@ exports[`Invalid #1 1`] = `
       16 |           item4: String @deprecated(reason: "")
       17 |           item5: String @deprecated(reason: "  ")
       18 |         }
+      19 |         
+      20 |         
+      21 |         type MyQuery @deprecated
 
-#### ❌ Error 1/5
+#### ❌ Error 1/6
 
       1 |         type A {
     > 2 |           deprecatedWithoutReason: String @deprecated
-        |                                            ^^^^^^^^^^ Deprecation reason is required for field "deprecatedWithoutReason" in type "A".
+        |                                            ^^^^^^^^^^ Deprecation reason is required for A.deprecatedWithoutReason.
       3 |           deprecatedWithReason: String @deprecated(reason: "Reason")
 
-#### ❌ Error 2/5
+#### ❌ Error 2/6
 
       7 |         enum TestEnum {
     > 8 |           item1 @deprecated
-        |                  ^^^^^^^^^^ Deprecation reason is required for field "item1" in type "TestEnum".
+        |                  ^^^^^^^^^^ Deprecation reason is required for TestEnum.item1.
       9 |           item2 @deprecated(reason: "Reason")
 
-#### ❌ Error 3/5
+#### ❌ Error 3/6
 
       12 |         interface TestInterface {
     > 13 |           item1: String @deprecated
-         |                          ^^^^^^^^^^ Deprecation reason is required for field "item1" in type "TestInterface".
+         |                          ^^^^^^^^^^ Deprecation reason is required for TestInterface.item1.
       14 |           item2: Number @deprecated(reason: "Reason")
 
-#### ❌ Error 4/5
+#### ❌ Error 4/6
 
       15 |           item3: String
     > 16 |           item4: String @deprecated(reason: "")
-         |                          ^^^^^^^^^^ Deprecation reason is required for field "item4" in type "TestInterface".
+         |                          ^^^^^^^^^^ Deprecation reason is required for TestInterface.item4.
       17 |           item5: String @deprecated(reason: "  ")
 
-#### ❌ Error 5/5
+#### ❌ Error 5/6
 
       16 |           item4: String @deprecated(reason: "")
     > 17 |           item5: String @deprecated(reason: "  ")
-         |                          ^^^^^^^^^^ Deprecation reason is required for field "item5" in type "TestInterface".
+         |                          ^^^^^^^^^^ Deprecation reason is required for TestInterface.item5.
       18 |         }
+
+#### ❌ Error 6/6
+
+      20 |         
+    > 21 |         type MyQuery @deprecated
+         |                       ^^^^^^^^^^ Deprecation reason is required for type MyQuery.
 `;

@@ -51,9 +51,7 @@ export const rule: GraphQLESLintRule = {
         if (!value) {
           context.report({
             node: node.name,
-            message: `Deprecation reason is required for field "${
-              node.parent.name.value
-            }" in ${getNodeName(node.parent.parent)}".`,
+            message: `Deprecation reason is required for ${getNodeName(node.parent)}.`,
           });
         }
       },
