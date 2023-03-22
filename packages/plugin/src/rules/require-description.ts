@@ -9,7 +9,7 @@ import {
   TYPES_KINDS,
 } from '../utils.js';
 
-const RULE_ID = 'require-description';
+export const RULE_ID = 'require-description';
 
 const ALLOWED_KINDS = [
   ...TYPES_KINDS,
@@ -132,7 +132,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     },
     type: 'suggestion',
     messages: {
-      [RULE_ID]: 'Description is required for `{{ nodeName }}`.',
+      [RULE_ID]: 'Description is required for {{ nodeName }}',
     },
     schema,
   },
