@@ -5,6 +5,7 @@ import { ASTNode, GraphQLSchema, Kind } from 'graphql';
 import lowerCase from 'lodash.lowercase';
 import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleContext } from './types.js';
+import { GraphQLESTreeNode } from './estree-converter/index.js';
 
 export function requireSiblingsOperations(
   ruleId: string,
@@ -123,8 +124,8 @@ export function truthy<T>(value: T): value is Truthy<T> {
   return !!value;
 }
 
-export function getNodeName(node: any) {
-  const DisplayNodeNameMap = {
+export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
+  const DisplayNodeNameMap: Record<string, string> = {
     [Kind.OBJECT_TYPE_DEFINITION]: 'type',
     [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
     [Kind.ENUM_TYPE_DEFINITION]: 'enum',
@@ -155,4 +156,5 @@ export function getNodeName(node: any) {
     case Kind.OPERATION_DEFINITION:
       return node.name ? `${node.operation} "${node.name.value}"` : node.operation;
   }
+  return ''
 }

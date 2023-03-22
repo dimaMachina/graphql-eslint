@@ -12,7 +12,6 @@
     "module": "esnext",
     "target": "es2018",
     "lib": ["es2021", "dom"],
-    "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "sourceMap": true,

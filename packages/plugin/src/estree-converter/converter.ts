@@ -43,7 +43,7 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
 
       const rawNode = () => {
         if (parent && key !== undefined) {
-          return parent[key];
+          return (parent as any)[key];
         }
         return node.kind === Kind.DOCUMENT
           ? <DocumentNode>{
