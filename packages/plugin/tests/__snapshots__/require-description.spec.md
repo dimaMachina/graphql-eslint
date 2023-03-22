@@ -116,7 +116,7 @@ exports[`Invalid #7 1`] = `
 #### ❌ Error
 
     > 1 | directive @auth(requires: Role!) on FIELD_DEFINITION
-        |            ^^^^ Description is required for directive @auth
+        |            ^^^^ Description is required for directive "auth"
 `;
 
 exports[`Invalid #8 1`] = `
@@ -346,7 +346,7 @@ exports[`should validate mutation 1`] = `
 #### ❌ Error
 
     > 1 | mutation createUser { foo }
-        | ^^^^^^^^ Description is required for mutation createUser
+        | ^^^^^^^^ Description is required for mutation "createUser"
 `;
 
 exports[`should validate subscription 1`] = `
@@ -363,5 +363,5 @@ exports[`should validate subscription 1`] = `
 #### ❌ Error
 
     > 1 | subscription commentAdded { foo }
-        | ^^^^^^^^^^^^ Description is required for subscription commentAdded
+        | ^^^^^^^^^^^^ Description is required for subscription "commentAdded"
 `;

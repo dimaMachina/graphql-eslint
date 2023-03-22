@@ -144,9 +144,8 @@ export function getNodeName(node: any) {
     case Kind.SCALAR_TYPE_DEFINITION:
     case Kind.INPUT_OBJECT_TYPE_DEFINITION:
     case Kind.UNION_TYPE_DEFINITION:
-      return `${DisplayNodeNameMap[node.kind]} "${node.name.value}"`;
     case Kind.DIRECTIVE_DEFINITION:
-      return `${DisplayNodeNameMap[node.kind]} @${node.name.value}`;
+      return `${DisplayNodeNameMap[node.kind]} "${node.name.value}"`;
     case Kind.FIELD_DEFINITION:
     case Kind.INPUT_VALUE_DEFINITION:
     case Kind.ENUM_VALUE_DEFINITION:
@@ -154,6 +153,6 @@ export function getNodeName(node: any) {
         DisplayNodeNameMap[node.parent.kind]
       } "${node.parent.name.value}"`;
     case Kind.OPERATION_DEFINITION:
-      return node.name ? `${node.operation} ${node.name.value}` : node.operation;
+      return node.name ? `${node.operation} "${node.name.value}"` : node.operation;
   }
 }
