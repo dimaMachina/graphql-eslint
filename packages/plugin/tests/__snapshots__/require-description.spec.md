@@ -14,7 +14,7 @@ exports[`Invalid #1 1`] = `
 #### ❌ Error
 
     > 1 | type User { id: ID }
-        |      ^^^^ Description is required for \`type User\`.
+        |      ^^^^ Description is required for type "User"
 `;
 
 exports[`Invalid #2 1`] = `
@@ -31,7 +31,7 @@ exports[`Invalid #2 1`] = `
 #### ❌ Error
 
     > 1 | interface Node { id: ID! }
-        |           ^^^^ Description is required for \`interface Node\`.
+        |           ^^^^ Description is required for interface "Node"
 `;
 
 exports[`Invalid #3 1`] = `
@@ -48,7 +48,7 @@ exports[`Invalid #3 1`] = `
 #### ❌ Error
 
     > 1 | enum Role { ADMIN }
-        |      ^^^^ Description is required for \`enum Role\`.
+        |      ^^^^ Description is required for enum "Role"
 `;
 
 exports[`Invalid #4 1`] = `
@@ -65,7 +65,7 @@ exports[`Invalid #4 1`] = `
 #### ❌ Error
 
     > 1 | scalar Email
-        |        ^^^^^ Description is required for \`scalar Email\`.
+        |        ^^^^^ Description is required for scalar "Email"
 `;
 
 exports[`Invalid #5 1`] = `
@@ -82,7 +82,7 @@ exports[`Invalid #5 1`] = `
 #### ❌ Error
 
     > 1 | input CreateUserInput { email: Email! }
-        |       ^^^^^^^^^^^^^^^ Description is required for \`input CreateUserInput\`.
+        |       ^^^^^^^^^^^^^^^ Description is required for input "CreateUserInput"
 `;
 
 exports[`Invalid #6 1`] = `
@@ -99,7 +99,7 @@ exports[`Invalid #6 1`] = `
 #### ❌ Error
 
     > 1 | union Media = Book | Movie
-        |       ^^^^^ Description is required for \`union Media\`.
+        |       ^^^^^ Description is required for union "Media"
 `;
 
 exports[`Invalid #7 1`] = `
@@ -116,7 +116,7 @@ exports[`Invalid #7 1`] = `
 #### ❌ Error
 
     > 1 | directive @auth(requires: Role!) on FIELD_DEFINITION
-        |            ^^^^ Description is required for \`directive @auth\`.
+        |            ^^^^ Description is required for directive "auth"
 `;
 
 exports[`Invalid #8 1`] = `
@@ -133,7 +133,7 @@ exports[`Invalid #8 1`] = `
 #### ❌ Error
 
     > 1 | type User { email: Email! }
-        |             ^^^^^ Description is required for \`User.email\`.
+        |             ^^^^^ Description is required for field "email" in type "User"
 `;
 
 exports[`Invalid #9 1`] = `
@@ -150,7 +150,7 @@ exports[`Invalid #9 1`] = `
 #### ❌ Error
 
     > 1 | input CreateUserInput { email: Email! }
-        |                         ^^^^^ Description is required for \`CreateUserInput.email\`.
+        |                         ^^^^^ Description is required for value "email" in input "CreateUserInput"
 `;
 
 exports[`Invalid #10 1`] = `
@@ -167,7 +167,7 @@ exports[`Invalid #10 1`] = `
 #### ❌ Error
 
     > 1 | enum Role { ADMIN }
-        |             ^^^^^ Description is required for \`Role.ADMIN\`.
+        |             ^^^^^ Description is required for value "ADMIN" in enum "Role"
 `;
 
 exports[`Invalid #17 1`] = `
@@ -184,7 +184,7 @@ exports[`Invalid #17 1`] = `
 #### ❌ Error
 
     > 1 | type Query { user(id: String!): User! }
-        |              ^^^^ Description is required for \`Query.user\`.
+        |              ^^^^ Description is required for field "user" in type "Query"
 `;
 
 exports[`Invalid #18 1`] = `
@@ -201,7 +201,7 @@ exports[`Invalid #18 1`] = `
 #### ❌ Error
 
     > 1 | type Mutation { createUser(id: [ID!]!): User! }
-        |                 ^^^^^^^^^^ Description is required for \`Mutation.createUser\`.
+        |                 ^^^^^^^^^^ Description is required for field "createUser" in type "Mutation"
 `;
 
 exports[`Invalid #19 1`] = `
@@ -224,7 +224,7 @@ exports[`Invalid #19 1`] = `
 
       1 |         type MySubscription {
     > 2 |           users: [User!]!
-        |           ^^^^^ Description is required for \`MySubscription.users\`.
+        |           ^^^^^ Description is required for field "users" in type "MySubscription"
       3 |         }
 `;
 
@@ -248,14 +248,14 @@ exports[`should disable description for ObjectTypeDefinition 1`] = `
 
       1 |         type CreateOneUserPayload {
     > 2 |           recordId: MongoID
-        |           ^^^^^^^^ Description is required for \`CreateOneUserPayload.recordId\`.
+        |           ^^^^^^^^ Description is required for field "recordId" in type "CreateOneUserPayload"
       3 |           record: User
 
 #### ❌ Error 2/2
 
       2 |           recordId: MongoID
     > 3 |           record: User
-        |           ^^^^^^ Description is required for \`CreateOneUserPayload.record\`.
+        |           ^^^^^^ Description is required for field "record" in type "CreateOneUserPayload"
       4 |         }
 `;
 
@@ -283,7 +283,7 @@ exports[`should ignore comments before fragment definition 1`] = `
 
       5 |
     > 6 |         query {
-        |         ^^^^^ Description is required for \`query\`.
+        |         ^^^^^ Description is required for query
       7 |           user {
 `;
 
@@ -306,7 +306,7 @@ exports[`should report because of linesBefore !== 1 1`] = `
 
       2 |
     > 3 |         query {
-        |         ^^^^^ Description is required for \`query\`.
+        |         ^^^^^ Description is required for query
       4 |           foo
 `;
 
@@ -328,7 +328,7 @@ exports[`should report because skips comment that starts with \`eslint\` 1`] = `
 
       1 |         # eslint-disable-next-line semi
     > 2 |         query {
-        |         ^^^^^ Description is required for \`query\`.
+        |         ^^^^^ Description is required for query
       3 |           foo
 `;
 
@@ -346,7 +346,7 @@ exports[`should validate mutation 1`] = `
 #### ❌ Error
 
     > 1 | mutation createUser { foo }
-        | ^^^^^^^^ Description is required for \`mutation createUser\`.
+        | ^^^^^^^^ Description is required for mutation "createUser"
 `;
 
 exports[`should validate subscription 1`] = `
@@ -363,5 +363,5 @@ exports[`should validate subscription 1`] = `
 #### ❌ Error
 
     > 1 | subscription commentAdded { foo }
-        | ^^^^^^^^^^^^ Description is required for \`subscription commentAdded\`.
+        | ^^^^^^^^^^^^ Description is required for subscription "commentAdded"
 `;

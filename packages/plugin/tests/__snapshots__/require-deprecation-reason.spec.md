@@ -9,51 +9,71 @@ exports[`Invalid #1 1`] = `
        4 |           notDeprecated: String
        5 |         }
        6 |
-       7 |         enum testEnum {
+       7 |         enum TestEnum {
        8 |           item1 @deprecated
        9 |           item2 @deprecated(reason: "Reason")
       10 |         }
       11 |
-      12 |         interface testInterface {
+      12 |         interface TestInterface {
       13 |           item1: String @deprecated
       14 |           item2: Number @deprecated(reason: "Reason")
       15 |           item3: String
       16 |           item4: String @deprecated(reason: "")
       17 |           item5: String @deprecated(reason: "  ")
       18 |         }
+      19 |
+      20 |         type MyQuery @deprecated
+      21 |
+      22 |         input MyInput {
+      23 |           foo: String! @deprecated
+      24 |         }
 
-#### ❌ Error 1/5
+#### ❌ Error 1/7
 
       1 |         type A {
     > 2 |           deprecatedWithoutReason: String @deprecated
-        |                                            ^^^^^^^^^^ Directive "@deprecated" must have a reason!
+        |                                            ^^^^^^^^^^ Deprecation reason is required for field "deprecatedWithoutReason" in type "A".
       3 |           deprecatedWithReason: String @deprecated(reason: "Reason")
 
-#### ❌ Error 2/5
+#### ❌ Error 2/7
 
-      7 |         enum testEnum {
+      7 |         enum TestEnum {
     > 8 |           item1 @deprecated
-        |                  ^^^^^^^^^^ Directive "@deprecated" must have a reason!
+        |                  ^^^^^^^^^^ Deprecation reason is required for value "item1" in enum "TestEnum".
       9 |           item2 @deprecated(reason: "Reason")
 
-#### ❌ Error 3/5
+#### ❌ Error 3/7
 
-      12 |         interface testInterface {
+      12 |         interface TestInterface {
     > 13 |           item1: String @deprecated
-         |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
+         |                          ^^^^^^^^^^ Deprecation reason is required for field "item1" in interface "TestInterface".
       14 |           item2: Number @deprecated(reason: "Reason")
 
-#### ❌ Error 4/5
+#### ❌ Error 4/7
 
       15 |           item3: String
     > 16 |           item4: String @deprecated(reason: "")
-         |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
+         |                          ^^^^^^^^^^ Deprecation reason is required for field "item4" in interface "TestInterface".
       17 |           item5: String @deprecated(reason: "  ")
 
-#### ❌ Error 5/5
+#### ❌ Error 5/7
 
       16 |           item4: String @deprecated(reason: "")
     > 17 |           item5: String @deprecated(reason: "  ")
-         |                          ^^^^^^^^^^ Directive "@deprecated" must have a reason!
+         |                          ^^^^^^^^^^ Deprecation reason is required for field "item5" in interface "TestInterface".
       18 |         }
+
+#### ❌ Error 6/7
+
+      19 |
+    > 20 |         type MyQuery @deprecated
+         |                       ^^^^^^^^^^ Deprecation reason is required for type "MyQuery".
+      21 |
+
+#### ❌ Error 7/7
+
+      22 |         input MyInput {
+    > 23 |           foo: String! @deprecated
+         |                         ^^^^^^^^^^ Deprecation reason is required for value "foo" in input "MyInput".
+      24 |         }
 `;

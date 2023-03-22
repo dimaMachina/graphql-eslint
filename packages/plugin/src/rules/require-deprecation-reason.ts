@@ -1,6 +1,7 @@
 import { ArgumentNode, DirectiveNode } from 'graphql';
 import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { getNodeName } from '../utils.js';
 
 export const rule: GraphQLESLintRule = {
   meta: {
@@ -50,7 +51,7 @@ export const rule: GraphQLESLintRule = {
         if (!value) {
           context.report({
             node: node.name,
-            message: 'Directive "@deprecated" must have a reason!',
+            message: `Deprecation reason is required for ${getNodeName(node.parent)}.`,
           });
         }
       },
