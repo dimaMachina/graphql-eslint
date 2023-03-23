@@ -11,7 +11,7 @@ exports[`Invalid #1 1`] = `
 #### ❌ Error
 
     > 1 |         # Bad
-        |         ^ Unexpected GraphQL descriptions as hashtag \`#\` for .
+        |         ^ Unexpected GraphQL descriptions as hashtag \`#\` for type "Query".
     Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       2 |         type Query {
 
@@ -43,7 +43,7 @@ exports[`Invalid #2 1`] = `
 
       1 |         # multiline
     > 2 |         # multiline
-        |         ^ Unexpected GraphQL descriptions as hashtag \`#\` for .
+        |         ^ Unexpected GraphQL descriptions as hashtag \`#\` for type "Query".
     Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       3 |         type Query {
 

@@ -70,25 +70,26 @@ export const rule: GraphQLESLintRule = {
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
             const isEslintComment = value!.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
-            const sourceCode = context.getSourceCode();
-            const { tokens } = sourceCode.ast;
-            console.log({ tokens });
-            const t = tokens.find(
-              token =>
-                token.loc.start.line === next.line && token.loc.start.column === next.column - 1,
-            );
-            const nextNode = t && sourceCode.getNodeByRangeIndex(t.range[1] + 1);
-
             if (
               !isEslintComment &&
               line !== prev.line &&
               next.kind === TokenKind.NAME &&
               linesAfter < 2
             ) {
+              const sourceCode = context.getSourceCode();
+              const { tokens } = sourceCode.ast;
+
+              const t = tokens.find(
+                token =>
+                  token.loc.start.line === next.line && token.loc.start.column === next.column - 1,
+              );
+              const nextNode = sourceCode.getNodeByRangeIndex(t.range[1] + 1);
+
               context.report({
                 messageId: RULE_ID,
                 data: {
-                  nodeName: nextNode ? getNodeName(nextNode) : '',
+                  nodeName:
+                    'name' in nextNode ? getNodeName(nextNode) : getNodeName(nextNode.parent),
                 },
                 loc: {
                   line,
