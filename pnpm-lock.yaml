@@ -40,7 +40,7 @@ importers:
       json-schema-to-markdown: 1.1.1
       prettier: 2.8.6
       prettier-plugin-tailwindcss: 0.2.5
-      rimraf: 4.4.0
+      rimraf: 4.4.1
       tsx: 3.12.6
       typescript: 5.0.2
       vitest: 0.29.7
@@ -64,7 +64,7 @@ importers:
       json-schema-to-markdown: 1.1.1_beglqnggvhpsclgwbdw27hzvu4
       prettier: 2.8.6
       prettier-plugin-tailwindcss: 0.2.5_prettier@2.8.6
-      rimraf: 4.4.0
+      rimraf: 4.4.1
       tsx: 3.12.6
       typescript: 5.0.2
       vitest: 0.29.7
@@ -8600,8 +8600,8 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rimraf/4.4.0:
-    resolution: {integrity: sha512-X36S+qpCUR0HjXlkDe4NAOhS//aHH0Z+h8Ckf2auGJk3PTnx5rLmrHkwNdbVQuCSUhOyFrlRvFEllZOYE+yZGQ==}
+  /rimraf/4.4.1:
+    resolution: {integrity: sha512-Gk8NlF062+T9CqNGn6h4tls3k6T1+/nXdOcSZVikNVtlRdYpA7wRJJMoXmuvOnLW844rPjdQ7JgXCYM6PPC/og==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
