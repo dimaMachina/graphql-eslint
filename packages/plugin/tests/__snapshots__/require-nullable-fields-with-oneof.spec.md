@@ -12,14 +12,14 @@ exports[`should validate \`input\` 1`] = `
 
       1 |         input Input @oneOf {
     > 2 |           foo: String!
-        |           ^^^ Field \`foo\` must be nullable.
+        |           ^^^ value "foo" in input "Input" must be nullable when "@oneOf" is in use
       3 |           bar: [Int]!
 
 #### ❌ Error 2/2
 
       2 |           foo: String!
     > 3 |           bar: [Int]!
-        |           ^^^ Field \`bar\` must be nullable.
+        |           ^^^ value "bar" in input "Input" must be nullable when "@oneOf" is in use
       4 |         }
 `;
 
@@ -35,6 +35,6 @@ exports[`should validate \`type\` 1`] = `
 
       1 |         type Type @oneOf {
     > 2 |           foo: String!
-        |           ^^^ Field \`foo\` must be nullable.
+        |           ^^^ field "foo" in type "Type" must be nullable when "@oneOf" is in use
       3 |           bar: Int
 `;

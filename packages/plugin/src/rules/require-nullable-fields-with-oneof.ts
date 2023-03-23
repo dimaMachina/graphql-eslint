@@ -1,6 +1,7 @@
 import { DirectiveNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { getNodeName } from '../utils.js';
 
 const RULE_ID = 'require-nullable-fields-with-oneof';
 
@@ -33,7 +34,7 @@ export const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [RULE_ID]: 'Field `{{fieldName}}` must be nullable.',
+      [RULE_ID]: '{{ nodeName }} must be nullable when "@oneOf" is in use',
     },
     schema: [],
   },
@@ -53,7 +54,7 @@ export const rule: GraphQLESLintRule = {
             context.report({
               node: field.name,
               messageId: RULE_ID,
-              data: { fieldName: field.name.value },
+              data: { nodeName: getNodeName(field) },
             });
           }
         }

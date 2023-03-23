@@ -27,10 +27,7 @@ ruleTester.runGraphQLTests('require-nullable-fields-with-oneof', rule, {
           bar: [Int]!
         }
       `,
-      errors: [
-        { message: 'Field `foo` must be nullable.' },
-        { message: 'Field `bar` must be nullable.' },
-      ],
+      errors: 2,
     },
     {
       name: 'should validate `type`',
@@ -40,7 +37,7 @@ ruleTester.runGraphQLTests('require-nullable-fields-with-oneof', rule, {
           bar: Int
         }
       `,
-      errors: [{ message: 'Field `foo` must be nullable.' }],
+      errors: 1,
     },
   ],
 });
