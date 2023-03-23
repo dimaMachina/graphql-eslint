@@ -127,6 +127,7 @@ export function truthy<T>(value: T): value is Truthy<T> {
 export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
   const DisplayNodeNameMap: Record<string, string> = {
     [Kind.OBJECT_TYPE_DEFINITION]: 'type',
+    [Kind.OBJECT_TYPE_EXTENSION]: 'type',
     [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
     [Kind.ENUM_TYPE_DEFINITION]: 'enum',
     [Kind.ENUM_TYPE_EXTENSION]: 'enum',
