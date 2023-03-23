@@ -28,7 +28,7 @@ exports[`Invalid #1 1`] = `
 
       1 |   enum EnumUserLanguagesSkill {
     > 2 |     """
-        |     ^ Unexpected block description.
+        |     ^ Unexpected block description for value "basic" in enum "EnumUserLanguagesSkill"
       3 |     basic
 
 #### 💡 Suggestion: Change to inline style description
@@ -50,7 +50,7 @@ exports[`Invalid #1 1`] = `
 
       5 |     basic
     > 6 |     """
-        |     ^ Unexpected block description.
+        |     ^ Unexpected block description for value "fluent" in enum "EnumUserLanguagesSkill"
       7 |     fluent
 
 #### 💡 Suggestion: Change to inline style description
@@ -72,7 +72,7 @@ exports[`Invalid #1 1`] = `
 
        9 |     fluent
     > 10 |     """
-         |     ^ Unexpected block description.
+         |     ^ Unexpected block description for value "native" in enum "EnumUserLanguagesSkill"
       11 |     native
 
 #### 💡 Suggestion: Change to inline style description
@@ -106,7 +106,7 @@ exports[`Invalid #2 1`] = `
 #### ❌ Error 1/3
 
     > 1 |   " Test "
-        |   ^^^^^^^^ Unexpected inline description.
+        |   ^^^^^^^^ Unexpected inline description for type "CreateOneUserPayload"
       2 |   type CreateOneUserPayload {
 
 #### 💡 Suggestion: Change to block style description
@@ -124,7 +124,7 @@ exports[`Invalid #2 1`] = `
 
       2 |   type CreateOneUserPayload {
     > 3 |     "Created document ID"
-        |     ^^^^^^^^^^^^^^^^^^^^^ Unexpected inline description.
+        |     ^^^^^^^^^^^^^^^^^^^^^ Unexpected inline description for field "recordId" in type "CreateOneUserPayload"
       4 |     recordId: MongoID
 
 #### 💡 Suggestion: Change to block style description
@@ -142,7 +142,7 @@ exports[`Invalid #2 1`] = `
 
       5 |
     > 6 |     "Created document"
-        |     ^^^^^^^^^^^^^^^^^^ Unexpected inline description.
+        |     ^^^^^^^^^^^^^^^^^^ Unexpected inline description for field "record" in type "CreateOneUserPayload"
       7 |     record: User
 
 #### 💡 Suggestion: Change to block style description
