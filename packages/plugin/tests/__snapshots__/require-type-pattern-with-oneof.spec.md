@@ -11,7 +11,7 @@ exports[`should validate \`error\` field 1`] = `
 #### ❌ Error
 
     > 1 |         type T @oneOf {
-        |              ^ Type \`T\` should have \`error\` field.
+        |              ^ type "T" is defined as output with "@oneOf" and must be defined with "error" field
       2 |           ok: Ok
 `;
 
@@ -26,6 +26,6 @@ exports[`should validate \`ok\` field 1`] = `
 #### ❌ Error
 
     > 1 |         type T @oneOf {
-        |              ^ Type \`T\` should have \`ok\` field.
+        |              ^ type "T" is defined as output with "@oneOf" and must be defined with "ok" field
       2 |           notok: Ok
 `;
