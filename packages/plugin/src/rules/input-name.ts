@@ -114,13 +114,12 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       'FieldDefinition > InputValueDefinition[name.value!=input] > Name'(
         node: GraphQLESTreeNode<NameNode>,
       ) {
-        if (
-          shouldCheckType((node.parent.parent as GraphQLESTreeNode<FieldDefinitionNode>).parent)
-        ) {
+        const fieldDef = node.parent.parent as GraphQLESTreeNode<FieldDefinitionNode>;
+        if (shouldCheckType(fieldDef.parent)) {
           const inputName = node.value;
           context.report({
             node,
-            message: `Input \`${inputName}\` should be called \`input\`.`,
+            message: `Input "${inputName}" should be named "input" for "${fieldDef.parent.name.value}.${fieldDef.name.value}"`,
             suggest: [
               {
                 desc: 'Rename to `input`',

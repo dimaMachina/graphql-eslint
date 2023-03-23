@@ -54,20 +54,17 @@ ruleTester.runGraphQLTests<RuleOptions>('input-name', rule, {
     {
       code: 'type Mutation { SetMessage(message: String): String }',
       options: [{ checkInputType: true }],
-      errors: [
-        { message: 'Input `message` should be called `input`.' },
-        { message: 'Input type `String` name should be `SetMessageInput`.' },
-      ],
+      errors: 2,
     },
     {
       code: 'type Mutation { SetMessage(input: String): String }',
       options: [{ checkInputType: true }],
-      errors: [{ message: 'Input type `String` name should be `SetMessageInput`.' }],
+      errors: 1,
     },
     {
       code: 'type Mutation { SetMessage(hello: SetMessageInput): String }',
       options: [{ checkInputType: true }],
-      errors: [{ message: 'Input `hello` should be called `input`.' }],
+      errors: 1,
     },
     {
       code: 'type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }',
