@@ -121,8 +121,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: 'value "firstName" should be before value "password"' },
-        { message: 'value "age" should be before value "firstName"' },
+        { message: 'input value "firstName" should be before input value "password"' },
+        { message: 'input value "age" should be before input value "firstName"' },
       ],
     },
     {
@@ -135,7 +135,7 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: 'value "lastName" should be before value "password"' }],
+      errors: [{ message: 'input value "lastName" should be before input value "password"' }],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -148,8 +148,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: 'value "ADMIN" should be before value "SUPER_ADMIN"' },
-        { message: 'value "GOD" should be before value "USER"' },
+        { message: 'enum value "ADMIN" should be before enum value "SUPER_ADMIN"' },
+        { message: 'enum value "GOD" should be before enum value "USER"' },
       ],
     },
     {
@@ -162,7 +162,7 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
           USER
         }
       `,
-      errors: [{ message: 'value "GOD" should be before value "SUPER_ADMIN"' }],
+      errors: [{ message: 'enum value "GOD" should be before enum value "SUPER_ADMIN"' }],
     },
     {
       options: [{ arguments: ['DirectiveDefinition'] }],
@@ -170,8 +170,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
       `,
       errors: [
-        { message: 'value "bb" should be before value "cc"' },
-        { message: 'value "aa" should be before value "bb"' },
+        { message: 'input value "bb" should be before input value "cc"' },
+        { message: 'input value "aa" should be before input value "bb"' },
       ],
     },
     {
@@ -182,8 +182,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: 'value "bb" should be before value "cc"' },
-        { message: 'value "aa" should be before value "bb"' },
+        { message: 'input value "bb" should be before input value "cc"' },
+        { message: 'input value "aa" should be before input value "bb"' },
       ],
     },
     {
@@ -281,9 +281,9 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: 'value "foo" should be before value "qux"' },
-        { message: 'value "Bar" should be before value "foo"' },
-        { message: 'value "bar" should be before value "Bar"' },
+        { message: 'enum value "foo" should be before enum value "qux"' },
+        { message: 'enum value "Bar" should be before enum value "foo"' },
+        { message: 'enum value "bar" should be before enum value "Bar"' },
       ],
     },
     {

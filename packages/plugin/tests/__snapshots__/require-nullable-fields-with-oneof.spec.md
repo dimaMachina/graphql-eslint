@@ -12,14 +12,14 @@ exports[`should validate \`input\` 1`] = `
 
       1 |         input Input @oneOf {
     > 2 |           foo: String!
-        |           ^^^ value "foo" in input "Input" must be nullable when "@oneOf" is in use
+        |           ^^^ input value "foo" in input "Input" must be nullable when "@oneOf" is in use
       3 |           bar: [Int]!
 
 #### ❌ Error 2/2
 
       2 |           foo: String!
     > 3 |           bar: [Int]!
-        |           ^^^ value "bar" in input "Input" must be nullable when "@oneOf" is in use
+        |           ^^^ input value "bar" in input "Input" must be nullable when "@oneOf" is in use
       4 |         }
 `;
 

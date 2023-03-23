@@ -146,7 +146,7 @@ exports[`Invalid #5 1`] = `
 
       2 |           user(
     > 3 |             # Bad
-        |             ^ Unexpected GraphQL descriptions as hashtag \`#\` for value "id" in field "user".
+        |             ^ Unexpected GraphQL descriptions as hashtag \`#\` for input value "id" in field "user".
     Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       4 |             id: Int!
 

@@ -139,14 +139,14 @@ exports[`Invalid #4 1`] = `
 
       2 |           password: String
     > 3 |           firstName: String!
-        |           ^^^^^^^^^ value "firstName" should be before value "password"
+        |           ^^^^^^^^^ input value "firstName" should be before input value "password"
       4 |           age: Int
 
 #### ❌ Error 2/2
 
       3 |           firstName: String!
     > 4 |           age: Int
-        |           ^^^ value "age" should be before value "firstName"
+        |           ^^^ input value "age" should be before input value "firstName"
       5 |           lastName: String!
 
 #### 🔧 Autofix output
@@ -181,7 +181,7 @@ exports[`Invalid #5 1`] = `
 
       4 |           password: String
     > 5 |           lastName: String!
-        |           ^^^^^^^^ value "lastName" should be before value "password"
+        |           ^^^^^^^^ input value "lastName" should be before input value "password"
       6 |         }
 
 #### 🔧 Autofix output
@@ -216,14 +216,14 @@ exports[`Invalid #6 1`] = `
 
       2 |           SUPER_ADMIN
     > 3 |           ADMIN
-        |           ^^^^^ value "ADMIN" should be before value "SUPER_ADMIN"
+        |           ^^^^^ enum value "ADMIN" should be before enum value "SUPER_ADMIN"
       4 |           USER
 
 #### ❌ Error 2/2
 
       4 |           USER
     > 5 |           GOD
-        |           ^^^ value "GOD" should be before value "USER"
+        |           ^^^ enum value "GOD" should be before enum value "USER"
       6 |         }
 
 #### 🔧 Autofix output
@@ -258,7 +258,7 @@ exports[`Invalid #7 1`] = `
 
       3 |           SUPER_ADMIN
     > 4 |           GOD
-        |           ^^^ value "GOD" should be before value "SUPER_ADMIN"
+        |           ^^^ enum value "GOD" should be before enum value "SUPER_ADMIN"
       5 |           USER
 
 #### 🔧 Autofix output
@@ -287,12 +287,12 @@ exports[`Invalid #8 1`] = `
 #### ❌ Error 1/2
 
     > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
-        |                                     ^^ value "bb" should be before value "cc"
+        |                                     ^^ input value "bb" should be before input value "cc"
 
 #### ❌ Error 2/2
 
     > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
-        |                                                ^^ value "aa" should be before value "bb"
+        |                                                ^^ input value "aa" should be before input value "bb"
 
 #### 🔧 Autofix output
 
@@ -318,14 +318,14 @@ exports[`Invalid #9 1`] = `
 
       1 |         type Query {
     > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
-        |                            ^^ value "bb" should be before value "cc"
+        |                            ^^ input value "bb" should be before input value "cc"
       3 |         }
 
 #### ❌ Error 2/2
 
       1 |         type Query {
     > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
-        |                                       ^^ value "aa" should be before value "bb"
+        |                                       ^^ input value "aa" should be before input value "bb"
       3 |         }
 
 #### 🔧 Autofix output
@@ -525,21 +525,21 @@ exports[`should compare with lexicographic order 1`] = `
 
       3 |           qux
     > 4 |           foo
-        |           ^^^ value "foo" should be before value "qux"
+        |           ^^^ enum value "foo" should be before enum value "qux"
       5 |           "Bar"
 
 #### ❌ Error 2/3
 
       5 |           "Bar"
     > 6 |           Bar
-        |           ^^^ value "Bar" should be before value "foo"
+        |           ^^^ enum value "Bar" should be before enum value "foo"
       7 |           """
 
 #### ❌ Error 3/3
 
        9 |           """
     > 10 |           bar
-         |           ^^^ value "bar" should be before value "Bar"
+         |           ^^^ enum value "bar" should be before enum value "Bar"
       11 |         }
 
 #### 🔧 Autofix output

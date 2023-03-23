@@ -28,7 +28,7 @@ exports[`Invalid #1 1`] = `
 
       1 |   enum EnumUserLanguagesSkill {
     > 2 |     """
-        |     ^ Unexpected block description for value "basic" in enum "EnumUserLanguagesSkill"
+        |     ^ Unexpected block description for enum value "basic" in enum "EnumUserLanguagesSkill"
       3 |     basic
 
 #### 💡 Suggestion: Change to inline style description
@@ -50,7 +50,7 @@ exports[`Invalid #1 1`] = `
 
       5 |     basic
     > 6 |     """
-        |     ^ Unexpected block description for value "fluent" in enum "EnumUserLanguagesSkill"
+        |     ^ Unexpected block description for enum value "fluent" in enum "EnumUserLanguagesSkill"
       7 |     fluent
 
 #### 💡 Suggestion: Change to inline style description
@@ -72,7 +72,7 @@ exports[`Invalid #1 1`] = `
 
        9 |     fluent
     > 10 |     """
-         |     ^ Unexpected block description for value "native" in enum "EnumUserLanguagesSkill"
+         |     ^ Unexpected block description for enum value "native" in enum "EnumUserLanguagesSkill"
       11 |     native
 
 #### 💡 Suggestion: Change to inline style description
