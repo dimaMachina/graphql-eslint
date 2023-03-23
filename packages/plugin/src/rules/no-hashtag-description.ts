@@ -1,8 +1,9 @@
 import { DocumentNode, Token, TokenKind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { getNodeName } from '../utils.js';
 
-const HASHTAG_COMMENT = 'HASHTAG_COMMENT';
+export const RULE_ID = 'HASHTAG_COMMENT';
 
 export const rule: GraphQLESLintRule = {
   meta: {
@@ -10,8 +11,8 @@ export const rule: GraphQLESLintRule = {
     hasSuggestions: true,
     schema: [],
     messages: {
-      [HASHTAG_COMMENT]:
-        'Using hashtag `#` for adding GraphQL descriptions is not allowed. Prefer using `"""` for multiline, or `"` for a single line description.',
+      [RULE_ID]:
+        'Unexpected GraphQL descriptions as hashtag `#` for {{ nodeName }}.\nPrefer using `"""` for multiline, or `"` for a single line description.',
     },
     docs: {
       description:
@@ -69,6 +70,14 @@ export const rule: GraphQLESLintRule = {
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
             const isEslintComment = value!.trimStart().startsWith('eslint');
             const linesAfter = next.line - line;
+            const sourceCode = context.getSourceCode();
+            const { tokens } = sourceCode.ast;
+            console.log({ tokens });
+            const t = tokens.find(
+              token =>
+                token.loc.start.line === next.line && token.loc.start.column === next.column - 1,
+            );
+            const nextNode = t && sourceCode.getNodeByRangeIndex(t.range[1] + 1);
 
             if (
               !isEslintComment &&
@@ -77,7 +86,10 @@ export const rule: GraphQLESLintRule = {
               linesAfter < 2
             ) {
               context.report({
-                messageId: HASHTAG_COMMENT,
+                messageId: RULE_ID,
+                data: {
+                  nodeName: nextNode ? getNodeName(nextNode) : '',
+                },
                 loc: {
                   line,
                   column: column - 1,

@@ -11,7 +11,8 @@ exports[`Invalid #1 1`] = `
 #### ❌ Error
 
     > 1 |         # Bad
-        |         ^ Using hashtag \`#\` for adding GraphQL descriptions is not allowed. Prefer using \`"""\` for multiline, or \`"\` for a single line description.
+        |         ^ Unexpected GraphQL descriptions as hashtag \`#\` for .
+    Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       2 |         type Query {
 
 #### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
@@ -42,7 +43,8 @@ exports[`Invalid #2 1`] = `
 
       1 |         # multiline
     > 2 |         # multiline
-        |         ^ Using hashtag \`#\` for adding GraphQL descriptions is not allowed. Prefer using \`"""\` for multiline, or \`"\` for a single line description.
+        |         ^ Unexpected GraphQL descriptions as hashtag \`#\` for .
+    Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       3 |         type Query {
 
 #### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
@@ -74,7 +76,8 @@ exports[`Invalid #3 1`] = `
 
       1 |         type Query {
     > 2 |           # Bad
-        |           ^ Using hashtag \`#\` for adding GraphQL descriptions is not allowed. Prefer using \`"""\` for multiline, or \`"\` for a single line description.
+        |           ^ Unexpected GraphQL descriptions as hashtag \`#\` for field "foo" in type "Query".
+    Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       3 |           foo: String
 
 #### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
@@ -106,7 +109,8 @@ exports[`Invalid #4 1`] = `
 
       2 |           bar: ID
     > 3 |           # Bad
-        |           ^ Using hashtag \`#\` for adding GraphQL descriptions is not allowed. Prefer using \`"""\` for multiline, or \`"\` for a single line description.
+        |           ^ Unexpected GraphQL descriptions as hashtag \`#\` for field "foo" in type "Query".
+    Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       4 |           foo: ID
 
 #### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
@@ -142,7 +146,8 @@ exports[`Invalid #5 1`] = `
 
       2 |           user(
     > 3 |             # Bad
-        |             ^ Using hashtag \`#\` for adding GraphQL descriptions is not allowed. Prefer using \`"""\` for multiline, or \`"\` for a single line description.
+        |             ^ Unexpected GraphQL descriptions as hashtag \`#\` for value "id" in field "user".
+    Prefer using \`"""\` for multiline, or \`"\` for a single line description.
       4 |             id: Int!
 
 #### 💡 Suggestion 1/2: Replace with \`"""\` description syntax
