@@ -938,7 +938,7 @@ exports[`should sort definitions 1`] = `
 
       24 |         # before mutation CreateUser
     > 25 |         mutation CreateUser {
-         |                  ^^^^^^^^^^ fragment "CreateUser" should be before operation definition
+         |                  ^^^^^^^^^^ mutation "CreateUser" should be before operation definition
       26 |           createUser
 
 #### ❌ Error 5/9

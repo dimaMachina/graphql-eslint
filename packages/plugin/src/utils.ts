@@ -48,8 +48,6 @@ export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
 
 export const CWD = process.cwd();
 
-export const IS_BROWSER = typeof window !== 'undefined';
-
 export const getTypeName = (node: ASTNode): string =>
   'type' in node ? getTypeName(node.type) : 'name' in node && node.name ? node.name.value : '';
 
@@ -148,9 +146,9 @@ const DisplayNodeNameMap: Record<string, string> = {
 } as const;
 
 export function displayNodeName(node: GraphQLESTreeNode<ASTNode>): string {
-  return `${DisplayNodeNameMap[node.kind]} "${
-    ('alias' in node && node.alias?.value) || node.name.value
-  }"`;
+  return `${
+    node.kind === Kind.OPERATION_DEFINITION ? node.operation : DisplayNodeNameMap[node.kind]
+  } "${('alias' in node && node.alias?.value) || node.name.value}"`;
 }
 
 export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
@@ -168,7 +166,7 @@ export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
     case Kind.ENUM_VALUE_DEFINITION:
       return `${displayNodeName(node)} in ${displayNodeName(node.parent)}`;
     case Kind.OPERATION_DEFINITION:
-      return node.name ? `${node.operation} "${node.name.value}"` : node.operation;
+      return node.name ? displayNodeName(node) : node.operation;
   }
   return '';
 }
