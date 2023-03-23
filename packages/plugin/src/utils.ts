@@ -148,7 +148,7 @@ const DisplayNodeNameMap: Record<string, string> = {
 export function displayNodeName(node: GraphQLESTreeNode<ASTNode>): string {
   return `${
     node.kind === Kind.OPERATION_DEFINITION ? node.operation : DisplayNodeNameMap[node.kind]
-  } "${('alias' in node && node.alias?.value) || node.name.value}"`;
+  } "${('alias' in node && node.alias?.value) || ('name' in node && node.name?.value)}"`;
 }
 
 export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {

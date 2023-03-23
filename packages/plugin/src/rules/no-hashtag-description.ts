@@ -82,14 +82,15 @@ export const rule: GraphQLESLintRule = {
               const t = tokens.find(
                 token =>
                   token.loc.start.line === next.line && token.loc.start.column === next.column - 1,
-              );
-              const nextNode = sourceCode.getNodeByRangeIndex(t.range[1] + 1);
+              )!;
+              const nextNode = sourceCode.getNodeByRangeIndex(t.range[1] + 1)!;
 
               context.report({
                 messageId: RULE_ID,
                 data: {
-                  nodeName:
-                    'name' in nextNode ? getNodeName(nextNode) : getNodeName(nextNode.parent),
+                  nodeName: getNodeName(
+                    'name' in nextNode ? (nextNode as any) : (nextNode as any).parent,
+                  ),
                 },
                 loc: {
                   line,

@@ -66,7 +66,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         context.report({
           loc: isBlock ? node.loc : node.loc.start,
           message: `Unexpected ${isBlock ? 'inline' : 'block'} description for ${getNodeName(
-            node.parent,
+            (node as any).parent,
           )}`,
           suggest: [
             {
