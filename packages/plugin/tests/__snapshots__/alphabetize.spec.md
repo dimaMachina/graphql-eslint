@@ -22,14 +22,14 @@ exports[`Invalid #1 1`] = `
 
       2 |           password: String
     > 3 |           firstName: String!
-        |           ^^^^^^^^^ \`firstName\` should be before \`password\`.
+        |           ^^^^^^^^^ field "firstName" should be before field "password"
       4 |           age: Int
 
 #### ❌ Error 2/2
 
       3 |           firstName: String!
     > 4 |           age: Int
-        |           ^^^ \`age\` should be before \`firstName\`.
+        |           ^^^ field "age" should be before field "firstName"
       5 |           lastName: String!
 
 #### 🔧 Autofix output
@@ -64,7 +64,7 @@ exports[`Invalid #2 1`] = `
 
       4 |           password: String
     > 5 |           lastName: String!
-        |           ^^^^^^^^ \`lastName\` should be before \`password\`.
+        |           ^^^^^^^^ field "lastName" should be before field "password"
       6 |         }
 
 #### 🔧 Autofix output
@@ -98,14 +98,14 @@ exports[`Invalid #3 1`] = `
 
       2 |           cc: Int
     > 3 |           bb: Int
-        |           ^^ \`bb\` should be before \`cc\`.
+        |           ^^ field "bb" should be before field "cc"
       4 |           aa: Int
 
 #### ❌ Error 2/2
 
       3 |           bb: Int
     > 4 |           aa: Int
-        |           ^^ \`aa\` should be before \`bb\`.
+        |           ^^ field "aa" should be before field "bb"
       5 |         }
 
 #### 🔧 Autofix output
@@ -139,14 +139,14 @@ exports[`Invalid #4 1`] = `
 
       2 |           password: String
     > 3 |           firstName: String!
-        |           ^^^^^^^^^ \`firstName\` should be before \`password\`.
+        |           ^^^^^^^^^ value "firstName" should be before value "password"
       4 |           age: Int
 
 #### ❌ Error 2/2
 
       3 |           firstName: String!
     > 4 |           age: Int
-        |           ^^^ \`age\` should be before \`firstName\`.
+        |           ^^^ value "age" should be before value "firstName"
       5 |           lastName: String!
 
 #### 🔧 Autofix output
@@ -181,7 +181,7 @@ exports[`Invalid #5 1`] = `
 
       4 |           password: String
     > 5 |           lastName: String!
-        |           ^^^^^^^^ \`lastName\` should be before \`password\`.
+        |           ^^^^^^^^ value "lastName" should be before value "password"
       6 |         }
 
 #### 🔧 Autofix output
@@ -216,14 +216,14 @@ exports[`Invalid #6 1`] = `
 
       2 |           SUPER_ADMIN
     > 3 |           ADMIN
-        |           ^^^^^ \`ADMIN\` should be before \`SUPER_ADMIN\`.
+        |           ^^^^^ value "ADMIN" should be before value "SUPER_ADMIN"
       4 |           USER
 
 #### ❌ Error 2/2
 
       4 |           USER
     > 5 |           GOD
-        |           ^^^ \`GOD\` should be before \`USER\`.
+        |           ^^^ value "GOD" should be before value "USER"
       6 |         }
 
 #### 🔧 Autofix output
@@ -258,7 +258,7 @@ exports[`Invalid #7 1`] = `
 
       3 |           SUPER_ADMIN
     > 4 |           GOD
-        |           ^^^ \`GOD\` should be before \`SUPER_ADMIN\`.
+        |           ^^^ value "GOD" should be before value "SUPER_ADMIN"
       5 |           USER
 
 #### 🔧 Autofix output
@@ -287,12 +287,12 @@ exports[`Invalid #8 1`] = `
 #### ❌ Error 1/2
 
     > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
-        |                                     ^^ \`bb\` should be before \`cc\`.
+        |                                     ^^ value "bb" should be before value "cc"
 
 #### ❌ Error 2/2
 
     > 1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
-        |                                                ^^ \`aa\` should be before \`bb\`.
+        |                                                ^^ value "aa" should be before value "bb"
 
 #### 🔧 Autofix output
 
@@ -318,14 +318,14 @@ exports[`Invalid #9 1`] = `
 
       1 |         type Query {
     > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
-        |                            ^^ \`bb\` should be before \`cc\`.
+        |                            ^^ value "bb" should be before value "cc"
       3 |         }
 
 #### ❌ Error 2/2
 
       1 |         type Query {
     > 2 |           test(cc: [Cc!]!, bb: [Bb!], aa: Aa!): Int
-        |                                       ^^ \`aa\` should be before \`bb\`.
+        |                                       ^^ value "aa" should be before value "bb"
       3 |         }
 
 #### 🔧 Autofix output
@@ -356,14 +356,14 @@ exports[`Invalid #10 1`] = `
 
       2 |           cc
     > 3 |           bb
-        |           ^^ \`bb\` should be before \`cc\`.
+        |           ^^ field "bb" should be before field "cc"
       4 |           aa
 
 #### ❌ Error 2/2
 
       3 |           bb
     > 4 |           aa
-        |           ^^ \`aa\` should be before \`bb\`.
+        |           ^^ field "aa" should be before field "bb"
       5 |         }
 
 #### 🔧 Autofix output
@@ -403,28 +403,28 @@ exports[`Invalid #11 1`] = `
 
       5 |               ccc
     > 6 |               bbb
-        |               ^^^ \`bbb\` should be before \`ccc\`.
+        |               ^^^ field "bbb" should be before field "ccc"
       7 |               aaa
 
 #### ❌ Error 2/4
 
       6 |               bbb
     > 7 |               aaa
-        |               ^^^ \`aaa\` should be before \`bbb\`.
+        |               ^^^ field "aaa" should be before field "bbb"
       8 |             }
 
 #### ❌ Error 3/4
 
        8 |             }
     >  9 |             bb
-         |             ^^ \`bb\` should be before inline fragment.
+         |             ^^ field "bb" should be before inline fragment
       10 |             aa
 
 #### ❌ Error 4/4
 
        9 |             bb
     > 10 |             aa
-         |             ^^ \`aa\` should be before \`bb\`.
+         |             ^^ field "aa" should be before field "bb"
       11 |           }
 
 #### 🔧 Autofix output
@@ -466,27 +466,27 @@ exports[`Invalid #12 1`] = `
 #### ❌ Error 1/4
 
     > 1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
-        |                                 ^^ \`bb\` should be before \`cc\`.
+        |                                 ^^ variable "bb" should be before variable "cc"
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
 
 #### ❌ Error 2/4
 
     > 1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
-        |                                             ^^ \`aa\` should be before \`bb\`.
+        |                                             ^^ variable "aa" should be before variable "bb"
       2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
 
 #### ❌ Error 3/4
 
       1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
     > 2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
-        |                          ^^^ \`bbb\` should be before \`ccc\`.
+        |                          ^^^ argument "bbb" should be before argument "ccc"
       3 |             something
 
 #### ❌ Error 4/4
 
       1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
     > 2 |           test(ccc: $cc, bbb: $bb, aaa: $aa) {
-        |                                    ^^^ \`aaa\` should be before \`bbb\`.
+        |                                    ^^^ argument "aaa" should be before argument "bbb"
       3 |             something
 
 #### 🔧 Autofix output
@@ -525,21 +525,21 @@ exports[`should compare with lexicographic order 1`] = `
 
       3 |           qux
     > 4 |           foo
-        |           ^^^ \`foo\` should be before \`qux\`.
+        |           ^^^ value "foo" should be before value "qux"
       5 |           "Bar"
 
 #### ❌ Error 2/3
 
       5 |           "Bar"
     > 6 |           Bar
-        |           ^^^ \`Bar\` should be before \`foo\`.
+        |           ^^^ value "Bar" should be before value "foo"
       7 |           """
 
 #### ❌ Error 3/3
 
        9 |           """
     > 10 |           bar
-         |           ^^^ \`bar\` should be before \`Bar\`.
+         |           ^^^ value "bar" should be before value "Bar"
       11 |         }
 
 #### 🔧 Autofix output
@@ -587,21 +587,21 @@ exports[`should move comment 1`] = `
 
       6 |           # before c
     > 7 |           c: Float!
-        |           ^ \`c\` should be before \`d\`.
+        |           ^ field "c" should be before field "d"
       8 |           # before b 1
 
 #### ❌ Error 2/3
 
        9 |           # before b 2
     > 10 |           b: [String] # same b
-         |           ^ \`b\` should be before \`c\`.
+         |           ^ field "b" should be before field "c"
       11 |           # before a
 
 #### ❌ Error 3/3
 
       11 |           # before a
     > 12 |           a: [Int!]! # same a
-         |           ^ \`a\` should be before \`b\`.
+         |           ^ field "a" should be before field "b"
       13 |           # end
 
 #### 🔧 Autofix output
@@ -656,28 +656,28 @@ exports[`should sort by group when \`*\` at the start 1`] = `
 
       3 |     createdAt: DateTime
     > 4 |     author: Int
-        |     ^^^^^^ \`author\` should be before \`createdAt\`.
+        |     ^^^^^^ field "author" should be before field "createdAt"
       5 |     wagon: Int
 
 #### ❌ Error 2/4
 
       6 |     id: ID
     > 7 |     foo: Int
-        |     ^^^ \`foo\` should be before \`id\`.
+        |     ^^^ field "foo" should be before field "id"
       8 |     updatedAt: DateTime
 
 #### ❌ Error 3/4
 
        8 |     updatedAt: DateTime
     >  9 |     bar: Int
-         |     ^^^ \`bar\` should be before \`updatedAt\`.
+         |     ^^^ field "bar" should be before field "updatedAt"
       10 |     nachos: Int
 
 #### ❌ Error 4/4
 
       10 |     nachos: Int
     > 11 |     guild: Int
-         |     ^^^^^ \`guild\` should be before \`nachos\`.
+         |     ^^^^^ field "guild" should be before field "nachos"
       12 |   }
 
 #### 🔧 Autofix output
@@ -730,28 +730,28 @@ exports[`should sort by group when \`*\` is at the end 1`] = `
 
       2 |     firstName: Int
     > 3 |     createdAt: DateTime
-        |     ^^^^^^^^^ \`createdAt\` should be before \`firstName\`.
+        |     ^^^^^^^^^ field "createdAt" should be before field "firstName"
       4 |     author: Int
 
 #### ❌ Error 2/4
 
       5 |     wagon: Int
     > 6 |     id: ID
-        |     ^^ \`id\` should be before \`wagon\`.
+        |     ^^ field "id" should be before field "wagon"
       7 |     foo: Int
 
 #### ❌ Error 3/4
 
       7 |     foo: Int
     > 8 |     updatedAt: DateTime
-        |     ^^^^^^^^^ \`updatedAt\` should be before \`foo\`.
+        |     ^^^^^^^^^ field "updatedAt" should be before field "foo"
       9 |     bar: Int
 
 #### ❌ Error 4/4
 
       10 |     nachos: Int
     > 11 |     guild: Int
-         |     ^^^^^ \`guild\` should be before \`nachos\`.
+         |     ^^^^^ field "guild" should be before field "nachos"
       12 |   }
 
 #### 🔧 Autofix output
@@ -804,28 +804,28 @@ exports[`should sort by group when \`*\` is between 1`] = `
 
       3 |     createdAt: DateTime
     > 4 |     author: Int
-        |     ^^^^^^ \`author\` should be before \`createdAt\`.
+        |     ^^^^^^ field "author" should be before field "createdAt"
       5 |     wagon: Int
 
 #### ❌ Error 2/4
 
       5 |     wagon: Int
     > 6 |     id: ID
-        |     ^^ \`id\` should be before \`wagon\`.
+        |     ^^ field "id" should be before field "wagon"
       7 |     foo: Int
 
 #### ❌ Error 3/4
 
        8 |     updatedAt: DateTime
     >  9 |     bar: Int
-         |     ^^^ \`bar\` should be before \`updatedAt\`.
+         |     ^^^ field "bar" should be before field "updatedAt"
       10 |     nachos: Int
 
 #### ❌ Error 4/4
 
       10 |     nachos: Int
     > 11 |     guild: Int
-         |     ^^^^^ \`guild\` should be before \`nachos\`.
+         |     ^^^^^ field "guild" should be before field "nachos"
       12 |   }
 
 #### 🔧 Autofix output
@@ -917,63 +917,63 @@ exports[`should sort definitions 1`] = `
 
       10 |         # before fragment UserFields
     > 11 |         fragment UserFields on User {
-         |                  ^^^^^^^^^^ \`UserFields\` should be before \`UserInput\`.
+         |                  ^^^^^^^^^^ fragment "UserFields" should be before input "UserInput"
       12 |           id
 
 #### ❌ Error 2/9
 
       14 |         # before type User
     > 15 |         type User # same type User
-         |              ^^^^ \`User\` should be before \`UserFields\`.
+         |              ^^^^ type "User" should be before fragment "UserFields"
       16 |         # before extend enum Role
 
 #### ❌ Error 3/9
 
       16 |         # before extend enum Role
     > 17 |         extend enum Role {
-         |                     ^^^^ \`Role\` should be before \`User\`.
+         |                     ^^^^ enum "Role" should be before type "User"
       18 |           SUPERMAN
 
 #### ❌ Error 4/9
 
       24 |         # before mutation CreateUser
     > 25 |         mutation CreateUser {
-         |                  ^^^^^^^^^^ \`CreateUser\` should be before operation definition.
+         |                  ^^^^^^^^^^ fragment "CreateUser" should be before operation definition
       26 |           createUser
 
 #### ❌ Error 5/9
 
       38 |         # before interface Node
     > 39 |         interface Node # same interface Node
-         |                   ^^^^ \`Node\` should be before \`RootQuery\`.
+         |                   ^^^^ interface "Node" should be before type "RootQuery"
       40 |         # before enum Role
 
 #### ❌ Error 6/9
 
       42 |         # before scalar Email
     > 43 |         scalar Email # same scalar Email
-         |                ^^^^^ \`Email\` should be before \`Role\`.
+         |                ^^^^^ scalar "Email" should be before enum "Role"
       44 |         # before input UserInput
 
 #### ❌ Error 7/9
 
       46 |         # before extend type User
     > 47 |         extend type User {
-         |                     ^^^^ \`User\` should be before \`UserInput\`.
+         |                     ^^^^ type "User" should be before input "UserInput"
       48 |           firstName: String!
 
 #### ❌ Error 8/9
 
       54 |         # before union Data
     > 55 |         union Data = User | Node # same union Data
-         |               ^^^^ \`Data\` should be before schema definition.
+         |               ^^^^ union "Data" should be before schema definition
       56 |         # before directive @auth
 
 #### ❌ Error 9/9
 
       56 |         # before directive @auth
     > 57 |         directive @auth(role: [Role!]!) on FIELD_DEFINITION # same directive @auth
-         |                    ^^^^ \`auth\` should be before \`Data\`.
+         |                    ^^^^ directive "auth" should be before union "Data"
       58 |
 
 #### 🔧 Autofix output
@@ -1062,14 +1062,14 @@ exports[`should sort when selection is aliased 1`] = `
 
       3 |           lastName: lastname # lastName comment
     > 4 |           fullName: fullname # fullName comment
-        |           ^^^^^^^^ \`fullName\` should be before \`lastName\`.
+        |           ^^^^^^^^ field "fullName" should be before field "lastName"
       5 |           firsName: firstname # firsName comment
 
 #### ❌ Error 2/2
 
       4 |           fullName: fullname # fullName comment
     > 5 |           firsName: firstname # firsName comment
-        |           ^^^^^^^^ \`firsName\` should be before \`fullName\`.
+        |           ^^^^^^^^ field "firsName" should be before field "fullName"
       6 |           # end
 
 #### 🔧 Autofix output

@@ -128,19 +128,29 @@ const DisplayNodeNameMap: Record<string, string> = {
   [Kind.OBJECT_TYPE_DEFINITION]: 'type',
   [Kind.OBJECT_TYPE_EXTENSION]: 'type',
   [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
+  [Kind.INTERFACE_TYPE_EXTENSION]: 'interface',
   [Kind.ENUM_TYPE_DEFINITION]: 'enum',
   [Kind.ENUM_TYPE_EXTENSION]: 'enum',
   [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
   [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
+  [Kind.INPUT_OBJECT_TYPE_EXTENSION]: 'input',
   [Kind.UNION_TYPE_DEFINITION]: 'union',
+  [Kind.UNION_TYPE_EXTENSION]: 'union',
   [Kind.DIRECTIVE_DEFINITION]: 'directive',
   [Kind.FIELD_DEFINITION]: 'field',
   [Kind.ENUM_VALUE_DEFINITION]: 'value',
   [Kind.INPUT_VALUE_DEFINITION]: 'value',
+  [Kind.ARGUMENT]: 'argument',
+  [Kind.VARIABLE]: 'variable',
+  [Kind.FRAGMENT_DEFINITION]: 'fragment',
+  [Kind.OPERATION_DEFINITION]: 'operation',
+  [Kind.FIELD]: 'field',
 } as const;
 
 export function displayNodeName(node: GraphQLESTreeNode<ASTNode>): string {
-  return `${DisplayNodeNameMap[node.kind]} "${node.name.value}"`;
+  return `${DisplayNodeNameMap[node.kind]} "${
+    ('alias' in node && node.alias?.value) || node.name.value
+  }"`;
 }
 
 export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {

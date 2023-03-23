@@ -23,7 +23,7 @@ import lowerCase from 'lodash.lowercase';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
 import { GraphQLESLintRule } from '../types.js';
-import { ARRAY_DEFAULT_OPTIONS, truthy } from '../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../utils.js';
 
 const RULE_ID = 'alphabetize';
 
@@ -218,7 +218,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       },
     },
     messages: {
-      [RULE_ID]: '`{{ currName }}` should be before {{ prevName }}.',
+      [RULE_ID]: '{{ currNode }} should be before {{ prevNode }}',
     },
     schema,
   },
@@ -320,8 +320,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           node: ('alias' in currNode && currNode.alias) || currNode.name,
           messageId: RULE_ID,
           data: {
-            currName,
-            prevName: prevName ? `\`${prevName}\`` : lowerCase(prevNode.kind),
+            currNode: displayNodeName(currNode),
+            prevNode: prevName ? displayNodeName(prevNode) : lowerCase(prevNode.kind),
           },
           *fix(fixer) {
             const prevRange = getRangeWithComments(prevNode);
