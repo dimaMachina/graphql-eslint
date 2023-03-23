@@ -129,6 +129,7 @@ export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
     [Kind.OBJECT_TYPE_DEFINITION]: 'type',
     [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
     [Kind.ENUM_TYPE_DEFINITION]: 'enum',
+    [Kind.ENUM_TYPE_EXTENSION]: 'enum',
     [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
     [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
     [Kind.UNION_TYPE_DEFINITION]: 'union',

@@ -1,6 +1,7 @@
 import { EnumTypeDefinitionNode, EnumTypeExtensionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { getNodeName } from '../utils.js';
 
 export const rule: GraphQLESLintRule = {
   meta: {
@@ -49,7 +50,9 @@ export const rule: GraphQLESLintRule = {
           const enumName = duplicate.name.value;
           context.report({
             node: duplicate.name,
-            message: `Case-insensitive enum values duplicates are not allowed! Found: \`${enumName}\`.`,
+            message: `Unexpected case-insensitive enum values duplicates for ${getNodeName(
+              duplicate,
+            )}`,
             suggest: [
               {
                 desc: `Remove \`${enumName}\` enum value`,
