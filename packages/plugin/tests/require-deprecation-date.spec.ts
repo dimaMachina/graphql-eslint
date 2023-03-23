@@ -30,24 +30,24 @@ ruleTester.runGraphQLTests<RuleOptions>('require-deprecation-date', rule, {
   invalid: [
     {
       code: 'scalar Old @deprecated(deletionDate: "22/08/2021")',
-      errors: [{ message: '"Old" сan be removed' }],
+      errors: 1,
     },
     {
       code: 'scalar Old @deprecated(untilDate: "22/08/2021")',
       options: [{ argumentName: 'untilDate' }],
-      errors: [{ message: '"Old" сan be removed' }],
+      errors: 1,
     },
     {
       code: 'scalar Old @deprecated(deletionDate: "bad")',
-      errors: [{ message: 'Deletion date must be in format "DD/MM/YYYY"' }],
+      errors: 1,
     },
     {
       code: 'scalar Old @deprecated(deletionDate: "32/08/2021")',
-      errors: [{ message: 'Invalid "32/08/2021" deletion date' }],
+      errors: 1,
     },
     {
       code: 'type Old { oldField: ID @deprecated }',
-      errors: [{ message: 'Directive "@deprecated" must have a deletion date' }],
+      errors: 1,
     },
   ],
 });

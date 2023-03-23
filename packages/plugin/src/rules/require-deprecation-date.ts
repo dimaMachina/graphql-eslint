@@ -2,6 +2,7 @@ import { DirectiveNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { getNodeName } from '../utils.js';
 
 // eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -68,10 +69,11 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ],
     },
     messages: {
-      [MESSAGE_REQUIRE_DATE]: 'Directive "@deprecated" must have a deletion date',
-      [MESSAGE_INVALID_FORMAT]: 'Deletion date must be in format "DD/MM/YYYY"',
-      [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date',
-      [MESSAGE_CAN_BE_REMOVED]: '"{{ nodeName }}" сan be removed',
+      [MESSAGE_REQUIRE_DATE]:
+        'Directive "@deprecated" must have a deletion date for {{ nodeName }}',
+      [MESSAGE_INVALID_FORMAT]: 'Deletion date must be in format "DD/MM/YYYY" for {{ nodeName }}',
+      [MESSAGE_INVALID_DATE]: 'Invalid "{{ deletionDate }}" deletion date for {{ nodeName }}',
+      [MESSAGE_CAN_BE_REMOVED]: '{{ nodeName }} сan be removed',
     },
     schema,
   },
@@ -85,6 +87,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           context.report({
             node: node.name,
             messageId: MESSAGE_REQUIRE_DATE,
+            data: {
+              nodeName: getNodeName(node.parent),
+            },
           });
           return;
         }
@@ -92,7 +97,11 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         const isValidDate = DATE_REGEX.test(deletionDate);
 
         if (!isValidDate) {
-          context.report({ node: deletionDateNode.value, messageId: MESSAGE_INVALID_FORMAT });
+          context.report({
+            node: deletionDateNode.value,
+            messageId: MESSAGE_INVALID_FORMAT,
+            data: { nodeName: getNodeName(node.parent) },
+          });
           return;
         }
         let [day, month, year] = deletionDate.split('/');
@@ -106,6 +115,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             messageId: MESSAGE_INVALID_DATE,
             data: {
               deletionDate,
+              nodeName: getNodeName(node.parent),
             },
           });
           return;
@@ -119,7 +129,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           context.report({
             node: parent.name,
             messageId: MESSAGE_CAN_BE_REMOVED,
-            data: { nodeName },
+            data: { nodeName: getNodeName(parent) },
             suggest: [
               {
                 desc: `Remove \`${nodeName}\``,
