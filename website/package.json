@@ -26,7 +26,7 @@
     "next-sitemap": "4.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "use-query-params": "2.2.0"
+    "use-query-params": "2.2.1"
   },
   "devDependencies": {
     "@theguild/algolia": "1.1.4",
