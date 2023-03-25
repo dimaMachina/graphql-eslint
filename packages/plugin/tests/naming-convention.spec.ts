@@ -190,6 +190,27 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
         }
       `,
     },
+    {
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredSuffixes: ['Enabled', 'Disabled'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=IpAddress]': {
+            requiredSuffixes: ['IpAddress'],
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        scalar IpAddress
+
+        type Test {
+          specialFeatureEnabled: Boolean!
+          userIpAddress: IpAddress!
+        }
+      `,
+    },
   ],
   invalid: [
     {
@@ -435,7 +456,7 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
       ],
     },
     {
-      name: 'should error when selected types do not match require prefixes',
+      name: 'should error when selected type names do not match require prefixes',
       options: [
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
@@ -468,6 +489,35 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
         { message: 'Field "enabled" should have one of the following prefixes: is, or has' },
         { message: 'Field "secret" should have one of the following prefixes: SUPER_SECRET_' },
         { message: 'Field "snake" should have one of the following prefixes: hiss' },
+      ],
+    },
+    {
+      name: 'should error when selected type names do not match require suffixes',
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredSuffixes: ['Enabled', 'Disabled'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=IpAddress]': {
+            requiredSuffixes: ['IpAddress'],
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        scalar IpAddress
+
+        type Test {
+          specialFeature: Boolean!
+          user: IpAddress!
+        }
+      `,
+      errors: [
+        {
+          message:
+            'Field "specialFeature" should have one of the following suffixes: Enabled, or Disabled',
+        },
+        { message: 'Field "user" should have one of the following suffixes: IpAddress' },
       ],
     },
   ],

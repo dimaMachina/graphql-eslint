@@ -2170,7 +2170,7 @@ exports[`schema-recommended config 1`] = `
     15 |         }
 `;
 
-exports[`should error when selected types do not match require prefixes 1`] = `
+exports[`should error when selected type names do not match require prefixes 1`] = `
 #### ⌨️ Code
 
        1 |         scalar Secret
@@ -2284,6 +2284,75 @@ exports[`should error when selected types do not match require prefixes 1`] = `
      9 |           secret: Secret!
     10 |           hiss_snake: Snake
     11 |         }
+`;
+
+exports[`should error when selected type names do not match require suffixes 1`] = `
+#### ⌨️ Code
+
+      1 |         scalar IpAddress
+      2 |
+      3 |         type Test {
+      4 |           specialFeature: Boolean!
+      5 |           user: IpAddress!
+      6 |         }
+
+#### ⚙️ Options
+
+    {
+      "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
+        "style": "camelCase",
+        "requiredSuffixes": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "FieldDefinition[gqlType.gqlType.name.value=IpAddress]": {
+        "requiredSuffixes": [
+          "IpAddress"
+        ]
+      }
+    }
+
+#### ❌ Error 1/2
+
+      3 |         type Test {
+    > 4 |           specialFeature: Boolean!
+        |           ^^^^^^^^^^^^^^ Field "specialFeature" should have one of the following suffixes: Enabled, or Disabled
+      5 |           user: IpAddress!
+
+#### 💡 Suggestion 1/2: Rename to \`specialFeatureEnabled\`
+
+    1 |         scalar IpAddress
+    2 |
+    3 |         type Test {
+    4 |           specialFeatureEnabled: Boolean!
+    5 |           user: IpAddress!
+    6 |         }
+
+#### 💡 Suggestion 2/2: Rename to \`specialFeatureDisabled\`
+
+    1 |         scalar IpAddress
+    2 |
+    3 |         type Test {
+    4 |           specialFeatureDisabled: Boolean!
+    5 |           user: IpAddress!
+    6 |         }
+
+#### ❌ Error 2/2
+
+      4 |           specialFeature: Boolean!
+    > 5 |           user: IpAddress!
+        |           ^^^^ Field "user" should have one of the following suffixes: IpAddress
+      6 |         }
+
+#### 💡 Suggestion: Rename to \`userIpAddress\`
+
+    1 |         scalar IpAddress
+    2 |
+    3 |         type Test {
+    4 |           specialFeature: Boolean!
+    5 |           userIpAddress: IpAddress!
+    6 |         }
 `;
 
 exports[`should ignore selections fields but check alias renaming 1`] = `

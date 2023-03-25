@@ -58,6 +58,7 @@ const schema = {
         forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
         forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
         requiredPrefixes: ARRAY_DEFAULT_OPTIONS,
+        requiredSuffixes: ARRAY_DEFAULT_OPTIONS,
         ignorePattern: {
           type: 'string',
           description: 'Option to skip validation of some words, e.g. acronyms',
@@ -131,6 +132,23 @@ const createRequiredPrefixNameSuggestions = (
   }
 };
 
+const createRequiredSuffixNameSuggestions = (
+  style: CaseStyle | undefined,
+  requiredSuffixes: string[],
+  name: string,
+): string[] => {
+  switch (style) {
+    case 'kebab-case':
+    case 'snake_case': {
+      const joiningCharacter = style === 'kebab-case' ? '-' : '_';
+      return requiredSuffixes.map(requiredSuffix => `${name}${joiningCharacter}${requiredSuffix}`);
+    }
+    default: {
+      return requiredSuffixes.map(requiredSuffix => `${name}${requiredSuffix}`);
+    }
+  }
+};
+
 const hasValidRequiredPrefix = (
   style: CaseStyle | undefined,
   name: string,
@@ -141,17 +159,42 @@ const hasValidRequiredPrefix = (
   }
 
   return requiredPrefixes.some(requiredPrefix => {
-    let suffixStartingLetter = '';
+    let suffixStartingCharacter = '';
 
     if (style === 'PascalCase' || style === 'UPPER_CASE' || style === 'camelCase') {
-      suffixStartingLetter = '[A-Z0-9]';
+      suffixStartingCharacter = '[A-Z0-9]';
     } else if (style === 'kebab-case') {
-      suffixStartingLetter = '-';
+      suffixStartingCharacter = '-';
     } else if (style === 'snake_case') {
-      suffixStartingLetter = '_';
+      suffixStartingCharacter = '_';
     }
 
-    const regex = new RegExp(`^${requiredPrefix}${suffixStartingLetter}`);
+    const regex = new RegExp(`^${requiredPrefix}${suffixStartingCharacter}`);
+    return regex.test(name);
+  });
+};
+
+const hasValidRequiredSuffix = (
+  style: CaseStyle | undefined,
+  name: string,
+  requiredSuffixes: string[],
+): boolean => {
+  if (style === undefined) {
+    return requiredSuffixes.some(requiredSuffix => name.endsWith(requiredSuffix));
+  }
+
+  return requiredSuffixes.some(requiredSuffix => {
+    let prefixEndingCharacter = '';
+
+    if (style === 'UPPER_CASE' || style === 'snake_case') {
+      prefixEndingCharacter = '_';
+    } else if (style === 'kebab-case') {
+      prefixEndingCharacter = '-';
+    } else if (style === 'PascalCase' || style === 'camelCase') {
+      prefixEndingCharacter = '[a-z0-9]';
+    }
+
+    const regex = new RegExp(`${prefixEndingCharacter}${requiredSuffix}`);
     return regex.test(name);
   });
 };
@@ -165,6 +208,7 @@ type PropertySchema = {
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
   requiredPrefixes?: string[];
+  requiredSuffixes?: string[];
   ignorePattern?: string;
 };
 
@@ -327,6 +371,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         style,
         ignorePattern,
         requiredPrefixes,
+        requiredSuffixes,
       } = normalisePropertyOption(selector);
       const nodeType = KindToDisplayName[n.kind] || n.kind;
       const nodeName = node.value;
@@ -361,7 +406,21 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
           return {
             errorMessage: `have one of the following prefixes: ${messagePrefixes}`,
-            renameToNames: renameToNames,
+            renameToNames,
+          };
+        }
+        if (requiredSuffixes && !hasValidRequiredSuffix(style, name, requiredSuffixes)) {
+          const renameToNames = createRequiredSuffixNameSuggestions(style, requiredSuffixes, name);
+
+          const messageSuffixes =
+            requiredSuffixes.length === 1
+              ? requiredSuffixes[0]
+              : requiredSuffixes.slice(0, requiredSuffixes.length - 1) +
+                `, or ${requiredSuffixes[requiredSuffixes.length - 1]}`;
+
+          return {
+            errorMessage: `have one of the following suffixes: ${messageSuffixes}`,
+            renameToNames,
           };
         }
         if (prefix && !name.startsWith(prefix)) {
