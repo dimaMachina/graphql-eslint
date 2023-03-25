@@ -290,6 +290,46 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [
+            {
+              'FieldDefinition[gqlType.name.value=Boolean]': {
+                style: 'camelCase',
+                requiredPrefixes: ['is', 'has'],
+              },
+              'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+                style: 'camelCase',
+                requiredPrefixes: ['is', 'has'],
+              },
+            },
+          ],
+          code: /* GraphQL */ `
+            type Product {
+              isBackordered: Boolean
+              isNew: Boolean!
+              hasDiscount: Boolean!
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [
+            {
+              'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': {
+                style: 'camelCase',
+                requiredSuffixes: ['SensitiveSecret'],
+              },
+            },
+          ],
+          code: /* GraphQL */ `
+            scalar SensitiveSecret
+
+            type Account {
+              accountSensitiveSecret: SensitiveSecret!
+            }
+          `,
+        },
       ],
       configOptions: {
         schema: [
