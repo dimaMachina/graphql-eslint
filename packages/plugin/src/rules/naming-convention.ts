@@ -3,7 +3,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
 import { GraphQLESLintRule, ValueOf } from '../types.js';
-import { ARRAY_DEFAULT_OPTIONS, convertCase, truthy, TYPES_KINDS } from '../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, CaseStyle, convertCase, truthy, TYPES_KINDS } from '../utils.js';
 
 const KindToDisplayName = {
   // types
@@ -57,6 +57,7 @@ const schema = {
         suffix: { type: 'string' },
         forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
         forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
+        requiredPrefixes: ARRAY_DEFAULT_OPTIONS,
         ignorePattern: {
           type: 'string',
           description: 'Option to skip validation of some words, e.g. acronyms',
@@ -105,6 +106,56 @@ const schema = {
   },
 } as const;
 
+const createRequiredPrefixNameSuggestions = (
+  style: CaseStyle | undefined,
+  requiredPrefixes: string[],
+  name: string,
+): string[] => {
+  switch (style) {
+    case undefined: {
+      return requiredPrefixes.map(requiredPrefix => `${requiredPrefix}${name}`);
+    }
+    case 'camelCase':
+    case 'PascalCase':
+    case 'UPPER_CASE': {
+      return requiredPrefixes.map(
+        requiredPrefix => requiredPrefix + name.charAt(0).toUpperCase() + name.slice(1),
+      );
+    }
+    case 'snake_case':
+    case 'kebab-case': {
+      const joiningCharacter = style === 'kebab-case' ? '-' : '_';
+
+      return requiredPrefixes.map(requiredPrefix => `${requiredPrefix}${joiningCharacter}${name}`);
+    }
+  }
+};
+
+const hasValidRequiredPrefix = (
+  style: CaseStyle | undefined,
+  name: string,
+  requiredPrefixes: string[],
+): boolean => {
+  if (style === undefined) {
+    return requiredPrefixes.some(requiredPrefix => name.startsWith(requiredPrefix));
+  }
+
+  return requiredPrefixes.some(requiredPrefix => {
+    let suffixStartingLetter = '';
+
+    if (style === 'PascalCase' || style === 'UPPER_CASE' || style === 'camelCase') {
+      suffixStartingLetter = '[A-Z0-9]';
+    } else if (style === 'kebab-case') {
+      suffixStartingLetter = '-';
+    } else if (style === 'snake_case') {
+      suffixStartingLetter = '_';
+    }
+
+    const regex = new RegExp(`^${requiredPrefix}${suffixStartingLetter}`);
+    return regex.test(name);
+  });
+};
+
 export type RuleOptions = FromSchema<typeof schema>;
 
 type PropertySchema = {
@@ -113,6 +164,7 @@ type PropertySchema = {
   prefix?: string;
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
+  requiredPrefixes?: string[];
   ignorePattern?: string;
 };
 
@@ -250,17 +302,15 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     function report(
       node: GraphQLESTreeNode<NameNode>,
       message: string,
-      suggestedName: string,
+      suggestedNames: string[],
     ): void {
       context.report({
         node,
         message,
-        suggest: [
-          {
-            desc: `Rename to \`${suggestedName}\``,
-            fix: fixer => fixer.replaceText(node as any, suggestedName),
-          },
-        ],
+        suggest: suggestedNames.map(suggestedName => ({
+          desc: `Rename to \`${suggestedName}\``,
+          fix: fixer => fixer.replaceText(node as any, suggestedName),
+        })),
       });
     }
 
@@ -269,51 +319,75 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       if (!node) {
         return;
       }
-      const { prefix, suffix, forbiddenPrefixes, forbiddenSuffixes, style, ignorePattern } =
-        normalisePropertyOption(selector);
+      const {
+        prefix,
+        suffix,
+        forbiddenPrefixes,
+        forbiddenSuffixes,
+        style,
+        ignorePattern,
+        requiredPrefixes,
+      } = normalisePropertyOption(selector);
       const nodeType = KindToDisplayName[n.kind] || n.kind;
       const nodeName = node.value;
       const error = getError();
       if (error) {
-        const { errorMessage, renameToName } = error;
-        const [leadingUnderscores] = nodeName.match(/^_*/) as RegExpMatchArray;
-        const [trailingUnderscores] = nodeName.match(/_*$/) as RegExpMatchArray;
-        const suggestedName = leadingUnderscores + renameToName + trailingUnderscores;
-        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedName);
+        const { errorMessage, renameToNames } = error;
+        const [leadingUnderscores] = nodeName.match(/^_*/) ?? [];
+        const [trailingUnderscores] = nodeName.match(/_*$/) ?? [];
+        const suggestedNames = renameToNames.map(
+          renameToName => leadingUnderscores + renameToName + trailingUnderscores,
+        );
+        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedNames);
       }
 
       function getError(): {
         errorMessage: string;
-        renameToName: string;
+        renameToNames: string[];
       } | void {
         const name = nodeName.replace(/(^_+)|(_+$)/g, '');
         if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
           return;
         }
+
+        if (requiredPrefixes && !hasValidRequiredPrefix(style, name, requiredPrefixes)) {
+          const renameToNames = createRequiredPrefixNameSuggestions(style, requiredPrefixes, name);
+
+          const messagePrefixes =
+            requiredPrefixes.length === 1
+              ? requiredPrefixes[0]
+              : requiredPrefixes.slice(0, requiredPrefixes.length - 1).join(', ') +
+                `, or ${requiredPrefixes[requiredPrefixes.length - 1]}`;
+
+          return {
+            errorMessage: `have one of the following prefixes: ${messagePrefixes}`,
+            renameToNames: renameToNames,
+          };
+        }
         if (prefix && !name.startsWith(prefix)) {
           return {
             errorMessage: `have "${prefix}" prefix`,
-            renameToName: prefix + name,
+            renameToNames: [prefix + name],
           };
         }
         if (suffix && !name.endsWith(suffix)) {
           return {
             errorMessage: `have "${suffix}" suffix`,
-            renameToName: name + suffix,
+            renameToNames: [name + suffix],
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
         if (forbiddenPrefix) {
           return {
             errorMessage: `not have "${forbiddenPrefix}" prefix`,
-            renameToName: name.replace(new RegExp(`^${forbiddenPrefix}`), ''),
+            renameToNames: [name.replace(new RegExp(`^${forbiddenPrefix}`), '')],
           };
         }
         const forbiddenSuffix = forbiddenSuffixes?.find(suffix => name.endsWith(suffix));
         if (forbiddenSuffix) {
           return {
             errorMessage: `not have "${forbiddenSuffix}" suffix`,
-            renameToName: name.replace(new RegExp(`${forbiddenSuffix}$`), ''),
+            renameToNames: [name.replace(new RegExp(`${forbiddenSuffix}$`), '')],
           };
         }
         // Style is optional
@@ -324,7 +398,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         if (!caseRegex.test(name)) {
           return {
             errorMessage: `be in ${style} format`,
-            renameToName: convertCase(style, name),
+            renameToNames: [convertCase(style, name)],
           };
         }
       }
@@ -332,11 +406,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
       const suggestedName = node.value.replace(isLeading ? /^_+/ : /_+$/, '');
-      report(
-        node,
-        `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
+      report(node, `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`, [
         suggestedName,
-      );
+      ]);
     };
 
     const listeners: GraphQLESLintRuleListener = {};

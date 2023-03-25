@@ -160,6 +160,36 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
       code: 'type T',
       options: [{ ObjectTypeDefinition: 'UPPER_CASE' }],
     },
+    {
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPrefixes: ['is', 'has'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=Secret]': {
+            requiredPrefixes: ['SUPER_SECRET_'],
+          },
+          'FieldDefinition[gqlType.name.value=Snake]': {
+            style: 'snake_case',
+            requiredPrefixes: ['hiss'],
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        scalar Secret
+
+        interface Snake {
+          value: String!
+        }
+
+        type Test {
+          isEnabled: Boolean!
+          SUPER_SECRET_secret: Secret!
+          hiss_snake: Snake
+        }
+      `,
+    },
   ],
   invalid: [
     {
@@ -402,6 +432,42 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
       errors: [
         { message: 'Leading underscores are not allowed' },
         { message: 'Trailing underscores are not allowed' },
+      ],
+    },
+    {
+      name: 'should error when selected types do not match require prefixes',
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPrefixes: ['is', 'has'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=Secret]': {
+            requiredPrefixes: ['SUPER_SECRET_'],
+          },
+          'FieldDefinition[gqlType.name.value=Snake]': {
+            style: 'snake_case',
+            requiredPrefixes: ['hiss'],
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        scalar Secret
+
+        interface Snake {
+          value: String!
+        }
+
+        type Test {
+          enabled: Boolean!
+          secret: Secret!
+          snake: Snake
+        }
+      `,
+      errors: [
+        { message: 'Field "enabled" should have one of the following prefixes: is, or has' },
+        { message: 'Field "secret" should have one of the following prefixes: SUPER_SECRET_' },
+        { message: 'Field "snake" should have one of the following prefixes: hiss' },
       ],
     },
   ],
