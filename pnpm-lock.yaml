@@ -273,7 +273,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       tailwindcss-radix: 2.8.0
-      use-query-params: 2.2.0
+      use-query-params: 2.2.1
     dependencies:
       '@graphql-eslint/eslint-plugin': link:../packages/plugin
       '@monaco-editor/react': 4.4.6_biqbaboplfbrettd7655fr4n2y
@@ -285,11 +285,11 @@ importers:
       lodash.debounce: 4.0.8
       lodash.uniqwith: 4.5.0
       next: 13.2.4_biqbaboplfbrettd7655fr4n2y
-      next-query-params: 4.1.0_y7gpak4ho3ix4mnjt7s76lu3si
+      next-query-params: 4.1.0_qv6nkcetb5qad6enzocw5dnk7y
       next-sitemap: 4.0.6_next@13.2.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      use-query-params: 2.2.0_biqbaboplfbrettd7655fr4n2y
+      use-query-params: 2.2.1_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@theguild/algolia': 1.1.4
       '@theguild/tailwind-config': 0.2.1
@@ -7066,7 +7066,7 @@ packages:
       - supports-color
     dev: false
 
-  /next-query-params/4.1.0_y7gpak4ho3ix4mnjt7s76lu3si:
+  /next-query-params/4.1.0_qv6nkcetb5qad6enzocw5dnk7y:
     resolution: {integrity: sha512-jjoQByM9s2d4wCUBUazhgHNVztm18meCtVoDj6v45+LZIQfxAF5QYVFKCbDYarI3iXD4xcZprztqLtALiiV8nQ==}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
@@ -7076,7 +7076,7 @@ packages:
       next: 13.2.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       tslib: 2.5.0
-      use-query-params: 2.2.0_biqbaboplfbrettd7655fr4n2y
+      use-query-params: 2.2.1_biqbaboplfbrettd7655fr4n2y
     dev: false
 
   /next-seo/5.15.0_ld2jel3hspngo3u5lti2kgl2sq:
@@ -9680,11 +9680,18 @@ packages:
       react: 18.2.0
     dev: false
 
-  /use-query-params/2.2.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-MPBwXVZYzFeJEdjv0YgPNFsafUOM8WTpwBEZfNEMlyzbTsf2c+ZpOBkdM95/w4rxzk4eVO3E4DW7v33+VDbiQw==}
+  /use-query-params/2.2.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-i6alcyLB8w9i3ZK3caNftdb+UnbfBRNPDnc89CNQWkGRmDrm/gfydHvMBfVsQJRq3NoHOM2dt/ceBWG2397v1Q==}
     peerDependencies:
+      '@reach/router': ^1.2.1
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
+      react-router-dom: '>=5'
+    peerDependenciesMeta:
+      '@reach/router':
+        optional: true
+      react-router-dom:
+        optional: true
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
