@@ -112,24 +112,12 @@ const createRequiredPrefixNameSuggestions = (
   requiredPrefixes: string[],
   name: string,
 ): string[] => {
-  switch (style) {
-    case undefined: {
-      return requiredPrefixes.map(requiredPrefix => `${requiredPrefix}${name}`);
-    }
-    case 'camelCase':
-    case 'PascalCase':
-    case 'UPPER_CASE': {
-      return requiredPrefixes.map(
-        requiredPrefix => requiredPrefix + name.charAt(0).toUpperCase() + name.slice(1),
-      );
-    }
-    case 'snake_case':
-    case 'kebab-case': {
-      const joiningCharacter = style === 'kebab-case' ? '-' : '_';
+  if (style === undefined)
+    return requiredPrefixes.map(requiredPrefix => `${requiredPrefix}${name}`);
 
-      return requiredPrefixes.map(requiredPrefix => `${requiredPrefix}${joiningCharacter}${name}`);
-    }
-  }
+  // The underscore here is used to delineate a word, regardless of style,
+  // which then will get transformed by convert case.
+  return requiredPrefixes.map(requiredPrefix => convertCase(style, `${requiredPrefix}_${name}`));
 };
 
 const createRequiredSuffixNameSuggestions = (
@@ -137,16 +125,12 @@ const createRequiredSuffixNameSuggestions = (
   requiredSuffixes: string[],
   name: string,
 ): string[] => {
-  switch (style) {
-    case 'kebab-case':
-    case 'snake_case': {
-      const joiningCharacter = style === 'kebab-case' ? '-' : '_';
-      return requiredSuffixes.map(requiredSuffix => `${name}${joiningCharacter}${requiredSuffix}`);
-    }
-    default: {
-      return requiredSuffixes.map(requiredSuffix => `${name}${requiredSuffix}`);
-    }
-  }
+  if (style === 'kebab-case' || style === 'snake_case')
+    // The underscore here is used to delineate a word, regardless of style,
+    // which then will get transformed by convert case.
+    return requiredSuffixes.map(requiredSuffix => convertCase(style, `${name}_${requiredSuffix}`));
+
+  return requiredSuffixes.map(requiredSuffix => `${name}${requiredSuffix}`);
 };
 
 const hasValidRequiredPrefix = (
@@ -154,24 +138,22 @@ const hasValidRequiredPrefix = (
   name: string,
   requiredPrefixes: string[],
 ): boolean => {
-  if (style === undefined) {
+  if (style === undefined)
     return requiredPrefixes.some(requiredPrefix => name.startsWith(requiredPrefix));
+
+  let suffixStartingCharacter = '';
+
+  if (style === 'PascalCase' || style === 'UPPER_CASE' || style === 'camelCase') {
+    suffixStartingCharacter = '[\\dA-Z]';
+  } else if (style === 'kebab-case') {
+    suffixStartingCharacter = '-';
+  } else if (style === 'snake_case') {
+    suffixStartingCharacter = '_';
   }
 
-  return requiredPrefixes.some(requiredPrefix => {
-    let suffixStartingCharacter = '';
-
-    if (style === 'PascalCase' || style === 'UPPER_CASE' || style === 'camelCase') {
-      suffixStartingCharacter = '[A-Z0-9]';
-    } else if (style === 'kebab-case') {
-      suffixStartingCharacter = '-';
-    } else if (style === 'snake_case') {
-      suffixStartingCharacter = '_';
-    }
-
-    const regex = new RegExp(`^${requiredPrefix}${suffixStartingCharacter}`);
-    return regex.test(name);
-  });
+  return requiredPrefixes.some(requiredPrefix =>
+    new RegExp(`^${requiredPrefix}${suffixStartingCharacter}`).test(name),
+  );
 };
 
 const hasValidRequiredSuffix = (
@@ -183,20 +165,19 @@ const hasValidRequiredSuffix = (
     return requiredSuffixes.some(requiredSuffix => name.endsWith(requiredSuffix));
   }
 
-  return requiredSuffixes.some(requiredSuffix => {
-    let prefixEndingCharacter = '';
+  let prefixEndingCharacter = '';
 
-    if (style === 'UPPER_CASE' || style === 'snake_case') {
-      prefixEndingCharacter = '_';
-    } else if (style === 'kebab-case') {
-      prefixEndingCharacter = '-';
-    } else if (style === 'PascalCase' || style === 'camelCase') {
-      prefixEndingCharacter = '[a-z0-9]';
-    }
+  if (style === 'UPPER_CASE' || style === 'snake_case') {
+    prefixEndingCharacter = '_';
+  } else if (style === 'kebab-case') {
+    prefixEndingCharacter = '-';
+  } else if (style === 'PascalCase' || style === 'camelCase') {
+    prefixEndingCharacter = '[\\da-z]';
+  }
 
-    const regex = new RegExp(`${prefixEndingCharacter}${requiredSuffix}`);
-    return regex.test(name);
-  });
+  return requiredSuffixes.some(requiredSuffix =>
+    new RegExp(`${prefixEndingCharacter}${requiredSuffix}$`).test(name),
+  );
 };
 
 export type RuleOptions = FromSchema<typeof schema>;
@@ -426,6 +407,19 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedNames);
       }
 
+      function generatePrefixOrSuffixErrorMessage(
+        prefixesOrSuffixes: string[],
+        kind: 'prefixes' | 'suffixes',
+      ): string {
+        const messagePrefixes =
+          prefixesOrSuffixes.length === 1
+            ? prefixesOrSuffixes[0]
+            : prefixesOrSuffixes.slice(0, prefixesOrSuffixes.length - 1).join(', ') +
+              `, or ${prefixesOrSuffixes[prefixesOrSuffixes.length - 1]}`;
+
+        return `have one of the following ${kind}: ${messagePrefixes}`;
+      }
+
       function getError(): {
         errorMessage: string;
         renameToNames: string[];
@@ -436,31 +430,15 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         }
 
         if (requiredPrefixes && !hasValidRequiredPrefix(style, name, requiredPrefixes)) {
-          const renameToNames = createRequiredPrefixNameSuggestions(style, requiredPrefixes, name);
-
-          const messagePrefixes =
-            requiredPrefixes.length === 1
-              ? requiredPrefixes[0]
-              : requiredPrefixes.slice(0, requiredPrefixes.length - 1).join(', ') +
-                `, or ${requiredPrefixes[requiredPrefixes.length - 1]}`;
-
           return {
-            errorMessage: `have one of the following prefixes: ${messagePrefixes}`,
-            renameToNames,
+            errorMessage: generatePrefixOrSuffixErrorMessage(requiredPrefixes, 'prefixes'),
+            renameToNames: createRequiredPrefixNameSuggestions(style, requiredPrefixes, name),
           };
         }
         if (requiredSuffixes && !hasValidRequiredSuffix(style, name, requiredSuffixes)) {
-          const renameToNames = createRequiredSuffixNameSuggestions(style, requiredSuffixes, name);
-
-          const messageSuffixes =
-            requiredSuffixes.length === 1
-              ? requiredSuffixes[0]
-              : requiredSuffixes.slice(0, requiredSuffixes.length - 1) +
-                `, or ${requiredSuffixes[requiredSuffixes.length - 1]}`;
-
           return {
-            errorMessage: `have one of the following suffixes: ${messageSuffixes}`,
-            renameToNames,
+            errorMessage: generatePrefixOrSuffixErrorMessage(requiredSuffixes, 'suffixes'),
+            renameToNames: createRequiredSuffixNameSuggestions(style, requiredSuffixes, name),
           };
         }
         if (prefix && !name.startsWith(prefix)) {
