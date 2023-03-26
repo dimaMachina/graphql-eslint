@@ -80,8 +80,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`firstName` should be before `password`.' },
-        { message: '`age` should be before `firstName`.' },
+        { message: 'field "firstName" should be before field "password"' },
+        { message: 'field "age" should be before field "firstName"' },
       ],
     },
     {
@@ -94,7 +94,7 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: '`lastName` should be before `password`.' }],
+      errors: [{ message: 'field "lastName" should be before field "password"' }],
     },
     {
       options: [{ fields: ['InterfaceTypeDefinition'] }],
@@ -106,8 +106,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`bb` should be before `cc`.' },
-        { message: '`aa` should be before `bb`.' },
+        { message: 'field "bb" should be before field "cc"' },
+        { message: 'field "aa" should be before field "bb"' },
       ],
     },
     {
@@ -121,8 +121,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`firstName` should be before `password`.' },
-        { message: '`age` should be before `firstName`.' },
+        { message: 'input value "firstName" should be before input value "password"' },
+        { message: 'input value "age" should be before input value "firstName"' },
       ],
     },
     {
@@ -135,7 +135,7 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
           lastName: String!
         }
       `,
-      errors: [{ message: '`lastName` should be before `password`.' }],
+      errors: [{ message: 'input value "lastName" should be before input value "password"' }],
     },
     {
       options: [{ values: ['EnumTypeDefinition'] }],
@@ -148,8 +148,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`ADMIN` should be before `SUPER_ADMIN`.' },
-        { message: '`GOD` should be before `USER`.' },
+        { message: 'enum value "ADMIN" should be before enum value "SUPER_ADMIN"' },
+        { message: 'enum value "GOD" should be before enum value "USER"' },
       ],
     },
     {
@@ -162,7 +162,7 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
           USER
         }
       `,
-      errors: [{ message: '`GOD` should be before `SUPER_ADMIN`.' }],
+      errors: [{ message: 'enum value "GOD" should be before enum value "SUPER_ADMIN"' }],
     },
     {
       options: [{ arguments: ['DirectiveDefinition'] }],
@@ -170,8 +170,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
       `,
       errors: [
-        { message: '`bb` should be before `cc`.' },
-        { message: '`aa` should be before `bb`.' },
+        { message: 'input value "bb" should be before input value "cc"' },
+        { message: 'input value "aa" should be before input value "bb"' },
       ],
     },
     {
@@ -182,8 +182,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`bb` should be before `cc`.' },
-        { message: '`aa` should be before `bb`.' },
+        { message: 'input value "bb" should be before input value "cc"' },
+        { message: 'input value "aa" should be before input value "bb"' },
       ],
     },
     {
@@ -196,8 +196,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`bb` should be before `cc`.' },
-        { message: '`aa` should be before `bb`.' },
+        { message: 'field "bb" should be before field "cc"' },
+        { message: 'field "aa" should be before field "bb"' },
       ],
     },
     {
@@ -217,10 +217,10 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`bbb` should be before `ccc`.' },
-        { message: '`aaa` should be before `bbb`.' },
-        { message: '`bb` should be before inline fragment.' },
-        { message: '`aa` should be before `bb`.' },
+        { message: 'field "bbb" should be before field "ccc"' },
+        { message: 'field "aaa" should be before field "bbb"' },
+        { message: 'field "bb" should be before inline fragment' },
+        { message: 'field "aa" should be before field "bb"' },
       ],
     },
     {
@@ -233,10 +233,10 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`bb` should be before `cc`.' },
-        { message: '`aa` should be before `bb`.' },
-        { message: '`bbb` should be before `ccc`.' },
-        { message: '`aaa` should be before `bbb`.' },
+        { message: 'variable "bb" should be before variable "cc"' },
+        { message: 'variable "aa" should be before variable "bb"' },
+        { message: 'argument "bbb" should be before argument "ccc"' },
+        { message: 'argument "aaa" should be before argument "bbb"' },
       ],
     },
     {
@@ -259,9 +259,9 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         } # } character
       `,
       errors: [
-        { message: '`c` should be before `d`.' },
-        { message: '`b` should be before `c`.' },
-        { message: '`a` should be before `b`.' },
+        { message: 'field "c" should be before field "d"' },
+        { message: 'field "b" should be before field "c"' },
+        { message: 'field "a" should be before field "b"' },
       ],
     },
     {
@@ -281,9 +281,9 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`foo` should be before `qux`.' },
-        { message: '`Bar` should be before `foo`.' },
-        { message: '`bar` should be before `Bar`.' },
+        { message: 'enum value "foo" should be before enum value "qux"' },
+        { message: 'enum value "Bar" should be before enum value "foo"' },
+        { message: 'enum value "bar" should be before enum value "Bar"' },
       ],
     },
     {
@@ -351,15 +351,15 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         # END
       `,
       errors: [
-        { message: '`UserFields` should be before `UserInput`.' },
-        { message: '`User` should be before `UserFields`.' },
-        { message: '`Role` should be before `User`.' },
-        { message: '`CreateUser` should be before operation definition.' },
-        { message: '`Node` should be before `RootQuery`.' },
-        { message: '`Email` should be before `Role`.' },
-        { message: '`User` should be before `UserInput`.' },
-        { message: '`Data` should be before schema definition.' },
-        { message: '`auth` should be before `Data`.' },
+        { message: 'fragment "UserFields" should be before input "UserInput"' },
+        { message: 'type "User" should be before fragment "UserFields"' },
+        { message: 'enum "Role" should be before type "User"' },
+        { message: 'mutation "CreateUser" should be before operation definition' },
+        { message: 'interface "Node" should be before type "RootQuery"' },
+        { message: 'scalar "Email" should be before enum "Role"' },
+        { message: 'type "User" should be before input "UserInput"' },
+        { message: 'union "Data" should be before schema definition' },
+        { message: 'directive "auth" should be before union "Data"' },
       ],
     },
     {
@@ -375,8 +375,8 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
         }
       `,
       errors: [
-        { message: '`fullName` should be before `lastName`.' },
-        { message: '`firsName` should be before `fullName`.' },
+        { message: 'field "fullName" should be before field "lastName"' },
+        { message: 'field "firsName" should be before field "fullName"' },
       ],
     },
     {
@@ -389,10 +389,10 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       ],
       code: GROUP_ORDER_TEST,
       errors: [
-        { message: '`author` should be before `createdAt`.' },
-        { message: '`id` should be before `wagon`.' },
-        { message: '`bar` should be before `updatedAt`.' },
-        { message: '`guild` should be before `nachos`.' },
+        { message: 'field "author" should be before field "createdAt"' },
+        { message: 'field "id" should be before field "wagon"' },
+        { message: 'field "bar" should be before field "updatedAt"' },
+        { message: 'field "guild" should be before field "nachos"' },
       ],
     },
     {
@@ -405,10 +405,10 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       ],
       code: GROUP_ORDER_TEST,
       errors: [
-        { message: '`createdAt` should be before `firstName`.' },
-        { message: '`id` should be before `wagon`.' },
-        { message: '`updatedAt` should be before `foo`.' },
-        { message: '`guild` should be before `nachos`.' },
+        { message: 'field "createdAt" should be before field "firstName"' },
+        { message: 'field "id" should be before field "wagon"' },
+        { message: 'field "updatedAt" should be before field "foo"' },
+        { message: 'field "guild" should be before field "nachos"' },
       ],
     },
     {
@@ -421,10 +421,10 @@ ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
       ],
       code: GROUP_ORDER_TEST,
       errors: [
-        { message: '`author` should be before `createdAt`.' },
-        { message: '`foo` should be before `id`.' },
-        { message: '`bar` should be before `updatedAt`.' },
-        { message: '`guild` should be before `nachos`.' },
+        { message: 'field "author" should be before field "createdAt"' },
+        { message: 'field "foo" should be before field "id"' },
+        { message: 'field "bar" should be before field "updatedAt"' },
+        { message: 'field "guild" should be before field "nachos"' },
       ],
     },
   ],

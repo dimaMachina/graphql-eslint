@@ -48,8 +48,6 @@ export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
 
 export const CWD = process.cwd();
 
-export const IS_BROWSER = typeof window !== 'undefined';
-
 export const getTypeName = (node: ASTNode): string =>
   'type' in node ? getTypeName(node.type) : 'name' in node && node.name ? node.name.value : '';
 
@@ -124,20 +122,36 @@ export function truthy<T>(value: T): value is Truthy<T> {
   return !!value;
 }
 
-export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
-  const DisplayNodeNameMap: Record<string, string> = {
-    [Kind.OBJECT_TYPE_DEFINITION]: 'type',
-    [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
-    [Kind.ENUM_TYPE_DEFINITION]: 'enum',
-    [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
-    [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
-    [Kind.UNION_TYPE_DEFINITION]: 'union',
-    [Kind.DIRECTIVE_DEFINITION]: 'directive',
-    [Kind.FIELD_DEFINITION]: 'field',
-    [Kind.ENUM_VALUE_DEFINITION]: 'value',
-    [Kind.INPUT_VALUE_DEFINITION]: 'value',
-  } as const;
+const DisplayNodeNameMap: Record<string, string> = {
+  [Kind.OBJECT_TYPE_DEFINITION]: 'type',
+  [Kind.OBJECT_TYPE_EXTENSION]: 'type',
+  [Kind.INTERFACE_TYPE_DEFINITION]: 'interface',
+  [Kind.INTERFACE_TYPE_EXTENSION]: 'interface',
+  [Kind.ENUM_TYPE_DEFINITION]: 'enum',
+  [Kind.ENUM_TYPE_EXTENSION]: 'enum',
+  [Kind.SCALAR_TYPE_DEFINITION]: 'scalar',
+  [Kind.INPUT_OBJECT_TYPE_DEFINITION]: 'input',
+  [Kind.INPUT_OBJECT_TYPE_EXTENSION]: 'input',
+  [Kind.UNION_TYPE_DEFINITION]: 'union',
+  [Kind.UNION_TYPE_EXTENSION]: 'union',
+  [Kind.DIRECTIVE_DEFINITION]: 'directive',
+  [Kind.FIELD_DEFINITION]: 'field',
+  [Kind.ENUM_VALUE_DEFINITION]: 'enum value',
+  [Kind.INPUT_VALUE_DEFINITION]: 'input value',
+  [Kind.ARGUMENT]: 'argument',
+  [Kind.VARIABLE]: 'variable',
+  [Kind.FRAGMENT_DEFINITION]: 'fragment',
+  [Kind.OPERATION_DEFINITION]: 'operation',
+  [Kind.FIELD]: 'field',
+} as const;
 
+export function displayNodeName(node: GraphQLESTreeNode<ASTNode>): string {
+  return `${
+    node.kind === Kind.OPERATION_DEFINITION ? node.operation : DisplayNodeNameMap[node.kind]
+  } "${('alias' in node && node.alias?.value) || ('name' in node && node.name?.value)}"`;
+}
+
+export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
   switch (node.kind) {
     case Kind.OBJECT_TYPE_DEFINITION:
     case Kind.INTERFACE_TYPE_DEFINITION:
@@ -146,15 +160,13 @@ export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
     case Kind.INPUT_OBJECT_TYPE_DEFINITION:
     case Kind.UNION_TYPE_DEFINITION:
     case Kind.DIRECTIVE_DEFINITION:
-      return `${DisplayNodeNameMap[node.kind]} "${node.name.value}"`;
+      return displayNodeName(node);
     case Kind.FIELD_DEFINITION:
     case Kind.INPUT_VALUE_DEFINITION:
     case Kind.ENUM_VALUE_DEFINITION:
-      return `${DisplayNodeNameMap[node.kind]} "${node.name.value}" in ${
-        DisplayNodeNameMap[node.parent.kind]
-      } "${node.parent.name.value}"`;
+      return `${displayNodeName(node)} in ${displayNodeName(node.parent)}`;
     case Kind.OPERATION_DEFINITION:
-      return node.name ? `${node.operation} "${node.name.value}"` : node.operation;
+      return node.name ? displayNodeName(node) : node.operation;
   }
   return '';
 }

@@ -1,5 +1,5 @@
 import { GraphQLRuleTester } from '../src';
-import { rule } from '../src/rules/no-hashtag-description';
+import { rule, RULE_ID } from '../src/rules/no-hashtag-description';
 
 const ruleTester = new GraphQLRuleTester();
 
@@ -103,7 +103,7 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
           foo: String
         }
       `,
-      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+      errors: [{ messageId: RULE_ID }],
     },
     {
       code: /* GraphQL */ `
@@ -113,7 +113,7 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
           foo: String
         }
       `,
-      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+      errors: [{ messageId: RULE_ID }],
     },
     {
       code: /* GraphQL */ `
@@ -122,7 +122,7 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
           foo: String
         }
       `,
-      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+      errors: [{ messageId: RULE_ID }],
     },
     {
       code: /* GraphQL */ `
@@ -133,7 +133,7 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
           # Good
         }
       `,
-      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+      errors: [{ messageId: RULE_ID }],
     },
     {
       code: /* GraphQL */ `
@@ -144,7 +144,7 @@ ruleTester.runGraphQLTests('no-hashtag-description', rule, {
           ): User
         }
       `,
-      errors: [{ messageId: 'HASHTAG_COMMENT' }],
+      errors: [{ messageId: RULE_ID }],
     },
   ],
 });

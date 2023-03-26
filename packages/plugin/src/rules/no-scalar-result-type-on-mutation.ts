@@ -1,7 +1,7 @@
-import { isScalarType, NameNode } from 'graphql';
+import { isScalarType, Kind, NameNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
-import { requireGraphQLSchemaFromContext } from '../utils.js';
+import { getNodeName, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'no-scalar-result-type-on-mutation';
 
@@ -52,9 +52,14 @@ export const rule: GraphQLESLintRule = {
         const typeName = node.value;
         const graphQLType = schema.getType(typeName);
         if (isScalarType(graphQLType)) {
+          let fieldDef = node.parent as any;
+          while (fieldDef.kind !== Kind.FIELD_DEFINITION) {
+            fieldDef = fieldDef.parent;
+          }
+
           context.report({
             node,
-            message: `Unexpected scalar result type \`${typeName}\`.`,
+            message: `Unexpected scalar result type \`${typeName}\` for ${getNodeName(fieldDef)}`,
             suggest: [
               {
                 desc: `Remove \`${typeName}\``,

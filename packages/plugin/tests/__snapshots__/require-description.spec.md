@@ -150,7 +150,7 @@ exports[`Invalid #9 1`] = `
 #### ❌ Error
 
     > 1 | input CreateUserInput { email: Email! }
-        |                         ^^^^^ Description is required for value "email" in input "CreateUserInput"
+        |                         ^^^^^ Description is required for input value "email" in input "CreateUserInput"
 `;
 
 exports[`Invalid #10 1`] = `
@@ -167,7 +167,7 @@ exports[`Invalid #10 1`] = `
 #### ❌ Error
 
     > 1 | enum Role { ADMIN }
-        |             ^^^^^ Description is required for value "ADMIN" in enum "Role"
+        |             ^^^^^ Description is required for enum value "ADMIN" in enum "Role"
 `;
 
 exports[`Invalid #17 1`] = `

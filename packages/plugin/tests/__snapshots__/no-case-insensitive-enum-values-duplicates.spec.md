@@ -8,7 +8,7 @@ exports[`Invalid #1 1`] = `
 #### ❌ Error
 
     > 1 | enum A { TEST TesT }
-        |               ^^^^ Case-insensitive enum values duplicates are not allowed! Found: \`TesT\`.
+        |               ^^^^ Unexpected case-insensitive enum values duplicates for enum value "TesT" in enum "A"
 
 #### 💡 Suggestion: Remove \`TesT\` enum value
 
@@ -23,7 +23,7 @@ exports[`Invalid #2 1`] = `
 #### ❌ Error
 
     > 1 | extend enum A { TEST TesT }
-        |                      ^^^^ Case-insensitive enum values duplicates are not allowed! Found: \`TesT\`.
+        |                      ^^^^ Unexpected case-insensitive enum values duplicates for enum value "TesT" in enum "A"
 
 #### 💡 Suggestion: Remove \`TesT\` enum value
 

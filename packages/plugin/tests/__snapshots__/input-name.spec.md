@@ -14,7 +14,7 @@ exports[`Invalid #1 1`] = `
 #### ❌ Error 1/2
 
     > 1 | type Mutation { SetMessage(message: String): String }
-        |                            ^^^^^^^ Input \`message\` should be called \`input\`.
+        |                            ^^^^^^^ Input "message" should be named "input" for "Mutation.SetMessage"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -65,7 +65,7 @@ exports[`Invalid #3 1`] = `
 #### ❌ Error
 
     > 1 | type Mutation { SetMessage(hello: SetMessageInput): String }
-        |                            ^^^^^ Input \`hello\` should be called \`input\`.
+        |                            ^^^^^ Input "hello" should be named "input" for "Mutation.SetMessage"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -86,7 +86,7 @@ exports[`Invalid #4 1`] = `
 #### ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
-        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+        |                            ^^^^^^ Input "record" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -116,7 +116,7 @@ exports[`Invalid #5 1`] = `
 #### ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
-        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+        |                            ^^^^^^ Input "record" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -146,7 +146,7 @@ exports[`Invalid #6 1`] = `
 #### ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
-        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+        |                            ^^^^^^ Input "record" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -176,7 +176,7 @@ exports[`Invalid #7 1`] = `
 #### ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
-        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+        |                            ^^^^^^ Input "record" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -206,7 +206,7 @@ exports[`Invalid #8 1`] = `
 #### ❌ Error 1/4
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+        |                            ^^^^^^ Input "record" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -224,7 +224,7 @@ exports[`Invalid #8 1`] = `
 #### ❌ Error 3/4
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                                            ^^^^ Input \`test\` should be called \`input\`.
+        |                                            ^^^^ Input "test" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -254,7 +254,7 @@ exports[`Invalid #9 1`] = `
 #### ❌ Error 1/2
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                            ^^^^^^ Input \`record\` should be called \`input\`.
+        |                            ^^^^^^ Input "record" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 
@@ -263,7 +263,7 @@ exports[`Invalid #9 1`] = `
 #### ❌ Error 2/2
 
     > 1 | type Mutation { userCreate(record: String, test: String): String }
-        |                                            ^^^^ Input \`test\` should be called \`input\`.
+        |                                            ^^^^ Input "test" should be named "input" for "Mutation.userCreate"
 
 #### 💡 Suggestion: Rename to \`input\`
 

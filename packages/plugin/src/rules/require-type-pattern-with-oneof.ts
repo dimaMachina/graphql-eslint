@@ -1,6 +1,7 @@
 import { ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { displayNodeName } from '../utils.js';
 
 const RULE_ID = 'require-type-pattern-with-oneof';
 
@@ -36,7 +37,8 @@ export const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [RULE_ID]: 'Type `{{typeName}}` should have `{{fieldName}}` field.',
+      [RULE_ID]:
+        '{{ nodeName }} is defined as output with "@oneOf" and must be defined with "{{ fieldName }}" field',
     },
     schema: [],
   },
@@ -54,7 +56,7 @@ export const rule: GraphQLESLintRule = {
               node: parent.name,
               messageId: RULE_ID,
               data: {
-                typeName: parent.name.value,
+                nodeName: displayNodeName(parent),
                 fieldName,
               },
             });

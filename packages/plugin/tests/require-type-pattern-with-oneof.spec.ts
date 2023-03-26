@@ -39,7 +39,7 @@ ruleTester.runGraphQLTests('require-type-pattern-with-oneof', rule, {
           error: Error
         }
       `,
-      errors: [{ message: 'Type `T` should have `ok` field.' }],
+      errors: 1,
     },
     {
       name: 'should validate `error` field',
@@ -49,7 +49,7 @@ ruleTester.runGraphQLTests('require-type-pattern-with-oneof', rule, {
           err: Error
         }
       `,
-      errors: [{ message: 'Type `T` should have `error` field.' }],
+      errors: 1,
     },
   ],
 });

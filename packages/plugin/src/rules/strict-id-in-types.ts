@@ -4,6 +4,7 @@ import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
+  displayNodeName,
   englishJoinWords,
   requireGraphQLSchemaFromContext,
   truthy,
@@ -176,9 +177,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           const pluralTypesSuffix = options.acceptedIdTypes.length > 1 ? 's' : '';
           context.report({
             node: node.name,
-            message: `${typeName} must have exactly one non-nullable unique identifier. Accepted name${pluralNamesSuffix}: ${englishJoinWords(
-              options.acceptedIdNames,
-            )}. Accepted type${pluralTypesSuffix}: ${englishJoinWords(options.acceptedIdTypes)}.`,
+            message: `${displayNodeName(node)} must have exactly one non-nullable unique identifier.
+Accepted name${pluralNamesSuffix}: ${englishJoinWords(options.acceptedIdNames)}.
+Accepted type${pluralTypesSuffix}: ${englishJoinWords(options.acceptedIdTypes)}.`,
           });
         }
       },

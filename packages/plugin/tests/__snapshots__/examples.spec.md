@@ -210,7 +210,9 @@ exports[`Examples > should work in multiple projects 1`] = `
         endColumn: 10,
         endLine: 1,
         line: 1,
-        message: User must have exactly one non-nullable unique identifier. Accepted name: id. Accepted type: ID.,
+        message: type "User" must have exactly one non-nullable unique identifier.
+Accepted name: id.
+Accepted type: ID.,
         nodeType: Name,
         ruleId: @graphql-eslint/strict-id-in-types,
         severity: 2,
@@ -225,7 +227,9 @@ exports[`Examples > should work in multiple projects 1`] = `
         endColumn: 10,
         endLine: 1,
         line: 1,
-        message: User must have exactly one non-nullable unique identifier. Accepted name: id. Accepted type: ID.,
+        message: type "User" must have exactly one non-nullable unique identifier.
+Accepted name: id.
+Accepted type: ID.,
         nodeType: Name,
         ruleId: @graphql-eslint/strict-id-in-types,
         severity: 2,

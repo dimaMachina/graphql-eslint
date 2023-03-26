@@ -2,6 +2,7 @@ import { StringValueNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { getNodeName } from '../utils.js';
 
 const schema = {
   type: 'array',
@@ -64,7 +65,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ) {
         context.report({
           loc: isBlock ? node.loc : node.loc.start,
-          message: `Unexpected ${isBlock ? 'inline' : 'block'} description.`,
+          message: `Unexpected ${isBlock ? 'inline' : 'block'} description for ${getNodeName(
+            (node as any).parent,
+          )}`,
           suggest: [
             {
               desc: `Change to ${isBlock ? 'block' : 'inline'} style description`,

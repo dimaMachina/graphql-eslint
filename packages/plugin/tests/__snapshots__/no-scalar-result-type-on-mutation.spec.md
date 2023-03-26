@@ -13,7 +13,7 @@ exports[`Invalid #2 1`] = `
 
       3 |         extend type Mutation {
     > 4 |           createUser: Boolean!
-        |                       ^^^^^^^ Unexpected scalar result type \`Boolean\`.
+        |                       ^^^^^^^ Unexpected scalar result type \`Boolean\` for field "createUser" in type "Mutation"
       5 |         }
 
 #### 💡 Suggestion: Remove \`Boolean\`
@@ -40,7 +40,7 @@ exports[`Invalid #3 1`] = `
 
       1 |         type RootMutation {
     > 2 |           createUser: [Boolean]
-        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\`.
+        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\` for field "createUser" in type "RootMutation"
       3 |         }
 
 #### 💡 Suggestion: Remove \`Boolean\`
@@ -70,7 +70,7 @@ exports[`Invalid #4 1`] = `
 
       2 |         extend type RootMutation {
     > 3 |           createUser: [Boolean]!
-        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\`.
+        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\` for field "createUser" in type "RootMutation"
       4 |         }
 
 #### 💡 Suggestion: Remove \`Boolean\`
@@ -98,7 +98,7 @@ exports[`Invalid #5 1`] = `
 
       2 |           createUser: User!
     > 3 |           updateUser: Int
-        |                       ^^^ Unexpected scalar result type \`Int\`.
+        |                       ^^^ Unexpected scalar result type \`Int\` for field "updateUser" in type "Mutation"
       4 |           deleteUser: [Boolean!]!
 
 #### 💡 Suggestion: Remove \`Int\`
@@ -113,7 +113,7 @@ exports[`Invalid #5 1`] = `
 
       3 |           updateUser: Int
     > 4 |           deleteUser: [Boolean!]!
-        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\`.
+        |                        ^^^^^^^ Unexpected scalar result type \`Boolean\` for field "deleteUser" in type "Mutation"
       5 |         }
 
 #### 💡 Suggestion: Remove \`Boolean\`
@@ -136,7 +136,7 @@ exports[`should ignore arguments 1`] = `
 
       1 |         type Mutation {
     > 2 |           createUser(a: ID, b: ID!, c: [ID]!, d: [ID!]!): Boolean
-        |                                                           ^^^^^^^ Unexpected scalar result type \`Boolean\`.
+        |                                                           ^^^^^^^ Unexpected scalar result type \`Boolean\` for field "createUser" in type "Mutation"
       3 |         }
 
 #### 💡 Suggestion: Remove \`Boolean\`
