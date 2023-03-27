@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.17.0
+
+### Minor Changes
+
+- [#1534](https://github.com/B2o5T/graphql-eslint/pull/1534)
+  [`4e94259`](https://github.com/B2o5T/graphql-eslint/commit/4e94259fb877622117ebcdd79c742f78ae86614e)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - improve error messages for some rules
+
 ## 3.16.2
 
 ### Patch Changes
