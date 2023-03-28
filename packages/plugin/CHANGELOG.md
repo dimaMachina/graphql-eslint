@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.18.0
+
+### Minor Changes
+
+- [#1540](https://github.com/B2o5T/graphql-eslint/pull/1540)
+  [`afea5fe`](https://github.com/B2o5T/graphql-eslint/commit/afea5feec9562139e16a19d227661acd5a99b64b)
+  Thanks [@louisscruz](https://github.com/louisscruz)! - [naming-convention]: add new options
+  `requiredPrefixes`, `requiredSuffixes`
+
 ## 3.17.0
 
 ### Minor Changes
