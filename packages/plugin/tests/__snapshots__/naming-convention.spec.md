@@ -2212,7 +2212,7 @@ exports[`should error when selected type names do not match require prefixes 1`]
 
       7 |         type Test {
     > 8 |           enabled: Boolean!
-        |           ^^^^^^^ Field "enabled" should have one of the following prefixes: is, or has
+        |           ^^^^^^^ Field "enabled" should have one of the following prefixes: is or has
       9 |           secret: Secret!
 
 #### 💡 Suggestion 1/2: Rename to \`isEnabled\`
@@ -2317,7 +2317,7 @@ exports[`should error when selected type names do not match require suffixes 1`]
 
       3 |         type Test {
     > 4 |           specialFeature: Boolean!
-        |           ^^^^^^^^^^^^^^ Field "specialFeature" should have one of the following suffixes: Enabled, or Disabled
+        |           ^^^^^^^^^^^^^^ Field "specialFeature" should have one of the following suffixes: Enabled or Disabled
       5 |           user: IpAddress!
 
 #### 💡 Suggestion 1/2: Rename to \`specialFeatureEnabled\`

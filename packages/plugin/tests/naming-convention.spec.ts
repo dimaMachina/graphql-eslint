@@ -161,21 +161,6 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
       options: [{ ObjectTypeDefinition: 'UPPER_CASE' }],
     },
     {
-      options: [
-        {
-          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
-            style: 'camelCase',
-            requiredPrefixes: ['is', 'has'],
-          },
-          'FieldDefinition[gqlType.gqlType.name.value=Secret]': {
-            requiredPrefixes: ['SUPER_SECRET_'],
-          },
-          'FieldDefinition[gqlType.name.value=Snake]': {
-            style: 'snake_case',
-            requiredPrefixes: ['hiss'],
-          },
-        },
-      ],
       code: /* GraphQL */ `
         scalar Secret
 
@@ -189,8 +174,31 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
           hiss_snake: Snake
         }
       `,
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPrefixes: ['is', 'has'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=Secret]': {
+            requiredPrefixes: ['SUPER_SECRET_'],
+          },
+          'FieldDefinition[gqlType.name.value=Snake]': {
+            style: 'snake_case',
+            requiredPrefixes: ['hiss_'],
+          },
+        },
+      ],
     },
     {
+      code: /* GraphQL */ `
+        scalar IpAddress
+
+        type Test {
+          specialFeatureEnabled: Boolean!
+          userIpAddress: IpAddress!
+        }
+      `,
       options: [
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
@@ -202,14 +210,6 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
           },
         },
       ],
-      code: /* GraphQL */ `
-        scalar IpAddress
-
-        type Test {
-          specialFeatureEnabled: Boolean!
-          userIpAddress: IpAddress!
-        }
-      `,
     },
   ],
   invalid: [
@@ -457,6 +457,19 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
     },
     {
       name: 'should error when selected type names do not match require prefixes',
+      code: /* GraphQL */ `
+        scalar Secret
+
+        interface Snake {
+          value: String!
+        }
+
+        type Test {
+          enabled: Boolean!
+          secret: Secret!
+          snake: Snake
+        }
+      `,
       options: [
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
@@ -472,27 +485,18 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
           },
         },
       ],
-      code: /* GraphQL */ `
-        scalar Secret
-
-        interface Snake {
-          value: String!
-        }
-
-        type Test {
-          enabled: Boolean!
-          secret: Secret!
-          snake: Snake
-        }
-      `,
-      errors: [
-        { message: 'Field "enabled" should have one of the following prefixes: is, or has' },
-        { message: 'Field "secret" should have one of the following prefixes: SUPER_SECRET_' },
-        { message: 'Field "snake" should have one of the following prefixes: hiss' },
-      ],
+      errors: 3,
     },
     {
       name: 'should error when selected type names do not match require suffixes',
+      code: /* GraphQL */ `
+        scalar IpAddress
+
+        type Test {
+          specialFeature: Boolean!
+          user: IpAddress!
+        }
+      `,
       options: [
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
@@ -504,21 +508,7 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
           },
         },
       ],
-      code: /* GraphQL */ `
-        scalar IpAddress
-
-        type Test {
-          specialFeature: Boolean!
-          user: IpAddress!
-        }
-      `,
-      errors: [
-        {
-          message:
-            'Field "specialFeature" should have one of the following suffixes: Enabled, or Disabled',
-        },
-        { message: 'Field "user" should have one of the following suffixes: IpAddress' },
-      ],
+      errors: 2,
     },
   ],
 });

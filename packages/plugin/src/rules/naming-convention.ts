@@ -3,7 +3,13 @@ import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
 import { GraphQLESLintRule, ValueOf } from '../types.js';
-import { ARRAY_DEFAULT_OPTIONS, CaseStyle, convertCase, truthy, TYPES_KINDS } from '../utils.js';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  convertCase,
+  englishJoinWords,
+  truthy,
+  TYPES_KINDS,
+} from '../utils.js';
 
 const KindToDisplayName = {
   // types
@@ -106,79 +112,6 @@ const schema = {
     ].join('\n'),
   },
 } as const;
-
-const createRequiredPrefixNameSuggestions = (
-  style: CaseStyle | undefined,
-  requiredPrefixes: string[],
-  name: string,
-): string[] => {
-  if (style === undefined)
-    return requiredPrefixes.map(requiredPrefix => `${requiredPrefix}${name}`);
-
-  // The underscore here is used to delineate a word, regardless of style,
-  // which then will get transformed by convert case.
-  return requiredPrefixes.map(requiredPrefix => convertCase(style, `${requiredPrefix}_${name}`));
-};
-
-const createRequiredSuffixNameSuggestions = (
-  style: CaseStyle | undefined,
-  requiredSuffixes: string[],
-  name: string,
-): string[] => {
-  if (style === 'kebab-case' || style === 'snake_case')
-    // The underscore here is used to delineate a word, regardless of style,
-    // which then will get transformed by convert case.
-    return requiredSuffixes.map(requiredSuffix => convertCase(style, `${name}_${requiredSuffix}`));
-
-  return requiredSuffixes.map(requiredSuffix => `${name}${requiredSuffix}`);
-};
-
-const hasValidRequiredPrefix = (
-  style: CaseStyle | undefined,
-  name: string,
-  requiredPrefixes: string[],
-): boolean => {
-  if (style === undefined)
-    return requiredPrefixes.some(requiredPrefix => name.startsWith(requiredPrefix));
-
-  let suffixStartingCharacter = '';
-
-  if (style === 'PascalCase' || style === 'UPPER_CASE' || style === 'camelCase') {
-    suffixStartingCharacter = '[\\dA-Z]';
-  } else if (style === 'kebab-case') {
-    suffixStartingCharacter = '-';
-  } else if (style === 'snake_case') {
-    suffixStartingCharacter = '_';
-  }
-
-  return requiredPrefixes.some(requiredPrefix =>
-    new RegExp(`^${requiredPrefix}${suffixStartingCharacter}`).test(name),
-  );
-};
-
-const hasValidRequiredSuffix = (
-  style: CaseStyle | undefined,
-  name: string,
-  requiredSuffixes: string[],
-): boolean => {
-  if (style === undefined) {
-    return requiredSuffixes.some(requiredSuffix => name.endsWith(requiredSuffix));
-  }
-
-  let prefixEndingCharacter = '';
-
-  if (style === 'UPPER_CASE' || style === 'snake_case') {
-    prefixEndingCharacter = '_';
-  } else if (style === 'kebab-case') {
-    prefixEndingCharacter = '-';
-  } else if (style === 'PascalCase' || style === 'camelCase') {
-    prefixEndingCharacter = '[\\da-z]';
-  }
-
-  return requiredSuffixes.some(requiredSuffix =>
-    new RegExp(`${prefixEndingCharacter}${requiredSuffix}$`).test(name),
-  );
-};
 
 export type RuleOptions = FromSchema<typeof schema>;
 
@@ -399,25 +332,12 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       const error = getError();
       if (error) {
         const { errorMessage, renameToNames } = error;
-        const [leadingUnderscores] = nodeName.match(/^_*/) ?? [];
-        const [trailingUnderscores] = nodeName.match(/_*$/) ?? [];
+        const [leadingUnderscores] = nodeName.match(/^_*/) as RegExpMatchArray;
+        const [trailingUnderscores] = nodeName.match(/_*$/) as RegExpMatchArray;
         const suggestedNames = renameToNames.map(
           renameToName => leadingUnderscores + renameToName + trailingUnderscores,
         );
         report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedNames);
-      }
-
-      function generatePrefixOrSuffixErrorMessage(
-        prefixesOrSuffixes: string[],
-        kind: 'prefixes' | 'suffixes',
-      ): string {
-        const messagePrefixes =
-          prefixesOrSuffixes.length === 1
-            ? prefixesOrSuffixes[0]
-            : prefixesOrSuffixes.slice(0, prefixesOrSuffixes.length - 1).join(', ') +
-              `, or ${prefixesOrSuffixes[prefixesOrSuffixes.length - 1]}`;
-
-        return `have one of the following ${kind}: ${messagePrefixes}`;
       }
 
       function getError(): {
@@ -427,19 +347,6 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         const name = nodeName.replace(/(^_+)|(_+$)/g, '');
         if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
           return;
-        }
-
-        if (requiredPrefixes && !hasValidRequiredPrefix(style, name, requiredPrefixes)) {
-          return {
-            errorMessage: generatePrefixOrSuffixErrorMessage(requiredPrefixes, 'prefixes'),
-            renameToNames: createRequiredPrefixNameSuggestions(style, requiredPrefixes, name),
-          };
-        }
-        if (requiredSuffixes && !hasValidRequiredSuffix(style, name, requiredSuffixes)) {
-          return {
-            errorMessage: generatePrefixOrSuffixErrorMessage(requiredSuffixes, 'suffixes'),
-            renameToNames: createRequiredSuffixNameSuggestions(style, requiredSuffixes, name),
-          };
         }
         if (prefix && !name.startsWith(prefix)) {
           return {
@@ -465,6 +372,32 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           return {
             errorMessage: `not have "${forbiddenSuffix}" suffix`,
             renameToNames: [name.replace(new RegExp(`${forbiddenSuffix}$`), '')],
+          };
+        }
+        if (
+          requiredPrefixes &&
+          !requiredPrefixes.some(requiredPrefix => name.startsWith(requiredPrefix))
+        ) {
+          return {
+            errorMessage: `have one of the following prefixes: ${englishJoinWords(
+              requiredPrefixes,
+            )}`,
+            renameToNames: style
+              ? requiredPrefixes.map(prefix => convertCase(style, `${prefix} ${name}`))
+              : requiredPrefixes.map(prefix => `${prefix}${name}`),
+          };
+        }
+        if (
+          requiredSuffixes &&
+          !requiredSuffixes.some(requiredSuffix => name.endsWith(requiredSuffix))
+        ) {
+          return {
+            errorMessage: `have one of the following suffixes: ${englishJoinWords(
+              requiredSuffixes,
+            )}`,
+            renameToNames: style
+              ? requiredSuffixes.map(suffix => convertCase(style, `${name} ${suffix}`))
+              : requiredSuffixes.map(suffix => `${name}${suffix}`),
           };
         }
         // Style is optional
