@@ -160,6 +160,57 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
       code: 'type T',
       options: [{ ObjectTypeDefinition: 'UPPER_CASE' }],
     },
+    {
+      code: /* GraphQL */ `
+        scalar Secret
+
+        interface Snake {
+          value: String!
+        }
+
+        type Test {
+          isEnabled: Boolean!
+          SUPER_SECRET_secret: Secret!
+          hiss_snake: Snake
+        }
+      `,
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPrefixes: ['is', 'has'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=Secret]': {
+            requiredPrefixes: ['SUPER_SECRET_'],
+          },
+          'FieldDefinition[gqlType.name.value=Snake]': {
+            style: 'snake_case',
+            requiredPrefixes: ['hiss_'],
+          },
+        },
+      ],
+    },
+    {
+      code: /* GraphQL */ `
+        scalar IpAddress
+
+        type Test {
+          specialFeatureEnabled: Boolean!
+          userIpAddress: IpAddress!
+        }
+      `,
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredSuffixes: ['Enabled', 'Disabled'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=IpAddress]': {
+            requiredSuffixes: ['IpAddress'],
+          },
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -403,6 +454,61 @@ ruleTester.runGraphQLTests<RuleOptions>('naming-convention', rule, {
         { message: 'Leading underscores are not allowed' },
         { message: 'Trailing underscores are not allowed' },
       ],
+    },
+    {
+      name: 'should error when selected type names do not match require prefixes',
+      code: /* GraphQL */ `
+        scalar Secret
+
+        interface Snake {
+          value: String!
+        }
+
+        type Test {
+          enabled: Boolean!
+          secret: Secret!
+          snake: Snake
+        }
+      `,
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPrefixes: ['is', 'has'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=Secret]': {
+            requiredPrefixes: ['SUPER_SECRET_'],
+          },
+          'FieldDefinition[gqlType.name.value=Snake]': {
+            style: 'snake_case',
+            requiredPrefixes: ['hiss'],
+          },
+        },
+      ],
+      errors: 3,
+    },
+    {
+      name: 'should error when selected type names do not match require suffixes',
+      code: /* GraphQL */ `
+        scalar IpAddress
+
+        type Test {
+          specialFeature: Boolean!
+          user: IpAddress!
+        }
+      `,
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredSuffixes: ['Enabled', 'Disabled'],
+          },
+          'FieldDefinition[gqlType.gqlType.name.value=IpAddress]': {
+            requiredSuffixes: ['IpAddress'],
+          },
+        },
+      ],
+      errors: 2,
     },
   ],
 });

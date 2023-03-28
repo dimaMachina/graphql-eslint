@@ -2170,6 +2170,191 @@ exports[`schema-recommended config 1`] = `
     15 |         }
 `;
 
+exports[`should error when selected type names do not match require prefixes 1`] = `
+#### ⌨️ Code
+
+       1 |         scalar Secret
+       2 |
+       3 |         interface Snake {
+       4 |           value: String!
+       5 |         }
+       6 |
+       7 |         type Test {
+       8 |           enabled: Boolean!
+       9 |           secret: Secret!
+      10 |           snake: Snake
+      11 |         }
+
+#### ⚙️ Options
+
+    {
+      "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
+        "style": "camelCase",
+        "requiredPrefixes": [
+          "is",
+          "has"
+        ]
+      },
+      "FieldDefinition[gqlType.gqlType.name.value=Secret]": {
+        "requiredPrefixes": [
+          "SUPER_SECRET_"
+        ]
+      },
+      "FieldDefinition[gqlType.name.value=Snake]": {
+        "style": "snake_case",
+        "requiredPrefixes": [
+          "hiss"
+        ]
+      }
+    }
+
+#### ❌ Error 1/3
+
+      7 |         type Test {
+    > 8 |           enabled: Boolean!
+        |           ^^^^^^^ Field "enabled" should have one of the following prefixes: is or has
+      9 |           secret: Secret!
+
+#### 💡 Suggestion 1/2: Rename to \`isEnabled\`
+
+     1 |         scalar Secret
+     2 |
+     3 |         interface Snake {
+     4 |           value: String!
+     5 |         }
+     6 |
+     7 |         type Test {
+     8 |           isEnabled: Boolean!
+     9 |           secret: Secret!
+    10 |           snake: Snake
+    11 |         }
+
+#### 💡 Suggestion 2/2: Rename to \`hasEnabled\`
+
+     1 |         scalar Secret
+     2 |
+     3 |         interface Snake {
+     4 |           value: String!
+     5 |         }
+     6 |
+     7 |         type Test {
+     8 |           hasEnabled: Boolean!
+     9 |           secret: Secret!
+    10 |           snake: Snake
+    11 |         }
+
+#### ❌ Error 2/3
+
+       8 |           enabled: Boolean!
+    >  9 |           secret: Secret!
+         |           ^^^^^^ Field "secret" should have one of the following prefixes: SUPER_SECRET_
+      10 |           snake: Snake
+
+#### 💡 Suggestion: Rename to \`SUPER_SECRET_secret\`
+
+     1 |         scalar Secret
+     2 |
+     3 |         interface Snake {
+     4 |           value: String!
+     5 |         }
+     6 |
+     7 |         type Test {
+     8 |           enabled: Boolean!
+     9 |           SUPER_SECRET_secret: Secret!
+    10 |           snake: Snake
+    11 |         }
+
+#### ❌ Error 3/3
+
+       9 |           secret: Secret!
+    > 10 |           snake: Snake
+         |           ^^^^^ Field "snake" should have one of the following prefixes: hiss
+      11 |         }
+
+#### 💡 Suggestion: Rename to \`hiss_snake\`
+
+     1 |         scalar Secret
+     2 |
+     3 |         interface Snake {
+     4 |           value: String!
+     5 |         }
+     6 |
+     7 |         type Test {
+     8 |           enabled: Boolean!
+     9 |           secret: Secret!
+    10 |           hiss_snake: Snake
+    11 |         }
+`;
+
+exports[`should error when selected type names do not match require suffixes 1`] = `
+#### ⌨️ Code
+
+      1 |         scalar IpAddress
+      2 |
+      3 |         type Test {
+      4 |           specialFeature: Boolean!
+      5 |           user: IpAddress!
+      6 |         }
+
+#### ⚙️ Options
+
+    {
+      "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
+        "style": "camelCase",
+        "requiredSuffixes": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "FieldDefinition[gqlType.gqlType.name.value=IpAddress]": {
+        "requiredSuffixes": [
+          "IpAddress"
+        ]
+      }
+    }
+
+#### ❌ Error 1/2
+
+      3 |         type Test {
+    > 4 |           specialFeature: Boolean!
+        |           ^^^^^^^^^^^^^^ Field "specialFeature" should have one of the following suffixes: Enabled or Disabled
+      5 |           user: IpAddress!
+
+#### 💡 Suggestion 1/2: Rename to \`specialFeatureEnabled\`
+
+    1 |         scalar IpAddress
+    2 |
+    3 |         type Test {
+    4 |           specialFeatureEnabled: Boolean!
+    5 |           user: IpAddress!
+    6 |         }
+
+#### 💡 Suggestion 2/2: Rename to \`specialFeatureDisabled\`
+
+    1 |         scalar IpAddress
+    2 |
+    3 |         type Test {
+    4 |           specialFeatureDisabled: Boolean!
+    5 |           user: IpAddress!
+    6 |         }
+
+#### ❌ Error 2/2
+
+      4 |           specialFeature: Boolean!
+    > 5 |           user: IpAddress!
+        |           ^^^^ Field "user" should have one of the following suffixes: IpAddress
+      6 |         }
+
+#### 💡 Suggestion: Rename to \`userIpAddress\`
+
+    1 |         scalar IpAddress
+    2 |
+    3 |         type Test {
+    4 |           specialFeature: Boolean!
+    5 |           userIpAddress: IpAddress!
+    6 |         }
+`;
+
 exports[`should ignore selections fields but check alias renaming 1`] = `
 #### ⌨️ Code
 

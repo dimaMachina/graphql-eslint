@@ -3,7 +3,13 @@ import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRuleListener } from '../testkit.js';
 import { GraphQLESLintRule, ValueOf } from '../types.js';
-import { ARRAY_DEFAULT_OPTIONS, convertCase, truthy, TYPES_KINDS } from '../utils.js';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  convertCase,
+  englishJoinWords,
+  truthy,
+  TYPES_KINDS,
+} from '../utils.js';
 
 const KindToDisplayName = {
   // types
@@ -57,6 +63,8 @@ const schema = {
         suffix: { type: 'string' },
         forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
         forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
+        requiredPrefixes: ARRAY_DEFAULT_OPTIONS,
+        requiredSuffixes: ARRAY_DEFAULT_OPTIONS,
         ignorePattern: {
           type: 'string',
           description: 'Option to skip validation of some words, e.g. acronyms',
@@ -113,6 +121,8 @@ type PropertySchema = {
   prefix?: string;
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
+  requiredPrefixes?: string[];
+  requiredSuffixes?: string[];
   ignorePattern?: string;
 };
 
@@ -194,6 +204,46 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [
+            {
+              'FieldDefinition[gqlType.name.value=Boolean]': {
+                style: 'camelCase',
+                requiredPrefixes: ['is', 'has'],
+              },
+              'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+                style: 'camelCase',
+                requiredPrefixes: ['is', 'has'],
+              },
+            },
+          ],
+          code: /* GraphQL */ `
+            type Product {
+              isBackordered: Boolean
+              isNew: Boolean!
+              hasDiscount: Boolean!
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          usage: [
+            {
+              'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': {
+                style: 'camelCase',
+                requiredSuffixes: ['SensitiveSecret'],
+              },
+            },
+          ],
+          code: /* GraphQL */ `
+            scalar SensitiveSecret
+
+            type Account {
+              accountSensitiveSecret: SensitiveSecret!
+            }
+          `,
+        },
       ],
       configOptions: {
         schema: [
@@ -250,17 +300,15 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     function report(
       node: GraphQLESTreeNode<NameNode>,
       message: string,
-      suggestedName: string,
+      suggestedNames: string[],
     ): void {
       context.report({
         node,
         message,
-        suggest: [
-          {
-            desc: `Rename to \`${suggestedName}\``,
-            fix: fixer => fixer.replaceText(node as any, suggestedName),
-          },
-        ],
+        suggest: suggestedNames.map(suggestedName => ({
+          desc: `Rename to \`${suggestedName}\``,
+          fix: fixer => fixer.replaceText(node as any, suggestedName),
+        })),
       });
     }
 
@@ -269,22 +317,32 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       if (!node) {
         return;
       }
-      const { prefix, suffix, forbiddenPrefixes, forbiddenSuffixes, style, ignorePattern } =
-        normalisePropertyOption(selector);
+      const {
+        prefix,
+        suffix,
+        forbiddenPrefixes,
+        forbiddenSuffixes,
+        style,
+        ignorePattern,
+        requiredPrefixes,
+        requiredSuffixes,
+      } = normalisePropertyOption(selector);
       const nodeType = KindToDisplayName[n.kind] || n.kind;
       const nodeName = node.value;
       const error = getError();
       if (error) {
-        const { errorMessage, renameToName } = error;
+        const { errorMessage, renameToNames } = error;
         const [leadingUnderscores] = nodeName.match(/^_*/) as RegExpMatchArray;
         const [trailingUnderscores] = nodeName.match(/_*$/) as RegExpMatchArray;
-        const suggestedName = leadingUnderscores + renameToName + trailingUnderscores;
-        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedName);
+        const suggestedNames = renameToNames.map(
+          renameToName => leadingUnderscores + renameToName + trailingUnderscores,
+        );
+        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedNames);
       }
 
       function getError(): {
         errorMessage: string;
-        renameToName: string;
+        renameToNames: string[];
       } | void {
         const name = nodeName.replace(/(^_+)|(_+$)/g, '');
         if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
@@ -293,27 +351,53 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         if (prefix && !name.startsWith(prefix)) {
           return {
             errorMessage: `have "${prefix}" prefix`,
-            renameToName: prefix + name,
+            renameToNames: [prefix + name],
           };
         }
         if (suffix && !name.endsWith(suffix)) {
           return {
             errorMessage: `have "${suffix}" suffix`,
-            renameToName: name + suffix,
+            renameToNames: [name + suffix],
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
         if (forbiddenPrefix) {
           return {
             errorMessage: `not have "${forbiddenPrefix}" prefix`,
-            renameToName: name.replace(new RegExp(`^${forbiddenPrefix}`), ''),
+            renameToNames: [name.replace(new RegExp(`^${forbiddenPrefix}`), '')],
           };
         }
         const forbiddenSuffix = forbiddenSuffixes?.find(suffix => name.endsWith(suffix));
         if (forbiddenSuffix) {
           return {
             errorMessage: `not have "${forbiddenSuffix}" suffix`,
-            renameToName: name.replace(new RegExp(`${forbiddenSuffix}$`), ''),
+            renameToNames: [name.replace(new RegExp(`${forbiddenSuffix}$`), '')],
+          };
+        }
+        if (
+          requiredPrefixes &&
+          !requiredPrefixes.some(requiredPrefix => name.startsWith(requiredPrefix))
+        ) {
+          return {
+            errorMessage: `have one of the following prefixes: ${englishJoinWords(
+              requiredPrefixes,
+            )}`,
+            renameToNames: style
+              ? requiredPrefixes.map(prefix => convertCase(style, `${prefix} ${name}`))
+              : requiredPrefixes.map(prefix => `${prefix}${name}`),
+          };
+        }
+        if (
+          requiredSuffixes &&
+          !requiredSuffixes.some(requiredSuffix => name.endsWith(requiredSuffix))
+        ) {
+          return {
+            errorMessage: `have one of the following suffixes: ${englishJoinWords(
+              requiredSuffixes,
+            )}`,
+            renameToNames: style
+              ? requiredSuffixes.map(suffix => convertCase(style, `${name} ${suffix}`))
+              : requiredSuffixes.map(suffix => `${name}${suffix}`),
           };
         }
         // Style is optional
@@ -324,7 +408,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         if (!caseRegex.test(name)) {
           return {
             errorMessage: `be in ${style} format`,
-            renameToName: convertCase(style, name),
+            renameToNames: [convertCase(style, name)],
           };
         }
       }
@@ -332,11 +416,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
       const suggestedName = node.value.replace(isLeading ? /^_+/ : /_+$/, '');
-      report(
-        node,
-        `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`,
+      report(node, `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`, [
         suggestedName,
-      );
+      ]);
     };
 
     const listeners: GraphQLESLintRuleListener = {};
