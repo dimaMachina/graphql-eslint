@@ -58,7 +58,7 @@ export function GraphQLEditor({
   useEffect(() => {
     const model = editorRef.current?.getModel();
     const monaco = monacoRef.current;
-    if (!model) return;
+    if (!model || !monaco) return;
     monaco.editor.setModelMarkers(
       model,
       'graphql-eslint',
