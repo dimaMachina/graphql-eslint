@@ -4,5 +4,11 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "automerge": true
+    }
+  ]
 }
