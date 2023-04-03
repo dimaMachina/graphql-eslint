@@ -98,8 +98,8 @@ importers:
         version: 16.6.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.37.0
+        version: 8.37.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -114,8 +114,8 @@ importers:
         version: 16.6.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.37.0
+        version: 8.37.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -130,8 +130,8 @@ importers:
         version: 16.6.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.37.0
+        version: 8.37.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -149,8 +149,8 @@ importers:
         version: 2.12.6(graphql@16.6.0)
     devDependencies:
       '@eslint/js':
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.37.0
+        version: 8.37.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -165,8 +165,8 @@ importers:
         version: 16.6.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.37.0
+        version: 8.37.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -203,8 +203,8 @@ importers:
         version: 16.6.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.37.0
+        version: 8.37.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -1424,6 +1424,11 @@ packages:
 
   /@eslint/js@8.36.0:
     resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@eslint/js@8.37.0:
+    resolution: {integrity: sha512-x5vzdtOOGgFVDCUs81QRB2+liax8rFg3+7hqM+QhBG0/G3F1ZsoYl97UrqgHgQ9KKT7G6c4V+aTUCgu/n22v1A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
