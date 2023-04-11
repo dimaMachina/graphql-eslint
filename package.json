@@ -42,7 +42,7 @@
     "rimraf": "4.4.1",
     "tsx": "3.12.6",
     "typescript": "5.0.3",
-    "vitest": "0.29.7"
+    "vitest": "0.30.1"
   },
   "resolutions": {
     "graphql": "16.6.0"
