@@ -215,7 +215,7 @@ function printCode(
   linesOffset = Number.POSITIVE_INFINITY,
 ): string {
   const { line, column, endLine, endColumn, message } = result;
-  const location = <AST.SourceLocation>{};
+  const location = {} as AST.SourceLocation;
 
   if (typeof line === 'number' && typeof column === 'number') {
     location.start = {

@@ -17,9 +17,9 @@ const TEST_SCHEMA = /* GraphQL */ `
 `;
 
 const WITH_SCHEMA = {
-  parserOptions: <ParserOptions>{
+  parserOptions: {
     schema: TEST_SCHEMA,
-  },
+  } as ParserOptions,
 };
 
 const ruleTester = new GraphQLRuleTester();

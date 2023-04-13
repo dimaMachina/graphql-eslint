@@ -46,12 +46,12 @@ export function convertToESTree<T extends DocumentNode>(node: T, schema?: GraphQ
           return (parent as any)[key];
         }
         return node.kind === Kind.DOCUMENT
-          ? <DocumentNode>{
+          ? ({
               ...node,
               definitions: node.definitions.map(definition =>
                 (definition as unknown as GraphQLESTreeNode<DefinitionNode>).rawNode(),
               ),
-            }
+            } as DocumentNode)
           : node;
       };
 
