@@ -60,10 +60,10 @@ const USER_POST_SCHEMA = /* GraphQL */ `
 `;
 
 const WITH_SCHEMA = {
-  parserOptions: <ParserOptions>{
+  parserOptions: {
     schema: TEST_SCHEMA,
     documents: '{ foo }',
-  },
+  } as ParserOptions,
 };
 
 const ruleTester = new GraphQLRuleTester();

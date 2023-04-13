@@ -53,11 +53,11 @@ describe('schema', async () => {
           // `child_process.execFileSync` that block Node.js event loop
           local = spawn(tsNodeCommand, [serverPath]);
           local.stdout.on('data', chunk => {
-            url = chunk.toString().trimRight();
+            url = chunk.toString().trimEnd();
             resolve();
           });
           local.stderr.on('data', chunk => {
-            throw new Error(chunk.toString().trimRight());
+            throw new Error(chunk.toString().trimEnd());
           });
         }),
     );

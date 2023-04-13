@@ -2,9 +2,9 @@ import { GraphQLRuleTester, ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/selection-set-depth';
 
 const WITH_SIBLINGS = {
-  parserOptions: <ParserOptions>{
+  parserOptions: {
     documents: 'fragment AlbumFields on Album { id }',
-  },
+  } as ParserOptions,
 };
 
 const ruleTester = new GraphQLRuleTester();
