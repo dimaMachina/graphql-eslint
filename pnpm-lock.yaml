@@ -343,7 +343,7 @@ importers:
         version: 1.2.1(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
       '@theguild/components':
         specifier: 4.5.9
-        version: 4.5.9(@algolia/client-search@4.16.0)(next@13.2.4)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
+        version: 4.5.9(@algolia/client-search@4.16.0)(next@13.3.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
       clsx:
         specifier: 1.2.1
         version: 1.2.1
@@ -357,14 +357,14 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       next:
-        specifier: 13.2.4
-        version: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: 13.3.0
+        version: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       next-query-params:
         specifier: 4.1.0
-        version: 4.1.0(next@13.2.4)(react@18.2.0)(use-query-params@2.2.1)
+        version: 4.1.0(next@13.3.0)(react@18.2.0)(use-query-params@2.2.1)
       next-sitemap:
         specifier: 4.0.7
-        version: 4.0.7(@next/env@13.2.4)(next@13.2.4)
+        version: 4.0.7(@next/env@13.3.0)(next@13.3.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1937,30 +1937,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@next/env@13.2.4:
-    resolution: {integrity: sha512-+Mq3TtpkeeKFZanPturjcXt+KHfKYnLlX6jMLyCrmpq6OOs4i1GqBOAauSkii9QeKCMTYzGppar21JU57b/GEA==}
+  /@next/env@13.3.0:
+    resolution: {integrity: sha512-AjppRV4uG3No7L1plinoTQETH+j2F10TEnrMfzbTUYwze5sBUPveeeBAPZPm8OkJZ1epq9OyYKhZrvbD6/9HCQ==}
     dev: false
 
-  /@next/swc-android-arm-eabi@13.2.4:
-    resolution: {integrity: sha512-DWlalTSkLjDU11MY11jg17O1gGQzpRccM9Oes2yTqj2DpHndajrXHGxj9HGtJ+idq2k7ImUdJVWS2h2l/EDJOw==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [android]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-android-arm64@13.2.4:
-    resolution: {integrity: sha512-sRavmUImUCf332Gy+PjIfLkMhiRX1Ez4SI+3vFDRs1N5eXp+uNzjFUK/oLMMOzk6KFSkbiK/3Wt8+dHQR/flNg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [android]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-darwin-arm64@13.2.4:
-    resolution: {integrity: sha512-S6vBl+OrInP47TM3LlYx65betocKUUlTZDDKzTiRDbsRESeyIkBtZ6Qi5uT2zQs4imqllJznVjFd1bXLx3Aa6A==}
+  /@next/swc-darwin-arm64@13.3.0:
+    resolution: {integrity: sha512-DmIQCNq6JtccLPPBzf0dgh2vzMWt5wjxbP71pCi5EWpWYE3MsP6FcRXi4MlAmFNDQOfcFXR2r7kBeG1LpZUh1w==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -1968,8 +1950,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-x64@13.2.4:
-    resolution: {integrity: sha512-a6LBuoYGcFOPGd4o8TPo7wmv5FnMr+Prz+vYHopEDuhDoMSHOnC+v+Ab4D7F0NMZkvQjEJQdJS3rqgFhlZmKlw==}
+  /@next/swc-darwin-x64@13.3.0:
+    resolution: {integrity: sha512-oQoqFa88OGgwnYlnAGHVct618FRI/749se0N3S8t9Bzdv5CRbscnO0RcX901+YnNK4Q6yeiizfgO3b7kogtsZg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -1977,26 +1959,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-freebsd-x64@13.2.4:
-    resolution: {integrity: sha512-kkbzKVZGPaXRBPisoAQkh3xh22r+TD+5HwoC5bOkALraJ0dsOQgSMAvzMXKsN3tMzJUPS0tjtRf1cTzrQ0I5vQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [freebsd]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm-gnueabihf@13.2.4:
-    resolution: {integrity: sha512-7qA1++UY0fjprqtjBZaOA6cas/7GekpjVsZn/0uHvquuITFCdKGFCsKNBx3S0Rpxmx6WYo0GcmhNRM9ru08BGg==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm64-gnu@13.2.4:
-    resolution: {integrity: sha512-xzYZdAeq883MwXgcwc72hqo/F/dwUxCukpDOkx/j1HTq/J0wJthMGjinN9wH5bPR98Mfeh1MZJ91WWPnZOedOg==}
+  /@next/swc-linux-arm64-gnu@13.3.0:
+    resolution: {integrity: sha512-Wzz2p/WqAJUqTVoLo6H18WMeAXo3i+9DkPDae4oQG8LMloJ3if4NEZTnOnTUlro6cq+S/W4pTGa97nWTrOjbGw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2004,8 +1968,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-musl@13.2.4:
-    resolution: {integrity: sha512-8rXr3WfmqSiYkb71qzuDP6I6R2T2tpkmf83elDN8z783N9nvTJf2E7eLx86wu2OJCi4T05nuxCsh4IOU3LQ5xw==}
+  /@next/swc-linux-arm64-musl@13.3.0:
+    resolution: {integrity: sha512-xPVrIQOQo9WXJYgmoTlMnAD/HlR/1e1ZIWGbwIzEirXBVBqMARUulBEIKdC19zuvoJ477qZJgBDCKtKEykCpyQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2013,8 +1977,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-gnu@13.2.4:
-    resolution: {integrity: sha512-Ngxh51zGSlYJ4EfpKG4LI6WfquulNdtmHg1yuOYlaAr33KyPJp4HeN/tivBnAHcZkoNy0hh/SbwDyCnz5PFJQQ==}
+  /@next/swc-linux-x64-gnu@13.3.0:
+    resolution: {integrity: sha512-jOFlpGuPD7W2tuXVJP4wt9a3cpNxWAPcloq5EfMJRiXsBBOjLVFZA7boXYxEBzSVgUiVVr1V9T0HFM7pULJ1qA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2022,8 +1986,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-musl@13.2.4:
-    resolution: {integrity: sha512-gOvwIYoSxd+j14LOcvJr+ekd9fwYT1RyMAHOp7znA10+l40wkFiMONPLWiZuHxfRk+Dy7YdNdDh3ImumvL6VwA==}
+  /@next/swc-linux-x64-musl@13.3.0:
+    resolution: {integrity: sha512-2OwKlzaBgmuet9XYHc3KwsEilzb04F540rlRXkAcjMHL7eCxB7uZIGtsVvKOnQLvC/elrUegwSw1+5f7WmfyOw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2031,8 +1995,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-arm64-msvc@13.2.4:
-    resolution: {integrity: sha512-q3NJzcfClgBm4HvdcnoEncmztxrA5GXqKeiZ/hADvC56pwNALt3ngDC6t6qr1YW9V/EPDxCYeaX4zYxHciW4Dw==}
+  /@next/swc-win32-arm64-msvc@13.3.0:
+    resolution: {integrity: sha512-OeHiA6YEvndxT46g+rzFK/MQTfftKxJmzslERMu9LDdC6Kez0bdrgEYed5eXFK2Z1viKZJCGRlhd06rBusyztA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -2040,8 +2004,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-ia32-msvc@13.2.4:
-    resolution: {integrity: sha512-/eZ5ncmHUYtD2fc6EUmAIZlAJnVT2YmxDsKs1Ourx0ttTtvtma/WKlMV5NoUsyOez0f9ExLyOpeCoz5aj+MPXw==}
+  /@next/swc-win32-ia32-msvc@13.3.0:
+    resolution: {integrity: sha512-4aB7K9mcVK1lYEzpOpqWrXHEZympU3oK65fnNcY1Qc4HLJFLJj8AViuqQd4jjjPNuV4sl8jAwTz3gN5VNGWB7w==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -2049,8 +2013,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-x64-msvc@13.2.4:
-    resolution: {integrity: sha512-0MffFmyv7tBLlji01qc0IaPP/LVExzvj7/R5x1Jph1bTAIj4Vu81yFQWHHQAP6r4ff9Ukj1mBK6MDNVXm7Tcvw==}
+  /@next/swc-win32-x64-msvc@13.3.0:
+    resolution: {integrity: sha512-Reer6rkLLcoOvB0dd66+Y7WrWVFH7sEEkF/4bJCIfsSKnTStTYaHtwIJAwbqnt9I392Tqvku0KkoqZOryWV9LQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -2486,7 +2450,7 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components@4.5.9(@algolia/client-search@4.16.0)(next@13.2.4)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
+  /@theguild/components@4.5.9(@algolia/client-search@4.16.0)(next@13.3.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
     resolution: {integrity: sha512-aaAd1/4C49RkhhEv9CHunAga3KTtgjK8du0WaKG9Qmb/Lpko+DwafruVEy3nq0QxZri4OVy7nY6E3qppcmqDCg==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
@@ -2505,10 +2469,10 @@ packages:
       focus-trap-react: 10.1.1(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       fuzzy: 0.1.3
       mermaid: 10.0.2
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       next-videos: 1.5.0(webpack@4.46.0)
-      nextra: 2.3.0(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)
-      nextra-theme-docs: 2.3.0(next@13.2.4)(nextra@2.3.0)(react-dom@18.2.0)(react@18.2.0)
+      nextra: 2.3.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
+      nextra-theme-docs: 2.3.0(next@13.3.0)(nextra@2.3.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-instantsearch-dom: 6.39.1(algoliasearch@4.16.0)(react-dom@18.2.0)(react@18.2.0)
@@ -8570,32 +8534,32 @@ packages:
       - supports-color
     dev: false
 
-  /next-query-params@4.1.0(next@13.2.4)(react@18.2.0)(use-query-params@2.2.1):
+  /next-query-params@4.1.0(next@13.3.0)(react@18.2.0)(use-query-params@2.2.1):
     resolution: {integrity: sha512-jjoQByM9s2d4wCUBUazhgHNVztm18meCtVoDj6v45+LZIQfxAF5QYVFKCbDYarI3iXD4xcZprztqLtALiiV8nQ==}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       use-query-params: ^2.0.0
     dependencies:
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       tslib: 2.5.0
       use-query-params: 2.2.1(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /next-seo@5.15.0(next@13.2.4)(react-dom@18.2.0)(react@18.2.0):
+  /next-seo@5.15.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-LGbcY91yDKGMb7YI+28n3g+RuChUkt6pXNpa8FkfKkEmNiJkeRDEXTnnjVtwT9FmMhG6NH8qwHTelGrlYm9rgg==}
     peerDependencies:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
     dependencies:
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /next-sitemap@4.0.7(@next/env@13.2.4)(next@13.2.4):
+  /next-sitemap@4.0.7(@next/env@13.3.0)(next@13.3.0):
     resolution: {integrity: sha512-S2g5IwJeO0+ecmFq981fb+Mw9YWmntOuN/qTCxclSkUibOJ8qKIOye0vn6NEJ1S4tKhbY+MTYKgJpNdFZYxLoA==}
     engines: {node: '>=14.18'}
     hasBin: true
@@ -8604,19 +8568,19 @@ packages:
       next: '*'
     dependencies:
       '@corex/deepmerge': 4.0.37
-      '@next/env': 13.2.4
+      '@next/env': 13.3.0
       minimist: 1.2.8
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /next-themes@0.2.1(next@13.2.4)(react-dom@18.2.0)(react@18.2.0):
+  /next-themes@0.2.1(next@13.3.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
     peerDependencies:
       next: '*'
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -8629,12 +8593,12 @@ packages:
       - webpack
     dev: false
 
-  /next@13.2.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-g1I30317cThkEpvzfXujf0O4wtaQHtDCLhlivwlTJ885Ld+eOgcz7r3TGQzeU+cSRoNHtD8tsJgzxVdYojFssw==}
+  /next@13.3.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OVTw8MpIPa12+DCUkPqRGPS3thlJPcwae2ZL4xti3iBff27goH024xy4q2lhlsdoYiKOi8Kz6uJoLW/GXwgfOA==}
     engines: {node: '>=14.6.0'}
     hasBin: true
     peerDependencies:
-      '@opentelemetry/api': ^1.4.0
+      '@opentelemetry/api': ^1.1.0
       fibers: '>= 3.1.0'
       node-sass: ^6.0.0 || ^7.0.0
       react: ^18.2.0
@@ -8650,33 +8614,30 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 13.2.4
+      '@next/env': 13.3.0
       '@swc/helpers': 0.4.14
+      busboy: 1.6.0
       caniuse-lite: 1.0.30001470
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       styled-jsx: 5.1.1(react@18.2.0)
     optionalDependencies:
-      '@next/swc-android-arm-eabi': 13.2.4
-      '@next/swc-android-arm64': 13.2.4
-      '@next/swc-darwin-arm64': 13.2.4
-      '@next/swc-darwin-x64': 13.2.4
-      '@next/swc-freebsd-x64': 13.2.4
-      '@next/swc-linux-arm-gnueabihf': 13.2.4
-      '@next/swc-linux-arm64-gnu': 13.2.4
-      '@next/swc-linux-arm64-musl': 13.2.4
-      '@next/swc-linux-x64-gnu': 13.2.4
-      '@next/swc-linux-x64-musl': 13.2.4
-      '@next/swc-win32-arm64-msvc': 13.2.4
-      '@next/swc-win32-ia32-msvc': 13.2.4
-      '@next/swc-win32-x64-msvc': 13.2.4
+      '@next/swc-darwin-arm64': 13.3.0
+      '@next/swc-darwin-x64': 13.3.0
+      '@next/swc-linux-arm64-gnu': 13.3.0
+      '@next/swc-linux-arm64-musl': 13.3.0
+      '@next/swc-linux-x64-gnu': 13.3.0
+      '@next/swc-linux-x64-musl': 13.3.0
+      '@next/swc-win32-arm64-msvc': 13.3.0
+      '@next/swc-win32-ia32-msvc': 13.3.0
+      '@next/swc-win32-x64-msvc': 13.3.0
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
     dev: false
 
-  /nextra-theme-docs@2.3.0(next@13.2.4)(nextra@2.3.0)(react-dom@18.2.0)(react@18.2.0):
+  /nextra-theme-docs@2.3.0(next@13.3.0)(nextra@2.3.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-KMvHhGOvaKIqR71Gnx+w/1c9LLfpQJ3+fnCAgg9qfjXo2agr1zRKyRDROyY8cGINdslpzmEGgs/MH2gDSAI6nw==}
     peerDependencies:
       next: '>=9.5.3'
@@ -8692,17 +8653,17 @@ packages:
       git-url-parse: 13.1.0
       intersection-observer: 0.12.2
       match-sorter: 6.3.1
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
-      next-seo: 5.15.0(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)
-      next-themes: 0.2.1(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)
-      nextra: 2.3.0(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
+      next-seo: 5.15.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
+      next-themes: 0.2.1(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
+      nextra: 2.3.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       scroll-into-view-if-needed: 3.0.6
       zod: 3.21.4
     dev: false
 
-  /nextra@2.3.0(next@13.2.4)(react-dom@18.2.0)(react@18.2.0):
+  /nextra@2.3.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-v17vMq2bJa15iKKt9+6AidSeIoKcK1ZlXmwqFqTgc0pQmRrl6pTJaSR36UZKcpMwvvLZ/7/xWuWV/OQB599O3g==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -8718,7 +8679,7 @@ packages:
       gray-matter: 4.0.3
       katex: 0.16.4
       lodash.get: 4.4.2
-      next: 13.2.4(react-dom@18.2.0)(react@18.2.0)
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)
       next-mdx-remote: 4.4.1(react-dom@18.2.0)(react@18.2.0)
       p-limit: 3.1.0
       react: 18.2.0
