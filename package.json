@@ -31,7 +31,7 @@
     "chalk": "4.1.2",
     "dedent": "0.7.0",
     "enquirer": "2.3.6",
-    "eslint": "8.36.0",
+    "eslint": "8.38.0",
     "eslint-plugin-eslint-plugin": "5.0.7",
     "eslint-plugin-tailwindcss": "3.10.3",
     "husky": "8.0.3",
@@ -42,17 +42,17 @@
     "rimraf": "4.4.1",
     "tsx": "3.12.6",
     "typescript": "5.0.3",
-    "vitest": "0.29.7"
+    "vitest": "0.30.1"
   },
   "resolutions": {
     "graphql": "16.6.0"
   },
   "pnpm": {
     "patchedDependencies": {
-      "eslint@8.36.0": "patches/eslint@8.31.0.patch",
+      "eslint@8.38.0": "patches/eslint@8.31.0.patch",
       "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch",
-      "@vitest/runner@0.29.7": "patches/@vitest__runner@0.28.4.patch"
+      "@vitest/runner@0.30.1": "patches/@vitest__runner@0.28.4.patch"
     }
   }
 }
