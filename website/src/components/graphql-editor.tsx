@@ -77,7 +77,7 @@ export function GraphQLEditor({
 
   return (
     <div className="grow overflow-hidden border-l dark:border-neutral-800 md:w-0">
-      <div className="truncate border-b bg-gray-100 py-2 px-4 text-xs text-gray-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-gray-200">
+      <div className="truncate border-b bg-gray-100 px-4 py-2 text-xs text-gray-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-gray-200">
         {fileName}
       </div>
       <Editor
