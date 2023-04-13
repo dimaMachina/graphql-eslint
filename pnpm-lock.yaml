@@ -104,8 +104,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
 
   examples/code-file:
     dependencies:
@@ -120,8 +120,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
 
   examples/graphql-config:
     dependencies:
@@ -136,8 +136,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
 
   examples/graphql-config-code-file:
     dependencies:
@@ -155,8 +155,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
 
   examples/monorepo:
     dependencies:
@@ -171,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
 
   examples/multiple-projects-graphql-config:
     dependencies:
@@ -187,8 +187,8 @@ importers:
         specifier: 4.3.0
         version: 4.3.0(@types/node@18.15.11)(cosmiconfig@8.0.0)(ts-node@10.9.1)(typescript@5.0.4)
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@18.15.11)(typescript@5.0.4)
@@ -209,14 +209,14 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
       eslint-config-prettier:
         specifier: 8.8.0
-        version: 8.8.0(eslint@8.36.0)
+        version: 8.8.0(eslint@8.38.0)
       eslint-plugin-prettier:
         specifier: 4.2.1
-        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.36.0)(prettier@2.8.7)
+        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.38.0)(prettier@2.8.7)
       prettier:
         specifier: 2.8.7
         version: 2.8.7
@@ -231,8 +231,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
       svelte:
         specifier: 3.58.0
         version: 3.58.0
@@ -256,11 +256,11 @@ importers:
         specifier: 3.2.47
         version: 3.2.47
       eslint:
-        specifier: 8.36.0
-        version: 8.36.0
+        specifier: 8.38.0
+        version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
       vue-eslint-parser:
         specifier: 9.1.1
-        version: 9.1.1(eslint@8.36.0)
+        version: 9.1.1(eslint@8.38.0)
 
   packages/plugin:
     dependencies:
@@ -305,8 +305,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       '@types/eslint':
-        specifier: 8.21.3
-        version: 8.21.3
+        specifier: 8.37.0
+        version: 8.37.0
       '@types/estree':
         specifier: 1.0.0
         version: 1.0.0
@@ -1292,16 +1292,6 @@ packages:
     dev: true
     optional: true
 
-  /@eslint-community/eslint-utils@4.4.0(eslint@8.36.0):
-    resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
-    dependencies:
-      eslint: 8.36.0
-      eslint-visitor-keys: 3.4.0
-    dev: true
-
   /@eslint-community/eslint-utils@4.4.0(eslint@8.38.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1315,23 +1305,6 @@ packages:
   /@eslint-community/regexpp@4.4.1:
     resolution: {integrity: sha512-BISJ6ZE4xQsuL/FmsyRaiffpq977bMlsKfGHTQrOGFErfByxIe6iZTxPf/00Zon9b9a7iUykfQwejN3s2ZW/Bw==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
-    dev: true
-
-  /@eslint/eslintrc@2.0.1:
-    resolution: {integrity: sha512-eFRmABvW2E5Ho6f5fHLqgena46rOj7r7OKHYfLElqcBfGFHHpjBhivyi5+jOEQuSpdc/1phIZJlbC2te+tZNIw==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dependencies:
-      ajv: 6.12.6
-      debug: 4.3.4
-      espree: 9.5.1
-      globals: 13.20.0
-      ignore: 5.2.4
-      import-fresh: 3.3.0
-      js-yaml: 4.1.0
-      minimatch: 3.1.2
-      strip-json-comments: 3.1.1
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /@eslint/eslintrc@2.0.2:
@@ -1349,11 +1322,6 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@eslint/js@8.36.0:
-    resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
   /@eslint/js@8.38.0:
@@ -2610,8 +2578,8 @@ packages:
     resolution: {integrity: sha512-EGlKlgMhnLt/cM4DbUSafFdrkeJoC9Mvnj0PUCU7tFmTjMjNRT957kXCx0wYm3JuEq4o4ZsS5vG+NlkM2DMd2A==}
     dev: true
 
-  /@types/eslint@8.21.3:
-    resolution: {integrity: sha512-fa7GkppZVEByMWGbTtE5MbmXWJTVbrjjaS8K6uQj+XtuuUv1fsuPAxhygfqLmsb/Ufb3CV8deFCpiMfAgi00Sw==}
+  /@types/eslint@8.37.0:
+    resolution: {integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==}
     dependencies:
       '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
@@ -5182,15 +5150,6 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /eslint-config-prettier@8.8.0(eslint@8.36.0):
-    resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
-    hasBin: true
-    peerDependencies:
-      eslint: '>=7.0.0'
-    dependencies:
-      eslint: 8.36.0
-    dev: true
-
   /eslint-config-prettier@8.8.0(eslint@8.38.0):
     resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
     hasBin: true
@@ -5426,7 +5385,7 @@ packages:
       semver: 7.3.8
     dev: true
 
-  /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.8.0)(eslint@8.36.0)(prettier@2.8.7):
+  /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.8.0)(eslint@8.38.0)(prettier@2.8.7):
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -5437,8 +5396,8 @@ packages:
       eslint-config-prettier:
         optional: true
     dependencies:
-      eslint: 8.36.0
-      eslint-config-prettier: 8.8.0(eslint@8.36.0)
+      eslint: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
+      eslint-config-prettier: 8.8.0(eslint@8.38.0)
       prettier: 2.8.7
       prettier-linter-helpers: 1.0.0
     dev: true
@@ -5604,55 +5563,6 @@ packages:
   /eslint-visitor-keys@3.4.0:
     resolution: {integrity: sha512-HPpKPUBQcAsZOsHAFwTtIKcYlCje62XB7SEAcxjtmW6TD1WVpkS6i6/hOVtTZIl4zGj/mBqpFVGvaDneik+VoQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dev: true
-
-  /eslint@8.36.0:
-    resolution: {integrity: sha512-Y956lmS7vDqomxlaaQAHVmeb4tNMp2FWIvU/RnU5BD3IKMD/MJPr76xdyr68P8tV1iNMvN2mRK0yy3c+UjL+bw==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    hasBin: true
-    dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@8.36.0)
-      '@eslint-community/regexpp': 4.4.1
-      '@eslint/eslintrc': 2.0.1
-      '@eslint/js': 8.36.0
-      '@humanwhocodes/config-array': 0.11.8
-      '@humanwhocodes/module-importer': 1.0.1
-      '@nodelib/fs.walk': 1.2.8
-      ajv: 6.12.6
-      chalk: 4.1.2
-      cross-spawn: 7.0.3
-      debug: 4.3.4
-      doctrine: 3.0.0
-      escape-string-regexp: 4.0.0
-      eslint-scope: 7.1.1
-      eslint-visitor-keys: 3.3.0
-      espree: 9.5.0
-      esquery: 1.5.0
-      esutils: 2.0.3
-      fast-deep-equal: 3.1.3
-      file-entry-cache: 6.0.1
-      find-up: 5.0.0
-      glob-parent: 6.0.2
-      globals: 13.20.0
-      grapheme-splitter: 1.0.4
-      ignore: 5.2.4
-      import-fresh: 3.3.0
-      imurmurhash: 0.1.4
-      is-glob: 4.0.3
-      is-path-inside: 3.0.3
-      js-sdsl: 4.4.0
-      js-yaml: 4.1.0
-      json-stable-stringify-without-jsonify: 1.0.1
-      levn: 0.4.1
-      lodash.merge: 4.6.2
-      minimatch: 3.1.2
-      natural-compare: 1.4.0
-      optionator: 0.9.1
-      strip-ansi: 6.0.1
-      strip-json-comments: 3.1.1
-      text-table: 0.2.0
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /eslint@8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq):
@@ -11934,14 +11844,14 @@ packages:
     resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
     dev: false
 
-  /vue-eslint-parser@9.1.1(eslint@8.36.0):
+  /vue-eslint-parser@9.1.1(eslint@8.38.0):
     resolution: {integrity: sha512-C2aI/r85Q6tYcz4dpgvrs4wH/MqVrRAVIdpYedrxnATDHHkb+TroeRcDpKWGZCx/OcECMWfz7tVwQ8e+Opy6rA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
     dependencies:
       debug: 4.3.4
-      eslint: 8.36.0
+      eslint: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
       eslint-scope: 7.1.1
       eslint-visitor-keys: 3.3.0
       espree: 9.5.0
