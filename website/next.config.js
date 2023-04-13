@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 export default withGuildDocs({
   redirects: () =>
     Object.entries({
-      '/': '/docs', // TODO: add landing page latter
+      '/': '/docs', // TODO: add landing page later
     }).map(([from, to]) => ({
       source: from,
       destination: to,

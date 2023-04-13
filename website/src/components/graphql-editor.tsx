@@ -33,8 +33,8 @@ export function GraphQLEditor({
   onChange,
 }: GraphQLEditorProps): ReactElement {
   const { resolvedTheme } = useTheme();
-  const editorRef = useRef<Parameters<OnMount>[0]>(null);
-  const monacoRef = useRef<Parameters<OnMount>[1]>(null);
+  const editorRef = useRef<Parameters<OnMount>[0]>();
+  const monacoRef = useRef<Parameters<OnMount>[1]>();
   const [editorMounted, setEditorMounted] = useState(false);
   let lintMessages = linter.verify(
     code,
@@ -63,8 +63,8 @@ export function GraphQLEditor({
       model,
       'graphql-eslint',
       lintMessages.map(message => ({
-        code: null,
-        source: null,
+        code: '',
+        source: '',
         startColumn: message.endColumn == null ? (message.column += 1) : message.column,
         startLineNumber: message.line,
         endColumn: message.endColumn || message.column,

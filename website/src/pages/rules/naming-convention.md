@@ -90,6 +90,30 @@ type Product {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.name.value=Boolean]': { style: 'camelCase', requiredPrefixes: ['is', 'has'] }, 'FieldDefinition[gqlType.gqlType.name.value=Boolean]': { style: 'camelCase', requiredPrefixes: ['is', 'has'] } }]
+
+type Product {
+  isBackordered: Boolean
+  isNew: Boolean!
+  hasDiscount: Boolean!
+}
+```
+
+### Correct
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': { style: 'camelCase', requiredSuffixes: ['SensitiveSecret'] } }]
+
+scalar SensitiveSecret
+
+type Account {
+  accountSensitiveSecret: SensitiveSecret!
+}
+```
+
 ## Config Schema
 
 > It's possible to use a [`selector`](https://eslint.org/docs/developer-guide/selectors) that starts
@@ -303,6 +327,24 @@ Additional restrictions:
 - Unique items: `true`
 
 ### `forbiddenSuffixes` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
+### `requiredPrefixes` (array)
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
+### `requiredSuffixes` (array)
 
 The object is an array with all elements of the type `string`.
 
