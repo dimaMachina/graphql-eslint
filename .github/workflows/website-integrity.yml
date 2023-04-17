@@ -31,11 +31,9 @@ jobs:
         if: always()
         id: diff_result
         run: |
-          OUTPUT=$(git diff origin/${{ github.base_ref }}.. -- website/route-lockfile.txt)
-          OUTPUT="${OUTPUT//'%'/'%25'}"
-          OUTPUT="${OUTPUT//$'\n'/'%0A'}"
-          OUTPUT="${OUTPUT//$'\r'/'%0D'}"
-          echo "::set-output name=result::$OUTPUT"
+          echo "result<<EOF" >> $GITHUB_OUTPUT
+          echo "$(git diff origin/${{ github.base_ref }}.. -- website/route-lockfile.txt)" >> $GITHUB_OUTPUT
+          echo EOF >> $GITHUB_OUTPUT
 
       - name: Publish a message
         if: always() && contains(steps.diff_result.outputs.result, 'diff')
