@@ -22,4 +22,4 @@ jobs:
       algoliaAdminApiKey: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
     with:
       domain: https://www.the-guild.dev/graphql/eslint/
-      source: 'ESLint'
+      source: ESLint
