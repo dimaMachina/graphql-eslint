@@ -21,5 +21,6 @@ jobs:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
       algoliaAdminApiKey: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
     with:
+      packageManager: pnpm
       domain: https://www.the-guild.dev/graphql/eslint/
       source: ESLint
