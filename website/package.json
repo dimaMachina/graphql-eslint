@@ -9,7 +9,8 @@
     "dev": "pnpm patch-browser && next",
     "patch-browser": "tsx ../scripts/patch-graphql-eslint-browser.ts",
     "prebuild": "tsx ../scripts/generate-docs.ts && pnpm patch-browser",
-    "start": "next start"
+    "start": "next start",
+    "theguild-nextra-algolia": "theguild-nextra-algolia"
   },
   "dependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
