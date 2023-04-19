@@ -35,7 +35,7 @@
     "@types/lodash.debounce": "4.0.7",
     "@types/lodash.uniqwith": "4.5.7",
     "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
+    "@types/react": "18.0.37",
     "tailwindcss-radix": "2.8.0"
   },
   "browserslist": {
