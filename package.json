@@ -37,7 +37,7 @@
     "husky": "8.0.3",
     "jest-snapshot-serializer-raw": "1.2.0",
     "json-schema-to-markdown": "1.1.1",
-    "prettier": "2.8.7",
+    "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "0.2.7",
     "rimraf": "5.0.0",
     "tsx": "3.12.6",
