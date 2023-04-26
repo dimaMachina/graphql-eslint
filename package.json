@@ -4,6 +4,11 @@
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
+  "packageManager": "pnpm@8.4.0",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "build": "tsc && bob build",
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",

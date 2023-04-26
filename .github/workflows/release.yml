@@ -10,7 +10,7 @@ jobs:
     with:
       releaseScript: release
       nodeVersion: 18
-      packageManager: pnpm
+      packageManager: pnpm@8.3.1
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
       npmToken: ${{ secrets.NPM_TOKEN }}
@@ -23,4 +23,4 @@ jobs:
     with:
       domain: https://www.the-guild.dev/graphql/eslint/
       source: ESLint
-      packageManager: pnpm
+      packageManager: pnpm@8.3.1
