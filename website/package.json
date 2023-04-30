@@ -24,7 +24,7 @@
     "lodash.uniqwith": "4.5.0",
     "next": "13.3.2",
     "next-query-params": "4.1.0",
-    "next-sitemap": "4.0.7",
+    "next-sitemap": "4.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "use-query-params": "2.2.1"
