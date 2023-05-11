@@ -323,8 +323,8 @@ importers:
         specifier: 16.6.0
         version: 16.6.0
       json-schema-to-ts:
-        specifier: 2.8.1
-        version: 2.8.1
+        specifier: 2.8.2
+        version: 2.8.2
     publishDirectory: dist
 
   website:
@@ -7240,8 +7240,8 @@ packages:
     dev: true
     patched: true
 
-  /json-schema-to-ts@2.8.1:
-    resolution: {integrity: sha512-cvyrXyE6g43GfJFA/B5VEBxWvutEze8iHVf9UTC0Pg26VcvWoYCWfF6X3484cm9xaX0pUJGP/wnHnU/IVZIHgg==}
+  /json-schema-to-ts@2.8.2:
+    resolution: {integrity: sha512-qyITu0FeIGLDMBaaAaMSWXSwpcgnuR5YEhNdLkD4nhCDrpjCKCJzO9pup99giDbzpGf5eX2o9OxCOe/29SaSbQ==}
     engines: {node: '>=16'}
     dependencies:
       '@babel/runtime': 7.21.5
