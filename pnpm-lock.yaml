@@ -259,8 +259,8 @@ importers:
         specifier: 8.38.0
         version: 8.38.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
       vue-eslint-parser:
-        specifier: 9.2.1
-        version: 9.2.1(eslint@8.38.0)
+        specifier: 9.3.0
+        version: 9.3.0(eslint@8.38.0)
 
   packages/plugin:
     dependencies:
@@ -12010,8 +12010,8 @@ packages:
     resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
     dev: false
 
-  /vue-eslint-parser@9.2.1(eslint@8.38.0):
-    resolution: {integrity: sha512-tPOex4n6jit4E7h68auOEbDMwE58XiP4dylfaVTCOVCouR45g+QFDBjgIdEU52EXJxKyjgh91dLfN2rxUcV0bQ==}
+  /vue-eslint-parser@9.3.0(eslint@8.38.0):
+    resolution: {integrity: sha512-48IxT9d0+wArT1+3wNIy0tascRoywqSUe2E1YalIC1L8jsUGe5aJQItWfRok7DVFGz3UYvzEI7n5wiTXsCMAcQ==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
