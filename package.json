@@ -39,7 +39,7 @@
     "json-schema-to-markdown": "1.1.1",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "0.2.8",
-    "rimraf": "5.0.0",
+    "rimraf": "5.0.1",
     "tsx": "3.12.7",
     "typescript": "5.0.4",
     "vitest": "0.30.1"
