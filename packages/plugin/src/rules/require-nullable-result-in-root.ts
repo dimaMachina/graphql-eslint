@@ -54,20 +54,25 @@ export const rule: GraphQLESLintRule = {
         node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         if (!rootTypeNames.has(node.name.value)) return;
+
         for (const field of node.fields || []) {
-          if (field.gqlType.type !== Kind.NON_NULL_TYPE) return;
-          const resultType = schema.getType((field.gqlType.gqlType as any).name.value);
+          if (field.gqlType.type !== Kind.NON_NULL_TYPE) continue;
+          if ('gqlType' in field.gqlType && field.gqlType.gqlType.type !== Kind.NAMED_TYPE)
+            continue;
+          const name = field.gqlType.gqlType.name.value;
+          const type = schema.getType(name);
+          const resultType = type ? getNodeName(type.astNode as any) : '';
+
           context.report({
             node: field.gqlType,
             messageId: RULE_ID,
             data: {
-              resultType: resultType ? getNodeName(resultType.astNode as any) : '',
+              resultType,
               rootType: getNodeName(node),
             },
             suggest: [
               {
-                desc: `Make \`${field.name.value}\` nullable`,
-                // Cast should succeed here because it only cares about the range
+                desc: `Make ${resultType} nullable`,
                 fix(fixer) {
                   const text = sourceCode.getText(field.gqlType as any);
 

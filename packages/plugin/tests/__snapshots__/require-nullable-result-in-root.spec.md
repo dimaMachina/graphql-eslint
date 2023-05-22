@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should fail when query contains non-nullable fields in root 1`] = `
+exports[`Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         type Query {
@@ -17,7 +17,7 @@ exports[`should fail when query contains non-nullable fields in root 1`] = `
         |                 ^^^^ Unexpected non-null result type "User" in type "Query"
       3 |         }
 
-#### 💡 Suggestion: Make \`user\` nullable
+#### 💡 Suggestion: Make type "User" nullable
 
     1 |         type Query {
     2 |           user: User
@@ -48,7 +48,7 @@ exports[`should work with extend query 1`] = `
         |                 ^^^^ Unexpected non-null result interface "User" in type "MyMutation"
       4 |         }
 
-#### 💡 Suggestion: Make \`user\` nullable
+#### 💡 Suggestion: Make interface "User" nullable
 
      1 |         type MyMutation
      2 |         extend type MyMutation {

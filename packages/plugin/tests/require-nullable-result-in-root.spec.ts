@@ -13,7 +13,6 @@ function useSchema(code: string): { code: string; parserOptions: Omit<ParserOpti
 ruleTester.runGraphQLTests('require-nullable-result-in-root', rule, {
   valid: [
     {
-      name: 'should pass when query contains nullable fields in root',
       ...useSchema(/* GraphQL */ `
         type Query {
           foo: User
@@ -28,7 +27,6 @@ ruleTester.runGraphQLTests('require-nullable-result-in-root', rule, {
   ],
   invalid: [
     {
-      name: 'should fail when query contains non-nullable fields in root',
       ...useSchema(/* GraphQL */ `
         type Query {
           user: User!
