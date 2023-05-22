@@ -16,7 +16,9 @@ ruleTester.runGraphQLTests('require-nullable-result-in-root', rule, {
       name: 'should pass when query contains nullable fields in root',
       ...useSchema(/* GraphQL */ `
         type Query {
-          user: User
+          foo: User
+          baz: [User]!
+          bar: [User!]!
         }
         type User {
           id: ID!
@@ -29,6 +31,19 @@ ruleTester.runGraphQLTests('require-nullable-result-in-root', rule, {
       name: 'should fail when query contains non-nullable fields in root',
       ...useSchema(/* GraphQL */ `
         type Query {
+          user: User!
+        }
+        type User {
+          id: ID!
+        }
+      `),
+      errors: [{ message: 'Non-null types are not allowed in root' }],
+    },
+    {
+      name: 'should work with extend query',
+      ...useSchema(/* GraphQL */ `
+        type Query
+        extend type Query {
           user: User!
         }
         type User {

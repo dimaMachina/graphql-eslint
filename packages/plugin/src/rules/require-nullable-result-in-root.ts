@@ -57,7 +57,6 @@ export const rule: GraphQLESLintRule = {
 
         for (const field of node.fields || []) {
           if (field.gqlType.type !== Kind.NON_NULL_TYPE) return;
-
           context.report({
             node: field.gqlType,
             messageId: RULE_ID,
