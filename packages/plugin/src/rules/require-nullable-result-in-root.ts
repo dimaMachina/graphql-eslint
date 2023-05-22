@@ -1,6 +1,6 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
-import { requireGraphQLSchemaFromContext, truthy } from '../utils.js';
+import { getNodeName, requireGraphQLSchemaFromContext, truthy } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter';
 
 const RULE_ID = 'require-nullable-result-in-root';
@@ -36,7 +36,7 @@ export const rule: GraphQLESLintRule = {
       ],
     },
     messages: {
-      [RULE_ID]: 'Non-null types are not allowed in root',
+      [RULE_ID]: 'Unexpected non-null result {{ resultType }} in {{ rootType }}',
     },
     schema: [],
   },
@@ -54,12 +54,16 @@ export const rule: GraphQLESLintRule = {
         node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
       ) {
         if (!rootTypeNames.has(node.name.value)) return;
-
         for (const field of node.fields || []) {
           if (field.gqlType.type !== Kind.NON_NULL_TYPE) return;
+          const resultType = schema.getType((field.gqlType.gqlType as any).name.value);
           context.report({
             node: field.gqlType,
             messageId: RULE_ID,
+            data: {
+              resultType: resultType ? getNodeName(resultType.astNode as any) : '',
+              rootType: getNodeName(node),
+            },
             suggest: [
               {
                 desc: `Make \`${field.name.value}\` nullable`,
