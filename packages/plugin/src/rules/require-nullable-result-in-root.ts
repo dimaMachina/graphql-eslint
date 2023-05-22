@@ -1,9 +1,9 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import { requireGraphQLSchemaFromContext, truthy } from '../utils.js';
+import { GraphQLESTreeNode } from '../estree-converter';
 
-const RULE_ID = 'no-non-null-in-root';
+const RULE_ID = 'require-nullable-result-in-root';
 
 export const rule: GraphQLESLintRule = {
   meta: {
@@ -11,26 +11,27 @@ export const rule: GraphQLESLintRule = {
     hasSuggestions: true,
     docs: {
       category: 'Schema',
-      description: 'Require nullable fields in root query.',
+      description: 'Require nullable fields in root types.',
       url: `https://github.com/B2o5T/graphql-eslint/blob/master/docs/rules/${RULE_ID}.md`,
+      requiresSchema: true,
       examples: [
         {
           title: 'Incorrect',
-          code: `type Query {
-            user: User!
-          }
-          type User {
-            id: ID!
-          }`,
+          code: /* GraphQL */ `
+            type Query {
+              user: User!
+            }
+          `,
         },
         {
           title: 'Correct',
-          code: `type Query {
-            user: User
-          }
-          type User {
-            id: ID!
-          }`,
+          code: /* GraphQL */ `
+            type Query {
+              foo: User
+              baz: [User]!
+              bar: [User!]!
+            }
+          `,
         },
       ],
     },
@@ -41,34 +42,33 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-    const rootTypeNames = [
-      schema.getQueryType(),
-      schema.getMutationType(),
-      schema.getSubscriptionType(),
-    ]
-      .filter(truthy)
-      .map(type => type.name);
-    const selector = `ObjectTypeDefinition[name.value=/^(${rootTypeNames.join('|')})$/]`;
+    const rootTypeNames = new Set(
+      [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]
+        .filter(truthy)
+        .map(type => type.name),
+    );
+    const sourceCode = context.getSourceCode();
 
     return {
-      [selector](node: GraphQLESTreeNode<ObjectTypeDefinitionNode>) {
-        const nonNullFields =
-          node.fields?.filter(field => {
-            return field.gqlType.type === Kind.NON_NULL_TYPE;
-          }) || [];
+      'ObjectTypeDefinition,ObjectTypeExtension'(
+        node: GraphQLESTreeNode<ObjectTypeDefinitionNode>,
+      ) {
+        if (!rootTypeNames.has(node.name.value)) return;
 
-        for (const field of nonNullFields) {
-          const sourceCode = context.getSourceCode();
-          const typeSource = sourceCode.getText(field.gqlType as any);
+        for (const field of node.fields || []) {
+          if (field.gqlType.type !== Kind.NON_NULL_TYPE) return;
+
           context.report({
             node: field.gqlType,
             messageId: RULE_ID,
             suggest: [
               {
                 desc: `Make \`${field.name.value}\` nullable`,
+                // Cast should succeed here because it only cares about the range
                 fix(fixer) {
-                  // Cast should succeed here because it only cares about the range
-                  return fixer.replaceText(field.gqlType as any, typeSource.replace('!', ''));
+                  const text = sourceCode.getText(field.gqlType as any);
+
+                  return fixer.replaceText(field.gqlType as any, text.replace('!', ''));
                 },
               },
             ],
