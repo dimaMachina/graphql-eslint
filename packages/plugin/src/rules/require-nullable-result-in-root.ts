@@ -1,7 +1,7 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESLintRule } from '../types.js';
 import { getNodeName, requireGraphQLSchemaFromContext, truthy } from '../utils.js';
-import { GraphQLESTreeNode } from '../estree-converter';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'require-nullable-result-in-root';
 
@@ -56,8 +56,10 @@ export const rule: GraphQLESLintRule = {
         if (!rootTypeNames.has(node.name.value)) return;
 
         for (const field of node.fields || []) {
-          if (field.gqlType.type !== Kind.NON_NULL_TYPE) continue;
-          if ('gqlType' in field.gqlType && field.gqlType.gqlType.type !== Kind.NAMED_TYPE)
+          if (
+            field.gqlType.type !== Kind.NON_NULL_TYPE ||
+            field.gqlType.gqlType.type !== Kind.NAMED_TYPE
+          )
             continue;
           const name = field.gqlType.gqlType.name.value;
           const type = schema.getType(name);
