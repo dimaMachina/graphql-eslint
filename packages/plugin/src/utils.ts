@@ -154,6 +154,7 @@ export function displayNodeName(node: GraphQLESTreeNode<ASTNode>): string {
 export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
   switch (node.kind) {
     case Kind.OBJECT_TYPE_DEFINITION:
+    case Kind.OBJECT_TYPE_EXTENSION:
     case Kind.INTERFACE_TYPE_DEFINITION:
     case Kind.ENUM_TYPE_DEFINITION:
     case Kind.SCALAR_TYPE_DEFINITION:
