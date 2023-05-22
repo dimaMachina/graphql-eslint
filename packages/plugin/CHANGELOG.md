@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.19.0
+
+### Minor Changes
+
+- [#1657](https://github.com/B2o5T/graphql-eslint/pull/1657)
+  [`0a571bb`](https://github.com/B2o5T/graphql-eslint/commit/0a571bbd8756168de29bf7da20a3b714681aab1b)
+  Thanks [@nishtahir](https://github.com/nishtahir)! - Add `require-nullable-result-in-root` rule to
+  report on non-null fields in root types
+
 ## 3.18.0
 
 ### Minor Changes
