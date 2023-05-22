@@ -45,7 +45,7 @@ exports[`should work with extend query 1`] = `
 
       2 |         extend type MyMutation {
     > 3 |           user: User!
-        |                 ^^^^ Unexpected non-null result interface "User" in 
+        |                 ^^^^ Unexpected non-null result interface "User" in type "MyMutation"
       4 |         }
 
 #### 💡 Suggestion: Make \`user\` nullable
