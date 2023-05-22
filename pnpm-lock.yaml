@@ -360,8 +360,8 @@ importers:
         specifier: 13.4.3
         version: 13.4.3(react-dom@18.2.0)(react@18.2.0)
       next-query-params:
-        specifier: 4.1.0
-        version: 4.1.0(next@13.4.3)(react@18.2.0)(use-query-params@2.2.1)
+        specifier: 4.2.1
+        version: 4.2.1(next@13.4.3)(react@18.2.0)(use-query-params@2.2.1)
       next-sitemap:
         specifier: 4.1.3
         version: 4.1.3(@next/env@13.4.3)(next@13.4.3)
@@ -7466,7 +7466,7 @@ packages:
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /lru-cache@4.1.5:
@@ -8424,8 +8424,8 @@ packages:
       - supports-color
     dev: false
 
-  /next-query-params@4.1.0(next@13.4.3)(react@18.2.0)(use-query-params@2.2.1):
-    resolution: {integrity: sha512-jjoQByM9s2d4wCUBUazhgHNVztm18meCtVoDj6v45+LZIQfxAF5QYVFKCbDYarI3iXD4xcZprztqLtALiiV8nQ==}
+  /next-query-params@4.2.1(next@13.4.3)(react@18.2.0)(use-query-params@2.2.1):
+    resolution: {integrity: sha512-sWhnZOO3wWlnhGcoWSiZDY+PTExv8EMeptJo6z3gR0jpdteNpkV5y49T8nplb7iHxvYE8LkeZDJ2oiFApr4xUQ==}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -8433,7 +8433,7 @@ packages:
     dependencies:
       next: 13.4.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      tslib: 2.4.1
+      tslib: 2.5.0
       use-query-params: 2.2.1(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
@@ -8595,7 +8595,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /node-fetch@2.6.11:
@@ -9024,7 +9024,7 @@ packages:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /pascalcase@0.1.1:
