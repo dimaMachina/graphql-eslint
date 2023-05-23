@@ -53,5 +53,18 @@ ruleTester.runGraphQLTests('require-nullable-result-in-root', rule, {
       `),
       errors: 1,
     },
+    {
+      name: 'should work with default scalars',
+      ...useSchema(/* GraphQL */ `
+        type MySubscription
+        extend type MySubscription {
+          foo: Boolean!
+        }
+        schema {
+          subscription: MySubscription
+        }
+      `),
+      errors: 1,
+    },
   ],
 });
