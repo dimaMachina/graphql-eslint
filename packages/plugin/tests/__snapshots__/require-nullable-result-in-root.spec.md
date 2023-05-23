@@ -27,6 +27,35 @@ exports[`Invalid #1 1`] = `
     6 |         }
 `;
 
+exports[`should work with default scalars 1`] = `
+#### ⌨️ Code
+
+      1 |         type MySubscription
+      2 |         extend type MySubscription {
+      3 |           foo: Boolean!
+      4 |         }
+      5 |         schema {
+      6 |           subscription: MySubscription
+      7 |         }
+
+#### ❌ Error
+
+      2 |         extend type MySubscription {
+    > 3 |           foo: Boolean!
+        |                ^^^^^^^ Unexpected non-null result Boolean in type "MySubscription"
+      4 |         }
+
+#### 💡 Suggestion: Make Boolean nullable
+
+    1 |         type MySubscription
+    2 |         extend type MySubscription {
+    3 |           foo: Boolean
+    4 |         }
+    5 |         schema {
+    6 |           subscription: MySubscription
+    7 |         }
+`;
+
 exports[`should work with extend query 1`] = `
 #### ⌨️ Code
 

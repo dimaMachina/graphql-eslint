@@ -63,13 +63,13 @@ export const rule: GraphQLESLintRule = {
             continue;
           const name = field.gqlType.gqlType.name.value;
           const type = schema.getType(name);
-          const resultType = type ? getNodeName(type.astNode as any) : '';
+          const resultType = type?.astNode ? getNodeName(type.astNode as any) : type?.name;
 
           context.report({
             node: field.gqlType,
             messageId: RULE_ID,
             data: {
-              resultType,
+              resultType: resultType || '',
               rootType: getNodeName(node),
             },
             suggest: [
