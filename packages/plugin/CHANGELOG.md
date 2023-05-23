@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.19.1
+
+### Patch Changes
+
+- [#1665](https://github.com/B2o5T/graphql-eslint/pull/1665)
+  [`73b1087`](https://github.com/B2o5T/graphql-eslint/commit/73b1087be4768daecee031b1778c20280d41edca)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix
+  `TypeError: Cannot read properties of undefined (reading 'kind')` for
+  `require-nullable-result-in-root` rule
+
 ## 3.19.0
 
 ### Minor Changes
