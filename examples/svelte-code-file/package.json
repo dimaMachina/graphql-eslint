@@ -15,6 +15,6 @@
     "eslint": "8.38.0",
     "svelte": "3.59.1",
     "svelte-eslint-parser": "0.29.0",
-    "svelte2tsx": "0.6.14"
+    "svelte2tsx": "0.6.15"
   }
 }
