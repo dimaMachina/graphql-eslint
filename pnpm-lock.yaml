@@ -240,8 +240,8 @@ importers:
         specifier: 0.29.0
         version: 0.29.0(svelte@3.59.1)
       svelte2tsx:
-        specifier: 0.6.14
-        version: 0.6.14(svelte@3.59.1)(typescript@5.0.4)
+        specifier: 0.6.15
+        version: 0.6.15(svelte@3.59.1)(typescript@5.0.4)
 
   examples/vue-code-file:
     dependencies:
@@ -9078,7 +9078,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.5.2
     dev: true
 
   /node-fetch@2.6.11:
@@ -9507,7 +9507,7 @@ packages:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.5.2
     dev: true
 
   /pascalcase@0.1.1:
@@ -11405,10 +11405,10 @@ packages:
       svelte: 3.59.1
     dev: true
 
-  /svelte2tsx@0.6.14(svelte@3.59.1)(typescript@5.0.4):
-    resolution: {integrity: sha512-Sxo9gtpc3dYWuFQ8fruZG+M+I6OZMIvOxxKjt48Lr8jD6Kr9cNf1Hf/yHUDEgDwQdRbAzn5y0FL9xk8Dx5v9lg==}
+  /svelte2tsx@0.6.15(svelte@3.59.1)(typescript@5.0.4):
+    resolution: {integrity: sha512-+j6RmA3g5pPs1DHa/rdzJjjhZuCfWx0IbNPaR99A2bvOSPPY6BlVkBGU0urI+DGcWHhYEG28Flo942KqlAkpEQ==}
     peerDependencies:
-      svelte: ^3.55
+      svelte: ^3.55 || ^4.0
       typescript: ^4.9.4 || ^5.0.0
     dependencies:
       dedent-js: 1.0.1
