@@ -1,4 +1,4 @@
-import { processor } from './processor.js';
+import { processor, processorWithVue } from './processor.js';
 
 export { parseForESLint } from './parser.js';
 export { rules } from './rules/index.js';
@@ -6,7 +6,7 @@ export * from './testkit.js';
 export * from './types.js';
 export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils.js';
 
-export const processors = { graphql: processor };
+export const processors = { graphql: processor, 'graphql-vue': processorWithVue };
 
 export { configs } from './configs/index.js';
 export { flatConfigs } from './flat-configs.js';
