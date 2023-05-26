@@ -9,7 +9,7 @@ module.exports = {
       files: ['*.js', '*.vue'],
       parser: 'vue-eslint-parser',
       processor: '@graphql-eslint/graphql',
-      extends: ['eslint:recommended'],
+      extends: ['eslint:recommended','plugin:vue/base'],
       env: {
         es6: true,
       },
