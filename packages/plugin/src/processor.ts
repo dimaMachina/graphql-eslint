@@ -124,3 +124,37 @@ export const processor: Linter.Processor<Block | string> = {
     return result.sort((a, b) => a.line - b.line || a.column - b.column);
   },
 };
+
+let vueProcessors: Record<string, Linter.Processor<Block | string>>;
+
+export const processorWithVue: Linter.Processor<Block | string> = {
+  // Get supportsAutofix and preprocess from the normal processor
+  ...processor,
+
+  postprocess(messages, filePath) {
+    if (messages.length > 0) {
+      // try to load the vue plugin
+      if (vueProcessors === undefined) {
+        try {
+          vueProcessors = require('eslint-plugin-vue').processors;
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error(error);
+          vueProcessors = {};
+        }
+      }
+
+      // If we have a vue processor, pass it the last element that contains the
+      // full SFC code for processing
+      if (vueProcessors['.vue']?.postprocess !== undefined) {
+        const last = messages.length - 1;
+        messages[last] = vueProcessors['.vue'].postprocess([messages[last]], filePath);
+      }
+
+      // And pass everything to the graphql processor
+      return processor.postprocess!(messages, filePath);
+    } else {
+      return messages.flat();
+    }
+  },
+};
