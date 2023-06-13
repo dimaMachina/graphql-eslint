@@ -1,4 +1,4 @@
-import { Callout, PackageCmd } from '@theguild/components'
+import { Callout } from '@theguild/components'
 
 # Getting Started
 
@@ -6,7 +6,9 @@ import { Callout, PackageCmd } from '@theguild/components'
 
 Start by installing the plugin package, which includes everything you need:
 
-<PackageCmd packages={['-D @graphql-eslint/eslint-plugin']} />
+```sh npm2yarn
+npm i -D @graphql-eslint/eslint-plugin
+```
 
 <Callout type="warning">
   Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
