@@ -23,7 +23,7 @@
     "lodash.debounce": "4.0.8",
     "lodash.uniqwith": "4.5.0",
     "next": "13.4.6",
-    "next-query-params": "4.2.1",
+    "next-query-params": "4.2.2",
     "next-sitemap": "4.1.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
