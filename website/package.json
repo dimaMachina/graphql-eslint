@@ -19,7 +19,7 @@
     "@radix-ui/react-select": "1.2.2",
     "@theguild/components": "5.0.0",
     "clsx": "1.2.1",
-    "graphql": "16.6.0",
+    "graphql": "16.7.0",
     "lodash.debounce": "4.0.8",
     "lodash.uniqwith": "4.5.0",
     "next": "13.4.6",
