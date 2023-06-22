@@ -45,7 +45,7 @@
     "vitest": "0.30.1"
   },
   "resolutions": {
-    "graphql": "16.7.0"
+    "graphql": "16.7.1"
   },
   "pnpm": {
     "patchedDependencies": {
