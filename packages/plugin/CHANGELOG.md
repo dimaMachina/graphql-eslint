@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.19.2
+
+### Patch Changes
+
+- [#1716](https://github.com/B2o5T/graphql-eslint/pull/1716)
+  [`40c1523`](https://github.com/B2o5T/graphql-eslint/commit/40c15236095d938f9b3b1ca3f78af9e513932606)
+  Thanks [@BlakeGardner](https://github.com/BlakeGardner)! - broken rule url for
+  `require-import-fragment` and `require-nullable-result-in-root`
+
 ## 3.19.1
 
 ### Patch Changes
