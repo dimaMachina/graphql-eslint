@@ -66,10 +66,13 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     // In case of GraphQL parser error, we report it to ESLint as a parser error that matches the requirements
     // of ESLint. This will make sure to display it correctly in IDEs and lint results.
     if (error instanceof GraphQLError) {
+      const location = error.locations?.[0];
       const eslintError = {
-        index: error.positions![0],
-        lineNumber: error.locations![0].line,
-        column: error.locations![0].column - 1,
+        index: error.positions?.[0],
+        ...(location && {
+          lineNumber: location.line,
+          column: location.column - 1,
+        }),
         message: error.message,
       };
       throw eslintError;
