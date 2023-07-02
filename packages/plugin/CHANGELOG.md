@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.19.3
+
+### Patch Changes
+
+- [#1725](https://github.com/B2o5T/graphql-eslint/pull/1725)
+  [`5f3f1a5`](https://github.com/B2o5T/graphql-eslint/commit/5f3f1a5095480d63c9ce516cc7a3dccc16c6032f)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix
+  `Parsing error: Cannot read properties of undefined (reading '0') eslint` in VSCode
+
 ## 3.19.2
 
 ### Patch Changes
