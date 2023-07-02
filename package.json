@@ -15,7 +15,7 @@
     "postinstall": "tsx scripts/patch-graphql.ts",
     "prebuild": "rimraf ./tsconfig.tsbuildinfo",
     "prerelease": "pnpm build",
-    "prettier": "prettier --cache --write --check .",
+    "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
     "test": "vitest ."
   },
