@@ -8,18 +8,17 @@ const opts: Options = {
   clean: true,
   bundle: false,
   dts: true,
+  env: {
+    ...(process.env.NODE_ENV && { NODE_ENV: process.env.NODE_ENV }),
+  },
 };
 
 const CWD = process.cwd();
-
 export default defineConfig([
   {
     ...opts,
     format: 'esm',
     outDir: 'dist/esm',
-    env: {
-      NODE_ENV: 'production',
-    },
     outExtension: () => ({ js: '.js' }),
     async onSuccess() {
       await fs.copyFile(
@@ -58,8 +57,5 @@ ${content}`.trimStart(),
     ...opts,
     format: 'cjs',
     outDir: 'dist/cjs',
-    env: {
-      NODE_ENV: 'production',
-    },
   },
 ]);
