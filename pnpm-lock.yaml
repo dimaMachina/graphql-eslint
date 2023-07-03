@@ -238,14 +238,14 @@ importers:
         specifier: 8.38.0
         version: 8.38.0
       svelte:
-        specifier: 4.0.1
-        version: 4.0.1
+        specifier: 4.0.2
+        version: 4.0.2
       svelte-eslint-parser:
         specifier: 0.32.0
-        version: 0.32.0(svelte@4.0.1)
+        version: 0.32.0(svelte@4.0.2)
       svelte2tsx:
         specifier: 0.6.16
-        version: 0.6.16(svelte@4.0.1)(typescript@5.1.6)
+        version: 0.6.16(svelte@4.0.2)(typescript@5.1.6)
 
   examples/vue-code-file:
     dependencies:
@@ -11283,7 +11283,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-eslint-parser@0.32.0(svelte@4.0.1):
+  /svelte-eslint-parser@0.32.0(svelte@4.0.2):
     resolution: {integrity: sha512-Q8Nh3GHHoWZMv3Ej4zw+3+gyWPR8I5pPTJXEOvW+JOgwhGXqGKh7mOKNlVcEPtk+PCGiK9TPaRtvRkKoJR327A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -11297,10 +11297,10 @@ packages:
       espree: 9.6.0
       postcss: 8.4.24
       postcss-scss: 4.0.6(postcss@8.4.24)
-      svelte: 4.0.1
+      svelte: 4.0.2
     dev: true
 
-  /svelte2tsx@0.6.16(svelte@4.0.1)(typescript@5.1.6):
+  /svelte2tsx@0.6.16(svelte@4.0.2)(typescript@5.1.6):
     resolution: {integrity: sha512-AX2iYEvQdd4tq5BokRdOOA0N/nD37ZnhXAomrAG9EEGl2cjkvoQUwe1Aluo6FSzA684WJjhxW+1ZXmveCmvDrA==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0
@@ -11308,12 +11308,12 @@ packages:
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 4.0.1
+      svelte: 4.0.2
       typescript: 5.1.6
     dev: true
 
-  /svelte@4.0.1:
-    resolution: {integrity: sha512-7n2u7A5cu8xCY6MBiXh/Mg6Lh3+Mw2qXlTDBYhzvCvmSM4L4gc4MVo540UtGcjqBiA48E1VDW+EUpBr7iuBlPg==}
+  /svelte@4.0.2:
+    resolution: {integrity: sha512-nqyyUaiKILhi3Lhd8zKTEvZHSy/g3KLKYDbuu03DnHevaT8NK7tb3eQN4XRgvd5Htb/okQKVdnZDPy2RgSKzsw==}
     engines: {node: '>=16'}
     dependencies:
       '@ampproject/remapping': 2.2.1
