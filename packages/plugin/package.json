@@ -5,32 +5,38 @@
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=12"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "require": {
-        "types": "./dist/typings/index.d.cts",
+        "types": "./dist/typings/index.d.ts",
         "default": "./dist/cjs/index.js"
       },
       "import": {
-        "types": "./dist/typings/index.d.ts",
+        "types": "./dist/typings/index.d.mts",
         "default": "./dist/esm/index.js"
       },
       "default": {
-        "types": "./dist/typings/index.d.ts",
+        "types": "./dist/typings/index.d.mts",
         "default": "./dist/esm/index.js"
       }
     }
   },
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/typings/index.d.mts",
   "keywords": [
     "eslint",
     "eslintplugin",
     "eslint-plugin",
     "graphql"
   ],
+  "scripts": {
+    "build": "tsup"
+  },
   "peerDependencies": {
     "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
