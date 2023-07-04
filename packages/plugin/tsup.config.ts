@@ -1,5 +1,5 @@
 import { defineConfig, Options } from 'tsup';
-import fs, { readFile, writeFile } from 'node:fs/promises';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import packageJson from './package.json';
 
@@ -28,28 +28,21 @@ export default defineConfig([
       await fs.writeFile(path.join(CWD, 'dist', 'esm', 'package.json'), '{"type": "module"}');
       await fs.writeFile(
         path.join(CWD, 'dist', 'package.json'),
-        JSON.stringify({ ...packageJson, devDependencies: undefined }).replaceAll('dist/', ''),
+        JSON.stringify(
+          {
+            ...packageJson,
+            devDependencies: undefined,
+            scripts: undefined,
+          },
+          null,
+          2,
+        ).replaceAll('dist/', ''),
       );
-
-      const filePaths = [
+      addCreateRequireBanner([
         'estree-converter/utils.js',
         'rules/graphql-js-validation.js',
         'testkit.js',
-      ];
-      await Promise.all(
-        filePaths.map(async filePath => {
-          const fullPath = path.join(CWD, 'dist', 'esm', filePath);
-          const content = await readFile(fullPath, 'utf8');
-          await writeFile(
-            fullPath,
-            `
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-${content}`.trimStart(),
-          );
-        }),
-      );
-
+      ]);
       console.log('✅ Success!');
     },
   },
@@ -59,3 +52,18 @@ ${content}`.trimStart(),
     outDir: 'dist/cjs',
   },
 ]);
+
+async function addCreateRequireBanner(filePaths: string[]): Promise<void> {
+  await Promise.all(
+    filePaths.map(async filePath => {
+      const fullPath = path.join(CWD, 'dist', 'esm', filePath);
+      const content = await fs.readFile(fullPath, 'utf8');
+      await fs.writeFile(
+        fullPath,
+        `import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+${content}`,
+      );
+    }),
+  );
+}
