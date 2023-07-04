@@ -14,20 +14,20 @@
     "./package.json": "./package.json",
     ".": {
       "require": {
-        "types": "./dist/typings/index.d.ts",
+        "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
       },
       "import": {
-        "types": "./dist/typings/index.d.mts",
+        "types": "./dist/esm/index.d.mts",
         "default": "./dist/esm/index.js"
       },
       "default": {
-        "types": "./dist/typings/index.d.mts",
+        "types": "./dist/esm/index.d.mts",
         "default": "./dist/esm/index.js"
       }
     }
   },
-  "typings": "dist/typings/index.d.mts",
+  "typings": "dist/esm/index.d.mts",
   "keywords": [
     "eslint",
     "eslintplugin",
@@ -70,6 +70,6 @@
   },
   "sideEffects": false,
   "typescript": {
-    "definition": "dist/typings/index.d.ts"
+    "definition": "dist/cjs/index.d.ts"
   }
 }
