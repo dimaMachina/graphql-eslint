@@ -20,7 +20,7 @@ function commentLine(str: string): string {
   return `// ${str}`;
 }
 
-await patch('/index.js', str => str.replace("export * from './testkit.js'", commentLine));
+await patch('/index.js', str => str.replace('export * from "./testkit.js"', commentLine));
 
 await patch('/parser.js', str =>
   str
@@ -46,18 +46,16 @@ await patch(
       .replace("import { createRequire } from 'module'", commentLine)
       .replace('const require = createRequire(import.meta.url)', commentLine)
       .replace(
-        `    let ruleFn = null;
+        `  let ruleFn = null;
+  try {
+    ruleFn = require(\`graphql/validation/rules/\${ruleName}Rule\`)[\`\${ruleName}Rule\`];
+  } catch {
     try {
-        ruleFn = require(\`graphql/validation/rules/\${ruleName}Rule\`)[\`\${ruleName}Rule\`];
+      ruleFn = require(\`graphql/validation/rules/\${ruleName}\`)[\`\${ruleName}Rule\`];
+    } catch {
+      ruleFn = require("graphql/validation")[\`\${ruleName}Rule\`];
     }
-    catch (_a) {
-        try {
-            ruleFn = require(\`graphql/validation/rules/\${ruleName}\`)[\`\${ruleName}Rule\`];
-        }
-        catch (_b) {
-            ruleFn = require('graphql/validation')[\`\${ruleName}Rule\`];
-        }
-    }`,
-        '    let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
+  }`,
+        '  let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
       ),
 );
