@@ -61,7 +61,7 @@ module.exports = {
       },
     },
     {
-      files: ['scripts/**'],
+      files: ['scripts/**', '**/tsup.config.ts'],
       rules: {
         'no-console': 'off',
       },
