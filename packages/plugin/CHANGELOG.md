@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.20.0
+
+### Minor Changes
+
+- [#1729](https://github.com/B2o5T/graphql-eslint/pull/1729)
+  [`018b2da`](https://github.com/B2o5T/graphql-eslint/commit/018b2da5fe71784b8c6adb0a8bcdb07ec597670a)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - bundle with tsup to strip out development code, check
+  with bob
+
 ## 3.19.3
 
 ### Patch Changes
