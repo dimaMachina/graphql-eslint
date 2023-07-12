@@ -4,12 +4,13 @@
  * taken from https://github.com/vitejs/vite/issues/7879#issuecomment-1156166452
  */
 
-import { unlink } from 'node:fs/promises';
+import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const require = createRequire(path.resolve('./packages/plugin/src'));
 
-unlink(require.resolve('graphql').replace(/\.js$/, '.mjs'))
+fs.promises
+  .unlink(require.resolve('graphql').replace(/\.js$/, '.mjs'))
   // ignore if file not exist (was already patched)
   .catch(() => null);
