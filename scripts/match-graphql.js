@@ -15,5 +15,5 @@ if (pkg.resolutions.graphql.startsWith(version)) {
 const npmVersion = version.includes('-') ? version : `^${version}`;
 pkg.resolutions.graphql = npmVersion;
 
-await fs.promises.writeFile(pkgPath, JSON.stringify(pkg, null, 2), 'utf8');
-await fs.promises.appendFile(path.join(CWD, '.prettierignore'), '\npackage.json');
+fs.promises.writeFile(pkgPath, JSON.stringify(pkg, null, 2), 'utf8');
+fs.promises.appendFile(path.join(CWD, '.prettierignore'), '\npackage.json');
