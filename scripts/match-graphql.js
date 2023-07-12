@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 // import pkg from '../package.json' assert { type: 'json' };
 const CWD = process.cwd();
-const pkg = JSON.parse(fs.readFileSync(path.join(CWD, '..', 'package.json')));
+const pkg = JSON.parse(fs.readFileSync(path.join(CWD, 'package.json')));
 
 const pkgPath = path.join(CWD, 'package.json');
 const version = process.argv[2];
