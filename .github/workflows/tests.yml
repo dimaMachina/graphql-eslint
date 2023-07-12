@@ -69,7 +69,7 @@ jobs:
       - name: Setup env
         uses: the-guild-org/shared-config/setup@main
         with:
-          nodeVersion: ${{matrix.node-version}}
+          nodeVersion: ${{matrix.node_version}}
           packageManager: pnpm
 
       - name: Use GraphQL v${{matrix.graphql_version}}
