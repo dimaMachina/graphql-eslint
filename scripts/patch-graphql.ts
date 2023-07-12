@@ -10,8 +10,6 @@ import path from 'node:path';
 
 const require = createRequire(path.resolve('./packages/plugin/src'));
 
-try {
-  await unlink(require.resolve('graphql').replace(/\.js$/, '.mjs'));
-} catch {
-  /* ignore if file not exist (was already patched) */
-}
+unlink(require.resolve('graphql').replace(/\.js$/, '.mjs'))
+  // ignore if file not exist (was already patched)
+  .catch(() => null);
