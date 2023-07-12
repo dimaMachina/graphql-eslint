@@ -4,6 +4,7 @@
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
+  "packageManager": "pnpm@6.35.1",
   "scripts": {
     "build": "pnpm --filter @graphql-eslint/eslint-plugin build && bob check",
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
