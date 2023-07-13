@@ -1,7 +1,7 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { GraphQLSchema, printSchema } from 'graphql';
+import { GraphQLSchema, printSchema, version } from 'graphql';
 import { loadGraphQLConfig } from '../src/graphql-config';
 import { getSchema } from '../src/schema';
 
@@ -16,7 +16,19 @@ describe('schema', async () => {
     const graphQLSchema = getSchema(gqlConfig.getDefault());
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
-    const sdlString = printSchema(graphQLSchema as GraphQLSchema);
+    let sdlString = printSchema(graphQLSchema as GraphQLSchema);
+
+    if (version.startsWith('15')) {
+      sdlString = sdlString.replace(
+        `"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR`,
+        '',
+      );
+    }
+
     expect(sdlString.trim()).toBe(schemaOnDisk.trim());
   };
 

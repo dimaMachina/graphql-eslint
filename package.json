@@ -4,7 +4,11 @@
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
-  "packageManager": "pnpm@7.33.3",
+  "packageManager": "pnpm@8.6.7",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "build": "pnpm --filter @graphql-eslint/eslint-plugin build && bob check",
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
