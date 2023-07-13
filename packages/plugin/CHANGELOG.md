@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.20.1
+
+### Patch Changes
+
+- [#1750](https://github.com/B2o5T/graphql-eslint/pull/1750)
+  [`7b461a1`](https://github.com/B2o5T/graphql-eslint/commit/7b461a1cf21b5efa7e9e7513745e336ad2708912)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - ESLint configuration in ... is invalid. Unexpected
+  top-level property "default". Fix targeting for legacy Node.js versions
+
 ## 3.20.0
 
 ### Minor Changes
