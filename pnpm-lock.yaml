@@ -367,8 +367,8 @@ importers:
         specifier: 13.4.9
         version: 13.4.9(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)
       next-query-params:
-        specifier: 4.2.2
-        version: 4.2.2(next@13.4.9)(react@18.2.0)(use-query-params@2.2.1)
+        specifier: 4.2.3
+        version: 4.2.3(next@13.4.9)(react@18.2.0)(use-query-params@2.2.1)
       next-sitemap:
         specifier: 4.1.8
         version: 4.1.8(next@13.4.9)
@@ -3994,6 +3994,7 @@ packages:
 
   /bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: false
@@ -6475,6 +6476,7 @@ packages:
 
   /file-uri-to-path@1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -9019,6 +9021,7 @@ packages:
 
   /nan@2.17.0:
     resolution: {integrity: sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -9075,8 +9078,8 @@ packages:
       - supports-color
     dev: false
 
-  /next-query-params@4.2.2(next@13.4.9)(react@18.2.0)(use-query-params@2.2.1):
-    resolution: {integrity: sha512-LXUvcDd5oGyqL2yQ6Kt61i57Lb1oL8Na+mnEBcyijNs+91TBnSnzBTLdCUz99NbKH1bgWVFkHSkRIv7w2RFjug==}
+  /next-query-params@4.2.3(next@13.4.9)(react@18.2.0)(use-query-params@2.2.1):
+    resolution: {integrity: sha512-hGNCYRH8YyA5ItiBGSKrtMl21b2MAqfPkdI1mvwloNVqSU142IaGzqHN+OTovyeLIpQfonY01y7BAHb/UH4POg==}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
