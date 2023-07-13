@@ -9,9 +9,9 @@
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "experimentalDecorators": true,
-    "module": "esnext",
-    "target": "es2018",
-    "lib": ["es2021", "dom"],
+    "module": "Node16",
+    "target": "es2019",
+    "lib": ["ESNext"],
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "sourceMap": true,
@@ -22,7 +22,6 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": ["vitest/globals"],
     "paths": {
       "@graphql-eslint/eslint-plugin": ["packages/plugin/src/index.ts"]
     }

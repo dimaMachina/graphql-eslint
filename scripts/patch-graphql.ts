@@ -13,5 +13,5 @@ const require = createRequire(path.resolve('./packages/plugin/src'));
 try {
   await unlink(require.resolve('graphql').replace(/\.js$/, '.mjs'));
 } catch {
-  /* ignore if file not exist (was already patched) */
+  // ignore if file not exist (was already patched)
 }

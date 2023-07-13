@@ -31,6 +31,7 @@
   "require-description": "",
   "require-field-of-type-query-in-mutation-result": "",
   "require-nullable-fields-with-oneof": "",
+  "require-nullable-result-in-root": "",
   "require-type-pattern-with-oneof": "",
   "strict-id-in-types": "",
   "unique-directive-names": "",

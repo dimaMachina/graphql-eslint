@@ -2,7 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
-export default {
+export = {
   parser: '@graphql-eslint/eslint-plugin',
   plugins: ['@graphql-eslint'],
   rules: {

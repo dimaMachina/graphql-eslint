@@ -31,6 +31,7 @@ import { rule as requireFieldOfTypeQueryInMutationResult } from './require-field
 import { rule as requireIdWhenAvailable } from './require-id-when-available.js';
 import { rule as requireImportFragment } from './require-import-fragment.js';
 import { rule as requireNullableFieldsWithOneof } from './require-nullable-fields-with-oneof.js';
+import { rule as requireNullableResultInRoot } from './require-nullable-result-in-root.js';
 import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof.js';
 import { rule as selectionSetDepth } from './selection-set-depth.js';
 import { rule as strictIdInTypes } from './strict-id-in-types.js';
@@ -67,6 +68,7 @@ export const rules = {
   'require-id-when-available': requireIdWhenAvailable,
   'require-import-fragment': requireImportFragment,
   'require-nullable-fields-with-oneof': requireNullableFieldsWithOneof,
+  'require-nullable-result-in-root': requireNullableResultInRoot,
   'require-type-pattern-with-oneof': requireTypePatternWithOneof,
   'selection-set-depth': selectionSetDepth,
   'strict-id-in-types': strictIdInTypes,

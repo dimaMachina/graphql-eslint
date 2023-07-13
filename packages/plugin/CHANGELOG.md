@@ -1,5 +1,60 @@
 # @graphql-eslint/eslint-plugin
 
+## 3.20.1
+
+### Patch Changes
+
+- [#1750](https://github.com/B2o5T/graphql-eslint/pull/1750)
+  [`7b461a1`](https://github.com/B2o5T/graphql-eslint/commit/7b461a1cf21b5efa7e9e7513745e336ad2708912)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - ESLint configuration in ... is invalid. Unexpected
+  top-level property "default". Fix targeting for legacy Node.js versions
+
+## 3.20.0
+
+### Minor Changes
+
+- [#1729](https://github.com/B2o5T/graphql-eslint/pull/1729)
+  [`018b2da`](https://github.com/B2o5T/graphql-eslint/commit/018b2da5fe71784b8c6adb0a8bcdb07ec597670a)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - bundle with tsup to strip out development code, check
+  with bob
+
+## 3.19.3
+
+### Patch Changes
+
+- [#1725](https://github.com/B2o5T/graphql-eslint/pull/1725)
+  [`5f3f1a5`](https://github.com/B2o5T/graphql-eslint/commit/5f3f1a5095480d63c9ce516cc7a3dccc16c6032f)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix
+  `Parsing error: Cannot read properties of undefined (reading '0') eslint` in VSCode
+
+## 3.19.2
+
+### Patch Changes
+
+- [#1716](https://github.com/B2o5T/graphql-eslint/pull/1716)
+  [`40c1523`](https://github.com/B2o5T/graphql-eslint/commit/40c15236095d938f9b3b1ca3f78af9e513932606)
+  Thanks [@BlakeGardner](https://github.com/BlakeGardner)! - broken rule url for
+  `require-import-fragment` and `require-nullable-result-in-root`
+
+## 3.19.1
+
+### Patch Changes
+
+- [#1665](https://github.com/B2o5T/graphql-eslint/pull/1665)
+  [`73b1087`](https://github.com/B2o5T/graphql-eslint/commit/73b1087be4768daecee031b1778c20280d41edca)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - fix
+  `TypeError: Cannot read properties of undefined (reading 'kind')` for
+  `require-nullable-result-in-root` rule
+
+## 3.19.0
+
+### Minor Changes
+
+- [#1657](https://github.com/B2o5T/graphql-eslint/pull/1657)
+  [`0a571bb`](https://github.com/B2o5T/graphql-eslint/commit/0a571bbd8756168de29bf7da20a3b714681aab1b)
+  Thanks [@nishtahir](https://github.com/nishtahir)! - Add `require-nullable-result-in-root` rule to
+  report on non-null fields in root types
+
 ## 3.18.0
 
 ### Minor Changes
