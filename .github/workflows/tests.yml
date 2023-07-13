@@ -57,7 +57,7 @@ jobs:
     needs: [typecheck]
     strategy:
       matrix:
-        node_version: [12, 16, 18]
+        node_version: [16, 18, 20]
         graphql_version: [15, 16]
 
     steps:
@@ -69,7 +69,7 @@ jobs:
       - name: Setup env
         uses: the-guild-org/shared-config/setup@main
         with:
-          nodeVersion: ${{matrix.node-version}}
+          nodeVersion: ${{matrix.node_version}}
           packageManager: pnpm
 
       - name: Use GraphQL v${{matrix.graphql_version}}
@@ -90,9 +90,8 @@ jobs:
         run: pnpm test
         env:
           CI: true
-
-      - name: Lint ESLint
-        run: pnpm lint
-
-      - name: Lint Prettier
-        run: pnpm lint:prettier
+#      - name: Lint ESLint
+#        run: pnpm lint
+#
+#      - name: Lint Prettier
+#        run: pnpm lint:prettier

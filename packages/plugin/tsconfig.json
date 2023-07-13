@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2021",
-    "module": "ESNext",
+    "target": "es2019",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "declaration": false,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
-    "skipLibCheck": true,
-    "allowJs": true,
-    "moduleResolution": "node",
     "lib": ["ESNext"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true

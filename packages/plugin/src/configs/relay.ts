@@ -1,4 +1,4 @@
-export default {
+export = {
   parser: '@graphql-eslint/eslint-plugin',
   plugins: ['@graphql-eslint'],
   rules: {
