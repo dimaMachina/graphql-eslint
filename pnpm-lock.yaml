@@ -53,8 +53,8 @@ importers:
         specifier: 4.1.2
         version: 4.1.2
       dedent:
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 1.0.2
+        version: 1.0.2
       enquirer:
         specifier: 2.3.6
         version: 2.3.6
@@ -5135,8 +5135,8 @@ packages:
     resolution: {integrity: sha512-OUepMozQULMLUmhxS95Vudo0jb0UchLimi3+pQ2plj61Fcy8axbP9hbiD4Sz6DPqn6XG3kfmziVfQ1rSys5AJQ==}
     dev: true
 
-  /dedent@1.0.1:
-    resolution: {integrity: sha512-ISfLyH40XVmphoIMyGwOpN4w9kB4Jjz5r62myZDJMbjJSwur7r/EZ0xg64yyZl50qoDVIvCT9UMLmQAjepmjiA==}
+  /dedent@1.0.2:
+    resolution: {integrity: sha512-jjGxaNbvFRbKwJMrS7Vbtp5VIUet5nmrUUAymCbir4/xXX3xvsBtMqtohNeSQ5ztUTR7lKLO5Qq1vf5cCe+Hcg==}
     dependencies:
       babel-plugin-macros: 3.1.0
     dev: true
