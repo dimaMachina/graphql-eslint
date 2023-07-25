@@ -191,8 +191,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       cosmiconfig-typescript-loader:
-        specifier: 4.3.0
-        version: 4.3.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6)
+        specifier: 4.4.0
+        version: 4.4.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6)
       eslint:
         specifier: 8.38.0
         version: 8.38.0
@@ -294,7 +294,7 @@ importers:
         version: 3.2.12
       graphql-config:
         specifier: ^4.4.0
-        version: 4.4.0(@types/node@18.17.0)(cosmiconfig-toml-loader@1.0.0)(cosmiconfig-typescript-loader@4.3.0)(graphql@16.7.1)
+        version: 4.4.0(@types/node@18.17.0)(cosmiconfig-toml-loader@1.0.0)(cosmiconfig-typescript-loader@4.4.0)(graphql@16.7.1)
       graphql-depth-limit:
         specifier: ^1.1.0
         version: 1.1.0(graphql@16.7.1)
@@ -4654,14 +4654,14 @@ packages:
       '@iarna/toml': 2.2.5
     dev: false
 
-  /cosmiconfig-typescript-loader@4.3.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6):
-    resolution: {integrity: sha512-NTxV1MFfZDLPiBMjxbHRwSh5LaLcPMwNdCutmnHJCKoVnlvldPWlllonKwrsRJ5pYZBIBGRWWU2tfvzxgeSW5Q==}
-    engines: {node: '>=12', npm: '>=6'}
+  /cosmiconfig-typescript-loader@4.4.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6):
+    resolution: {integrity: sha512-BabizFdC3wBHhbI4kJh0VkQP9GkBfoHPydD0COMce1nJ1kJAB3F2TmJ/I7diULBKtmEWSwEbuN/KDtgnmUUVmw==}
+    engines: {node: '>=v14.21.3'}
     peerDependencies:
       '@types/node': '*'
       cosmiconfig: '>=7'
       ts-node: '>=10'
-      typescript: '>=3'
+      typescript: '>=4'
     dependencies:
       '@types/node': 18.17.0
       cosmiconfig: 8.2.0
@@ -6930,7 +6930,7 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /graphql-config@4.4.0(@types/node@18.17.0)(cosmiconfig-toml-loader@1.0.0)(cosmiconfig-typescript-loader@4.3.0)(graphql@16.7.1):
+  /graphql-config@4.4.0(@types/node@18.17.0)(cosmiconfig-toml-loader@1.0.0)(cosmiconfig-typescript-loader@4.4.0)(graphql@16.7.1):
     resolution: {integrity: sha512-QUrX7R4htnTBTi83a0IlIilWVfiLEG8ANFlHRcxoZiTvOXTbgan67SUdGe1OlopbDuyNgtcy4ladl3Gvk4C36A==}
     engines: {node: '>= 10.0.0'}
     peerDependencies:
@@ -6946,7 +6946,7 @@ packages:
       '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
       cosmiconfig: 8.0.0
       cosmiconfig-toml-loader: 1.0.0
-      cosmiconfig-typescript-loader: 4.3.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6)
       graphql: 16.7.1
       minimatch: 4.2.1
       string-env-interpolation: 1.0.1
