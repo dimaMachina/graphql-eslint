@@ -191,8 +191,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       cosmiconfig-typescript-loader:
-        specifier: 4.4.0
-        version: 4.4.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.1.6)
+        specifier: 5.0.0
+        version: 5.0.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(typescript@5.1.6)
       eslint:
         specifier: 8.38.0
         version: 8.38.0
@@ -4667,6 +4667,21 @@ packages:
       cosmiconfig: 8.2.0
       ts-node: 10.9.1(@types/node@18.17.0)(typescript@5.1.6)
       typescript: 5.1.6
+    dev: false
+
+  /cosmiconfig-typescript-loader@5.0.0(@types/node@18.17.0)(cosmiconfig@8.2.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==}
+    engines: {node: '>=v16'}
+    peerDependencies:
+      '@types/node': '*'
+      cosmiconfig: '>=8.2'
+      typescript: '>=4'
+    dependencies:
+      '@types/node': 18.17.0
+      cosmiconfig: 8.2.0
+      jiti: 1.19.1
+      typescript: 5.1.6
+    dev: true
 
   /cosmiconfig@8.0.0:
     resolution: {integrity: sha512-da1EafcpH6b/TD8vDRaWV7xFINlHlF6zKsGwS1TsuVJTZRkquaS5HTMq7uq6h31619QjbsYl21gVDOm32KM1vQ==}
