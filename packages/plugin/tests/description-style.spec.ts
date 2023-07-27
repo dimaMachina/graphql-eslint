@@ -1,4 +1,4 @@
-import { ruleTester } from '../src/testkit';
+import { RuleTester } from '../src/testkit';
 import { rule, RuleOptions } from '../src/rules/description-style';
 
 const INLINE_SDL = /* GraphQL */ `
@@ -28,6 +28,8 @@ export const BLOCK_SDL = /* GraphQL */ `
     native
   }
 `;
+
+const ruleTester = new RuleTester();
 
 ruleTester.run<RuleOptions>('description-style', rule, {
   valid: [

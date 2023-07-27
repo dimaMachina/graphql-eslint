@@ -1,12 +1,12 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { codeFrameColumns } from '@babel/code-frame';
-import { AST, Linter, Rule, RuleTester } from 'eslint';
+import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
 import { FlatRuleTester } from 'eslint/use-at-your-own-risk';
 import { ASTKindToNode } from 'graphql';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { GraphQLESLintRule, ParserOptions } from './types.js';
-import { parseForESLint } from './parser.js'
+import { parseForESLint } from './parser.js';
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Record<
   string,
@@ -16,7 +16,7 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Re
 };
 
 export type GraphQLValidTestCase<Options = []> = Omit<
-  RuleTester.ValidTestCase,
+  ESLintRuleTester.ValidTestCase,
   'options' | 'parserOptions'
 > & {
   options?: Options;
@@ -24,7 +24,7 @@ export type GraphQLValidTestCase<Options = []> = Omit<
 };
 
 export type GraphQLInvalidTestCase<T = []> = GraphQLValidTestCase<T> & {
-  errors: (RuleTester.TestCaseError | string)[] | number;
+  errors: (ESLintRuleTester.TestCaseError | string)[] | number;
   output?: string | null;
 };
 
@@ -43,11 +43,11 @@ type RuleTesterConfig = {
   parserOptions: Omit<ParserOptions, 'filePath'>;
 };
 
-export class GraphQLRuleTester extends FlatRuleTester {
-  config: RuleTesterConfig;
+export class RuleTester extends FlatRuleTester {
+  static parserName = '@graphql-eslint/eslint-plugin';
 
   constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
-    const config = {
+    super({
       languageOptions: {
         parser: { parseForESLint },
         parserOptions: {
@@ -55,9 +55,7 @@ export class GraphQLRuleTester extends FlatRuleTester {
           skipGraphQLConfig: true,
         },
       },
-    };
-    super(config);
-    this.config = config;
+    });
   }
 
   fromMockFile(path: string): string {
@@ -73,31 +71,14 @@ export class GraphQLRuleTester extends FlatRuleTester {
     },
   ): void {
     super.run(ruleId, rule as any, tests);
+    const config = this.testerConfig[1] as RuleTesterConfig;
+
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
     const hasOnlyTest = [...tests.valid, ...tests.invalid].some(
       t => typeof t !== 'string' && t.only,
     );
-
-    // for (const [index, testCase] of tests.valid.entries()) {
-    //   const { name, code, filename, only }: RuleTester.ValidTestCase =
-    //     typeof testCase === 'string' ? { code: testCase } : testCase;
-    //
-    //   if (hasOnlyTest && !only) {
-    //     continue;
-    //   }
-    //
-    //   const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
-    //   defineParser(linter, verifyConfig.parser);
-    //
-    //   const messages = linter.verify(code, verifyConfig, { filename });
-    //   const codeFrame = printCode(code, { line: 0, column: 0 });
-    //
-    //   it(name || `Valid #${index + 1}\n${codeFrame}`, () => {
-    //     expect(messages).toEqual([]);
-    //   });
-    // }
 
     for (const [idx, testCase] of tests.invalid.entries()) {
       const { only, filename, options, name } = testCase;
@@ -106,8 +87,9 @@ export class GraphQLRuleTester extends FlatRuleTester {
       }
 
       const code = removeTrailingBlankLines(testCase.code);
-      const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
-      defineParser(linter, verifyConfig.parser);
+      const verifyConfig = getVerifyConfig<Options>(ruleId, config, testCase);
+      defineParser(linter, config.languageOptions.parser);
+      verifyConfig.parser = RuleTester.parserName;
 
       const messages = linter.verify(code, verifyConfig, filename);
       if (messages.length === 0) {
@@ -161,8 +143,6 @@ export class GraphQLRuleTester extends FlatRuleTester {
   }
 }
 
-export const ruleTester = new GraphQLRuleTester();
-
 function removeTrailingBlankLines(text: string): string {
   return text.replace(/^\s*\n/, '').trimEnd();
 }
@@ -182,15 +162,10 @@ function getVerifyConfig<Options>(
   testerConfig: RuleTesterConfig,
   testCase: GraphQLInvalidTestCase<Options>,
 ): Omit<Linter.Config, 'parser'> & { parser: string } {
-  const { parser = testerConfig.parser, parserOptions, options } = testCase;
+  const { options } = testCase;
 
   return {
     ...testerConfig,
-    parser,
-    parserOptions: {
-      ...testerConfig.parserOptions,
-      ...parserOptions,
-    },
     rules: {
       [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
     },
@@ -199,7 +174,7 @@ function getVerifyConfig<Options>(
 
 const parsers = new WeakMap();
 
-function defineParser(linter: Linter, parser: string): void {
+function defineParser(linter: Linter, parser: Linter.ParserModule): void {
   if (!parser) {
     return;
   }
@@ -210,8 +185,7 @@ function defineParser(linter: Linter, parser: string): void {
   const defined = parsers.get(linter);
   if (!defined.has(parser)) {
     defined.add(parser);
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    linter.defineParser(parser, require(parser));
+    linter.defineParser(RuleTester.parserName, parser);
   }
 }
 
