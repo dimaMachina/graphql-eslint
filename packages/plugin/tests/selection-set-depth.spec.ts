@@ -1,4 +1,5 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule, RuleOptions } from '../src/rules/selection-set-depth';
 
 const WITH_SIBLINGS = {
@@ -7,9 +8,9 @@ const WITH_SIBLINGS = {
   } as ParserOptions,
 };
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests<RuleOptions>('selection-set-depth', rule, {
+ruleTester.run<RuleOptions>('selection-set-depth', rule, {
   valid: [
     {
       options: [{ maxDepth: 2 }],

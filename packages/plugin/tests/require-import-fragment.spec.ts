@@ -1,10 +1,11 @@
 import { join } from 'node:path';
-import { GraphQLInvalidTestCase, GraphQLRuleTester } from '../src';
+import { GraphQLInvalidTestCase } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/require-import-fragment';
 import { Linter } from 'eslint';
 import ParserOptions = Linter.ParserOptions;
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
 function withMocks({
   name,
@@ -38,7 +39,7 @@ function withMocks({
   };
 }
 
-ruleTester.runGraphQLTests('require-import-fragment', rule, {
+ruleTester.run('require-import-fragment', rule, {
   valid: [
     withMocks({
       name: 'should not report with named import',

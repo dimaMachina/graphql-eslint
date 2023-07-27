@@ -1,9 +1,9 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/require-type-pattern-with-oneof';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('require-type-pattern-with-oneof', rule, {
+ruleTester.run('require-type-pattern-with-oneof', rule, {
   valid: [
     /* GraphQL */ `
       type T @oneOf {

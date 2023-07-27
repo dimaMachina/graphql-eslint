@@ -1,4 +1,5 @@
-import { GraphQLRuleTester, ParserOptions, rules } from '../src';
+import { ParserOptions, rules } from '../src';
+import { RuleTester } from '../src/testkit';
 
 const parserOptions: Pick<ParserOptions, 'schema'> = {
   schema: /* GraphQL */ `
@@ -12,9 +13,9 @@ const parserOptions: Pick<ParserOptions, 'schema'> = {
     }
   `,
 };
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('fields-on-correct-type', rules['fields-on-correct-type'], {
+ruleTester.run('fields-on-correct-type', rules['fields-on-correct-type'], {
   valid: [],
   invalid: [
     {

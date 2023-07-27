@@ -1,4 +1,5 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule, RuleOptions } from '../src/rules/require-id-when-available';
 
 const TEST_SCHEMA = /* GraphQL */ `
@@ -66,7 +67,7 @@ const WITH_SCHEMA = {
   } as ParserOptions,
 };
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
 
 const DOCUMENT_WITH_UNION = /* GraphQL */ `
@@ -79,7 +80,7 @@ const DOCUMENT_WITH_UNION = /* GraphQL */ `
   }
 `;
 
-ruleTester.runGraphQLTests<RuleOptions, true>('require-id-when-available', rule, {
+ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
   valid: [
     {
       name: 'should completely ignore FragmentDefinition',
