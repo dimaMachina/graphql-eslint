@@ -56,8 +56,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0
       enquirer:
-        specifier: 2.3.6
-        version: 2.3.6
+        specifier: 2.4.0
+        version: 2.4.0
       eslint:
         specifier: 8.44.0
         version: 8.44.0(patch_hash=v7lv2hbnxmm2b22qo3sob3rjvq)
@@ -947,7 +947,7 @@ packages:
       '@types/semver': 7.5.0
       ansi-colors: 4.1.3
       chalk: 2.4.2
-      enquirer: 2.3.6
+      enquirer: 2.4.0
       external-editor: 3.1.0
       fs-extra: 7.0.1
       human-id: 1.0.2
@@ -5541,11 +5541,12 @@ packages:
       tapable: 2.2.1
     dev: true
 
-  /enquirer@2.3.6:
-    resolution: {integrity: sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==}
+  /enquirer@2.4.0:
+    resolution: {integrity: sha512-ehu97t6FTYK2I3ZYtnp0BZ9vt0mvEL/cnHBds7Ct6jo9VX1VIkiFhOvVRWh6eblQqd7KOoICIQV+syZ3neXO/Q==}
     engines: {node: '>=8.6'}
     dependencies:
       ansi-colors: 4.1.3
+      strip-ansi: 6.0.1
     dev: true
 
   /entities@4.5.0:
