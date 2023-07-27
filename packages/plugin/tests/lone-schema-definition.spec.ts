@@ -1,9 +1,9 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests(
+ruleTester.run(
   'lone-schema-definition',
   GRAPHQL_JS_VALIDATIONS['lone-schema-definition'],
   {

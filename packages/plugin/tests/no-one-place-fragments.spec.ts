@@ -1,10 +1,10 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/no-one-place-fragments';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-one-place-fragments', rule, {
+ruleTester.run('no-one-place-fragments', rule, {
   valid: [
     {
       name: 'ok when spread 2 times',

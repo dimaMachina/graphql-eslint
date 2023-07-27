@@ -1,9 +1,9 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester, rules } from '../src';
+import { RuleTester, rules } from '../src';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-undefined-variables', rules['no-undefined-variables'], {
+ruleTester.run('no-undefined-variables', rules['no-undefined-variables'], {
   valid: [],
   invalid: [
     {

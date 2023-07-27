@@ -1,4 +1,5 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/no-deprecated';
 
 const TEST_SCHEMA = /* GraphQL */ `
@@ -25,9 +26,9 @@ const WITH_SCHEMA = {
     documents: [],
   } as ParserOptions,
 };
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-deprecated', rule, {
+ruleTester.run('no-deprecated', rule, {
   valid: [
     { ...WITH_SCHEMA, code: 'query { newField }' },
     { ...WITH_SCHEMA, code: 'mutation { something(t: NEW) }' },

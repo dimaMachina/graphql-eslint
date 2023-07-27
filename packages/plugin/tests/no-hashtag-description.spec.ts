@@ -1,9 +1,9 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule, RULE_ID } from '../src/rules/no-hashtag-description';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-hashtag-description', rule, {
+ruleTester.run('no-hashtag-description', rule, {
   valid: [
     /* GraphQL */ `
       " Good "

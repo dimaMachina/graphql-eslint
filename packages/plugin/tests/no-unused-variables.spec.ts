@@ -1,9 +1,10 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester, rules } from '../src';
+import { RuleTester } from '../src/testkit';
+import { rules } from '../src';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-unused-variables', rules['no-unused-variables'], {
+ruleTester.run('no-unused-variables', rules['no-unused-variables'], {
   valid: [
     {
       filename: join(__dirname, 'mocks/no-unused-variables.gql'),

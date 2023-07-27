@@ -1,4 +1,4 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/no-unused-fields';
 
 const SCHEMA = /* GraphQL */ `
@@ -38,9 +38,9 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-const ruleTester = new GraphQLRuleTester({ schema: SCHEMA });
+const ruleTester = new RuleTester({ schema: SCHEMA });
 
-ruleTester.runGraphQLTests('no-unused-fields', rule, {
+ruleTester.run('no-unused-fields', rule, {
   valid: [
     {
       code: SCHEMA,

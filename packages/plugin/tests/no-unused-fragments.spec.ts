@@ -1,9 +1,10 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester, rules } from '../src';
+import { rules } from '../src';
+import { RuleTester } from '../src/testkit';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-unused-fragments', rules['no-unused-fragments'], {
+ruleTester.run('no-unused-fragments', rules['no-unused-fragments'], {
   valid: [
     {
       name: 'should find file with operation definition that import current fragment',

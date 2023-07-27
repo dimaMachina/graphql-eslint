@@ -1,9 +1,9 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/no-case-insensitive-enum-values-duplicates';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-case-insensitive-enum-values-duplicates', rule, {
+ruleTester.run('no-case-insensitive-enum-values-duplicates', rule, {
   valid: [],
   invalid: [
     {

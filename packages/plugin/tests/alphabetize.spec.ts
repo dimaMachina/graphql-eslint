@@ -1,7 +1,7 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule, RuleOptions } from '../src/rules/alphabetize';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
 const GROUP_ORDER_TEST = /* GraphQL */ `
   type User {
@@ -18,7 +18,7 @@ const GROUP_ORDER_TEST = /* GraphQL */ `
   }
 `;
 
-ruleTester.runGraphQLTests<RuleOptions>('alphabetize', rule, {
+ruleTester.run<RuleOptions>('alphabetize', rule, {
   valid: [
     {
       options: [{ fields: ['ObjectTypeDefinition'] }],

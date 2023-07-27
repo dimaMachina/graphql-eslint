@@ -1,4 +1,5 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/require-field-of-type-query-in-mutation-result';
 
 const useSchema = (
@@ -16,9 +17,9 @@ const useSchema = (
   },
 });
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rule, {
+ruleTester.run('require-field-of-type-query-in-mutation-result', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       type Query {

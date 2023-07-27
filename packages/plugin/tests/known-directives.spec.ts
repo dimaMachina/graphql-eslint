@@ -1,6 +1,7 @@
-import { GraphQLRuleTester, rules } from '../src';
+import { rules } from '../src';
+import { RuleTester } from '../src/testkit';
 
-const ruleTester = new GraphQLRuleTester({
+const ruleTester = new RuleTester({
   schema: /* GraphQL */ `
     type User {
       id: ID!
@@ -12,7 +13,7 @@ const ruleTester = new GraphQLRuleTester({
   `,
 });
 
-ruleTester.runGraphQLTests<[{ ignoreClientDirectives: string[] }]>(
+ruleTester.run<[{ ignoreClientDirectives: string[] }]>(
   'known-directives',
   rules['known-directives'],
   {

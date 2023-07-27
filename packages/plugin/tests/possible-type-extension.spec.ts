@@ -1,7 +1,8 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester, ParserOptions, rules } from '../src';
+import { ParserOptions, rules } from '../src';
+import { RuleTester } from '../src/testkit';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
 const useUserSchema = (
   code: string,
@@ -22,7 +23,7 @@ const useUserSchema = (
   };
 };
 
-ruleTester.runGraphQLTests('possible-type-extension', rules['possible-type-extension'], {
+ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
   valid: [
     useUserSchema(/* GraphQL */ `
       extend type User {

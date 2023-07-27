@@ -1,9 +1,9 @@
-import { GraphQLRuleTester } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule } from '../src/rules/no-anonymous-operations';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests('no-anonymous-operations', rule, {
+ruleTester.run('no-anonymous-operations', rule, {
   valid: ['query myQuery { a }', 'mutation doSomething { a }', 'subscription myData { a }'],
   invalid: [
     { code: 'query { a }', errors: 1 },

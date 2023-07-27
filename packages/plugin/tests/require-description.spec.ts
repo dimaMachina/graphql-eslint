@@ -1,10 +1,11 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule, RuleOptions, RULE_ID } from '../src/rules/require-description';
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 const OPERATION = { OperationDefinition: true };
 
-ruleTester.runGraphQLTests<RuleOptions>('require-description', rule, {
+ruleTester.run<RuleOptions>('require-description', rule, {
   valid: [
     {
       code: /* GraphQL */ `

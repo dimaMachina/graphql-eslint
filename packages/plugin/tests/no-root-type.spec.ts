@@ -1,4 +1,5 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
+import { RuleTester } from '../src/testkit';
 import { rule, RuleOptions } from '../src/rules/no-root-type';
 
 const useSchema = (
@@ -11,9 +12,9 @@ const useSchema = (
   },
 });
 
-const ruleTester = new GraphQLRuleTester();
+const ruleTester = new RuleTester();
 
-ruleTester.runGraphQLTests<RuleOptions>('no-root-type', rule, {
+ruleTester.run<RuleOptions>('no-root-type', rule, {
   valid: [
     {
       ...useSchema('type Query'),
