@@ -1,7 +1,5 @@
-import { GraphQLRuleTester } from '../src';
+import { ruleTester } from '../src/testkit';
 import { rule, RuleOptions } from '../src/rules/description-style';
-
-const ruleTester = new GraphQLRuleTester();
 
 const INLINE_SDL = /* GraphQL */ `
   " Test "
@@ -31,7 +29,7 @@ export const BLOCK_SDL = /* GraphQL */ `
   }
 `;
 
-ruleTester.runGraphQLTests<RuleOptions>('description-style', rule, {
+ruleTester.run<RuleOptions>('description-style', rule, {
   valid: [
     BLOCK_SDL,
     {

@@ -2,9 +2,11 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester } from 'eslint';
+import { FlatRuleTester } from 'eslint/use-at-your-own-risk';
 import { ASTKindToNode } from 'graphql';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { GraphQLESLintRule, ParserOptions } from './types.js';
+import { parseForESLint } from './parser.js'
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Record<
   string,
@@ -41,15 +43,17 @@ type RuleTesterConfig = {
   parserOptions: Omit<ParserOptions, 'filePath'>;
 };
 
-export class GraphQLRuleTester extends RuleTester {
+export class GraphQLRuleTester extends FlatRuleTester {
   config: RuleTesterConfig;
 
   constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
     const config = {
-      parser: require.resolve('@graphql-eslint/eslint-plugin'),
-      parserOptions: {
-        ...parserOptions,
-        skipGraphQLConfig: true,
+      languageOptions: {
+        parser: { parseForESLint },
+        parserOptions: {
+          ...parserOptions,
+          skipGraphQLConfig: true,
+        },
       },
     };
     super(config);
@@ -60,7 +64,7 @@ export class GraphQLRuleTester extends RuleTester {
     return readFileSync(resolve(__dirname, `../tests/mocks/${path}`), 'utf-8');
   }
 
-  runGraphQLTests<Options, WithTypeInfo extends boolean = false>(
+  run<Options, WithTypeInfo extends boolean = false>(
     ruleId: string,
     rule: GraphQLESLintRule<Options, WithTypeInfo>,
     tests: {
@@ -156,6 +160,8 @@ export class GraphQLRuleTester extends RuleTester {
     }
   }
 }
+
+export const ruleTester = new GraphQLRuleTester();
 
 function removeTrailingBlankLines(text: string): string {
   return text.replace(/^\s*\n/, '').trimEnd();
