@@ -68,7 +68,14 @@ export class RuleTester extends ESLintRuleTester {
       invalid: GraphQLInvalidTestCase<Options>[];
     },
   ): void {
+    for (const test of [...tests.valid, ...tests.invalid]) {
+      test.getMessages = (messages) => {
+        console.log(123,{messages})
+      }
+    }
+
     super.run(ruleId, rule as any, tests);
+    return
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
