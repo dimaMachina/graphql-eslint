@@ -69,26 +69,18 @@ export class RuleTester extends ESLintRuleTester {
     },
   ): void {
     for (const test of [...tests.valid, ...tests.invalid]) {
-      test.getMessages = (messages) => {
-        console.log(123,{messages})
-      }
+      test.getMessages = messages => {
+        console.log(123, { messages });
+      };
     }
 
     super.run(ruleId, rule as any, tests);
-    return
+    return;
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
-    const hasOnlyTest = [...tests.valid, ...tests.invalid].some(
-      t => typeof t !== 'string' && t.only,
-    );
-
     for (const [idx, testCase] of tests.invalid.entries()) {
-      const { only, filename, options, name } = testCase;
-      if (hasOnlyTest && !only) {
-        continue;
-      }
-
+      const { filename, options, name } = testCase;
       const code = removeTrailingBlankLines(testCase.code);
       const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
       defineParser(linter, verifyConfig.parser);
