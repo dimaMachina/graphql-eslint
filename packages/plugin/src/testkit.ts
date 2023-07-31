@@ -2,11 +2,9 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
-import { FlatRuleTester } from 'eslint/use-at-your-own-risk';
 import { ASTKindToNode } from 'graphql';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { GraphQLESLintRule, ParserOptions } from './types.js';
-import { parseForESLint } from './parser.js';
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Record<
   string,
@@ -43,19 +41,19 @@ type RuleTesterConfig = {
   parserOptions: Omit<ParserOptions, 'filePath'>;
 };
 
-export class RuleTester extends FlatRuleTester {
-  static parserName = '@graphql-eslint/eslint-plugin';
+export class RuleTester extends ESLintRuleTester {
+  config: RuleTesterConfig;
 
   constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
-    super({
-      languageOptions: {
-        parser: { parseForESLint },
-        parserOptions: {
-          ...parserOptions,
-          skipGraphQLConfig: true,
-        },
+    const config = {
+      parser: require.resolve('@graphql-eslint/eslint-plugin'),
+      parserOptions: {
+        ...parserOptions,
+        skipGraphQLConfig: true,
       },
-    });
+    };
+    super(config);
+    this.config = config;
   }
 
   fromMockFile(path: string): string {
@@ -71,8 +69,6 @@ export class RuleTester extends FlatRuleTester {
     },
   ): void {
     super.run(ruleId, rule as any, tests);
-    const config = this.testerConfig[1] as RuleTesterConfig;
-
     const linter = new Linter();
     linter.defineRule(ruleId, rule as any);
 
@@ -87,9 +83,8 @@ export class RuleTester extends FlatRuleTester {
       }
 
       const code = removeTrailingBlankLines(testCase.code);
-      const verifyConfig = getVerifyConfig<Options>(ruleId, config, testCase);
-      defineParser(linter, config.languageOptions.parser);
-      verifyConfig.parser = RuleTester.parserName;
+      const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
+      defineParser(linter, verifyConfig.parser);
 
       const messages = linter.verify(code, verifyConfig, filename);
       if (messages.length === 0) {
@@ -162,10 +157,15 @@ function getVerifyConfig<Options>(
   testerConfig: RuleTesterConfig,
   testCase: GraphQLInvalidTestCase<Options>,
 ): Omit<Linter.Config, 'parser'> & { parser: string } {
-  const { options } = testCase;
+  const { parser = testerConfig.parser, parserOptions, options } = testCase;
 
   return {
     ...testerConfig,
+    parser,
+    parserOptions: {
+      ...testerConfig.parserOptions,
+      ...parserOptions,
+    },
     rules: {
       [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
     },
@@ -174,7 +174,7 @@ function getVerifyConfig<Options>(
 
 const parsers = new WeakMap();
 
-function defineParser(linter: Linter, parser: Linter.ParserModule): void {
+function defineParser(linter: Linter, parser: string): void {
   if (!parser) {
     return;
   }
@@ -185,7 +185,8 @@ function defineParser(linter: Linter, parser: Linter.ParserModule): void {
   const defined = parsers.get(linter);
   if (!defined.has(parser)) {
     defined.add(parser);
-    linter.defineParser(RuleTester.parserName, parser);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    linter.defineParser(parser, require(parser));
   }
 }
 
