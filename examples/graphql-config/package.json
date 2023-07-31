@@ -14,6 +14,6 @@
   "devDependencies": {
     "@eslint/js": "8.45.0",
     "@graphql-eslint/eslint-plugin": "workspace:*",
-    "eslint": "8.38.0"
+    "eslint": "8.46.0"
   }
 }
