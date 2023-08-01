@@ -1,5 +1,6 @@
 import { createRequire } from 'node:module';
 import { withGuildDocs } from '@theguild/components/next.config';
+import webpack from 'webpack';
 
 const require = createRequire(import.meta.url);
 
@@ -28,6 +29,11 @@ export default withGuildDocs({
       // fixes for schema.js and documents.js TypeError: Cannot read properties of undefined (reading 'split')
       'fast-glob': false,
     };
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
+        resource.request = resource.request.replace('node:', '');
+      }),
+    );
     return config;
   },
   eslint: {
