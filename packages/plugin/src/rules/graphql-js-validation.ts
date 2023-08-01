@@ -30,7 +30,16 @@ import {
   PossibleTypeExtensionsRule,
   ProvidedRequiredArgumentsRule,
   ScalarLeafsRule,
-  SingleFieldSubscriptionsRule
+  SingleFieldSubscriptionsRule,
+  UniqueArgumentNamesRule,
+  UniqueDirectiveNamesRule,
+  UniqueDirectivesPerLocationRule,
+  UniqueEnumValueNamesRule,
+  UniqueFieldDefinitionNamesRule,
+  UniqueInputFieldNamesRule,
+  UniqueOperationTypesRule,
+  UniqueTypeNamesRule,
+  UniqueVariableNamesRule,
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
@@ -598,7 +607,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-argument-names',
-      ruleName: 'UniqueArgumentNames',
+      rule: UniqueArgumentNamesRule,
     },
     {
       category: 'Operations',
@@ -610,7 +619,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-directive-names',
-      ruleName: 'UniqueDirectiveNames',
+      rule: UniqueDirectiveNamesRule,
     },
     {
       category: 'Schema',
@@ -620,7 +629,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-directive-names-per-location',
-      ruleName: 'UniqueDirectivesPerLocation',
+      rule: UniqueDirectivesPerLocationRule,
     },
     {
       category: ['Schema', 'Operations'],
@@ -632,7 +641,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-enum-value-names',
-      ruleName: 'UniqueEnumValueNames',
+      rule: UniqueEnumValueNamesRule,
     },
     {
       category: 'Schema',
@@ -644,7 +653,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-field-definition-names',
-      ruleName: 'UniqueFieldDefinitionNames',
+      rule: UniqueFieldDefinitionNamesRule,
     },
     {
       category: 'Schema',
@@ -654,7 +663,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-input-field-names',
-      ruleName: 'UniqueInputFieldNames',
+      rule: UniqueInputFieldNamesRule,
     },
     {
       category: 'Operations',
@@ -665,7 +674,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-operation-types',
-      ruleName: 'UniqueOperationTypes',
+      rule: UniqueOperationTypesRule,
     },
     {
       category: 'Schema',
@@ -675,7 +684,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-type-names',
-      ruleName: 'UniqueTypeNames',
+      rule: UniqueTypeNamesRule,
     },
     {
       category: 'Schema',
@@ -685,7 +694,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-variable-names',
-      ruleName: 'UniqueVariableNames',
+      rule: UniqueVariableNamesRule,
     },
     {
       category: 'Operations',
