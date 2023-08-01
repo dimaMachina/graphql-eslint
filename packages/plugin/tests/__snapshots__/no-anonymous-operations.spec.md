@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-anonymous-operations > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | query { a }
@@ -15,7 +15,7 @@ exports[`Invalid #1 1`] = `
     1 | query a { a }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-anonymous-operations > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | mutation { renamed: a }
@@ -30,7 +30,7 @@ exports[`Invalid #2 1`] = `
     1 | mutation renamed { renamed: a }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`no-anonymous-operations > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | subscription { ...someFragmentSpread }

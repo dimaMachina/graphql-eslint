@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-unused-fields > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -23,7 +23,7 @@ exports[`Invalid #1 1`] = `
     4 |         }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-unused-fields > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         type Query {

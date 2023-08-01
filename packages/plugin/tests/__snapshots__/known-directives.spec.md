@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should work only with Kind.FIELD 1`] = `
+exports[`known-directives > invalid > should work only with Kind.FIELD 1`] = `
 #### ⌨️ Code
 
       1 | scalar Foo @bad

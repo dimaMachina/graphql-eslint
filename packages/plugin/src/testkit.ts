@@ -116,7 +116,7 @@ export class RuleTester extends ESLintRuleTester {
     };
 
     for (const [id, testCase] of tests.invalid.entries()) {
-      testCase.name = `Invalid #${id + 1}`;
+      testCase.name ||= `Invalid #${id + 1}`;
       testCase.getMessages = getMessages(testCase);
     }
 

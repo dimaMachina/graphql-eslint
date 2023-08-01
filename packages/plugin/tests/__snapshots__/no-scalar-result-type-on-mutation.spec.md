@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #2 1`] = `
+exports[`no-scalar-result-type-on-mutation > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         type Mutation
@@ -25,7 +25,7 @@ exports[`Invalid #2 1`] = `
     5 |         }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`no-scalar-result-type-on-mutation > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 |         type RootMutation {
@@ -54,7 +54,7 @@ exports[`Invalid #3 1`] = `
     7 |         }
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`no-scalar-result-type-on-mutation > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 |         type RootMutation
@@ -85,7 +85,7 @@ exports[`Invalid #4 1`] = `
     8 |         }
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`no-scalar-result-type-on-mutation > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 |         type Mutation {
@@ -125,7 +125,7 @@ exports[`Invalid #5 1`] = `
     5 |         }
 `;
 
-exports[`should ignore arguments 1`] = `
+exports[`no-scalar-result-type-on-mutation > invalid > should ignore arguments 1`] = `
 #### ⌨️ Code
 
       1 |         type Mutation {

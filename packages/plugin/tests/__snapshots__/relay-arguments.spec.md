@@ -71,7 +71,7 @@ exports[`relay-arguments > invalid > Invalid #2 1`] = `
       3 |         }
 `;
 
-exports[`relay-arguments > invalid > Invalid #3 1`] = `
+exports[`relay-arguments > invalid > should report about 2nd required argument if 1st was provided 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
