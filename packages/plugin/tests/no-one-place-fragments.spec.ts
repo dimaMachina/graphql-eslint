@@ -1,8 +1,6 @@
 import { join } from 'node:path';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/no-one-place-fragments';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 ruleTester.run('no-one-place-fragments', rule, {
   valid: [

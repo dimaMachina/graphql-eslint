@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
+import { ruleTester } from './test-utils';
 
 const useSchema = (
   code: string,
@@ -16,8 +16,6 @@ const useSchema = (
     `,
   },
 });
-
-const ruleTester = new RuleTester();
 
 ruleTester.run('no-scalar-result-type-on-mutation', rule, {
   valid: [

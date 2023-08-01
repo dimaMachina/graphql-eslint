@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/no-unreachable-types';
+import { ruleTester } from './test-utils';
 
 const useSchema = (
   schema: string,
@@ -10,8 +10,6 @@ const useSchema = (
     code: schema,
   };
 };
-
-const ruleTester = new RuleTester();
 
 ruleTester.run('no-unreachable-types', rule, {
   valid: [

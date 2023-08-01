@@ -1,8 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-nullable-result-in-root';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 function useSchema(code: string): { code: string; parserOptions: Omit<ParserOptions, 'filePath'> } {
   return {

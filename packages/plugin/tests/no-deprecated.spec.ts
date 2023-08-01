@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/no-deprecated';
+import { ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -26,7 +26,6 @@ const WITH_SCHEMA = {
     documents: [],
   } as ParserOptions,
 };
-const ruleTester = new RuleTester();
 
 ruleTester.run('no-deprecated', rule, {
   valid: [

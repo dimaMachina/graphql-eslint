@@ -1,5 +1,5 @@
 import { rule, RuleOptions } from '../src/rules/lone-executable-definition';
-import { ruleTester } from "./test-utils";
+import { ruleTester } from './test-utils';
 
 ruleTester.run<RuleOptions>('lone-executable-definition', rule, {
   valid: [

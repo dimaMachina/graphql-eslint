@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/no-root-type';
+import { ruleTester } from './test-utils';
 
 const useSchema = (
   code: string,
@@ -11,8 +11,6 @@ const useSchema = (
     schema: schema + code,
   },
 });
-
-const ruleTester = new RuleTester();
 
 ruleTester.run<RuleOptions>('no-root-type', rule, {
   valid: [

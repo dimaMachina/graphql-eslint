@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { rules } from '../src';
-import { ruleTester } from "./test-utils";
+import { ruleTester } from './test-utils';
 
 ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
   valid: [
