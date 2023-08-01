@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { AST } from 'eslint';
 import { Comment, SourceLocation } from 'estree';
 import {
@@ -25,32 +24,7 @@ export function getBaseType(type: GraphQLOutputType): GraphQLNamedType {
   return type;
 }
 
-// Hardcoded type because tests fails on graphql 15
-type TokenKindValue =
-  | ':'
-  | '!'
-  | '...'
-  | '('
-  | ')'
-  | '['
-  | ']'
-  | '{'
-  | '}'
-  | '@'
-  | '&'
-  // | '<EOF>'
-  | '<SOF>'
-  | '='
-  | '|'
-  | '$'
-  | 'BlockString'
-  | 'Comment'
-  | 'Float'
-  | 'Int'
-  | 'Name'
-  | 'String';
-
-export function convertToken<T extends TokenKindValue | 'Block' | 'Line'>(
+export function convertToken<T extends TokenKind | 'Block' | 'Line'>(
   token: Token,
   type: T,
 ): Omit<AST.Token, 'type'> & { type: T } {
@@ -76,25 +50,9 @@ export function convertToken<T extends TokenKindValue | 'Block' | 'Line'>(
   };
 }
 
-function getLexer(source: Source): Lexer {
-  // GraphQL v14
-  const gqlLanguage = require('graphql/language');
-  if (gqlLanguage?.createLexer) {
-    return gqlLanguage.createLexer(source, {});
-  }
-
-  // GraphQL v15
-  const { Lexer: LexerCls } = require('graphql');
-  if (LexerCls && typeof LexerCls === 'function') {
-    return new LexerCls(source);
-  }
-
-  throw new Error('Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!');
-}
-
 export function extractTokens(filePath: string, code: string): AST.Token[] {
   const source = new Source(code, filePath);
-  const lexer = getLexer(source);
+  const lexer = new Lexer(source);
   const tokens: AST.Token[] = [];
   let token = lexer.advance();
 
