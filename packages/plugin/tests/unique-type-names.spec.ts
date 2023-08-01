@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
+import { ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -15,8 +15,6 @@ const WITH_SCHEMA = {
     documents: [],
   } as ParserOptions,
 };
-
-const ruleTester = new RuleTester();
 
 ruleTester.run('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-type-names'], {
   valid: [

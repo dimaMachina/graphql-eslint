@@ -1,5 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/require-deprecation-date';
+import { ruleTester } from './test-utils';
 
 const now = new Date();
 now.setDate(now.getDate() + 1);
@@ -9,8 +9,6 @@ const month = (now.getMonth() + 1).toString().padStart(2, '0');
 const year = now.getFullYear();
 
 const tomorrow = `${day}/${month}/${year}`;
-
-const ruleTester = new RuleTester();
 
 ruleTester.run<RuleOptions>('require-deprecation-date', rule, {
   valid: [

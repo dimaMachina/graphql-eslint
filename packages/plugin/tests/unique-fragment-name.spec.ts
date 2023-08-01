@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/unique-fragment-name';
+import { ruleTester } from './test-utils';
 
 const TEST_FRAGMENT = /* GraphQL */ `
   fragment HasIdFields on HasId {
@@ -16,8 +16,6 @@ const SIBLING_FRAGMENTS = (
     documents,
   },
 });
-
-const ruleTester = new RuleTester();
 
 ruleTester.run('unique-fragment-name', rule, {
   valid: [

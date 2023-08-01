@@ -1,4 +1,3 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/no-unused-fields';
 
 const SCHEMA = /* GraphQL */ `

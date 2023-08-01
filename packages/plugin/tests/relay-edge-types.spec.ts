@@ -1,8 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/relay-edge-types';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {

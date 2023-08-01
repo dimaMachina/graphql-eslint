@@ -1,8 +1,7 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions, RULE_ID } from '../src/rules/require-description';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new RuleTester();
 const OPERATION = { OperationDefinition: true };
 
 ruleTester.run<RuleOptions>('require-description', rule, {

@@ -1,8 +1,6 @@
 import { join } from 'node:path';
 import { rules } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 ruleTester.run('no-unused-fragments', rules['no-unused-fragments'], {
   valid: [

@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/unique-operation-name';
+import { ruleTester } from './test-utils';
 
 const TEST_OPERATION = 'query test { foo }';
 
@@ -12,8 +12,6 @@ const SIBLING_OPERATIONS = (
     documents,
   },
 });
-
-const ruleTester = new RuleTester();
 
 ruleTester.run('unique-operation-name', rule, {
   valid: [
