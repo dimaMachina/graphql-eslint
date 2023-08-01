@@ -1,10 +1,12 @@
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
 
 const require = createRequire(import.meta.url);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 type ValidTestCase<Options = [], ParserOptions = Record<string, never>> = Omit<
   ESLintRuleTester.ValidTestCase,
@@ -36,10 +38,10 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
   }
 
   fromMockFile(path: string): string {
-    return readFileSync(resolve(__dirname, `../tests/mocks/${path}`), 'utf-8');
+    return readFileSync(resolve(__dirname, `../../plugin/tests/mocks/${path}`), 'utf-8');
   }
 
-  // @ts-expect-error
+  // @ts-expect-error -- fix later
   run<Options>(
     ruleId: string,
     rule: Rule.RuleModule,
@@ -49,10 +51,10 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         Pick<ESLintRuleTester.InvalidTestCase, 'errors'>)[];
     },
   ): void {
-    // @ts-expect-error
+    // @ts-expect-error -- fix later
     const { testerConfig, linter } = this;
 
-    const getMessages = (testCase: ESLintRuleTester.InvalidTestCase) => () => {
+    const getMessages = (testCase: ESLintRuleTester.InvalidTestCase) => {
       const { options, code: rawCode, filename, parserOptions } = testCase;
 
       const config = {
@@ -109,11 +111,12 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
 
     for (const [id, testCase] of tests.invalid.entries()) {
       testCase.name ||= `Invalid #${id + 1}`;
-      // @ts-expect-error
-      testCase.getMessages = getMessages(testCase);
+      Object.defineProperty(testCase, 'assertMessages', {
+        value: getMessages,
+      });
     }
 
-    // @ts-expect-error
+    // @ts-expect-error -- fix later
     super.run(ruleId, rule as any, tests);
   }
 }

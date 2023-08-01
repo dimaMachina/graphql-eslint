@@ -21,6 +21,12 @@
         // Run `build` in workspaces I depend on first
         "^build"
       ]
+    },
+    "test": {
+      "dependsOn": [
+        // A workspace's `test` command depends on its own `build` commands first being completed
+        "build"
+      ]
     }
   }
 }

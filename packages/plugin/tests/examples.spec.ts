@@ -1,7 +1,9 @@
 import { spawnSync } from 'node:child_process';
 import { join, relative } from 'node:path';
 import { ESLint } from 'eslint';
-import { CWD } from '../src/utils';
+import { CWD as PROJECT_CWD } from '../src/utils';
+
+const CWD = join(PROJECT_CWD, '..', '..');
 
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: ESLint.LintResult & { fatalErrorCount: number }) => {
