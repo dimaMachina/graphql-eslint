@@ -4,15 +4,18 @@ import { DEFAULT_CONFIG } from './test-utils';
 
 const ruleTester = new RuleTester({
   ...DEFAULT_CONFIG,
-  schema: /* GraphQL */ `
-    type User {
-      id: ID!
-    }
+  parserOptions: {
+    ...DEFAULT_CONFIG.parserOptions,
+    schema: /* GraphQL */ `
+      type User {
+        id: ID!
+      }
 
-    type Query {
-      user: User
-    }
-  `,
+      type Query {
+        user: User
+      }
+    `,
+  },
 });
 
 ruleTester.run<[{ ignoreClientDirectives: string[] }]>(

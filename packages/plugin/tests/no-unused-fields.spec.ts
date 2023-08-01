@@ -39,7 +39,13 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-const ruleTester = new RuleTester({ ...DEFAULT_CONFIG, schema: SCHEMA });
+const ruleTester = new RuleTester({
+  ...DEFAULT_CONFIG,
+  parserOptions: {
+    ...DEFAULT_CONFIG.parserOptions,
+    schema: SCHEMA,
+  },
+});
 
 ruleTester.run('no-unused-fields', rule, {
   valid: [
