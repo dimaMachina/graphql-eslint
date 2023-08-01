@@ -70,13 +70,6 @@ module.exports = {
       },
     },
     {
-      files: ['packages/plugin/src/**'],
-      rules: {
-        // remove in v4 major
-        'unicorn/prefer-node-protocol': 'off',
-      },
-    },
-    {
       files: ['packages/plugin/src/rules/index.ts'],
       rules: {
         // file is generated

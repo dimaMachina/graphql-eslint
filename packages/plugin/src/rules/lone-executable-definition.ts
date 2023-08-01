@@ -1,4 +1,4 @@
-import { ExecutableDefinitionNode } from 'graphql';
+import { ExecutableDefinitionNode, OperationTypeNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
@@ -6,7 +6,7 @@ import { ARRAY_DEFAULT_OPTIONS, getLocation, pascalCase } from '../utils.js';
 
 const RULE_ID = 'lone-executable-definition';
 
-const definitionTypes = ['fragment', 'query', 'mutation', 'subscription'] as const;
+const definitionTypes = ['fragment', ...Object.values(OperationTypeNode)] as const;
 
 type Definition = (typeof definitionTypes)[number];
 type DefinitionESTreeNode = GraphQLESTreeNode<ExecutableDefinitionNode>;

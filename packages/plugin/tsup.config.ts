@@ -38,7 +38,6 @@ export default defineConfig([
           2,
         ).replaceAll('dist/', ''),
       );
-      addCreateRequireBanner(['estree-converter/utils.js', 'rules/graphql-js-validation.js']);
       console.log('✅ Success!');
     },
   },
@@ -48,18 +47,3 @@ export default defineConfig([
     outDir: 'dist/cjs',
   },
 ]);
-
-async function addCreateRequireBanner(filePaths: string[]): Promise<void> {
-  await Promise.all(
-    filePaths.map(async filePath => {
-      const fullPath = path.join(CWD, 'dist', 'esm', filePath);
-      const content = await fs.readFile(fullPath, 'utf8');
-      await fs.writeFile(
-        fullPath,
-        `import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-${content}`,
-      );
-    }),
-  );
-}

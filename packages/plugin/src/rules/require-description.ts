@@ -168,8 +168,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           const rawNode = node.rawNode();
           const { prev, line } = rawNode.loc!.startToken;
           if (prev?.kind === TokenKind.COMMENT) {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
-            const value = prev.value!.trim();
+            const value = prev.value.trim();
             const linesBefore = line - prev.line;
             if (!value.startsWith('eslint') && linesBefore === 1) {
               description = value;

@@ -1,4 +1,4 @@
-import { relative } from 'path';
+import { relative } from 'node:path';
 import { NameNode, visit } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
