@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { NameNode } from 'graphql';
 import { requireSiblingsOperations } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';

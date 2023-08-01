@@ -1,4 +1,4 @@
-import { relative } from 'path';
+import { relative } from 'node:path';
 import { ExecutableDefinitionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { FragmentSource, OperationSource } from '../siblings.js';

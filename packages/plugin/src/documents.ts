@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import { Source } from '@graphql-tools/utils';
 import debugFactory from 'debug';
 import fg from 'fast-glob';

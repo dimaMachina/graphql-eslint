@@ -1,4 +1,4 @@
-import { dirname } from 'path';
+import { dirname } from 'node:path';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import debugFactory from 'debug';
 import {
