@@ -1,0 +1,26 @@
+{
+  "pipeline": {
+    "build": {
+      "outputs": ["dist/**"],
+      "dependsOn": [
+        // Run `build` in workspaces I depend on first
+        "^build"
+      ]
+    },
+    "dev": {
+      "dependsOn": [
+        // Run `dev` in workspaces I depend on first
+        "^dev"
+      ],
+      // Never cache anything (including logs) emitted by a `dev` task
+      "cache": false,
+      "persistent": true
+    },
+    "typecheck": {
+      "dependsOn": [
+        // Run `build` in workspaces I depend on first
+        "^build"
+      ]
+    }
+  }
+}

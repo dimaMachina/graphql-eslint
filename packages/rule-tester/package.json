@@ -3,7 +3,11 @@
   "engines": {
     "node": ">=18"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
   "peerDependencies": {
     "eslint": "^8.46.0"
   },

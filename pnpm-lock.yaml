@@ -337,6 +337,9 @@ importers:
       '@types/babel__code-frame':
         specifier: 7.0.3
         version: 7.0.3
+      '@types/node':
+        specifier: 18.17.1
+        version: 18.17.1
       eslint:
         specifier: ^8.46.0
         version: 8.46.0(patch_hash=t2nfsf5qfxmsuzmwslg2btnxeq)
