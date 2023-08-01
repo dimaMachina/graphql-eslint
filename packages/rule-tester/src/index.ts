@@ -1,11 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
 
-const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 type ValidTestCase<Options = [], ParserOptions = Record<string, never>> = Omit<

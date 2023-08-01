@@ -1,4 +1,6 @@
 import { rule } from '../src/rules/no-unused-fields';
+import { RuleTester } from '@theguild/eslint-rule-tester';
+import { DEFAULT_CONFIG } from './test-utils';
 
 const SCHEMA = /* GraphQL */ `
   type User {
@@ -37,7 +39,7 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-const ruleTester = new RuleTester({ schema: SCHEMA });
+const ruleTester = new RuleTester({ ...DEFAULT_CONFIG, schema: SCHEMA });
 
 ruleTester.run('no-unused-fields', rule, {
   valid: [

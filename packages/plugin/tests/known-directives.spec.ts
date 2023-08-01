@@ -1,6 +1,9 @@
 import { rules } from '../src';
+import { RuleTester } from '@theguild/eslint-rule-tester';
+import { DEFAULT_CONFIG } from './test-utils';
 
 const ruleTester = new RuleTester({
+  ...DEFAULT_CONFIG,
   schema: /* GraphQL */ `
     type User {
       id: ID!
