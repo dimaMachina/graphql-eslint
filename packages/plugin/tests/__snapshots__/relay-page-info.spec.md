@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`relay-page-info > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | scalar PageInfo
@@ -11,7 +11,7 @@ exports[`Invalid #1 1`] = `
         |        ^^^^^^^^ \`PageInfo\` must be an Object type.
 `;
 
-exports[`when \`PageInfo\` is missing 1`] = `
+exports[`relay-page-info > invalid > when \`PageInfo\` is missing 1`] = `
 #### ⌨️ Code
 
       1 | type Query
@@ -22,7 +22,7 @@ exports[`when \`PageInfo\` is missing 1`] = `
         | ^ The server must provide a \`PageInfo\` object.
 `;
 
-exports[`when enum 1`] = `
+exports[`relay-page-info > invalid > when enum 1`] = `
 #### ⌨️ Code
 
       1 |         enum PageInfo
@@ -47,7 +47,7 @@ exports[`when enum 1`] = `
       3 |           hasPreviousPage
 `;
 
-exports[`when extend type 1`] = `
+exports[`relay-page-info > invalid > when extend type 1`] = `
 #### ⌨️ Code
 
       1 |         type PageInfo
@@ -83,7 +83,7 @@ exports[`when extend type 1`] = `
       2 |         extend type PageInfo {
 `;
 
-exports[`when fields is missing or incorrect return type 1`] = `
+exports[`relay-page-info > invalid > when fields is missing or incorrect return type 1`] = `
 #### ⌨️ Code
 
       1 |         type PageInfo {
@@ -118,7 +118,7 @@ exports[`when fields is missing or incorrect return type 1`] = `
       4 |         }
 `;
 
-exports[`when input 1`] = `
+exports[`relay-page-info > invalid > when input 1`] = `
 #### ⌨️ Code
 
       1 |         input PageInfo
@@ -143,7 +143,7 @@ exports[`when input 1`] = `
       3 |           hasPreviousPage: Boolean!
 `;
 
-exports[`when interface 1`] = `
+exports[`relay-page-info > invalid > when interface 1`] = `
 #### ⌨️ Code
 
       1 |         interface PageInfo
@@ -168,7 +168,7 @@ exports[`when interface 1`] = `
       3 |           hasPreviousPage: Boolean!
 `;
 
-exports[`when union 1`] = `
+exports[`relay-page-info > invalid > when union 1`] = `
 #### ⌨️ Code
 
       1 |         union PageInfo = UserConnection | Post

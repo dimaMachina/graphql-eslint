@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should validate \`error\` field 1`] = `
+exports[`require-type-pattern-with-oneof > invalid > should validate \`error\` field 1`] = `
 #### ⌨️ Code
 
       1 |         type T @oneOf {
@@ -15,7 +15,7 @@ exports[`should validate \`error\` field 1`] = `
       2 |           ok: Ok
 `;
 
-exports[`should validate \`ok\` field 1`] = `
+exports[`require-type-pattern-with-oneof > invalid > should validate \`ok\` field 1`] = `
 #### ⌨️ Code
 
       1 |         type T @oneOf {

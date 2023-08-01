@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`selection-set-depth > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         query deep2 {
@@ -33,7 +33,7 @@ exports[`Invalid #1 1`] = `
     5 |         }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`selection-set-depth > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         query deep2 {
@@ -66,7 +66,7 @@ exports[`Invalid #2 1`] = `
     5 |         }
 `;
 
-exports[`suggestions should not throw error when fragment is located in different file 1`] = `
+exports[`selection-set-depth > invalid > suggestions should not throw error when fragment is located in different file 1`] = `
 #### ⌨️ Code
 
       1 |         {
@@ -91,7 +91,7 @@ exports[`suggestions should not throw error when fragment is located in differen
       6 |           }
 `;
 
-exports[`suggestions should work with inline fragments 1`] = `
+exports[`selection-set-depth > invalid > suggestions should work with inline fragments 1`] = `
 #### ⌨️ Code
 
       1 |         {

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`require-description > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | type User { id: ID }
@@ -17,7 +17,7 @@ exports[`Invalid #1 1`] = `
         |      ^^^^ Description is required for type "User"
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`require-description > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | interface Node { id: ID! }
@@ -34,7 +34,7 @@ exports[`Invalid #2 1`] = `
         |           ^^^^ Description is required for interface "Node"
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`require-description > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | enum Role { ADMIN }
@@ -51,7 +51,7 @@ exports[`Invalid #3 1`] = `
         |      ^^^^ Description is required for enum "Role"
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`require-description > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 | scalar Email
@@ -68,7 +68,7 @@ exports[`Invalid #4 1`] = `
         |        ^^^^^ Description is required for scalar "Email"
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`require-description > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 | input CreateUserInput { email: Email! }
@@ -85,7 +85,7 @@ exports[`Invalid #5 1`] = `
         |       ^^^^^^^^^^^^^^^ Description is required for input "CreateUserInput"
 `;
 
-exports[`Invalid #6 1`] = `
+exports[`require-description > invalid > Invalid #6 1`] = `
 #### ⌨️ Code
 
       1 | union Media = Book | Movie
@@ -102,7 +102,7 @@ exports[`Invalid #6 1`] = `
         |       ^^^^^ Description is required for union "Media"
 `;
 
-exports[`Invalid #7 1`] = `
+exports[`require-description > invalid > Invalid #7 1`] = `
 #### ⌨️ Code
 
       1 | directive @auth(requires: Role!) on FIELD_DEFINITION
@@ -119,7 +119,7 @@ exports[`Invalid #7 1`] = `
         |            ^^^^ Description is required for directive "auth"
 `;
 
-exports[`Invalid #8 1`] = `
+exports[`require-description > invalid > Invalid #8 1`] = `
 #### ⌨️ Code
 
       1 | type User { email: Email! }
@@ -136,7 +136,7 @@ exports[`Invalid #8 1`] = `
         |             ^^^^^ Description is required for field "email" in type "User"
 `;
 
-exports[`Invalid #9 1`] = `
+exports[`require-description > invalid > Invalid #9 1`] = `
 #### ⌨️ Code
 
       1 | input CreateUserInput { email: Email! }
@@ -153,7 +153,7 @@ exports[`Invalid #9 1`] = `
         |                         ^^^^^ Description is required for input value "email" in input "CreateUserInput"
 `;
 
-exports[`Invalid #10 1`] = `
+exports[`require-description > invalid > Invalid #10 1`] = `
 #### ⌨️ Code
 
       1 | enum Role { ADMIN }
@@ -170,7 +170,7 @@ exports[`Invalid #10 1`] = `
         |             ^^^^^ Description is required for enum value "ADMIN" in enum "Role"
 `;
 
-exports[`Invalid #17 1`] = `
+exports[`require-description > invalid > Invalid #17 1`] = `
 #### ⌨️ Code
 
       1 | type Query { user(id: String!): User! }
@@ -187,7 +187,7 @@ exports[`Invalid #17 1`] = `
         |              ^^^^ Description is required for field "user" in type "Query"
 `;
 
-exports[`Invalid #18 1`] = `
+exports[`require-description > invalid > Invalid #18 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { createUser(id: [ID!]!): User! }
@@ -204,7 +204,7 @@ exports[`Invalid #18 1`] = `
         |                 ^^^^^^^^^^ Description is required for field "createUser" in type "Mutation"
 `;
 
-exports[`Invalid #19 1`] = `
+exports[`require-description > invalid > Invalid #19 1`] = `
 #### ⌨️ Code
 
       1 |         type MySubscription {
@@ -228,7 +228,7 @@ exports[`Invalid #19 1`] = `
       3 |         }
 `;
 
-exports[`should disable description for ObjectTypeDefinition 1`] = `
+exports[`require-description > invalid > should disable description for ObjectTypeDefinition 1`] = `
 #### ⌨️ Code
 
       1 |         type CreateOneUserPayload {
@@ -259,7 +259,7 @@ exports[`should disable description for ObjectTypeDefinition 1`] = `
       4 |         }
 `;
 
-exports[`should ignore comments before fragment definition 1`] = `
+exports[`require-description > invalid > should ignore comments before fragment definition 1`] = `
 #### ⌨️ Code
 
        1 |         # BAD
@@ -287,7 +287,7 @@ exports[`should ignore comments before fragment definition 1`] = `
       7 |           user {
 `;
 
-exports[`should report because of linesBefore !== 1 1`] = `
+exports[`require-description > invalid > should report because of linesBefore !== 1 1`] = `
 #### ⌨️ Code
 
       1 |         # linesBefore !== 1
@@ -310,7 +310,7 @@ exports[`should report because of linesBefore !== 1 1`] = `
       4 |           foo
 `;
 
-exports[`should report because skips comment that starts with \`eslint\` 1`] = `
+exports[`require-description > invalid > should report because skips comment that starts with \`eslint\` 1`] = `
 #### ⌨️ Code
 
       1 |         # eslint-disable-next-line semi
@@ -332,7 +332,7 @@ exports[`should report because skips comment that starts with \`eslint\` 1`] = `
       3 |           foo
 `;
 
-exports[`should validate mutation 1`] = `
+exports[`require-description > invalid > should validate mutation 1`] = `
 #### ⌨️ Code
 
       1 | mutation createUser { foo }
@@ -349,7 +349,7 @@ exports[`should validate mutation 1`] = `
         | ^^^^^^^^ Description is required for mutation "createUser"
 `;
 
-exports[`should validate subscription 1`] = `
+exports[`require-description > invalid > should validate subscription 1`] = `
 #### ⌨️ Code
 
       1 | subscription commentAdded { foo }

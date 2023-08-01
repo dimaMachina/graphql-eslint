@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`strict-id-in-types > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | type B { name: String! }
@@ -13,7 +13,7 @@ exports[`Invalid #1 1`] = `
     Accepted type: ID.
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`strict-id-in-types > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | type B { id: ID! _id: String! }
@@ -39,7 +39,7 @@ exports[`Invalid #2 1`] = `
     Accepted types: ID or String.
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`strict-id-in-types > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }
@@ -84,7 +84,7 @@ exports[`Invalid #3 1`] = `
     Accepted type: String.
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`strict-id-in-types > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 | type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }
@@ -121,7 +121,7 @@ exports[`Invalid #4 1`] = `
     Accepted type: ID.
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`strict-id-in-types > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 | type B { id: ID! } type BError { message: String! }
