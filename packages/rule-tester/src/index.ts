@@ -111,6 +111,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
       testCase.getMessages = getMessages(testCase);
     }
 
+    // @ts-expect-error
     super.run(ruleId, rule as any, tests);
   }
 }

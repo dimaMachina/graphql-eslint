@@ -1,8 +1,14 @@
 {
   "name": "@theguild/eslint-rule-tester",
+  "type": "module",
   "engines": {
     "node": ">=18"
   },
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
