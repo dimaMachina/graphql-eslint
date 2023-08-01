@@ -38,11 +38,7 @@ export default defineConfig([
           2,
         ).replaceAll('dist/', ''),
       );
-      addCreateRequireBanner([
-        'estree-converter/utils.js',
-        'rules/graphql-js-validation.js',
-        'testkit.js',
-      ]);
+      addCreateRequireBanner(['estree-converter/utils.js', 'rules/graphql-js-validation.js']);
       console.log('✅ Success!');
     },
   },

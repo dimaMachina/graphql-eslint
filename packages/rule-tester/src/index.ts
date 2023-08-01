@@ -1,7 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { createRequire } from 'node:module';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
+
+const require = createRequire(import.meta.url);
 
 type ValidTestCase<Options = [], ParserOptions = Record<string, never>> = Omit<
   ESLintRuleTester.ValidTestCase,
@@ -64,8 +67,6 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
       };
 
       const code = removeTrailingBlankLines(rawCode);
-      const messages = linter.verify(code, config, filename);
-
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
       const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
 
@@ -74,6 +75,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         messageForSnapshot.push('#### ⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
       }
 
+      const messages = linter.verify(code, config, filename);
       for (const [index, message] of messages.entries()) {
         const codeWithMessage = printCode(code, message, 1);
         messageForSnapshot.push(
