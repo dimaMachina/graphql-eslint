@@ -42,7 +42,7 @@ import {
   UniqueVariableNamesRule,
   ValuesOfCorrectTypeRule,
   VariablesAreInputTypesRule,
-  VariablesInAllowedPositionRule
+  VariablesInAllowedPositionRule,
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
@@ -53,6 +53,9 @@ import {
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
 } from '../utils.js';
+import { SDLValidationRule } from 'graphql/validation/ValidationContext';
+
+type GraphQLJSRule = ValidationRule | SDLValidationRule;
 
 function validateDocument({
   context,
@@ -64,7 +67,7 @@ function validateDocument({
   context: GraphQLESLintRuleContext;
   schema: GraphQLSchema | null;
   documentNode: DocumentNode;
-  rule: ValidationRule;
+  rule: GraphQLJSRule;
   hasDidYouMeanSuggestions?: boolean;
 }): void {
   if (documentNode.definitions.length === 0) {
@@ -192,7 +195,7 @@ const validationToRule = (
     hasDidYouMeanSuggestions,
   }: {
     ruleId: string;
-    rule: ValidationRule;
+    rule: GraphQLJSRule;
     getDocumentNode?: GetDocumentNode;
     schema?: JSONSchema | [];
     hasDidYouMeanSuggestions?: boolean;
@@ -205,7 +208,7 @@ const validationToRule = (
         docs: {
           recommended: true,
           ...docs,
-          graphQLJSRuleName: rule,
+          graphQLJSRuleName: rule.name,
           url: `https://the-guild.dev/graphql/eslint/rules/${ruleId}`,
           description: `${docs.description}\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
         },
