@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
 import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';
-import { ruleTester } from '../src/test-utils';
+import { ruleTester } from './test-utils';
 
 ruleTester.run('no-typename-prefix', noTypenamePrefix, {
   valid: [

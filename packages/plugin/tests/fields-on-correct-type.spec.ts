@@ -1,5 +1,5 @@
 import { ParserOptions, rules } from '../src';
-import { ruleTester } from '../src/test-utils';
+import { ruleTester } from './test-utils';
 
 const parserOptions: Pick<ParserOptions, 'schema'> = {
   schema: /* GraphQL */ `
