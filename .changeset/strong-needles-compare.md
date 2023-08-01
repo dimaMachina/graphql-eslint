@@ -4,6 +4,8 @@
 
 Remove `GraphQLRuleTester` from bundle, to test your rules use regular `RuleTester` from eslint
 
+> **Note**: with this change unnecessary dependency `@babel/code-frame` was removed too 
+
 ```js
 import { RuleTester } from 'eslint'
 

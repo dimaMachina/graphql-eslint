@@ -21,7 +21,7 @@
     "prerelease": "NODE_ENV=production pnpm build",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
-    "test": "turbo run test"
+    "test": "turbo run test --filter=!website"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
