@@ -23,7 +23,14 @@ import {
   LoneSchemaDefinitionRule,
   NoFragmentCyclesRule,
   NoUndefinedVariablesRule,
-  NoUnusedFragmentsRule
+  NoUnusedFragmentsRule,
+  NoUnusedVariablesRule,
+  OverlappingFieldsCanBeMergedRule,
+  PossibleFragmentSpreadsRule,
+  PossibleTypeExtensionsRule,
+  ProvidedRequiredArgumentsRule,
+  ScalarLeafsRule,
+  SingleFieldSubscriptionsRule
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
@@ -502,7 +509,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-unused-variables',
-      ruleName: 'NoUnusedVariables',
+      rule: NoUnusedVariablesRule,
       getDocumentNode: handleMissingFragments,
     },
     {
@@ -516,7 +523,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'overlapping-fields-can-be-merged',
-      ruleName: 'OverlappingFieldsCanBeMerged',
+      rule: OverlappingFieldsCanBeMergedRule,
     },
     {
       category: 'Operations',
@@ -528,7 +535,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'possible-fragment-spread',
-      ruleName: 'PossibleFragmentSpreads',
+      rule: PossibleFragmentSpreadsRule,
     },
     {
       category: 'Operations',
@@ -540,7 +547,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'possible-type-extension',
-      ruleName: 'PossibleTypeExtensions',
+      rule: PossibleTypeExtensionsRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -555,7 +562,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'provided-required-arguments',
-      ruleName: 'ProvidedRequiredArguments',
+      rule: ProvidedRequiredArgumentsRule,
     },
     {
       category: ['Schema', 'Operations'],
@@ -567,7 +574,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'scalar-leafs',
-      ruleName: 'ScalarLeafs',
+      rule: ScalarLeafsRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -580,7 +587,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'one-field-subscriptions',
-      ruleName: 'SingleFieldSubscriptions',
+      rule: SingleFieldSubscriptionsRule,
     },
     {
       category: 'Operations',
