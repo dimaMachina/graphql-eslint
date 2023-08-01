@@ -1,8 +1,6 @@
 import { join } from 'node:path';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rules } from '../src';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from '../src/test-utils';
 
 ruleTester.run('no-undefined-variables', rules['no-undefined-variables'], {
   valid: [],

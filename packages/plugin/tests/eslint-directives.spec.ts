@@ -1,9 +1,7 @@
 import { join } from 'node:path';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
 import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from '../src/test-utils';
 
 ruleTester.run('no-typename-prefix', noTypenamePrefix, {
   valid: [

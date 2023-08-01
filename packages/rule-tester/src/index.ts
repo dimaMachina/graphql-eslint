@@ -27,16 +27,6 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
 }
 
 export class RuleTester<ParserOptions> extends ESLintRuleTester {
-  constructor(parserOptions: ParserOptions) {
-    super({
-      parser: require.resolve('@graphql-eslint/eslint-plugin'),
-      parserOptions: {
-        ...parserOptions,
-        skipGraphQLConfig: true,
-      },
-    });
-  }
-
   fromMockFile(path: string): string {
     return readFileSync(resolve(__dirname, `../../plugin/tests/mocks/${path}`), 'utf-8');
   }

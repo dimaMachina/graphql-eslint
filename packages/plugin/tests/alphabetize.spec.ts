@@ -1,7 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/alphabetize';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from '../src/test-utils';
 
 const GROUP_ORDER_TEST = /* GraphQL */ `
   type User {

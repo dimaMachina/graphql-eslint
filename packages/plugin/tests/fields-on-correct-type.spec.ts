@@ -1,5 +1,5 @@
 import { ParserOptions, rules } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
+import { ruleTester } from '../src/test-utils';
 
 const parserOptions: Pick<ParserOptions, 'schema'> = {
   schema: /* GraphQL */ `
@@ -13,7 +13,6 @@ const parserOptions: Pick<ParserOptions, 'schema'> = {
     }
   `,
 };
-const ruleTester = new RuleTester();
 
 ruleTester.run('fields-on-correct-type', rules['fields-on-correct-type'], {
   valid: [],

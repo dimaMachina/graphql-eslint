@@ -1,5 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/description-style';
+import { ruleTester } from '../src/test-utils';
 
 const INLINE_SDL = /* GraphQL */ `
   " Test "
@@ -28,8 +28,6 @@ export const BLOCK_SDL = /* GraphQL */ `
     native
   }
 `;
-
-const ruleTester = new RuleTester();
 
 ruleTester.run<RuleOptions>('description-style', rule, {
   valid: [
