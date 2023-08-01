@@ -141,7 +141,7 @@ async function generateDocs(): Promise<void> {
     } else {
       blocks.push(
         `- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/${ruleName}.ts)`,
-        `- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/${ruleName}.spec.ts)`,
+        `- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/${ruleName}.spec.ts)`,
       );
     }
     return {
@@ -194,7 +194,8 @@ async function generateDocs(): Promise<void> {
       `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
       `- ${Icon.HAS_SUGGESTIONS} if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
       BR,
-      // '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
+      '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
+      '<!-- prettier-ignore -->',
       printMarkdownTable(
         [
           `Name${NBSP.repeat(20)}`,

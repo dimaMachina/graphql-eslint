@@ -26,7 +26,7 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
 
 export class RuleTester<ParserOptions> extends ESLintRuleTester {
   fromMockFile(path: string): string {
-    return readFileSync(resolve(__dirname, `../../plugin/tests/mocks/${path}`), 'utf-8');
+    return readFileSync(resolve(__dirname, `../../plugin/__tests__/mocks/${path}`), 'utf-8');
   }
 
   // @ts-expect-error -- fix later

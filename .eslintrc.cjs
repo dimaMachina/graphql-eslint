@@ -1,5 +1,5 @@
 module.exports = {
-  ignorePatterns: ['examples', 'packages/plugin/tests/__snapshots__'],
+  ignorePatterns: ['examples', 'packages/plugin/__tests__/__snapshots__'],
   extends: [
     '@theguild',
     '@theguild/eslint-config/json',
@@ -55,7 +55,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/tests/mocks/**/*.{ts,js}'],
+      files: ['**/__tests__/mocks/**/*.{ts,js}'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
       },

@@ -100,3 +100,10 @@ export type OmitRecursively<T extends object, K extends PropertyKey> = Omit<
   { [P in keyof T]: OmitDistributive<T[P], K> },
   K
 >;
+
+export type ConfigName =
+  | 'operations-all'
+  | 'operations-recommended'
+  | 'schema-all'
+  | 'schema-recommended'
+  | 'schema-relay';

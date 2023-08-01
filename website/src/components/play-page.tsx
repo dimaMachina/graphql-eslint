@@ -1,5 +1,5 @@
 import { ReactElement, useRef } from 'react';
-import { flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
+import { flatConfigs, rules, ConfigName } from '@graphql-eslint/eslint-plugin';
 import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
 import { asArray } from '@graphql-tools/utils';
 import { clsx } from 'clsx';
@@ -9,8 +9,15 @@ import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
 
-const schemaConfigs = ['schema-recommended', 'schema-all', 'relay'] as const;
-const operationsConfigs = ['operations-recommended', 'operations-all'] as const;
+const schemaConfigs: ReadonlyArray<ConfigName> = [
+  'schema-recommended',
+  'schema-all',
+  'schema-relay',
+] as const;
+const operationsConfigs: ReadonlyArray<ConfigName> = [
+  'operations-recommended',
+  'operations-all',
+] as const;
 
 const schemaRulesOptions = Object.entries(rules)
   .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))

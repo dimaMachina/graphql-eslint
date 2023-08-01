@@ -1,5 +1,8 @@
 # `possible-type-extension`
 
+✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file
+enables this rule.
+
 💡 This rule provides
 [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
