@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { AST } from 'eslint';
 import {
   ASTVisitor,
@@ -12,12 +11,12 @@ import {
   ValidationRule,
   visit,
 } from 'graphql';
+import { ExecutableDefinitionsRule } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
-  logger,
   REPORT_ON_FIRST_CHARACTER,
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
@@ -155,37 +154,26 @@ const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
 const validationToRule = (
   {
     ruleId,
-    ruleName,
+    rule,
     getDocumentNode,
     schema = [],
     hasDidYouMeanSuggestions,
   }: {
     ruleId: string;
-    ruleName: string;
+    rule: ValidationRule;
     getDocumentNode?: GetDocumentNode;
     schema?: JSONSchema | [];
     hasDidYouMeanSuggestions?: boolean;
   },
   docs: RuleDocsInfo<any>,
 ): Record<typeof ruleId, GraphQLESLintRule<[], true>> => {
-  let ruleFn: ValidationRule | null = null;
-
-  try {
-    ruleFn = require(`graphql/validation/rules/${ruleName}Rule`)[`${ruleName}Rule`];
-  } catch {
-    try {
-      ruleFn = require(`graphql/validation/rules/${ruleName}`)[`${ruleName}Rule`];
-    } catch {
-      ruleFn = require('graphql/validation')[`${ruleName}Rule`];
-    }
-  }
   return {
     [ruleId]: {
       meta: {
         docs: {
           recommended: true,
           ...docs,
-          graphQLJSRuleName: ruleName,
+          graphQLJSRuleName: rule,
           url: `https://the-guild.dev/graphql/eslint/rules/${ruleId}`,
           description: `${docs.description}\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
         },
@@ -193,13 +181,6 @@ const validationToRule = (
         hasSuggestions: hasDidYouMeanSuggestions,
       },
       create(context) {
-        if (!ruleFn) {
-          logger.warn(
-            `Rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql" version you are using. Skipping…`,
-          );
-          return {};
-        }
-
         return {
           Document(node) {
             const schema = docs.requiresSchema
@@ -214,7 +195,7 @@ const validationToRule = (
               context,
               schema,
               documentNode,
-              rule: ruleFn!,
+              rule,
               hasDidYouMeanSuggestions,
             });
           },
@@ -229,7 +210,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'executable-definitions',
-      ruleName: 'ExecutableDefinitions',
+      rule: ExecutableDefinitionsRule,
     },
     {
       category: 'Operations',

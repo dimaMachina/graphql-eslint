@@ -27,35 +27,3 @@ await patch('/parser.js', str =>
     .replace('const gqlConfig = loadGraphQLConfig(options)', commentLine)
     .replace('const project = gqlConfig.getProjectForFile(realFilepath)', 'let project'),
 );
-
-await patch('/estree-converter/utils.js', str =>
-  str
-    .replace("import { createRequire } from 'module'", commentLine)
-    .replace('const require = createRequire(import.meta.url)', commentLine)
-    .replace(
-      'function getLexer(source) {',
-      m => `import { Lexer } from 'graphql'\n${m}\n    return new Lexer(source)`,
-    ),
-);
-
-await patch(
-  '/rules/graphql-js-validation.js',
-  str =>
-    "import * as allGraphQLJSRules from 'graphql/validation/index.js'\n" +
-    str
-      .replace("import { createRequire } from 'module'", commentLine)
-      .replace('const require = createRequire(import.meta.url)', commentLine)
-      .replace(
-        `  let ruleFn = null;
-  try {
-    ruleFn = require(\`graphql/validation/rules/\${ruleName}Rule\`)[\`\${ruleName}Rule\`];
-  } catch {
-    try {
-      ruleFn = require(\`graphql/validation/rules/\${ruleName}\`)[\`\${ruleName}Rule\`];
-    } catch {
-      ruleFn = require("graphql/validation")[\`\${ruleName}Rule\`];
-    }
-  }`,
-        '  let ruleFn = allGraphQLJSRules[`${ruleName}Rule`]',
-      ),
-);
