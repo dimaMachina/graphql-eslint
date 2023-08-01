@@ -1,7 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from "./test-utils";
 
 ruleTester.run('lone-schema-definition', GRAPHQL_JS_VALIDATIONS['lone-schema-definition'], {
   valid: [

@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { rules } from '../src';
-import { ruleTester } from '../src/test-utils';
+import { ruleTester } from './test-utils';
 
 ruleTester.run('no-undefined-variables', rules['no-undefined-variables'], {
   valid: [],

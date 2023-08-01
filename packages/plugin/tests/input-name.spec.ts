@@ -1,7 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/input-name';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from "./test-utils";
 
 ruleTester.run<RuleOptions>('input-name', rule, {
   valid: [
