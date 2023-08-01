@@ -9,7 +9,6 @@
     "node": ">=18"
   },
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -27,7 +26,6 @@
       }
     }
   },
-  "typings": "dist/esm/index.d.mts",
   "keywords": [
     "eslint",
     "eslintplugin",
@@ -39,6 +37,7 @@
     "test": "vitest"
   },
   "peerDependencies": {
+    "eslint": "^8",
     "graphql": "^16"
   },
   "dependencies": {
@@ -68,8 +67,5 @@
     "directory": "dist",
     "access": "public"
   },
-  "sideEffects": false,
-  "typescript": {
-    "definition": "dist/cjs/index.d.ts"
-  }
+  "sideEffects": false
 }
