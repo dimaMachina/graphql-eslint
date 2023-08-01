@@ -10,7 +10,7 @@
     "pnpm": ">=8"
   },
   "scripts": {
-    "build": "pnpm --filter @graphql-eslint/eslint-plugin build && bob check",
+    "build": "turbo run build --filter=!website && bob check",
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
@@ -46,6 +46,7 @@
     "rimraf": "5.0.1",
     "tsup": "^7.1.0",
     "tsx": "3.12.7",
+    "turbo": "^1.10.12",
     "typescript": "5.1.6",
     "vitest": "0.30.1"
   },

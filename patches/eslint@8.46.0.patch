@@ -13,7 +13,7 @@ index 233cbed5b5ccdf89806df9786a0902a317dd451e..7db8fa9c1fca4183460164ca1fd8fa0a
  const DEFAULT_ECMA_VERSION = 5;
  const commentParser = new ConfigCommentParser();
 diff --git a/lib/rule-tester/flat-rule-tester.js b/lib/rule-tester/flat-rule-tester.js
-index f143873f7bc76737acc5ff00871e462ef058bf4b..ac6ecbbda2854bf927c6de3632588c5b6ea8a9a8 100644
+index f143873f7bc76737acc5ff00871e462ef058bf4b..a0b6283b653a9f9cd478711c34bbf4a07ad9008f 100644
 --- a/lib/rule-tester/flat-rule-tester.js
 +++ b/lib/rule-tester/flat-rule-tester.js
 @@ -998,11 +998,7 @@ class FlatRuleTester {
@@ -30,10 +30,10 @@ index f143873f7bc76737acc5ff00871e462ef058bf4b..ac6ecbbda2854bf927c6de3632588c5b
  
              assertASTDidntChange(result.beforeAST, result.afterAST);
 diff --git a/lib/rule-tester/rule-tester.js b/lib/rule-tester/rule-tester.js
-index e4dc126783c8232a67268c72def615829c4508b9..9b38bf58032a161dfbed70e6bb3974644297dd8f 100644
+index e4dc126783c8232a67268c72def615829c4508b9..6e1de73fd06e8bfec07e14c8779b050959f3add4 100644
 --- a/lib/rule-tester/rule-tester.js
 +++ b/lib/rule-tester/rule-tester.js
-@@ -1008,11 +1008,7 @@ class RuleTester {
+@@ -1008,13 +1008,10 @@ class RuleTester {
                      assert.strictEqual(result.output, item.output, "Output is incorrect.");
                  }
              } else {
@@ -45,4 +45,7 @@ index e4dc126783c8232a67268c72def615829c4508b9..9b38bf58032a161dfbed70e6bb397464
 +                // 🚨 Don't need, as we assert autofix output with snapshots
              }
  
++            item.assertMessages(item)
              assertASTDidntChange(result.beforeAST, result.afterAST);
+         }
+ 
