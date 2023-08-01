@@ -1,5 +1,5 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions, RULE_ID } from '../src/rules/require-description';
 
 const ruleTester = new RuleTester();

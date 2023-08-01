@@ -1,4 +1,4 @@
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/description-style';
 
 const INLINE_SDL = /* GraphQL */ `

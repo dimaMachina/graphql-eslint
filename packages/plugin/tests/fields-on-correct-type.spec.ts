@@ -1,5 +1,5 @@
 import { ParserOptions, rules } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 
 const parserOptions: Pick<ParserOptions, 'schema'> = {
   schema: /* GraphQL */ `

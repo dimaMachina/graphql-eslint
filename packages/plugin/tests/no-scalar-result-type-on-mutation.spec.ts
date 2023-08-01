@@ -1,5 +1,5 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
 
 const useSchema = (

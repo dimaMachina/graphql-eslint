@@ -1,4 +1,4 @@
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/alphabetize';
 
 const ruleTester = new RuleTester();

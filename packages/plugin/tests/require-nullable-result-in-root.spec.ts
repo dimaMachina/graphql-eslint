@@ -1,5 +1,5 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-nullable-result-in-root';
 
 const ruleTester = new RuleTester();

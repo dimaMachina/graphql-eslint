@@ -1,4 +1,4 @@
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-deprecation-reason';
 
 const ruleTester = new RuleTester();

@@ -302,6 +302,9 @@ importers:
         specifier: ^2.4.1
         version: 2.4.1
     devDependencies:
+      '@theguild/eslint-rule-tester':
+        specifier: workspace:*
+        version: link:../rule-tester
       '@types/debug':
         specifier: 4.1.8
         version: 4.1.8

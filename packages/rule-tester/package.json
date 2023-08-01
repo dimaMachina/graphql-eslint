@@ -1,6 +1,8 @@
 {
   "name": "@theguild/eslint-rule-tester",
+  "version": "0.0.0",
   "type": "module",
+  "private": true,
   "engines": {
     "node": ">=18"
   },
@@ -24,6 +26,5 @@
     "@types/babel__code-frame": "7.0.3",
     "@types/node": "18.17.1",
     "eslint": "^8.46.0"
-  },
-  "privat": true
+  }
 }

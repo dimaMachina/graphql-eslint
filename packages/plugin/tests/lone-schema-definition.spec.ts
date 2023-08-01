@@ -1,4 +1,4 @@
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
 const ruleTester = new RuleTester();

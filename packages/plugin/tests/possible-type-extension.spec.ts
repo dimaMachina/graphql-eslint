@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { ParserOptions, rules } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 
 const ruleTester = new RuleTester();
 

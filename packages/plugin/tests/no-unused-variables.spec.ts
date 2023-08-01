@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rules } from '../src';
 
 const ruleTester = new RuleTester();

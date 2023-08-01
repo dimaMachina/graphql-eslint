@@ -1,5 +1,5 @@
 import { rules } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 
 const ruleTester = new RuleTester({
   schema: /* GraphQL */ `

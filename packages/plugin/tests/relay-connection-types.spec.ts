@@ -1,4 +1,4 @@
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/relay-connection-types';
 
 const ruleTester = new RuleTester();

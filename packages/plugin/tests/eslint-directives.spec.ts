@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
 import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';
 

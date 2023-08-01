@@ -1,4 +1,4 @@
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RULE_ID } from '../src/rules/no-hashtag-description';
 
 const ruleTester = new RuleTester();

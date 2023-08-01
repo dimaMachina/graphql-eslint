@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { ParserOptions } from '../src';
-import { RuleTester } from '../src/testkit';
+import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/unique-fragment-name';
 
 const TEST_FRAGMENT = /* GraphQL */ `
