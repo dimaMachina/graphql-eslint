@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`unique-operation-name > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | query test { bar }
@@ -12,7 +12,7 @@ exports[`Invalid #1 1`] = `
     	6844040.graphql
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`unique-operation-name > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | query test { bar }

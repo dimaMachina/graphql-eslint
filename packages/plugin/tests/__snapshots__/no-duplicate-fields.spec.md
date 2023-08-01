@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-duplicate-fields > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         query test($v: String, $t: String, $v: String) {
@@ -20,7 +20,7 @@ exports[`Invalid #1 1`] = `
     3 |         }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-duplicate-fields > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         query test {
@@ -45,7 +45,7 @@ exports[`Invalid #2 1`] = `
     5 |         }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`no-duplicate-fields > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 |         query test {
@@ -76,7 +76,7 @@ exports[`Invalid #3 1`] = `
     8 |         }
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`no-duplicate-fields > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 |         query test {

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-typename-prefix > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -21,7 +21,7 @@ exports[`Invalid #1 1`] = `
     3 |         }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-typename-prefix > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -58,7 +58,7 @@ exports[`Invalid #2 1`] = `
     4 |         }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`no-typename-prefix > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 |         interface Node {

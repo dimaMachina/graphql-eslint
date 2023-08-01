@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-unreachable-types > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
        1 |         type Query {
@@ -114,7 +114,7 @@ exports[`Invalid #1 1`] = `
     18 |         
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-unreachable-types > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
        1 |         # ScalarTypeDefinition
@@ -412,7 +412,7 @@ exports[`Invalid #2 1`] = `
     27 |         
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`no-unreachable-types > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
        1 |         interface User {
@@ -462,7 +462,7 @@ exports[`Invalid #3 1`] = `
     18 |         
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`no-unreachable-types > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
        1 |         interface User {
@@ -570,7 +570,7 @@ exports[`Invalid #4 1`] = `
     18 |         }
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`no-unreachable-types > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
        1 |         type Query {

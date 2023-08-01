@@ -36,24 +36,15 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
   return [code.slice(0, range[0]), text, code.slice(range[1])].join('');
 }
 
-type RuleTesterConfig = {
-  parser: string;
-  parserOptions: Omit<ParserOptions, 'filePath'>;
-};
-
 export class RuleTester extends ESLintRuleTester {
-  config: RuleTesterConfig;
-
   constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
-    const config = {
+    super({
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
         ...parserOptions,
         skipGraphQLConfig: true,
       },
-    };
-    super(config);
-    this.config = config;
+    });
   }
 
   fromMockFile(path: string): string {
@@ -68,27 +59,23 @@ export class RuleTester extends ESLintRuleTester {
       invalid: GraphQLInvalidTestCase<Options>[];
     },
   ): void {
-    for (const test of [...tests.valid, ...tests.invalid]) {
-      test.getMessages = messages => {
-        console.log(123, { messages });
+    const getMessages = (testCase: ESLintRuleTester.InvalidTestCase) => () => {
+      const { options, code: rawCode, filename, parserOptions } = testCase;
+
+      const testerConfig = {
+        ...this.testerConfig,
+        parserOptions: {
+          ...this.testerConfig.parserOptions,
+          ...parserOptions,
+        },
+        rules: {
+          [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
+        },
       };
-    }
 
-    super.run(ruleId, rule as any, tests);
-    return;
-    const linter = new Linter();
-    linter.defineRule(ruleId, rule as any);
+      const code = removeTrailingBlankLines(rawCode);
+      const messages = this.linter.verify(code, testerConfig, filename);
 
-    for (const [idx, testCase] of tests.invalid.entries()) {
-      const { filename, options, name } = testCase;
-      const code = removeTrailingBlankLines(testCase.code);
-      const verifyConfig = getVerifyConfig<Options>(ruleId, this.config, testCase);
-      defineParser(linter, verifyConfig.parser);
-
-      const messages = linter.verify(code, verifyConfig, filename);
-      if (messages.length === 0) {
-        throw new Error('Invalid case should have at least one error.');
-      }
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
       const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
 
@@ -98,10 +85,6 @@ export class RuleTester extends ESLintRuleTester {
       }
 
       for (const [index, message] of messages.entries()) {
-        if (message.fatal) {
-          throw new Error(message.message);
-        }
-
         const codeWithMessage = printCode(code, message, 1);
         messageForSnapshot.push(
           printWithIndex('#### ❌ Error', index, messages.length),
@@ -123,17 +106,21 @@ export class RuleTester extends ESLintRuleTester {
           }
         }
       }
-
       if (rule.meta.fixable) {
-        const { fixed, output } = linter.verifyAndFix(code, verifyConfig, filename);
+        const { fixed, output } = this.linter.verifyAndFix(code, testerConfig, filename);
         if (fixed) {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
       }
-      it(name || `Invalid #${idx + 1}`, () => {
-        expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
-      });
+      expect(messageForSnapshot.join('\n\n')).toMatchSnapshot();
+    };
+
+    for (const [id, testCase] of tests.invalid.entries()) {
+      testCase.name = `Invalid #${id + 1}`;
+      testCase.getMessages = getMessages(testCase);
     }
+
+    super.run(ruleId, rule as any, tests);
   }
 }
 
@@ -149,44 +136,6 @@ function printWithIndex(title: string, index: number, total: number, description
     title += `: ${description}`;
   }
   return title;
-}
-
-function getVerifyConfig<Options>(
-  ruleId: string,
-  testerConfig: RuleTesterConfig,
-  testCase: GraphQLInvalidTestCase<Options>,
-): Omit<Linter.Config, 'parser'> & { parser: string } {
-  const { parser = testerConfig.parser, parserOptions, options } = testCase;
-
-  return {
-    ...testerConfig,
-    parser,
-    parserOptions: {
-      ...testerConfig.parserOptions,
-      ...parserOptions,
-    },
-    rules: {
-      [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
-    },
-  };
-}
-
-const parsers = new WeakMap();
-
-function defineParser(linter: Linter, parser: string): void {
-  if (!parser) {
-    return;
-  }
-  if (!parsers.has(linter)) {
-    parsers.set(linter, new Set());
-  }
-
-  const defined = parsers.get(linter);
-  if (!defined.has(parser)) {
-    defined.add(parser);
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    linter.defineParser(parser, require(parser));
-  }
 }
 
 function printCode(
