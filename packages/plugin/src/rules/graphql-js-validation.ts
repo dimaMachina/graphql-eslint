@@ -11,7 +11,13 @@ import {
   ValidationRule,
   visit,
 } from 'graphql';
-import { ExecutableDefinitionsRule } from 'graphql/validation/index.js';
+import {
+  ExecutableDefinitionsRule,
+  FieldsOnCorrectTypeRule,
+  FragmentsOnCompositeTypesRule,
+  KnownArgumentNamesRule,
+  KnownDirectivesRule,
+} from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
@@ -222,7 +228,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'fields-on-correct-type',
-      ruleName: 'FieldsOnCorrectType',
+      rule: FieldsOnCorrectTypeRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -235,7 +241,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'fragments-on-composite-type',
-      ruleName: 'FragmentsOnCompositeTypes',
+      rule: FragmentsOnCompositeTypesRule,
     },
     {
       category: 'Operations',
@@ -247,7 +253,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-argument-names',
-      ruleName: 'KnownArgumentNames',
+      rule: KnownArgumentNamesRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -260,7 +266,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-directives',
-      ruleName: 'KnownDirectives',
+      rule: KnownDirectivesRule,
       getDocumentNode({ context, node: documentNode }) {
         const { ignoreClientDirectives = [] } = context.options[0] || {};
         if (ignoreClientDirectives.length === 0) {
