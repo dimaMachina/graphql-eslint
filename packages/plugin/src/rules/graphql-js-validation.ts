@@ -568,8 +568,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
     {
       category: 'Schema',
       description: 'A type extension is only valid if the type is defined and has the same kind.',
-      // TODO: add in graphql-eslint v4
-      recommended: false,
+      recommended: true,
       requiresSchema: true,
       isDisabledForAllConfig: true,
     },

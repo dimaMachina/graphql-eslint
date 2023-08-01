@@ -49,6 +49,7 @@ export const rule: GraphQLESLintRule = {
       description: 'Enforce unique fragment names across your project.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSiblings: true,
+      recommended: true,
       examples: [
         {
           title: 'Incorrect',
