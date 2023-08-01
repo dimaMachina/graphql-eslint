@@ -75,7 +75,7 @@ function validateDocument({
   }
   try {
     const validationErrors = schema
-      ? validate(schema, documentNode, [rule])
+      ? validate(schema, documentNode, [rule as ValidationRule])
       : validateSDL(documentNode, null, [rule as any]);
 
     for (const error of validationErrors) {
