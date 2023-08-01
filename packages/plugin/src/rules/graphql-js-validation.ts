@@ -40,6 +40,9 @@ import {
   UniqueOperationTypesRule,
   UniqueTypeNamesRule,
   UniqueVariableNamesRule,
+  ValuesOfCorrectTypeRule,
+  VariablesAreInputTypesRule,
+  VariablesInAllowedPositionRule
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
@@ -705,7 +708,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'value-literals-of-correct-type',
-      ruleName: 'ValuesOfCorrectType',
+      rule: ValuesOfCorrectTypeRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -718,7 +721,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'variables-are-input-types',
-      ruleName: 'VariablesAreInputTypes',
+      rule: VariablesAreInputTypesRule,
     },
     {
       category: 'Operations',
@@ -730,7 +733,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'variables-in-allowed-position',
-      ruleName: 'VariablesInAllowedPosition',
+      rule: VariablesInAllowedPositionRule,
     },
     {
       category: 'Operations',
