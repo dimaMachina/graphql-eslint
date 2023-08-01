@@ -1,11 +1,11 @@
 import { GraphQLParseOptions } from '@graphql-tools/utils';
 import { AST, Linter, Rule } from 'eslint';
 import * as ESTree from 'estree';
-import { GraphQLSchema } from 'graphql';
+import { GraphQLSchema, ASTKindToNode } from 'graphql';
 import { IExtensions, IGraphQLProject } from 'graphql-config';
 import { JSONSchema } from 'json-schema-to-ts';
 import { SiblingOperations } from './siblings.js';
-import { GraphQLESLintRuleListener } from './testkit.js';
+import { GraphQLESTreeNode } from './estree-converter/index.js';
 
 export type Schema = GraphQLSchema | null;
 export type Pointer = string | string[];
@@ -73,6 +73,13 @@ export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> 
       };
   graphQLJSRuleName?: string;
   isDisabledForAllConfig?: true;
+};
+
+export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Record<
+  string,
+  any
+> & {
+  [K in keyof ASTKindToNode]?: (node: GraphQLESTreeNode<ASTKindToNode[K], WithTypeInfo>) => void;
 };
 
 export type GraphQLESLintRule<Options = [], WithTypeInfo extends boolean = false> = {

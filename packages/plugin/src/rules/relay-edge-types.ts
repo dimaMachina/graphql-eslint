@@ -12,8 +12,7 @@ import {
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRuleListener } from '../testkit.js';
-import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
 
 const RULE_ID = 'relay-edge-types';
