@@ -17,6 +17,13 @@ import {
   FragmentsOnCompositeTypesRule,
   KnownArgumentNamesRule,
   KnownDirectivesRule,
+  KnownFragmentNamesRule,
+  KnownTypeNamesRule,
+  LoneAnonymousOperationRule,
+  LoneSchemaDefinitionRule,
+  NoFragmentCyclesRule,
+  NoUndefinedVariablesRule,
+  NoUnusedFragmentsRule
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
@@ -321,7 +328,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-fragment-names',
-      ruleName: 'KnownFragmentNames',
+      rule: KnownFragmentNamesRule,
       getDocumentNode: handleMissingFragments,
     },
     {
@@ -381,7 +388,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-type-names',
-      ruleName: 'KnownTypeNames',
+      rule: KnownTypeNamesRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -394,7 +401,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'lone-anonymous-operation',
-      ruleName: 'LoneAnonymousOperation',
+      rule: LoneAnonymousOperationRule,
     },
     {
       category: 'Operations',
@@ -406,7 +413,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'lone-schema-definition',
-      ruleName: 'LoneSchemaDefinition',
+      rule: LoneSchemaDefinitionRule,
     },
     {
       category: 'Schema',
@@ -416,7 +423,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-fragment-cycles',
-      ruleName: 'NoFragmentCycles',
+      rule: NoFragmentCyclesRule,
     },
     {
       category: 'Operations',
@@ -428,7 +435,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-undefined-variables',
-      ruleName: 'NoUndefinedVariables',
+      rule: NoUndefinedVariablesRule,
       getDocumentNode: handleMissingFragments,
     },
     {
@@ -442,7 +449,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-unused-fragments',
-      ruleName: 'NoUnusedFragments',
+      rule: NoUnusedFragmentsRule,
       getDocumentNode: ({ ruleId, context, node }) => {
         const siblings = requireSiblingsOperations(ruleId, context);
         const FilePathToDocumentsMap = [
