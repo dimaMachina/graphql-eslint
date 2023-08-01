@@ -13,7 +13,7 @@ jobs:
       - name: Fetch
         run: git fetch origin master
 
-      - name: Setup env
+      - name: Setup ENV
         uses: the-guild-org/shared-config/setup@main
         with:
           nodeVersion: 18
@@ -28,7 +28,7 @@ jobs:
       - name: Compare
         run: git diff origin/${{ github.base_ref }}.. -- website/route-lockfile.txt
 
-      - name: Diff to file
+      - name: Diff to File
         if: always()
         id: diff_result
         run: |
@@ -36,7 +36,7 @@ jobs:
           echo "$(git diff origin/${{ github.base_ref }}.. -- website/route-lockfile.txt)" >> $GITHUB_OUTPUT
           echo EOF >> $GITHUB_OUTPUT
 
-      - name: Publish a message
+      - name: Publish a Message
         if: always() && contains(steps.diff_result.outputs.result, 'diff')
         uses: marocchino/sticky-pull-request-comment@v2
         with:

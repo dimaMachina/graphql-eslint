@@ -1,8 +1,7 @@
 name: pr
 on:
   pull_request:
-    branches:
-      - master
+    branches: [master, v4]
 
 jobs:
   dependencies:
