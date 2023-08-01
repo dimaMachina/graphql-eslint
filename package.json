@@ -50,9 +50,6 @@
     "typescript": "5.1.6",
     "vitest": "0.30.1"
   },
-  "resolutions": {
-    "graphql": "16.7.1"
-  },
   "pnpm": {
     "patchedDependencies": {
       "eslint@8.46.0": "patches/eslint@8.46.0.patch",

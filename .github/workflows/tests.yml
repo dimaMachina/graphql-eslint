@@ -35,12 +35,6 @@ jobs:
           nodeVersion: 18
           packageManager: pnpm
 
-      - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node scripts/match-graphql.js ${{matrix.graphql_version}}
-
-      - name: Install Dependencies
-        run: pnpm i --no-frozen-lockfile
-
       - name: Build
         run: pnpm build
 
@@ -51,8 +45,8 @@ jobs:
     needs: [typecheck]
     strategy:
       matrix:
-        node_version: [16, 18, 20]
-        graphql_version: [15, 16]
+        node_version: [18, 20]
+        graphql_version: [16]
 
     steps:
       - name: Checkout Master
@@ -65,12 +59,6 @@ jobs:
         with:
           nodeVersion: ${{matrix.node_version}}
           packageManager: pnpm
-
-      - name: Use GraphQL v${{matrix.graphql_version}}
-        run: node scripts/match-graphql.js ${{matrix.graphql_version}}
-
-      - name: Install Dependencies
-        run: pnpm i --no-frozen-lockfile
 
       - name: Test
         run: pnpm test
