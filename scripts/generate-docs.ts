@@ -141,7 +141,7 @@ async function generateDocs(): Promise<void> {
     } else {
       blocks.push(
         `- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/${ruleName}.ts)`,
-        `- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/${ruleName}.spec.ts)`,
+        `- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/${ruleName}.spec.ts)`,
       );
     }
     return {
