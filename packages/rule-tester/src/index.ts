@@ -1,20 +1,14 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
-import { GraphQLESLintRule, ParserOptions } from './types.js';
 
-export type GraphQLValidTestCase<Options = []> = Omit<
+type ValidTestCase<Options = [], ParserOptions = Record<string, never>> = Omit<
   ESLintRuleTester.ValidTestCase,
   'options' | 'parserOptions'
 > & {
   options?: Options;
-  parserOptions?: Omit<ParserOptions, 'filePath'>;
-};
-
-export type GraphQLInvalidTestCase<T = []> = GraphQLValidTestCase<T> & {
-  errors: (ESLintRuleTester.TestCaseError | string)[] | number;
-  output?: string | null;
+  parserOptions?: ParserOptions;
 };
 
 function indentCode(code: string, indent = 4): string {
@@ -27,8 +21,8 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
   return [code.slice(0, range[0]), text, code.slice(range[1])].join('');
 }
 
-export class RuleTester extends ESLintRuleTester {
-  constructor(parserOptions: Omit<ParserOptions, 'filePath'> = {}) {
+export class RuleTester<ParserOptions> extends ESLintRuleTester {
+  constructor(parserOptions: ParserOptions) {
     super({
       parser: require.resolve('@graphql-eslint/eslint-plugin'),
       parserOptions: {
@@ -43,23 +37,25 @@ export class RuleTester extends ESLintRuleTester {
   }
 
   // @ts-expect-error
-  run<Options, WithTypeInfo extends boolean = false>(
+  run<Options>(
     ruleId: string,
-    rule: GraphQLESLintRule<Options, WithTypeInfo>,
+    rule: Rule.RuleModule,
     tests: {
-      valid: (GraphQLValidTestCase<Options> | string)[];
-      invalid: GraphQLInvalidTestCase<Options>[];
+      valid: (string | ValidTestCase<Options, ParserOptions>)[];
+      invalid: (ValidTestCase<Options, ParserOptions> &
+        Pick<ESLintRuleTester.InvalidTestCase, 'errors'>)[];
     },
   ): void {
+    // @ts-expect-error
+    const { testerConfig, linter } = this;
+
     const getMessages = (testCase: ESLintRuleTester.InvalidTestCase) => () => {
       const { options, code: rawCode, filename, parserOptions } = testCase;
 
-      const testerConfig = {
-        // @ts-expect-error
-        parser: this.testerConfig.parser,
+      const config = {
+        parser: testerConfig.parser,
         parserOptions: {
-          // @ts-expect-error
-          ...this.testerConfig.parserOptions,
+          ...testerConfig.parserOptions,
           ...parserOptions,
         },
         rules: {
@@ -68,8 +64,7 @@ export class RuleTester extends ESLintRuleTester {
       };
 
       const code = removeTrailingBlankLines(rawCode);
-      // @ts-expect-error
-      const messages = this.linter.verify(code, testerConfig, filename);
+      const messages = linter.verify(code, config, filename);
 
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
       const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
@@ -101,9 +96,8 @@ export class RuleTester extends ESLintRuleTester {
           }
         }
       }
-      if (rule.meta.fixable) {
-        // @ts-expect-error
-        const { fixed, output } = this.linter.verifyAndFix(code, testerConfig, filename);
+      if (rule.meta!.fixable) {
+        const { fixed, output } = linter.verifyAndFix(code, config, filename);
         if (fixed) {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
