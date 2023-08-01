@@ -51,6 +51,7 @@ export class RuleTester extends ESLintRuleTester {
     return readFileSync(resolve(__dirname, `../tests/mocks/${path}`), 'utf-8');
   }
 
+  // @ts-expect-error
   run<Options, WithTypeInfo extends boolean = false>(
     ruleId: string,
     rule: GraphQLESLintRule<Options, WithTypeInfo>,
@@ -63,8 +64,10 @@ export class RuleTester extends ESLintRuleTester {
       const { options, code: rawCode, filename, parserOptions } = testCase;
 
       const testerConfig = {
-        ...this.testerConfig,
+        // @ts-expect-error
+        parser: this.testerConfig.parser,
         parserOptions: {
+          // @ts-expect-error
           ...this.testerConfig.parserOptions,
           ...parserOptions,
         },
@@ -74,6 +77,7 @@ export class RuleTester extends ESLintRuleTester {
       };
 
       const code = removeTrailingBlankLines(rawCode);
+      // @ts-expect-error
       const messages = this.linter.verify(code, testerConfig, filename);
 
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
@@ -107,6 +111,7 @@ export class RuleTester extends ESLintRuleTester {
         }
       }
       if (rule.meta.fixable) {
+        // @ts-expect-error
         const { fixed, output } = this.linter.verifyAndFix(code, testerConfig, filename);
         if (fixed) {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
@@ -117,6 +122,7 @@ export class RuleTester extends ESLintRuleTester {
 
     for (const [id, testCase] of tests.invalid.entries()) {
       testCase.name ||= `Invalid #${id + 1}`;
+      // @ts-expect-error
       testCase.getMessages = getMessages(testCase);
     }
 

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Edge type must be Object type 1`] = `
+exports[`relay-edge-types > invalid > Edge type must be Object type 1`] = `
 #### ⌨️ Code
 
        1 |         type PageInfo
@@ -31,7 +31,8 @@ exports[`Edge type must be Object type 1`] = `
 
     {
       "shouldImplementNode": false,
-      "listTypeCanWrapOnlyEdgeType": false
+      "listTypeCanWrapOnlyEdgeType": false,
+      "withEdgeSuffix": true
     }
 
 #### ❌ Error 1/4
@@ -63,7 +64,7 @@ exports[`Edge type must be Object type 1`] = `
       22 |           pageInfo: PageInfo!
 `;
 
-exports[`list type 1`] = `
+exports[`relay-edge-types > invalid > list type 1`] = `
 #### ⌨️ Code
 
        1 |         type AEdge {
@@ -83,7 +84,9 @@ exports[`list type 1`] = `
 #### ⚙️ Options
 
     {
-      "listTypeCanWrapOnlyEdgeType": true
+      "listTypeCanWrapOnlyEdgeType": true,
+      "withEdgeSuffix": true,
+      "shouldImplementNode": true
     }
 
 #### ❌ Error 1/4
@@ -115,7 +118,7 @@ exports[`list type 1`] = `
       13 |         }
 `;
 
-exports[`should implements Node 1`] = `
+exports[`relay-edge-types > invalid > should implements Node 1`] = `
 #### ⌨️ Code
 
        1 |         type User {
@@ -132,7 +135,9 @@ exports[`should implements Node 1`] = `
 #### ⚙️ Options
 
     {
-      "shouldImplementNode": true
+      "shouldImplementNode": true,
+      "withEdgeSuffix": true,
+      "listTypeCanWrapOnlyEdgeType": true
     }
 
 #### ❌ Error
@@ -143,7 +148,7 @@ exports[`should implements Node 1`] = `
       5 |           node: User!
 `;
 
-exports[`should report cursor when list is used 1`] = `
+exports[`relay-edge-types > invalid > should report cursor when list is used 1`] = `
 #### ⌨️ Code
 
       1 |         type PageInfo
@@ -160,7 +165,8 @@ exports[`should report cursor when list is used 1`] = `
 
     {
       "shouldImplementNode": false,
-      "listTypeCanWrapOnlyEdgeType": false
+      "listTypeCanWrapOnlyEdgeType": false,
+      "withEdgeSuffix": true
     }
 
 #### ❌ Error 1/2
@@ -178,7 +184,7 @@ exports[`should report cursor when list is used 1`] = `
       5 |         }
 `;
 
-exports[`should report when fields is missing 1`] = `
+exports[`relay-edge-types > invalid > should report when fields is missing 1`] = `
 #### ⌨️ Code
 
       1 |         type PageInfo
@@ -203,7 +209,7 @@ exports[`should report when fields is missing 1`] = `
       3 |         type AConnection {
 `;
 
-exports[`should report when without Edge suffix 1`] = `
+exports[`relay-edge-types > invalid > should report when without Edge suffix 1`] = `
 #### ⌨️ Code
 
       1 |         scalar Email
@@ -218,7 +224,9 @@ exports[`should report when without Edge suffix 1`] = `
 #### ⚙️ Options
 
     {
-      "withEdgeSuffix": true
+      "withEdgeSuffix": true,
+      "shouldImplementNode": true,
+      "listTypeCanWrapOnlyEdgeType": true
     }
 
 #### ❌ Error

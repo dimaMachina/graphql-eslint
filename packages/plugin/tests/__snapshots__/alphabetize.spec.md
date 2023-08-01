@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`alphabetize > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -15,7 +15,8 @@ exports[`Invalid #1 1`] = `
     {
       "fields": [
         "ObjectTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -42,7 +43,7 @@ exports[`Invalid #1 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`alphabetize > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         extend type User {
@@ -57,7 +58,8 @@ exports[`Invalid #2 1`] = `
     {
       "fields": [
         "ObjectTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error
@@ -77,7 +79,7 @@ exports[`Invalid #2 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`alphabetize > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 |         interface Test {
@@ -91,7 +93,8 @@ exports[`Invalid #3 1`] = `
     {
       "fields": [
         "InterfaceTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -117,7 +120,7 @@ exports[`Invalid #3 1`] = `
       5 |         }
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`alphabetize > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 |         input UserInput {
@@ -132,7 +135,8 @@ exports[`Invalid #4 1`] = `
     {
       "fields": [
         "InputObjectTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -159,7 +163,7 @@ exports[`Invalid #4 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`alphabetize > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 |         extend input UserInput {
@@ -174,7 +178,8 @@ exports[`Invalid #5 1`] = `
     {
       "fields": [
         "InputObjectTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error
@@ -194,7 +199,7 @@ exports[`Invalid #5 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #6 1`] = `
+exports[`alphabetize > invalid > Invalid #6 1`] = `
 #### ⌨️ Code
 
       1 |         enum Role {
@@ -209,7 +214,8 @@ exports[`Invalid #6 1`] = `
     {
       "values": [
         "EnumTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -236,7 +242,7 @@ exports[`Invalid #6 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #7 1`] = `
+exports[`alphabetize > invalid > Invalid #7 1`] = `
 #### ⌨️ Code
 
       1 |         extend enum Role {
@@ -251,7 +257,8 @@ exports[`Invalid #7 1`] = `
     {
       "values": [
         "EnumTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error
@@ -271,7 +278,7 @@ exports[`Invalid #7 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #8 1`] = `
+exports[`alphabetize > invalid > Invalid #8 1`] = `
 #### ⌨️ Code
 
       1 |         directive @test(cc: [Cc!]!, bb: [Bb!], aa: Aa!) on FIELD_DEFINITION
@@ -281,7 +288,8 @@ exports[`Invalid #8 1`] = `
     {
       "arguments": [
         "DirectiveDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -299,7 +307,7 @@ exports[`Invalid #8 1`] = `
       1 |         directive @test(aa: Aa!, bb: [Bb!], cc: [Cc!]!) on FIELD_DEFINITION
 `;
 
-exports[`Invalid #9 1`] = `
+exports[`alphabetize > invalid > Invalid #9 1`] = `
 #### ⌨️ Code
 
       1 |         type Query {
@@ -311,7 +319,8 @@ exports[`Invalid #9 1`] = `
     {
       "arguments": [
         "FieldDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -335,7 +344,7 @@ exports[`Invalid #9 1`] = `
       3 |         }
 `;
 
-exports[`Invalid #10 1`] = `
+exports[`alphabetize > invalid > Invalid #10 1`] = `
 #### ⌨️ Code
 
       1 |         fragment TestFields on Test {
@@ -349,7 +358,8 @@ exports[`Invalid #10 1`] = `
     {
       "selections": [
         "FragmentDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
@@ -375,7 +385,7 @@ exports[`Invalid #10 1`] = `
       5 |         }
 `;
 
-exports[`Invalid #11 1`] = `
+exports[`alphabetize > invalid > Invalid #11 1`] = `
 #### ⌨️ Code
 
        1 |         query {
@@ -396,7 +406,8 @@ exports[`Invalid #11 1`] = `
     {
       "selections": [
         "OperationDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/4
@@ -443,7 +454,7 @@ exports[`Invalid #11 1`] = `
       12 |         }
 `;
 
-exports[`Invalid #12 1`] = `
+exports[`alphabetize > invalid > Invalid #12 1`] = `
 #### ⌨️ Code
 
       1 |         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
@@ -460,7 +471,8 @@ exports[`Invalid #12 1`] = `
       ],
       "arguments": [
         "Field"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/4
@@ -498,7 +510,7 @@ exports[`Invalid #12 1`] = `
       5 |         }
 `;
 
-exports[`should compare with lexicographic order 1`] = `
+exports[`alphabetize > invalid > should compare with lexicographic order 1`] = `
 #### ⌨️ Code
 
        1 |         enum Test {
@@ -518,7 +530,8 @@ exports[`should compare with lexicographic order 1`] = `
     {
       "values": [
         "EnumTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/3
@@ -557,7 +570,7 @@ exports[`should compare with lexicographic order 1`] = `
       11 |         }
 `;
 
-exports[`should move comment 1`] = `
+exports[`alphabetize > invalid > should move comment 1`] = `
 #### ⌨️ Code
 
        1 |         type Test { # { character
@@ -580,7 +593,8 @@ exports[`should move comment 1`] = `
     {
       "fields": [
         "ObjectTypeDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/3
@@ -622,7 +636,7 @@ exports[`should move comment 1`] = `
       14 |         } # } character
 `;
 
-exports[`should sort by group when \`*\` at the start 1`] = `
+exports[`alphabetize > invalid > should sort by group when \`*\` at the start 1`] = `
 #### ⌨️ Code
 
        1 |   type User {
@@ -649,7 +663,8 @@ exports[`should sort by group when \`*\` at the start 1`] = `
         "updatedAt",
         "id",
         "createdAt"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/4
@@ -696,7 +711,7 @@ exports[`should sort by group when \`*\` at the start 1`] = `
       12 |   }
 `;
 
-exports[`should sort by group when \`*\` is at the end 1`] = `
+exports[`alphabetize > invalid > should sort by group when \`*\` is at the end 1`] = `
 #### ⌨️ Code
 
        1 |   type User {
@@ -723,7 +738,8 @@ exports[`should sort by group when \`*\` is at the end 1`] = `
         "id",
         "createdAt",
         "*"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/4
@@ -770,7 +786,7 @@ exports[`should sort by group when \`*\` is at the end 1`] = `
       12 |   }
 `;
 
-exports[`should sort by group when \`*\` is between 1`] = `
+exports[`alphabetize > invalid > should sort by group when \`*\` is between 1`] = `
 #### ⌨️ Code
 
        1 |   type User {
@@ -797,7 +813,8 @@ exports[`should sort by group when \`*\` is between 1`] = `
         "*",
         "createdAt",
         "updatedAt"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/4
@@ -844,7 +861,7 @@ exports[`should sort by group when \`*\` is between 1`] = `
       12 |   }
 `;
 
-exports[`should sort definitions 1`] = `
+exports[`alphabetize > invalid > should sort definitions 1`] = `
 #### ⌨️ Code
 
        1 |         # START
@@ -1039,7 +1056,7 @@ exports[`should sort definitions 1`] = `
       59 |         # END
 `;
 
-exports[`should sort when selection is aliased 1`] = `
+exports[`alphabetize > invalid > should sort when selection is aliased 1`] = `
 #### ⌨️ Code
 
       1 |         {
@@ -1055,7 +1072,8 @@ exports[`should sort when selection is aliased 1`] = `
     {
       "selections": [
         "OperationDefinition"
-      ]
+      ],
+      "definitions": false
     }
 
 #### ❌ Error 1/2
