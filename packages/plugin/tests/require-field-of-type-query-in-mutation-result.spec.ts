@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-field-of-type-query-in-mutation-result';
+import { ruleTester } from './test-utils';
 
 const useSchema = (
   code: string,
@@ -16,8 +16,6 @@ const useSchema = (
     `,
   },
 });
-
-const ruleTester = new RuleTester();
 
 ruleTester.run('require-field-of-type-query-in-mutation-result', rule, {
   valid: [

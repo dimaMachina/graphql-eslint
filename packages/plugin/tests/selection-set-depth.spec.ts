@@ -1,14 +1,12 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/selection-set-depth';
+import { ruleTester } from './test-utils';
 
 const WITH_SIBLINGS = {
   parserOptions: {
     documents: 'fragment AlbumFields on Album { id }',
   } as ParserOptions,
 };
-
-const ruleTester = new RuleTester();
 
 ruleTester.run<RuleOptions>('selection-set-depth', rule, {
   valid: [

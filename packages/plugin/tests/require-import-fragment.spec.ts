@@ -1,11 +1,9 @@
 import { join } from 'node:path';
 import { GraphQLInvalidTestCase } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-import-fragment';
 import { Linter } from 'eslint';
 import ParserOptions = Linter.ParserOptions;
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 function withMocks({
   name,

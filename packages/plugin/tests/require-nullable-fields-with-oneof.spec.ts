@@ -1,7 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-nullable-fields-with-oneof';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 ruleTester.run('require-nullable-fields-with-oneof', rule, {
   valid: [

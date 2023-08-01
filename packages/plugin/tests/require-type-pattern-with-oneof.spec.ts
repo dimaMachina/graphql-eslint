@@ -1,7 +1,5 @@
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule } from '../src/rules/require-type-pattern-with-oneof';
-
-const ruleTester = new RuleTester();
+import { ruleTester } from './test-utils';
 
 ruleTester.run('require-type-pattern-with-oneof', rule, {
   valid: [

@@ -1,6 +1,6 @@
 import { ParserOptions } from '../src';
-import { RuleTester } from '@theguild/eslint-rule-tester';
 import { rule, RuleOptions } from '../src/rules/require-id-when-available';
+import { ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -67,7 +67,6 @@ const WITH_SCHEMA = {
   } as ParserOptions,
 };
 
-const ruleTester = new RuleTester();
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
 
 const DOCUMENT_WITH_UNION = /* GraphQL */ `
