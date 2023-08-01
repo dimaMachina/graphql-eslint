@@ -1,9 +1,7 @@
-import { GraphQLRuleTester } from '../src';
 import { rule } from '../src/rules/require-nullable-fields-with-oneof';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('require-nullable-fields-with-oneof', rule, {
+ruleTester.run('require-nullable-fields-with-oneof', rule, {
   valid: [
     /* GraphQL */ `
       input Input @oneOf {

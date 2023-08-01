@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should not throw an error on undefined fragment 1`] = `
+exports[`known-fragment-names > invalid > should not throw an error on undefined fragment 1`] = `
 #### ⌨️ Code
 
       1 | {

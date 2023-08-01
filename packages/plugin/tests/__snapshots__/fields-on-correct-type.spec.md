@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should highlight selection on multi line 1`] = `
+exports[`fields-on-correct-type > invalid > should highlight selection on multi line 1`] = `
 #### ⌨️ Code
 
       1 |         {
@@ -19,7 +19,7 @@ exports[`should highlight selection on multi line 1`] = `
       5 |             age
 `;
 
-exports[`should highlight selection on single line 1`] = `
+exports[`fields-on-correct-type > invalid > should highlight selection on single line 1`] = `
 #### ⌨️ Code
 
       1 | fragment UserFields on User { id bad age }

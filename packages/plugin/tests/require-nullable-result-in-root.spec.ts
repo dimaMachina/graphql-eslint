@@ -1,7 +1,6 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
 import { rule } from '../src/rules/require-nullable-result-in-root';
-
-const ruleTester = new GraphQLRuleTester();
+import { ruleTester } from './test-utils';
 
 function useSchema(code: string): { code: string; parserOptions: Omit<ParserOptions, 'filePath'> } {
   return {
@@ -10,7 +9,7 @@ function useSchema(code: string): { code: string; parserOptions: Omit<ParserOpti
   };
 }
 
-ruleTester.runGraphQLTests('require-nullable-result-in-root', rule, {
+ruleTester.run('require-nullable-result-in-root', rule, {
   valid: [
     {
       ...useSchema(/* GraphQL */ `

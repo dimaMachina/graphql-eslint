@@ -4,6 +4,7 @@ import path from 'node:path';
 import { GraphQLSchema, printSchema, version } from 'graphql';
 import { loadGraphQLConfig } from '../src/graphql-config';
 import { getSchema } from '../src/schema';
+import { CWD } from '../src/utils';
 
 describe('schema', async () => {
   const SCHEMA_GRAPHQL_PATH = path.resolve(__dirname, 'mocks/user-schema.graphql');
@@ -57,7 +58,7 @@ directive @specifiedBy(
     beforeAll(
       () =>
         new Promise(resolve => {
-          const tsNodeCommand = path.resolve(process.cwd(), 'node_modules/.bin/tsx');
+          const tsNodeCommand = path.resolve(CWD, '..', '..', 'node_modules', '.bin', 'tsx');
           const serverPath = path.resolve(__dirname, 'mocks/graphql-server.ts');
 
           // Import `TestGraphQLServer` and run it in this file will don't work

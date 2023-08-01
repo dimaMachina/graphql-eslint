@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`input-name > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { SetMessage(message: String): String }
@@ -8,7 +8,10 @@ exports[`Invalid #1 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/2
@@ -30,7 +33,7 @@ exports[`Invalid #1 1`] = `
     1 | type Mutation { SetMessage(message: SetMessageInput): String }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`input-name > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { SetMessage(input: String): String }
@@ -38,7 +41,10 @@ exports[`Invalid #2 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error
@@ -51,7 +57,7 @@ exports[`Invalid #2 1`] = `
     1 | type Mutation { SetMessage(input: SetMessageInput): String }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`input-name > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { SetMessage(hello: SetMessageInput): String }
@@ -59,7 +65,10 @@ exports[`Invalid #3 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error
@@ -72,7 +81,7 @@ exports[`Invalid #3 1`] = `
     1 | type Mutation { SetMessage(input: SetMessageInput): String }
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`input-name > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(record: CreateOneUserInput!): CreateOneUserPayload }
@@ -80,7 +89,10 @@ exports[`Invalid #4 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/2
@@ -102,7 +114,7 @@ exports[`Invalid #4 1`] = `
     1 | type Mutation { userCreate(record: userCreateInput!): CreateOneUserPayload }
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`input-name > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(record: [CreateOneUserInput]!): CreateOneUserPayload }
@@ -110,7 +122,10 @@ exports[`Invalid #5 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/2
@@ -132,7 +147,7 @@ exports[`Invalid #5 1`] = `
     1 | type Mutation { userCreate(record: [userCreateInput]!): CreateOneUserPayload }
 `;
 
-exports[`Invalid #6 1`] = `
+exports[`input-name > invalid > Invalid #6 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(record: [CreateOneUserInput!]!): CreateOneUserPayload }
@@ -140,7 +155,10 @@ exports[`Invalid #6 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/2
@@ -162,7 +180,7 @@ exports[`Invalid #6 1`] = `
     1 | type Mutation { userCreate(record: [userCreateInput!]!): CreateOneUserPayload }
 `;
 
-exports[`Invalid #7 1`] = `
+exports[`input-name > invalid > Invalid #7 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(record: [CreateOneUserInput!]): CreateOneUserPayload }
@@ -170,7 +188,10 @@ exports[`Invalid #7 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/2
@@ -192,7 +213,7 @@ exports[`Invalid #7 1`] = `
     1 | type Mutation { userCreate(record: [userCreateInput!]): CreateOneUserPayload }
 `;
 
-exports[`Invalid #8 1`] = `
+exports[`input-name > invalid > Invalid #8 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(record: String, test: String): String }
@@ -200,7 +221,10 @@ exports[`Invalid #8 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true
+      "checkInputType": true,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/4
@@ -240,7 +264,7 @@ exports[`Invalid #8 1`] = `
     1 | type Mutation { userCreate(record: String, test: userCreateInput): String }
 `;
 
-exports[`Invalid #9 1`] = `
+exports[`input-name > invalid > Invalid #9 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(record: String, test: String): String }
@@ -248,7 +272,10 @@ exports[`Invalid #9 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": false
+      "checkInputType": false,
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error 1/2
@@ -270,7 +297,7 @@ exports[`Invalid #9 1`] = `
     1 | type Mutation { userCreate(record: String, input: String): String }
 `;
 
-exports[`Invalid #10 1`] = `
+exports[`input-name > invalid > Invalid #10 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(input: String): String }
@@ -279,7 +306,9 @@ exports[`Invalid #10 1`] = `
 
     {
       "checkInputType": true,
-      "caseSensitiveInputType": false
+      "caseSensitiveInputType": false,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error
@@ -292,7 +321,7 @@ exports[`Invalid #10 1`] = `
     1 | type Mutation { userCreate(input: userCreateInput): String }
 `;
 
-exports[`Invalid #11 1`] = `
+exports[`input-name > invalid > Invalid #11 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation { userCreate(input: UserCreateInput): String }
@@ -301,7 +330,9 @@ exports[`Invalid #11 1`] = `
 
     {
       "checkInputType": true,
-      "caseSensitiveInputType": true
+      "caseSensitiveInputType": true,
+      "checkQueries": false,
+      "checkMutations": true
     }
 
 #### ❌ Error
@@ -314,7 +345,7 @@ exports[`Invalid #11 1`] = `
     1 | type Mutation { userCreate(input: userCreateInput): String }
 `;
 
-exports[`Invalid #12 1`] = `
+exports[`input-name > invalid > Invalid #12 1`] = `
 #### ⌨️ Code
 
       1 | type Query { getUser(input: GetUserInput): String }
@@ -324,7 +355,8 @@ exports[`Invalid #12 1`] = `
     {
       "checkQueries": true,
       "checkInputType": true,
-      "caseSensitiveInputType": true
+      "caseSensitiveInputType": true,
+      "checkMutations": true
     }
 
 #### ❌ Error

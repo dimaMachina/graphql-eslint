@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`relay-arguments > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -49,7 +49,7 @@ exports[`Invalid #1 1`] = `
       8 |           ): PostConnection
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`relay-arguments > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -71,7 +71,7 @@ exports[`Invalid #2 1`] = `
       3 |         }
 `;
 
-exports[`should report about 2nd required argument if 1st was provided 1`] = `
+exports[`relay-arguments > invalid > should report about 2nd required argument if 1st was provided 1`] = `
 #### ⌨️ Code
 
       1 |         type User {

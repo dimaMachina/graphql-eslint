@@ -2,7 +2,6 @@ import { processor } from './processor.js';
 
 export { parseForESLint } from './parser.js';
 export { rules } from './rules/index.js';
-export * from './testkit.js';
 export * from './types.js';
 export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils.js';
 

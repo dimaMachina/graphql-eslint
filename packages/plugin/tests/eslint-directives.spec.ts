@@ -1,11 +1,9 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester } from '../src';
 import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
 import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('no-typename-prefix', noTypenamePrefix, {
+ruleTester.run('no-typename-prefix', noTypenamePrefix, {
   valid: [
     {
       name: 'should work with descriptions #942',
@@ -20,7 +18,7 @@ ruleTester.runGraphQLTests('no-typename-prefix', noTypenamePrefix, {
   invalid: [],
 });
 
-ruleTester.runGraphQLTests('test-directives', noAnonymousOperations, {
+ruleTester.run('test-directives', noAnonymousOperations, {
   valid: [
     /* GraphQL */ `
       # eslint-disable-next-line

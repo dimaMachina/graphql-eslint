@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should allow fragments if they are ignored 1`] = `
+exports[`lone-executable-definition > invalid > should allow fragments if they are ignored 1`] = `
 #### ⌨️ Code
 
        1 |         query Foo {
@@ -31,7 +31,7 @@ exports[`should allow fragments if they are ignored 1`] = `
       8 |           createFoo {
 `;
 
-exports[`should report additional definitions 1`] = `
+exports[`lone-executable-definition > invalid > should report additional definitions 1`] = `
 #### ⌨️ Code
 
        1 |         query Valid {
@@ -103,7 +103,7 @@ exports[`should report additional definitions 1`] = `
       24 |           id
 `;
 
-exports[`should report definitions after short-hand query 1`] = `
+exports[`lone-executable-definition > invalid > should report definitions after short-hand query 1`] = `
 #### ⌨️ Code
 
       1 |         {

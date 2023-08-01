@@ -1,9 +1,7 @@
-import { GraphQLRuleTester } from '../src';
 import { rule } from '../src/rules/relay-connection-types';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('relay-connection-types', rule, {
+ruleTester.run('relay-connection-types', rule, {
   valid: [
     {
       name: 'follow Relay spec',

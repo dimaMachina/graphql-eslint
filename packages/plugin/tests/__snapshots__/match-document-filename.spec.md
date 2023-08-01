@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`match-document-filename > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | { me }
@@ -17,7 +17,7 @@ exports[`Invalid #1 1`] = `
         | ^ File extension ".graphql" don't match extension ".gql"
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`match-document-filename > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | query UserById { user { id } }
@@ -36,7 +36,7 @@ exports[`Invalid #2 1`] = `
         | ^ Unexpected filename "user-by-id.gql". Rename it to "UserById.gql"
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`match-document-filename > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | query UserById { user { id } }
@@ -56,7 +56,7 @@ exports[`Invalid #3 1`] = `
         | ^ Unexpected filename "userById.gql". Rename it to "UserById.query.gql"
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`match-document-filename > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 | fragment UserFields on User { id }
@@ -75,7 +75,7 @@ exports[`Invalid #4 1`] = `
         | ^ Unexpected filename "user-fields.gql". Rename it to "UserFields.gql"
 `;
 
-exports[`Invalid #7 1`] = `
+exports[`match-document-filename > invalid > Invalid #7 1`] = `
 #### ⌨️ Code
 
       1 |         mutation addAlertChannel {
@@ -97,7 +97,7 @@ exports[`Invalid #7 1`] = `
       2 |           foo
 `;
 
-exports[`compare only first operation name 1`] = `
+exports[`match-document-filename > invalid > compare only first operation name 1`] = `
 #### ⌨️ Code
 
       1 | query getUsers { users } mutation createPost { createPost }
@@ -121,7 +121,7 @@ exports[`compare only first operation name 1`] = `
         | ^ Unexpected filename "getUsersQuery.gql". Rename it to "GetUsers.query.gql"
 `;
 
-exports[`compare only first operation name if fragment is present 1`] = `
+exports[`match-document-filename > invalid > compare only first operation name if fragment is present 1`] = `
 #### ⌨️ Code
 
       1 |         fragment UserFields on User {

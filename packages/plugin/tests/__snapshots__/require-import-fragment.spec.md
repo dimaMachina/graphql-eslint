@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should report fragments when there are no import expressions 1`] = `
+exports[`require-import-fragment > invalid > should report fragments when there are no import expressions 1`] = `
 #### ⌨️ Code
 
       1 | {
@@ -26,7 +26,7 @@ exports[`should report fragments when there are no import expressions 1`] = `
     6 | }
 `;
 
-exports[`should report with default import 1`] = `
+exports[`require-import-fragment > invalid > should report with default import 1`] = `
 #### ⌨️ Code
 
       1 | #import 'bar-fragment.gql'
@@ -54,7 +54,7 @@ exports[`should report with default import 1`] = `
     7 | }
 `;
 
-exports[`should report with named import 1`] = `
+exports[`require-import-fragment > invalid > should report with named import 1`] = `
 #### ⌨️ Code
 
       1 | #import FooFields from "bar-fragment.gql"

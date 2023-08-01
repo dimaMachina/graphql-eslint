@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-deprecated > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | mutation { something(t: OLD) }
@@ -15,7 +15,7 @@ exports[`Invalid #1 1`] = `
     1 | mutation { something(t: ) }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-deprecated > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | mutation { something(t: OLD_WITH_REASON) }
@@ -30,7 +30,7 @@ exports[`Invalid #2 1`] = `
     1 | mutation { something(t: ) }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`no-deprecated > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | query { oldField }
@@ -45,7 +45,7 @@ exports[`Invalid #3 1`] = `
     1 | query {  }
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`no-deprecated > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 | query { oldFieldWithReason }

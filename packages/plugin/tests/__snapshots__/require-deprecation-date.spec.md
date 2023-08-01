@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`require-deprecation-date > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | scalar Old @deprecated(deletionDate: "22/08/2021")
@@ -15,7 +15,7 @@ exports[`Invalid #1 1`] = `
     1 |
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`require-deprecation-date > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | scalar Old @deprecated(untilDate: "22/08/2021")
@@ -36,7 +36,7 @@ exports[`Invalid #2 1`] = `
     1 |
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`require-deprecation-date > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | scalar Old @deprecated(deletionDate: "bad")
@@ -47,7 +47,7 @@ exports[`Invalid #3 1`] = `
         |                                      ^^^^^ Deletion date must be in format "DD/MM/YYYY" for scalar "Old"
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`require-deprecation-date > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
       1 | scalar Old @deprecated(deletionDate: "32/08/2021")
@@ -58,7 +58,7 @@ exports[`Invalid #4 1`] = `
         |                                      ^^^^^^^^^^^^ Invalid "32/08/2021" deletion date for scalar "Old"
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`require-deprecation-date > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 | type Old { oldField: ID @deprecated }

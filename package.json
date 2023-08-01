@@ -10,7 +10,7 @@
     "pnpm": ">=8"
   },
   "scripts": {
-    "build": "pnpm --filter @graphql-eslint/eslint-plugin build && bob check",
+    "build": "turbo run build --filter=!website && bob check",
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
@@ -21,7 +21,7 @@
     "prerelease": "NODE_ENV=production pnpm build",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
-    "test": "vitest ."
+    "test": "turbo run test --filter=!website"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
@@ -35,7 +35,7 @@
     "chalk": "4.1.2",
     "dedent": "1.5.1",
     "enquirer": "2.4.1",
-    "eslint": "8.44.0",
+    "eslint": "8.46.0",
     "eslint-plugin-eslint-plugin": "5.0.7",
     "eslint-plugin-tailwindcss": "3.13.0",
     "husky": "8.0.3",
@@ -46,6 +46,7 @@
     "rimraf": "5.0.1",
     "tsup": "^7.1.0",
     "tsx": "3.12.7",
+    "turbo": "^1.10.12",
     "typescript": "5.1.6",
     "vitest": "0.30.1"
   },
@@ -54,7 +55,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "eslint@8.44.0": "patches/eslint@8.31.0.patch",
+      "eslint@8.46.0": "patches/eslint@8.46.0.patch",
       "eslint-plugin-eslint-plugin@5.0.7": "patches/eslint-plugin-eslint-plugin@5.0.6.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch",
       "@vitest/runner@0.30.1": "patches/@vitest__runner@0.28.4.patch"

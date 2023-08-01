@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`no-case-insensitive-enum-values-duplicates > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | enum A { TEST TesT }
@@ -15,7 +15,7 @@ exports[`Invalid #1 1`] = `
     1 | enum A { TEST  }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`no-case-insensitive-enum-values-duplicates > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | extend enum A { TEST TesT }

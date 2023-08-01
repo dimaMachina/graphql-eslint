@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #2 1`] = `
+exports[`require-field-of-type-query-in-mutation-result > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 |         type Query
@@ -18,7 +18,7 @@ exports[`Invalid #2 1`] = `
       6 |         }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`require-field-of-type-query-in-mutation-result > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 |         type RootQuery
@@ -39,7 +39,7 @@ exports[`Invalid #3 1`] = `
       4 |         }
 `;
 
-exports[`Invalid #4 1`] = `
+exports[`require-field-of-type-query-in-mutation-result > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
        1 |         type RootQuery
@@ -61,7 +61,7 @@ exports[`Invalid #4 1`] = `
       5 |         }
 `;
 
-exports[`should ignore arguments 1`] = `
+exports[`require-field-of-type-query-in-mutation-result > invalid > should ignore arguments 1`] = `
 #### ⌨️ Code
 
       1 |         type Query

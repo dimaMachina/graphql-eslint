@@ -21,8 +21,7 @@ import {
 import { FromSchema } from 'json-schema-to-ts';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRuleListener } from '../testkit.js';
-import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
 import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../utils.js';
 
 const RULE_ID = 'alphabetize';

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should validate \`input\` 1`] = `
+exports[`require-nullable-fields-with-oneof > invalid > should validate \`input\` 1`] = `
 #### ⌨️ Code
 
       1 |         input Input @oneOf {
@@ -23,7 +23,7 @@ exports[`should validate \`input\` 1`] = `
       4 |         }
 `;
 
-exports[`should validate \`type\` 1`] = `
+exports[`require-nullable-fields-with-oneof > invalid > should validate \`type\` 1`] = `
 #### ⌨️ Code
 
       1 |         type Type @oneOf {

@@ -1,7 +1,6 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
 import { rule } from '../src/rules/relay-page-info';
-
-const ruleTester = new GraphQLRuleTester();
+import { ruleTester } from './test-utils';
 
 function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
   return {
@@ -12,7 +11,7 @@ function useSchema(code: string): { code: string; parserOptions: Pick<ParserOpti
   };
 }
 
-ruleTester.runGraphQLTests('relay-page-info', rule, {
+ruleTester.run('relay-page-info', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       type PageInfo {

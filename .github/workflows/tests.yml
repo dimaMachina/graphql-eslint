@@ -2,9 +2,9 @@ name: test
 
 on:
   push:
-    branches: [master]
+    branches: [master, v4]
   pull_request:
-    branches: [master]
+    branches: [master, v4]
 
 jobs:
   lint:
@@ -44,12 +44,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifact
-          path: packages/plugin/dist
-
   test:
     name: Node.js v${{matrix.node_version}} / GraphQL v${{matrix.graphql_version}} / ESLint v8
     timeout-minutes: 60
@@ -77,14 +71,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i --no-frozen-lockfile
-
-      # We need build for examples.spec.ts test
-      # Otherwise we'll get error - Cannot find module 'node_modules/@graphql-eslint/eslint-plugin/dist/index.js'
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifact
-          path: packages/plugin/dist
 
       - name: Test
         run: pnpm test

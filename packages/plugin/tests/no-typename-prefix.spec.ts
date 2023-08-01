@@ -1,9 +1,7 @@
-import { GraphQLRuleTester } from '../src';
 import { rule } from '../src/rules/no-typename-prefix';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('no-typename-prefix', rule, {
+ruleTester.run('no-typename-prefix', rule, {
   valid: [
     /* GraphQL */ `
       type User {

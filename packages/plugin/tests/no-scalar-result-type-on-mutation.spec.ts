@@ -1,5 +1,6 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
+import { ruleTester } from './test-utils';
 
 const useSchema = (
   code: string,
@@ -16,9 +17,7 @@ const useSchema = (
   },
 });
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('no-scalar-result-type-on-mutation', rule, {
+ruleTester.run('no-scalar-result-type-on-mutation', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       type Query {

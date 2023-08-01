@@ -1,5 +1,6 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
+import { ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -15,9 +16,7 @@ const WITH_SCHEMA = {
   } as ParserOptions,
 };
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-type-names'], {
+ruleTester.run('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-type-names'], {
   valid: [
     { ...WITH_SCHEMA, code: TEST_SCHEMA },
     {

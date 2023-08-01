@@ -1,9 +1,7 @@
-import { GraphQLRuleTester } from '../src';
 import { rule } from '../src/rules/no-duplicate-fields';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('no-duplicate-fields', rule, {
+ruleTester.run('no-duplicate-fields', rule, {
   valid: [],
   invalid: [
     {

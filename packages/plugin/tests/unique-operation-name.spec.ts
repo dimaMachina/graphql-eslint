@@ -1,6 +1,7 @@
 import { join } from 'node:path';
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
 import { rule } from '../src/rules/unique-operation-name';
+import { ruleTester } from './test-utils';
 
 const TEST_OPERATION = 'query test { foo }';
 
@@ -12,9 +13,7 @@ const SIBLING_OPERATIONS = (
   },
 });
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('unique-operation-name', rule, {
+ruleTester.run('unique-operation-name', rule, {
   valid: [
     {
       ...SIBLING_OPERATIONS(TEST_OPERATION),

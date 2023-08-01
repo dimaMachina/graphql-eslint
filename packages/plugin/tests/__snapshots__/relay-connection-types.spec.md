@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`\`edges\` field should return a list type that wraps an edge type 1`] = `
+exports[`relay-connection-types > invalid > \`edges\` field should return a list type that wraps an edge type 1`] = `
 #### ⌨️ Code
 
       1 |         type AConnection {
@@ -27,7 +27,7 @@ exports[`\`edges\` field should return a list type that wraps an edge type 1`] =
       7 |           pageInfo: PageInfo!
 `;
 
-exports[`\`pageInfo\` field must return a non-null \`PageInfo\` object 1`] = `
+exports[`relay-connection-types > invalid > \`pageInfo\` field must return a non-null \`PageInfo\` object 1`] = `
 #### ⌨️ Code
 
        1 |         type AConnection {
@@ -87,7 +87,7 @@ exports[`\`pageInfo\` field must return a non-null \`PageInfo\` object 1`] = `
       20 |         }
 `;
 
-exports[`should report about missing \`Connection\` suffix 1`] = `
+exports[`relay-connection-types > invalid > should report about missing \`Connection\` suffix 1`] = `
 #### ⌨️ Code
 
       1 |         type User {
@@ -102,7 +102,7 @@ exports[`should report about missing \`Connection\` suffix 1`] = `
       2 |           edges: UserEdge
 `;
 
-exports[`should report about missing \`edges\` field 1`] = `
+exports[`relay-connection-types > invalid > should report about missing \`edges\` field 1`] = `
 #### ⌨️ Code
 
       1 | type UserConnection { pageInfo: PageInfo! }
@@ -113,7 +113,7 @@ exports[`should report about missing \`edges\` field 1`] = `
         |      ^^^^^^^^^^^^^^ Connection type must contain a field \`edges\` that return a list type.
 `;
 
-exports[`should report about missing \`pageInfo\` field 1`] = `
+exports[`relay-connection-types > invalid > should report about missing \`pageInfo\` field 1`] = `
 #### ⌨️ Code
 
       1 | type UserConnection { edges: [UserEdge] }
@@ -124,7 +124,7 @@ exports[`should report about missing \`pageInfo\` field 1`] = `
         |      ^^^^^^^^^^^^^^ Connection type must contain a field \`pageInfo\` that return a non-null \`PageInfo\` Object type.
 `;
 
-exports[`should report about non connection types with \`Connection\` suffix 1`] = `
+exports[`relay-connection-types > invalid > should report about non connection types with \`Connection\` suffix 1`] = `
 #### ⌨️ Code
 
        1 |         scalar DateTimeConnection

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`require-nullable-result-in-root > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         type Query {
@@ -27,7 +27,7 @@ exports[`Invalid #1 1`] = `
     6 |         }
 `;
 
-exports[`should work with default scalars 1`] = `
+exports[`require-nullable-result-in-root > invalid > should work with default scalars 1`] = `
 #### ⌨️ Code
 
       1 |         type MySubscription
@@ -56,7 +56,7 @@ exports[`should work with default scalars 1`] = `
     7 |         }
 `;
 
-exports[`should work with extend query 1`] = `
+exports[`require-nullable-result-in-root > invalid > should work with extend query 1`] = `
 #### ⌨️ Code
 
        1 |         type MyMutation

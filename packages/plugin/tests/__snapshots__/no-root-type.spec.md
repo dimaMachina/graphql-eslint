@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`disallow mutation 1`] = `
+exports[`no-root-type > invalid > disallow mutation 1`] = `
 #### ⌨️ Code
 
       1 | type Mutation
@@ -23,7 +23,7 @@ exports[`disallow mutation 1`] = `
     1 |
 `;
 
-exports[`disallow subscription 1`] = `
+exports[`no-root-type > invalid > disallow subscription 1`] = `
 #### ⌨️ Code
 
       1 | type Subscription
@@ -46,7 +46,7 @@ exports[`disallow subscription 1`] = `
     1 |
 `;
 
-exports[`disallow when root type name is renamed 1`] = `
+exports[`no-root-type > invalid > disallow when root type name is renamed 1`] = `
 #### ⌨️ Code
 
       1 | type MyMutation
@@ -69,7 +69,7 @@ exports[`disallow when root type name is renamed 1`] = `
     1 |
 `;
 
-exports[`disallow with extend 1`] = `
+exports[`no-root-type > invalid > disallow with extend 1`] = `
 #### ⌨️ Code
 
       1 | extend type Mutation { foo: ID }

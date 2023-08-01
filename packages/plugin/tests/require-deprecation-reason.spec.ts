@@ -1,9 +1,7 @@
-import { GraphQLRuleTester } from '../src';
 import { rule } from '../src/rules/require-deprecation-reason';
+import { ruleTester } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('require-deprecation-reason', rule, {
+ruleTester.run('require-deprecation-reason', rule, {
   valid: [
     /* GraphQL */ `
       query getUser {

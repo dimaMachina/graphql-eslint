@@ -1,5 +1,6 @@
-import { GraphQLRuleTester, ParserOptions } from '../src';
+import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-unreachable-types';
+import { ruleTester } from './test-utils';
 
 const useSchema = (
   schema: string,
@@ -10,9 +11,7 @@ const useSchema = (
   };
 };
 
-const ruleTester = new GraphQLRuleTester();
-
-ruleTester.runGraphQLTests('no-unreachable-types', rule, {
+ruleTester.run('no-unreachable-types', rule, {
   valid: [
     useSchema(/* GraphQL */ `
       scalar A

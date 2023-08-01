@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`possible-type-extension > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 |         extend type OtherUser {

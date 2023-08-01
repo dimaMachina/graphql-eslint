@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should error fragment used in one place 1`] = `
+exports[`no-one-place-fragments > invalid > should error fragment used in one place 1`] = `
 #### ⌨️ Code
 
       1 | fragment UserFields on User {

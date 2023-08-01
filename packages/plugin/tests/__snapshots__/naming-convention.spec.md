@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Invalid #1 1`] = `
+exports[`naming-convention > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | type b { test: String }
@@ -9,7 +9,9 @@ exports[`Invalid #1 1`] = `
 
     {
       "types": "PascalCase",
-      "FieldDefinition": "PascalCase"
+      "FieldDefinition": "PascalCase",
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/2
@@ -31,7 +33,7 @@ exports[`Invalid #1 1`] = `
     1 | type b { Test: String }
 `;
 
-exports[`Invalid #2 1`] = `
+exports[`naming-convention > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | type __b { test__: String }
@@ -62,7 +64,7 @@ exports[`Invalid #2 1`] = `
     1 | type __b { test: String }
 `;
 
-exports[`Invalid #3 1`] = `
+exports[`naming-convention > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
       1 | scalar BSONDecimal
@@ -70,7 +72,9 @@ exports[`Invalid #3 1`] = `
 #### ⚙️ Options
 
     {
-      "ScalarTypeDefinition": "snake_case"
+      "ScalarTypeDefinition": "snake_case",
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error
@@ -83,7 +87,7 @@ exports[`Invalid #3 1`] = `
     1 | scalar bson_decimal
 `;
 
-exports[`Invalid #5 1`] = `
+exports[`naming-convention > invalid > Invalid #5 1`] = `
 #### ⌨️ Code
 
       1 | enum B { test }
@@ -92,7 +96,9 @@ exports[`Invalid #5 1`] = `
 
     {
       "EnumTypeDefinition": "camelCase",
-      "EnumValueDefinition": "UPPER_CASE"
+      "EnumValueDefinition": "UPPER_CASE",
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/2
@@ -114,7 +120,7 @@ exports[`Invalid #5 1`] = `
     1 | enum B { TEST }
 `;
 
-exports[`Invalid #6 1`] = `
+exports[`naming-convention > invalid > Invalid #6 1`] = `
 #### ⌨️ Code
 
       1 | input test { _Value: String }
@@ -123,7 +129,9 @@ exports[`Invalid #6 1`] = `
 
     {
       "types": "PascalCase",
-      "InputValueDefinition": "snake_case"
+      "InputValueDefinition": "snake_case",
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/3
@@ -154,7 +162,7 @@ exports[`Invalid #6 1`] = `
     1 | input test { Value: String }
 `;
 
-exports[`Invalid #7 1`] = `
+exports[`naming-convention > invalid > Invalid #7 1`] = `
 #### ⌨️ Code
 
       1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
@@ -172,7 +180,9 @@ exports[`Invalid #7 1`] = `
       "EnumValueDefinition": {
         "style": "camelCase",
         "suffix": "ENUM"
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/4
@@ -212,7 +222,7 @@ exports[`Invalid #7 1`] = `
     1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWOENUM }
 `;
 
-exports[`Invalid #8 1`] = `
+exports[`naming-convention > invalid > Invalid #8 1`] = `
 #### ⌨️ Code
 
       1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
@@ -230,7 +240,9 @@ exports[`Invalid #8 1`] = `
       "EnumValueDefinition": {
         "style": "UPPER_CASE",
         "prefix": "ENUM"
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/3
@@ -261,7 +273,7 @@ exports[`Invalid #8 1`] = `
     1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE ENUMVALUE_TWO }
 `;
 
-exports[`Invalid #9 1`] = `
+exports[`naming-convention > invalid > Invalid #9 1`] = `
 #### ⌨️ Code
 
       1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { getC: String }
@@ -291,7 +303,9 @@ exports[`Invalid #9 1`] = `
           "get",
           "query"
         ]
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/5
@@ -340,7 +354,7 @@ exports[`Invalid #9 1`] = `
     1 | type One { getFoo: String, queryBar: String } type Query { getA(id: ID!): String, queryB: String } extend type Query { C: String }
 `;
 
-exports[`Invalid #10 1`] = `
+exports[`naming-convention > invalid > Invalid #10 1`] = `
 #### ⌨️ Code
 
       1 | query Foo { foo } query getBar { bar }
@@ -353,7 +367,9 @@ exports[`Invalid #10 1`] = `
         "forbiddenPrefixes": [
           "get"
         ]
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/2
@@ -375,7 +391,7 @@ exports[`Invalid #10 1`] = `
     1 | query Foo { foo } query Bar { bar }
 `;
 
-exports[`large graphql file 1`] = `
+exports[`naming-convention > invalid > large graphql file 1`] = `
 #### ⌨️ Code
 
        1 | input _idOperatorsFilterFindManyUserInput {
@@ -1495,7 +1511,8 @@ exports[`large graphql file 1`] = `
       "types": "PascalCase",
       "InputValueDefinition": "camelCase",
       "EnumValueDefinition": "UPPER_CASE",
-      "FragmentDefinition": "PascalCase"
+      "FragmentDefinition": "PascalCase",
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/27
@@ -1687,7 +1704,7 @@ exports[`large graphql file 1`] = `
       390 | }
 `;
 
-exports[`operations-recommended config 1`] = `
+exports[`naming-convention > invalid > operations-recommended config 1`] = `
 #### ⌨️ Code
 
        1 |         query TestQuery { test }
@@ -1730,7 +1747,9 @@ exports[`operations-recommended config 1`] = `
         "forbiddenSuffixes": [
           "Fragment"
         ]
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/9
@@ -1939,7 +1958,7 @@ exports[`operations-recommended config 1`] = `
     13 |         fragment Test on Test { id }
 `;
 
-exports[`schema-recommended config 1`] = `
+exports[`naming-convention > invalid > schema-recommended config 1`] = `
 #### ⌨️ Code
 
        1 |         type Query {
@@ -1991,7 +2010,9 @@ exports[`schema-recommended config 1`] = `
         "forbiddenSuffixes": [
           "Subscription"
         ]
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/7
@@ -2170,7 +2191,7 @@ exports[`schema-recommended config 1`] = `
     15 |         }
 `;
 
-exports[`should error when selected type names do not match require prefixes 1`] = `
+exports[`naming-convention > invalid > should error when selected type names do not match require prefixes 1`] = `
 #### ⌨️ Code
 
        1 |         scalar Secret
@@ -2205,7 +2226,9 @@ exports[`should error when selected type names do not match require prefixes 1`]
         "requiredPrefixes": [
           "hiss"
         ]
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/3
@@ -2286,7 +2309,7 @@ exports[`should error when selected type names do not match require prefixes 1`]
     11 |         }
 `;
 
-exports[`should error when selected type names do not match require suffixes 1`] = `
+exports[`naming-convention > invalid > should error when selected type names do not match require suffixes 1`] = `
 #### ⌨️ Code
 
       1 |         scalar IpAddress
@@ -2310,7 +2333,9 @@ exports[`should error when selected type names do not match require suffixes 1`]
         "requiredSuffixes": [
           "IpAddress"
         ]
-      }
+      },
+      "allowLeadingUnderscore": false,
+      "allowTrailingUnderscore": false
     }
 
 #### ❌ Error 1/2
@@ -2355,7 +2380,7 @@ exports[`should error when selected type names do not match require suffixes 1`]
     6 |         }
 `;
 
-exports[`should ignore selections fields but check alias renaming 1`] = `
+exports[`naming-convention > invalid > should ignore selections fields but check alias renaming 1`] = `
 #### ⌨️ Code
 
       1 |         {

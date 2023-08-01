@@ -1,18 +1,24 @@
-import { GraphQLRuleTester, rules } from '../src';
+import { rules } from '../src';
+import { RuleTester } from '@theguild/eslint-rule-tester';
+import { DEFAULT_CONFIG } from './test-utils';
 
-const ruleTester = new GraphQLRuleTester({
-  schema: /* GraphQL */ `
-    type User {
-      id: ID!
-    }
+const ruleTester = new RuleTester({
+  ...DEFAULT_CONFIG,
+  parserOptions: {
+    ...DEFAULT_CONFIG.parserOptions,
+    schema: /* GraphQL */ `
+      type User {
+        id: ID!
+      }
 
-    type Query {
-      user: User
-    }
-  `,
+      type Query {
+        user: User
+      }
+    `,
+  },
 });
 
-ruleTester.runGraphQLTests<[{ ignoreClientDirectives: string[] }]>(
+ruleTester.run<[{ ignoreClientDirectives: string[] }]>(
   'known-directives',
   rules['known-directives'],
   {
