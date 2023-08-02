@@ -3,9 +3,14 @@
 ---
 
 - remove `parserOptions.schema`
-- remove `parserOptions.operations`
+- remove `parserOptions.documents`
+- remove `parserOptions.extensions`
+- remove `parserOptions.include`
+- remove `parserOptions.exclude`
+- remove `parserOptions.projects`
 - remove `parserOptions.schemaOptions`
 - remove `parserOptions.skipGraphQLConfig`
+- remove `parserOptions.operations`
 
 - set `graphql-config` optional peer dependency (not needed in browser)
 
