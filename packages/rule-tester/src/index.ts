@@ -42,7 +42,10 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
     // @ts-expect-error -- fix later
     const { testerConfig, linter } = this;
 
-    const getMessages = (testCase: ESLintRuleTester.InvalidTestCase, messages: Linter.LintMessage[]) => {
+    const getMessages = (
+      testCase: ESLintRuleTester.InvalidTestCase,
+      messages: Linter.LintMessage[],
+    ) => {
       const { options, code, filename, parserOptions } = testCase;
 
       const config = {

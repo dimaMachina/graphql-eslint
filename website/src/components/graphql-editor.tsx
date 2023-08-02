@@ -42,7 +42,7 @@ export function GraphQLEditor({
       parser: '@graphql-eslint/eslint-plugin',
       // extends: `plugin:@graphql-eslint/schema-recommended`,
       parserOptions: {
-        graphQLConfig: { schema, documents }
+        graphQLConfig: { schema, documents },
       },
       rules: selectedRules,
     },
