@@ -12,6 +12,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "browser": "./dist/index.browser.mjs",
       "require": {
         "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
@@ -38,7 +39,13 @@
   },
   "peerDependencies": {
     "eslint": "^8",
-    "graphql": "^16"
+    "graphql": "^16",
+    "graphql-config": "^4.4 || ^5"
+  },
+  "peerDependenciesMeta": {
+    "graphql-config": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@graphql-tools/code-file-loader": "^7.3.6",
@@ -47,7 +54,6 @@
     "chalk": "^4.1.2",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
-    "graphql-config": "^4.4.0",
     "graphql-depth-limit": "^1.1.0",
     "lodash.lowercase": "^4.3.0",
     "tslib": "^2.4.1"
@@ -61,6 +67,7 @@
     "@types/json-schema": "7.0.12",
     "@types/lodash.lowercase": "4.3.7",
     "graphql": "16.7.1",
+    "graphql-config": "^4.4.0",
     "json-schema-to-ts": "2.9.1"
   },
   "publishConfig": {

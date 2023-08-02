@@ -62,4 +62,4 @@ query {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-unused-fields.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-unused-fields.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/no-unused-fields.spec.ts)

@@ -1,12 +1,14 @@
-import { parseGraphQLSDL } from '@graphql-tools/utils';
+import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
 import debugFactory from 'debug';
-import { buildSchema, GraphQLError, GraphQLSchema } from 'graphql';
+import { buildSchema, GraphQLError } from 'graphql';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
 import { loadGraphQLConfig } from './graphql-config.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';
-import { GraphQLESLintParseResult, ParserOptions } from './types.js';
+import { GraphQLESLintParseResult, ParserOptions, Schema } from './types.js';
 import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
+import { GraphQLProjectConfig, IGraphQLProject } from 'graphql-config';
+import { getDocuments } from './documents.js';
 
 const debug = debugFactory('graphql-eslint:parser');
 
@@ -15,26 +17,36 @@ debug('cwd %o', CWD);
 export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   try {
     const { filePath } = options;
-    // TODO: remove in graphql-eslint v4
-    options.documents ||= options.operations;
     // First parse code from file, in case of syntax error do not try load schema,
     // documents or even graphql-config instance
     const { document } = parseGraphQLSDL(filePath, code, {
       ...options.graphQLParserOptions,
       noLocation: false,
     });
-    const gqlConfig = loadGraphQLConfig(options);
-    const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
-    const project = gqlConfig.getProjectForFile(realFilepath);
+    let project: GraphQLProjectConfig;
+    let schema: Schema, documents: Source[];
 
-    let schema: GraphQLSchema | null = null;
+    if (process.env.IS_BROWSER === 'true') {
+      documents = [
+        parseGraphQLSDL(
+          'operation.graphql',
+          (options.graphQLConfig as IGraphQLProject).documents as string,
+          { noLocation: true },
+        ),
+      ];
+    } else {
+      const gqlConfig = loadGraphQLConfig(options);
+      const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
+      project = gqlConfig.getProjectForFile(realFilepath);
+      documents = getDocuments(project);
+    }
 
     try {
-      schema = project
-        ? getSchema(project, options.schemaOptions)
-        : typeof options.schema === 'string'
-        ? buildSchema(options.schema)
-        : null;
+      if (process.env.IS_BROWSER === 'true') {
+        schema = buildSchema((options.graphQLConfig as IGraphQLProject).schema as string);
+      } else {
+        schema = getSchema(project!);
+      }
     } catch (error) {
       if (error instanceof Error) {
         error.message = `Error while loading schema: ${error.message}`;
@@ -47,7 +59,7 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     return {
       services: {
         schema,
-        siblingOperations: getSiblings(project, options.documents),
+        siblingOperations: getSiblings(documents),
       },
       ast: {
         comments: extractComments(document.loc),

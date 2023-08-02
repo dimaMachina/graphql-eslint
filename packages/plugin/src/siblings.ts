@@ -1,4 +1,4 @@
-import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
+import { Source } from '@graphql-tools/utils';
 import {
   FragmentDefinitionNode,
   Kind,
@@ -7,9 +7,6 @@ import {
   SelectionSetNode,
   visit,
 } from 'graphql';
-import { GraphQLProjectConfig } from 'graphql-config';
-import { getDocuments } from './documents.js';
-import { ParserOptions } from './types.js';
 import { logger } from './utils.js';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };
@@ -31,23 +28,14 @@ export type SiblingOperations = {
 
 const siblingOperationsCache = new Map<Source[], SiblingOperations>();
 
-export function getSiblings(
-  project?: GraphQLProjectConfig,
-  documents?: ParserOptions['documents'],
-): SiblingOperations {
-  const siblings = project
-    ? getDocuments(project)
-    : typeof documents === 'string'
-    ? [parseGraphQLSDL('operation.graphql', documents, { noLocation: true })]
-    : [];
-
-  if (siblings.length === 0) {
+export function getSiblings(documents: Source[]): SiblingOperations {
+  if (documents.length === 0) {
     let printed = false;
 
     const noopWarn = () => {
       if (!printed) {
         logger.warn(
-          'getSiblingOperations was called without any operations. Make sure to set "parserOptions.operations" to make this feature available!',
+          'getSiblingOperations was called without any operations. Make sure to set graphql-config `documents` field to make this feature available! See https://the-guild.dev/graphql/config/docs/user/documents for more info',
         );
         printed = true;
       }
@@ -69,7 +57,7 @@ export function getSiblings(
   // Since the siblings array is cached, we can use it as cache key.
   // We should get the same array reference each time we get
   // to this point for the same graphql project
-  const value = siblingOperationsCache.get(siblings);
+  const value = siblingOperationsCache.get(documents);
 
   if (value) {
     return value;
@@ -81,7 +69,7 @@ export function getSiblings(
     if (fragmentsCache === null) {
       const result: FragmentSource[] = [];
 
-      for (const source of siblings) {
+      for (const source of documents) {
         for (const definition of source.document?.definitions || []) {
           if (definition.kind === Kind.FRAGMENT_DEFINITION) {
             result.push({
@@ -102,7 +90,7 @@ export function getSiblings(
     if (cachedOperations === null) {
       const result: OperationSource[] = [];
 
-      for (const source of siblings) {
+      for (const source of documents) {
         for (const definition of source.document?.definitions || []) {
           if (definition.kind === Kind.OPERATION_DEFINITION) {
             result.push({
@@ -159,6 +147,6 @@ export function getSiblings(
     getOperationByType: type => getOperations().filter(o => o.document.operation === type),
   };
 
-  siblingOperationsCache.set(siblings, siblingOperations);
+  siblingOperationsCache.set(documents, siblingOperations);
   return siblingOperations;
 }

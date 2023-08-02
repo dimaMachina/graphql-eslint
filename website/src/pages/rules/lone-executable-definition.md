@@ -57,4 +57,4 @@ Additional restrictions:
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/lone-executable-definition.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/lone-executable-definition.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/lone-executable-definition.spec.ts)

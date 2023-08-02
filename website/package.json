@@ -6,9 +6,8 @@
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
     "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
-    "dev": "pnpm patch-browser && next",
-    "patch-browser": "tsx ../scripts/patch-graphql-eslint-browser.ts",
-    "prebuild": "tsx ../scripts/generate-docs.ts && pnpm patch-browser",
+    "dev": "next",
+    "prebuild": "tsx ../scripts/generate-docs.ts",
     "start": "next start",
     "theguild-nextra-algolia": "theguild-nextra-algolia"
   },

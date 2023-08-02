@@ -40,4 +40,4 @@ type User {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-typename-prefix.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-typename-prefix.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/no-typename-prefix.spec.ts)

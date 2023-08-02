@@ -42,8 +42,8 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
     // @ts-expect-error -- fix later
     const { testerConfig, linter } = this;
 
-    const getMessages = (testCase: ESLintRuleTester.InvalidTestCase) => {
-      const { options, code: rawCode, filename, parserOptions } = testCase;
+    const getMessages = (testCase: ESLintRuleTester.InvalidTestCase, messages: Linter.LintMessage[]) => {
+      const { options, code, filename, parserOptions } = testCase;
 
       const config = {
         parser: testerConfig.parser,
@@ -55,8 +55,6 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
           [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
         },
       };
-
-      const code = removeTrailingBlankLines(rawCode);
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
       const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
 
@@ -64,8 +62,6 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         const opts = JSON.stringify(options, null, 2).slice(1, -1);
         messageForSnapshot.push('#### ⚙️ Options', indentCode(removeTrailingBlankLines(opts), 2));
       }
-
-      const messages = linter.verify(code, config, filename);
       for (const [index, message] of messages.entries()) {
         const codeWithMessage = printCode(code, message, 1);
         messageForSnapshot.push(
@@ -99,6 +95,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
 
     for (const [id, testCase] of tests.invalid.entries()) {
       testCase.name ||= `Invalid #${id + 1}`;
+      testCase.code = removeTrailingBlankLines(testCase.code);
       Object.defineProperty(testCase, 'assertMessages', {
         value: getMessages,
       });

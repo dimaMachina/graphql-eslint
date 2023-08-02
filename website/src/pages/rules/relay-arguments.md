@@ -57,4 +57,4 @@ Default: `true`
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/relay-arguments.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/relay-arguments.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/relay-arguments.spec.ts)

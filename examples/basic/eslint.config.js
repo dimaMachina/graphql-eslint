@@ -14,8 +14,10 @@ export default [
     languageOptions: {
       parser: graphqlESLint,
       parserOptions: {
-        schema: 'schema.graphql',
-        operations: ['query.graphql', 'fragment.graphql', 'fragment2.graphql'],
+        graphQLConfig: {
+          schema: 'schema.graphql',
+          documents: ['query.graphql', 'fragment.graphql', 'fragment2.graphql'],
+        },
       },
     },
     rules: {

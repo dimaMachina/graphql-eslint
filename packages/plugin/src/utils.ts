@@ -14,7 +14,7 @@ export function requireSiblingsOperations(
   const { siblingOperations } = context.parserServices;
   if (!siblingOperations.available) {
     throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`,
+      `Rule \`${ruleId}\` requires graphql-config \`documents\` field to be set and loaded. See https://the-guild.dev/graphql/config/docs/user/documents for more info`,
     );
   }
   return siblingOperations;
@@ -27,7 +27,7 @@ export function requireGraphQLSchemaFromContext(
   const { schema } = context.parserServices;
   if (!schema) {
     throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
+      `Rule \`${ruleId}\` requires graphql-config \`schema\` field to be set and loaded. See https://the-guild.dev/graphql/config/docs/user/schema for more info`,
     );
   }
   return schema;

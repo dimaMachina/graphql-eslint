@@ -9,15 +9,17 @@ const opts: Options = {
   bundle: false,
   dts: true,
   env: {
+    IS_BROWSER: 'false',
     ...(process.env.NODE_ENV && { NODE_ENV: process.env.NODE_ENV }),
   },
+  format: 'esm',
+  minifySyntax: true,
 };
 
 const CWD = process.cwd();
 export default defineConfig([
   {
     ...opts,
-    format: 'esm',
     outDir: 'dist/esm',
     outExtension: () => ({ js: '.js' }),
     async onSuccess() {
@@ -45,5 +47,18 @@ export default defineConfig([
     ...opts,
     format: 'cjs',
     outDir: 'dist/cjs',
+  },
+  {
+    ...opts,
+    entry: {
+      'index.browser': 'src/index.browser.ts'
+    },
+    outDir: 'dist',
+    dts: false,
+    bundle: true,
+    env: {
+      NODE_ENV: 'production',
+      IS_BROWSER: 'true',
+    },
   },
 ]);
