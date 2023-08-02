@@ -349,8 +349,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@theguild/components':
-        specifier: 5.1.1
-        version: 5.1.1(@algolia/client-search@4.19.1)(@types/react@18.2.18)(next@13.4.12)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
+        specifier: 5.2.1
+        version: 5.2.1(@algolia/client-search@4.19.1)(@types/react@18.2.18)(next@13.4.12)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
       clsx:
         specifier: 2.0.0
         version: 2.0.0
@@ -2878,8 +2878,8 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components@5.1.1(@algolia/client-search@4.19.1)(@types/react@18.2.18)(next@13.4.12)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
-    resolution: {integrity: sha512-VPmnK7r5PYWemyYby/Xfxn9jv+nKDAZcW27hlKmiG8pVHe2q6HNjZvubZijmtl6r0WoiCdBnKJSDtaKDV5fbJQ==}
+  /@theguild/components@5.2.1(@algolia/client-search@4.19.1)(@types/react@18.2.18)(next@13.4.12)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
+    resolution: {integrity: sha512-sEJMyyAuB7P1fdHewWfdy7CnXUSgR+mkVK74H2UWJWVVyydx4QZnrrefZEgDLyuea7V10a4zjNou1FwdJ+05Fg==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
       react: ^18.2.0
