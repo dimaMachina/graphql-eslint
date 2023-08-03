@@ -1,4 +1,3 @@
-import { GraphQLParseOptions } from '@graphql-tools/utils';
 import { AST, Linter, Rule } from 'eslint';
 import * as ESTree from 'estree';
 import { GraphQLSchema, ASTKindToNode } from 'graphql';
@@ -12,7 +11,6 @@ export type Pointer = string | string[];
 
 export interface ParserOptions {
   graphQLConfig?: IGraphQLConfig;
-  graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
   filePath: string;
 }
 

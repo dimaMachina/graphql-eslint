@@ -20,7 +20,6 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     // First parse code from file, in case of syntax error do not try load schema,
     // documents or even graphql-config instance
     const { document } = parseGraphQLSDL(filePath, code, {
-      ...options.graphQLParserOptions,
       noLocation: false,
     });
     let project: GraphQLProjectConfig;
