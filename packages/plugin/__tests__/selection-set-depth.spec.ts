@@ -4,8 +4,10 @@ import { ruleTester } from './test-utils';
 
 const WITH_SIBLINGS = {
   parserOptions: {
-    documents: 'fragment AlbumFields on Album { id }',
-  } as ParserOptions,
+    graphQLConfig: {
+      documents: 'fragment AlbumFields on Album { id }',
+    }
+  } satisfies ParserOptions,
 };
 
 ruleTester.run<RuleOptions>('selection-set-depth', rule, {

@@ -6,7 +6,7 @@ const { FlatESLint } = eslintExperimentalApis;
 
 export function getESLintWithConfig(
   config: Record<string, any>,
-  parserOptions?: Omit<ParserOptions, 'filePath'>,
+  graphQLConfig?: Partial<ParserOptions['graphQLConfig']>,
 ) {
   return new FlatESLint({
     overrideConfigFile: true,
@@ -16,10 +16,11 @@ export function getESLintWithConfig(
         languageOptions: {
           parser: { parseForESLint },
           parserOptions: {
-            schema: 'type Query { foo: Int }',
-            skipGraphQLConfig: true,
-            ...parserOptions,
-          },
+            graphQLConfig: {
+              schema: 'type Query { foo: Int }',
+              ...graphQLConfig,
+            },
+          } satisfies Partial<ParserOptions>,
         },
         plugins: {
           '@graphql-eslint': { rules },
