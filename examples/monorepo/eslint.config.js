@@ -2,7 +2,6 @@ import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
 import js from '@eslint/js';
 
 const SCHEMA_PATH = 'server/**/*.gql';
-const OPERATIONS_PATH = 'client/**/*.{tsx,gql}';
 
 export default [
   {
@@ -30,10 +29,6 @@ export default [
     },
     languageOptions: {
       parser: graphqlESLint,
-      parserOptions: {
-        schema: SCHEMA_PATH,
-        operations: OPERATIONS_PATH,
-      },
     },
   },
   {

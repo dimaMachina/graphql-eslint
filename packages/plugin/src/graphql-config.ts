@@ -11,6 +11,7 @@ export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
   return loadConfigSync({
     // load config relative to the file being linted
     rootDir: path.dirname(filePath),
+    throwOnMissing: false,
     extensions: [codeFileLoaderExtension],
   });
 }
@@ -25,16 +26,26 @@ export function loadGraphQLConfig({
     return graphQLConfig;
   }
   debug('options.graphQLConfig: %o', config);
-  if (config) {
-    if (!('projects' in config || 'schemaPath' in config)) {
-      // if `schema` is `undefined` will throw error `Project 'default' not found`
-      config.schema ??= '';
-    }
-    graphQLConfig = new GraphQLConfig({ config, filepath: '' }, [codeFileLoaderExtension]);
-  } else {
+  if (!config) {
     graphQLConfig = loadOnDiskGraphQLConfig(filePath);
-    debug('GraphQL-Config path %o', graphQLConfig.filepath);
   }
+  const enhancedConfig =
+    config && ('projects' in config || 'schemaPath' in config)
+      ? config
+      : {
+          // if `schema` is `undefined` will throw error `Project 'default' not found`
+          schema: config?.schema || '',
+          ...config,
+        };
+
+  graphQLConfig ||= new GraphQLConfig(
+    {
+      config: enhancedConfig,
+      filepath: '',
+    },
+    [codeFileLoaderExtension],
+  );
+  debug('GraphQL-Config path %o', graphQLConfig.filepath);
 
   return graphQLConfig;
 }
