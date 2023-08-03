@@ -293,111 +293,6 @@ exports[`Examples > should work in vue 1`] = `
 ]
 `;
 
-exports[`Examples > should work on \`.graphql\` files 1`] = `
-[
-  {
-    filePath: examples/basic/fragment.graphql,
-    messages: [
-      {
-        column: 10,
-        endColumn: 14,
-        endLine: 1,
-        line: 1,
-        message: Fragment named "Test" already defined in:
-	fragment2.graphql,
-        messageId: unique-fragment-name,
-        nodeType: Name,
-        ruleId: @graphql-eslint/unique-fragment-name,
-        severity: 2,
-      },
-    ],
-  },
-  {
-    filePath: examples/basic/fragment2.graphql,
-    messages: [
-      {
-        column: 10,
-        endColumn: 14,
-        endLine: 1,
-        line: 1,
-        message: Fragment named "Test" already defined in:
-	fragment.graphql,
-        messageId: unique-fragment-name,
-        nodeType: Name,
-        ruleId: @graphql-eslint/unique-fragment-name,
-        severity: 2,
-      },
-    ],
-  },
-  {
-    filePath: examples/basic/query.graphql,
-    messages: [
-      {
-        column: 1,
-        endColumn: 6,
-        endLine: 1,
-        line: 1,
-        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
-        messageId: no-anonymous-operations,
-        nodeType: null,
-        ruleId: @graphql-eslint/no-anonymous-operations,
-        severity: 2,
-        suggestions: [
-          {
-            desc: Rename to \`user\`,
-            fix: {
-              range: [
-                5,
-                5,
-              ],
-              text:  user,
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    filePath: examples/basic/schema.graphql,
-    messages: [
-      {
-        column: 3,
-        endColumn: 7,
-        endLine: 2,
-        line: 2,
-        message: Description is required for field "user" in type "Query",
-        messageId: require-description,
-        nodeType: null,
-        ruleId: @graphql-eslint/require-description,
-        severity: 2,
-      },
-      {
-        column: 3,
-        endColumn: 5,
-        endLine: 6,
-        line: 6,
-        message: Description is required for field "id" in type "User",
-        messageId: require-description,
-        nodeType: null,
-        ruleId: @graphql-eslint/require-description,
-        severity: 2,
-      },
-      {
-        column: 3,
-        endColumn: 7,
-        endLine: 7,
-        line: 7,
-        message: Description is required for field "name" in type "User",
-        messageId: require-description,
-        nodeType: null,
-        ruleId: @graphql-eslint/require-description,
-        severity: 2,
-      },
-    ],
-  },
-]
-`;
-
 exports[`Examples > should work on \`.js\` files 1`] = `
 [
   {
@@ -474,6 +369,111 @@ exports[`Examples > should work on \`.js\` files 1`] = `
             },
           },
         ],
+      },
+    ],
+  },
+]
+`;
+
+exports[`Examples > should work programmatically 1`] = `
+[
+  {
+    filePath: examples/programmatic/fragment.graphql,
+    messages: [
+      {
+        column: 10,
+        endColumn: 14,
+        endLine: 1,
+        line: 1,
+        message: Fragment named "Test" already defined in:
+	fragment2.graphql,
+        messageId: unique-fragment-name,
+        nodeType: Name,
+        ruleId: @graphql-eslint/unique-fragment-name,
+        severity: 2,
+      },
+    ],
+  },
+  {
+    filePath: examples/programmatic/fragment2.graphql,
+    messages: [
+      {
+        column: 10,
+        endColumn: 14,
+        endLine: 1,
+        line: 1,
+        message: Fragment named "Test" already defined in:
+	fragment.graphql,
+        messageId: unique-fragment-name,
+        nodeType: Name,
+        ruleId: @graphql-eslint/unique-fragment-name,
+        severity: 2,
+      },
+    ],
+  },
+  {
+    filePath: examples/programmatic/query.graphql,
+    messages: [
+      {
+        column: 1,
+        endColumn: 6,
+        endLine: 1,
+        line: 1,
+        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
+        messageId: no-anonymous-operations,
+        nodeType: null,
+        ruleId: @graphql-eslint/no-anonymous-operations,
+        severity: 2,
+        suggestions: [
+          {
+            desc: Rename to \`user\`,
+            fix: {
+              range: [
+                5,
+                5,
+              ],
+              text:  user,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    filePath: examples/programmatic/schema.graphql,
+    messages: [
+      {
+        column: 3,
+        endColumn: 7,
+        endLine: 2,
+        line: 2,
+        message: Description is required for field "user" in type "Query",
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
+      },
+      {
+        column: 3,
+        endColumn: 5,
+        endLine: 6,
+        line: 6,
+        message: Description is required for field "id" in type "User",
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
+      },
+      {
+        column: 3,
+        endColumn: 7,
+        endLine: 7,
+        line: 7,
+        message: Description is required for field "name" in type "User",
+        messageId: require-description,
+        nodeType: null,
+        ruleId: @graphql-eslint/require-description,
+        severity: 2,
       },
     ],
   },
@@ -962,72 +962,6 @@ exports[`Examples > should work with \`graphql-config\` 1`] = `
                 48,
               ],
               text: ,
-            },
-          },
-        ],
-      },
-    ],
-  },
-]
-`;
-
-exports[`Examples > should work with \`graphql-config\` on \`.js\` files 1`] = `
-[
-  {
-    filePath: examples/graphql-config-code-file/query.js,
-    messages: [
-      {
-        column: 7,
-        endColumn: 15,
-        endLine: 3,
-        line: 3,
-        message: 'GET_USER' is assigned a value but never used.,
-        messageId: unusedVar,
-        nodeType: Identifier,
-        ruleId: no-unused-vars,
-        severity: 2,
-      },
-      {
-        column: 3,
-        endColumn: 8,
-        endLine: 4,
-        line: 4,
-        message: Anonymous GraphQL operations are forbidden. Make sure to name your query!,
-        messageId: no-anonymous-operations,
-        nodeType: null,
-        ruleId: @graphql-eslint/no-anonymous-operations,
-        severity: 2,
-        suggestions: [
-          {
-            desc: Rename to \`user\`,
-            fix: {
-              range: [
-                61,
-                61,
-              ],
-              text:  user,
-            },
-          },
-        ],
-      },
-      {
-        column: 10,
-        line: 5,
-        message: Field \`user.id\` must be selected when it's available on a type.
-Include it in your selection set.,
-        messageId: require-id-when-available,
-        nodeType: null,
-        ruleId: @graphql-eslint/require-id-when-available,
-        severity: 2,
-        suggestions: [
-          {
-            desc: Add \`id\` selection,
-            fix: {
-              range: [
-                81,
-                81,
-              ],
-              text: id ,
             },
           },
         ],
