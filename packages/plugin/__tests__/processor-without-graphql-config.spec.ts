@@ -1,5 +1,9 @@
 import { Block, processor } from '../src/processor';
 
+vi.mock('../src/graphql-config', () => ({
+  loadOnDiskGraphQLConfig: vi.fn(() => null),
+}));
+
 describe('processor.preprocess() without graphql-config', () => {
   const QUERY = 'query users { id }';
   it('should find "gql" tag', () => {
