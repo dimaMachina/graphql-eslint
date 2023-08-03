@@ -7,10 +7,12 @@ const TEST_OPERATION = 'query test { foo }';
 
 const SIBLING_OPERATIONS = (
   ...documents: string[]
-): { parserOptions: Pick<ParserOptions, 'documents'> } => ({
+) => ({
   parserOptions: {
-    documents,
-  },
+    graphQLConfig: {
+      documents,
+    }
+  } satisfies ParserOptions,
 });
 
 ruleTester.run('unique-operation-name', rule, {

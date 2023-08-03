@@ -6,14 +6,15 @@ const TEST_SCHEMA = /* GraphQL */ `
   type Query {
     foo: String
     bar: Boolean
-  }
+  } 
 `;
 
 const WITH_SCHEMA = {
   parserOptions: {
-    schema: TEST_SCHEMA,
-    documents: [],
-  } as ParserOptions,
+    graphQLConfig: {
+      schema: TEST_SCHEMA,
+    },
+  } satisfies Partial<ParserOptions>,
 };
 
 ruleTester.run('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-type-names'], {

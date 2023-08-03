@@ -1,4 +1,4 @@
-import { dirname } from 'node:path';
+import path from 'node:path';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
 import debugFactory from 'debug';
 import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync } from 'graphql-config';
@@ -10,7 +10,7 @@ let graphQLConfig: GraphQLConfig;
 export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
   return loadConfigSync({
     // load config relative to the file being linted
-    rootDir: dirname(filePath),
+    rootDir: path.dirname(filePath),
     extensions: [codeFileLoaderExtension],
   });
 }
