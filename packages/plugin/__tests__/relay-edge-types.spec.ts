@@ -1,22 +1,12 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/relay-edge-types';
-import { ruleTester } from './test-utils';
-
-function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
-  return {
-    code,
-    parserOptions: {
-      schema: code,
-    },
-  };
-}
+import { ruleTester, withSchema } from './test-utils';
 
 ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
   valid: [
-    {
+    withSchema({
       name: 'when cursor returns string',
       options: [{ shouldImplementNode: false }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type AEdge {
           node: Int!
           cursor: String!
@@ -24,11 +14,11 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [AEdge]
         }
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'cursor returns scalar',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         scalar Email
         type AEdge {
           node: Email!
@@ -37,12 +27,12 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [AEdge]
         }
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'with Edge suffix',
       options: [{ withEdgeSuffix: true }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         scalar Email
         type AEdge {
           node: Email!
@@ -51,12 +41,12 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [AEdge]
         }
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'should implements Node',
       options: [{ shouldImplementNode: true }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         interface Node {
           id: ID!
         }
@@ -70,11 +60,11 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [AEdge]
         }
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'should not throw when not Object type is used',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type AEdge {
           node: Int!
           cursor: String!
@@ -82,14 +72,14 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [AEdge]
         }
-      `),
-    },
+      `,
+    }),
   ],
   invalid: [
-    {
+    withSchema({
       name: 'Edge type must be Object type',
       options: [{ shouldImplementNode: false, listTypeCanWrapOnlyEdgeType: false }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type PageInfo
         type BConnection
         type DConnection
@@ -113,25 +103,25 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
           edges: [DEdge!]!
           pageInfo: PageInfo!
         }
-      `),
+      `,
       errors: 4,
-    },
-    {
+    }),
+    withSchema({
       name: 'should report when fields is missing',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type PageInfo
         type AEdge
         type AConnection {
           edges: [AEdge]
           pageInfo: PageInfo!
         }
-      `),
+      `,
       errors: 2,
-    },
-    {
+    }),
+    withSchema({
       name: 'should report cursor when list is used',
       options: [{ shouldImplementNode: false, listTypeCanWrapOnlyEdgeType: false }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type PageInfo
         type AEdge {
           node: [PageInfo!]!
@@ -141,13 +131,13 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
           edges: [AEdge]
           pageInfo: PageInfo!
         }
-      `),
+      `,
       errors: 2,
-    },
-    {
+    }),
+    withSchema({
       name: 'should report when without Edge suffix',
       options: [{ withEdgeSuffix: true }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         scalar Email
         type Aedge {
           node: Email!
@@ -156,13 +146,13 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [Aedge]
         }
-      `),
+      `,
       errors: 1,
-    },
-    {
+    }),
+    withSchema({
       name: 'list type',
       options: [{ listTypeCanWrapOnlyEdgeType: true }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type AEdge {
           node: Int!
           cursor: String!
@@ -176,13 +166,13 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
           messages: [Int]!
           posts: [Int!]!
         }
-      `),
+      `,
       errors: 4,
-    },
-    {
+    }),
+    withSchema({
       name: 'should implements Node',
       options: [{ shouldImplementNode: true }],
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type User {
           id: ID!
         }
@@ -193,8 +183,8 @@ ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
         type AConnection {
           edges: [AEdge]
         }
-      `),
+      `,
       errors: 1,
-    },
+    }),
   ],
 });
