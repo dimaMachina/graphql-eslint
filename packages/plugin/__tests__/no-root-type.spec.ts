@@ -5,11 +5,13 @@ import { ruleTester } from './test-utils';
 const useSchema = (
   code: string,
   schema = '',
-): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => ({
+) => ({
   code,
   parserOptions: {
-    schema: schema + code,
-  },
+    graphQLConfig: {
+      schema: schema + code,
+    }
+  } satisfies Partial<ParserOptions>,
 });
 
 ruleTester.run<RuleOptions>('no-root-type', rule, {

@@ -9,12 +9,14 @@ ruleTester.run('no-unused-fragments', rules['no-unused-fragments'], {
       filename: join(__dirname, 'mocks/user-fields.graphql'),
       code: ruleTester.fromMockFile('user-fields.graphql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        documents: [
-          join(__dirname, 'mocks/user-fields.graphql'),
-          join(__dirname, 'mocks/post-fields.graphql'),
-          join(__dirname, 'mocks/post.graphql'),
-        ],
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/user-schema.graphql'),
+          documents: [
+            join(__dirname, 'mocks/user-fields.graphql'),
+            join(__dirname, 'mocks/post-fields.graphql'),
+            join(__dirname, 'mocks/post.graphql'),
+          ],
+        }
       },
     },
   ],

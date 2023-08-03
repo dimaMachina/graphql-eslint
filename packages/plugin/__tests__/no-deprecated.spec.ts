@@ -22,9 +22,10 @@ const TEST_SCHEMA = /* GraphQL */ `
 
 const WITH_SCHEMA = {
   parserOptions: {
-    schema: TEST_SCHEMA,
-    documents: [],
-  } as ParserOptions,
+    graphQLConfig: {
+      schema: TEST_SCHEMA,
+    }
+  } satisfies Partial<ParserOptions>,
 };
 
 ruleTester.run('no-deprecated', rule, {

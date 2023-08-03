@@ -1,20 +1,22 @@
 import { rules } from '../src';
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { DEFAULT_CONFIG } from './test-utils';
+import { ParserOptions } from '../src/types';
 
-const ruleTester = new RuleTester({
+const ruleTester = new RuleTester<Partial<ParserOptions>>({
   ...DEFAULT_CONFIG,
   parserOptions: {
-    ...DEFAULT_CONFIG.parserOptions,
-    schema: /* GraphQL */ `
-      type User {
-        id: ID!
-      }
+    graphQLConfig: {
+      schema: /* GraphQL */ `
+        type User {
+          id: ID!
+        }
 
-      type Query {
-        user: User
-      }
-    `,
+        type Query {
+          user: User
+        }
+      `,
+    },
   },
 });
 

@@ -8,8 +8,10 @@ ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
       filename: join(__dirname, 'mocks/user.graphql'),
       code: ruleTester.fromMockFile('user.graphql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/user-schema.graphql'),
+          documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
+        },
       },
     },
     {
@@ -22,8 +24,10 @@ ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
         }
       `,
       parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        documents: join(__dirname, 'mocks/known-fragment-names.ts'),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/user-schema.graphql'),
+          documents: join(__dirname, 'mocks/known-fragment-names.ts'),
+        },
       },
     },
     {
@@ -31,11 +35,13 @@ ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
       filename: join(__dirname, 'mocks/known-fragment-names/user.gql'),
       code: ruleTester.fromMockFile('known-fragment-names/user.gql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        documents: [
-          join(__dirname, 'mocks/known-fragment-names/user.gql'),
-          join(__dirname, 'mocks/known-fragment-names/user-fields.gql'),
-        ],
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/user-schema.graphql'),
+          documents: [
+            join(__dirname, 'mocks/known-fragment-names/user.gql'),
+            join(__dirname, 'mocks/known-fragment-names/user-fields.gql'),
+          ],
+        },
       },
     },
     {
@@ -48,30 +54,32 @@ ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
         }
       `,
       parserOptions: {
-        schema: /* GraphQL */ `
-          interface ContentUnit {
-            contentSets: Int
-          }
-
-          type IntroText implements ContentUnit {
-            contentSets: Int
-          }
-
-          type Introduction {
-            introText: IntroText
-          }
-
-          type Query {
-            foo: Int
-          }
-        `,
-        documents: /* GraphQL */ `
-          fragment ContentUnit on ContentUnit {
-            contentSets {
-              id
+        graphQLConfig: {
+          schema: /* GraphQL */ `
+            interface ContentUnit {
+              contentSets: Int
             }
-          }
-        `,
+
+            type IntroText implements ContentUnit {
+              contentSets: Int
+            }
+
+            type Introduction {
+              introText: IntroText
+            }
+
+            type Query {
+              foo: Int
+            }
+          `,
+          documents: /* GraphQL */ `
+            fragment ContentUnit on ContentUnit {
+              contentSets {
+                id
+              }
+            }
+          `,
+        },
       },
     },
     {
@@ -84,41 +92,43 @@ ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
         }
       `,
       parserOptions: {
-        schema: /* GraphQL */ `
-          type Cat {
-            name: String
-          }
-
-          type Dog {
-            age: String
-          }
-
-          union AnimalUnion = Cat | Dog
-
-          type Animal {
-            animal: AnimalUnion
-          }
-
-          type Query {
-            animal: Animal
-          }
-        `,
-        documents: /* GraphQL */ `
-          fragment CatFields on Cat {
-            title
-          }
-
-          fragment DogFields on Dog {
-            url
-          }
-
-          fragment AnimalFields on AnimalUnion {
-            animal {
-              ...CatFields
-              ...DogFields
+        graphQLConfig: {
+          schema: /* GraphQL */ `
+            type Cat {
+              name: String
             }
-          }
-        `,
+
+            type Dog {
+              age: String
+            }
+
+            union AnimalUnion = Cat | Dog
+
+            type Animal {
+              animal: AnimalUnion
+            }
+
+            type Query {
+              animal: Animal
+            }
+          `,
+          documents: /* GraphQL */ `
+            fragment CatFields on Cat {
+              title
+            }
+
+            fragment DogFields on Dog {
+              url
+            }
+
+            fragment AnimalFields on AnimalUnion {
+              animal {
+                ...CatFields
+                ...DogFields
+              }
+            }
+          `,
+        },
       },
     },
   ],
@@ -128,11 +138,13 @@ ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
       filename: join(__dirname, 'mocks/known-fragment-names/operation-with-undefined-fragment.gql'),
       code: ruleTester.fromMockFile('known-fragment-names/operation-with-undefined-fragment.gql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        documents: join(
-          __dirname,
-          'mocks/known-fragment-names/operation-with-undefined-fragment.gql',
-        ),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/user-schema.graphql'),
+          documents: join(
+            __dirname,
+            'mocks/known-fragment-names/operation-with-undefined-fragment.gql',
+          ),
+        },
       },
       errors: [{ message: 'Unknown fragment "DoesNotExist".' }],
     },

@@ -1,6 +1,7 @@
 import { rule } from '../src/rules/no-unused-fields';
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { DEFAULT_CONFIG } from './test-utils';
+import { ParserOptions } from '../src/types';
 
 const SCHEMA = /* GraphQL */ `
   type User {
@@ -39,11 +40,12 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-const ruleTester = new RuleTester({
+const ruleTester = new RuleTester<Partial<ParserOptions>>({
   ...DEFAULT_CONFIG,
   parserOptions: {
-    ...DEFAULT_CONFIG.parserOptions,
-    schema: SCHEMA,
+    graphQLConfig: {
+      schema: SCHEMA,
+    },
   },
 });
 

@@ -8,8 +8,10 @@ ruleTester.run('no-unused-variables', rules['no-unused-variables'], {
       filename: join(__dirname, 'mocks/no-unused-variables.gql'),
       code: ruleTester.fromMockFile('no-unused-variables.gql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/user-schema.graphql'),
-        documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/user-schema.graphql'),
+          documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
+        }
       },
     },
   ],
