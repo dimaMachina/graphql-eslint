@@ -13,7 +13,7 @@ describe('schema', async () => {
   const schemaOnDisk = await readFile(SCHEMA_GRAPHQL_PATH, 'utf8');
 
   const testSchema = (schema: string) => {
-    const gqlConfig = loadGraphQLConfig({ schema, filePath: '' });
+    const gqlConfig = loadGraphQLConfig({ graphQLConfig: { schema }, filePath: '' });
     const graphQLSchema = getSchema(gqlConfig.getDefault());
     expect(graphQLSchema).toBeInstanceOf(GraphQLSchema);
 
@@ -77,42 +77,31 @@ describe('schema', async () => {
     });
 
     describe('should passe headers', () => {
-      let schemaUrl: string;
-      let schemaOptions;
-
-      beforeAll(() => {
-        schemaUrl = `${url}/my-headers`;
-        schemaOptions = {
-          headers: {
-            authorization: 'Bearer Foo',
-          },
-        };
-      });
-
       // https://graphql-config.com/schema#passing-headers
       it('with `parserOptions.schema`', () => {
         const gqlConfig = loadGraphQLConfig({
-          schema: {
-            [schemaUrl]: schemaOptions,
+          graphQLConfig: {
+            schema: {
+              [`${url}/my-headers`]: {
+                headers: {
+                  authorization: 'Bearer Foo',
+                },
+              },
+            },
           },
           filePath: '',
         });
         expect(() => getSchema(gqlConfig.getDefault())).toThrow('authorization: "Bearer Foo"');
-      });
-
-      // https://github.com/B2o5T/graphql-eslint/blob/master/docs/parser-options.md#schemaoptions
-      it('with `parserOptions.schemaOptions`', () => {
-        const gqlConfig = loadGraphQLConfig({ schema: schemaUrl, filePath: '' });
-        expect(() => getSchema(gqlConfig.getDefault(), schemaOptions)).toThrow(
-          'authorization: "Bearer Foo"',
-        );
       });
     });
   });
 
   describe('schema loading', () => {
     it('should return Error', () => {
-      const gqlConfig = loadGraphQLConfig({ schema: 'not-exist.gql', filePath: '' });
+      const gqlConfig = loadGraphQLConfig({
+        graphQLConfig: { schema: 'not-exist.gql' },
+        filePath: '',
+      });
       expect(() => getSchema(gqlConfig.getDefault())).toThrow(
         'Unable to find any GraphQL type definitions for the following pointers',
       );
@@ -121,7 +110,9 @@ describe('schema', async () => {
 
   it('should load the graphql-config rc file relative to the linted file', () => {
     const gqlConfig = loadGraphQLConfig({
-      schema: path.resolve(__dirname, 'mocks/using-config/schema.graphql'),
+      graphQLConfig: {
+        schema: path.resolve(__dirname, 'mocks/using-config/schema-in-config.graphql'),
+      },
       filePath: path.resolve(__dirname, 'mocks/using-config/test.graphql'),
     });
 
