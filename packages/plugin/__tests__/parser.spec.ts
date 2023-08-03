@@ -9,7 +9,7 @@ describe('Parser', () => {
       type Query
     `;
 
-    const result = parseForESLint(code, { filePath: 'test.graphql' });
+    const result = parseForESLint(code, { graphQLConfig: {}, filePath: 'test.graphql' });
     expect(result.ast).toMatchSnapshot();
     expect(result.ast.tokens).toBeTruthy();
   });
@@ -31,7 +31,7 @@ describe('Parser', () => {
       }
     `;
 
-    const result = parseForESLint(code, { filePath: 'test.graphql' });
+    const result = parseForESLint(code, { graphQLConfig: {}, filePath: 'test.graphql' });
     const field = (result.ast.body[0] as any).definitions[0].variableDefinitions[0];
 
     expect(field.type).toBe('VariableDefinition');
@@ -58,8 +58,7 @@ describe('Parser', () => {
 
     const result = parseForESLint(code, {
       filePath: 'test.graphql',
-      schema,
-      skipGraphQLConfig: true,
+      graphQLConfig: { schema },
     });
     const { selectionSet } = (result.ast.body[0] as any).definitions[0];
     const typeInfo = selectionSet.typeInfo();

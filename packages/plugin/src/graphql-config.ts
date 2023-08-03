@@ -25,9 +25,8 @@ export function loadGraphQLConfig({
     return graphQLConfig;
   }
   debug('options.graphQLConfig: %o', config);
-
   if (config) {
-    if ('documents' in config) {
+    if (!('projects' in config || 'schemaPath' in config)) {
       // if `schema` is `undefined` will throw error `Project 'default' not found`
       config.schema ??= '';
     }
