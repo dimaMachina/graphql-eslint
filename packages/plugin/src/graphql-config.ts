@@ -25,27 +25,24 @@ export function loadGraphQLConfig({
   if (process.env.NODE_ENV !== 'test' && graphQLConfig) {
     return graphQLConfig;
   }
-  debug('options.graphQLConfig: %o', config);
-  if (!config) {
-    graphQLConfig = loadOnDiskGraphQLConfig(filePath);
+  debug('parserOptions.graphQLConfig: %o', config);
+  const onDiskConfig = !config && loadOnDiskGraphQLConfig(filePath);
+  if (onDiskConfig) {
+    debug('GraphQL-Config path %o', onDiskConfig.filepath);
   }
-  const enhancedConfig =
+
+  const configOptions =
     config && ('projects' in config || 'schemaPath' in config)
       ? config
       : {
           // if `schema` is `undefined` will throw error `Project 'default' not found`
-          schema: config?.schema || '',
+          schema: config?.schema ?? '',
           ...config,
         };
 
-  graphQLConfig ||= new GraphQLConfig(
-    {
-      config: enhancedConfig,
-      filepath: '',
-    },
-    [codeFileLoaderExtension],
-  );
-  debug('GraphQL-Config path %o', graphQLConfig.filepath);
+  graphQLConfig =
+    onDiskConfig ||
+    new GraphQLConfig({ config: configOptions, filepath: '' }, [codeFileLoaderExtension]);
 
   return graphQLConfig;
 }

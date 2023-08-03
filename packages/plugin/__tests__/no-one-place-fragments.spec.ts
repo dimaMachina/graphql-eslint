@@ -19,7 +19,7 @@ ruleTester.run('no-one-place-fragments', rule, {
       name: 'should error fragment used in one place',
       code: ruleTester.fromMockFile('user-fields.graphql'),
       errors: [
-        { message: 'Fragment `UserFields` used only once. Inline him in "-877628611.graphql".' },
+        { message: 'Fragment `UserFields` used only once. Inline him in "146179389.graphql".' },
       ],
       parserOptions: {
         graphQLConfig: {
