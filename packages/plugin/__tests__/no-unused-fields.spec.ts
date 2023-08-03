@@ -54,43 +54,45 @@ ruleTester.run('no-unused-fields', rule, {
     {
       code: SCHEMA,
       parserOptions: {
-        documents: /* GraphQL */ `
-          {
-            user(id: 1) {
-              ... on User {
-                address {
-                  zip
-                  events {
-                    ... on Event {
-                      by {
-                        id
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                ... on User {
+                  address {
+                    zip
+                    events {
+                      ... on Event {
+                        by {
+                          id
+                        }
+                        can_rename: name
+                        data
                       }
-                      can_rename: name
-                      data
                     }
                   }
                 }
               }
             }
-          }
 
-          fragment UserFields on User {
-            can_rename: firstName
-            lastName
-          }
-
-          mutation {
-            deleteUser(id: 2) {
-              age
+            fragment UserFields on User {
+              can_rename: firstName
+              lastName
             }
-            createUser(firstName: "Foo") {
-              address {
-                country
+
+            mutation {
+              deleteUser(id: 2) {
+                age
+              }
+              createUser(firstName: "Foo") {
+                address {
+                  country
+                }
               }
             }
-          }
-        `,
-      },
+          `,
+        },
+      }
     },
   ],
   invalid: [
@@ -102,13 +104,15 @@ ruleTester.run('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        documents: /* GraphQL */ `
-          {
-            user(id: 1) {
-              id
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                id
+              }
             }
-          }
-        `,
+          `,
+        }
       },
       errors: [{ message: 'Field "firstName" is unused' }],
     },
@@ -123,13 +127,15 @@ ruleTester.run('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        documents: /* GraphQL */ `
-          {
-            user(id: 1) {
-              id
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                id
+              }
             }
-          }
-        `,
+          `,
+        }
       },
       errors: [{ message: 'Field "deleteUser" is unused' }],
     },
