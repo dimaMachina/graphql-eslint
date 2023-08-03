@@ -2,19 +2,19 @@ import { ParserOptions } from '../src';
 import { rule } from '../src/rules/require-field-of-type-query-in-mutation-result';
 import { ruleTester } from './test-utils';
 
-const useSchema = (
-  code: string,
-): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => ({
+const useSchema = (code: string) => ({
   code,
   parserOptions: {
-    schema: /* GraphQL */ `
-      type User {
-        id: ID!
-      }
+    graphQLConfig: {
+      schema: /* GraphQL */ `
+        type User {
+          id: ID!
+        }
 
-      ${code}
-    `,
-  },
+        ${code}
+      `,
+    }
+  } satisfies Partial<ParserOptions>,
 });
 
 ruleTester.run('require-field-of-type-query-in-mutation-result', rule, {

@@ -62,9 +62,11 @@ const USER_POST_SCHEMA = /* GraphQL */ `
 
 const WITH_SCHEMA = {
   parserOptions: {
-    schema: TEST_SCHEMA,
-    documents: '{ foo }',
-  } as ParserOptions,
+    graphQLConfig: {
+      schema: TEST_SCHEMA,
+      documents: '{ foo }',
+    }
+  } satisfies Partial<ParserOptions>,
 };
 
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
@@ -92,8 +94,10 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: '{ foo }',
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: '{ foo }',
+        }
       },
     },
     {

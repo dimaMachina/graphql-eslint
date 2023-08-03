@@ -232,17 +232,19 @@ ruleTester.run<RuleOptions>('require-description', rule, {
   ],
 });
 
-function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
+function useSchema(code: string) {
   return {
     code,
     parserOptions: {
-      schema: /* GraphQL */ `
-        type User {
-          id: ID!
-        }
+      graphQLConfig: {
+        schema: /* GraphQL */ `
+          type User {
+            id: ID!
+          }
 
-        ${code}
-      `,
-    },
+          ${code}
+        `,
+      }
+    } satisfies Partial<ParserOptions>,
   };
 }
