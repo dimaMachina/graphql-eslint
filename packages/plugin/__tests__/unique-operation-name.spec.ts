@@ -8,7 +8,6 @@ const TEST_OPERATION = 'query test { foo }';
 const SIBLING_OPERATIONS = (...documents: string[]) => ({
   parserOptions: {
     graphQLConfig: {
-      schema: '',
       documents,
     },
   } satisfies Partial<ParserOptions>,

@@ -12,7 +12,6 @@ const TEST_FRAGMENT = /* GraphQL */ `
 const SIBLING_FRAGMENTS = (...documents: string[]) => ({
   parserOptions: {
     graphQLConfig: {
-      schema: '',
       documents,
     },
   } satisfies Partial<ParserOptions>,

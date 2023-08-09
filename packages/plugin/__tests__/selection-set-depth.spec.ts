@@ -5,7 +5,6 @@ import { ruleTester } from './test-utils';
 const WITH_SIBLINGS = {
   parserOptions: {
     graphQLConfig: {
-      schema: '',
       documents: 'fragment AlbumFields on Album { id }',
     },
   } satisfies Partial<ParserOptions>,
