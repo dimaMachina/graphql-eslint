@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/no-root-type';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const useSchema = (code: string, schema = '') => ({
   code,
@@ -8,7 +7,7 @@ const useSchema = (code: string, schema = '') => ({
     graphQLConfig: {
       schema: schema + code,
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run<RuleOptions>('no-root-type', rule, {

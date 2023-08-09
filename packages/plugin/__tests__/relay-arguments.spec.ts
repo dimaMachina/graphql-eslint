@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/relay-arguments';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 function useSchema(code: string) {
   return {
@@ -13,7 +12,7 @@ function useSchema(code: string) {
           ${code}
         `,
       },
-    } satisfies Partial<ParserOptions>,
+    } satisfies ParserOptionsForTests,
   };
 }
 

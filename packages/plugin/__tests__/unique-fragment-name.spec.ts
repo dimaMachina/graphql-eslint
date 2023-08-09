@@ -1,7 +1,6 @@
 import { join } from 'node:path';
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/unique-fragment-name';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const TEST_FRAGMENT = /* GraphQL */ `
   fragment HasIdFields on HasId {
@@ -14,7 +13,7 @@ const SIBLING_FRAGMENTS = (...documents: string[]) => ({
     graphQLConfig: {
       documents,
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run('unique-fragment-name', rule, {

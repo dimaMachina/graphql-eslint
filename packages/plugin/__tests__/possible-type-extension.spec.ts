@@ -1,6 +1,5 @@
 import { join } from 'node:path';
-import { ParserOptions } from '../src';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
 const useUserSchema = (code: string) => {
@@ -18,7 +17,7 @@ const useUserSchema = (code: string) => {
           }
         `,
       },
-    } satisfies Partial<ParserOptions>,
+    } satisfies ParserOptionsForTests,
   };
 };
 

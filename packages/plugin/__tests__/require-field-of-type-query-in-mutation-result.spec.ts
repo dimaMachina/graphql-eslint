@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/require-field-of-type-query-in-mutation-result';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const useSchema = (code: string) => ({
   code,
@@ -14,7 +13,7 @@ const useSchema = (code: string) => ({
         ${code}
       `,
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run('require-field-of-type-query-in-mutation-result', rule, {

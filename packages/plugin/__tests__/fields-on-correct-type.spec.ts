@@ -1,10 +1,9 @@
-import { ParserOptions } from '../src';
-import { DEFAULT_CONFIG } from './test-utils';
+import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils';
 // @ts-expect-error
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
-const ruleTester = new RuleTester<Partial<ParserOptions>>({
+const ruleTester = new RuleTester<ParserOptionsForTests>({
   ...DEFAULT_CONFIG,
   parserOptions: {
     graphQLConfig: {

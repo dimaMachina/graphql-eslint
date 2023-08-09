@@ -1,13 +1,12 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/selection-set-depth';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const WITH_SIBLINGS = {
   parserOptions: {
     graphQLConfig: {
       documents: 'fragment AlbumFields on Album { id }',
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 };
 
 ruleTester.run<RuleOptions>('selection-set-depth', rule, {

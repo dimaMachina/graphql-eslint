@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-deprecated';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -25,7 +24,7 @@ const WITH_SCHEMA = {
     graphQLConfig: {
       schema: TEST_SCHEMA,
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 };
 
 ruleTester.run('no-deprecated', rule, {

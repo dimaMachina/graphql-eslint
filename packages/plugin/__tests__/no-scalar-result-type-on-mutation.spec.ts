@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const useSchema = (code: string) => ({
   code,
@@ -14,7 +13,7 @@ const useSchema = (code: string) => ({
         ${code}
       `,
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run('no-scalar-result-type-on-mutation', rule, {

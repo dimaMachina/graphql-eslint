@@ -1,7 +1,7 @@
 import { join } from 'node:path';
-import { GraphQLInvalidTestCase, ParserOptions } from '../src';
+import { GraphQLInvalidTestCase } from '../src';
 import { rule } from '../src/rules/require-import-fragment';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 function withMocks({
   name,
@@ -24,7 +24,7 @@ function withMocks({
           join(__dirname, 'mocks/import-fragments/bar-fragment.gql'),
         ],
       },
-    } satisfies Partial<ParserOptions>,
+    } satisfies ParserOptionsForTests,
     errors,
   };
 }

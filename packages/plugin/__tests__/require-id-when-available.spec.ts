@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/require-id-when-available';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -66,7 +65,7 @@ const WITH_SCHEMA = {
       schema: TEST_SCHEMA,
       documents: '{ foo }',
     },
-  } satisfies Partial<ParserOptions>,
+  } satisfies ParserOptionsForTests,
 };
 
 const MESSAGE_ID = { messageId: 'require-id-when-available' };

@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions, RULE_ID } from '../src/rules/require-description';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const OPERATION = { OperationDefinition: true };
 
@@ -245,6 +244,6 @@ function useSchema(code: string) {
           ${code}
         `,
       },
-    } satisfies Partial<ParserOptions>,
+    } satisfies ParserOptionsForTests,
   };
 }

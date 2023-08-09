@@ -1,6 +1,6 @@
 // @ts-expect-error
 import { RuleTester } from '@theguild/eslint-rule-tester';
-import { ParserOptions } from '../src/types.js';
+import { ParserOptions } from '../src/index.js';
 
 export const DEFAULT_CONFIG = {
   parser: require.resolve('@graphql-eslint/eslint-plugin'),
@@ -9,9 +9,11 @@ export const DEFAULT_CONFIG = {
   },
 };
 
-export const ruleTester = new RuleTester<{
+export type ParserOptionsForTests = {
   graphQLConfig: Partial<ParserOptions['graphQLConfig']>;
-}>(DEFAULT_CONFIG);
+};
+
+export const ruleTester = new RuleTester<ParserOptionsForTests>(DEFAULT_CONFIG);
 
 export function withSchema<T extends { code: string }>({ code, ...rest }: T) {
   return {
@@ -20,7 +22,7 @@ export function withSchema<T extends { code: string }>({ code, ...rest }: T) {
       graphQLConfig: {
         schema: code,
       },
-    } satisfies Partial<ParserOptions>,
+    } satisfies ParserOptionsForTests,
     ...rest,
   };
 }
