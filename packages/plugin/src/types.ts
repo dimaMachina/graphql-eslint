@@ -52,12 +52,7 @@ export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> 
     code: string;
     usage?: T;
   }[];
-  configOptions?:
-    | T
-    | {
-        schema?: T;
-        operations?: T;
-      };
+  configOptions?: T | { schema?: T; operations?: T };
   graphQLJSRuleName?: string;
   isDisabledForAllConfig?: true;
 };

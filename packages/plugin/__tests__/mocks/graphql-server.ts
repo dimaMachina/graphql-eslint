@@ -40,7 +40,7 @@ class TestGraphQLServer {
   }
 
   private async router(req: IncomingMessage, res: ServerResponse): Promise<void> {
-    const { pathname } = new URL(req.url, this.base);
+    const { pathname } = new URL(req.url!, this.base);
 
     if (pathname === '/') {
       const { query } = await this.parseData(req);

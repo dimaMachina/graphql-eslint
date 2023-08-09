@@ -11,6 +11,7 @@ const TEST_FRAGMENT = /* GraphQL */ `
 
 const SIBLING_FRAGMENTS = (...documents: string[]) => ({
   parserOptions: {
+    // @ts-expect-error
     graphQLConfig: {
       documents,
     },

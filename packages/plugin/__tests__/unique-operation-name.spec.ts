@@ -7,6 +7,7 @@ const TEST_OPERATION = 'query test { foo }';
 
 const SIBLING_OPERATIONS = (...documents: string[]) => ({
   parserOptions: {
+    // @ts-expect-error
     graphQLConfig: {
       documents,
     },

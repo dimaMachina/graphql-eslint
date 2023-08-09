@@ -282,9 +282,6 @@ importers:
       lodash.lowercase:
         specifier: ^4.3.0
         version: 4.3.0
-      tslib:
-        specifier: ^2.4.1
-        version: 2.4.1
     devDependencies:
       '@theguild/eslint-rule-tester':
         specifier: workspace:*

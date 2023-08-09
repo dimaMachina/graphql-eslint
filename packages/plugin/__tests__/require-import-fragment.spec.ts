@@ -17,6 +17,7 @@ function withMocks({
     filename,
     code: ruleTester.fromMockFile(filename.split('/mocks')[1]),
     parserOptions: {
+      // @ts-expect-error
       graphQLConfig: {
         documents: [
           filename,

@@ -4,6 +4,7 @@ import { ruleTester } from './test-utils';
 
 const WITH_SIBLINGS = {
   parserOptions: {
+    // @ts-expect-error
     graphQLConfig: {
       documents: 'fragment AlbumFields on Album { id }',
     },

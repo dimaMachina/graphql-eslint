@@ -26,6 +26,5 @@
       "@graphql-eslint/eslint-plugin": ["packages/plugin/src/index.ts"]
     }
   },
-  "include": ["packages"],
-  "exclude": ["**/tests"]
+  "include": ["packages"]
 }
