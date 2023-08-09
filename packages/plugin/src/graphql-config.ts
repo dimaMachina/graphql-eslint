@@ -51,5 +51,5 @@ const codeFileLoaderExtension: GraphQLExtensionDeclaration = api => {
   const { schema, documents } = api.loaders;
   schema.register(new CodeFileLoader());
   documents.register(new CodeFileLoader());
-  return { name: 'graphql-eslint-loaders' };
+  return { name: 'code-file-loaders' };
 };
