@@ -11,7 +11,7 @@ export const DEFAULT_CONFIG = {
   },
 };
 
-export const ruleTester = new RuleTester<Partial<ParserOptions>>(DEFAULT_CONFIG);
+export const ruleTester = new RuleTester(DEFAULT_CONFIG);
 
 export function withSchema<T extends { code: string }>({ code, ...rest }: T) {
   return {

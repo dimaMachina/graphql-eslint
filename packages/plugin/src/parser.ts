@@ -25,7 +25,12 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     let project: GraphQLProjectConfig;
     let schema: Schema, documents: Source[];
 
-    if (process.env.IS_BROWSER === 'true') {
+    if (typeof window === 'undefined') {
+      const gqlConfig = loadGraphQLConfig(options);
+      const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
+      project = gqlConfig.getProjectForFile(realFilepath);
+      documents = getDocuments(project);
+    } else {
       documents = [
         parseGraphQLSDL(
           'operation.graphql',
@@ -33,18 +38,13 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
           { noLocation: true },
         ),
       ];
-    } else {
-      const gqlConfig = loadGraphQLConfig(options);
-      const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
-      project = gqlConfig.getProjectForFile(realFilepath);
-      documents = getDocuments(project);
     }
 
     try {
-      if (process.env.IS_BROWSER === 'true') {
-        schema = buildSchema((options.graphQLConfig as IGraphQLProject).schema as string);
-      } else {
+      if (typeof window === 'undefined') {
         schema = getSchema(project!);
+      } else {
+        schema = buildSchema((options.graphQLConfig as IGraphQLProject).schema as string);
       }
     } catch (error) {
       if (error instanceof Error) {

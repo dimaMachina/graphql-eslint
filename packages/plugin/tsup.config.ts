@@ -9,11 +9,13 @@ const opts: Options = {
   bundle: false,
   dts: true,
   env: {
-    IS_BROWSER: 'false',
     ...(process.env.NODE_ENV && { NODE_ENV: process.env.NODE_ENV }),
   },
   format: 'esm',
   minifySyntax: true,
+  esbuildOptions(options, _context) {
+    options.define!.window = 'undefined';
+  },
 };
 
 const CWD = process.cwd();
@@ -58,7 +60,9 @@ export default defineConfig([
     bundle: true,
     env: {
       NODE_ENV: 'production',
-      IS_BROWSER: 'true',
+    },
+    esbuildOptions(options, _context) {
+      options.define!.window = 'true';
     },
   },
 ]);

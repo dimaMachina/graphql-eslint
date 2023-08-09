@@ -7,7 +7,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "dom"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true
   }
