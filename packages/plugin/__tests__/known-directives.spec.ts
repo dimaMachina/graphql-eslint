@@ -1,4 +1,4 @@
-// @ts-expect-error
+// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
@@ -22,7 +22,7 @@ const ruleTester = new RuleTester<ParserOptionsForTests>({
 
 ruleTester.run<[{ ignoreClientDirectives: string[] }]>(
   'known-directives',
-  // @ts-expect-error
+  // @ts-expect-error -- I don't know why it's complaining
   GRAPHQL_JS_VALIDATIONS['known-directives'],
   {
     valid: [

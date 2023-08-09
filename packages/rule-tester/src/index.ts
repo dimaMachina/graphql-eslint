@@ -88,7 +88,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
           }
         }
       }
-      if (rule.meta!.fixable) {
+      if (rule.meta.fixable) {
         const { fixed, output } = linter.verifyAndFix(code, config, filename);
         if (fixed) {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));

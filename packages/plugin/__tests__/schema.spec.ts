@@ -81,7 +81,7 @@ describe('schema', async () => {
       it('with `parserOptions.schema`', () => {
         const gqlConfig = loadGraphQLConfig({
           graphQLConfig: {
-            // @ts-expect-error
+            // @ts-expect-error -- here I don't know why it's complaining
             schema: {
               [`${url}/my-headers`]: {
                 headers: {

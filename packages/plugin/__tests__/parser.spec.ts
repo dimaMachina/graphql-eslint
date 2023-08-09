@@ -9,7 +9,7 @@ describe('Parser', () => {
       type Query
     `;
 
-    // @ts-expect-error
+    // @ts-expect-error -- empty object to run programmatic config
     const result = parseForESLint(code, { graphQLConfig: {}, filePath: 'test.graphql' });
     expect(result.ast).toMatchSnapshot();
     expect(result.ast.tokens).toBeTruthy();
@@ -32,7 +32,7 @@ describe('Parser', () => {
       }
     `;
 
-    // @ts-expect-error
+    // @ts-expect-error -- empty object to run programmatic config
     const result = parseForESLint(code, { graphQLConfig: {}, filePath: 'test.graphql' });
     const field = (result.ast.body[0] as any).definitions[0].variableDefinitions[0];
 

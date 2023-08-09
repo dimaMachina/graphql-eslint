@@ -1,4 +1,4 @@
-// @ts-expect-error
+// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { ParserOptions } from '../src/index.js';
 

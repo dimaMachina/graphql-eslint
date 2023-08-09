@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSchema, introspectionFromSchema } from 'graphql';
 
-// @ts-expect-error
+// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const sdlSchema = readFileSync(resolve(__dirname, 'user-schema.graphql'), 'utf8');
