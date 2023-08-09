@@ -1,5 +1,5 @@
-import { IGraphQLConfig } from 'graphql-config';
-import { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import type { IGraphQLConfig } from 'graphql-config';
+import type { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
 
 const config: IGraphQLConfig = {
   projects: {

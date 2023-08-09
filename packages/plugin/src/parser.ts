@@ -14,14 +14,33 @@ const debug = debugFactory('graphql-eslint:parser');
 
 debug('cwd %o', CWD);
 
+const LEGACY_PARSER_OPTIONS_KEYS = [
+  'schema',
+  'documents',
+  'extensions',
+  'include',
+  'exclude',
+  'projects',
+  'schemaOptions',
+  'graphQLParserOptions',
+  'skipGraphQLConfig',
+  'operations',
+] as const;
+
 export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
+  for (const key of LEGACY_PARSER_OPTIONS_KEYS) {
+    if (key in options) {
+      throw new Error(
+        `\`parserOptions.${key}\` was removed in graphql-eslint@4. Use physical graphql-config for setting schema and documents or \`parserOptions.graphQLConfig\` for programmatic usage.`,
+      );
+    }
+  }
+
   try {
     const { filePath } = options;
     // First parse code from file, in case of syntax error do not try load schema,
     // documents or even graphql-config instance
-    const { document } = parseGraphQLSDL(filePath, code, {
-      noLocation: false,
-    });
+    const { document } = parseGraphQLSDL(filePath, code, { noLocation: false });
     let project: GraphQLProjectConfig;
     let schema: Schema, documents: Source[];
 

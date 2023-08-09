@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { AST } from 'eslint';
 import { Position } from 'estree';
 import { ASTNode, GraphQLSchema, Kind } from 'graphql';
@@ -33,13 +32,18 @@ export function requireGraphQLSchemaFromContext(
   return schema;
 }
 
+const chalk = {
+  red: (str: string) => `\x1b[31m${str}\x1b[39m`,
+  yellow: (str: string) => `\x1b[33m${str}\x1b[39m`,
+};
+
 export const logger = {
   error: (...args: unknown[]) =>
     // eslint-disable-next-line no-console
-    console.error(chalk.red('error'), '[graphql-eslint]', chalk(...args)),
+    console.error(chalk.red('error'), '[graphql-eslint]', ...args),
   warn: (...args: unknown[]) =>
     // eslint-disable-next-line no-console
-    console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
+    console.warn(chalk.yellow('warning'), '[graphql-eslint]', ...args),
 };
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');

@@ -16,6 +16,7 @@ exports[`alphabetize > invalid > Invalid #1 1`] = `
       "fields": [
         "ObjectTypeDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -59,6 +60,7 @@ exports[`alphabetize > invalid > Invalid #2 1`] = `
       "fields": [
         "ObjectTypeDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -94,6 +96,7 @@ exports[`alphabetize > invalid > Invalid #3 1`] = `
       "fields": [
         "InterfaceTypeDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -136,6 +139,7 @@ exports[`alphabetize > invalid > Invalid #4 1`] = `
       "fields": [
         "InputObjectTypeDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -179,6 +183,7 @@ exports[`alphabetize > invalid > Invalid #5 1`] = `
       "fields": [
         "InputObjectTypeDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -212,9 +217,7 @@ exports[`alphabetize > invalid > Invalid #6 1`] = `
 #### ⚙️ Options
 
     {
-      "values": [
-        "EnumTypeDefinition"
-      ],
+      "values": true,
       "definitions": false
     }
 
@@ -255,9 +258,7 @@ exports[`alphabetize > invalid > Invalid #7 1`] = `
 #### ⚙️ Options
 
     {
-      "values": [
-        "EnumTypeDefinition"
-      ],
+      "values": true,
       "definitions": false
     }
 
@@ -289,6 +290,7 @@ exports[`alphabetize > invalid > Invalid #8 1`] = `
       "arguments": [
         "DirectiveDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -320,6 +322,7 @@ exports[`alphabetize > invalid > Invalid #9 1`] = `
       "arguments": [
         "FieldDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -359,6 +362,7 @@ exports[`alphabetize > invalid > Invalid #10 1`] = `
       "selections": [
         "FragmentDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -407,6 +411,7 @@ exports[`alphabetize > invalid > Invalid #11 1`] = `
       "selections": [
         "OperationDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -472,6 +477,7 @@ exports[`alphabetize > invalid > Invalid #12 1`] = `
       "arguments": [
         "Field"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -528,9 +534,7 @@ exports[`alphabetize > invalid > should compare with lexicographic order 1`] = `
 #### ⚙️ Options
 
     {
-      "values": [
-        "EnumTypeDefinition"
-      ],
+      "values": true,
       "definitions": false
     }
 
@@ -594,6 +598,7 @@ exports[`alphabetize > invalid > should move comment 1`] = `
       "fields": [
         "ObjectTypeDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -664,6 +669,7 @@ exports[`alphabetize > invalid > should sort by group when \`*\` at the start 1`
         "id",
         "createdAt"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -739,6 +745,7 @@ exports[`alphabetize > invalid > should sort by group when \`*\` is at the end 1
         "createdAt",
         "*"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -814,6 +821,7 @@ exports[`alphabetize > invalid > should sort by group when \`*\` is between 1`] 
         "createdAt",
         "updatedAt"
       ],
+      "values": false,
       "definitions": false
     }
 
@@ -927,7 +935,8 @@ exports[`alphabetize > invalid > should sort definitions 1`] = `
 #### ⚙️ Options
 
     {
-      "definitions": true
+      "definitions": true,
+      "values": false
     }
 
 #### ❌ Error 1/9
@@ -1073,6 +1082,7 @@ exports[`alphabetize > invalid > should sort when selection is aliased 1`] = `
       "selections": [
         "OperationDefinition"
       ],
+      "values": false,
       "definitions": false
     }
 

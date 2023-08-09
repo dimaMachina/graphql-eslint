@@ -42,7 +42,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       `,
     },
     {
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         enum Role {
           ADMIN
@@ -136,7 +136,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       errors: [{ message: 'input value "lastName" should be before input value "password"' }],
     },
     {
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         enum Role {
           SUPER_ADMIN
@@ -151,7 +151,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       ],
     },
     {
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         extend enum Role {
           ADMIN
@@ -264,7 +264,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
     },
     {
       name: 'should compare with lexicographic order',
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         enum Test {
           "qux"
