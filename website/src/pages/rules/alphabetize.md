@@ -45,7 +45,7 @@ type User {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/alphabetize: ['error', { values: ['EnumTypeDefinition'] }]
+# eslint @graphql-eslint/alphabetize: ['error', { values: true }]
 
 enum Role {
   SUPER_ADMIN
@@ -58,7 +58,7 @@ enum Role {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/alphabetize: ['error', { values: ['EnumTypeDefinition'] }]
+# eslint @graphql-eslint/alphabetize: ['error', { values: true }]
 
 enum Role {
   ADMIN
@@ -115,18 +115,9 @@ Additional restrictions:
 - Minimum items: `1`
 - Unique items: `true`
 
-### `values` (array)
+### `values` (boolean)
 
 Values of `enum`.
-
-The elements of the array can contain the following enum values:
-
-- `EnumTypeDefinition`
-
-Additional restrictions:
-
-- Minimum items: `1`
-- Unique items: `true`
 
 ### `selections` (array)
 
@@ -174,8 +165,6 @@ Additional restrictions:
 ### `definitions` (boolean)
 
 Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.
-
-Default: `false`
 
 ### `groups` (array)
 
