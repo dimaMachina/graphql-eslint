@@ -6,7 +6,7 @@ const WITH_SIBLINGS = {
   parserOptions: {
     graphQLConfig: {
       documents: 'fragment AlbumFields on Album { id }',
-    }
+    },
   } satisfies ParserOptions,
 };
 
@@ -108,7 +108,7 @@ ruleTester.run<RuleOptions>('selection-set-depth', rule, {
               }
             }
           `,
-        }
+        },
       },
       options: [{ maxDepth: 2 }],
       errors: [{ message: "'' exceeds maximum operation depth of 2" }],

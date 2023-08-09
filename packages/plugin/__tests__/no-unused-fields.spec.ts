@@ -92,7 +92,7 @@ ruleTester.run('no-unused-fields', rule, {
             }
           `,
         },
-      }
+      },
     },
   ],
   invalid: [
@@ -112,7 +112,7 @@ ruleTester.run('no-unused-fields', rule, {
               }
             }
           `,
-        }
+        },
       },
       errors: [{ message: 'Field "firstName" is unused' }],
     },
@@ -135,7 +135,7 @@ ruleTester.run('no-unused-fields', rule, {
               }
             }
           `,
-        }
+        },
       },
       errors: [{ message: 'Field "deleteUser" is unused' }],
     },

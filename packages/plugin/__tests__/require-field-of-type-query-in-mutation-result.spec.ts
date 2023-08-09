@@ -13,7 +13,7 @@ const useSchema = (code: string) => ({
 
         ${code}
       `,
-    }
+    },
   } satisfies Partial<ParserOptions>,
 });
 

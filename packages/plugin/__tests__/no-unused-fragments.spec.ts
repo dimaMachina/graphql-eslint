@@ -16,7 +16,7 @@ ruleTester.run('no-unused-fragments', rules['no-unused-fragments'], {
             join(__dirname, 'mocks/post-fields.graphql'),
             join(__dirname, 'mocks/post.graphql'),
           ],
-        }
+        },
       },
     },
   ],

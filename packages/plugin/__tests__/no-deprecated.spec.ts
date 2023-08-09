@@ -24,7 +24,7 @@ const WITH_SCHEMA = {
   parserOptions: {
     graphQLConfig: {
       schema: TEST_SCHEMA,
-    }
+    },
   } satisfies Partial<ParserOptions>,
 };
 

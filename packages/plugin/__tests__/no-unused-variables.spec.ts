@@ -11,7 +11,7 @@ ruleTester.run('no-unused-variables', rules['no-unused-variables'], {
         graphQLConfig: {
           schema: join(__dirname, 'mocks/user-schema.graphql'),
           documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
-        }
+        },
       },
     },
   ],

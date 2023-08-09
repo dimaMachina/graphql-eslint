@@ -6,7 +6,7 @@ const TEST_SCHEMA = /* GraphQL */ `
   type Query {
     foo: String
     bar: Boolean
-  } 
+  }
 `;
 
 const WITH_SCHEMA = {

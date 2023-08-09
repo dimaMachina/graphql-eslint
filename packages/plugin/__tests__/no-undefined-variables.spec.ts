@@ -12,7 +12,7 @@ ruleTester.run('no-undefined-variables', rules['no-undefined-variables'], {
         graphQLConfig: {
           schema: join(__dirname, 'mocks/user-schema.graphql'),
           documents: join(__dirname, 'mocks/user-fields-with-variables.gql'),
-        }
+        },
       },
       errors: [
         { message: 'Variable "$limit" is not defined by operation "User".' },

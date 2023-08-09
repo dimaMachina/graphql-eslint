@@ -5,13 +5,11 @@ import { ruleTester } from './test-utils';
 
 const TEST_OPERATION = 'query test { foo }';
 
-const SIBLING_OPERATIONS = (
-  ...documents: string[]
-) => ({
+const SIBLING_OPERATIONS = (...documents: string[]) => ({
   parserOptions: {
     graphQLConfig: {
       documents,
-    }
+    },
   } satisfies ParserOptions,
 });
 

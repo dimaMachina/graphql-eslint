@@ -2,9 +2,7 @@ import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
 import { ruleTester } from './test-utils';
 
-const useSchema = (
-  code: string,
-) => ({
+const useSchema = (code: string) => ({
   code,
   parserOptions: {
     graphQLConfig: {
@@ -15,7 +13,7 @@ const useSchema = (
 
         ${code}
       `,
-    }
+    },
   } satisfies Partial<ParserOptions>,
 });
 

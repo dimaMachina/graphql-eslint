@@ -9,14 +9,12 @@ const TEST_FRAGMENT = /* GraphQL */ `
   }
 `;
 
-const SIBLING_FRAGMENTS = (
-  ...documents: string[]
-) => ({
+const SIBLING_FRAGMENTS = (...documents: string[]) => ({
   parserOptions: {
     graphQLConfig: {
       documents,
-    }
-  } satisfies ParserOptions
+    },
+  } satisfies ParserOptions,
 });
 
 ruleTester.run('unique-fragment-name', rule, {

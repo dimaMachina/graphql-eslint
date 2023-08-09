@@ -2,9 +2,7 @@ import { join } from 'node:path';
 import { ParserOptions, rules } from '../src';
 import { ruleTester } from './test-utils';
 
-const useUserSchema = (
-  code: string,
-) => {
+const useUserSchema = (code: string) => {
   return {
     code,
     parserOptions: {
@@ -18,7 +16,7 @@ const useUserSchema = (
             user: User
           }
         `,
-      }
+      },
     } satisfies Partial<ParserOptions>,
   };
 };
@@ -40,7 +38,7 @@ ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
       parserOptions: {
         graphQLConfig: {
           schema: join(__dirname, 'mocks/possible-type-extension/separate-graphql-files/*.gql'),
-        }
+        },
       },
     },
     {
@@ -54,7 +52,7 @@ ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
       parserOptions: {
         graphQLConfig: {
           schema: join(__dirname, 'mocks/possible-type-extension/separate-code-files/*.ts'),
-        }
+        },
       },
     },
     {
@@ -64,7 +62,7 @@ ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
       parserOptions: {
         graphQLConfig: {
           schema: join(__dirname, 'mocks/possible-type-extension/one-graphql-file/type-user.gql'),
-        }
+        },
       },
     },
   ],

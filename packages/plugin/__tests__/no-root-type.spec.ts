@@ -2,15 +2,12 @@ import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/no-root-type';
 import { ruleTester } from './test-utils';
 
-const useSchema = (
-  code: string,
-  schema = '',
-) => ({
+const useSchema = (code: string, schema = '') => ({
   code,
   parserOptions: {
     graphQLConfig: {
       schema: schema + code,
-    }
+    },
   } satisfies Partial<ParserOptions>,
 });
 
