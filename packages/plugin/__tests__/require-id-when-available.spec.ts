@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/require-id-when-available';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -62,9 +61,11 @@ const USER_POST_SCHEMA = /* GraphQL */ `
 
 const WITH_SCHEMA = {
   parserOptions: {
-    schema: TEST_SCHEMA,
-    documents: '{ foo }',
-  } as ParserOptions,
+    graphQLConfig: {
+      schema: TEST_SCHEMA,
+      documents: '{ foo }',
+    },
+  } satisfies ParserOptionsForTests,
 };
 
 const MESSAGE_ID = { messageId: 'require-id-when-available' };
@@ -92,16 +93,20 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: '{ foo }',
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: '{ foo }',
+        },
       },
     },
     {
       name: "should ignore checking selections on OperationDefinition as it's redundant check",
       code: '{ foo }',
       parserOptions: {
-        schema: 'type Query { id: ID }',
-        documents: '{ foo }',
+        graphQLConfig: {
+          schema: 'type Query { id: ID }',
+          documents: '{ foo }',
+        },
       },
     },
     { ...WITH_SCHEMA, code: '{ noId { name } }' },
@@ -110,8 +115,10 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
       name: 'should find selection in fragment',
       code: '{ hasId { ...HasIdFields } }',
       parserOptions: {
-        schema: TEST_SCHEMA,
-        documents: 'fragment HasIdFields on HasId { id }',
+        graphQLConfig: {
+          schema: TEST_SCHEMA,
+          documents: 'fragment HasIdFields on HasId { id }',
+        },
       },
     },
     { ...WITH_SCHEMA, code: '{ vehicles { id ...on Car { id mileage } } }' },
@@ -142,16 +149,18 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserLightFields on User {
-            id
-          }
-          fragment UserFullFields on User {
-            ...UserLightFields
-            name
-          }
-        `,
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserLightFields on User {
+              id
+            }
+            fragment UserFullFields on User {
+              ...UserLightFields
+              name
+            }
+          `,
+        },
       },
     },
     {
@@ -164,20 +173,22 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserLightFields on User {
-            id
-          }
-          fragment UserMediumFields on User {
-            ...UserLightFields
-            name
-          }
-          fragment UserFullFields on User {
-            ...UserMediumFields
-            name
-          }
-        `,
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserLightFields on User {
+              id
+            }
+            fragment UserMediumFields on User {
+              ...UserLightFields
+              name
+            }
+            fragment UserFullFields on User {
+              ...UserMediumFields
+              name
+            }
+          `,
+        },
       },
     },
     {
@@ -190,20 +201,22 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserLightFields on User {
-            ... on User {
-              id
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserLightFields on User {
+              ... on User {
+                id
+              }
             }
-          }
-          fragment UserMediumFields on User {
-            ...UserLightFields
-          }
-          fragment UserFullFields on User {
-            ...UserMediumFields
-          }
-        `,
+            fragment UserMediumFields on User {
+              ...UserLightFields
+            }
+            fragment UserFullFields on User {
+              ...UserMediumFields
+            }
+          `,
+        },
       },
     },
     {
@@ -216,26 +229,28 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserFields on User {
-            id
-          }
-          fragment UserLightFields on User {
-            ... on User {
-              ...UserFields
-              name
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserFields on User {
+              id
             }
-          }
-          fragment UserMediumFields on User {
-            name
-            ...UserLightFields
-          }
-          fragment UserFullFields on User {
-            name
-            ...UserMediumFields
-          }
-        `,
+            fragment UserLightFields on User {
+              ... on User {
+                ...UserFields
+                name
+              }
+            }
+            fragment UserMediumFields on User {
+              name
+              ...UserLightFields
+            }
+            fragment UserFullFields on User {
+              name
+              ...UserMediumFields
+            }
+          `,
+        },
       },
     },
     {
@@ -248,18 +263,20 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserFields on User {
-            name
-          }
-          fragment UserFullFields on User {
-            ... on User {
-              ...UserFields
-              id # order is matter
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserFields on User {
+              name
             }
-          }
-        `,
+            fragment UserFullFields on User {
+              ... on User {
+                ...UserFields
+                id # order is matter
+              }
+            }
+          `,
+        },
       },
     },
     {
@@ -272,18 +289,20 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserFields on User {
-            name
-          }
-          fragment UserFullFields on User {
-            ... on User {
-              ...UserFields
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserFields on User {
+              name
             }
-            id # order is matter
-          }
-        `,
+            fragment UserFullFields on User {
+              ... on User {
+                ...UserFields
+              }
+              id # order is matter
+            }
+          `,
+        },
       },
     },
     {
@@ -321,20 +340,22 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserLightFields on User {
-            name
-          }
-          fragment UserMediumFields on User {
-            ...UserLightFields
-            name
-          }
-          fragment UserFullFields on User {
-            ...UserMediumFields
-            name
-          }
-        `,
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserLightFields on User {
+              name
+            }
+            fragment UserMediumFields on User {
+              ...UserLightFields
+              name
+            }
+            fragment UserFullFields on User {
+              ...UserMediumFields
+              name
+            }
+          `,
+        },
       },
       errors: [MESSAGE_ID],
     },
@@ -343,8 +364,10 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
       code: '{ user { id ...UserFields } }',
       errors: [MESSAGE_ID],
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: 'fragment UserFields on User { posts { title } }',
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: 'fragment UserFields on User { posts { title } }',
+        },
       },
     },
     {
@@ -352,22 +375,24 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
       code: '{ user { ...UserFullFields } }',
       errors: [MESSAGE_ID, MESSAGE_ID, MESSAGE_ID, MESSAGE_ID],
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserFullFields on User {
-            posts {
-              author {
-                ...UserFields
-                authorPosts: posts {
-                  title
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserFullFields on User {
+              posts {
+                author {
+                  ...UserFields
+                  authorPosts: posts {
+                    title
+                  }
                 }
               }
             }
-          }
-          fragment UserFields on User {
-            name
-          }
-        `,
+            fragment UserFields on User {
+              name
+            }
+          `,
+        },
       },
     },
     {
@@ -375,8 +400,10 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
       errors: [MESSAGE_ID],
       code: DOCUMENT_WITH_UNION,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: DOCUMENT_WITH_UNION,
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: DOCUMENT_WITH_UNION,
+        },
       },
     },
     {
@@ -392,12 +419,14 @@ ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
         }
       `,
       parserOptions: {
-        schema: USER_POST_SCHEMA,
-        documents: /* GraphQL */ `
-          fragment UserFields on User {
-            name
-          }
-        `,
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UserFields on User {
+              name
+            }
+          `,
+        },
       },
     },
   ],

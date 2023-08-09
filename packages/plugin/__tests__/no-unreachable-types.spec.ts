@@ -1,129 +1,137 @@
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-unreachable-types';
-import { ruleTester } from './test-utils';
-
-const useSchema = (
-  schema: string,
-): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => {
-  return {
-    parserOptions: { schema },
-    code: schema,
-  };
-};
+import { ruleTester, withSchema } from './test-utils';
 
 ruleTester.run('no-unreachable-types', rule, {
   valid: [
-    useSchema(/* GraphQL */ `
-      scalar A
-      scalar B
+    withSchema({
+      code: /* GraphQL */ `
+        scalar A
+        scalar B
 
-      # UnionTypeDefinition
-      union Response = A | B
+        # UnionTypeDefinition
+        union Response = A | B
 
-      type Query {
-        foo: Response
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      type Query {
-        me: User
-      }
+        type Query {
+          foo: Response
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        type Query {
+          me: User
+        }
 
-      # ObjectTypeDefinition
-      type User {
-        id: ID
-        name: String
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      type Query {
-        me: User
-      }
+        # ObjectTypeDefinition
+        type User {
+          id: ID
+          name: String
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        type Query {
+          me: User
+        }
 
-      # InterfaceTypeDefinition
-      interface Address {
-        city: String
-      }
+        # InterfaceTypeDefinition
+        interface Address {
+          city: String
+        }
 
-      type User implements Address {
-        city: String
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      # ScalarTypeDefinition
-      scalar DateTime
+        type User implements Address {
+          city: String
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        # ScalarTypeDefinition
+        scalar DateTime
 
-      type Query {
-        now: DateTime
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      # EnumTypeDefinition
-      enum Role {
-        ADMIN
-        USER
-      }
+        type Query {
+          now: DateTime
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        # EnumTypeDefinition
+        enum Role {
+          ADMIN
+          USER
+        }
 
-      type Query {
-        role: Role
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      input UserInput {
-        id: ID
-      }
+        type Query {
+          role: Role
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        input UserInput {
+          id: ID
+        }
 
-      type Query {
-        # InputValueDefinition
-        user(input: UserInput!): Boolean
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      # DirectiveDefinition
-      directive @auth(role: [Role!]!) on FIELD_DEFINITION
+        type Query {
+          # InputValueDefinition
+          user(input: UserInput!): Boolean
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        # DirectiveDefinition
+        directive @auth(role: [Role!]!) on FIELD_DEFINITION
 
-      enum Role {
-        ADMIN
-        USER
-      }
+        enum Role {
+          ADMIN
+          USER
+        }
 
-      type Query {
-        # Directive
-        user: ID @auth(role: [ADMIN])
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      type RootQuery
-      type RootMutation
-      type RootSubscription
+        type Query {
+          # Directive
+          user: ID @auth(role: [ADMIN])
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        type RootQuery
+        type RootMutation
+        type RootSubscription
 
-      schema {
-        query: RootQuery
-        mutation: RootMutation
-        subscription: RootSubscription
-      }
-    `),
-    useSchema(/* GraphQL */ `
-      interface User {
-        id: ID!
-      }
+        schema {
+          query: RootQuery
+          mutation: RootMutation
+          subscription: RootSubscription
+        }
+      `,
+    }),
+    withSchema({
+      code: /* GraphQL */ `
+        interface User {
+          id: ID!
+        }
 
-      interface Manager implements User {
-        id: ID!
-      }
+        interface Manager implements User {
+          id: ID!
+        }
 
-      type TopManager implements Manager {
-        id: ID!
-        name: String
-      }
+        type TopManager implements Manager {
+          id: ID!
+          name: String
+        }
 
-      type Query {
-        me: User
-      }
-    `),
-    {
+        type Query {
+          me: User
+        }
+      `,
+    }),
+    withSchema({
       name: 'directive on schema',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type Query
 
         schema @good {
@@ -131,11 +139,11 @@ ruleTester.run('no-unreachable-types', rule, {
         }
 
         directive @good on SCHEMA
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'should ignore directive with request locations',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         directive @q on QUERY
         directive @w on MUTATION
         directive @e on SUBSCRIPTION
@@ -145,23 +153,23 @@ ruleTester.run('no-unreachable-types', rule, {
         directive @u on INLINE_FRAGMENT
         directive @i on VARIABLE_DEFINITION
         type Query
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'should ignore types from directive arguments with request locations',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         enum Enum {
           A
           B
         }
         directive @q(arg: Enum = A) on QUERY
         type Query
-      `),
-    },
+      `,
+    }),
   ],
   invalid: [
-    {
-      ...useSchema(/* GraphQL */ `
+    withSchema({
+      code: /* GraphQL */ `
         type Query {
           node(id: ID!): AnotherNode!
         }
@@ -184,15 +192,15 @@ ruleTester.run('no-unreachable-types', rule, {
           name: String
           address: String
         }
-      `),
+      `,
       errors: [
         { message: 'Interface type `Node` is unreachable.' },
         { message: 'Interface type `User` is unreachable.' },
         { message: 'Object type `SuperUser` is unreachable.' },
       ],
-    },
-    {
-      ...useSchema(/* GraphQL */ `
+    }),
+    withSchema({
+      code: /* GraphQL */ `
         # ScalarTypeDefinition
         scalar DateTime
 
@@ -222,7 +230,7 @@ ruleTester.run('no-unreachable-types', rule, {
         type User implements Address {
           city: String
         }
-      `),
+      `,
       errors: [
         { message: 'Scalar type `DateTime` is unreachable.' },
         { message: 'Enum type `Role` is unreachable.' },
@@ -232,9 +240,9 @@ ruleTester.run('no-unreachable-types', rule, {
         { message: 'Interface type `Address` is unreachable.' },
         { message: 'Object type `User` is unreachable.' },
       ],
-    },
-    {
-      ...useSchema(/* GraphQL */ `
+    }),
+    withSchema({
+      code: /* GraphQL */ `
         interface User {
           id: String
         }
@@ -253,11 +261,11 @@ ruleTester.run('no-unreachable-types', rule, {
         }
 
         scalar DateTime
-      `),
+      `,
       errors: [{ message: 'Scalar type `DateTime` is unreachable.' }],
-    },
-    {
-      ...useSchema(/* GraphQL */ `
+    }),
+    withSchema({
+      code: /* GraphQL */ `
         interface User {
           id: String
         }
@@ -278,15 +286,15 @@ ruleTester.run('no-unreachable-types', rule, {
         type Query {
           user: AnotherUser!
         }
-      `),
+      `,
       errors: [
         { message: 'Interface type `User` is unreachable.' },
         { message: 'Object type `SuperUser` is unreachable.' },
         { message: 'Object type `SuperUser` is unreachable.' },
       ],
-    },
-    {
-      ...useSchema(/* GraphQL */ `
+    }),
+    withSchema({
+      code: /* GraphQL */ `
         type Query {
           node(id: ID!): Node!
         }
@@ -307,8 +315,8 @@ ruleTester.run('no-unreachable-types', rule, {
         }
 
         scalar DateTime
-      `),
+      `,
       errors: [{ message: 'Scalar type `DateTime` is unreachable.' }],
-    },
+    }),
   ],
 });

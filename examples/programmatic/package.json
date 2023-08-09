@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-eslint/example-basic",
+  "name": "@graphql-eslint/example-programmatic",
   "version": "0.0.0",
   "type": "module",
   "repository": "https://github.com/B2o5T/graphql-eslint",

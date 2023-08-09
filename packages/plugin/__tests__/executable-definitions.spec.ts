@@ -1,6 +1,5 @@
-import { ParserOptions } from '../src';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
-import { ruleTester } from './test-utils';
+import { ruleTester, ParserOptionsForTests } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -19,8 +18,10 @@ const TEST_SCHEMA = /* GraphQL */ `
 
 const WITH_SCHEMA = {
   parserOptions: {
-    schema: TEST_SCHEMA,
-  } as ParserOptions,
+    graphQLConfig: {
+      schema: TEST_SCHEMA,
+    },
+  } satisfies ParserOptionsForTests,
 };
 
 ruleTester.run('executable-definitions', GRAPHQL_JS_VALIDATIONS['executable-definitions'], {

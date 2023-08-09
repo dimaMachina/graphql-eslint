@@ -37,4 +37,4 @@ type Mutation {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-scalar-result-type-on-mutation.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-scalar-result-type-on-mutation.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/no-scalar-result-type-on-mutation.spec.ts)

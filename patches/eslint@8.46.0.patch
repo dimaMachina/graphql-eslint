@@ -45,7 +45,7 @@ index e4dc126783c8232a67268c72def615829c4508b9..6e1de73fd06e8bfec07e14c8779b0509
 +                // 🚨 Don't need, as we assert autofix output with snapshots
              }
  
-+            item.assertMessages(item)
++            item.assertMessages(item, messages)
              assertASTDidntChange(result.beforeAST, result.afterAST);
          }
  

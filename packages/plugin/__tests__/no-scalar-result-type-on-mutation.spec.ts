@@ -1,20 +1,19 @@
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
-const useSchema = (
-  code: string,
-): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => ({
+const useSchema = (code: string) => ({
   code,
   parserOptions: {
-    schema: /* GraphQL */ `
-      type User {
-        id: ID!
-      }
+    graphQLConfig: {
+      schema: /* GraphQL */ `
+        type User {
+          id: ID!
+        }
 
-      ${code}
-    `,
-  },
+        ${code}
+      `,
+    },
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run('no-scalar-result-type-on-mutation', rule, {

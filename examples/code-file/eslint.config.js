@@ -17,9 +17,6 @@ export default [
     },
     languageOptions: {
       parser: graphqlESLint,
-      parserOptions: {
-        schema: 'schema.graphql',
-      },
     },
     rules: {
       '@graphql-eslint/no-anonymous-operations': 'error',

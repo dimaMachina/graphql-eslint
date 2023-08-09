@@ -1,14 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es2022",
     "module": "Node16",
     "moduleResolution": "node16",
     "declaration": false,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "dom"],
     "types": ["vitest/globals"],
-    "resolveJsonModule": true
-  }
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@graphql-eslint/eslint-plugin": ["./src/index.ts"]
+    }
+  },
+  "exclude": ["dist"]
 }

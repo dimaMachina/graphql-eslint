@@ -1,30 +1,17 @@
-import { GraphQLParseOptions } from '@graphql-tools/utils';
 import { AST, Linter, Rule } from 'eslint';
 import * as ESTree from 'estree';
 import { GraphQLSchema, ASTKindToNode } from 'graphql';
-import { IExtensions, IGraphQLProject } from 'graphql-config';
 import { JSONSchema } from 'json-schema-to-ts';
 import { SiblingOperations } from './siblings.js';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
+import { IGraphQLConfig } from 'graphql-config';
 
 export type Schema = GraphQLSchema | null;
 export type Pointer = string | string[];
 
 export interface ParserOptions {
-  schema?: Pointer | Record<string, { headers: Record<string, string> }>;
-  documents?: Pointer;
-  extensions?: IExtensions;
-  include?: Pointer;
-  exclude?: Pointer;
-  projects?: Record<string, IGraphQLProject>;
-  schemaOptions?: Omit<GraphQLParseOptions, 'assumeValidSDL'> & {
-    headers: Record<string, string>;
-  };
-  graphQLParserOptions?: Omit<GraphQLParseOptions, 'noLocation'>;
-  skipGraphQLConfig?: boolean;
+  graphQLConfig?: IGraphQLConfig;
   filePath: string;
-  /** @deprecated Use `documents` instead */
-  operations?: Pointer;
 }
 
 export type ParserServices = {
@@ -65,12 +52,7 @@ export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> 
     code: string;
     usage?: T;
   }[];
-  configOptions?:
-    | T
-    | {
-        schema?: T;
-        operations?: T;
-      };
+  configOptions?: T | { schema?: T; operations?: T };
   graphQLJSRuleName?: string;
   isDisabledForAllConfig?: true;
 };

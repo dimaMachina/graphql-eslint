@@ -8,7 +8,10 @@ const CWD = join(PROJECT_CWD, '..', '..');
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: ESLint.LintResult & { fatalErrorCount: number }) => {
     if (curr.fatalErrorCount > 0) {
-      throw new Error('Found fatal error');
+      throw new Error(`Found fatal error:
+
+${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
+      `);
     }
     return acc + curr.errorCount;
   }, 0);
@@ -38,8 +41,8 @@ function testSnapshot(results: ESLint.LintResult[]): void {
 }
 
 describe('Examples', () => {
-  it('should work on `.graphql` files', () => {
-    const cwd = join(CWD, 'examples/basic');
+  it('should work programmatically', () => {
+    const cwd = join(CWD, 'examples/programmatic');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(6);
     testSnapshot(results);
@@ -56,13 +59,6 @@ describe('Examples', () => {
     const cwd = join(CWD, 'examples/graphql-config');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
-  });
-
-  it('should work with `graphql-config` on `.js` files', () => {
-    const cwd = join(CWD, 'examples/graphql-config-code-file');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(3);
     testSnapshot(results);
   });
 

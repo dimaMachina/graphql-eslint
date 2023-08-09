@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSchema, introspectionFromSchema } from 'graphql';
 
+// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const sdlSchema = readFileSync(resolve(__dirname, 'user-schema.graphql'), 'utf8');
@@ -40,7 +41,7 @@ class TestGraphQLServer {
   }
 
   private async router(req: IncomingMessage, res: ServerResponse): Promise<void> {
-    const { pathname } = new URL(req.url, this.base);
+    const { pathname } = new URL(req.url!, this.base);
 
     if (pathname === '/') {
       const { query } = await this.parseData(req);

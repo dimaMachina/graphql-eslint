@@ -44,4 +44,4 @@ enum MyEnum {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/no-case-insensitive-enum-values-duplicates.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/no-case-insensitive-enum-values-duplicates.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/no-case-insensitive-enum-values-duplicates.spec.ts)

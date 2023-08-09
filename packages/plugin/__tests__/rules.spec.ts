@@ -1,12 +1,13 @@
-import { configs, parseForESLint, ParserOptions, rules } from '@graphql-eslint/eslint-plugin';
+import { configs, parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
 import eslintExperimentalApis from 'eslint/use-at-your-own-risk';
+import { ParserOptionsForTests } from './test-utils';
 
 // @ts-expect-error we need to wait when ESLint publish correct types
 const { FlatESLint } = eslintExperimentalApis;
 
 export function getESLintWithConfig(
   config: Record<string, any>,
-  parserOptions?: Omit<ParserOptions, 'filePath'>,
+  graphQLConfig?: ParserOptionsForTests['graphQLConfig'],
 ) {
   return new FlatESLint({
     overrideConfigFile: true,
@@ -16,10 +17,11 @@ export function getESLintWithConfig(
         languageOptions: {
           parser: { parseForESLint },
           parserOptions: {
-            schema: 'type Query { foo: Int }',
-            skipGraphQLConfig: true,
-            ...parserOptions,
-          },
+            graphQLConfig: {
+              schema: 'type Query { foo: Int }',
+              ...graphQLConfig,
+            },
+          } satisfies ParserOptionsForTests,
         },
         plugins: {
           '@graphql-eslint': { rules },

@@ -11,6 +11,6 @@ exports[`no-one-place-fragments > invalid > should error fragment used in one pl
 #### ❌ Error
 
     > 1 | fragment UserFields on User {
-        |          ^^^^^^^^^^ Fragment \`UserFields\` used only once. Inline him in "-877628611.graphql".
+        |          ^^^^^^^^^^ Fragment \`UserFields\` used only once. Inline him in "146179389.graphql".
       2 |   id
 `;

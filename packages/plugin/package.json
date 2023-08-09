@@ -12,6 +12,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "browser": "./dist/index.browser.mjs",
       "require": {
         "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
@@ -34,7 +35,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "eslint": "^8",
@@ -47,10 +49,9 @@
     "chalk": "^4.1.2",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
-    "graphql-config": "^4.4.0",
+    "graphql-config": "^4.5.0",
     "graphql-depth-limit": "^1.1.0",
-    "lodash.lowercase": "^4.3.0",
-    "tslib": "^2.4.1"
+    "lodash.lowercase": "^4.3.0"
   },
   "devDependencies": {
     "@theguild/eslint-rule-tester": "workspace:*",

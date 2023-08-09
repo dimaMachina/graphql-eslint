@@ -1,17 +1,18 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/relay-arguments';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
-function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
+function useSchema(code: string) {
   return {
     code,
     parserOptions: {
-      schema: /* GraphQL */ `
-        ${code}
-        type PostConnection
-        type Query
-      `,
-    },
+      graphQLConfig: {
+        schema: /* GraphQL */ `
+          type PostConnection
+          type Query
+          ${code}
+        `,
+      },
+    } satisfies ParserOptionsForTests,
   };
 }
 

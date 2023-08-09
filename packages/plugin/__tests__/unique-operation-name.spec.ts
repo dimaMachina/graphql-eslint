@@ -1,16 +1,15 @@
 import { join } from 'node:path';
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/unique-operation-name';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const TEST_OPERATION = 'query test { foo }';
 
-const SIBLING_OPERATIONS = (
-  ...documents: string[]
-): { parserOptions: Pick<ParserOptions, 'documents'> } => ({
+const SIBLING_OPERATIONS = (...documents: string[]) => ({
   parserOptions: {
-    documents,
-  },
+    graphQLConfig: {
+      documents,
+    },
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run('unique-operation-name', rule, {

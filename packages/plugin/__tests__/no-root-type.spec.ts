@@ -1,15 +1,13 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/no-root-type';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
-const useSchema = (
-  code: string,
-  schema = '',
-): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => ({
+const useSchema = (code: string, schema = '') => ({
   code,
   parserOptions: {
-    schema: schema + code,
-  },
+    graphQLConfig: {
+      schema: schema + code,
+    },
+  } satisfies ParserOptionsForTests,
 });
 
 ruleTester.run<RuleOptions>('no-root-type', rule, {

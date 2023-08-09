@@ -1,18 +1,10 @@
-import { ParserOptions } from '../src';
 import { rule } from '../src/rules/require-nullable-result-in-root';
-import { ruleTester } from './test-utils';
-
-function useSchema(code: string): { code: string; parserOptions: Omit<ParserOptions, 'filePath'> } {
-  return {
-    code,
-    parserOptions: { schema: code },
-  };
-}
+import { ruleTester, withSchema } from './test-utils';
 
 ruleTester.run('require-nullable-result-in-root', rule, {
   valid: [
-    {
-      ...useSchema(/* GraphQL */ `
+    withSchema({
+      code: /* GraphQL */ `
         type Query {
           foo: User
           baz: [User]!
@@ -21,24 +13,24 @@ ruleTester.run('require-nullable-result-in-root', rule, {
         type User {
           id: ID!
         }
-      `),
-    },
+      `,
+    }),
   ],
   invalid: [
-    {
-      ...useSchema(/* GraphQL */ `
+    withSchema({
+      code: /* GraphQL */ `
         type Query {
           user: User!
         }
         type User {
           id: ID!
         }
-      `),
+      `,
       errors: 1,
-    },
-    {
+    }),
+    withSchema({
       name: 'should work with extend query',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type MyMutation
         extend type MyMutation {
           user: User!
@@ -49,12 +41,12 @@ ruleTester.run('require-nullable-result-in-root', rule, {
         schema {
           mutation: MyMutation
         }
-      `),
+      `,
       errors: 1,
-    },
-    {
+    }),
+    withSchema({
       name: 'should work with default scalars',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type MySubscription
         extend type MySubscription {
           foo: Boolean!
@@ -62,8 +54,8 @@ ruleTester.run('require-nullable-result-in-root', rule, {
         schema {
           subscription: MySubscription
         }
-      `),
+      `,
       errors: 1,
-    },
+    }),
   ],
 });

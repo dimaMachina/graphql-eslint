@@ -4,7 +4,6 @@ import js from '@eslint/js';
 export default [
   {
     files: ['**/*.js'],
-    processor: graphqlESLint.processors.graphql,
     rules: js.configs.recommended.rules,
   },
   {
@@ -14,9 +13,16 @@ export default [
     },
     languageOptions: {
       parser: graphqlESLint,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'schema.graphql',
+          documents: ['query.graphql', 'fragment.graphql', 'fragment2.graphql'],
+        },
+      },
     },
     rules: {
-      '@graphql-eslint/require-id-when-available': 'error',
+      '@graphql-eslint/require-id-when-available': ['error', { fieldName: '_id' }],
+      '@graphql-eslint/unique-fragment-name': 'error',
       '@graphql-eslint/no-anonymous-operations': 'error',
       '@graphql-eslint/naming-convention': [
         'error',
@@ -28,6 +34,8 @@ export default [
           },
         },
       ],
+      '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
+      '@graphql-eslint/require-description': ['error', { FieldDefinition: true }],
     },
   },
 ];

@@ -1,6 +1,7 @@
 import { rule } from '../src/rules/no-unused-fields';
+// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { RuleTester } from '@theguild/eslint-rule-tester';
-import { DEFAULT_CONFIG } from './test-utils';
+import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils';
 
 const SCHEMA = /* GraphQL */ `
   type User {
@@ -39,11 +40,12 @@ const SCHEMA = /* GraphQL */ `
   }
 `;
 
-const ruleTester = new RuleTester({
+const ruleTester = new RuleTester<ParserOptionsForTests>({
   ...DEFAULT_CONFIG,
   parserOptions: {
-    ...DEFAULT_CONFIG.parserOptions,
-    schema: SCHEMA,
+    graphQLConfig: {
+      schema: SCHEMA,
+    },
   },
 });
 
@@ -52,42 +54,44 @@ ruleTester.run('no-unused-fields', rule, {
     {
       code: SCHEMA,
       parserOptions: {
-        documents: /* GraphQL */ `
-          {
-            user(id: 1) {
-              ... on User {
-                address {
-                  zip
-                  events {
-                    ... on Event {
-                      by {
-                        id
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                ... on User {
+                  address {
+                    zip
+                    events {
+                      ... on Event {
+                        by {
+                          id
+                        }
+                        can_rename: name
+                        data
                       }
-                      can_rename: name
-                      data
                     }
                   }
                 }
               }
             }
-          }
 
-          fragment UserFields on User {
-            can_rename: firstName
-            lastName
-          }
-
-          mutation {
-            deleteUser(id: 2) {
-              age
+            fragment UserFields on User {
+              can_rename: firstName
+              lastName
             }
-            createUser(firstName: "Foo") {
-              address {
-                country
+
+            mutation {
+              deleteUser(id: 2) {
+                age
+              }
+              createUser(firstName: "Foo") {
+                address {
+                  country
+                }
               }
             }
-          }
-        `,
+          `,
+        },
       },
     },
   ],
@@ -100,13 +104,15 @@ ruleTester.run('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        documents: /* GraphQL */ `
-          {
-            user(id: 1) {
-              id
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                id
+              }
             }
-          }
-        `,
+          `,
+        },
       },
       errors: [{ message: 'Field "firstName" is unused' }],
     },
@@ -121,13 +127,15 @@ ruleTester.run('no-unused-fields', rule, {
         }
       `,
       parserOptions: {
-        documents: /* GraphQL */ `
-          {
-            user(id: 1) {
-              id
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                id
+              }
             }
-          }
-        `,
+          `,
+        },
       },
       errors: [{ message: 'Field "deleteUser" is unused' }],
     },

@@ -1,39 +1,29 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/strict-id-in-types';
-import { ruleTester } from './test-utils';
-
-function useSchema(code: string): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } {
-  return {
-    code,
-    parserOptions: {
-      schema: code,
-    },
-  };
-}
+import { ruleTester, withSchema } from './test-utils';
 
 ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
   valid: [
-    useSchema('type A { id: ID! }'),
-    {
-      ...useSchema('type A { _id: String! }'),
+    withSchema({ code: 'type A { id: ID! }' }),
+    withSchema({
+      code: 'type A { _id: String! }',
       options: [
         {
           acceptedIdNames: ['_id'],
           acceptedIdTypes: ['String'],
         },
       ],
-    },
-    {
-      ...useSchema('type A { _id: String! } type A1 { id: ID! }'),
+    }),
+    withSchema({
+      code: 'type A { _id: String! } type A1 { id: ID! }',
       options: [
         {
           acceptedIdNames: ['id', '_id'],
           acceptedIdTypes: ['ID', 'String'],
         },
       ],
-    },
-    {
-      ...useSchema('type A { id: ID! } type AResult { key: String! }'),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type AResult { key: String! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -43,9 +33,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
-      ...useSchema('type A { id: ID! } type A1 { id: ID! }'),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type A1 { id: ID! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -55,20 +45,18 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
-      ...useSchema('type A { id: ID! } type A1 { id: ID! }'),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type A1 { id: ID! }',
       options: [
         {
           acceptedIdNames: ['id'],
           acceptedIdTypes: ['ID'],
         },
       ],
-    },
-    {
-      ...useSchema(
-        'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
-      ),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type AResult { key: String! } type APayload { bool: Boolean! } type APagination { num: Int! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -78,9 +66,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
-      ...useSchema('type A { id: ID! } type AError { message: String! }'),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type AError { message: String! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -90,11 +78,10 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
-      ...useSchema(
-        'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }',
-      ),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type AGeneralError { message: String! } type AForbiddenError { message: String! }',
+
       options: [
         {
           acceptedIdNames: ['id'],
@@ -104,9 +91,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
-      ...useSchema('type A { id: ID! }'),
+    }),
+    withSchema({
+      code: 'type A { id: ID! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -116,11 +103,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
-      ...useSchema(
-        'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }',
-      ),
+    }),
+    withSchema({
+      code: 'type A { id: ID! } type AError { message: String! } type AResult { payload: A! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -131,10 +116,10 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           },
         },
       ],
-    },
-    {
+    }),
+    withSchema({
       name: 'should ignore root types',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type User {
           id: ID!
         }
@@ -147,11 +132,11 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
         type Subscription {
           userAdded: User
         }
-      `),
-    },
-    {
+      `,
+    }),
+    withSchema({
       name: 'should ignore root types that are renamed',
-      ...useSchema(/* GraphQL */ `
+      code: /* GraphQL */ `
         type User {
           id: ID!
         }
@@ -169,16 +154,16 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
           mutation: MyMutation
           subscription: MySubscription
         }
-      `),
-    },
+      `,
+    }),
   ],
   invalid: [
-    {
-      ...useSchema('type B { name: String! }'),
+    withSchema({
+      code: 'type B { name: String! }',
       errors: 1,
-    },
-    {
-      ...useSchema('type B { id: ID! _id: String! }'),
+    }),
+    withSchema({
+      code: 'type B { id: ID! _id: String! }',
       options: [
         {
           acceptedIdNames: ['id', '_id'],
@@ -186,11 +171,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
         },
       ],
       errors: 1,
-    },
-    {
-      ...useSchema(
-        'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }',
-      ),
+    }),
+    withSchema({
+      code: 'type B { id: String! } type B1 { id: [String] } type B2 { id: [String!] } type B3 { id: [String]! } type B4 { id: [String!]! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -198,11 +181,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
         },
       ],
       errors: 4,
-    },
-    {
-      ...useSchema(
-        'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
-      ),
+    }),
+    withSchema({
+      code: 'type B { id: ID! } type Bresult { key: String! } type BPayload { bool: Boolean! } type BPagination { num: Int! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -213,9 +194,9 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
         },
       ],
       errors: 2,
-    },
-    {
-      ...useSchema('type B { id: ID! } type BError { message: String! }'),
+    }),
+    withSchema({
+      code: 'type B { id: ID! } type BError { message: String! }',
       options: [
         {
           acceptedIdNames: ['id'],
@@ -226,6 +207,6 @@ ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
         },
       ],
       errors: 1,
-    },
+    }),
   ],
 });

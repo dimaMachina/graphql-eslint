@@ -1,11 +1,12 @@
-import { ParserOptions } from '../src';
 import { rule, RuleOptions } from '../src/rules/selection-set-depth';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const WITH_SIBLINGS = {
   parserOptions: {
-    documents: 'fragment AlbumFields on Album { id }',
-  } as ParserOptions,
+    graphQLConfig: {
+      documents: 'fragment AlbumFields on Album { id }',
+    },
+  } satisfies ParserOptionsForTests,
 };
 
 ruleTester.run<RuleOptions>('selection-set-depth', rule, {
@@ -97,14 +98,16 @@ ruleTester.run<RuleOptions>('selection-set-depth', rule, {
     {
       name: 'suggestions should not throw error when fragment is located in different file',
       parserOptions: {
-        documents: /* GraphQL */ `
-          fragment AlbumFields on Album {
-            id
-            modifier {
-              date
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            fragment AlbumFields on Album {
+              id
+              modifier {
+                date
+              }
             }
-          }
-        `,
+          `,
+        },
       },
       options: [{ maxDepth: 2 }],
       errors: [{ message: "'' exceeds maximum operation depth of 2" }],

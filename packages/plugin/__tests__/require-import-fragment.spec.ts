@@ -1,38 +1,21 @@
 import { join } from 'node:path';
-import { GraphQLInvalidTestCase } from '../src';
 import { rule } from '../src/rules/require-import-fragment';
-import { Linter } from 'eslint';
-import ParserOptions = Linter.ParserOptions;
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
-function withMocks({
-  name,
-  filename,
-  errors,
-}: {
-  name: string;
-  filename: string;
-  errors?: GraphQLInvalidTestCase['errors'];
-}): {
-  name: string;
-  filename: string;
-  code: string;
-  parserOptions: {
-    documents: ParserOptions['documents'];
-  };
-  errors: any;
-} {
+function withMocks({ name, filename, errors }: { name: string; filename: string; errors?: any }) {
   return {
     name,
     filename,
     code: ruleTester.fromMockFile(filename.split('/mocks')[1]),
     parserOptions: {
-      documents: [
-        filename,
-        join(__dirname, 'mocks/import-fragments/foo-fragment.gql'),
-        join(__dirname, 'mocks/import-fragments/bar-fragment.gql'),
-      ],
-    },
+      graphQLConfig: {
+        documents: [
+          filename,
+          join(__dirname, 'mocks/import-fragments/foo-fragment.gql'),
+          join(__dirname, 'mocks/import-fragments/bar-fragment.gql'),
+        ],
+      },
+    } satisfies ParserOptionsForTests,
     errors,
   };
 }

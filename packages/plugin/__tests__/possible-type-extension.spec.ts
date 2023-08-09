@@ -1,27 +1,27 @@
 import { join } from 'node:path';
-import { ParserOptions, rules } from '../src';
-import { ruleTester } from './test-utils';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
-const useUserSchema = (
-  code: string,
-): { code: string; parserOptions: Pick<ParserOptions, 'schema'> } => {
+const useUserSchema = (code: string) => {
   return {
     code,
     parserOptions: {
-      schema: /* GraphQL */ `
-        type User {
-          id: ID
-        }
+      graphQLConfig: {
+        schema: /* GraphQL */ `
+          type User {
+            id: ID
+          }
 
-        type Query {
-          user: User
-        }
-      `,
-    },
+          type Query {
+            user: User
+          }
+        `,
+      },
+    } satisfies ParserOptionsForTests,
   };
 };
 
-ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
+ruleTester.run('possible-type-extension', GRAPHQL_JS_VALIDATIONS['possible-type-extension'], {
   valid: [
     useUserSchema(/* GraphQL */ `
       extend type User {
@@ -36,7 +36,9 @@ ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
       ),
       code: ruleTester.fromMockFile('possible-type-extension/separate-graphql-files/type-user.gql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/possible-type-extension/separate-graphql-files/*.gql'),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/possible-type-extension/separate-graphql-files/*.gql'),
+        },
       },
     },
     {
@@ -48,7 +50,9 @@ ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
         }
       `,
       parserOptions: {
-        schema: join(__dirname, 'mocks/possible-type-extension/separate-code-files/*.ts'),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/possible-type-extension/separate-code-files/*.ts'),
+        },
       },
     },
     {
@@ -56,7 +60,9 @@ ruleTester.run('possible-type-extension', rules['possible-type-extension'], {
       filename: join(__dirname, 'mocks/possible-type-extension/one-graphql-file/type-user.gql'),
       code: ruleTester.fromMockFile('possible-type-extension/one-graphql-file/type-user.gql'),
       parserOptions: {
-        schema: join(__dirname, 'mocks/possible-type-extension/one-graphql-file/type-user.gql'),
+        graphQLConfig: {
+          schema: join(__dirname, 'mocks/possible-type-extension/one-graphql-file/type-user.gql'),
+        },
       },
     },
   ],

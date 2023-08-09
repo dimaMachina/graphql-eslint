@@ -1,3 +1,4 @@
+// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
