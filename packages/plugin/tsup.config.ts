@@ -4,7 +4,7 @@ import path from 'node:path';
 import packageJson from './package.json';
 
 const opts: Options = {
-  entry: ['src/**/*.ts'],
+  entry: ['src/**/*.ts', '!src/index.browser.ts'],
   clean: true,
   bundle: false,
   dts: true,

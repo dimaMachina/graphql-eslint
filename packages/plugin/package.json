@@ -1,6 +1,7 @@
 {
   "name": "@graphql-eslint/eslint-plugin",
   "version": "3.20.1",
+  "type": "module",
   "description": "GraphQL plugin for ESLint",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
@@ -35,7 +36,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "eslint": "^8",
