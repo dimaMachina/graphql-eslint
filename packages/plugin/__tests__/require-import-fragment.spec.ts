@@ -1,17 +1,8 @@
 import { join } from 'node:path';
-import { GraphQLInvalidTestCase } from '../src';
 import { rule } from '../src/rules/require-import-fragment';
 import { ParserOptionsForTests, ruleTester } from './test-utils';
 
-function withMocks({
-  name,
-  filename,
-  errors,
-}: {
-  name: string;
-  filename: string;
-  errors?: GraphQLInvalidTestCase['errors'];
-}) {
+function withMocks({ name, filename, errors }: { name: string; filename: string; errors?: any }) {
   return {
     name,
     filename,
