@@ -62,10 +62,9 @@ jobs:
 
       - name: Test
         run: pnpm test
-        env:
-          CI: true
-#      - name: Lint ESLint
-#        run: pnpm lint
+
+      - name: Type Check
+        run: pnpm typecheck
 #
 #      - name: Lint Prettier
 #        run: pnpm lint:prettier
