@@ -11,11 +11,11 @@ const TEST_FRAGMENT = /* GraphQL */ `
 
 const SIBLING_FRAGMENTS = (...documents: string[]) => ({
   parserOptions: {
-    // @ts-expect-error
     graphQLConfig: {
+      schema: '',
       documents,
     },
-  } satisfies ParserOptions,
+  } satisfies Partial<ParserOptions>,
 });
 
 ruleTester.run('unique-fragment-name', rule, {

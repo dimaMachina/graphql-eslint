@@ -1,6 +1,7 @@
-import { ParserOptions, rules } from '../src';
+import { ParserOptions } from '../src';
 import { DEFAULT_CONFIG } from './test-utils';
 import { RuleTester } from '@theguild/eslint-rule-tester';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
 const ruleTester = new RuleTester<Partial<ParserOptions>>({
   ...DEFAULT_CONFIG,
@@ -20,7 +21,7 @@ const ruleTester = new RuleTester<Partial<ParserOptions>>({
   },
 });
 
-ruleTester.run('fields-on-correct-type', rules['fields-on-correct-type'], {
+ruleTester.run('fields-on-correct-type', GRAPHQL_JS_VALIDATIONS['fields-on-correct-type'], {
   valid: [],
   invalid: [
     {

@@ -7,11 +7,11 @@ const TEST_OPERATION = 'query test { foo }';
 
 const SIBLING_OPERATIONS = (...documents: string[]) => ({
   parserOptions: {
-    // @ts-expect-error
     graphQLConfig: {
+      schema: '',
       documents,
     },
-  } satisfies ParserOptions,
+  } satisfies Partial<ParserOptions>,
 });
 
 ruleTester.run('unique-operation-name', rule, {

@@ -17,15 +17,15 @@ function withMocks({
     filename,
     code: ruleTester.fromMockFile(filename.split('/mocks')[1]),
     parserOptions: {
-      // @ts-expect-error
       graphQLConfig: {
+        schema: '',
         documents: [
           filename,
           join(__dirname, 'mocks/import-fragments/foo-fragment.gql'),
           join(__dirname, 'mocks/import-fragments/bar-fragment.gql'),
         ],
       },
-    } satisfies ParserOptions,
+    } satisfies Partial<ParserOptions>,
     errors,
   };
 }

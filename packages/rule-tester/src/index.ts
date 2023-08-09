@@ -3,6 +3,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeFrameColumns } from '@babel/code-frame';
 import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
+import { GraphQLESLintRule } from '../../plugin/src/types.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -30,9 +31,9 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
   }
 
   // @ts-expect-error -- fix later
-  run<Options>(
+  run<Options, WithTypeInfo extends boolean = false>(
     ruleId: string,
-    rule: Rule.RuleModule,
+    rule: GraphQLESLintRule<Options, WithTypeInfo>,
     tests: {
       valid: (string | ValidTestCase<Options, ParserOptions>)[];
       invalid: (ValidTestCase<Options, ParserOptions> &

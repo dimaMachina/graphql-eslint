@@ -4,11 +4,11 @@ import { ruleTester } from './test-utils';
 
 const WITH_SIBLINGS = {
   parserOptions: {
-    // @ts-expect-error
     graphQLConfig: {
+      schema: '',
       documents: 'fragment AlbumFields on Album { id }',
     },
-  } satisfies ParserOptions,
+  } satisfies Partial<ParserOptions>,
 };
 
 ruleTester.run<RuleOptions>('selection-set-depth', rule, {
