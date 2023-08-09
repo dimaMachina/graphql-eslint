@@ -1,5 +1,6 @@
 import { ParserOptions } from '../src';
 import { DEFAULT_CONFIG } from './test-utils';
+// @ts-expect-error
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 

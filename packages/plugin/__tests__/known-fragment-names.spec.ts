@@ -1,8 +1,8 @@
 import { join } from 'node:path';
-import { rules } from '../src';
 import { ruleTester } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
-ruleTester.run('known-fragment-names', rules['known-fragment-names'], {
+ruleTester.run('known-fragment-names', GRAPHQL_JS_VALIDATIONS['known-fragment-names'], {
   valid: [
     {
       filename: join(__dirname, 'mocks/user.graphql'),

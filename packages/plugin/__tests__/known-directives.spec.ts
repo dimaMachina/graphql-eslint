@@ -1,7 +1,8 @@
-import { rules } from '../src';
+// @ts-expect-error
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { DEFAULT_CONFIG } from './test-utils';
 import { ParserOptions } from '../src/types';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
 const ruleTester = new RuleTester<Partial<ParserOptions>>({
   ...DEFAULT_CONFIG,
@@ -22,7 +23,8 @@ const ruleTester = new RuleTester<Partial<ParserOptions>>({
 
 ruleTester.run<[{ ignoreClientDirectives: string[] }]>(
   'known-directives',
-  rules['known-directives'],
+  // @ts-expect-error
+  GRAPHQL_JS_VALIDATIONS['known-directives'],
   {
     valid: [
       {

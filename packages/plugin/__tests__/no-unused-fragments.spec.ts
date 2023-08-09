@@ -1,8 +1,8 @@
 import { join } from 'node:path';
-import { rules } from '../src';
 import { ruleTester } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
 
-ruleTester.run('no-unused-fragments', rules['no-unused-fragments'], {
+ruleTester.run('no-unused-fragments', GRAPHQL_JS_VALIDATIONS['no-unused-fragments'], {
   valid: [
     {
       name: 'should find file with operation definition that import current fragment',

@@ -1,4 +1,5 @@
 import { rule } from '../src/rules/no-unused-fields';
+// @ts-expect-error
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { DEFAULT_CONFIG } from './test-utils';
 import { ParserOptions } from '../src/types';
@@ -55,6 +56,7 @@ ruleTester.run('no-unused-fields', rule, {
       code: SCHEMA,
       parserOptions: {
         graphQLConfig: {
+          schema: '',
           documents: /* GraphQL */ `
             {
               user(id: 1) {
@@ -105,6 +107,7 @@ ruleTester.run('no-unused-fields', rule, {
       `,
       parserOptions: {
         graphQLConfig: {
+          schema: '',
           documents: /* GraphQL */ `
             {
               user(id: 1) {
@@ -128,6 +131,7 @@ ruleTester.run('no-unused-fields', rule, {
       `,
       parserOptions: {
         graphQLConfig: {
+          schema: '',
           documents: /* GraphQL */ `
             {
               user(id: 1) {

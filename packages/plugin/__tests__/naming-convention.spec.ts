@@ -395,7 +395,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
           subscriptionField: ID
         }
       `,
-      options: (rule.meta.docs.configOptions as any).schema,
+      options: (rule.meta.docs!.configOptions as any).schema,
       errors: [
         { message: 'Field "fieldQuery" should not have "Query" suffix' },
         { message: 'Field "queryField" should not have "query" prefix' },

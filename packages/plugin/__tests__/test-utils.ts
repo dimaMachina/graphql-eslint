@@ -1,3 +1,4 @@
+// @ts-expect-error
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { ParserOptions } from '../src/types.js';
 
@@ -8,7 +9,9 @@ export const DEFAULT_CONFIG = {
   },
 };
 
-export const ruleTester = new RuleTester(DEFAULT_CONFIG);
+export const ruleTester = new RuleTester<{
+  graphQLConfig: Partial<ParserOptions['graphQLConfig']>;
+}>(DEFAULT_CONFIG);
 
 export function withSchema<T extends { code: string }>({ code, ...rest }: T) {
   return {
