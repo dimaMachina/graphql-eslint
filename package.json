@@ -14,14 +14,15 @@
     "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore --cache .",
     "lint:prettier": "prettier --cache --check .",
     "postinstall": "tsx scripts/patch-graphql.ts",
     "prebuild": "rimraf tsconfig.tsbuildinfo",
     "prerelease": "NODE_ENV=production pnpm build",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
-    "test": "turbo run test --filter=!website"
+    "test": "turbo run test --filter=!website",
+    "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",

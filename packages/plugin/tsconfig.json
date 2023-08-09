@@ -10,6 +10,10 @@
     "lib": ["ESNext", "dom"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "paths": {
+      "@graphql-eslint/eslint-plugin": ["./src/index.ts"]
+    }
+  },
+  "exclude": ["dist"]
 }
