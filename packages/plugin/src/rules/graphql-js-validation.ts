@@ -34,7 +34,7 @@ import {
   UniqueArgumentNamesRule,
   UniqueDirectiveNamesRule,
   UniqueDirectivesPerLocationRule,
-  UniqueEnumValueNamesRule,
+  // UniqueEnumValueNamesRule, -- Superseded by graphql-eslint's `unique-enum-value-names` rule
   UniqueFieldDefinitionNamesRule,
   UniqueInputFieldNamesRule,
   UniqueOperationTypesRule,
@@ -640,18 +640,6 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       description:
         'A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.',
       requiresSchema: true,
-    },
-  ),
-  validationToRule(
-    {
-      ruleId: 'unique-enum-value-names',
-      rule: UniqueEnumValueNamesRule,
-    },
-    {
-      category: 'Schema',
-      description: 'A GraphQL enum type is only valid if all its values are uniquely named.',
-      recommended: false,
-      isDisabledForAllConfig: true,
     },
   ),
   validationToRule(

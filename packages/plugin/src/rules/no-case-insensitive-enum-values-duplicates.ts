@@ -11,7 +11,8 @@ export const rule: GraphQLESLintRule = {
       url: 'https://the-guild.dev/graphql/eslint/rules/no-case-insensitive-enum-values-duplicates',
       category: 'Schema',
       recommended: true,
-      description: 'Disallow case-insensitive enum values duplicates.',
+      description: `A GraphQL enum type is only valid if all its values are uniquely named.
+> This rule disallow case-insensitive enum values duplicates too.`,
       examples: [
         {
           title: 'Incorrect',
