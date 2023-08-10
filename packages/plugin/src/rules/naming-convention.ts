@@ -272,6 +272,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             'InterfaceTypeDefinition,InterfaceTypeExtension': {
               forbiddenPrefixes: ['Interface'],
               forbiddenSuffixes: ['Interface'],
+            },
+            'UnionTypeDefinition,UnionTypeExtension': {
+              forbiddenPrefixes: ['Union'],
+              forbiddenSuffixes: ['Union'],
             }
           },
         ],

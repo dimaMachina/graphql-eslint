@@ -1982,6 +1982,9 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
       19 |
       20 |         interface TestInterface
       21 |         extend interface InterfaceTest { id: ID }
+      22 |         
+      23 |         union TestUnion
+      24 |         extend union UnionTest = TestInterface
 
 #### ⚙️ Options
 
@@ -2033,11 +2036,19 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Interface"
         ]
       },
+      "UnionTypeDefinition,UnionTypeExtension": {
+        "forbiddenPrefixes": [
+          "Union"
+        ],
+        "forbiddenSuffixes": [
+          "Union"
+        ]
+      },
       "allowLeadingUnderscore": false,
       "allowTrailingUnderscore": false
     }
 
-#### ❌ Error 1/11
+#### ❌ Error 1/13
 
       1 |         type Query {
     > 2 |           fieldQuery: ID
@@ -2067,8 +2078,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 2/11
+#### ❌ Error 2/13
 
       2 |           fieldQuery: ID
     > 3 |           queryField: ID
@@ -2098,8 +2112,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 3/11
+#### ❌ Error 3/13
 
       3 |           queryField: ID
     > 4 |           getField: ID
@@ -2129,8 +2146,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 4/11
+#### ❌ Error 4/13
 
       7 |         type Mutation {
     > 8 |           fieldMutation: ID
@@ -2160,8 +2180,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 5/11
+#### ❌ Error 5/13
 
        8 |           fieldMutation: ID
     >  9 |           mutationField: ID
@@ -2191,8 +2214,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 6/11
+#### ❌ Error 6/13
 
       12 |         type Subscription {
     > 13 |           fieldSubscription: ID
@@ -2222,8 +2248,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 7/11
+#### ❌ Error 7/13
 
       13 |           fieldSubscription: ID
     > 14 |           subscriptionField: ID
@@ -2253,8 +2282,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 8/11
+#### ❌ Error 8/13
 
       16 |
     > 17 |         enum TestEnum
@@ -2284,8 +2316,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 9/11
+#### ❌ Error 9/13
 
       17 |         enum TestEnum
     > 18 |         extend enum EnumTest { A }
@@ -2315,8 +2350,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 10/11
+#### ❌ Error 10/13
 
       19 |
     > 20 |         interface TestInterface
@@ -2346,12 +2384,16 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface Test
     21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
 
-#### ❌ Error 11/11
+#### ❌ Error 11/13
 
       20 |         interface TestInterface
     > 21 |         extend interface InterfaceTest { id: ID }
          |                          ^^^^^^^^^^^^^ InterfaceTypeExtension "InterfaceTest" should not have "Interface" prefix
+      22 |         
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2376,6 +2418,76 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     19 |
     20 |         interface TestInterface
     21 |         extend interface Test { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
+
+#### ❌ Error 12/13
+
+      22 |         
+    > 23 |         union TestUnion
+         |               ^^^^^^^^^ Union "TestUnion" should not have "Union" suffix
+      24 |         extend union UnionTest = TestInterface
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union Test
+    24 |         extend union UnionTest = TestInterface
+
+#### ❌ Error 13/13
+
+      23 |         union TestUnion
+    > 24 |         extend union UnionTest = TestInterface
+         |                      ^^^^^^^^^ UnionTypeExtension "UnionTest" should not have "Union" prefix
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union Test = TestInterface
 `;
 
 exports[`naming-convention > invalid > should error when selected type names do not match require prefixes 1`] = `

@@ -400,9 +400,12 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
 
         interface TestInterface
         extend interface InterfaceTest { id: ID }
+        
+        union TestUnion
+        extend union UnionTest = TestInterface
       `,
       options: (rule.meta.docs!.configOptions as any).schema,
-      errors: 11,
+      errors: 13,
     },
     {
       name: 'operations-recommended config',
