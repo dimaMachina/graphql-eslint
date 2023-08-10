@@ -34,7 +34,7 @@ export default [
           },
         },
       ],
-      '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
+      '@graphql-eslint/unique-enum-value-names': 'error',
       '@graphql-eslint/require-description': ['error', { FieldDefinition: true }],
     },
   },
