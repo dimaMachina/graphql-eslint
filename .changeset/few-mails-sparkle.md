@@ -24,11 +24,24 @@
 - `naming-convention`
 
   - add new option for `schema-recommended` config
+
   ```json5
   {
     'EnumTypeDefinition,EnumTypeExtension': {
       forbiddenPrefixes: ['Enum'],
       forbiddenSuffixes: ['Enum']
+    },
+    'InterfaceTypeDefinition,InterfaceTypeExtension': {
+      forbiddenPrefixes: ['Interface'],
+      forbiddenSuffixes: ['Interface']
+    },
+    'UnionTypeDefinition,UnionTypeExtension': {
+      forbiddenPrefixes: ['Union'],
+      forbiddenSuffixes: ['Union']
+    },
+    'ObjectTypeDefinition,ObjectTypeExtension': {
+      forbiddenPrefixes: ['Type'],
+      forbiddenSuffixes: ['Type']
     }
   }
   ```
