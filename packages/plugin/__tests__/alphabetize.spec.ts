@@ -425,5 +425,24 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
         { message: 'field "guild" should be before field "nachos"' },
       ],
     },
+    {
+      name: 'should sort selections by group when `*` is between',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          aa
+          id
+        }
+      `,
+      errors: 3,
+    },
   ],
 });

@@ -1031,6 +1031,57 @@ exports[`alphabetize > invalid > should sort definitions 1`] = `
       59 |         # END
 `;
 
+exports[`alphabetize > invalid > should sort selections by group when \`*\` is between 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           zz
+      3 |           updatedAt
+      4 |           createdAt
+      5 |           aa
+      6 |           id
+      7 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ]
+    }
+
+#### ❌ Error 1/3
+
+      2 |           zz
+    > 3 |           updatedAt
+        |           ^^^^^^^^^ field "updatedAt" should be before field "zz"
+      4 |           createdAt
+
+#### ❌ Error 2/3
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           aa
+
+#### ❌ Error 3/3
+
+      4 |           createdAt
+    > 5 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      6 |           id
+
+#### 🔧 Autofix output
+
+      1 |         {
+      2 |           aa
+      3 |           createdAt
+      4 |           id
+      5 |           updatedAt
+      6 |           zz
+      7 |         }
+`;
+
 exports[`alphabetize > invalid > should sort when selection is aliased 1`] = `
 #### ⌨️ Code
 
