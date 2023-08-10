@@ -42,7 +42,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [no-typename-prefix](/rules/no-typename-prefix)|Enforces users to avoid using the type name in a field name while defining your schema.|![recommended][]|📄|🚀|💡
 [no-undefined-variables](/rules/no-undefined-variables)|A GraphQL operation is only valid if all variables encountered, both directly and via fragment spreads, are defined by that operation.|![recommended][]|📦|🔮|
 [no-unreachable-types](/rules/no-unreachable-types)|Requires all types to be reachable at some level by root level fields.|![recommended][]|📄|🚀|💡
-[no-unused-fields](/rules/no-unused-fields)|Requires all fields to be used at some level by siblings operations.|![all][]|📄|🚀|💡
+[no-unused-fields](/rules/no-unused-fields)|Requires all fields to be used at some level by siblings operations.||📄|🚀|💡
 [no-unused-fragments](/rules/no-unused-fragments)|A GraphQL document is only valid if all fragment definitions are spread within operations, or spread within other fragments spread within operations.|![recommended][]|📦|🔮|
 [no-unused-variables](/rules/no-unused-variables)|A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.|![recommended][]|📦|🔮|
 [one-field-subscriptions](/rules/one-field-subscriptions)|A GraphQL subscription is valid only if it contains a single root field.|![recommended][]|📦|🔮|
@@ -69,7 +69,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [unique-argument-names](/rules/unique-argument-names)|A GraphQL field or directive is only valid if all supplied arguments are uniquely named.|![recommended][]|📦|🔮|
 [unique-directive-names](/rules/unique-directive-names)|A GraphQL document is only valid if all defined directives have unique names.|![recommended][]|📄|🔮|
 [unique-directive-names-per-location](/rules/unique-directive-names-per-location)|A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.|![recommended][]|📄 📦|🔮|
-[unique-enum-value-names](/rules/unique-enum-value-names)|A GraphQL enum type is only valid if all its values are uniquely named.|![all][]|📄|🔮|
+[unique-enum-value-names](/rules/unique-enum-value-names)|A GraphQL enum type is only valid if all its values are uniquely named.||📄|🔮|
 [unique-field-definition-names](/rules/unique-field-definition-names)|A GraphQL complex type is only valid if all its fields are uniquely named.|![recommended][]|📄|🔮|
 [unique-fragment-name](/rules/unique-fragment-name)|Enforce unique fragment names across your project.|![recommended][]|📦|🚀|
 [unique-input-field-names](/rules/unique-input-field-names)|A GraphQL input object value is only valid if all supplied fields are uniquely named.|![recommended][]|📦|🔮|
