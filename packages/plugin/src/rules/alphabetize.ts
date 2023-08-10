@@ -26,21 +26,14 @@ import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../utils.js';
 
 const RULE_ID = 'alphabetize';
 
-const fieldsEnum: (
-  | 'InputObjectTypeDefinition'
-  | 'InterfaceTypeDefinition'
-  | 'ObjectTypeDefinition'
-)[] = [
+const fieldsEnum = [
   Kind.OBJECT_TYPE_DEFINITION,
   Kind.INTERFACE_TYPE_DEFINITION,
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
 ];
-const selectionsEnum: ('FragmentDefinition' | 'OperationDefinition')[] = [
-  Kind.OPERATION_DEFINITION,
-  Kind.FRAGMENT_DEFINITION,
-];
-const variablesEnum: ['OperationDefinition'] = [Kind.OPERATION_DEFINITION];
-const argumentsEnum: ('Directive' | 'DirectiveDefinition' | 'Field' | 'FieldDefinition')[] = [
+const selectionsEnum = [Kind.OPERATION_DEFINITION, Kind.FRAGMENT_DEFINITION];
+const variablesEnum = [Kind.OPERATION_DEFINITION, Kind.FRAGMENT_DEFINITION];
+const argumentsEnum = [
   Kind.FIELD_DEFINITION,
   Kind.FIELD,
   Kind.DIRECTIVE_DEFINITION,
@@ -205,6 +198,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           {
             selections: selectionsEnum,
             variables: variablesEnum,
+            definitions: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
           },
         ],
@@ -334,6 +328,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     const opts = context.options[0];
     const fields = new Set(opts.fields ?? []);
+    const variables = new Set(opts.variables ?? []);
     const listeners: GraphQLESLintRuleListener = {};
 
     const kinds = [
@@ -355,7 +350,6 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     const fieldsSelector = kinds.join(',');
     const selectionsSelector = opts.selections?.join(',');
-    const hasVariables = opts.variables?.[0] === Kind.OPERATION_DEFINITION;
     const argumentsSelector = opts.arguments?.join(',');
 
     if (fieldsSelector) {
@@ -390,7 +384,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       };
     }
 
-    if (hasVariables) {
+    if (variables.has(Kind.OPERATION_DEFINITION)) {
       listeners.OperationDefinition = (node: GraphQLESTreeNode<OperationDefinitionNode>) => {
         checkNodes(node.variableDefinitions?.map(varDef => varDef.variable));
       };

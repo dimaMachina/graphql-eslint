@@ -140,6 +140,7 @@ Variables of operations `query`, `mutation` and `subscription`.
 The elements of the array can contain the following enum values:
 
 - `OperationDefinition`
+- `FragmentDefinition`
 
 Additional restrictions:
 
