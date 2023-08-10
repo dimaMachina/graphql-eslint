@@ -32,6 +32,18 @@ export = {
           forbiddenPrefixes: ['subscription'],
           forbiddenSuffixes: ['Subscription'],
         },
+        'EnumTypeDefinition,EnumTypeExtension': {
+          forbiddenPrefixes: ['Enum'],
+          forbiddenSuffixes: ['Enum'],
+        },
+        'InterfaceTypeDefinition,InterfaceTypeExtension': {
+          forbiddenPrefixes: ['Interface'],
+          forbiddenSuffixes: ['Interface'],
+        },
+        'UnionTypeDefinition,UnionTypeExtension': {
+          forbiddenPrefixes: ['Union'],
+          forbiddenSuffixes: ['Union'],
+        },
       },
     ],
     '@graphql-eslint/no-case-insensitive-enum-values-duplicates': 'error',

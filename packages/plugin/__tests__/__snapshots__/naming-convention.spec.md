@@ -2025,7 +2025,8 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Enum"
         ],
         "forbiddenSuffixes": [
-          "Enum"
+          "Enum",
+          "EnumType"
         ]
       },
       "InterfaceTypeDefinition,InterfaceTypeExtension": {
@@ -2033,7 +2034,8 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Interface"
         ],
         "forbiddenSuffixes": [
-          "Interface"
+          "Interface",
+          "InterfaceType"
         ]
       },
       "UnionTypeDefinition,UnionTypeExtension": {
@@ -2041,7 +2043,8 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Union"
         ],
         "forbiddenSuffixes": [
-          "Union"
+          "Union",
+          "UnionType"
         ]
       },
       "allowLeadingUnderscore": false,
