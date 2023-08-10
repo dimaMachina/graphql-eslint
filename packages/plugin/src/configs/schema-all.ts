@@ -8,12 +8,15 @@ export = {
     '@graphql-eslint/alphabetize': [
       'error',
       {
+        definitions: true,
         fields: ['ObjectTypeDefinition', 'InterfaceTypeDefinition', 'InputObjectTypeDefinition'],
-        values: ['EnumTypeDefinition'],
+        values: true,
         arguments: ['FieldDefinition', 'Field', 'DirectiveDefinition', 'Directive'],
+        groups: ['id', '*', 'createdAt', 'updatedAt'],
       },
     ],
     '@graphql-eslint/input-name': 'error',
+    '@graphql-eslint/no-root-type': ['error', { disallow: ['mutation', 'subscription'] }],
     '@graphql-eslint/no-scalar-result-type-on-mutation': 'error',
     '@graphql-eslint/require-deprecation-date': 'error',
     '@graphql-eslint/require-field-of-type-query-in-mutation-result': 'error',

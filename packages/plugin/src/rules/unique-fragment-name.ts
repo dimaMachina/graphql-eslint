@@ -18,7 +18,7 @@ export const checkNode = (
     node.kind === Kind.FRAGMENT_DEFINITION
       ? siblings.getFragment(documentName)
       : siblings.getOperation(documentName);
-  const filepath = context.getFilename();
+  const filepath = context.filename;
 
   const conflictingDocuments = siblingDocuments.filter(f => {
     const isSameName = f.document.name?.value === documentName;

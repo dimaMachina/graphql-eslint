@@ -46,15 +46,7 @@ ruleTester.run('require-nullable-result-in-root', rule, {
     }),
     withSchema({
       name: 'should work with default scalars',
-      code: /* GraphQL */ `
-        type MySubscription
-        extend type MySubscription {
-          foo: Boolean!
-        }
-        schema {
-          subscription: MySubscription
-        }
-      `,
+      code: 'type Mutation { foo: Boolean! }',
       errors: 1,
     }),
   ],

@@ -43,9 +43,7 @@ export const rule: GraphQLESLintRule = {
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const rootTypeNames = new Set(
-      [schema.getQueryType(), schema.getMutationType(), schema.getSubscriptionType()]
-        .filter(truthy)
-        .map(type => type.name),
+      [schema.getQueryType(), schema.getMutationType()].filter(truthy).map(type => type.name),
     );
     const sourceCode = context.getSourceCode();
 

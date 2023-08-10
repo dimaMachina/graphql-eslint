@@ -394,17 +394,27 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
           fieldSubscription: ID
           subscriptionField: ID
         }
+
+        enum TestEnum
+        extend enum EnumTest {
+          A
+        }
+
+        interface TestInterface
+        extend interface InterfaceTest {
+          id: ID
+        }
+
+        union TestUnion
+        extend union UnionTest = TestInterface
+
+        type TestType
+        extend type TypeTest {
+          id: ID
+        }
       `,
       options: (rule.meta.docs!.configOptions as any).schema,
-      errors: [
-        { message: 'Field "fieldQuery" should not have "Query" suffix' },
-        { message: 'Field "queryField" should not have "query" prefix' },
-        { message: 'Field "getField" should not have "get" prefix' },
-        { message: 'Field "fieldMutation" should not have "Mutation" suffix' },
-        { message: 'Field "mutationField" should not have "mutation" prefix' },
-        { message: 'Field "fieldSubscription" should not have "Subscription" suffix' },
-        { message: 'Field "subscriptionField" should not have "subscription" prefix' },
-      ],
+      errors: 15,
     },
     {
       name: 'operations-recommended config',

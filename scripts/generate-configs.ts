@@ -23,7 +23,7 @@ type WriteFile = {
 
 const writeFormattedFile: WriteFile = async (filePath, code) => {
   if (filePath.startsWith('configs')) {
-    code = `export default ${JSON.stringify(code)}`;
+    code = `export = ${JSON.stringify(code)}`;
   }
 
   const formattedCode = [

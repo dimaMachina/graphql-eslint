@@ -183,7 +183,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const options = context.options[0] || {
       fileExtension: null,
     };
-    const filePath = context.getFilename();
+    const filePath = context.filename;
     const isVirtualFile = VIRTUAL_DOCUMENT_REGEX.test(filePath);
 
     if (process.env.NODE_ENV !== 'test' && isVirtualFile) {

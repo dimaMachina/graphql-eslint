@@ -15,8 +15,7 @@ exports[`alphabetize > invalid > Invalid #1 1`] = `
     {
       "fields": [
         "ObjectTypeDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2
@@ -58,8 +57,7 @@ exports[`alphabetize > invalid > Invalid #2 1`] = `
     {
       "fields": [
         "ObjectTypeDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error
@@ -93,8 +91,7 @@ exports[`alphabetize > invalid > Invalid #3 1`] = `
     {
       "fields": [
         "InterfaceTypeDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2
@@ -135,8 +132,7 @@ exports[`alphabetize > invalid > Invalid #4 1`] = `
     {
       "fields": [
         "InputObjectTypeDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2
@@ -178,8 +174,7 @@ exports[`alphabetize > invalid > Invalid #5 1`] = `
     {
       "fields": [
         "InputObjectTypeDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error
@@ -212,10 +207,7 @@ exports[`alphabetize > invalid > Invalid #6 1`] = `
 #### ⚙️ Options
 
     {
-      "values": [
-        "EnumTypeDefinition"
-      ],
-      "definitions": false
+      "values": true
     }
 
 #### ❌ Error 1/2
@@ -255,10 +247,7 @@ exports[`alphabetize > invalid > Invalid #7 1`] = `
 #### ⚙️ Options
 
     {
-      "values": [
-        "EnumTypeDefinition"
-      ],
-      "definitions": false
+      "values": true
     }
 
 #### ❌ Error
@@ -288,8 +277,7 @@ exports[`alphabetize > invalid > Invalid #8 1`] = `
     {
       "arguments": [
         "DirectiveDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2
@@ -319,8 +307,7 @@ exports[`alphabetize > invalid > Invalid #9 1`] = `
     {
       "arguments": [
         "FieldDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2
@@ -358,8 +345,7 @@ exports[`alphabetize > invalid > Invalid #10 1`] = `
     {
       "selections": [
         "FragmentDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2
@@ -406,8 +392,7 @@ exports[`alphabetize > invalid > Invalid #11 1`] = `
     {
       "selections": [
         "OperationDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/4
@@ -466,13 +451,10 @@ exports[`alphabetize > invalid > Invalid #12 1`] = `
 #### ⚙️ Options
 
     {
-      "variables": [
-        "OperationDefinition"
-      ],
+      "variables": true,
       "arguments": [
         "Field"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/4
@@ -528,10 +510,7 @@ exports[`alphabetize > invalid > should compare with lexicographic order 1`] = `
 #### ⚙️ Options
 
     {
-      "values": [
-        "EnumTypeDefinition"
-      ],
-      "definitions": false
+      "values": true
     }
 
 #### ❌ Error 1/3
@@ -593,8 +572,7 @@ exports[`alphabetize > invalid > should move comment 1`] = `
     {
       "fields": [
         "ObjectTypeDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/3
@@ -663,8 +641,7 @@ exports[`alphabetize > invalid > should sort by group when \`*\` at the start 1`
         "updatedAt",
         "id",
         "createdAt"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/4
@@ -738,8 +715,7 @@ exports[`alphabetize > invalid > should sort by group when \`*\` is at the end 1
         "id",
         "createdAt",
         "*"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/4
@@ -813,8 +789,7 @@ exports[`alphabetize > invalid > should sort by group when \`*\` is between 1`] 
         "*",
         "createdAt",
         "updatedAt"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/4
@@ -1056,6 +1031,63 @@ exports[`alphabetize > invalid > should sort definitions 1`] = `
       59 |         # END
 `;
 
+exports[`alphabetize > invalid > should sort selections by group when \`*\` is between 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           zz
+      3 |           updatedAt
+      4 |           createdAt
+      5 |           aa
+      6 |           id
+      7 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+
+#### ❌ Error 1/3
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           aa
+
+#### ❌ Error 2/3
+
+      4 |           createdAt
+    > 5 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      6 |           id
+
+#### ❌ Error 3/3
+
+      5 |           aa
+    > 6 |           id
+        |           ^^ field "id" should be before field "aa"
+      7 |         }
+
+#### 🔧 Autofix output
+
+      1 |         {
+      2 |           id
+      3 |           aa
+      4 |           zz
+      5 |           createdAt
+      6 |           updatedAt
+      7 |         }
+`;
+
 exports[`alphabetize > invalid > should sort when selection is aliased 1`] = `
 #### ⌨️ Code
 
@@ -1072,8 +1104,7 @@ exports[`alphabetize > invalid > should sort when selection is aliased 1`] = `
     {
       "selections": [
         "OperationDefinition"
-      ],
-      "definitions": false
+      ]
     }
 
 #### ❌ Error 1/2

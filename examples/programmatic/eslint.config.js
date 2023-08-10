@@ -21,7 +21,7 @@ export default [
       },
     },
     rules: {
-      '@graphql-eslint/require-id-when-available': ['error', { fieldName: '_id' }],
+      '@graphql-eslint/require-selections': ['error', { fieldName: '_id' }],
       '@graphql-eslint/unique-fragment-name': 'error',
       '@graphql-eslint/no-anonymous-operations': 'error',
       '@graphql-eslint/naming-convention': [
@@ -34,7 +34,7 @@ export default [
           },
         },
       ],
-      '@graphql-eslint/no-case-insensitive-enum-values-duplicates': ['error'],
+      '@graphql-eslint/unique-enum-value-names': 'error',
       '@graphql-eslint/require-description': ['error', { FieldDefinition: true }],
     },
   },

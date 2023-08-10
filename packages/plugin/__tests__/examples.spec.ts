@@ -72,7 +72,7 @@ describe('Examples', () => {
   it('should work in monorepo', () => {
     const cwd = join(CWD, 'examples/monorepo');
     const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(7);
+    expect(countErrors(results)).toBe(11);
     testSnapshot(results);
   });
 

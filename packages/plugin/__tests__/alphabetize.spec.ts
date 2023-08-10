@@ -42,7 +42,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       `,
     },
     {
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         enum Role {
           ADMIN
@@ -136,7 +136,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       errors: [{ message: 'input value "lastName" should be before input value "password"' }],
     },
     {
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         enum Role {
           SUPER_ADMIN
@@ -151,7 +151,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       ],
     },
     {
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         extend enum Role {
           ADMIN
@@ -222,7 +222,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       ],
     },
     {
-      options: [{ variables: ['OperationDefinition'], arguments: ['Field'] }],
+      options: [{ variables: true, arguments: ['Field'] }],
       code: /* GraphQL */ `
         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
           test(ccc: $cc, bbb: $bb, aaa: $aa) {
@@ -264,7 +264,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
     },
     {
       name: 'should compare with lexicographic order',
-      options: [{ values: ['EnumTypeDefinition'] }],
+      options: [{ values: true }],
       code: /* GraphQL */ `
         enum Test {
           "qux"
@@ -424,6 +424,25 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
         { message: 'field "bar" should be before field "updatedAt"' },
         { message: 'field "guild" should be before field "nachos"' },
       ],
+    },
+    {
+      name: 'should sort selections by group when `*` is between',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          aa
+          id
+        }
+      `,
+      errors: 3,
     },
   ],
 });

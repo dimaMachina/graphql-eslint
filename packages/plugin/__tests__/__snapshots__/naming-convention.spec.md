@@ -1976,6 +1976,24 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
       13 |           fieldSubscription: ID
       14 |           subscriptionField: ID
       15 |         }
+      16 |
+      17 |         enum TestEnum
+      18 |         extend enum EnumTest {
+      19 |           A
+      20 |         }
+      21 |
+      22 |         interface TestInterface
+      23 |         extend interface InterfaceTest {
+      24 |           id: ID
+      25 |         }
+      26 |
+      27 |         union TestUnion
+      28 |         extend union UnionTest = TestInterface
+      29 |
+      30 |         type TestType
+      31 |         extend type TypeTest {
+      32 |           id: ID
+      33 |         }
 
 #### ⚙️ Options
 
@@ -2011,11 +2029,43 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Subscription"
         ]
       },
+      "EnumTypeDefinition,EnumTypeExtension": {
+        "forbiddenPrefixes": [
+          "Enum"
+        ],
+        "forbiddenSuffixes": [
+          "Enum"
+        ]
+      },
+      "InterfaceTypeDefinition,InterfaceTypeExtension": {
+        "forbiddenPrefixes": [
+          "Interface"
+        ],
+        "forbiddenSuffixes": [
+          "Interface"
+        ]
+      },
+      "UnionTypeDefinition,UnionTypeExtension": {
+        "forbiddenPrefixes": [
+          "Union"
+        ],
+        "forbiddenSuffixes": [
+          "Union"
+        ]
+      },
+      "ObjectTypeDefinition,ObjectTypeExtension": {
+        "forbiddenPrefixes": [
+          "Type"
+        ],
+        "forbiddenSuffixes": [
+          "Type"
+        ]
+      },
       "allowLeadingUnderscore": false,
       "allowTrailingUnderscore": false
     }
 
-#### ❌ Error 1/7
+#### ❌ Error 1/15
 
       1 |         type Query {
     > 2 |           fieldQuery: ID
@@ -2039,8 +2089,26 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           fieldSubscription: ID
     14 |           subscriptionField: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
-#### ❌ Error 2/7
+#### ❌ Error 2/15
 
       2 |           fieldQuery: ID
     > 3 |           queryField: ID
@@ -2064,8 +2132,26 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           fieldSubscription: ID
     14 |           subscriptionField: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
-#### ❌ Error 3/7
+#### ❌ Error 3/15
 
       3 |           queryField: ID
     > 4 |           getField: ID
@@ -2089,8 +2175,26 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           fieldSubscription: ID
     14 |           subscriptionField: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
-#### ❌ Error 4/7
+#### ❌ Error 4/15
 
       7 |         type Mutation {
     > 8 |           fieldMutation: ID
@@ -2114,8 +2218,26 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           fieldSubscription: ID
     14 |           subscriptionField: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
-#### ❌ Error 5/7
+#### ❌ Error 5/15
 
        8 |           fieldMutation: ID
     >  9 |           mutationField: ID
@@ -2139,8 +2261,26 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           fieldSubscription: ID
     14 |           subscriptionField: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
-#### ❌ Error 6/7
+#### ❌ Error 6/15
 
       12 |         type Subscription {
     > 13 |           fieldSubscription: ID
@@ -2164,8 +2304,26 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           field: ID
     14 |           subscriptionField: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
-#### ❌ Error 7/7
+#### ❌ Error 7/15
 
       13 |           fieldSubscription: ID
     > 14 |           subscriptionField: ID
@@ -2189,6 +2347,368 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     13 |           fieldSubscription: ID
     14 |           Field: ID
     15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 8/15
+
+      16 |
+    > 17 |         enum TestEnum
+         |              ^^^^^^^^ Enumerator "TestEnum" should not have "Enum" suffix
+      18 |         extend enum EnumTest {
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum Test
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 9/15
+
+      17 |         enum TestEnum
+    > 18 |         extend enum EnumTest {
+         |                     ^^^^^^^^ EnumTypeExtension "EnumTest" should not have "Enum" prefix
+      19 |           A
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum Test {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 10/15
+
+      21 |
+    > 22 |         interface TestInterface
+         |                   ^^^^^^^^^^^^^ Interface "TestInterface" should not have "Interface" suffix
+      23 |         extend interface InterfaceTest {
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface Test
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 11/15
+
+      22 |         interface TestInterface
+    > 23 |         extend interface InterfaceTest {
+         |                          ^^^^^^^^^^^^^ InterfaceTypeExtension "InterfaceTest" should not have "Interface" prefix
+      24 |           id: ID
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface Test {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 12/15
+
+      26 |
+    > 27 |         union TestUnion
+         |               ^^^^^^^^^ Union "TestUnion" should not have "Union" suffix
+      28 |         extend union UnionTest = TestInterface
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union Test
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 13/15
+
+      27 |         union TestUnion
+    > 28 |         extend union UnionTest = TestInterface
+         |                      ^^^^^^^^^ UnionTypeExtension "UnionTest" should not have "Union" prefix
+      29 |
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union Test = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 14/15
+
+      29 |
+    > 30 |         type TestType
+         |              ^^^^^^^^ Type "TestType" should not have "Type" suffix
+      31 |         extend type TypeTest {
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type Test
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
+
+#### ❌ Error 15/15
+
+      30 |         type TestType
+    > 31 |         extend type TypeTest {
+         |                     ^^^^^^^^ ObjectTypeExtension "TypeTest" should not have "Type" prefix
+      32 |           id: ID
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type Test {
+    32 |           id: ID
+    33 |         }
 `;
 
 exports[`naming-convention > invalid > should error when selected type names do not match require prefixes 1`] = `
