@@ -46,4 +46,8 @@
   }
   ```
 
-- remove graphql-js `unique-enum-value-names` rule
+- remove graphql-js' `unique-enum-value-names` rule
+
+- rename `no-case-insensitive-enum-values-duplicates` to `unique-enum-value-names`
+
+  > Since this rule reports case-insensitive enum values duplicates too
