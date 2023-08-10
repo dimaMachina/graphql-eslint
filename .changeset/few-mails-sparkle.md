@@ -23,7 +23,7 @@
 
 - `naming-convention`
 
-  - add new option for `schema-recommended` config
+  - add new options for `schema-recommended` config
 
   ```json5
   {

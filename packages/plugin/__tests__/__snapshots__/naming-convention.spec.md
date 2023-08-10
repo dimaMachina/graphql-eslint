@@ -1978,16 +1978,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
       15 |         }
       16 |
       17 |         enum TestEnum
-      18 |         extend enum EnumTest { A }
-      19 |
-      20 |         interface TestInterface
-      21 |         extend interface InterfaceTest { id: ID }
-      22 |         
-      23 |         union TestUnion
-      24 |         extend union UnionTest = TestInterface
-      25 |         
-      26 |         type TestType
-      27 |         extend type TypeTest { id: ID }
+      18 |         extend enum EnumTest {
+      19 |           A
+      20 |         }
+      21 |
+      22 |         interface TestInterface
+      23 |         extend interface InterfaceTest {
+      24 |           id: ID
+      25 |         }
+      26 |
+      27 |         union TestUnion
+      28 |         extend union UnionTest = TestInterface
+      29 |
+      30 |         type TestType
+      31 |         extend type TypeTest {
+      32 |           id: ID
+      33 |         }
 
 #### ⚙️ Options
 
@@ -2085,16 +2091,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 2/15
 
@@ -2122,16 +2134,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 3/15
 
@@ -2159,16 +2177,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 4/15
 
@@ -2196,16 +2220,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 5/15
 
@@ -2233,16 +2263,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 6/15
 
@@ -2270,16 +2306,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 7/15
 
@@ -2307,23 +2349,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 8/15
 
       16 |
     > 17 |         enum TestEnum
          |              ^^^^^^^^ Enumerator "TestEnum" should not have "Enum" suffix
-      18 |         extend enum EnumTest { A }
+      18 |         extend enum EnumTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2344,23 +2392,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum Test
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 9/15
 
       17 |         enum TestEnum
-    > 18 |         extend enum EnumTest { A }
+    > 18 |         extend enum EnumTest {
          |                     ^^^^^^^^ EnumTypeExtension "EnumTest" should not have "Enum" prefix
-      19 |
+      19 |           A
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2381,23 +2435,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum Test { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum Test {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 10/15
 
-      19 |
-    > 20 |         interface TestInterface
+      21 |
+    > 22 |         interface TestInterface
          |                   ^^^^^^^^^^^^^ Interface "TestInterface" should not have "Interface" suffix
-      21 |         extend interface InterfaceTest { id: ID }
+      23 |         extend interface InterfaceTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2418,23 +2478,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface Test
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface Test
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 11/15
 
-      20 |         interface TestInterface
-    > 21 |         extend interface InterfaceTest { id: ID }
+      22 |         interface TestInterface
+    > 23 |         extend interface InterfaceTest {
          |                          ^^^^^^^^^^^^^ InterfaceTypeExtension "InterfaceTest" should not have "Interface" prefix
-      22 |         
+      24 |           id: ID
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2455,23 +2521,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface Test { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface Test {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 12/15
 
-      22 |         
-    > 23 |         union TestUnion
+      26 |
+    > 27 |         union TestUnion
          |               ^^^^^^^^^ Union "TestUnion" should not have "Union" suffix
-      24 |         extend union UnionTest = TestInterface
+      28 |         extend union UnionTest = TestInterface
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2492,23 +2564,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union Test
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union Test
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 13/15
 
-      23 |         union TestUnion
-    > 24 |         extend union UnionTest = TestInterface
+      27 |         union TestUnion
+    > 28 |         extend union UnionTest = TestInterface
          |                      ^^^^^^^^^ UnionTypeExtension "UnionTest" should not have "Union" prefix
-      25 |         
+      29 |
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2529,23 +2607,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union Test = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union Test = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 14/15
 
-      25 |         
-    > 26 |         type TestType
+      29 |
+    > 30 |         type TestType
          |              ^^^^^^^^ Type "TestType" should not have "Type" suffix
-      27 |         extend type TypeTest { id: ID }
+      31 |         extend type TypeTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2566,22 +2650,29 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type Test
-    27 |         extend type TypeTest { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type Test
+    31 |         extend type TypeTest {
+    32 |           id: ID
+    33 |         }
 
 #### ❌ Error 15/15
 
-      26 |         type TestType
-    > 27 |         extend type TypeTest { id: ID }
+      30 |         type TestType
+    > 31 |         extend type TypeTest {
          |                     ^^^^^^^^ ObjectTypeExtension "TypeTest" should not have "Type" prefix
+      32 |           id: ID
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2602,16 +2693,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     15 |         }
     16 |
     17 |         enum TestEnum
-    18 |         extend enum EnumTest { A }
-    19 |
-    20 |         interface TestInterface
-    21 |         extend interface InterfaceTest { id: ID }
-    22 |         
-    23 |         union TestUnion
-    24 |         extend union UnionTest = TestInterface
-    25 |         
-    26 |         type TestType
-    27 |         extend type Test { id: ID }
+    18 |         extend enum EnumTest {
+    19 |           A
+    20 |         }
+    21 |
+    22 |         interface TestInterface
+    23 |         extend interface InterfaceTest {
+    24 |           id: ID
+    25 |         }
+    26 |
+    27 |         union TestUnion
+    28 |         extend union UnionTest = TestInterface
+    29 |
+    30 |         type TestType
+    31 |         extend type Test {
+    32 |           id: ID
+    33 |         }
 `;
 
 exports[`naming-convention > invalid > should error when selected type names do not match require prefixes 1`] = `
