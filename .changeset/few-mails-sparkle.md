@@ -16,4 +16,7 @@
 - update `schema-all`/`operations-all` config
 
 - `require-description` rule changes
+
   - add `rootField: true` option for `schema-recommended` config
+
+- require `eslint` at least `>=8.44.0` as peerDependency

@@ -510,7 +510,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
           return node;
         };
 
-        return getParentNode(context.getFilename(), node);
+        return getParentNode(context.filename, node);
       },
     },
     {

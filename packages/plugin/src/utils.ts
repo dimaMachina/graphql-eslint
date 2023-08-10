@@ -10,7 +10,7 @@ export function requireSiblingsOperations(
   ruleId: string,
   context: GraphQLESLintRuleContext,
 ): SiblingOperations | never {
-  const { siblingOperations } = context.parserServices;
+  const { siblingOperations } = context.sourceCode.parserServices;
   if (!siblingOperations.available) {
     throw new Error(
       `Rule \`${ruleId}\` requires graphql-config \`documents\` field to be set and loaded. See https://the-guild.dev/graphql/config/docs/user/documents for more info`,
@@ -23,7 +23,7 @@ export function requireGraphQLSchemaFromContext(
   ruleId: string,
   context: GraphQLESLintRuleContext,
 ): GraphQLSchema | never {
-  const { schema } = context.parserServices;
+  const { schema } = context.sourceCode.parserServices;
   if (!schema) {
     throw new Error(
       `Rule \`${ruleId}\` requires graphql-config \`schema\` field to be set and loaded. See https://the-guild.dev/graphql/config/docs/user/schema for more info`,

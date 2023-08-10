@@ -71,7 +71,7 @@ export const rule: GraphQLESLintRule = {
   create(context) {
     const comments = context.getSourceCode().getAllComments();
     const siblings = requireSiblingsOperations(RULE_ID, context);
-    const filePath = context.getFilename();
+    const filePath = context.filename;
 
     return {
       'FragmentSpread > .name'(node: GraphQLESTreeNode<NameNode>) {
