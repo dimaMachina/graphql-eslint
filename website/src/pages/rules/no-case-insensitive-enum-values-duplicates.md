@@ -13,7 +13,9 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Disallow case-insensitive enum values duplicates.
+A GraphQL enum type is only valid if all its values are uniquely named.
+
+> This rule disallow case-insensitive enum values duplicates too.
 
 ## Usage Examples
 

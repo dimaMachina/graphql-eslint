@@ -45,3 +45,5 @@
     }
   }
   ```
+
+- remove graphql-js `unique-enum-value-names` rule

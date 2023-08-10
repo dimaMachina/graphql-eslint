@@ -31,7 +31,7 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [match-document-filename](/rules/match-document-filename)|This rule allows you to enforce that the file name should match the operation name.|![all][]|📦|🚀|
 [naming-convention](/rules/naming-convention)|Require names to follow specified conventions.|![recommended][]|📄 📦|🚀|💡
 [no-anonymous-operations](/rules/no-anonymous-operations)|Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.|![recommended][]|📦|🚀|💡
-[no-case-insensitive-enum-values-duplicates](/rules/no-case-insensitive-enum-values-duplicates)|Disallow case-insensitive enum values duplicates.|![recommended][]|📄|🚀|💡
+[no-case-insensitive-enum-values-duplicates](/rules/no-case-insensitive-enum-values-duplicates)|A GraphQL enum type is only valid if all its values are uniquely named.|![recommended][]|📄|🚀|💡
 [no-deprecated](/rules/no-deprecated)|Enforce that deprecated fields or enum values are not in use by operations.|![recommended][]|📦|🚀|💡
 [no-duplicate-fields](/rules/no-duplicate-fields)|Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.|![recommended][]|📦|🚀|💡
 [no-fragment-cycles](/rules/no-fragment-cycles)|A GraphQL fragment is only valid when it does not have cycles in fragments usage.|![recommended][]|📦|🔮|
@@ -69,7 +69,6 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [unique-argument-names](/rules/unique-argument-names)|A GraphQL field or directive is only valid if all supplied arguments are uniquely named.|![recommended][]|📦|🔮|
 [unique-directive-names](/rules/unique-directive-names)|A GraphQL document is only valid if all defined directives have unique names.|![recommended][]|📄|🔮|
 [unique-directive-names-per-location](/rules/unique-directive-names-per-location)|A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.|![recommended][]|📄 📦|🔮|
-[unique-enum-value-names](/rules/unique-enum-value-names)|A GraphQL enum type is only valid if all its values are uniquely named.||📄|🔮|
 [unique-field-definition-names](/rules/unique-field-definition-names)|A GraphQL complex type is only valid if all its fields are uniquely named.|![recommended][]|📄|🔮|
 [unique-fragment-name](/rules/unique-fragment-name)|Enforce unique fragment names across your project.|![recommended][]|📦|🚀|
 [unique-input-field-names](/rules/unique-input-field-names)|A GraphQL input object value is only valid if all supplied fields are uniquely named.|![recommended][]|📦|🔮|

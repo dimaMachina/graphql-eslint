@@ -35,7 +35,6 @@
   "require-type-pattern-with-oneof": "",
   "strict-id-in-types": "",
   "unique-directive-names": "",
-  "unique-enum-value-names": "",
   "unique-field-definition-names": "",
   "unique-operation-types": "",
   "unique-type-names": "",
