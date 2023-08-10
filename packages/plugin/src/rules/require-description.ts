@@ -125,7 +125,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         {
           types: true,
           [Kind.DIRECTIVE_DEFINITION]: true,
-          // rootField: true TODO enable in graphql-eslint v4
+          rootField: true,
         },
       ],
       recommended: true,
