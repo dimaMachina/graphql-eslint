@@ -1985,6 +1985,9 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
       22 |         
       23 |         union TestUnion
       24 |         extend union UnionTest = TestInterface
+      25 |         
+      26 |         type TestType
+      27 |         extend type TypeTest { id: ID }
 
 #### ⚙️ Options
 
@@ -2025,8 +2028,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Enum"
         ],
         "forbiddenSuffixes": [
-          "Enum",
-          "EnumType"
+          "Enum"
         ]
       },
       "InterfaceTypeDefinition,InterfaceTypeExtension": {
@@ -2034,8 +2036,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Interface"
         ],
         "forbiddenSuffixes": [
-          "Interface",
-          "InterfaceType"
+          "Interface"
         ]
       },
       "UnionTypeDefinition,UnionTypeExtension": {
@@ -2043,15 +2044,22 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Union"
         ],
         "forbiddenSuffixes": [
-          "Union",
-          "UnionType"
+          "Union"
+        ]
+      },
+      "ObjectTypeDefinition,ObjectTypeExtension": {
+        "forbiddenPrefixes": [
+          "Type"
+        ],
+        "forbiddenSuffixes": [
+          "Type"
         ]
       },
       "allowLeadingUnderscore": false,
       "allowTrailingUnderscore": false
     }
 
-#### ❌ Error 1/13
+#### ❌ Error 1/15
 
       1 |         type Query {
     > 2 |           fieldQuery: ID
@@ -2084,8 +2092,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 2/13
+#### ❌ Error 2/15
 
       2 |           fieldQuery: ID
     > 3 |           queryField: ID
@@ -2118,8 +2129,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 3/13
+#### ❌ Error 3/15
 
       3 |           queryField: ID
     > 4 |           getField: ID
@@ -2152,8 +2166,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 4/13
+#### ❌ Error 4/15
 
       7 |         type Mutation {
     > 8 |           fieldMutation: ID
@@ -2186,8 +2203,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 5/13
+#### ❌ Error 5/15
 
        8 |           fieldMutation: ID
     >  9 |           mutationField: ID
@@ -2220,8 +2240,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 6/13
+#### ❌ Error 6/15
 
       12 |         type Subscription {
     > 13 |           fieldSubscription: ID
@@ -2254,8 +2277,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 7/13
+#### ❌ Error 7/15
 
       13 |           fieldSubscription: ID
     > 14 |           subscriptionField: ID
@@ -2288,8 +2314,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 8/13
+#### ❌ Error 8/15
 
       16 |
     > 17 |         enum TestEnum
@@ -2322,8 +2351,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 9/13
+#### ❌ Error 9/15
 
       17 |         enum TestEnum
     > 18 |         extend enum EnumTest { A }
@@ -2356,8 +2388,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 10/13
+#### ❌ Error 10/15
 
       19 |
     > 20 |         interface TestInterface
@@ -2390,8 +2425,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 11/13
+#### ❌ Error 11/15
 
       20 |         interface TestInterface
     > 21 |         extend interface InterfaceTest { id: ID }
@@ -2424,8 +2462,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 12/13
+#### ❌ Error 12/15
 
       22 |         
     > 23 |         union TestUnion
@@ -2458,12 +2499,16 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union Test
     24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
 
-#### ❌ Error 13/13
+#### ❌ Error 13/15
 
       23 |         union TestUnion
     > 24 |         extend union UnionTest = TestInterface
          |                      ^^^^^^^^^ UnionTypeExtension "UnionTest" should not have "Union" prefix
+      25 |         
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2491,6 +2536,82 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     22 |         
     23 |         union TestUnion
     24 |         extend union Test = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type TypeTest { id: ID }
+
+#### ❌ Error 14/15
+
+      25 |         
+    > 26 |         type TestType
+         |              ^^^^^^^^ Type "TestType" should not have "Type" suffix
+      27 |         extend type TypeTest { id: ID }
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type Test
+    27 |         extend type TypeTest { id: ID }
+
+#### ❌ Error 15/15
+
+      26 |         type TestType
+    > 27 |         extend type TypeTest { id: ID }
+         |                     ^^^^^^^^ ObjectTypeExtension "TypeTest" should not have "Type" prefix
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
+    22 |         
+    23 |         union TestUnion
+    24 |         extend union UnionTest = TestInterface
+    25 |         
+    26 |         type TestType
+    27 |         extend type Test { id: ID }
 `;
 
 exports[`naming-convention > invalid > should error when selected type names do not match require prefixes 1`] = `

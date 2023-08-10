@@ -403,9 +403,12 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         
         union TestUnion
         extend union UnionTest = TestInterface
+        
+        type TestType
+        extend type TypeTest { id: ID }
       `,
       options: (rule.meta.docs!.configOptions as any).schema,
-      errors: 13,
+      errors: 15,
     },
     {
       name: 'operations-recommended config',

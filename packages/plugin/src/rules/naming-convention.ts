@@ -267,15 +267,19 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             },
             'EnumTypeDefinition,EnumTypeExtension': {
               forbiddenPrefixes: ['Enum'],
-              forbiddenSuffixes: ['Enum', 'EnumType'],
+              forbiddenSuffixes: ['Enum'],
             },
             'InterfaceTypeDefinition,InterfaceTypeExtension': {
               forbiddenPrefixes: ['Interface'],
-              forbiddenSuffixes: ['Interface', 'InterfaceType'],
+              forbiddenSuffixes: ['Interface'],
             },
             'UnionTypeDefinition,UnionTypeExtension': {
               forbiddenPrefixes: ['Union'],
-              forbiddenSuffixes: ['Union', 'UnionType'],
+              forbiddenSuffixes: ['Union'],
+            },
+            'ObjectTypeDefinition,ObjectTypeExtension': {
+              forbiddenPrefixes: ['Type'],
+              forbiddenSuffixes: ['Type'],
             },
           },
         ],
