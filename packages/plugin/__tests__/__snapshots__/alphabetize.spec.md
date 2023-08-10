@@ -1047,38 +1047,44 @@ exports[`alphabetize > invalid > should sort selections by group when \`*\` is b
     {
       "selections": [
         "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt"
       ]
     }
 
 #### ❌ Error 1/3
-
-      2 |           zz
-    > 3 |           updatedAt
-        |           ^^^^^^^^^ field "updatedAt" should be before field "zz"
-      4 |           createdAt
-
-#### ❌ Error 2/3
 
       3 |           updatedAt
     > 4 |           createdAt
         |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
       5 |           aa
 
-#### ❌ Error 3/3
+#### ❌ Error 2/3
 
       4 |           createdAt
     > 5 |           aa
         |           ^^ field "aa" should be before field "createdAt"
       6 |           id
 
+#### ❌ Error 3/3
+
+      5 |           aa
+    > 6 |           id
+        |           ^^ field "id" should be before field "aa"
+      7 |         }
+
 #### 🔧 Autofix output
 
       1 |         {
-      2 |           aa
-      3 |           createdAt
-      4 |           id
-      5 |           updatedAt
-      6 |           zz
+      2 |           id
+      3 |           aa
+      4 |           zz
+      5 |           createdAt
+      6 |           updatedAt
       7 |         }
 `;
 
