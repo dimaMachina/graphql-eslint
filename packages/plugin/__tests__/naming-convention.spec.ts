@@ -397,9 +397,12 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
 
         enum TestEnum
         extend enum EnumTest { A }
+
+        interface TestInterface
+        extend interface InterfaceTest { id: ID }
       `,
       options: (rule.meta.docs!.configOptions as any).schema,
-      errors: 9,
+      errors: 11,
     },
     {
       name: 'operations-recommended config',

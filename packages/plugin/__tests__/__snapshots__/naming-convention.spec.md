@@ -1979,6 +1979,9 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
       16 |
       17 |         enum TestEnum
       18 |         extend enum EnumTest { A }
+      19 |
+      20 |         interface TestInterface
+      21 |         extend interface InterfaceTest { id: ID }
 
 #### ⚙️ Options
 
@@ -2022,11 +2025,19 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
           "Enum"
         ]
       },
+      "InterfaceTypeDefinition,InterfaceTypeExtension": {
+        "forbiddenPrefixes": [
+          "Interface"
+        ],
+        "forbiddenSuffixes": [
+          "Interface"
+        ]
+      },
       "allowLeadingUnderscore": false,
       "allowTrailingUnderscore": false
     }
 
-#### ❌ Error 1/9
+#### ❌ Error 1/11
 
       1 |         type Query {
     > 2 |           fieldQuery: ID
@@ -2053,8 +2064,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 2/9
+#### ❌ Error 2/11
 
       2 |           fieldQuery: ID
     > 3 |           queryField: ID
@@ -2081,8 +2095,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 3/9
+#### ❌ Error 3/11
 
       3 |           queryField: ID
     > 4 |           getField: ID
@@ -2109,8 +2126,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 4/9
+#### ❌ Error 4/11
 
       7 |         type Mutation {
     > 8 |           fieldMutation: ID
@@ -2137,8 +2157,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 5/9
+#### ❌ Error 5/11
 
        8 |           fieldMutation: ID
     >  9 |           mutationField: ID
@@ -2165,8 +2188,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 6/9
+#### ❌ Error 6/11
 
       12 |         type Subscription {
     > 13 |           fieldSubscription: ID
@@ -2193,8 +2219,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 7/9
+#### ❌ Error 7/11
 
       13 |           fieldSubscription: ID
     > 14 |           subscriptionField: ID
@@ -2221,8 +2250,11 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 8/9
+#### ❌ Error 8/11
 
       16 |
     > 17 |         enum TestEnum
@@ -2249,12 +2281,16 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum Test
     18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
 
-#### ❌ Error 9/9
+#### ❌ Error 9/11
 
       17 |         enum TestEnum
     > 18 |         extend enum EnumTest { A }
          |                     ^^^^^^^^ EnumTypeExtension "EnumTest" should not have "Enum" prefix
+      19 |
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2276,6 +2312,70 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
     16 |
     17 |         enum TestEnum
     18 |         extend enum Test { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface InterfaceTest { id: ID }
+
+#### ❌ Error 10/11
+
+      19 |
+    > 20 |         interface TestInterface
+         |                   ^^^^^^^^^^^^^ Interface "TestInterface" should not have "Interface" suffix
+      21 |         extend interface InterfaceTest { id: ID }
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface Test
+    21 |         extend interface InterfaceTest { id: ID }
+
+#### ❌ Error 11/11
+
+      20 |         interface TestInterface
+    > 21 |         extend interface InterfaceTest { id: ID }
+         |                          ^^^^^^^^^^^^^ InterfaceTypeExtension "InterfaceTest" should not have "Interface" prefix
+
+#### 💡 Suggestion: Rename to \`Test\`
+
+     1 |         type Query {
+     2 |           fieldQuery: ID
+     3 |           queryField: ID
+     4 |           getField: ID
+     5 |         }
+     6 |
+     7 |         type Mutation {
+     8 |           fieldMutation: ID
+     9 |           mutationField: ID
+    10 |         }
+    11 |
+    12 |         type Subscription {
+    13 |           fieldSubscription: ID
+    14 |           subscriptionField: ID
+    15 |         }
+    16 |
+    17 |         enum TestEnum
+    18 |         extend enum EnumTest { A }
+    19 |
+    20 |         interface TestInterface
+    21 |         extend interface Test { id: ID }
 `;
 
 exports[`naming-convention > invalid > should error when selected type names do not match require prefixes 1`] = `

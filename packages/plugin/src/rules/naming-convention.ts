@@ -268,6 +268,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             'EnumTypeDefinition,EnumTypeExtension': {
               forbiddenPrefixes: ['Enum'],
               forbiddenSuffixes: ['Enum'],
+            },
+            'InterfaceTypeDefinition,InterfaceTypeExtension': {
+              forbiddenPrefixes: ['Interface'],
+              forbiddenSuffixes: ['Interface'],
             }
           },
         ],
