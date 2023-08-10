@@ -16,7 +16,6 @@
     "generate:configs": "tsx scripts/generate-configs.ts",
     "lint": "eslint --ignore-path .gitignore --cache .",
     "lint:prettier": "prettier --cache --check .",
-    "postinstall": "tsx scripts/patch-graphql.ts",
     "prebuild": "rimraf tsconfig.tsbuildinfo",
     "prerelease": "NODE_ENV=production pnpm build",
     "prettier": "pnpm lint:prettier --write",

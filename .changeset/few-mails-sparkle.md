@@ -13,7 +13,7 @@
 
   - rename rule to `require-selections`
 
-- update `schema-all`/`operations-all` config
+- update `schema-all`/`operations-all` configs
 
 - `require-description` rule changes
 

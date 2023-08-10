@@ -256,7 +256,7 @@ importers:
         specifier: ^4.3.4
         version: 4.3.4
       eslint:
-        specifier: ^8
+        specifier: '>=8.44.0'
         version: 8.46.0(patch_hash=yi5cqffjk423hcgr7hl33kguwu)
       fast-glob:
         specifier: ^3.2.12
