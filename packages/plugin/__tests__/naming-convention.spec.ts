@@ -396,16 +396,22 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         }
 
         enum TestEnum
-        extend enum EnumTest { A }
+        extend enum EnumTest {
+          A
+        }
 
         interface TestInterface
-        extend interface InterfaceTest { id: ID }
-        
+        extend interface InterfaceTest {
+          id: ID
+        }
+
         union TestUnion
         extend union UnionTest = TestInterface
-        
+
         type TestType
-        extend type TypeTest { id: ID }
+        extend type TypeTest {
+          id: ID
+        }
       `,
       options: (rule.meta.docs!.configOptions as any).schema,
       errors: 15,
