@@ -451,9 +451,7 @@ exports[`alphabetize > invalid > Invalid #12 1`] = `
 #### ⚙️ Options
 
     {
-      "variables": [
-        "OperationDefinition"
-      ],
+      "variables": true,
       "arguments": [
         "Field"
       ]

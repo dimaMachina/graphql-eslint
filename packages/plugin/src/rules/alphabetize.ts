@@ -26,14 +26,20 @@ import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../utils.js';
 
 const RULE_ID = 'alphabetize';
 
-const fieldsEnum = [
+const fieldsEnum: (
+  | 'InputObjectTypeDefinition'
+  | 'InterfaceTypeDefinition'
+  | 'ObjectTypeDefinition'
+)[] = [
   Kind.OBJECT_TYPE_DEFINITION,
   Kind.INTERFACE_TYPE_DEFINITION,
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
 ];
-const selectionsEnum = [Kind.OPERATION_DEFINITION, Kind.FRAGMENT_DEFINITION];
-const variablesEnum = [Kind.OPERATION_DEFINITION, Kind.FRAGMENT_DEFINITION];
-const argumentsEnum = [
+const selectionsEnum: ('FragmentDefinition' | 'OperationDefinition')[] = [
+  Kind.OPERATION_DEFINITION,
+  Kind.FRAGMENT_DEFINITION,
+];
+const argumentsEnum: ('Directive' | 'DirectiveDefinition' | 'Field' | 'FieldDefinition')[] = [
   Kind.FIELD_DEFINITION,
   Kind.FIELD,
   Kind.DIRECTIVE_DEFINITION,
@@ -69,10 +75,7 @@ const schema = {
           'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
       },
       variables: {
-        ...ARRAY_DEFAULT_OPTIONS,
-        items: {
-          enum: variablesEnum,
-        },
+        type: 'boolean',
         description: 'Variables of operations `query`, `mutation` and `subscription`.',
       },
       arguments: {
@@ -197,7 +200,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         operations: [
           {
             selections: selectionsEnum,
-            variables: variablesEnum,
+            variables: true,
             definitions: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
           },
@@ -328,7 +331,6 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
 
     const opts = context.options[0];
     const fields = new Set(opts.fields ?? []);
-    const variables = new Set(opts.variables ?? []);
     const listeners: GraphQLESLintRuleListener = {};
 
     const kinds = [
@@ -384,7 +386,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       };
     }
 
-    if (variables.has(Kind.OPERATION_DEFINITION)) {
+    if (opts.variables) {
       listeners.OperationDefinition = (node: GraphQLESTreeNode<OperationDefinitionNode>) => {
         checkNodes(node.variableDefinitions?.map(varDef => varDef.variable));
       };

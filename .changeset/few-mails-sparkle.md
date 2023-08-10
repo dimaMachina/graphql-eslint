@@ -5,4 +5,4 @@
 - `alphabetize` rule changes
   - add `definitions: true` option for `schema-all`/`operations-all` configs
   - rename `values: ['EnumTypeDefinition']` to `values: true`
-  - add `FragmentDefinition` to `variables` option
+  - rename `variables: ['OperationDefinition']` to `variables: true`

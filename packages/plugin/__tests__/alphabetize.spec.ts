@@ -222,7 +222,7 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       ],
     },
     {
-      options: [{ variables: ['OperationDefinition'], arguments: ['Field'] }],
+      options: [{ variables: true, arguments: ['Field'] }],
       code: /* GraphQL */ `
         mutation ($cc: [Cc!]!, $bb: [Bb!], $aa: Aa!) {
           test(ccc: $cc, bbb: $bb, aaa: $aa) {
