@@ -1,4 +1,4 @@
-import { rule, RuleOptions } from '../src/rules/require-id-when-available';
+import { rule, RuleOptions } from '../src/rules/require-selections';
 import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const TEST_SCHEMA = /* GraphQL */ `

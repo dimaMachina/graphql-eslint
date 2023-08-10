@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`require-id-when-available > invalid > Invalid #1 1`] = `
+exports[`require-selections > invalid > Invalid #1 1`] = `
 #### ⌨️ Code
 
       1 | { hasId { name } }
@@ -16,7 +16,7 @@ exports[`require-id-when-available > invalid > Invalid #1 1`] = `
     1 | { hasId { id name } }
 `;
 
-exports[`require-id-when-available > invalid > Invalid #2 1`] = `
+exports[`require-selections > invalid > Invalid #2 1`] = `
 #### ⌨️ Code
 
       1 | { hasId { id } }
@@ -38,7 +38,7 @@ exports[`require-id-when-available > invalid > Invalid #2 1`] = `
     1 | { hasId { name id } }
 `;
 
-exports[`require-id-when-available > invalid > should not work with n nested fragments if you never get the id 1`] = `
+exports[`require-selections > invalid > should not work with n nested fragments if you never get the id 1`] = `
 #### ⌨️ Code
 
       1 |         query User {
@@ -64,7 +64,7 @@ exports[`require-id-when-available > invalid > should not work with n nested fra
     5 |         }
 `;
 
-exports[`require-id-when-available > invalid > should report an error about missing \`posts.id\` field in fragment 1`] = `
+exports[`require-selections > invalid > should report an error about missing \`posts.id\` field in fragment 1`] = `
 #### ⌨️ Code
 
       1 | { user { id ...UserFields } }
@@ -76,7 +76,7 @@ exports[`require-id-when-available > invalid > should report an error about miss
     Include it in your selection set or add to used fragment \`UserFields\`.
 `;
 
-exports[`require-id-when-available > invalid > should report an error about missing \`user.id\`, \`posts.id\`, \`author.id\` and \`authorPosts.id\` selection 1`] = `
+exports[`require-selections > invalid > should report an error about missing \`user.id\`, \`posts.id\`, \`author.id\` and \`authorPosts.id\` selection 1`] = `
 #### ⌨️ Code
 
       1 | { user { ...UserFullFields } }
@@ -110,7 +110,7 @@ exports[`require-id-when-available > invalid > should report an error about miss
     Include it in your selection set or add to used fragments \`UserFullFields\` or \`UserFields\`.
 `;
 
-exports[`require-id-when-available > invalid > should report an error with union 1`] = `
+exports[`require-selections > invalid > should report an error with union 1`] = `
 #### ⌨️ Code
 
       1 |   {
@@ -140,7 +140,7 @@ exports[`require-id-when-available > invalid > should report an error with union
     7 |   }
 `;
 
-exports[`require-id-when-available > invalid > should report an error with union and fragment spread 1`] = `
+exports[`require-selections > invalid > should report an error with union and fragment spread 1`] = `
 #### ⌨️ Code
 
       1 |         {
@@ -170,7 +170,7 @@ exports[`require-id-when-available > invalid > should report an error with union
     7 |         }
 `;
 
-exports[`require-id-when-available > invalid > support multiple id field names 1`] = `
+exports[`require-selections > invalid > support multiple id field names 1`] = `
 #### ⌨️ Code
 
       1 | { hasId { name } }
