@@ -552,29 +552,29 @@ Special thanks to @connorjs
 
   ### Before
 
-  ```json
+  ```json5
   {
-    "@graphql-eslint/avoid-operation-name-prefix": [
-      "error",
+    '@graphql-eslint/avoid-operation-name-prefix': [
+      'error',
       {
-        "keywords": ["Query", "Mutation", "Subscription", "Get"]
+        keywords: ['Query', 'Mutation', 'Subscription', 'Get']
       }
     ],
-    "@graphql-eslint/no-operation-name-suffix": "error"
+    '@graphql-eslint/no-operation-name-suffix': 'error'
   }
   ```
 
   ### After
 
-  ```json
+  ```json5
   {
-    "@graphql-eslint/naming-convention": [
-      "error",
+    '@graphql-eslint/naming-convention': [
+      'error',
       {
-        "OperationDefinition": {
-          "style": "PascalCase",
-          "forbiddenPrefixes": ["Query", "Mutation", "Subscription", "Get"],
-          "forbiddenSuffixes": ["Query", "Mutation", "Subscription"]
+        OperationDefinition: {
+          style: 'PascalCase',
+          forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+          forbiddenSuffixes: ['Query', 'Mutation', 'Subscription']
         }
       }
     ]
@@ -605,24 +605,24 @@ Special thanks to @connorjs
 
   ### Before
 
-  ```json
+  ```json5
   {
-    "@graphql-eslint/naming-convention": [
-      "error",
+    '@graphql-eslint/naming-convention': [
+      'error',
       {
-        "ObjectTypeDefinition": "PascalCase",
-        "InterfaceTypeDefinition": "PascalCase",
-        "EnumTypeDefinition": "PascalCase",
-        "ScalarTypeDefinition": "PascalCase",
-        "InputObjectTypeDefinition": "PascalCase",
-        "UnionTypeDefinition": "PascalCase",
-        "FieldDefinition": "camelCase",
-        "InputValueDefinition": "camelCase",
-        "QueryDefinition": {
-          "forbiddenPrefixes": ["get"]
+        ObjectTypeDefinition: 'PascalCase',
+        InterfaceTypeDefinition: 'PascalCase',
+        EnumTypeDefinition: 'PascalCase',
+        ScalarTypeDefinition: 'PascalCase',
+        InputObjectTypeDefinition: 'PascalCase',
+        UnionTypeDefinition: 'PascalCase',
+        FieldDefinition: 'camelCase',
+        InputValueDefinition: 'camelCase',
+        QueryDefinition: {
+          forbiddenPrefixes: ['get']
         },
-        "leadingUnderscore": "allow",
-        "trailingUnderscore": "allow"
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow'
       }
     ]
   }
@@ -630,19 +630,19 @@ Special thanks to @connorjs
 
   ### After
 
-  ```json
+  ```json5
   {
-    "@graphql-eslint/naming-convention": [
-      "error",
+    '@graphql-eslint/naming-convention': [
+      'error',
       {
-        "types": "PascalCase",
-        "FieldDefinition": "camelCase",
-        "InputValueDefinition": "camelCase",
-        "FieldDefinition[parent.name.value=Query]": {
-          "forbiddenPrefixes": ["get"]
+        types: 'PascalCase',
+        FieldDefinition: 'camelCase',
+        InputValueDefinition: 'camelCase',
+        'FieldDefinition[parent.name.value=Query]': {
+          forbiddenPrefixes: ['get']
         },
-        "allowLeadingUnderscore": true,
-        "allowTrailingUnderscore": true
+        allowLeadingUnderscore: true,
+        allowTrailingUnderscore: true
       }
     ]
   }
@@ -663,21 +663,21 @@ Special thanks to @connorjs
 
   ### Before
 
-  ```json
+  ```json5
   {
-    "@graphql-eslint/require-description": [
-      "error",
+    '@graphql-eslint/require-description': [
+      'error',
       {
-        "on": [
-          "ObjectTypeDefinition",
-          "InterfaceTypeDefinition",
-          "EnumTypeDefinition",
-          "InputObjectTypeDefinition",
-          "UnionTypeDefinition",
-          "FieldDefinition",
-          "InputValueDefinition",
-          "EnumValueDefinition",
-          "DirectiveDefinition"
+        on: [
+          'ObjectTypeDefinition',
+          'InterfaceTypeDefinition',
+          'EnumTypeDefinition',
+          'InputObjectTypeDefinition',
+          'UnionTypeDefinition',
+          'FieldDefinition',
+          'InputValueDefinition',
+          'EnumValueDefinition',
+          'DirectiveDefinition'
         ]
       }
     ]
@@ -686,16 +686,16 @@ Special thanks to @connorjs
 
   ### After
 
-  ```json
+  ```json5
   {
-    "@graphql-eslint/require-description": [
-      "error",
+    '@graphql-eslint/require-description': [
+      'error',
       {
-        "types": true,
-        "FieldDefinition": true,
-        "InputValueDefinition": true,
-        "EnumValueDefinition": true,
-        "DirectiveDefinition": true
+        types: true,
+        FieldDefinition: true,
+        InputValueDefinition: true,
+        EnumValueDefinition: true,
+        DirectiveDefinition: true
       }
     ]
   }
@@ -886,39 +886,41 @@ Special thanks to @connorjs
   As a drop-in replacement for the whole set of rules we had in `validate-against-schema`, you can
   use this:
 
-```
-      "@graphql-eslint/executable-definitions": "error",
-      "@graphql-eslint/fields-on-correct-type": "error",
-      "@graphql-eslint/fragments-on-composite-type": "error",
-      "@graphql-eslint/known-argument-names": "error",
-      "@graphql-eslint/known-directives": "error",
-      "@graphql-eslint/known-fragment-names": "error",
-      "@graphql-eslint/known-type-names": "error",
-      "@graphql-eslint/lone-anonymous-operation": "error",
-      "@graphql-eslint/lone-schema-definition": "error",
-      "@graphql-eslint/no-fragment-cycles": "error",
-      "@graphql-eslint/no-undefined-variables": "error",
-      "@graphql-eslint/no-unused-fragments": "error",
-      "@graphql-eslint/no-unused-variables": "error",
-      "@graphql-eslint/overlapping-fields-can-be-merged": "error",
-      "@graphql-eslint/possible-fragment-spread": "error",
-      "@graphql-eslint/possible-type-extension": "error",
-      "@graphql-eslint/provided-required-arguments": "error",
-      "@graphql-eslint/scalar-leafs": "error",
-      "@graphql-eslint/one-field-subscriptions": "error",
-      "@graphql-eslint/unique-argument-names": "error",
-      "@graphql-eslint/unique-directive-names": "error",
-      "@graphql-eslint/unique-directive-names-per-location": "error",
-      "@graphql-eslint/unique-enum-value-names": "error",
-      "@graphql-eslint/unique-field-definition-names": "error",
-      "@graphql-eslint/unique-input-field-names": "error",
-      "@graphql-eslint/unique-operation-types": "error",
-      "@graphql-eslint/unique-type-names": "error",
-      "@graphql-eslint/unique-variable-names": "error",
-      "@graphql-eslint/value-literals-of-correct-type": "error",
-      "@graphql-eslint/variables-are-input-types": "error",
-      "@graphql-eslint/variables-in-allowed-position": "error"
-```
+  ```json5
+  {
+    '@graphql-eslint/executable-definitions': 'error',
+    '@graphql-eslint/fields-on-correct-type': 'error',
+    '@graphql-eslint/fragments-on-composite-type': 'error',
+    '@graphql-eslint/known-argument-names': 'error',
+    '@graphql-eslint/known-directives': 'error',
+    '@graphql-eslint/known-fragment-names': 'error',
+    '@graphql-eslint/known-type-names': 'error',
+    '@graphql-eslint/lone-anonymous-operation': 'error',
+    '@graphql-eslint/lone-schema-definition': 'error',
+    '@graphql-eslint/no-fragment-cycles': 'error',
+    '@graphql-eslint/no-undefined-variables': 'error',
+    '@graphql-eslint/no-unused-fragments': 'error',
+    '@graphql-eslint/no-unused-variables': 'error',
+    '@graphql-eslint/overlapping-fields-can-be-merged': 'error',
+    '@graphql-eslint/possible-fragment-spread': 'error',
+    '@graphql-eslint/possible-type-extension': 'error',
+    '@graphql-eslint/provided-required-arguments': 'error',
+    '@graphql-eslint/scalar-leafs': 'error',
+    '@graphql-eslint/one-field-subscriptions': 'error',
+    '@graphql-eslint/unique-argument-names': 'error',
+    '@graphql-eslint/unique-directive-names': 'error',
+    '@graphql-eslint/unique-directive-names-per-location': 'error',
+    '@graphql-eslint/unique-enum-value-names': 'error',
+    '@graphql-eslint/unique-field-definition-names': 'error',
+    '@graphql-eslint/unique-input-field-names': 'error',
+    '@graphql-eslint/unique-operation-types': 'error',
+    '@graphql-eslint/unique-type-names': 'error',
+    '@graphql-eslint/unique-variable-names': 'error',
+    '@graphql-eslint/value-literals-of-correct-type': 'error',
+    '@graphql-eslint/variables-are-input-types': 'error',
+    '@graphql-eslint/variables-in-allowed-position': 'error'
+  }
+  ```
 
 - 61251e7: Bump dependencies and update minimum Node version to `v12`
 
