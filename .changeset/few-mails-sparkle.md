@@ -51,3 +51,7 @@
 - rename `no-case-insensitive-enum-values-duplicates` to `unique-enum-value-names`
 
   > Since this rule reports case-insensitive enum values duplicates too
+
+- `require-nullable-result-in-root` rule changes
+
+  Do not check subscriptions

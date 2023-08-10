@@ -30,30 +30,16 @@ exports[`require-nullable-result-in-root > invalid > Invalid #1 1`] = `
 exports[`require-nullable-result-in-root > invalid > should work with default scalars 1`] = `
 #### ⌨️ Code
 
-      1 |         type MySubscription
-      2 |         extend type MySubscription {
-      3 |           foo: Boolean!
-      4 |         }
-      5 |         schema {
-      6 |           subscription: MySubscription
-      7 |         }
+      1 | type Mutation { foo: Boolean! }
 
 #### ❌ Error
 
-      2 |         extend type MySubscription {
-    > 3 |           foo: Boolean!
-        |                ^^^^^^^ Unexpected non-null result Boolean in type "MySubscription"
-      4 |         }
+    > 1 | type Mutation { foo: Boolean! }
+        |                      ^^^^^^^ Unexpected non-null result Boolean in type "Mutation"
 
 #### 💡 Suggestion: Make Boolean nullable
 
-    1 |         type MySubscription
-    2 |         extend type MySubscription {
-    3 |           foo: Boolean
-    4 |         }
-    5 |         schema {
-    6 |           subscription: MySubscription
-    7 |         }
+    1 | type Mutation { foo: Boolean }
 `;
 
 exports[`require-nullable-result-in-root > invalid > should work with extend query 1`] = `
