@@ -20,3 +20,15 @@
   - add `rootField: true` option for `schema-recommended` config
 
 - require `eslint` at least `>=8.44.0` as peerDependency
+
+- `naming-convention`
+
+  - add new option for `schema-recommended` config
+  ```json5
+  {
+    'EnumTypeDefinition,EnumTypeExtension': {
+      forbiddenPrefixes: ['Enum'],
+      forbiddenSuffixes: ['Enum']
+    }
+  }
+  ```
