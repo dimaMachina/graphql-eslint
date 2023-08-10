@@ -10,7 +10,6 @@ import { rule as loneExecutableDefinition } from './lone-executable-definition.j
 import { rule as matchDocumentFilename } from './match-document-filename.js';
 import { rule as namingConvention } from './naming-convention.js';
 import { rule as noAnonymousOperations } from './no-anonymous-operations.js';
-import { rule as noCaseInsensitiveEnumValuesDuplicates } from './no-case-insensitive-enum-values-duplicates.js';
 import { rule as noDeprecated } from './no-deprecated.js';
 import { rule as noDuplicateFields } from './no-duplicate-fields.js';
 import { rule as noHashtagDescription } from './no-hashtag-description.js';
@@ -35,6 +34,7 @@ import { rule as requireSelections } from './require-selections.js';
 import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof.js';
 import { rule as selectionSetDepth } from './selection-set-depth.js';
 import { rule as strictIdInTypes } from './strict-id-in-types.js';
+import { rule as uniqueEnumValueNames } from './unique-enum-value-names.js';
 import { rule as uniqueFragmentName } from './unique-fragment-name.js';
 import { rule as uniqueOperationName } from './unique-operation-name.js';
 
@@ -47,7 +47,6 @@ export const rules = {
   'match-document-filename': matchDocumentFilename,
   'naming-convention': namingConvention,
   'no-anonymous-operations': noAnonymousOperations,
-  'no-case-insensitive-enum-values-duplicates': noCaseInsensitiveEnumValuesDuplicates,
   'no-deprecated': noDeprecated,
   'no-duplicate-fields': noDuplicateFields,
   'no-hashtag-description': noHashtagDescription,
@@ -72,6 +71,7 @@ export const rules = {
   'require-type-pattern-with-oneof': requireTypePatternWithOneof,
   'selection-set-depth': selectionSetDepth,
   'strict-id-in-types': strictIdInTypes,
+  'unique-enum-value-names': uniqueEnumValueNames,
   'unique-fragment-name': uniqueFragmentName,
   'unique-operation-name': uniqueOperationName,
 };
