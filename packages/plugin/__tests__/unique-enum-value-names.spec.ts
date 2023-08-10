@@ -1,7 +1,7 @@
-import { rule } from '../src/rules/no-case-insensitive-enum-values-duplicates';
+import { rule } from '../src/rules/unique-enum-value-names';
 import { ruleTester } from './test-utils';
 
-ruleTester.run('no-case-insensitive-enum-values-duplicates', rule, {
+ruleTester.run('unique-enum-value-names', rule, {
   valid: [],
   invalid: [
     {
