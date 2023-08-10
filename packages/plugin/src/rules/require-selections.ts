@@ -22,7 +22,7 @@ import {
   requireSiblingsOperations,
 } from '../utils.js';
 
-const RULE_ID = 'require-id-when-available';
+const RULE_ID = 'require-selections';
 const DEFAULT_ID_FIELD_NAME = 'id';
 
 const schema = {

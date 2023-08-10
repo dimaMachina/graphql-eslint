@@ -58,10 +58,10 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 [require-deprecation-reason](/rules/require-deprecation-reason)|Require all deprecation directives to specify a reason.|![recommended][]|📄|🚀|
 [require-description](/rules/require-description)|Enforce descriptions in type definitions and operations.|![recommended][]|📄|🚀|
 [require-field-of-type-query-in-mutation-result](/rules/require-field-of-type-query-in-mutation-result)|Allow the client in one round-trip not only to call mutation but also to get a wagon of data to update their application.|![all][]|📄|🚀|
-[require-id-when-available](/rules/require-id-when-available)|Enforce selecting specific fields when they are available on the GraphQL type.|![recommended][]|📦|🚀|💡
 [require-import-fragment](/rules/require-import-fragment)|Require fragments to be imported via an import expression.||📦|🚀|💡
 [require-nullable-fields-with-oneof](/rules/require-nullable-fields-with-oneof)|Require `input` or `type` fields to be non-nullable with `@oneOf` directive.|![all][]|📄|🚀|
 [require-nullable-result-in-root](/rules/require-nullable-result-in-root)|Require nullable fields in root types.|![all][]|📄|🚀|💡
+[require-selections](/rules/require-selections)|Enforce selecting specific fields when they are available on the GraphQL type.|![recommended][]|📦|🚀|💡
 [require-type-pattern-with-oneof](/rules/require-type-pattern-with-oneof)|Enforce types with `@oneOf` directive have `error` and `ok` fields.|![all][]|📄|🚀|
 [scalar-leafs](/rules/scalar-leafs)|A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.|![recommended][]|📦|🔮|💡
 [selection-set-depth](/rules/selection-set-depth)|Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).|![recommended][]|📦|🚀|💡

@@ -22,3 +22,7 @@ This rule was removed because the same things can be validated using
 
 This rule was removed because the same things can be validated using
 [`naming-convention`](/rules/naming-convention).
+
+## `require-id-when-available`
+
+This rule was renamed to [`require-selections`](/rules/require-selections).

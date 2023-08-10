@@ -28,10 +28,10 @@ import { rule as requireDeprecationDate } from './require-deprecation-date.js';
 import { rule as requireDeprecationReason } from './require-deprecation-reason.js';
 import { rule as requireDescription } from './require-description.js';
 import { rule as requireFieldOfTypeQueryInMutationResult } from './require-field-of-type-query-in-mutation-result.js';
-import { rule as requireIdWhenAvailable } from './require-id-when-available.js';
 import { rule as requireImportFragment } from './require-import-fragment.js';
 import { rule as requireNullableFieldsWithOneof } from './require-nullable-fields-with-oneof.js';
 import { rule as requireNullableResultInRoot } from './require-nullable-result-in-root.js';
+import { rule as requireSelections } from './require-selections.js';
 import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof.js';
 import { rule as selectionSetDepth } from './selection-set-depth.js';
 import { rule as strictIdInTypes } from './strict-id-in-types.js';
@@ -65,10 +65,10 @@ export const rules = {
   'require-deprecation-reason': requireDeprecationReason,
   'require-description': requireDescription,
   'require-field-of-type-query-in-mutation-result': requireFieldOfTypeQueryInMutationResult,
-  'require-id-when-available': requireIdWhenAvailable,
   'require-import-fragment': requireImportFragment,
   'require-nullable-fields-with-oneof': requireNullableFieldsWithOneof,
   'require-nullable-result-in-root': requireNullableResultInRoot,
+  'require-selections': requireSelections,
   'require-type-pattern-with-oneof': requireTypePatternWithOneof,
   'selection-set-depth': selectionSetDepth,
   'strict-id-in-types': strictIdInTypes,

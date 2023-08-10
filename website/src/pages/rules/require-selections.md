@@ -1,4 +1,4 @@
-# `require-id-when-available`
+# `require-selections`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
 enables this rule.
@@ -7,7 +7,7 @@ enables this rule.
 [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)
 
 - Category: `Operations`
-- Rule name: `@graphql-eslint/require-id-when-available`
+- Rule name: `@graphql-eslint/require-selections`
 - Requires GraphQL Schema: `true`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)
 - Requires GraphQL Operations: `true`
@@ -20,7 +20,7 @@ Enforce selecting specific fields when they are available on the GraphQL type.
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/require-id-when-available: 'error'
+# eslint @graphql-eslint/require-selections: 'error'
 
 # In your schema
 type User {
@@ -39,7 +39,7 @@ query {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/require-id-when-available: 'error'
+# eslint @graphql-eslint/require-selections: 'error'
 
 # In your schema
 type User {
@@ -88,5 +88,5 @@ The schema defines the following additional types:
 
 ## Resources
 
-- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-id-when-available.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/require-id-when-available.spec.ts)
+- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-selections.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/require-selections.spec.ts)

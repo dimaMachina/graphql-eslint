@@ -68,7 +68,7 @@ const WITH_SCHEMA = {
   } satisfies ParserOptionsForTests,
 };
 
-const MESSAGE_ID = { messageId: 'require-id-when-available' };
+const MESSAGE_ID = { messageId: 'require-selections' };
 
 const DOCUMENT_WITH_UNION = /* GraphQL */ `
   {
@@ -80,7 +80,7 @@ const DOCUMENT_WITH_UNION = /* GraphQL */ `
   }
 `;
 
-ruleTester.run<RuleOptions, true>('require-id-when-available', rule, {
+ruleTester.run<RuleOptions, true>('require-selections', rule, {
   valid: [
     {
       name: 'should completely ignore FragmentDefinition',

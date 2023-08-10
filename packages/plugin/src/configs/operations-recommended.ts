@@ -41,7 +41,7 @@ export = {
     '@graphql-eslint/overlapping-fields-can-be-merged': 'error',
     '@graphql-eslint/possible-fragment-spread': 'error',
     '@graphql-eslint/provided-required-arguments': 'error',
-    '@graphql-eslint/require-id-when-available': 'error',
+    '@graphql-eslint/require-selections': 'error',
     '@graphql-eslint/scalar-leafs': 'error',
     '@graphql-eslint/selection-set-depth': ['error', { maxDepth: 7 }],
     '@graphql-eslint/unique-argument-names': 'error',
