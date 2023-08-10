@@ -10,3 +10,5 @@
   - add `groups: ['id', '*', 'createdAt', 'updatedAt']` for `schema-all`/`operations-all` configs
 
 - rename `require-id-when-available` to `require-selections`
+
+- update `schema-all`/`operations-all` config

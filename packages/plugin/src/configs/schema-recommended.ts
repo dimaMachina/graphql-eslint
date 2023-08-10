@@ -38,6 +38,7 @@ export = {
     '@graphql-eslint/no-hashtag-description': 'error',
     '@graphql-eslint/no-typename-prefix': 'error',
     '@graphql-eslint/no-unreachable-types': 'error',
+    '@graphql-eslint/possible-type-extension': 'error',
     '@graphql-eslint/provided-required-arguments': 'error',
     '@graphql-eslint/require-deprecation-reason': 'error',
     '@graphql-eslint/require-description': ['error', { types: true, DirectiveDefinition: true }],

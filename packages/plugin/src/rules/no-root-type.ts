@@ -34,7 +34,6 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       description: 'Disallow using root types `mutation` and/or `subscription`.',
       url: 'https://the-guild.dev/graphql/eslint/rules/no-root-type',
       requiresSchema: true,
-      isDisabledForAllConfig: true,
       examples: [
         {
           title: 'Incorrect',
@@ -55,6 +54,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           `,
         },
       ],
+      configOptions: [{ disallow: ['mutation', 'subscription'] }],
     },
     schema,
   },

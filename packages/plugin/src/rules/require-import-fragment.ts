@@ -60,7 +60,6 @@ export const rule: GraphQLESLintRule = {
         },
       ],
       requiresSiblings: true,
-      isDisabledForAllConfig: true,
     },
     hasSuggestions: true,
     messages: {

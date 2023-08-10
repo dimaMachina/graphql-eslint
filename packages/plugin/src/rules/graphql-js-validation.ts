@@ -570,7 +570,6 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       description: 'A type extension is only valid if the type is defined and has the same kind.',
       recommended: true,
       requiresSchema: true,
-      isDisabledForAllConfig: true,
     },
   ),
   validationToRule(
