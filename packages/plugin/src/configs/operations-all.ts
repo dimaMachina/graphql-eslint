@@ -9,7 +9,8 @@ export = {
       'error',
       {
         selections: ['OperationDefinition', 'FragmentDefinition'],
-        variables: ['OperationDefinition'],
+        variables: true,
+        definitions: true,
         arguments: ['Field', 'Directive'],
       },
     ],
@@ -24,7 +25,5 @@ export = {
       },
     ],
     '@graphql-eslint/no-one-place-fragments': 'error',
-    '@graphql-eslint/unique-fragment-name': 'error',
-    '@graphql-eslint/unique-operation-name': 'error',
   },
 };
