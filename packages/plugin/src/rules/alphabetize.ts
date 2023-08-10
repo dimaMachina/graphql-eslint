@@ -190,19 +190,20 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       configOptions: {
         schema: [
           {
+            definitions: true,
             fields: fieldsEnum,
             values: true,
             arguments: argumentsEnum,
-            definitions: true,
             groups: ['id', '*', 'createdAt', 'updatedAt'],
           },
         ],
         operations: [
           {
+            definitions: true,
             selections: selectionsEnum,
             variables: true,
-            definitions: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
+            groups: ['id', '*', 'createdAt', 'updatedAt'],
           },
         ],
       },

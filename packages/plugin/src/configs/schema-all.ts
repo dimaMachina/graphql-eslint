@@ -8,10 +8,10 @@ export = {
     '@graphql-eslint/alphabetize': [
       'error',
       {
+        definitions: true,
         fields: ['ObjectTypeDefinition', 'InterfaceTypeDefinition', 'InputObjectTypeDefinition'],
         values: true,
         arguments: ['FieldDefinition', 'Field', 'DirectiveDefinition', 'Directive'],
-        definitions: true,
         groups: ['id', '*', 'createdAt', 'updatedAt'],
       },
     ],

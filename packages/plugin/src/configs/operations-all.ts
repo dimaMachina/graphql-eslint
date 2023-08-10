@@ -8,10 +8,11 @@ export = {
     '@graphql-eslint/alphabetize': [
       'error',
       {
+        definitions: true,
         selections: ['OperationDefinition', 'FragmentDefinition'],
         variables: true,
-        definitions: true,
         arguments: ['Field', 'Directive'],
+        groups: ['id', '*', 'createdAt', 'updatedAt'],
       },
     ],
     '@graphql-eslint/lone-executable-definition': 'error',
