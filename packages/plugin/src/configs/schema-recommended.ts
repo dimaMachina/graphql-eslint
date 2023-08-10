@@ -44,6 +44,10 @@ export = {
           forbiddenPrefixes: ['Union'],
           forbiddenSuffixes: ['Union'],
         },
+        'ObjectTypeDefinition,ObjectTypeExtension': {
+          forbiddenPrefixes: ['Type'],
+          forbiddenSuffixes: ['Type'],
+        },
       },
     ],
     '@graphql-eslint/no-case-insensitive-enum-values-duplicates': 'error',
