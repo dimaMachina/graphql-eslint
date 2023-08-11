@@ -1,5 +1,127 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.0
+
+### Major Changes
+
+- [#1794](https://github.com/B2o5T/graphql-eslint/pull/1794)
+  [`4079167e`](https://github.com/B2o5T/graphql-eslint/commit/4079167e2af800e12d74dc516d49bf4024b3f956)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - - bring back `possible-type-extension` rule to
+  `schema-recommended` config
+
+  - add `unique-operation-name` and `unique-fragment-name` rules to `operations-recommended` config
+
+  The concept of sibling operations provided by graphql-config's `documents` fields is based on
+  uniquely named operations and fragments, for omitting false-positive/negative cases when
+  operations and fragments are located in separate files. For this reason, these rules must be
+  included in the recommended config
+
+  - rename `relay` config to `schema-relay`
+
+  > To avoid confusing when users extend this config for executable definitions (operations and
+  > fragments)
+
+- [#1812](https://github.com/B2o5T/graphql-eslint/pull/1812)
+  [`bf475e88`](https://github.com/B2o5T/graphql-eslint/commit/bf475e88ca60d77111c7ef324d4e3080451f094c)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - - `alphabetize` rule changes
+
+  - add `definitions: true` option for `schema-all`/`operations-all` configs
+  - rename `values: ['EnumTypeDefinition']` to `values: true`
+  - rename `variables: ['OperationDefinition']` to `variables: true`
+  - add `groups: ['id', '*', 'createdAt', 'updatedAt']` for `schema-all`/`operations-all` configs
+
+  - `require-id-when-available` rule changes
+
+    - rename rule to `require-selections`
+
+  - update `schema-all`/`operations-all` configs
+
+  - `require-description` rule changes
+
+    - add `rootField: true` option for `schema-recommended` config
+
+  - require `eslint` at least `>=8.44.0` as peerDependency
+
+  - `naming-convention`
+
+    - add new options for `schema-recommended` config
+
+    ```json5
+    {
+      'EnumTypeDefinition,EnumTypeExtension': {
+        forbiddenPrefixes: ['Enum'],
+        forbiddenSuffixes: ['Enum']
+      },
+      'InterfaceTypeDefinition,InterfaceTypeExtension': {
+        forbiddenPrefixes: ['Interface'],
+        forbiddenSuffixes: ['Interface']
+      },
+      'UnionTypeDefinition,UnionTypeExtension': {
+        forbiddenPrefixes: ['Union'],
+        forbiddenSuffixes: ['Union']
+      },
+      'ObjectTypeDefinition,ObjectTypeExtension': {
+        forbiddenPrefixes: ['Type'],
+        forbiddenSuffixes: ['Type']
+      }
+    }
+    ```
+
+  - remove graphql-js' `unique-enum-value-names` rule
+
+  - rename `no-case-insensitive-enum-values-duplicates` to `unique-enum-value-names`
+
+    > Since this rule reports case-insensitive enum values duplicates too
+
+  - `require-nullable-result-in-root` rule changes
+
+    Do not check subscriptions
+
+- [#1795](https://github.com/B2o5T/graphql-eslint/pull/1795)
+  [`2f46a717`](https://github.com/B2o5T/graphql-eslint/commit/2f46a717349c63019a80935f4b19396b2319584e)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - - remove `parserOptions.schema`
+
+  - remove `parserOptions.documents`
+  - remove `parserOptions.extensions`
+  - remove `parserOptions.include`
+  - remove `parserOptions.exclude`
+  - remove `parserOptions.projects`
+  - remove `parserOptions.schemaOptions`
+  - remove `parserOptions.graphQLParserOptions`
+  - remove `parserOptions.skipGraphQLConfig`
+  - remove `parserOptions.operations`
+
+  - add `parserOptions.graphQLConfig?: IGraphQLConfig` for programmatic usage
+
+- [#1793](https://github.com/B2o5T/graphql-eslint/pull/1793)
+  [`6593482b`](https://github.com/B2o5T/graphql-eslint/commit/6593482b3bf0d80a8afdfb0018b9eb13b874ebfc)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - drop support of Node.js 12/14/16, GraphQL 14/15
+
+- [#1792](https://github.com/B2o5T/graphql-eslint/pull/1792)
+  [`804f8b61`](https://github.com/B2o5T/graphql-eslint/commit/804f8b617b3d63407db5bdea686bb3992801fa96)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - Remove `GraphQLRuleTester` from bundle, to test your
+  rules use regular `RuleTester` from eslint
+
+  > **Note**: with this change unnecessary dependency `@babel/code-frame` was removed too
+
+  ```js
+  import { RuleTester } from 'eslint'
+
+  const ruleTester = new RuleTester({
+    parser: require.resolve('@graphql-eslint/eslint-plugin')
+  })
+  ```
+
+### Patch Changes
+
+- [#1792](https://github.com/B2o5T/graphql-eslint/pull/1792)
+  [`804f8b61`](https://github.com/B2o5T/graphql-eslint/commit/804f8b617b3d63407db5bdea686bb3992801fa96)
+  Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
+
+  - Removed dependency
+    [`@babel/code-frame@^7.18.6` ↗︎](https://www.npmjs.com/package/@babel/code-frame/v/7.18.6) (from
+    `dependencies`)
+
 ## 3.20.1
 
 ### Patch Changes

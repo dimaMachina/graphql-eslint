@@ -1,0 +1,25 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "@graphql-eslint/example-code-file": "0.0.0",
+    "@graphql-eslint/example-graphql-config": "0.0.0",
+    "@graphql-eslint/example-monorepo": "0.0.0",
+    "@graphql-eslint/example-multiple-projects-graphql-config": "0.0.0",
+    "@graphql-eslint/example-prettier": "0.0.0",
+    "@graphql-eslint/example-programmatic": "0.0.0",
+    "@graphql-eslint/example-svelte-code-file": "0.0.0",
+    "@graphql-eslint/example-vue-code-file": "0.0.0",
+    "@graphql-eslint/eslint-plugin": "3.20.1",
+    "@theguild/eslint-rule-tester": "0.0.0",
+    "website": "0.0.0"
+  },
+  "changesets": [
+    "@graphql-eslint_eslint-plugin-1792-dependencies",
+    "dull-scissors-destroy",
+    "few-mails-sparkle",
+    "itchy-ads-compete",
+    "rare-planes-love",
+    "strong-needles-compare"
+  ]
+}
