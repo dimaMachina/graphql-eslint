@@ -105,8 +105,8 @@ importers:
         version: 16.8.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.47.0
-        version: 8.47.0
+        specifier: 8.48.0
+        version: 8.48.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -121,8 +121,8 @@ importers:
         version: 16.8.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.47.0
-        version: 8.47.0
+        specifier: 8.48.0
+        version: 8.48.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -137,8 +137,8 @@ importers:
         version: 16.8.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.47.0
-        version: 8.47.0
+        specifier: 8.48.0
+        version: 8.48.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -156,8 +156,8 @@ importers:
         version: 2.12.6(graphql@16.8.0)
     devDependencies:
       '@eslint/js':
-        specifier: 8.47.0
-        version: 8.47.0
+        specifier: 8.48.0
+        version: 8.48.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -172,8 +172,8 @@ importers:
         version: 16.8.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.47.0
-        version: 8.47.0
+        specifier: 8.48.0
+        version: 8.48.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -210,8 +210,8 @@ importers:
         version: 16.8.0
     devDependencies:
       '@eslint/js':
-        specifier: 8.47.0
-        version: 8.47.0
+        specifier: 8.48.0
+        version: 8.48.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -1461,8 +1461,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@eslint/js@8.47.0:
-    resolution: {integrity: sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==}
+  /@eslint/js@8.48.0:
+    resolution: {integrity: sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
