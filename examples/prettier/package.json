@@ -14,7 +14,7 @@
   "devDependencies": {
     "@eslint/js": "8.47.0",
     "@graphql-eslint/eslint-plugin": "workspace:*",
-    "eslint": "8.38.0",
+    "eslint": "8.48.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.8.8"
