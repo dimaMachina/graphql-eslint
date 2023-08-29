@@ -1,5 +1,8 @@
 # `unique-operation-name`
 
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
+enables this rule.
+
 - Category: `Operations`
 - Rule name: `@graphql-eslint/unique-operation-name`
 - Requires GraphQL Schema: `false`
@@ -54,4 +57,4 @@ query me {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/unique-operation-name.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/unique-operation-name.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/unique-operation-name.spec.ts)

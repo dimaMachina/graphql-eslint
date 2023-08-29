@@ -36,4 +36,4 @@ input Input @oneOf {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-nullable-fields-with-oneof.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/require-nullable-fields-with-oneof.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/require-nullable-fields-with-oneof.spec.ts)

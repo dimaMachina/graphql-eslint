@@ -4,12 +4,17 @@ import path from 'node:path';
 import packageJson from './package.json';
 
 const opts: Options = {
-  entry: ['src/**/*.ts'],
+  entry: ['src/**/*.ts', '!src/index.browser.ts'],
   clean: true,
   bundle: false,
   dts: true,
   env: {
     ...(process.env.NODE_ENV && { NODE_ENV: process.env.NODE_ENV }),
+  },
+  format: 'esm',
+  minifySyntax: true,
+  esbuildOptions(options, _context) {
+    options.define!.window = 'undefined';
   },
 };
 
@@ -17,7 +22,6 @@ const CWD = process.cwd();
 export default defineConfig([
   {
     ...opts,
-    format: 'esm',
     outDir: 'dist/esm',
     outExtension: () => ({ js: '.js' }),
     async onSuccess() {
@@ -38,11 +42,6 @@ export default defineConfig([
           2,
         ).replaceAll('dist/', ''),
       );
-      addCreateRequireBanner([
-        'estree-converter/utils.js',
-        'rules/graphql-js-validation.js',
-        'testkit.js',
-      ]);
       console.log('✅ Success!');
     },
   },
@@ -51,19 +50,19 @@ export default defineConfig([
     format: 'cjs',
     outDir: 'dist/cjs',
   },
+  {
+    ...opts,
+    entry: {
+      'index.browser': 'src/index.browser.ts',
+    },
+    outDir: 'dist',
+    dts: false,
+    bundle: true,
+    env: {
+      NODE_ENV: 'production',
+    },
+    esbuildOptions(options, _context) {
+      options.define!.window = 'true';
+    },
+  },
 ]);
-
-async function addCreateRequireBanner(filePaths: string[]): Promise<void> {
-  await Promise.all(
-    filePaths.map(async filePath => {
-      const fullPath = path.join(CWD, 'dist', 'esm', filePath);
-      const content = await fs.readFile(fullPath, 'utf8');
-      await fs.writeFile(
-        fullPath,
-        `import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-${content}`,
-      );
-    }),
-  );
-}

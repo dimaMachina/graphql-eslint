@@ -1,5 +1,5 @@
-import { IGraphQLConfig } from 'graphql-config';
-import { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import type { IGraphQLConfig } from 'graphql-config';
+import type { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
 
 const config: IGraphQLConfig = {
   projects: {
@@ -12,11 +12,11 @@ const config: IGraphQLConfig = {
       documents: 'query.second-project.js',
       extensions: {
         // in case you want to use different names for magic comment and module identifier
-        pluckConfig: <GraphQLTagPluckOptions>{
+        pluckConfig: {
           modules: [{ name: 'custom-graphql-tag', identifier: 'custom' }],
           globalGqlIdentifierName: 'custom',
           gqlMagicComment: 'MyGraphQL',
-        },
+        } satisfies GraphQLTagPluckOptions,
       },
     },
   },

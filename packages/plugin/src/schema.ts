@@ -3,15 +3,12 @@ import fg from 'fast-glob';
 import { GraphQLSchema } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
 import { ModuleCache } from './cache.js';
-import { ParserOptions, Pointer, Schema } from './types.js';
+import { Pointer, Schema } from './types.js';
 
 const schemaCache = new ModuleCache<GraphQLSchema>();
 const debug = debugFactory('graphql-eslint:schema');
 
-export function getSchema(
-  project: GraphQLProjectConfig,
-  schemaOptions?: ParserOptions['schemaOptions'],
-): Schema {
+export function getSchema(project: GraphQLProjectConfig): Schema {
   const schemaKey = project.schema;
 
   if (!schemaKey) {
@@ -26,7 +23,6 @@ export function getSchema(
 
   debug('Loading schema from %o', project.schema);
   const schema = project.loadSchemaSync(project.schema, 'GraphQLSchema', {
-    ...schemaOptions,
     pluckConfig: project.extensions.pluckConfig,
   });
   if (debug.enabled) {

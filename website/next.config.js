@@ -1,5 +1,6 @@
 import { createRequire } from 'node:module';
 import { withGuildDocs } from '@theguild/components/next.config';
+import webpack from 'webpack';
 
 const require = createRequire(import.meta.url);
 
@@ -20,14 +21,18 @@ export default withGuildDocs({
       esquery: require.resolve('esquery'),
       // fixes for @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
       eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js'),
-      // fixes for processor.js Module not found: Can't resolve 'velocityjs' and other 36 modules
-      '@graphql-tools/graphql-tag-pluck': false,
-      '@graphql-tools/code-file-loader': false,
-      // fixes for graphql-config.js TypeError: (0 , module__WEBPACK_IMPORTED_MODULE_0__.createRequire) is not a function
-      'graphql-config': false,
-      // fixes for schema.js and documents.js TypeError: Cannot read properties of undefined (reading 'split')
-      'fast-glob': false,
+      '@graphql-eslint/eslint-plugin/package.json': require.resolve(
+        '@graphql-eslint/eslint-plugin/package.json',
+      ),
+      '@graphql-eslint/eslint-plugin': require
+        .resolve('@graphql-eslint/eslint-plugin')
+        .replace('cjs/index.js', 'index.browser.mjs'),
     };
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
+        resource.request = resource.request.replace('node:', '');
+      }),
+    );
     return config;
   },
   eslint: {

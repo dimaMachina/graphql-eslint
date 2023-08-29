@@ -1,12 +1,10 @@
-name: website
+name: Website
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   deployment:

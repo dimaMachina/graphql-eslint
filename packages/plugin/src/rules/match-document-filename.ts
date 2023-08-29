@@ -1,4 +1,4 @@
-import { basename, extname } from 'path';
+import { basename, extname } from 'node:path';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
@@ -183,7 +183,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const options = context.options[0] || {
       fileExtension: null,
     };
-    const filePath = context.getFilename();
+    const filePath = context.filename;
     const isVirtualFile = VIRTUAL_DOCUMENT_REGEX.test(filePath);
 
     if (process.env.NODE_ENV !== 'test' && isVirtualFile) {

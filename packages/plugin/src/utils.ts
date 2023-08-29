@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { AST } from 'eslint';
 import { Position } from 'estree';
 import { ASTNode, GraphQLSchema, Kind } from 'graphql';
@@ -11,10 +10,10 @@ export function requireSiblingsOperations(
   ruleId: string,
   context: GraphQLESLintRuleContext,
 ): SiblingOperations | never {
-  const { siblingOperations } = context.parserServices;
+  const { siblingOperations } = context.sourceCode.parserServices;
   if (!siblingOperations.available) {
     throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.operations\` to be set and loaded. See https://bit.ly/graphql-eslint-operations for more info`,
+      `Rule \`${ruleId}\` requires graphql-config \`documents\` field to be set and loaded. See https://the-guild.dev/graphql/config/docs/user/documents for more info`,
     );
   }
   return siblingOperations;
@@ -24,22 +23,27 @@ export function requireGraphQLSchemaFromContext(
   ruleId: string,
   context: GraphQLESLintRuleContext,
 ): GraphQLSchema | never {
-  const { schema } = context.parserServices;
+  const { schema } = context.sourceCode.parserServices;
   if (!schema) {
     throw new Error(
-      `Rule \`${ruleId}\` requires \`parserOptions.schema\` to be set and loaded. See https://bit.ly/graphql-eslint-schema for more info`,
+      `Rule \`${ruleId}\` requires graphql-config \`schema\` field to be set and loaded. See https://the-guild.dev/graphql/config/docs/user/schema for more info`,
     );
   }
   return schema;
 }
 
+const chalk = {
+  red: (str: string) => `\x1b[31m${str}\x1b[39m`,
+  yellow: (str: string) => `\x1b[33m${str}\x1b[39m`,
+};
+
 export const logger = {
   error: (...args: unknown[]) =>
     // eslint-disable-next-line no-console
-    console.error(chalk.red('error'), '[graphql-eslint]', chalk(...args)),
+    console.error(chalk.red('error'), '[graphql-eslint]', ...args),
   warn: (...args: unknown[]) =>
     // eslint-disable-next-line no-console
-    console.warn(chalk.yellow('warning'), '[graphql-eslint]', chalk(...args)),
+    console.warn(chalk.yellow('warning'), '[graphql-eslint]', ...args),
 };
 
 export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');

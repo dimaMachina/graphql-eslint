@@ -41,7 +41,9 @@ export function GraphQLEditor({
     {
       parser: '@graphql-eslint/eslint-plugin',
       // extends: `plugin:@graphql-eslint/schema-recommended`,
-      parserOptions: { schema, documents },
+      parserOptions: {
+        graphQLConfig: { schema, documents },
+      },
       rules: selectedRules,
     },
     fileName,

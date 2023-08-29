@@ -1,0 +1,51 @@
+diff --git a/lib/linter/linter.js b/lib/linter/linter.js
+index 233cbed5b5ccdf89806df9786a0902a317dd451e..7db8fa9c1fca4183460164ca1fd8fa0a3c9e6206 100644
+--- a/lib/linter/linter.js
++++ b/lib/linter/linter.js
+@@ -44,7 +44,8 @@ const { getRuleFromConfig } = require("../config/flat-config-helpers");
+ const { FlatConfigArray } = require("../config/flat-config-array");
+ 
+ const debug = require("debug")("eslint:linter");
+-const MAX_AUTOFIX_PASSES = 10;
++// 🚨 10 is not enough for alphabetize test with definitions sorting
++const MAX_AUTOFIX_PASSES = 20;
+ const DEFAULT_PARSER_NAME = "espree";
+ const DEFAULT_ECMA_VERSION = 5;
+ const commentParser = new ConfigCommentParser();
+diff --git a/lib/rule-tester/flat-rule-tester.js b/lib/rule-tester/flat-rule-tester.js
+index f143873f7bc76737acc5ff00871e462ef058bf4b..a0b6283b653a9f9cd478711c34bbf4a07ad9008f 100644
+--- a/lib/rule-tester/flat-rule-tester.js
++++ b/lib/rule-tester/flat-rule-tester.js
+@@ -998,11 +998,7 @@ class FlatRuleTester {
+                     assert.strictEqual(result.output, item.output, "Output is incorrect.");
+                 }
+             } else {
+-                assert.strictEqual(
+-                    result.output,
+-                    item.code,
+-                    "The rule fixed the code. Please add 'output' property."
+-                );
++                // 🚨 Don't need, as we assert autofix output with snapshots
+             }
+ 
+             assertASTDidntChange(result.beforeAST, result.afterAST);
+diff --git a/lib/rule-tester/rule-tester.js b/lib/rule-tester/rule-tester.js
+index e4dc126783c8232a67268c72def615829c4508b9..6e1de73fd06e8bfec07e14c8779b050959f3add4 100644
+--- a/lib/rule-tester/rule-tester.js
++++ b/lib/rule-tester/rule-tester.js
+@@ -1008,13 +1008,10 @@ class RuleTester {
+                     assert.strictEqual(result.output, item.output, "Output is incorrect.");
+                 }
+             } else {
+-                assert.strictEqual(
+-                    result.output,
+-                    item.code,
+-                    "The rule fixed the code. Please add 'output' property."
+-                );
++                // 🚨 Don't need, as we assert autofix output with snapshots
+             }
+ 
++            item.assertMessages(item, messages)
+             assertASTDidntChange(result.beforeAST, result.afterAST);
+         }
+ 

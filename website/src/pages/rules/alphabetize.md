@@ -45,7 +45,7 @@ type User {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/alphabetize: ['error', { values: ['EnumTypeDefinition'] }]
+# eslint @graphql-eslint/alphabetize: ['error', { values: true }]
 
 enum Role {
   SUPER_ADMIN
@@ -58,7 +58,7 @@ enum Role {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/alphabetize: ['error', { values: ['EnumTypeDefinition'] }]
+# eslint @graphql-eslint/alphabetize: ['error', { values: true }]
 
 enum Role {
   ADMIN
@@ -115,18 +115,9 @@ Additional restrictions:
 - Minimum items: `1`
 - Unique items: `true`
 
-### `values` (array)
+### `values` (boolean)
 
 Values of `enum`.
-
-The elements of the array can contain the following enum values:
-
-- `EnumTypeDefinition`
-
-Additional restrictions:
-
-- Minimum items: `1`
-- Unique items: `true`
 
 ### `selections` (array)
 
@@ -142,18 +133,9 @@ Additional restrictions:
 - Minimum items: `1`
 - Unique items: `true`
 
-### `variables` (array)
+### `variables` (boolean)
 
 Variables of operations `query`, `mutation` and `subscription`.
-
-The elements of the array can contain the following enum values:
-
-- `OperationDefinition`
-
-Additional restrictions:
-
-- Minimum items: `1`
-- Unique items: `true`
 
 ### `arguments` (array)
 
@@ -175,8 +157,6 @@ Additional restrictions:
 
 Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.
 
-Default: `false`
-
 ### `groups` (array)
 
 Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything
@@ -192,4 +172,4 @@ Additional restrictions:
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/alphabetize.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/alphabetize.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/alphabetize.spec.ts)

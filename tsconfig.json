@@ -21,11 +21,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "paths": {
-      "@graphql-eslint/eslint-plugin": ["packages/plugin/src/index.ts"]
-    }
+    "skipLibCheck": true
   },
-  "include": ["packages"],
-  "exclude": ["**/tests"]
+  "include": ["packages"]
 }

@@ -99,7 +99,7 @@ export const rule: GraphQLESLintRule = {
 
 await writeFile(RULE_PATH, RULE_CONTENT.trimStart());
 
-const TEST_PATH = join(CWD, `packages/plugin/tests/${ruleId}.spec.ts`);
+const TEST_PATH = join(CWD, `packages/plugin/__tests__/${ruleId}.spec.ts`);
 const TEST_CONTENT = `
 import { GraphQLRuleTester, ParserOptions } from '../src';
 import { rule } from '../src/rules/${ruleId}';

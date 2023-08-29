@@ -1,5 +1,8 @@
 # `unique-fragment-name`
 
+✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
+enables this rule.
+
 - Category: `Operations`
 - Rule name: `@graphql-eslint/unique-fragment-name`
 - Requires GraphQL Schema: `false`
@@ -50,4 +53,4 @@ fragment UserFields on User {
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/unique-fragment-name.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/tests/unique-fragment-name.spec.ts)
+- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/unique-fragment-name.spec.ts)

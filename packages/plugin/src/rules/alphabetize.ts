@@ -21,8 +21,7 @@ import {
 import { FromSchema } from 'json-schema-to-ts';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRuleListener } from '../testkit.js';
-import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
 import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../utils.js';
 
 const RULE_ID = 'alphabetize';
@@ -36,12 +35,10 @@ const fieldsEnum: (
   Kind.INTERFACE_TYPE_DEFINITION,
   Kind.INPUT_OBJECT_TYPE_DEFINITION,
 ];
-const valuesEnum: ['EnumTypeDefinition'] = [Kind.ENUM_TYPE_DEFINITION];
 const selectionsEnum: ('FragmentDefinition' | 'OperationDefinition')[] = [
   Kind.OPERATION_DEFINITION,
   Kind.FRAGMENT_DEFINITION,
 ];
-const variablesEnum: ['OperationDefinition'] = [Kind.OPERATION_DEFINITION];
 const argumentsEnum: ('Directive' | 'DirectiveDefinition' | 'Field' | 'FieldDefinition')[] = [
   Kind.FIELD_DEFINITION,
   Kind.FIELD,
@@ -66,10 +63,7 @@ const schema = {
         description: 'Fields of `type`, `interface`, and `input`.',
       },
       values: {
-        ...ARRAY_DEFAULT_OPTIONS,
-        items: {
-          enum: valuesEnum,
-        },
+        type: 'boolean',
         description: 'Values of `enum`.',
       },
       selections: {
@@ -81,10 +75,7 @@ const schema = {
           'Selections of `fragment` and operations `query`, `mutation` and `subscription`.',
       },
       variables: {
-        ...ARRAY_DEFAULT_OPTIONS,
-        items: {
-          enum: variablesEnum,
-        },
+        type: 'boolean',
         description: 'Variables of operations `query`, `mutation` and `subscription`.',
       },
       arguments: {
@@ -98,7 +89,6 @@ const schema = {
         type: 'boolean',
         description:
           'Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `directive`.',
-        default: false,
       },
       groups: {
         ...ARRAY_DEFAULT_OPTIONS,
@@ -148,7 +138,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Incorrect',
-          usage: [{ values: [Kind.ENUM_TYPE_DEFINITION] }],
+          usage: [{ values: true }],
           code: /* GraphQL */ `
             enum Role {
               SUPER_ADMIN
@@ -160,7 +150,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct',
-          usage: [{ values: [Kind.ENUM_TYPE_DEFINITION] }],
+          usage: [{ values: true }],
           code: /* GraphQL */ `
             enum Role {
               ADMIN
@@ -200,19 +190,20 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       configOptions: {
         schema: [
           {
+            definitions: true,
             fields: fieldsEnum,
-            values: valuesEnum,
+            values: true,
             arguments: argumentsEnum,
-            // TODO: add in graphql-eslint v4
-            // definitions: true,
-            // groups: ['id', '*', 'createdAt', 'updatedAt']
+            groups: ['id', '*', 'createdAt', 'updatedAt'],
           },
         ],
         operations: [
           {
+            definitions: true,
             selections: selectionsEnum,
-            variables: variablesEnum,
+            variables: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
+            groups: ['id', '*', 'createdAt', 'updatedAt'],
           },
         ],
       },
@@ -361,10 +352,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       .flat();
 
     const fieldsSelector = kinds.join(',');
-
-    const hasEnumValues = opts.values?.[0] === Kind.ENUM_TYPE_DEFINITION;
     const selectionsSelector = opts.selections?.join(',');
-    const hasVariables = opts.variables?.[0] === Kind.OPERATION_DEFINITION;
     const argumentsSelector = opts.arguments?.join(',');
 
     if (fieldsSelector) {
@@ -382,7 +370,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       };
     }
 
-    if (hasEnumValues) {
+    if (opts.values) {
       const enumValuesSelector = [Kind.ENUM_TYPE_DEFINITION, Kind.ENUM_TYPE_EXTENSION].join(',');
       listeners[enumValuesSelector] = (
         node: GraphQLESTreeNode<EnumTypeDefinitionNode | EnumTypeExtensionNode>,
@@ -399,7 +387,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       };
     }
 
-    if (hasVariables) {
+    if (opts.variables) {
       listeners.OperationDefinition = (node: GraphQLESTreeNode<OperationDefinitionNode>) => {
         checkNodes(node.variableDefinitions?.map(varDef => varDef.variable));
       };

@@ -1,8 +1,7 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRuleListener } from '../testkit.js';
-import { GraphQLESLintRule, ValueOf } from '../types.js';
+import { GraphQLESLintRule, ValueOf, GraphQLESLintRuleListener } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
   convertCase,
@@ -265,6 +264,22 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             'FieldDefinition[parent.name.value=Subscription]': {
               forbiddenPrefixes: ['subscription'],
               forbiddenSuffixes: ['Subscription'],
+            },
+            'EnumTypeDefinition,EnumTypeExtension': {
+              forbiddenPrefixes: ['Enum'],
+              forbiddenSuffixes: ['Enum'],
+            },
+            'InterfaceTypeDefinition,InterfaceTypeExtension': {
+              forbiddenPrefixes: ['Interface'],
+              forbiddenSuffixes: ['Interface'],
+            },
+            'UnionTypeDefinition,UnionTypeExtension': {
+              forbiddenPrefixes: ['Union'],
+              forbiddenSuffixes: ['Union'],
+            },
+            'ObjectTypeDefinition,ObjectTypeExtension': {
+              forbiddenPrefixes: ['Type'],
+              forbiddenSuffixes: ['Type'],
             },
           },
         ],

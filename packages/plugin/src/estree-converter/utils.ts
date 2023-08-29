@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { AST } from 'eslint';
 import { Comment, SourceLocation } from 'estree';
 import {
@@ -25,40 +24,14 @@ export function getBaseType(type: GraphQLOutputType): GraphQLNamedType {
   return type;
 }
 
-// Hardcoded type because tests fails on graphql 15
-type TokenKindValue =
-  | ':'
-  | '!'
-  | '...'
-  | '('
-  | ')'
-  | '['
-  | ']'
-  | '{'
-  | '}'
-  | '@'
-  | '&'
-  // | '<EOF>'
-  | '<SOF>'
-  | '='
-  | '|'
-  | '$'
-  | 'BlockString'
-  | 'Comment'
-  | 'Float'
-  | 'Int'
-  | 'Name'
-  | 'String';
-
-export function convertToken<T extends TokenKindValue | 'Block' | 'Line'>(
+export function convertToken<T extends TokenKind | 'Block' | 'Line'>(
   token: Token,
   type: T,
 ): Omit<AST.Token, 'type'> & { type: T } {
   const { line, column, end, start, value } = token;
   return {
     type,
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
-    value: value!,
+    value,
     /*
      * ESLint has 0-based column number
      * https://eslint.org/docs/developer-guide/working-with-rules#contextreport
@@ -77,25 +50,9 @@ export function convertToken<T extends TokenKindValue | 'Block' | 'Line'>(
   };
 }
 
-function getLexer(source: Source): Lexer {
-  // GraphQL v14
-  const gqlLanguage = require('graphql/language');
-  if (gqlLanguage?.createLexer) {
-    return gqlLanguage.createLexer(source, {});
-  }
-
-  // GraphQL v15
-  const { Lexer: LexerCls } = require('graphql');
-  if (LexerCls && typeof LexerCls === 'function') {
-    return new LexerCls(source);
-  }
-
-  throw new Error('Unsupported GraphQL version! Please make sure to use GraphQL v14 or newer!');
-}
-
 export function extractTokens(filePath: string, code: string): AST.Token[] {
   const source = new Source(code, filePath);
-  const lexer = getLexer(source);
+  const lexer = new Lexer(source);
   const tokens: AST.Token[] = [];
   let token = lexer.advance();
 
@@ -120,8 +77,7 @@ export function extractComments(loc?: Location): Comment[] {
       const comment = convertToken(
         token,
         // `eslint-disable` directive works only with `Block` type comment
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: remove `!` when drop support of graphql@15
-        token.value!.trimStart().startsWith('eslint') ? 'Block' : 'Line',
+        token.value.trimStart().startsWith('eslint') ? 'Block' : 'Line',
       );
       comments.push(comment);
     }

@@ -1,5 +1,6 @@
 import { configs } from './configs/index.js';
 import { parseForESLint } from './parser.js';
+import { ConfigName } from './types.js';
 
 const languageOptions = {
   parser: { parseForESLint },
@@ -17,9 +18,9 @@ export const flatConfigs = {
     languageOptions,
     rules: configs['operations-recommended'].rules,
   },
-  relay: {
+  'schema-relay': {
     languageOptions,
-    rules: configs.relay.rules,
+    rules: configs['schema-relay'].rules,
   },
   'schema-all': {
     languageOptions,
@@ -32,4 +33,4 @@ export const flatConfigs = {
     languageOptions,
     rules: configs['schema-recommended'].rules,
   },
-};
+} satisfies Record<ConfigName, unknown>;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { AST } from 'eslint';
 import {
   ASTVisitor,
@@ -12,16 +11,51 @@ import {
   ValidationRule,
   visit,
 } from 'graphql';
+import {
+  ExecutableDefinitionsRule,
+  FieldsOnCorrectTypeRule,
+  FragmentsOnCompositeTypesRule,
+  KnownArgumentNamesRule,
+  KnownDirectivesRule,
+  KnownFragmentNamesRule,
+  KnownTypeNamesRule,
+  LoneAnonymousOperationRule,
+  LoneSchemaDefinitionRule,
+  NoFragmentCyclesRule,
+  NoUndefinedVariablesRule,
+  NoUnusedFragmentsRule,
+  NoUnusedVariablesRule,
+  OverlappingFieldsCanBeMergedRule,
+  PossibleFragmentSpreadsRule,
+  PossibleTypeExtensionsRule,
+  ProvidedRequiredArgumentsRule,
+  ScalarLeafsRule,
+  SingleFieldSubscriptionsRule,
+  UniqueArgumentNamesRule,
+  UniqueDirectiveNamesRule,
+  UniqueDirectivesPerLocationRule,
+  // UniqueEnumValueNamesRule, -- Superseded by graphql-eslint's `unique-enum-value-names` rule
+  UniqueFieldDefinitionNamesRule,
+  UniqueInputFieldNamesRule,
+  UniqueOperationTypesRule,
+  UniqueTypeNamesRule,
+  UniqueVariableNamesRule,
+  ValuesOfCorrectTypeRule,
+  VariablesAreInputTypesRule,
+  VariablesInAllowedPositionRule,
+} from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
-  logger,
   REPORT_ON_FIRST_CHARACTER,
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
 } from '../utils.js';
+import { SDLValidationRule } from 'graphql/validation/ValidationContext';
+
+type GraphQLJSRule = ValidationRule | SDLValidationRule;
 
 function validateDocument({
   context,
@@ -33,7 +67,7 @@ function validateDocument({
   context: GraphQLESLintRuleContext;
   schema: GraphQLSchema | null;
   documentNode: DocumentNode;
-  rule: ValidationRule;
+  rule: GraphQLJSRule;
   hasDidYouMeanSuggestions?: boolean;
 }): void {
   if (documentNode.definitions.length === 0) {
@@ -41,7 +75,7 @@ function validateDocument({
   }
   try {
     const validationErrors = schema
-      ? validate(schema, documentNode, [rule])
+      ? validate(schema, documentNode, [rule as ValidationRule])
       : validateSDL(documentNode, null, [rule as any]);
 
     for (const error of validationErrors) {
@@ -155,37 +189,26 @@ const handleMissingFragments: GetDocumentNode = ({ ruleId, context, node }) => {
 const validationToRule = (
   {
     ruleId,
-    ruleName,
+    rule,
     getDocumentNode,
     schema = [],
     hasDidYouMeanSuggestions,
   }: {
     ruleId: string;
-    ruleName: string;
+    rule: GraphQLJSRule;
     getDocumentNode?: GetDocumentNode;
     schema?: JSONSchema | [];
     hasDidYouMeanSuggestions?: boolean;
   },
   docs: RuleDocsInfo<any>,
 ): Record<typeof ruleId, GraphQLESLintRule<[], true>> => {
-  let ruleFn: ValidationRule | null = null;
-
-  try {
-    ruleFn = require(`graphql/validation/rules/${ruleName}Rule`)[`${ruleName}Rule`];
-  } catch {
-    try {
-      ruleFn = require(`graphql/validation/rules/${ruleName}`)[`${ruleName}Rule`];
-    } catch {
-      ruleFn = require('graphql/validation')[`${ruleName}Rule`];
-    }
-  }
   return {
     [ruleId]: {
       meta: {
         docs: {
           recommended: true,
           ...docs,
-          graphQLJSRuleName: ruleName,
+          graphQLJSRuleName: rule.name,
           url: `https://the-guild.dev/graphql/eslint/rules/${ruleId}`,
           description: `${docs.description}\n> This rule is a wrapper around a \`graphql-js\` validation function.`,
         },
@@ -193,13 +216,6 @@ const validationToRule = (
         hasSuggestions: hasDidYouMeanSuggestions,
       },
       create(context) {
-        if (!ruleFn) {
-          logger.warn(
-            `Rule "${ruleId}" depends on a GraphQL validation rule "${ruleName}" but it's not available in the "graphql" version you are using. Skipping…`,
-          );
-          return {};
-        }
-
         return {
           Document(node) {
             const schema = docs.requiresSchema
@@ -214,7 +230,7 @@ const validationToRule = (
               context,
               schema,
               documentNode,
-              rule: ruleFn!,
+              rule,
               hasDidYouMeanSuggestions,
             });
           },
@@ -229,7 +245,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'executable-definitions',
-      ruleName: 'ExecutableDefinitions',
+      rule: ExecutableDefinitionsRule,
     },
     {
       category: 'Operations',
@@ -241,7 +257,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'fields-on-correct-type',
-      ruleName: 'FieldsOnCorrectType',
+      rule: FieldsOnCorrectTypeRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -254,7 +270,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'fragments-on-composite-type',
-      ruleName: 'FragmentsOnCompositeTypes',
+      rule: FragmentsOnCompositeTypesRule,
     },
     {
       category: 'Operations',
@@ -266,7 +282,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-argument-names',
-      ruleName: 'KnownArgumentNames',
+      rule: KnownArgumentNamesRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -279,7 +295,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-directives',
-      ruleName: 'KnownDirectives',
+      rule: KnownDirectivesRule,
       getDocumentNode({ context, node: documentNode }) {
         const { ignoreClientDirectives = [] } = context.options[0] || {};
         if (ignoreClientDirectives.length === 0) {
@@ -334,7 +350,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-fragment-names',
-      ruleName: 'KnownFragmentNames',
+      rule: KnownFragmentNamesRule,
       getDocumentNode: handleMissingFragments,
     },
     {
@@ -394,7 +410,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'known-type-names',
-      ruleName: 'KnownTypeNames',
+      rule: KnownTypeNamesRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -407,7 +423,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'lone-anonymous-operation',
-      ruleName: 'LoneAnonymousOperation',
+      rule: LoneAnonymousOperationRule,
     },
     {
       category: 'Operations',
@@ -419,7 +435,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'lone-schema-definition',
-      ruleName: 'LoneSchemaDefinition',
+      rule: LoneSchemaDefinitionRule,
     },
     {
       category: 'Schema',
@@ -429,7 +445,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-fragment-cycles',
-      ruleName: 'NoFragmentCycles',
+      rule: NoFragmentCyclesRule,
     },
     {
       category: 'Operations',
@@ -441,7 +457,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-undefined-variables',
-      ruleName: 'NoUndefinedVariables',
+      rule: NoUndefinedVariablesRule,
       getDocumentNode: handleMissingFragments,
     },
     {
@@ -455,7 +471,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-unused-fragments',
-      ruleName: 'NoUnusedFragments',
+      rule: NoUnusedFragmentsRule,
       getDocumentNode: ({ ruleId, context, node }) => {
         const siblings = requireSiblingsOperations(ruleId, context);
         const FilePathToDocumentsMap = [
@@ -494,7 +510,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
           return node;
         };
 
-        return getParentNode(context.getFilename(), node);
+        return getParentNode(context.filename, node);
       },
     },
     {
@@ -508,7 +524,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'no-unused-variables',
-      ruleName: 'NoUnusedVariables',
+      rule: NoUnusedVariablesRule,
       getDocumentNode: handleMissingFragments,
     },
     {
@@ -522,7 +538,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'overlapping-fields-can-be-merged',
-      ruleName: 'OverlappingFieldsCanBeMerged',
+      rule: OverlappingFieldsCanBeMergedRule,
     },
     {
       category: 'Operations',
@@ -534,7 +550,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'possible-fragment-spread',
-      ruleName: 'PossibleFragmentSpreads',
+      rule: PossibleFragmentSpreadsRule,
     },
     {
       category: 'Operations',
@@ -546,22 +562,20 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'possible-type-extension',
-      ruleName: 'PossibleTypeExtensions',
+      rule: PossibleTypeExtensionsRule,
       hasDidYouMeanSuggestions: true,
     },
     {
       category: 'Schema',
       description: 'A type extension is only valid if the type is defined and has the same kind.',
-      // TODO: add in graphql-eslint v4
-      recommended: false,
+      recommended: true,
       requiresSchema: true,
-      isDisabledForAllConfig: true,
     },
   ),
   validationToRule(
     {
       ruleId: 'provided-required-arguments',
-      ruleName: 'ProvidedRequiredArguments',
+      rule: ProvidedRequiredArgumentsRule,
     },
     {
       category: ['Schema', 'Operations'],
@@ -573,7 +587,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'scalar-leafs',
-      ruleName: 'ScalarLeafs',
+      rule: ScalarLeafsRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -586,7 +600,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'one-field-subscriptions',
-      ruleName: 'SingleFieldSubscriptions',
+      rule: SingleFieldSubscriptionsRule,
     },
     {
       category: 'Operations',
@@ -597,7 +611,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-argument-names',
-      ruleName: 'UniqueArgumentNames',
+      rule: UniqueArgumentNamesRule,
     },
     {
       category: 'Operations',
@@ -609,7 +623,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-directive-names',
-      ruleName: 'UniqueDirectiveNames',
+      rule: UniqueDirectiveNamesRule,
     },
     {
       category: 'Schema',
@@ -619,7 +633,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-directive-names-per-location',
-      ruleName: 'UniqueDirectivesPerLocation',
+      rule: UniqueDirectivesPerLocationRule,
     },
     {
       category: ['Schema', 'Operations'],
@@ -630,20 +644,8 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   ),
   validationToRule(
     {
-      ruleId: 'unique-enum-value-names',
-      ruleName: 'UniqueEnumValueNames',
-    },
-    {
-      category: 'Schema',
-      description: 'A GraphQL enum type is only valid if all its values are uniquely named.',
-      recommended: false,
-      isDisabledForAllConfig: true,
-    },
-  ),
-  validationToRule(
-    {
       ruleId: 'unique-field-definition-names',
-      ruleName: 'UniqueFieldDefinitionNames',
+      rule: UniqueFieldDefinitionNamesRule,
     },
     {
       category: 'Schema',
@@ -653,7 +655,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-input-field-names',
-      ruleName: 'UniqueInputFieldNames',
+      rule: UniqueInputFieldNamesRule,
     },
     {
       category: 'Operations',
@@ -664,7 +666,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-operation-types',
-      ruleName: 'UniqueOperationTypes',
+      rule: UniqueOperationTypesRule,
     },
     {
       category: 'Schema',
@@ -674,7 +676,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-type-names',
-      ruleName: 'UniqueTypeNames',
+      rule: UniqueTypeNamesRule,
     },
     {
       category: 'Schema',
@@ -684,7 +686,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'unique-variable-names',
-      ruleName: 'UniqueVariableNames',
+      rule: UniqueVariableNamesRule,
     },
     {
       category: 'Operations',
@@ -695,7 +697,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'value-literals-of-correct-type',
-      ruleName: 'ValuesOfCorrectType',
+      rule: ValuesOfCorrectTypeRule,
       hasDidYouMeanSuggestions: true,
     },
     {
@@ -708,7 +710,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'variables-are-input-types',
-      ruleName: 'VariablesAreInputTypes',
+      rule: VariablesAreInputTypesRule,
     },
     {
       category: 'Operations',
@@ -720,7 +722,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
   validationToRule(
     {
       ruleId: 'variables-in-allowed-position',
-      ruleName: 'VariablesInAllowedPosition',
+      rule: VariablesInAllowedPositionRule,
     },
     {
       category: 'Operations',

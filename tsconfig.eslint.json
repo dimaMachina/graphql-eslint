@@ -6,6 +6,11 @@
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true
   },
-  "include": ["scripts/*.ts", "packages/plugin/tests/**/*.ts", "vite.config.ts", "serializer.ts"],
+  "include": [
+    "scripts/*.ts",
+    "packages/plugin/__tests__/**/*.ts",
+    "vite.config.ts",
+    "serializer.ts"
+  ],
   "exclude": []
 }

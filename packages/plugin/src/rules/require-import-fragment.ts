@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { NameNode } from 'graphql';
 import { requireSiblingsOperations } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
@@ -60,7 +60,6 @@ export const rule: GraphQLESLintRule = {
         },
       ],
       requiresSiblings: true,
-      isDisabledForAllConfig: true,
     },
     hasSuggestions: true,
     messages: {
@@ -72,7 +71,7 @@ export const rule: GraphQLESLintRule = {
   create(context) {
     const comments = context.getSourceCode().getAllComments();
     const siblings = requireSiblingsOperations(RULE_ID, context);
-    const filePath = context.getFilename();
+    const filePath = context.filename;
 
     return {
       'FragmentSpread > .name'(node: GraphQLESTreeNode<NameNode>) {

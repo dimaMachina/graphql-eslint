@@ -8,9 +8,11 @@ export = {
     '@graphql-eslint/alphabetize': [
       'error',
       {
+        definitions: true,
         selections: ['OperationDefinition', 'FragmentDefinition'],
-        variables: ['OperationDefinition'],
+        variables: true,
         arguments: ['Field', 'Directive'],
+        groups: ['id', '*', 'createdAt', 'updatedAt'],
       },
     ],
     '@graphql-eslint/lone-executable-definition': 'error',
@@ -24,7 +26,6 @@ export = {
       },
     ],
     '@graphql-eslint/no-one-place-fragments': 'error',
-    '@graphql-eslint/unique-fragment-name': 'error',
-    '@graphql-eslint/unique-operation-name': 'error',
+    '@graphql-eslint/require-import-fragment': 'error',
   },
 };

@@ -52,6 +52,7 @@ export const rule: GraphQLESLintRule = {
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSiblings: true,
       requiresSchema: true,
+      // Requires documents to be set
       isDisabledForAllConfig: true,
       examples: [
         {

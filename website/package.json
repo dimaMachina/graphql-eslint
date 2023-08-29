@@ -6,9 +6,8 @@
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
     "build": "next build && next-sitemap --config next-sitemap.config.cjs && next export",
-    "dev": "pnpm patch-browser && next",
-    "patch-browser": "tsx ../scripts/patch-graphql-eslint-browser.ts",
-    "prebuild": "tsx ../scripts/generate-docs.ts && pnpm patch-browser",
+    "dev": "next",
+    "prebuild": "tsx ../scripts/generate-docs.ts",
     "start": "next start",
     "theguild-nextra-algolia": "theguild-nextra-algolia"
   },
@@ -36,7 +35,8 @@
     "@types/lodash.uniqwith": "4.5.7",
     "@types/node": "18.17.12",
     "@types/react": "18.2.21",
-    "tailwindcss-radix": "2.8.0"
+    "tailwindcss-radix": "2.8.0",
+    "webpack": "^5.88.2"
   },
   "browserslist": {
     "production": [
