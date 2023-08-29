@@ -1,4 +1,3 @@
-import { asArray } from '@graphql-tools/utils';
 import * as ESTree from 'estree';
 import {
   ASTNode,
@@ -13,6 +12,7 @@ import {
   visitWithTypeInfo,
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
+import { asArray } from '@graphql-tools/utils';
 import { getBaseType, GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types.js';
 import {

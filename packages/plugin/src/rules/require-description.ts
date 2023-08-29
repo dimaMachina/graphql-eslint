@@ -1,5 +1,5 @@
-import { getRootTypeNames } from '@graphql-tools/utils';
 import { ASTKindToNode, Kind, TokenKind } from 'graphql';
+import { getRootTypeNames } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../types.js';
 import {

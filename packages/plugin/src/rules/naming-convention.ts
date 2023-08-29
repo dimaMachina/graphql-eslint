@@ -1,7 +1,7 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule, ValueOf, GraphQLESLintRuleListener } from '../types.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener, ValueOf } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
   convertCase,

@@ -5,8 +5,8 @@
 dependencies updates:
 
 - Updated dependency
-  [`graphql-config@^4.5.0` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.5.0) (from `^4.4.0`,
-  in `dependencies`)
+  [`graphql-config@^4.5.0` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.5.0) (from
+  `^4.4.0`, in `dependencies`)
 - Removed dependency
   [`@babel/code-frame@^7.18.6` ↗︎](https://www.npmjs.com/package/@babel/code-frame/v/7.18.6) (from
   `dependencies`)

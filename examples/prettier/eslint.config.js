@@ -1,7 +1,7 @@
-import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
-import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import prettierPlugin from 'eslint-plugin-prettier';
 import js from '@eslint/js';
+import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
 
 export default [
   {

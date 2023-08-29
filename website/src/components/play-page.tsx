@@ -1,11 +1,11 @@
 import { ReactElement, useRef } from 'react';
-import { flatConfigs, rules, ConfigName } from '@graphql-eslint/eslint-plugin';
-import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
-import { asArray } from '@graphql-tools/utils';
 import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { ConfigName, flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
+import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
+import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
 

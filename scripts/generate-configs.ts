@@ -9,10 +9,9 @@ import utils from '../packages/plugin/src/utils.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-const { format, resolveConfig } = prettier;
-
 const BR = '';
-const prettierOptions = resolveConfig.sync(__dirname);
+const prettierOptions = await prettier.resolveConfig(__dirname);
+
 const SRC_PATH = join(process.cwd(), 'packages/plugin/src');
 const IGNORE_FILES = ['index.ts', 'graphql-js-validation.ts'];
 
@@ -31,7 +30,7 @@ const writeFormattedFile: WriteFile = async (filePath, code) => {
     ' * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`',
     ' */',
     BR,
-    format(code, {
+    await prettier.format(code as string, {
       ...prettierOptions,
       parser: 'typescript',
     }),

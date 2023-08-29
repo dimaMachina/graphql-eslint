@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { ruleTester } from './test-utils';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
+import { ruleTester } from './test-utils';
 
 ruleTester.run('no-unused-fragments', GRAPHQL_JS_VALIDATIONS['no-unused-fragments'], {
   valid: [

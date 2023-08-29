@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { AST, RuleTester as ESLintRuleTester, Linter, Rule } from 'eslint';
 import { codeFrameColumns } from '@babel/code-frame';
-import { AST, Linter, Rule, RuleTester as ESLintRuleTester } from 'eslint';
 import { GraphQLESLintRule } from '../../plugin/src/types.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

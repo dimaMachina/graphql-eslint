@@ -2,9 +2,9 @@ import { AST } from 'eslint';
 import { Position } from 'estree';
 import { ASTNode, GraphQLSchema, Kind } from 'graphql';
 import lowerCase from 'lodash.lowercase';
+import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleContext } from './types.js';
-import { GraphQLESTreeNode } from './estree-converter/index.js';
 
 export function requireSiblingsOperations(
   ruleId: string,

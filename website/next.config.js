@@ -1,6 +1,6 @@
 import { createRequire } from 'node:module';
-import { withGuildDocs } from '@theguild/components/next.config';
 import webpack from 'webpack';
+import { withGuildDocs } from '@theguild/components/next.config';
 
 const require = createRequire(import.meta.url);
 

@@ -1,4 +1,3 @@
-import { Source } from '@graphql-tools/utils';
 import {
   FragmentDefinitionNode,
   Kind,
@@ -7,6 +6,7 @@ import {
   SelectionSetNode,
   visit,
 } from 'graphql';
+import { Source } from '@graphql-tools/utils';
 import { logger } from './utils.js';
 
 export type FragmentSource = { filePath: string; document: FragmentDefinitionNode };

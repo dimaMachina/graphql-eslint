@@ -1,10 +1,10 @@
 import { AST, Linter, Rule } from 'eslint';
 import * as ESTree from 'estree';
-import { GraphQLSchema, ASTKindToNode } from 'graphql';
-import { JSONSchema } from 'json-schema-to-ts';
-import { SiblingOperations } from './siblings.js';
-import { GraphQLESTreeNode } from './estree-converter/index.js';
+import { ASTKindToNode, GraphQLSchema } from 'graphql';
 import { IGraphQLConfig } from 'graphql-config';
+import { JSONSchema } from 'json-schema-to-ts';
+import { GraphQLESTreeNode } from './estree-converter/index.js';
+import { SiblingOperations } from './siblings.js';
 
 export type Schema = GraphQLSchema | null;
 export type Pointer = string | string[];

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
+import { clsx } from 'clsx';
 import * as S from '@radix-ui/react-select';
 import { CaretSlimIcon, CheckIcon } from '@theguild/components';
-import { clsx } from 'clsx';
 import { Button } from './button';
 
 type SelectProps = {

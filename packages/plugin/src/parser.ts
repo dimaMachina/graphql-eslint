@@ -1,14 +1,14 @@
-import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
 import debugFactory from 'debug';
 import { buildSchema, GraphQLError } from 'graphql';
+import { GraphQLProjectConfig, IGraphQLProject } from 'graphql-config';
+import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
+import { getDocuments } from './documents.js';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
 import { loadGraphQLConfig } from './graphql-config.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';
 import { GraphQLESLintParseResult, ParserOptions, Schema } from './types.js';
 import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
-import { GraphQLProjectConfig, IGraphQLProject } from 'graphql-config';
-import { getDocuments } from './documents.js';
 
 const debug = debugFactory('graphql-eslint:parser');
 

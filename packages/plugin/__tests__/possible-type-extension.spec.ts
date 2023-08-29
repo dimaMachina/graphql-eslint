@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
 import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
+import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const useUserSchema = (code: string) => {
   return {

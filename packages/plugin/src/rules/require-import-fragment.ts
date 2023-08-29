@@ -1,8 +1,8 @@
 import path from 'node:path';
 import { NameNode } from 'graphql';
-import { requireSiblingsOperations } from '../utils.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
+import { requireSiblingsOperations } from '../utils.js';
 
 const RULE_ID = 'require-import-fragment';
 const SUGGESTION_ID = 'add-import-expression';

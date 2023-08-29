@@ -1,4 +1,4 @@
-import { rule, RuleOptions, RULE_ID } from '../src/rules/require-description';
+import { rule, RULE_ID, RuleOptions } from '../src/rules/require-description';
 import { ParserOptionsForTests, ruleTester } from './test-utils';
 
 const OPERATION = { OperationDefinition: true };

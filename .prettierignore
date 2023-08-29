@@ -1,10 +1,7 @@
-dist/
 packages/plugin/__tests__/__snapshots__/
 examples/prettier/invalid.graphql
 examples/prettier/invalid.js
 pnpm-lock.yaml
-.bob/
-.next/
-out/
+
 # prettier ignore doesn't work
 website/src/pages/docs/configs.mdx

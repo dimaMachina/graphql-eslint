@@ -1,11 +1,11 @@
 import { relative } from 'node:path';
+import { Linter } from 'eslint';
+import { GraphQLConfig } from 'graphql-config';
 import {
   gqlPluckFromCodeStringSync,
   GraphQLTagPluckOptions,
 } from '@graphql-tools/graphql-tag-pluck';
 import { asArray } from '@graphql-tools/utils';
-import { Linter } from 'eslint';
-import { GraphQLConfig } from 'graphql-config';
 import { loadOnDiskGraphQLConfig } from './graphql-config.js';
 import { CWD, REPORT_ON_FIRST_CHARACTER, truthy } from './utils.js';
 

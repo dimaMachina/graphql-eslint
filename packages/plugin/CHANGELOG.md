@@ -117,12 +117,13 @@
 - [#1813](https://github.com/B2o5T/graphql-eslint/pull/1813)
   [`1c2d220`](https://github.com/B2o5T/graphql-eslint/commit/1c2d2205a8eb1d7446e4101bb4300e6e71120e42)
   Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
+
   - Updated dependency
     [`graphql-config@^4.5.0` ↗︎](https://www.npmjs.com/package/graphql-config/v/4.5.0) (from
     `^4.4.0`, in `dependencies`)
   - Removed dependency
-    [`@babel/code-frame@^7.18.6` ↗︎](https://www.npmjs.com/package/@babel/code-frame/v/7.18.6) (from
-    `dependencies`)
+    [`@babel/code-frame@^7.18.6` ↗︎](https://www.npmjs.com/package/@babel/code-frame/v/7.18.6)
+    (from `dependencies`)
   - Removed dependency [`chalk@^4.1.2` ↗︎](https://www.npmjs.com/package/chalk/v/4.1.2) (from
     `dependencies`)
   - Removed dependency [`tslib@^2.4.1` ↗︎](https://www.npmjs.com/package/tslib/v/2.4.1) (from
@@ -138,8 +139,8 @@
   Thanks [@B2o5T](https://github.com/B2o5T)! - dependencies updates:
 
   - Removed dependency
-    [`@babel/code-frame@^7.18.6` ↗︎](https://www.npmjs.com/package/@babel/code-frame/v/7.18.6) (from
-    `dependencies`)
+    [`@babel/code-frame@^7.18.6` ↗︎](https://www.npmjs.com/package/@babel/code-frame/v/7.18.6)
+    (from `dependencies`)
 
 ## 3.20.1
 

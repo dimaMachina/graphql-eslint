@@ -1,4 +1,3 @@
-import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
 import {
   ASTVisitor,
   GraphQLSchema,
@@ -11,6 +10,7 @@ import {
   visit,
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
+import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';

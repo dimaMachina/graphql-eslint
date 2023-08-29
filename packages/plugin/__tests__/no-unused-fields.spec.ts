@@ -1,6 +1,6 @@
-import { rule } from '../src/rules/no-unused-fields';
 // @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { RuleTester } from '@theguild/eslint-rule-tester';
+import { rule } from '../src/rules/no-unused-fields';
 import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils';
 
 const SCHEMA = /* GraphQL */ `

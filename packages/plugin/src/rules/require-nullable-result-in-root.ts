@@ -1,7 +1,7 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
+import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import { getNodeName, requireGraphQLSchemaFromContext, truthy } from '../utils.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
 
 const RULE_ID = 'require-nullable-result-in-root';
 

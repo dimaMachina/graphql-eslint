@@ -1,14 +1,13 @@
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { asArray } from '@graphql-tools/utils';
 import dedent from 'dedent';
 import md from 'json-schema-to-markdown';
 import prettier from 'prettier';
+import { asArray } from '@graphql-tools/utils';
 import pkg from '../packages/plugin/src/index.js';
 
 const { rules } = pkg;
-const { format, resolveConfig } = prettier;
 
 const BR = '';
 const NBSP = '&nbsp;';
@@ -51,9 +50,9 @@ function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]
 }
 
 async function generateDocs(): Promise<void> {
-  const prettierConfig = await resolveConfig('./docs/README.md');
+  const prettierConfig = await prettier.resolveConfig('./docs/README.md');
 
-  const result = Object.entries(rules).map(([ruleName, rule]) => {
+  const result = Object.entries(rules).map(async ([ruleName, rule]) => {
     const blocks: string[] = [`# \`${ruleName}\``];
     const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
 
@@ -106,11 +105,13 @@ async function generateDocs(): Promise<void> {
           const options =
             usage?.length > 0
               ? // ESLint RuleTester accept options as array but in eslintrc config we must provide options as object
-                format(JSON.stringify(['error', ...usage]), {
-                  parser: 'babel',
-                  singleQuote: true,
-                  printWidth: Infinity,
-                }).replace(';\n', '')
+                (
+                  await prettier.format(JSON.stringify(['error', ...usage]), {
+                    parser: 'babel',
+                    singleQuote: true,
+                    printWidth: Infinity,
+                  })
+                ).replace(';\n', '')
               : "'error'";
           blocks.push(`# eslint @graphql-eslint/${ruleName}: ${options}`, BR);
         }
@@ -182,48 +183,49 @@ async function generateDocs(): Promise<void> {
       ];
     });
 
-  result.push({
-    path: resolve(RULES_PATH, 'index.md'),
-    content: [
-      '# Overview',
-      'Each rule has emojis denoting:',
-      `- ${Icon.SCHEMA} if the rule applies to schema documents`,
-      `- ${Icon.OPERATIONS} if the rule applies to operations`,
-      `- ${Icon.GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
-      `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
-      `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
-      `- ${Icon.HAS_SUGGESTIONS} if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
-      BR,
-      '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
-      '<!-- prettier-ignore -->',
-      printMarkdownTable(
-        [
-          `Name${NBSP.repeat(20)}`,
-          'Description',
-          { name: `${NBSP.repeat(4)}Config${NBSP.repeat(4)}`, align: 'center' },
-          { name: `${Icon.SCHEMA}${NBSP}/${NBSP}${Icon.OPERATIONS}`, align: 'center' },
-          { name: `${Icon.GRAPHQL_ESLINT}${NBSP}/${NBSP}${Icon.GRAPHQL_JS}`, align: 'center' },
-          { name: `${Icon.FIXABLE}${NBSP}/${NBSP}${Icon.HAS_SUGGESTIONS}`, align: 'center' },
-        ],
-        sortedRules,
-      ),
-      '[recommended]: https://img.shields.io/badge/-recommended-green.svg',
-      '[all]: https://img.shields.io/badge/-all-blue.svg',
-      '[relay]: https://img.shields.io/badge/-relay-orange.svg',
-    ].join('\n'),
-  });
-
-  await Promise.all(
-    result.map(r =>
-      writeFile(
-        r.path,
-        format(r.content, {
-          parser: 'markdown',
-          ...prettierConfig,
-        }),
-      ),
-    ),
+  result.push(
+    Promise.resolve({
+      path: resolve(RULES_PATH, 'index.md'),
+      content: [
+        '# Overview',
+        'Each rule has emojis denoting:',
+        `- ${Icon.SCHEMA} if the rule applies to schema documents`,
+        `- ${Icon.OPERATIONS} if the rule applies to operations`,
+        `- ${Icon.GRAPHQL_ESLINT} \`graphql-eslint\` rule`,
+        `- ${Icon.GRAPHQL_JS} \`graphql-js\` rule`,
+        `- ${Icon.FIXABLE} if some problems reported by the rule are automatically fixable by the \`--fix\` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option`,
+        `- ${Icon.HAS_SUGGESTIONS} if some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions)`,
+        BR,
+        '<!-- 🚨 IMPORTANT! Do not manually modify this table. Run: `yarn generate:docs` -->',
+        '<!-- prettier-ignore -->',
+        printMarkdownTable(
+          [
+            `Name${NBSP.repeat(20)}`,
+            'Description',
+            { name: `${NBSP.repeat(4)}Config${NBSP.repeat(4)}`, align: 'center' },
+            { name: `${Icon.SCHEMA}${NBSP}/${NBSP}${Icon.OPERATIONS}`, align: 'center' },
+            { name: `${Icon.GRAPHQL_ESLINT}${NBSP}/${NBSP}${Icon.GRAPHQL_JS}`, align: 'center' },
+            { name: `${Icon.FIXABLE}${NBSP}/${NBSP}${Icon.HAS_SUGGESTIONS}`, align: 'center' },
+          ],
+          sortedRules,
+        ),
+        '[recommended]: https://img.shields.io/badge/-recommended-green.svg',
+        '[all]: https://img.shields.io/badge/-all-blue.svg',
+        '[relay]: https://img.shields.io/badge/-relay-orange.svg',
+      ].join('\n'),
+    }),
   );
+
+  for (const r of result) {
+    const { path, content } = await r;
+    writeFile(
+      path,
+      await prettier.format(content, {
+        parser: 'markdown',
+        ...prettierConfig,
+      }),
+    );
+  }
 
   const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entries(rules)
     .sort(([a], [b]) => a.localeCompare(b))
@@ -273,7 +275,7 @@ async function generateDocs(): Promise<void> {
 
   writeFile(
     resolve(RULES_PATH, '_meta.json'),
-    format(JSON.stringify(metaJson), {
+    await prettier.format(JSON.stringify(metaJson), {
       parser: 'json',
       ...prettierConfig,
     }),
