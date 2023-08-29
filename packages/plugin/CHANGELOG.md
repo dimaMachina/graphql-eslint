@@ -73,20 +73,20 @@
     {
       'EnumTypeDefinition,EnumTypeExtension': {
         forbiddenPrefixes: ['Enum'],
-        forbiddenSuffixes: ['Enum'],
+        forbiddenSuffixes: ['Enum']
       },
       'InterfaceTypeDefinition,InterfaceTypeExtension': {
         forbiddenPrefixes: ['Interface'],
-        forbiddenSuffixes: ['Interface'],
+        forbiddenSuffixes: ['Interface']
       },
       'UnionTypeDefinition,UnionTypeExtension': {
         forbiddenPrefixes: ['Union'],
-        forbiddenSuffixes: ['Union'],
+        forbiddenSuffixes: ['Union']
       },
       'ObjectTypeDefinition,ObjectTypeExtension': {
         forbiddenPrefixes: ['Type'],
-        forbiddenSuffixes: ['Type'],
-      },
+        forbiddenSuffixes: ['Type']
+      }
     }
     ```
 
@@ -128,11 +128,11 @@
   > **Note**: with this change unnecessary dependency `@babel/code-frame` was removed too
 
   ```js
-  import { RuleTester } from 'eslint';
+  import { RuleTester } from 'eslint'
 
   const ruleTester = new RuleTester({
-    parser: require.resolve('@graphql-eslint/eslint-plugin'),
-  });
+    parser: require.resolve('@graphql-eslint/eslint-plugin')
+  })
   ```
 
 ### Patch Changes
@@ -702,10 +702,10 @@ Special thanks to @connorjs
     '@graphql-eslint/avoid-operation-name-prefix': [
       'error',
       {
-        keywords: ['Query', 'Mutation', 'Subscription', 'Get'],
-      },
+        keywords: ['Query', 'Mutation', 'Subscription', 'Get']
+      }
     ],
-    '@graphql-eslint/no-operation-name-suffix': 'error',
+    '@graphql-eslint/no-operation-name-suffix': 'error'
   }
   ```
 
@@ -719,10 +719,10 @@ Special thanks to @connorjs
         OperationDefinition: {
           style: 'PascalCase',
           forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-          forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-        },
-      },
-    ],
+          forbiddenSuffixes: ['Query', 'Mutation', 'Subscription']
+        }
+      }
+    ]
   }
   ```
 
@@ -764,12 +764,12 @@ Special thanks to @connorjs
         FieldDefinition: 'camelCase',
         InputValueDefinition: 'camelCase',
         QueryDefinition: {
-          forbiddenPrefixes: ['get'],
+          forbiddenPrefixes: ['get']
         },
         leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      },
-    ],
+        trailingUnderscore: 'allow'
+      }
+    ]
   }
   ```
 
@@ -784,12 +784,12 @@ Special thanks to @connorjs
         FieldDefinition: 'camelCase',
         InputValueDefinition: 'camelCase',
         'FieldDefinition[parent.name.value=Query]': {
-          forbiddenPrefixes: ['get'],
+          forbiddenPrefixes: ['get']
         },
         allowLeadingUnderscore: true,
-        allowTrailingUnderscore: true,
-      },
-    ],
+        allowTrailingUnderscore: true
+      }
+    ]
   }
   ```
 
@@ -822,10 +822,10 @@ Special thanks to @connorjs
           'FieldDefinition',
           'InputValueDefinition',
           'EnumValueDefinition',
-          'DirectiveDefinition',
-        ],
-      },
-    ],
+          'DirectiveDefinition'
+        ]
+      }
+    ]
   }
   ```
 
@@ -840,9 +840,9 @@ Special thanks to @connorjs
         FieldDefinition: true,
         InputValueDefinition: true,
         EnumValueDefinition: true,
-        DirectiveDefinition: true,
-      },
-    ],
+        DirectiveDefinition: true
+      }
+    ]
   }
   ```
 
@@ -1063,7 +1063,7 @@ Special thanks to @connorjs
     '@graphql-eslint/unique-variable-names': 'error',
     '@graphql-eslint/value-literals-of-correct-type': 'error',
     '@graphql-eslint/variables-are-input-types': 'error',
-    '@graphql-eslint/variables-in-allowed-position': 'error',
+    '@graphql-eslint/variables-in-allowed-position': 'error'
   }
   ```
 
