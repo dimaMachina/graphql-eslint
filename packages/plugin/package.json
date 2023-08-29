@@ -48,7 +48,7 @@
     "@graphql-tools/utils": "^9.0.0",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
-    "graphql-config": "^4.5.0",
+    "graphql-config": "^5.0.0",
     "graphql-depth-limit": "^1.1.0",
     "lodash.lowercase": "^4.3.0"
   },
