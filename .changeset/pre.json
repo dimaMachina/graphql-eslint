@@ -16,6 +16,7 @@
   },
   "changesets": [
     "@graphql-eslint_eslint-plugin-1792-dependencies",
+    "@graphql-eslint_eslint-plugin-1813-dependencies",
     "dull-scissors-destroy",
     "few-mails-sparkle",
     "itchy-ads-compete",
