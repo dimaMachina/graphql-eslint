@@ -26,8 +26,8 @@ importers:
         specifier: 2.26.2
         version: 2.26.2
       '@graphql-tools/utils':
-        specifier: 9.2.1
-        version: 9.2.1(graphql@16.8.0)
+        specifier: 10.0.5
+        version: 10.0.5(graphql@16.8.0)
       '@theguild/eslint-config':
         specifier: 0.11.0
         version: 0.11.0(eslint@8.48.0)(typescript@5.2.2)
@@ -241,14 +241,14 @@ importers:
   packages/plugin:
     dependencies:
       '@graphql-tools/code-file-loader':
-        specifier: ^7.3.6
-        version: 7.3.23(@babel/core@7.22.11)(graphql@16.8.0)
+        specifier: ^8.0.0
+        version: 8.0.2(graphql@16.8.0)
       '@graphql-tools/graphql-tag-pluck':
-        specifier: ^7.3.6
-        version: 7.5.2(@babel/core@7.22.11)(graphql@16.8.0)
+        specifier: ^8.0.0
+        version: 8.0.2(graphql@16.8.0)
       '@graphql-tools/utils':
-        specifier: ^9.0.0
-        version: 9.2.1(graphql@16.8.0)
+        specifier: ^10.0.0
+        version: 10.0.5(graphql@16.8.0)
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -1467,19 +1467,19 @@ packages:
       value-or-promise: 1.0.12
     dev: false
 
-  /@graphql-tools/code-file-loader@7.3.23(@babel/core@7.22.11)(graphql@16.8.0):
-    resolution: {integrity: sha512-8Wt1rTtyTEs0p47uzsPJ1vAtfAx0jmxPifiNdmo9EOCuUPyQGEbMaik/YkqZ7QUFIEYEQu+Vgfo8tElwOPtx5Q==}
+  /@graphql-tools/code-file-loader@8.0.2(graphql@16.8.0):
+    resolution: {integrity: sha512-AKNpkElUL2cWocYpC4DzNEpo6qJw8Lp+L3bKQ/mIfmbsQxgLz5uve6zHBMhDaFPdlwfIox41N3iUSvi77t9e8A==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/graphql-tag-pluck': 7.5.2(@babel/core@7.22.11)(graphql@16.8.0)
-      '@graphql-tools/utils': 9.2.1(graphql@16.8.0)
+      '@graphql-tools/graphql-tag-pluck': 8.0.2(graphql@16.8.0)
+      '@graphql-tools/utils': 10.0.5(graphql@16.8.0)
       globby: 11.1.0
       graphql: 16.8.0
       tslib: 2.6.2
       unixify: 1.0.0
     transitivePeerDependencies:
-      - '@babel/core'
       - supports-color
     dev: false
 
@@ -1579,20 +1579,21 @@ packages:
       unixify: 1.0.0
     dev: false
 
-  /@graphql-tools/graphql-tag-pluck@7.5.2(@babel/core@7.22.11)(graphql@16.8.0):
-    resolution: {integrity: sha512-RW+H8FqOOLQw0BPXaahYepVSRjuOHw+7IL8Opaa5G5uYGOBxoXR7DceyQ7BcpMgktAOOmpDNQ2WtcboChOJSRA==}
+  /@graphql-tools/graphql-tag-pluck@8.0.2(graphql@16.8.0):
+    resolution: {integrity: sha512-U6fE4yEHxuk/nqmPixHpw1WhqdS6aYuaV60m1bEmUmGJNbpAhaMBy01JncpvpF15yZR5LZ0UjkHg+A3Lhoc8YQ==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
+      '@babel/core': 7.22.11
       '@babel/parser': 7.22.11
       '@babel/plugin-syntax-import-assertions': 7.22.5(@babel/core@7.22.11)
       '@babel/traverse': 7.22.11
       '@babel/types': 7.22.11
-      '@graphql-tools/utils': 9.2.1(graphql@16.8.0)
+      '@graphql-tools/utils': 10.0.5(graphql@16.8.0)
       graphql: 16.8.0
       tslib: 2.6.2
     transitivePeerDependencies:
-      - '@babel/core'
       - supports-color
     dev: false
 
@@ -1693,16 +1694,6 @@ packages:
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.0)
       dset: 3.1.2
-      graphql: 16.8.0
-      tslib: 2.6.2
-    dev: false
-
-  /@graphql-tools/utils@9.2.1(graphql@16.8.0):
-    resolution: {integrity: sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.0)
       graphql: 16.8.0
       tslib: 2.6.2
 
@@ -4764,7 +4755,6 @@ packages:
   /dset@3.1.2:
     resolution: {integrity: sha512-g/M9sqy3oHe477Ar4voQxWtaPIFw1jTdKZuomOjhCcBx9nHUNn0pu6NopuFFrTh/TRZIKEj+76vLWFu9BNKk+Q==}
     engines: {node: '>=4'}
-    dev: false
 
   /duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
