@@ -9,10 +9,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "graphql": "16.7.1"
+    "graphql": "16.8.0"
   },
   "devDependencies": {
-    "@eslint/js": "8.46.0",
+    "@eslint/js": "8.48.0",
     "@graphql-eslint/eslint-plugin": "workspace:*",
     "eslint": "8.46.0",
     "eslint-config-prettier": "9.0.0",
