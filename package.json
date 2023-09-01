@@ -26,7 +26,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.2",
-    "@graphql-tools/utils": "10.0.5",
+    "@graphql-tools/utils": "10.0.6",
     "@theguild/eslint-config": "0.11.0",
     "@theguild/prettier-config": "2.0.1",
     "@types/dedent": "0.7.0",
