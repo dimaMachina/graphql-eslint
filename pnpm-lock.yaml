@@ -328,8 +328,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
       '@theguild/components':
-        specifier: 5.2.2
-        version: 5.2.2(@algolia/client-search@4.19.1)(@types/react@18.2.21)(next@13.4.19)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2)
+        specifier: 5.2.3
+        version: 5.2.3(@algolia/client-search@4.19.1)(@types/react@18.2.21)(next@13.4.19)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2)
       clsx:
         specifier: 2.0.0
         version: 2.0.0
@@ -392,10 +392,10 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
 
-  /@algolia/autocomplete-core@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0):
+  /@algolia/autocomplete-core@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0):
     resolution: {integrity: sha512-kFtn8XPMdE1QGDxyMTObGgaUpq5lcG2fLVsda6E88MoZZsfYkC8Oua6dwa0b06/GpgEWaliby/7AksUqz05uzw==}
     dependencies:
-      '@algolia/autocomplete-plugin-algolia-insights': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
+      '@algolia/autocomplete-plugin-algolia-insights': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
       '@algolia/autocomplete-shared': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -403,13 +403,13 @@ packages:
       - search-insights
     dev: false
 
-  /@algolia/autocomplete-js@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0):
+  /@algolia/autocomplete-js@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0):
     resolution: {integrity: sha512-+INNaRwwztxUboAoTnDSAm7INPcyLOu4SANYTZihyQiVRr6ZeJd7/AlifMnonJxrEH7j5RgX7WhjUm5xMN+r8A==}
     peerDependencies:
       '@algolia/client-search': '>= 4.5.1 < 6'
       algoliasearch: '>= 4.9.1 < 6'
     dependencies:
-      '@algolia/autocomplete-core': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
+      '@algolia/autocomplete-core': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
       '@algolia/autocomplete-preset-algolia': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
       '@algolia/autocomplete-shared': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
       '@algolia/client-search': 4.19.1
@@ -420,26 +420,26 @@ packages:
       - search-insights
     dev: false
 
-  /@algolia/autocomplete-plugin-algolia-insights@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0):
+  /@algolia/autocomplete-plugin-algolia-insights@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0):
     resolution: {integrity: sha512-TsJ5vs1jR9IbYDRWnd0tHLF/y54quoSAV7fDbyDdfUdkuI9bVP0bzulxT+POezPT5+6Ya5IJNCrg4DViA3Dm0Q==}
     peerDependencies:
       search-insights: '>= 1 < 3'
     dependencies:
       '@algolia/autocomplete-shared': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
-      search-insights: 2.7.0
+      search-insights: 2.8.0
     transitivePeerDependencies:
       - '@algolia/client-search'
       - algoliasearch
     dev: false
 
-  /@algolia/autocomplete-plugin-query-suggestions@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0):
+  /@algolia/autocomplete-plugin-query-suggestions@1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0):
     resolution: {integrity: sha512-awczuqV8hydlTMeuiDFhHzx+5HLD+pSVxySb4LgT60mUuT8cmivAnxm2NrgEulamDeFj7LKFR9fXHpkIs5LTnA==}
     peerDependencies:
       '@algolia/client-search': '>= 4.5.1 < 6'
       algoliasearch: '>= 4.5.1 < 6'
     dependencies:
-      '@algolia/autocomplete-core': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
-      '@algolia/autocomplete-js': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
+      '@algolia/autocomplete-core': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
+      '@algolia/autocomplete-js': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
       '@algolia/autocomplete-preset-algolia': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
       '@algolia/autocomplete-shared': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
       '@algolia/client-search': 4.19.1
@@ -2510,16 +2510,16 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components@5.2.2(@algolia/client-search@4.19.1)(@types/react@18.2.21)(next@13.4.19)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2):
-    resolution: {integrity: sha512-OOF/YrVOm0SN0Dngu8f10z7kW/p0M00IDIcZoiUmU/uw4f/5lH4SYOiLk1r7jqmqwuWgNEh55plO2iUeepwP6w==}
+  /@theguild/components@5.2.3(@algolia/client-search@4.19.1)(@types/react@18.2.21)(next@13.4.19)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2):
+    resolution: {integrity: sha512-93nsnL8oS1Lb4k67YmQSU4xD6gMTCAksDeZxD3Ms6iPwAaAgReMGizV/ZpQooc3q/emtlyIkJy3fLOOVXLS2/w==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@algolia/autocomplete-js': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
-      '@algolia/autocomplete-plugin-algolia-insights': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
-      '@algolia/autocomplete-plugin-query-suggestions': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0)
+      '@algolia/autocomplete-js': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
+      '@algolia/autocomplete-plugin-algolia-insights': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
+      '@algolia/autocomplete-plugin-query-suggestions': 1.11.0(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.0)
       '@algolia/autocomplete-theme-classic': 1.11.0
       '@giscus/react': 2.3.0(react-dom@18.2.0)(react@18.2.0)
       '@next/bundle-analyzer': 13.4.2
@@ -2539,7 +2539,7 @@ packages:
       react-paginate: 8.2.0(react@18.2.0)
       react-player: 2.12.0(react@18.2.0)
       remark-mdx-disable-explicit-jsx: 0.1.0
-      search-insights: 2.7.0
+      search-insights: 2.8.0
       semver: 7.5.4
       use-debounce: 9.0.4(react@18.2.0)
     transitivePeerDependencies:
@@ -9331,9 +9331,9 @@ packages:
       compute-scroll-into-view: 3.0.3
     dev: false
 
-  /search-insights@2.7.0:
-    resolution: {integrity: sha512-GLbVaGgzYEKMvuJbHRhLi1qoBFnjXZGZ6l4LxOYPCp4lI2jDRB3jPU9/XNhMwv6kvnA9slTreq6pvK+b3o3aqg==}
-    engines: {node: '>=8.16.0'}
+  /search-insights@2.8.0:
+    resolution: {integrity: sha512-VzI4PMktJbydkbrF3/n40vFfRxdwg+o3CkQt0F3mHRSXVuv0PsVxQvB6mQQq/e9MCXAemcmp/GP9CNHpayFoCw==}
+    engines: {node: '>=16.0.0'}
     dev: false
 
   /section-matter@1.0.0:
