@@ -21,7 +21,7 @@
     "graphql": "16.8.1",
     "lodash.debounce": "4.0.8",
     "lodash.uniqwith": "4.5.0",
-    "next": "13.4.19",
+    "next": "13.5.1",
     "next-query-params": "4.2.3",
     "next-sitemap": "4.2.2",
     "react": "18.2.0",
