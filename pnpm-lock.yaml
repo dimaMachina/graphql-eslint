@@ -102,8 +102,8 @@ importers:
         version: 16.8.1
     devDependencies:
       '@eslint/js':
-        specifier: 8.48.0
-        version: 8.48.0
+        specifier: 8.49.0
+        version: 8.49.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -118,8 +118,8 @@ importers:
         version: 16.8.1
     devDependencies:
       '@eslint/js':
-        specifier: 8.48.0
-        version: 8.48.0
+        specifier: 8.49.0
+        version: 8.49.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -134,8 +134,8 @@ importers:
         version: 16.8.1
     devDependencies:
       '@eslint/js':
-        specifier: 8.48.0
-        version: 8.48.0
+        specifier: 8.49.0
+        version: 8.49.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -163,8 +163,8 @@ importers:
         version: 16.8.1
     devDependencies:
       '@eslint/js':
-        specifier: 8.48.0
-        version: 8.48.0
+        specifier: 8.49.0
+        version: 8.49.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
@@ -188,8 +188,8 @@ importers:
         version: 16.8.1
     devDependencies:
       '@eslint/js':
-        specifier: 8.48.0
-        version: 8.48.0
+        specifier: 8.49.0
+        version: 8.49.0
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../../packages/plugin/dist
