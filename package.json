@@ -48,7 +48,7 @@
     "tsx": "3.12.10",
     "turbo": "^1.10.12",
     "typescript": "5.2.2",
-    "vitest": "0.34.4"
+    "vitest": "0.34.5"
   },
   "pnpm": {
     "patchedDependencies": {
