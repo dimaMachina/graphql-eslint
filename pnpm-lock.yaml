@@ -77,8 +77,8 @@ importers:
         specifier: 0.5.4
         version: 0.5.4(prettier@3.0.3)
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       tsup:
         specifier: ^7.1.0
         version: 7.2.0(typescript@5.2.2)
@@ -1939,7 +1939,7 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       '@npmcli/name-from-folder': 2.0.0
-      glob: 10.3.4
+      glob: 10.3.7
       minimatch: 9.0.3
       read-package-json-fast: 3.0.2
     dev: true
@@ -5764,18 +5764,6 @@ packages:
   /glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
-  /glob@10.3.4:
-    resolution: {integrity: sha512-6LFElP3A+i/Q8XQKEvZjkEWEOTgAIALR9AO2rwT8bgPhDd1anmqDJDZ6lLddI4ehxxxR1S5RIqKe1uapMQfYaQ==}
-    engines: {node: '>=16 || 14 >=14.17'}
-    hasBin: true
-    dependencies:
-      foreground-child: 3.1.1
-      jackspeak: 2.3.3
-      minimatch: 9.0.3
-      minipass: 7.0.3
-      path-scurry: 1.10.1
-    dev: true
-
   /glob@10.3.7:
     resolution: {integrity: sha512-wCMbE1m9Nx5yD9LYtgsVWq5VhHlk5WzJirw594qZR6AIvQYuHrdDtIktUVjQItalD53y7dqoedu9xP0u0WaxIQ==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -9385,8 +9373,8 @@ packages:
     dependencies:
       glob: 7.2.3
 
-  /rimraf@5.0.4:
-    resolution: {integrity: sha512-rizQI/o/YAMM1us0Zyax0uRfIK39XR52EAjjOi0fzMolpGp0onj6CWzBAXuOx6+6Xi9Rgi0d9tUZojhJerLUmQ==}
+  /rimraf@5.0.5:
+    resolution: {integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
