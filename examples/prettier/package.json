@@ -12,7 +12,7 @@
     "graphql": "16.8.1"
   },
   "devDependencies": {
-    "@eslint/js": "8.50.0",
+    "@eslint/js": "8.51.0",
     "@graphql-eslint/eslint-plugin": "workspace:*",
     "eslint": "8.51.0",
     "eslint-config-prettier": "9.0.0",
