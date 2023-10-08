@@ -45,7 +45,7 @@ jobs:
     needs: [typecheck]
     strategy:
       matrix:
-        node_version: [18, 20]
+        node_version: [18, 20.7]
         graphql_version: [16]
 
     steps:
