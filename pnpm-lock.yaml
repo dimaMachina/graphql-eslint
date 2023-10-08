@@ -213,8 +213,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       svelte-eslint-parser:
-        specifier: 0.33.0
-        version: 0.33.0(svelte@4.2.1)
+        specifier: 0.33.1
+        version: 0.33.1(svelte@4.2.1)
       svelte2tsx:
         specifier: 0.6.22
         version: 0.6.22(svelte@4.2.1)(typescript@5.2.2)
@@ -9909,8 +9909,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-eslint-parser@0.33.0(svelte@4.2.1):
-    resolution: {integrity: sha512-5awZ6Bs+Tb/zQwa41PSdcLynAVQTwW0HGyCBjtbAQ59taLZqDgQSMzRlDmapjZdDtzERm0oXDZNE0E+PKJ6ryg==}
+  /svelte-eslint-parser@0.33.1(svelte@4.2.1):
+    resolution: {integrity: sha512-vo7xPGTlKBGdLH8T5L64FipvTrqv3OQRx9d2z5X05KKZDlF4rQk8KViZO4flKERY+5BiVdOh7zZ7JGJWo5P0uA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       svelte: ^3.37.0 || ^4.0.0
