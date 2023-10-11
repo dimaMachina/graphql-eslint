@@ -1,5 +1,3 @@
-[![GraphQL Conf 2023](/GraphQLConf-2023-Banner.png)](https://graphql.org/conf/)
-
 # GraphQL-ESLint
 
 [![npm version](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin.svg)](https://badge.fury.io/js/%40graphql-eslint%2Feslint-plugin)
