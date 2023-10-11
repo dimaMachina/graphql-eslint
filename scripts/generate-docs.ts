@@ -274,9 +274,9 @@ async function generateDocs(): Promise<void> {
   };
 
   writeFile(
-    resolve(RULES_PATH, '_meta.json'),
-    await prettier.format(JSON.stringify(metaJson), {
-      parser: 'json',
+    resolve(RULES_PATH, '_meta.ts'),
+    await prettier.format('export default ' + JSON.stringify(metaJson), {
+      parser: 'typescript',
       ...prettierConfig,
     }),
   );
