@@ -362,8 +362,8 @@ importers:
         version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@theguild/algolia':
-        specifier: 1.1.9
-        version: 1.1.9
+        specifier: 2.0.0
+        version: 2.0.0
       '@theguild/tailwind-config':
         specifier: 0.3.0
         version: 0.3.0
@@ -2484,13 +2484,13 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@theguild/algolia@1.1.9:
-    resolution: {integrity: sha512-WygxjQDdwY/ORO0QJgyAahWR1okA/6kbYbdP/Zas28L0GIvToLhzjswmZ+tzvw62GU3EeFp8JpPf24QHe5/0og==}
+  /@theguild/algolia@2.0.0:
+    resolution: {integrity: sha512-4cjVARyY3Q1CM/9tJ8teeTXt0ZF4Dj9qAqAl393i/Kb/YEh+N/Y+/Uof2sNsoOXcIVQ32equ3VlP0qCdI6gThQ==}
     hasBin: true
     dependencies:
       algoliasearch: 4.19.1
       commander: 11.0.0
-      fast-glob: 3.3.1
+      fast-xml-parser: 4.3.2
       github-slugger: 2.0.0
       gray-matter: 4.0.3
       lodash.sortby: 4.7.0
@@ -5469,6 +5469,13 @@ packages:
     dependencies:
       punycode: 1.4.1
     dev: false
+
+  /fast-xml-parser@4.3.2:
+    resolution: {integrity: sha512-rmrXUXwbJedoXkStenj1kkljNF7ugn5ZjR9FJcwmCfcCbtOMDghPajbc+Tck6vE6F5XsDmx+Pr2le9fw8+pXBg==}
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
+    dev: true
 
   /fastq@1.15.0:
     resolution: {integrity: sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==}
@@ -9962,6 +9969,10 @@ packages:
     resolution: {integrity: sha512-PugKzOsyXpArk0yWmUwqOZecSO0GH0bPoctLcqNDH9J04pVW3lflYE0ujElBGTloevcxF5MofAOZ7C5l2b+wLg==}
     dependencies:
       acorn: 8.10.0
+    dev: true
+
+  /strnum@1.0.5:
+    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
     dev: true
 
   /style-to-object@0.4.2:
