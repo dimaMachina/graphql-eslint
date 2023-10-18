@@ -58,7 +58,7 @@
     "@types/eslint": "8.44.5",
     "@types/estree": "1.0.3",
     "@types/graphql-depth-limit": "1.1.5",
-    "@types/json-schema": "7.0.13",
+    "@types/json-schema": "7.0.14",
     "@types/lodash.lowercase": "4.3.7",
     "graphql": "16.8.1",
     "json-schema-to-ts": "2.9.2"
