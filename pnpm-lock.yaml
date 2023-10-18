@@ -304,8 +304,8 @@ importers:
         version: 7.22.13
     devDependencies:
       '@types/babel__code-frame':
-        specifier: 7.0.4
-        version: 7.0.4
+        specifier: 7.0.5
+        version: 7.0.5
       '@types/node':
         specifier: 18.18.5
         version: 18.18.5
@@ -2619,8 +2619,8 @@ packages:
     dependencies:
       '@types/estree': 1.0.2
 
-  /@types/babel__code-frame@7.0.4:
-    resolution: {integrity: sha512-WBxINLlATjvmpCgBbb9tOPrKtcPfu4A/Yz2iRzmdaodfvjAS/Z0WZJClV9/EXvoC9viI3lgUs7B9Uo7G/RmMGg==}
+  /@types/babel__code-frame@7.0.5:
+    resolution: {integrity: sha512-tE88HnYMl5iJAB1V9nJCrE1udmwGCoNvx2ayTa8nwkE3UMMRRljANO+sX8D321hIrqf1DlvhAPAo5G6DWaMQNg==}
     dev: true
 
   /@types/chai-subset@1.3.3:
