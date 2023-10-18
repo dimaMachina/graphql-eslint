@@ -56,7 +56,7 @@
     "@theguild/eslint-rule-tester": "workspace:*",
     "@types/debug": "4.1.10",
     "@types/eslint": "8.44.5",
-    "@types/estree": "1.0.2",
+    "@types/estree": "1.0.3",
     "@types/graphql-depth-limit": "1.1.4",
     "@types/json-schema": "7.0.13",
     "@types/lodash.lowercase": "4.3.7",
