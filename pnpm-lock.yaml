@@ -210,14 +210,14 @@ importers:
         specifier: 8.51.0
         version: 8.51.0
       svelte:
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 4.2.2
+        version: 4.2.2
       svelte-eslint-parser:
         specifier: 0.33.1
-        version: 0.33.1(svelte@4.2.1)
+        version: 0.33.1(svelte@4.2.2)
       svelte2tsx:
         specifier: 0.6.23
-        version: 0.6.23(svelte@4.2.1)(typescript@5.2.2)
+        version: 0.6.23(svelte@4.2.2)(typescript@5.2.2)
 
   examples/vue-code-file:
     dependencies:
@@ -6956,6 +6956,13 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /magic-string@0.30.5:
+    resolution: {integrity: sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.15
+    dev: true
+
   /map-obj@1.0.1:
     resolution: {integrity: sha512-7N/q3lyZ+LVCp7PzuxrJr4KMbBE2hW7BT7YNia330OFxIf4d3r5zVpicP2650l7CPN6RM9zOJRl3NGpqSiw3Eg==}
     engines: {node: '>=0.10.0'}
@@ -10063,7 +10070,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-eslint-parser@0.33.1(svelte@4.2.1):
+  /svelte-eslint-parser@0.33.1(svelte@4.2.2):
     resolution: {integrity: sha512-vo7xPGTlKBGdLH8T5L64FipvTrqv3OQRx9d2z5X05KKZDlF4rQk8KViZO4flKERY+5BiVdOh7zZ7JGJWo5P0uA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -10077,10 +10084,10 @@ packages:
       espree: 9.6.1
       postcss: 8.4.29
       postcss-scss: 4.0.8(postcss@8.4.29)
-      svelte: 4.2.1
+      svelte: 4.2.2
     dev: true
 
-  /svelte2tsx@0.6.23(svelte@4.2.1)(typescript@5.2.2):
+  /svelte2tsx@0.6.23(svelte@4.2.2)(typescript@5.2.2):
     resolution: {integrity: sha512-3bwd1PuWUA3oEXy8+85zrLDnmJOsVpShpKVAehGWeYsz/66zMihTpRpUN97VVAKTZbO5tP4wnchHUXYs0zOwdw==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0
@@ -10088,12 +10095,12 @@ packages:
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 4.2.1
+      svelte: 4.2.2
       typescript: 5.2.2
     dev: true
 
-  /svelte@4.2.1:
-    resolution: {integrity: sha512-LpLqY2Jr7cRxkrTc796/AaaoMLF/1ax7cto8Ot76wrvKQhrPmZ0JgajiWPmg9mTSDqO16SSLiD17r9MsvAPTmw==}
+  /svelte@4.2.2:
+    resolution: {integrity: sha512-My2tytF2e2NnHSpn2M7/3VdXT4JdTglYVUuSuK/mXL2XtulPYbeBfl8Dm1QiaKRn0zoULRnL+EtfZHHP0k4H3A==}
     engines: {node: '>=16'}
     dependencies:
       '@ampproject/remapping': 2.2.1
@@ -10107,7 +10114,7 @@ packages:
       estree-walker: 3.0.3
       is-reference: 3.0.2
       locate-character: 3.0.0
-      magic-string: 0.30.3
+      magic-string: 0.30.5
       periscopic: 3.1.0
     dev: true
 
