@@ -32,7 +32,7 @@
     "@theguild/algolia": "2.0.0",
     "@theguild/tailwind-config": "0.3.0",
     "@types/lodash.debounce": "4.0.8",
-    "@types/lodash.uniqwith": "4.5.7",
+    "@types/lodash.uniqwith": "4.5.8",
     "@types/node": "18.18.5",
     "@types/react": "18.2.28",
     "tailwindcss-radix": "2.8.0",
