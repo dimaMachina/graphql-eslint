@@ -287,8 +287,8 @@ importers:
         specifier: 7.0.14
         version: 7.0.14
       '@types/lodash.lowercase':
-        specifier: 4.3.7
-        version: 4.3.7
+        specifier: 4.3.8
+        version: 4.3.8
       graphql:
         specifier: 16.8.1
         version: 16.8.1
@@ -2726,8 +2726,8 @@ packages:
       '@types/lodash': 4.14.198
     dev: true
 
-  /@types/lodash.lowercase@4.3.7:
-    resolution: {integrity: sha512-cyjXwXsUW8jj+aONNwOeOfuod4cqxmZvXwLp+MZvjdcvXSve1+fRxC0aT/Yx0bbP3L36SGPwr1Kv3uVV8k8AjQ==}
+  /@types/lodash.lowercase@4.3.8:
+    resolution: {integrity: sha512-Ye5WhmZfmRDH8xBivkwN5HZEJULps4jB7x/OAfcds6w8TmrQi4Uj8kOmVGtm8sTJ56GK/67IfVtJZ/PHtmLOzQ==}
     dependencies:
       '@types/lodash': 4.14.198
     dev: true
