@@ -28,7 +28,7 @@
     "@changesets/cli": "2.26.2",
     "@graphql-tools/utils": "10.0.8",
     "@theguild/eslint-config": "0.11.1",
-    "@theguild/prettier-config": "2.0.1",
+    "@theguild/prettier-config": "2.0.2",
     "@types/dedent": "0.7.2",
     "@types/node": "20.8.10",
     "bob-the-bundler": "7.0.1",
