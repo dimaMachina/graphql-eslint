@@ -57,7 +57,7 @@
     "@types/debug": "4.1.11",
     "@types/eslint": "8.44.7",
     "@types/estree": "1.0.5",
-    "@types/graphql-depth-limit": "1.1.5",
+    "@types/graphql-depth-limit": "1.1.6",
     "@types/json-schema": "7.0.14",
     "@types/lodash.lowercase": "4.3.8",
     "graphql": "16.8.1",

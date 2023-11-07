@@ -281,8 +281,8 @@ importers:
         specifier: 1.0.5
         version: 1.0.5
       '@types/graphql-depth-limit':
-        specifier: 1.1.5
-        version: 1.1.5
+        specifier: 1.1.6
+        version: 1.1.6
       '@types/json-schema':
         specifier: 7.0.14
         version: 7.0.14
@@ -2727,8 +2727,8 @@ packages:
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
-  /@types/graphql-depth-limit@1.1.5:
-    resolution: {integrity: sha512-nhXDaJ+4gCtse2VhsJX4cCcoPtXRYhy0RcBFlW74TOihxaNZR1g86FRvffdhAyQiIqJt+lsretqlyn+XEdqgig==}
+  /@types/graphql-depth-limit@1.1.6:
+    resolution: {integrity: sha512-WU4bjoKOzJ8CQE32Pbyq+YshTMcLJf2aJuvVtSLv1BQPwDUGa38m2Vr8GGxf0GZ0luCQcfxlhZeHKu6nmTBvrw==}
     dependencies:
       graphql: 14.7.0
     dev: true
