@@ -35,8 +35,8 @@ importers:
         specifier: 2.0.1
         version: 2.0.1(prettier@3.0.3)
       '@types/dedent':
-        specifier: 0.7.1
-        version: 0.7.1
+        specifier: 0.7.2
+        version: 0.7.2
       '@types/node':
         specifier: 20.8.10
         version: 20.8.10
@@ -2699,8 +2699,8 @@ packages:
     dependencies:
       '@types/ms': 0.7.31
 
-  /@types/dedent@0.7.1:
-    resolution: {integrity: sha512-NKo033xLkoVCgUobq+FS1S3J6kwWeOcyqEBc2r2oi9J/dKncY11J9VgS0Giv7T4rxVt/MajUVcFppT2TPJA2Cg==}
+  /@types/dedent@0.7.2:
+    resolution: {integrity: sha512-kRiitIeUg1mPV9yH4VUJ/1uk2XjyANfeL8/7rH1tsjvHeO9PJLBHJIYsFWmAvmGj5u8rj+1TZx7PZzW2qLw3Lw==}
     dev: true
 
   /@types/eslint-scope@3.7.4:
