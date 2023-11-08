@@ -59,7 +59,7 @@
     "@types/estree": "1.0.5",
     "@types/graphql-depth-limit": "1.1.6",
     "@types/json-schema": "7.0.15",
-    "@types/lodash.lowercase": "4.3.8",
+    "@types/lodash.lowercase": "4.3.9",
     "graphql": "16.8.1",
     "json-schema-to-ts": "2.9.2"
   },
