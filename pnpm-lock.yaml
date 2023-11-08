@@ -371,8 +371,8 @@ importers:
         specifier: 4.0.9
         version: 4.0.9
       '@types/lodash.uniqwith':
-        specifier: 4.5.8
-        version: 4.5.8
+        specifier: 4.5.9
+        version: 4.5.9
       '@types/node':
         specifier: 20.8.10
         version: 20.8.10
@@ -2777,8 +2777,8 @@ packages:
       '@types/lodash': 4.14.198
     dev: true
 
-  /@types/lodash.uniqwith@4.5.8:
-    resolution: {integrity: sha512-xCe1FCV6QBKvCl+H2rxiGizbzDmYQAjsceD8iweTCHt1tP+G2/Czki0f7Uqi4KR1tAWwdV2Fe5RH/wDN/iqLCQ==}
+  /@types/lodash.uniqwith@4.5.9:
+    resolution: {integrity: sha512-r/L/U1bAHuZF/bKVanxZtPTCr0J47L8Ftpg4BeV1Knv5ZOl9f6bwqVxP5fvvqniHatgcYpp7vwccxbvVGMV8Xw==}
     dependencies:
       '@types/lodash': 4.14.198
     dev: true
