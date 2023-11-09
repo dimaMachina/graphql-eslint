@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@theguild/eslint-rule-tester": "workspace:*",
-    "@types/debug": "4.1.11",
+    "@types/debug": "4.1.12",
     "@types/eslint": "8.44.7",
     "@types/estree": "1.0.5",
     "@types/graphql-depth-limit": "1.1.6",
