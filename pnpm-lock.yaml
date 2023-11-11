@@ -83,8 +83,8 @@ importers:
         specifier: ^7.1.0
         version: 7.2.0(typescript@5.2.2)
       tsx:
-        specifier: 4.1.0
-        version: 4.1.0
+        specifier: 4.1.1
+        version: 4.1.1
       turbo:
         specifier: ^1.10.12
         version: 1.10.13
@@ -10434,8 +10434,8 @@ packages:
       - ts-node
     dev: true
 
-  /tsx@4.1.0:
-    resolution: {integrity: sha512-u4l17Yd63Wsk2fzNn1wZCmcS9kwJ/2ysl7wuoVggv2hd3NjLA5JQPpyJMXoWSXOwOvoQUzNcu/sf/35HEsnXsg==}
+  /tsx@4.1.1:
+    resolution: {integrity: sha512-zyPn5BFMB0TB5kMLbYPNx4x/oL/oSlaecdKCv6WeJ0TeSEfx8RTJWjuB5TZ2dSewktgfBsBO/HNA9mrMWqLXMA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
