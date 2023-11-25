@@ -346,8 +346,8 @@ importers:
         specifier: ^13.5.4
         version: 13.5.4(@babel/core@7.22.17)(react-dom@18.2.0)(react@18.2.0)
       next-query-params:
-        specifier: ^4.2.3
-        version: 4.2.3(next@13.5.4)(react@18.2.0)(use-query-params@2.2.1)
+        specifier: ^5.0.0
+        version: 5.0.0(next@13.5.4)(react@18.2.0)(use-query-params@2.2.1)
       next-sitemap:
         specifier: ^4.2.3
         version: 4.2.3(next@13.5.4)
@@ -8393,10 +8393,10 @@ packages:
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  /next-query-params@4.2.3(next@13.5.4)(react@18.2.0)(use-query-params@2.2.1):
-    resolution: {integrity: sha512-hGNCYRH8YyA5ItiBGSKrtMl21b2MAqfPkdI1mvwloNVqSU142IaGzqHN+OTovyeLIpQfonY01y7BAHb/UH4POg==}
+  /next-query-params@5.0.0(next@13.5.4)(react@18.2.0)(use-query-params@2.2.1):
+    resolution: {integrity: sha512-Zm9nc0QgrTMaQwGdbICcTDaYS4oRcXo628Ye6JQGdp/9JzlhzDpzcGRqciK0S62yAyE3b5ozFpgzY0gDUEbLtw==}
     peerDependencies:
-      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       use-query-params: ^2.0.0
     dependencies:
