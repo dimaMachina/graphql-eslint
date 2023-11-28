@@ -362,8 +362,8 @@ importers:
         version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@theguild/algolia':
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       '@theguild/tailwind-config':
         specifier: 0.3.0
         version: 0.3.0
@@ -2835,8 +2835,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@theguild/algolia@2.0.0:
-    resolution: {integrity: sha512-4cjVARyY3Q1CM/9tJ8teeTXt0ZF4Dj9qAqAl393i/Kb/YEh+N/Y+/Uof2sNsoOXcIVQ32equ3VlP0qCdI6gThQ==}
+  /@theguild/algolia@2.1.0:
+    resolution: {integrity: sha512-NvS4Gxs2jJaGXf/4x71iG0EFiXSiwXLQjwjPruRqjR8nVWnE4UEkdMKlaJLtV+pjqMfM2DX3EcoNr+c8O5UH7g==}
     hasBin: true
     dependencies:
       algoliasearch: 4.19.1
