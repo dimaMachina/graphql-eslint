@@ -31,14 +31,16 @@ export const rule: GraphQLESLintRule = {
   create(context) {
     return {
       Document(node) {
-        const withRootTypeRenaming = true;
+        // https://github.com/apollographql/federation/blob/4ffe723395b4a054807b4f58181f166d76b57160/internals-js/src/__tests__/testUtils.ts#L16C45-L16C67
+        const doc = asFed2SubgraphDocument(node.rawNode());
 
+        const withRootTypeRenaming = true;
         const buildOptions = {
           blueprint: new FederationBlueprint(withRootTypeRenaming),
           validate: false,
         };
-        const doc = asFed2SubgraphDocument(node.rawNode());
 
+        // https://github.com/apollographql/federation/blob/4ffe723395b4a054807b4f58181f166d76b57160/internals-js/src/federation.ts#L1329
         const subgraphSchema = buildSchemaFromAST(doc, buildOptions);
 
         const name = 'graphql-eslint-subgraph';
