@@ -115,7 +115,7 @@ function useSchema(code: string): { code: string; parserOptions: Omit<ParserOpti
   };
 }
 
-ruleTester.runGraphQLTests('${ruleId}', rule, {
+ruleTester.run('${ruleId}', rule, {
   valid: [
     {
       name: 'should ',
