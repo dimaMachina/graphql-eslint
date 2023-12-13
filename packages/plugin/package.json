@@ -39,8 +39,14 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
+    "@apollo/federation-internals": "^2",
     "eslint": ">=8.44.0",
     "graphql": "^16"
+  },
+  "peerDependenciesMeta": {
+    "@apollo/federation-internals": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@graphql-tools/code-file-loader": "^8.0.0",
@@ -53,6 +59,7 @@
     "lodash.lowercase": "^4.3.0"
   },
   "devDependencies": {
+    "@apollo/federation-internals": "^2.6.1",
     "@theguild/eslint-rule-tester": "workspace:*",
     "@types/debug": "4.1.12",
     "@types/eslint": "8.44.9",
@@ -61,6 +68,7 @@
     "@types/json-schema": "7.0.15",
     "@types/lodash.lowercase": "4.3.9",
     "graphql": "16.8.1",
+    "graphql-tag": "^2.12.6",
     "json-schema-to-ts": "2.9.2"
   },
   "publishConfig": {
