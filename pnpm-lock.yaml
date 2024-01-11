@@ -229,8 +229,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/plugin/dist
       '@vue/compiler-sfc':
-        specifier: 3.4.8
-        version: 3.4.8
+        specifier: 3.4.10
+        version: 3.4.10
       eslint:
         specifier: 8.56.0
         version: 8.56.0
@@ -3531,46 +3531,46 @@ packages:
       pretty-format: 29.6.3
     dev: true
 
-  /@vue/compiler-core@3.4.8:
-    resolution: {integrity: sha512-GjAwOydZV6UyVBi1lYW5v4jjfU6wOeyi3vBATKJOwV7muYF0/nZi4kfdJc0pwdT5lXwbbx57lyA2Y356rFpw1A==}
+  /@vue/compiler-core@3.4.10:
+    resolution: {integrity: sha512-53vxh7K9qbx+JILnGEhrFRyr7H7e4NdT8RuTNU3m6HhJKFvcAqFTNXpYMHnyuAzzRGdsbsYHBgQC3H6xEXTG6w==}
     dependencies:
       '@babel/parser': 7.23.6
-      '@vue/shared': 3.4.8
+      '@vue/shared': 3.4.10
       entities: 4.5.0
       estree-walker: 2.0.2
       source-map-js: 1.0.2
     dev: true
 
-  /@vue/compiler-dom@3.4.8:
-    resolution: {integrity: sha512-GsPyji42zmkSJlaDFKXvwB97ukTlHzlFH/iVzPFYz/APnSzuhu/CMFQbsYmrtsnc2yscF39eC4rKzvKR27aBug==}
+  /@vue/compiler-dom@3.4.10:
+    resolution: {integrity: sha512-QAALBJksIFpXGYuo74rtMgnwpVZDvd3kYbUa4gYX9s/5QiqEvZSgbKtOdUGydXcxKPt3ifC+0/bhPVHXN2694A==}
     dependencies:
-      '@vue/compiler-core': 3.4.8
-      '@vue/shared': 3.4.8
+      '@vue/compiler-core': 3.4.10
+      '@vue/shared': 3.4.10
     dev: true
 
-  /@vue/compiler-sfc@3.4.8:
-    resolution: {integrity: sha512-3ZcurOa6bQdZ6VZLtMqYSUZqpsMqfX0MC3oCxQG0VIJFCqouZAgRYJN1c8QvGs7HW5wW8aXVvUOQU0ILVlYHKA==}
+  /@vue/compiler-sfc@3.4.10:
+    resolution: {integrity: sha512-sTOssaQySgrMjrhZxmAqdp6n+E51VteIVIDaOR537H2P63DyzMmig21U0XXFxiXmMIfrK91lAInnc+bIAYemGw==}
     dependencies:
       '@babel/parser': 7.23.6
-      '@vue/compiler-core': 3.4.8
-      '@vue/compiler-dom': 3.4.8
-      '@vue/compiler-ssr': 3.4.8
-      '@vue/shared': 3.4.8
+      '@vue/compiler-core': 3.4.10
+      '@vue/compiler-dom': 3.4.10
+      '@vue/compiler-ssr': 3.4.10
+      '@vue/shared': 3.4.10
       estree-walker: 2.0.2
       magic-string: 0.30.5
       postcss: 8.4.32
       source-map-js: 1.0.2
     dev: true
 
-  /@vue/compiler-ssr@3.4.8:
-    resolution: {integrity: sha512-nxN79LHeAemhBpIa2PQ6rz57cW7W4C/XIJCOMSn2g49u6q2ekirmJI0osAOTErQPApOR0KwP2QyeTexX4zQCrw==}
+  /@vue/compiler-ssr@3.4.10:
+    resolution: {integrity: sha512-Y90TL1abretWbUiK5rv+9smS1thCHE5sSuhZgiLh6cxgZ2Pcy3BEvDd3reID0iwNcTdMbTeE6NI3Aq4Mux6hqQ==}
     dependencies:
-      '@vue/compiler-dom': 3.4.8
-      '@vue/shared': 3.4.8
+      '@vue/compiler-dom': 3.4.10
+      '@vue/shared': 3.4.10
     dev: true
 
-  /@vue/shared@3.4.8:
-    resolution: {integrity: sha512-ChLCWzXiJboQ009oVkemhEoUdrxHme7v3ip+Kh+/kDDeF1WtHWGt0knRLGm1Y4YqCRTSs9QxsZIY8paJj5Szrw==}
+  /@vue/shared@3.4.10:
+    resolution: {integrity: sha512-C0mIVhwW1xQLMFyqMJxnhq6fWyE02lCgcE+TDdtGpg6B3H6kh/0YcqS54qYc76UJNlWegf3VgsLqgk6D9hBmzQ==}
     dev: true
 
   /@webassemblyjs/ast@1.11.6:
