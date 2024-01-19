@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@theguild/algolia": "2.1.0",
-    "@theguild/tailwind-config": "0.3.1",
+    "@theguild/tailwind-config": "0.3.2",
     "@types/lodash.debounce": "4.0.9",
     "@types/lodash.uniqwith": "4.5.9",
     "@types/node": "20.11.5",
