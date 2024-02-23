@@ -34,7 +34,7 @@
     "@types/lodash.debounce": "4.0.9",
     "@types/lodash.uniqwith": "4.5.9",
     "@types/node": "20.11.20",
-    "@types/react": "18.2.57",
+    "@types/react": "18.2.58",
     "tailwindcss-radix": "2.8.0",
     "webpack": "^5.88.2"
   },
