@@ -332,7 +332,7 @@ importers:
         version: 6.2.0(@algolia/client-search@4.22.1)(@types/react@18.2.58)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)(webpack@5.90.3)
       clsx:
         specifier: ^2.0.0
-        version: 2.0.0
+        version: 2.1.0
       graphql:
         specifier: ^16.8.1
         version: 16.8.1
@@ -4500,6 +4500,11 @@ packages:
 
   /clsx@2.0.0:
     resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
+    dev: false
+
+  /clsx@2.1.0:
+    resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
     dev: false
 
@@ -8928,7 +8933,7 @@ packages:
     dependencies:
       '@headlessui/react': 1.7.18(react-dom@18.2.0)(react@18.2.0)
       '@popperjs/core': 2.11.8
-      clsx: 2.0.0
+      clsx: 2.1.0
       escape-string-regexp: 5.0.0
       flexsearch: 0.7.43
       focus-visible: 5.2.0
@@ -8957,7 +8962,7 @@ packages:
       '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.2.0)
-      clsx: 2.0.0
+      clsx: 2.1.0
       estree-util-to-js: 2.0.0
       estree-util-value-to-estree: 3.0.1
       github-slugger: 2.0.0
