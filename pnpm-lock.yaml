@@ -216,8 +216,8 @@ importers:
         specifier: 0.33.1
         version: 0.33.1(svelte@4.2.12)
       svelte2tsx:
-        specifier: 0.7.1
-        version: 0.7.1(svelte@4.2.12)(typescript@5.3.3)
+        specifier: 0.7.2
+        version: 0.7.2(svelte@4.2.12)(typescript@5.3.3)
 
   examples/vue-code-file:
     dependencies:
@@ -11128,8 +11128,8 @@ packages:
       svelte: 4.2.12
     dev: true
 
-  /svelte2tsx@0.7.1(svelte@4.2.12)(typescript@5.3.3):
-    resolution: {integrity: sha512-0lKa6LrqJxRan0bDmBd/uFsVzYSXnoFUDaczaH0znke/XI79oy1JjFaF51J9EsOvpn8lXPlrUc3n/MA/ORNxBg==}
+  /svelte2tsx@0.7.2(svelte@4.2.12)(typescript@5.3.3):
+    resolution: {integrity: sha512-gtKJPzGt8OARDILafwyTeM2Xh/t5nCN+/Kjr2SlfVDqct5G4t/e8jaY6e0cxjLOyiVYJTGQrjmghrMyH6jAHnQ==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
