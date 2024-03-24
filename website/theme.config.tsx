@@ -1,8 +1,9 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router';
-import { defineConfig, FooterExtended } from '@theguild/components';
+import { defineConfig, FooterExtended, PRODUCTS } from '@theguild/components';
 
 export default defineConfig({
+  description: PRODUCTS.ESLINT.title,
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
   footer: {
     component: function Footer() {
@@ -10,6 +11,6 @@ export default defineConfig({
       return route === '/play' ? null : <FooterExtended />;
     },
   },
-  logoLink: '/docs',
-  siteName: 'ESLINT',
+  logo: PRODUCTS.ESLINT.logo({ className: 'w-9' }),
+  websiteName: 'GraphQL-ESLint',
 });
