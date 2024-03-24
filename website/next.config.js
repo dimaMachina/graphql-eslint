@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url);
 
 /** @type {import("next").Config} */
 export default withGuildDocs({
+  output: 'export',
   redirects: () =>
     Object.entries({
       '/': '/docs', // TODO: add landing page later
