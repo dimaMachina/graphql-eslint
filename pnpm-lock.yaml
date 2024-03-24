@@ -377,8 +377,8 @@ importers:
         specifier: 18.2.64
         version: 18.2.64
       tailwindcss-radix:
-        specifier: 2.8.0
-        version: 2.8.0
+        specifier: 3.0.2
+        version: 3.0.2
       webpack:
         specifier: ^5.88.2
         version: 5.90.3(esbuild@0.19.12)
@@ -11042,8 +11042,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /tailwindcss-radix@2.8.0:
-    resolution: {integrity: sha512-1k1UfoIYgVyBl13FKwwoKavjnJ5VEaUClCTAsgz3VLquN4ay/lyaMPzkbqD71sACDs2fRGImytAUlMb4TzOt1A==}
+  /tailwindcss-radix@3.0.2:
+    resolution: {integrity: sha512-BuIF9q0QGVck7VW0UFFv0PYEHytlSlTo+1BeLug4fiHm1CHulHJ5NxCtCJ+sCaNAy0aWwYKk87mVccSoebgxXw==}
     dev: true
 
   /tailwindcss@3.4.1:
