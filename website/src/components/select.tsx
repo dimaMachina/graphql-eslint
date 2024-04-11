@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { clsx } from 'clsx';
 import * as S from '@radix-ui/react-select';
-import { CaretSlimIcon, CheckIcon } from '@theguild/components';
+import { CaretSlimIcon } from '@theguild/components';
 import { Button } from './button';
 
 type SelectProps = {
@@ -11,6 +11,18 @@ type SelectProps = {
   onChange: (newValue: string) => void;
   placeholder: string;
 };
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 20 20" width="1em" height="1em" fill="currentColor">
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
 
 export const Select = ({
   options,
