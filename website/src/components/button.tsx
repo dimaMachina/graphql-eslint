@@ -13,7 +13,7 @@ export const Button = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
         'group',
         'radix-state-open:bg-gray-50 dark:radix-state-open:bg-gray-900',
         'radix-state-on:bg-gray-50 dark:radix-state-on:bg-gray-900',
-        'radix-state-instant-open:bg-gray-50 radix-state-delayed-open:bg-gray-50',
+        'radix-state-delayed-open:bg-gray-50 radix-state-instant-open:bg-gray-50',
         className,
       )}
       {...props}

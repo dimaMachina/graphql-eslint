@@ -79,34 +79,34 @@ type NodeWithType =
 type ParentNode<T> = T extends DocumentNode
   ? AST.Program
   : T extends DefinitionNode
-  ? DocumentNode
-  : T extends EnumValueDefinitionNode
-  ? EnumTypeDefinitionNode | EnumTypeExtensionNode
-  : T extends InputValueDefinitionNode
-  ?
-      | DirectiveDefinitionNode
-      | FieldDefinitionNode
-      | InputObjectTypeDefinitionNode
-      | InputObjectTypeExtensionNode
-  : T extends FieldDefinitionNode
-  ?
-      | InterfaceTypeDefinitionNode
-      | InterfaceTypeExtensionNode
-      | ObjectTypeDefinitionNode
-      | ObjectTypeExtensionNode
-  : T extends SelectionSetNode
-  ? ExecutableDefinitionNode | FieldNode | InlineFragmentNode
-  : T extends SelectionNode
-  ? SelectionSetNode
-  : T extends TypeNode
-  ? NodeWithType
-  : T extends NameNode
-  ? NodeWithName
-  : T extends DirectiveNode
-  ? InputObjectTypeDefinitionNode | ObjectTypeDefinitionNode
-  : T extends VariableNode
-  ? VariableDefinitionNode
-  : unknown; // Explicitly show error to add new ternary with parent nodes
+    ? DocumentNode
+    : T extends EnumValueDefinitionNode
+      ? EnumTypeDefinitionNode | EnumTypeExtensionNode
+      : T extends InputValueDefinitionNode
+        ?
+            | DirectiveDefinitionNode
+            | FieldDefinitionNode
+            | InputObjectTypeDefinitionNode
+            | InputObjectTypeExtensionNode
+        : T extends FieldDefinitionNode
+          ?
+              | InterfaceTypeDefinitionNode
+              | InterfaceTypeExtensionNode
+              | ObjectTypeDefinitionNode
+              | ObjectTypeExtensionNode
+          : T extends SelectionSetNode
+            ? ExecutableDefinitionNode | FieldNode | InlineFragmentNode
+            : T extends SelectionNode
+              ? SelectionSetNode
+              : T extends TypeNode
+                ? NodeWithType
+                : T extends NameNode
+                  ? NodeWithName
+                  : T extends DirectiveNode
+                    ? InputObjectTypeDefinitionNode | ObjectTypeDefinitionNode
+                    : T extends VariableNode
+                      ? VariableDefinitionNode
+                      : unknown; // Explicitly show error to add new ternary with parent nodes
 
 type Node<T extends ASTNode, WithTypeInfo extends boolean> =
   // Remove readonly for friendly editor popup
@@ -130,7 +130,7 @@ export type GraphQLESTreeNode<T, W extends boolean = false> =
           : GraphQLESTreeNode<Node<T, W>[K], W>;
       }
     : // If Program node => add `parent: null` field
-    T extends AST.Program
-    ? T & { parent: null }
-    : // Return value as is
-      T;
+      T extends AST.Program
+      ? T & { parent: null }
+      : // Return value as is
+        T;
