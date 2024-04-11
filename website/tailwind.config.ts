@@ -1,5 +1,5 @@
+import tailwindRadix from 'tailwindcss-radix';
 import tailwindConfig from '@theguild/tailwind-config';
-import tailwindRadix from 'tailwindcss-radix'
 
 // eslint-disable-next-line import/no-default-export
 export default {
