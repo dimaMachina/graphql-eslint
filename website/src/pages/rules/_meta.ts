@@ -20,6 +20,7 @@ export default {
   'no-typename-prefix': '',
   'no-unreachable-types': '',
   'no-unused-fields': '',
+  'nullable-records': '',
   'possible-type-extension': '',
   'relay-arguments': '',
   'relay-connection-types': '',

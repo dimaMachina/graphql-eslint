@@ -37,6 +37,7 @@ import { rule as strictIdInTypes } from './strict-id-in-types/index.js';
 import { rule as uniqueEnumValueNames } from './unique-enum-value-names/index.js';
 import { rule as uniqueFragmentName } from './unique-fragment-name/index.js';
 import { rule as uniqueOperationName } from './unique-operation-name/index.js';
+import { rule as nullableRecords } from './nullable-records/index.js'
 
 export const rules = {
   ...GRAPHQL_JS_VALIDATIONS,
@@ -56,6 +57,7 @@ export const rules = {
   'no-typename-prefix': noTypenamePrefix,
   'no-unreachable-types': noUnreachableTypes,
   'no-unused-fields': noUnusedFields,
+  'nullable-records': nullableRecords,
   'relay-arguments': relayArguments,
   'relay-connection-types': relayConnectionTypes,
   'relay-edge-types': relayEdgeTypes,
