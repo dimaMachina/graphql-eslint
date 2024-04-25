@@ -37,7 +37,7 @@ export const Select = ({
         <Button>
           <S.Value placeholder={placeholder} />
           <S.Icon className="ml-2">
-            <CaretSlimIcon className="h-3 w-3" />
+            <CaretSlimIcon className="size-3" />
           </S.Icon>
         </Button>
       </S.Trigger>
