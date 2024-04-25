@@ -363,6 +363,22 @@ exports[`Examples > should work on \`.js\` files 1`] = `
         nodeType: MemberExpression,
         ruleId: no-console,
         severity: 2,
+        suggestions: [
+          {
+            data: {
+              propertyName: log,
+            },
+            desc: Remove the console.log().,
+            fix: {
+              range: [
+                0,
+                48,
+              ],
+              text: ,
+            },
+            messageId: removeConsole,
+          },
+        ],
       },
     ],
   },

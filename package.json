@@ -20,7 +20,7 @@
     "prerelease": "NODE_ENV=production pnpm build",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
-    "test": "turbo run test --filter=!website",
+    "test": "turbo run test",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
