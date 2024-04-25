@@ -248,7 +248,7 @@ importers:
         version: 8.3.0(graphql@16.8.1)
       '@graphql-tools/utils':
         specifier: ^10.0.0
-        version: 10.1.0(graphql@16.8.1)
+        version: 10.1.3(graphql@16.8.1)
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -320,7 +320,7 @@ importers:
         version: link:../packages/plugin/dist
       '@monaco-editor/react':
         specifier: ^4.6.0
-        version: 4.6.0(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0)
+        version: 4.6.0(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-icons':
         specifier: ^1.3.0
         version: 1.3.0(react@18.2.0)
@@ -1417,7 +1417,7 @@ packages:
       '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       dataloader: 2.2.2
       graphql: 16.8.1
-      tslib: 2.6.2
+      tslib: 2.5.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -1428,7 +1428,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       '@graphql-tools/graphql-tag-pluck': 8.3.0(graphql@16.8.1)
-      '@graphql-tools/utils': 10.1.0(graphql@16.8.1)
+      '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       globby: 11.1.0
       graphql: 16.8.1
       tslib: 2.5.0
@@ -1449,7 +1449,7 @@ packages:
       '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       dataloader: 2.2.2
       graphql: 16.8.1
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /@graphql-tools/executor-graphql-ws@1.1.2(graphql@16.8.1):
@@ -1463,7 +1463,7 @@ packages:
       graphql: 16.8.1
       graphql-ws: 5.15.0(graphql@16.8.1)
       isomorphic-ws: 5.0.0(ws@8.13.0)
-      tslib: 2.6.2
+      tslib: 2.5.0
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -1482,7 +1482,7 @@ packages:
       extract-files: 11.0.0
       graphql: 16.8.1
       meros: 1.2.1(@types/node@20.12.7)
-      tslib: 2.6.2
+      tslib: 2.5.0
       value-or-promise: 1.0.12
     transitivePeerDependencies:
       - '@types/node'
@@ -1498,7 +1498,7 @@ packages:
       '@types/ws': 8.5.4
       graphql: 16.8.1
       isomorphic-ws: 5.0.0(ws@8.16.0)
-      tslib: 2.6.2
+      tslib: 2.5.0
       ws: 8.16.0
     transitivePeerDependencies:
       - bufferutil
@@ -1515,7 +1515,7 @@ packages:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       '@repeaterjs/repeater': 3.0.4
       graphql: 16.8.1
-      tslib: 2.6.2
+      tslib: 2.5.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -1544,7 +1544,7 @@ packages:
       '@babel/plugin-syntax-import-assertions': 7.20.0(@babel/core@7.24.3)
       '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
-      '@graphql-tools/utils': 10.1.0(graphql@16.8.1)
+      '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       graphql: 16.8.1
       tslib: 2.5.0
     transitivePeerDependencies:
@@ -1560,7 +1560,7 @@ packages:
       '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       graphql: 16.8.1
       resolve-from: 5.0.0
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /@graphql-tools/json-file-loader@8.0.1(graphql@16.8.1):
@@ -1609,7 +1609,7 @@ packages:
       '@graphql-tools/merge': 9.0.3(graphql@16.8.1)
       '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       graphql: 16.8.1
-      tslib: 2.6.2
+      tslib: 2.5.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -1640,19 +1640,6 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@graphql-tools/utils@10.1.0(graphql@16.8.1):
-    resolution: {integrity: sha512-wLPqhgeZ9BZJPRoaQbsDN/CtJDPd/L4qmmtPkjI3NuYJ39x+Eqz1Sh34EAGMuDh+xlOHqBwHczkZUpoK9tvzjw==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@graphql-typed-document-node/core': 3.1.2(graphql@16.8.1)
-      cross-inspect: 1.0.0
-      dset: 3.1.2
-      graphql: 16.8.1
-      tslib: 2.5.0
-    dev: false
-
   /@graphql-tools/utils@10.1.3(graphql@16.8.1):
     resolution: {integrity: sha512-loco2ctrrMQzdpSHbcOo6+Ecp21BV67cQ2pNGhuVKAexruu01RdLn3LgtK47B9BpLz3cUD6U0u1R0rur7xMOOg==}
     engines: {node: '>=16.0.0'}
@@ -1661,7 +1648,7 @@ packages:
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       cross-inspect: 1.0.0
-      dset: 3.1.2
+      dset: 3.1.3
       graphql: 16.8.1
       tslib: 2.6.2
 
@@ -1675,16 +1662,8 @@ packages:
       '@graphql-tools/schema': 10.0.3(graphql@16.8.1)
       '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       graphql: 16.8.1
-      tslib: 2.6.2
+      tslib: 2.5.0
       value-or-promise: 1.0.12
-    dev: false
-
-  /@graphql-typed-document-node/core@3.1.2(graphql@16.8.1):
-    resolution: {integrity: sha512-9anpBMM9mEgZN4wr2v8wHJI2/u5TnnggewRN6OlvXTTnuVyoY19X6rOv9XTqKRw6dcGKwZsBi8n0kDE2I5i4VA==}
-    peerDependencies:
-      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      graphql: 16.8.1
     dev: false
 
   /@graphql-typed-document-node/core@3.2.0(graphql@16.8.1):
@@ -1894,24 +1873,24 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@monaco-editor/loader@1.4.0(monaco-editor@0.47.0):
+  /@monaco-editor/loader@1.4.0(monaco-editor@0.48.0):
     resolution: {integrity: sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==}
     peerDependencies:
       monaco-editor: '>= 0.21.0 < 1'
     dependencies:
-      monaco-editor: 0.47.0
+      monaco-editor: 0.48.0
       state-local: 1.0.7
     dev: false
 
-  /@monaco-editor/react@4.6.0(monaco-editor@0.47.0)(react-dom@18.2.0)(react@18.2.0):
+  /@monaco-editor/react@4.6.0(monaco-editor@0.48.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@monaco-editor/loader': 1.4.0(monaco-editor@0.47.0)
-      monaco-editor: 0.47.0
+      '@monaco-editor/loader': 1.4.0(monaco-editor@0.48.0)
+      monaco-editor: 0.48.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -3426,7 +3405,7 @@ packages:
       '@whatwg-node/events': 0.1.1
       busboy: 1.6.0
       fast-querystring: 1.1.1
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /@xtuc/ieee754@1.2.0:
@@ -4199,7 +4178,7 @@ packages:
     resolution: {integrity: sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==}
     engines: {node: '>=16.0.0'}
     dependencies:
-      tslib: 2.5.0
+      tslib: 2.6.2
 
   /cross-spawn@5.1.0:
     resolution: {integrity: sha512-pTgQJ5KC0d2hcY8eyL1IzlBPYjTkyH72XRZPnLyKus2mBfNjQs3klqbJU2VILqZryAZUt9JOb3h/mWMy23/f5A==}
@@ -4887,8 +4866,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /dset@3.1.2:
-    resolution: {integrity: sha512-g/M9sqy3oHe477Ar4voQxWtaPIFw1jTdKZuomOjhCcBx9nHUNn0pu6NopuFFrTh/TRZIKEj+76vLWFu9BNKk+Q==}
+  /dset@3.1.3:
+    resolution: {integrity: sha512-20TuZZHCEZ2O71q9/+8BwKwZ0QtD9D8ObhrihJPr+vLLYlSuAU3/zL4cSlgbfeoGHTjCSJBa7NGcrF9/Bx/WJQ==}
     engines: {node: '>=4'}
 
   /duplexer@0.1.2:
@@ -6336,7 +6315,7 @@ packages:
       '@graphql-tools/load': 8.0.2(graphql@16.8.1)
       '@graphql-tools/merge': 9.0.3(graphql@16.8.1)
       '@graphql-tools/url-loader': 8.0.2(@types/node@20.12.7)(graphql@16.8.1)
-      '@graphql-tools/utils': 10.1.0(graphql@16.8.1)
+      '@graphql-tools/utils': 10.1.3(graphql@16.8.1)
       cosmiconfig: 8.3.6(typescript@5.4.5)
       graphql: 16.8.1
       jiti: 1.21.0
@@ -7229,7 +7208,7 @@ packages:
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
     optionalDependencies:
-      graceful-fs: 4.2.11
+      graceful-fs: 4.2.10
     dev: true
 
   /jsonfile@6.1.0:
@@ -7237,7 +7216,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.11
+      graceful-fs: 4.2.10
     dev: true
 
   /jsx-ast-utils@3.3.5:
@@ -7453,7 +7432,7 @@ packages:
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: true
 
   /lru-cache@10.2.0:
@@ -8451,8 +8430,8 @@ packages:
       ufo: 1.5.3
     dev: true
 
-  /monaco-editor@0.47.0:
-    resolution: {integrity: sha512-VabVvHvQ9QmMwXu4du008ZDuyLnHs9j7ThVFsiJoXSOQk18+LF89N4ADzPbFenm0W4V2bGHnFBztIRQTgBfxzw==}
+  /monaco-editor@0.48.0:
+    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
     dev: false
 
   /mri@1.2.0:
@@ -9729,7 +9708,7 @@ packages:
       '@types/react': 18.2.79
       react: 18.2.0
       react-style-singleton: 2.2.1(@types/react@18.2.79)(react@18.2.0)
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /react-remove-scroll@2.5.5(@types/react@18.2.79)(react@18.2.0):
@@ -9765,7 +9744,7 @@ packages:
       get-nonce: 1.0.1
       invariant: 2.2.4
       react: 18.2.0
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /react@18.2.0:
@@ -11568,7 +11547,7 @@ packages:
     dependencies:
       '@types/react': 18.2.79
       react: 18.2.0
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /use-query-params@2.2.1(react-dom@18.2.0)(react@18.2.0):
@@ -11602,7 +11581,7 @@ packages:
       '@types/react': 18.2.79
       detect-node-es: 1.1.0
       react: 18.2.0
-      tslib: 2.6.2
+      tslib: 2.5.0
     dev: false
 
   /util-deprecate@1.0.2:
