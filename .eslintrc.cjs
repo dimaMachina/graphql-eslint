@@ -100,11 +100,7 @@ module.exports = {
       },
       settings: {
         tailwindcss: {
-          config: 'website/tailwind.config.cjs',
-          cssFiles: [
-            'website/src/**/*.css',
-            'node_modules/.pnpm/node_modules/nextra-theme-docs/style.css',
-          ],
+          config: 'website/tailwind.config.ts',
         },
       },
     },
