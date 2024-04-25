@@ -307,8 +307,8 @@ importers:
         specifier: 7.0.6
         version: 7.0.6
       '@types/node':
-        specifier: 20.11.25
-        version: 20.11.25
+        specifier: 20.12.7
+        version: 20.12.7
       eslint:
         specifier: 8.48.0
         version: 8.48.0(patch_hash=yi5cqffjk423hcgr7hl33kguwu)
@@ -371,8 +371,8 @@ importers:
         specifier: 4.5.9
         version: 4.5.9
       '@types/node':
-        specifier: 20.11.25
-        version: 20.11.25
+        specifier: 20.12.7
+        version: 20.12.7
       '@types/react':
         specifier: 18.2.79
         version: 18.2.79
@@ -3046,12 +3046,6 @@ packages:
 
   /@types/node@12.20.55:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
-    dev: true
-
-  /@types/node@20.11.25:
-    resolution: {integrity: sha512-TBHyJxk2b7HceLVGFcpAUjsa5zIdsPWlR6XHfyGzd0SFu+/NFgQgMAl96MSDZgQDvJAvV6BKsFOrt6zIL09JDw==}
-    dependencies:
-      undici-types: 5.26.5
     dev: true
 
   /@types/node@20.12.7:
