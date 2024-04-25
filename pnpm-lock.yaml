@@ -59,8 +59,8 @@ importers:
         specifier: 5.0.7
         version: 5.0.7(patch_hash=cdhdgvmsbh3fbusrlxsl6de2he)(eslint@8.57.0)
       eslint-plugin-tailwindcss:
-        specifier: 3.14.3
-        version: 3.14.3(tailwindcss@3.4.3)
+        specifier: 3.15.1
+        version: 3.15.1(tailwindcss@3.4.3)
       husky:
         specifier: 9.0.11
         version: 9.0.11
@@ -5513,14 +5513,14 @@ packages:
       eslint: 8.57.0
     dev: true
 
-  /eslint-plugin-tailwindcss@3.14.3(tailwindcss@3.4.3):
-    resolution: {integrity: sha512-1MKT8CrVuqVJleHxb7ICHsF2QwO0G+VJ28athTtlcOkccp0qmwK7nCUa1C9paCZ+VVgQU4fonsjLz/wUxoMHJQ==}
+  /eslint-plugin-tailwindcss@3.15.1(tailwindcss@3.4.3):
+    resolution: {integrity: sha512-4RXRMIaMG07C2TBEW1k0VM4+dDazz1kxcZhkK4zirvmHGZTA4jnlSO2kq5mamuSPi+Wo17dh2SlC8IyFBuCd7Q==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
       tailwindcss: ^3.4.0
     dependencies:
       fast-glob: 3.3.2
-      postcss: 8.4.21
+      postcss: 8.4.38
       tailwindcss: 3.4.3
     dev: true
 
@@ -8451,12 +8451,6 @@ packages:
       thenify-all: 1.6.0
     dev: true
 
-  /nanoid@3.3.4:
-    resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
-    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-    dev: true
-
   /nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -9452,15 +9446,6 @@ packages:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
     dev: true
 
-  /postcss@8.4.21:
-    resolution: {integrity: sha512-tP7u/Sn/dVxK2NnruI4H9BG+x+Wxz6oeZ1cJ8P6G/PZY0IKk4k/63TDsQf2kQq3+qoJeLm2kIBUNlZe3zgb4Zg==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.4
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-    dev: true
-
   /postcss@8.4.31:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -10390,11 +10375,6 @@ packages:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
       yargs: 15.4.1
-    dev: true
-
-  /source-map-js@1.0.2:
-    resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
-    engines: {node: '>=0.10.0'}
     dev: true
 
   /source-map-js@1.2.0:
@@ -11722,7 +11702,7 @@ packages:
     dependencies:
       '@types/node': 20.12.7
       esbuild: 0.16.17
-      postcss: 8.4.37
+      postcss: 8.4.38
       resolve: 1.22.1
       rollup: 3.19.1
     optionalDependencies:
