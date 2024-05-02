@@ -92,13 +92,13 @@ export const rule: GraphQLESLintRule = {
 
           const importPath = path.join(path.dirname(filePath), extractedImportPath);
           const hasInSiblings = fragmentsFromSiblings.some(
-            source => source.filePath === importPath,
+            source => path.resolve(source.filePath) === importPath,
           );
           if (hasInSiblings) return;
         }
 
         const fragmentInSameFile = fragmentsFromSiblings.some(
-          source => source.filePath === filePath,
+          source => path.resolve(source.filePath) === filePath,
         );
         if (fragmentInSameFile) return;
 
