@@ -213,8 +213,8 @@ importers:
         specifier: 4.2.16
         version: 4.2.16
       svelte-eslint-parser:
-        specifier: 0.35.0
-        version: 0.35.0(svelte@4.2.16)
+        specifier: 0.36.0
+        version: 0.36.0(svelte@4.2.16)
       svelte2tsx:
         specifier: 0.7.8
         version: 0.7.8(svelte@4.2.16)(typescript@5.4.5)
@@ -5582,11 +5582,11 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svelte-eslint-parser@0.35.0:
-    resolution: {integrity: sha512-CtbPseajW0gjwEvHiuzYJkPDjAcHz2FaHt540j6RVYrZgnE6xWkzUBodQ4I3nV+G5AS0Svt8K6aIA/CIU9xT2Q==}
+  svelte-eslint-parser@0.36.0:
+    resolution: {integrity: sha512-/6YmUSr0FAVxW8dXNdIMydBnddPMHzaHirAZ7RrT21XYdgGGZMh0LQG6CZsvAFS4r2Y4ItUuCQc8TQ3urB30mQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
-      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.112
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.115
     peerDependenciesMeta:
       svelte:
         optional: true
@@ -12530,7 +12530,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-eslint-parser@0.35.0(svelte@4.2.16):
+  svelte-eslint-parser@0.36.0(svelte@4.2.16):
     dependencies:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
