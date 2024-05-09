@@ -29,8 +29,8 @@ importers:
         specifier: 10.2.0
         version: 10.2.0(graphql@16.8.1)
       '@theguild/eslint-config':
-        specifier: 0.11.8
-        version: 0.11.8(eslint@8.57.0)(typescript@5.4.5)
+        specifier: 0.11.9
+        version: 0.11.9(eslint@8.57.0)(typescript@5.4.5)
       '@theguild/prettier-config':
         specifier: 2.0.6
         version: 2.0.6(@vue/compiler-sfc@3.4.27)(prettier@3.2.5)
@@ -1620,8 +1620,8 @@ packages:
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@theguild/eslint-config@0.11.8':
-    resolution: {integrity: sha512-j64LMYyuSQOsxv+zLtJe6hdLSF1CtkZCp/UngXLLiot9W6IIFBj35rWqQdY11ie84nyCCxkvwys5GJPflzPOFw==}
+  '@theguild/eslint-config@0.11.9':
+    resolution: {integrity: sha512-UUYYzYelCGS5WMPD6LlL8YKFH8bQM+1AIEDiybYNkIexVoMfqDjUEI4FXzmWXPlCtNoJelQ3O9/Wt/EDY13KgA==}
     peerDependencies:
       eslint: ^8
       typescript: ^5
@@ -2976,11 +2976,11 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-sonarjs@0.25.1:
-    resolution: {integrity: sha512-5IOKvj/GMBNqjxBdItfotfRHo7w48496GOu1hxdeXuD0mB1JBlDCViiLHETDTfA8pDAVSBimBEQoetRXYceQEw==}
+  eslint-plugin-sonarjs@1.0.3:
+    resolution: {integrity: sha512-6s41HLPYPyDrp+5+7Db5yFYbod6h9pC7yx+xfcNwHRcLe1EZwbbQT/tdOAkR7ekVUkNGEvN3GmYakIoQUX7dEg==}
     engines: {node: '>=16'}
     peerDependencies:
-      eslint: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+      eslint: ^8.0.0 || ^9.0.0
 
   eslint-plugin-tailwindcss@3.15.1:
     resolution: {integrity: sha512-4RXRMIaMG07C2TBEW1k0VM4+dDazz1kxcZhkK4zirvmHGZTA4jnlSO2kq5mamuSPi+Wo17dh2SlC8IyFBuCd7Q==}
@@ -7596,7 +7596,7 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@theguild/eslint-config@0.11.8(eslint@8.57.0)(typescript@5.4.5)':
+  '@theguild/eslint-config@0.11.9(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
       '@rushstack/eslint-patch': 1.10.2
       '@typescript-eslint/eslint-plugin': 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -7612,7 +7612,7 @@ snapshots:
       eslint-plugin-promise: 6.1.1(eslint@8.57.0)
       eslint-plugin-react: 7.34.1(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
-      eslint-plugin-sonarjs: 0.25.1(eslint@8.57.0)
+      eslint-plugin-sonarjs: 1.0.3(eslint@8.57.0)
       eslint-plugin-unicorn: 52.0.0(eslint@8.57.0)
       eslint-plugin-yml: 1.14.0(eslint@8.57.0)
       typescript: 5.4.5
@@ -9290,7 +9290,7 @@ snapshots:
       semver: 6.3.1
       string.prototype.matchall: 4.0.11
 
-  eslint-plugin-sonarjs@0.25.1(eslint@8.57.0):
+  eslint-plugin-sonarjs@1.0.3(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
 
