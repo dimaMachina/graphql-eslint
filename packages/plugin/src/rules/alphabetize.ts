@@ -94,7 +94,7 @@ const schema = {
         ...ARRAY_DEFAULT_OPTIONS,
         minItems: 2,
         description:
-          "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything else.",
+          "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt', '...']` where `...` stands for fragment spreads, and `*` stands for for everything else.",
       },
     },
   },
@@ -203,7 +203,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             selections: selectionsEnum,
             variables: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
-            groups: ['id', '*', 'createdAt', 'updatedAt'],
+            groups: ['id', '*', 'createdAt', 'updatedAt', '...'],
           },
         ],
       },
@@ -283,10 +283,33 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             if (!groups.includes('*')) {
               throw new Error('`groups` option should contain `*` string.');
             }
+
+            // Try an exact match
             let indexForPrev = groups.indexOf(prevName);
-            if (indexForPrev === -1) indexForPrev = groups.indexOf('*');
+
+            // Check for the fragment spread group
+            if (indexForPrev === -1 && prevNode.kind === Kind.FRAGMENT_SPREAD) {
+              indexForPrev = groups.indexOf('...');
+            }
+
+            // Check for the catch-all group
+            if (indexForPrev === -1) {
+              indexForPrev = groups.indexOf('*');
+            }
+
+            // Try an exact match
             let indexForCurr = groups.indexOf(currName);
-            if (indexForCurr === -1) indexForCurr = groups.indexOf('*');
+
+            // Check for the fragment spread group
+            if (indexForCurr === -1 && currNode.kind === Kind.FRAGMENT_SPREAD) {
+              indexForCurr = groups.indexOf('...');
+            }
+
+            // Check for the catch-all group
+            if (indexForCurr === -1) {
+              indexForCurr = groups.indexOf('*');
+            }
+
             shouldSortByGroup = indexForPrev - indexForCurr > 0;
             if (indexForPrev < indexForCurr) {
               continue;
