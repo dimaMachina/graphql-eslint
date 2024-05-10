@@ -95,7 +95,12 @@ module.exports = {
         'tailwindcss/enforces-negative-arbitrary-values': 'error',
         'tailwindcss/enforces-shorthand': 'error',
         'tailwindcss/migration-from-tailwind-2': 'error',
-        'tailwindcss/no-custom-classname': 'error',
+        'tailwindcss/no-custom-classname': [
+          'error',
+          {
+            whitelist: ['nextra-scrollbar'],
+          },
+        ],
         'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }],
       },
       settings: {
