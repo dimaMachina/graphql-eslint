@@ -429,5 +429,30 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
         },
       },
     },
+    {
+      name: 'should report an error with union and non-inline fragment',
+      errors: [MESSAGE_ID],
+      code: /* GraphQL */ `
+        {
+          userOrPost {
+            ...UnionFragment
+          }
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UnionFragment on UserOrPost {
+              ...UserFields
+            }
+
+            fragment UserFields on User {
+              name
+            }
+          `,
+        },
+      },
+    },
   ],
 });
