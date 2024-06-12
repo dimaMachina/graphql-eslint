@@ -74,8 +74,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2
       prettier-plugin-tailwindcss:
-        specifier: 0.6.3
-        version: 0.6.3(@ianvs/prettier-plugin-sort-imports@4.2.1(@vue/compiler-sfc@3.4.27)(prettier@3.3.2))(prettier@3.3.2)
+        specifier: 0.6.4
+        version: 0.6.4(@ianvs/prettier-plugin-sort-imports@4.2.1(@vue/compiler-sfc@3.4.27)(prettier@3.3.2))(prettier@3.3.2)
       rimraf:
         specifier: 5.0.7
         version: 5.0.7
@@ -4955,8 +4955,8 @@ packages:
     peerDependencies:
       prettier: ^3.0.3
 
-  prettier-plugin-tailwindcss@0.6.3:
-    resolution: {integrity: sha512-GeJ9bqXN4APAP0V5T2a1J/o6a50MWevEUCPWxijpdXFDQkBCoAfz4pQfv+YMXSqZ5GXLMDYio0mUOfrYL7gf4w==}
+  prettier-plugin-tailwindcss@0.6.4:
+    resolution: {integrity: sha512-3vhbIvlKyAWPaw9bUr2cw6M1BGx2Oy9CCLJyv+nxEiBGCTcL69WcAz2IFMGqx8IXSzQCInGSo2ujAByg9poHLQ==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -11848,7 +11848,7 @@ snapshots:
       prettier: 3.3.2
       sh-syntax: 0.4.2
 
-  prettier-plugin-tailwindcss@0.6.3(@ianvs/prettier-plugin-sort-imports@4.2.1(@vue/compiler-sfc@3.4.27)(prettier@3.3.2))(prettier@3.3.2):
+  prettier-plugin-tailwindcss@0.6.4(@ianvs/prettier-plugin-sort-imports@4.2.1(@vue/compiler-sfc@3.4.27)(prettier@3.3.2))(prettier@3.3.2):
     dependencies:
       prettier: 3.3.2
     optionalDependencies:
