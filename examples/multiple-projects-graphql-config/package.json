@@ -7,7 +7,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "graphql": "16.8.1"
+    "graphql": "16.8.2"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
