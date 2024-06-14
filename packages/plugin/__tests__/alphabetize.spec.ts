@@ -444,5 +444,128 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       `,
       errors: 3,
     },
+    {
+      name: 'should sort relationships',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          relationships_last: false
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          z
+          yyy {
+            id
+          }
+        }
+      `,
+      errors: 3,
+    },
+    {
+      name: 'should sort relationships last',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          relationships_last: true
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          aab {
+            id
+          }
+          aa
+          user {
+            id
+          }
+          id
+        }
+      `,
+      errors: 4,
+    },
+    {
+      name: 'should sort relationships last with group',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt'],
+          relationships_last: true
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          aab {
+            id
+          }
+          aa
+          user {
+            id
+          }
+          updatedAt
+        }
+      `,
+      errors: 3,
+    },
+    {
+      name: 'should sort between relationships',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt'],
+          relationships_last: true
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          aa
+          user {
+            id
+          }
+          aab {
+            id
+          }
+          updatedAt
+        }
+      `,
+      errors: 4,
+    },
+    {
+      name: 'should sort between group relationships',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt', 'user', 'aab'],
+          relationships_last: true
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          aa
+          id
+          zz
+          aab {
+            id
+          }
+          user {
+            id
+          }
+          updatedAt
+        }
+      `,
+      errors: 3,
+    },
   ],
 });
