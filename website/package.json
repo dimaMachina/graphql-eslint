@@ -31,7 +31,7 @@
     "@theguild/tailwind-config": "0.4.2",
     "@types/lodash.debounce": "4.0.9",
     "@types/lodash.uniqwith": "4.5.9",
-    "@types/node": "20.14.2",
+    "@types/node": "20.14.3",
     "@types/react": "18.3.3",
     "tailwindcss-radix": "3.0.3",
     "webpack": "^5.88.2"
