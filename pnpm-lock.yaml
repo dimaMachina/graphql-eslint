@@ -216,8 +216,8 @@ importers:
         specifier: 0.39.1
         version: 0.39.1(svelte@4.2.18)
       svelte2tsx:
-        specifier: 0.7.9
-        version: 0.7.9(svelte@4.2.18)(typescript@5.4.5)
+        specifier: 0.7.10
+        version: 0.7.10(svelte@4.2.18)(typescript@5.4.5)
 
   examples/vue-code-file:
     dependencies:
@@ -5453,8 +5453,8 @@ packages:
       svelte:
         optional: true
 
-  svelte2tsx@0.7.9:
-    resolution: {integrity: sha512-Rm+0LAwg9wT4H2IsR8EaM9EWErTzi9LmuZKxkH5b1ua94XjQmwHstBP4VabLgA9AE6XmwBg+xK7Cjzwfm6ustQ==}
+  svelte2tsx@0.7.10:
+    resolution: {integrity: sha512-POOXaTncPGjwXMj6NVSRvdNj8KFqqLabFtXsQal3WyPy4X5raGsiDST2+ELhceKwfHk79/hR3qGUeU7KxYo4vQ==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
@@ -12309,7 +12309,7 @@ snapshots:
     optionalDependencies:
       svelte: 4.2.18
 
-  svelte2tsx@0.7.9(svelte@4.2.18)(typescript@5.4.5):
+  svelte2tsx@0.7.10(svelte@4.2.18)(typescript@5.4.5):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
