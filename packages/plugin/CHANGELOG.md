@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.1
+
+### Major Changes
+
+- [#2418](https://github.com/dimaMachina/graphql-eslint/pull/2418)
+  [`c2d5386`](https://github.com/dimaMachina/graphql-eslint/commit/c2d53869c84e7393b11239f78d55eb1477a9a077)
+  Thanks [@comatory](https://github.com/comatory)! - exposing GraphQLESTreeNode type
+
 ## 4.0.0-alpha.0
 
 ### Major Changes
@@ -1099,8 +1107,8 @@ Special thanks to @connorjs
 
 ### Minor Changes
 
-- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique
-  indentifier field unless being in exceptions
+- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique indentifier
+  field unless being in exceptions
 
 ## 0.8.1
 
