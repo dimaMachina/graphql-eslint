@@ -8,6 +8,7 @@ import { SiblingOperations } from './siblings.js';
 
 export type Schema = GraphQLSchema | null;
 export type Pointer = string | string[];
+export { GraphQLESTreeNode } from './estree-converter/types.js';
 
 export interface ParserOptions {
   graphQLConfig?: IGraphQLConfig;
