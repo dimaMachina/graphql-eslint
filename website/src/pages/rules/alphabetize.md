@@ -169,6 +169,10 @@ Additional restrictions:
 - Minimum items: `2`
 - Unique items: `true`
 
+### `relationships_last` (boolean)
+
+Sort relationships last
+
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/alphabetize.ts)
