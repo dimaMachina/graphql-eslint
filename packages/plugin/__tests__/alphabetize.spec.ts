@@ -444,5 +444,65 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       `,
       errors: 3,
     },
+    {
+      name: 'should sort selections by group when `...` is at the start',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['...', 'id', '*', 'createdAt', 'updatedAt'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt
+          aa
+          id
+          ...ChildFragment
+        }
+      `,
+      errors: 4,
+    },
+    {
+      name: 'should sort selections by group when `...` is between',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', '...', 'createdAt', 'updatedAt'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          ...ChildFragment
+          updatedAt
+          createdAt
+          aa
+          id
+        }
+      `,
+      errors: 3,
+    },
+    {
+      name: 'should sort selections by group when `...` is at the end',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'createdAt', 'updatedAt', '...'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          ...ChildFragment
+          zz
+          updatedAt
+          createdAt
+          aa
+          id
+        }
+      `,
+      errors: 4,
+    },
   ],
 });
