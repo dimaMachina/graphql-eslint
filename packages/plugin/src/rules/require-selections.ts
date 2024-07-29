@@ -51,6 +51,7 @@ export type RuleOptions = FromSchema<typeof schema>;
 export const rule: GraphQLESLintRule<RuleOptions, true> = {
   meta: {
     type: 'suggestion',
+    // eslint-disable-next-line eslint-plugin/require-meta-has-suggestions -- false positive since we assign `problem.suggest` conditionally
     hasSuggestions: true,
     docs: {
       category: 'Operations',
