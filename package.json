@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "name": "graphql-eslint-monorepo",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
@@ -46,7 +47,7 @@
     "rimraf": "6.0.1",
     "tsup": "^8.0.0",
     "tsx": "4.15.7",
-    "turbo": "^1.13.2",
+    "turbo": "^2.0.9",
     "typescript": "5.5.4",
     "vitest": "0.34.6"
   },
