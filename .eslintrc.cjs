@@ -36,7 +36,6 @@ module.exports = {
       files: ['**/rules/*.ts'],
       extends: ['plugin:eslint-plugin/rules-recommended'],
       rules: {
-        'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.$' }], // force to put a point at the end
         'eslint-plugin/require-meta-docs-url': [
           'error',
           { pattern: 'https://the-guild.dev/graphql/eslint/rules/{{name}}' },
