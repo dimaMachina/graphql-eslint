@@ -62,8 +62,8 @@ importers:
         specifier: 3.17.4
         version: 3.17.4(tailwindcss@3.4.4)
       husky:
-        specifier: 9.0.11
-        version: 9.0.11
+        specifier: 9.1.4
+        version: 9.1.4
       jest-snapshot-serializer-raw:
         specifier: 2.0.0
         version: 2.0.0
@@ -3579,8 +3579,8 @@ packages:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
 
-  husky@9.0.11:
-    resolution: {integrity: sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==}
+  husky@9.1.4:
+    resolution: {integrity: sha512-bho94YyReb4JV7LYWRWxZ/xr6TtOTt8cMfmQ39MQYJ7f/YE268s3GdghGwi+y4zAeqewE5zYLvuhV0M0ijsDEA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -10177,7 +10177,7 @@ snapshots:
 
   human-signals@4.3.1: {}
 
-  husky@9.0.11: {}
+  husky@9.1.4: {}
 
   iconv-lite@0.4.24:
     dependencies:
