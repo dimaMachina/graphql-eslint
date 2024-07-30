@@ -94,6 +94,27 @@ ruleTester.run('no-unused-fields', rule, {
         },
       },
     },
+    {
+      name: 'should allow fields if they are ignored',
+      options: [{ ignoredFieldSelectors: ['FieldDefinition[name.value=firstName]'] }],
+      code: /* GraphQL */ `
+        type User {
+          id: ID!
+          firstName: String
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          documents: /* GraphQL */ `
+            {
+              user(id: 1) {
+                id
+              }
+            }
+          `,
+        },
+      },
+    },
   ],
   invalid: [
     {
