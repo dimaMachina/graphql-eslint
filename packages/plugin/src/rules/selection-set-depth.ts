@@ -113,7 +113,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             reportError(error: GraphQLError) {
               const { line, column } = error.locations![0];
 
-              // @ts-expect-error
+              // @ts-expect-error -- fix types
               const ancestors = context.sourceCode.getAncestors(node);
               const token = (ancestors[0] as AST.Program).tokens.find(
                 token => token.loc.start.line === line && token.loc.start.column === column - 1,
