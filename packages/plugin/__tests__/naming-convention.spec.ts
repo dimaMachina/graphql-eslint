@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/naming-convention';
-import { ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/naming-convention.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run<RuleOptions>('naming-convention', rule, {
   valid: [

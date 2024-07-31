@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/require-field-of-type-query-in-mutation-result';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule } from '../src/rules/require-field-of-type-query-in-mutation-result.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const useSchema = (code: string) => ({
   code,

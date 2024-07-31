@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/require-deprecation-reason';
-import { ruleTester } from './test-utils';
+import { rule } from '../src/rules/require-deprecation-reason.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run('require-deprecation-reason', rule, {
   valid: [
