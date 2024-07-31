@@ -22,7 +22,7 @@ type WriteFile = {
 
 const writeFormattedFile: WriteFile = async (filePath, code) => {
   if (filePath.startsWith('configs')) {
-    code = `// @ts-expect-error
+    code = `// @ts-expect-error -- for cjs
 export = ${JSON.stringify(code)}`;
   }
 
