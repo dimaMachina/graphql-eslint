@@ -2,7 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
-// @ts-expect-error
+// @ts-expect-error -- for cjs
 export = {
   parser: '@graphql-eslint/eslint-plugin',
   plugins: ['@graphql-eslint'],
