@@ -26,8 +26,8 @@ importers:
         specifier: 10.3.2
         version: 10.3.2(graphql@16.9.0)
       '@theguild/eslint-config':
-        specifier: 0.11.10
-        version: 0.11.10(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4)
+        specifier: 0.11.11
+        version: 0.11.11(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4)
       '@theguild/prettier-config':
         specifier: 2.0.7
         version: 2.0.7(@vue/compiler-sfc@3.4.35)(prettier@3.3.3)
@@ -1654,8 +1654,8 @@ packages:
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@theguild/eslint-config@0.11.10':
-    resolution: {integrity: sha512-sT4Lq56zXU+h6f4CmqVp6QLcZGlUczZEmGOIh+/orOkbSJqMYTZstoplZWodYGDTqGyjX3oPdaisyWLhyUQLzg==}
+  '@theguild/eslint-config@0.11.11':
+    resolution: {integrity: sha512-CeuFWimLkPO0rlWR0j+81ovWJlOWYYC+301zkEgqJWXMbfYR+IYeEf9fqBPawX0bX+JAmeC8nm48ZylbY6+O5A==}
     peerDependencies:
       eslint: ^8
       typescript: ^5
@@ -2942,9 +2942,9 @@ packages:
       eslint-config-prettier:
         optional: true
 
-  eslint-plugin-promise@6.6.0:
-    resolution: {integrity: sha512-57Zzfw8G6+Gq7axm2Pdo3gW/Rx3h9Yywgn61uE/3elTCOePEHVrn2i5CdfBwA1BLK0Q0WqctICIUSqXZW/VprQ==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+  eslint-plugin-promise@7.0.0:
+    resolution: {integrity: sha512-wb1ECT+b90ndBdAujhIdAU8oQ3Vt5gKqP/t78KOmg0ifynrvc2jGR9f6ndbOVNFpKf6jLUBlBBDF3H3Wk0JICg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
@@ -2972,8 +2972,8 @@ packages:
     peerDependencies:
       tailwindcss: ^3.4.0
 
-  eslint-plugin-unicorn@54.0.0:
-    resolution: {integrity: sha512-XxYLRiYtAWiAjPv6z4JREby1TAE2byBC7wlh0V4vWDCpccOSU1KovWV//jqPXF6bq3WKxqX9rdjoRQ1EhdmNdQ==}
+  eslint-plugin-unicorn@55.0.0:
+    resolution: {integrity: sha512-n3AKiVpY2/uDcGrS3+QsYDkjPfaOrNrsfQxU9nt5nitd9KuvVXrfAvgCO9DYPSfap+Gqjw9EOrXIsBp5tlHZjA==}
     engines: {node: '>=18.18'}
     peerDependencies:
       eslint: '>=8.56.0'
@@ -7651,7 +7651,7 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@theguild/eslint-config@0.11.10(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4)':
+  '@theguild/eslint-config@0.11.11(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4)':
     dependencies:
       '@rushstack/eslint-patch': 1.10.4
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4))(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4)
@@ -7664,11 +7664,11 @@ snapshots:
       eslint-plugin-jsx-a11y: 6.9.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       eslint-plugin-mdx: 3.1.5(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       eslint-plugin-n: 17.10.1(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
-      eslint-plugin-promise: 6.6.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
+      eslint-plugin-promise: 7.0.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       eslint-plugin-react: 7.35.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       eslint-plugin-react-hooks: 4.6.2(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       eslint-plugin-sonarjs: 1.0.4(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
-      eslint-plugin-unicorn: 54.0.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
+      eslint-plugin-unicorn: 55.0.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       eslint-plugin-yml: 1.14.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -9284,7 +9284,7 @@ snapshots:
       '@types/eslint': 9.6.0
       eslint-config-prettier: 9.1.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
 
-  eslint-plugin-promise@6.6.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)):
+  eslint-plugin-promise@7.0.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)):
     dependencies:
       eslint: 9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)
 
@@ -9324,16 +9324,16 @@ snapshots:
       postcss: 8.4.40
       tailwindcss: 3.4.7
 
-  eslint-plugin-unicorn@54.0.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)):
+  eslint-plugin-unicorn@55.0.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)):
     dependencies:
       '@babel/helper-validator-identifier': 7.24.7
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))
-      '@eslint/eslintrc': 3.1.0
       ci-info: 4.0.0
       clean-regexp: 1.0.0
       core-js-compat: 3.37.1
       eslint: 9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)
       esquery: 1.6.0
+      globals: 15.8.0
       indent-string: 4.0.0
       is-builtin-module: 3.2.1
       jsesc: 3.0.2
@@ -9343,8 +9343,6 @@ snapshots:
       regjsparser: 0.10.0
       semver: 7.6.3
       strip-indent: 3.0.0
-    transitivePeerDependencies:
-      - supports-color
 
   eslint-plugin-yml@1.14.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)):
     dependencies:
