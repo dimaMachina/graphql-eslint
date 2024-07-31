@@ -236,8 +236,8 @@ exports[`Examples > should work in multiple projects 1`] = `
             desc: Rename to \`users\`,
             fix: {
               range: [
-                141,
-                141,
+                148,
+                148,
               ],
               text: query users ,
             },
@@ -268,10 +268,10 @@ Accepted type: ID.,
     messages: [
       {
         column: 6,
-        endColumn: 10,
+        endColumn: 17,
         endLine: 1,
         line: 1,
-        message: type "User" must have exactly one non-nullable unique identifier.
+        message: type "AnotherUser" must have exactly one non-nullable unique identifier.
 Accepted name: id.
 Accepted type: ID.,
         nodeType: Name,
