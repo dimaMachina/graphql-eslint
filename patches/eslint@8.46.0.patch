@@ -13,10 +13,18 @@ index e5d4d2c789c584a525a6aacb3c347c4dd06a5f27..a2c575f2d65f549def753314a2d86999
  const DEFAULT_ECMA_VERSION = 5;
  const commentParser = new ConfigCommentParser();
 diff --git a/lib/rule-tester/rule-tester.js b/lib/rule-tester/rule-tester.js
-index 756490e1df3d97ef47cc42f120ecda8813ec9f73..d49cdca7b7bed30fa51c197843f424d226ced0e5 100644
+index 756490e1df3d97ef47cc42f120ecda8813ec9f73..c411abe0efc9dd7ac939263adc75743e031a20cc 100644
 --- a/lib/rule-tester/rule-tester.js
 +++ b/lib/rule-tester/rule-tester.js
-@@ -1235,11 +1235,7 @@ class RuleTester {
+@@ -1102,7 +1102,6 @@ class RuleTester {
+                             assert.strictEqual(message.endColumn, error.endColumn, `Error endColumn should be ${error.endColumn}`);
+                         }
+ 
+-                        assert.ok(!message.suggestions || hasOwnProperty(error, "suggestions"), `Error at index ${i} has suggestions. Please specify 'suggestions' property on the test error object.`);
+                         if (hasOwnProperty(error, "suggestions")) {
+ 
+                             // Support asserting there are no suggestions
+@@ -1235,11 +1234,7 @@ class RuleTester {
                      assert.notStrictEqual(item.code, item.output, "Test property 'output' matches 'code'. If no autofix is expected, then omit the 'output' property or set it to null.");
                  }
              } else {
