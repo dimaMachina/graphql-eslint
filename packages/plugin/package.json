@@ -13,7 +13,6 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "browser": "./dist/index.browser.js",
       "require": {
         "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
@@ -28,6 +27,7 @@
       }
     }
   },
+  "types": "dist/esm/index.d.ts",
   "keywords": [
     "eslint",
     "eslintplugin",
