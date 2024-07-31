@@ -29,7 +29,8 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
       /\(node:\d{4}\) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js./,
       '',
     )
-    .replace('\n(Use `node --trace-warnings ...` to show where the warning was created)\n', '');
+    .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
+    .trimEnd();
   if (errorOutput) {
     throw new Error(errorOutput);
   }
