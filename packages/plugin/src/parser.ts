@@ -28,7 +28,7 @@ const LEGACY_PARSER_OPTIONS_KEYS = [
   'operations',
 ] as const;
 
-function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
+export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   for (const key of LEGACY_PARSER_OPTIONS_KEYS) {
     if (key in options) {
       throw new Error(
