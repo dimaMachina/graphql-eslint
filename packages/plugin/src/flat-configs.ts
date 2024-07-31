@@ -1,10 +1,8 @@
 import { configs } from './configs/index.js';
-import { parseForESLint } from './parser.js';
+import { parser } from './parser.js';
 import { ConfigName } from './types.js';
 
-const languageOptions = {
-  parser: { parseForESLint },
-};
+const languageOptions = { parser };
 
 export const flatConfigs = {
   'operations-all': {

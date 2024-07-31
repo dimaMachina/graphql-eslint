@@ -5,6 +5,7 @@ import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
 import { getDocuments } from './documents.js';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
 import { loadGraphQLConfig } from './graphql-config.js';
+import { version } from './meta.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';
 import { GraphQLESLintParseResult, ParserOptions, Schema } from './types.js';
@@ -27,7 +28,7 @@ const LEGACY_PARSER_OPTIONS_KEYS = [
   'operations',
 ] as const;
 
-export function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
+function parseForESLint(code: string, options: ParserOptions): GraphQLESLintParseResult {
   for (const key of LEGACY_PARSER_OPTIONS_KEYS) {
     if (key in options) {
       throw new Error(
@@ -110,3 +111,11 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     throw error;
   }
 }
+
+export const parser = {
+  parseForESLint,
+  meta: {
+    name: '@graphql-eslint/parser',
+    version,
+  },
+};
