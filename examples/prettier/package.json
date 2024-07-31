@@ -6,7 +6,7 @@
   "author": "JounQin <admin@1stg.me>",
   "private": true,
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint --cache ."
   },
   "dependencies": {
     "graphql": "16.9.0"

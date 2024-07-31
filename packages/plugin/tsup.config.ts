@@ -24,6 +24,7 @@ export default defineConfig([
   {
     ...opts,
     outDir: 'dist/esm',
+    target: 'esnext',
   },
   {
     ...opts,

@@ -3,8 +3,7 @@ import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { ConfigName, flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
-import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
+import { ConfigName, flatConfigs, parser, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
@@ -114,7 +113,7 @@ export function PlayPage(): ReactElement {
           </span>
           <span className="flex justify-between text-sm">
             <span>GraphQL-ESLint</span>
-            <span>{graphqlESLintPkgJson.version}</span>
+            <span>{parser.meta.version}</span>
           </span>
         </div>
         <div>
