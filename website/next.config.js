@@ -22,9 +22,6 @@ export default withGuildDocs({
       esquery: require.resolve('esquery'),
       // fixes for @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
       eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js'),
-      '@graphql-eslint/eslint-plugin/package.json': require.resolve(
-        '@graphql-eslint/eslint-plugin/package.json',
-      ),
       '@graphql-eslint/eslint-plugin': require
         .resolve('@graphql-eslint/eslint-plugin')
         .replace('cjs/index.js', 'index.browser.js'),
