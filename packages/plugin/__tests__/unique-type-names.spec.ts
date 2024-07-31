@@ -1,5 +1,5 @@
-import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
@@ -9,11 +9,13 @@ const TEST_SCHEMA = /* GraphQL */ `
 `;
 
 const WITH_SCHEMA = {
-  parserOptions: {
-    graphQLConfig: {
-      schema: TEST_SCHEMA,
-    },
-  } satisfies ParserOptionsForTests,
+  languageOptions: {
+    parserOptions: {
+      graphQLConfig: {
+        schema: TEST_SCHEMA,
+      },
+    } satisfies ParserOptionsForTests,
+  }
 };
 
 ruleTester.run('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-type-names'], {

@@ -40,20 +40,23 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         Pick<ESLintRuleTester.InvalidTestCase, 'errors'>)[];
     },
   ): void {
-    // @ts-expect-error -- fix later
+    // @ts-expect-error -- TODO fix me
     const { testerConfig, linter } = this;
 
     const getMessages = (
       testCase: ESLintRuleTester.InvalidTestCase,
       messages: Linter.LintMessage[],
     ) => {
+      // @ts-expect-error -- TODO fix me
       const { options, code, filename, parserOptions } = testCase;
 
-      const config = {
-        parser: testerConfig.parser,
-        parserOptions: {
-          ...testerConfig.parserOptions,
-          ...parserOptions,
+      const config: Linter.Config = {
+        languageOptions: {
+          parser: testerConfig.parser,
+          parserOptions: {
+            ...testerConfig[0].languageOptions.parserOptions,
+            ...parserOptions,
+          },
         },
         rules: {
           [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
@@ -105,8 +108,28 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
       });
     }
 
-    // @ts-expect-error -- fix later
-    super.run(ruleId, rule as any, tests);
+    super.run(ruleId, rule as any, {
+      // @ts-expect-error -- TODO: remove this
+      invalid: tests.invalid.map(({ parserOptions, ...testCase }) => ({
+        ...testCase,
+        languageOptions: {
+          parserOptions,
+        },
+      })),
+      // @ts-expect-error -- TODO: remove this
+      valid: tests.valid.map((_testCase) => {
+        if (typeof _testCase === 'string') {
+          return _testCase
+        }
+        const { parserOptions, ...testCase } = _testCase
+        return ({
+          ...testCase,
+          languageOptions: {
+            parserOptions,
+          },
+        })
+      }),
+    });
   }
 }
 
