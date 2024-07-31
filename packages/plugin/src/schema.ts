@@ -5,7 +5,7 @@ import { GraphQLProjectConfig } from 'graphql-config';
 import { ModuleCache } from './cache.js';
 import { Pointer, Schema } from './types.js';
 
-const schemaCache = new ModuleCache<GraphQLSchema>();
+const schemaCache = new ModuleCache<GraphQLProjectConfig['schema'], GraphQLSchema>();
 const debug = debugFactory('graphql-eslint:schema');
 
 export function getSchema(project: GraphQLProjectConfig): Schema {
