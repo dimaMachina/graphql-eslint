@@ -45,7 +45,7 @@ import {
   VariablesInAllowedPositionRule,
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
-import { SDLValidationRule } from 'graphql/validation/ValidationContext';
+import { SDLValidationRule } from 'graphql/validation/ValidationContext.js';
 import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
 import {
