@@ -1,5 +1,5 @@
 ---
-"@graphql-eslint/eslint-plugin": major
+'@graphql-eslint/eslint-plugin': major
 ---
 
 exposing GraphQLESTreeNode type

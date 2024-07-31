@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/require-deprecation-date';
-import { ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/require-deprecation-date.js';
+import { ruleTester } from './test-utils.js';
 
 const now = new Date();
 now.setDate(now.getDate() + 1);

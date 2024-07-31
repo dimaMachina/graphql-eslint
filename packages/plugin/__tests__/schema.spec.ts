@@ -2,9 +2,9 @@ import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { GraphQLSchema, printSchema } from 'graphql';
-import { loadGraphQLConfig } from '../src/graphql-config';
-import { getSchema } from '../src/schema';
-import { CWD } from '../src/utils';
+import { loadGraphQLConfig } from '../src/graphql-config.js';
+import { getSchema } from '../src/schema.js';
+import { CWD } from '../src/utils.js';
 
 describe('schema', async () => {
   const SCHEMA_GRAPHQL_PATH = path.resolve(__dirname, 'mocks/user-schema.graphql');

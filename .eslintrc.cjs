@@ -51,6 +51,7 @@ module.exports = {
       extends: ['plugin:eslint-plugin/tests-recommended'],
       rules: {
         'eslint-plugin/test-case-shorthand-strings': 'error',
+        'import/extensions': 'off',
       },
     },
     {

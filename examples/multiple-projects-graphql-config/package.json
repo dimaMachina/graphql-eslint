@@ -4,13 +4,13 @@
   "author": "Dimitri POSTOLOV",
   "private": true,
   "scripts": {
-    "lint": "eslint ."
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint ."
   },
   "dependencies": {
     "graphql": "16.9.0"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
-    "eslint": "8.57.0"
+    "eslint": "9.8.0"
   }
 }

@@ -1,5 +1,5 @@
-import { rule, RULE_ID, RuleOptions } from '../src/rules/require-description';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule, RULE_ID, RuleOptions } from '../src/rules/require-description.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const OPERATION = { OperationDefinition: true };
 

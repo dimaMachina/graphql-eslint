@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { rule } from '../src/rules/unique-fragment-name';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule } from '../src/rules/unique-fragment-name.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const TEST_FRAGMENT = /* GraphQL */ `
   fragment HasIdFields on HasId {

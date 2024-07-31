@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/relay-connection-types';
-import { ruleTester } from './test-utils';
+import { rule } from '../src/rules/relay-connection-types.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run('relay-connection-types', rule, {
   valid: [

@@ -6,12 +6,10 @@ import { parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
 import Editor, { OnMount } from '@monaco-editor/react';
 import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
 
-const linter = new Linter();
-
-linter.defineParser('@graphql-eslint/eslint-plugin', { parseForESLint });
-for (const [ruleId, rule] of Object.entries(rules)) {
-  linter.defineRule(`@graphql-eslint/${ruleId}`, rule as any);
-}
+const linter = new Linter({
+  // requires to provide, you'll get `No matching configuration found for schema.graphql` in the browser
+  cwd: '.',
+});
 
 type GraphQLEditorProps = {
   fileName: `${string}.graphql`;
@@ -36,18 +34,26 @@ export function GraphQLEditor({
   const editorRef = useRef<Parameters<OnMount>[0]>();
   const monacoRef = useRef<Parameters<OnMount>[1]>();
   const [editorMounted, setEditorMounted] = useState(false);
+
   let lintMessages = linter.verify(
     code,
     {
-      parser: '@graphql-eslint/eslint-plugin',
-      // extends: `plugin:@graphql-eslint/schema-recommended`,
-      parserOptions: {
-        graphQLConfig: { schema, documents },
+      files: ['*.graphql'],
+      plugins: {
+        // @ts-expect-error -- fixme
+        '@graphql-eslint': { rules },
+      },
+      languageOptions: {
+        parser: { parseForESLint },
+        parserOptions: {
+          graphQLConfig: { schema, documents },
+        },
       },
       rules: selectedRules,
     },
     fileName,
   );
+
   lintMessages = uniqWith(
     // remove duplicates of graphql-js messages
     lintMessages,

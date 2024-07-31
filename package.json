@@ -1,6 +1,6 @@
 {
-  "type": "module",
   "name": "graphql-eslint-monorepo",
+  "type": "module",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
@@ -12,10 +12,10 @@
   },
   "scripts": {
     "build": "turbo run build --filter=!website && bob check",
-    "ci:lint": "eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
+    "ci:lint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --output-file eslint_report.json --format json .",
     "create-rule": "tsx scripts/create-rule.ts",
     "generate:configs": "tsx scripts/generate-configs.ts",
-    "lint": "eslint --ignore-path .gitignore --cache .",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --cache .",
     "lint:prettier": "prettier --ignore-path .gitignore --ignore-path .prettierignore --cache --check .",
     "prebuild": "rimraf tsconfig.tsbuildinfo",
     "prerelease": "NODE_ENV=production pnpm build",
@@ -36,7 +36,7 @@
     "chalk": "5.3.0",
     "dedent": "1.5.3",
     "enquirer": "2.4.1",
-    "eslint": "8.57.0",
+    "eslint": "9.8.0",
     "eslint-plugin-eslint-plugin": "6.2.0",
     "eslint-plugin-tailwindcss": "3.17.4",
     "husky": "9.1.4",
@@ -53,7 +53,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "eslint@8.48.0": "patches/eslint@8.46.0.patch",
+      "eslint@9.8.0": "patches/eslint@8.46.0.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch"
     }
   }

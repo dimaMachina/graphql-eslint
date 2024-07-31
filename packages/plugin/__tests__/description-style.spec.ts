@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/description-style';
-import { ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/description-style.js';
+import { ruleTester } from './test-utils.js';
 
 const INLINE_SDL = /* GraphQL */ `
   " Test "

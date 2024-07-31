@@ -1,11 +1,11 @@
-// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
+import { Linter } from 'eslint';
+import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { ParserOptions } from '../src/index.js';
 
-export const DEFAULT_CONFIG = {
-  parser: require.resolve('@graphql-eslint/eslint-plugin'),
-  parserOptions: {
-    graphQLConfig: {},
+export const DEFAULT_CONFIG: Linter.Config = {
+  languageOptions: {
+    parser: graphqlESLint,
   },
 };
 
