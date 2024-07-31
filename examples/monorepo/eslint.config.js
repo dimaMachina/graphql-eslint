@@ -25,10 +25,10 @@ export default [
     // Setup GraphQL Parser
     files: ['**/*.{graphql,gql}'],
     plugins: {
-      '@graphql-eslint': graphqlESLint,
+      '@graphql-eslint': { rules: graphqlESLint.rules },
     },
     languageOptions: {
-      parser: graphqlESLint,
+      parser: graphqlESLint.parser,
     },
   },
   {
