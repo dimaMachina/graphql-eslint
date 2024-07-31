@@ -19,7 +19,13 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
-  const errorOutput = stderr.toString();
+  const errorOutput = stderr
+    .toString()
+    .replace(
+      /\(node:\d{5}\) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time/,
+      '',
+    )
+    .replace('\n(Use `node --trace-warnings ...` to show where the warning was created)\n', '');
   if (errorOutput) {
     throw new Error(errorOutput);
   }
