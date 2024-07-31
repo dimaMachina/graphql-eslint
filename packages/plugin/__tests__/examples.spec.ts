@@ -22,7 +22,11 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const errorOutput = stderr
     .toString()
     .replace(
-      /\(node:\d{4,5}\) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time/,
+      /\(node:\d{5}\) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time/,
+      '',
+    )
+    .replace(
+      /\(node:\d{4}\) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js./,
       '',
     )
     .replace('\n(Use `node --trace-warnings ...` to show where the warning was created)\n', '');
