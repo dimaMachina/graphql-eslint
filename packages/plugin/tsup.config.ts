@@ -13,6 +13,7 @@ const opts: Options = {
   },
   format: 'esm',
   minifySyntax: true,
+  outExtension: () => ({ js: '.js' }),
   esbuildOptions(options, _context) {
     options.define!.window = 'undefined';
   },
@@ -23,13 +24,17 @@ export default defineConfig([
   {
     ...opts,
     outDir: 'dist/esm',
-    outExtension: () => ({ js: '.js' }),
+  },
+  {
+    ...opts,
+    format: 'cjs',
+    outDir: 'dist/cjs',
     async onSuccess() {
       await fs.copyFile(
         path.join(CWD, '..', '..', 'README.md'),
         path.join(CWD, 'dist', 'README.md'),
       );
-      await fs.writeFile(path.join(CWD, 'dist', 'esm', 'package.json'), '{"type": "module"}');
+      await fs.writeFile(path.join(CWD, 'dist', 'cjs', 'package.json'), '{"type": "commonjs"}');
       await fs.writeFile(
         path.join(CWD, 'dist', 'package.json'),
         JSON.stringify(
@@ -44,11 +49,6 @@ export default defineConfig([
       );
       console.log('✅ Success!');
     },
-  },
-  {
-    ...opts,
-    format: 'cjs',
-    outDir: 'dist/cjs',
   },
   {
     ...opts,

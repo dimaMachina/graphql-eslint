@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { rule } from '../src/rules/require-import-fragment';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule } from '../src/rules/require-import-fragment.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 function withMocks({ name, filename, errors }: { name: string; filename: string; errors?: any }) {
   return {

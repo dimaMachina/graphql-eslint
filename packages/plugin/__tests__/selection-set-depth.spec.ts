@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/selection-set-depth';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/selection-set-depth.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const WITH_SIBLINGS = {
   parserOptions: {

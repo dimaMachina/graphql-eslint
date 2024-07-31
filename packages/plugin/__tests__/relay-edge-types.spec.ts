@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/relay-edge-types';
-import { ruleTester, withSchema } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/relay-edge-types.js';
+import { ruleTester, withSchema } from './test-utils.js';
 
 ruleTester.run<RuleOptions, true>('relay-edge-types', rule, {
   valid: [

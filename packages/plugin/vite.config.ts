@@ -1,6 +1,5 @@
 import path from 'node:path';
 import tsconfigPaths from 'vite-tsconfig-paths';
-// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { defineConfig } from 'vitest/config';
 
 const GRAPHQL_PATH = path.join(__dirname, 'node_modules', 'graphql');

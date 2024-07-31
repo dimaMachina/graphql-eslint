@@ -2,12 +2,11 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dedent from 'dedent';
+// @ts-expect-error -- ignore types
 import md from 'json-schema-to-markdown';
 import prettier from 'prettier';
 import { asArray } from '@graphql-tools/utils';
-import pkg from '../packages/plugin/src/index.js';
-
-const { rules } = pkg;
+import { rules } from '../packages/plugin/src/index.js';
 
 const BR = '';
 const NBSP = '&nbsp;';

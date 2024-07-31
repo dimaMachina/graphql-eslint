@@ -1,7 +1,6 @@
-// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { RuleTester } from '@theguild/eslint-rule-tester';
-import { rule } from '../src/rules/no-unused-fields';
-import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils';
+import { rule } from '../src/rules/no-unused-fields.js';
+import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils.js';
 
 const SCHEMA = /* GraphQL */ `
   type User {
@@ -41,10 +40,12 @@ const SCHEMA = /* GraphQL */ `
 `;
 
 const ruleTester = new RuleTester<ParserOptionsForTests>({
-  ...DEFAULT_CONFIG,
-  parserOptions: {
-    graphQLConfig: {
-      schema: SCHEMA,
+  languageOptions: {
+    ...DEFAULT_CONFIG.languageOptions,
+    parserOptions: {
+      graphQLConfig: {
+        schema: SCHEMA,
+      },
     },
   },
 });

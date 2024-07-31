@@ -27,7 +27,15 @@ export default withGuildDocs({
       ),
       '@graphql-eslint/eslint-plugin': require
         .resolve('@graphql-eslint/eslint-plugin')
-        .replace('cjs/index.js', 'index.browser.mjs'),
+        .replace('cjs/index.js', 'index.browser.js'),
+
+      // fixes Cannot use GraphQLNonNull "Boolean!" from another module or realm.
+      'graphql/utilities/valueFromASTUntyped.js': require.resolve(
+        'graphql/utilities/valueFromASTUntyped',
+      ),
+      'graphql/validation/index.js': require.resolve('graphql/validation'),
+      'graphql/validation/validate.js': require.resolve('graphql/validation/validate'),
+      graphql: require.resolve('graphql'),
     };
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {

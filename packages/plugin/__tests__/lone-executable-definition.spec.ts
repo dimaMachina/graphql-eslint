@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/lone-executable-definition';
-import { ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/lone-executable-definition.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run<RuleOptions>('lone-executable-definition', rule, {
   valid: [

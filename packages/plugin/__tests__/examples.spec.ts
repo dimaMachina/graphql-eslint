@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { join, relative } from 'node:path';
 import { ESLint } from 'eslint';
-import { CWD as PROJECT_CWD } from '../src/utils';
+import { CWD as PROJECT_CWD } from '../src/utils.js';
 
 const CWD = join(PROJECT_CWD, '..', '..');
 

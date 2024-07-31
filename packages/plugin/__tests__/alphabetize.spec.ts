@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/alphabetize';
-import { ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/alphabetize.js';
+import { ruleTester } from './test-utils.js';
 
 const GROUP_ORDER_TEST = /* GraphQL */ `
   type User {

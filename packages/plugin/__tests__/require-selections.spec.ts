@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/require-selections';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/require-selections.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
