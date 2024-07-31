@@ -15,7 +15,7 @@ const WITH_SCHEMA = {
         schema: TEST_SCHEMA,
       },
     } satisfies ParserOptionsForTests,
-  }
+  },
 };
 
 ruleTester.run('unique-type-names', GRAPHQL_JS_VALIDATIONS['unique-type-names'], {

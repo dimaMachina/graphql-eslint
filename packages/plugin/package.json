@@ -1,6 +1,7 @@
 {
   "name": "@graphql-eslint/eslint-plugin",
   "version": "4.0.0-alpha.1",
+  "type": "module",
   "description": "GraphQL plugin for ESLint",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
@@ -8,7 +9,6 @@
   "engines": {
     "node": ">=18"
   },
-  "type": "module",
   "main": "dist/cjs/index.js",
   "exports": {
     "./package.json": "./package.json",

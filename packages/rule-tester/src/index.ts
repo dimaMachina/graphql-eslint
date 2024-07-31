@@ -117,17 +117,17 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         },
       })),
       // @ts-expect-error -- TODO: remove this
-      valid: tests.valid.map((_testCase) => {
+      valid: tests.valid.map(_testCase => {
         if (typeof _testCase === 'string') {
-          return _testCase
+          return _testCase;
         }
-        const { parserOptions, ...testCase } = _testCase
-        return ({
+        const { parserOptions, ...testCase } = _testCase;
+        return {
           ...testCase,
           languageOptions: {
             parserOptions,
           },
-        })
+        };
       }),
     });
   }
