@@ -7,7 +7,7 @@ import Editor, { OnMount } from '@monaco-editor/react';
 import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
 
 const linter = new Linter({
-  // requires to provide, otherwise will get` No matching configuration found for schema.graphql` in browser
+  // requires to provide, you'll get `No matching configuration found for schema.graphql` in the browser
   cwd: '.',
 });
 
