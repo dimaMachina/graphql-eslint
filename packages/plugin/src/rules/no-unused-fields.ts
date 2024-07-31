@@ -14,7 +14,7 @@ const usedFieldsCache = new ModuleCache<GraphQLProjectConfig['schema'], UsedFiel
 function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): UsedFields {
   // We don't want cache usedFields on test environment
   // Otherwise usedFields will be same for all tests
-  let cachedValue = usedFieldsCache.get(schema);
+  const cachedValue = usedFieldsCache.get(schema);
   if (process.env.NODE_ENV !== 'test' && cachedValue) {
     return cachedValue;
   }

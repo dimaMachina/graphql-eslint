@@ -51,7 +51,7 @@ const RequestDirectiveLocations = new Set<string>([
 function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   // We don't want cache reachableTypes on test environment
   // Otherwise reachableTypes will be same for all tests
-  let cachedValue = reachableTypesCache.get(schema);
+  const cachedValue = reachableTypesCache.get(schema);
   if (process.env.NODE_ENV !== 'test' && cachedValue) {
     return cachedValue;
   }
