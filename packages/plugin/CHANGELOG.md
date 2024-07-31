@@ -1,5 +1,19 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.2
+
+### Patch Changes
+
+- [#2455](https://github.com/dimaMachina/graphql-eslint/pull/2455)
+  [`08a8a13`](https://github.com/dimaMachina/graphql-eslint/commit/08a8a1382d51140ddf7a310de3a711b354533879)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix caching issues for
+  `no-unreachable-types` / `no-unused-fields` rules for multi projects
+
+- [#2458](https://github.com/dimaMachina/graphql-eslint/pull/2458)
+  [`9096458`](https://github.com/dimaMachina/graphql-eslint/commit/909645893d41f2ccf618b2c74fb7671ddab538b9)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - add `meta` object with `name` and
+  `version` to `parser` and `processor` to be compatible with ESLint 9
+
 ## 4.0.0-alpha.1
 
 ### Major Changes
