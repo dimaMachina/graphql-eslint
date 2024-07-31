@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { ConfigName, flatConfigs, rules, parser } from '@graphql-eslint/eslint-plugin';
+import { ConfigName, flatConfigs, parser, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
