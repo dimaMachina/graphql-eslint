@@ -7,7 +7,7 @@ import { ModuleCache } from './cache.js';
 import { Pointer } from './types.js';
 
 const debug = debugFactory('graphql-eslint:operations');
-const operationsCache = new ModuleCache<Source[]>();
+const operationsCache = new ModuleCache<GraphQLProjectConfig['documents'], Source[]>();
 
 const handleVirtualPath = (documents: Source[]): Source[] => {
   const filepathMap: Record<string, number> = Object.create(null);
