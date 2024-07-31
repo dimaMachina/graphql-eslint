@@ -167,7 +167,6 @@ export function PlayPage(): ReactElement {
           ...(schemaConfig && flatConfigs[schemaConfig].rules),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
-              // @ts-expect-error -- TODO: fix type error
               flatConfigs['schema-all'].rules[`@graphql-eslint/${schemaRule}`],
           }),
         }}
@@ -184,7 +183,6 @@ export function PlayPage(): ReactElement {
           ...(operationConfig && flatConfigs[operationConfig].rules),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
-              // @ts-expect-error -- TODO: fix type error
               flatConfigs['operations-all'].rules[`@graphql-eslint/${operationRule}`],
           }),
         }}
