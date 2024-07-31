@@ -13,17 +13,17 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "browser": "./dist/index.browser.mjs",
+      "browser": "./dist/index.browser.js",
       "require": {
         "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
       },
       "import": {
-        "types": "./dist/esm/index.d.mts",
+        "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       },
       "default": {
-        "types": "./dist/esm/index.d.mts",
+        "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       }
     }
