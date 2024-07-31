@@ -8,7 +8,9 @@ import {
   NameNode,
   visit,
 } from 'graphql';
+import { GraphQLProjectConfig } from 'graphql-config';
 import lowerCase from 'lodash.lowercase';
+import { ModuleCache } from '../cache.js';
 import { GraphQLESTreeNode } from '../estree-converter/index.js';
 import { GraphQLESLintRule } from '../types.js';
 import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
@@ -33,7 +35,7 @@ const KINDS = [
 
 type ReachableTypes = Set<string>;
 
-let reachableTypesCache: ReachableTypes;
+const reachableTypesCache = new ModuleCache<GraphQLProjectConfig['schema'], ReachableTypes>();
 
 const RequestDirectiveLocations = new Set<string>([
   DirectiveLocation.QUERY,
@@ -49,8 +51,9 @@ const RequestDirectiveLocations = new Set<string>([
 function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
   // We don't want cache reachableTypes on test environment
   // Otherwise reachableTypes will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && reachableTypesCache) {
-    return reachableTypesCache;
+  const cachedValue = reachableTypesCache.get(schema);
+  if (process.env.NODE_ENV !== 'test' && cachedValue) {
+    return cachedValue;
   }
   const reachableTypes: ReachableTypes = new Set();
 
@@ -106,9 +109,8 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
       }
     }
   }
-
-  reachableTypesCache = reachableTypes;
-  return reachableTypesCache;
+  reachableTypesCache.set(schema, reachableTypes);
+  return reachableTypes;
 }
 
 export const rule: GraphQLESLintRule = {

@@ -1,4 +1,6 @@
 import { GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
+import { GraphQLProjectConfig } from 'graphql-config';
+import { ModuleCache } from '../cache.js';
 import { SiblingOperations } from '../siblings.js';
 import { GraphQLESLintRule } from '../types.js';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils.js';
@@ -7,13 +9,14 @@ const RULE_ID = 'no-unused-fields';
 
 type UsedFields = Record<string, Set<string>>;
 
-let usedFieldsCache: UsedFields;
+const usedFieldsCache = new ModuleCache<GraphQLProjectConfig['schema'], UsedFields>();
 
 function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): UsedFields {
   // We don't want cache usedFields on test environment
   // Otherwise usedFields will be same for all tests
-  if (process.env.NODE_ENV !== 'test' && usedFieldsCache) {
-    return usedFieldsCache;
+  const cachedValue = usedFieldsCache.get(schema);
+  if (process.env.NODE_ENV !== 'test' && cachedValue) {
+    return cachedValue;
   }
   const usedFields: UsedFields = Object.create(null);
   const typeInfo = new TypeInfo(schema);
@@ -37,8 +40,8 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
   for (const { document } of allDocuments) {
     visit(document, visitor);
   }
-  usedFieldsCache = usedFields;
-  return usedFieldsCache;
+  usedFieldsCache.set(schema, usedFields);
+  return usedFields;
 }
 
 export const rule: GraphQLESLintRule = {

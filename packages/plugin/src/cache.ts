@@ -4,7 +4,7 @@ import debugFactory from 'debug';
 
 const log = debugFactory('graphql-eslint:ModuleCache');
 
-export class ModuleCache<T, K = any> {
+export class ModuleCache<K, T> {
   map = new Map<K, { lastSeen: [number, number]; result: T }>();
 
   set(cacheKey: K, result: T): void {
