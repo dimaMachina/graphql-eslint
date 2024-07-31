@@ -1,4 +1,4 @@
-import { Block, processor } from '../src/processor';
+import { Block, processor } from '../src/processor.js';
 
 vi.mock('../src/graphql-config', () => ({
   loadOnDiskGraphQLConfig: vi.fn(() => ({

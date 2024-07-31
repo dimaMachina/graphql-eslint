@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/no-typename-prefix';
-import { ruleTester } from './test-utils';
+import { rule } from '../src/rules/no-typename-prefix.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run('no-typename-prefix', rule, {
   valid: [

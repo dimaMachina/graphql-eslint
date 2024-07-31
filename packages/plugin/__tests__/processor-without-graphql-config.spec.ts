@@ -1,4 +1,4 @@
-import { Block, processor } from '../src/processor';
+import { Block, processor } from '../src/processor.js';
 
 describe('processor.preprocess() without graphql-config', () => {
   const QUERY = 'query users { id }';

@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/no-unreachable-types';
-import { ruleTester, withSchema } from './test-utils';
+import { rule } from '../src/rules/no-unreachable-types.js';
+import { ruleTester, withSchema } from './test-utils.js';
 
 ruleTester.run('no-unreachable-types', rule, {
   valid: [
