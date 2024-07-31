@@ -1,10 +1,10 @@
 import js from '@eslint/js';
-import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import * as graphql from '@graphql-eslint/eslint-plugin';
 
 export default [
   {
     files: ['**/*.js'],
-    processor: graphqlESLint.processors.graphql,
+    processor: graphql.processors.graphql,
     rules: {
       ...js.configs.recommended.rules,
       'no-console': 'error',
@@ -13,10 +13,10 @@ export default [
   {
     files: ['**/*.graphql'],
     plugins: {
-      '@graphql-eslint': graphqlESLint,
+      '@graphql-eslint': { rules: graphql.rules },
     },
     languageOptions: {
-      parser: graphqlESLint,
+      parser: graphql.parser,
     },
     rules: {
       '@graphql-eslint/no-anonymous-operations': 'error',

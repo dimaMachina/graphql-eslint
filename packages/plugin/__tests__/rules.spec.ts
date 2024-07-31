@@ -1,5 +1,5 @@
 import { FlatESLint } from 'eslint/use-at-your-own-risk';
-import { configs, parseForESLint, rules } from '@graphql-eslint/eslint-plugin';
+import { configs, parser, rules } from '@graphql-eslint/eslint-plugin';
 import { ParserOptionsForTests } from './test-utils.js';
 
 export function getESLintWithConfig(
@@ -12,7 +12,7 @@ export function getESLintWithConfig(
       {
         files: ['*.graphql'],
         languageOptions: {
-          parser: { parseForESLint },
+          parser,
           parserOptions: {
             graphQLConfig: {
               schema: 'type Query { foo: Int }',

@@ -1,6 +1,6 @@
 import { processor } from './processor.js';
 
-export { parseForESLint } from './parser.js';
+export { parser, parseForESLint } from './parser.js';
 export { rules } from './rules/index.js';
 export * from './types.js';
 export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils.js';
