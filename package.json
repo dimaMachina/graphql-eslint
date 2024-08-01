@@ -46,7 +46,7 @@
     "prettier-plugin-tailwindcss": "0.6.5",
     "rimraf": "6.0.1",
     "tsup": "^8.0.0",
-    "tsx": "4.16.3",
+    "tsx": "4.16.4",
     "turbo": "^2.0.9",
     "typescript": "5.5.4",
     "vitest": "2.0.5"

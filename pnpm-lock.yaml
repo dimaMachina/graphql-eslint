@@ -78,10 +78,10 @@ importers:
         version: 6.0.1
       tsup:
         specifier: ^8.0.0
-        version: 8.2.3(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.3)(typescript@5.5.4)(yaml@2.5.0)
+        version: 8.2.3(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.4)(typescript@5.5.4)(yaml@2.5.0)
       tsx:
-        specifier: 4.16.3
-        version: 4.16.3
+        specifier: 4.16.4
+        version: 4.16.4
       turbo:
         specifier: ^2.0.9
         version: 2.0.11
@@ -5812,8 +5812,8 @@ packages:
       typescript:
         optional: true
 
-  tsx@4.16.3:
-    resolution: {integrity: sha512-MP8AEUxVnboD2rCC6kDLxnpDBNWN9k3BSVU/0/nNxgm70bPBnfn+yCKcnOsIVPQwdkbKYoFOlKjjWZWJ2XCXUg==}
+  tsx@4.16.4:
+    resolution: {integrity: sha512-E0EDobc7FtOxdNtG0ZQWztLa9PK/TqC5QvdV0heyIMJySwcJ8vyvziOznzO1MIM2IDfacLGBgfiCUmba6mvI7Q==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -11744,13 +11744,13 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.40
 
-  postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.3)(yaml@2.5.0):
+  postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.4)(yaml@2.5.0):
     dependencies:
       lilconfig: 3.1.2
     optionalDependencies:
       jiti: 1.21.6
       postcss: 8.4.40
-      tsx: 4.16.3
+      tsx: 4.16.4
       yaml: 2.5.0
 
   postcss-merge-longhand@7.0.2(postcss@8.4.40):
@@ -12780,7 +12780,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@8.2.3(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.3)(typescript@5.5.4)(yaml@2.5.0):
+  tsup@8.2.3(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.4)(typescript@5.5.4)(yaml@2.5.0):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
@@ -12792,7 +12792,7 @@ snapshots:
       globby: 11.1.0
       joycon: 3.1.1
       picocolors: 1.0.1
-      postcss-load-config: 6.0.1(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.3)(yaml@2.5.0)
+      postcss-load-config: 6.0.1(jiti@1.21.6)(postcss@8.4.40)(tsx@4.16.4)(yaml@2.5.0)
       resolve-from: 5.0.0
       rollup: 4.19.1
       source-map: 0.8.0-beta.0
@@ -12807,7 +12807,7 @@ snapshots:
       - tsx
       - yaml
 
-  tsx@4.16.3:
+  tsx@4.16.4:
     dependencies:
       esbuild: 0.21.5
       get-tsconfig: 4.7.6
