@@ -35,8 +35,8 @@ importers:
         specifier: 0.7.2
         version: 0.7.2
       '@types/node':
-        specifier: 20.14.13
-        version: 20.14.13
+        specifier: 20.14.14
+        version: 20.14.14
       bob-the-bundler:
         specifier: 7.0.1
         version: 7.0.1(typescript@5.5.4)
@@ -90,7 +90,7 @@ importers:
         version: 5.5.4
       vitest:
         specifier: 2.0.5
-        version: 2.0.5(@types/node@20.14.13)(terser@5.31.3)
+        version: 2.0.5(@types/node@20.14.14)(terser@5.31.3)
 
   examples/code-file:
     dependencies:
@@ -257,7 +257,7 @@ importers:
         version: 3.3.2
       graphql-config:
         specifier: ^5.0.0
-        version: 5.0.3(@types/node@20.14.13)(graphql@16.9.0)(typescript@5.5.4)
+        version: 5.0.3(@types/node@20.14.14)(graphql@16.9.0)(typescript@5.5.4)
       graphql-depth-limit:
         specifier: ^1.1.0
         version: 1.1.0(graphql@16.9.0)
@@ -294,7 +294,7 @@ importers:
         version: 2.12.0
       vite-tsconfig-paths:
         specifier: ^4.3.2
-        version: 4.3.2(typescript@5.5.4)(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))
+        version: 4.3.2(typescript@5.5.4)(vite@5.3.5(@types/node@20.14.14)(terser@5.31.3))
     publishDirectory: dist
 
   packages/rule-tester:
@@ -307,8 +307,8 @@ importers:
         specifier: 7.0.6
         version: 7.0.6
       '@types/node':
-        specifier: 20.14.13
-        version: 20.14.13
+        specifier: 20.14.14
+        version: 20.14.14
       eslint:
         specifier: 9.8.0
         version: 9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)
@@ -371,8 +371,8 @@ importers:
         specifier: 4.5.9
         version: 4.5.9
       '@types/node':
-        specifier: 20.14.13
-        version: 20.14.13
+        specifier: 20.14.14
+        version: 20.14.14
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1767,8 +1767,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@20.14.13':
-    resolution: {integrity: sha512-+bHoGiZb8UiQ0+WEtmph2IWQCjIqg8MDZMAV+ppRRhUZnquF5mQkP/9vpSwJClEiSM/C7fZZExPzfU0vJTyp8w==}
+  '@types/node@20.14.14':
+    resolution: {integrity: sha512-d64f00982fS9YoOgJkAMolK7MN8Iq3TDdVjchbYHdEmjth/DHowx82GnoA+tVUAN+7vxfYUgAzi+JXbKNd2SDQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -6901,14 +6901,14 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@graphql-tools/executor-http@1.1.5(@types/node@20.14.13)(graphql@16.9.0)':
+  '@graphql-tools/executor-http@1.1.5(@types/node@20.14.14)(graphql@16.9.0)':
     dependencies:
       '@graphql-tools/utils': 10.3.2(graphql@16.9.0)
       '@repeaterjs/repeater': 3.0.6
       '@whatwg-node/fetch': 0.9.19
       extract-files: 11.0.0
       graphql: 16.9.0
-      meros: 1.3.0(@types/node@20.14.13)
+      meros: 1.3.0(@types/node@20.14.14)
       tslib: 2.6.3
       value-or-promise: 1.0.12
     transitivePeerDependencies:
@@ -6994,12 +6994,12 @@ snapshots:
       tslib: 2.6.3
       value-or-promise: 1.0.12
 
-  '@graphql-tools/url-loader@8.0.2(@types/node@20.14.13)(graphql@16.9.0)':
+  '@graphql-tools/url-loader@8.0.2(@types/node@20.14.14)(graphql@16.9.0)':
     dependencies:
       '@ardatan/sync-fetch': 0.0.1
       '@graphql-tools/delegate': 10.0.16(graphql@16.9.0)
       '@graphql-tools/executor-graphql-ws': 1.2.0(graphql@16.9.0)
-      '@graphql-tools/executor-http': 1.1.5(@types/node@20.14.13)(graphql@16.9.0)
+      '@graphql-tools/executor-http': 1.1.5(@types/node@20.14.14)(graphql@16.9.0)
       '@graphql-tools/executor-legacy-ws': 1.1.0(graphql@16.9.0)
       '@graphql-tools/utils': 10.3.2(graphql@16.9.0)
       '@graphql-tools/wrap': 10.0.5(graphql@16.9.0)
@@ -7720,7 +7720,7 @@ snapshots:
 
   '@types/concat-stream@2.0.3':
     dependencies:
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
 
   '@types/d3-scale-chromatic@3.0.3': {}
 
@@ -7804,7 +7804,7 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@20.14.13':
+  '@types/node@20.14.14':
     dependencies:
       undici-types: 5.26.5
 
@@ -7829,7 +7829,7 @@ snapshots:
 
   '@types/ws@8.5.12':
     dependencies:
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
 
   '@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4))(eslint@9.8.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4))(typescript@5.5.4)':
     dependencies:
@@ -9836,13 +9836,13 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  graphql-config@5.0.3(@types/node@20.14.13)(graphql@16.9.0)(typescript@5.5.4):
+  graphql-config@5.0.3(@types/node@20.14.14)(graphql@16.9.0)(typescript@5.5.4):
     dependencies:
       '@graphql-tools/graphql-file-loader': 8.0.1(graphql@16.9.0)
       '@graphql-tools/json-file-loader': 8.0.1(graphql@16.9.0)
       '@graphql-tools/load': 8.0.2(graphql@16.9.0)
       '@graphql-tools/merge': 9.0.4(graphql@16.9.0)
-      '@graphql-tools/url-loader': 8.0.2(@types/node@20.14.13)(graphql@16.9.0)
+      '@graphql-tools/url-loader': 8.0.2(@types/node@20.14.14)(graphql@16.9.0)
       '@graphql-tools/utils': 10.3.2(graphql@16.9.0)
       cosmiconfig: 8.3.6(typescript@5.5.4)
       graphql: 16.9.0
@@ -10303,7 +10303,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -10781,9 +10781,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  meros@1.3.0(@types/node@20.14.13):
+  meros@1.3.0(@types/node@20.14.14):
     optionalDependencies:
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
 
   mhchemparser@4.2.1: {}
 
@@ -12913,7 +12913,7 @@ snapshots:
       '@types/concat-stream': 2.0.3
       '@types/debug': 4.1.12
       '@types/is-empty': 1.2.3
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
       '@types/unist': 3.0.2
       concat-stream: 2.0.0
       debug: 4.3.6
@@ -13155,13 +13155,13 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-node@2.0.5(@types/node@20.14.13)(terser@5.31.3):
+  vite-node@2.0.5(@types/node@20.14.14)(terser@5.31.3):
     dependencies:
       cac: 6.7.14
       debug: 4.3.6
       pathe: 1.1.2
       tinyrainbow: 1.2.0
-      vite: 5.3.5(@types/node@20.14.13)(terser@5.31.3)
+      vite: 5.3.5(@types/node@20.14.14)(terser@5.31.3)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -13172,28 +13172,28 @@ snapshots:
       - supports-color
       - terser
 
-  vite-tsconfig-paths@4.3.2(typescript@5.5.4)(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3)):
+  vite-tsconfig-paths@4.3.2(typescript@5.5.4)(vite@5.3.5(@types/node@20.14.14)(terser@5.31.3)):
     dependencies:
       debug: 4.3.6
       globrex: 0.1.2
       tsconfck: 3.1.1(typescript@5.5.4)
     optionalDependencies:
-      vite: 5.3.5(@types/node@20.14.13)(terser@5.31.3)
+      vite: 5.3.5(@types/node@20.14.14)(terser@5.31.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@5.3.5(@types/node@20.14.13)(terser@5.31.3):
+  vite@5.3.5(@types/node@20.14.14)(terser@5.31.3):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.40
       rollup: 4.19.1
     optionalDependencies:
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
       fsevents: 2.3.3
       terser: 5.31.3
 
-  vitest@2.0.5(@types/node@20.14.13)(terser@5.31.3):
+  vitest@2.0.5(@types/node@20.14.14)(terser@5.31.3):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -13211,11 +13211,11 @@ snapshots:
       tinybench: 2.8.0
       tinypool: 1.0.0
       tinyrainbow: 1.2.0
-      vite: 5.3.5(@types/node@20.14.13)(terser@5.31.3)
-      vite-node: 2.0.5(@types/node@20.14.13)(terser@5.31.3)
+      vite: 5.3.5(@types/node@20.14.14)(terser@5.31.3)
+      vite-node: 2.0.5(@types/node@20.14.14)(terser@5.31.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 20.14.13
+      '@types/node': 20.14.14
     transitivePeerDependencies:
       - less
       - lightningcss
