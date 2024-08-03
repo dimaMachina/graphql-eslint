@@ -14,7 +14,6 @@ export default [
     processor: graphql.processors.graphql,
     languageOptions: {
       parserOptions: {
-        sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },

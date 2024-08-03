@@ -1,10 +1,11 @@
 {
   "name": "@graphql-eslint/example-multiple-projects-graphql-config",
   "version": "0.0.0",
+  "type": "module",
   "author": "Dimitri POSTOLOV",
   "private": true,
   "scripts": {
-    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --cache ."
+    "lint": "eslint --cache ."
   },
   "dependencies": {
     "graphql": "16.9.0"
