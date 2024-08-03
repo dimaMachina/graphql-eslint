@@ -23,21 +23,21 @@ export default [
   {
     // Setup GraphQL Parser
     files: ['**/*.{graphql,gql}'],
-    plugins: {
-      '@graphql-eslint': { rules: graphql.rules },
-    },
     languageOptions: {
       parser: graphql.parser,
+    },
+    plugins: {
+      '@graphql-eslint': { rules: graphql.rules },
     },
   },
   {
     // Setup recommended config for schema files
     files: [SCHEMA_PATH],
-    ...graphql.flatConfigs['schema-recommended'],
+    rules: graphql.configs['flat/schema-recommended'],
   },
   {
     // Setup recommended config for operations files
     files: ['client/**/*.{graphql,gql}'],
-    ...graphql.flatConfigs['operations-recommended'],
+    rules: graphql.configs['flat/operations-recommended'],
   },
 ];

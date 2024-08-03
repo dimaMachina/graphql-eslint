@@ -10,22 +10,22 @@ export default [
   {
     // Setup GraphQL Parser
     files: ['**/*.graphql'],
-    plugins: {
-      '@graphql-eslint': { rules: graphql.rules },
-    },
     languageOptions: {
       parser: graphql.parser,
+    },
+    plugins: {
+      '@graphql-eslint': { rules: graphql.rules },
     },
   },
   {
     files: ['schema.*.graphql'],
     rules: {
-      ...graphql.flatConfigs['schema-recommended'].rules,
+      ...graphql.configs['flat/schema-recommended'].rules,
       '@graphql-eslint/require-description': 'off',
     },
   },
   {
     files: ['**/*.js/*.graphql'],
-    rules: graphql.flatConfigs['operations-recommended'].rules,
+    rules: graphql.configs['flat/operations-recommended'].rules,
   },
 ];
