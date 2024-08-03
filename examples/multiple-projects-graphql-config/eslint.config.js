@@ -20,12 +20,12 @@ export default [
   {
     files: ['schema.*.graphql'],
     rules: {
-      ...graphql.configs['flat/schema-recommended'].rules,
+      ...graphql.configs['flat/schema-recommended'],
       '@graphql-eslint/require-description': 'off',
     },
   },
   {
     files: ['**/*.js/*.graphql'],
-    rules: graphql.configs['flat/operations-recommended'].rules,
+    rules: graphql.configs['flat/operations-recommended'],
   },
 ];
