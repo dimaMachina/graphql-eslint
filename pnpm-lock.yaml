@@ -241,8 +241,8 @@ importers:
         specifier: ^8.0.0
         version: 8.1.2(graphql@16.9.0)
       '@graphql-tools/graphql-tag-pluck':
-        specifier: ^8.0.0
-        version: 8.3.1(graphql@16.9.0)
+        specifier: 8.3.2-alpha-20240803110708-298aeb8bb2ca4ef649bf09fc42f82fc88c6d5e13
+        version: 8.3.2-alpha-20240803110708-298aeb8bb2ca4ef649bf09fc42f82fc88c6d5e13(graphql@16.9.0)
       '@graphql-tools/utils':
         specifier: ^10.0.0
         version: 10.3.2(graphql@16.9.0)
@@ -940,6 +940,12 @@ packages:
 
   '@graphql-tools/graphql-tag-pluck@8.3.1':
     resolution: {integrity: sha512-ujits9tMqtWQQq4FI4+qnVPpJvSEn7ogKtyN/gfNT+ErIn6z1e4gyVGQpTK5sgAUXq1lW4gU/5fkFFC5/sL2rQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+
+  '@graphql-tools/graphql-tag-pluck@8.3.2-alpha-20240803110708-298aeb8bb2ca4ef649bf09fc42f82fc88c6d5e13':
+    resolution: {integrity: sha512-Y+Sk4y19MO2nDYMG4I/FFP1RJ/LMMypKi0AxE+xrRdemnMBAj0cO2yL05+WpuKHQjryDMYl9KomQzQA1M0Jjnw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
@@ -6945,6 +6951,19 @@ snapshots:
       unixify: 1.0.0
 
   '@graphql-tools/graphql-tag-pluck@8.3.1(graphql@16.9.0)':
+    dependencies:
+      '@babel/core': 7.24.9
+      '@babel/parser': 7.25.0
+      '@babel/plugin-syntax-import-assertions': 7.24.7(@babel/core@7.24.9)
+      '@babel/traverse': 7.25.1
+      '@babel/types': 7.25.0
+      '@graphql-tools/utils': 10.3.2(graphql@16.9.0)
+      graphql: 16.9.0
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@graphql-tools/graphql-tag-pluck@8.3.2-alpha-20240803110708-298aeb8bb2ca4ef649bf09fc42f82fc88c6d5e13(graphql@16.9.0)':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/parser': 7.25.0

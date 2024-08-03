@@ -5,7 +5,7 @@
   "author": "Dimitri POSTOLOV",
   "private": true,
   "scripts": {
-    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --cache ."
+    "lint": "eslint --cache ."
   },
   "dependencies": {
     "graphql": "16.9.0"
