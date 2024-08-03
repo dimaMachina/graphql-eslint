@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@graphql-tools/code-file-loader": "^8.0.0",
-    "@graphql-tools/graphql-tag-pluck": "^8.0.0",
+    "@graphql-tools/graphql-tag-pluck": "8.3.2-alpha-20240803110708-298aeb8bb2ca4ef649bf09fc42f82fc88c6d5e13",
     "@graphql-tools/utils": "^10.0.0",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
