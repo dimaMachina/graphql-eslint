@@ -8,4 +8,3 @@ export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './ut
 export const processors = { graphql: processor };
 
 export { configs } from './configs/index.js';
-export { flatConfigs } from './flat-configs.js';

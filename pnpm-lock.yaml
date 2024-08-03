@@ -256,8 +256,8 @@ importers:
         specifier: ^3.2.12
         version: 3.3.2
       graphql-config:
-        specifier: ^5.0.0
-        version: 5.0.3(@types/node@20.14.14)(graphql@16.9.0)(typescript@5.5.4)
+        specifier: ^5.1.0
+        version: 5.1.0(@types/node@20.14.14)(graphql@16.9.0)(typescript@5.5.4)
       graphql-depth-limit:
         specifier: ^1.1.0
         version: 1.1.0(graphql@16.9.0)
@@ -3356,8 +3356,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  graphql-config@5.0.3:
-    resolution: {integrity: sha512-BNGZaoxIBkv9yy6Y7omvsaBUHOzfFcII3UN++tpH8MGOKFPFkCPZuwx09ggANMt8FgyWP1Od8SWPmrUEZca4NQ==}
+  graphql-config@5.1.0:
+    resolution: {integrity: sha512-g4mNs1OZmZI+LHwRly3BbHO3mRZryyRCbmFKDGsFGde3U0F7TlIwJ0mhX1KTJlQzGQVDZDexZWnvIwodFERPvg==}
     engines: {node: '>= 16.0.0'}
     peerDependencies:
       cosmiconfig-toml-loader: ^1.0.0
@@ -9855,7 +9855,7 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  graphql-config@5.0.3(@types/node@20.14.14)(graphql@16.9.0)(typescript@5.5.4):
+  graphql-config@5.1.0(@types/node@20.14.14)(graphql@16.9.0)(typescript@5.5.4):
     dependencies:
       '@graphql-tools/graphql-file-loader': 8.0.1(graphql@16.9.0)
       '@graphql-tools/json-file-loader': 8.0.1(graphql@16.9.0)

@@ -8,9 +8,6 @@ export default [
   },
   {
     files: ['**/*.graphql'],
-    plugins: {
-      '@graphql-eslint': { rules: graphql.rules },
-    },
     languageOptions: {
       parser: graphql.parser,
       parserOptions: {
@@ -19,6 +16,9 @@ export default [
           documents: ['query.graphql', 'fragment.graphql', 'fragment2.graphql'],
         },
       },
+    },
+    plugins: {
+      '@graphql-eslint': { rules: graphql.rules },
     },
     rules: {
       '@graphql-eslint/require-selections': ['error', { fieldName: '_id' }],

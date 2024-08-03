@@ -8,11 +8,11 @@ export default [
   },
   {
     files: ['**/*.graphql'],
-    plugins: {
-      '@graphql-eslint': { rules: graphql.rules },
-    },
     languageOptions: {
       parser: graphql.parser,
+    },
+    plugins: {
+      '@graphql-eslint': { rules: graphql.rules },
     },
     rules: {
       '@graphql-eslint/no-anonymous-operations': 'error',
