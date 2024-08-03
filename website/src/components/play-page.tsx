@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { ConfigName, flatConfigs, parser, rules } from '@graphql-eslint/eslint-plugin';
+import { ConfigName, configs, parser, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
@@ -163,10 +163,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(schemaConfig && flatConfigs[schemaConfig].rules),
+          ...(schemaConfig && configs[`flat/${schemaConfig}`]),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
-              flatConfigs['schema-all'].rules[`@graphql-eslint/${schemaRule}`],
+              configs['flat/schema-all'][`@graphql-eslint/${schemaRule}`],
           }),
         }}
         onChange={setSchema}
@@ -179,10 +179,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(operationConfig && flatConfigs[operationConfig].rules),
+          ...(operationConfig && configs[`flat/${operationConfig}`]),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
-              flatConfigs['operations-all'].rules[`@graphql-eslint/${operationRule}`],
+              configs['flat/operations-all'][`@graphql-eslint/${operationRule}`],
           }),
         }}
         onChange={setOperation}

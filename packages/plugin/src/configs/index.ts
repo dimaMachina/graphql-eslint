@@ -16,4 +16,15 @@ export const configs = {
   'schema-relay': relayConfig,
   'operations-recommended': operationsRecommendedConfig,
   'operations-all': operationsAllConfig,
-} satisfies Record<ConfigName, unknown>;
+  'flat/schema-recommended': schemaRecommendedConfig.rules,
+  'flat/schema-all': {
+    ...schemaRecommendedConfig.rules,
+    ...schemaAllConfig.rules,
+  },
+  'flat/schema-relay': relayConfig.rules,
+  'flat/operations-recommended': operationsRecommendedConfig.rules,
+  'flat/operations-all': {
+    ...operationsRecommendedConfig.rules,
+    ...operationsAllConfig.rules,
+  },
+} satisfies Record<ConfigName | `flat/${ConfigName}`, unknown>;
