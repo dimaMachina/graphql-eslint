@@ -14,15 +14,15 @@
   Thanks [@dimaMachina](https://github.com/dimaMachina)! - - rename flat configs exports
 
   ```diff
-  -graphql.flatConfigs['schema-recommended']
+  -graphql.flatConfigs['schema-recommended'].rules
   +graphql.configs['flat/schema-recommended']
-  -graphql.flatConfigs['schema-relay']
+  -graphql.flatConfigs['schema-relay'].rules
   +graphql.configs['flat/schema-relay']
-  -graphql.flatConfigs['schema-all']
+  -graphql.flatConfigs['schema-all'].rules
   +graphql.configs['flat/schema-all']
-  -graphql.flatConfigs['operations-recommended']
+  -graphql.flatConfigs['operations-recommended'].rules
   +graphql.configs['flat/operations-recommended']
-  -graphql.flatConfigs['operations-all']
+  -graphql.flatConfigs['operations-all'].rules
   +graphql.configs['flat/operations-all']
   ```
 
