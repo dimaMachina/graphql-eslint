@@ -1,5 +1,34 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.3
+
+### Patch Changes
+
+- [#2466](https://github.com/dimaMachina/graphql-eslint/pull/2466)
+  [`da608d7`](https://github.com/dimaMachina/graphql-eslint/commit/da608d735f7e292b15955ace2fd4b1f17406105e)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix `require is not defined` in flat
+  configs for Vue/Svelte projects
+
+- [#2468](https://github.com/dimaMachina/graphql-eslint/pull/2468)
+  [`733a66e`](https://github.com/dimaMachina/graphql-eslint/commit/733a66e38cb5a444ff3a2f9ed7c1b31665fca404)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - - rename flat configs exports
+
+  ```diff
+  -graphql.flatConfigs['schema-recommended']
+  +graphql.configs['flat/schema-recommended']
+  -graphql.flatConfigs['schema-relay']
+  +graphql.configs['flat/schema-relay']
+  -graphql.flatConfigs['schema-all']
+  +graphql.configs['flat/schema-all']
+  -graphql.flatConfigs['operations-recommended']
+  +graphql.configs['flat/operations-recommended']
+  -graphql.flatConfigs['operations-all']
+  +graphql.configs['flat/operations-all']
+  ```
+
+  - fix with programmatic usage when passing large schema as string causes `pattern too long` error
+  - fix loading ESM `graphql.config.js` configs
+
 ## 4.0.0-alpha.2
 
 ### Patch Changes
