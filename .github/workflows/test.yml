@@ -39,7 +39,7 @@ jobs:
         run: pnpm build
 
   test:
-    name: Node.js v${{matrix.node_version}} / GraphQL v${{matrix.graphql_version}} / ESLint v8
+    name: Node.js v${{matrix.node_version}} / GraphQL v${{matrix.graphql_version}} / ESLint v9
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: [typecheck]
