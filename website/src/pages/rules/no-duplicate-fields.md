@@ -1,3 +1,9 @@
+---
+description:
+  'Checks for duplicate fields in selection set, variables in operation definition, or in arguments
+  set of a field.'
+---
+
 # `no-duplicate-fields`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

@@ -1,3 +1,9 @@
+---
+description:
+  'A GraphQL document is only valid if all fragment definitions are spread within operations, or
+  spread within other fragments spread within operations.'
+---
+
 # `no-unused-fragments`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

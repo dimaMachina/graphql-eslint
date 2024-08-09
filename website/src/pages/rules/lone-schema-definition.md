@@ -1,3 +1,7 @@
+---
+description: 'A GraphQL document is only valid if it contains only one schema definition.'
+---
+
 # `lone-schema-definition`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

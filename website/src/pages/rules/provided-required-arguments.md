@@ -1,3 +1,9 @@
+---
+description:
+  'A field or directive is only valid if all required (non-null without a default value) field
+  arguments have been provided.'
+---
+
 # `provided-required-arguments`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and

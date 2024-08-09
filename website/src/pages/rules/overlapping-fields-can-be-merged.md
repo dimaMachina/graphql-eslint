@@ -1,3 +1,9 @@
+---
+description:
+  'A selection set is only valid if all fields (including spreading any fragments) either correspond
+  to distinct response names or can be merged without ambiguity.'
+---
+
 # `overlapping-fields-can-be-merged`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

@@ -1,3 +1,7 @@
+---
+description: 'Require all deprecation directives to specify a reason.'
+---
+
 # `require-deprecation-reason`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

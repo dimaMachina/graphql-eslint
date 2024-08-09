@@ -1,3 +1,7 @@
+---
+description: 'Requires all types to be reachable at some level by root level fields.'
+---
+
 # `no-unreachable-types`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

@@ -1,3 +1,9 @@
+---
+description:
+  'A GraphQL document is only valid if all value literals are of the type expected at their
+  position.'
+---
+
 # `value-literals-of-correct-type`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

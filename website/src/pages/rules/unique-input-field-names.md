@@ -1,3 +1,7 @@
+---
+description: 'A GraphQL input object value is only valid if all supplied fields are uniquely named.'
+---
+
 # `unique-input-field-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

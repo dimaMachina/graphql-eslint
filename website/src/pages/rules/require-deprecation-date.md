@@ -1,3 +1,9 @@
+---
+description:
+  'Require deletion date on `@deprecated` directive. Suggest removing deprecated things after
+  deprecated date.'
+---
+
 # `require-deprecation-date`
 
 💡 This rule provides

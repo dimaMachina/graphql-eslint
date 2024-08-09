@@ -1,3 +1,7 @@
+---
+description: 'A GraphQL subscription is valid only if it contains a single root field.'
+---
+
 # `one-field-subscriptions`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

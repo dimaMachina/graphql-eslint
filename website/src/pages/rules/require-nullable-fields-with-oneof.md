@@ -1,3 +1,7 @@
+---
+description: 'Require `input` or `type` fields to be non-nullable with `@oneOf` directive.'
+---
+
 # `require-nullable-fields-with-oneof`
 
 - Category: `Schema`

@@ -1,3 +1,7 @@
+---
+description: 'This rule allows you to enforce that the file name should match the operation name.'
+---
+
 # `match-document-filename`
 
 - Category: `Operations`

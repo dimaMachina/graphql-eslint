@@ -1,3 +1,7 @@
+---
+description: 'Set of rules to follow Relay specification for Arguments.'
+---
+
 # `relay-arguments`
 
 - Category: `Schema`

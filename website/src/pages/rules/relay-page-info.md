@@ -1,3 +1,7 @@
+---
+description: 'Set of rules to follow Relay specification for `PageInfo` object.'
+---
+
 # `relay-page-info`
 
 - Category: `Schema`

@@ -1,3 +1,7 @@
+---
+description: 'A GraphQL enum type is only valid if all its values are uniquely named.'
+---
+
 # `unique-enum-value-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file
