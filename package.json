@@ -43,7 +43,7 @@
     "jest-snapshot-serializer-raw": "2.0.0",
     "json-schema-to-markdown": "1.1.1",
     "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "0.6.5",
+    "prettier-plugin-tailwindcss": "0.6.6",
     "rimraf": "6.0.1",
     "tsup": "^8.0.0",
     "tsx": "4.17.0",
