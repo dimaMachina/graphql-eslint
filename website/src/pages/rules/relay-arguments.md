@@ -1,10 +1,5 @@
 ---
-description:
-  "Set of rules to follow Relay specification for Arguments.\n\n- A field that returns a Connection
-  type must include forward pagination arguments (`first` and `after`), backward pagination
-  arguments (`last` and `before`), or both\n\nForward pagination arguments\n\n- `first` takes a
-  non-negative integer\n- `after` takes the Cursor type\n\nBackward pagination arguments\n\n- `last`
-  takes a non-negative integer\n- `before` takes the Cursor type"
+description: 'Set of rules to follow Relay specification for Arguments.'
 ---
 
 # `relay-arguments`
