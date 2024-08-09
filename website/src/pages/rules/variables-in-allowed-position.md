@@ -1,3 +1,7 @@
+---
+description: 'Variables passed to field arguments conform to type.'
+---
+
 # `variables-in-allowed-position`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

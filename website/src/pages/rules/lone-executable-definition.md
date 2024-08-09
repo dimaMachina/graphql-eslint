@@ -1,3 +1,8 @@
+---
+description:
+  'Require queries, mutations, subscriptions or fragments to be located in separate files.'
+---
+
 # `lone-executable-definition`
 
 - Category: `Operations`

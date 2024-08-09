@@ -1,3 +1,7 @@
+---
+description: 'Avoid scalar result type on mutation type to make sure to return a valid state.'
+---
+
 # `no-scalar-result-type-on-mutation`
 
 💡 This rule provides

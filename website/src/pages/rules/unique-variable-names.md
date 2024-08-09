@@ -1,3 +1,7 @@
+---
+description: 'A GraphQL operation is only valid if all its variables are uniquely named.'
+---
+
 # `unique-variable-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
