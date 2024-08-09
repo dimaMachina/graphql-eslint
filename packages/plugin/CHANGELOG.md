@@ -1,5 +1,13 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.4
+
+### Patch Changes
+
+- [#2483](https://github.com/dimaMachina/graphql-eslint/pull/2483)
+  [`d52585a`](https://github.com/dimaMachina/graphql-eslint/commit/d52585a08513546e1c403a6cf83de6d6370e96da)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix compatibility with Node.js v22
+
 ## 4.0.0-alpha.3
 
 ### Patch Changes
