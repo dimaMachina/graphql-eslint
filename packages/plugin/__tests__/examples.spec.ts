@@ -22,10 +22,6 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const errorOutput = stderr
     .toString()
     .replace(
-      /\(node:\d{4,5}\) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time/,
-      '',
-    )
-    .replace(
       /\(node:\d{4,5}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
       '',
     )

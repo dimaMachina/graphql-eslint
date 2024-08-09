@@ -48,7 +48,7 @@ function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]
   ].join('\n');
 }
 
-const MARKDOWN_LINK_RE = /\[.*]\((.*?)\)/;
+const MARKDOWN_LINK_RE = /\[(.*?)]\(.*\)/;
 
 async function generateDocs(): Promise<void> {
   const prettierConfig = await prettier.resolveConfig('./docs/README.md');

@@ -1,7 +1,7 @@
 ---
 description:
   'Limit the complexity of the GraphQL operations solely by their depth. Based on
-  https://npmjs.com/package/graphql-depth-limit.'
+  graphql-depth-limit.'
 ---
 
 # `selection-set-depth`
