@@ -26,10 +26,6 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
       '',
     )
     .replace(
-      /\(node:\d{4}\) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js./,
-      '',
-    )
-    .replace(
       /\(node:\d{4,5}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
       '',
     )
