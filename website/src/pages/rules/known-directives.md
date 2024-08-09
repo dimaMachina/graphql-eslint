@@ -1,7 +1,7 @@
 ---
 description:
-  "A GraphQL document is only valid if all `@directive`s are known by the schema and legally
-  positioned.\n> This rule is a wrapper around a `graphql-js` validation function."
+  'A GraphQL document is only valid if all `@directive`s are known by the schema and legally
+  positioned.'
 ---
 
 # `known-directives`

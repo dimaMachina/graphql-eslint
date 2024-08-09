@@ -1,7 +1,7 @@
 ---
 description:
-  "A field or directive is only valid if all required (non-null without a default value) field
-  arguments have been provided.\n> This rule is a wrapper around a `graphql-js` validation function."
+  'A field or directive is only valid if all required (non-null without a default value) field
+  arguments have been provided.'
 ---
 
 # `provided-required-arguments`

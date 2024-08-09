@@ -1,7 +1,7 @@
 ---
 description:
-  "A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar
-  or enum types.\n> This rule is a wrapper around a `graphql-js` validation function."
+  'A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar
+  or enum types.'
 ---
 
 # `scalar-leafs`

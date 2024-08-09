@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL fragment is only valid when it does not have cycles in fragments usage.\n> This rule is
-  a wrapper around a `graphql-js` validation function."
+description: 'A GraphQL fragment is only valid when it does not have cycles in fragments usage.'
 ---
 
 # `no-fragment-cycles`

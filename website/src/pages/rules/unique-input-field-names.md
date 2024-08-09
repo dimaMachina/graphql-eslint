@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL input object value is only valid if all supplied fields are uniquely named.\n> This
-  rule is a wrapper around a `graphql-js` validation function."
+description: 'A GraphQL input object value is only valid if all supplied fields are uniquely named.'
 ---
 
 # `unique-input-field-names`

@@ -1,7 +1,7 @@
 ---
 description:
-  "A GraphQL document is only valid if all non-repeatable directives at a given location are
-  uniquely named.\n> This rule is a wrapper around a `graphql-js` validation function."
+  'A GraphQL document is only valid if all non-repeatable directives at a given location are
+  uniquely named.'
 ---
 
 # `unique-directive-names-per-location`

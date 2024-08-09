@@ -54,7 +54,7 @@ async function generateDocs(): Promise<void> {
   const result = Object.entries(rules).map(async ([ruleName, rule]) => {
     const blocks: string[] = [
       '---',
-      `description: ${JSON.stringify(rule.meta.docs!.description)}`,
+      `description: ${JSON.stringify(rule.meta.docs!.description!.replace(/\n.*/, ''))}`,
       '---',
       `# \`${ruleName}\``,
     ];

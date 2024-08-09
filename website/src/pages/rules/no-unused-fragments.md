@@ -1,8 +1,7 @@
 ---
 description:
-  "A GraphQL document is only valid if all fragment definitions are spread within operations, or
-  spread within other fragments spread within operations.\n> This rule is a wrapper around a
-  `graphql-js` validation function."
+  'A GraphQL document is only valid if all fragment definitions are spread within operations, or
+  spread within other fragments spread within operations.'
 ---
 
 # `no-unused-fragments`

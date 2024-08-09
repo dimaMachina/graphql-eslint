@@ -1,7 +1,6 @@
 ---
 description:
-  "A GraphQL field or directive is only valid if all supplied arguments are uniquely named.\n> This
-  rule is a wrapper around a `graphql-js` validation function."
+  'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.'
 ---
 
 # `unique-argument-names`

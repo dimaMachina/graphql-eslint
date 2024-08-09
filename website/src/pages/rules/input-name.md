@@ -1,9 +1,7 @@
 ---
 description:
-  "Require mutation argument to be always called \"input\" and input type to be called Mutation name
-  + \"Input\".\nUsing the same name for all input parameters will make your schemas easier to
-  consume and more predictable. Using the same name as mutation for InputType will make it easier to
-  find mutations that InputType belongs to."
+  'Require mutation argument to be always called "input" and input type to be called Mutation name +
+  "Input".'
 ---
 
 # `input-name`

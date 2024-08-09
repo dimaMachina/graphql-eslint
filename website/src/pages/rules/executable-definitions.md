@@ -1,7 +1,7 @@
 ---
 description:
-  "A GraphQL document is only valid for execution if all definitions are either operation or
-  fragment definitions.\n> This rule is a wrapper around a `graphql-js` validation function."
+  'A GraphQL document is only valid for execution if all definitions are either operation or
+  fragment definitions.'
 ---
 
 # `executable-definitions`

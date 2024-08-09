@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL complex type is only valid if all its fields are uniquely named.\n> This rule is a
-  wrapper around a `graphql-js` validation function."
+description: 'A GraphQL complex type is only valid if all its fields are uniquely named.'
 ---
 
 # `unique-field-definition-names`

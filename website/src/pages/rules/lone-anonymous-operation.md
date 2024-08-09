@@ -1,8 +1,7 @@
 ---
 description:
-  "A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if
-  it contains only that one operation definition.\n> This rule is a wrapper around a `graphql-js`
-  validation function."
+  'A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if
+  it contains only that one operation definition.'
 ---
 
 # `lone-anonymous-operation`

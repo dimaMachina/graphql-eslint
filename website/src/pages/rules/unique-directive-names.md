@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL document is only valid if all defined directives have unique names.\n> This rule is a
-  wrapper around a `graphql-js` validation function."
+description: 'A GraphQL document is only valid if all defined directives have unique names.'
 ---
 
 # `unique-directive-names`

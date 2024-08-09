@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL operation is only valid if all its variables are uniquely named.\n> This rule is a
-  wrapper around a `graphql-js` validation function."
+description: 'A GraphQL operation is only valid if all its variables are uniquely named.'
 ---
 
 # `unique-variable-names`

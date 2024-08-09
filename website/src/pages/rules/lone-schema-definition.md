@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL document is only valid if it contains only one schema definition.\n> This rule is a
-  wrapper around a `graphql-js` validation function."
+description: 'A GraphQL document is only valid if it contains only one schema definition.'
 ---
 
 # `lone-schema-definition`

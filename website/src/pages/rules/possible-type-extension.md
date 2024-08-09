@@ -1,7 +1,5 @@
 ---
-description:
-  "A type extension is only valid if the type is defined and has the same kind.\n> This rule is a
-  wrapper around a `graphql-js` validation function."
+description: 'A type extension is only valid if the type is defined and has the same kind.'
 ---
 
 # `possible-type-extension`

@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL document is only valid if it has only one type per operation.\n> This rule is a wrapper
-  around a `graphql-js` validation function."
+description: 'A GraphQL document is only valid if it has only one type per operation.'
 ---
 
 # `unique-operation-types`

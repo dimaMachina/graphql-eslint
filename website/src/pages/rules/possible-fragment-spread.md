@@ -1,8 +1,8 @@
 ---
 description:
-  "A fragment spread is only valid if the type condition could ever possibly be true: if there is a
+  'A fragment spread is only valid if the type condition could ever possibly be true: if there is a
   non-empty intersection of the possible parent types, and possible types which pass the type
-  condition.\n> This rule is a wrapper around a `graphql-js` validation function."
+  condition.'
 ---
 
 # `possible-fragment-spread`

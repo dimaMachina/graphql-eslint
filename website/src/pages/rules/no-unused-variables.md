@@ -1,8 +1,7 @@
 ---
 description:
-  "A GraphQL operation is only valid if all variables defined by an operation are used, either
-  directly or within a spread fragment.\n> This rule is a wrapper around a `graphql-js` validation
-  function."
+  'A GraphQL operation is only valid if all variables defined by an operation are used, either
+  directly or within a spread fragment.'
 ---
 
 # `no-unused-variables`

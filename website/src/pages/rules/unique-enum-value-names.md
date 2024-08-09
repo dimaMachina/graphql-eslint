@@ -1,7 +1,5 @@
 ---
-description:
-  "A GraphQL enum type is only valid if all its values are uniquely named.\n> This rule disallows
-  case-insensitive enum values duplicates too."
+description: 'A GraphQL enum type is only valid if all its values are uniquely named.'
 ---
 
 # `unique-enum-value-names`
