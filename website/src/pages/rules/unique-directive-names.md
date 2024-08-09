@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL document is only valid if all defined directives have unique names.\n> This rule is a
+  wrapper around a `graphql-js` validation function."
+---
+
 # `unique-directive-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

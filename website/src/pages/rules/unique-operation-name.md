@@ -1,3 +1,7 @@
+---
+description: 'Enforce unique operation names across your project.'
+---
+
 # `unique-operation-name`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

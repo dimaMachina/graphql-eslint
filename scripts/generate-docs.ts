@@ -52,7 +52,12 @@ async function generateDocs(): Promise<void> {
   const prettierConfig = await prettier.resolveConfig('./docs/README.md');
 
   const result = Object.entries(rules).map(async ([ruleName, rule]) => {
-    const blocks: string[] = [`# \`${ruleName}\``];
+    const blocks: string[] = [
+      '---',
+      `description: ${JSON.stringify(rule.meta.docs!.description)}`,
+      '---',
+      `# \`${ruleName}\``,
+    ];
     const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
 
     if (deprecated) {

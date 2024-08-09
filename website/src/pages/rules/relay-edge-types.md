@@ -1,3 +1,15 @@
+---
+description:
+  "Set of rules to follow Relay specification for Edge types.\n\n- A type that is returned in list
+  form by a connection type's `edges` field is considered by this spec to be an Edge type\n- Edge
+  type must be an Object type\n- Edge type must contain a field `node` that return either Scalar,
+  Enum, Object, Interface, Union, or a non-null wrapper around one of those types. Notably, this
+  field cannot return a list\n- Edge type must contain a field `cursor` that return either String,
+  Scalar, or a non-null wrapper around one of those types\n- Edge type name must end in \"Edge\"
+  _(optional)_\n- Edge type's field `node` must implement `Node` interface _(optional)_\n- A list
+  type should only wrap an edge type _(optional)_"
+---
+
 # `relay-edge-types`
 
 - Category: `Schema`

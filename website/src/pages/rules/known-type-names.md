@@ -1,3 +1,10 @@
+---
+description:
+  "A GraphQL document is only valid if referenced types (specifically variable definitions and
+  fragment conditions) are defined by the type schema.\n> This rule is a wrapper around a
+  `graphql-js` validation function."
+---
+
 # `known-type-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and

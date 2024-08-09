@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL document is only valid if it has only one type per operation.\n> This rule is a wrapper
+  around a `graphql-js` validation function."
+---
+
 # `unique-operation-types`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

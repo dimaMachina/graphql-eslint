@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL operation is only valid if all the variables it defines are of input types (scalar,
+  enum, or input object).\n> This rule is a wrapper around a `graphql-js` validation function."
+---
+
 # `variables-are-input-types`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

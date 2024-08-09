@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined
+  in the same document.\n> This rule is a wrapper around a `graphql-js` validation function."
+---
+
 # `known-fragment-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

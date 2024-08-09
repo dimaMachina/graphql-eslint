@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL complex type is only valid if all its fields are uniquely named.\n> This rule is a
+  wrapper around a `graphql-js` validation function."
+---
+
 # `unique-field-definition-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

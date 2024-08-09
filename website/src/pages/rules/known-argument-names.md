@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL field is only valid if all supplied arguments are defined by that field.\n> This rule
+  is a wrapper around a `graphql-js` validation function."
+---
+
 # `known-argument-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and

@@ -1,3 +1,9 @@
+---
+description:
+  'Limit the complexity of the GraphQL operations solely by their depth. Based on
+  [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).'
+---
+
 # `selection-set-depth`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

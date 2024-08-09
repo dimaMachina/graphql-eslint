@@ -1,3 +1,7 @@
+---
+description: 'Require names to follow specified conventions.'
+---
+
 # `naming-convention`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and

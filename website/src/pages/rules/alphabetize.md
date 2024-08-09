@@ -1,3 +1,9 @@
+---
+description:
+  'Enforce arrange in alphabetical order for type fields, enum values, input object fields,
+  operation selections and more.'
+---
+
 # `alphabetize`
 
 🔧 The `--fix` option on the

@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL subscription is valid only if it contains a single root field.\n> This rule is a
+  wrapper around a `graphql-js` validation function."
+---
+
 # `one-field-subscriptions`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

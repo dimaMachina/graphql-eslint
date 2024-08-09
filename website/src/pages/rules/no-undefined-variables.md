@@ -1,3 +1,10 @@
+---
+description:
+  "A GraphQL operation is only valid if all variables encountered, both directly and via fragment
+  spreads, are defined by that operation.\n> This rule is a wrapper around a `graphql-js` validation
+  function."
+---
+
 # `no-undefined-variables`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

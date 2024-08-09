@@ -1,3 +1,12 @@
+---
+description:
+  "Set of rules to follow Relay specification for Connection types.\n\n- Any type whose name ends in
+  \"Connection\" is considered by spec to be a `Connection type`\n- Connection type must be an
+  Object type\n- Connection type must contain a field `edges` that return a list type that wraps an
+  edge type\n- Connection type must contain a field `pageInfo` that return a non-null `PageInfo`
+  Object type"
+---
+
 # `relay-connection-types`
 
 - Category: `Schema`

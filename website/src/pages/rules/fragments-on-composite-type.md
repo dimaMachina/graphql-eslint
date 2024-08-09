@@ -1,3 +1,10 @@
+---
+description:
+  "Fragments use a type condition to determine if they apply, since fragments can only be spread
+  into a composite type (object, interface, or union), the type condition must also be a composite
+  type.\n> This rule is a wrapper around a `graphql-js` validation function."
+---
+
 # `fragments-on-composite-type`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

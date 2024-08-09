@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        graphql_version: [15, 16]
+        graphql_version: [16]
 
     steps:
       - name: Checkout Master

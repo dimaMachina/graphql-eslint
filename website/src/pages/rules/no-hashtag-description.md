@@ -1,3 +1,9 @@
+---
+description:
+  "Requires to use `\"\"\"` or `\"` for adding a GraphQL description instead of `#`.\nAllows to use
+  hashtag for comments, as long as it's not attached to an AST definition."
+---
+
 # `no-hashtag-description`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

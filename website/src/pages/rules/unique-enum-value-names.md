@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL enum type is only valid if all its values are uniquely named.\n> This rule disallows
+  case-insensitive enum values duplicates too."
+---
+
 # `unique-enum-value-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

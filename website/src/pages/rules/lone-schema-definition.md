@@ -1,3 +1,9 @@
+---
+description:
+  "A GraphQL document is only valid if it contains only one schema definition.\n> This rule is a
+  wrapper around a `graphql-js` validation function."
+---
+
 # `lone-schema-definition`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

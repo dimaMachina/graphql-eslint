@@ -1,3 +1,7 @@
+---
+description: 'Enforce that deprecated fields or enum values are not in use by operations.'
+---
+
 # `no-deprecated`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

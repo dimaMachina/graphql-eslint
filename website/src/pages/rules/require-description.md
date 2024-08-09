@@ -1,3 +1,7 @@
+---
+description: 'Enforce descriptions in type definitions and operations.'
+---
+
 # `require-description`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file
