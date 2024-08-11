@@ -14,7 +14,9 @@ export default [
       parser: graphql.parser,
     },
     plugins: {
-      '@graphql-eslint': { rules: graphql.rules },
+      '@graphql-eslint': {
+        rules: graphql.rules,
+      },
     },
   },
   {

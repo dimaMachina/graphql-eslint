@@ -2,36 +2,63 @@ import AstroIcon from '@/icons/astro.svg'
 import GearIcon from '@/icons/gear.svg'
 import GraphQLIcon from '@/icons/graphql.svg'
 import HalfIcon from '@/icons/half.svg'
-import JavaScriptIcon from '@/icons/javascript.svg'
+import JSIcon from '@/icons/javascript.svg'
 import PrettierIcon from '@/icons/prettier.svg'
 import StackIcon from '@/icons/stack.svg'
 import SvelteIcon from '@/icons/svelte.svg'
 import VueIcon from '@/icons/vue.svg'
-import { Cards, Steps, Callout } from '@theguild/components'
+import { Callout, Cards, Steps } from '@theguild/components'
 
 # Getting Started
 
+## Quickstart
+
 <Steps>
-  ### Installation
 
-  Install the plugin package with your favourite package manager.
+### Installation
 
-  ```sh npm2yarn
-  npm i -D @graphql-eslint/eslint-plugin
-  ```
+Install the plugin package with your favourite package manager.
 
-  <Callout type="warning">
-    Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
-  </Callout>
+```sh npm2yarn
+npm i -D @graphql-eslint/eslint-plugin
+```
+
+<Callout type="warning">
+  Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
+</Callout>
+
+### Configuration
+
+Create a new
+[configuration object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects)
+in your `eslint.config.js` file to setup `@graphql-eslint` plugin.
+
+```js filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  // ...other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': {
+        rules: graphqlPlugin.rules
+      }
+    }
+  }
+]
+```
+
 </Steps>
 
 ## Usage
 
 ### Basic
 
-export const overrideClass = '[&_svg]:self-start [&_svg]:shrink-0'
-
-<Cards num={2} className={overrideClass}>
+<Cards num={2} className="[&_svg]:shrink-0 [&_svg]:self-start">
   <Cards.Card
     icon={<GraphQLIcon />}
     title="Usage with `.graphql` files"
@@ -39,7 +66,7 @@ export const overrideClass = '[&_svg]:self-start [&_svg]:shrink-0'
     arrow
   />
   <Cards.Card
-    icon={<JavaScriptIcon />}
+    icon={<JSIcon />}
     title="Usage with code files `.js/.jsx`"
     href="/usage/code-files"
     arrow
