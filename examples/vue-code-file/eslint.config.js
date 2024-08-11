@@ -1,11 +1,11 @@
 import vueParser from 'vue-eslint-parser';
 import js from '@eslint/js';
-import * as graphql from '@graphql-eslint/eslint-plugin';
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 
 export default [
   {
     files: ['**/*.js', '**/*.vue'],
-    processor: graphql.processors.graphql,
+    processor: graphqlPlugin.processors.graphql,
     rules: js.configs.recommended.rules,
   },
   {
@@ -17,11 +17,11 @@ export default [
   {
     files: ['**/*.graphql'],
     languageOptions: {
-      parser: graphql.parser,
+      parser: graphqlPlugin.parser,
     },
     plugins: {
       '@graphql-eslint': {
-        rules: graphql.rules,
+        rules: graphqlPlugin.rules,
       },
     },
     rules: {

@@ -1,5 +1,5 @@
 import js from '@eslint/js';
-import * as graphql from '@graphql-eslint/eslint-plugin';
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 
 const SCHEMA_PATH = 'server/**/*.gql';
 
@@ -11,7 +11,7 @@ export default [
   {
     files: ['client/**/*.tsx'],
     // Setup processor for operations/fragments definitions on code-files
-    processor: graphql.processors.graphql,
+    processor: graphqlPlugin.processor,
     languageOptions: {
       parserOptions: {
         ecmaFeatures: {
@@ -24,22 +24,22 @@ export default [
     // Setup GraphQL Parser
     files: ['**/*.{graphql,gql}'],
     languageOptions: {
-      parser: graphql.parser,
+      parser: graphqlPlugin.parser,
     },
     plugins: {
       '@graphql-eslint': {
-        rules: graphql.rules,
+        rules: graphqlPlugin.rules,
       },
     },
   },
   {
     // Setup recommended config for schema files
     files: [SCHEMA_PATH],
-    rules: graphql.configs['flat/schema-recommended'],
+    rules: graphqlPlugin.configs['flat/schema-recommended'].rules,
   },
   {
     // Setup recommended config for operations files
     files: ['client/**/*.{graphql,gql}'],
-    rules: graphql.configs['flat/operations-recommended'],
+    rules: graphqlPlugin.configs['flat/operations-recommended'].rules,
   },
 ];
