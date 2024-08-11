@@ -1,8 +1,13 @@
 import { createRequire } from 'node:module';
+import path from 'node:path';
 import webpack from 'webpack';
 import { withGuildDocs } from '@theguild/components/next.config';
 
 const require = createRequire(import.meta.url);
+
+const sep = path.sep === '/' ? '/' : '\\\\';
+
+const ALLOWED_SVG_REGEX = new RegExp(`src${sep}icons${sep}.+\\.svg$`);
 
 /** @type {import("next").Config} */
 export default withGuildDocs({
@@ -39,6 +44,23 @@ export default withGuildDocs({
         resource.request = resource.request.replace('node:', '');
       }),
     );
+
+    const fileLoaderRule = config.module.rules.find(rule => rule.test?.test?.('.svg'));
+    fileLoaderRule.exclude = ALLOWED_SVG_REGEX;
+
+    config.module.rules.push({
+      test: ALLOWED_SVG_REGEX,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: ['removeXMLNS'],
+            },
+          },
+        },
+      ],
+    });
     return config;
   },
   eslint: {

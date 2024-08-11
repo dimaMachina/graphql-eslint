@@ -1,0 +1,68 @@
+import AstroIcon from '@/icons/astro.svg'
+import GearIcon from '@/icons/gear.svg'
+import GraphQLIcon from '@/icons/graphql.svg'
+import HalfIcon from '@/icons/half.svg'
+import JavaScriptIcon from '@/icons/javascript.svg'
+import PrettierIcon from '@/icons/prettier.svg'
+import StackIcon from '@/icons/stack.svg'
+import SvelteIcon from '@/icons/svelte.svg'
+import VueIcon from '@/icons/vue.svg'
+import { Cards } from '@theguild/components'
+
+# Usage
+
+## Basic
+
+export const overrideClass = '[&_svg]:self-start [&_svg]:shrink-0'
+
+<Cards num={2} className={overrideClass}>
+  <Cards.Card
+    icon={<GraphQLIcon />}
+    title="Usage with `.graphql` files"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card
+    icon={<JavaScriptIcon />}
+    title="Usage with code files `.js/.jsx`"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card
+    icon={<HalfIcon />}
+    title="Usage to lint both schema/documents"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card
+    icon={<StackIcon />}
+    title="Usage to lint different schemas"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card icon={<GearIcon />} title="Programmatic usage" href="/usage/prettier" arrow />
+</Cards>
+
+## Advanced
+
+<Cards num={2}>
+  <Cards.Card
+    icon={<SvelteIcon />}
+    title="Usage with `.svelte` files"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card icon={<VueIcon />} title="Usage with `.vue` files" href="/usage/prettier" arrow />
+  <Cards.Card
+    icon={<AstroIcon className="dark:fill-white" />}
+    title="Usage with `.astro` files"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card
+    icon={<PrettierIcon />}
+    title="Usage with `eslint-plugin-prettier`"
+    href="/usage/prettier"
+    arrow
+  />
+</Cards>
