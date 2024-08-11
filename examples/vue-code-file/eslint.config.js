@@ -5,7 +5,7 @@ import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 export default [
   {
     files: ['**/*.js', '**/*.vue'],
-    processor: graphqlPlugin.processors.graphql,
+    processor: graphqlPlugin.processor,
     rules: js.configs.recommended.rules,
   },
   {
