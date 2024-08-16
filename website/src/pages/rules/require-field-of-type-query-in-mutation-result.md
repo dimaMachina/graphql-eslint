@@ -1,3 +1,9 @@
+---
+description:
+  'Allow the client in one round-trip not only to call mutation but also to get a wagon of data to
+  update their application.'
+---
+
 # `require-field-of-type-query-in-mutation-result`
 
 - Category: `Schema`

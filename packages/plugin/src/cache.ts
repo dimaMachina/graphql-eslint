@@ -4,15 +4,21 @@ import debugFactory from 'debug';
 
 const log = debugFactory('graphql-eslint:ModuleCache');
 
-export class ModuleCache<T, K = any> {
+export class ModuleCache<K, T> {
   map = new Map<K, { lastSeen: [number, number]; result: T }>();
 
   set(cacheKey: K, result: T): void {
+    // Remove server-side cache code in browser
+    if (typeof window !== 'undefined') return;
+
     this.map.set(cacheKey, { lastSeen: process.hrtime(), result });
     log('setting entry for', cacheKey);
   }
 
   get(cacheKey: K, settings = { lifetime: 10 /* seconds */ }): T | void {
+    // Remove server-side cache code in browser
+    if (typeof window !== 'undefined') return;
+
     const value = this.map.get(cacheKey);
     if (!value) {
       log('cache miss for', cacheKey);

@@ -1,3 +1,7 @@
+---
+description: 'Set of rules to follow Relay specification for Edge types.'
+---
+
 # `relay-edge-types`
 
 - Category: `Schema`

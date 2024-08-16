@@ -1,17 +1,17 @@
 import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 import js from '@eslint/js';
-import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import * as graphql from '@graphql-eslint/eslint-plugin';
 
 export default [
   {
     plugins: {
-      prettier: prettierPlugin,
+      prettier: { rules: prettierPlugin.rules },
     },
   },
   {
     files: ['**/*.js'],
-    processor: graphqlESLint.processors.graphql,
+    processor: graphql.processors.graphql,
     rules: {
       ...js.configs.recommended.rules,
       ...prettierConfig.rules,
@@ -21,10 +21,10 @@ export default [
   {
     files: ['**/*.graphql'],
     languageOptions: {
-      parser: graphqlESLint,
+      parser: graphql.parser,
     },
     plugins: {
-      '@graphql-eslint': graphqlESLint,
+      '@graphql-eslint': { rules: graphql.rules },
     },
     rules: {
       'prettier/prettier': 'error',

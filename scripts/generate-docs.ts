@@ -2,12 +2,11 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dedent from 'dedent';
+// @ts-expect-error -- ignore types
 import md from 'json-schema-to-markdown';
 import prettier from 'prettier';
 import { asArray } from '@graphql-tools/utils';
-import pkg from '../packages/plugin/src/index.js';
-
-const { rules } = pkg;
+import { rules } from '../packages/plugin/src/index.js';
 
 const BR = '';
 const NBSP = '&nbsp;';
@@ -49,11 +48,18 @@ function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]
   ].join('\n');
 }
 
+const MARKDOWN_LINK_RE = /\[(.*?)]\(.*\)/;
+
 async function generateDocs(): Promise<void> {
   const prettierConfig = await prettier.resolveConfig('./docs/README.md');
 
   const result = Object.entries(rules).map(async ([ruleName, rule]) => {
-    const blocks: string[] = [`# \`${ruleName}\``];
+    const blocks: string[] = [
+      '---',
+      `description: ${JSON.stringify(rule.meta.docs!.description!.replace(/\n.*/g, '').replace(MARKDOWN_LINK_RE, '$1'))}`,
+      '---',
+      `# \`${ruleName}\``,
+    ];
     const { deprecated, docs, schema, fixable, hasSuggestions } = rule.meta;
 
     if (deprecated) {

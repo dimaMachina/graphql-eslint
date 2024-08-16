@@ -1,3 +1,7 @@
+---
+description: 'Enforce unique fragment names across your project.'
+---
+
 # `unique-fragment-name`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

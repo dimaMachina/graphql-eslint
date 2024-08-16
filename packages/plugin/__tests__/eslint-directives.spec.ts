@@ -1,7 +1,7 @@
 import { join } from 'node:path';
-import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations';
-import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix';
-import { ruleTester } from './test-utils';
+import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations.js';
+import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run('no-typename-prefix', noTypenamePrefix, {
   valid: [
@@ -10,7 +10,7 @@ ruleTester.run('no-typename-prefix', noTypenamePrefix, {
       code: /* GraphQL */ `
         type Type {
           "Some description"
-          typeName: String! # eslint-disable-line no-typename-prefix
+          typeName: String! # eslint-disable-line rule-to-test/no-typename-prefix
         }
       `,
     },
@@ -27,12 +27,12 @@ ruleTester.run('test-directives', noAnonymousOperations, {
       }
     `,
     /* GraphQL */ `
-      # eslint-disable-next-line test-directives
+      # eslint-disable-next-line rule-to-test/test-directives
       {
         a
       }
     `,
-    '{ a } # eslint-disable-line test-directives',
+    '{ a } # eslint-disable-line rule-to-test/test-directives',
     '{ a } # eslint-disable-line',
     /* GraphQL */ `
       # eslint-disable

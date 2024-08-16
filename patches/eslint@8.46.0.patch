@@ -1,40 +1,31 @@
 diff --git a/lib/linter/linter.js b/lib/linter/linter.js
-index 233cbed5b5ccdf89806df9786a0902a317dd451e..7db8fa9c1fca4183460164ca1fd8fa0a3c9e6206 100644
+index e5d4d2c789c584a525a6aacb3c347c4dd06a5f27..a2c575f2d65f549def753314a2d86999a983b4c1 100644
 --- a/lib/linter/linter.js
 +++ b/lib/linter/linter.js
-@@ -44,7 +44,8 @@ const { getRuleFromConfig } = require("../config/flat-config-helpers");
- const { FlatConfigArray } = require("../config/flat-config-array");
- 
+@@ -47,7 +47,8 @@ const { normalizeSeverityToString } = require("../shared/severity");
+ const jslang = require("../languages/js");
+ const { activeFlags, inactiveFlags } = require("../shared/flags");
  const debug = require("debug")("eslint:linter");
 -const MAX_AUTOFIX_PASSES = 10;
 +// 🚨 10 is not enough for alphabetize test with definitions sorting
-+const MAX_AUTOFIX_PASSES = 20;
++const MAX_AUTOFIX_PASSES = 20
  const DEFAULT_PARSER_NAME = "espree";
  const DEFAULT_ECMA_VERSION = 5;
  const commentParser = new ConfigCommentParser();
-diff --git a/lib/rule-tester/flat-rule-tester.js b/lib/rule-tester/flat-rule-tester.js
-index f143873f7bc76737acc5ff00871e462ef058bf4b..a0b6283b653a9f9cd478711c34bbf4a07ad9008f 100644
---- a/lib/rule-tester/flat-rule-tester.js
-+++ b/lib/rule-tester/flat-rule-tester.js
-@@ -998,11 +998,7 @@ class FlatRuleTester {
-                     assert.strictEqual(result.output, item.output, "Output is incorrect.");
-                 }
-             } else {
--                assert.strictEqual(
--                    result.output,
--                    item.code,
--                    "The rule fixed the code. Please add 'output' property."
--                );
-+                // 🚨 Don't need, as we assert autofix output with snapshots
-             }
- 
-             assertASTDidntChange(result.beforeAST, result.afterAST);
 diff --git a/lib/rule-tester/rule-tester.js b/lib/rule-tester/rule-tester.js
-index e4dc126783c8232a67268c72def615829c4508b9..6e1de73fd06e8bfec07e14c8779b050959f3add4 100644
+index 756490e1df3d97ef47cc42f120ecda8813ec9f73..c411abe0efc9dd7ac939263adc75743e031a20cc 100644
 --- a/lib/rule-tester/rule-tester.js
 +++ b/lib/rule-tester/rule-tester.js
-@@ -1008,13 +1008,10 @@ class RuleTester {
-                     assert.strictEqual(result.output, item.output, "Output is incorrect.");
+@@ -1102,7 +1102,6 @@ class RuleTester {
+                             assert.strictEqual(message.endColumn, error.endColumn, `Error endColumn should be ${error.endColumn}`);
+                         }
+ 
+-                        assert.ok(!message.suggestions || hasOwnProperty(error, "suggestions"), `Error at index ${i} has suggestions. Please specify 'suggestions' property on the test error object.`);
+                         if (hasOwnProperty(error, "suggestions")) {
+ 
+                             // Support asserting there are no suggestions
+@@ -1235,11 +1234,7 @@ class RuleTester {
+                     assert.notStrictEqual(item.code, item.output, "Test property 'output' matches 'code'. If no autofix is expected, then omit the 'output' property or set it to null.");
                  }
              } else {
 -                assert.strictEqual(
@@ -45,7 +36,4 @@ index e4dc126783c8232a67268c72def615829c4508b9..6e1de73fd06e8bfec07e14c8779b0509
 +                // 🚨 Don't need, as we assert autofix output with snapshots
              }
  
-+            item.assertMessages(item, messages)
              assertASTDidntChange(result.beforeAST, result.afterAST);
-         }
- 

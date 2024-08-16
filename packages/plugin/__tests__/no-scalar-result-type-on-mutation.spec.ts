@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/no-scalar-result-type-on-mutation';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule } from '../src/rules/no-scalar-result-type-on-mutation.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const useSchema = (code: string) => ({
   code,

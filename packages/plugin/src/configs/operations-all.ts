@@ -2,6 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
+// @ts-expect-error -- for cjs
 export = {
   extends: './configs/operations-recommended',
   rules: {

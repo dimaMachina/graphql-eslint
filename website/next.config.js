@@ -22,12 +22,17 @@ export default withGuildDocs({
       esquery: require.resolve('esquery'),
       // fixes for @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
       eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js'),
-      '@graphql-eslint/eslint-plugin/package.json': require.resolve(
-        '@graphql-eslint/eslint-plugin/package.json',
-      ),
       '@graphql-eslint/eslint-plugin': require
         .resolve('@graphql-eslint/eslint-plugin')
-        .replace('cjs/index.js', 'index.browser.mjs'),
+        .replace('cjs/index.js', 'index.browser.js'),
+
+      // fixes Cannot use GraphQLNonNull "Boolean!" from another module or realm.
+      'graphql/utilities/valueFromASTUntyped.js': require.resolve(
+        'graphql/utilities/valueFromASTUntyped',
+      ),
+      'graphql/validation/index.js': require.resolve('graphql/validation'),
+      'graphql/validation/validate.js': require.resolve('graphql/validation/validate'),
+      graphql: require.resolve('graphql'),
     };
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {

@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/no-root-type';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { rule, RuleOptions } from '../src/rules/no-root-type.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const useSchema = (code: string, schema = '') => ({
   code,

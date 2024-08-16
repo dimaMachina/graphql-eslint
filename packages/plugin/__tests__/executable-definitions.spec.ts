@@ -1,5 +1,5 @@
-import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
-import { ParserOptionsForTests, ruleTester } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation.js';
+import { ParserOptionsForTests, ruleTester } from './test-utils.js';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {

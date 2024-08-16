@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { join, relative } from 'node:path';
 import { ESLint } from 'eslint';
-import { CWD as PROJECT_CWD } from '../src/utils';
+import { CWD as PROJECT_CWD } from '../src/utils.js';
 
 const CWD = join(PROJECT_CWD, '..', '..');
 
@@ -19,7 +19,18 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
-  const errorOutput = stderr.toString();
+  const errorOutput = stderr
+    .toString()
+    .replace(
+      /\(node:\d{4,5}\) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time/,
+      '',
+    )
+    .replace(
+      /\(node:\d{4,5}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      '',
+    )
+    .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
+    .trimEnd();
   if (errorOutput) {
     throw new Error(errorOutput);
   }

@@ -3,8 +3,7 @@ import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { ConfigName, flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
-import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
+import { ConfigName, configs, parser, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
@@ -114,7 +113,7 @@ export function PlayPage(): ReactElement {
           </span>
           <span className="flex justify-between text-sm">
             <span>GraphQL-ESLint</span>
-            <span>{graphqlESLintPkgJson.version}</span>
+            <span>{parser.meta.version}</span>
           </span>
         </div>
         <div>
@@ -164,11 +163,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(schemaConfig && flatConfigs[schemaConfig].rules),
+          ...(schemaConfig && configs[`flat/${schemaConfig}`]),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
-              // @ts-expect-error -- TODO: fix type error
-              flatConfigs['schema-all'].rules[`@graphql-eslint/${schemaRule}`],
+              configs['flat/schema-all'][`@graphql-eslint/${schemaRule}`],
           }),
         }}
         onChange={setSchema}
@@ -181,11 +179,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(operationConfig && flatConfigs[operationConfig].rules),
+          ...(operationConfig && configs[`flat/${operationConfig}`]),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
-              // @ts-expect-error -- TODO: fix type error
-              flatConfigs['operations-all'].rules[`@graphql-eslint/${operationRule}`],
+              configs['flat/operations-all'][`@graphql-eslint/${operationRule}`],
           }),
         }}
         onChange={setOperation}

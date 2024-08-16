@@ -5,15 +5,15 @@
   "author": "Dimitri POSTOLOV",
   "private": true,
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint --cache ."
   },
   "dependencies": {
-    "graphql": "16.8.1"
+    "graphql": "16.9.0"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
-    "@vue/compiler-sfc": "3.4.27",
-    "eslint": "8.57.0",
-    "vue-eslint-parser": "9.4.2"
+    "@vue/compiler-sfc": "3.4.38",
+    "eslint": "9.9.0",
+    "vue-eslint-parser": "9.4.3"
   }
 }

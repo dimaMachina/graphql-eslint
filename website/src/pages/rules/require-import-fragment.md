@@ -1,3 +1,7 @@
+---
+description: 'Require fragments to be imported via an import expression.'
+---
+
 # `require-import-fragment`
 
 💡 This rule provides
