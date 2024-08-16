@@ -1,3 +1,7 @@
+---
+description: 'Require all comments to follow the same style (either block or inline).'
+---
+
 # `description-style`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

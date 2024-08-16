@@ -1,3 +1,9 @@
+---
+description:
+  'Requires output types to have one unique identifier unless they do not have a logical one.
+  Exceptions can be used to ignore output types that do not have unique identifiers.'
+---
+
 # `strict-id-in-types`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

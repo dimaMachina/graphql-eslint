@@ -1,3 +1,9 @@
+---
+description:
+  'Require mutation argument to be always called "input" and input type to be called Mutation name +
+  "Input".'
+---
+
 # `input-name`
 
 💡 This rule provides

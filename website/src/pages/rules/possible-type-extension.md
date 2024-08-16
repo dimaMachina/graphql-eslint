@@ -1,3 +1,7 @@
+---
+description: 'A type extension is only valid if the type is defined and has the same kind.'
+---
+
 # `possible-type-extension`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file
