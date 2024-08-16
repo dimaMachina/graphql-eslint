@@ -103,9 +103,8 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
     for (const [id, testCase] of tests.invalid.entries()) {
       testCase.name ||= `Invalid #${id + 1}`;
       testCase.code = removeTrailingBlankLines(testCase.code);
-      Object.defineProperty(testCase, 'assertMessages', {
-        value: getMessages,
-      });
+      // @ts-expect-error -- Added in `patches/eslint.patch`
+      testCase.assertMessages = getMessages;
     }
 
     super.run(ruleId, rule as any, {
