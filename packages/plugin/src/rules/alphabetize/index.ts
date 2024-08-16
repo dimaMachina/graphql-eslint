@@ -20,9 +20,9 @@ import {
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import lowerCase from 'lodash.lowercase';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
-import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../utils.js';
+import { GraphQLESTreeNode } from '@/estree-converter/index.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener } from '@/types.js';
+import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '@/utils.js';
 
 const RULE_ID = 'alphabetize';
 
