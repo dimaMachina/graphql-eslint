@@ -112,7 +112,7 @@ const schema = {
   },
 } as const;
 
-export type RuleOptions = FromSchema<typeof schema>;
+export type RuleOptions = FromSchema<typeof schema, { keepDefaultedPropertiesOptional: true }>;
 
 type PropertySchema = {
   style?: AllowedStyle;
