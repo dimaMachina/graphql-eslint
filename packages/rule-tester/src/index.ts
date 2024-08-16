@@ -47,8 +47,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
       testCase: ESLintRuleTester.InvalidTestCase,
       messages: Linter.LintMessage[],
     ) => {
-      // @ts-expect-error -- TODO fix me
-      const { options, code, filename, parserOptions } = testCase;
+      const { options, code, filename, languageOptions: _languageOptions } = testCase;
 
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
       const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
