@@ -98,6 +98,7 @@ module.exports = {
         'tailwindcss/no-custom-classname': [
           'error',
           {
+            // TODO: figure out why there is an error only on CI
             whitelist: ['nextra-scrollbar'],
           },
         ],
