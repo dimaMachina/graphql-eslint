@@ -4,7 +4,7 @@ import { defineConfig, Options } from 'tsup';
 import packageJson from './package.json';
 
 const opts: Options = {
-  entry: ['src/**/*.ts', '!src/index.browser.ts'],
+  entry: ['src/**/*.ts', '!src/index.browser.ts', '!src/**/*.test.ts'],
   clean: true,
   bundle: false,
   dts: true,
