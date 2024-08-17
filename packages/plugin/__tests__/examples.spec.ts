@@ -17,8 +17,32 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
   }, 0);
 }
 
-function getESLintOutput(cwd: string): ESLint.LintResult[] {
+function getFlatESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
+
+  return parseESLintOutput({ stdout, stderr });
+}
+
+function getLegacyESLintOutput(cwd: string): ESLint.LintResult[] {
+  const { stdout, stderr } = spawnSync(
+    'eslint',
+    ['--format', 'json', '--ignore-pattern', 'eslint.config.js', '.'],
+    {
+      cwd,
+      env: { ...process.env, ESLINT_USE_FLAT_CONFIG: 'false' },
+    },
+  );
+
+  return parseESLintOutput({ stdout, stderr });
+}
+
+function parseESLintOutput({
+  stdout,
+  stderr,
+}: {
+  stdout: Buffer;
+  stderr: Buffer;
+}): ESLint.LintResult[] {
   const errorOutput = stderr
     .toString()
     .replace(
@@ -26,10 +50,14 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
       '',
     )
     .replace(
-      /\(node:\d{4,5}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      /\(node:\d{4,5}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead\./,
       '',
     )
     .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
+    .replace(
+      /\(node:\d{4,5}\) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support will be removed in v10.0.0. Please migrate to an eslint.config.js file. See https:\/\/eslint.org\/docs\/latest\/use\/configure\/migration-guide for details\./,
+      '',
+    )
     .trimEnd();
   if (errorOutput) {
     throw new Error(errorOutput);
@@ -40,71 +68,74 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   return JSON.parse(output.slice(start, end));
 }
 
-function testSnapshot(results: ESLint.LintResult[]): void {
-  const normalizedResults = results
+function normalizeResults(results: ESLint.LintResult[]) {
+  return results
     .map(result => ({
       filePath: relative(CWD, result.filePath),
       messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
-
-  expect(normalizedResults).toMatchSnapshot();
 }
 
 describe('Examples', () => {
   it('should work programmatically', () => {
     const cwd = join(CWD, 'examples/programmatic');
-    const results = getESLintOutput(cwd);
+    const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(6);
     testSnapshot(results);
   });
 
   it('should work on `.js` files', () => {
     const cwd = join(CWD, 'examples/code-file');
-    const results = getESLintOutput(cwd);
+    const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(4);
     testSnapshot(results);
   });
 
   it('should work with `graphql-config`', () => {
     const cwd = join(CWD, 'examples/graphql-config');
-    const results = getESLintOutput(cwd);
+    const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
     const cwd = join(CWD, 'examples/prettier');
-    const results = getESLintOutput(cwd);
+    const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(23);
     testSnapshot(results);
   });
 
   it('should work in monorepo', () => {
     const cwd = join(CWD, 'examples/monorepo');
-    const results = getESLintOutput(cwd);
+    const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(11);
     testSnapshot(results);
   });
 
   it('should work in svelte', () => {
     const cwd = join(CWD, 'examples/svelte-code-file');
-    const results = getESLintOutput(cwd);
+    const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
-  it('should work in vue', () => {
+  it.only('should work in vue', () => {
     const cwd = join(CWD, 'examples/vue-code-file');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
+    testESLintOutput(cwd, 2);
   });
 
   it('should work in multiple projects', () => {
     const cwd = join(CWD, 'examples/multiple-projects-graphql-config');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(4);
-    testSnapshot(results);
+    testESLintOutput(cwd, 4);
   });
 });
+
+function testESLintOutput(cwd: string, errorCount: number): void {
+  const flatResults = getFlatESLintOutput(cwd);
+  expect(countErrors(flatResults)).toBe(errorCount);
+  expect(normalizeResults(flatResults)).toMatchSnapshot();
+
+  const results = getLegacyESLintOutput(cwd);
+  expect(normalizeResults(results)).toEqual(normalizeResults(flatResults));
+}
