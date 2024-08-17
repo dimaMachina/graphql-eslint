@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import { rule } from './index.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
+import { CWD } from "@/utils.js";
 
 const TEST_OPERATION = 'query test { foo }';
 
@@ -20,8 +21,8 @@ ruleTester.run('unique-operation-name', rule, {
     },
     {
       // Compare filepath of code as real instead of virtual with siblings
-      ...SIBLING_OPERATIONS(join(__dirname, 'mocks/unique-fragment.js')),
-      filename: join(__dirname, 'mocks/unique-fragment.js/1_document.graphql'),
+      ...SIBLING_OPERATIONS(join(CWD, '__tests__/mocks/unique-fragment.js')),
+      filename: join(CWD, '__tests__/mocks/unique-fragment.js/1_document.graphql'),
       code: /* GraphQL */ `
         query User {
           user {
