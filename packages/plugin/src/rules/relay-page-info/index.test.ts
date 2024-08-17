@@ -1,5 +1,5 @@
-import { rule } from './index.js';
 import { ruleTester, withSchema } from '../../../__tests__/test-utils.js';
+import { rule } from './index.js';
 
 ruleTester.run('relay-page-info', rule, {
   valid: [

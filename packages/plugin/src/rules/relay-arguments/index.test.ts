@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from './index.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
+import { rule, RuleOptions } from './index.js';
 
 function useSchema(code: string) {
   return {

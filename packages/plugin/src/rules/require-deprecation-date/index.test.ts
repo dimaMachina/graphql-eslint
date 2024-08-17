@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from './index.js';
 import { ruleTester } from '../../../__tests__/test-utils.js';
+import { rule, RuleOptions } from './index.js';
 
 const now = new Date();
 now.setDate(now.getDate() + 1);

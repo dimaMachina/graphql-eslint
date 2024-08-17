@@ -1,6 +1,6 @@
 import { RuleTester } from '@theguild/eslint-rule-tester';
-import { rule } from './index.js';
 import { DEFAULT_CONFIG, ParserOptionsForTests } from '../../../__tests__/test-utils.js';
+import { rule } from './index.js';
 
 const SCHEMA = /* GraphQL */ `
   type User {
