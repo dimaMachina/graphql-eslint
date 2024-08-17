@@ -1,4 +1,5 @@
 packages/plugin/__tests__/__snapshots__/
+packages/plugin/src/rules/*/snapshot.md
 examples/prettier/invalid.graphql
 examples/prettier/invalid.js
 pnpm-lock.yaml

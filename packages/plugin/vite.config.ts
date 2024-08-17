@@ -7,8 +7,13 @@ const GRAPHQL_PATH = path.join(__dirname, 'node_modules', 'graphql');
 export default defineConfig({
   test: {
     globals: true,
-    resolveSnapshotPath: testPath =>
-      testPath.replace('__tests__/', '__tests__/__snapshots__/').replace(/\.ts$/, '.md'),
+    resolveSnapshotPath(testPath) {
+      if (testPath.endsWith('/index.test.ts')) {
+        return testPath.replace('/index.test.ts', '/snapshot.md');
+      }
+
+      return testPath.replace('__tests__/', '__tests__/__snapshots__/').replace(/\.ts$/, '.md');
+    },
     setupFiles: ['./serializer.ts'],
     alias: {
       // fixes Duplicate "graphql" modules cannot be used at the same time since different
