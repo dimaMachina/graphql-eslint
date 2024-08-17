@@ -1,5 +1,5 @@
-import { rule } from './index.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
+import { rule } from './index.js';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {
