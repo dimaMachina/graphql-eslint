@@ -1,14 +1,14 @@
 import { ASTKindToNode, Kind, NameNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule, GraphQLESLintRuleListener, ValueOf } from '../types.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener, ValueOf } from '../../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
   convertCase,
   englishJoinWords,
   truthy,
   TYPES_KINDS,
-} from '../utils.js';
+} from '../../utils.js';
 
 const KindToDisplayName = {
   // types

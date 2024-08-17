@@ -1,14 +1,14 @@
 import { basename, extname } from 'node:path';
 import { FragmentDefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule } from '../types.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule } from '../../types.js';
 import {
   CaseStyle as _CaseStyle,
   convertCase,
   REPORT_ON_FIRST_CHARACTER,
   VIRTUAL_DOCUMENT_REGEX,
-} from '../utils.js';
+} from '../../utils.js';
 
 type CaseStyle = _CaseStyle | 'matchDocumentStyle';
 

@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/match-document-filename.js';
-import { ruleTester } from './test-utils.js';
+import { rule, RuleOptions } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run<RuleOptions>('match-document-filename', rule, {
   valid: [
