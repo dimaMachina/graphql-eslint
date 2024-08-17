@@ -1,9 +1,9 @@
 import { GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
-import { ModuleCache } from '../cache.js';
-import { SiblingOperations } from '../siblings.js';
-import { GraphQLESLintRule } from '../types.js';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../utils.js';
+import { ModuleCache } from '../../cache.js';
+import { SiblingOperations } from '../../siblings.js';
+import { GraphQLESLintRule } from '../../types.js';
+import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';
 

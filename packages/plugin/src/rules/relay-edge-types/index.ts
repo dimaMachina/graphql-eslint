@@ -11,9 +11,9 @@ import {
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../../types.js';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../../utils.js';
 
 const RULE_ID = 'relay-edge-types';
 const MESSAGE_MUST_BE_OBJECT_TYPE = 'MESSAGE_MUST_BE_OBJECT_TYPE';

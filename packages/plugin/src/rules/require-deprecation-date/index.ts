@@ -1,8 +1,8 @@
 import { DirectiveNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
-import { GraphQLESTreeNode, valueFromNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule } from '../types.js';
-import { getNodeName } from '../utils.js';
+import { GraphQLESTreeNode, valueFromNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule } from '../../types.js';
+import { getNodeName } from '../../utils.js';
 
 // eslint-disable-next-line unicorn/better-regex
 const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;

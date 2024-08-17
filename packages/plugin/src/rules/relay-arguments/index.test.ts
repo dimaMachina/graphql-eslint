@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/relay-arguments.js';
-import { ParserOptionsForTests, ruleTester } from './test-utils.js';
+import { rule, RuleOptions } from './index.js';
+import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
 
 function useSchema(code: string) {
   return {
