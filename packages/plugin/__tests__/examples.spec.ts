@@ -78,11 +78,9 @@ function normalizeResults(results: ESLint.LintResult[]) {
 }
 
 describe('Examples', () => {
-  it.skip('should work programmatically', () => {
+  it('should work programmatically', () => {
     const cwd = join(CWD, 'examples/programmatic');
-    const results = getFlatESLintOutput(cwd);
-    expect(countErrors(results)).toBe(6);
-    testSnapshot(results);
+    testESLintOutput(cwd, 6);
   });
 
   it.skip('should work on `.js` files', () => {
