@@ -1,7 +1,7 @@
 import { join } from 'node:path';
-import { rule } from './index.js';
+import { CWD } from '@/utils.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
-import { CWD } from "@/utils.js";
+import { rule } from './index.js';
 
 const TEST_OPERATION = 'query test { foo }';
 

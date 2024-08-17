@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from './index.js';
 import { ruleTester, withSchema } from '../../../__tests__/test-utils.js';
+import { rule, RuleOptions } from './index.js';
 
 ruleTester.run<RuleOptions>('strict-id-in-types', rule, {
   valid: [

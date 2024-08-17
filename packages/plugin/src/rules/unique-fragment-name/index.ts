@@ -3,7 +3,12 @@ import { ExecutableDefinitionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { FragmentSource, OperationSource } from '../../siblings.js';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../../types.js';
-import { CWD, normalizePath, requireSiblingsOperations, VIRTUAL_DOCUMENT_REGEX } from '../../utils.js';
+import {
+  CWD,
+  normalizePath,
+  requireSiblingsOperations,
+  VIRTUAL_DOCUMENT_REGEX,
+} from '../../utils.js';
 
 const RULE_ID = 'unique-fragment-name';
 
