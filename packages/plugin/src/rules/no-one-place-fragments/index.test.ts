@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { rule } from './index.js';
 import { ruleTester } from '../../../__tests__/test-utils.js';
+import { rule } from './index.js';
 
 ruleTester.run('no-one-place-fragments', rule, {
   valid: [
