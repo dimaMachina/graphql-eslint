@@ -1,5 +1,5 @@
-import { rule, RuleOptions } from '../src/rules/input-name.js';
-import { ruleTester } from './test-utils.js';
+import { rule, RuleOptions } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run<RuleOptions>('input-name', rule, {
   valid: [

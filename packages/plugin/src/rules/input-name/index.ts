@@ -9,8 +9,8 @@ import {
   ObjectTypeExtensionNode,
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../types.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../../types.js';
 
 const schema = {
   type: 'array',
