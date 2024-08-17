@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import { CWD } from '@/utils.js';
 import { ruleTester } from '../../../__tests__/test-utils.js';
 import { rule } from './index.js';
 
@@ -9,7 +10,7 @@ ruleTester.run('no-one-place-fragments', rule, {
       code: ruleTester.fromMockFile('no-one-place-fragments.graphql'),
       parserOptions: {
         graphQLConfig: {
-          documents: join(process.cwd(), '__tests__/mocks/no-one-place-fragments.graphql'),
+          documents: join(CWD, '__tests__/mocks/no-one-place-fragments.graphql'),
         },
       },
     },
