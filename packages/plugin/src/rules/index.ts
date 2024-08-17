@@ -3,7 +3,7 @@
  */
 
 import { rule as alphabetize } from './alphabetize/index.js';
-import { rule as descriptionStyle } from './description-style.js';
+import { rule as descriptionStyle } from './description-style/index.js';
 import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation.js';
 import { rule as inputName } from './input-name.js';
 import { rule as loneExecutableDefinition } from './lone-executable-definition.js';
