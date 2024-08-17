@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations.js';
+import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations/index.js';
 import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix.js';
 import { ruleTester } from './test-utils.js';
 

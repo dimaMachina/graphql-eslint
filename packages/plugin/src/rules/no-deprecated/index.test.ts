@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/no-deprecated.js';
-import { ParserOptionsForTests, ruleTester } from './test-utils.js';
+import { rule } from './index.js';
+import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
 
 const TEST_SCHEMA = /* GraphQL */ `
   type Query {

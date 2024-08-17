@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/no-duplicate-fields.js';
-import { ruleTester } from './test-utils.js';
+import { rule } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run('no-duplicate-fields', rule, {
   valid: [],

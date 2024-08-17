@@ -1,5 +1,5 @@
-import { rule, RULE_ID } from '../src/rules/no-hashtag-description.js';
-import { ruleTester } from './test-utils.js';
+import { rule, RULE_ID } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run('no-hashtag-description', rule, {
   valid: [

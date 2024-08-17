@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/no-anonymous-operations.js';
-import { ruleTester } from './test-utils.js';
+import { rule } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run('no-anonymous-operations', rule, {
   valid: ['query myQuery { a }', 'mutation doSomething { a }', 'subscription myData { a }'],

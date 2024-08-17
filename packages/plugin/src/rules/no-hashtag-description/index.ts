@@ -1,7 +1,7 @@
 import { DocumentNode, Token, TokenKind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule } from '../types.js';
-import { getNodeName } from '../utils.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule } from '../../types.js';
+import { getNodeName } from '../../utils.js';
 
 export const RULE_ID = 'HASHTAG_COMMENT';
 
