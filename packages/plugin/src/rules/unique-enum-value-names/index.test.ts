@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/unique-enum-value-names.js';
-import { ruleTester } from './test-utils.js';
+import { rule } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run('unique-enum-value-names', rule, {
   valid: [],

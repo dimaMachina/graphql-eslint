@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/require-type-pattern-with-oneof.js';
-import { ruleTester } from './test-utils.js';
+import { rule } from './index.js';
+import { ruleTester } from '../../../__tests__/test-utils.js';
 
 ruleTester.run('require-type-pattern-with-oneof', rule, {
   valid: [

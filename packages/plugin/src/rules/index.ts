@@ -31,12 +31,12 @@ import { rule as requireImportFragment } from './require-import-fragment/index.j
 import { rule as requireNullableFieldsWithOneof } from './require-nullable-fields-with-oneof/index.js';
 import { rule as requireNullableResultInRoot } from './require-nullable-result-in-root/index.js';
 import { rule as requireSelections } from './require-selections/index.js';
-import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof.js';
-import { rule as selectionSetDepth } from './selection-set-depth.js';
-import { rule as strictIdInTypes } from './strict-id-in-types.js';
-import { rule as uniqueEnumValueNames } from './unique-enum-value-names.js';
-import { rule as uniqueFragmentName } from './unique-fragment-name.js';
-import { rule as uniqueOperationName } from './unique-operation-name.js';
+import { rule as requireTypePatternWithOneof } from './require-type-pattern-with-oneof/index.js';
+import { rule as selectionSetDepth } from './selection-set-depth/index.js';
+import { rule as strictIdInTypes } from './strict-id-in-types/index.js';
+import { rule as uniqueEnumValueNames } from './unique-enum-value-names/index.js';
+import { rule as uniqueFragmentName } from './unique-fragment-name/index.js';
+import { rule as uniqueOperationName } from './unique-operation-name/index.js';
 
 export const rules = {
   ...GRAPHQL_JS_VALIDATIONS,

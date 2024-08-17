@@ -1,7 +1,7 @@
 import { ObjectTypeDefinitionNode } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule } from '../types.js';
-import { displayNodeName } from '../utils.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule } from '../../types.js';
+import { displayNodeName } from '../../utils.js';
 
 const RULE_ID = 'require-type-pattern-with-oneof';
 
