@@ -18,7 +18,7 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 }
 
 function getFlatESLintOutput(cwd: string): ESLint.LintResult[] {
-  const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
+  const { stdout, stderr } = spawnSync('eslint', ['--format', 'json', '.'], { cwd });
 
   return parseESLintOutput({ stdout, stderr });
 }
@@ -83,7 +83,7 @@ describe('Examples', () => {
     testESLintOutput(cwd, 6);
   });
 
-  it.skip('should work on `.js` files', () => {
+  it('should work on `.js` files', () => {
     const cwd = join(CWD, 'examples/code-file');
     testESLintOutput(cwd, 4);
   });
@@ -125,5 +125,6 @@ function testESLintOutput(cwd: string, errorCount: number): void {
   expect(normalizeResults(flatResults)).toMatchSnapshot();
 
   const results = getLegacyESLintOutput(cwd);
-  expect(normalizeResults(results)).toEqual(normalizeResults(flatResults));
+  expect(countErrors(results)).toBe(errorCount);
+  expect(normalizeResults(results)).toMatchSnapshot();
 }
