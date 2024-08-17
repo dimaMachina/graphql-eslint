@@ -78,21 +78,21 @@ function normalizeResults(results: ESLint.LintResult[]) {
 }
 
 describe('Examples', () => {
-  it('should work programmatically', () => {
+  it.skip('should work programmatically', () => {
     const cwd = join(CWD, 'examples/programmatic');
     const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(6);
     testSnapshot(results);
   });
 
-  it('should work on `.js` files', () => {
+  it.skip('should work on `.js` files', () => {
     const cwd = join(CWD, 'examples/code-file');
     const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(4);
     testSnapshot(results);
   });
 
-  it('should work with `graphql-config`', () => {
+  it.skip('should work with `graphql-config`', () => {
     const cwd = join(CWD, 'examples/graphql-config');
     const results = getFlatESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
@@ -101,27 +101,25 @@ describe('Examples', () => {
 
   it('should work with `eslint-plugin-prettier`', () => {
     const cwd = join(CWD, 'examples/prettier');
-    const results = getFlatESLintOutput(cwd);
-    expect(countErrors(results)).toBe(23);
-    testSnapshot(results);
+    testESLintOutput(cwd, 23);
   });
 
-  it.only('should work in monorepo', () => {
+  it('should work in monorepo', () => {
     const cwd = join(CWD, 'examples/monorepo');
     testESLintOutput(cwd, 11);
   });
 
-  it.only('should work in svelte', () => {
+  it('should work in svelte', () => {
     const cwd = join(CWD, 'examples/svelte-code-file');
     testESLintOutput(cwd, 2);
   });
 
-  it.only('should work in vue', () => {
+  it('should work in vue', () => {
     const cwd = join(CWD, 'examples/vue-code-file');
     testESLintOutput(cwd, 2);
   });
 
-  it.only('should work in multiple projects', () => {
+  it('should work in multiple projects', () => {
     const cwd = join(CWD, 'examples/multiple-projects-graphql-config');
     testESLintOutput(cwd, 4);
   });
