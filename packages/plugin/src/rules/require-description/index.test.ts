@@ -1,5 +1,5 @@
-import { rule, RULE_ID, RuleOptions } from './index.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
+import { rule, RULE_ID, RuleOptions } from './index.js';
 
 const OPERATION = { OperationDefinition: true };
 

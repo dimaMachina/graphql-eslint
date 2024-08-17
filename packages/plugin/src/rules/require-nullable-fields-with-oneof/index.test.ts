@@ -1,5 +1,5 @@
-import { rule } from './index.js';
 import { ruleTester } from '../../../__tests__/test-utils.js';
+import { rule } from './index.js';
 
 ruleTester.run('require-nullable-fields-with-oneof', rule, {
   valid: [
