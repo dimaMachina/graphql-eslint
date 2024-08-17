@@ -106,11 +106,9 @@ describe('Examples', () => {
     testSnapshot(results);
   });
 
-  it('should work in monorepo', () => {
+  it.only('should work in monorepo', () => {
     const cwd = join(CWD, 'examples/monorepo');
-    const results = getFlatESLintOutput(cwd);
-    expect(countErrors(results)).toBe(11);
-    testSnapshot(results);
+    testESLintOutput(cwd, 11);
   });
 
   it.only('should work in svelte', () => {
