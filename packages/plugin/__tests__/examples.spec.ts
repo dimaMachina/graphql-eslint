@@ -113,11 +113,9 @@ describe('Examples', () => {
     testSnapshot(results);
   });
 
-  it('should work in svelte', () => {
+  it.only('should work in svelte', () => {
     const cwd = join(CWD, 'examples/svelte-code-file');
-    const results = getFlatESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
+    testESLintOutput(cwd, 2);
   });
 
   it.only('should work in vue', () => {
@@ -125,7 +123,7 @@ describe('Examples', () => {
     testESLintOutput(cwd, 2);
   });
 
-  it('should work in multiple projects', () => {
+  it.only('should work in multiple projects', () => {
     const cwd = join(CWD, 'examples/multiple-projects-graphql-config');
     testESLintOutput(cwd, 4);
   });
