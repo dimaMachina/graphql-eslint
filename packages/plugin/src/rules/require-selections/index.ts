@@ -13,14 +13,14 @@ import {
 } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { asArray } from '@graphql-tools/utils';
-import { getBaseType, GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../types.js';
+import { getBaseType, GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
   englishJoinWords,
   requireGraphQLSchemaFromContext,
   requireSiblingsOperations,
-} from '../utils.js';
+} from '../../utils.js';
 
 const RULE_ID = 'require-selections';
 const DEFAULT_ID_FIELD_NAME = 'id';

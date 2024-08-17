@@ -1,5 +1,5 @@
-import { rule } from '../src/rules/require-nullable-result-in-root.js';
-import { ruleTester, withSchema } from './test-utils.js';
+import { rule } from './index.js';
+import { ruleTester, withSchema } from '../../../__tests__/test-utils.js';
 
 ruleTester.run('require-nullable-result-in-root', rule, {
   valid: [

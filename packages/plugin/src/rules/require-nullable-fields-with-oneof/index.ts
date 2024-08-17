@@ -1,7 +1,7 @@
 import { DirectiveNode, Kind } from 'graphql';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule } from '../types.js';
-import { getNodeName } from '../utils.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule } from '../../types.js';
+import { getNodeName } from '../../utils.js';
 
 const RULE_ID = 'require-nullable-fields-with-oneof';
 
