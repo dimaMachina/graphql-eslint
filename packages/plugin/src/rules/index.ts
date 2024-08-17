@@ -13,11 +13,11 @@ import { rule as noAnonymousOperations } from './no-anonymous-operations/index.j
 import { rule as noDeprecated } from './no-deprecated/index.js';
 import { rule as noDuplicateFields } from './no-duplicate-fields/index.js';
 import { rule as noHashtagDescription } from './no-hashtag-description/index.js';
-import { rule as noOnePlaceFragments } from './no-one-place-fragments.js';
-import { rule as noRootType } from './no-root-type.js';
-import { rule as noScalarResultTypeOnMutation } from './no-scalar-result-type-on-mutation.js';
-import { rule as noTypenamePrefix } from './no-typename-prefix.js';
-import { rule as noUnreachableTypes } from './no-unreachable-types.js';
+import { rule as noOnePlaceFragments } from './no-one-place-fragments/index.js';
+import { rule as noRootType } from './no-root-type/index.js';
+import { rule as noScalarResultTypeOnMutation } from './no-scalar-result-type-on-mutation/index.js';
+import { rule as noTypenamePrefix } from './no-typename-prefix/index.js';
+import { rule as noUnreachableTypes } from './no-unreachable-types/index.js';
 import { rule as noUnusedFields } from './no-unused-fields.js';
 import { rule as relayArguments } from './relay-arguments.js';
 import { rule as relayConnectionTypes } from './relay-connection-types.js';

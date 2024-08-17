@@ -10,10 +10,10 @@ import {
 } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
 import lowerCase from 'lodash.lowercase';
-import { ModuleCache } from '../cache.js';
-import { GraphQLESTreeNode } from '../estree-converter/index.js';
-import { GraphQLESLintRule } from '../types.js';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../utils.js';
+import { ModuleCache } from '../../cache.js';
+import { GraphQLESTreeNode } from '../../estree-converter/index.js';
+import { GraphQLESLintRule } from '../../types.js';
+import { getTypeName, requireGraphQLSchemaFromContext } from '../../utils.js';
 
 const RULE_ID = 'no-unreachable-types';
 
