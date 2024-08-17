@@ -92,11 +92,9 @@ describe('Examples', () => {
     testSnapshot(results);
   });
 
-  it.skip('should work with `graphql-config`', () => {
+  it('should work with `graphql-config`', () => {
     const cwd = join(CWD, 'examples/graphql-config');
-    const results = getFlatESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
+    testESLintOutput(cwd, 2);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
