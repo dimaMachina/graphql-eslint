@@ -1,11 +1,11 @@
 import svelteParser from 'svelte-eslint-parser';
 import js from '@eslint/js';
-import * as graphql from '@graphql-eslint/eslint-plugin';
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 
 export default [
   {
     files: ['**/*.js', '**/*.svelte'],
-    processor: graphql.processors.graphql,
+    processor: graphqlPlugin.processor,
     rules: js.configs.recommended.rules,
   },
   {
@@ -17,10 +17,12 @@ export default [
   {
     files: ['**/*.graphql'],
     languageOptions: {
-      parser: graphql.parser,
+      parser: graphqlPlugin.parser,
     },
     plugins: {
-      '@graphql-eslint': { rules: graphql.rules },
+      '@graphql-eslint': {
+        rules: graphqlPlugin.rules,
+      },
     },
     rules: {
       '@graphql-eslint/no-anonymous-operations': 'error',

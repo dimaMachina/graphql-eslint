@@ -1,6 +1,7 @@
 export default {
   index: 'Introduction',
+  usage: '',
   'getting-started': 'Getting Started',
-  configs: 'Configs',
-  'custom-rules': 'Custom Rules',
+  configs: '',
+  'custom-rules': '',
 };

@@ -9,9 +9,7 @@ exports[`naming-convention > invalid > Invalid #1 1`] = `
 
     {
       "types": "PascalCase",
-      "FieldDefinition": "PascalCase",
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      "FieldDefinition": "PascalCase"
     }
 
 #### ❌ Error 1/2
@@ -72,9 +70,7 @@ exports[`naming-convention > invalid > Invalid #3 1`] = `
 #### ⚙️ Options
 
     {
-      "ScalarTypeDefinition": "snake_case",
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      "ScalarTypeDefinition": "snake_case"
     }
 
 #### ❌ Error
@@ -96,9 +92,7 @@ exports[`naming-convention > invalid > Invalid #5 1`] = `
 
     {
       "EnumTypeDefinition": "camelCase",
-      "EnumValueDefinition": "UPPER_CASE",
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      "EnumValueDefinition": "UPPER_CASE"
     }
 
 #### ❌ Error 1/2
@@ -129,9 +123,7 @@ exports[`naming-convention > invalid > Invalid #6 1`] = `
 
     {
       "types": "PascalCase",
-      "InputValueDefinition": "snake_case",
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      "InputValueDefinition": "snake_case"
     }
 
 #### ❌ Error 1/3
@@ -180,9 +172,7 @@ exports[`naming-convention > invalid > Invalid #7 1`] = `
       "EnumValueDefinition": {
         "style": "camelCase",
         "suffix": "ENUM"
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/4
@@ -240,9 +230,7 @@ exports[`naming-convention > invalid > Invalid #8 1`] = `
       "EnumValueDefinition": {
         "style": "UPPER_CASE",
         "prefix": "ENUM"
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/3
@@ -303,9 +291,7 @@ exports[`naming-convention > invalid > Invalid #9 1`] = `
           "get",
           "query"
         ]
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/5
@@ -367,9 +353,7 @@ exports[`naming-convention > invalid > Invalid #10 1`] = `
         "forbiddenPrefixes": [
           "get"
         ]
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/2
@@ -1511,8 +1495,7 @@ exports[`naming-convention > invalid > large graphql file 1`] = `
       "types": "PascalCase",
       "InputValueDefinition": "camelCase",
       "EnumValueDefinition": "UPPER_CASE",
-      "FragmentDefinition": "PascalCase",
-      "allowTrailingUnderscore": false
+      "FragmentDefinition": "PascalCase"
     }
 
 #### ❌ Error 1/27
@@ -1747,9 +1730,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
         "forbiddenSuffixes": [
           "Fragment"
         ]
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/9
@@ -2060,9 +2041,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
         "forbiddenSuffixes": [
           "Type"
         ]
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/15
@@ -2746,9 +2725,7 @@ exports[`naming-convention > invalid > should error when selected type names do 
         "requiredPrefixes": [
           "hiss"
         ]
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/3
@@ -2853,9 +2830,7 @@ exports[`naming-convention > invalid > should error when selected type names do 
         "requiredSuffixes": [
           "IpAddress"
         ]
-      },
-      "allowLeadingUnderscore": false,
-      "allowTrailingUnderscore": false
+      }
     }
 
 #### ❌ Error 1/2

@@ -8,10 +8,7 @@ exports[`input-name > invalid > Invalid #1 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error 1/2
@@ -41,10 +38,7 @@ exports[`input-name > invalid > Invalid #2 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error
@@ -65,10 +59,7 @@ exports[`input-name > invalid > Invalid #3 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error
@@ -89,10 +80,7 @@ exports[`input-name > invalid > Invalid #4 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error 1/2
@@ -122,10 +110,7 @@ exports[`input-name > invalid > Invalid #5 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error 1/2
@@ -155,10 +140,7 @@ exports[`input-name > invalid > Invalid #6 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error 1/2
@@ -188,10 +170,7 @@ exports[`input-name > invalid > Invalid #7 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error 1/2
@@ -221,10 +200,7 @@ exports[`input-name > invalid > Invalid #8 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": true
     }
 
 #### ❌ Error 1/4
@@ -272,10 +248,7 @@ exports[`input-name > invalid > Invalid #9 1`] = `
 #### ⚙️ Options
 
     {
-      "checkInputType": false,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "checkInputType": false
     }
 
 #### ❌ Error 1/2
@@ -306,9 +279,7 @@ exports[`input-name > invalid > Invalid #10 1`] = `
 
     {
       "checkInputType": true,
-      "caseSensitiveInputType": false,
-      "checkQueries": false,
-      "checkMutations": true
+      "caseSensitiveInputType": false
     }
 
 #### ❌ Error
@@ -330,9 +301,7 @@ exports[`input-name > invalid > Invalid #11 1`] = `
 
     {
       "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkQueries": false,
-      "checkMutations": true
+      "caseSensitiveInputType": true
     }
 
 #### ❌ Error
@@ -355,8 +324,7 @@ exports[`input-name > invalid > Invalid #12 1`] = `
     {
       "checkQueries": true,
       "checkInputType": true,
-      "caseSensitiveInputType": true,
-      "checkMutations": true
+      "caseSensitiveInputType": true
     }
 
 #### ❌ Error

@@ -163,10 +163,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(schemaConfig && configs[`flat/${schemaConfig}`]),
+          ...(schemaConfig && configs[`flat/${schemaConfig}`].rules),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
-              configs['flat/schema-all'][`@graphql-eslint/${schemaRule}`],
+              configs['flat/schema-all'].rules[`@graphql-eslint/${schemaRule}`],
           }),
         }}
         onChange={setSchema}
@@ -179,10 +179,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(operationConfig && configs[`flat/${operationConfig}`]),
+          ...(operationConfig && configs[`flat/${operationConfig}`].rules),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
-              configs['flat/operations-all'][`@graphql-eslint/${operationRule}`],
+              configs['flat/operations-all'].rules[`@graphql-eslint/${operationRule}`],
           }),
         }}
         onChange={setOperation}

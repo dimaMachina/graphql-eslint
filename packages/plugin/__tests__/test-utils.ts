@@ -1,11 +1,11 @@
 import { Linter } from 'eslint';
-import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 import { RuleTester } from '@theguild/eslint-rule-tester';
 import { ParserOptions } from '../src/index.js';
 
 export const DEFAULT_CONFIG: Linter.Config = {
   languageOptions: {
-    parser: graphqlESLint,
+    parser: graphqlPlugin.parser,
   },
 };
 
