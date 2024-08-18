@@ -7,7 +7,7 @@ title: How Does a Parser Work?
 The `graphql-eslint` parser is works in the following way:
 
 1. Loads all relevant GraphQL code using ESLint core (either from `.graphql` files, or using
-   [ESLint `processor`](https://eslint.org/docs/developer-guide/working-with-plugins#processors-in-plugins)
+   [ESLint `processor`](https://eslint.org/docs/latest/extend/plugins#processors-in-plugins)
    to find in code-files).
 1. Is uses `graphql-js` (and `graphql-tools`) to parse the found string into a `DocumentNode`.
 1. Extracts all comments (marked as `# ...`) from the parsed AST, and provides to ESLint as
