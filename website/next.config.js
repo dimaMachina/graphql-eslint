@@ -15,7 +15,8 @@ export default withGuildDocs({
   redirects: () =>
     Object.entries({
       '/': '/docs', // TODO: add landing page later
-      '/docs/getting-started/parser': '/'
+      '/docs/getting-started/parser': '/',
+      '/docs/getting-started/parser-options': '/',
     }).map(([from, to]) => ({
       source: from,
       destination: to,
