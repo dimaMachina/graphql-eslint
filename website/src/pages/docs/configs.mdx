@@ -2,14 +2,23 @@ import { Callout } from '@theguild/components'
 
 # Available Configs
 
+## Schema Configs
+
 {/* prettier-ignore-start */}
 |Name|Description|
 |:-:|-|
-|[`flat/schema-recommended`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/schema-recommended.ts)|enables recommended rules for schema (SDL) development|
-|[`flat/schema-all`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/schema-all.ts)|enables all rules for schema (SDL) development, except for those that require `parserOptions.operations` option|
+|[`flat/schema-recommended`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/schema-recommended.ts)|enables recommended rules for schema development|
+|[`flat/schema-all`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/schema-all.ts)|enables all rules for schema development, except for those that require `parserOptions.operations` option|
+|[`flat/schema-relay`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/schema-relay.ts)|enables rules from Relay specification for schema development|
+{/* prettier-ignore-end */}
+
+## Operations Configs
+
+{/* prettier-ignore-start */}
+|Name|Description|
+|:-:|-|
 |[`flat/operations-recommended`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/operations-recommended.ts) |enables recommended rules for consuming GraphQL (operations) development|
 |[`flat/operations-all`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/operations-all.ts)|enables all rules for consuming GraphQL (operations) development|
-|[`flat/schema-relay`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/schema-relay.ts)|enables rules from Relay specification for schema (SDL) development|
 {/* prettier-ignore-end */}
 
 <Callout type="warning">
@@ -25,27 +34,28 @@ If you are in a monorepo project, you probably need both sets of rules, see
 
 ## Config Usage
 
-For example, to enable the `schema-recommended` config, enable it in your `.eslintrc` file with the
-`extends` option:
+For example, to enable the `flat/schema-recommended` config, in a new configuration object assign the `rules` field to the `rules` field from the associated config from
+`graphqlPlugin.configs` object.
 
-```diff filename=".eslintrc.json"
-{
-  "overrides": [
-    {
-      "files": ["*.js"],
-      "processor": "@graphql-eslint/graphql"
+```js filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  // ... other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
     },
-    {
-      "files": ["*.graphql"],
--     "parser": "@graphql-eslint/eslint-plugin",
--     "plugins": ["@graphql-eslint"],
-+     "extends": "plugin:@graphql-eslint/schema-recommended"
+    plugins: {
+      '@graphql-eslint': {
+        rules: graphqlPlugin.rules
+      }
     }
-  ]
-}
+  },
+  {
+    files: ['path-to-schema/**/*.graphql'],
+    rules: graphqlPlugin.configs['flat/schema-recommended'].rules
+  }
+]
 ```
-
-<Callout>
-  All configs under the hood set `parser` as `@graphql-eslint/eslint-plugin` and add
-  `@graphql-eslint` to `plugins` array, so you don't need to specify them.
-</Callout>
