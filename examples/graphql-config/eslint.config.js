@@ -12,9 +12,7 @@ export default [
       parser: graphqlPlugin.parser,
     },
     plugins: {
-      '@graphql-eslint': {
-        rules: graphqlPlugin.rules,
-      },
+      '@graphql-eslint': graphqlPlugin,
     },
     rules: {
       '@graphql-eslint/no-anonymous-operations': 'error',

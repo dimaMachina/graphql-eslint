@@ -18,9 +18,7 @@ export default [
       },
     },
     plugins: {
-      '@graphql-eslint': {
-        rules: graphqlPlugin.rules,
-      },
+      '@graphql-eslint': graphqlPlugin,
     },
     rules: {
       '@graphql-eslint/require-selections': ['error', { fieldName: '_id' }],
