@@ -26,8 +26,8 @@ importers:
         specifier: 10.5.4
         version: 10.5.4(graphql@16.9.0)
       '@theguild/eslint-config':
-        specifier: 0.12.0
-        version: 0.12.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(typescript@5.5.4)
+        specifier: 0.12.1
+        version: 0.12.1(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(typescript@5.5.4)
       '@theguild/prettier-config':
         specifier: 2.0.7
         version: 2.0.7(@vue/compiler-sfc@3.4.38)(prettier@3.3.3)
@@ -1637,10 +1637,10 @@ packages:
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@theguild/eslint-config@0.12.0':
-    resolution: {integrity: sha512-a9xlmrgK6aInWG3yvQuRtJlpg3hMwt631aZwjDoYTsf4p9RLUQDlrxTh0+g2Gv/MIS+iFMZ9SuNAydQB9QlKoQ==}
+  '@theguild/eslint-config@0.12.1':
+    resolution: {integrity: sha512-H/w0tiZ38Fc0OWRIDzrirp4dyP39kFXHNOj+eIs5AwCJ8gw//Sftk4Zf0HQQw+sdY/kkU54nl6tI/REswE7DZg==}
     peerDependencies:
-      eslint: ^8
+      eslint: ^8 || ^9
       typescript: ^5
 
   '@theguild/prettier-config@2.0.7':
@@ -7561,7 +7561,7 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@theguild/eslint-config@0.12.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(typescript@5.5.4)':
+  '@theguild/eslint-config@0.12.1(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
       '@rushstack/eslint-patch': 1.10.4
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(typescript@5.5.4)
