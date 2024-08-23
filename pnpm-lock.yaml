@@ -362,8 +362,8 @@ importers:
         version: 2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@theguild/tailwind-config':
-        specifier: 0.4.2
-        version: 0.4.2
+        specifier: 0.5.0
+        version: 0.5.0
       '@types/lodash.debounce':
         specifier: 4.0.9
         version: 4.0.9
@@ -1656,8 +1656,8 @@ packages:
   '@theguild/remark-npm2yarn@0.3.0':
     resolution: {integrity: sha512-Fofw+9airYgjBd9G6PiHHCrptjyUybQ50JH9/5o9LCH54kggJ7stpCofzHjICB8L7VQbQ1Gwu23P/3CMVY1R4Q==}
 
-  '@theguild/tailwind-config@0.4.2':
-    resolution: {integrity: sha512-FX+VNoKmTRQ8Otxy2ikZa3j7Iv5kCF+Q6VJ9x0HHq40qWuW9wPiCimJ0CXkz6oO5iLY2grNvSwtylMbXlGTzrg==}
+  '@theguild/tailwind-config@0.5.0':
+    resolution: {integrity: sha512-TZTB1kOtnipBxePHCDEwX4G31PWuGiI9+Vim0rryP2t0210wTuz02dN17kz6ClQ/bnNPFaO+X2esy+acfh346A==}
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -7610,7 +7610,7 @@ snapshots:
       npm-to-yarn: 2.2.1
       unist-util-visit: 5.0.0
 
-  '@theguild/tailwind-config@0.4.2':
+  '@theguild/tailwind-config@0.5.0':
     dependencies:
       autoprefixer: 10.4.20(postcss@8.4.41)
       cssnano: 7.0.5(postcss@8.4.41)
