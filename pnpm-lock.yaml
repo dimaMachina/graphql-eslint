@@ -173,7 +173,7 @@ importers:
         version: 9.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))
       eslint-plugin-prettier:
         specifier: 5.2.1
-        version: 5.2.1(@types/eslint@9.6.0)(eslint-config-prettier@9.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6)))(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(prettier@3.3.3)
+        version: 5.2.1(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6)))(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(prettier@3.3.3)
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -272,8 +272,8 @@ importers:
         specifier: 4.1.12
         version: 4.1.12
       '@types/eslint':
-        specifier: 9.6.0
-        version: 9.6.0
+        specifier: 9.6.1
+        version: 9.6.1
       '@types/estree':
         specifier: 1.0.5
         version: 1.0.5
@@ -1687,8 +1687,8 @@ packages:
   '@types/dedent@0.7.2':
     resolution: {integrity: sha512-kRiitIeUg1mPV9yH4VUJ/1uk2XjyANfeL8/7rH1tsjvHeO9PJLBHJIYsFWmAvmGj5u8rj+1TZx7PZzW2qLw3Lw==}
 
-  '@types/eslint@9.6.0':
-    resolution: {integrity: sha512-gi6WQJ7cHRgZxtkQEoyHMppPjq9Kxo5Tjn2prSKDSmZrCz8TZ3jSRCeTJm+WoM+oB0WG37bRqLzaaU3q7JypGg==}
+  '@types/eslint@9.6.1':
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
 
   '@types/estree-jsx@1.0.5':
     resolution: {integrity: sha512-52CcUVNFyfb1A2ALocQw/Dd1BQFNmSdkuC3BkZ6iqhdMfQz7JWOFRuJFloOzjk+6WijU56m9oKXFAXc7o3Towg==}
@@ -7646,7 +7646,7 @@ snapshots:
 
   '@types/dedent@0.7.2': {}
 
-  '@types/eslint@9.6.0':
+  '@types/eslint@9.6.1':
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
@@ -9175,14 +9175,14 @@ snapshots:
       minimatch: 9.0.5
       semver: 7.6.3
 
-  eslint-plugin-prettier@5.2.1(@types/eslint@9.6.0)(eslint-config-prettier@9.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6)))(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(prettier@3.3.3):
+  eslint-plugin-prettier@5.2.1(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6)))(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))(prettier@3.3.3):
     dependencies:
       eslint: 9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6)
       prettier: 3.3.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.9.1
     optionalDependencies:
-      '@types/eslint': 9.6.0
+      '@types/eslint': 9.6.1
       eslint-config-prettier: 9.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6))
 
   eslint-plugin-promise@7.1.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@1.21.6)):
