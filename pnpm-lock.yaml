@@ -290,8 +290,8 @@ importers:
         specifier: 16.9.0
         version: 16.9.0
       json-schema-to-ts:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.1.1
+        version: 3.1.1
       vite-tsconfig-paths:
         specifier: ^5.0.0
         version: 5.0.1(typescript@5.5.4)(vite@5.4.1(@types/node@20.16.2)(terser@5.31.6))
@@ -3783,8 +3783,8 @@ packages:
   json-schema-to-markdown@1.1.1:
     resolution: {integrity: sha512-AWah/3VoorCoBBtnzZnGUjUey9WbMx1HjENyFXh/hYgnohL5XWZ6JKdaNMRn/ZExyPIsEXWqukVw2kacoGqAIQ==}
 
-  json-schema-to-ts@3.1.0:
-    resolution: {integrity: sha512-UeVN/ery4/JeXI8h4rM8yZPxsH+KqPi/84qFxHfTGHZnWnK9D0UU9ZGYO+6XAaJLqCWMiks+ARuFOKAiSxJCHA==}
+  json-schema-to-ts@3.1.1:
+    resolution: {integrity: sha512-+DWg8jCJG2TEnpy7kOm/7/AxaYoaRbjVB4LFZLySZlWn8exGs3A4OLJR966cVvU26N7X9TWxl+Jsw7dzAqKT6g==}
     engines: {node: '>=16'}
 
   json-schema-traverse@0.4.1:
@@ -10166,7 +10166,7 @@ snapshots:
 
   json-schema-to-markdown@1.1.1(patch_hash=beglqnggvhpsclgwbdw27hzvu4): {}
 
-  json-schema-to-ts@3.1.0:
+  json-schema-to-ts@3.1.1:
     dependencies:
       '@babel/runtime': 7.25.0
       ts-algebra: 2.0.0
