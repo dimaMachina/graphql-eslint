@@ -328,8 +328,8 @@ importers:
         specifier: ^2.0.0
         version: 2.1.1(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@theguild/components':
-        specifier: 6.6.4
-        version: 6.6.4(@types/react@18.3.5)(next@14.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.1))
+        specifier: 6.6.5
+        version: 6.6.5(@types/react@18.3.5)(next@14.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.1))
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -1162,8 +1162,8 @@ packages:
     resolution: {integrity: sha512-lH8bYk2kqfbKsht/Gejd8K+y069ZXPHBfrlcj1ptS6xlJbHhncHxpFyy57W+PTuCcN+MPGVjs+3CiufG8EUrCQ==}
     engines: {node: '>= 10'}
 
-  '@next/bundle-analyzer@14.2.5':
-    resolution: {integrity: sha512-BtBbI8VUnB7s4m9ut6CkeJ8Hyx+aq+86mbH+uAld7ZGG0/eH4+5hcPnkHKsQM/yj74iClazS0fninI8yZbIZWA==}
+  '@next/bundle-analyzer@14.2.7':
+    resolution: {integrity: sha512-Zz55BLjoNKiUjr8PJIMTXFQnbUEpk8qkXP5nmEcXvOorbruQOIdmkRa3sahlJZPWTjsZNpxwImhZf2yFMVMWeg==}
 
   '@next/env@13.5.6':
     resolution: {integrity: sha512-Yac/bV5sBGkkEXmAX5FWPS9Mmo2rthrOPRQQNfycJPkjUAUclomCPH7QFVCDQ4Mp2k2K1SSM6m0zrxYrOwtFQw==}
@@ -1630,8 +1630,8 @@ packages:
   '@tanstack/virtual-core@3.9.0':
     resolution: {integrity: sha512-Saga7/QRGej/IDCVP5BgJ1oDqlDT2d9rQyoflS3fgMS8ntJ8JGw/LBqK2GorHa06+VrNFc0tGz65XQHJQJetFQ==}
 
-  '@theguild/components@6.6.4':
-    resolution: {integrity: sha512-pW3HdLJ4kPXP0L6XHhkLYUH6ng52XrSdQZkfLDSGVmsgNB3Rnq1RU0ndh3p8y90djAgHcKbudCG42+SDAt623w==}
+  '@theguild/components@6.6.5':
+    resolution: {integrity: sha512-Ffck7yt4dXaWOyNg/HAOrPpOTtE2Q5QFM/w1bZ/7bRssNdirGj0cntk+rpiryJbXsLXmF4wDOxEpbNUep1TC+Q==}
     peerDependencies:
       next: ^13 || ^14
       react: ^18.2.0
@@ -7142,7 +7142,7 @@ snapshots:
       '@napi-rs/simple-git-win32-arm64-msvc': 0.1.17
       '@napi-rs/simple-git-win32-x64-msvc': 0.1.17
 
-  '@next/bundle-analyzer@14.2.5':
+  '@next/bundle-analyzer@14.2.7':
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
@@ -7537,10 +7537,10 @@ snapshots:
 
   '@tanstack/virtual-core@3.9.0': {}
 
-  '@theguild/components@6.6.4(@types/react@18.3.5)(next@14.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.1))':
+  '@theguild/components@6.6.5(@types/react@18.3.5)(next@14.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.1))':
     dependencies:
       '@giscus/react': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@next/bundle-analyzer': 14.2.5
+      '@next/bundle-analyzer': 14.2.7
       clsx: 2.1.1
       fuzzy: 0.1.3
       next: 14.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
