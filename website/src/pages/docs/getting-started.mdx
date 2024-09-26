@@ -172,6 +172,19 @@ For syntax highlighting you need a GraphQL extension (which may potentially have
 for example
 [GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
 
+You will also need to add `"graphql"` to `eslint.validate` property in `.vscode/settings.json`.
+If you don't have `eslint.validate`, you will need to create it and add all languages you want ESLint to `validate`.
+
+```diff filename=".vscode/settings.json"
+{
+   "eslint.validate": [
+     "javascript",
+     "typescript",
++    "graphql"
+  ],
+}
+```
+
 ## Further Reading
 
 If you wish to learn more about this project, how the parser works, how to add custom rules and more
