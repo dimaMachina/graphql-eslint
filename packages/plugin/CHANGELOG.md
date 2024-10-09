@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.5
+
+### Patch Changes
+
+- [#2605](https://github.com/dimaMachina/graphql-eslint/pull/2605)
+  [`2ae64e1`](https://github.com/dimaMachina/graphql-eslint/commit/2ae64e12ab2e61c14b8a195410e2e68dc3fb29d0)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix types exports by
+  `@arethetypeswrong/cli` package
+
 ## 4.0.0-alpha.4
 
 ### Patch Changes
