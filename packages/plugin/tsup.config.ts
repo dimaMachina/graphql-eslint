@@ -10,6 +10,7 @@ const opts: Options = {
   dts: true,
   env: {
     ...(process.env.NODE_ENV && { NODE_ENV: process.env.NODE_ENV }),
+    VERSION: packageJson.version,
   },
   format: 'esm',
   minifySyntax: true,
