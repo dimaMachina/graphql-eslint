@@ -22,14 +22,10 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const errorOutput = stderr
     .toString()
     .replace(
-      /\(node:\d{4,5}\) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time/,
+      /\(node:\d{4,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
       '',
     )
-    .replace(
-      /\(node:\d{4,5}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
-      '',
-    )
-    .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
+    .replace('(Use `node --trace-deprecation ...` to show where the warning was created)', '')
     .trimEnd();
   if (errorOutput) {
     throw new Error(errorOutput);
