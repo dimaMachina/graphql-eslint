@@ -1,5 +1,17 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.6
+
+### Patch Changes
+
+- [#2616](https://github.com/dimaMachina/graphql-eslint/pull/2616)
+  [`c0f1b07`](https://github.com/dimaMachina/graphql-eslint/commit/c0f1b077c8c7b8ee872bcee191f1acf5a8d5f62b)
+  Thanks [@fcortes](https://github.com/fcortes)! - The import attribute syntax (with { type: "json"
+  }) is still experimental so warnings showed up when using the library as it was being used to
+  import the package.json file to extract the package version
+
+  As an alternative, the current version will be injected on build time through tsup configuration.
+
 ## 4.0.0-alpha.5
 
 ### Patch Changes
