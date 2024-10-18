@@ -328,8 +328,8 @@ importers:
         specifier: ^2.0.0
         version: 2.1.2(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@theguild/components':
-        specifier: 7.0.1
-        version: 7.0.1(@types/react@18.3.11)(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.3)(webpack@5.95.0(esbuild@0.23.1))
+        specifier: 7.0.2
+        version: 7.0.2(@types/react@18.3.11)(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.3)(webpack@5.95.0(esbuild@0.23.1))
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -1771,8 +1771,8 @@ packages:
   '@tanstack/virtual-core@3.10.8':
     resolution: {integrity: sha512-PBu00mtt95jbKFi6Llk9aik8bnR3tR/oQP1o3TSi+iG//+Q2RTIzCEgKkHG8BB86kxMNW6O8wku+Lmi+QFR6jA==}
 
-  '@theguild/components@7.0.1':
-    resolution: {integrity: sha512-zpFrXXBGs6RwdXTmoJD9bpEfEloeUVXD3+DB6hki0pZ1X8kE7+x9SUg47vEK9GcQh+dcrGKywMSfiIotxxs38A==}
+  '@theguild/components@7.0.2':
+    resolution: {integrity: sha512-yE4h9WSe9/nyA/hrS3IlkY/fTTPYyToLtKCTWSxnfnUa+h+X8LyJSWEibiBX3hZTcydBl/GxybpIcn1lI2VGLA==}
     peerDependencies:
       next: ^13 || ^14
       react: ^18.2.0
@@ -7894,7 +7894,7 @@ snapshots:
 
   '@tanstack/virtual-core@3.10.8': {}
 
-  '@theguild/components@7.0.1(@types/react@18.3.11)(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.3)(webpack@5.95.0(esbuild@0.23.1))':
+  '@theguild/components@7.0.2(@types/react@18.3.11)(next@14.2.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.3)(webpack@5.95.0(esbuild@0.23.1))':
     dependencies:
       '@giscus/react': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@next/bundle-analyzer': 14.2.15
