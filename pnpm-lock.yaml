@@ -207,14 +207,14 @@ importers:
         specifier: 9.9.0
         version: 9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3)
       svelte:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.3
+        version: 5.0.3
       svelte-eslint-parser:
         specifier: 0.42.0
-        version: 0.42.0(svelte@5.0.2)
+        version: 0.42.0(svelte@5.0.3)
       svelte2tsx:
         specifier: 0.7.22
-        version: 0.7.22(svelte@5.0.2)(typescript@5.6.3)
+        version: 0.7.22(svelte@5.0.3)(typescript@5.6.3)
 
   examples/vue-code-file:
     dependencies:
@@ -5743,8 +5743,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@5.0.2:
-    resolution: {integrity: sha512-TIqp5kjyTMa45L0McUvVfjuvlF/hyxVolyAc9APY3/FeF5aqYpt+Y1PckPQ7DlsDkthxNeq2+ystop8GlIV3kw==}
+  svelte@5.0.3:
+    resolution: {integrity: sha512-i8DopbAPRP9iaR3qqe++LPv4povQRshSseH3kSrzI4URZ9/7OTt3vCJPBp+5ACRQDik0S/tM1ZRA6EW/sGcKfw==}
     engines: {node: '>=18'}
 
   svgo@3.3.2:
@@ -12716,7 +12716,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-eslint-parser@0.42.0(svelte@5.0.2):
+  svelte-eslint-parser@0.42.0(svelte@5.0.3):
     dependencies:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
@@ -12724,16 +12724,16 @@ snapshots:
       postcss: 8.4.47
       postcss-scss: 4.0.9(postcss@8.4.47)
     optionalDependencies:
-      svelte: 5.0.2
+      svelte: 5.0.3
 
-  svelte2tsx@0.7.22(svelte@5.0.2)(typescript@5.6.3):
+  svelte2tsx@0.7.22(svelte@5.0.3)(typescript@5.6.3):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 5.0.2
+      svelte: 5.0.3
       typescript: 5.6.3
 
-  svelte@5.0.2:
+  svelte@5.0.3:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
