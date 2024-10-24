@@ -1088,6 +1088,200 @@ exports[`alphabetize > invalid > should sort selections by group when \`*\` is b
       7 |         }
 `;
 
+exports[`alphabetize > invalid > should sort selections by group when \`...\` is at the end 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           ...ChildFragment
+      3 |           zz
+      4 |           updatedAt
+      5 |           createdAt
+      6 |           aa
+      7 |           id
+      8 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt",
+        "..."
+      ]
+    }
+
+#### ❌ Error 1/4
+
+      2 |           ...ChildFragment
+    > 3 |           zz
+        |           ^^ field "zz" should be before fragment spread "ChildFragment"
+      4 |           updatedAt
+
+#### ❌ Error 2/4
+
+      4 |           updatedAt
+    > 5 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      6 |           aa
+
+#### ❌ Error 3/4
+
+      5 |           createdAt
+    > 6 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      7 |           id
+
+#### ❌ Error 4/4
+
+      6 |           aa
+    > 7 |           id
+        |           ^^ field "id" should be before field "aa"
+      8 |         }
+
+#### 🔧 Autofix output
+
+      1 |         {
+      2 |           id
+      3 |           aa
+      4 |           zz
+      5 |           createdAt
+      6 |           updatedAt
+      7 |           ...ChildFragment
+      8 |         }
+`;
+
+exports[`alphabetize > invalid > should sort selections by group when \`...\` is at the start 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           zz
+      3 |           updatedAt
+      4 |           createdAt
+      5 |           aa
+      6 |           id
+      7 |           ...ChildFragment
+      8 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "...",
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+
+#### ❌ Error 1/4
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           aa
+
+#### ❌ Error 2/4
+
+      4 |           createdAt
+    > 5 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      6 |           id
+
+#### ❌ Error 3/4
+
+      5 |           aa
+    > 6 |           id
+        |           ^^ field "id" should be before field "aa"
+      7 |           ...ChildFragment
+
+#### ❌ Error 4/4
+
+      6 |           id
+    > 7 |           ...ChildFragment
+        |              ^^^^^^^^^^^^^ fragment spread "ChildFragment" should be before field "id"
+      8 |         }
+
+#### 🔧 Autofix output
+
+      1 |         {
+      2 |           ...ChildFragment
+      3 |           id
+      4 |           aa
+      5 |           zz
+      6 |           createdAt
+      7 |           updatedAt
+      8 |         }
+`;
+
+exports[`alphabetize > invalid > should sort selections by group when \`...\` is between 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           zz
+      3 |           ...ChildFragment
+      4 |           updatedAt
+      5 |           createdAt
+      6 |           aa
+      7 |           id
+      8 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "...",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+
+#### ❌ Error 1/3
+
+      4 |           updatedAt
+    > 5 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      6 |           aa
+
+#### ❌ Error 2/3
+
+      5 |           createdAt
+    > 6 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      7 |           id
+
+#### ❌ Error 3/3
+
+      6 |           aa
+    > 7 |           id
+        |           ^^ field "id" should be before field "aa"
+      8 |         }
+
+#### 🔧 Autofix output
+
+      1 |         {
+      2 |           id
+      3 |           aa
+      4 |           zz
+      5 |           ...ChildFragment
+      6 |           createdAt
+      7 |           updatedAt
+      8 |         }
+`;
+
 exports[`alphabetize > invalid > should sort when selection is aliased 1`] = `
 #### ⌨️ Code
 
