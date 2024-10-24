@@ -96,6 +96,10 @@ const schema = {
         description:
           "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything else.",
       },
+      relationships_last: {
+        type: 'boolean',
+        description: 'Sort nodes last',
+      },
     },
   },
 } as const;
@@ -260,6 +264,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       // Starts from 1, ignore nodes.length <= 1
       for (let i = 1; i < nodes.length; i += 1) {
         const currNode = nodes[i];
+        const isCurrNodeObject = 'selectionSet' in currNode && currNode.selectionSet != null;
         const currName =
           ('alias' in currNode && currNode.alias?.value) ||
           ('name' in currNode && currNode.name?.value);
@@ -269,15 +274,22 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         }
 
         const prevNode = nodes[i - 1];
+        const isPrevNodeObject = 'selectionSet' in prevNode && prevNode.selectionSet != null;
         const prevName =
           ('alias' in prevNode && prevNode.alias?.value) ||
           ('name' in prevNode && prevNode.name?.value);
         if (prevName) {
+          const { groups, relationships_last } = opts;
+          if (relationships_last && isCurrNodeObject && !isPrevNodeObject) {
+            continue;
+          }
           // Compare with lexicographic order
-          const compareResult = prevName.localeCompare(currName);
-
-          const { groups } = opts;
+          let compareResult = prevName.localeCompare(currName);
           let shouldSortByGroup = false;
+          const shouldSortNodes = relationships_last && !isCurrNodeObject && isPrevNodeObject
+          if (shouldSortNodes) {
+            compareResult = 1;
+          }
 
           if (groups?.length) {
             if (!groups.includes('*')) {
@@ -288,7 +300,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             let indexForCurr = groups.indexOf(currName);
             if (indexForCurr === -1) indexForCurr = groups.indexOf('*');
             shouldSortByGroup = indexForPrev - indexForCurr > 0;
-            if (indexForPrev < indexForCurr) {
+            if (indexForPrev < indexForCurr && !shouldSortNodes) {
               continue;
             }
           }

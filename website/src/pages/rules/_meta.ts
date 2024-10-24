@@ -68,5 +68,5 @@ export default {
   'unique-variable-names': '',
   'value-literals-of-correct-type': '',
   'variables-are-input-types': '',
-  'variables-in-allowed-position': '',
-};
+  'variables-in-allowed-position': ''
+}

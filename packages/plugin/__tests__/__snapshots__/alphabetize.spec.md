@@ -614,6 +614,153 @@ exports[`alphabetize > invalid > should move comment 1`] = `
       14 |         } # } character
 `;
 
+exports[`alphabetize > invalid > should sort between group relationships 1`] = `
+#### ⌨️ Code
+
+       1 |         {
+       2 |           aa
+       3 |           id
+       4 |           zz
+       5 |           aab {
+       6 |             id
+       7 |           }
+       8 |           user {
+       9 |             id
+      10 |           }
+      11 |           updatedAt
+      12 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt",
+        "user",
+        "aab"
+      ],
+      "relationships_last": true
+    }
+
+#### ❌ Error 1/3
+
+      2 |           aa
+    > 3 |           id
+        |           ^^ field "id" should be before field "aa"
+      4 |           zz
+
+#### ❌ Error 2/3
+
+      7 |           }
+    > 8 |           user {
+        |           ^^^^ field "user" should be before field "aab"
+      9 |             id
+
+#### ❌ Error 3/3
+
+      10 |           }
+    > 11 |           updatedAt
+         |           ^^^^^^^^^ field "updatedAt" should be before field "user"
+      12 |         }
+
+#### 🔧 Autofix output
+
+       1 |         {
+       2 |           id
+       3 |           aa
+       4 |           zz
+       5 |           updatedAt
+       6 |           user {
+       7 |             id
+       8 |           }
+       9 |           aab {
+      10 |             id
+      11 |           }
+      12 |         }
+`;
+
+exports[`alphabetize > invalid > should sort between relationships 1`] = `
+#### ⌨️ Code
+
+       1 |         {
+       2 |           zz
+       3 |           updatedAt
+       4 |           createdAt
+       5 |           aa
+       6 |           user {
+       7 |             id
+       8 |           }
+       9 |           aab {
+      10 |             id
+      11 |           }
+      12 |           updatedAt
+      13 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt"
+      ],
+      "relationships_last": true
+    }
+
+#### ❌ Error 1/4
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           aa
+
+#### ❌ Error 2/4
+
+      4 |           createdAt
+    > 5 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      6 |           user {
+
+#### ❌ Error 3/4
+
+       8 |           }
+    >  9 |           aab {
+         |           ^^^ field "aab" should be before field "user"
+      10 |             id
+
+#### ❌ Error 4/4
+
+      11 |           }
+    > 12 |           updatedAt
+         |           ^^^^^^^^^ field "updatedAt" should be before field "aab"
+      13 |         }
+
+#### 🔧 Autofix output
+
+       1 |         {
+       2 |           aa
+       3 |           zz
+       4 |           createdAt
+       5 |           updatedAt
+       6 |           updatedAt
+       7 |           aab {
+       8 |             id
+       9 |           }
+      10 |           user {
+      11 |             id
+      12 |           }
+      13 |         }
+`;
+
 exports[`alphabetize > invalid > should sort by group when \`*\` at the start 1`] = `
 #### ⌨️ Code
 
@@ -1029,6 +1176,203 @@ exports[`alphabetize > invalid > should sort definitions 1`] = `
       57 |         } # same schema definition
       58 |
       59 |         # END
+`;
+
+exports[`alphabetize > invalid > should sort relationships 1`] = `
+#### ⌨️ Code
+
+      1 |         {
+      2 |           zz
+      3 |           updatedAt
+      4 |           createdAt
+      5 |           z
+      6 |           yyy {
+      7 |             id
+      8 |           }
+      9 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "relationships_last": false
+    }
+
+#### ❌ Error 1/3
+
+      2 |           zz
+    > 3 |           updatedAt
+        |           ^^^^^^^^^ field "updatedAt" should be before field "zz"
+      4 |           createdAt
+
+#### ❌ Error 2/3
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           z
+
+#### ❌ Error 3/3
+
+      5 |           z
+    > 6 |           yyy {
+        |           ^^^ field "yyy" should be before field "z"
+      7 |             id
+
+#### 🔧 Autofix output
+
+      1 |         {
+      2 |           createdAt
+      3 |           updatedAt
+      4 |           yyy {
+      5 |             id
+      6 |           }
+      7 |           z
+      8 |           zz
+      9 |         }
+`;
+
+exports[`alphabetize > invalid > should sort relationships last 1`] = `
+#### ⌨️ Code
+
+       1 |         {
+       2 |           zz
+       3 |           updatedAt
+       4 |           createdAt
+       5 |           aab {
+       6 |             id
+       7 |           }
+       8 |           aa
+       9 |           user {
+      10 |             id
+      11 |           }
+      12 |           id
+      13 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "relationships_last": true
+    }
+
+#### ❌ Error 1/4
+
+      2 |           zz
+    > 3 |           updatedAt
+        |           ^^^^^^^^^ field "updatedAt" should be before field "zz"
+      4 |           createdAt
+
+#### ❌ Error 2/4
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           aab {
+
+#### ❌ Error 3/4
+
+      7 |           }
+    > 8 |           aa
+        |           ^^ field "aa" should be before field "aab"
+      9 |           user {
+
+#### ❌ Error 4/4
+
+      11 |           }
+    > 12 |           id
+         |           ^^ field "id" should be before field "user"
+      13 |         }
+
+#### 🔧 Autofix output
+
+       1 |         {
+       2 |           aa
+       3 |           createdAt
+       4 |           id
+       5 |           updatedAt
+       6 |           zz
+       7 |           aab {
+       8 |             id
+       9 |           }
+      10 |           user {
+      11 |             id
+      12 |           }
+      13 |         }
+`;
+
+exports[`alphabetize > invalid > should sort relationships last with group 1`] = `
+#### ⌨️ Code
+
+       1 |         {
+       2 |           zz
+       3 |           updatedAt
+       4 |           createdAt
+       5 |           aab {
+       6 |             id
+       7 |           }
+       8 |           aa
+       9 |           user {
+      10 |             id
+      11 |           }
+      12 |           updatedAt
+      13 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "createdAt",
+        "updatedAt"
+      ],
+      "relationships_last": true
+    }
+
+#### ❌ Error 1/3
+
+      3 |           updatedAt
+    > 4 |           createdAt
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |           aab {
+
+#### ❌ Error 2/3
+
+      7 |           }
+    > 8 |           aa
+        |           ^^ field "aa" should be before field "aab"
+      9 |           user {
+
+#### ❌ Error 3/3
+
+      11 |           }
+    > 12 |           updatedAt
+         |           ^^^^^^^^^ field "updatedAt" should be before field "user"
+      13 |         }
+
+#### 🔧 Autofix output
+
+       1 |         {
+       2 |           aa
+       3 |           zz
+       4 |           createdAt
+       5 |           updatedAt
+       6 |           updatedAt
+       7 |           aab {
+       8 |             id
+       9 |           }
+      10 |           user {
+      11 |             id
+      12 |           }
+      13 |         }
 `;
 
 exports[`alphabetize > invalid > should sort selections by group when \`*\` is between 1`] = `
