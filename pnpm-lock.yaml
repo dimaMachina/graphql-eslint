@@ -53,8 +53,8 @@ importers:
         specifier: 9.9.0
         version: 9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3)
       eslint-plugin-eslint-plugin:
-        specifier: 6.3.0
-        version: 6.3.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3))
+        specifier: 6.3.1
+        version: 6.3.1(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3))
       eslint-plugin-tailwindcss:
         specifier: 3.17.5
         version: 3.17.5(tailwindcss@3.4.14)
@@ -3160,8 +3160,8 @@ packages:
     peerDependencies:
       eslint: '>=8'
 
-  eslint-plugin-eslint-plugin@6.3.0:
-    resolution: {integrity: sha512-R6Z/rPGY2Bl8Xf78/UikevEVVKve8L3b0We787U3GLH6f8RhmGWT6CcvlQkNsZDaHYoNfn/aIZKK438iF1A6iw==}
+  eslint-plugin-eslint-plugin@6.3.1:
+    resolution: {integrity: sha512-5OUvS+kzpfbX3Pyt7ULYLJBGdjM/tGPdjePGFE50Lqdqcn/dB0f9ifbRCrCGWBt10Ljk7O6ajj3BPOZ8vmD50g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.23.0'
@@ -9737,7 +9737,7 @@ snapshots:
       eslint: 9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3)
       eslint-compat-utils: 0.5.1(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3))
 
-  eslint-plugin-eslint-plugin@6.3.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3)):
+  eslint-plugin-eslint-plugin@6.3.1(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3)):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3))
       eslint: 9.9.0(patch_hash=cqyibohmktxazhgy2cj3pxovf4)(jiti@2.3.3)
