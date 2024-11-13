@@ -19,7 +19,11 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 }
 
 function getFlatESLintOutput(cwd: string): ESLint.LintResult[] {
-  const { stdout, stderr } = spawnSync('eslint', ['--format', 'json', '.'], { cwd });
+  const { stdout, stderr } = spawnSync('eslint', ['--format', 'json', '.'], {
+    cwd,
+    // For Windows, otherwise `stdout` and `stderr` are `null`
+    shell: os.platform() === 'win32',
+  });
 
   return parseESLintOutput({ stdout, stderr });
 }
