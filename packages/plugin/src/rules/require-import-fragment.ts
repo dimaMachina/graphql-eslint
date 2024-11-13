@@ -78,7 +78,7 @@ export const rule: GraphQLESLintRule = {
         const fragmentName = node.value;
         const fragmentsFromSiblings = siblings.getFragment(fragmentName);
         // eslint-disable-next-line no-console
-        console.log(fragmentsFromSiblings);
+        // console.log(fragmentsFromSiblings);
         for (const comment of comments) {
           if (comment.type !== 'Line') continue;
 
