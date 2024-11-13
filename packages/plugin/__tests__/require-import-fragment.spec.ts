@@ -13,6 +13,7 @@ function withMocks({ name, filename, errors }: { name: string; filename: string;
           filename,
           join(__dirname, 'mocks/import-fragments/foo-fragment.gql'),
           join(__dirname, 'mocks/import-fragments/bar-fragment.gql'),
+          join(__dirname, 'mocks/import-fragments/baz-fragment/index.gql'),
         ],
       },
     } satisfies ParserOptionsForTests,
@@ -33,6 +34,10 @@ ruleTester.run('require-import-fragment', rule, {
     withMocks({
       name: 'should not report fragments from the same file',
       filename: join(__dirname, 'mocks/import-fragments/same-file.gql'),
+    }),
+    withMocks({
+      name: 'should not report with module import',
+      filename: join(__dirname, 'mocks/import-fragments/module-import.gql'),
     }),
   ],
   invalid: [

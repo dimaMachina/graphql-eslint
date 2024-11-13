@@ -1,0 +1,7 @@
+# import './baz-fragment'
+
+query {
+  foo {
+    ...BazFields
+  }
+}
