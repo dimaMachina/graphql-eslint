@@ -41,7 +41,7 @@ export default [
     // a fixed .graphql extension, so you need to include that extension below
     // or these files won't be linted.
     files: ['**/*.js', '**/*.ts', '**/*.vue'],
-    processor: graphql.processors.graphql
+    processor: graphqlPlugin.processor
     // NOTE: While you CAN put rules here to affect JS/TS/Vue files, those
     // rules won't affect GraphQL. To modify rules that effect GrahpQL inside
     // these files, add those to the block for .graphql files, below.
@@ -58,9 +58,9 @@ export default [
 
     // Any rule overrides for GraphQL go HERE. For example, to enable
     // recommended operations rules
-    plugins: { '@graphql-eslint': { rules: graphqlESLint.rules } },
+    plugins: { '@graphql-eslint': graphqlPlugin },
     rules: {
-      ...graphqlESLint.configs['flat/operations-recommended']
+      ...graphqlESLint.configs['flat/operations-recommended'].rules
       // Can also override the recommended rules here, e.g.:
       // "@graphql-eslint/naming-convention": ["off"],
     }
