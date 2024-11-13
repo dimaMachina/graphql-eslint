@@ -1,9 +1,10 @@
 import { spawnSync } from 'node:child_process';
-import { join, relative } from 'node:path';
+import os from 'node:os';
+import path from 'node:path';
 import { ESLint } from 'eslint';
-import { CWD as PROJECT_CWD } from '../src/utils.js';
+import { CWD as PROJECT_CWD, slash } from '../src/utils.js';
 
-const CWD = join(PROJECT_CWD, '..', '..');
+const CWD = path.join(PROJECT_CWD, '..', '..');
 
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: ESLint.LintResult & { fatalErrorCount: number }) => {
@@ -18,7 +19,11 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 }
 
 function getFlatESLintOutput(cwd: string): ESLint.LintResult[] {
-  const { stdout, stderr } = spawnSync('eslint', ['--format', 'json', '.'], { cwd });
+  const { stdout, stderr } = spawnSync('eslint', ['--format', 'json', '.'], {
+    cwd,
+    // For Windows, otherwise `stdout` and `stderr` are `null`
+    shell: os.platform() === 'win32',
+  });
 
   return parseESLintOutput({ stdout, stderr });
 }
@@ -30,6 +35,8 @@ function getLegacyESLintOutput(cwd: string): ESLint.LintResult[] {
     {
       cwd,
       env: { ...process.env, ESLINT_USE_FLAT_CONFIG: 'false' },
+      // For Windows, otherwise `stdout` and `stderr` are `null`
+      shell: os.platform() === 'win32',
     },
   );
 
@@ -46,10 +53,15 @@ function parseESLintOutput({
   const errorOutput = stderr
     .toString()
     .replace(
-      /\(node:\d{4,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      /\(node:\d+\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      '',
+    )
+    .replace(
+      /\(node:\d+\) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support will be removed in v10.0.0. Please migrate to an eslint.config.js file. See https:\/\/eslint.org\/docs\/latest\/use\/configure\/migration-guide for details./,
       '',
     )
     .replace('(Use `node --trace-deprecation ...` to show where the warning was created)', '')
+    .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
     .trimEnd();
   if (errorOutput) {
     throw new Error(errorOutput);
@@ -63,7 +75,7 @@ function parseESLintOutput({
 function normalizeResults(results: ESLint.LintResult[]) {
   return results
     .map(result => ({
-      filePath: relative(CWD, result.filePath),
+      filePath: slash(path.relative(CWD, result.filePath)),
       messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
@@ -71,52 +83,54 @@ function normalizeResults(results: ESLint.LintResult[]) {
 
 describe('Examples', () => {
   it('should work programmatically', () => {
-    const cwd = join(CWD, 'examples/programmatic');
+    const cwd = path.join(CWD, 'examples', 'programmatic');
     testESLintOutput(cwd, 6);
   });
 
   it('should work on `.js` files', () => {
-    const cwd = join(CWD, 'examples/code-file');
+    const cwd = path.join(CWD, 'examples', 'code-file');
     testESLintOutput(cwd, 4);
   });
 
   it('should work with `graphql-config`', () => {
-    const cwd = join(CWD, 'examples/graphql-config');
+    const cwd = path.join(CWD, 'examples', 'graphql-config');
     testESLintOutput(cwd, 2);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
-    const cwd = join(CWD, 'examples/prettier');
+    const cwd = path.join(CWD, 'examples', 'prettier');
     testESLintOutput(cwd, 23);
   });
 
   it('should work in monorepo', () => {
-    const cwd = join(CWD, 'examples/monorepo');
+    const cwd = path.join(CWD, 'examples', 'monorepo');
     testESLintOutput(cwd, 11);
   });
 
   it('should work in svelte', () => {
-    const cwd = join(CWD, 'examples/svelte-code-file');
+    const cwd = path.join(CWD, 'examples', 'svelte-code-file');
     testESLintOutput(cwd, 2);
   });
 
   it('should work in vue', () => {
-    const cwd = join(CWD, 'examples/vue-code-file');
+    const cwd = path.join(CWD, 'examples', 'vue-code-file');
     testESLintOutput(cwd, 2);
   });
 
   it('should work in multiple projects', () => {
-    const cwd = join(CWD, 'examples/multiple-projects-graphql-config');
+    const cwd = path.join(CWD, 'examples', 'multiple-projects-graphql-config');
     testESLintOutput(cwd, 4);
   });
 });
 
 function testESLintOutput(cwd: string, errorCount: number): void {
   const flatResults = getFlatESLintOutput(cwd);
-  expect(countErrors(flatResults)).toBe(errorCount);
-  expect(normalizeResults(flatResults)).toMatchSnapshot();
-
   const results = getLegacyESLintOutput(cwd);
+  // Windows has some offset for `range`, I think due \r\n handling
+  if (os.platform() !== 'win32') {
+    expect(normalizeResults(flatResults)).toMatchSnapshot();
+    expect(normalizeResults(results)).toMatchSnapshot();
+  }
+  expect(countErrors(flatResults)).toBe(errorCount);
   expect(countErrors(results)).toBe(errorCount);
-  expect(normalizeResults(results)).toMatchSnapshot();
 }
