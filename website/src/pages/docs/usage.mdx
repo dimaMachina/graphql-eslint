@@ -1,0 +1,106 @@
+import AstroIcon from '@/icons/astro.svg'
+import GearIcon from '@/icons/gear.svg'
+import GraphQLIcon from '@/icons/graphql.svg'
+import HalfIcon from '@/icons/half.svg'
+import JSIcon from '@/icons/javascript.svg'
+import PrettierIcon from '@/icons/prettier.svg'
+import StackIcon from '@/icons/stack.svg'
+import SvelteIcon from '@/icons/svelte.svg'
+import VueIcon from '@/icons/vue.svg'
+import { Callout, Cards, Steps } from '@theguild/components'
+
+# Getting Started
+
+## Quickstart
+
+<Steps>
+
+### Installation
+
+Install the plugin package with your favourite package manager.
+
+```sh npm2yarn
+npm i -D @graphql-eslint/eslint-plugin
+```
+
+<Callout type="warning">
+  Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
+</Callout>
+
+### Configuration
+
+Create a new
+[configuration object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects)
+in your `eslint.config.js` file to setup `@graphql-eslint` plugin.
+
+```js filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  // ...other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': {
+        rules: graphqlPlugin.rules
+      }
+    }
+  }
+]
+```
+
+</Steps>
+
+## Usage
+
+### Basic
+
+<Cards num={2} className="[&_svg]:shrink-0 [&_svg]:self-start">
+  <Cards.Card
+    icon={<GraphQLIcon />}
+    title="Usage with `.graphql` files"
+    href="/usage/graphql"
+    arrow
+  />
+  <Cards.Card
+    icon={<JSIcon />}
+    title="Usage with code files `.js/.jsx`"
+    href="/usage/code-files"
+    arrow
+  />
+  <Cards.Card
+    icon={<HalfIcon />}
+    title="Usage to lint both schema/documents"
+    href="/usage/schema-and-documents"
+    arrow
+  />
+  <Cards.Card
+    icon={<StackIcon />}
+    title="Usage to lint different schemas"
+    href="/usage/prettier"
+    arrow
+  />
+  <Cards.Card icon={<GearIcon />} title="Programmatic usage" href="/usage/programmatic" arrow />
+</Cards>
+
+### Advanced
+
+<Cards num={2}>
+  <Cards.Card icon={<SvelteIcon />} title="Usage with `.svelte` files" href="/usage/svelte" arrow />
+  <Cards.Card icon={<VueIcon />} title="Usage with `.vue` files" href="/usage/vue" arrow />
+  <Cards.Card
+    icon={<AstroIcon className="dark:fill-white" />}
+    title="Usage with `.astro` files"
+    href="/usage/astro"
+    arrow
+  />
+  <Cards.Card
+    icon={<PrettierIcon />}
+    title="Usage with `eslint-plugin-prettier`"
+    href="/usage/prettier"
+    arrow
+  />
+</Cards>
