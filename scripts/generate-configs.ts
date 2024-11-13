@@ -41,8 +41,9 @@ export = ${JSON.stringify(code)}`;
   console.log(`✅  ${chalk.green(filePath)} file generated`);
 };
 
-const ruleFilenames = readdirSync(join(SRC_PATH, 'rules'))
-  .filter(filename => !IGNORE_FILES.includes(filename))
+const ruleFilenames = readdirSync(join(SRC_PATH, 'rules')).filter(
+  filename => !IGNORE_FILES.includes(filename),
+);
 
 async function generateRules(): Promise<void> {
   const code = [
