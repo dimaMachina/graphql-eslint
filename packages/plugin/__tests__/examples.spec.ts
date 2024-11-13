@@ -118,6 +118,9 @@ function testESLintOutput(cwd: string, errorCount: number): void {
   const flatResults = getFlatESLintOutput(cwd);
   expect(countErrors(flatResults)).toBe(errorCount);
   const results = getLegacyESLintOutput(cwd);
+  if (cwd.endsWith('multiple-projects-graphql-config')) {
+    console.log(results)
+  }
   expect(countErrors(results)).toBe(errorCount);
   // Windows has some offset for `range`, disable temporarily
   if (os.platform() !== 'win32') {
