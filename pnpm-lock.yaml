@@ -59,8 +59,8 @@ importers:
         specifier: 6.3.1
         version: 6.3.1(eslint@9.14.0(patch_hash=t64n7kxodazs6lnwu42sgf5voe)(jiti@2.4.0))
       eslint-plugin-tailwindcss:
-        specifier: 3.17.5
-        version: 3.17.5(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.14)
+        specifier: 3.17.3
+        version: 3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.14)
       husky:
         specifier: 9.1.6
         version: 9.1.6
@@ -4280,8 +4280,8 @@ packages:
     peerDependencies:
       eslint: ^8.0.0 || ^9.0.0
 
-  eslint-plugin-tailwindcss@3.17.5:
-    resolution: {integrity: sha512-8Mi7p7dm+mO1dHgRHHFdPu4RDTBk69Cn4P0B40vRQR+MrguUpwmKwhZy1kqYe3Km8/4nb+cyrCF+5SodOEmaow==}
+  eslint-plugin-tailwindcss@3.17.3:
+    resolution: {integrity: sha512-DVMVVUFQ+lPraRSuUk2I41XMnusXT6b3WaQZYlUHduULnERaqe9sNfmpRY1IyxlzmKoQxSbZ8IHRhl9ePo8PeA==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       tailwindcss: ^3.4.0
@@ -12773,7 +12773,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-tailwindcss@3.17.5(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.14):
+  eslint-plugin-tailwindcss@3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.14):
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.48
