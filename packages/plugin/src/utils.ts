@@ -46,7 +46,7 @@ export const logger = {
     console.warn(chalk.yellow('warning'), '[graphql-eslint]', ...args),
 };
 
-export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
+export const normalizePath = (path: string): string => path.replace(/\\/g, '/');
 
 export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
 
