@@ -1,11 +1,11 @@
-# Linting GraphQL in Vue
+# Usage with `.vue` files
 
 `graphql-eslint` can lint GraphQL documents inside Vue Single-File Components (.vue files). It does this in two steps: (1) extract the GraphQL documents from the Vue (or js/ts) file, and (2) lint the extracted GraphQL documents.
 
 If you don't embed GraphQL documents in your Vue files, you can skip this page.
 
 <Callout type="warning">
-  Due to [a limitation in graphql-tag-pluck](https://github.com/dimaMachina/graphql-eslint/issues/2103), lint violations will show up at the top of the Vue document, on the first character, not inline. 
+  Due to [a limitation in graphql-tag-pluck](https://github.com/dimaMachina/graphql-eslint/issues/2103), lint violations will show up at the top of the Vue document, on the first character, not inline.
 </Callout>
 
 ## Configuration
