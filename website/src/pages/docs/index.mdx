@@ -8,7 +8,10 @@ description: What's GraphQL-ESLint, key features and helpful resources.
 This project integrates GraphQL and ESLint, for a better developer experience.
 
 <video autoPlay loop muted playsInline>
-  <source src="/demo.mp4" type="video/mp4" />
+  <source
+    src={(process.env.NODE_ENV === 'production' ? 'eslint' : '') + '/demo.mp4'}
+    type="video/mp4"
+  />
 </video>
 
 <p className="mt-3 text-center text-sm italic">Demo GraphQL-ESLint in VSCode</p>
