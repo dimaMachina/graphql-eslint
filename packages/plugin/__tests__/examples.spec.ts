@@ -1,9 +1,9 @@
 import { spawnSync } from 'node:child_process';
-import { join, relative } from 'node:path';
+import path from 'node:path';
 import { ESLint } from 'eslint';
 import { CWD as PROJECT_CWD } from '../src/utils.js';
 
-const CWD = join(PROJECT_CWD, '..', '..');
+const CWD = path.join(PROJECT_CWD, '..', '..');
 
 function countErrors(results: ESLint.LintResult[]): number {
   return results.reduce<number>((acc, curr: ESLint.LintResult & { fatalErrorCount: number }) => {
@@ -19,8 +19,9 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
+  console.log({ cwd, stderr, stdout })
   const errorOutput = stderr
-    ?.toString()
+    .toString()
     .replace(
       /\(node:\d{4,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
       '',
@@ -39,7 +40,7 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
 function testSnapshot(results: ESLint.LintResult[]): void {
   const normalizedResults = results
     .map(result => ({
-      filePath: relative(CWD, result.filePath),
+      filePath: path.relative(CWD, result.filePath),
       messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
@@ -49,56 +50,56 @@ function testSnapshot(results: ESLint.LintResult[]): void {
 
 describe('Examples', () => {
   it('should work programmatically', () => {
-    const cwd = join(CWD, 'examples', 'programmatic');
+    const cwd = path.join(CWD, 'examples', 'programmatic');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(6);
     testSnapshot(results);
   });
 
   it('should work on `.js` files', () => {
-    const cwd = join(CWD, 'examples', 'code-file');
+    const cwd = path.join(CWD, 'examples', 'code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(4);
     testSnapshot(results);
   });
 
   it('should work with `graphql-config`', () => {
-    const cwd = join(CWD, 'examples', 'graphql-config');
+    const cwd = path.join(CWD, 'examples', 'graphql-config');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
-    const cwd = join(CWD, 'examples', 'prettier');
+    const cwd = path.join(CWD, 'examples', 'prettier');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(23);
     testSnapshot(results);
   });
 
   it('should work in monorepo', () => {
-    const cwd = join(CWD, 'examples', 'monorepo');
+    const cwd = path.join(CWD, 'examples', 'monorepo');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(11);
     testSnapshot(results);
   });
 
   it('should work in svelte', () => {
-    const cwd = join(CWD, 'example', 'svelte-code-file');
+    const cwd = path.join(CWD, 'example', 'svelte-code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work in vue', () => {
-    const cwd = join(CWD, 'examples', 'vue-code-file');
+    const cwd = path.join(CWD, 'examples', 'vue-code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work in multiple projects', () => {
-    const cwd = join(CWD, 'examples', 'multiple-projects-graphql-config');
+    const cwd = path.join(CWD, 'examples', 'multiple-projects-graphql-config');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(4);
     testSnapshot(results);
