@@ -8,18 +8,18 @@ If you don't embed GraphQL documents in your Vue files, you can skip this page.
 
 <Callout type="warning">
   Due to [a limitation in
-  graphql-tag-pluck](https://github.com/dimaMachina/graphql-eslint/issues/2103), lint violations
+  `graphql-tag-pluck`](https://github.com/dimaMachina/graphql-eslint/issues/2103), lint violations
   will show up at the top of the Vue document, on the first character, not inline.
 </Callout>
 
 ## Configuration
 
 Add the following configuration to your `eslint.config.js` file to setup `@graphql-eslint` plugin.
-The intermediate graphql files always have the .graphql extension. Make sure the second block
-matches those files, even if you use another extension for your project's GraphQL (e.g. .gql).
+The intermediate graphql files always have the `.graphql` extension. Make sure the second block
+matches those files, even if you use another extension for your project's GraphQL (e.g. `.gql`).
 
 <Callout type="warning">
-  Make sure the first section, which extracts GrahpQL from Vue files, comes **before** any other Vue
+  Make sure the first section, which extracts GraphQL from Vue files, comes **before** any other Vue
   rules. Otherwise, eslint may incorrectly rewrite all error messages to say only "clear."
 </Callout>
 

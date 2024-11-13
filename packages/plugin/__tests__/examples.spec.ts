@@ -49,10 +49,15 @@ function parseESLintOutput({
   const errorOutput = stderr
     .toString()
     .replace(
-      /\(node:\d{3,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      /\(node:\d+\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      '',
+    )
+    .replace(
+      /\(node:\d+\) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support will be removed in v10.0.0. Please migrate to an eslint.config.js file. See https:\/\/eslint.org\/docs\/latest\/use\/configure\/migration-guide for details./,
       '',
     )
     .replace('(Use `node --trace-deprecation ...` to show where the warning was created)', '')
+    .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
     .trimEnd();
   if (errorOutput) {
     throw new Error(errorOutput);
@@ -119,7 +124,7 @@ function testESLintOutput(cwd: string, errorCount: number): void {
   expect(countErrors(flatResults)).toBe(errorCount);
   const results = getLegacyESLintOutput(cwd);
   if (cwd.endsWith('multiple-projects-graphql-config')) {
-    console.log(results)
+    console.log(results);
   }
   expect(countErrors(results)).toBe(errorCount);
   // Windows has some offset for `range`, disable temporarily
