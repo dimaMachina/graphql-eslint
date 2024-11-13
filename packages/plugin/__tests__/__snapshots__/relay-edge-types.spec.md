@@ -31,8 +31,7 @@ exports[`relay-edge-types > invalid > Edge type must be Object type 1`] = `
 
     {
       "shouldImplementNode": false,
-      "listTypeCanWrapOnlyEdgeType": false,
-      "withEdgeSuffix": true
+      "listTypeCanWrapOnlyEdgeType": false
     }
 
 #### ❌ Error 1/4
@@ -84,9 +83,7 @@ exports[`relay-edge-types > invalid > list type 1`] = `
 #### ⚙️ Options
 
     {
-      "listTypeCanWrapOnlyEdgeType": true,
-      "withEdgeSuffix": true,
-      "shouldImplementNode": true
+      "listTypeCanWrapOnlyEdgeType": true
     }
 
 #### ❌ Error 1/4
@@ -135,9 +132,7 @@ exports[`relay-edge-types > invalid > should implements Node 1`] = `
 #### ⚙️ Options
 
     {
-      "shouldImplementNode": true,
-      "withEdgeSuffix": true,
-      "listTypeCanWrapOnlyEdgeType": true
+      "shouldImplementNode": true
     }
 
 #### ❌ Error
@@ -165,8 +160,7 @@ exports[`relay-edge-types > invalid > should report cursor when list is used 1`]
 
     {
       "shouldImplementNode": false,
-      "listTypeCanWrapOnlyEdgeType": false,
-      "withEdgeSuffix": true
+      "listTypeCanWrapOnlyEdgeType": false
     }
 
 #### ❌ Error 1/2
@@ -224,9 +218,7 @@ exports[`relay-edge-types > invalid > should report when without Edge suffix 1`]
 #### ⚙️ Options
 
     {
-      "withEdgeSuffix": true,
-      "shouldImplementNode": true,
-      "listTypeCanWrapOnlyEdgeType": true
+      "withEdgeSuffix": true
     }
 
 #### ❌ Error

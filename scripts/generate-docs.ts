@@ -51,7 +51,8 @@ function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]
 const MARKDOWN_LINK_RE = /\[(.*?)]\(.*\)/;
 
 async function generateDocs(): Promise<void> {
-  const prettierConfig = await prettier.resolveConfig('./docs/README.md');
+  const prettierConfigMd = await prettier.resolveConfig('./README.md');
+  const prettierConfigTs = await prettier.resolveConfig('./_meta.ts');
 
   const result = Object.entries(rules).map(async ([ruleName, rule]) => {
     const blocks: string[] = [
@@ -228,7 +229,7 @@ async function generateDocs(): Promise<void> {
       path,
       await prettier.format(content, {
         parser: 'markdown',
-        ...prettierConfig,
+        ...prettierConfigMd,
       }),
     );
   }
@@ -283,7 +284,7 @@ async function generateDocs(): Promise<void> {
     resolve(RULES_PATH, '_meta.ts'),
     await prettier.format('export default ' + JSON.stringify(metaJson), {
       parser: 'typescript',
-      ...prettierConfig,
+      ...prettierConfigTs,
     }),
   );
 
