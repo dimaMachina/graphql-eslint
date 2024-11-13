@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { rule as noAnonymousOperations } from '../src/rules/no-anonymous-operations.js';
-import { rule as noTypenamePrefix } from '../src/rules/no-typename-prefix.js';
+import { rule as noAnonymousOperations } from '@/rules/no-anonymous-operations/index.js';
+import { rule as noTypenamePrefix } from '@/rules/no-typename-prefix/index.js';
 import { ruleTester } from './test-utils.js';
 
 ruleTester.run('no-typename-prefix', noTypenamePrefix, {
