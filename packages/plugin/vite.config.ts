@@ -8,6 +8,8 @@ export default defineConfig({
   test: {
     globals: true,
     resolveSnapshotPath: testPath =>
+      // @ts-expect-error
+      console.log({testPath}) ||
       testPath.replace('__tests__/', '__tests__/__snapshots__/').replace(/\.ts$/, '.md'),
     setupFiles: ['./serializer.ts'],
     alias: {

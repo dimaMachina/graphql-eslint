@@ -48,7 +48,7 @@ describe('schema', async () => {
       () =>
         new Promise(resolve => {
           const tsNodeCommand = path.resolve(CWD, '..', '..', 'node_modules', '.bin', 'tsx');
-          const serverPath = path.resolve(__dirname, 'mocks/graphql-server.ts');
+          const serverPath = path.resolve(__dirname, 'mocks', 'graphql-server.ts');
 
           // Import `TestGraphQLServer` and run it in this file will don't work
           // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
