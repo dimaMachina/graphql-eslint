@@ -19,11 +19,12 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], {
-    cwd, // .replaceAll('\\', '/'),
+    cwd,
+    shell: true,
   });
   console.log({ stdout, stderr, cwd });
   const errorOutput = stderr
-    ?.toString()
+    .toString()
     .replace(
       /\(node:\d{4,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
       '',
@@ -33,7 +34,7 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   if (errorOutput) {
     throw new Error(errorOutput);
   }
-  const output = stdout?.toString() || '';
+  const output = stdout.toString();
   const start = output.indexOf('[{');
   const end = output.lastIndexOf('}]') + 2;
   return JSON.parse(output.slice(start, end));
