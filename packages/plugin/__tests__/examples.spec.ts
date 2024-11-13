@@ -19,7 +19,6 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], { cwd });
-  console.log({ cwd, stderr, stdout })
   const errorOutput = stderr
     .toString()
     .replace(
@@ -85,7 +84,7 @@ describe('Examples', () => {
   });
 
   it('should work in svelte', () => {
-    const cwd = path.join(CWD, 'example', 'svelte-code-file');
+    const cwd = path.join(CWD, 'examples', 'svelte-code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
