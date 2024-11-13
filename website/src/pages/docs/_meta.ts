@@ -1,5 +1,7 @@
 export default {
   index: '',
+  'getting-started': '',
+  'parser-options': '',
   usage: '',
   '---1': {
     type: 'separator',
@@ -14,8 +16,4 @@ export default {
   },
   parser: '',
   'custom-rules': '',
-  '---3': {
-    type: 'separator',
-  },
-  'getting-started': '',
 };
