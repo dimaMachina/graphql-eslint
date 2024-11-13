@@ -19,7 +19,7 @@ describe('schema', async () => {
 
     const sdlString = printSchema(graphQLSchema as GraphQLSchema);
 
-    expect(sdlString.trim()).toBe(schemaOnDisk.replaceAll('\\r\\n', '\\n').trim());
+    expect(sdlString.trim()).toBe(schemaOnDisk.replaceAll('\r\n', '\n').trim());
   };
 
   describe('GraphQLFileLoader', () => {
