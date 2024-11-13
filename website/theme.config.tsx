@@ -1,5 +1,5 @@
 /* eslint sort-keys: error */
-import { defineConfig, PRODUCTS } from '@theguild/components';
+import { Callout, defineConfig, PRODUCTS } from '@theguild/components';
 
 export default defineConfig({
   backgroundColor: {
@@ -28,4 +28,13 @@ export default defineConfig({
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
   logo: <PRODUCTS.ESLINT.logo />,
   websiteName: 'GraphQL-ESLint',
+  components: {
+    WIP() {
+      return (
+        <Callout type="warning" emoji="🚧">
+          This page is under construction. Help us improve the content by submitting a PR.
+        </Callout>
+      );
+    },
+  },
 });

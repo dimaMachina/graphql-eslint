@@ -125,15 +125,13 @@ describe('Examples', () => {
 
 function testESLintOutput(cwd: string, errorCount: number): void {
   const flatResults = getFlatESLintOutput(cwd);
+  if (cwd.includes('multiple-projects-graphql-config')) {
+    console.log({ cwd })
+    console.dir(flatResults, { depth:null });
+  }
+  expect(normalizeResults(flatResults)).toMatchSnapshot();
   expect(countErrors(flatResults)).toBe(errorCount);
   const results = getLegacyESLintOutput(cwd);
-  if (cwd.endsWith('multiple-projects-graphql-config')) {
-    console.log(results);
-  }
   expect(countErrors(results)).toBe(errorCount);
-  // Windows has some offset for `range`, disable temporarily
-  if (os.platform() !== 'win32') {
-    expect(normalizeResults(flatResults)).toMatchSnapshot();
-    expect(normalizeResults(results)).toMatchSnapshot();
-  }
+  expect(normalizeResults(results)).toMatchSnapshot();
 }
