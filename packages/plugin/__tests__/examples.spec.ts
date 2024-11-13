@@ -126,8 +126,8 @@ describe('Examples', () => {
 function testESLintOutput(cwd: string, errorCount: number): void {
   const flatResults = getFlatESLintOutput(cwd);
   if (cwd.includes('multiple-projects-graphql-config')) {
-    console.log({ cwd })
-    console.dir(flatResults, { depth:null });
+    console.log({ cwd });
+    console.dir(flatResults, { depth: null });
   }
   expect(normalizeResults(flatResults)).toMatchSnapshot();
   expect(countErrors(flatResults)).toBe(errorCount);

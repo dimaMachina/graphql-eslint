@@ -41,22 +41,23 @@ describe('schema', async () => {
     });
   });
 
-  describe('UrlLoader', () => {
+  const isWindows = os.platform() === 'win32';
+  const describeOrSkip = isWindows ? describe.skip : describe;
+
+  describeOrSkip('UrlLoader', () => {
     let local: ChildProcessWithoutNullStreams;
     let url: string;
 
     beforeAll(() => {
       const { promise, resolve, reject } = Promise.withResolvers<void>();
 
-      const tsNodeCommand = path.resolve(CWD, '..', '..', 'node_modules', '.bin', 'tsx');
+      const tsxCommand = path.resolve(CWD, '..', '..', 'node_modules', '.bin', 'tsx');
       const serverPath = path.resolve(__dirname, 'mocks', 'graphql-server.ts');
 
       // Import `TestGraphQLServer` and run it in this file will don't work
       // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
       // `child_process.execFileSync` that block Node.js event loop
-      local = spawn(tsNodeCommand, [serverPath], {
-        shell: os.platform() === 'win32',
-      });
+      local = spawn(tsxCommand, [serverPath]);
       local.stdout.on('data', chunk => {
         url = chunk.toString().trimEnd();
         resolve();
