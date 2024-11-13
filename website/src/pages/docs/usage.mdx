@@ -37,16 +37,14 @@ in your `eslint.config.js` file to setup `@graphql-eslint` plugin.
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 
 export default [
-  // ...other config
+  // ... other config
   {
     files: ['**/*.graphql'],
     languageOptions: {
       parser: graphqlPlugin.parser
     },
     plugins: {
-      '@graphql-eslint': {
-        rules: graphqlPlugin.rules
-      }
+      '@graphql-eslint': graphqlPlugin
     }
   }
 ]
@@ -80,7 +78,7 @@ export default [
   <Cards.Card
     icon={<StackIcon />}
     title="Usage to lint different schemas"
-    href="/usage/prettier"
+    href="/usage/multiple-projects"
     arrow
   />
   <Cards.Card icon={<GearIcon />} title="Programmatic usage" href="/usage/programmatic" arrow />

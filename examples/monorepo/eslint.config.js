@@ -1,8 +1,6 @@
 import js from '@eslint/js';
 import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 
-const SCHEMA_PATH = 'server/**/*.gql';
-
 export default [
   {
     files: ['**/*.{js,tsx}'],
@@ -27,14 +25,12 @@ export default [
       parser: graphqlPlugin.parser,
     },
     plugins: {
-      '@graphql-eslint': {
-        rules: graphqlPlugin.rules,
-      },
+      '@graphql-eslint': graphqlPlugin,
     },
   },
   {
     // Setup recommended config for schema files
-    files: [SCHEMA_PATH],
+    files: ['server/**/*.gql'],
     rules: graphqlPlugin.configs['flat/schema-recommended'].rules,
   },
   {
