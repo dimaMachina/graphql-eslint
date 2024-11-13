@@ -23,6 +23,7 @@ export const checkNode = (
   const conflictingDocuments = siblingDocuments.filter(f => {
     const isSameName = f.document.name?.value === documentName;
     const isSamePath = slash(f.filePath) === slash(filepath);
+    console.log({ isSameName }, [slash(f.filePath), slash(filepath)]);
     return isSameName && !isSamePath;
   });
 
