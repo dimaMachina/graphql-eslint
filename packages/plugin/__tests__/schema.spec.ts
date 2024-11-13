@@ -1,5 +1,6 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { GraphQLSchema, printSchema } from 'graphql';
 import { loadGraphQLConfig } from '../src/graphql-config.js';
@@ -54,7 +55,7 @@ describe('schema', async () => {
       // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
       // `child_process.execFileSync` that block Node.js event loop
       local = spawn(tsNodeCommand, [serverPath], {
-        shell: true
+        shell: os.platform() === 'win32',
       });
       local.stdout.on('data', chunk => {
         url = chunk.toString().trimEnd();
