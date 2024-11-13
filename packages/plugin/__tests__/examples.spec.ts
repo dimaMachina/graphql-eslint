@@ -43,7 +43,7 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
 function testSnapshot(results: ESLint.LintResult[]): void {
   const normalizedResults = results
     .map(result => ({
-      filePath: path.posix.relative(CWD, result.filePath),
+      filePath: path.relative(CWD, result.filePath).replaceAll('\\', '/'),
       messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
