@@ -1,1 +1,69 @@
 # Usage with `.vue` files
+
+`graphql-eslint` can lint GraphQL documents inside Vue Single-File Components (.vue files). It does
+this in two steps: (1) extract the GraphQL documents from the Vue (or js/ts) file, and (2) lint the
+extracted GraphQL documents.
+
+If you don't embed GraphQL documents in your Vue files, you can skip this page.
+
+<Callout type="warning">
+  Due to [a limitation in
+  graphql-tag-pluck](https://github.com/dimaMachina/graphql-eslint/issues/2103), lint violations
+  will show up at the top of the Vue document, on the first character, not inline.
+</Callout>
+
+## Configuration
+
+Add the following configuration to your `eslint.config.js` file to setup `@graphql-eslint` plugin.
+The intermediate graphql files always have the .graphql extension. Make sure the second block
+matches those files, even if you use another extension for your project's GraphQL (e.g. .gql).
+
+<Callout type="warning">
+  Make sure the first section, which extracts GrahpQL from Vue files, comes **before** any other Vue
+  rules. Otherwise, eslint may incorrectly rewrite all error messages to say only "clear."
+</Callout>
+
+```js filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  {
+    // NOTE: Order matters! This has to happen FIRST, before any block that
+    // includes the Vue parser (including e.g. recommended Vue ESLint rules).
+    // It also has to be before the .graphql block, below
+    //
+    // Extract GraphQL from files for linting -- this creates .graphql files
+    // that are then linted below
+    //
+    // graphql-eslint scans all files (using the processor lsited) and outputs
+    // an intermediate file with the extracted GraphQL. That intermediate file
+    // is then linted, generating the errors we see. The intermediate file has
+    // a fixed .graphql extension, so you need to include that extension below
+    // or these files won't be linted.
+    files: ['**/*.js', '**/*.ts', '**/*.vue'],
+    processor: graphqlPlugin.processor
+    // NOTE: While you CAN put rules here to affect JS/TS/Vue files, those
+    // rules won't affect GraphQL. To modify rules that effect GrahpQL inside
+    // these files, add those to the block for .graphql files, below.
+  },
+  // ...other config
+  {
+    // Lint all GraphQL files, including the intermediate ones above. If you
+    // want to tune the rules that appear in your files, even Vue/JS/TS files,
+    // put those rule changes HERE
+    files: ['**/*.graphql'], // Add .gql extension if you use that
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+
+    // Any rule overrides for GraphQL go HERE. For example, to enable
+    // recommended operations rules
+    plugins: { '@graphql-eslint': graphqlPlugin },
+    rules: {
+      ...graphqlESLint.configs['flat/operations-recommended'].rules
+      // Can also override the recommended rules here, e.g.:
+      // "@graphql-eslint/naming-convention": ["off"],
+    }
+  }
+]
+```
