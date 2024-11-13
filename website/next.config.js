@@ -31,7 +31,7 @@ export default withGuildDocs({
       eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js'),
       '@graphql-eslint/eslint-plugin': require
         .resolve('@graphql-eslint/eslint-plugin')
-        .replace('cjs/index.js', 'index.browser.js'),
+        .replace(/cjs[\/\\]index\.js$/, 'index.browser.js'),
 
       // fixes Cannot use GraphQLNonNull "Boolean!" from another module or realm.
       'graphql/utilities/valueFromASTUntyped.js': require.resolve(
@@ -40,20 +40,6 @@ export default withGuildDocs({
       'graphql/validation/index.js': require.resolve('graphql/validation'),
       'graphql/validation/validate.js': require.resolve('graphql/validation/validate'),
       graphql: require.resolve('graphql'),
-      // For Windows
-      '@vue/compiler-sfc': false,
-      '@graphql-tools/graphql-tag-pluck': false,
-      'graphql-config': false,
-      velocityjs: false,
-      'dustjs-linkedin': false,
-      atpl: false,
-      liquor: false,
-      twig: false,
-      ejs: false,
-      eco: false,
-      jazz: false,
-      jqtpl: false,
-      hamljs: false
     };
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
