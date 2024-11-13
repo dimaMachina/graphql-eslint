@@ -45,7 +45,7 @@ export default defineConfig({
             href={`https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/eslint.config.js`}
           >
             ESLint Flat Config
-          </Anchor>
+          </Anchor>{' '}
           or{' '}
           <Anchor
             href={`https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/.eslintrc.cjs`}
