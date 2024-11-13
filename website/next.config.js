@@ -41,11 +41,17 @@ export default withGuildDocs({
       'graphql/validation/validate.js': require.resolve('graphql/validation/validate'),
       graphql: require.resolve('graphql'),
       // For Windows
+      '@vue/compiler-sfc': false,
       velocityjs: false,
       'dustjs-linkedin': false,
       atpl: false,
       liquor: false,
       twig: false,
+      ejs: false,
+      eco: false,
+      jazz: false,
+      jqtpl: false,
+      hamljs: false
     };
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {

@@ -49,6 +49,7 @@ export const logger = {
 export const slash = (path: string): string => path.replaceAll('\\', '/');
 
 // Match slash or backslash for Windows
+// eslint-disable-next-line no-useless-escape
 export const VIRTUAL_DOCUMENT_REGEX = /[\/\\]\d+_document.graphql$/;
 
 export const CWD = process.cwd();
