@@ -31,6 +31,8 @@ export default withGuildDocs({
       eslint: require.resolve('eslint').replace('lib/api.js', 'lib/linter/index.js'),
       '@graphql-eslint/eslint-plugin': require
         .resolve('@graphql-eslint/eslint-plugin')
+        // Match slash or backslash for Windows
+        // eslint-disable-next-line no-useless-escape
         .replace(/cjs[\/\\]index\.js$/, 'index.browser.js'),
 
       // fixes Cannot use GraphQLNonNull "Boolean!" from another module or realm.
