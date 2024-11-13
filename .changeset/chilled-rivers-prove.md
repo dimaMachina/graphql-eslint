@@ -2,13 +2,13 @@
 '@graphql-eslint/eslint-plugin': major
 ---
 
-1. graphql plugin can now we specified with
+1. graphql plugin can now we be specified as
 
 ```js
-plugins: { '@graphql-eslint': graphqlPlugin },
+plugins: { '@graphql-eslint': graphqlPlugin }
 ```
 
-1. config rules now should be specified with accessing `rules` property
+1. Config rules should now be accessed through the `rules` property
 
 ```diff
   rules: {
@@ -22,7 +22,7 @@ plugins: { '@graphql-eslint': graphqlPlugin },
 processor: graphqlPlugin.processor
 ```
 
-1. plugin can now be imported with default import
+1. The plugin can now be imported using a default import
 
 ```js
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
