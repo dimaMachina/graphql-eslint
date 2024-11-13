@@ -53,7 +53,9 @@ describe('schema', async () => {
       // Import `TestGraphQLServer` and run it in this file will don't work
       // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
       // `child_process.execFileSync` that block Node.js event loop
-      local = spawn(tsNodeCommand, [serverPath]);
+      local = spawn(tsNodeCommand, [serverPath], {
+        shell: true
+      });
       local.stdout.on('data', chunk => {
         url = chunk.toString().trimEnd();
         resolve();
