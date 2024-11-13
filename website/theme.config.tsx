@@ -2,14 +2,16 @@
 import { ComponentProps } from 'react';
 import { Callout, defineConfig, PRODUCTS } from '@theguild/components';
 
-function Anchor(props: ComponentProps<'a'>) {
+function Anchor({ children, ...props }: ComponentProps<'a'>) {
   return (
     <a
       target="_blank"
       rel="noreferrer"
       className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
       {...props}
-    />
+    >
+      {children}
+    </a>
   );
 }
 
@@ -28,14 +30,7 @@ export default defineConfig({
     dismissible: false,
   },
   components: {
-    WIP() {
-      return (
-        <Callout type="warning" emoji="🚧">
-          This page is under construction. Help us improve the content by submitting a PR.
-        </Callout>
-      );
-    },
-    // @ts-expect-error
+    // @ts-expect-error -- fixme
     OfficialExampleCallout({ gitFolder }: { gitFolder: string }) {
       return (
         <Callout type="info">
@@ -58,6 +53,13 @@ export default defineConfig({
             ESLint Legacy Config
           </Anchor>
           .
+        </Callout>
+      );
+    },
+    WIP() {
+      return (
+        <Callout type="warning" emoji="🚧">
+          This page is under construction. Help us improve the content by submitting a PR.
         </Callout>
       );
     },
