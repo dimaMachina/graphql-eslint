@@ -15,6 +15,7 @@ export default defineConfig({
       return testPath.replace('__tests__/', '__tests__/__snapshots__/').replace(/\.ts$/, '.md');
     },
     setupFiles: ['./serializer.ts'],
+    hookTimeout: 20_000,
     alias: {
       // fixes Duplicate "graphql" modules cannot be used at the same time since different
       'graphql/validation/index.js': path.join(GRAPHQL_PATH, 'validation', 'index.js'),

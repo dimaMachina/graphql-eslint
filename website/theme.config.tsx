@@ -14,6 +14,7 @@ export default defineConfig({
           href="https://074c6ee9.graphql-eslint.pages.dev/docs"
           target="_blank"
           rel="noreferrer"
+          // eslint-disable-next-line tailwindcss/no-custom-classname
           className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
         >
           here

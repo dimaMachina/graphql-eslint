@@ -2,9 +2,9 @@ import { Callout } from '@theguild/components'
 
 # Usage with `.vue` files
 
-`graphql-eslint` can lint GraphQL documents inside Vue Single-File Components (.vue files). It does
-this in two steps: (1) extract the GraphQL documents from the Vue (or js/ts) file, and (2) lint the
-extracted GraphQL documents.
+`graphql-eslint` can lint GraphQL documents inside Vue Single-File Components (`.vue` files). It
+does this in two steps: (1) extract the GraphQL documents from the Vue (or `.js`/`.ts`) file, and
+(2) lint the extracted GraphQL documents.
 
 If you don't embed GraphQL documents in your Vue files, you can skip this page.
 
@@ -37,7 +37,7 @@ export default [
     // Extract GraphQL from files for linting -- this creates .graphql files
     // that are then linted below
     //
-    // graphql-eslint scans all files (using the processor lsited) and outputs
+    // graphql-eslint scans all files (using the processor listed) and outputs
     // an intermediate file with the extracted GraphQL. That intermediate file
     // is then linted, generating the errors we see. The intermediate file has
     // a fixed .graphql extension, so you need to include that extension below
@@ -45,7 +45,7 @@ export default [
     files: ['**/*.js', '**/*.ts', '**/*.vue'],
     processor: graphqlPlugin.processor
     // NOTE: While you CAN put rules here to affect JS/TS/Vue files, those
-    // rules won't affect GraphQL. To modify rules that effect GrahpQL inside
+    // rules won't affect GraphQL. To modify rules that effect GraphQL inside
     // these files, add those to the block for .graphql files, below.
   },
   // ...other config
