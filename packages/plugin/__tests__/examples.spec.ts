@@ -20,9 +20,9 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], {
     cwd,
+    // For Windows, otherwise `stdout` and `stderr` are `null`
     shell: true,
   });
-  console.log({ stdout, stderr, cwd });
   const errorOutput = stderr
     .toString()
     .replace(
@@ -43,7 +43,7 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
 function testSnapshot(results: ESLint.LintResult[]): void {
   const normalizedResults = results
     .map(result => ({
-      filePath: path.relative(CWD, result.filePath),
+      filePath: path.relative(CWD, result.filePath.replaceAll('\\', '/')),
       messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
