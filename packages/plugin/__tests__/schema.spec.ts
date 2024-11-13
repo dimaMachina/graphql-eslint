@@ -1,5 +1,6 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { GraphQLSchema, printSchema } from 'graphql';
 import { loadGraphQLConfig } from '../src/graphql-config.js';
@@ -19,7 +20,7 @@ describe('schema', async () => {
 
     const sdlString = printSchema(graphQLSchema as GraphQLSchema);
 
-    expect(sdlString.trim()).toBe(schemaOnDisk.trim());
+    expect(sdlString.trim()).toBe(schemaOnDisk.replaceAll('\r\n', '\n').trim());
   };
 
   describe('GraphQLFileLoader', () => {
@@ -40,37 +41,39 @@ describe('schema', async () => {
     });
   });
 
-  describe('UrlLoader', () => {
+  const isWindows = os.platform() === 'win32';
+  const describeOrSkip = isWindows ? describe.skip : describe;
+
+  describeOrSkip('UrlLoader', () => {
     let local: ChildProcessWithoutNullStreams;
     let url: string;
 
-    beforeAll(
-      () =>
-        new Promise(resolve => {
-          const tsNodeCommand = path.resolve(CWD, '..', '..', 'node_modules', '.bin', 'tsx');
-          const serverPath = path.resolve(__dirname, 'mocks/graphql-server.ts');
+    beforeAll(() => {
+      const { promise, resolve, reject } = Promise.withResolvers<void>();
 
-          // Import `TestGraphQLServer` and run it in this file will don't work
-          // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
-          // `child_process.execFileSync` that block Node.js event loop
-          local = spawn(tsNodeCommand, [serverPath]);
-          local.stdout.on('data', chunk => {
-            url = chunk.toString().trimEnd();
-            resolve();
-          });
-          local.stderr.on('data', chunk => {
-            throw new Error(chunk.toString().trimEnd());
-          });
-        }),
-    );
+      const tsxCommand = path.resolve(CWD, '..', '..', 'node_modules', '.bin', 'tsx');
+      const serverPath = path.resolve(__dirname, 'mocks', 'graphql-server.ts');
 
-    afterAll(
-      () =>
-        new Promise(done => {
-          local.on('close', () => done());
-          local.kill();
-        }),
-    );
+      // Import `TestGraphQLServer` and run it in this file will don't work
+      // because `@graphql-tools/url-loader` under the hood uses `sync-fetch` package that uses
+      // `child_process.execFileSync` that block Node.js event loop
+      local = spawn(tsxCommand, [serverPath]);
+      local.stdout.on('data', chunk => {
+        url = chunk.toString().trimEnd();
+        resolve();
+      });
+      local.stderr.on('data', chunk => {
+        reject(chunk.toString().trimEnd());
+      });
+      return promise;
+    });
+
+    afterAll(() => {
+      const { promise, resolve } = Promise.withResolvers<void>();
+      local.on('close', resolve);
+      local.kill();
+      return promise;
+    });
 
     it('should load schema from URL', () => {
       testSchema(url);

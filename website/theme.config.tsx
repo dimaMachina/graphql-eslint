@@ -1,11 +1,15 @@
 /* eslint sort-keys: error */
-import { defineConfig, PRODUCTS } from '@theguild/components';
+import { Callout, defineConfig, PRODUCTS } from '@theguild/components';
 
 export default defineConfig({
+  backgroundColor: {
+    dark: '15,17,20',
+    light: '250,250,250',
+  },
   banner: {
     content: (
       <>
-        This docs for version 4 of plugin. For version 3 click{' '}
+        🚧 This is WIP documentation for v4 of the plugin. For v3 click{' '}
         <a
           href="https://074c6ee9.graphql-eslint.pages.dev/docs"
           target="_blank"
@@ -17,13 +21,19 @@ export default defineConfig({
         .
       </>
     ),
+    dismissible: false,
   },
-  backgroundColor: {
-    dark: '15,17,20',
-    light: '250,250,250',
+  components: {
+    WIP() {
+      return (
+        <Callout type="warning" emoji="🚧">
+          This page is under construction. Help us improve the content by submitting a PR.
+        </Callout>
+      );
+    },
   },
   description: PRODUCTS.ESLINT.title,
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
-  logo: <PRODUCTS.ESLINT.logo className="w-9" />,
+  logo: <PRODUCTS.ESLINT.logo />,
   websiteName: 'GraphQL-ESLint',
 });

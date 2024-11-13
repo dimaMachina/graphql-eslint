@@ -26,16 +26,16 @@ ruleTester.run('unique-fragment-name', rule, {
     {
       // Assert `skipGraphQLImport` is set to true
       ...SIBLING_FRAGMENTS(
-        join(CWD, '__tests__/mocks/user-fields.graphql'),
-        join(CWD, '__tests__/mocks/user.graphql'),
+        join(CWD, '__tests__', 'mocks', 'user-fields.graphql'),
+        join(CWD, '__tests__', 'mocks', 'user.graphql'),
       ),
-      filename: join(CWD, '__tests__/mocks/user-fields.graphql'),
+      filename: join(CWD, '__tests__', 'mocks', 'user-fields.graphql'),
       code: ruleTester.fromMockFile('user-fields.graphql'),
     },
     {
       // Compare filepath of code as real instead of virtual with siblings
-      ...SIBLING_FRAGMENTS(join(CWD, '__tests__/mocks/unique-fragment.js')),
-      filename: join(CWD, '__tests__/mocks/unique-fragment.js/0_document.graphql'),
+      ...SIBLING_FRAGMENTS(join(CWD, '__tests__', 'mocks', 'unique-fragment.js')),
+      filename: join(CWD, '__tests__', 'mocks', 'unique-fragment.js', '0_document.graphql'),
       code: /* GraphQL */ `
         fragment UserFields on User {
           id

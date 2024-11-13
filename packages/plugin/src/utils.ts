@@ -46,9 +46,11 @@ export const logger = {
     console.warn(chalk.yellow('warning'), '[graphql-eslint]', ...args),
 };
 
-export const normalizePath = (path: string): string => (path || '').replace(/\\/g, '/');
+export const slash = (path: string): string => path.replaceAll('\\', '/');
 
-export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
+// Match slash or backslash for Windows
+// eslint-disable-next-line no-useless-escape
+export const VIRTUAL_DOCUMENT_REGEX = /[\/\\]\d+_document.graphql$/;
 
 export const CWD = process.cwd();
 

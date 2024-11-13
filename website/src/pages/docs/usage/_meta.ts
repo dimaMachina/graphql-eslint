@@ -1,5 +1,5 @@
 export default {
-  '---1': {
+  _1: {
     type: 'separator',
     title: 'Basic',
   },
@@ -8,7 +8,7 @@ export default {
   'schema-and-documents': '',
   'multiple-projects': '',
   programmatic: '',
-  '---2': {
+  _2: {
     type: 'separator',
     title: 'Advanced',
   },

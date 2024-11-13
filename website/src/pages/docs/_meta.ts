@@ -1,21 +1,19 @@
 export default {
   index: '',
+  'getting-started': '',
+  'parser-options': '',
   usage: '',
-  '---1': {
+  _1: {
     type: 'separator',
     title: 'Users',
   },
   configs: '',
   'disabling-rules': '',
   vscode: '',
-  '---2': {
+  _2: {
     type: 'separator',
     title: 'Developers',
   },
   parser: '',
   'custom-rules': '',
-  '---3': {
-    type: 'separator',
-  },
-  'getting-started': '',
 };
