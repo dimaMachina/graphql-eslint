@@ -8,9 +8,6 @@ patchedDependencies:
   eslint:
     hash: t64n7kxodazs6lnwu42sgf5voe
     path: patches/eslint.patch
-  eslint-plugin-tailwindcss:
-    hash: quqasx3lkw2fskc7xdiwuschla
-    path: patches/eslint-plugin-tailwindcss.patch
   json-schema-to-markdown@1.1.1:
     hash: beglqnggvhpsclgwbdw27hzvu4
     path: patches/json-schema-to-markdown@1.1.1.patch
@@ -60,7 +57,7 @@ importers:
         version: 6.3.1(eslint@9.14.0(patch_hash=t64n7kxodazs6lnwu42sgf5voe)(jiti@2.4.0))
       eslint-plugin-tailwindcss:
         specifier: 3.17.3
-        version: 3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.14)
+        version: 3.17.3(tailwindcss@3.4.14)
       husky:
         specifier: 9.1.6
         version: 9.1.6
@@ -12773,7 +12770,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-tailwindcss@3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.14):
+  eslint-plugin-tailwindcss@3.17.3(tailwindcss@3.4.14):
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.48

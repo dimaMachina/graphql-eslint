@@ -42,6 +42,8 @@ export default withGuildDocs({
       'graphql/validation/index.js': require.resolve('graphql/validation'),
       'graphql/validation/validate.js': require.resolve('graphql/validation/validate'),
       graphql: require.resolve('graphql'),
+      // For Windows
+      fs: false
     };
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
