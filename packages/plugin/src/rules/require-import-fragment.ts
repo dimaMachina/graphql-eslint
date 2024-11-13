@@ -77,6 +77,7 @@ export const rule: GraphQLESLintRule = {
       'FragmentSpread > .name'(node: GraphQLESTreeNode<NameNode>) {
         const fragmentName = node.value;
         const fragmentsFromSiblings = siblings.getFragment(fragmentName);
+        // eslint-disable-next-line no-console
         console.log(fragmentsFromSiblings)
         for (const comment of comments) {
           if (comment.type !== 'Line') continue;
