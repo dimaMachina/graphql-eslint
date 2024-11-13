@@ -1,5 +1,52 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.7
+
+### Major Changes
+
+- [#2598](https://github.com/dimaMachina/graphql-eslint/pull/2598)
+  [`e771499`](https://github.com/dimaMachina/graphql-eslint/commit/e771499db22ed6aa358af090b535f6206e191ebb)
+  Thanks [@bmulholland](https://github.com/bmulholland)! - 1. graphql plugin can now we be specified
+  as
+
+  ```diff
+  plugins: {
+  -  '@graphql-eslint': {
+  -    graphqlPlugin.rules
+  -  }
+  +  '@graphql-eslint': graphqlPlugin
+  }
+  ```
+
+  1. Config rules should now be accessed through the `rules` property
+
+     ```diff
+       rules: {
+     -   ...graphqlESLint.configs['flat/operations-recommended']
+     +   ...graphqlESLint.configs['flat/operations-recommended'].rules
+     ```
+
+  1. processor can now be specified with accessing `processor` property
+
+     ```diff
+     - processor: graphql.processors.graphql
+     + processor: graphqlPlugin.processor
+     ```
+
+  1. The plugin can now be imported using a default import
+
+     ```diff
+     - import * as graphql from '@graphql-eslint/eslint-plugin'
+     + import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+     ```
+
+### Patch Changes
+
+- [#2692](https://github.com/dimaMachina/graphql-eslint/pull/2692)
+  [`dcf4e35`](https://github.com/dimaMachina/graphql-eslint/commit/dcf4e3558e13f4350e4e0960d8e9603667cda0b2)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix some issues on Windows by running
+  tests with matrix on github CI
+
 ## 4.0.0-alpha.6
 
 ### Patch Changes
