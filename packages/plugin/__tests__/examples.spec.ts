@@ -27,7 +27,7 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const errorOutput = stderr
     .toString()
     .replace(
-      /\(node:\d{4,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
+      /\(node:\d{3,7}\) \[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead./,
       '',
     )
     .replace('(Use `node --trace-deprecation ...` to show where the warning was created)', '')
