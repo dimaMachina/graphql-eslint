@@ -131,10 +131,6 @@ function testESLintOutput(cwd: string, errorCount: number): void {
     expect(normalizeResults(flatResults)).toMatchSnapshot();
     expect(normalizeResults(results)).toMatchSnapshot();
   }
-  if (cwd.includes('multiple-projects-graphql-config')) {
-    console.log({ cwd });
-    console.dir(flatResults, { depth: null });
-  }
   expect(countErrors(flatResults)).toBe(errorCount);
   expect(countErrors(results)).toBe(errorCount);
 }

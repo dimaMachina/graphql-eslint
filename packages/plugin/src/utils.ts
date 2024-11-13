@@ -48,7 +48,8 @@ export const logger = {
 
 export const slash = (path: string): string => path.replaceAll('\\', '/');
 
-export const VIRTUAL_DOCUMENT_REGEX = /\/\d+_document.graphql$/;
+// Match slash or backslash for Windows
+export const VIRTUAL_DOCUMENT_REGEX = /[\/\\]\d+_document.graphql$/;
 
 export const CWD = process.cwd();
 

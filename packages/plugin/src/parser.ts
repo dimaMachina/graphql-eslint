@@ -47,7 +47,7 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
 
     if (typeof window === 'undefined') {
       const gqlConfig = loadGraphQLConfig(options);
-      const realFilepath = slash(filePath).replace(VIRTUAL_DOCUMENT_REGEX, '');
+      const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
       project = gqlConfig.getProjectForFile(realFilepath);
       documents = getDocuments(project);
     } else {
