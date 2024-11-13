@@ -2,7 +2,7 @@ import { spawnSync } from 'node:child_process';
 import os from 'node:os';
 import path from 'node:path';
 import { ESLint } from 'eslint';
-import { CWD as PROJECT_CWD } from '../src/utils.js';
+import { CWD as PROJECT_CWD, slash } from '../src/utils.js';
 
 const CWD = path.join(PROJECT_CWD, '..', '..');
 
@@ -18,12 +18,34 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
   }, 0);
 }
 
-function getESLintOutput(cwd: string): ESLint.LintResult[] {
-  const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], {
-    cwd,
-    // For Windows, otherwise `stdout` and `stderr` are `null`
-    shell: os.platform() === 'win32',
-  });
+function getFlatESLintOutput(cwd: string): ESLint.LintResult[] {
+  const { stdout, stderr } = spawnSync('eslint', ['--format', 'json', '.'], { cwd });
+
+  return parseESLintOutput({ stdout, stderr });
+}
+
+function getLegacyESLintOutput(cwd: string): ESLint.LintResult[] {
+  const { stdout, stderr } = spawnSync(
+    'eslint',
+    ['--format', 'json', '--ignore-pattern', 'eslint.config.js', '.'],
+    {
+      cwd,
+      env: { ...process.env, ESLINT_USE_FLAT_CONFIG: 'false' },
+      // For Windows, otherwise `stdout` and `stderr` are `null`
+      shell: os.platform() === 'win32',
+    },
+  );
+
+  return parseESLintOutput({ stdout, stderr });
+}
+
+function parseESLintOutput({
+  stdout,
+  stderr,
+}: {
+  stdout: Buffer;
+  stderr: Buffer;
+}): ESLint.LintResult[] {
   const errorOutput = stderr
     .toString()
     .replace(
@@ -41,76 +63,65 @@ function getESLintOutput(cwd: string): ESLint.LintResult[] {
   return JSON.parse(output.slice(start, end));
 }
 
-function testSnapshot(results: ESLint.LintResult[]): void {
-  const normalizedResults = results
+function normalizeResults(results: ESLint.LintResult[]) {
+  return results
     .map(result => ({
-      filePath: path.relative(CWD, result.filePath).replaceAll('\\', '/'),
+      filePath: slash(path.relative(CWD, result.filePath)),
       messages: result.messages,
     }))
     .filter(result => result.messages.length > 0);
-
-  // Windows has some offset for `range`, disable temporarily
-  if (os.platform() !== 'win32') {
-    expect(normalizedResults).toMatchSnapshot();
-  }
 }
 
 describe('Examples', () => {
   it('should work programmatically', () => {
     const cwd = path.join(CWD, 'examples', 'programmatic');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(6);
-    testSnapshot(results);
+    testESLintOutput(cwd, 6);
   });
 
   it('should work on `.js` files', () => {
     const cwd = path.join(CWD, 'examples', 'code-file');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(4);
-    testSnapshot(results);
+    testESLintOutput(cwd, 4);
   });
 
   it('should work with `graphql-config`', () => {
     const cwd = path.join(CWD, 'examples', 'graphql-config');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
+    testESLintOutput(cwd, 2);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
     const cwd = path.join(CWD, 'examples', 'prettier');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(23);
-    testSnapshot(results);
+    testESLintOutput(cwd, 23);
   });
 
   it('should work in monorepo', () => {
     const cwd = path.join(CWD, 'examples', 'monorepo');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(11);
-    testSnapshot(results);
+    testESLintOutput(cwd, 11);
   });
 
   it('should work in svelte', () => {
     const cwd = path.join(CWD, 'examples', 'svelte-code-file');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
+    testESLintOutput(cwd, 2);
   });
 
   it('should work in vue', () => {
     const cwd = path.join(CWD, 'examples', 'vue-code-file');
-    const results = getESLintOutput(cwd);
-    expect(countErrors(results)).toBe(2);
-    testSnapshot(results);
+    testESLintOutput(cwd, 2);
   });
 
   it('should work in multiple projects', () => {
     const cwd = path.join(CWD, 'examples', 'multiple-projects-graphql-config');
-    const results = getESLintOutput(cwd);
-    // eslint-disable-next-line
-    console.dir(results, { depth: null });
-    expect(countErrors(results)).toBe(4);
-    testSnapshot(results);
+    testESLintOutput(cwd, 4);
   });
 });
+
+function testESLintOutput(cwd: string, errorCount: number): void {
+  const flatResults = getFlatESLintOutput(cwd);
+  expect(countErrors(flatResults)).toBe(errorCount);
+  const results = getLegacyESLintOutput(cwd);
+  expect(countErrors(results)).toBe(errorCount);
+  // Windows has some offset for `range`, disable temporarily
+  if (os.platform() !== 'win32') {
+    expect(normalizeResults(flatResults)).toMatchSnapshot();
+    expect(normalizeResults(results)).toMatchSnapshot();
+  }
+}

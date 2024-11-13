@@ -41,15 +41,15 @@ export = ${JSON.stringify(code)}`;
   console.log(`✅  ${chalk.green(filePath)} file generated`);
 };
 
-const ruleFilenames = readdirSync(join(SRC_PATH, 'rules'))
-  .filter(filename => filename.endsWith('.ts') && !IGNORE_FILES.includes(filename))
-  .map(filename => filename.replace(/\.ts$/, ''));
+const ruleFilenames = readdirSync(join(SRC_PATH, 'rules')).filter(
+  filename => !IGNORE_FILES.includes(filename),
+);
 
 async function generateRules(): Promise<void> {
   const code = [
     "import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation.js'",
     ...ruleFilenames.map(
-      ruleName => `import { rule as ${camelCase(ruleName)} } from './${ruleName}.js'`,
+      ruleName => `import { rule as ${camelCase(ruleName)} } from './${ruleName}/index.js'`,
     ),
     BR,
     'export const rules = {',

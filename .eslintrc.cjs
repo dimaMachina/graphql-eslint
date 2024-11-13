@@ -107,5 +107,13 @@ module.exports = {
         },
       },
     },
+    {
+      files: ['website/**/*.mdx'],
+      rules: {
+        // TODO: remove `# {frontMatter.title}` and this override
+        '@typescript-eslint/no-unused-expressions': 'off',
+        'no-undef': 'off',
+      },
+    },
   ],
 };

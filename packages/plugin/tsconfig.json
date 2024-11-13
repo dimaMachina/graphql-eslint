@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
+      "@/*": ["./src/*"],
       "@graphql-eslint/eslint-plugin": ["./src/index.ts"]
     }
   },
