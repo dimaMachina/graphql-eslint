@@ -8,6 +8,6 @@ export default defineConfig({
   },
   description: PRODUCTS.ESLINT.title,
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
-  logo: <PRODUCTS.ESLINT.logo className="w-9" />,
+  logo: <PRODUCTS.ESLINT.logo />,
   websiteName: 'GraphQL-ESLint',
 });

@@ -28,9 +28,6 @@ module.exports = {
         '@typescript-eslint/array-type': ['error', { readonly: 'generic' }],
         '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'no-type-imports' }],
       },
-      parserOptions: {
-        project: ['tsconfig.json', 'website/tsconfig.json', 'tsconfig.eslint.json'],
-      },
     },
     {
       files: ['**/rules/*.ts'],
