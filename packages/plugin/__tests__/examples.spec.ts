@@ -19,9 +19,9 @@ ${results.map(result => result.messages.map(m => m.message)).join('\n\n')}
 
 function getESLintOutput(cwd: string): ESLint.LintResult[] {
   const { stdout, stderr } = spawnSync('eslint', ['.', '--format', 'json'], {
-    cwd: cwd, // .replaceAll('\\', '/'),
+    cwd, // .replaceAll('\\', '/'),
   });
-  console.log({ stdout, stderr });
+  console.log({ stdout, stderr, cwd });
   const errorOutput = stderr
     ?.toString()
     .replace(
