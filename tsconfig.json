@@ -23,5 +23,5 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["packages"]
+  "include": ["packages", "scripts"]
 }
