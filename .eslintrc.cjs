@@ -8,7 +8,6 @@ module.exports = {
   ],
   rules: {
     'unicorn/prefer-array-some': 'error',
-    'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { VariableDeclarator: { object: true } }],
     quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
   },

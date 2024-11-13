@@ -9,7 +9,7 @@ import { version } from './meta.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';
 import { GraphQLESLintParseResult, ParserOptions, Schema } from './types.js';
-import { CWD, slash, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
+import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
 
 const debug = debugFactory('graphql-eslint:parser');
 
