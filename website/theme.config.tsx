@@ -9,7 +9,7 @@ export default defineConfig({
   banner: {
     content: (
       <>
-        This docs for version 4 of plugin. For version 3 click{' '}
+        🚧 This is WIP documentation for v4 of the plugin. For v3 click{' '}
         <a
           href="https://074c6ee9.graphql-eslint.pages.dev/docs"
           target="_blank"
@@ -21,6 +21,7 @@ export default defineConfig({
         .
       </>
     ),
+    dismissible: false,
   },
   description: PRODUCTS.ESLINT.title,
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
