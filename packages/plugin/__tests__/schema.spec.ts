@@ -76,7 +76,7 @@ describe('schema', async () => {
 
     it('should load schema from URL', () => {
       testSchema(url);
-    });
+    }, 20_000);
 
     describe('should passe headers', () => {
       // https://graphql-config.com/schema#passing-headers
@@ -97,7 +97,7 @@ describe('schema', async () => {
         expect(() => getSchema(gqlConfig.getDefault())).toThrow('authorization: "Bearer Foo"');
       });
     });
-  }, 20_000);
+  });
 
   describe('schema loading', () => {
     it('should return Error', () => {
