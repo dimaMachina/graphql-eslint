@@ -49,56 +49,56 @@ function testSnapshot(results: ESLint.LintResult[]): void {
 
 describe('Examples', () => {
   it('should work programmatically', () => {
-    const cwd = join(CWD, 'examples/programmatic');
+    const cwd = join(CWD, 'examples', 'programmatic');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(6);
     testSnapshot(results);
   });
 
   it('should work on `.js` files', () => {
-    const cwd = join(CWD, 'examples/code-file');
+    const cwd = join(CWD, 'examples', 'code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(4);
     testSnapshot(results);
   });
 
   it('should work with `graphql-config`', () => {
-    const cwd = join(CWD, 'examples/graphql-config');
+    const cwd = join(CWD, 'examples', 'graphql-config');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work with `eslint-plugin-prettier`', () => {
-    const cwd = join(CWD, 'examples/prettier');
+    const cwd = join(CWD, 'examples', 'prettier');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(23);
     testSnapshot(results);
   });
 
   it('should work in monorepo', () => {
-    const cwd = join(CWD, 'examples/monorepo');
+    const cwd = join(CWD, 'examples', 'monorepo');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(11);
     testSnapshot(results);
   });
 
   it('should work in svelte', () => {
-    const cwd = join(CWD, 'examples/svelte-code-file');
+    const cwd = join(CWD, 'example', 'svelte-code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work in vue', () => {
-    const cwd = join(CWD, 'examples/vue-code-file');
+    const cwd = join(CWD, 'examples', 'vue-code-file');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(2);
     testSnapshot(results);
   });
 
   it('should work in multiple projects', () => {
-    const cwd = join(CWD, 'examples/multiple-projects-graphql-config');
+    const cwd = join(CWD, 'examples', 'multiple-projects-graphql-config');
     const results = getESLintOutput(cwd);
     expect(countErrors(results)).toBe(4);
     testSnapshot(results);
