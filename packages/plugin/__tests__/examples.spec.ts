@@ -126,7 +126,7 @@ describe('Examples', () => {
 function testESLintOutput(cwd: string, errorCount: number): void {
   const flatResults = getFlatESLintOutput(cwd);
   const results = getLegacyESLintOutput(cwd);
-  // Windows has some offset for `range`, disable temporarily
+  // Windows has some offset for `range`, I think due \r\n handling
   if (os.platform() !== 'win32') {
     expect(normalizeResults(flatResults)).toMatchSnapshot();
     expect(normalizeResults(results)).toMatchSnapshot();

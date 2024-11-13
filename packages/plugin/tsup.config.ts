@@ -2,10 +2,12 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { defineConfig, Options } from 'tsup';
 import packageJson from './package.json';
+import { CWD } from '@/utils.js';
 
 const opts: Options = {
   entry: ['src/**/*.ts', '!src/index.browser.ts', '!src/**/*.test.ts'],
   clean: true,
+  splitting: true,
   bundle: false,
   dts: true,
   env: {
@@ -20,7 +22,6 @@ const opts: Options = {
   },
 };
 
-const CWD = process.cwd();
 export default defineConfig([
   {
     ...opts,

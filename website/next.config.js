@@ -42,6 +42,8 @@ export default withGuildDocs({
       graphql: require.resolve('graphql'),
       // For Windows
       '@vue/compiler-sfc': false,
+      '@graphql-tools/graphql-tag-pluck': false,
+      'graphql-config': false,
       velocityjs: false,
       'dustjs-linkedin': false,
       atpl: false,
