@@ -9,7 +9,7 @@ import { version } from './meta.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';
 import { GraphQLESLintParseResult, ParserOptions, Schema } from './types.js';
-import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
+import { CWD, slash, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
 
 const debug = debugFactory('graphql-eslint:parser');
 
@@ -47,7 +47,7 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
 
     if (typeof window === 'undefined') {
       const gqlConfig = loadGraphQLConfig(options);
-      const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
+      const realFilepath = slash(filePath).replace(VIRTUAL_DOCUMENT_REGEX, '');
       project = gqlConfig.getProjectForFile(realFilepath);
       documents = getDocuments(project);
     } else {
