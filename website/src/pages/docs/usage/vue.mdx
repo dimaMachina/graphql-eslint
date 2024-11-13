@@ -1,3 +1,5 @@
+import { Callout } from '@theguild/components'
+
 # Usage with `.vue` files
 
 `graphql-eslint` can lint GraphQL documents inside Vue Single-File Components (.vue files). It does
@@ -20,7 +22,7 @@ matches those files, even if you use another extension for your project's GraphQ
 
 <Callout type="warning">
   Make sure the first section, which extracts GraphQL from Vue files, comes **before** any other Vue
-  rules. Otherwise, eslint may incorrectly rewrite all error messages to say only "clear."
+  rules. Otherwise, eslint may incorrectly rewrite all error messages to say only "clear".
 </Callout>
 
 ```js filename="eslint.config.js"
