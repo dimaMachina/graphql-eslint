@@ -1,5 +1,17 @@
 /* eslint sort-keys: error */
+import { ComponentProps } from 'react';
 import { Callout, defineConfig, PRODUCTS } from '@theguild/components';
+
+function Anchor(props: ComponentProps<'a'>) {
+  return (
+    <a
+      target="_blank"
+      rel="noreferrer"
+      className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
+      {...props}
+    />
+  );
+}
 
 export default defineConfig({
   backgroundColor: {
@@ -10,15 +22,7 @@ export default defineConfig({
     content: (
       <>
         🚧 This is WIP documentation for v4 of the plugin. For v3 click{' '}
-        <a
-          href="https://074c6ee9.graphql-eslint.pages.dev/docs"
-          target="_blank"
-          rel="noreferrer"
-          className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-        >
-          here
-        </a>
-        .
+        <Anchor href="https://074c6ee9.graphql-eslint.pages.dev/docs">here</Anchor>.
       </>
     ),
     dismissible: false,
@@ -28,6 +32,32 @@ export default defineConfig({
       return (
         <Callout type="warning" emoji="🚧">
           This page is under construction. Help us improve the content by submitting a PR.
+        </Callout>
+      );
+    },
+    // @ts-expect-error
+    OfficialExampleCallout({ gitFolder }: { gitFolder: string }) {
+      return (
+        <Callout type="info">
+          <strong>Note</strong>: Check out{' '}
+          <Anchor
+            href={`https://github.com/dimaMachina/graphql-eslint/tree/master/examples/${gitFolder}`}
+          >
+            the official examples
+          </Anchor>{' '}
+          for{' '}
+          <Anchor
+            href={`https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/eslint.config.js`}
+          >
+            ESLint Flat Config
+          </Anchor>
+          or{' '}
+          <Anchor
+            href={`https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/.eslintrc.cjs`}
+          >
+            ESLint Legacy Config
+          </Anchor>
+          .
         </Callout>
       );
     },
