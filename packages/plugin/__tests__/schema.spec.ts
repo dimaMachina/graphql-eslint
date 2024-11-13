@@ -97,7 +97,7 @@ describe('schema', async () => {
         expect(() => getSchema(gqlConfig.getDefault())).toThrow('authorization: "Bearer Foo"');
       });
     });
-  });
+  }, 20_000);
 
   describe('schema loading', () => {
     it('should return Error', () => {

@@ -80,8 +80,6 @@ describe('Examples', () => {
   it('should work with `eslint-plugin-prettier`', () => {
     const cwd = path.join(CWD, 'examples', 'prettier');
     const results = getESLintOutput(cwd);
-    // eslint-disable-next-line
-    console.dir(results, { depth: null });
     expect(countErrors(results)).toBe(23);
     testSnapshot(results);
   });
