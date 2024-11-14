@@ -166,7 +166,7 @@ Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `dir
 ### `groups` (array)
 
 Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt', '...']` where `...` stands for
-fragment spreads, and `*` stands for for everything else.
+fragment spreads, and `*` stands for everything else.
 
 The object is an array with all elements of the type `string`.
 

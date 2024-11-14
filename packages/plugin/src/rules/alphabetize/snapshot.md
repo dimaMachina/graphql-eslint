@@ -1225,7 +1225,7 @@ exports[`alphabetize > invalid > should sort selections by group when \`...\` is
 exports[`alphabetize > invalid > should sort selections by group when \`...\` is between 1`] = `
 #### ⌨️ Code
 
-      1 |         {
+      1 |         fragment foo on Foo {
       2 |           zz
       3 |           ...ChildFragment
       4 |           updatedAt
@@ -1238,7 +1238,7 @@ exports[`alphabetize > invalid > should sort selections by group when \`...\` is
 
     {
       "selections": [
-        "OperationDefinition"
+        "FragmentDefinition"
       ],
       "groups": [
         "id",
@@ -1272,7 +1272,7 @@ exports[`alphabetize > invalid > should sort selections by group when \`...\` is
 
 #### 🔧 Autofix output
 
-      1 |         {
+      1 |         fragment foo on Foo {
       2 |           id
       3 |           aa
       4 |           zz

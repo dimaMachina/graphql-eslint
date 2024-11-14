@@ -468,12 +468,12 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       name: 'should sort selections by group when `...` is between',
       options: [
         {
-          selections: ['OperationDefinition'],
+          selections: ['FragmentDefinition'],
           groups: ['id', '*', '...', 'createdAt', 'updatedAt'],
         },
       ],
       code: /* GraphQL */ `
-        {
+        fragment foo on Foo {
           zz
           ...ChildFragment
           updatedAt

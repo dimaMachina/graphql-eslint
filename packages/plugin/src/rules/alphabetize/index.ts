@@ -260,18 +260,14 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       // Starts from 1, ignore nodes.length <= 1
       for (let i = 1; i < nodes.length; i += 1) {
         const currNode = nodes[i];
-        const currName =
-          ('alias' in currNode && currNode.alias?.value) ||
-          ('name' in currNode && currNode.name?.value);
+        const currName = getName(currNode);
         if (!currName) {
           // we don't move unnamed current nodes
           continue;
         }
 
         const prevNode = nodes[i - 1];
-        const prevName =
-          ('alias' in prevNode && prevNode.alias?.value) ||
-          ('name' in prevNode && prevNode.name?.value);
+        const prevName = getName(prevNode);
         if (prevName) {
           // Compare with lexicographic order
           const compareResult = prevName.localeCompare(currName);
@@ -283,32 +279,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             if (!groups.includes('*')) {
               throw new Error('`groups` option should contain `*` string.');
             }
-
-            // Try an exact match
-            let indexForPrev = groups.indexOf(prevName);
-
-            // Check for the fragment spread group
-            if (indexForPrev === -1 && prevNode.kind === Kind.FRAGMENT_SPREAD) {
-              indexForPrev = groups.indexOf('...');
-            }
-
-            // Check for the catch-all group
-            if (indexForPrev === -1) {
-              indexForPrev = groups.indexOf('*');
-            }
-
-            // Try an exact match
-            let indexForCurr = groups.indexOf(currName);
-
-            // Check for the fragment spread group
-            if (indexForCurr === -1 && currNode.kind === Kind.FRAGMENT_SPREAD) {
-              indexForCurr = groups.indexOf('...');
-            }
-
-            // Check for the catch-all group
-            if (indexForCurr === -1) {
-              indexForCurr = groups.indexOf('*');
-            }
+            const indexForPrev = getIndex({ node: prevNode, groups });
+            const indexForCurr = getIndex({ node: currNode, groups });
 
             shouldSortByGroup = indexForPrev - indexForCurr > 0;
             if (indexForPrev < indexForCurr) {
@@ -435,3 +407,34 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     return listeners;
   },
 };
+
+function getIndex({
+  node,
+  groups,
+}: {
+  node: GraphQLESTreeNode<ASTNode>;
+  groups: string[];
+}): number {
+  // Try an exact match
+  let index = groups.indexOf(getName(node));
+
+  // Check for the fragment spread group
+  if (index === -1 && node.kind === Kind.FRAGMENT_SPREAD) {
+    index = groups.indexOf('...');
+  }
+
+  // Check for the catch-all group
+  if (index === -1) {
+    index = groups.indexOf('*');
+  }
+  return index;
+}
+
+function getName(node: GraphQLESTreeNode<ASTNode>): string {
+  return (
+    ('alias' in node && node.alias?.value) ||
+    //
+    ('name' in node && node.name?.value) ||
+    ''
+  );
+}
