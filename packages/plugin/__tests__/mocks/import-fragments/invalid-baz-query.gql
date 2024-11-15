@@ -1,0 +1,6 @@
+# import BazFields from "./baz-fragment.gql"
+query {
+  Bar {
+    ...BazFields
+  }
+}
