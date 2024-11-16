@@ -2,7 +2,7 @@ import path from 'node:path';
 import { NameNode } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { requireSiblingsOperations } from '../../utils.js';
+import { requireSiblingsOperations, slash } from '../../utils.js';
 
 const RULE_ID = 'require-import-fragment';
 const SUGGESTION_ID = 'add-import-expression';
@@ -89,21 +89,21 @@ export const rule: GraphQLESLintRule = {
 
           const extractedImportPath = comment.value.match(/(["'])((?:\1|.)*?)\1/)?.[2];
           if (!extractedImportPath) continue;
-
-          const importPath = path.join(path.dirname(filePath), extractedImportPath);
+          const importPath = path.join(filePath, '..', extractedImportPath);
           const hasInSiblings = fragmentsFromSiblings.some(
             source => source.filePath === importPath,
           );
           if (hasInSiblings) return;
         }
-
         const fragmentInSameFile = fragmentsFromSiblings.some(
           source => source.filePath === filePath,
         );
         if (fragmentInSameFile) return;
-
         const suggestedFilePaths = fragmentsFromSiblings.length
-          ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
+          ? fragmentsFromSiblings.map(o =>
+              // Use always forward slash for suggested import path
+              slash(path.relative(path.dirname(filePath), o.filePath)),
+            )
           : ['CHANGE_ME.graphql'];
 
         context.report({

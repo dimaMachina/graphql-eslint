@@ -1,6 +1,6 @@
 # Imports could have extra whitespace and double/single quotes
 
-#  import  'foo-fragment.gql'
+#  import  './fragments/foo-fragment.gql'
 
 query {
   foo {

@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import path from 'node:path';
 import debugFactory from 'debug';
 import fg from 'fast-glob';
 import { GraphQLProjectConfig } from 'graphql-config';
@@ -15,13 +15,18 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
   return documents.map(source => {
     const location = source.location!;
     if (['.gql', '.graphql'].some(extension => location.endsWith(extension))) {
-      return source;
+      return {
+        ...source,
+        // When using glob pattern e.g. `**/*.gql` location contains always forward slashes even on
+        // Windows
+        location: path.resolve(location),
+      };
     }
     filepathMap[location] ??= -1;
     const index = (filepathMap[location] += 1);
     return {
       ...source,
-      location: resolve(location, `${index}_document.graphql`),
+      location: path.resolve(location, `${index}_document.graphql`),
     };
   });
 };
