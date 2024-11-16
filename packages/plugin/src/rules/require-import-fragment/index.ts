@@ -77,6 +77,7 @@ export const rule: GraphQLESLintRule = {
       'FragmentSpread > .name'(node: GraphQLESTreeNode<NameNode>) {
         const fragmentName = node.value;
         const fragmentsFromSiblings = siblings.getFragment(fragmentName);
+        console.log({ fragmentsFromSiblings })
         for (const comment of comments) {
           if (comment.type !== 'Line') continue;
 
@@ -96,7 +97,6 @@ export const rule: GraphQLESLintRule = {
           );
           if (hasInSiblings) return;
         }
-
         const fragmentInSameFile = fragmentsFromSiblings.some(
           source => source.filePath === filePath,
         );

@@ -63,6 +63,7 @@ ruleTester.run('require-import-fragment', rule, {
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'same-file.gql'),
     }),
     withMocks({
+      only: true,
       name: 'should not report with correct relative path import',
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
     }),
