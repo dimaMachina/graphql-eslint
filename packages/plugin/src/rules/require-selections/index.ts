@@ -180,30 +180,20 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
             }
           } else if (selection.kind === Kind.FRAGMENT_SPREAD) {
             const [foundSpread] = siblings.getFragment(selection.name.value);
-            if (foundSpread) {
-              const fragmentSpread = foundSpread.document;
+            if (!foundSpread) return;
+            const fragmentSpread = foundSpread.document;
 
-              // the fragment is either for the union type itself or one of the types in the union
-              const t =
-                fragmentSpread.typeCondition.name.value === rawType.name
-                  ? rawType
-                  : types.find(t => t.name === fragmentSpread.typeCondition.name.value);
-
-              if (t) {
-                // only include types in the union in error messaging
-                if (t.name !== rawType.name) {
-                  checkedFragmentSpreads.add(fragmentSpread.name.value);
-                }
-
-                checkSelections(
-                  fragmentSpread.selectionSet,
-                  t,
-                  loc,
-                  parent,
-                  checkedFragmentSpreads,
-                );
-              }
+            // the fragment is either for the union type itself or one of the types in the union
+            const t =
+              fragmentSpread.typeCondition.name.value === rawType.name
+                ? rawType
+                : types.find(t => t.name === fragmentSpread.typeCondition.name.value)!;
+            // only include types in the union in error messaging
+            if (t.name !== rawType.name) {
+              checkedFragmentSpreads.add(fragmentSpread.name.value);
             }
+
+            checkSelections(fragmentSpread.selectionSet, t, loc, parent, checkedFragmentSpreads);
           }
         }
       }
