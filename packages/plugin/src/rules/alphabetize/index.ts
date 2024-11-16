@@ -95,11 +95,11 @@ const schema = {
         minItems: 2,
         description:
           [
-            "Custom order group. Example: `['...', 'id', '*', '{']` where:",
+            "Order group. Example: `['...', 'id', '*', '{']` where:",
             "- `...` stands for fragment spreads",
             "- `id` stands for field with name `id`",
             "- `*` stands for everything else",
-            "- `{` stands for field `selection set`"
+            "- `{` stands for fields `selection set`"
           ].join('\n'),
       },
     },
@@ -200,7 +200,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             fields: fieldsEnum,
             values: true,
             arguments: argumentsEnum,
-            groups: ['id', '*', '{'],
+            groups: ['id', '*', 'createdAt', 'updatedAt'],
           },
         ],
         operations: [
