@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.9
+
+### Patch Changes
+
+- [#2277](https://github.com/dimaMachina/graphql-eslint/pull/2277)
+  [`3b35bae`](https://github.com/dimaMachina/graphql-eslint/commit/3b35baedacb8cdac542268933d8a8fec6c199af0)
+  Thanks [@yoavain-sundaysky](https://github.com/yoavain-sundaysky)! - fix false positive cases for
+  `require-import-fragment` on Windows, when `graphql-config`'s `documents` key contained glob
+  pattern => source file path of document contained always forward slashes
+
 ## 4.0.0-alpha.8
 
 ### Minor Changes
