@@ -14,7 +14,7 @@ jobs:
     with:
       npmTag: alpha
       buildScript: prerelease
-      nodeVersion: 18
+      nodeVersion: 22
       packageManager: pnpm
     secrets:
       githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
