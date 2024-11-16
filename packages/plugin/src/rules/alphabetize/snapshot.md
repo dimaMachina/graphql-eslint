@@ -1031,6 +1031,141 @@ exports[`alphabetize > invalid > should sort definitions 1`] = `
       59 |         # END
 `;
 
+exports[`alphabetize > invalid > should sort selection set at the end 1`] = `
+#### ⌨️ Code
+
+       1 |         {
+       2 |           zz
+       3 |           updatedAt
+       4 |           createdAt {
+       5 |             __typename
+       6 |           }
+       7 |           aa
+       8 |           user {
+       9 |             id
+      10 |           }
+      11 |           aab {
+      12 |             id
+      13 |           }
+      14 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "id",
+        "*",
+        "updatedAt",
+        "{"
+      ]
+    }
+
+#### ❌ Error 1/2
+
+      6 |           }
+    > 7 |           aa
+        |           ^^ field "aa" should be before field "createdAt"
+      8 |           user {
+
+#### ❌ Error 2/2
+
+      10 |           }
+    > 11 |           aab {
+         |           ^^^ field "aab" should be before field "user"
+      12 |             id
+
+#### 🔧 Autofix output
+
+       1 |         {
+       2 |           aa
+       3 |           zz
+       4 |           updatedAt
+       5 |           aab {
+       6 |             id
+       7 |           }
+       8 |           createdAt {
+       9 |             __typename
+      10 |           }
+      11 |           user {
+      12 |             id
+      13 |           }
+      14 |         }
+`;
+
+exports[`alphabetize > invalid > should sort selection set at the start 1`] = `
+#### ⌨️ Code
+
+       1 |         {
+       2 |           zz
+       3 |           updatedAt
+       4 |           createdAt {
+       5 |             __typename
+       6 |           }
+       7 |           aa
+       8 |           user {
+       9 |             id
+      10 |           }
+      11 |           aab {
+      12 |             id
+      13 |           }
+      14 |         }
+
+#### ⚙️ Options
+
+    {
+      "selections": [
+        "OperationDefinition"
+      ],
+      "groups": [
+        "{",
+        "id",
+        "*",
+        "updatedAt"
+      ]
+    }
+
+#### ❌ Error 1/3
+
+      3 |           updatedAt
+    > 4 |           createdAt {
+        |           ^^^^^^^^^ field "createdAt" should be before field "updatedAt"
+      5 |             __typename
+
+#### ❌ Error 2/3
+
+      7 |           aa
+    > 8 |           user {
+        |           ^^^^ field "user" should be before field "aa"
+      9 |             id
+
+#### ❌ Error 3/3
+
+      10 |           }
+    > 11 |           aab {
+         |           ^^^ field "aab" should be before field "user"
+      12 |             id
+
+#### 🔧 Autofix output
+
+       1 |         {
+       2 |           aab {
+       3 |             id
+       4 |           }
+       5 |           createdAt {
+       6 |             __typename
+       7 |           }
+       8 |           user {
+       9 |             id
+      10 |           }
+      11 |           aa
+      12 |           zz
+      13 |           updatedAt
+      14 |         }
+`;
+
 exports[`alphabetize > invalid > should sort selections by group when \`*\` is between 1`] = `
 #### ⌨️ Code
 

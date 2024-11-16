@@ -93,8 +93,13 @@ const schema = {
       groups: {
         ...ARRAY_DEFAULT_OPTIONS,
         minItems: 2,
-        description:
-          "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt', '...']` where `...` stands for fragment spreads, and `*` stands for  everything else.",
+        description: [
+          "Order group. Example: `['...', 'id', '*', '{']` where:",
+          '- `...` stands for fragment spreads',
+          '- `id` stands for field with name `id`',
+          '- `*` stands for everything else',
+          '- `{` stands for fields `selection set`',
+        ].join('\n'),
       },
     },
   },
@@ -203,7 +208,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             selections: selectionsEnum,
             variables: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
-            groups: ['...', 'id', '*', 'createdAt', 'updatedAt'],
+            groups: ['...', 'id', '*', '{'],
           },
         ],
       },
@@ -417,16 +422,11 @@ function getIndex({
 }): number {
   // Try an exact match
   let index = groups.indexOf(getName(node));
-
+  if (index === -1 && 'selectionSet' in node && node.selectionSet) index = groups.indexOf('{');
   // Check for the fragment spread group
-  if (index === -1 && node.kind === Kind.FRAGMENT_SPREAD) {
-    index = groups.indexOf('...');
-  }
-
+  if (index === -1 && node.kind === Kind.FRAGMENT_SPREAD) index = groups.indexOf('...');
   // Check for the catch-all group
-  if (index === -1) {
-    index = groups.indexOf('*');
-  }
+  if (index === -1) index = groups.indexOf('*');
   return index;
 }
 

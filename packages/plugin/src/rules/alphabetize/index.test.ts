@@ -504,5 +504,57 @@ ruleTester.run<RuleOptions>('alphabetize', rule, {
       `,
       errors: 4,
     },
+    {
+      name: 'should sort selection set at the end',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['id', '*', 'updatedAt', '{'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt {
+            __typename
+          }
+          aa
+          user {
+            id
+          }
+          aab {
+            id
+          }
+        }
+      `,
+      errors: 2,
+    },
+    {
+      name: 'should sort selection set at the start',
+      options: [
+        {
+          selections: ['OperationDefinition'],
+          groups: ['{', 'id', '*', 'updatedAt'],
+        },
+      ],
+      code: /* GraphQL */ `
+        {
+          zz
+          updatedAt
+          createdAt {
+            __typename
+          }
+          aa
+          user {
+            id
+          }
+          aab {
+            id
+          }
+        }
+      `,
+      errors: 3,
+    },
   ],
 });
