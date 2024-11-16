@@ -7,11 +7,18 @@ const TEST_SCHEMA = /* GraphQL */ `
     noId: NoId!
     vehicles: [Vehicle!]!
     flying: [Flying!]!
+    noIdOrNoId2: NoIdOrNoId2!
   }
 
   type NoId {
     name: String!
   }
+
+  type NoId2 {
+    name: String!
+  }
+
+  union NoIdOrNoId2 = NoId | NoId2
 
   interface Vehicle {
     id: ID!
@@ -310,6 +317,22 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
       ...WITH_SCHEMA,
       code: '{ hasId {  id: name } }',
     },
+    {
+      name: 'should work when union has no `id` field to select',
+      ...WITH_SCHEMA,
+      code: /* GraphQL */ `
+        {
+          noIdOrNoId2 {
+            ... on NoId {
+              name
+            }
+            ... on NoId2 {
+              name
+            }
+          }
+        }
+      `,
+    },
   ],
   invalid: [
     {
@@ -422,6 +445,54 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
         graphQLConfig: {
           schema: USER_POST_SCHEMA,
           documents: /* GraphQL */ `
+            fragment UserFields on User {
+              name
+            }
+          `,
+        },
+      },
+    },
+    {
+      name: 'should report an error with union and non-inline fragment',
+      errors: [MESSAGE_ID],
+      code: /* GraphQL */ `
+        {
+          userOrPost {
+            ...UnionFragment
+          }
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UnionFragment on UserOrPost {
+              ... on User {
+                name
+              }
+            }
+          `,
+        },
+      },
+    },
+    {
+      name: 'should report an error with union and non-inline fragment and nested fragment',
+      errors: [MESSAGE_ID],
+      code: /* GraphQL */ `
+        {
+          userOrPost {
+            ...UnionFragment
+          }
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: /* GraphQL */ `
+            fragment UnionFragment on UserOrPost {
+              ...UserFields
+            }
+
             fragment UserFields on User {
               name
             }
