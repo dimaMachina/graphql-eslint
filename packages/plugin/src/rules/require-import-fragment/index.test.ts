@@ -19,10 +19,7 @@ function withMocks({
     code: ruleTester.fromMockFile(filename.split('mocks')[1]),
     parserOptions: {
       graphQLConfig: {
-        documents: [
-          filename,
-          './__tests__/mocks/import-fragments/fragments/**/*.gql',
-        ],
+        documents: [filename, './__tests__/mocks/import-fragments/fragments/**/*.gql'],
       },
     } satisfies ParserOptionsForTests,
     errors,
