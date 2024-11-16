@@ -54,6 +54,34 @@ exports[`require-import-fragment > invalid > should report with default import 1
     7 | }
 `;
 
+exports[`require-import-fragment > invalid > should report with incorrect relative path import 1`] = `
+#### ⌨️ Code
+
+      1 | # import BazFields from "./baz-fragment.gql"
+      2 | query {
+      3 |   Bar {
+      4 |     ...BazFields
+      5 |   }
+      6 | }
+
+#### ❌ Error
+
+      3 |   Bar {
+    > 4 |     ...BazFields
+        |        ^^^^^^^^^ Expected "BazFields" fragment to be imported.
+      5 |   }
+
+#### 💡 Suggestion: Add import expression for "BazFields".
+
+    1 | # import BazFields from 'other-path/baz-fragment.gql'
+    2 | # import BazFields from "./baz-fragment.gql"
+    3 | query {
+    4 |   Bar {
+    5 |     ...BazFields
+    6 |   }
+    7 | }
+`;
+
 exports[`require-import-fragment > invalid > should report with named import 1`] = `
 #### ⌨️ Code
 
