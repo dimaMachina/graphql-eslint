@@ -25,14 +25,14 @@ function withMocks({ name, filename, errors }: { name: string; filename: string;
 function withMockForceLinuxDelimiter(args: { name: string; filename: string; errors?: any }) {
   const mocks = withMocks(args);
   const { graphQLConfig } = mocks.parserOptions;
-  graphQLConfig.documents =graphQLConfig.documents.map(doc => doc.replaceAll('/', '\\'))
+  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll('/', '\\'));
   return mocks;
 }
 
 function withMockForceWindowsDelimiter(args: { name: string; filename: string; errors?: any }) {
   const mocks = withMocks(args);
   const { graphQLConfig } = mocks.parserOptions;
-  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll('\\', '/'))
+  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll('\\', '/'));
   return mocks;
 }
 
@@ -78,6 +78,6 @@ ruleTester.run('require-import-fragment', rule, {
       name: 'should report fragments when there are no import expressions',
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'missing-import.gql'),
       errors: [{ message: 'Expected "FooFields" fragment to be imported.' }],
-    })
+    }),
   ],
 });
