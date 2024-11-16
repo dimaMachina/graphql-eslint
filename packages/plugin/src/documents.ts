@@ -15,7 +15,12 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
   return documents.map(source => {
     const location = source.location!;
     if (['.gql', '.graphql'].some(extension => location.endsWith(extension))) {
-      return source;
+      return {
+        ...source,
+        // When using glob pattern e.g. `**/*.gql` location contains always forward slashes even on
+        // Windows
+        location: path.resolve(location),
+      };
     }
     filepathMap[location] ??= -1;
     const index = (filepathMap[location] += 1);
