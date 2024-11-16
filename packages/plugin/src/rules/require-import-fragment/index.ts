@@ -89,12 +89,7 @@ export const rule: GraphQLESLintRule = {
 
           const extractedImportPath = comment.value.match(/(["'])((?:\1|.)*?)\1/)?.[2];
           if (!extractedImportPath) continue;
-
-          const importPath = path.join(
-            path.dirname(filePath),
-            extractedImportPath.replaceAll(/[/\\]/g, path.sep),
-          );
-
+          const importPath = path.join(filePath, '..', extractedImportPath);
           const hasInSiblings = fragmentsFromSiblings.some(
             source => source.filePath === importPath,
           );
