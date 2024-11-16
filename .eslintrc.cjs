@@ -8,7 +8,6 @@ module.exports = {
   ],
   rules: {
     'unicorn/prefer-array-some': 'error',
-    'unicorn/better-regex': 'error',
     'prefer-destructuring': ['error', { VariableDeclarator: { object: true } }],
     quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
   },
@@ -28,15 +27,11 @@ module.exports = {
         '@typescript-eslint/array-type': ['error', { readonly: 'generic' }],
         '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'no-type-imports' }],
       },
-      parserOptions: {
-        project: ['tsconfig.json', 'website/tsconfig.json', 'tsconfig.eslint.json'],
-      },
     },
     {
       files: ['**/rules/*.ts'],
       extends: ['plugin:eslint-plugin/rules-recommended'],
       rules: {
-        'eslint-plugin/require-meta-docs-description': ['error', { pattern: '.+\\.$' }], // force to put a point at the end
         'eslint-plugin/require-meta-docs-url': [
           'error',
           { pattern: 'https://the-guild.dev/graphql/eslint/rules/{{name}}' },
@@ -52,6 +47,7 @@ module.exports = {
       extends: ['plugin:eslint-plugin/tests-recommended'],
       rules: {
         'eslint-plugin/test-case-shorthand-strings': 'error',
+        'import/extensions': 'off',
       },
     },
     {
@@ -95,13 +91,32 @@ module.exports = {
         'tailwindcss/enforces-negative-arbitrary-values': 'error',
         'tailwindcss/enforces-shorthand': 'error',
         'tailwindcss/migration-from-tailwind-2': 'error',
-        'tailwindcss/no-custom-classname': 'error',
+        'tailwindcss/no-custom-classname': [
+          'error',
+          {
+            // TODO: figure out why there is an error only on CI
+            whitelist: [
+              'nextra-scrollbar',
+              '_text-primary-600',
+              '_underline',
+              '_decoration-from-font',
+            ],
+          },
+        ],
         'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }],
       },
       settings: {
         tailwindcss: {
           config: 'website/tailwind.config.ts',
         },
+      },
+    },
+    {
+      files: ['website/**/*.mdx'],
+      rules: {
+        // TODO: remove `# {frontMatter.title}` and this override
+        '@typescript-eslint/no-unused-expressions': 'off',
+        'no-undef': 'off',
       },
     },
   ],

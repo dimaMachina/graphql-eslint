@@ -7,6 +7,7 @@ import {
 } from '@graphql-tools/graphql-tag-pluck';
 import { asArray } from '@graphql-tools/utils';
 import { loadOnDiskGraphQLConfig } from './graphql-config.js';
+import { version } from './meta.js';
 import { CWD, REPORT_ON_FIRST_CHARACTER, truthy } from './utils.js';
 
 export type Block = Linter.ProcessorFile & {
@@ -22,6 +23,10 @@ let onDiskConfigLoaded = false;
 const RELEVANT_KEYWORDS = ['gql', 'graphql', 'GraphQL'] as const;
 
 export const processor = {
+  meta: {
+    name: '@graphql-eslint/processor',
+    version,
+  },
   supportsAutofix: true,
   preprocess(code, filePath) {
     if (!onDiskConfigLoaded) {

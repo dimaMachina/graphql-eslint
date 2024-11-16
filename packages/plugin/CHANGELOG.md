@@ -1,5 +1,132 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.7
+
+### Major Changes
+
+- [#2598](https://github.com/dimaMachina/graphql-eslint/pull/2598)
+  [`e771499`](https://github.com/dimaMachina/graphql-eslint/commit/e771499db22ed6aa358af090b535f6206e191ebb)
+  Thanks [@bmulholland](https://github.com/bmulholland)! - 1. graphql plugin can now we be specified
+  as
+
+  ```diff
+  plugins: {
+  -  '@graphql-eslint': {
+  -    graphqlPlugin.rules
+  -  }
+  +  '@graphql-eslint': graphqlPlugin
+  }
+  ```
+
+  1. Config rules should now be accessed through the `rules` property
+
+     ```diff
+       rules: {
+     -   ...graphqlESLint.configs['flat/operations-recommended']
+     +   ...graphqlESLint.configs['flat/operations-recommended'].rules
+     ```
+
+  1. processor can now be specified with accessing `processor` property
+
+     ```diff
+     - processor: graphql.processors.graphql
+     + processor: graphqlPlugin.processor
+     ```
+
+  1. The plugin can now be imported using a default import
+
+     ```diff
+     - import * as graphql from '@graphql-eslint/eslint-plugin'
+     + import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+     ```
+
+### Patch Changes
+
+- [#2692](https://github.com/dimaMachina/graphql-eslint/pull/2692)
+  [`dcf4e35`](https://github.com/dimaMachina/graphql-eslint/commit/dcf4e3558e13f4350e4e0960d8e9603667cda0b2)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix some issues on Windows by running
+  tests with matrix on github CI
+
+## 4.0.0-alpha.6
+
+### Patch Changes
+
+- [#2616](https://github.com/dimaMachina/graphql-eslint/pull/2616)
+  [`c0f1b07`](https://github.com/dimaMachina/graphql-eslint/commit/c0f1b077c8c7b8ee872bcee191f1acf5a8d5f62b)
+  Thanks [@fcortes](https://github.com/fcortes)! - The import attribute syntax (with { type: "json"
+  }) is still experimental so warnings showed up when using the library as it was being used to
+  import the package.json file to extract the package version
+
+  As an alternative, the current version will be injected on build time through tsup configuration.
+
+## 4.0.0-alpha.5
+
+### Patch Changes
+
+- [#2605](https://github.com/dimaMachina/graphql-eslint/pull/2605)
+  [`2ae64e1`](https://github.com/dimaMachina/graphql-eslint/commit/2ae64e12ab2e61c14b8a195410e2e68dc3fb29d0)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix types exports by
+  `@arethetypeswrong/cli` package
+
+## 4.0.0-alpha.4
+
+### Patch Changes
+
+- [#2483](https://github.com/dimaMachina/graphql-eslint/pull/2483)
+  [`d52585a`](https://github.com/dimaMachina/graphql-eslint/commit/d52585a08513546e1c403a6cf83de6d6370e96da)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix compatibility with Node.js v22
+
+## 4.0.0-alpha.3
+
+### Patch Changes
+
+- [#2466](https://github.com/dimaMachina/graphql-eslint/pull/2466)
+  [`da608d7`](https://github.com/dimaMachina/graphql-eslint/commit/da608d735f7e292b15955ace2fd4b1f17406105e)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix `require is not defined` in flat
+  configs for Vue/Svelte projects
+
+- [#2468](https://github.com/dimaMachina/graphql-eslint/pull/2468)
+  [`733a66e`](https://github.com/dimaMachina/graphql-eslint/commit/733a66e38cb5a444ff3a2f9ed7c1b31665fca404)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - - rename flat configs exports
+
+  ```diff
+  -graphql.flatConfigs['schema-recommended'].rules
+  +graphql.configs['flat/schema-recommended']
+  -graphql.flatConfigs['schema-relay'].rules
+  +graphql.configs['flat/schema-relay']
+  -graphql.flatConfigs['schema-all'].rules
+  +graphql.configs['flat/schema-all']
+  -graphql.flatConfigs['operations-recommended'].rules
+  +graphql.configs['flat/operations-recommended']
+  -graphql.flatConfigs['operations-all'].rules
+  +graphql.configs['flat/operations-all']
+  ```
+
+  - fix with programmatic usage when passing large schema as string causes `pattern too long` error
+  - fix loading ESM `graphql.config.js` configs
+
+## 4.0.0-alpha.2
+
+### Patch Changes
+
+- [#2455](https://github.com/dimaMachina/graphql-eslint/pull/2455)
+  [`08a8a13`](https://github.com/dimaMachina/graphql-eslint/commit/08a8a1382d51140ddf7a310de3a711b354533879)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix caching issues for
+  `no-unreachable-types` / `no-unused-fields` rules for multi projects
+
+- [#2458](https://github.com/dimaMachina/graphql-eslint/pull/2458)
+  [`9096458`](https://github.com/dimaMachina/graphql-eslint/commit/909645893d41f2ccf618b2c74fb7671ddab538b9)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - add `meta` object with `name` and
+  `version` to `parser` and `processor` to be compatible with ESLint 9
+
+## 4.0.0-alpha.1
+
+### Major Changes
+
+- [#2418](https://github.com/dimaMachina/graphql-eslint/pull/2418)
+  [`c2d5386`](https://github.com/dimaMachina/graphql-eslint/commit/c2d53869c84e7393b11239f78d55eb1477a9a077)
+  Thanks [@comatory](https://github.com/comatory)! - exposing GraphQLESTreeNode type
+
 ## 4.0.0-alpha.0
 
 ### Major Changes
@@ -1099,8 +1226,8 @@ Special thanks to @connorjs
 
 ### Minor Changes
 
-- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique
-  indentifier field unless being in exceptions
+- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique indentifier
+  field unless being in exceptions
 
 ## 0.8.1
 

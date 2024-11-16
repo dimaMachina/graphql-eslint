@@ -1,3 +1,7 @@
+---
+description: 'Enforce types with `@oneOf` directive have `error` and `ok` fields.'
+---
+
 # `require-type-pattern-with-oneof`
 
 - Category: `Schema`

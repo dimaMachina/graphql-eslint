@@ -1,5 +1,5 @@
-import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
-import { ruleTester } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation.js';
+import { ruleTester } from './test-utils.js';
 
 ruleTester.run('lone-schema-definition', GRAPHQL_JS_VALIDATIONS['lone-schema-definition'], {
   valid: [

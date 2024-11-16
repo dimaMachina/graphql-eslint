@@ -1,3 +1,7 @@
+---
+description: 'Disallow fragments that are used only in one place.'
+---
+
 # `no-one-place-fragments`
 
 - Category: `Operations`

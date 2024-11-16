@@ -1,3 +1,7 @@
+---
+description: 'Require nullable fields in root types.'
+---
+
 # `require-nullable-result-in-root`
 
 💡 This rule provides

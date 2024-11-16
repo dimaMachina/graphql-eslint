@@ -40,25 +40,15 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         Pick<ESLintRuleTester.InvalidTestCase, 'errors'>)[];
     },
   ): void {
-    // @ts-expect-error -- fix later
+    // @ts-expect-error -- TODO fix me
     const { testerConfig, linter } = this;
 
     const getMessages = (
       testCase: ESLintRuleTester.InvalidTestCase,
       messages: Linter.LintMessage[],
     ) => {
-      const { options, code, filename, parserOptions } = testCase;
+      const { options, code, filename, languageOptions: _languageOptions } = testCase;
 
-      const config = {
-        parser: testerConfig.parser,
-        parserOptions: {
-          ...testerConfig.parserOptions,
-          ...parserOptions,
-        },
-        rules: {
-          [ruleId]: Array.isArray(options) ? ['error', ...options] : 'error',
-        },
-      };
       const codeFrame = indentCode(printCode(code, { line: 0, column: 0 }));
       const messageForSnapshot = ['#### ⌨️ Code', codeFrame];
 
@@ -89,7 +79,24 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
         }
       }
       if (rule.meta.fixable) {
-        const { fixed, output } = linter.verifyAndFix(code, config, filename);
+        const pluginName = 'rule-to-test';
+        const { fixed, output } = linter.verifyAndFix(
+          code,
+          {
+            ...testerConfig[1],
+            plugins: {
+              [pluginName]: {
+                rules: {
+                  [ruleId]: rule,
+                },
+              },
+            },
+            rules: {
+              [`${pluginName}/${ruleId}`]: Array.isArray(options) ? ['error', ...options] : 'error',
+            },
+          },
+          filename,
+        );
         if (fixed) {
           messageForSnapshot.push('#### 🔧 Autofix output', indentCode(printCode(output)));
         }
@@ -100,13 +107,32 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
     for (const [id, testCase] of tests.invalid.entries()) {
       testCase.name ||= `Invalid #${id + 1}`;
       testCase.code = removeTrailingBlankLines(testCase.code);
-      Object.defineProperty(testCase, 'assertMessages', {
-        value: getMessages,
-      });
+      // @ts-expect-error -- Added in `patches/eslint.patch`
+      testCase.assertMessages = getMessages;
     }
 
-    // @ts-expect-error -- fix later
-    super.run(ruleId, rule as any, tests);
+    super.run(ruleId, rule as any, {
+      // @ts-expect-error -- TODO: remove this
+      invalid: tests.invalid.map(({ parserOptions, ...testCase }) => ({
+        ...testCase,
+        languageOptions: {
+          parserOptions,
+        },
+      })),
+      // @ts-expect-error -- TODO: remove this
+      valid: tests.valid.map(_testCase => {
+        if (typeof _testCase === 'string') {
+          return _testCase;
+        }
+        const { parserOptions, ...testCase } = _testCase;
+        return {
+          ...testCase,
+          languageOptions: {
+            parserOptions,
+          },
+        };
+      }),
+    });
   }
 }
 

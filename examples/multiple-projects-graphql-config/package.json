@@ -1,16 +1,17 @@
 {
   "name": "@graphql-eslint/example-multiple-projects-graphql-config",
   "version": "0.0.0",
+  "type": "module",
   "author": "Dimitri POSTOLOV",
   "private": true,
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint --cache ."
   },
   "dependencies": {
-    "graphql": "16.8.2"
+    "graphql": "16.9.0"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
-    "eslint": "8.57.0"
+    "eslint": "9.14.0"
   }
 }

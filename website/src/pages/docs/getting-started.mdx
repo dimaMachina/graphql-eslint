@@ -1,18 +1,12 @@
+---
+sidebarTitle: 🚧 Getting Started
+---
+
 import { Callout } from '@theguild/components'
 
 # Getting Started
 
-## Installation
-
-Start by installing the plugin package, which includes everything you need:
-
-```sh npm2yarn
-npm i -D @graphql-eslint/eslint-plugin
-```
-
-<Callout type="warning">
-  Make sure you have [`graphql`](https://npmjs.com/package/graphql) dependency in your project.
-</Callout>
+<WIP />
 
 ## Configuration
 
@@ -88,8 +82,8 @@ If you are using [`graphql-config`](https://the-guild.dev/graphql/config), you a
 Alternatively, you can define `parserOptions.schema` in the `*.graphql` override in your ESLint
 config.
 
-The parser allows you to specify a json file / graphql files(s) / url / raw string to locate your
-schema (We are using `graphql-tools` to do that). Just add `parserOptions.schema` to your
+The parser allows you to specify a `.json` file / `.graphql` files(s) / url / raw string to locate
+your schema (We are using `graphql-tools` to do that). Just add `parserOptions.schema` to your
 configuration file:
 
 ```diff filename=".eslintrc.json"
@@ -140,43 +134,3 @@ just specify a glob expression(s) that points to your code/`.graphql` files:
   }
 }
 ```
-
-### Disabling Rules
-
-The `graphql-eslint` parser looks for GraphQL comments syntax (marked with `#`) and will send it to
-ESLint as directives. That means, you can use ESLint directives syntax to hint ESLint, just like in
-any other type of files.
-
-To disable ESLint for a specific line, you can do:
-
-```graphql
-# eslint-disable-next-line
-type Query {
-  foo: String!
-}
-```
-
-You can also specify specific rules to disable, apply it over the entire file,
-`eslint-disable-next-line` or current `eslint-disable-line`.
-
-You can find a list of
-[ESLint directives here](https://eslint.org/docs/latest/user-guide/configuring/rules#using-configuration-comments-1).
-
-### VSCode Integration
-
-Use
-[ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-to integrate ESLint into VSCode.
-
-For syntax highlighting you need a GraphQL extension (which may potentially have its own linting),
-for example
-[GraphQL (by GraphQL Foundation)](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
-
-## Further Reading
-
-If you wish to learn more about this project, how the parser works, how to add custom rules and more
-please refer to the below links:
-
-- [Writing Custom Rules](/docs/custom-rules)
-- [How the parser works?](/docs/getting-started/parser)
-- [`parserOptions`](/docs/getting-started/parser-options)

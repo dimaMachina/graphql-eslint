@@ -1,6 +1,19 @@
 export default {
-  index: 'Introduction',
-  'getting-started': 'Getting Started',
-  configs: 'Configs',
-  'custom-rules': 'Custom Rules',
+  index: '',
+  'getting-started': '',
+  'parser-options': '',
+  usage: '',
+  _1: {
+    type: 'separator',
+    title: 'Users',
+  },
+  configs: '',
+  'disabling-rules': '',
+  vscode: '',
+  _2: {
+    type: 'separator',
+    title: 'Developers',
+  },
+  parser: '',
+  'custom-rules': '',
 };

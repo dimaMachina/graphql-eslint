@@ -1,0 +1,20 @@
+# Disabling Rules
+
+The `graphql-eslint` parser looks for GraphQL comments syntax (marked with `#`) and will send it to
+ESLint as directives. That means, you can use ESLint directives syntax to hint ESLint, just like in
+any other type of files.
+
+To disable ESLint for a specific line, you can do:
+
+```graphql
+# eslint-disable-next-line
+type Query {
+  foo: String!
+}
+```
+
+You can also specify specific rules to disable, apply it over the entire file,
+`eslint-disable-next-line` or current `eslint-disable-line`.
+
+You can find a list of
+[ESLint directives here](https://eslint.org/docs/latest/user-guide/configuring/rules#using-configuration-comments-1).

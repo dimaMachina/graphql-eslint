@@ -1,5 +1,5 @@
 import js from '@eslint/js';
-import * as graphqlESLint from '@graphql-eslint/eslint-plugin';
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 
 export default [
   {
@@ -8,17 +8,17 @@ export default [
   },
   {
     files: ['**/*.graphql'],
-    plugins: {
-      '@graphql-eslint': graphqlESLint,
-    },
     languageOptions: {
-      parser: graphqlESLint,
+      parser: graphqlPlugin.parser,
       parserOptions: {
         graphQLConfig: {
           schema: 'schema.graphql',
           documents: ['query.graphql', 'fragment.graphql', 'fragment2.graphql'],
         },
       },
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin,
     },
     rules: {
       '@graphql-eslint/require-selections': ['error', { fieldName: '_id' }],
