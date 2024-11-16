@@ -417,16 +417,11 @@ function getIndex({
 }): number {
   // Try an exact match
   let index = groups.indexOf(getName(node));
-
+  if (index === -1 && 'selectionSet' in node && node.selectionSet) index = groups.indexOf('{');
   // Check for the fragment spread group
-  if (index === -1 && node.kind === Kind.FRAGMENT_SPREAD) {
-    index = groups.indexOf('...');
-  }
-
+  if (index === -1 && node.kind === Kind.FRAGMENT_SPREAD) index = groups.indexOf('...');
   // Check for the catch-all group
-  if (index === -1) {
-    index = groups.indexOf('*');
-  }
+  if (index === -1) index = groups.indexOf('*');
   return index;
 }
 
