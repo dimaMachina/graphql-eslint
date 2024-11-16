@@ -22,9 +22,7 @@ function withMocks({
       graphQLConfig: {
         documents: [
           filename,
-          join(CWD, '__tests__', 'mocks', 'import-fragments', 'foo-fragment.gql'),
-          join(CWD, '__tests__', 'mocks', 'import-fragments', 'bar-fragment.gql'),
-          join(CWD, '__tests__', 'mocks', 'import-fragments', 'other-path', 'baz-fragment.gql'),
+          join(CWD, '__tests__', 'mocks', 'imports-fragments', 'fragments', '**', '*.gql'),
         ],
       },
     } satisfies ParserOptionsForTests,

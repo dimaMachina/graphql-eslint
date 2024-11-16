@@ -1,6 +1,6 @@
 # Imports could have extra whitespace and double/single quotes
 
-#  import  BazFields  from  "./other-path/baz-fragment.gql"
+#  import  BazFields  from  "./fragments/other-path/baz-fragment.gql"
 
 query {
   baz {
