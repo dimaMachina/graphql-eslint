@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.10
+
+### Major Changes
+
+- [#2319](https://github.com/dimaMachina/graphql-eslint/pull/2319)
+  [`b3c73dc`](https://github.com/dimaMachina/graphql-eslint/commit/b3c73dc6f0d1de7cfb232bc0e78ab871edc247de)
+  Thanks [@maciesielka](https://github.com/maciesielka)! - Enforce `require-selections` on
+  `FragmentSpread`s within `GraphQLUnionType`s
+
 ## 4.0.0-alpha.9
 
 ### Patch Changes
