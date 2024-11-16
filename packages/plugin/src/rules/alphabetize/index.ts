@@ -94,7 +94,13 @@ const schema = {
         ...ARRAY_DEFAULT_OPTIONS,
         minItems: 2,
         description:
-          "Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt', '...']` where `...` stands for fragment spreads, and `*` stands for  everything else.",
+          [
+            "Custom order group. Example: `['...', 'id', '*', '{']` where:",
+            "- `...` stands for fragment spreads",
+            "- `id` stands for field with name `id`",
+            "- `*` stands for everything else",
+            "- `{` stands for field `selection set`"
+          ].join('\n'),
       },
     },
   },
@@ -194,7 +200,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             fields: fieldsEnum,
             values: true,
             arguments: argumentsEnum,
-            groups: ['id', '*', 'createdAt', 'updatedAt'],
+            groups: ['id', '*', '{'],
           },
         ],
         operations: [
@@ -203,7 +209,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             selections: selectionsEnum,
             variables: true,
             arguments: [Kind.FIELD, Kind.DIRECTIVE],
-            groups: ['...', 'id', '*', 'createdAt', 'updatedAt'],
+            groups: ['...', 'id', '*', '{'],
           },
         ],
       },
