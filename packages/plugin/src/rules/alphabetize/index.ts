@@ -93,14 +93,13 @@ const schema = {
       groups: {
         ...ARRAY_DEFAULT_OPTIONS,
         minItems: 2,
-        description:
-          [
-            "Order group. Example: `['...', 'id', '*', '{']` where:",
-            "- `...` stands for fragment spreads",
-            "- `id` stands for field with name `id`",
-            "- `*` stands for everything else",
-            "- `{` stands for fields `selection set`"
-          ].join('\n'),
+        description: [
+          "Order group. Example: `['...', 'id', '*', '{']` where:",
+          '- `...` stands for fragment spreads',
+          '- `id` stands for field with name `id`',
+          '- `*` stands for everything else',
+          '- `{` stands for fields `selection set`',
+        ].join('\n'),
       },
     },
   },
