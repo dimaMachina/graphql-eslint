@@ -18,7 +18,7 @@ exports[`require-import-fragment > invalid > should report fragments when there 
 
 #### 💡 Suggestion: Add import expression for "FooFields".
 
-    1 | # import FooFields from 'foo-fragment.gql'
+    1 | # import FooFields from 'fragments/foo-fragment.gql'
     2 | {
     3 |   foo {
     4 |     ...FooFields
