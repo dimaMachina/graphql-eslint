@@ -77,7 +77,6 @@ export const rule: GraphQLESLintRule = {
       'FragmentSpread > .name'(node: GraphQLESTreeNode<NameNode>) {
         const fragmentName = node.value;
         const fragmentsFromSiblings = siblings.getFragment(fragmentName);
-        console.log({ fragmentsFromSiblings })
         for (const comment of comments) {
           if (comment.type !== 'Line') continue;
 
@@ -91,7 +90,11 @@ export const rule: GraphQLESLintRule = {
           const extractedImportPath = comment.value.match(/(["'])((?:\1|.)*?)\1/)?.[2];
           if (!extractedImportPath) continue;
 
-          const importPath = path.join(path.dirname(filePath), extractedImportPath);
+          const importPath = path.join(
+            path.dirname(filePath),
+            extractedImportPath.replaceAll(/[/\\]/g, path.sep),
+          );
+
           const hasInSiblings = fragmentsFromSiblings.some(
             source => source.filePath === importPath,
           );

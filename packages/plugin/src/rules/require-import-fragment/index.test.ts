@@ -1,4 +1,4 @@
-import { join, sep } from 'node:path';
+import { join } from 'node:path';
 import { CWD } from '@/utils.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
 import { rule } from './index.js';
@@ -7,7 +7,7 @@ function withMocks({
   name,
   filename,
   errors,
-  only,
+  only = false,
 }: {
   name: string;
   filename: string;
@@ -33,21 +33,6 @@ function withMocks({
   };
 }
 
-const withMockForceLinuxDelimiter: typeof withMocks = args => {
-  const mocks = withMocks(args);
-  const { graphQLConfig } = mocks.parserOptions;
-  console.log('graphQLConfig.documents', graphQLConfig.documents);
-  // graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '/'));
-  return mocks;
-};
-
-const withMockForceWindowsDelimiter: typeof withMocks = args => {
-  const mocks = withMocks(args);
-  // const { graphQLConfig } = mocks.parserOptions;
-  // graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '\\'));
-  return mocks;
-};
-
 ruleTester.run('require-import-fragment', rule, {
   valid: [
     withMocks({
@@ -63,18 +48,7 @@ ruleTester.run('require-import-fragment', rule, {
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'same-file.gql'),
     }),
     withMocks({
-      only: true,
       name: 'should not report with correct relative path import',
-      filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
-    }),
-    withMockForceLinuxDelimiter({
-      only: true,
-      name: 'should not report with correct relative path import - forced linux style',
-      filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
-    }),
-    withMockForceWindowsDelimiter({
-      only: true,
-      name: 'should not report with correct relative path import - force widows style',
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
     }),
   ],
