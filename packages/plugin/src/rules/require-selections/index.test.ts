@@ -323,7 +323,12 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
       code: /* GraphQL */ `
         {
           noIdOrNoId2 {
-            ...UnionWithNoIdFragment
+            ...on NoId {
+              name
+            }
+            ... on NoId2 {
+              name
+            }
           }
         }
       `,

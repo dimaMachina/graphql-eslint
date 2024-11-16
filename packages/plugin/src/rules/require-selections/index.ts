@@ -198,7 +198,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
                 checkSelections(
                   fragmentSpread.selectionSet,
                   t,
-                  (selection as GraphQLESTreeNode<SelectionNode>).loc.start,
+                  loc,
                   parent,
                   checkedFragmentSpreads,
                 );
