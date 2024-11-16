@@ -57,7 +57,7 @@ exports[`require-import-fragment > invalid > should report with default import 1
 exports[`require-import-fragment > invalid > should report with named import 1`] = `
 #### ⌨️ Code
 
-      1 | #import FooFields from "bar-fragment.gql"
+      1 | #import FooFields from "./fragments/bar-fragment.gql"
       2 | query {
       3 |   foo {
       4 |     ...FooFields
@@ -73,8 +73,8 @@ exports[`require-import-fragment > invalid > should report with named import 1`]
 
 #### 💡 Suggestion: Add import expression for "FooFields".
 
-    1 | # import FooFields from 'foo-fragment.gql'
-    2 | #import FooFields from "bar-fragment.gql"
+    1 | # import FooFields from 'fragments/foo-fragment.gql'
+    2 | #import FooFields from "./fragments/bar-fragment.gql"
     3 | query {
     4 |   foo {
     5 |     ...FooFields

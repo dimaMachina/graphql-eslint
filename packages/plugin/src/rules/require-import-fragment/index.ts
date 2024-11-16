@@ -99,7 +99,7 @@ export const rule: GraphQLESLintRule = {
           source => source.filePath === filePath,
         );
         if (fragmentInSameFile) return;
-
+        console.log(fragmentsFromSiblings)
         const suggestedFilePaths = fragmentsFromSiblings.length
           ? fragmentsFromSiblings.map(o => path.relative(path.dirname(filePath), o.filePath))
           : ['CHANGE_ME.graphql'];

@@ -60,7 +60,6 @@ ruleTester.run('require-import-fragment', rule, {
       errors: [{ message: 'Expected "FooFields" fragment to be imported.' }],
     }),
     withMocks({
-      only: true,
       name: 'should report fragments when there are no import expressions',
       filename: path.resolve('__tests__', 'mocks', 'import-fragments', 'missing-import.gql'),
       errors: [{ message: 'Expected "FooFields" fragment to be imported.' }],
