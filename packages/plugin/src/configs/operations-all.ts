@@ -13,7 +13,7 @@ export = {
         selections: ['OperationDefinition', 'FragmentDefinition'],
         variables: true,
         arguments: ['Field', 'Directive'],
-        groups: ['id', '*', 'createdAt', 'updatedAt', '...'],
+        groups: ['...', 'id', '*', 'createdAt', 'updatedAt'],
       },
     ],
     '@graphql-eslint/lone-executable-definition': 'error',
