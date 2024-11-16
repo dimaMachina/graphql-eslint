@@ -36,15 +36,15 @@ function withMocks({
 const withMockForceLinuxDelimiter: typeof withMocks = args => {
   const mocks = withMocks(args);
   const { graphQLConfig } = mocks.parserOptions;
-  console.log(graphQLConfig.documents);
-  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '/'));
+  console.log('graphQLConfig.documents', graphQLConfig.documents);
+  // graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '/'));
   return mocks;
 };
 
 const withMockForceWindowsDelimiter: typeof withMocks = args => {
   const mocks = withMocks(args);
-  const { graphQLConfig } = mocks.parserOptions;
-  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '\\'));
+  // const { graphQLConfig } = mocks.parserOptions;
+  // graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '\\'));
   return mocks;
 };
 
