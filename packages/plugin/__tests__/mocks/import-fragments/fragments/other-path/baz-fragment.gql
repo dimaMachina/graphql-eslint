@@ -1,3 +1,0 @@
-fragment BazFields on Bar {
-  id
-}

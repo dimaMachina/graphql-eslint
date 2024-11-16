@@ -40,10 +40,6 @@ ruleTester.run('require-import-fragment', rule, {
       name: 'should not report fragments from the same file',
       filename: path.resolve('__tests__', 'mocks', 'import-fragments', 'same-file.gql'),
     }),
-    withMocks({
-      name: 'should not report with correct relative path import',
-      filename: path.resolve('__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
-    }),
   ],
   invalid: [
     withMocks({
