@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import path from 'node:path';
 import debugFactory from 'debug';
 import fg from 'fast-glob';
 import { GraphQLProjectConfig } from 'graphql-config';
@@ -21,7 +21,7 @@ const handleVirtualPath = (documents: Source[]): Source[] => {
     const index = (filepathMap[location] += 1);
     return {
       ...source,
-      location: resolve(location, `${index}_document.graphql`),
+      location: path.resolve(location, `${index}_document.graphql`),
     };
   });
 };

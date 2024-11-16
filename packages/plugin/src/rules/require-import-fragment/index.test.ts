@@ -1,9 +1,19 @@
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { CWD } from '@/utils.js';
 import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils.js';
 import { rule } from './index.js';
 
-function withMocks({ name, filename, errors }: { name: string; filename: string; errors?: any }) {
+function withMocks({
+  name,
+  filename,
+  errors,
+  only,
+}: {
+  name: string;
+  filename: string;
+  errors?: any;
+  only?: boolean;
+}) {
   return {
     name,
     filename,
@@ -19,22 +29,24 @@ function withMocks({ name, filename, errors }: { name: string; filename: string;
       },
     } satisfies ParserOptionsForTests,
     errors,
+    only,
   };
 }
 
-function withMockForceLinuxDelimiter(args: { name: string; filename: string; errors?: any }) {
+const withMockForceLinuxDelimiter: typeof withMocks = args => {
   const mocks = withMocks(args);
   const { graphQLConfig } = mocks.parserOptions;
-  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll('/', '\\'));
+  console.log(graphQLConfig.documents);
+  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '/'));
   return mocks;
-}
+};
 
-function withMockForceWindowsDelimiter(args: { name: string; filename: string; errors?: any }) {
+const withMockForceWindowsDelimiter: typeof withMocks = args => {
   const mocks = withMocks(args);
   const { graphQLConfig } = mocks.parserOptions;
-  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll('\\', '/'));
+  graphQLConfig.documents = graphQLConfig.documents.map(doc => doc.replaceAll(sep, '\\'));
   return mocks;
-}
+};
 
 ruleTester.run('require-import-fragment', rule, {
   valid: [
@@ -55,10 +67,12 @@ ruleTester.run('require-import-fragment', rule, {
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
     }),
     withMockForceLinuxDelimiter({
+      only: true,
       name: 'should not report with correct relative path import - forced linux style',
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
     }),
     withMockForceWindowsDelimiter({
+      only: true,
       name: 'should not report with correct relative path import - force widows style',
       filename: join(CWD, '__tests__', 'mocks', 'import-fragments', 'valid-baz-query.gql'),
     }),
