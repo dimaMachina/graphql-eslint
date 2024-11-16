@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "vitest",
+    "test": "vitest --allowOnly",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
