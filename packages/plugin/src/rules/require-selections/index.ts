@@ -187,10 +187,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
               fragmentSpread.typeCondition.name.value === rawType.name
                 ? rawType
                 : types.find(t => t.name === fragmentSpread.typeCondition.name.value)!;
-            // only include types in the union in error messaging
-            if (t.name !== rawType.name) {
-              checkedFragmentSpreads.add(fragmentSpread.name.value);
-            }
+            checkedFragmentSpreads.add(fragmentSpread.name.value);
 
             checkSelections(fragmentSpread.selectionSet, t, loc, parent, checkedFragmentSpreads);
           }

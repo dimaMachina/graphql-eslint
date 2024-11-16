@@ -184,7 +184,7 @@ exports[`require-selections > invalid > should report an error with union and no
       1 |         {
     > 2 |           userOrPost {
         |                      ^ Field \`userOrPost.id\` must be selected when it's available on a type.
-    Include it in your selection set.
+    Include it in your selection set or add to used fragment \`UnionFragment\`.
       3 |             ...UnionFragment
 `;
 
@@ -202,7 +202,7 @@ exports[`require-selections > invalid > should report an error with union and no
       1 |         {
     > 2 |           userOrPost {
         |                      ^ Field \`userOrPost.id\` must be selected when it's available on a type.
-    Include it in your selection set or add to used fragment \`UserFields\`.
+    Include it in your selection set or add to used fragments \`UnionFragment\` or \`UserFields\`.
       3 |             ...UnionFragment
 `;
 
