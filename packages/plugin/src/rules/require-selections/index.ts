@@ -6,7 +6,6 @@ import {
   GraphQLOutputType,
   GraphQLUnionType,
   Kind,
-  SelectionNode,
   SelectionSetNode,
   TypeInfo,
   visit,

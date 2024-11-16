@@ -323,7 +323,7 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
       code: /* GraphQL */ `
         {
           noIdOrNoId2 {
-            ...on NoId {
+            ... on NoId {
               name
             }
             ... on NoId2 {
