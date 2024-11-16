@@ -1,6 +1,7 @@
 {
   "name": "@graphql-eslint/eslint-plugin",
-  "version": "4.0.0-alpha.0",
+  "version": "4.0.0-alpha.9",
+  "type": "module",
   "description": "GraphQL plugin for ESLint",
   "repository": "https://github.com/B2o5T/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
@@ -8,25 +9,20 @@
   "engines": {
     "node": ">=18"
   },
-  "main": "dist/cjs/index.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "browser": "./dist/index.browser.mjs",
       "require": {
-        "types": "./dist/cjs/index.d.ts",
+        "types": "./dist/cjs/index.d.cts",
         "default": "./dist/cjs/index.js"
       },
       "import": {
-        "types": "./dist/esm/index.d.mts",
-        "default": "./dist/esm/index.js"
-      },
-      "default": {
-        "types": "./dist/esm/index.d.mts",
+        "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       }
     }
   },
+  "types": "dist/esm/index.d.ts",
   "keywords": [
     "eslint",
     "eslintplugin",
@@ -44,24 +40,25 @@
   },
   "dependencies": {
     "@graphql-tools/code-file-loader": "^8.0.0",
-    "@graphql-tools/graphql-tag-pluck": "^8.0.0",
+    "@graphql-tools/graphql-tag-pluck": "8.3.4",
     "@graphql-tools/utils": "^10.0.0",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
-    "graphql-config": "^5.0.0",
+    "graphql-config": "^5.1.0",
     "graphql-depth-limit": "^1.1.0",
     "lodash.lowercase": "^4.3.0"
   },
   "devDependencies": {
     "@theguild/eslint-rule-tester": "workspace:*",
     "@types/debug": "4.1.12",
-    "@types/eslint": "8.56.5",
-    "@types/estree": "1.0.5",
+    "@types/eslint": "9.6.1",
+    "@types/estree": "1.0.6",
     "@types/graphql-depth-limit": "1.1.6",
     "@types/json-schema": "7.0.15",
     "@types/lodash.lowercase": "4.3.9",
-    "graphql": "16.8.1",
-    "json-schema-to-ts": "2.12.0"
+    "graphql": "16.9.0",
+    "json-schema-to-ts": "3.1.1",
+    "vite-tsconfig-paths": "^5.0.0"
   },
   "publishConfig": {
     "directory": "dist",

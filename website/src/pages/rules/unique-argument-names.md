@@ -1,3 +1,8 @@
+---
+description:
+  'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.'
+---
+
 # `unique-argument-names`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

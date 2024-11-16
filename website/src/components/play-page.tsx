@@ -3,8 +3,7 @@ import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { ConfigName, flatConfigs, rules } from '@graphql-eslint/eslint-plugin';
-import graphqlESLintPkgJson from '@graphql-eslint/eslint-plugin/package.json';
+import { ConfigName, configs, parser, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
@@ -102,7 +101,7 @@ export function PlayPage(): ReactElement {
     <div
       className={clsx(
         'h-[calc(100dvh-var(--nextra-navbar-height))]',
-        'flex flex-row bg-gradient-to-br from-fuchsia-200/60 via-pink-300/60 to-purple-300/60 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
+        'flex bg-gradient-to-br from-fuchsia-200/60 via-pink-300/60 to-purple-300/60 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]',
       )}
     >
       <div className="nextra-scrollbar flex w-72 flex-col gap-4 overflow-y-auto p-5 text-xs">
@@ -114,7 +113,7 @@ export function PlayPage(): ReactElement {
           </span>
           <span className="flex justify-between text-sm">
             <span>GraphQL-ESLint</span>
-            <span>{graphqlESLintPkgJson.version}</span>
+            <span>{parser.meta.version}</span>
           </span>
         </div>
         <div>
@@ -164,11 +163,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(schemaConfig && flatConfigs[schemaConfig].rules),
+          ...(schemaConfig && configs[`flat/${schemaConfig}`].rules),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
-              // @ts-expect-error -- TODO: fix type error
-              flatConfigs['schema-all'].rules[`@graphql-eslint/${schemaRule}`],
+              configs['flat/schema-all'].rules[`@graphql-eslint/${schemaRule}`],
           }),
         }}
         onChange={setSchema}
@@ -181,11 +179,10 @@ export function PlayPage(): ReactElement {
         documents={operation}
         selectedRules={{
           // @ts-expect-error -- TODO: fix type error
-          ...(operationConfig && flatConfigs[operationConfig].rules),
+          ...(operationConfig && configs[`flat/${operationConfig}`].rules),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
-              // @ts-expect-error -- TODO: fix type error
-              flatConfigs['operations-all'].rules[`@graphql-eslint/${operationRule}`],
+              configs['flat/operations-all'].rules[`@graphql-eslint/${operationRule}`],
           }),
         }}
         onChange={setOperation}

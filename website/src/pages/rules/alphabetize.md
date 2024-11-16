@@ -1,3 +1,9 @@
+---
+description:
+  'Enforce arrange in alphabetical order for type fields, enum values, input object fields,
+  operation selections and more.'
+---
+
 # `alphabetize`
 
 🔧 The `--fix` option on the
@@ -159,8 +165,12 @@ Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `dir
 
 ### `groups` (array)
 
-Custom order group. Example: `['id', '*', 'createdAt', 'updatedAt']` where `*` says for everything
-else.
+Custom order group. Example: `['...', 'id', '*', '{']` where:
+
+- `...` stands for fragment spreads
+- `id` stands for field with name `id`
+- `*` stands for everything else
+- `{` stands for field `selection set`
 
 The object is an array with all elements of the type `string`.
 

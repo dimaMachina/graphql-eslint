@@ -1,22 +1,23 @@
-// @ts-expect-error -- add `"type": "module"` to `package.json` to fix this
 import { RuleTester } from '@theguild/eslint-rule-tester';
-import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation';
-import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils';
+import { GRAPHQL_JS_VALIDATIONS } from '../src/rules/graphql-js-validation.js';
+import { DEFAULT_CONFIG, ParserOptionsForTests } from './test-utils.js';
 
 const ruleTester = new RuleTester<ParserOptionsForTests>({
-  ...DEFAULT_CONFIG,
-  parserOptions: {
-    graphQLConfig: {
-      schema: /* GraphQL */ `
-        type User {
-          id: ID
-          age: Int
-        }
+  languageOptions: {
+    ...DEFAULT_CONFIG.languageOptions,
+    parserOptions: {
+      graphQLConfig: {
+        schema: /* GraphQL */ `
+          type User {
+            id: ID
+            age: Int
+          }
 
-        type Query {
-          user: User
-        }
-      `,
+          type Query {
+            user: User
+          }
+        `,
+      },
     },
   },
 });

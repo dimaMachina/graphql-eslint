@@ -1,3 +1,4 @@
+// @ts-expect-error -- for cjs
 export = {
   parser: '@graphql-eslint/eslint-plugin',
   plugins: ['@graphql-eslint'],

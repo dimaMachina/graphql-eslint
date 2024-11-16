@@ -1,4 +1,4 @@
-import { parseForESLint } from '../src';
+import { parseForESLint } from '../src/parser.js';
 
 describe('Parser', () => {
   it('parseForESLint() should return ast and tokens', () => {

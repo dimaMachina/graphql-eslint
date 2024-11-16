@@ -1,4 +1,4 @@
-#import FooFields from "bar-fragment.gql"
+#import FooFields from "./fragments/bar-fragment.gql"
 query {
   foo {
     ...FooFields

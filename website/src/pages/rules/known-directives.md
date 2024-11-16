@@ -1,3 +1,9 @@
+---
+description:
+  'A GraphQL document is only valid if all `@directive`s are known by the schema and legally
+  positioned.'
+---
+
 # `known-directives`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and
