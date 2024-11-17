@@ -99,7 +99,7 @@ ruleTester.run('no-unused-fields', rule, {
       },
     },
     {
-      name: 'should allow fields if they are ignored',
+      name: 'should do not report unused fields for Relay',
       options: example!.usage,
       code: RELAY_SCHEMA,
       parserOptions: {
