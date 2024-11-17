@@ -66,10 +66,7 @@ const RELAY_QUERY = /* GraphQL */ `
 `;
 
 const RELAY_DEFAULT_IGNORED_FIELD_SELECTORS = [
-  '[parent.name.value=PageInfo][name.value=endCursor]',
-  '[parent.name.value=PageInfo][name.value=startCursor]',
-  '[parent.name.value=PageInfo][name.value=hasNextPage]',
-  '[parent.name.value=PageInfo][name.value=hasPreviousPage]',
+  '[parent.name.value=PageInfo][name.value=/(endCursor|startCursor|hasNextPage|hasPreviousPage)/]',
   '[parent.name.value=/Edge$/][name.value=cursor]',
   '[parent.name.value=/Connection$/][name.value=pageInfo]',
 ];
