@@ -79,7 +79,8 @@ const schema = {
         description: [
           'Fields that will be ignored and are allowed to be unused.',
           '',
-          '> These fields are defined by ESLint [`selectors`](https://eslint.org/docs/developer-guide/selectors). Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
+          '> These fields are defined by ESLint [`selectors`](https://eslint.org/docs/developer-guide/selectors).',
+          '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
         ].join('\n'),
         items: {
           type: 'string',
@@ -128,6 +129,15 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
   usedFieldsCache.set(schema, usedFields);
   return usedFields;
 }
+
+const RELAY_DEFAULT_IGNORED_FIELD_SELECTORS = [
+  '[parent.name.value=PageInfo][name.value=endCursor]',
+  '[parent.name.value=PageInfo][name.value=startCursor]',
+  '[parent.name.value=PageInfo][name.value=hasNextPage]',
+  '[parent.name.value=PageInfo][name.value=hasPreviousPage]',
+  '[parent.name.value=/Edge$/][name.value=cursor]',
+  '[parent.name.value=/Connection$/][name.value=pageInfo]',
+];
 
 export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
@@ -186,18 +196,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct (ignoring fields)',
-          usage: [
-            {
-              ignoredFieldSelectors: [
-                '[parent.name.value=PageInfo][name.value=endCursor]',
-                '[parent.name.value=PageInfo][name.value=startCursor]',
-                '[parent.name.value=PageInfo][name.value=hasNextPage]',
-                '[parent.name.value=PageInfo][name.value=hasPreviousPage]',
-                '[parent.name.value=/Edge$/][name.value=cursor]',
-                '[parent.name.value=/Connection$/][name.value=pageInfo]',
-              ],
-            },
-          ],
+          usage: [{ ignoredFieldSelectors: RELAY_DEFAULT_IGNORED_FIELD_SELECTORS }],
           code: /* GraphQL */ `
             # schema
             ${RELAY_SCHEMA}
