@@ -1,11 +1,19 @@
+import { configs } from './configs/index.js';
+import { parseForESLint, parser } from './parser.js';
 import { processor } from './processor.js';
+import { rules } from './rules/index.js';
 
-export { parseForESLint } from './parser.js';
-export { rules } from './rules/index.js';
 export * from './types.js';
 export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils.js';
 
 export const processors = { graphql: processor };
 
-export { configs } from './configs/index.js';
-export { flatConfigs } from './flat-configs.js';
+export { rules, configs, parser, parseForESLint };
+
+// eslint-disable-next-line import/no-default-export -- It's common practice for ESLint plugins that supports Flat config to use the default export
+export default {
+  parser,
+  processor,
+  rules,
+  configs,
+};

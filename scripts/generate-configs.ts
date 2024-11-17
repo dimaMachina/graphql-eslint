@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
 import prettier from 'prettier';
 import { CategoryType, GraphQLESLintRule } from '../packages/plugin/src/index.js';
-import utils from '../packages/plugin/src/utils.js';
+import { camelCase } from '../packages/plugin/src/utils.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -22,7 +22,8 @@ type WriteFile = {
 
 const writeFormattedFile: WriteFile = async (filePath, code) => {
   if (filePath.startsWith('configs')) {
-    code = `export = ${JSON.stringify(code)}`;
+    code = `// @ts-expect-error -- for cjs
+export = ${JSON.stringify(code)}`;
   }
 
   const formattedCode = [
@@ -40,21 +41,21 @@ const writeFormattedFile: WriteFile = async (filePath, code) => {
   console.log(`✅  ${chalk.green(filePath)} file generated`);
 };
 
-const ruleFilenames = readdirSync(join(SRC_PATH, 'rules'))
-  .filter(filename => filename.endsWith('.ts') && !IGNORE_FILES.includes(filename))
-  .map(filename => filename.replace(/\.ts$/, ''));
+const ruleFilenames = readdirSync(join(SRC_PATH, 'rules')).filter(
+  filename => !IGNORE_FILES.includes(filename),
+);
 
 async function generateRules(): Promise<void> {
   const code = [
     "import { GRAPHQL_JS_VALIDATIONS } from './graphql-js-validation.js'",
     ...ruleFilenames.map(
-      ruleName => `import { rule as ${utils.camelCase(ruleName)} } from './${ruleName}.js'`,
+      ruleName => `import { rule as ${camelCase(ruleName)} } from './${ruleName}/index.js'`,
     ),
     BR,
     'export const rules = {',
     '...GRAPHQL_JS_VALIDATIONS,',
     ruleFilenames.map(ruleName =>
-      ruleName.includes('-') ? `'${ruleName}': ${utils.camelCase(ruleName)}` : ruleName,
+      ruleName.includes('-') ? `'${ruleName}': ${camelCase(ruleName)}` : ruleName,
     ),
     '}',
   ].join('\n');

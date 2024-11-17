@@ -1,3 +1,7 @@
+---
+description: 'A GraphQL fragment is only valid when it does not have cycles in fragments usage.'
+---
+
 # `no-fragment-cycles`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

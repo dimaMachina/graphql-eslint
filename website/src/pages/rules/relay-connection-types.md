@@ -1,3 +1,7 @@
+---
+description: 'Set of rules to follow Relay specification for Connection types.'
+---
+
 # `relay-connection-types`
 
 - Category: `Schema`

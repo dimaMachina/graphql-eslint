@@ -1,3 +1,7 @@
+---
+description: 'Disallow using root types `mutation` and/or `subscription`.'
+---
+
 # `no-root-type`
 
 💡 This rule provides

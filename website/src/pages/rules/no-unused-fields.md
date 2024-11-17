@@ -1,3 +1,7 @@
+---
+description: 'Requires all fields to be used at some level by siblings operations.'
+---
+
 # `no-unused-fields`
 
 💡 This rule provides

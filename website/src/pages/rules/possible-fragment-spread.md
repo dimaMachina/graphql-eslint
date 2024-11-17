@@ -1,3 +1,10 @@
+---
+description:
+  'A fragment spread is only valid if the type condition could ever possibly be true: if there is a
+  non-empty intersection of the possible parent types, and possible types which pass the type
+  condition.'
+---
+
 # `possible-fragment-spread`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

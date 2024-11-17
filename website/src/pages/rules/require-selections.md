@@ -1,3 +1,7 @@
+---
+description: 'Enforce selecting specific fields when they are available on the GraphQL type.'
+---
+
 # `require-selections`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

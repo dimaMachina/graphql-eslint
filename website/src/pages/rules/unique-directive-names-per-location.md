@@ -1,3 +1,9 @@
+---
+description:
+  'A GraphQL document is only valid if all non-repeatable directives at a given location are
+  uniquely named.'
+---
+
 # `unique-directive-names-per-location`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` and

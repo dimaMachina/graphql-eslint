@@ -1,3 +1,9 @@
+---
+description:
+  'A GraphQL document is only valid for execution if all definitions are either operation or
+  fragment definitions.'
+---
+
 # `executable-definitions`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file

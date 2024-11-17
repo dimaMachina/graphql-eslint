@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "module": "Node16",
+    "module": "nodenext",
     "moduleResolution": "node16",
     "declaration": false,
     "noEmit": true,
@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {
+      "@/*": ["./src/*"],
       "@graphql-eslint/eslint-plugin": ["./src/index.ts"]
     }
   },

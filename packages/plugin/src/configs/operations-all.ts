@@ -2,6 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
  */
 
+// @ts-expect-error -- for cjs
 export = {
   extends: './configs/operations-recommended',
   rules: {
@@ -12,7 +13,7 @@ export = {
         selections: ['OperationDefinition', 'FragmentDefinition'],
         variables: true,
         arguments: ['Field', 'Directive'],
-        groups: ['id', '*', 'createdAt', 'updatedAt'],
+        groups: ['...', 'id', '*', '{'],
       },
     ],
     '@graphql-eslint/lone-executable-definition': 'error',

@@ -1,3 +1,7 @@
+---
+description: 'Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.'
+---
+
 # `no-hashtag-description`
 
 ✅ The `"extends": "plugin:@graphql-eslint/schema-recommended"` property in a configuration file

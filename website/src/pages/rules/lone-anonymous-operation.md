@@ -1,3 +1,9 @@
+---
+description:
+  'A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if
+  it contains only that one operation definition.'
+---
+
 # `lone-anonymous-operation`
 
 ✅ The `"extends": "plugin:@graphql-eslint/operations-recommended"` property in a configuration file
