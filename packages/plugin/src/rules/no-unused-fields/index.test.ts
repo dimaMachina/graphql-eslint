@@ -51,7 +51,7 @@ const ruleTester = new RuleTester<ParserOptionsForTests>({
 });
 
 const example = rule.meta.docs!.examples!.find(example => example.title.includes('ignoring'));
-const [RELAY_SCHEMA, RELAY_QUERY] = example!.code.split('# query');
+const [RELAY_SCHEMA, RELAY_QUERY] = example!.code.split('### 2️⃣ YOUR QUERY');
 
 ruleTester.run('no-unused-fields', rule, {
   valid: [
