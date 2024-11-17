@@ -430,6 +430,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     };
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
+      if (node.parent.kind === 'Field' && node.parent.alias !== node) {
+        return;
+      }
       const suggestedName = node.value.replace(isLeading ? /^_+/ : /_+$/, '');
       report(node, `${isLeading ? 'Leading' : 'Trailing'} underscores are not allowed`, [
         suggestedName,
@@ -439,14 +442,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     const listeners: GraphQLESLintRuleListener = {};
 
     if (!allowLeadingUnderscore) {
-      listeners[
-        'Name[value=/^_/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'
-      ] = checkUnderscore(true);
+      listeners['Name[value=/^_/]'] = checkUnderscore(true);
     }
     if (!allowTrailingUnderscore) {
-      listeners[
-        'Name[value=/_$/]:matches([parent.kind!=Field], [parent.kind=Field][parent.alias])'
-      ] = checkUnderscore(false);
+      listeners['Name[value=/_$/]'] = checkUnderscore(false);
     }
 
     const selectors = new Set(
