@@ -138,16 +138,14 @@ E.g. The following selector will ignore all the relay pagination fields for ever
 in the schema:
 
 ```json
-{
-  "ignoredFieldSelectors": [
-    "[parent.name.value=PageInfo][name.value=endCursor]",
-    "[parent.name.value=PageInfo][name.value=startCursor]",
-    "[parent.name.value=PageInfo][name.value=hasNextPage]",
-    "[parent.name.value=PageInfo][name.value=hasPreviousPage]",
-    "[parent.name.value=/Edge$/][name.value=cursor]",
-    "[parent.name.value=/Connection$/][name.value=pageInfo]"
-  ]
-}
+[
+  "[parent.name.value=PageInfo][name.value=endCursor]",
+  "[parent.name.value=PageInfo][name.value=startCursor]",
+  "[parent.name.value=PageInfo][name.value=hasNextPage]",
+  "[parent.name.value=PageInfo][name.value=hasPreviousPage]",
+  "[parent.name.value=/Edge$/][name.value=cursor]",
+  "[parent.name.value=/Connection$/][name.value=pageInfo]"
+]
 ```
 
 > These fields are defined by ESLint
