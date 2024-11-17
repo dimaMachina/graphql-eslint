@@ -3,7 +3,7 @@ import { GraphQLProjectConfig } from 'graphql-config';
 import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
-import { GraphQLESLintRule, GraphQLESLintRuleListener, GraphQLESTreeNode } from '../../types.js';
+import { GraphQLESLintRule, GraphQLESTreeNode } from '../../types.js';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';

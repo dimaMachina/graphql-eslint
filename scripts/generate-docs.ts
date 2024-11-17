@@ -55,7 +55,9 @@ async function generateDocs(): Promise<void> {
   const prettierConfigTs = await prettier.resolveConfig('./_meta.ts');
 
   const result = Object.entries(rules).map(async ([ruleName, rule]) => {
-    const frontMatterDescription = rule.meta.docs!.description!.replace(/\n.*/g, '').replace(MARKDOWN_LINK_RE, '$1')
+    const frontMatterDescription = rule.meta
+      .docs!.description!.replace(/\n.*/g, '')
+      .replace(MARKDOWN_LINK_RE, '$1');
     const blocks: string[] = [
       '---',
       `description: ${JSON.stringify(frontMatterDescription)}`,
