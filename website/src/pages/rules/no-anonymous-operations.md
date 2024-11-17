@@ -19,8 +19,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require name for your GraphQL operations. This is useful since most GraphQL client libraries are
-using the operation name for caching purposes.
+{frontMatter.description}
 
 ## Usage Examples
 

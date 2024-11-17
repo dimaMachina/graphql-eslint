@@ -14,7 +14,7 @@ enables this rule.
 - Requires GraphQL Operations: `true`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforce unique fragment names across your project.
+{frontMatter.description}
 
 ## Usage Examples
 

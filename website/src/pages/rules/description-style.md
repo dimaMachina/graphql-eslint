@@ -17,7 +17,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require all comments to follow the same style (either block or inline).
+{frontMatter.description}
 
 ## Usage Examples
 

@@ -11,7 +11,7 @@ description: 'This rule allows you to enforce that the file name should match th
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-This rule allows you to enforce that the file name should match the operation name.
+{frontMatter.description}
 
 ## Usage Examples
 

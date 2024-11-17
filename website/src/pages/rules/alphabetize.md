@@ -17,8 +17,7 @@ fix some of the problems reported by this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation
-selections and more.
+{frontMatter.description}
 
 ## Usage Examples
 

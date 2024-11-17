@@ -14,7 +14,7 @@ description: 'Disallow using root types `mutation` and/or `subscription`.'
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Disallow using root types `mutation` and/or `subscription`.
+{frontMatter.description}
 
 ## Usage Examples
 

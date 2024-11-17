@@ -14,7 +14,7 @@ description: 'Avoid scalar result type on mutation type to make sure to return a
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Avoid scalar result type on mutation type to make sure to return a valid state.
+{frontMatter.description}
 
 ## Usage Examples
 

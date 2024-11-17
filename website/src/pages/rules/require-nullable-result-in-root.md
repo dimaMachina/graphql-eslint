@@ -14,7 +14,7 @@ description: 'Require nullable fields in root types.'
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require nullable fields in root types.
+{frontMatter.description}
 
 ## Usage Examples
 

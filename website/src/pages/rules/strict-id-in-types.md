@@ -16,8 +16,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Requires output types to have one unique identifier unless they do not have a logical one.
-Exceptions can be used to ignore output types that do not have unique identifiers.
+{frontMatter.description}
 
 ## Usage Examples
 

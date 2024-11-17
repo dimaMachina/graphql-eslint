@@ -17,7 +17,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforce that deprecated fields or enum values are not in use by operations.
+{frontMatter.description}
 
 ## Usage Examples
 

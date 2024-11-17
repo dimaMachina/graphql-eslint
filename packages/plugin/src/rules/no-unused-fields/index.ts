@@ -65,6 +65,15 @@ const RELAY_QUERY = /* GraphQL */ `
   }
 `;
 
+const RELAY_DEFAULT_IGNORED_FIELD_SELECTORS = [
+  '[parent.name.value=PageInfo][name.value=endCursor]',
+  '[parent.name.value=PageInfo][name.value=startCursor]',
+  '[parent.name.value=PageInfo][name.value=hasNextPage]',
+  '[parent.name.value=PageInfo][name.value=hasPreviousPage]',
+  '[parent.name.value=/Edge$/][name.value=cursor]',
+  '[parent.name.value=/Connection$/][name.value=pageInfo]',
+];
+
 const schema = {
   type: 'array',
   maxItems: 1,
@@ -78,6 +87,10 @@ const schema = {
         minItems: 1,
         description: [
           'Fields that will be ignored and are allowed to be unused.',
+          'E.g. following selector will ignores all the relay pagination fields for every connection exposed in schema:',
+          '```json',
+          JSON.stringify(RELAY_DEFAULT_IGNORED_FIELD_SELECTORS, null, 2),
+          '```',
           '',
           '> These fields are defined by ESLint [`selectors`](https://eslint.org/docs/developer-guide/selectors).',
           '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
@@ -129,15 +142,6 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
   usedFieldsCache.set(schema, usedFields);
   return usedFields;
 }
-
-const RELAY_DEFAULT_IGNORED_FIELD_SELECTORS = [
-  '[parent.name.value=PageInfo][name.value=endCursor]',
-  '[parent.name.value=PageInfo][name.value=startCursor]',
-  '[parent.name.value=PageInfo][name.value=hasNextPage]',
-  '[parent.name.value=PageInfo][name.value=hasPreviousPage]',
-  '[parent.name.value=/Edge$/][name.value=cursor]',
-  '[parent.name.value=/Connection$/][name.value=pageInfo]',
-];
 
 export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {

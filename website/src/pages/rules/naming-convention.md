@@ -18,7 +18,7 @@ rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require names to follow specified conventions.
+{frontMatter.description}
 
 ## Usage Examples
 

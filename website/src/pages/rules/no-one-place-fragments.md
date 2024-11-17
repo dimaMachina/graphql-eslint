@@ -11,7 +11,7 @@ description: 'Disallow fragments that are used only in one place.'
 - Requires GraphQL Operations: `true`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Disallow fragments that are used only in one place.
+{frontMatter.description}
 
 ## Usage Examples
 

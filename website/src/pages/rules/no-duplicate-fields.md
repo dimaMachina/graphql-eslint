@@ -19,8 +19,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Checks for duplicate fields in selection set, variables in operation definition, or in arguments set
-of a field.
+{frontMatter.description}
 
 ## Usage Examples
 
