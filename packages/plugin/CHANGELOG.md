@@ -1,5 +1,15 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.11
+
+### Major Changes
+
+- [#2281](https://github.com/dimaMachina/graphql-eslint/pull/2281)
+  [`c53cb4e`](https://github.com/dimaMachina/graphql-eslint/commit/c53cb4e8e462f65e880cb700020602081632503c)
+  Thanks [@maciesielka](https://github.com/maciesielka)! - Add new config option
+  `ignoredFieldSelectors` to `no-unused-fields` rule to ignore all the relay pagination fields for
+  every connection exposed in schema for example
+
 ## 4.0.0-alpha.10
 
 ### Major Changes
