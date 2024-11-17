@@ -90,23 +90,6 @@ const DOCUMENT_WITH_UNION = /* GraphQL */ `
 ruleTester.run<RuleOptions, true>('require-selections', rule, {
   valid: [
     {
-      name: 'should completely ignore FragmentDefinition',
-      code: /* GraphQL */ `
-        fragment UserFields on User {
-          name
-          posts {
-            title
-          }
-        }
-      `,
-      parserOptions: {
-        graphQLConfig: {
-          schema: USER_POST_SCHEMA,
-          documents: '{ foo }',
-        },
-      },
-    },
-    {
       name: "should ignore checking selections on OperationDefinition as it's redundant check",
       code: '{ foo }',
       parserOptions: {
@@ -499,6 +482,24 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
           `,
         },
       },
+    },
+    {
+      name: 'should not ignore FragmentDefinition',
+      code: /* GraphQL */ `
+        fragment UserFields on User {
+          name
+          posts {
+            title
+          }
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: USER_POST_SCHEMA,
+          documents: '{ foo }',
+        },
+      },
+      errors: 2
     },
   ],
 });

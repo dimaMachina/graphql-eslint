@@ -119,7 +119,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
     // Check selections only in OperationDefinition,
     // skip selections of OperationDefinition and InlineFragment
     const selector =
-      'OperationDefinition SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
+      'SelectionSet[parent.kind!=/(^OperationDefinition|InlineFragment)$/]';
     const typeInfo = new TypeInfo(schema);
 
     function checkFragments(node: GraphQLESTreeNode<SelectionSetNode>): void {
