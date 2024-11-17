@@ -38,6 +38,50 @@ exports[`require-selections > invalid > Invalid #2 1`] = `
     1 | { hasId { name id } }
 `;
 
+exports[`require-selections > invalid > should not ignore FragmentDefinition 1`] = `
+#### ⌨️ Code
+
+      1 |         fragment UserFields on User {
+      2 |           name
+      3 |           posts {
+      4 |             title
+      5 |           }
+      6 |         }
+
+#### ❌ Error 1/2
+
+    > 1 |         fragment UserFields on User {
+        |                                     ^ Field \`UserFields.id\` must be selected when it's available on a type.
+    Include it in your selection set.
+      2 |           name
+
+#### 💡 Suggestion: Add \`id\` selection
+
+    1 |         fragment UserFields on User {
+    2 |           id name
+    3 |           posts {
+    4 |             title
+    5 |           }
+    6 |         }
+
+#### ❌ Error 2/2
+
+      2 |           name
+    > 3 |           posts {
+        |                 ^ Field \`posts.id\` must be selected when it's available on a type.
+    Include it in your selection set.
+      4 |             title
+
+#### 💡 Suggestion: Add \`id\` selection
+
+    1 |         fragment UserFields on User {
+    2 |           name
+    3 |           posts {
+    4 |             id title
+    5 |           }
+    6 |         }
+`;
+
 exports[`require-selections > invalid > should not work with n nested fragments if you never get the id 1`] = `
 #### ⌨️ Code
 
