@@ -156,7 +156,7 @@ async function generateDocs(): Promise<void> {
       );
     }
     return {
-      path: resolve(RULES_PATH, `${ruleName}.md`),
+      path: resolve(RULES_PATH, `${ruleName}.mdx`),
       content: blocks.join('\n'),
     };
   });
