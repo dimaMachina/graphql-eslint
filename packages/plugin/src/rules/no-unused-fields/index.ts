@@ -1,12 +1,69 @@
 import { FieldDefinitionNode, GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
-import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLProjectConfig } from 'graphql-config';
+import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
-import { GraphQLESLintRule, GraphQLESLintRuleListener, GraphQLESTreeNode } from "../../types.js";
+import { GraphQLESLintRule, GraphQLESLintRuleListener, GraphQLESTreeNode } from '../../types.js';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';
+
+const RELAY_SCHEMA = /* GraphQL */ `
+  # Root Query Type
+  type Query {
+    user: User
+  }
+
+  # User Type
+  type User {
+    id: ID!
+    name: String!
+    friends(first: Int, after: String): FriendConnection!
+  }
+
+  # FriendConnection Type (Relay Connection)
+  type FriendConnection {
+    edges: [FriendEdge]
+    pageInfo: PageInfo!
+  }
+
+  # FriendEdge Type
+  type FriendEdge {
+    cursor: String!
+    node: Friend!
+  }
+
+  # Friend Type
+  type Friend {
+    id: ID!
+    name: String!
+  }
+
+  # PageInfo Type (Relay Pagination)
+  type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
+  }
+`;
+
+const RELAY_QUERY = /* GraphQL */ `
+  query {
+    user {
+      id
+      name
+      friends(first: 10) {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`;
 
 const schema = {
   type: 'array',
@@ -26,7 +83,7 @@ const schema = {
         ].join('\n'),
         items: {
           type: 'string',
-          pattern: '^FieldDefinition(.+)$',
+          pattern: '^\\[(.+)]$',
         },
       },
     },
@@ -129,24 +186,24 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct (ignoring fields)',
-          usage: [{ ignoredFieldSelectors: ['FieldDefinition[name.value=lastName]'] }],
+          usage: [
+            {
+              ignoredFieldSelectors: [
+                '[parent.name.value=PageInfo][name.value=endCursor]',
+                '[parent.name.value=PageInfo][name.value=startCursor]',
+                '[parent.name.value=PageInfo][name.value=hasNextPage]',
+                '[parent.name.value=PageInfo][name.value=hasPreviousPage]',
+                '[parent.name.value=/Edge$/][name.value=cursor]',
+                '[parent.name.value=/Connection$/][name.value=pageInfo]',
+              ],
+            },
+          ],
           code: /* GraphQL */ `
-            type User {
-              id: ID!
-              firstName: String
-              lastName: String
-            }
+            # schema
+            ${RELAY_SCHEMA}
 
-            type Query {
-              me: User
-            }
-
-            query {
-              me {
-                id
-                firstName
-              }
-            }
+            # query
+            ${RELAY_QUERY}
           `,
         },
       ],
@@ -164,37 +221,33 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       (acc, selector) => `${acc}:not(${selector})`,
       'FieldDefinition',
     );
-
-    const listener: GraphQLESLintRuleListener = (node: GraphQLESTreeNode<FieldDefinitionNode>) => {
-      const fieldName = node.name.value;
-      const parentTypeName = node.parent.name.value;
-      const isUsed = usedFields[parentTypeName]?.has(fieldName);
-
-      if (isUsed) {
-        return;
-      }
-
-      context.report({
-        node: node.name,
-        messageId: RULE_ID,
-        data: { fieldName },
-        suggest: [
-          {
-            desc: `Remove \`${fieldName}\` field`,
-            fix(fixer) {
-              const sourceCode = context.getSourceCode() as any;
-              const tokenBefore = sourceCode.getTokenBefore(node);
-              const tokenAfter = sourceCode.getTokenAfter(node);
-              const isEmptyType = tokenBefore.type === '{' && tokenAfter.type === '}';
-              return fixer.remove((isEmptyType ? node.parent : node) as any);
-            },
-          },
-        ],
-      });
-    };
-
     return {
-      [selector]: listener,
+      [selector](node: GraphQLESTreeNode<FieldDefinitionNode>) {
+        const fieldName = node.name.value;
+        const parentTypeName = node.parent.name.value;
+        const isUsed = usedFields[parentTypeName]?.has(fieldName);
+        if (isUsed) {
+          return;
+        }
+
+        context.report({
+          node: node.name,
+          messageId: RULE_ID,
+          data: { fieldName },
+          suggest: [
+            {
+              desc: `Remove \`${fieldName}\` field`,
+              fix(fixer) {
+                const sourceCode = context.getSourceCode() as any;
+                const tokenBefore = sourceCode.getTokenBefore(node);
+                const tokenAfter = sourceCode.getTokenAfter(node);
+                const isEmptyType = tokenBefore.type === '{' && tokenAfter.type === '}';
+                return fixer.remove((isEmptyType ? node.parent : node) as any);
+              },
+            },
+          ],
+        });
+      },
     };
   },
 };

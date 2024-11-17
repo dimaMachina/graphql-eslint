@@ -95,7 +95,7 @@ The schema defines the following properties:
 Fields that will be ignored and are allowed to be unused.
 
 > These fields are defined by ESLint
-> [`selectors`](https://eslint.org/docs/developer-guide/selectors) . Paste or drop code into the
+> [`selectors`](https://eslint.org/docs/developer-guide/selectors). Paste or drop code into the
 > editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your
 > selector.
 

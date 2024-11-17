@@ -50,6 +50,9 @@ const ruleTester = new RuleTester<ParserOptionsForTests>({
   },
 });
 
+const example = rule.meta.docs!.examples!.find(example => example.title.includes('ignoring'));
+const [RELAY_SCHEMA, RELAY_QUERY] = example!.code.split('# query');
+
 ruleTester.run('no-unused-fields', rule, {
   valid: [
     {
@@ -97,22 +100,12 @@ ruleTester.run('no-unused-fields', rule, {
     },
     {
       name: 'should allow fields if they are ignored',
-      options: [{ ignoredFieldSelectors: ['FieldDefinition[name.value=firstName]'] }],
-      code: /* GraphQL */ `
-        type User {
-          id: ID!
-          firstName: String
-        }
-      `,
+      options: example!.usage,
+      code: RELAY_SCHEMA,
       parserOptions: {
         graphQLConfig: {
-          documents: /* GraphQL */ `
-            {
-              user(id: 1) {
-                id
-              }
-            }
-          `,
+          documents: RELAY_QUERY,
+          schema: RELAY_SCHEMA,
         },
       },
     },
