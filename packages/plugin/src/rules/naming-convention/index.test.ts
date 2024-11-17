@@ -109,7 +109,9 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       code: 'query { foo }',
       options: [{ OperationDefinition: { style: 'PascalCase' } }],
     },
-    '{ test { __typename ok_ } }',
+    {
+      code: '{ test { __typename ok_ } }',
+    },
     {
       name: 'should ignore fields',
       code: /* GraphQL */ `
@@ -208,6 +210,17 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
           },
         },
       ],
+    },
+    {
+      name: 'should not fail when aliasing underscore fields',
+      code: /* GraphQL */ `
+        {
+          test {
+            bar: __foo
+            foo: bar__
+          }
+        }
+      `,
     },
   ],
   invalid: [
