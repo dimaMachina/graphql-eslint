@@ -16,8 +16,7 @@ description:
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require deletion date on `@deprecated` directive. Suggest removing deprecated things after
-deprecated date.
+{frontMatter.description}
 
 ## Usage Examples
 

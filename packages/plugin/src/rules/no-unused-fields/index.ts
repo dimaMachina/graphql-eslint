@@ -1,11 +1,108 @@
-import { GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
+import { FieldDefinitionNode, GraphQLSchema, TypeInfo, visit, visitWithTypeInfo } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
+import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
-import { GraphQLESLintRule } from '../../types.js';
+import { GraphQLESLintRule, GraphQLESTreeNode } from '../../types.js';
 import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';
+
+const RELAY_SCHEMA = /* GraphQL */ `
+  # Root Query Type
+  type Query {
+    user: User
+  }
+
+  # User Type
+  type User {
+    id: ID!
+    name: String!
+    friends(first: Int, after: String): FriendConnection!
+  }
+
+  # FriendConnection Type (Relay Connection)
+  type FriendConnection {
+    edges: [FriendEdge]
+    pageInfo: PageInfo!
+  }
+
+  # FriendEdge Type
+  type FriendEdge {
+    cursor: String!
+    node: Friend!
+  }
+
+  # Friend Type
+  type Friend {
+    id: ID!
+    name: String!
+  }
+
+  # PageInfo Type (Relay Pagination)
+  type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
+  }
+`;
+
+const RELAY_QUERY = /* GraphQL */ `
+  query {
+    user {
+      id
+      name
+      friends(first: 10) {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+const RELAY_DEFAULT_IGNORED_FIELD_SELECTORS = [
+  '[parent.name.value=PageInfo][name.value=/(endCursor|startCursor|hasNextPage|hasPreviousPage)/]',
+  '[parent.name.value=/Edge$/][name.value=cursor]',
+  '[parent.name.value=/Connection$/][name.value=pageInfo]',
+];
+
+const schema = {
+  type: 'array',
+  maxItems: 1,
+  items: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      ignoredFieldSelectors: {
+        type: 'array',
+        uniqueItems: true,
+        minItems: 1,
+        description: [
+          'Fields that will be ignored and are allowed to be unused.',
+          '',
+          'E.g. The following selector will ignore all the relay pagination fields for every connection exposed in the schema:',
+          '```json',
+          JSON.stringify(RELAY_DEFAULT_IGNORED_FIELD_SELECTORS, null, 2),
+          '```',
+          '',
+          '> These fields are defined by ESLint [`selectors`](https://eslint.org/docs/developer-guide/selectors).',
+          '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
+        ].join('\n'),
+        items: {
+          type: 'string',
+          pattern: '^\\[(.+)]$',
+        },
+      },
+    },
+  },
+} as const;
+
+export type RuleOptions = FromSchema<typeof schema>;
 
 type UsedFields = Record<string, Set<string>>;
 
@@ -44,7 +141,7 @@ function getUsedFields(schema: GraphQLSchema, operations: SiblingOperations): Us
   return usedFields;
 }
 
-export const rule: GraphQLESLintRule = {
+export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     messages: {
       [RULE_ID]: 'Field "{{fieldName}}" is unused',
@@ -99,23 +196,37 @@ export const rule: GraphQLESLintRule = {
             }
           `,
         },
+        {
+          title: 'Correct (ignoring fields)',
+          usage: [{ ignoredFieldSelectors: RELAY_DEFAULT_IGNORED_FIELD_SELECTORS }],
+          code: /* GraphQL */ `
+            ### 1️⃣ YOUR SCHEMA
+            ${RELAY_SCHEMA}
+
+            ### 2️⃣ YOUR QUERY
+            ${RELAY_QUERY}
+          `,
+        },
       ],
     },
     type: 'suggestion',
-    schema: [],
+    schema,
     hasSuggestions: true,
   },
   create(context) {
     const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
     const siblingsOperations = requireSiblingsOperations(RULE_ID, context);
     const usedFields = getUsedFields(schema, siblingsOperations);
-
+    const { ignoredFieldSelectors } = context.options[0] || {};
+    const selector = (ignoredFieldSelectors || []).reduce(
+      (acc, selector) => `${acc}:not(${selector})`,
+      'FieldDefinition',
+    );
     return {
-      FieldDefinition(node) {
+      [selector](node: GraphQLESTreeNode<FieldDefinitionNode>) {
         const fieldName = node.name.value;
         const parentTypeName = node.parent.name.value;
         const isUsed = usedFields[parentTypeName]?.has(fieldName);
-
         if (isUsed) {
           return;
         }

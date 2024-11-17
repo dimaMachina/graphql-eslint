@@ -17,7 +17,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Requires all types to be reachable at some level by root level fields.
+{frontMatter.description}
 
 ## Usage Examples
 

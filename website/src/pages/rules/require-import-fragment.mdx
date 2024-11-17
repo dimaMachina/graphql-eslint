@@ -14,7 +14,7 @@ description: 'Require fragments to be imported via an import expression.'
 - Requires GraphQL Operations: `true`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require fragments to be imported via an import expression.
+{frontMatter.description}
 
 ## Usage Examples
 

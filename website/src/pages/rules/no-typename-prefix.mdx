@@ -18,7 +18,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforces users to avoid using the type name in a field name while defining your schema.
+{frontMatter.description}
 
 ## Usage Examples
 

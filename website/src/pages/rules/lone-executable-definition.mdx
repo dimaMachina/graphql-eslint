@@ -12,7 +12,7 @@ description:
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require queries, mutations, subscriptions or fragments to be located in separate files.
+{frontMatter.description}
 
 ## Usage Examples
 

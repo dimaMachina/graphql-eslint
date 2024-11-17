@@ -50,6 +50,9 @@ const ruleTester = new RuleTester<ParserOptionsForTests>({
   },
 });
 
+const example = rule.meta.docs!.examples!.find(example => example.title.includes('ignoring'));
+const [RELAY_SCHEMA, RELAY_QUERY] = example!.code.split('### 2️⃣ YOUR QUERY');
+
 ruleTester.run('no-unused-fields', rule, {
   valid: [
     {
@@ -92,6 +95,17 @@ ruleTester.run('no-unused-fields', rule, {
               }
             }
           `,
+        },
+      },
+    },
+    {
+      name: 'should do not report unused fields for Relay',
+      options: example!.usage,
+      code: RELAY_SCHEMA,
+      parserOptions: {
+        graphQLConfig: {
+          documents: RELAY_QUERY,
+          schema: RELAY_SCHEMA,
         },
       },
     },

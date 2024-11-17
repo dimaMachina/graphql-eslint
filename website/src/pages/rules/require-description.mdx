@@ -14,7 +14,7 @@ enables this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforce descriptions in type definitions and operations.
+{frontMatter.description}
 
 ## Usage Examples
 

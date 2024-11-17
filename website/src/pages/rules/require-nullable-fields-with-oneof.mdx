@@ -11,7 +11,7 @@ description: 'Require `input` or `type` fields to be non-nullable with `@oneOf` 
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Require `input` or `type` fields to be non-nullable with `@oneOf` directive.
+{frontMatter.description}
 
 ## Usage Examples
 

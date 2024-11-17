@@ -17,8 +17,7 @@ fix some of the problems reported by this rule.
 - Requires GraphQL Operations: `false`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforce arrange in alphabetical order for type fields, enum values, input object fields, operation
-selections and more.
+{frontMatter.description}
 
 ## Usage Examples
 
@@ -165,12 +164,12 @@ Definitions – `type`, `interface`, `enum`, `scalar`, `input`, `union` and `dir
 
 ### `groups` (array)
 
-Custom order group. Example: `['...', 'id', '*', '{']` where:
+Order group. Example: `['...', 'id', '*', '{']` where:
 
 - `...` stands for fragment spreads
 - `id` stands for field with name `id`
 - `*` stands for everything else
-- `{` stands for field `selection set`
+- `{` stands for fields `selection set`
 
 The object is an array with all elements of the type `string`.
 

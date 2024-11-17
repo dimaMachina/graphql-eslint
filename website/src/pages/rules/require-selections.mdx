@@ -17,7 +17,7 @@ enables this rule.
 - Requires GraphQL Operations: `true`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Enforce selecting specific fields when they are available on the GraphQL type.
+{frontMatter.description}
 
 ## Usage Examples
 
