@@ -2,4 +2,4 @@
 '@graphql-eslint/eslint-plugin': major
 ---
 
-Add ignore config to `no-unused-fields` rule
+Add new config option `ignoredFieldSelectors` to `no-unused-fields` rule to ignore all the relay pagination fields for every connection exposed in schema for example

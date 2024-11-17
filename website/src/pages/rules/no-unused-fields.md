@@ -14,7 +14,7 @@ description: 'Requires all fields to be used at some level by siblings operation
 - Requires GraphQL Operations: `true`
   [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)
 
-Requires all fields to be used at some level by siblings operations.
+{frontMatter.description}
 
 ## Usage Examples
 
@@ -66,22 +66,62 @@ query {
 ### Correct (ignoring fields)
 
 ```graphql
-# eslint @graphql-eslint/no-unused-fields: ['error', { ignoredFieldSelectors: ['FieldDefinition[name.value=lastName]'] }]
+# eslint @graphql-eslint/no-unused-fields: ['error', { ignoredFieldSelectors: ['[parent.name.value=PageInfo][name.value=endCursor]', '[parent.name.value=PageInfo][name.value=startCursor]', '[parent.name.value=PageInfo][name.value=hasNextPage]', '[parent.name.value=PageInfo][name.value=hasPreviousPage]', '[parent.name.value=/Edge$/][name.value=cursor]', '[parent.name.value=/Connection$/][name.value=pageInfo]'] }]
 
+### 1️⃣ YOUR SCHEMA
+
+# Root Query Type
+type Query {
+  user: User
+}
+
+# User Type
 type User {
   id: ID!
-  firstName: String
-  lastName: String
+  name: String!
+  friends(first: Int, after: String): FriendConnection!
 }
 
-type Query {
-  me: User
+# FriendConnection Type (Relay Connection)
+type FriendConnection {
+  edges: [FriendEdge]
+  pageInfo: PageInfo!
 }
+
+# FriendEdge Type
+type FriendEdge {
+  cursor: String!
+  node: Friend!
+}
+
+# Friend Type
+type Friend {
+  id: ID!
+  name: String!
+}
+
+# PageInfo Type (Relay Pagination)
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+### 2️⃣ YOUR QUERY
 
 query {
-  me {
+  user {
     id
-    firstName
+    name
+    friends(first: 10) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
   }
 }
 ```
@@ -93,6 +133,22 @@ The schema defines the following properties:
 ### `ignoredFieldSelectors` (array)
 
 Fields that will be ignored and are allowed to be unused.
+
+E.g. The following selector will ignore all the relay pagination fields for every connection exposed
+in the schema:
+
+```json
+{
+  "ignoredFieldSelectors": [
+    "[parent.name.value=PageInfo][name.value=endCursor]",
+    "[parent.name.value=PageInfo][name.value=startCursor]",
+    "[parent.name.value=PageInfo][name.value=hasNextPage]",
+    "[parent.name.value=PageInfo][name.value=hasPreviousPage]",
+    "[parent.name.value=/Edge$/][name.value=cursor]",
+    "[parent.name.value=/Connection$/][name.value=pageInfo]"
+  ]
+}
+```
 
 > These fields are defined by ESLint
 > [`selectors`](https://eslint.org/docs/developer-guide/selectors). Paste or drop code into the

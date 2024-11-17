@@ -87,9 +87,10 @@ const schema = {
         minItems: 1,
         description: [
           'Fields that will be ignored and are allowed to be unused.',
-          'E.g. following selector will ignores all the relay pagination fields for every connection exposed in schema:',
+          '',
+          'E.g. The following selector will ignore all the relay pagination fields for every connection exposed in the schema:',
           '```json',
-          JSON.stringify(RELAY_DEFAULT_IGNORED_FIELD_SELECTORS, null, 2),
+          JSON.stringify({ ignoredFieldSelectors: RELAY_DEFAULT_IGNORED_FIELD_SELECTORS }, null, 2),
           '```',
           '',
           '> These fields are defined by ESLint [`selectors`](https://eslint.org/docs/developer-guide/selectors).',
@@ -202,10 +203,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           title: 'Correct (ignoring fields)',
           usage: [{ ignoredFieldSelectors: RELAY_DEFAULT_IGNORED_FIELD_SELECTORS }],
           code: /* GraphQL */ `
-            # schema
+            ### 1️⃣ YOUR SCHEMA
             ${RELAY_SCHEMA}
 
-            # query
+            ### 2️⃣ YOUR QUERY
             ${RELAY_QUERY}
           `,
         },
