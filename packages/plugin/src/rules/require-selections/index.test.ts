@@ -499,7 +499,7 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
           documents: '{ foo }',
         },
       },
-      errors: 2
+      errors: 2,
     },
   ],
 });
