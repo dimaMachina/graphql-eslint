@@ -1,5 +1,19 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.12
+
+### Patch Changes
+
+- [#2711](https://github.com/dimaMachina/graphql-eslint/pull/2711)
+  [`b15df66`](https://github.com/dimaMachina/graphql-eslint/commit/b15df66b048fdd57e108a6332a6b546765685f7e)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - Reenable running
+  `require-id-when-available` on `FragmentDefinition`
+
+- [#2713](https://github.com/dimaMachina/graphql-eslint/pull/2713)
+  [`8b6d46b`](https://github.com/dimaMachina/graphql-eslint/commit/8b6d46b3ceac6397c6471ce127add2daa6593e30)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - `naming-convention` rule should not fail
+  when aliasing underscore fields
+
 ## 4.0.0-alpha.11
 
 ### Major Changes
