@@ -60,45 +60,50 @@ export default [
   <Cards.Card
     icon={<GraphQLIcon />}
     title="Usage with `.graphql` files"
-    href="/usage/graphql"
+    href="/docs/usage/graphql"
     arrow
   />
-  <Cards.Card
-    icon={<JSIcon />}
-    title="Usage with code files `.js/.jsx`"
-    href="/usage/js"
-    arrow
-  />
+  <Cards.Card icon={<JSIcon />} title="Usage with code files `.js/.jsx`" href="/docs/usage/js" arrow />
   <Cards.Card
     icon={<HalfIcon />}
     title="Usage to lint both schema/documents"
-    href="/usage/schema-and-documents"
+    href="/docs/usage/schema-and-documents"
     arrow
   />
   <Cards.Card
     icon={<StackIcon />}
     title="Usage to lint different schemas"
-    href="/usage/multiple-projects"
+    href="/docs/usage/multiple-projects"
     arrow
   />
-  <Cards.Card icon={<GearIcon />} title="Programmatic usage" href="/usage/programmatic" arrow />
+  <Cards.Card
+    icon={<GearIcon />}
+    title="Programmatic usage"
+    href="/docs/usage/programmatic"
+    arrow
+  />
 </Cards>
 
 ### Advanced
 
 <Cards num={2}>
-  <Cards.Card icon={<SvelteIcon />} title="Usage with `.svelte` files" href="/usage/svelte" arrow />
-  <Cards.Card icon={<VueIcon />} title="Usage with `.vue` files" href="/usage/vue" arrow />
+  <Cards.Card
+    icon={<SvelteIcon />}
+    title="Usage with `.svelte` files"
+    href="/docs/usage/svelte"
+    arrow
+  />
+  <Cards.Card icon={<VueIcon />} title="Usage with `.vue` files" href="/docs/usage/vue" arrow />
   <Cards.Card
     icon={<AstroIcon className="dark:fill-white" />}
     title="Usage with `.astro` files"
-    href="/usage/astro"
+    href="/docs/usage/astro"
     arrow
   />
   <Cards.Card
     icon={<PrettierIcon />}
     title="Usage with `eslint-plugin-prettier`"
-    href="/usage/prettier"
+    href="/docs/usage/prettier"
     arrow
   />
 </Cards>

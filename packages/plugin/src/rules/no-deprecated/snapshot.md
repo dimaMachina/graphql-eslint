@@ -8,9 +8,9 @@ exports[`no-deprecated > invalid > Invalid #1 1`] = `
 #### ❌ Error
 
     > 1 | mutation { something(t: OLD) }
-        |                         ^^^ This enum value is marked as deprecated in your GraphQL schema (reason: No longer supported)
+        |                         ^^^ Enum "OLD" is marked as deprecated in your GraphQL schema (reason: No longer supported)
 
-#### 💡 Suggestion: Remove \`OLD\` enum value
+#### 💡 Suggestion: Remove enum "OLD"
 
     1 | mutation { something(t: ) }
 `;
@@ -23,9 +23,9 @@ exports[`no-deprecated > invalid > Invalid #2 1`] = `
 #### ❌ Error
 
     > 1 | mutation { something(t: OLD_WITH_REASON) }
-        |                         ^^^^^^^^^^^^^^^ This enum value is marked as deprecated in your GraphQL schema (reason: test)
+        |                         ^^^^^^^^^^^^^^^ Enum "OLD_WITH_REASON" is marked as deprecated in your GraphQL schema (reason: test)
 
-#### 💡 Suggestion: Remove \`OLD_WITH_REASON\` enum value
+#### 💡 Suggestion: Remove enum "OLD_WITH_REASON"
 
     1 | mutation { something(t: ) }
 `;
@@ -33,29 +33,59 @@ exports[`no-deprecated > invalid > Invalid #2 1`] = `
 exports[`no-deprecated > invalid > Invalid #3 1`] = `
 #### ⌨️ Code
 
-      1 | query { oldField }
+      1 | { oldField }
 
 #### ❌ Error
 
-    > 1 | query { oldField }
-        |         ^^^^^^^^ This field is marked as deprecated in your GraphQL schema (reason: No longer supported)
+    > 1 | { oldField }
+        |   ^^^^^^^^ Field "oldField" is marked as deprecated in your GraphQL schema (reason: No longer supported)
 
-#### 💡 Suggestion: Remove \`oldField\` field
+#### 💡 Suggestion: Remove field "oldField"
 
-    1 | query {  }
+    1 | {  }
 `;
 
 exports[`no-deprecated > invalid > Invalid #4 1`] = `
 #### ⌨️ Code
 
-      1 | query { oldFieldWithReason }
+      1 | { oldFieldWithReason }
 
 #### ❌ Error
 
-    > 1 | query { oldFieldWithReason }
-        |         ^^^^^^^^^^^^^^^^^^ This field is marked as deprecated in your GraphQL schema (reason: test)
+    > 1 | { oldFieldWithReason }
+        |   ^^^^^^^^^^^^^^^^^^ Field "oldFieldWithReason" is marked as deprecated in your GraphQL schema (reason: test)
 
-#### 💡 Suggestion: Remove \`oldFieldWithReason\` field
+#### 💡 Suggestion: Remove field "oldFieldWithReason"
 
-    1 | query {  }
+    1 | {  }
+`;
+
+exports[`no-deprecated > invalid > Invalid #5 1`] = `
+#### ⌨️ Code
+
+      1 | { testArgument(a: 2) }
+
+#### ❌ Error
+
+    > 1 | { testArgument(a: 2) }
+        |                ^^^ Argument "a" is marked as deprecated in your GraphQL schema (reason: Use 'b' instead.)
+
+#### 💡 Suggestion: Remove argument "a"
+
+    1 | { testArgument() }
+`;
+
+exports[`no-deprecated > invalid > Invalid #6 1`] = `
+#### ⌨️ Code
+
+      1 | { testObjectField(input: { a:2 }) }
+
+#### ❌ Error
+
+    > 1 | { testObjectField(input: { a:2 }) }
+        |                            ^^ Object field "a" is marked as deprecated in your GraphQL schema (reason: Use 'b' instead.)
+
+#### 💡 Suggestion: Remove object field "a"
+
+    1 | { testObjectField(input: {  }) }
 `;
