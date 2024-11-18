@@ -55,7 +55,8 @@ ruleTester.run('no-deprecated', rule, {
       code: 'mutation { something(t: OLD_WITH_REASON) }',
       errors: [
         {
-          message: 'Enum "OLD_WITH_REASON" is marked as deprecated in your GraphQL schema (reason: test)',
+          message:
+            'Enum "OLD_WITH_REASON" is marked as deprecated in your GraphQL schema (reason: test)',
         },
       ],
     },
