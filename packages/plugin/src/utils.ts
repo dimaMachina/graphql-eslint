@@ -176,7 +176,7 @@ const DisplayNodeNameMap: Record<Kind, string> = {
 export function displayNodeName(node: GraphQLESTreeNode<ASTNode, boolean>): string {
   return `${
     node.kind === Kind.OPERATION_DEFINITION ? node.operation : DisplayNodeNameMap[node.kind]
-    // @ts-expect-error
+    // @ts-expect-error -- fixme
   } "${('alias' in node && node.alias?.value) || ('name' in node && node.name?.value) || node.value}"`;
 }
 

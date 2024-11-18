@@ -92,7 +92,7 @@ ruleTester.run('no-deprecated', rule, {
     },
     {
       ...WITH_SCHEMA,
-      code: '{ testObjectField(input: { a:2 }) }',
+      code: '{ testObjectField(input: { a: 2 }) }',
       errors: [
         {
           message:
