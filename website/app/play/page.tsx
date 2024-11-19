@@ -1,19 +1,18 @@
-import { FC } from "react";
-import { clsx } from "clsx";
-import Page from "./page.client";
-import { Linter } from "eslint";
-import { parser } from "@graphql-eslint/eslint-plugin";
+import { FC } from 'react';
+import { clsx } from 'clsx';
+import { Linter } from 'eslint';
+import { parser } from '@graphql-eslint/eslint-plugin';
+import Page from './page.client';
 
 export const metadata = {
-  title: "Playground"
+  title: 'Playground',
 };
-
 
 function dedent(code: string) {
   return code
-    .split("\n")
+    .split('\n')
     .map(line => line.slice(2))
-    .join("\n")
+    .join('\n')
     .trimStart();
 }
 
@@ -43,18 +42,22 @@ const DEFAULT_OPERATION = dedent(/* GraphQL */ `
 `);
 
 const classes = {
-  heading: clsx("font-medium mb-2")
+  heading: clsx('font-medium mb-2'),
 };
 
 const PlayPage: FC = () => {
   return (
     <div
       className={clsx(
-        "h-[calc(100dvh-var(--nextra-navbar-height))]",
-        "flex bg-gradient-to-br from-fuchsia-200/60 via-pink-300/60 to-purple-300/60 dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30 max-md:min-w-[1280px]"
+        'h-[calc(100dvh-var(--nextra-navbar-height))]',
+        'flex bg-gradient-to-br from-fuchsia-200/60 via-pink-300/60 to-purple-300/60 max-md:min-w-[1280px] dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30',
       )}
     >
-      <Page defaultOperation={DEFAULT_OPERATION} defaultSchema={DEFAULT_SCHEMA} headingClass={classes.heading}>
+      <Page
+        defaultOperation={DEFAULT_OPERATION}
+        defaultSchema={DEFAULT_SCHEMA}
+        headingClass={classes.heading}
+      >
         <div>
           <h3 className={classes.heading}>VERSIONING</h3>
           <span className="flex justify-between text-sm">
@@ -69,6 +72,6 @@ const PlayPage: FC = () => {
       </Page>
     </div>
   );
-}
+};
 
-export default PlayPage
+export default PlayPage;
