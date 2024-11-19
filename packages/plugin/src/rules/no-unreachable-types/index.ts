@@ -2,6 +2,7 @@ import {
   ASTNode,
   ASTVisitor,
   DirectiveLocation,
+  getNamedType,
   GraphQLSchema,
   isInterfaceType,
   Kind,
@@ -102,10 +103,7 @@ function getReachableTypes(schema: GraphQLSchema): ReachableTypes {
     if (node.locations.some(location => RequestDirectiveLocations.has(location))) {
       reachableTypes.add(node.name);
       for (const arg of node.args) {
-        const argTypeName = 'name' in arg.type && arg.type.name;
-        if (argTypeName) {
-          reachableTypes.add(argTypeName);
-        }
+        reachableTypes.add(getNamedType(arg.type).name);
       }
     }
   }
