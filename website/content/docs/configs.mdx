@@ -1,10 +1,4 @@
----
-title: Shared Configs
----
-
-import { Callout } from '@theguild/components'
-
-# {metadata.title}
+# Shared Configs
 
 ## Schema Configs
 
@@ -25,16 +19,15 @@ import { Callout } from '@theguild/components'
 |[`flat/operations-all`](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/configs/operations-all.ts)|enables all rules for consuming GraphQL (operations) development|
 {/* prettier-ignore-end */}
 
-<Callout type="warning">
-If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
-
-If you are in a project that develops GraphQL operations (`query`/`mutation`/`subscription`), you'll
-need `operations` rules.
-
-If you are in a monorepo project, you probably need both sets of rules, see
-[example of configuration](https://github.com/B2o5T/graphql-eslint/tree/master/examples/monorepo/eslint.config.js).
-
-</Callout>
+> [!WARNING]
+>
+> If you are in a project that develops the GraphQL schema, you'll need `schema` rules.
+>
+> If you are in a project that develops GraphQL operations (`query`/`mutation`/`subscription`), you'll
+> need `operations` rules.
+>
+> If you are in a monorepo project, you probably need both sets of rules, see
+> [example of configuration](https://github.com/B2o5T/graphql-eslint/tree/master/examples/monorepo/eslint.config.js).
 
 ## Config Usage
 
