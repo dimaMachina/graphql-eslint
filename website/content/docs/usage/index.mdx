@@ -12,8 +12,9 @@ import StackIcon from '@icons/stack.svg?svgr'
 import SvelteIcon from '@icons/svelte.svg?svgr'
 import VueIcon from '@icons/vue.svg?svgr'
 import { Callout, Cards, Steps } from '@theguild/components'
+import { createIndexPage, getPageMap, MDXRemote } from '@theguild/components/server'
 
-# Getting Started
+# Usage
 
 ## Quickstart
 
@@ -58,61 +59,18 @@ export default [
 
 ## Usage
 
-### Basic
-
-<Cards num={2} className="[&_svg]:shrink-0 [&_svg]:self-start">
-  <Cards.Card
-    icon={<GraphQLIcon />}
-    title="Usage with `.graphql` files"
-    href="/docs/usage/graphql"
-    arrow
-  />
-  <Cards.Card
-    icon={<JSIcon />}
-    title="Usage with code files `.js/.jsx`"
-    href="/docs/usage/js"
-    arrow
-  />
-  <Cards.Card
-    icon={<HalfIcon />}
-    title="Usage to lint both schema/documents"
-    href="/docs/usage/schema-and-documents"
-    arrow
-  />
-  <Cards.Card
-    icon={<StackIcon />}
-    title="Usage to lint different schemas"
-    href="/docs/usage/multiple-projects"
-    arrow
-  />
-  <Cards.Card
-    icon={<GearIcon />}
-    title="Programmatic usage"
-    href="/docs/usage/programmatic"
-    arrow
-  />
-</Cards>
-
-### Advanced
-
-<Cards num={2}>
-  <Cards.Card
-    icon={<SvelteIcon />}
-    title="Usage with `.svelte` files"
-    href="/docs/usage/svelte"
-    arrow
-  />
-  <Cards.Card icon={<VueIcon />} title="Usage with `.vue` files" href="/docs/usage/vue" arrow />
-  <Cards.Card
-    icon={<AstroIcon className="dark:fill-white" />}
-    title="Usage with `.astro` files"
-    href="/docs/usage/astro"
-    arrow
-  />
-  <Cards.Card
-    icon={<PrettierIcon />}
-    title="Usage with `eslint-plugin-prettier`"
-    href="/docs/usage/prettier"
-    arrow
-  />
-</Cards>
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('/docs/usage'))}
+  components={{
+    Cards,
+    GraphQLIcon,
+    JSIcon,
+    HalfIcon,
+    StackIcon,
+    GearIcon,
+    SvelteIcon,
+    VueIcon,
+    AstroIcon,
+    PrettierIcon
+  }}
+/>
