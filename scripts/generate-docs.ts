@@ -11,7 +11,7 @@ import { rules } from '../packages/plugin/src/index.js';
 const BR = '';
 const NBSP = '&nbsp;';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const RULES_PATH = resolve(__dirname, '..', 'website', 'src', 'pages', 'rules');
+const RULES_PATH = resolve(__dirname, '..', 'website', 'src', 'content', 'rules');
 
 enum Icon {
   SCHEMA = '📄',
@@ -101,7 +101,7 @@ async function generateDocs(): Promise<void> {
       `- Requires GraphQL Schema: \`${requiresSchema}\` [ℹ️](/docs/getting-started#extended-linting-rules-with-graphql-schema)`,
       `- Requires GraphQL Operations: \`${requiresSiblings}\` [ℹ️](/docs/getting-started#extended-linting-rules-with-siblings-operations)`,
       BR,
-      docs.description === frontMatterDescription ? '{frontMatter.description}' : docs.description,
+      docs.description === frontMatterDescription ? '{metadata.description}' : docs.description,
     );
 
     if (docs.examples?.length > 0) {

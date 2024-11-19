@@ -1,3 +1,5 @@
+'use client'
+
 import { ReactElement, useRef } from 'react';
 import { clsx } from 'clsx';
 import { Linter } from 'eslint';

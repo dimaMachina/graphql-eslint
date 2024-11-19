@@ -13,7 +13,7 @@ const ALLOWED_SVG_REGEX = new RegExp(`src${sep}icons${sep}.+\\.svg$`);
 export default withGuildDocs({
   cleanDistDir: true,
   output: 'export',
-  redirects: () =>
+  redirects: async () =>
     Object.entries({
       '/': '/docs', // TODO: add landing page later
       '/docs/getting-started/parser': '/docs/parser',

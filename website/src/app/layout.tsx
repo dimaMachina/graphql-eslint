@@ -4,7 +4,7 @@ import { FC, ReactNode } from 'react';
 import { GuildLogo } from '@theguild/components';
 import { getDefaultMetadata, GuildLayout } from '@theguild/components/server';
 import '@theguild/components/style.css';
-import './globals.css';
+// import './globals.css';
 
 const description = 'Modern, Open-source API Tooling and Ecosystem that scales';
 const websiteName = 'The Guild';
