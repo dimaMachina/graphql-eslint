@@ -237,59 +237,7 @@ async function generateDocs(): Promise<void> {
     );
   }
 
-  const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entries(rules)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .reduce<{
-      schemaRules: string[];
-      operationsRules: string[];
-      schemaAndOperationsRules: [];
-    }>(
-      (acc, [ruleId, curr]) => {
-        const { category } = curr.meta.docs;
-        if (category === 'Schema') {
-          acc.schemaRules.push(ruleId);
-        } else if (category === 'Operations') {
-          acc.operationsRules.push(ruleId);
-        } else {
-          acc.schemaAndOperationsRules.push(ruleId);
-        }
-        return acc;
-      },
-      { schemaRules: [], operationsRules: [], schemaAndOperationsRules: [] },
-    );
-  const metaJson = {
-    index: {
-      title: 'Overview',
-      theme: {
-        layout: 'full',
-      },
-    },
-    prettier: '`prettier` Rule',
-    'deprecated-rules': 'Deprecated Rules',
-    '---1': {
-      title: 'Schema & Operations Rules',
-      type: 'separator',
-    },
-    ...Object.fromEntries(schemaAndOperationsRules.map(key => [key, ''])),
-    '---2': {
-      title: 'Schema Rules',
-      type: 'separator',
-    },
-    ...Object.fromEntries(schemaRules.map(key => [key, ''])),
-    '---3': {
-      title: 'Operations Rules',
-      type: 'separator',
-    },
-    ...Object.fromEntries(operationsRules.map(key => [key, ''])),
-  };
 
-  writeFile(
-    resolve(RULES_PATH, '_meta.ts'),
-    await prettier.format('export default ' + JSON.stringify(metaJson), {
-      parser: 'typescript',
-      ...prettierConfigTs,
-    }),
-  );
 
   console.log('✅  Documentation generated');
 }

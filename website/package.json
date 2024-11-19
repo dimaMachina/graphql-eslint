@@ -7,8 +7,8 @@
     "analyze": "ANALYZE=true yarn build",
     "build": "next build && next-sitemap",
     "dev": "next",
-    "prebuild": "tsx ../scripts/generate-docs.ts",
     "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
+    "prebuild": "tsx ../scripts/generate-docs.ts",
     "start": "next start"
   },
   "dependencies": {
@@ -29,13 +29,13 @@
     "use-query-params": "^2.2.1"
   },
   "devDependencies": {
-    "pagefind": "1.1.1",
     "@svgr/webpack": "^8.1.0",
     "@theguild/tailwind-config": "0.6.0",
     "@types/lodash.debounce": "4.0.9",
     "@types/lodash.uniqwith": "4.5.9",
     "@types/node": "22.9.0",
     "@types/react": "18.3.12",
+    "pagefind": "1.1.1",
     "tailwindcss-radix": "3.0.5",
     "webpack": "^5.88.2"
   },
