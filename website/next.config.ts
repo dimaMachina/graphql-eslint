@@ -45,20 +45,20 @@ export default withGuildDocs({
     );
 
     // rule.exclude doesn't work starting from Next.js 15
-    const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
-      rule => rule.test?.test?.('.svg')
-    )
+    const { test: _test, ...imageLoaderOptions } = config.module.rules.find(rule =>
+      rule.test?.test?.('.svg'),
+    );
     config.module.rules.push({
       test: /\.svg$/,
       oneOf: [
         {
           resourceQuery: /svgr/,
-          use: ['@svgr/webpack']
+          use: ['@svgr/webpack'],
         },
-        imageLoaderOptions
-      ]
-    })
-    return config
+        imageLoaderOptions,
+      ],
+    });
+    return config;
   },
   eslint: {
     ignoreDuringBuilds: true,
