@@ -1,10 +1,10 @@
-import { ComponentPropsWithoutRef, FC, ReactNode } from "react";
+import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
 import { Banner, PRODUCTS } from '@theguild/components';
 import { getDefaultMetadata, GuildLayout } from '@theguild/components/server';
 import { QueryParamProvider } from './query-params-provider';
 import '@theguild/components/style.css';
 
-const description =  PRODUCTS.ESLINT.title;
+const description = PRODUCTS.ESLINT.title;
 const websiteName = 'GraphQL-ESLint';
 
 export const metadata = getDefaultMetadata({
@@ -24,7 +24,7 @@ const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({ children, ...props }) => {
       {children}
     </a>
   );
-}
+};
 
 const RootLayout: FC<{
   children: ReactNode;
@@ -41,12 +41,13 @@ const RootLayout: FC<{
         },
       }}
       layoutProps={{
-        banner: <Banner dismissible={false}>
-          🚧 This is WIP documentation for v4 of the plugin. For v3 click{' '}
-          <Anchor href="https://074c6ee9.graphql-eslint.pages.dev/docs">here</Anchor>.
-        </Banner>,
-        docsRepositoryBase:
-          'https://github.com/dimaMachina/graphql-eslint/tree/master/website',
+        banner: (
+          <Banner dismissible={false}>
+            🚧 This is WIP documentation for v4 of the plugin. For v3 click{' '}
+            <Anchor href="https://074c6ee9.graphql-eslint.pages.dev/docs">here</Anchor>.
+          </Banner>
+        ),
+        docsRepositoryBase: 'https://github.com/dimaMachina/graphql-eslint/tree/master/website',
       }}
       navbarProps={{
         navLinks: [

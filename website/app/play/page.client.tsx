@@ -3,10 +3,10 @@
 import { FC, ReactNode, useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { GraphQLEditor } from './graphql-editor';
-import { Select } from './select';
 import { ConfigName, configs, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
+import { GraphQLEditor } from './graphql-editor';
+import { Select } from './select';
 
 const schemaConfigs: ReadonlyArray<ConfigName> = [
   'schema-recommended',

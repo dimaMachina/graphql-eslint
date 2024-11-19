@@ -237,8 +237,6 @@ async function generateDocs(): Promise<void> {
     );
   }
 
-
-
   console.log('✅  Documentation generated');
 }
 
