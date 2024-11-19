@@ -2,10 +2,17 @@ import { ParserOptionsForTests, ruleTester } from '../../../__tests__/test-utils
 import { rule } from './index.js';
 
 const TEST_SCHEMA = /* GraphQL */ `
+  input TestInput {
+    a: Int @deprecated(reason: "Use 'b' instead.")
+    b: Boolean
+  }
+
   type Query {
     oldField: String @deprecated
     oldFieldWithReason: String @deprecated(reason: "test")
     newField: String!
+    testArgument(a: Int @deprecated(reason: "Use 'b' instead."), b: Boolean): Boolean
+    testObjectField(input: TestInput): Boolean
   }
 
   type Mutation {
@@ -29,7 +36,7 @@ const WITH_SCHEMA = {
 
 ruleTester.run('no-deprecated', rule, {
   valid: [
-    { ...WITH_SCHEMA, code: 'query { newField }' },
+    { ...WITH_SCHEMA, code: '{ newField }' },
     { ...WITH_SCHEMA, code: 'mutation { something(t: NEW) }' },
   ],
   invalid: [
@@ -39,7 +46,7 @@ ruleTester.run('no-deprecated', rule, {
       errors: [
         {
           message:
-            'This enum value is marked as deprecated in your GraphQL schema (reason: No longer supported)',
+            'Enum "OLD" is marked as deprecated in your GraphQL schema (reason: No longer supported)',
         },
       ],
     },
@@ -48,25 +55,49 @@ ruleTester.run('no-deprecated', rule, {
       code: 'mutation { something(t: OLD_WITH_REASON) }',
       errors: [
         {
-          message: 'This enum value is marked as deprecated in your GraphQL schema (reason: test)',
+          message:
+            'Enum "OLD_WITH_REASON" is marked as deprecated in your GraphQL schema (reason: test)',
         },
       ],
     },
     {
       ...WITH_SCHEMA,
-      code: 'query { oldField }',
+      code: '{ oldField }',
       errors: [
         {
           message:
-            'This field is marked as deprecated in your GraphQL schema (reason: No longer supported)',
+            'Field "oldField" is marked as deprecated in your GraphQL schema (reason: No longer supported)',
         },
       ],
     },
     {
       ...WITH_SCHEMA,
-      code: 'query { oldFieldWithReason }',
+      code: '{ oldFieldWithReason }',
       errors: [
-        { message: 'This field is marked as deprecated in your GraphQL schema (reason: test)' },
+        {
+          message:
+            'Field "oldFieldWithReason" is marked as deprecated in your GraphQL schema (reason: test)',
+        },
+      ],
+    },
+    {
+      ...WITH_SCHEMA,
+      code: '{ testArgument(a: 2) }',
+      errors: [
+        {
+          message:
+            'Argument "a" is marked as deprecated in your GraphQL schema (reason: Use \'b\' instead.)',
+        },
+      ],
+    },
+    {
+      ...WITH_SCHEMA,
+      code: '{ testObjectField(input: { a: 2 }) }',
+      errors: [
+        {
+          message:
+            'Object field "a" is marked as deprecated in your GraphQL schema (reason: Use \'b\' instead.)',
+        },
       ],
     },
   ],

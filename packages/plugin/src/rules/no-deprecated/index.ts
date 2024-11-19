@@ -1,7 +1,7 @@
-import { EnumValueNode, FieldNode, Kind } from 'graphql';
+import { ArgumentNode, EnumValueNode, FieldNode, ObjectFieldNode } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { requireGraphQLSchemaFromContext } from '../../utils.js';
+import { displayNodeName, requireGraphQLSchemaFromContext } from '../../utils.js';
 
 const RULE_ID = 'no-deprecated';
 
@@ -79,8 +79,7 @@ export const rule: GraphQLESLintRule<[], true> = {
       recommended: true,
     },
     messages: {
-      [RULE_ID]:
-        'This {{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
+      [RULE_ID]: '{{ type }} is marked as deprecated in your GraphQL schema (reason: {{ reason }})',
     },
     schema: [],
   },
@@ -88,21 +87,20 @@ export const rule: GraphQLESLintRule<[], true> = {
     requireGraphQLSchemaFromContext(RULE_ID, context);
 
     function report(
-      node: GraphQLESTreeNode<EnumValueNode | FieldNode, true>,
+      node: GraphQLESTreeNode<EnumValueNode | FieldNode | ArgumentNode | ObjectFieldNode, true>,
       reason: string,
     ): void {
-      const nodeName = node.kind === Kind.ENUM ? node.value : node.name.value;
-      const nodeType = node.kind === Kind.ENUM ? 'enum value' : 'field';
+      const nodeType = displayNodeName(node);
       context.report({
         node,
         messageId: RULE_ID,
         data: {
-          type: nodeType,
+          type: nodeType[0].toUpperCase() + nodeType.slice(1),
           reason,
         },
         suggest: [
           {
-            desc: `Remove \`${nodeName}\` ${nodeType}`,
+            desc: `Remove ${nodeType}`,
             fix: fixer => fixer.remove(node as any),
           },
         ],
@@ -124,6 +122,25 @@ export const rule: GraphQLESLintRule<[], true> = {
 
         if (reason) {
           report(node, reason);
+        }
+      },
+      Argument(node) {
+        const typeInfo = node.typeInfo();
+        const reason = typeInfo.argument?.deprecationReason;
+        if (reason) {
+          report(node, reason);
+        }
+      },
+      ObjectValue(node) {
+        const typeInfo = node.typeInfo();
+        // @ts-expect-error -- fixme
+        const fields = typeInfo.inputType!.getFields();
+        for (const field of node.fields) {
+          const fieldName = field.name.value;
+          const reason = fields[fieldName].deprecationReason;
+          if (reason) {
+            report(field, reason);
+          }
         }
       },
     };

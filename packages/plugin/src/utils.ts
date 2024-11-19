@@ -173,10 +173,11 @@ const DisplayNodeNameMap: Record<Kind, string> = {
   [Kind.VARIABLE]: 'variable',
 } as const;
 
-export function displayNodeName(node: GraphQLESTreeNode<ASTNode>): string {
+export function displayNodeName(node: GraphQLESTreeNode<ASTNode, boolean>): string {
   return `${
     node.kind === Kind.OPERATION_DEFINITION ? node.operation : DisplayNodeNameMap[node.kind]
-  } "${('alias' in node && node.alias?.value) || ('name' in node && node.name?.value)}"`;
+    // @ts-expect-error -- fixme
+  } "${('alias' in node && node.alias?.value) || ('name' in node && node.name?.value) || node.value}"`;
 }
 
 export function getNodeName(node: GraphQLESTreeNode<ASTNode>): string {
