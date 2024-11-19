@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.14
+
+### Patch Changes
+
+- [#2721](https://github.com/dimaMachina/graphql-eslint/pull/2721)
+  [`cda7929`](https://github.com/dimaMachina/graphql-eslint/commit/cda7929a69256afe3f87ef69f950d35b089775f2)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix `no-unreachable-types` to consider
+  wrapped request directive argument types
+
 ## 4.0.0-alpha.13
 
 ### Minor Changes
