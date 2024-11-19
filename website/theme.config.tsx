@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
 import { ComponentProps } from 'react';
-import { Callout, defineConfig, PRODUCTS } from '@theguild/components';
+import { Callout, PRODUCTS } from '@theguild/components';
 
 function Anchor({ children, ...props }: ComponentProps<'a'>) {
   return (
@@ -15,7 +15,7 @@ function Anchor({ children, ...props }: ComponentProps<'a'>) {
   );
 }
 
-export default defineConfig({
+export default ({
   backgroundColor: {
     dark: '15,17,20',
     light: '250,250,250',
@@ -30,7 +30,6 @@ export default defineConfig({
     dismissible: false,
   },
   components: {
-    // @ts-expect-error -- fixme
     OfficialExampleCallout({ gitFolder }: { gitFolder: string }) {
       return (
         <Callout type="info">
@@ -66,6 +65,6 @@ export default defineConfig({
   },
   description: PRODUCTS.ESLINT.title,
   docsRepositoryBase: 'https://github.com/B2o5T/graphql-eslint/tree/master/website', // base URL for the docs repository
-  logo: <PRODUCTS.ESLINT.logo />,
-  websiteName: 'GraphQL-ESLint',
+  // logo: <PRODUCTS.ESLINT.logo />,
+  // websiteName: 'GraphQL-ESLint',
 });

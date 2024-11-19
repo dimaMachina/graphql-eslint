@@ -1,14 +1,15 @@
 import { FC, ReactNode } from 'react';
 // import { IBM_Plex_Sans } from 'next/font/google';
 // import { Toaster } from 'react-hot-toast';
-import { GuildLogo } from '@theguild/components';
+import { GuildLogo, PRODUCTS } from '@theguild/components';
 import { getDefaultMetadata, GuildLayout } from '@theguild/components/server';
 import '@theguild/components/style.css';
 // import './globals.css';
 
 const description = 'Modern, Open-source API Tooling and Ecosystem that scales';
-const websiteName = 'The Guild';
-
+const websiteName = 'GraphQL-ESLint';
+import { QueryParamProvider } from './query-params-provider'
+  ;
 export const metadata = getDefaultMetadata({
   description,
   websiteName,
@@ -29,6 +30,7 @@ export const metadata = getDefaultMetadata({
 //   weight: ['400', '500', '600', '700'],
 //   subsets: ['latin'],
 // });
+
 
 const RootLayout: FC<{
   children: ReactNode;
@@ -54,7 +56,7 @@ const RootLayout: FC<{
     <GuildLayout
       websiteName={websiteName}
       description={description}
-      logo={<GuildLogo height="40" width="37.7" />}
+      logo={<PRODUCTS.ESLINT.logo className="text-lg" />}
       // htmlProps={{
       //   className: ibmPlexSans.className,
       // }}
@@ -68,22 +70,24 @@ const RootLayout: FC<{
         docsRepositoryBase:
           'https://github.com/the-guild-org/the-guild-website/tree/master/website',
       }}
-      // navbarProps={{
-      //   navLinks: [
-      //     { children: 'Blog', href: '/blog' },
-      //     { children: 'About us', href: '/about-us' },
-      //   ],
+      navbarProps={{
+        navLinks: [
+          { children: 'Playground', href: '/play' },
+          { children: 'Rules', href: '/rules' },
+        ],
       //   searchProps: {
       //     placeholder: 'Search…',
       //   },
-      // }}
+      }}
     >
       {/* Add JSON-LD to your page */}
       {/*<script*/}
       {/*  type="application/ld+json"*/}
       {/*  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}*/}
       {/*/>*/}
+      <QueryParamProvider>
       {children}
+      </QueryParamProvider>
       {/*<Toaster />*/}
     </GuildLayout>
   );
