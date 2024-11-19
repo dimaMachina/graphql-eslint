@@ -83,7 +83,7 @@ exports[`no-deprecated > invalid > Invalid #6 1`] = `
 #### ❌ Error
 
     > 1 | { testObjectField(input: { a: 2 }) }
-        |                            ^ Object field "a" is marked as deprecated in your GraphQL schema (reason: Use 'b' instead.)
+        |                            ^^^ Object field "a" is marked as deprecated in your GraphQL schema (reason: Use 'b' instead.)
 
 #### 💡 Suggestion: Remove object field "a"
 
