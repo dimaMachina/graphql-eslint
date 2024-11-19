@@ -45,8 +45,8 @@ const RootLayout: FC<{
       }}
       navbarProps={{
         navLinks: [
-          { children: 'Playground', href: '/play' },
           { children: 'Rules', href: '/rules' },
+          { children: 'Playground', href: '/play' },
         ],
       }}
     >

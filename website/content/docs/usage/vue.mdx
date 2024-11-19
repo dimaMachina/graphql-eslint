@@ -3,8 +3,6 @@ sidebarTitle: Vue
 icon: VueIcon
 ---
 
-import { Callout } from '@theguild/components'
-
 # Usage with `.vue` files
 
 <OfficialExampleCallout gitFolder="vue-code-file" />
@@ -15,11 +13,11 @@ does this in two steps: (1) extract the GraphQL documents from the Vue (or `.js`
 
 If you don't embed GraphQL documents in your Vue files, you can skip this page.
 
-<Callout type="warning">
-  Due to [a limitation in
-  `graphql-tag-pluck`](https://github.com/dimaMachina/graphql-eslint/issues/2103), lint violations
-  will show up at the top of the Vue document, on the first character, not inline.
-</Callout>
+> [!WARNING]
+>
+> Due to
+> [a limitation in `graphql-tag-pluck`](https://github.com/dimaMachina/graphql-eslint/issues/2103),
+> lint violations will show up at the top of the Vue document, on the first character, not inline.
 
 ## Configuration
 
@@ -27,10 +25,10 @@ Add the following configuration to your `eslint.config.js` file to setup `@graph
 The intermediate graphql files always have the `.graphql` extension. Make sure the second block
 matches those files, even if you use another extension for your project's GraphQL (e.g. `.gql`).
 
-<Callout type="warning">
-  Make sure the first section, which extracts GraphQL from Vue files, comes **before** any other Vue
-  rules. Otherwise, eslint may incorrectly rewrite all error messages to say only "clear".
-</Callout>
+> [!WARNING]
+>
+> Make sure the first section, which extracts GraphQL from Vue files, comes **before** any other Vue
+> rules. Otherwise, eslint may incorrectly rewrite all error messages to say only "clear".
 
 ```js filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
