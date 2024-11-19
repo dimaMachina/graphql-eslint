@@ -10,7 +10,7 @@ const websiteName = 'GraphQL-ESLint';
 export const metadata = getDefaultMetadata({
   description,
   websiteName,
-  productName: 'GUILD',
+  productName: 'ESLINT',
 });
 
 const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({ children, ...props }) => {
@@ -34,12 +34,6 @@ const RootLayout: FC<{
       websiteName={websiteName}
       description={description}
       logo={<PRODUCTS.ESLINT.logo className="text-lg" />}
-      headProps={{
-        backgroundColor: {
-          dark: 'rgb(15, 17, 20)',
-          light: 'rgb(250, 250, 250)',
-        },
-      }}
       layoutProps={{
         banner: (
           <Banner dismissible={false}>
