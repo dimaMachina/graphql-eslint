@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.13
+
+### Minor Changes
+
+- [#2719](https://github.com/dimaMachina/graphql-eslint/pull/2719)
+  [`57d6edf`](https://github.com/dimaMachina/graphql-eslint/commit/57d6edf07226dba743b4045ddaab3c0212d738bf)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - check for deprecated arguments and object
+  field nodes in graphql operations in `no-deprecated` rule
+
 ## 4.0.0-alpha.12
 
 ### Patch Changes
