@@ -1,17 +1,17 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { Callout } from '@theguild/components';
 import {
   compileMdx,
   useMDXComponents as getDocsMDXComponents,
   MDXRemote,
 } from '@theguild/components/server';
-import fs from 'node:fs/promises'
-import path from 'node:path'
 
 const docsComponents = getDocsMDXComponents({
   async OfficialExampleCallout({ gitFolder }) {
-    const user = "dimaMachina";
-    const repo = "graphql-eslint";
-    const branch = "master";
+    const user = 'dimaMachina';
+    const repo = 'graphql-eslint';
+    const branch = 'master';
     const docsPath = `examples/${gitFolder}/`;
     return (
       <MDXRemote
@@ -36,7 +36,7 @@ const docsComponents = getDocsMDXComponents({
     );
   },
   async ESLintConfigs({ gitFolder }) {
-    const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder)
+    const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder);
     return (
       <MDXRemote
         compiledSource={await compileMdx(`
@@ -58,9 +58,8 @@ ${await fs.readFile(`${docsPath}/.eslintrc.cjs`)}
 \`\`\``)}
       />
     );
-  }
+  },
 });
-
 
 export const useMDXComponents = components => ({
   ...docsComponents,
