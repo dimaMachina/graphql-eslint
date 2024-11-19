@@ -49,6 +49,16 @@ export const useMDXComponents = components => ({
     return (
       <MDXRemote
         compiledSource={await compileMdx(`
+> [!NOTE]
+>
+> Check out
+> [the official examples](https://github.com/dimaMachina/graphql-eslint/tree/master/examples/${gitFolder})
+> for
+> [ESLint Flat Config](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/eslint.config.js)
+> or
+> [ESLint Legacy Config](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/.eslintrc.cjs)
+> .
+
 ## ESLint Flat Config
 \`\`\`js filename="eslint.config.js"
 ${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}eslint.config.js`).then(response => response.text())}
@@ -62,17 +72,7 @@ ${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${doc
 
 \`\`\`js filename=".eslintrc.cjs"
 ${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}.eslintrc.cjs`).then(response => response.text())}
-\`\`\`
-
-> [!NOTE]
->
-> Check out
-> [the official examples](https://github.com/dimaMachina/graphql-eslint/tree/master/examples/${gitFolder})
-> for
-> [ESLint Flat Config](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/eslint.config.js)
-> or
-> [ESLint Legacy Config](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/.eslintrc.cjs)
-> .`)}
+\`\`\``)}
       />
     );
   },
