@@ -4,13 +4,14 @@ import {
   useMDXComponents as getDocsMDXComponents,
   MDXRemote,
 } from '@theguild/components/server';
-
-const user = 'dimaMachina';
-const repo = 'graphql-eslint';
-const branch = 'master';
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 const docsComponents = getDocsMDXComponents({
   async OfficialExampleCallout({ gitFolder }) {
+    const user = "dimaMachina";
+    const repo = "graphql-eslint";
+    const branch = "master";
     const docsPath = `examples/${gitFolder}/`;
     return (
       <MDXRemote
@@ -35,8 +36,7 @@ const docsComponents = getDocsMDXComponents({
     );
   },
   async ESLintConfigs({ gitFolder }) {
-    const docsPath = `examples/${gitFolder}/`;
-
+    const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder)
     return (
       <MDXRemote
         compiledSource={await compileMdx(`
@@ -44,8 +44,7 @@ const docsComponents = getDocsMDXComponents({
 
 ## ESLint Flat Config
 \`\`\`js filename="eslint.config.js"
-${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}eslint.config.js`)
-          .then(response => response.text())}
+${await fs.readFile(`${docsPath}/eslint.config.js`)}
 \`\`\`
 
 ## ESLint Legacy Config
@@ -55,8 +54,7 @@ ${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${doc
 > An eslintrc configuration file, is deprecated and support will be removed in ESLint v10.0.0. Migrate to an [\`eslint.config.js\` file](#eslint-flat-config)
 
 \`\`\`js filename=".eslintrc.cjs"
-${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}.eslintrc.cjs`)
-          .then(response => response.text())}
+${await fs.readFile(`${docsPath}/.eslintrc.cjs`)}
 \`\`\``)}
       />
     );
