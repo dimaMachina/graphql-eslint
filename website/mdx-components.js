@@ -1,5 +1,9 @@
-import { MDXRemote, useMDXComponents as getDocsMDXComponents, compileMdx } from "@theguild/components/server";
-import { Callout } from "@theguild/components";
+import { Callout } from '@theguild/components';
+import {
+  compileMdx,
+  useMDXComponents as getDocsMDXComponents,
+  MDXRemote,
+} from '@theguild/components/server';
 
 const docsComponents = getDocsMDXComponents({});
 
@@ -10,9 +14,7 @@ export const useMDXComponents = components => ({
     return (
       <Callout type="info">
         <strong>Note</strong>: Check out{' '}
-        <a
-          href={`https://github.com/dimaMachina/graphql-eslint/tree/master/examples/${gitFolder}`}
-        >
+        <a href={`https://github.com/dimaMachina/graphql-eslint/tree/master/examples/${gitFolder}`}>
           the official examples
         </a>{' '}
         for{' '}
@@ -39,13 +41,14 @@ export const useMDXComponents = components => ({
     );
   },
   async ESLintConfigs({ gitFolder }) {
-    const user = 'dimaMachina'
-    const repo = 'graphql-eslint'
-    const branch = 'master'
-    const docsPath = `examples/${gitFolder}/`
+    const user = 'dimaMachina';
+    const repo = 'graphql-eslint';
+    const branch = 'master';
+    const docsPath = `examples/${gitFolder}/`;
 
-
-    return <MDXRemote compiledSource={await compileMdx(`
+    return (
+      <MDXRemote
+        compiledSource={await compileMdx(`
 ## ESLint Flat Config
 \`\`\`js filename="eslint.config.js"
 ${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}eslint.config.js`).then(response => response.text())}
@@ -69,6 +72,8 @@ ${await fetch(`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${doc
 > [ESLint Flat Config](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/eslint.config.js)
 > or
 > [ESLint Legacy Config](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/${gitFolder}/.eslintrc.cjs)
-> .`)} />
-  }
+> .`)}
+      />
+    );
+  },
 });

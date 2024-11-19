@@ -40,7 +40,7 @@ function useDebouncedQueryParams<TypeToEncode, TypeFromDecode = TypeToEncode>(
   return [query, fn.current];
 }
 
-const Page: FC<{
+export const ClientPage: FC<{
   defaultSchema: string;
   defaultOperation: string;
   children: ReactNode;
@@ -140,5 +140,3 @@ const Page: FC<{
     </>
   );
 };
-
-export default Page;

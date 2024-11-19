@@ -52,7 +52,6 @@ const MARKDOWN_LINK_RE = /\[(.*?)]\(.*\)/;
 
 async function generateDocs(): Promise<void> {
   const prettierConfigMd = await prettier.resolveConfig('./README.md');
-  const prettierConfigTs = await prettier.resolveConfig('./_meta.ts');
 
   const result = Object.entries(rules).map(async ([ruleName, rule]) => {
     const frontMatterDescription = rule.meta
