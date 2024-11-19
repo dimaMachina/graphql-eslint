@@ -5,10 +5,6 @@ import { withGuildDocs } from '@theguild/components/next.config';
 
 const require = createRequire(import.meta.url);
 
-const sep = path.sep === '/' ? '/' : '\\\\';
-
-const ALLOWED_SVG_REGEX = new RegExp(`src${sep}icons${sep}.+\\.svg$`);
-
 /** @type {import("next").Config} */
 export default withGuildDocs({
   cleanDistDir: true,
@@ -48,23 +44,21 @@ export default withGuildDocs({
       }),
     );
 
-    const fileLoaderRule = config.module.rules.find(rule => rule.test?.test?.('.svg'));
-    fileLoaderRule.exclude = ALLOWED_SVG_REGEX;
-
+    // rule.exclude doesn't work starting from Next.js 15
+    const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
+      rule => rule.test?.test?.('.svg')
+    )
     config.module.rules.push({
-      test: ALLOWED_SVG_REGEX,
-      use: [
+      test: /\.svg$/,
+      oneOf: [
         {
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: ['removeXMLNS'],
-            },
-          },
+          resourceQuery: /svgr/,
+          use: ['@svgr/webpack']
         },
-      ],
-    });
-    return config;
+        imageLoaderOptions
+      ]
+    })
+    return config
   },
   eslint: {
     ignoreDuringBuilds: true,
