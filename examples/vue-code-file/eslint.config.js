@@ -7,6 +7,7 @@ import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 export default [
   {
     files: ['**/*.js'],
+    processor: graphqlPlugin.processor,
     rules: js.configs.recommended.rules,
   },
   ...pluginVue.configs['flat/recommended'],
@@ -18,19 +19,13 @@ export default [
       pluginVue.processors['.vue'],
       processorVueBlocks({
         blocks: {
-          styles: true,
+          styles: false,
           customBlocks: true,
-          // Usually it's not recommended to lint <script> and <template>
-          // As eslint-plugin-vue already provides the support
           script: true,
           template: false,
         },
       }),
     ]),
-  },
-  {
-    files: ['**/*.js'],
-    processor: graphqlPlugin.processor,
   },
   {
     files: ['**/*.graphql'],

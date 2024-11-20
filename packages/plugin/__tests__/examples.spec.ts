@@ -114,7 +114,7 @@ describe('Examples', () => {
 
   it('should work in vue', () => {
     const cwd = path.join(CWD, 'examples', 'vue-code-file');
-    testESLintOutput(cwd, 2);
+    testESLintOutput(cwd, 4);
   });
 
   it('should work in multiple projects', () => {
