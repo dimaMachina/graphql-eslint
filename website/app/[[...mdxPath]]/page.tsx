@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents are not react hooks */
 
 import { generateStaticParamsFor, importPage } from '@theguild/components/pages';
-import { useMDXComponents } from '../../mdx-components.js';
+import { useMDXComponents } from '../../mdx-components';
 
 export const generateStaticParams = generateStaticParamsFor('mdxPath');
 

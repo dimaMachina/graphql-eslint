@@ -61,7 +61,7 @@ ${await fs.readFile(`${docsPath}/.eslintrc.cjs`)}
   },
 });
 
-export const useMDXComponents = components => ({
+export const useMDXComponents: typeof getDocsMDXComponents = components => ({
   ...docsComponents,
   ...components,
 });
