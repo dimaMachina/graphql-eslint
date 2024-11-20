@@ -8,12 +8,14 @@ const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entrie
     schemaAndOperationsRules: [];
   }>(
     (acc, [ruleId, curr]) => {
+      // @ts-expect-error -- fixme
       const { category } = curr.meta.docs;
       if (category === 'Schema') {
         acc.schemaRules.push(ruleId);
       } else if (category === 'Operations') {
         acc.operationsRules.push(ruleId);
       } else {
+        // @ts-expect-error -- fixme
         acc.schemaAndOperationsRules.push(ruleId);
       }
       return acc;

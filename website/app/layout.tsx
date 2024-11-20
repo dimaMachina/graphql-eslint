@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
 import { Banner, PRODUCTS } from '@theguild/components';
 import { getDefaultMetadata, GuildLayout } from '@theguild/components/server';
-import { QueryParamProvider } from './query-params-provider';
 import '@theguild/components/style.css';
 
 const description = PRODUCTS.ESLINT.title;
@@ -50,7 +49,7 @@ const RootLayout: FC<{
         ],
       }}
     >
-      <QueryParamProvider>{children}</QueryParamProvider>
+      {children}
     </GuildLayout>
   );
 };

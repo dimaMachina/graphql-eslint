@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import { parser } from '@graphql-eslint/eslint-plugin';
 import { ClientPage } from './page.client';
+import { QueryParamProvider } from './query-params-provider';
 
 export const metadata = {
   title: 'Playground',
@@ -53,23 +54,27 @@ const PlayPage: FC = () => {
         'flex bg-gradient-to-br from-fuchsia-200/60 via-pink-300/60 to-purple-300/60 max-md:min-w-[1280px] dark:from-pink-800/30 dark:via-fuchsia-900/30 dark:to-purple-800/30',
       )}
     >
-      <ClientPage
-        defaultOperation={DEFAULT_OPERATION}
-        defaultSchema={DEFAULT_SCHEMA}
-        headingClass={classes.heading}
-      >
-        <div>
-          <h3 className={classes.heading}>VERSIONING</h3>
-          <span className="flex justify-between text-sm">
-            <span>ESLint</span>
-            <span>{Linter.version}</span>
-          </span>
-          <span className="flex justify-between text-sm">
-            <span>GraphQL-ESLint</span>
-            <span>{parser.meta.version}</span>
-          </span>
-        </div>
-      </ClientPage>
+      <Suspense fallback="Loading...">
+        <QueryParamProvider>
+          <ClientPage
+            defaultOperation={DEFAULT_OPERATION}
+            defaultSchema={DEFAULT_SCHEMA}
+            headingClass={classes.heading}
+          >
+            <div>
+              <h3 className={classes.heading}>VERSIONING</h3>
+              <span className="flex justify-between text-sm">
+                <span>ESLint</span>
+                <span>{Linter.version}</span>
+              </span>
+              <span className="flex justify-between text-sm">
+                <span>GraphQL-ESLint</span>
+                <span>{parser.meta.version}</span>
+              </span>
+            </div>
+          </ClientPage>
+        </QueryParamProvider>
+      </Suspense>
     </div>
   );
 };

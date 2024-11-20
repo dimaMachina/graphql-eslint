@@ -5,7 +5,6 @@ import { withGuildDocs } from '@theguild/components/next.config';
 
 const require = createRequire(import.meta.url);
 
-/** @type {import("next").Config} */
 export default withGuildDocs({
   cleanDistDir: true,
   output: 'export',
@@ -45,6 +44,7 @@ export default withGuildDocs({
     );
 
     // rule.exclude doesn't work starting from Next.js 15
+    // @ts-expect-error -- fixme
     const { test: _test, ...imageLoaderOptions } = config.module.rules.find(rule =>
       rule.test?.test?.('.svg'),
     );
