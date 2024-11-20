@@ -1,8 +1,8 @@
+import { mergeProcessors } from 'eslint-merge-processors';
+import pluginVue from 'eslint-plugin-vue';
+import processorVueBlocks from 'eslint-processor-vue-blocks';
 import js from '@eslint/js';
 import graphqlPlugin from '@graphql-eslint/eslint-plugin';
-import pluginVue from 'eslint-plugin-vue'
-import processorVueBlocks from 'eslint-processor-vue-blocks'
-import { mergeProcessors } from 'eslint-merge-processors'
 
 export default [
   {
@@ -24,7 +24,7 @@ export default [
           // As eslint-plugin-vue already provides the support
           script: true,
           template: false,
-        }
+        },
       }),
     ]),
   },

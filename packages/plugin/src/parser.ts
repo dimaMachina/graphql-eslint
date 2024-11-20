@@ -4,7 +4,7 @@ import { GraphQLProjectConfig, IGraphQLProject } from 'graphql-config';
 import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
 import { getDocuments } from './documents.js';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
-import { getFirstExistingPath, loadGraphQLConfig } from "./graphql-config.js";
+import { getFirstExistingPath, loadGraphQLConfig } from './graphql-config.js';
 import { version } from './meta.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';

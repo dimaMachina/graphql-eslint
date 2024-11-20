@@ -1,5 +1,5 @@
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
 import debugFactory from 'debug';
 import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
@@ -13,10 +13,10 @@ let graphQLConfig: GraphQLConfig;
  *
  */
 export function getFirstExistingPath(filePath: string): string {
-  while(!fs.existsSync(filePath)) {
-    filePath = path.dirname(filePath)
+  while (!fs.existsSync(filePath)) {
+    filePath = path.dirname(filePath);
   }
-  return filePath
+  return filePath;
 }
 
 export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
