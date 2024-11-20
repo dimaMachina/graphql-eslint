@@ -1,18 +1,28 @@
-import svelteParser from 'svelte-eslint-parser';
 import js from '@eslint/js';
 import graphqlPlugin from '@graphql-eslint/eslint-plugin';
+import eslintPluginSvelte from 'eslint-plugin-svelte';
+import { mergeProcessors } from 'eslint-merge-processors';
+import processorVueBlocks from 'eslint-processor-vue-blocks';
 
 export default [
   {
-    files: ['**/*.js', '**/*.svelte'],
+    files: ['**/*.js'],
     processor: graphqlPlugin.processor,
     rules: js.configs.recommended.rules,
   },
+  ...eslintPluginSvelte.configs['flat/recommended'],
   {
     files: ['**/*.svelte'],
-    languageOptions: {
-      parser: svelteParser,
-    },
+    // `eslint-plugin-svelte` will set a default processor for `.svelte` files
+    // we use `eslint-merge-processors` to extend it
+    processor: mergeProcessors([
+      eslintPluginSvelte.processors.svelte,
+      processorVueBlocks({
+        blocks: {
+          script: true,
+        },
+      }),
+    ]),
   },
   {
     files: ['**/*.graphql'],
