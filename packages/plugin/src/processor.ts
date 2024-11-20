@@ -1,4 +1,4 @@
-import { relative } from 'node:path';
+import path from 'node:path';
 import { Linter } from 'eslint';
 import { GraphQLConfig } from 'graphql-config';
 import {
@@ -29,9 +29,10 @@ export const processor = {
   },
   supportsAutofix: true,
   preprocess(code, filePath) {
-    if (process.env.ESLINT_USE_FLAT_CONFIG !== 'false' && filePath.endsWith('.vue')) {
+    const ext = path.parse(filePath).ext.slice(1);
+    if (process.env.ESLINT_USE_FLAT_CONFIG !== 'false' && (ext === 'vue' || ext === 'svelte')) {
       throw new Error(
-        "Processing of `.vue` files is no longer supported, follow the new official vue example for ESLint's flat config https://github.com/dimaMachina/graphql-eslint/tree/master/examples/vue-code-file",
+        `Processing of \`.${ext}\` files is no longer supported, follow the new official ${ext} example for ESLint's flat config https://github.com/dimaMachina/graphql-eslint/tree/master/examples/${ext}-code-file`,
       );
     }
     if (!onDiskConfigLoaded) {
@@ -83,7 +84,7 @@ export const processor = {
       return [...blocks, code /* source code must be provided and be last */];
     } catch (error) {
       if (error instanceof Error) {
-        error.message = `[graphql-eslint] Error while preprocessing "${relative(
+        error.message = `[graphql-eslint] Error while preprocessing "${path.relative(
           CWD,
           filePath,
         )}" file\n\n${error.message}`;

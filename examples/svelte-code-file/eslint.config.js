@@ -1,8 +1,8 @@
+import { mergeProcessors } from 'eslint-merge-processors';
+import eslintPluginSvelte from 'eslint-plugin-svelte';
+import processorVueBlocks from 'eslint-processor-vue-blocks';
 import js from '@eslint/js';
 import graphqlPlugin from '@graphql-eslint/eslint-plugin';
-import eslintPluginSvelte from 'eslint-plugin-svelte';
-import { mergeProcessors } from 'eslint-merge-processors';
-import processorVueBlocks from 'eslint-processor-vue-blocks';
 
 export default [
   {
