@@ -11,7 +11,7 @@ import { rules } from '../packages/plugin/src/index.js';
 const BR = '';
 const NBSP = '&nbsp;';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const RULES_PATH = resolve(__dirname, '..', 'website', 'src', 'content', 'rules');
+const RULES_PATH = resolve(__dirname, '..', 'website', 'content', 'rules');
 
 enum Icon {
   SCHEMA = '📄',
