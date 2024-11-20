@@ -1,4 +1,5 @@
 import path from 'node:path';
+import fs from 'node:fs';
 import debugFactory from 'debug';
 import { GraphQLConfig, GraphQLExtensionDeclaration, loadConfigSync } from 'graphql-config';
 import { CodeFileLoader } from '@graphql-tools/code-file-loader';
@@ -7,10 +8,21 @@ import { ParserOptions } from './types.js';
 const debug = debugFactory('graphql-eslint:graphql-config');
 let graphQLConfig: GraphQLConfig;
 
+/**
+ * Filepath can be a virtual file, so we need to find the first existing path
+ *
+ */
+export function getFirstExistingPath(filePath: string): string {
+  while(!fs.existsSync(filePath)) {
+    filePath = path.dirname(filePath)
+  }
+  return filePath
+}
+
 export function loadOnDiskGraphQLConfig(filePath: string): GraphQLConfig {
   return loadConfigSync({
     // load config relative to the file being linted
-    rootDir: path.dirname(filePath),
+    rootDir: getFirstExistingPath(path.dirname(filePath)),
     throwOnMissing: false,
     extensions: [codeFileLoaderExtension],
   });
