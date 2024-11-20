@@ -5,7 +5,7 @@
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
-  "packageManager": "pnpm@9.13.2",
+  "packageManager": "pnpm@9.14.1",
   "engines": {
     "node": ">=16",
     "pnpm": ">=9.0.6"
@@ -32,7 +32,7 @@
     "@theguild/eslint-config": "0.13.1",
     "@theguild/prettier-config": "3.0.0",
     "@types/dedent": "0.7.2",
-    "@types/node": "22.9.0",
+    "@types/node": "22.9.1",
     "chalk": "5.3.0",
     "dedent": "1.5.3",
     "enquirer": "2.4.1",
@@ -43,7 +43,7 @@
     "jest-snapshot-serializer-raw": "2.0.0",
     "json-schema-to-markdown": "1.1.1",
     "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "0.6.8",
+    "prettier-plugin-tailwindcss": "0.6.9",
     "rimraf": "6.0.1",
     "tsup": "^8.3.5",
     "tsx": "4.19.2",
