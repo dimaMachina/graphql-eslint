@@ -1,5 +1,20 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.15
+
+### Patch Changes
+
+- [#2743](https://github.com/dimaMachina/graphql-eslint/pull/2743)
+  [`03ccb9d`](https://github.com/dimaMachina/graphql-eslint/commit/03ccb9dabcd70af92ae46a0807f6cd979317a38f)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix error from `no-deprecated` rule
+  `4.0.0-alpha.13: node.typeInfo(...).inputType.getFields is not a function`
+
+- [#2735](https://github.com/dimaMachina/graphql-eslint/pull/2735)
+  [`ccd9303`](https://github.com/dimaMachina/graphql-eslint/commit/ccd930309957896f5d22ed59d40a67803ee77868)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix reporting lint issues not on first
+  char of file for `.vue` and support ESLint fixes and suggestions for them. Use
+  [new official example](https://github.com/dimaMachina/graphql-eslint/blob/master/examples/vue-code-file/eslint.config.js)
+
 ## 4.0.0-alpha.14
 
 ### Patch Changes
