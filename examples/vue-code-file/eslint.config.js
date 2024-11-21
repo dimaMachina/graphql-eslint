@@ -22,7 +22,6 @@ export default [
           styles: false,
           customBlocks: true,
           script: true,
-          template: false,
         },
       }),
     ]),
