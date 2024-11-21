@@ -133,7 +133,7 @@ export const rule: GraphQLESLintRule<[], true> = {
       },
       ObjectValue(node) {
         const { inputType } = node.typeInfo();
-        if (!inputType) return
+        if (!inputType) return;
         if ('getFields' in inputType) {
           const fields = inputType.getFields();
           for (const field of node.fields) {
