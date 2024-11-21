@@ -4,12 +4,12 @@ import { GraphQLProjectConfig, IGraphQLProject } from 'graphql-config';
 import { parseGraphQLSDL, Source } from '@graphql-tools/utils';
 import { getDocuments } from './documents.js';
 import { convertToESTree, extractComments, extractTokens } from './estree-converter/index.js';
-import { loadGraphQLConfig } from './graphql-config.js';
+import { getFirstExistingPath, loadGraphQLConfig } from './graphql-config.js';
 import { version } from './meta.js';
 import { getSchema } from './schema.js';
 import { getSiblings } from './siblings.js';
 import { GraphQLESLintParseResult, ParserOptions, Schema } from './types.js';
-import { CWD, VIRTUAL_DOCUMENT_REGEX } from './utils.js';
+import { CWD } from './utils.js';
 
 const debug = debugFactory('graphql-eslint:parser');
 
@@ -44,11 +44,9 @@ export function parseForESLint(code: string, options: ParserOptions): GraphQLESL
     const { document } = parseGraphQLSDL(filePath, code, { noLocation: false });
     let project: GraphQLProjectConfig;
     let schema: Schema, documents: Source[];
-
     if (typeof window === 'undefined') {
       const gqlConfig = loadGraphQLConfig(options);
-      const realFilepath = filePath.replace(VIRTUAL_DOCUMENT_REGEX, '');
-      project = gqlConfig.getProjectForFile(realFilepath);
+      project = gqlConfig.getProjectForFile(getFirstExistingPath(filePath));
       documents = getDocuments(project);
     } else {
       documents = [

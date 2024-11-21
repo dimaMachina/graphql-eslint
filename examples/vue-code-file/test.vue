@@ -1,9 +1,9 @@
 <template>
-  <span>test</span>
+  <!-- use the variables to satisfy the no-unused-vars lint -->
+  <span>{{ GET_USER }}</span>
+  <span>{{ GET_ANOTHER_USER }}</span>
 </template>
 <script>
-/* eslint-disable no-unused-vars */
-
 const GET_USER = /* GraphQL */ `
   query {
     user {

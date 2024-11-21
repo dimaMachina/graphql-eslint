@@ -1,18 +1,30 @@
-import vueParser from 'vue-eslint-parser';
+import { mergeProcessors } from 'eslint-merge-processors';
+import pluginVue from 'eslint-plugin-vue';
+import processorVueBlocks from 'eslint-processor-vue-blocks';
 import js from '@eslint/js';
 import graphqlPlugin from '@graphql-eslint/eslint-plugin';
 
 export default [
   {
-    files: ['**/*.js', '**/*.vue'],
+    files: ['**/*.js'],
     processor: graphqlPlugin.processor,
     rules: js.configs.recommended.rules,
   },
+  ...pluginVue.configs['flat/recommended'],
   {
     files: ['**/*.vue'],
-    languageOptions: {
-      parser: vueParser,
-    },
+    // `eslint-plugin-vue` will set a default processor for `.vue` files
+    // we use `eslint-merge-processors` to extend it
+    processor: mergeProcessors([
+      pluginVue.processors.vue,
+      processorVueBlocks({
+        blocks: {
+          script: true,
+          scriptSetup: true,
+          customBlocks: true,
+        },
+      }),
+    ]),
   },
   {
     files: ['**/*.graphql'],

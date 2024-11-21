@@ -29,6 +29,11 @@ export const processor = {
   },
   supportsAutofix: true,
   preprocess(code, filePath) {
+    if (process.env.ESLINT_USE_FLAT_CONFIG !== 'false' && filePath.endsWith('.vue')) {
+      throw new Error(
+        "Processing of `.vue` files is no longer supported, follow the new official vue example for ESLint's flat config https://github.com/dimaMachina/graphql-eslint/tree/master/examples/vue-code-file",
+      );
+    }
     if (!onDiskConfigLoaded) {
       onDiskConfig = loadOnDiskGraphQLConfig(filePath);
       onDiskConfigLoaded = true;
