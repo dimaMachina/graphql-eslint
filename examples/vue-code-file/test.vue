@@ -1,5 +1,5 @@
 <template>
-	<!-- use the variables to satisfy the no-unused-vars lint -->
+  <!-- use the variables to satisfy the no-unused-vars lint -->
   <span>{{ GET_USER }}</span>
   <span>{{ GET_ANOTHER_USER }}</span>
 </template>
