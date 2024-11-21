@@ -1,5 +1,7 @@
 <template>
-  <span>test</span>
+	<!-- use the variables to satisfy the no-unused-vars lint -->
+  <span>{{ GET_USER }}</span>
+  <span>{{ GET_ANOTHER_USER }}</span>
 </template>
 <script>
 const GET_USER = /* GraphQL */ `
