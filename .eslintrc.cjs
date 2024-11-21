@@ -119,5 +119,11 @@ module.exports = {
         'no-undef': 'off',
       },
     },
+    {
+      files: ['website/**/*.mdx/**'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
   ],
 };
