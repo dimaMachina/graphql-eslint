@@ -16,7 +16,7 @@ export default [
     // `eslint-plugin-vue` will set a default processor for `.vue` files
     // we use `eslint-merge-processors` to extend it
     processor: mergeProcessors([
-      pluginVue.processors['.vue'],
+      pluginVue.processors.vue,
       processorVueBlocks({
         blocks: {
           styles: false,

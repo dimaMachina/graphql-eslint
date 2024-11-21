@@ -1,6 +1,4 @@
 <script>
-/* eslint-disable no-unused-vars */
-
 const GET_USER = /* GraphQL */ `
   query {
     user {

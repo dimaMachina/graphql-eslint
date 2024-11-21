@@ -109,7 +109,7 @@ describe('Examples', () => {
 
   it('should work in svelte', () => {
     const cwd = path.join(CWD, 'examples', 'svelte-code-file');
-    testESLintOutput(cwd, 2);
+    testESLintOutput(cwd, 4);
   });
 
   it('should work in vue', () => {
