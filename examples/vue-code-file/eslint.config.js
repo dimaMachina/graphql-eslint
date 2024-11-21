@@ -13,8 +13,9 @@ export default [
   ...pluginVue.configs['flat/recommended'],
   {
     files: ['**/*.vue'],
-    // `eslint-plugin-vue` will set a default processor for `.vue` files
-    // we use `eslint-merge-processors` to extend it
+    // Vue still needs to be parsed by the Vue parser for normal linting. But GraphQL's lint needs to lint only the JS/TS part,
+    // so extract those as blocks using eslint-processor-vue-blocks. This turns the script parts of Vue SFCs into virtual JS/TS
+    // blocks inside ESLint. ESLint can then parse the JS/TS to find GraphQL parts. And finally, graphql-eslint can lint the resulting GraphQL
     processor: mergeProcessors([
       pluginVue.processors.vue,
       processorVueBlocks({
