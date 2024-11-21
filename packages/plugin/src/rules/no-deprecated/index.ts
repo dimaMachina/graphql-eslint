@@ -132,14 +132,16 @@ export const rule: GraphQLESLintRule<[], true> = {
         }
       },
       ObjectValue(node) {
-        const typeInfo = node.typeInfo();
-        // @ts-expect-error -- fixme
-        const fields = typeInfo.inputType!.getFields();
-        for (const field of node.fields) {
-          const fieldName = field.name.value;
-          const reason = fields[fieldName].deprecationReason;
-          if (reason) {
-            report(field, reason);
+        const { inputType } = node.typeInfo();
+        if (!inputType) return;
+        if ('getFields' in inputType) {
+          const fields = inputType.getFields();
+          for (const field of node.fields) {
+            const fieldName = field.name.value;
+            const reason = fields[fieldName].deprecationReason;
+            if (reason) {
+              report(field, reason);
+            }
           }
         }
       },
