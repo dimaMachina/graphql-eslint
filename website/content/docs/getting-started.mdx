@@ -9,23 +9,28 @@ import { Callout } from '@theguild/components'
 To get started, define an override in your ESLint config to apply this plugin to `.graphql` files.
 Add the [rules](/rules) you want applied.
 
-<Callout type="error" emoji="🚨">
-  **Note**: This step is necessary even if you are declaring operations and/or schema in code files.
-</Callout>
+> [!NOTE]
+>
+> This step is necessary even if you are declaring operations and/or schema in code files.
 
-```json filename=".eslintrc.json"
-{
-  "overrides": [
-    {
-      "files": ["*.graphql"],
-      "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": ["@graphql-eslint"],
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      }
+```js filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  // ... other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/known-type-names': 'error'
     }
-  ]
-}
+  }
+]
 ```
 
 If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that
@@ -39,23 +44,27 @@ If you are defining GraphQL schema or GraphQL operations in code files, you'll w
 additional override to extend the functionality of this plugin to the schema and operations in those
 files.
 
-```diff filename=".eslintrc.json"
-{
-  "overrides": [
-+   {
-+     "files": ["*.js"],
-+     "processor": "@graphql-eslint/graphql"
-+   },
-    {
-      "files": ["*.graphql"],
-      "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": ["@graphql-eslint"],
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      }
+```diff filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
+
+export default [
++ {
++   files: ['**/*.js'],
++   processor: graphqlPlugin.processor
++ },
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/known-type-names': 'error'
     }
-  ]
-}
+  }
+]
 ```
 
 Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause
