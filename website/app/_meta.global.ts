@@ -29,8 +29,6 @@ export default {
     type: 'page',
     items: {
       index: '',
-      'getting-started': '',
-      'parser-options': '',
       usage: {
         title: 'Usage',
         items: {
@@ -53,6 +51,7 @@ export default {
           prettier: '',
         },
       },
+      'parser-options': '',
       _1: {
         type: 'separator',
         title: 'Users',
