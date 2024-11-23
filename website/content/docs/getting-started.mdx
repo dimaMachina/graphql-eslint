@@ -85,6 +85,12 @@ schema as a `.json` file, `.graphql` files(s), url endpoint or as raw string.
 
 > We are using `graphql-tools` to do that.
 
+```js filename="graphql.config.js"
+export default {
+  schema: 'schema.graphql'
+}
+```
+
 Alternatively, you can define `languageOptions.parserOptions.graphQLConfig.schema`.
 
 ```diff filename="eslint.config.js"
