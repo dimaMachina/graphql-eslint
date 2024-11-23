@@ -32,6 +32,7 @@ export default defineConfig([
     ...opts,
     format: 'cjs',
     outDir: 'dist/cjs',
+    cjsInterop: true,
     async onSuccess() {
       await fs.copyFile(
         path.join(CWD, '..', '..', 'README.md'),
