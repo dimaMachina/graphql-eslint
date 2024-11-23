@@ -36,10 +36,13 @@ npm i -D @graphql-eslint/eslint-plugin
 
 Create a new
 [configuration object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects)
-in your `eslint.config.js` file to setup `@graphql-eslint` plugin.
+in your `eslint.config.js` file to apply this plugin to `.graphql` files. Add [the rules](/rules)
+you want applied.
 
-To get started, define an override in your ESLint config to apply this plugin to `.graphql` files.
-Add the [rules](/rules) you want applied.
+If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that
+apply to individual files, you should be good to go. If you would like use a remote schema or use
+rules that apply across the entire collection of definitions at once, see
+[here](#extended-linting-rules-with-graphql-schema).
 
 > [!WARNING]
 >
@@ -65,11 +68,6 @@ export default [
   }
 ]
 ```
-
-If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that
-apply to individual files, you should be good to go 👍. If you would like use a remote schema or use
-rules that apply across the entire collection of definitions at once, see
-[here](#extended-linting-rules-with-graphql-schema).
 
 </Steps>
 
