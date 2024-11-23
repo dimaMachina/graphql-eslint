@@ -5,4 +5,38 @@ icon: JSIcon
 
 # Usage with code files `.js/.jsx`
 
+You need to add a new
+[configuration object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects)
+in your `eslint.config.js` to setup GraphQL-ESLint processor for `.js` files.
+
+```diff filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
+
+export default [
++ {
++   files: ['**/*.js'],
++   processor: graphqlPlugin.processor
++ },
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/known-type-names': 'error'
+    }
+  }
+]
+```
+
+> [!TIP]
+>
+> Under the hood, the processor extracts schema and operation files from `files: ['**/*.js']` and
+> treats them as virtual GraphQL documents with `.graphql` extensions. This enables the overrides
+> you define for `.graphql` files, under `files: ['**/*.graphql']`, to be applied to the definitions
+> within your code files[^1].
+
 <ESLintConfigs gitFolder="code-file" />
