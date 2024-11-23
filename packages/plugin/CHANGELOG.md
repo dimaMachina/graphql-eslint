@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.0-alpha.16
+
+### Patch Changes
+
+- [#2752](https://github.com/dimaMachina/graphql-eslint/pull/2752)
+  [`1e3e966`](https://github.com/dimaMachina/graphql-eslint/commit/1e3e96634a29099704c29a328955c28b060aa7dc)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix - Config types don't satisfy
+  `FlatConfig.Config`
+
 ## 4.0.0-alpha.15
 
 ### Patch Changes
