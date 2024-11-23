@@ -56,6 +56,7 @@ export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> 
   configOptions?: T | { schema?: T; operations?: T };
   graphQLJSRuleName?: string;
   isDisabledForAllConfig?: true;
+  whenNotToUseIt?: string;
 };
 
 export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Record<

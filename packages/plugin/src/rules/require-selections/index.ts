@@ -103,6 +103,8 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         },
       ],
       recommended: true,
+      whenNotToUseIt:
+        "Relay Compiler automatically adds an `id` field to any type that has an `id` field, even if it hasn't been explicitly requested. Requesting a field that is not used directly in the code can conflict with another Relay rule: `relay/unused-fields`.",
     },
     messages: {
       [RULE_ID]:
