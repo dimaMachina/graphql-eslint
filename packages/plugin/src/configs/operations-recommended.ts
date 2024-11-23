@@ -2,7 +2,7 @@
  * 🚨 IMPORTANT! Do not manually modify this file. Run: `pnpm generate:configs`
  */
 
-import type { Linter } from 'eslint';
+import { Linter } from 'eslint';
 
 export default {
   parser: '@graphql-eslint/eslint-plugin',
