@@ -1,5 +1,5 @@
 /*
- * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
+ * 🚨 IMPORTANT! Do not manually modify this file. Run: `pnpm generate:configs`
  */
 
 import { rule as alphabetize } from './alphabetize/index.js';

@@ -22,13 +22,15 @@ type WriteFile = {
 
 const writeFormattedFile: WriteFile = async (filePath, code) => {
   if (filePath.startsWith('configs')) {
-    code = `// @ts-expect-error -- for cjs
-export = ${JSON.stringify(code)}`;
+    code = `
+import type { Linter } from 'eslint';
+
+export default ${JSON.stringify(code)} satisfies Linter.LegacyConfig`;
   }
 
   const formattedCode = [
     '/*',
-    ' * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`',
+    ' * 🚨 IMPORTANT! Do not manually modify this file. Run: `pnpm generate:configs`',
     ' */',
     BR,
     await prettier.format(code as string, {
