@@ -1,5 +1,4 @@
-import type { IGraphQLConfig } from 'graphql-config';
-import type { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
+import type { IGraphQLConfig, GraphQLTagPluckOptions } from '@graphql-eslint/eslint-plugin';
 
 const config: IGraphQLConfig = {
   projects: {
