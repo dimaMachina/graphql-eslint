@@ -79,13 +79,13 @@ root-level fields.
 
 To use these rules, you'll need to tell ESLint how to identify the entire set of schema definitions.
 
-`graphql-eslint` integrates with [`graphql-config`](https://the-guild.dev/graphql/config)
-automatically and will use it to load your schema!
+GraphQL ESLint integrates with [GraphQL Config](https://the-guild.dev/graphql/config) automatically
+and will use your physical config to load your schema. GraphQL Config allows you to specify your
+schema as a `.json` file, `.graphql` files(s), url endpoint or as raw string.
+
+> We are using `graphql-tools` to do that.
 
 Alternatively, you can define `languageOptions.parserOptions.graphQLConfig.schema`.
-
-The parser allows you to specify a `.json` file / `.graphql` files(s) / url / raw string to locate
-your schema (We are using `graphql-tools` to do that).
 
 ```diff filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
