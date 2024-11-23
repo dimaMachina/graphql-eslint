@@ -11,7 +11,7 @@ import PrettierIcon from '@icons/prettier.svg?svgr'
 import StackIcon from '@icons/stack.svg?svgr'
 import SvelteIcon from '@icons/svelte.svg?svgr'
 import VueIcon from '@icons/vue.svg?svgr'
-import { Cards, Steps } from '@theguild/components'
+import { Cards, Steps, Tabs } from '@theguild/components'
 import { createIndexPage, getPageMap, MDXRemote } from '@theguild/components/server'
 
 # Usage
@@ -136,15 +136,17 @@ making it available for rules while doing the actual linting.
 To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
 just specify a glob expression(s) that points to your code[^1] and/or `.graphql` files:
 
+<Tabs items={['GraphQL Config', 'Programmatic Usage']}>
+<Tabs.Tab>
 ```diff filename="graphql.config.js"
 export default {
   schema: './schema.graphql',
 + documents: './src/**/*.graphql'
 }
 ```
+</Tabs.Tab>
 
-or via programmatic usage:
-
+<Tabs.Tab>
 ```diff filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 
@@ -170,7 +172,8 @@ export default [
   }
 ]
 ```
-
+</Tabs.Tab>
+</Tabs>
 </Steps>
 
 ## Usage
