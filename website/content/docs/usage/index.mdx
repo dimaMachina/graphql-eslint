@@ -38,6 +38,10 @@ Create a new
 [configuration object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects)
 in your `eslint.config.js` file to setup `@graphql-eslint` plugin.
 
+> [!WARNING]
+>
+> This step is necessary even if you are declaring operations and/or schema in code files[^1].
+
 ```js filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 
@@ -74,3 +78,5 @@ export default [
     PrettierIcon
   }}
 />
+
+[^1]: Code files (e.g., `.js`, `.jsx`, `.ts`, `.tsx` files)
