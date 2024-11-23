@@ -65,11 +65,12 @@ export default [
 ]
 ```
 
-Under the hood, specifying the `@graphql-eslint/graphql` processor for code files[^1] will cause
-`graphql-eslint/graphql` to extract the schema and operation definitions from these files into
-virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined
-for `.graphql` files, via `"files": ["*.graphql"]`, to get applied to the definitions defined in
-your code files[^1].
+> [!TIP]
+>
+> Under the hood, processor will extract the schema and operations files from `files: ['**/*.js']`
+> under virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've
+> defined for `.graphql` files, via `files: ['**/*.graphql']`, to get applied to the definitions
+> defined in your code files[^1].
 
 ### Extended Linting Rules with GraphQL Schema
 
