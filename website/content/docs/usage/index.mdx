@@ -85,15 +85,20 @@ schema. GraphQL Config supports multiple ways to specify your schema, including 
 > This integration uses [`graphql-tools`](https://the-guild.dev/graphql/tools) under the hood to
 > handle the schema loading.
 
-Here’s an example of a basic `graphql.config.js` file:
+Example of providing GraphQL schema:
+
+<Tabs items={['GraphQL Config', 'Programmatic Usage']}>
+<Tabs.Tab>
 
 ```js filename="graphql.config.js"
 export default {
   schema: './schema.graphql'
 }
 ```
+</Tabs.Tab>
 
-Alternatively, you can define the schema directly within your ESLint configuration by specifying
+<Tabs.Tab>
+Alternatively, you can provide the schema directly within your ESLint configuration by specifying
 `languageOptions.parserOptions.graphQLConfig.schema`.
 
 ```diff filename="eslint.config.js"
@@ -120,6 +125,8 @@ export default [
   }
 ]
 ```
+</Tabs.Tab>
+</Tabs>
 
 ### Providing GraphQL Operations<sup>_(Optional)_</sup>
 
@@ -136,6 +143,8 @@ making it available for rules while doing the actual linting.
 To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
 just specify a glob expression(s) that points to your code[^1] and/or `.graphql` files:
 
+Example of providing GraphQL operations:
+
 <Tabs items={['GraphQL Config', 'Programmatic Usage']}>
 <Tabs.Tab>
 ```diff filename="graphql.config.js"
@@ -147,6 +156,9 @@ export default {
 </Tabs.Tab>
 
 <Tabs.Tab>
+Alternatively, you can provide the documents directly within your ESLint configuration by specifying
+`languageOptions.parserOptions.graphQLConfig.documents`.
+
 ```diff filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 
