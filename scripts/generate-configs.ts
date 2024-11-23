@@ -23,7 +23,7 @@ type WriteFile = {
 const writeFormattedFile: WriteFile = async (filePath, code) => {
   if (filePath.startsWith('configs')) {
     code = `
-import type { Linter } from 'eslint';
+import { Linter } from 'eslint';
 
 export default ${JSON.stringify(code)} satisfies Linter.LegacyConfig`;
   }

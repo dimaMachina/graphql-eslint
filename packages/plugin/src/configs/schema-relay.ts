@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint';
+import { Linter } from 'eslint';
 
 export default {
   parser: '@graphql-eslint/eslint-plugin',

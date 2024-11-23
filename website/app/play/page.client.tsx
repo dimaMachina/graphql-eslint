@@ -115,7 +115,7 @@ export const ClientPage: FC<{
           ...(schemaConfig && configs[`flat/${schemaConfig}`].rules),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
-             // @ts-expect-error -- TODO: fix type error
+              // @ts-expect-error -- TODO: fix type error
               configs['flat/schema-all'].rules[`@graphql-eslint/${schemaRule}`],
           }),
         }}
@@ -132,7 +132,7 @@ export const ClientPage: FC<{
           ...(operationConfig && configs[`flat/${operationConfig}`].rules),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
-            // @ts-expect-error -- TODO: fix type error
+              // @ts-expect-error -- TODO: fix type error
               configs['flat/operations-all'].rules[`@graphql-eslint/${operationRule}`],
           }),
         }}

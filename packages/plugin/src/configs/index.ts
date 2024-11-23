@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint';
+import { Linter } from 'eslint';
 import { ConfigName } from '../types.js';
 import operationsAllConfig from './operations-all.js';
 import operationsRecommendedConfig from './operations-recommended.js';

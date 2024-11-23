@@ -141,6 +141,10 @@ async function generateDocs(): Promise<void> {
       blocks.push('## Config Schema', md(jsonSchema, '##'));
     }
 
+    if (docs.whenNotToUseIt) {
+      blocks.push('## When Not To Use It', docs.whenNotToUseIt);
+    }
+
     blocks.push('## Resources');
 
     if (graphQLJSRuleName) {

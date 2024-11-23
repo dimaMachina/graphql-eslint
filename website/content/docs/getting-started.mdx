@@ -1,31 +1,32 @@
-import { Callout } from '@theguild/components'
-
-# 🚧 Getting Started
-
-<WIP />
+# Getting Started
 
 ## Configuration
 
 To get started, define an override in your ESLint config to apply this plugin to `.graphql` files.
 Add the [rules](/rules) you want applied.
 
-<Callout type="error" emoji="🚨">
-  **Note**: This step is necessary even if you are declaring operations and/or schema in code files.
-</Callout>
+> [!WARNING]
+>
+> This step is necessary even if you are declaring operations and/or schema in code files[^1].
 
-```json filename=".eslintrc.json"
-{
-  "overrides": [
-    {
-      "files": ["*.graphql"],
-      "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": ["@graphql-eslint"],
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      }
+```js filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  // ... other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/known-type-names': 'error'
     }
-  ]
-}
+  }
+]
 ```
 
 If your GraphQL definitions are defined only in `.graphql` files, and you're only using rules that
@@ -33,75 +34,94 @@ apply to individual files, you should be good to go 👍. If you would like use 
 rules that apply across the entire collection of definitions at once, see
 [here](#extended-linting-rules-with-graphql-schema).
 
-### Apply Plugin to GraphQL Definitions Defined in Code Files
+## Extend Plugin Functionality to GraphQL Definitions in Code Files[^1]
 
-If you are defining GraphQL schema or GraphQL operations in code files, you'll want to define an
-additional override to extend the functionality of this plugin to the schema and operations in those
-files.
+When defining GraphQL schemas or operations directly in code files[^1], you need to add an override
+to ensure that this plugin's functionality is applied to those definitions as well.
 
-```diff filename=".eslintrc.json"
-{
-  "overrides": [
-+   {
-+     "files": ["*.js"],
-+     "processor": "@graphql-eslint/graphql"
-+   },
-    {
-      "files": ["*.graphql"],
-      "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": ["@graphql-eslint"],
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      }
+```diff filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
+
+export default [
++ {
++   files: ['**/*.js'],
++   processor: graphqlPlugin.processor
++ },
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/known-type-names': 'error'
     }
-  ]
+  }
+]
+```
+
+> [!TIP]
+>
+> Under the hood, the processor extracts schema and operation files from `files: ['**/*.js']` and
+> treats them as virtual GraphQL documents with `.graphql` extensions. This enables the overrides
+> you define for `.graphql` files, under `files: ['**/*.graphql']`, to be applied to the definitions
+> within your code files[^1].
+
+## Extended Linting Rules with GraphQL Schema
+
+Some linting rules require access to the entire GraphQL schema. For example, the
+[no-unreachable-types](../rules/no-unreachable-types) rule checks that all types are reachable
+through root-level fields.
+
+To enable these rules, you need to inform ESLint how to identify and load your complete schema.
+
+The GraphQL ESLint plugin integrates seamlessly with
+[GraphQL Config](https://the-guild.dev/graphql/config) which it uses to automatically load your
+schema. GraphQL Config supports multiple ways to specify your schema, including `.json`
+(introspection) file, `.graphql` files, a URL endpoint, or a raw string.
+
+> This integration uses [`graphql-tools`](https://the-guild.dev/graphql/tools) under the hood to
+> handle the schema loading.
+
+Here’s an example of a basic `graphql.config.js` file:
+
+```js filename="graphql.config.js"
+export default {
+  schema: './schema.graphql'
 }
 ```
 
-Under the hood, specifying the `@graphql-eslint/graphql` processor for code files will cause
-`graphql-eslint/graphql` to extract the schema and operation definitions from these files into
-virtual GraphQL documents with `.graphql` extensions. This will allow the overrides you've defined
-for `.graphql` files, via `"files": ["*.graphql"]`, to get applied to the definitions defined in
-your code files.
+Alternatively, you can define the schema directly within your ESLint configuration by specifying
+`languageOptions.parserOptions.graphQLConfig.schema`.
 
-### Extended Linting Rules with GraphQL Schema
+```diff filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 
-Some rules require an understanding of the entire schema at once. For example,
-[no-unreachable-types](https://the-guild.dev/graphql/eslint/rules/no-unreachable-types) checks that
-all types are reachable by root-level fields.
-
-To use these rules, you'll need to tell ESLint how to identify the entire set of schema definitions.
-
-If you are using [`graphql-config`](https://the-guild.dev/graphql/config), you are good to go.
-`graphql-eslint` integrates with it automatically and will use it to load your schema!
-
-Alternatively, you can define `parserOptions.schema` in the `*.graphql` override in your ESLint
-config.
-
-The parser allows you to specify a `.json` file / `.graphql` files(s) / url / raw string to locate
-your schema (We are using `graphql-tools` to do that). Just add `parserOptions.schema` to your
-configuration file:
-
-```diff filename=".eslintrc.json"
-{
-  "files": ["*.graphql"],
-  "parser": "@graphql-eslint/eslint-plugin",
-  "plugins": ["@graphql-eslint"],
-  "rules": {
-    "@graphql-eslint/no-unreachable-types": "error"
-  },
-+ "parserOptions": {
-+   "schema": "./schema.graphql"
-+ }
-}
+export default [
+  // ... other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser,
++     parserOptions: {
++       graphQLConfig: {
++         schema: './schema.graphql'
++       }
++     }
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/no-unreachable-types': 'error'
+    }
+  }
+]
 ```
 
-> You can find a complete
-> [documentation of the `parserOptions` here](/docs/getting-started/parser-options).
-
-> Some rules require type information to operate, it's marked in the docs for each rule!
-
-### Extended Linting Rules with Siblings Operations
+## Extended Linting Rules with Siblings Operations
 
 While implementing this tool, we had to find solutions for a better integration of the GraphQL
 ecosystem and ESLint core.
@@ -114,19 +134,41 @@ To workaround that, we allow you to provide additional information on your Graph
 making it available for rules while doing the actual linting.
 
 To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
-just specify a glob expression(s) that points to your code/`.graphql` files:
+just specify a glob expression(s) that points to your code[^1] and/or `.graphql` files:
 
-```diff filename=".eslintrc.json"
-{
-  "files": ["*.graphql"],
-  "parser": "@graphql-eslint/eslint-plugin",
-  "plugins": ["@graphql-eslint"],
-  "rules": {
-    "@graphql-eslint/unique-operation-name": "error"
-  },
-  "parserOptions": {
-+   "operations": "./src/**/*.graphql",
-    "schema": "./schema.graphql"
-  }
+```diff filename="graphql.config.js"
+export default {
+  schema: './schema.graphql',
++ documents: './src/**/*.graphql'
 }
 ```
+
+or via programmatic usage:
+
+```diff filename="eslint.config.js"
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
+
+export default [
+  // ... other config
+  {
+    files: ['**/*.graphql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser,
+      parserOptions: {
+        graphQLConfig: {
+          schema: './schema.graphql',
++         documents: './src/**/*.graphql'
+        }
+      }
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin
+    },
+    rules: {
+      '@graphql-eslint/unique-operation-name': 'error'
+    }
+  }
+]
+```
+
+[^1]: Code files (e.g., `.js`, `.jsx`, `.ts`, `.tsx` files)

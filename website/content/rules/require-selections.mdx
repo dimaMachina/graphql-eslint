@@ -90,6 +90,12 @@ The schema defines the following additional types:
 
 ## `asArray` (array)
 
+## When Not To Use It
+
+Relay Compiler automatically adds an `id` field to any type that has an `id` field, even if it
+hasn't been explicitly requested. Requesting a field that is not used directly in the code can
+conflict with another Relay rule: `relay/unused-fields`.
+
 ## Resources
 
 - [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/require-selections.ts)
