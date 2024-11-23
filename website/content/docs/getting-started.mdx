@@ -1,5 +1,3 @@
-import { Callout } from '@theguild/components'
-
 # 🚧 Getting Started
 
 <WIP />
@@ -76,20 +74,17 @@ your code files.
 ### Extended Linting Rules with GraphQL Schema
 
 Some rules require an understanding of the entire schema at once. For example,
-[no-unreachable-types](https://the-guild.dev/graphql/eslint/rules/no-unreachable-types) checks that
+[no-unreachable-types](../rules/no-unreachable-types) checks that
 all types are reachable by root-level fields.
 
 To use these rules, you'll need to tell ESLint how to identify the entire set of schema definitions.
 
-If you are using [`graphql-config`](https://the-guild.dev/graphql/config), you are good to go.
-`graphql-eslint` integrates with it automatically and will use it to load your schema!
+`graphql-eslint` integrates with [`graphql-config`](https://the-guild.dev/graphql/config) automatically and will use it to load your schema!
 
-Alternatively, you can define `parserOptions.schema` in the `*.graphql` override in your ESLint
-config.
+Alternatively, you can define `languageOptions.parserOptions.graphQLConfig.schema`.
 
 The parser allows you to specify a `.json` file / `.graphql` files(s) / url / raw string to locate
-your schema (We are using `graphql-tools` to do that). Just add `parserOptions.schema` to your
-configuration file:
+your schema (We are using `graphql-tools` to do that).
 
 ```diff filename=".eslintrc.json"
 {
