@@ -1,9 +1,10 @@
 /*
- * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
+ * 🚨 IMPORTANT! Do not manually modify this file. Run: `pnpm generate:configs`
  */
 
-// @ts-expect-error -- for cjs
-export = {
+import type { Linter } from 'eslint';
+
+export default {
   extends: './configs/schema-recommended',
   rules: {
     '@graphql-eslint/alphabetize': [
@@ -25,4 +26,4 @@ export = {
     '@graphql-eslint/require-nullable-result-in-root': 'error',
     '@graphql-eslint/require-type-pattern-with-oneof': 'error',
   },
-};
+} satisfies Linter.LegacyConfig;

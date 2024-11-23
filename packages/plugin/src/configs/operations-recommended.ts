@@ -1,9 +1,10 @@
 /*
- * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
+ * 🚨 IMPORTANT! Do not manually modify this file. Run: `pnpm generate:configs`
  */
 
-// @ts-expect-error -- for cjs
-export = {
+import type { Linter } from 'eslint';
+
+export default {
   parser: '@graphql-eslint/eslint-plugin',
   plugins: ['@graphql-eslint'],
   rules: {
@@ -55,4 +56,4 @@ export = {
     '@graphql-eslint/variables-are-input-types': 'error',
     '@graphql-eslint/variables-in-allowed-position': 'error',
   },
-};
+} satisfies Linter.LegacyConfig;

@@ -1,13 +1,9 @@
+import type { Linter } from 'eslint';
 import { ConfigName } from '../types.js';
-// @ts-expect-error -- complains about no default export
 import operationsAllConfig from './operations-all.js';
-// @ts-expect-error -- complains about no default export
 import operationsRecommendedConfig from './operations-recommended.js';
-// @ts-expect-error -- complains about no default export
 import schemaAllConfig from './schema-all.js';
-// @ts-expect-error -- complains about no default export
 import schemaRecommendedConfig from './schema-recommended.js';
-// @ts-expect-error -- complains about no default export
 import relayConfig from './schema-relay.js';
 
 export const configs = {
@@ -37,4 +33,4 @@ export const configs = {
       ...operationsAllConfig.rules,
     },
   },
-} satisfies Record<ConfigName | `flat/${ConfigName}`, unknown>;
+} satisfies Record<ConfigName, Linter.LegacyConfig> & Record<`flat/${ConfigName}`, Linter.Config>;

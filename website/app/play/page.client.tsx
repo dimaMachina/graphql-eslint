@@ -103,7 +103,6 @@ export const ClientPage: FC<{
             placeholder="Choose an operation rule"
           />
         </div>
-        {/*<Button className="mt-auto">Download this config</Button>*/}
       </div>
       <GraphQLEditor
         height="calc(50% - 17px)"
@@ -116,6 +115,7 @@ export const ClientPage: FC<{
           ...(schemaConfig && configs[`flat/${schemaConfig}`].rules),
           ...(schemaRule && {
             [`@graphql-eslint/${schemaRule}`]:
+             // @ts-expect-error -- TODO: fix type error
               configs['flat/schema-all'].rules[`@graphql-eslint/${schemaRule}`],
           }),
         }}
@@ -132,6 +132,7 @@ export const ClientPage: FC<{
           ...(operationConfig && configs[`flat/${operationConfig}`].rules),
           ...(operationRule && {
             [`@graphql-eslint/${operationRule}`]:
+            // @ts-expect-error -- TODO: fix type error
               configs['flat/operations-all'].rules[`@graphql-eslint/${operationRule}`],
           }),
         }}

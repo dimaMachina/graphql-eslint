@@ -1,9 +1,10 @@
 /*
- * 🚨 IMPORTANT! Do not manually modify this file. Run: `yarn generate-configs`
+ * 🚨 IMPORTANT! Do not manually modify this file. Run: `pnpm generate:configs`
  */
 
-// @ts-expect-error -- for cjs
-export = {
+import type { Linter } from 'eslint';
+
+export default {
   extends: './configs/operations-recommended',
   rules: {
     '@graphql-eslint/alphabetize': [
@@ -29,4 +30,4 @@ export = {
     '@graphql-eslint/no-one-place-fragments': 'error',
     '@graphql-eslint/require-import-fragment': 'error',
   },
-};
+} satisfies Linter.LegacyConfig;
