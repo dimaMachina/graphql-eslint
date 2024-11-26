@@ -79,8 +79,11 @@ To enable these rules, you need to inform ESLint how to identify and load your c
 
 The GraphQL ESLint plugin integrates seamlessly with
 [GraphQL Config](https://the-guild.dev/graphql/config) which it uses to automatically load your
-schema. GraphQL Config supports multiple ways to specify your schema, including `.json`
-(introspection result), `.graphql` files, a URL endpoint, or a raw string.
+schema. GraphQL Config [supports multiple ways to specify your schema](https://the-guild.dev/graphql/config/docs/user/schema), including:
+- `.json` (introspection result)
+- `.graphql` files
+- a URL endpoint
+- or a raw string.
 
 > This integration uses [`graphql-tools`](https://the-guild.dev/graphql/tools) under the hood to
 > handle the schema loading.
@@ -92,7 +95,20 @@ Example of providing GraphQL schema:
 
 ```js filename="graphql.config.js"
 export default {
-  schema: './schema.graphql'
+  // a path to a local `.graphql` file
+  schema: './schema.graphql',
+
+  // a glob expression to load multiple files
+  schema: './src/**/*.graphql',
+
+  // paths to multiple `.graphql` files
+  schema: ['src/schema-a.graphql', 'src/schema-b.graphql', 'src/schema-c.graphql']
+
+  // a path to a local `.json` (introspection) file
+  schema: './schema.json',
+
+  // a URL endpoint
+  schema: 'https://my-server/graphql'
 }
 ```
 

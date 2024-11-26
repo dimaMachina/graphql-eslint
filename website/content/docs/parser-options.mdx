@@ -22,23 +22,6 @@ You can disable this behaviour using `skipGraphQLConfig: true{:json}` in the `pa
 You can specify a `schema` key to load your GraphQL schema. The parser uses `graphql-tools` and its
 loaders, here are a few examples for a valid setup:
 
-```yaml filename=".graphqlrc"
-# a path to a local `.graphql` file
-schema: './schema.graphql'
-
-# a glob expression to load multiple files
-schema: './src/**/*.graphql'
-
-# paths to multiple `.graphql` files
-schema: ['src/schema-a.graphql', 'src/schema-b.graphql', 'src/schema-c.graphql']
-
-# a path to a local `.json` (introspection) file
-schema: './schema.json'
-
-# a URL endpoint
-schema: 'https://my-server/graphql'
-```
-
 ## `schemaOptions`
 
 If you wish to send additional configuration for the `graphql-tools` loaders that loads your schema,
