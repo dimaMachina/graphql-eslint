@@ -58,13 +58,13 @@ export default {
       configs: '',
       rules: {
         title: 'Rules',
-        href: '/rules'
+        href: '/rules',
       },
       'disabling-rules': '',
       vscode: '',
       playground: {
         title: 'Playground',
-        href: '/play'
+        href: '/play',
       },
       _2: {
         type: 'separator',
