@@ -13,6 +13,7 @@ import SvelteIcon from '@icons/svelte.svg?svgr'
 import VueIcon from '@icons/vue.svg?svgr'
 import { Cards, Steps, Tabs } from '@theguild/components'
 import { createIndexPage, getPageMap, MDXRemote } from '@theguild/components/server'
+import { GraphqlConfigInfo } from '../../../app/graphql-config-info.mdx'
 
 # Usage
 
@@ -83,7 +84,7 @@ schema.
 
 > [!TIP]
 >
-> GraphQL Config uses [`GraphQL Tools`](https://the-guild.dev/graphql/tools) under the hood to
+> GraphQL Config uses [`GraphQL Tools`](https://the-guild.dev/graphql/tools) and its loaders under the hood to
 > handle the schema loading. GraphQL Config
 > [supports multiple ways to specify your schema](https://the-guild.dev/graphql/config/docs/user/schema),
 > including:
@@ -93,14 +94,7 @@ schema.
 > - a URL endpoint
 > - or a raw string.
 
-> [!NOTE]
->
-> If you have
-> [GraphQL Config configuration file](https://the-guild.dev/graphql/config/docs/user/usage) in your
-> project, the GraphQL-ESLint's parser will automatically use him to load your GraphQL schema.
->
-> Alternatively you can pass GraphQL Config options programmatically via
-> `languageOptions.parserOptions.graphQLConfig` in the `eslint.config.js` file.
+<GraphqlConfigInfo name="schema" />
 
 Example of providing GraphQL schema:
 
@@ -116,7 +110,7 @@ export default {
   schema: './src/**/*.graphql',
 
   // paths to multiple `.graphql` files
-  schema: ['src/schema-a.graphql', 'src/schema-b.graphql', 'src/schema-c.graphql']
+  schema: ['./src/schema-a.graphql', './src/schema-b.graphql', './src/schema-c.graphql']
 
   // a path to a local `.json` (introspection result) file
   schema: './schema.json',
@@ -175,14 +169,22 @@ making it available for rules while doing the actual linting.
 To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
 just specify a glob expression(s) that points to your code[^1] and/or `.graphql` files:
 
+<GraphqlConfigInfo name="operations" configKey="documents" />
+
 Example of providing GraphQL operations:
 
 <Tabs items={['GraphQL Config', 'Programmatic Usage']}>
 <Tabs.Tab>
-```diff filename="graphql.config.js"
+```js filename="graphql.config.js"
 export default {
-  schema: './schema.graphql',
-+ documents: './src/**/*.graphql'
+  // a path to a local `.graphql` file
+  documents: './users.graphql',
+
+  // a glob expression to load multiple files
+  documents: './src/**/*.graphql',
+
+  // paths to multiple `.graphql` files
+  documents: ['./src/users.graphql', './src/posts.graphql', './src/user-fields.graphql']
 }
 ```
 </Tabs.Tab>
