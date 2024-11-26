@@ -2,12 +2,7 @@ import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import { getRootTypeNames } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../../types.js';
-import {
-  getLocation,
-  getNodeName,
-  requireGraphQLSchema,
-  TYPES_KINDS,
-} from '../../utils.js';
+import { getLocation, getNodeName, requireGraphQLSchema, TYPES_KINDS } from '../../utils.js';
 
 export const RULE_ID = 'require-description';
 

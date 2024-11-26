@@ -51,8 +51,8 @@ import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../ty
 import {
   ARRAY_DEFAULT_OPTIONS,
   REPORT_ON_FIRST_CHARACTER,
-  requireGraphQLSchema,
   requireGraphQLOperations,
+  requireGraphQLSchema,
 } from '../utils.js';
 
 type GraphQLJSRule = ValidationRule | SDLValidationRule;
@@ -218,9 +218,7 @@ const validationToRule = (
       create(context) {
         return {
           Document(node) {
-            const schema = docs.requiresSchema
-              ? requireGraphQLSchema(ruleId, context)
-              : null;
+            const schema = docs.requiresSchema ? requireGraphQLSchema(ruleId, context) : null;
 
             const documentNode = getDocumentNode
               ? getDocumentNode({ ruleId, context, node: node.rawNode() })

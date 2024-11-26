@@ -4,7 +4,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
 import { GraphQLESLintRule, GraphQLESTreeNode } from '../../types.js';
-import { requireGraphQLSchema, requireGraphQLOperations } from '../../utils.js';
+import { requireGraphQLOperations, requireGraphQLSchema } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';
 

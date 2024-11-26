@@ -18,8 +18,8 @@ import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../../type
 import {
   ARRAY_DEFAULT_OPTIONS,
   englishJoinWords,
-  requireGraphQLSchema,
   requireGraphQLOperations,
+  requireGraphQLSchema,
 } from '../../utils.js';
 
 const RULE_ID = 'require-selections';

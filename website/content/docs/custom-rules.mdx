@@ -115,8 +115,8 @@ become available in your rules in two ways:
 #### Getting `GraphQLSchema`
 
 To mark your ESLint rules as a rule that needs access to GraphQL schema, start by running
-`requireGraphQLSchema` from the plugin package, it will make sure to return a schema, or
-throw an error for the user about the missing schema.
+`requireGraphQLSchema` from the plugin package, it will make sure to return a schema, or throw an
+error for the user about the missing schema.
 
 ```ts
 const schema = requireGraphQLSchema(ruleName, context)
