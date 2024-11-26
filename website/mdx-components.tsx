@@ -38,13 +38,15 @@ const docsComponents = getDocsMDXComponents({
   async ESLintConfigs({ gitFolder, graphqlConfigFile = '' }) {
     const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder);
     const { ext } = path.parse(graphqlConfigFile);
-    const graphqlConfig = graphqlConfigFile && `
+    const graphqlConfig =
+      graphqlConfigFile &&
+      `
 ## GraphQL Config
 
 \`\`\`${ext.slice(1)} filename="${graphqlConfigFile}"
 ${(await fs.readFile(`${docsPath}/${graphqlConfigFile}`, 'utf8')).trim()}
 \`\`\`
-`
+`;
     return (
       <MDXRemote
         compiledSource={await compileMdx(`
