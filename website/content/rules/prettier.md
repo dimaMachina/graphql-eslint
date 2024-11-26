@@ -24,5 +24,5 @@ better. You need to do the following:
 ```
 
 You can take
-[`this repository`](https://github.com/B2o5T/graphql-eslint/tree/master/examples/prettier) as
+[`this repository`](https://github.com/dimaMachina/graphql-eslint/tree/master/examples/prettier) as
 example.
