@@ -41,7 +41,7 @@
     "eslint-plugin-tailwindcss": "3.17.5",
     "jest-snapshot-serializer-raw": "2.0.0",
     "json-schema-to-markdown": "1.1.1",
-    "prettier": "3.3.3",
+    "prettier": "3.4.0",
     "prettier-plugin-tailwindcss": "0.6.9",
     "rimraf": "6.0.1",
     "tsup": "^8.3.5",
