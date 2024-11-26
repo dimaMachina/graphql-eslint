@@ -1,4 +1,4 @@
-import { compileMdx, MDXRemote } from "@theguild/components/server";
+import { compileMdx, MDXRemote } from '@theguild/components/server'
 
 export async function GraphqlConfigInfo({ name, configKey = name }) {
   const rawMdx = `
@@ -13,7 +13,6 @@ export async function GraphqlConfigInfo({ name, configKey = name }) {
 > Alternatively, you can pass GraphQL Config options programmatically via
 > \`languageOptions.parserOptions.graphQLConfig\` in your \`eslint.config.js\` file.`
 
-  const rawJs = await compileMdx(rawMdx)
+const rawJs = await compileMdx(rawMdx)
 
-  return <MDXRemote compiledSource={rawJs} />
-}
+return <MDXRemote compiledSource={rawJs} /> }
