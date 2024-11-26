@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@graphql-eslint/eslint-plugin': workspace:*
+
 patchedDependencies:
   eslint:
     hash: t64n7kxodazs6lnwu42sgf5voe
