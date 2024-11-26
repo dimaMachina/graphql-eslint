@@ -17,7 +17,7 @@ module.exports = {
         es2022: true,
       },
       parserOptions: {
-        sourceType: 'module'
+        sourceType: 'module',
       },
       rules: {
         'no-console': 'error',

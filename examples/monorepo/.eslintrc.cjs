@@ -10,13 +10,13 @@ module.exports = {
   // they will try to also execute for all overrides, as ESLint's configs cascade
   overrides: [
     {
-      files: "*.{js,tsx}",
+      files: '*.{js,tsx}',
       extends: 'eslint:recommended',
       env: {
         es2022: true,
       },
       parserOptions: {
-        sourceType: 'module'
+        sourceType: 'module',
       },
     },
     {
