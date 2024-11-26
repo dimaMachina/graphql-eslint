@@ -123,6 +123,7 @@ module.exports = {
       files: ['website/**/*.mdx/**'],
       rules: {
         'import/no-default-export': 'off',
+        'no-dupe-keys': 'off', // Usage examples contains duplicate keys
       },
     },
   ],

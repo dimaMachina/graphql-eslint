@@ -2,7 +2,7 @@ import { relative } from 'node:path';
 import { NameNode, visit } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { CWD, requireSiblingsOperations } from '../../utils.js';
+import { CWD, requireGraphQLOperations } from '../../utils.js';
 
 const RULE_ID = 'no-one-place-fragments';
 
@@ -54,7 +54,7 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const operations = requireSiblingsOperations(RULE_ID, context);
+    const operations = requireGraphQLOperations(RULE_ID, context);
     const allDocuments = [...operations.getOperations(), ...operations.getFragments()];
 
     const usedFragmentsMap: Record<string, string[]> = Object.create(null);

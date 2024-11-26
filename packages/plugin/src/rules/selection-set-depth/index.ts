@@ -5,7 +5,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { SiblingOperations } from '../../siblings.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { ARRAY_DEFAULT_OPTIONS, logger, requireSiblingsOperations } from '../../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, logger, requireGraphQLOperations } from '../../utils.js';
 
 const RULE_ID = 'selection-set-depth';
 
@@ -88,7 +88,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     let siblings: SiblingOperations | null = null;
 
     try {
-      siblings = requireSiblingsOperations(RULE_ID, context);
+      siblings = requireGraphQLOperations(RULE_ID, context);
     } catch {
       logger.warn(
         `Rule "${RULE_ID}" works best with siblings operations loaded. See https://the-guild.dev/graphql/eslint/docs/usage#providing-operations for more info`,

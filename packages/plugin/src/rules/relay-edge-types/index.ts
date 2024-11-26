@@ -13,7 +13,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { getDocumentNodeFromSchema } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../../types.js';
-import { getTypeName, requireGraphQLSchemaFromContext } from '../../utils.js';
+import { getTypeName, requireGraphQLSchema } from '../../utils.js';
 
 const RULE_ID = 'relay-edge-types';
 const MESSAGE_MUST_BE_OBJECT_TYPE = 'MESSAGE_MUST_BE_OBJECT_TYPE';
@@ -124,7 +124,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
     schema,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchema(RULE_ID, context);
     const edgeTypes = getEdgeTypes(schema);
     const options: RuleOptions[0] = {
       withEdgeSuffix: true,

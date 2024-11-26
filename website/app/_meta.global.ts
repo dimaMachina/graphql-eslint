@@ -51,14 +51,21 @@ export default {
           prettier: '',
         },
       },
-      'parser-options': '',
       _1: {
         type: 'separator',
         title: 'Users',
       },
       configs: '',
+      rules: {
+        title: 'Rules',
+        href: '/rules',
+      },
       'disabling-rules': '',
       vscode: '',
+      playground: {
+        title: 'Playground',
+        href: '/play',
+      },
       _2: {
         type: 'separator',
         title: 'Developers',

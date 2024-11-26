@@ -36,7 +36,7 @@ const RootLayout: FC<{
       layoutProps={{
         banner: (
           <Banner dismissible={false}>
-            🚧 This is WIP documentation for v4 of the plugin. For v3 click{' '}
+            This is documentation for v4 of the plugin. For v3 click{' '}
             <Anchor href="https://074c6ee9.graphql-eslint.pages.dev/docs">here</Anchor>.
           </Banner>
         ),

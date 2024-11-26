@@ -13,6 +13,7 @@ import SvelteIcon from '@icons/svelte.svg?svgr'
 import VueIcon from '@icons/vue.svg?svgr'
 import { Cards, Steps, Tabs } from '@theguild/components'
 import { createIndexPage, getPageMap, MDXRemote } from '@theguild/components/server'
+import { GraphqlConfigInfo } from '../../../app/graphql-config-info.mdx'
 
 # Usage
 
@@ -38,10 +39,6 @@ Create a new
 [configuration object](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects)
 in your `eslint.config.js` file to apply this plugin to `.graphql` files and configure
 [the rules](/rules) you want to enforce.
-
-> [!WARNING]
->
-> This step is necessary even if you are declaring operations and/or schema in code files[^1].
 
 ```js filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
@@ -79,11 +76,21 @@ To enable these rules, you need to inform ESLint how to identify and load your c
 
 The GraphQL ESLint plugin integrates seamlessly with
 [GraphQL Config](https://the-guild.dev/graphql/config) which it uses to automatically load your
-schema. GraphQL Config supports multiple ways to specify your schema, including `.json`
-(introspection result), `.graphql` files, a URL endpoint, or a raw string.
+schema.
 
-> This integration uses [`graphql-tools`](https://the-guild.dev/graphql/tools) under the hood to
-> handle the schema loading.
+> [!TIP]
+>
+> GraphQL Config uses [`GraphQL Tools`](https://the-guild.dev/graphql/tools) and its loaders under
+> the hood to handle the schema loading. GraphQL Config
+> [supports multiple ways to specify your schema](https://the-guild.dev/graphql/config/docs/user/schema),
+> including:
+>
+> - `.json` (introspection result)
+> - `.graphql` files
+> - a URL endpoint
+> - or a raw string.
+
+<GraphqlConfigInfo name="schema" />
 
 Example of providing GraphQL schema:
 
@@ -92,15 +99,26 @@ Example of providing GraphQL schema:
 
 ```js filename="graphql.config.js"
 export default {
-  schema: './schema.graphql'
+  // a path to a local `.graphql` file
+  schema: './schema.graphql',
+
+  // a glob expression to load multiple files
+  schema: './src/**/*.graphql',
+
+  // paths to multiple `.graphql` files
+  schema: ['./src/schema-a.graphql', './src/schema-b.graphql', './src/schema-c.graphql'],
+
+  // a path to a local `.json` (introspection result) file
+  schema: './schema.json',
+
+  // a URL endpoint
+  schema: 'https://my-server/graphql'
 }
 ```
 
 </Tabs.Tab>
 
 <Tabs.Tab>
-Alternatively, you can provide the schema directly within your ESLint configuration by specifying
-`languageOptions.parserOptions.graphQLConfig.schema`.
 
 ```diff filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
@@ -145,21 +163,29 @@ making it available for rules while doing the actual linting.
 To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
 just specify a glob expression(s) that points to your code[^1] and/or `.graphql` files:
 
+<GraphqlConfigInfo name="operations" configKey="documents" />
+
 Example of providing GraphQL operations:
 
 <Tabs items={['GraphQL Config', 'Programmatic Usage']}>
 <Tabs.Tab>
-```diff filename="graphql.config.js"
+
+```js filename="graphql.config.js"
 export default {
-  schema: './schema.graphql',
-+ documents: './src/**/*.graphql'
+  // a path to a local `.graphql` file
+  documents: './users.graphql',
+
+  // a glob expression to load multiple files
+  documents: './src/**/*.graphql',
+
+  // paths to multiple `.graphql` files
+  documents: ['./src/users.graphql', './src/posts.graphql', './src/user-fields.graphql']
 }
 ```
+
 </Tabs.Tab>
 
 <Tabs.Tab>
-Alternatively, you can provide the documents directly within your ESLint configuration by specifying
-`languageOptions.parserOptions.graphQLConfig.documents`.
 
 ```diff filename="eslint.config.js"
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'

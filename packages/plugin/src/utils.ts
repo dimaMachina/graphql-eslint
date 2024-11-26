@@ -6,7 +6,7 @@ import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { SiblingOperations } from './siblings.js';
 import { GraphQLESLintRuleContext } from './types.js';
 
-export function requireSiblingsOperations(
+export function requireGraphQLOperations(
   ruleId: string,
   context: GraphQLESLintRuleContext,
 ): SiblingOperations | never {
@@ -19,7 +19,7 @@ export function requireSiblingsOperations(
   return siblingOperations;
 }
 
-export function requireGraphQLSchemaFromContext(
+export function requireGraphQLSchema(
   ruleId: string,
   context: GraphQLESLintRuleContext,
 ): GraphQLSchema | never {

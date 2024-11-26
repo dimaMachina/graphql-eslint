@@ -2,7 +2,7 @@ import { FieldDefinitionNode, isScalarType, Kind, NameNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { requireGraphQLSchemaFromContext } from '../../utils.js';
+import { requireGraphQLSchema } from '../../utils.js';
 
 const RULE_ID = 'relay-arguments';
 const MISSING_ARGUMENTS = 'MISSING_ARGUMENTS';
@@ -74,7 +74,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
     schema,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchema(RULE_ID, context);
     const { includeBoth = true } = context.options[0] || {};
 
     return {

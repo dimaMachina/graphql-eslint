@@ -4,7 +4,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
 import { GraphQLESLintRule, GraphQLESTreeNode } from '../../types.js';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from '../../utils.js';
+import { requireGraphQLOperations, requireGraphQLSchema } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';
 
@@ -214,8 +214,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     hasSuggestions: true,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
-    const siblingsOperations = requireSiblingsOperations(RULE_ID, context);
+    const schema = requireGraphQLSchema(RULE_ID, context);
+    const siblingsOperations = requireGraphQLOperations(RULE_ID, context);
     const usedFields = getUsedFields(schema, siblingsOperations);
     const { ignoredFieldSelectors } = context.options[0] || {};
     const selector = (ignoredFieldSelectors || []).reduce(

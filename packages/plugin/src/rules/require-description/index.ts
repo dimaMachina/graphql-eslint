@@ -2,12 +2,7 @@ import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import { getRootTypeNames } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../../types.js';
-import {
-  getLocation,
-  getNodeName,
-  requireGraphQLSchemaFromContext,
-  TYPES_KINDS,
-} from '../../utils.js';
+import { getLocation, getNodeName, requireGraphQLSchema, TYPES_KINDS } from '../../utils.js';
 
 export const RULE_ID = 'require-description';
 
@@ -149,7 +144,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
 
     if (rootField) {
-      const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+      const schema = requireGraphQLSchema(RULE_ID, context);
       const rootTypeNames = getRootTypeNames(schema);
       kinds.add(
         `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${[

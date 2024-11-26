@@ -2,7 +2,7 @@ import path from 'node:path';
 import { NameNode } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { requireSiblingsOperations, slash } from '../../utils.js';
+import { requireGraphQLOperations, slash } from '../../utils.js';
 
 const RULE_ID = 'require-import-fragment';
 const SUGGESTION_ID = 'add-import-expression';
@@ -70,7 +70,7 @@ export const rule: GraphQLESLintRule = {
   },
   create(context) {
     const comments = context.getSourceCode().getAllComments();
-    const siblings = requireSiblingsOperations(RULE_ID, context);
+    const siblings = requireGraphQLOperations(RULE_ID, context);
     const filePath = context.filename;
 
     return {
