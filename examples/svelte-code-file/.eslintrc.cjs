@@ -15,7 +15,7 @@ module.exports = {
       processor: '@graphql-eslint/graphql',
       extends: ['eslint:recommended'],
       env: {
-        es6: true,
+        es2022: true,
       },
     },
     {
