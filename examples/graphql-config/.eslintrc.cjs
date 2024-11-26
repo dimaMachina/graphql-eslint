@@ -12,6 +12,12 @@ module.exports = {
     {
       files: ['*.js'],
       extends: ['eslint:recommended'],
+      env: {
+        es2022: true,
+      },
+      parserOptions: {
+        sourceType: 'module',
+      },
     },
     {
       files: ['*.graphql'],

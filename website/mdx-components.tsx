@@ -1,7 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { addBasePath } from 'next/dist/client/add-base-path';
-import { Callout } from '@theguild/components';
 import {
   compileMdx,
   useMDXComponents as getDocsMDXComponents,
@@ -29,23 +28,33 @@ const docsComponents = getDocsMDXComponents({
       />
     );
   },
-  WIP() {
-    return (
-      <Callout type="warning" emoji="🚧">
-        This page is under construction. Help us improve the content by submitting a PR.
-      </Callout>
-    );
-  },
-  async ESLintConfigs({ gitFolder }) {
+  // WIP() {
+  //   return (
+  //     <Callout type="warning" emoji="🚧">
+  //       This page is under construction. Help us improve the content by submitting a PR.
+  //     </Callout>
+  //   );
+  // },
+  async ESLintConfigs({ gitFolder, graphqlConfigFile = '' }) {
     const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder);
+    const { ext } = path.parse(graphqlConfigFile);
+    const graphqlConfig =
+      graphqlConfigFile &&
+      `
+## GraphQL Config
+
+\`\`\`${ext.slice(1)} filename="${graphqlConfigFile}"
+${(await fs.readFile(`${docsPath}/${graphqlConfigFile}`, 'utf8')).trim()}
+\`\`\`
+`;
     return (
       <MDXRemote
         compiledSource={await compileMdx(`
 <OfficialExampleCallout gitFolder="${gitFolder}" />
-
+${graphqlConfig}
 ## ESLint Flat Config
 \`\`\`js filename="eslint.config.js"
-${await fs.readFile(`${docsPath}/eslint.config.js`)}
+${(await fs.readFile(`${docsPath}/eslint.config.js`, 'utf8')).trim()}
 \`\`\`
 
 ## ESLint Legacy Config
@@ -55,7 +64,7 @@ ${await fs.readFile(`${docsPath}/eslint.config.js`)}
 > An eslintrc configuration file, is deprecated and support will be removed in ESLint v10.0.0. Migrate to an [\`eslint.config.js\` file](#eslint-flat-config)
 
 \`\`\`js filename=".eslintrc.cjs"
-${await fs.readFile(`${docsPath}/.eslintrc.cjs`)}
+${(await fs.readFile(`${docsPath}/.eslintrc.cjs`, 'utf8')).trim()}
 \`\`\``)}
       />
     );
