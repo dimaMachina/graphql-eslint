@@ -1,7 +1,7 @@
 {
   "name": "graphql-eslint-monorepo",
   "type": "module",
-  "repository": "https://github.com/B2o5T/graphql-eslint",
+  "repository": "https://github.com/dimaMachina/graphql-eslint",
   "author": "Dotan Simha <dotansimha@gmail.com>",
   "license": "MIT",
   "private": true,
@@ -54,6 +54,9 @@
     "patchedDependencies": {
       "eslint": "patches/eslint.patch",
       "json-schema-to-markdown@1.1.1": "patches/json-schema-to-markdown@1.1.1.patch"
+    },
+    "overrides": {
+      "@graphql-eslint/eslint-plugin": "workspace:*"
     }
   }
 }
