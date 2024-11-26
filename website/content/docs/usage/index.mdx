@@ -93,6 +93,15 @@ schema.
 > - a URL endpoint
 > - or a raw string.
 
+> [!NOTE]
+>
+> If you have
+> [GraphQL Config configuration file](https://the-guild.dev/graphql/config/docs/user/usage) in your
+> project, the GraphQL-ESLint's parser will automatically use him to load your GraphQL schema.
+>
+> Alternatively you can pass GraphQL Config options programmatically via
+> `languageOptions.parserOptions.graphQLConfig` in the `eslint.config.js` file.
+
 Example of providing GraphQL schema:
 
 <Tabs items={['GraphQL Config', 'Programmatic Usage']}>

@@ -2,21 +2,6 @@
 
 <WIP />
 
-## `skipGraphQLConfig`
-
-If you are using [`graphql-config`](https://the-guild.dev/graphql/config) in your project, the
-parser will automatically use that to load your default GraphQL schema.
-
-You can disable this behaviour using `skipGraphQLConfig: true{:json}` in the `parserOptions`:
-
-```json filename=".eslintrc.json"
-{
-  "parserOptions": {
-    "skipGraphQLConfig": true
-  }
-}
-```
-
 ## `schema`
 
 You can specify a `schema` key to load your GraphQL schema. The parser uses `graphql-tools` and its
