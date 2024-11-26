@@ -164,8 +164,8 @@ The wrapped `GraphQLRuleTester` provides built-in configured parser, and a schem
 need to test your rule with a loaded schema.
 
 ```ts filename="my-rule.test.ts"
+import { RuleTester } from 'eslint'
 import { parser } from '@graphql-eslint/eslint-plugin'
-import { RuleTester } from 'eslint';
 import { rule } from './my-rule'
 
 const ruleTester = new RuleTester({
@@ -178,11 +178,11 @@ const ruleTester = new RuleTester({
         `,
         documents: /* GraphQL */ `
           # Optionally, your operations, your rule could have access to them
-        `,
-      },
-    },
-  },
-});
+        `
+      }
+    }
+  }
+})
 
 ruleTester.run('my-rule', rule, {
   valid: [
