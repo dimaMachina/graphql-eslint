@@ -91,7 +91,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       siblings = requireSiblingsOperations(RULE_ID, context);
     } catch {
       logger.warn(
-        `Rule "${RULE_ID}" works best with siblings operations loaded. For more info: https://bit.ly/graphql-eslint-operations`,
+        `Rule "${RULE_ID}" works best with siblings operations loaded. See https://the-guild.dev/graphql/eslint/docs/usage#providing-operations for more info`,
       );
     }
 
@@ -146,7 +146,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           });
         } catch (e) {
           logger.warn(
-            `Rule "${RULE_ID}" check failed due to a missing siblings operations. For more info: https://bit.ly/graphql-eslint-operations`,
+            `Rule "${RULE_ID}" check failed due to a missing siblings operations. See https://the-guild.dev/graphql/eslint/docs/usage#providing-operations for more info`,
             e,
           );
         }

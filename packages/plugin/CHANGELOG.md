@@ -1325,8 +1325,8 @@ Special thanks to @connorjs
 
 ### Minor Changes
 
-- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique indentifier
-  field unless being in exceptions
+- 4693f27: [New rule] strict-id-in-types: use this to enforce output types to have a unique
+  indentifier field unless being in exceptions
 
 ## 0.8.1
 
