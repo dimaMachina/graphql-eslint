@@ -51,7 +51,6 @@ export default {
           prettier: '',
         },
       },
-      'parser-options': '',
       _1: {
         type: 'separator',
         title: 'Users',
