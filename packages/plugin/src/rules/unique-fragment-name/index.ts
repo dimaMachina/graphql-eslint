@@ -3,7 +3,7 @@ import { ExecutableDefinitionNode, Kind } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { FragmentSource, OperationSource } from '../../siblings.js';
 import { GraphQLESLintRule, GraphQLESLintRuleContext } from '../../types.js';
-import { CWD, requireSiblingsOperations, slash, VIRTUAL_DOCUMENT_REGEX } from '../../utils.js';
+import { CWD, requireGraphQLOperations, slash, VIRTUAL_DOCUMENT_REGEX } from '../../utils.js';
 
 const RULE_ID = 'unique-fragment-name';
 
@@ -13,7 +13,7 @@ export const checkNode = (
   ruleId: string,
 ): void => {
   const documentName = node.name!.value;
-  const siblings = requireSiblingsOperations(ruleId, context);
+  const siblings = requireGraphQLOperations(ruleId, context);
   const siblingDocuments: (FragmentSource | OperationSource)[] =
     node.kind === Kind.FRAGMENT_DEFINITION
       ? siblings.getFragment(documentName)

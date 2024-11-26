@@ -1,7 +1,7 @@
 import { ArgumentNode, EnumValueNode, FieldNode, ObjectFieldNode } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { displayNodeName, requireGraphQLSchemaFromContext } from '../../utils.js';
+import { displayNodeName, requireGraphQLSchema } from '../../utils.js';
 
 const RULE_ID = 'no-deprecated';
 
@@ -84,7 +84,7 @@ export const rule: GraphQLESLintRule<[], true> = {
     schema: [],
   },
   create(context) {
-    requireGraphQLSchemaFromContext(RULE_ID, context);
+    requireGraphQLSchema(RULE_ID, context);
 
     function report(
       node: GraphQLESTreeNode<EnumValueNode | FieldNode | ArgumentNode | ObjectFieldNode, true>,

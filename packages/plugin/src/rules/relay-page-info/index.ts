@@ -1,7 +1,7 @@
 import { isScalarType, Kind, NameNode, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchemaFromContext } from '../../utils.js';
+import { REPORT_ON_FIRST_CHARACTER, requireGraphQLSchema } from '../../utils.js';
 import { NON_OBJECT_TYPES } from '../relay-connection-types/index.js';
 
 const RULE_ID = 'relay-page-info';
@@ -48,7 +48,7 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchema(RULE_ID, context);
     if (process.env.NODE_ENV === 'test' || !hasPageInfoChecked) {
       const pageInfoType = schema.getType('PageInfo');
       if (!pageInfoType) {

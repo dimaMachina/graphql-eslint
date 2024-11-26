@@ -1,7 +1,7 @@
 import { Kind, ObjectTypeDefinitionNode } from 'graphql';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { getNodeName, requireGraphQLSchemaFromContext, truthy } from '../../utils.js';
+import { getNodeName, requireGraphQLSchema, truthy } from '../../utils.js';
 
 const RULE_ID = 'require-nullable-result-in-root';
 
@@ -41,7 +41,7 @@ export const rule: GraphQLESLintRule = {
     schema: [],
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchema(RULE_ID, context);
     const rootTypeNames = new Set(
       [schema.getQueryType(), schema.getMutationType()].filter(truthy).map(type => type.name),
     );

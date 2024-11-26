@@ -6,7 +6,7 @@ import {
   ARRAY_DEFAULT_OPTIONS,
   displayNodeName,
   englishJoinWords,
-  requireGraphQLSchemaFromContext,
+  requireGraphQLSchema,
   truthy,
 } from '../../utils.js';
 
@@ -131,7 +131,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ...context.options[0],
     };
 
-    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const schema = requireGraphQLSchema(RULE_ID, context);
     const rootTypeNames = [
       schema.getQueryType(),
       schema.getMutationType(),

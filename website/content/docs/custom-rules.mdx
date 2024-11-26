@@ -84,13 +84,13 @@ Here's an example for using original `graphql-js` validate method to validate `O
 
 ```ts filename="my-rule.ts"
 import { validate } from 'graphql'
-import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
+import { requireGraphQLSchema } from '@graphql-eslint/eslint-plugin'
 
 export const rule = {
   create(context) {
     return {
       OperationDefinition(node) {
-        const schema = requireGraphQLSchemaFromContext(context)
+        const schema = requireGraphQLSchema('my-rule', context)
 
         validate(context, schema, {
           kind: Kind.DOCUMENT,
@@ -115,28 +115,28 @@ become available in your rules in two ways:
 #### Getting `GraphQLSchema`
 
 To mark your ESLint rules as a rule that needs access to GraphQL schema, start by running
-`requireGraphQLSchemaFromContext` from the plugin package, it will make sure to return a schema, or
+`requireGraphQLSchema` from the plugin package, it will make sure to return a schema, or
 throw an error for the user about the missing schema.
 
 ```ts
-const schema = requireGraphQLSchemaFromContext(context)
+const schema = requireGraphQLSchema(ruleName, context)
 ```
 
 #### Accessing `TypeInfo`
 
 If schema is provided and loaded successfully, the `typeInfo` will be available to use. Otherwise -
 it will be `undefined`. If your plugin requires `typeInfo` in order to operate and run, make sure to
-call `requireGraphQLSchemaFromContext` - it will validate that the schema is loaded.
+call `requireGraphQLSchema` - it will validate that the schema is loaded.
 
 `typeInfo` is provided on every node, based on the type of that node, for example, to access the
 `GraphQLOutputType` while you are visiting a `SelectionSet` node, you can do:
 
 ```ts filename="my-rule.ts"
-import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
+import { requireGraphQLSchema } from '@graphql-eslint/eslint-plugin'
 
 export const rule = {
   create(context) {
-    requireGraphQLSchemaFromContext('my-rule', context)
+    requireGraphQLSchema('my-rule', context)
 
     return {
       SelectionSet(node) {

@@ -7,7 +7,7 @@ export * from './types.js';
 export type { IGraphQLConfig } from 'graphql-config';
 export type { GraphQLTagPluckOptions } from '@graphql-tools/graphql-tag-pluck';
 
-export { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './utils.js';
+export { requireGraphQLSchema, requireGraphQLOperations } from './utils.js';
 
 export const processors = { graphql: processor };
 

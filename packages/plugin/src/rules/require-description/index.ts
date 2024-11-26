@@ -5,7 +5,7 @@ import { GraphQLESLintRule, ValueOf } from '../../types.js';
 import {
   getLocation,
   getNodeName,
-  requireGraphQLSchemaFromContext,
+  requireGraphQLSchema,
   TYPES_KINDS,
 } from '../../utils.js';
 
@@ -149,7 +149,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
 
     if (rootField) {
-      const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+      const schema = requireGraphQLSchema(RULE_ID, context);
       const rootTypeNames = getRootTypeNames(schema);
       kinds.add(
         `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=/^(${[

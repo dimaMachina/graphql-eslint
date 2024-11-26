@@ -2,7 +2,7 @@ import { NameNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchemaFromContext, truthy } from '../../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchema, truthy } from '../../utils.js';
 
 const schema = {
   type: 'array',
@@ -59,7 +59,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    const schema = requireGraphQLSchemaFromContext('no-root-type', context);
+    const schema = requireGraphQLSchema('no-root-type', context);
     const disallow = new Set(context.options[0].disallow);
 
     const rootTypeNames = [
