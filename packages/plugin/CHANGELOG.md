@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.0.1
+
+### Patch Changes
+
+- [#2775](https://github.com/dimaMachina/graphql-eslint/pull/2775)
+  [`84d78b7`](https://github.com/dimaMachina/graphql-eslint/commit/84d78b796ad2c44221dd5789be858e8dc87933b5)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - fix error
+  `TypeError: Cannot read properties of undefined (reading 'type')` in `require-description` rule
+
 ## 4.0.0
 
 ### Major Changes
