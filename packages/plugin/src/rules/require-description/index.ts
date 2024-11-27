@@ -153,6 +153,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       );
     }
 
+    if (!kinds.size) {
+      throw new Error('At least one kind must be enabled');
+    }
+
     const selector = [...kinds].join(',');
 
     return {
