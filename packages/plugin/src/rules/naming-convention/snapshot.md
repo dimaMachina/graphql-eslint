@@ -1984,7 +1984,7 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
     {
       "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
         "style": "camelCase",
-        "requiredPrefixes": [
+        "requiredPattern": [
           "^is",
           "^has"
         ]
@@ -1994,15 +1994,7 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
 #### ❌ Error
 
     > 1 | type Test { enabled: Boolean! }
-        |             ^^^^^^^ Field "enabled" should have one of the following prefixes: ^is or ^has
-
-#### 💡 Suggestion 1/2: Rename to \`isEnabled\`
-
-    1 | type Test { isEnabled: Boolean! }
-
-#### 💡 Suggestion 2/2: Rename to \`hasEnabled\`
-
-    1 | type Test { hasEnabled: Boolean! }
+        |             ^^^^^^^ Field "enabled" should contain the required pattern: ^is or ^has
 `;
 
 exports[`naming-convention > invalid > schema-recommended config 1`] = `

@@ -364,6 +364,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         requiredPrefixes,
         requiredSuffixes,
         forbiddenPattern,
+        requiredPattern
       } = normalisePropertyOption(selector);
       const nodeName = node.value;
       const error = getError();
@@ -409,6 +410,17 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           return {
             errorMessage: `not contain the forbidden pattern "${forbidden}"`,
             renameToNames: [name.replace(new RegExp(forbidden), '')],
+          };
+        }
+        if (
+          requiredPattern &&
+          !requiredPattern.some(pattern => new RegExp(pattern).test(name))
+        ) {
+          return {
+            errorMessage: `contain the required pattern: ${englishJoinWords(
+              requiredPattern,
+            )}`,
+            renameToNames: []
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
