@@ -98,7 +98,7 @@ exports[`naming-convention > invalid > Invalid #5 1`] = `
 #### ❌ Error 1/2
 
     > 1 | enum B { test }
-        |      ^ Enumerator "B" should be in camelCase format
+        |      ^ Enum "B" should be in camelCase format
 
 #### 💡 Suggestion: Rename to \`b\`
 
@@ -107,7 +107,7 @@ exports[`naming-convention > invalid > Invalid #5 1`] = `
 #### ❌ Error 2/2
 
     > 1 | enum B { test }
-        |          ^^^^ Enumeration value "test" should be in UPPER_CASE format
+        |          ^^^^ Enum value "test" should be in UPPER_CASE format
 
 #### 💡 Suggestion: Rename to \`TEST\`
 
@@ -129,7 +129,7 @@ exports[`naming-convention > invalid > Invalid #6 1`] = `
 #### ❌ Error 1/3
 
     > 1 | input test { _Value: String }
-        |       ^^^^ Input type "test" should be in PascalCase format
+        |       ^^^^ Input "test" should be in PascalCase format
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -138,7 +138,7 @@ exports[`naming-convention > invalid > Invalid #6 1`] = `
 #### ❌ Error 2/3
 
     > 1 | input test { _Value: String }
-        |              ^^^^^^ Input property "_Value" should be in snake_case format
+        |              ^^^^^^ Input value "_Value" should be in snake_case format
 
 #### 💡 Suggestion: Rename to \`_value\`
 
@@ -196,7 +196,7 @@ exports[`naming-convention > invalid > Invalid #7 1`] = `
 #### ❌ Error 3/4
 
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
-        |                                          ^^^^^^^^^ Enumeration value "VALUE_ONE" should have "ENUM" suffix
+        |                                          ^^^^^^^^^ Enum value "VALUE_ONE" should have "ENUM" suffix
 
 #### 💡 Suggestion: Rename to \`VALUE_ONEENUM\`
 
@@ -205,7 +205,7 @@ exports[`naming-convention > invalid > Invalid #7 1`] = `
 #### ❌ Error 4/4
 
     > 1 | type TypeOne { aField: String } enum Z { VALUE_ONE VALUE_TWO }
-        |                                                    ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" suffix
+        |                                                    ^^^^^^^^^ Enum value "VALUE_TWO" should have "ENUM" suffix
 
 #### 💡 Suggestion: Rename to \`VALUE_TWOENUM\`
 
@@ -245,7 +245,7 @@ exports[`naming-convention > invalid > Invalid #8 1`] = `
 #### ❌ Error 2/3
 
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
-        |                                      ^^^^^^^^^^^^^^^^ Enumeration value "A_ENUM_VALUE_ONE" should have "ENUM" prefix
+        |                                      ^^^^^^^^^^^^^^^^ Enum value "A_ENUM_VALUE_ONE" should have "ENUM" prefix
 
 #### 💡 Suggestion: Rename to \`ENUMA_ENUM_VALUE_ONE\`
 
@@ -254,7 +254,7 @@ exports[`naming-convention > invalid > Invalid #8 1`] = `
 #### ❌ Error 3/3
 
     > 1 | type One { aField: String } enum Z { A_ENUM_VALUE_ONE VALUE_TWO }
-        |                                                       ^^^^^^^^^ Enumeration value "VALUE_TWO" should have "ENUM" prefix
+        |                                                       ^^^^^^^^^ Enum value "VALUE_TWO" should have "ENUM" prefix
 
 #### 💡 Suggestion: Rename to \`ENUMVALUE_TWO\`
 
@@ -359,7 +359,7 @@ exports[`naming-convention > invalid > Invalid #10 1`] = `
 #### ❌ Error 1/2
 
     > 1 | query Foo { foo } query getBar { bar }
-        |       ^^^ Operation "Foo" should be in camelCase format
+        |       ^^^ Query "Foo" should be in camelCase format
 
 #### 💡 Suggestion: Rename to \`foo\`
 
@@ -368,11 +368,46 @@ exports[`naming-convention > invalid > Invalid #10 1`] = `
 #### ❌ Error 2/2
 
     > 1 | query Foo { foo } query getBar { bar }
-        |                         ^^^^^^ Operation "getBar" should not have "get" prefix
+        |                         ^^^^^^ Query "getBar" should not have "get" prefix
 
 #### 💡 Suggestion: Rename to \`Bar\`
 
     1 | query Foo { foo } query Bar { bar }
+`;
+
+exports[`naming-convention > invalid > forbiddenPattern 1`] = `
+#### ⌨️ Code
+
+      1 | query queryFoo { foo } query getBar { bar }
+
+#### ⚙️ Options
+
+    {
+      "OperationDefinition": {
+        "forbiddenPattern": [
+          "^get",
+          "^query"
+        ]
+      }
+    }
+
+#### ❌ Error 1/2
+
+    > 1 | query queryFoo { foo } query getBar { bar }
+        |       ^^^^^^^^ Query "queryFoo" should not contain the forbidden pattern "^query"
+
+#### 💡 Suggestion: Rename to \`Foo\`
+
+    1 | query Foo { foo } query getBar { bar }
+
+#### ❌ Error 2/2
+
+    > 1 | query queryFoo { foo } query getBar { bar }
+        |                              ^^^^^^ Query "getBar" should not contain the forbidden pattern "^get"
+
+#### 💡 Suggestion: Rename to \`Bar\`
+
+    1 | query queryFoo { foo } query Bar { bar }
 `;
 
 exports[`naming-convention > invalid > large graphql file 1`] = `
@@ -1501,189 +1536,189 @@ exports[`naming-convention > invalid > large graphql file 1`] = `
 #### ❌ Error 1/27
 
     > 1 | input _idOperatorsFilterFindManyUserInput {
-        |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format
+        |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format
       2 |   gt: MongoID
 
 #### ❌ Error 2/27
 
       10 |
     > 11 | input _idOperatorsFilterFindOneUserInput {
-         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format
+         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format
       12 |   gt: MongoID
 
 #### ❌ Error 3/27
 
       20 |
     > 21 | input _idOperatorsFilterRemoveManyUserInput {
-         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format
+         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format
       22 |   gt: MongoID
 
 #### ❌ Error 4/27
 
       30 |
     > 31 | input _idOperatorsFilterRemoveOneUserInput {
-         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format
+         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format
       32 |   gt: MongoID
 
 #### ❌ Error 5/27
 
       40 |
     > 41 | input _idOperatorsFilterUpdateManyUserInput {
-         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format
+         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format
       42 |   gt: MongoID
 
 #### ❌ Error 6/27
 
       50 |
     > 51 | input _idOperatorsFilterUpdateOneUserInput {
-         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format
+         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format
       52 |   gt: MongoID
 
 #### ❌ Error 7/27
 
       60 |
     > 61 | input _idOperatorsFilterUserInput {
-         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input type "_idOperatorsFilterUserInput" should be in PascalCase format
+         |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Input "_idOperatorsFilterUserInput" should be in PascalCase format
       62 |   gt: MongoID
 
 #### ❌ Error 8/27
 
       207 | enum EnumUserGender {
     > 208 |   male
-          |   ^^^^ Enumeration value "male" should be in UPPER_CASE format
+          |   ^^^^ Enum value "male" should be in UPPER_CASE format
       209 |   female
 
 #### ❌ Error 9/27
 
       208 |   male
     > 209 |   female
-          |   ^^^^^^ Enumeration value "female" should be in UPPER_CASE format
+          |   ^^^^^^ Enum value "female" should be in UPPER_CASE format
       210 |   ladyboy
 
 #### ❌ Error 10/27
 
       209 |   female
     > 210 |   ladyboy
-          |   ^^^^^^^ Enumeration value "ladyboy" should be in UPPER_CASE format
+          |   ^^^^^^^ Enum value "ladyboy" should be in UPPER_CASE format
       211 | }
 
 #### ❌ Error 11/27
 
       213 | enum EnumUserLanguagesSkill {
     > 214 |   basic
-          |   ^^^^^ Enumeration value "basic" should be in UPPER_CASE format
+          |   ^^^^^ Enum value "basic" should be in UPPER_CASE format
       215 |   fluent
 
 #### ❌ Error 12/27
 
       214 |   basic
     > 215 |   fluent
-          |   ^^^^^^ Enumeration value "fluent" should be in UPPER_CASE format
+          |   ^^^^^^ Enum value "fluent" should be in UPPER_CASE format
       216 |   native
 
 #### ❌ Error 13/27
 
       215 |   fluent
     > 216 |   native
-          |   ^^^^^^ Enumeration value "native" should be in UPPER_CASE format
+          |   ^^^^^^ Enum value "native" should be in UPPER_CASE format
       217 | }
 
 #### ❌ Error 14/27
 
       238 |   _operators: OperatorsFilterFindManyUserInput
     > 239 |   OR: [FilterFindManyUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       240 |   AND: [FilterFindManyUserInput!]
 
 #### ❌ Error 15/27
 
       239 |   OR: [FilterFindManyUserInput!]
     > 240 |   AND: [FilterFindManyUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       241 |
 
 #### ❌ Error 16/27
 
       267 |   _operators: OperatorsFilterFindOneUserInput
     > 268 |   OR: [FilterFindOneUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       269 |   AND: [FilterFindOneUserInput!]
 
 #### ❌ Error 17/27
 
       268 |   OR: [FilterFindOneUserInput!]
     > 269 |   AND: [FilterFindOneUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       270 | }
 
 #### ❌ Error 18/27
 
       291 |   _operators: OperatorsFilterRemoveManyUserInput
     > 292 |   OR: [FilterRemoveManyUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       293 |   AND: [FilterRemoveManyUserInput!]
 
 #### ❌ Error 19/27
 
       292 |   OR: [FilterRemoveManyUserInput!]
     > 293 |   AND: [FilterRemoveManyUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       294 | }
 
 #### ❌ Error 20/27
 
       315 |   _operators: OperatorsFilterRemoveOneUserInput
     > 316 |   OR: [FilterRemoveOneUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       317 |   AND: [FilterRemoveOneUserInput!]
 
 #### ❌ Error 21/27
 
       316 |   OR: [FilterRemoveOneUserInput!]
     > 317 |   AND: [FilterRemoveOneUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       318 | }
 
 #### ❌ Error 22/27
 
       339 |   _operators: OperatorsFilterUpdateManyUserInput
     > 340 |   OR: [FilterUpdateManyUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       341 |   AND: [FilterUpdateManyUserInput!]
 
 #### ❌ Error 23/27
 
       340 |   OR: [FilterUpdateManyUserInput!]
     > 341 |   AND: [FilterUpdateManyUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       342 | }
 
 #### ❌ Error 24/27
 
       363 |   _operators: OperatorsFilterUpdateOneUserInput
     > 364 |   OR: [FilterUpdateOneUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       365 |   AND: [FilterUpdateOneUserInput!]
 
 #### ❌ Error 25/27
 
       364 |   OR: [FilterUpdateOneUserInput!]
     > 365 |   AND: [FilterUpdateOneUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       366 | }
 
 #### ❌ Error 26/27
 
       387 |   _operators: OperatorsFilterUserInput
     > 388 |   OR: [FilterUserInput!]
-          |   ^^ Input property "OR" should be in camelCase format
+          |   ^^ Input value "OR" should be in camelCase format
       389 |   AND: [FilterUserInput!]
 
 #### ❌ Error 27/27
 
       388 |   OR: [FilterUserInput!]
     > 389 |   AND: [FilterUserInput!]
-          |   ^^^ Input property "AND" should be in camelCase format
+          |   ^^^ Input value "AND" should be in camelCase format
       390 | }
 `;
 
@@ -1736,7 +1771,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 #### ❌ Error 1/9
 
     > 1 |         query TestQuery { test }
-        |               ^^^^^^^^^ Operation "TestQuery" should not have "Query" suffix
+        |               ^^^^^^^^^ Query "TestQuery" should not have "Query" suffix
       2 |         query QueryTest { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1759,7 +1794,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       1 |         query TestQuery { test }
     > 2 |         query QueryTest { test }
-        |               ^^^^^^^^^ Operation "QueryTest" should not have "Query" prefix
+        |               ^^^^^^^^^ Query "QueryTest" should not have "Query" prefix
       3 |         query GetQuery { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1782,7 +1817,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       2 |         query QueryTest { test }
     > 3 |         query GetQuery { test }
-        |               ^^^^^^^^ Operation "GetQuery" should not have "Get" prefix
+        |               ^^^^^^^^ Query "GetQuery" should not have "Get" prefix
       4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
 
 #### 💡 Suggestion: Rename to \`Query\`
@@ -1805,7 +1840,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       5 |
     > 6 |         mutation TestMutation { test }
-        |                  ^^^^^^^^^^^^ Operation "TestMutation" should not have "Mutation" suffix
+        |                  ^^^^^^^^^^^^ Mutation "TestMutation" should not have "Mutation" suffix
       7 |         mutation MutationTest { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1828,7 +1863,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       6 |         mutation TestMutation { test }
     > 7 |         mutation MutationTest { test }
-        |                  ^^^^^^^^^^^^ Operation "MutationTest" should not have "Mutation" prefix
+        |                  ^^^^^^^^^^^^ Mutation "MutationTest" should not have "Mutation" prefix
       8 |
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1851,7 +1886,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
        8 |
     >  9 |         subscription TestSubscription { test }
-         |                      ^^^^^^^^^^^^^^^^ Operation "TestSubscription" should not have "Subscription" suffix
+         |                      ^^^^^^^^^^^^^^^^ Subscription "TestSubscription" should not have "Subscription" suffix
       10 |         subscription SubscriptionTest { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1874,7 +1909,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
        9 |         subscription TestSubscription { test }
     > 10 |         subscription SubscriptionTest { test }
-         |                      ^^^^^^^^^^^^^^^^ Operation "SubscriptionTest" should not have "Subscription" prefix
+         |                      ^^^^^^^^^^^^^^^^ Subscription "SubscriptionTest" should not have "Subscription" prefix
       11 |
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2349,7 +2384,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       16 |
     > 17 |         enum TestEnum
-         |              ^^^^^^^^ Enumerator "TestEnum" should not have "Enum" suffix
+         |              ^^^^^^^^ Enum "TestEnum" should not have "Enum" suffix
       18 |         extend enum EnumTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2392,7 +2427,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       17 |         enum TestEnum
     > 18 |         extend enum EnumTest {
-         |                     ^^^^^^^^ EnumTypeExtension "EnumTest" should not have "Enum" prefix
+         |                     ^^^^^^^^ Enum "EnumTest" should not have "Enum" prefix
       19 |           A
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2478,7 +2513,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       22 |         interface TestInterface
     > 23 |         extend interface InterfaceTest {
-         |                          ^^^^^^^^^^^^^ InterfaceTypeExtension "InterfaceTest" should not have "Interface" prefix
+         |                          ^^^^^^^^^^^^^ Interface "InterfaceTest" should not have "Interface" prefix
       24 |           id: ID
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2564,7 +2599,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       27 |         union TestUnion
     > 28 |         extend union UnionTest = TestInterface
-         |                      ^^^^^^^^^ UnionTypeExtension "UnionTest" should not have "Union" prefix
+         |                      ^^^^^^^^^ Union "UnionTest" should not have "Union" prefix
       29 |
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2650,7 +2685,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       30 |         type TestType
     > 31 |         extend type TypeTest {
-         |                     ^^^^^^^^ ObjectTypeExtension "TypeTest" should not have "Type" prefix
+         |                     ^^^^^^^^ Type "TypeTest" should not have "Type" prefix
       32 |           id: ID
 
 #### 💡 Suggestion: Rename to \`Test\`
