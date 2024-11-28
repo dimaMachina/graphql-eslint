@@ -71,14 +71,14 @@ const schema = {
           items: {
             type: 'object',
           },
-          description: 'RegEx',
+          description: 'Should be of instance of RegEx',
         },
         requiredPattern: {
           ...ARRAY_DEFAULT_OPTIONS,
           items: {
             type: 'object',
           },
-          description: 'RegEx',
+          description: 'Should be of instance of RegEx',
         },
         forbiddenPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
@@ -101,26 +101,6 @@ const schema = {
           description: 'Option to skip validation of some words, e.g. acronyms',
         },
       },
-      allOf: ['forbidden', 'required'].flatMap(name => [
-        {
-          not: {
-            properties: {
-              [`${name}Pattern`]: { type: 'array' },
-              [`${name}Prefixes`]: { type: 'array' },
-            },
-            required: [`${name}Pattern`, `${name}Prefixes`],
-          },
-        },
-        {
-          not: {
-            properties: {
-              [`${name}Pattern`]: { type: 'array' },
-              [`${name}Suffixes`]: { type: 'array' },
-            },
-            required: [`${name}Pattern`, `${name}Suffixes`],
-          },
-        },
-      ]),
     },
   },
   type: 'array',
