@@ -5,6 +5,7 @@ import { GraphQLESLintRule, GraphQLESLintRuleListener, ValueOf } from '../../typ
 import {
   ARRAY_DEFAULT_OPTIONS,
   convertCase,
+  displayNodeName,
   englishJoinWords,
   truthy,
   TYPES_KINDS,
@@ -137,6 +138,8 @@ type PropertySchema = {
   style?: AllowedStyle;
   suffix?: string;
   prefix?: string;
+  forbiddenPattern?: string[];
+  requiredPattern?: string[];
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
   requiredPrefixes?: string[];
@@ -360,8 +363,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         ignorePattern,
         requiredPrefixes,
         requiredSuffixes,
+        forbiddenPattern,
       } = normalisePropertyOption(selector);
-      const nodeType = KindToDisplayName[n.kind] || n.kind;
       const nodeName = node.value;
       const error = getError();
       if (error) {
@@ -371,7 +374,12 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         const suggestedNames = renameToNames.map(
           renameToName => leadingUnderscores + renameToName + trailingUnderscores,
         );
-        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedNames);
+        const name = displayNodeName(n);
+        report(
+          node,
+          `${name[0].toUpperCase()}${name.slice(1)} should ${errorMessage}`,
+          suggestedNames,
+        );
       }
 
       function getError(): {
@@ -392,6 +400,15 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           return {
             errorMessage: `have "${suffix}" suffix`,
             renameToNames: [name + suffix],
+          };
+        }
+        const forbidden = forbiddenPattern?.find((pattern: string) =>
+          new RegExp(pattern).test(name),
+        );
+        if (forbidden) {
+          return {
+            errorMessage: `not contain the forbidden pattern "${forbidden}"`,
+            renameToNames: [name.replace(new RegExp(forbidden), '')],
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
