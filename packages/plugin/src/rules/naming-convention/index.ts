@@ -51,7 +51,7 @@ const schemaOption = {
 const descriptionPrefixesSuffixes = (name: 'forbiddenPattern' | 'requiredPattern') =>
   `> [!WARNING]
 >
-> This option is deprecated and will be removed in the next major release. Use \`${name}\` instead`;
+> This option is deprecated and will be removed in the next major release. Use \`${name}\` instead.`;
 
 const schema = {
   definitions: {
