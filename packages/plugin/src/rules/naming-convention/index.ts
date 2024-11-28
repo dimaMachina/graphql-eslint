@@ -89,6 +89,26 @@ const schema = {
           description: 'Option to skip validation of some words, e.g. acronyms',
         },
       },
+      allOf: ['forbidden', 'required'].flatMap(name => [
+        {
+          not: {
+            properties: {
+              [`${name}Pattern`]: { type: 'array' },
+              [`${name}Prefixes`]: { type: 'array' },
+            },
+            required: [`${name}Pattern`, `${name}Prefixes`],
+          },
+        },
+        {
+          not: {
+            properties: {
+              [`${name}Pattern`]: { type: 'array' },
+              [`${name}Suffixes`]: { type: 'array' },
+            },
+            required: [`${name}Pattern`, `${name}Suffixes`],
+          },
+        },
+      ]),
     },
   },
   type: 'array',
@@ -364,7 +384,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         requiredPrefixes,
         requiredSuffixes,
         forbiddenPattern,
-        requiredPattern
+        requiredPattern,
       } = normalisePropertyOption(selector);
       const nodeName = node.value;
       const error = getError();
@@ -412,15 +432,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             renameToNames: [name.replace(new RegExp(forbidden), '')],
           };
         }
-        if (
-          requiredPattern &&
-          !requiredPattern.some(pattern => new RegExp(pattern).test(name))
-        ) {
+        if (requiredPattern && !requiredPattern.some(pattern => new RegExp(pattern).test(name))) {
           return {
-            errorMessage: `contain the required pattern: ${englishJoinWords(
-              requiredPattern,
-            )}`,
-            renameToNames: []
+            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPattern)}`,
+            renameToNames: [],
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));

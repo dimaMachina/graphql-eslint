@@ -259,27 +259,22 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
       errors: [
         {
-          message:
-            'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format',
         },
         {
           message: 'Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format',
         },
         { message: 'Input "_idOperatorsFilterUserInput" should be in PascalCase format' },
         { message: 'Enum value "male" should be in UPPER_CASE format' },
@@ -540,12 +535,14 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
     {
       name: 'requiredPattern',
       code: 'type Test { enabled: Boolean! }',
-      options: [{
-        'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
-          style: 'camelCase',
-          requiredPattern: ['^is', '^has'],
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPattern: ['^is', '^has'],
+          },
         },
-       }],
+      ],
       errors: 1,
     },
   ],
