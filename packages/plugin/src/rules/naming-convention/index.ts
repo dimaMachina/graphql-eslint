@@ -5,6 +5,7 @@ import { GraphQLESLintRule, GraphQLESLintRuleListener, ValueOf } from '../../typ
 import {
   ARRAY_DEFAULT_OPTIONS,
   convertCase,
+  displayNodeName,
   englishJoinWords,
   truthy,
   TYPES_KINDS,
@@ -47,6 +48,11 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 } as const;
 
+const descriptionPrefixesSuffixes = (name: 'forbiddenPattern' | 'requiredPattern') =>
+  `> [!WARNING]
+>
+> This option is deprecated and will be removed in the next major release. Use [\`${name}\`](#${name.toLowerCase()}-array) instead.`;
+
 const schema = {
   definitions: {
     asString: {
@@ -60,10 +66,36 @@ const schema = {
         style: { enum: ALLOWED_STYLES },
         prefix: { type: 'string' },
         suffix: { type: 'string' },
-        forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
-        forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
-        requiredPrefixes: ARRAY_DEFAULT_OPTIONS,
-        requiredSuffixes: ARRAY_DEFAULT_OPTIONS,
+        forbiddenPattern: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          items: {
+            type: 'object',
+          },
+          description: 'Should be of instance of `RegEx`',
+        },
+        requiredPattern: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          items: {
+            type: 'object',
+          },
+          description: 'Should be of instance of `RegEx`',
+        },
+        forbiddenPrefixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('forbiddenPattern'),
+        },
+        forbiddenSuffixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('forbiddenPattern'),
+        },
+        requiredPrefixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('requiredPattern'),
+        },
+        requiredSuffixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('requiredPattern'),
+        },
         ignorePattern: {
           type: 'string',
           description: 'Option to skip validation of some words, e.g. acronyms',
@@ -118,6 +150,8 @@ type PropertySchema = {
   style?: AllowedStyle;
   suffix?: string;
   prefix?: string;
+  forbiddenPattern?: RegExp[];
+  requiredPattern?: RegExp[];
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
   requiredPrefixes?: string[];
@@ -341,8 +375,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         ignorePattern,
         requiredPrefixes,
         requiredSuffixes,
+        forbiddenPattern,
+        requiredPattern,
       } = normalisePropertyOption(selector);
-      const nodeType = KindToDisplayName[n.kind] || n.kind;
       const nodeName = node.value;
       const error = getError();
       if (error) {
@@ -352,7 +387,12 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         const suggestedNames = renameToNames.map(
           renameToName => leadingUnderscores + renameToName + trailingUnderscores,
         );
-        report(node, `${nodeType} "${nodeName}" should ${errorMessage}`, suggestedNames);
+        const name = displayNodeName(n);
+        report(
+          node,
+          `${name[0].toUpperCase()}${name.slice(1)} should ${errorMessage}`,
+          suggestedNames,
+        );
       }
 
       function getError(): {
@@ -373,6 +413,19 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           return {
             errorMessage: `have "${suffix}" suffix`,
             renameToNames: [name + suffix],
+          };
+        }
+        const forbidden = forbiddenPattern?.find(pattern => pattern.test(name));
+        if (forbidden) {
+          return {
+            errorMessage: `not contain the forbidden pattern "${forbidden}"`,
+            renameToNames: [name.replace(forbidden, '')],
+          };
+        }
+        if (requiredPattern && !requiredPattern.some(pattern => pattern.test(name))) {
+          return {
+            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPattern.map(re => re.source))}`,
+            renameToNames: [],
           };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));

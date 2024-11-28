@@ -25,6 +25,11 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
   return [code.slice(0, range[0]), text, code.slice(range[1])].join('');
 }
 
+// @ts-expect-error -- Extend RegExp with a custom toJSON method
+RegExp.prototype.toJSON = function() {
+  return `/${this.source}/${this.flags}`
+};
+
 export class RuleTester<ParserOptions> extends ESLintRuleTester {
   fromMockFile(path: string): string {
     return readFileSync(resolve(__dirname, `../../plugin/__tests__/mocks/${path}`), 'utf-8');

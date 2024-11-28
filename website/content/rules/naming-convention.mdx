@@ -321,7 +321,38 @@ This element must be one of the following enum values:
 
 ### `suffix` (string)
 
+### `forbiddenPattern` (array)
+
+Should be of instance of `RegEx`
+
+The object is an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
+### `requiredPattern` (array)
+
+Should be of instance of `RegEx`
+
+The object is an array with all elements of the type `object`.
+
+The array object has the following properties:
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
 ### `forbiddenPrefixes` (array)
+
+> [!WARNING]
+>
+> This option is deprecated and will be removed in the next major release. Use
+> [`forbiddenPattern`](#forbiddenpattern-array) instead.
 
 The object is an array with all elements of the type `string`.
 
@@ -332,6 +363,11 @@ Additional restrictions:
 
 ### `forbiddenSuffixes` (array)
 
+> [!WARNING]
+>
+> This option is deprecated and will be removed in the next major release. Use
+> [`forbiddenPattern`](#forbiddenpattern-array) instead.
+
 The object is an array with all elements of the type `string`.
 
 Additional restrictions:
@@ -341,6 +377,11 @@ Additional restrictions:
 
 ### `requiredPrefixes` (array)
 
+> [!WARNING]
+>
+> This option is deprecated and will be removed in the next major release. Use
+> [`requiredPattern`](#requiredpattern-array) instead.
+
 The object is an array with all elements of the type `string`.
 
 Additional restrictions:
@@ -349,6 +390,11 @@ Additional restrictions:
 - Unique items: `true`
 
 ### `requiredSuffixes` (array)
+
+> [!WARNING]
+>
+> This option is deprecated and will be removed in the next major release. Use
+> [`requiredPattern`](#requiredpattern-array) instead.
 
 The object is an array with all elements of the type `string`.
 
@@ -363,5 +409,5 @@ Option to skip validation of some words, e.g. acronyms
 
 ## Resources
 
-- [Rule source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/src/rules/naming-convention.ts)
-- [Test source](https://github.com/B2o5T/graphql-eslint/tree/master/packages/plugin/__tests__/naming-convention.spec.ts)
+- [Rule source](https://github.com/dimaMachina/graphql-eslint/tree/master/packages/plugin/src/rules/naming-convention.ts)
+- [Test source](https://github.com/dimaMachina/graphql-eslint/tree/master/packages/plugin/__tests__/naming-convention.spec.ts)

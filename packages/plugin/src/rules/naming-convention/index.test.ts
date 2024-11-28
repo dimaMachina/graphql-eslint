@@ -259,49 +259,44 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
       errors: [
         {
-          message:
-            'Input type "_idOperatorsFilterFindManyUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format',
         },
         {
-          message: 'Input type "_idOperatorsFilterFindOneUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input type "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input type "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input type "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format',
         },
         {
-          message:
-            'Input type "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format',
+          message: 'Input "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format',
         },
-        { message: 'Input type "_idOperatorsFilterUserInput" should be in PascalCase format' },
-        { message: 'Enumeration value "male" should be in UPPER_CASE format' },
-        { message: 'Enumeration value "female" should be in UPPER_CASE format' },
-        { message: 'Enumeration value "ladyboy" should be in UPPER_CASE format' },
-        { message: 'Enumeration value "basic" should be in UPPER_CASE format' },
-        { message: 'Enumeration value "fluent" should be in UPPER_CASE format' },
-        { message: 'Enumeration value "native" should be in UPPER_CASE format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
-        { message: 'Input property "OR" should be in camelCase format' },
-        { message: 'Input property "AND" should be in camelCase format' },
+        { message: 'Input "_idOperatorsFilterUserInput" should be in PascalCase format' },
+        { message: 'Enum value "male" should be in UPPER_CASE format' },
+        { message: 'Enum value "female" should be in UPPER_CASE format' },
+        { message: 'Enum value "ladyboy" should be in UPPER_CASE format' },
+        { message: 'Enum value "basic" should be in UPPER_CASE format' },
+        { message: 'Enum value "fluent" should be in UPPER_CASE format' },
+        { message: 'Enum value "native" should be in UPPER_CASE format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
+        { message: 'Input value "OR" should be in camelCase format' },
+        { message: 'Input value "AND" should be in camelCase format' },
       ],
     },
     {
@@ -313,16 +308,16 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         },
       ],
       errors: [
-        { message: 'Enumerator "B" should be in camelCase format' },
-        { message: 'Enumeration value "test" should be in UPPER_CASE format' },
+        { message: 'Enum "B" should be in camelCase format' },
+        { message: 'Enum value "test" should be in UPPER_CASE format' },
       ],
     },
     {
       code: 'input test { _Value: String }',
       options: [{ types: 'PascalCase', InputValueDefinition: 'snake_case' }],
       errors: [
-        { message: 'Input type "test" should be in PascalCase format' },
-        { message: 'Input property "_Value" should be in snake_case format' },
+        { message: 'Input "test" should be in PascalCase format' },
+        { message: 'Input value "_Value" should be in snake_case format' },
         { message: 'Leading underscores are not allowed' },
       ],
     },
@@ -338,8 +333,8 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       errors: [
         { message: 'Type "TypeOne" should be in camelCase format' },
         { message: 'Field "aField" should have "AAA" suffix' },
-        { message: 'Enumeration value "VALUE_ONE" should have "ENUM" suffix' },
-        { message: 'Enumeration value "VALUE_TWO" should have "ENUM" suffix' },
+        { message: 'Enum value "VALUE_ONE" should have "ENUM" suffix' },
+        { message: 'Enum value "VALUE_TWO" should have "ENUM" suffix' },
       ],
     },
     {
@@ -353,8 +348,8 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
       errors: [
         { message: 'Field "aField" should have "Field" prefix' },
-        { message: 'Enumeration value "A_ENUM_VALUE_ONE" should have "ENUM" prefix' },
-        { message: 'Enumeration value "VALUE_TWO" should have "ENUM" prefix' },
+        { message: 'Enum value "A_ENUM_VALUE_ONE" should have "ENUM" prefix' },
+        { message: 'Enum value "VALUE_TWO" should have "ENUM" prefix' },
       ],
     },
     {
@@ -385,8 +380,8 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       code: 'query Foo { foo } query getBar { bar }',
       options: [{ OperationDefinition: { style: 'camelCase', forbiddenPrefixes: ['get'] } }],
       errors: [
-        { message: 'Operation "Foo" should be in camelCase format' },
-        { message: 'Operation "getBar" should not have "get" prefix' },
+        { message: 'Query "Foo" should be in camelCase format' },
+        { message: 'Query "getBar" should not have "get" prefix' },
       ],
     },
     {
@@ -448,13 +443,13 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       `,
       options: (rule.meta.docs!.configOptions as any).operations,
       errors: [
-        { message: 'Operation "TestQuery" should not have "Query" suffix' },
-        { message: 'Operation "QueryTest" should not have "Query" prefix' },
-        { message: 'Operation "GetQuery" should not have "Get" prefix' },
-        { message: 'Operation "TestMutation" should not have "Mutation" suffix' },
-        { message: 'Operation "MutationTest" should not have "Mutation" prefix' },
-        { message: 'Operation "TestSubscription" should not have "Subscription" suffix' },
-        { message: 'Operation "SubscriptionTest" should not have "Subscription" prefix' },
+        { message: 'Query "TestQuery" should not have "Query" suffix' },
+        { message: 'Query "QueryTest" should not have "Query" prefix' },
+        { message: 'Query "GetQuery" should not have "Get" prefix' },
+        { message: 'Mutation "TestMutation" should not have "Mutation" suffix' },
+        { message: 'Mutation "MutationTest" should not have "Mutation" prefix' },
+        { message: 'Subscription "TestSubscription" should not have "Subscription" suffix' },
+        { message: 'Subscription "SubscriptionTest" should not have "Subscription" prefix' },
         { message: 'Fragment "TestFragment" should not have "Fragment" suffix' },
         { message: 'Fragment "FragmentTest" should not have "Fragment" prefix' },
       ],
@@ -530,6 +525,25 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         },
       ],
       errors: 2,
+    },
+    {
+      name: 'forbiddenPattern',
+      code: 'query queryFoo { foo } query getBar { bar }',
+      options: [{ OperationDefinition: { forbiddenPattern: [/^(get|query)/] } }],
+      errors: 2,
+    },
+    {
+      name: 'requiredPattern',
+      code: 'type Test { enabled: Boolean! }',
+      options: [
+        {
+          'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+            style: 'camelCase',
+            requiredPattern: [/^(is|has)/],
+          },
+        },
+      ],
+      errors: 1,
     },
   ],
 });
