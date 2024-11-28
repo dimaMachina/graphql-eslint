@@ -63,6 +63,7 @@ export default defineConfig([
     dts: false,
     bundle: true,
     env: {
+      ...opts.env,
       NODE_ENV: 'production',
     },
     esbuildOptions(options, _context) {

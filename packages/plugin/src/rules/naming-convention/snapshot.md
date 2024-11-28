@@ -385,8 +385,7 @@ exports[`naming-convention > invalid > forbiddenPattern 1`] = `
     {
       "OperationDefinition": {
         "forbiddenPattern": [
-          "^get",
-          "^query"
+          "/^(get|query)/"
         ]
       }
     }
@@ -1985,8 +1984,7 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
       "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
         "style": "camelCase",
         "requiredPattern": [
-          "^is",
-          "^has"
+          "/^(is|has)/"
         ]
       }
     }

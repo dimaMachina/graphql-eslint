@@ -70,15 +70,15 @@ const schema = {
           ...ARRAY_DEFAULT_OPTIONS,
           items: {
             type: 'object',
-            description: 'RegEx',
           },
+          description: 'RegEx',
         },
         requiredPattern: {
           ...ARRAY_DEFAULT_OPTIONS,
           items: {
             type: 'object',
-            description: 'RegEx',
           },
+          description: 'RegEx',
         },
         forbiddenPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
