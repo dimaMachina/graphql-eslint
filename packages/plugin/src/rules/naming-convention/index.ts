@@ -47,6 +47,9 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 } as const;
 
+const descriptionPrefixesSuffixes = (name: 'forbiddenPattern' | 'requiredPattern') =>
+  `> This option is deprecated and will be removed in next major release. Use "${name}" instead`;
+
 const schema = {
   definitions: {
     asString: {
@@ -60,10 +63,24 @@ const schema = {
         style: { enum: ALLOWED_STYLES },
         prefix: { type: 'string' },
         suffix: { type: 'string' },
-        forbiddenPrefixes: ARRAY_DEFAULT_OPTIONS,
-        forbiddenSuffixes: ARRAY_DEFAULT_OPTIONS,
-        requiredPrefixes: ARRAY_DEFAULT_OPTIONS,
-        requiredSuffixes: ARRAY_DEFAULT_OPTIONS,
+        forbiddenPattern: ARRAY_DEFAULT_OPTIONS,
+        requiredPattern: ARRAY_DEFAULT_OPTIONS,
+        forbiddenPrefixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('forbiddenPattern'),
+        },
+        forbiddenSuffixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('forbiddenPattern'),
+        },
+        requiredPrefixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('requiredPattern'),
+        },
+        requiredSuffixes: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          description: descriptionPrefixesSuffixes('requiredPattern'),
+        },
         ignorePattern: {
           type: 'string',
           description: 'Option to skip validation of some words, e.g. acronyms',
