@@ -71,14 +71,14 @@ const schema = {
           items: {
             type: 'object',
           },
-          description: 'Should be of instance of RegEx',
+          description: 'Should be of instance of `RegEx`',
         },
         requiredPattern: {
           ...ARRAY_DEFAULT_OPTIONS,
           items: {
             type: 'object',
           },
-          description: 'Should be of instance of RegEx',
+          description: 'Should be of instance of `RegEx`',
         },
         forbiddenPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
