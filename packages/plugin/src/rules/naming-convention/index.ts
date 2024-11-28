@@ -66,8 +66,20 @@ const schema = {
         style: { enum: ALLOWED_STYLES },
         prefix: { type: 'string' },
         suffix: { type: 'string' },
-        forbiddenPattern: ARRAY_DEFAULT_OPTIONS,
-        requiredPattern: ARRAY_DEFAULT_OPTIONS,
+        forbiddenPattern: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          items: {
+            type: 'object',
+            description: 'RegEx',
+          },
+        },
+        requiredPattern: {
+          ...ARRAY_DEFAULT_OPTIONS,
+          items: {
+            type: 'object',
+            description: 'RegEx',
+          },
+        },
         forbiddenPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
           description: descriptionPrefixesSuffixes('forbiddenPattern'),
@@ -158,8 +170,8 @@ type PropertySchema = {
   style?: AllowedStyle;
   suffix?: string;
   prefix?: string;
-  forbiddenPattern?: string[];
-  requiredPattern?: string[];
+  forbiddenPattern?: RegExp[];
+  requiredPattern?: RegExp[];
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
   requiredPrefixes?: string[];
@@ -423,18 +435,16 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             renameToNames: [name + suffix],
           };
         }
-        const forbidden = forbiddenPattern?.find((pattern: string) =>
-          new RegExp(pattern).test(name),
-        );
+        const forbidden = forbiddenPattern?.find(pattern => pattern.test(name));
         if (forbidden) {
           return {
             errorMessage: `not contain the forbidden pattern "${forbidden}"`,
-            renameToNames: [name.replace(new RegExp(forbidden), '')],
+            renameToNames: [name.replace(forbidden, '')],
           };
         }
-        if (requiredPattern && !requiredPattern.some(pattern => new RegExp(pattern).test(name))) {
+        if (requiredPattern && !requiredPattern.some(pattern => pattern.test(name))) {
           return {
-            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPattern)}`,
+            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPattern.map(re => re.source))}`,
             renameToNames: [],
           };
         }

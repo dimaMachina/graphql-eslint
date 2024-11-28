@@ -394,7 +394,7 @@ exports[`naming-convention > invalid > forbiddenPattern 1`] = `
 #### ❌ Error 1/2
 
     > 1 | query queryFoo { foo } query getBar { bar }
-        |       ^^^^^^^^ Query "queryFoo" should not contain the forbidden pattern "^query"
+        |       ^^^^^^^^ Query "queryFoo" should not contain the forbidden pattern "/^(get|query)/"
 
 #### 💡 Suggestion: Rename to \`Foo\`
 
@@ -403,7 +403,7 @@ exports[`naming-convention > invalid > forbiddenPattern 1`] = `
 #### ❌ Error 2/2
 
     > 1 | query queryFoo { foo } query getBar { bar }
-        |                              ^^^^^^ Query "getBar" should not contain the forbidden pattern "^get"
+        |                              ^^^^^^ Query "getBar" should not contain the forbidden pattern "/^(get|query)/"
 
 #### 💡 Suggestion: Rename to \`Bar\`
 
@@ -1994,7 +1994,7 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
 #### ❌ Error
 
     > 1 | type Test { enabled: Boolean! }
-        |             ^^^^^^^ Field "enabled" should contain the required pattern: ^is or ^has
+        |             ^^^^^^^ Field "enabled" should contain the required pattern: ^(is|has)
 `;
 
 exports[`naming-convention > invalid > schema-recommended config 1`] = `

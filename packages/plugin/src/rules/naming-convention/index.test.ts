@@ -529,7 +529,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
     {
       name: 'forbiddenPattern',
       code: 'query queryFoo { foo } query getBar { bar }',
-      options: [{ OperationDefinition: { forbiddenPattern: ['^get', '^query'] } }],
+      options: [{ OperationDefinition: { forbiddenPattern: [/^(get|query)/] } }],
       errors: 2,
     },
     {
@@ -539,7 +539,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
             style: 'camelCase',
-            requiredPattern: ['^is', '^has'],
+            requiredPattern: [/^(is|has)/],
           },
         },
       ],
