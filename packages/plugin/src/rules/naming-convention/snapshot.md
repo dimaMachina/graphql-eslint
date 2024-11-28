@@ -1974,6 +1974,37 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
     13 |         fragment Test on Test { id }
 `;
 
+exports[`naming-convention > invalid > requiredPattern 1`] = `
+#### ⌨️ Code
+
+      1 | type Test { enabled: Boolean! }
+
+#### ⚙️ Options
+
+    {
+      "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
+        "style": "camelCase",
+        "requiredPrefixes": [
+          "^is",
+          "^has"
+        ]
+      }
+    }
+
+#### ❌ Error
+
+    > 1 | type Test { enabled: Boolean! }
+        |             ^^^^^^^ Field "enabled" should have one of the following prefixes: ^is or ^has
+
+#### 💡 Suggestion 1/2: Rename to \`isEnabled\`
+
+    1 | type Test { isEnabled: Boolean! }
+
+#### 💡 Suggestion 2/2: Rename to \`hasEnabled\`
+
+    1 | type Test { hasEnabled: Boolean! }
+`;
+
 exports[`naming-convention > invalid > schema-recommended config 1`] = `
 #### ⌨️ Code
 

@@ -537,5 +537,16 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       options: [{ OperationDefinition: { forbiddenPattern: ['^get', '^query'] } }],
       errors: 2,
     },
+    {
+      name: 'requiredPattern',
+      code: 'type Test { enabled: Boolean! }',
+      options: [{
+        'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
+          style: 'camelCase',
+          requiredPattern: ['^is', '^has'],
+        },
+       }],
+      errors: 1,
+    },
   ],
 });
