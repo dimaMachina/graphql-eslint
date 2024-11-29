@@ -56,7 +56,7 @@ ${(await fs.readFile(`${docsPath}/.eslintrc.cjs`, 'utf8')).trim()}
 > [!NOTE]
 >
 > Check out
-> [the official example${hasLegacyConfig && 's'}](https://github.com/${user}/${repo}/tree/${branch}/examples/${gitFolder})
+> [the official example${hasLegacyConfig ? 's' : ''}](https://github.com/${user}/${repo}/tree/${branch}/examples/${gitFolder})
 > for
 > [ESLint Flat Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/eslint.config.js)
 ${hasLegacyConfig ? `> or [ESLint Legacy Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/.eslintrc.cjs).` : '>.'}
