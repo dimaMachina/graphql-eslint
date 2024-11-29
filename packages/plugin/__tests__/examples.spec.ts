@@ -127,7 +127,7 @@ describe('Examples', () => {
     const flatResults = getFlatESLintOutput(cwd);
     expect(normalizeResults(flatResults)).toMatchSnapshot();
     expect(countErrors(flatResults)).toBe(1);
-  })
+  });
 });
 
 function testESLintOutput(cwd: string, errorCount: number): void {

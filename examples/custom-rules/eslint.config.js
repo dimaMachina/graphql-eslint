@@ -1,5 +1,5 @@
 import graphqlPlugin from '@graphql-eslint/eslint-plugin';
-import { rule } from './my-rule.js'
+import { rule } from './my-rule.js';
 
 export default [
   {
@@ -10,8 +10,8 @@ export default [
     plugins: {
       '@internal': {
         rules: {
-          'my-rule': rule
-        }
+          'my-rule': rule,
+        },
       },
     },
     rules: {

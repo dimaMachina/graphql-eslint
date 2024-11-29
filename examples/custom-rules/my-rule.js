@@ -5,10 +5,10 @@ export const rule = {
         if (!node.name?.value) {
           context.report({
             node,
-            message: 'Oops, name is required!'
-          })
+            message: 'Oops, name is required!',
+          });
         }
-      }
-    }
-  }
-}
+      },
+    };
+  },
+};
