@@ -218,34 +218,33 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         }
       }
 
-      function hasIdField({ selections }: typeof node, idNames: string[]): boolean {
-        return selections.some(selection => {
-          if (selection.kind === Kind.FIELD) {
-            if (selection.alias && idNames.includes(selection.alias.value)) {
-              return true;
-            }
-
-            return idNames.includes(selection.name.value);
-          }
-
-          if (selection.kind === Kind.INLINE_FRAGMENT) {
-            return hasIdField(selection.selectionSet, idNames);
-          }
-
-          if (selection.kind === Kind.FRAGMENT_SPREAD) {
-            const [foundSpread] = siblings.getFragment(selection.name.value);
-            if (foundSpread) {
-              const fragmentSpread = foundSpread.document;
-              checkedFragmentSpreads.add(fragmentSpread.name.value);
-              return hasIdField(fragmentSpread.selectionSet, idNames);
-            }
-          }
-          return false;
-        });
-      }
-
       function report(idNames: string[]) {
-        const hasId = hasIdField(node, idNames);
+        function hasIdField({ selections }: typeof node): boolean {
+          return selections.some(selection => {
+            if (selection.kind === Kind.FIELD) {
+              if (selection.alias && idNames.includes(selection.alias.value)) {
+                return true;
+              }
+
+              return idNames.includes(selection.name.value);
+            }
+
+            if (selection.kind === Kind.INLINE_FRAGMENT) {
+              return hasIdField(selection.selectionSet);
+            }
+
+            if (selection.kind === Kind.FRAGMENT_SPREAD) {
+              const [foundSpread] = siblings.getFragment(selection.name.value);
+              if (foundSpread) {
+                const fragmentSpread = foundSpread.document;
+                checkedFragmentSpreads.add(fragmentSpread.name.value);
+                return hasIdField(fragmentSpread.selectionSet);
+              }
+            }
+            return false;
+          });
+        }
+        const hasId = hasIdField(node);
         if (hasId) {
           return;
         }
