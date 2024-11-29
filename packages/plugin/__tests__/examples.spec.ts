@@ -125,10 +125,7 @@ describe('Examples', () => {
   it('should work with custom rules', () => {
     const cwd = path.join(CWD, 'examples', 'custom-rules');
     const flatResults = getFlatESLintOutput(cwd);
-    // Windows has some offset for `range`, I think due \r\n handling
-    if (os.platform() !== 'win32') {
-      expect(normalizeResults(flatResults)).toMatchSnapshot();
-    }
+    expect(normalizeResults(flatResults)).toMatchSnapshot();
     expect(countErrors(flatResults)).toBe(1);
   });
 });
