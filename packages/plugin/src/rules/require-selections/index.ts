@@ -42,6 +42,9 @@ const schema = {
         oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asArray' }],
         default: DEFAULT_ID_FIELD_NAME,
       },
+      requireAllFields: {
+        type: 'boolean',
+      }
     },
   },
 } as const;
@@ -115,7 +118,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   create(context) {
     const schema = requireGraphQLSchema(RULE_ID, context);
     const siblings = requireGraphQLOperations(RULE_ID, context);
-    const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
+    const { fieldName = DEFAULT_ID_FIELD_NAME, requireAllFields } = context.options[0] || {};
     const idNames = asArray(fieldName);
 
     // Check selections only in OperationDefinition,
@@ -237,17 +240,31 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           return;
         }
 
-        const pluralSuffix = idNames.length > 1 ? 's' : '';
-        const fieldName = englishJoinWords(
-          idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
-        );
+        if (requireAllFields) {
+          for (const idName of idNames) {
+            report(displayName(idName), [idName])
+          }
+        } else {
+          const fieldName = englishJoinWords(
+            idNames.map(displayName),
+          );
+          report(fieldName, idNames)
+        }
+      }
 
+      function displayName(name: string) {
+        return  `\`${(parent.alias || parent.name).value}.${name}\``
+      }
+
+
+      function report(fieldName: string, idNames: string[]) {
+        const pluralSuffix = idNames.length > 1 ? 's' : '';
         const addition =
           checkedFragmentSpreads.size === 0
             ? ''
             : ` or add to used fragment${
-                checkedFragmentSpreads.size > 1 ? 's' : ''
-              } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
+              checkedFragmentSpreads.size > 1 ? 's' : ''
+            } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
 
         const problem: ReportDescriptor = {
           loc,

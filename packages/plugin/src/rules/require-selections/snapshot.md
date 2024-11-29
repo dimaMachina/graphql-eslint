@@ -250,6 +250,42 @@ exports[`require-selections > invalid > should report an error with union and no
       3 |             ...UnionFragment
 `;
 
+exports[`require-selections > invalid > should require all fields with \`requireAllFields\` option 1`] = `
+#### ⌨️ Code
+
+      1 | { hasId { id } }
+
+#### ⚙️ Options
+
+    {
+      "requireAllFields": true,
+      "fieldName": [
+        "name",
+        "_id"
+      ]
+    }
+
+#### ❌ Error 1/2
+
+    > 1 | { hasId { id } }
+        |         ^ Field \`hasId.name\` must be selected when it's available on a type.
+    Include it in your selection set.
+
+#### 💡 Suggestion: Add \`name\` selection
+
+    1 | { hasId { name id } }
+
+#### ❌ Error 2/2
+
+    > 1 | { hasId { id } }
+        |         ^ Field \`hasId._id\` must be selected when it's available on a type.
+    Include it in your selection set.
+
+#### 💡 Suggestion: Add \`_id\` selection
+
+    1 | { hasId { _id id } }
+`;
+
 exports[`require-selections > invalid > support multiple id field names 1`] = `
 #### ⌨️ Code
 
