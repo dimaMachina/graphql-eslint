@@ -108,6 +108,19 @@ importers:
         specifier: 9.15.0
         version: 9.15.0(patch_hash=t64n7kxodazs6lnwu42sgf5voe)(jiti@2.4.0)
 
+  examples/custom-rules:
+    dependencies:
+      graphql:
+        specifier: 16.9.0
+        version: 16.9.0
+    devDependencies:
+      '@graphql-eslint/eslint-plugin':
+        specifier: workspace:*
+        version: link:../../packages/plugin/dist
+      eslint:
+        specifier: 9.15.0
+        version: 9.15.0(patch_hash=t64n7kxodazs6lnwu42sgf5voe)(jiti@2.4.0)
+
   examples/graphql-config:
     dependencies:
       graphql:
