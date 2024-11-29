@@ -4,7 +4,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
 import { GraphQLESLintRule, GraphQLESTreeNode } from '../../types.js';
-import { eslintSelectorsTip, requireGraphQLOperations, requireGraphQLSchema } from "../../utils.js";
+import { eslintSelectorsTip, requireGraphQLOperations, requireGraphQLSchema } from '../../utils.js';
 
 const RULE_ID = 'no-unused-fields';
 
@@ -89,7 +89,7 @@ const schema = {
           '```json',
           JSON.stringify(RELAY_DEFAULT_IGNORED_FIELD_SELECTORS, null, 2),
           '```',
-          eslintSelectorsTip
+          eslintSelectorsTip,
         ].join('\n'),
         items: {
           type: 'string',

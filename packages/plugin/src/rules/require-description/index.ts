@@ -3,12 +3,13 @@ import { getRootTypeNames } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../../types.js';
 import {
-  ARRAY_DEFAULT_OPTIONS, eslintSelectorsTip,
+  ARRAY_DEFAULT_OPTIONS,
+  eslintSelectorsTip,
   getLocation,
   getNodeName,
   requireGraphQLSchema,
-  TYPES_KINDS
-} from "../../utils.js";
+  TYPES_KINDS,
+} from '../../utils.js';
 
 export const RULE_ID = 'require-description';
 
@@ -46,7 +47,7 @@ const schema = {
       },
       ignoredSelectors: {
         ...ARRAY_DEFAULT_OPTIONS,
-        description: ['Ignore specific selectors', eslintSelectorsTip].join('\n')
+        description: ['Ignore specific selectors', eslintSelectorsTip].join('\n'),
       },
       ...Object.fromEntries(
         [...ALLOWED_KINDS].sort().map(kind => {
@@ -54,7 +55,13 @@ const schema = {
 >
 > Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
           if (kind === Kind.OPERATION_DEFINITION) {
-            description += ['','','> [!WARNING]', '>', '> You must use only comment syntax `#` and not description syntax `"""` or `"`.'].join('\n')
+            description += [
+              '',
+              '',
+              '> [!WARNING]',
+              '>',
+              '> You must use only comment syntax `#` and not description syntax `"""` or `"`.',
+            ].join('\n');
           }
           return [kind, { type: 'boolean', description }];
         }),
@@ -129,6 +136,33 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [
+            {
+              ignoredSelectors: [
+                '[type=ObjectTypeDefinition][name.value=PageInfo]',
+                '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]',
+              ],
+            },
+          ],
+          code: /* GraphQL */ `
+            type FriendConnection {
+              edges: [FriendEdge]
+              pageInfo: PageInfo!
+            }
+            type FriendEdge {
+              cursor: String!
+              node: Friend!
+            }
+            type PageInfo {
+              hasPreviousPage: Boolean!
+              hasNextPage: Boolean!
+              startCursor: String
+              endCursor: String
+            }
+          `,
+        },
       ],
       configOptions: [
         {
@@ -168,7 +202,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
     let selector = `:matches(${[...kinds]})`;
     for (const str of ignoredSelectors) {
-      selector += `:not(${str})`
+      selector += `:not(${str})`;
     }
     return {
       [selector](node: SelectorNode) {

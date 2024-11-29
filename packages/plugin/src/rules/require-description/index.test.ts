@@ -229,14 +229,16 @@ ruleTester.run<RuleOptions>('require-description', rule, {
       errors: [{ messageId: RULE_ID }],
     },
     {
-      only: true,
       name: 'ignoredSelectors',
-      options: [{ types: true,
-       ignoredSelectors: [
-         '[type=ObjectTypeDefinition][name.value=PageInfo]',
-         '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]',
-       ]
-      }],
+      options: [
+        {
+          types: true,
+          ignoredSelectors: [
+            '[type=ObjectTypeDefinition][name.value=PageInfo]',
+            '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]',
+          ],
+        },
+      ],
       code: /* GraphQL */ `
         type Query {
           user: User
@@ -266,7 +268,7 @@ ruleTester.run<RuleOptions>('require-description', rule, {
         }
       `,
       errors: 3,
-    }
+    },
   ],
 });
 
