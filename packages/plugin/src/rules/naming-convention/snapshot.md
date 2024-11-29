@@ -409,6 +409,40 @@ exports[`naming-convention > invalid > forbiddenPattern 1`] = `
     1 | query queryFoo { foo } query Bar { bar }
 `;
 
+exports[`naming-convention > invalid > forbiddenPatterns 1`] = `
+#### ⌨️ Code
+
+      1 | query queryFoo { foo } query getBar { bar }
+
+#### ⚙️ Options
+
+    {
+      "OperationDefinition": {
+        "forbiddenPatterns": [
+          "/^(get|query)/"
+        ]
+      }
+    }
+
+#### ❌ Error 1/2
+
+    > 1 | query queryFoo { foo } query getBar { bar }
+        |       ^^^^^^^^ Query "queryFoo" should not contain the forbidden pattern "/^(get|query)/"
+
+#### 💡 Suggestion: Rename to \`Foo\`
+
+    1 | query Foo { foo } query getBar { bar }
+
+#### ❌ Error 2/2
+
+    > 1 | query queryFoo { foo } query getBar { bar }
+        |                              ^^^^^^ Query "getBar" should not contain the forbidden pattern "/^(get|query)/"
+
+#### 💡 Suggestion: Rename to \`Bar\`
+
+    1 | query queryFoo { foo } query Bar { bar }
+`;
+
 exports[`naming-convention > invalid > large graphql file 1`] = `
 #### ⌨️ Code
 
@@ -1984,6 +2018,28 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
       "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
         "style": "camelCase",
         "requiredPattern": [
+          "/^(is|has)/"
+        ]
+      }
+    }
+
+#### ❌ Error
+
+    > 1 | type Test { enabled: Boolean! }
+        |             ^^^^^^^ Field "enabled" should contain the required pattern: ^(is|has)
+`;
+
+exports[`naming-convention > invalid > requiredPatterns 1`] = `
+#### ⌨️ Code
+
+      1 | type Test { enabled: Boolean! }
+
+#### ⚙️ Options
+
+    {
+      "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
+        "style": "camelCase",
+        "requiredPatterns": [
           "/^(is|has)/"
         ]
       }

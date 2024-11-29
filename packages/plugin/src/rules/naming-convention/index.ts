@@ -48,7 +48,7 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 } as const;
 
-const descriptionPrefixesSuffixes = (name: 'forbiddenPattern' | 'requiredPattern') =>
+const descriptionPrefixesSuffixes = (name: 'forbiddenPatterns' | 'requiredPatterns') =>
   `> [!WARNING]
 >
 > This option is deprecated and will be removed in the next major release. Use [\`${name}\`](#${name.toLowerCase()}-array) instead.`;
@@ -66,14 +66,14 @@ const schema = {
         style: { enum: ALLOWED_STYLES },
         prefix: { type: 'string' },
         suffix: { type: 'string' },
-        forbiddenPattern: {
+        forbiddenPatterns: {
           ...ARRAY_DEFAULT_OPTIONS,
           items: {
             type: 'object',
           },
           description: 'Should be of instance of `RegEx`',
         },
-        requiredPattern: {
+        requiredPatterns: {
           ...ARRAY_DEFAULT_OPTIONS,
           items: {
             type: 'object',
@@ -82,19 +82,19 @@ const schema = {
         },
         forbiddenPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('forbiddenPattern'),
+          description: descriptionPrefixesSuffixes('forbiddenPatterns'),
         },
         forbiddenSuffixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('forbiddenPattern'),
+          description: descriptionPrefixesSuffixes('forbiddenPatterns'),
         },
         requiredPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('requiredPattern'),
+          description: descriptionPrefixesSuffixes('requiredPatterns'),
         },
         requiredSuffixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('requiredPattern'),
+          description: descriptionPrefixesSuffixes('requiredPatterns'),
         },
         ignorePattern: {
           type: 'string',
@@ -152,8 +152,8 @@ type PropertySchema = {
   style?: AllowedStyle;
   suffix?: string;
   prefix?: string;
-  forbiddenPattern?: RegExp[];
-  requiredPattern?: RegExp[];
+  forbiddenPatterns?: RegExp[];
+  requiredPatterns?: RegExp[];
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
   requiredPrefixes?: string[];
@@ -377,8 +377,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         ignorePattern,
         requiredPrefixes,
         requiredSuffixes,
-        forbiddenPattern,
-        requiredPattern,
+        forbiddenPatterns,
+        requiredPatterns,
       } = normalisePropertyOption(selector);
       const nodeName = node.value;
       const error = getError();
@@ -417,16 +417,16 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             renameToNames: [name + suffix],
           };
         }
-        const forbidden = forbiddenPattern?.find(pattern => pattern.test(name));
+        const forbidden = forbiddenPatterns?.find(pattern => pattern.test(name));
         if (forbidden) {
           return {
             errorMessage: `not contain the forbidden pattern "${forbidden}"`,
             renameToNames: [name.replace(forbidden, '')],
           };
         }
-        if (requiredPattern && !requiredPattern.some(pattern => pattern.test(name))) {
+        if (requiredPatterns && !requiredPatterns.some(pattern => pattern.test(name))) {
           return {
-            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPattern.map(re => re.source))}`,
+            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPatterns.map(re => re.source))}`,
             renameToNames: [],
           };
         }

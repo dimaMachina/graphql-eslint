@@ -70,6 +70,27 @@ type User {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/require-description: ['error', { ignoredSelectors: ['[type=ObjectTypeDefinition][name.value=PageInfo]', '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]'] }]
+
+type FriendConnection {
+  edges: [FriendEdge]
+  pageInfo: PageInfo!
+}
+type FriendEdge {
+  cursor: String!
+  node: Friend!
+}
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+```
+
 ## Config Schema
 
 The schema defines the following properties:
