@@ -8,43 +8,38 @@ import {
 } from '@theguild/components/server';
 
 const docsComponents = getDocsMDXComponents({
-  async ESLintConfigs({ gitFolder, graphqlConfigFile = '' }) {
+  async ESLintConfigs({
+    gitFolder,
+    additionalFiles,
+  }: {
+    gitFolder: string;
+    additionalFiles: Record<string, string>;
+  }) {
     const user = 'dimaMachina';
     const repo = 'graphql-eslint';
     const branch = 'master';
     const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder);
-    const { ext } = path.parse(graphqlConfigFile);
 
-    const graphqlConfig =
-      graphqlConfigFile &&
-      `
-## GraphQL Config
+    const promises = Object.entries({
+      ...additionalFiles,
+      'ESLint Flat Config': 'eslint.config.js',
+    }).map(async ([heading, filePath]) => {
+      const { ext } = path.parse(filePath);
+      return `## ${heading}
 
-\`\`\`${ext.slice(1)} filename="${graphqlConfigFile}"
-${(await fs.readFile(`${docsPath}/${graphqlConfigFile}`, 'utf8')).trim()}
-\`\`\`
-`;
+\`\`\`${ext.slice(1)} filename="${filePath}"
+${(await fs.readFile(`${docsPath}/${filePath}`, 'utf8')).trim()}
+\`\`\``;
+    });
+    const files = await Promise.all(promises);
 
-    return (
-      <MDXRemote
-        compiledSource={await compileMdx(`
-> [!NOTE]
->
-> Check out
-> [the official examples](https://github.com/${user}/${repo}/tree/${branch}/examples/${gitFolder})
-> for
-> [ESLint Flat Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/eslint.config.js)
-> or
-> [ESLint Legacy Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/.eslintrc.cjs)
-> .
+    const hasLegacyConfig = await fs
+      .access(`${docsPath}/.eslintrc.cjs`)
+      .then(() => true)
+      .catch(() => false);
 
-${graphqlConfig}
-## ESLint Flat Config
-\`\`\`js filename="eslint.config.js"
-${(await fs.readFile(`${docsPath}/eslint.config.js`, 'utf8')).trim()}
-\`\`\`
-
-## ESLint Legacy Config
+    const legacyConfig = hasLegacyConfig
+      ? `## ESLint Legacy Config
 
 > [!WARNING]
 >
@@ -52,7 +47,23 @@ ${(await fs.readFile(`${docsPath}/eslint.config.js`, 'utf8')).trim()}
 
 \`\`\`js filename=".eslintrc.cjs"
 ${(await fs.readFile(`${docsPath}/.eslintrc.cjs`, 'utf8')).trim()}
-\`\`\``)}
+\`\`\``
+      : '';
+
+    return (
+      <MDXRemote
+        compiledSource={await compileMdx(`
+> [!NOTE]
+>
+> Check out
+> [the official example${hasLegacyConfig ? 's' : ''}](https://github.com/${user}/${repo}/tree/${branch}/examples/${gitFolder})
+> for
+> [ESLint Flat Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/eslint.config.js)
+${hasLegacyConfig ? `> or [ESLint Legacy Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/.eslintrc.cjs).` : '>.'}
+
+${files.join('\n')}
+
+${legacyConfig}`)}
       />
     );
   },

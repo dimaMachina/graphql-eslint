@@ -2133,3 +2133,23 @@ exports[`Examples > should work with \`graphql-config\` 2`] = `
   },
 ]
 `;
+
+exports[`Examples > should work with custom rules 1`] = `
+[
+  {
+    filePath: examples/custom-rules/test.graphql,
+    messages: [
+      {
+        column: 1,
+        endColumn: 16,
+        endLine: 3,
+        line: 1,
+        message: Oops, name is required!,
+        nodeType: OperationDefinition,
+        ruleId: @internal/my-rule,
+        severity: 2,
+      },
+    ],
+  },
+]
+`;
