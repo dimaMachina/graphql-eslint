@@ -3,10 +3,8 @@ import tailwindConfig from '@theguild/tailwind-config';
 
 export default {
   ...tailwindConfig,
-  content: [
-    ...tailwindConfig.content,
-    './content/**/*.{md,mdx}'
-  ],
+  // todo: add to shared config
+  content: [...tailwindConfig.content, './content/**/*.{md,mdx}'],
   // @ts-expect-error -- fixme
   plugins: [tailwindRadix()],
 };
