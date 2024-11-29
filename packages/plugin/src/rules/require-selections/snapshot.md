@@ -286,6 +286,32 @@ exports[`require-selections > invalid > should require all fields with \`require
     1 | { hasId { _id id } }
 `;
 
+exports[`require-selections > invalid > should require rest fields with \`requireAllFields\` option 1`] = `
+#### ⌨️ Code
+
+      1 | { hasId { _id } }
+
+#### ⚙️ Options
+
+    {
+      "requireAllFields": true,
+      "fieldName": [
+        "name",
+        "_id"
+      ]
+    }
+
+#### ❌ Error
+
+    > 1 | { hasId { _id } }
+        |         ^ Field \`hasId.name\` must be selected when it's available on a type.
+    Include it in your selection set.
+
+#### 💡 Suggestion: Add \`name\` selection
+
+    1 | { hasId { name _id } }
+`;
+
 exports[`require-selections > invalid > support multiple id field names 1`] = `
 #### ⌨️ Code
 

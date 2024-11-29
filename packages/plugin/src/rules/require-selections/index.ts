@@ -206,7 +206,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           return;
         }
 
-        function hasIdField({ selections }: typeof node): boolean {
+        function hasIdField({ selections }: typeof node, idNames: string[]): boolean {
           return selections.some(selection => {
             if (selection.kind === Kind.FIELD) {
               if (selection.alias && idNames.includes(selection.alias.value)) {
@@ -217,7 +217,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
             }
 
             if (selection.kind === Kind.INLINE_FRAGMENT) {
-              return hasIdField(selection.selectionSet);
+              return hasIdField(selection.selectionSet, idNames);
             }
 
             if (selection.kind === Kind.FRAGMENT_SPREAD) {
@@ -225,30 +225,33 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
               if (foundSpread) {
                 const fragmentSpread = foundSpread.document;
                 checkedFragmentSpreads.add(fragmentSpread.name.value);
-                return hasIdField(fragmentSpread.selectionSet);
+                return hasIdField(fragmentSpread.selectionSet, idNames);
               }
             }
             return false;
           });
         }
 
-        const hasId = hasIdField(node);
 
         checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
 
-        if (hasId) {
-          return;
-        }
-
         if (requireAllFields) {
           for (const idName of idNames) {
+            const hasId = hasIdField(node, [idName]);
+            if (hasId) {
+              continue;
+            }
             report(displayName(idName), [idName])
           }
         } else {
-          const fieldName = englishJoinWords(
+          const hasId = hasIdField(node, idNames);
+          if (hasId) {
+            return;
+          }
+          const fieldNames = englishJoinWords(
             idNames.map(displayName),
           );
-          report(fieldName, idNames)
+          report(fieldNames, idNames)
         }
       }
 
