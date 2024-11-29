@@ -38,7 +38,7 @@ export default {
           },
           graphql: '',
           js: '',
-          'schema-and-documents': '',
+          'schema-and-operations': '',
           'multiple-projects': '',
           programmatic: '',
           _2: {
