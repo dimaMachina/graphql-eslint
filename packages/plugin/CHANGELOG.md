@@ -1,5 +1,35 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.1.0
+
+### Minor Changes
+
+- [#2780](https://github.com/dimaMachina/graphql-eslint/pull/2780)
+  [`98e0b56`](https://github.com/dimaMachina/graphql-eslint/commit/98e0b564a7df339aad03e5ea69e40d34864b2fc1)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - introduce `forbiddenPatterns` and
+  `requiredPatterns` options for `naming-convention` rule and deprecate `forbiddenPrefixes`,
+  `forbiddenSuffixes` and `requiredPrefixes` and `requiredSuffixes`
+
+- [#2782](https://github.com/dimaMachina/graphql-eslint/pull/2782)
+  [`4c20cdd`](https://github.com/dimaMachina/graphql-eslint/commit/4c20cddd252091d61be708a83649ef4b3655e66c)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - add new option `ignoredSelectors` for
+  `require-description` rule, to ignore eslint selectors, e.g. types which ends with `Connection` or
+  `Edge`
+
+- [#2783](https://github.com/dimaMachina/graphql-eslint/pull/2783)
+  [`6e354c9`](https://github.com/dimaMachina/graphql-eslint/commit/6e354c91ec926ae2ff82668d7b81c0a79b019bc3)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - add `json-schema-to-ts` as optional peer
+  dependency
+
+### Patch Changes
+
+- [#2783](https://github.com/dimaMachina/graphql-eslint/pull/2783)
+  [`6e354c9`](https://github.com/dimaMachina/graphql-eslint/commit/6e354c91ec926ae2ff82668d7b81c0a79b019bc3)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - dependencies updates:
+  - Added dependency
+    [`json-schema-to-ts@^3` ↗︎](https://www.npmjs.com/package/json-schema-to-ts/v/3.0.0) (to
+    `peerDependencies`)
+
 ## 4.0.1
 
 ### Patch Changes
