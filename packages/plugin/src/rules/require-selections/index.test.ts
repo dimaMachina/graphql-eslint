@@ -501,5 +501,29 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
       },
       errors: 2,
     },
+    {
+      name: 'should require all fields with `requireAllFields` option',
+      code: '{ hasId { id } }',
+      options: [{ requireAllFields: true, fieldName: ['name', '_id'] }],
+      parserOptions: {
+        graphQLConfig: {
+          schema: TEST_SCHEMA,
+          documents: '{ foo }',
+        },
+      },
+      errors: 2,
+    },
+    {
+      name: 'should require rest of all fields with `requireAllFields` option',
+      code: '{ hasId { _id } }',
+      options: [{ requireAllFields: true, fieldName: ['name', '_id'] }],
+      parserOptions: {
+        graphQLConfig: {
+          schema: TEST_SCHEMA,
+          documents: '{ foo }',
+        },
+      },
+      errors: 1,
+    },
   ],
 });

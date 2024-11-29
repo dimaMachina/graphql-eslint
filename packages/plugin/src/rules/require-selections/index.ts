@@ -42,6 +42,10 @@ const schema = {
         oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asArray' }],
         default: DEFAULT_ID_FIELD_NAME,
       },
+      requireAllFields: {
+        type: 'boolean',
+        description: 'Whether all fields of `fieldName` option must be included.',
+      },
     },
   },
 } as const;
@@ -115,7 +119,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   create(context) {
     const schema = requireGraphQLSchema(RULE_ID, context);
     const siblings = requireGraphQLOperations(RULE_ID, context);
-    const { fieldName = DEFAULT_ID_FIELD_NAME } = context.options[0] || {};
+    const { fieldName = DEFAULT_ID_FIELD_NAME, requireAllFields } = context.options[0] || {};
     const idNames = asArray(fieldName);
 
     // Check selections only in OperationDefinition,
@@ -203,6 +207,18 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           return;
         }
 
+        checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
+
+        if (requireAllFields) {
+          for (const idName of idNames) {
+            report([idName]);
+          }
+        } else {
+          report(idNames);
+        }
+      }
+
+      function report(idNames: string[]) {
         function hasIdField({ selections }: typeof node): boolean {
           return selections.some(selection => {
             if (selection.kind === Kind.FIELD) {
@@ -228,20 +244,14 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
             return false;
           });
         }
-
         const hasId = hasIdField(node);
-
-        checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
-
         if (hasId) {
           return;
         }
-
-        const pluralSuffix = idNames.length > 1 ? 's' : '';
         const fieldName = englishJoinWords(
           idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
         );
-
+        const pluralSuffix = idNames.length > 1 ? 's' : '';
         const addition =
           checkedFragmentSpreads.size === 0
             ? ''
