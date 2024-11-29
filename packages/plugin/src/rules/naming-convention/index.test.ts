@@ -229,11 +229,13 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
           _someField_: Boolean!
         }
       `,
-      options: [{
-        'FieldDefinition[parent.name.value=SomeType]': {
-          ignorePattern: ".*someField.*"
-        }
-      }]
+      options: [
+        {
+          'FieldDefinition[parent.name.value=SomeType]': {
+            ignorePattern: '.*someField.*',
+          },
+        },
+      ],
     },
   ],
   invalid: [
@@ -271,8 +273,8 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         },
       ],
       errors: [
-        { message: 'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format', },
-        { message: 'Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format', },
+        { message: 'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format' },
+        { message: 'Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format' },
         { message: 'Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format' },
         { message: 'Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format' },
         { message: 'Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format' },
