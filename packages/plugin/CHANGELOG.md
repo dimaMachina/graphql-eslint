@@ -1,5 +1,19 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.1.1
+
+### Patch Changes
+
+- [#2785](https://github.com/dimaMachina/graphql-eslint/pull/2785)
+  [`99b0703`](https://github.com/dimaMachina/graphql-eslint/commit/99b0703e91fc6661664c8773f48ffe28ac4a3467)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - `allowLeadingUnderscore` and
+  `allowTrailingUnderscore` should not conflict with `ignorePattern` in `naming-convention` rule
+
+- [#2787](https://github.com/dimaMachina/graphql-eslint/pull/2787)
+  [`f370359`](https://github.com/dimaMachina/graphql-eslint/commit/f370359b4844c291cf5790e4503454ebd30373a2)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - add an example with
+  [custom graphql rules](https://github.com/dimaMachina/graphql-eslint/tree/master/examples/custom-rules)
+
 ## 4.1.0
 
 ### Minor Changes
