@@ -342,6 +342,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
   create(context) {
     const options = context.options[0] || {};
     const { allowLeadingUnderscore, allowTrailingUnderscore, types, ...restOptions } = options;
+    const ignoredNodes = new Set<unknown>();
 
     function normalisePropertyOption(kind: string): PropertySchema {
       const style = (restOptions[kind] || types) as Options;
@@ -403,6 +404,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       } | void {
         const name = nodeName.replace(/(^_+)|(_+$)/g, '');
         if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
+          if ('name' in n) {
+            ignoredNodes.add(n.name);
+          }
           return;
         }
         if (prefix && !name.startsWith(prefix)) {
@@ -485,6 +489,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     };
 
     const checkUnderscore = (isLeading: boolean) => (node: GraphQLESTreeNode<NameNode>) => {
+      if (ignoredNodes.has(node)) {
+        return;
+      }
       if (node.parent.kind === 'Field' && node.parent.alias !== node) {
         return;
       }
