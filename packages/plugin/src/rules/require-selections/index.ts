@@ -44,8 +44,8 @@ const schema = {
       },
       requireAllFields: {
         type: 'boolean',
-        description: 'Whether all fields of `fieldName` option must be included.'
-      }
+        description: 'Whether all fields of `fieldName` option must be included.',
+      },
     },
   },
 } as const;
@@ -207,15 +207,14 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           return;
         }
 
-
         checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
 
         if (requireAllFields) {
           for (const idName of idNames) {
-            report([idName])
+            report([idName]);
           }
         } else {
-          report(idNames)
+          report(idNames);
         }
       }
 
@@ -258,8 +257,8 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           checkedFragmentSpreads.size === 0
             ? ''
             : ` or add to used fragment${
-              checkedFragmentSpreads.size > 1 ? 's' : ''
-            } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
+                checkedFragmentSpreads.size > 1 ? 's' : ''
+              } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
 
         const problem: ReportDescriptor = {
           loc,

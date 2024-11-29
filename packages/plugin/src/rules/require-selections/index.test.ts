@@ -503,7 +503,7 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
     },
     {
       name: 'should require all fields with `requireAllFields` option',
-      code: /* GraphQL */ `{ hasId { id } }`,
+      code: '{ hasId { id } }',
       options: [{ requireAllFields: true, fieldName: ['name', '_id'] }],
       parserOptions: {
         graphQLConfig: {
@@ -511,11 +511,11 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
           documents: '{ foo }',
         },
       },
-      errors: 2
+      errors: 2,
     },
     {
       name: 'should require rest of all fields with `requireAllFields` option',
-      code: /* GraphQL */ `{ hasId { _id } }`,
+      code: '{ hasId { _id } }',
       options: [{ requireAllFields: true, fieldName: ['name', '_id'] }],
       parserOptions: {
         graphQLConfig: {
@@ -523,7 +523,7 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
           documents: '{ foo }',
         },
       },
-      errors: 1
-    }
+      errors: 1,
+    },
   ],
 });
