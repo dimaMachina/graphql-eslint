@@ -36,7 +36,13 @@
   },
   "peerDependencies": {
     "eslint": ">=8.44.0",
-    "graphql": "^16"
+    "graphql": "^16",
+    "json-schema-to-ts": "^3"
+  },
+  "peerDependenciesMeta": {
+    "json-schema-to-ts": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@graphql-tools/code-file-loader": "^8.0.0",
