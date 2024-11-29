@@ -121,6 +121,13 @@ describe('Examples', () => {
     const cwd = path.join(CWD, 'examples', 'multiple-projects-graphql-config');
     testESLintOutput(cwd, 4);
   });
+
+  it('should work with custom rules', () => {
+    const cwd = path.join(CWD, 'examples', 'custom-rule');
+    const flatResults = getFlatESLintOutput(cwd);
+    expect(normalizeResults(flatResults)).toMatchSnapshot();
+    expect(countErrors(flatResults)).toBe(1);
+  })
 });
 
 function testESLintOutput(cwd: string, errorCount: number): void {
