@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.2.0
+
+### Minor Changes
+
+- [#2790](https://github.com/dimaMachina/graphql-eslint/pull/2790)
+  [`438078d`](https://github.com/dimaMachina/graphql-eslint/commit/438078d54442ef5e584affb2ae82c32898ce7e3e)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - feat(`require-selections` rule):
+  introduce new option `requireAllFields` to require all values of `fieldName: string[]` option
+
 ## 4.1.1
 
 ### Patch Changes
