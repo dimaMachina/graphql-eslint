@@ -375,7 +375,7 @@ exports[`naming-convention > invalid > Invalid #10 1`] = `
     1 | query Foo { foo } query Bar { bar }
 `;
 
-exports[`naming-convention > invalid > forbiddenPattern 1`] = `
+exports[`naming-convention > invalid > forbiddenPatterns 1`] = `
 #### ⌨️ Code
 
       1 | query queryFoo { foo } query getBar { bar }
@@ -384,7 +384,7 @@ exports[`naming-convention > invalid > forbiddenPattern 1`] = `
 
     {
       "OperationDefinition": {
-        "forbiddenPattern": [
+        "forbiddenPatterns": [
           "/^(get|query)/"
         ]
       }
@@ -1973,7 +1973,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
     13 |         fragment Test on Test { id }
 `;
 
-exports[`naming-convention > invalid > requiredPattern 1`] = `
+exports[`naming-convention > invalid > requiredPatterns 1`] = `
 #### ⌨️ Code
 
       1 | type Test { enabled: Boolean! }
@@ -1983,7 +1983,7 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
     {
       "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
         "style": "camelCase",
-        "requiredPattern": [
+        "requiredPatterns": [
           "/^(is|has)/"
         ]
       }

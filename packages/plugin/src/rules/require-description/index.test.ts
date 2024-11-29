@@ -228,6 +228,47 @@ ruleTester.run<RuleOptions>('require-description', rule, {
       options: [{ rootField: true }],
       errors: [{ messageId: RULE_ID }],
     },
+    {
+      name: 'ignoredSelectors',
+      options: [
+        {
+          types: true,
+          ignoredSelectors: [
+            '[type=ObjectTypeDefinition][name.value=PageInfo]',
+            '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]',
+          ],
+        },
+      ],
+      code: /* GraphQL */ `
+        type Query {
+          user: User
+        }
+        type User {
+          id: ID!
+          name: String!
+          friends(first: Int, after: String): FriendConnection!
+        }
+        type FriendConnection {
+          edges: [FriendEdge]
+          pageInfo: PageInfo!
+        }
+        type FriendEdge {
+          cursor: String!
+          node: Friend!
+        }
+        type Friend {
+          id: ID!
+          name: String!
+        }
+        type PageInfo {
+          hasPreviousPage: Boolean!
+          hasNextPage: Boolean!
+          startCursor: String
+          endCursor: String
+        }
+      `,
+      errors: 3,
+    },
   ],
 });
 

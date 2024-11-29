@@ -26,8 +26,8 @@ function applyFix(code: string, { range, text }: Rule.Fix): string {
 }
 
 // @ts-expect-error -- Extend RegExp with a custom toJSON method
-RegExp.prototype.toJSON = function() {
-  return `/${this.source}/${this.flags}`
+RegExp.prototype.toJSON = function () {
+  return `/${this.source}/${this.flags}`;
 };
 
 export class RuleTester<ParserOptions> extends ESLintRuleTester {

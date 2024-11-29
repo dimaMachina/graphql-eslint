@@ -2,7 +2,14 @@ import { ASTKindToNode, Kind, TokenKind } from 'graphql';
 import { getRootTypeNames } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../../types.js';
-import { getLocation, getNodeName, requireGraphQLSchema, TYPES_KINDS } from '../../utils.js';
+import {
+  ARRAY_DEFAULT_OPTIONS,
+  eslintSelectorsTip,
+  getLocation,
+  getNodeName,
+  requireGraphQLSchema,
+  TYPES_KINDS,
+} from '../../utils.js';
 
 export const RULE_ID = 'require-description';
 
@@ -30,18 +37,31 @@ const schema = {
     properties: {
       types: {
         type: 'boolean',
+        enum: [true],
         description: `Includes:\n${TYPES_KINDS.map(kind => `- \`${kind}\``).join('\n')}`,
       },
       rootField: {
         type: 'boolean',
+        enum: [true],
         description: 'Definitions within `Query`, `Mutation`, and `Subscription` root types.',
+      },
+      ignoredSelectors: {
+        ...ARRAY_DEFAULT_OPTIONS,
+        description: ['Ignore specific selectors', eslintSelectorsTip].join('\n'),
       },
       ...Object.fromEntries(
         [...ALLOWED_KINDS].sort().map(kind => {
-          let description = `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
+          let description = `> [!NOTE]
+>
+> Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
           if (kind === Kind.OPERATION_DEFINITION) {
-            description +=
-              '\n> You must use only comment syntax `#` and not description syntax `"""` or `"`.';
+            description += [
+              '',
+              '',
+              '> [!WARNING]',
+              '>',
+              '> You must use only comment syntax `#` and not description syntax `"""` or `"`.',
+            ].join('\n');
           }
           return [kind, { type: 'boolean', description }];
         }),
@@ -55,8 +75,9 @@ export type RuleOptions = [
   {
     [key in AllowedKind]?: boolean;
   } & {
-    types?: boolean;
-    rootField?: boolean;
+    types?: true;
+    rootField?: true;
+    ignoredSelectors?: string[];
   },
 ];
 
@@ -115,6 +136,33 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             }
           `,
         },
+        {
+          title: 'Correct',
+          usage: [
+            {
+              ignoredSelectors: [
+                '[type=ObjectTypeDefinition][name.value=PageInfo]',
+                '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]',
+              ],
+            },
+          ],
+          code: /* GraphQL */ `
+            type FriendConnection {
+              edges: [FriendEdge]
+              pageInfo: PageInfo!
+            }
+            type FriendEdge {
+              cursor: String!
+              node: Friend!
+            }
+            type PageInfo {
+              hasPreviousPage: Boolean!
+              hasNextPage: Boolean!
+              startCursor: String
+              endCursor: String
+            }
+          `,
+        },
       ],
       configOptions: [
         {
@@ -132,7 +180,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    const { types, rootField, ...restOptions } = context.options[0] || {};
+    const { types, rootField, ignoredSelectors = [], ...restOptions } = context.options[0] || {};
 
     const kinds = new Set<string>(types ? TYPES_KINDS : []);
     for (const [kind, isEnabled] of Object.entries(restOptions)) {
@@ -152,13 +200,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         ].join(',')})$/] > FieldDefinition`,
       );
     }
-
-    if (!kinds.size) {
-      throw new Error('At least one kind must be enabled');
+    let selector = `:matches(${[...kinds]})`;
+    for (const str of ignoredSelectors) {
+      selector += `:not(${str})`;
     }
-
-    const selector = [...kinds].join(',');
-
     return {
       [selector](node: SelectorNode) {
         let description = '';

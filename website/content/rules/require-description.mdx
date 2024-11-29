@@ -70,11 +70,32 @@ type User {
 }
 ```
 
+### Correct
+
+```graphql
+# eslint @graphql-eslint/require-description: ['error', { ignoredSelectors: ['[type=ObjectTypeDefinition][name.value=PageInfo]', '[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]'] }]
+
+type FriendConnection {
+  edges: [FriendEdge]
+  pageInfo: PageInfo!
+}
+type FriendEdge {
+  cursor: String!
+  node: Friend!
+}
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+```
+
 ## Config Schema
 
 The schema defines the following properties:
 
-### `types` (boolean)
+### `types` (boolean, enum)
 
 Includes:
 
@@ -85,66 +106,116 @@ Includes:
 - `InputObjectTypeDefinition`
 - `UnionTypeDefinition`
 
-### `rootField` (boolean)
+This element must be one of the following enum values:
+
+- `true`
+
+### `rootField` (boolean, enum)
 
 Definitions within `Query`, `Mutation`, and `Subscription` root types.
 
+This element must be one of the following enum values:
+
+- `true`
+
+### `ignoredSelectors` (array)
+
+Ignore specific selectors
+
+> [!TIP]
+>
+> These fields are defined by ESLint
+> [`selectors`](https://eslint.org/docs/developer-guide/selectors). Paste or drop code into the
+> editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your
+> selector.
+
+The object is an array with all elements of the type `string`.
+
+Additional restrictions:
+
+- Minimum items: `1`
+- Unique items: `true`
+
 ### `DirectiveDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#DirectiveDefinition).
 
 ### `EnumTypeDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#EnumTypeDefinition).
 
 ### `EnumValueDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#EnumValueDefinition).
 
 ### `FieldDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#FieldDefinition).
 
 ### `InputObjectTypeDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#InputObjectTypeDefinition).
 
 ### `InputValueDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#InputValueDefinition).
 
 ### `InterfaceTypeDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#InterfaceTypeDefinition).
 
 ### `ObjectTypeDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#ObjectTypeDefinition).
 
 ### `OperationDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#OperationDefinition).
 
+> [!WARNING]
+>
 > You must use only comment syntax `#` and not description syntax `"""` or `"`.
 
 ### `ScalarTypeDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#ScalarTypeDefinition).
 
 ### `UnionTypeDefinition` (boolean)
 
-Read more about this kind on
-[spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
+> [!NOTE]
+>
+> Read more about this kind on
+> [spec.graphql.org](https://spec.graphql.org/October2021/#UnionTypeDefinition).
 
 ## Resources
 
