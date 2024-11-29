@@ -63,7 +63,7 @@ export default [
 
 ### Lint GraphQL Definitions in Code Files <sup>_(Optional)_</sup>[#lint-in-code-files]
 
-If you're defining GraphQL schemas or operations directly within code files[^1], check out
+If you're defining GraphQL schemas or operations directly within code files (e.g., `.js`, `.jsx`, `.ts`, `.tsx` files), check out
 [the usage with `.js`/`.jsx`](./usage/js) files.
 
 ### Providing GraphQL Schema <sup>_(Optional)_</sup>[#providing-schema]
@@ -75,13 +75,13 @@ through root-level fields.
 To enable these rules, you need to inform ESLint how to identify and load your complete schema.
 
 The GraphQL ESLint plugin integrates seamlessly with
-[GraphQL Config](https://the-guild.dev/graphql/config) which it uses to automatically load your
+[GraphQL Config](https://the-guild.dev/graphql/config), which it uses to automatically load your
 schema.
 
 > [!TIP]
 >
 > GraphQL Config uses [`GraphQL Tools`](https://the-guild.dev/graphql/tools) and its loaders under
-> the hood to handle the schema loading. GraphQL Config
+> the hood to handle the schema loading. It also
 > [supports multiple ways to specify your schema](https://the-guild.dev/graphql/config/docs/user/schema),
 > including:
 >
@@ -160,8 +160,14 @@ results, due the missing information.
 To workaround that, we allow you to provide additional information on your GraphQL operations,
 making it available for rules while doing the actual linting.
 
-To provide that, we are using `graphql-tools` loaders to load your sibling operations and fragments,
-just specify a glob expression(s) that points to your code[^1] and/or `.graphql` files:
+The GraphQL ESLint plugin integrates seamlessly with
+[GraphQL Config](https://the-guild.dev/graphql/config), which it uses to automatically load your sibling operations and fragments.
+
+> [!TIP]
+>
+> GraphQL Config uses [`GraphQL Tools`](https://the-guild.dev/graphql/tools) and its loaders under
+> the hood to handle the loading of operations and fragments. It also
+> [supports multiple ways to specify them](https://the-guild.dev/graphql/config/docs/user/documents).
 
 <GraphqlConfigInfo name="operations" configKey="documents" />
 
@@ -234,5 +240,3 @@ export default [
     PrettierIcon
   }}
 />
-
-[^1]: Code files (e.g., `.js`, `.jsx`, `.ts`, `.tsx` files)

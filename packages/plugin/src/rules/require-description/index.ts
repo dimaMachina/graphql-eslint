@@ -180,7 +180,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     schema,
   },
   create(context) {
-    let { types, rootField, ignoredSelectors = [], ...restOptions } = context.options[0] || {};
+    const { types, rootField, ignoredSelectors = [], ...restOptions } = context.options[0] || {};
 
     const kinds = new Set<string>(types ? TYPES_KINDS : []);
     for (const [kind, isEnabled] of Object.entries(restOptions)) {
