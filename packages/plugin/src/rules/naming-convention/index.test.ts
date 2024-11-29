@@ -222,6 +222,19 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         }
       `,
     },
+    {
+      name: '`allowLeadingUnderscore` and `allowTrailingUnderscore` should not conflict with `ignorePattern`',
+      code: /* GraphQL */ `
+        type SomeType {
+          _someField_: Boolean!
+        }
+      `,
+      options: [{
+        'FieldDefinition[parent.name.value=SomeType]': {
+          ignorePattern: ".*someField.*"
+        }
+      }]
+    },
   ],
   invalid: [
     {
@@ -258,24 +271,12 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         },
       ],
       errors: [
-        {
-          message: 'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format',
-        },
-        {
-          message: 'Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format',
-        },
-        {
-          message: 'Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format',
-        },
-        {
-          message: 'Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format',
-        },
-        {
-          message: 'Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format',
-        },
-        {
-          message: 'Input "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format',
-        },
+        { message: 'Input "_idOperatorsFilterFindManyUserInput" should be in PascalCase format', },
+        { message: 'Input "_idOperatorsFilterFindOneUserInput" should be in PascalCase format', },
+        { message: 'Input "_idOperatorsFilterRemoveManyUserInput" should be in PascalCase format' },
+        { message: 'Input "_idOperatorsFilterRemoveOneUserInput" should be in PascalCase format' },
+        { message: 'Input "_idOperatorsFilterUpdateManyUserInput" should be in PascalCase format' },
+        { message: 'Input "_idOperatorsFilterUpdateOneUserInput" should be in PascalCase format' },
         { message: 'Input "_idOperatorsFilterUserInput" should be in PascalCase format' },
         { message: 'Enum value "male" should be in UPPER_CASE format' },
         { message: 'Enum value "female" should be in UPPER_CASE format' },
