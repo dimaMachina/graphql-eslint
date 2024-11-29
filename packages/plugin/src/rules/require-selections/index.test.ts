@@ -514,7 +514,7 @@ ruleTester.run<RuleOptions, true>('require-selections', rule, {
       errors: 2
     },
     {
-      name: 'should require rest fields with `requireAllFields` option',
+      name: 'should require rest of all fields with `requireAllFields` option',
       code: /* GraphQL */ `{ hasId { _id } }`,
       options: [{ requireAllFields: true, fieldName: ['name', '_id'] }],
       parserOptions: {

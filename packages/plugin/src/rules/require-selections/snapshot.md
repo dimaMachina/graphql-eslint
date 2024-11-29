@@ -286,7 +286,7 @@ exports[`require-selections > invalid > should require all fields with \`require
     1 | { hasId { _id id } }
 `;
 
-exports[`require-selections > invalid > should require rest fields with \`requireAllFields\` option 1`] = `
+exports[`require-selections > invalid > should require rest of all fields with \`requireAllFields\` option 1`] = `
 #### ⌨️ Code
 
       1 | { hasId { _id } }

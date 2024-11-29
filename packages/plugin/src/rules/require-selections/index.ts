@@ -206,61 +206,52 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
           return;
         }
 
-        function hasIdField({ selections }: typeof node, idNames: string[]): boolean {
-          return selections.some(selection => {
-            if (selection.kind === Kind.FIELD) {
-              if (selection.alias && idNames.includes(selection.alias.value)) {
-                return true;
-              }
-
-              return idNames.includes(selection.name.value);
-            }
-
-            if (selection.kind === Kind.INLINE_FRAGMENT) {
-              return hasIdField(selection.selectionSet, idNames);
-            }
-
-            if (selection.kind === Kind.FRAGMENT_SPREAD) {
-              const [foundSpread] = siblings.getFragment(selection.name.value);
-              if (foundSpread) {
-                const fragmentSpread = foundSpread.document;
-                checkedFragmentSpreads.add(fragmentSpread.name.value);
-                return hasIdField(fragmentSpread.selectionSet, idNames);
-              }
-            }
-            return false;
-          });
-        }
-
 
         checkFragments(node as GraphQLESTreeNode<SelectionSetNode>);
 
         if (requireAllFields) {
           for (const idName of idNames) {
-            const hasId = hasIdField(node, [idName]);
-            if (hasId) {
-              continue;
-            }
-            report(displayName(idName), [idName])
+            report([idName])
           }
         } else {
-          const hasId = hasIdField(node, idNames);
-          if (hasId) {
-            return;
-          }
-          const fieldNames = englishJoinWords(
-            idNames.map(displayName),
-          );
-          report(fieldNames, idNames)
+          report(idNames)
         }
       }
 
-      function displayName(name: string) {
-        return  `\`${(parent.alias || parent.name).value}.${name}\``
+      function hasIdField({ selections }: typeof node, idNames: string[]): boolean {
+        return selections.some(selection => {
+          if (selection.kind === Kind.FIELD) {
+            if (selection.alias && idNames.includes(selection.alias.value)) {
+              return true;
+            }
+
+            return idNames.includes(selection.name.value);
+          }
+
+          if (selection.kind === Kind.INLINE_FRAGMENT) {
+            return hasIdField(selection.selectionSet, idNames);
+          }
+
+          if (selection.kind === Kind.FRAGMENT_SPREAD) {
+            const [foundSpread] = siblings.getFragment(selection.name.value);
+            if (foundSpread) {
+              const fragmentSpread = foundSpread.document;
+              checkedFragmentSpreads.add(fragmentSpread.name.value);
+              return hasIdField(fragmentSpread.selectionSet, idNames);
+            }
+          }
+          return false;
+        });
       }
 
-
-      function report(fieldName: string, idNames: string[]) {
+      function report(idNames: string[]) {
+        const hasId = hasIdField(node, idNames);
+        if (hasId) {
+          return;
+        }
+        const fieldName = englishJoinWords(
+          idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
+        );
         const pluralSuffix = idNames.length > 1 ? 's' : '';
         const addition =
           checkedFragmentSpreads.size === 0
