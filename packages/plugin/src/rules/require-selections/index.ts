@@ -44,6 +44,7 @@ const schema = {
       },
       requireAllFields: {
         type: 'boolean',
+        description: 'Whether all fields of `fieldName` option must be included.'
       }
     },
   },
