@@ -36,7 +36,19 @@ ${(await fs.readFile(`${docsPath}/${filePath}`, 'utf8')).trim()}
     const hasLegacyConfig = await fs
       .access(`${docsPath}/.eslintrc.cjs`)
       .then(() => true)
-      .catch(() => '');
+      .catch(() => false);
+
+    const legacyConfig = hasLegacyConfig
+      ? `## ESLint Legacy Config
+
+> [!WARNING]
+>
+> An eslintrc configuration file, is deprecated and support will be removed in ESLint v10.0.0. Migrate to an [\`eslint.config.js\` file](#eslint-flat-config)
+
+\`\`\`js filename=".eslintrc.cjs"
+${(await fs.readFile(`${docsPath}/.eslintrc.cjs`, 'utf8')).trim()}
+\`\`\``
+      : '';
 
     return (
       <MDXRemote
@@ -51,20 +63,7 @@ ${hasLegacyConfig ? `> or [ESLint Legacy Config](https://github.com/${user}/${re
 
 ${files.join('\n')}
 
-${
-  hasLegacyConfig &&
-  `
-## ESLint Legacy Config
-
-> [!WARNING]
->
-> An eslintrc configuration file, is deprecated and support will be removed in ESLint v10.0.0. Migrate to an [\`eslint.config.js\` file](#eslint-flat-config)
-
-\`\`\`js filename=".eslintrc.cjs"
-${(await fs.readFile(`${docsPath}/.eslintrc.cjs`, 'utf8')).trim()}
-\`\`\``
-}
-`)}
+${legacyConfig}`)}
       />
     );
   },
