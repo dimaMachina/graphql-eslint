@@ -123,7 +123,7 @@ describe('Examples', () => {
   });
 
   it('should work with custom rules', () => {
-    const cwd = path.join(CWD, 'examples', 'custom-rule');
+    const cwd = path.join(CWD, 'examples', 'custom-rules');
     const flatResults = getFlatESLintOutput(cwd);
     expect(normalizeResults(flatResults)).toMatchSnapshot();
     expect(countErrors(flatResults)).toBe(1);

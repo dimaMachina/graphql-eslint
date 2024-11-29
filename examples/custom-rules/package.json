@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-eslint/example-custom-rule",
+  "name": "@graphql-eslint/example-custom-rules",
   "version": "0.0.0",
   "type": "module",
   "repository": "https://github.com/dimaMachina/graphql-eslint",
