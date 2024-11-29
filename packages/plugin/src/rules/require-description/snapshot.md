@@ -228,6 +228,67 @@ exports[`require-description > invalid > Invalid #19 1`] = `
       3 |         }
 `;
 
+exports[`require-description > invalid > ignoredSelectors 1`] = `
+#### ⌨️ Code
+
+       1 |         type Query {
+       2 |           user: User
+       3 |         }
+       4 |         type User {
+       5 |           id: ID!
+       6 |           name: String!
+       7 |           friends(first: Int, after: String): FriendConnection!
+       8 |         }
+       9 |         type FriendConnection {
+      10 |           edges: [FriendEdge]
+      11 |           pageInfo: PageInfo!
+      12 |         }
+      13 |         type FriendEdge {
+      14 |           cursor: String!
+      15 |           node: Friend!
+      16 |         }
+      17 |         type Friend {
+      18 |           id: ID!
+      19 |           name: String!
+      20 |         }
+      21 |         type PageInfo {
+      22 |           hasPreviousPage: Boolean!
+      23 |           hasNextPage: Boolean!
+      24 |           startCursor: String
+      25 |           endCursor: String
+      26 |         }
+
+#### ⚙️ Options
+
+    {
+      "types": true,
+      "ignoredSelectors": [
+        "[type=ObjectTypeDefinition][name.value=PageInfo]",
+        "[type=ObjectTypeDefinition][name.value=/(Connection|Edge)$/]"
+      ]
+    }
+
+#### ❌ Error 1/3
+
+    > 1 |         type Query {
+        |              ^^^^^ Description is required for type "Query"
+      2 |           user: User
+
+#### ❌ Error 2/3
+
+      3 |         }
+    > 4 |         type User {
+        |              ^^^^ Description is required for type "User"
+      5 |           id: ID!
+
+#### ❌ Error 3/3
+
+      16 |         }
+    > 17 |         type Friend {
+         |              ^^^^^^ Description is required for type "Friend"
+      18 |           id: ID!
+`;
+
 exports[`require-description > invalid > should disable description for ObjectTypeDefinition 1`] = `
 #### ⌨️ Code
 

@@ -118,7 +118,9 @@ const schema = {
           kind,
           {
             ...schemaOption,
-            description: `Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
+            description: `> [!NOTE]
+>
+> Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`,
           },
         ]),
       ),

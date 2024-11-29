@@ -4,7 +4,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import { ModuleCache } from '../../cache.js';
 import { SiblingOperations } from '../../siblings.js';
 import { GraphQLESLintRule, GraphQLESTreeNode } from '../../types.js';
-import { requireGraphQLOperations, requireGraphQLSchema } from '../../utils.js';
+import { eslintSelectorsTip, requireGraphQLOperations, requireGraphQLSchema } from "../../utils.js";
 
 const RULE_ID = 'no-unused-fields';
 
@@ -89,9 +89,7 @@ const schema = {
           '```json',
           JSON.stringify(RELAY_DEFAULT_IGNORED_FIELD_SELECTORS, null, 2),
           '```',
-          '',
-          '> These fields are defined by ESLint [`selectors`](https://eslint.org/docs/developer-guide/selectors).',
-          '> Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.',
+          eslintSelectorsTip
         ].join('\n'),
         items: {
           type: 'string',
