@@ -8,36 +8,13 @@ import {
 } from '@theguild/components/server';
 
 const docsComponents = getDocsMDXComponents({
-  async OfficialExampleCallout({ gitFolder }) {
+  async ESLintConfigs({ gitFolder, graphqlConfigFile = '' }) {
     const user = 'dimaMachina';
     const repo = 'graphql-eslint';
     const branch = 'master';
-    const docsPath = `examples/${gitFolder}/`;
-    return (
-      <MDXRemote
-        compiledSource={await compileMdx(`
-> [!NOTE]
->
-> Check out
-> [the official examples](https://github.com/${user}/${repo}/tree/${branch}/${docsPath})
-> for
-> [ESLint Flat Config](https://github.com/${user}/${repo}/blob/${branch}/${docsPath}eslint.config.js)
-> or
-> [ESLint Legacy Config](https://github.com/${user}/${repo}/blob/${branch}/${docsPath}/.eslintrc.cjs)
-> .`)}
-      />
-    );
-  },
-  // WIP() {
-  //   return (
-  //     <Callout type="warning" emoji="🚧">
-  //       This page is under construction. Help us improve the content by submitting a PR.
-  //     </Callout>
-  //   );
-  // },
-  async ESLintConfigs({ gitFolder, graphqlConfigFile = '' }) {
     const docsPath = path.join(process.cwd(), '..', 'examples', gitFolder);
     const { ext } = path.parse(graphqlConfigFile);
+
     const graphqlConfig =
       graphqlConfigFile &&
       `
@@ -47,10 +24,20 @@ const docsComponents = getDocsMDXComponents({
 ${(await fs.readFile(`${docsPath}/${graphqlConfigFile}`, 'utf8')).trim()}
 \`\`\`
 `;
+
     return (
       <MDXRemote
         compiledSource={await compileMdx(`
-<OfficialExampleCallout gitFolder="${gitFolder}" />
+> [!NOTE]
+>
+> Check out
+> [the official examples](https://github.com/${user}/${repo}/tree/${branch}/examples/${gitFolder})
+> for
+> [ESLint Flat Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/eslint.config.js)
+> or
+> [ESLint Legacy Config](https://github.com/${user}/${repo}/blob/${branch}/examples/${gitFolder}/.eslintrc.cjs)
+> .
+
 ${graphqlConfig}
 ## ESLint Flat Config
 \`\`\`js filename="eslint.config.js"
