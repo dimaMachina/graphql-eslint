@@ -220,14 +220,14 @@ importers:
         specifier: 9.16.0
         version: 9.16.0(patch_hash=t64n7kxodazs6lnwu42sgf5voe)(jiti@2.4.0)
       svelte:
-        specifier: 5.2.11
-        version: 5.2.11
+        specifier: 5.2.12
+        version: 5.2.12
       svelte-eslint-parser:
         specifier: 0.43.0
-        version: 0.43.0(svelte@5.2.11)
+        version: 0.43.0(svelte@5.2.12)
       svelte2tsx:
         specifier: 0.7.28
-        version: 0.7.28(svelte@5.2.11)(typescript@5.6.3)
+        version: 0.7.28(svelte@5.2.12)(typescript@5.6.3)
 
   examples/vue-code-file:
     dependencies:
@@ -4393,8 +4393,8 @@ packages:
       jiti:
         optional: true
 
-  esm-env@1.2.0:
-    resolution: {integrity: sha512-OhSQuHL3mUcaQHjGe8UMG8GsJIJHYYz0flR0h9fiTPNMupLMkb7TvcRD0EeJXW5a8GHBgfz08b6FDLNK7kkPQA==}
+  esm-env@1.2.1:
+    resolution: {integrity: sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==}
 
   esm@3.2.25:
     resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
@@ -4417,8 +4417,8 @@ packages:
     resolution: {integrity: sha512-ca9pw9fomFcKPvFLXhBKUK90ZvGibiGOvRJNbjljY7s7uq/5YO4BOzcYtJqExdx99rF6aAcnRxHmcUHcz6sQsg==}
     engines: {node: '>=0.10'}
 
-  esrap@1.2.2:
-    resolution: {integrity: sha512-F2pSJklxx1BlQIQgooczXCPHmcWpn6EsP5oo73LQfonG9fIlIENQ8vMmfGXeojP9MrkzUNAfyU5vdFlR9shHAw==}
+  esrap@1.2.3:
+    resolution: {integrity: sha512-ZlQmCCK+n7SGoqo7DnfKaP1sJZa49P01/dXzmjCASSo04p72w8EksT2NMK8CEX8DhKsfJXANioIw8VyHNsBfvQ==}
 
   esrecurse@4.3.0:
     resolution: {integrity: sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==}
@@ -6816,8 +6816,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@5.2.11:
-    resolution: {integrity: sha512-rAVKne02inlyw//aD1QXuUbxDBNnyW6sagS7JfxzUbGVuJnHrf2WfQdJDYlBq8mOz8NBGQAZdD6KEITd0NUDtA==}
+  svelte@5.2.12:
+    resolution: {integrity: sha512-lcrJVygO05nzQkgRLxaz3qd0kamyhujfpCxalzzKabJUueVrnpc0bhHgR2hUa/335XvOHO39wtc79C72g+5ftw==}
     engines: {node: '>=18'}
 
   svg-parser@2.0.4:
@@ -11194,7 +11194,7 @@ snapshots:
     dependencies:
       '@vitest/spy': 2.1.6
       estree-walker: 3.0.3
-      magic-string: 0.30.12
+      magic-string: 0.30.14
     optionalDependencies:
       vite: 5.4.10(@types/node@22.10.1)(lightningcss@1.28.2)(terser@5.36.0)
 
@@ -11210,7 +11210,7 @@ snapshots:
   '@vitest/snapshot@2.1.6':
     dependencies:
       '@vitest/pretty-format': 2.1.6
-      magic-string: 0.30.12
+      magic-string: 0.30.14
       pathe: 1.1.2
 
   '@vitest/spy@2.1.6':
@@ -12912,7 +12912,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esm-env@1.2.0: {}
+  esm-env@1.2.1: {}
 
   esm@3.2.25: {}
 
@@ -12934,7 +12934,7 @@ snapshots:
     dependencies:
       estraverse: 5.3.0
 
-  esrap@1.2.2:
+  esrap@1.2.3:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
       '@types/estree': 1.0.6
@@ -15831,7 +15831,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-eslint-parser@0.43.0(svelte@5.2.11):
+  svelte-eslint-parser@0.43.0(svelte@5.2.12):
     dependencies:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
@@ -15839,16 +15839,16 @@ snapshots:
       postcss: 8.4.48
       postcss-scss: 4.0.9(postcss@8.4.48)
     optionalDependencies:
-      svelte: 5.2.11
+      svelte: 5.2.12
 
-  svelte2tsx@0.7.28(svelte@5.2.11)(typescript@5.6.3):
+  svelte2tsx@0.7.28(svelte@5.2.12)(typescript@5.6.3):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 5.2.11
+      svelte: 5.2.12
       typescript: 5.6.3
 
-  svelte@5.2.11:
+  svelte@5.2.12:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -15857,11 +15857,11 @@ snapshots:
       acorn-typescript: 1.4.13(acorn@8.14.0)
       aria-query: 5.3.2
       axobject-query: 4.1.0
-      esm-env: 1.2.0
-      esrap: 1.2.2
+      esm-env: 1.2.1
+      esrap: 1.2.3
       is-reference: 3.0.3
       locate-character: 3.0.0
-      magic-string: 0.30.12
+      magic-string: 0.30.14
       zimmerframe: 1.1.2
 
   svg-parser@2.0.4: {}
