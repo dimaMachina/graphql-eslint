@@ -8,7 +8,7 @@ import {
 import { asArray } from '@graphql-tools/utils';
 import { loadOnDiskGraphQLConfig } from './graphql-config.js';
 import { version } from './meta.js';
-import { CWD, REPORT_ON_FIRST_CHARACTER, truthy } from './utils.js';
+import { CWD, REPORT_ON_FIRST_CHARACTER } from './utils.js';
 
 export type Block = Linter.ProcessorFile & {
   lineOffset: number;
@@ -50,15 +50,14 @@ export const processor = {
         gqlMagicComment = 'GraphQL',
       } = pluckConfig;
 
-      keywords = [
-        ...new Set(
-          [
-            ...modules.map(({ identifier }) => identifier),
-            ...asArray(globalGqlIdentifierName),
-            gqlMagicComment,
-          ].filter(truthy),
-        ),
+      const mods = modules.map(({ identifier }) => identifier).filter((v): v is string => !!v)
+
+      const result = [
+        ...mods,
+        ...asArray(globalGqlIdentifierName),
+        gqlMagicComment,
       ];
+      keywords = [...new Set(result)];
     }
 
     if (keywords.every(keyword => !code.includes(keyword))) {
