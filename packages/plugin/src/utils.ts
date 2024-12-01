@@ -121,12 +121,6 @@ export const ARRAY_DEFAULT_OPTIONS = {
 export const englishJoinWords = (words: string[]): string =>
   new Intl.ListFormat('en-US', { type: 'disjunction' }).format(words);
 
-type Truthy<T> = T extends '' | 0 | false | null | undefined ? never : T; // from lodash
-
-export function truthy<T>(value: T): value is Truthy<T> {
-  return !!value;
-}
-
 const DisplayNodeNameMap: Record<Kind, string> = {
   [Kind.ARGUMENT]: 'argument',
   [Kind.BOOLEAN]: 'boolean',

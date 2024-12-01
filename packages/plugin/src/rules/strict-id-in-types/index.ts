@@ -7,7 +7,6 @@ import {
   displayNodeName,
   englishJoinWords,
   requireGraphQLSchema,
-  truthy,
 } from '../../utils.js';
 
 const RULE_ID = 'strict-id-in-types';
@@ -137,7 +136,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       schema.getMutationType(),
       schema.getSubscriptionType(),
     ]
-      .filter(truthy)
+      .filter(v => !!v)
       .map(type => type.name);
     const selector = `ObjectTypeDefinition[name.value!=/^(${rootTypeNames.join('|')})$/]`;
 

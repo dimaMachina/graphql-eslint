@@ -9,6 +9,7 @@
     "strict": true,
     "lib": ["ESNext", "dom"],
     "types": ["vitest/globals"],
+    "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "paths": {

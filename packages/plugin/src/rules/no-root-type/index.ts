@@ -2,7 +2,7 @@ import { NameNode } from 'graphql';
 import { FromSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule } from '../../types.js';
-import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchema, truthy } from '../../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, requireGraphQLSchema } from '../../utils.js';
 
 const schema = {
   type: 'array',
@@ -66,7 +66,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       disallow.has('mutation') && schema.getMutationType(),
       disallow.has('subscription') && schema.getSubscriptionType(),
     ]
-      .filter(truthy)
+      .filter(v => !!v)
       .map(type => type.name)
       .join('|');
 
