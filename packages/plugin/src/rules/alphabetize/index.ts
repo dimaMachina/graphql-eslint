@@ -22,7 +22,7 @@ import { FromSchema } from 'json-schema-to-ts';
 import lowerCase from 'lodash.lowercase';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, GraphQLESLintRuleListener } from '../../types.js';
-import { ARRAY_DEFAULT_OPTIONS, displayNodeName, truthy } from '../../utils.js';
+import { ARRAY_DEFAULT_OPTIONS, displayNodeName } from '../../utils.js';
 
 const RULE_ID = 'alphabetize';
 
@@ -348,7 +348,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         Kind.INPUT_OBJECT_TYPE_EXTENSION,
       ],
     ]
-      .filter(truthy)
+      .filter(v => !!v)
       .flat();
 
     const fieldsSelector = kinds.join(',');
