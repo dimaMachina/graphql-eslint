@@ -50,13 +50,9 @@ export const processor = {
         gqlMagicComment = 'GraphQL',
       } = pluckConfig;
 
-      const mods = modules.map(({ identifier }) => identifier).filter((v): v is string => !!v)
+      const mods = modules.map(({ identifier }) => identifier).filter((v): v is string => !!v);
 
-      const result = [
-        ...mods,
-        ...asArray(globalGqlIdentifierName),
-        gqlMagicComment,
-      ];
+      const result = [...mods, ...asArray(globalGqlIdentifierName), gqlMagicComment];
       keywords = [...new Set(result)];
     }
 

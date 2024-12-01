@@ -510,7 +510,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
 
     const selectors = new Set(
-      [types && TYPES_KINDS, Object.keys(restOptions)].filter((v) => !!v).flat(),
+      [types && TYPES_KINDS, Object.keys(restOptions)].filter(v => !!v).flat(),
     );
 
     for (const selector of selectors) {
