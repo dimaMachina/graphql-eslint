@@ -1,5 +1,14 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.2.1
+
+### Patch Changes
+
+- [#2805](https://github.com/dimaMachina/graphql-eslint/pull/2805)
+  [`fc2bf85`](https://github.com/dimaMachina/graphql-eslint/commit/fc2bf850b813ac567967ee5ce0f1358f0b7fa4e0)
+  Thanks [@FloEdelmann](https://github.com/FloEdelmann)! - fix(deps): increase minimum
+  graphql-config version
+
 ## 4.2.0
 
 ### Minor Changes
