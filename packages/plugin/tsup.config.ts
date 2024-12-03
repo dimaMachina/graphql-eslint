@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { defineConfig, Options } from 'tsup';
 import { CWD } from '@/utils.js';
-import packageJson from './package.json';
+import packageJson from './package.json' with { type: 'json' };
 
 const opts: Options = {
   entry: ['src/**/*.ts', '!src/index.browser.ts', '!src/**/*.test.ts'],
