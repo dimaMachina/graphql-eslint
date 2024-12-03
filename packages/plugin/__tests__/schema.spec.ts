@@ -114,10 +114,7 @@ describe('schema', async () => {
 
   it('should load the graphql-config rc file relative to the linted file', () => {
     const gqlConfig = loadGraphQLConfig({
-      graphQLConfig: {
-        schema: path.resolve(__dirname, 'mocks/using-config/schema-in-config.graphql'),
-      },
-      filePath: path.resolve(__dirname, 'mocks/using-config/test.graphql'),
+      filePath: path.resolve(__dirname, 'mocks/using-config/nested/test.graphql'),
     });
 
     const graphQLSchema = getSchema(gqlConfig.getDefault()) as GraphQLSchema;

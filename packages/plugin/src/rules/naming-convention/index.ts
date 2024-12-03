@@ -7,7 +7,6 @@ import {
   convertCase,
   displayNodeName,
   englishJoinWords,
-  truthy,
   TYPES_KINDS,
 } from '../../utils.js';
 
@@ -511,7 +510,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     }
 
     const selectors = new Set(
-      [types && TYPES_KINDS, Object.keys(restOptions)].flat().filter(truthy),
+      [types && TYPES_KINDS, Object.keys(restOptions)].filter(v => !!v).flat(),
     );
 
     for (const selector of selectors) {

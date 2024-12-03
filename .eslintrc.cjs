@@ -41,9 +41,6 @@ module.exports = {
     },
     {
       files: ['**/*.{spec,test}.ts'],
-      env: {
-        jest: true,
-      },
       extends: ['plugin:eslint-plugin/tests-recommended'],
       rules: {
         'eslint-plugin/test-case-shorthand-strings': 'error',

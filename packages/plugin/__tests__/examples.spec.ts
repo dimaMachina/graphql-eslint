@@ -60,6 +60,10 @@ function parseESLintOutput({
       /\(node:\d+\) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support will be removed in v10.0.0. Please migrate to an eslint.config.js file. See https:\/\/eslint.org\/docs\/latest\/use\/configure\/migration-guide for details./,
       '',
     )
+    .replace(
+      'An eslintrc configuration file is used because you have the ESLINT_USE_FLAT_CONFIG environment variable set to false. If you want to use an eslint.config.js file, remove the environment variable. If you want to find the location of the eslintrc configuration file, use the --debug flag.',
+      '',
+    )
     .replace('(Use `node --trace-deprecation ...` to show where the warning was created)', '')
     .replace('(Use `node --trace-warnings ...` to show where the warning was created)', '')
     .trimEnd();
