@@ -16,7 +16,7 @@
     "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-select": "^2.0.0",
-    "@theguild/components": "8.0.0-alpha-20241120035725-2b8cadd078ebc2ace612021973b3e50944386052",
+    "@theguild/components": "8.0.0-alpha-20241203160437-3108a588f84f2fff96b5379132752d0893c6edf5",
     "clsx": "^2.0.0",
     "graphql": "^16.9.0",
     "lodash.debounce": "^4.0.8",
