@@ -257,8 +257,8 @@ importers:
         specifier: ^8.0.0
         version: 8.1.7(graphql@16.9.0)
       '@graphql-tools/graphql-tag-pluck':
-        specifier: 8.3.4
-        version: 8.3.4(graphql@16.9.0)
+        specifier: ^8.3.4
+        version: 8.3.6(graphql@16.9.0)
       '@graphql-tools/utils':
         specifier: ^10.0.0
         version: 10.5.6(graphql@16.9.0)
@@ -1772,12 +1772,6 @@ packages:
 
   '@graphql-tools/graphql-file-loader@8.0.5':
     resolution: {integrity: sha512-c39Df38Nrt+2ZscPjAFZmCxzfSH98hjxfIzAbB6MOJBSsPCXtze3uVhXxxymxTCe+0MSo+b9LsdvRpVUOGFVSg==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-
-  '@graphql-tools/graphql-tag-pluck@8.3.4':
-    resolution: {integrity: sha512-prb+3Pec8qxgouZVBA4jOXGTxKFEw7w2IPPLnz1P06EgxBvRQXTcHtRo9HNWSGMYO4jUrpYiIqlq/Jzjlgb3rA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
@@ -9658,19 +9652,6 @@ snapshots:
       graphql: 16.9.0
       tslib: 2.8.1
       unixify: 1.0.0
-
-  '@graphql-tools/graphql-tag-pluck@8.3.4(graphql@16.9.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/parser': 7.26.2
-      '@babel/plugin-syntax-import-assertions': 7.26.0(@babel/core@7.26.0)
-      '@babel/traverse': 7.25.9
-      '@babel/types': 7.26.0
-      '@graphql-tools/utils': 10.5.6(graphql@16.9.0)
-      graphql: 16.9.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
 
   '@graphql-tools/graphql-tag-pluck@8.3.6(graphql@16.9.0)':
     dependencies:
