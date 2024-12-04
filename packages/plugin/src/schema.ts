@@ -40,7 +40,7 @@ export function getSchema(project: GraphQLProjectConfig): Schema {
 
       if (urlArgument.value.kind !== 'StringValue') return BREAK;
 
-      isFederation = urlArgument.value.value.includes('/federation/');
+      isFederation = urlArgument.value.value.includes('specs.apollo.dev/federation/');
     },
   });
 
