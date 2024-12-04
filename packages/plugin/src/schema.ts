@@ -1,6 +1,6 @@
 import debugFactory from 'debug';
 import fg from 'fast-glob';
-import { GraphQLSchema } from 'graphql';
+import { BREAK, GraphQLSchema, visit } from 'graphql';
 import { GraphQLProjectConfig } from 'graphql-config';
 import { ModuleCache } from './cache.js';
 import { Pointer, Schema } from './types.js';
@@ -22,9 +22,38 @@ export function getSchema(project: GraphQLProjectConfig): Schema {
   }
 
   debug('Loading schema from %o', project.schema);
-  const schema = project.loadSchemaSync(project.schema, 'GraphQLSchema', {
+
+  const opts = {
     pluckConfig: project.extensions.pluckConfig,
+  };
+
+  const typeDefs = project.loadSchemaSync(project.schema, 'DocumentNode', opts);
+  let isFederation = false;
+
+  visit(typeDefs, {
+    SchemaExtension(node) {
+      const linkDirective = node.directives?.find(d => d.name.value === 'link');
+      if (!linkDirective) return BREAK;
+
+      const urlArgument = linkDirective.arguments?.find(a => a.name.value === 'url');
+      if (!urlArgument) return BREAK;
+
+      if (urlArgument.value.kind !== 'StringValue') return BREAK;
+
+      isFederation = urlArgument.value.value.includes('/federation/');
+    },
   });
+
+  let schema: GraphQLSchema;
+
+  if (isFederation) {
+    const { buildSubgraphSchema } = require('@apollo/subgraph');
+
+    schema = buildSubgraphSchema({ typeDefs });
+  } else {
+    schema = project.loadSchemaSync(project.schema, 'GraphQLSchema', opts);
+  }
+
   if (debug.enabled) {
     debug('Schema loaded: %o', schema instanceof GraphQLSchema);
     const schemaPaths = fg.sync(project.schema as Pointer, { absolute: true });
