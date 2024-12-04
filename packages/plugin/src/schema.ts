@@ -47,6 +47,7 @@ export function getSchema(project: GraphQLProjectConfig): Schema {
   let schema: GraphQLSchema;
 
   if (isFederation) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports -- we inject createRequire in `tsup.config.ts`
     const { buildSubgraphSchema } = require('@apollo/subgraph');
 
     schema = buildSubgraphSchema({ typeDefs });
