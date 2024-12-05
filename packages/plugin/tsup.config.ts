@@ -27,6 +27,31 @@ export default defineConfig([
     ...opts,
     outDir: 'dist/esm',
     target: 'esnext',
+    esbuildPlugins: [
+      {
+        name: 'inject-create-require',
+        setup(build) {
+          build.onLoad({ filter: /schema\.ts$/ }, async args => {
+            const code = await fs.readFile(args.path, 'utf8');
+            const index = code.indexOf('export function getSchema');
+
+            if (index === -1) {
+              throw new Error('Unable to inject `createRequire` for file ' + args.path);
+            }
+
+            return {
+              contents: [
+                'import { createRequire } from "module"',
+                code.slice(0, index),
+                'const require = createRequire(import.meta.url)',
+                code.slice(index),
+              ].join('\n'),
+              loader: 'ts',
+            };
+          });
+        },
+      },
+    ],
   },
   {
     ...opts,
