@@ -1,5 +1,31 @@
 # @graphql-eslint/eslint-plugin
 
+## 4.3.0
+
+### Minor Changes
+
+- [#2814](https://github.com/dimaMachina/graphql-eslint/pull/2814)
+  [`ccc302d`](https://github.com/dimaMachina/graphql-eslint/commit/ccc302d3e43634f1010564a6522413f133aeb674)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - lint federation subgraphs schemas without
+  parse errors
+
+### Patch Changes
+
+- [#2814](https://github.com/dimaMachina/graphql-eslint/pull/2814)
+  [`ccc302d`](https://github.com/dimaMachina/graphql-eslint/commit/ccc302d3e43634f1010564a6522413f133aeb674)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - dependencies updates:
+
+  - Updated dependency
+    [`@graphql-tools/graphql-tag-pluck@^8.3.4` ↗︎](https://www.npmjs.com/package/@graphql-tools/graphql-tag-pluck/v/8.3.4)
+    (from `8.3.4`, in `dependencies`)
+  - Added dependency
+    [`@apollo/subgraph@^2` ↗︎](https://www.npmjs.com/package/@apollo/subgraph/v/2.0.0) (to
+    `peerDependencies`)
+
+- [#2797](https://github.com/dimaMachina/graphql-eslint/pull/2797)
+  [`b904515`](https://github.com/dimaMachina/graphql-eslint/commit/b9045158e181925cbf2eedbb9f6b9964f25fe613)
+  Thanks [@dimaMachina](https://github.com/dimaMachina)! - remove `truthy` helper function
+
 ## 4.2.1
 
 ### Patch Changes
