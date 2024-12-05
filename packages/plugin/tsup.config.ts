@@ -97,7 +97,7 @@ export default defineConfig([
       {
         name: 'remove-processor',
         setup(build) {
-          build.onLoad({ filter: /\/src\/processor\.ts$/ }, _args => {
+          build.onLoad({ filter: /processor\.ts$/ }, _args => {
             return {
               contents: 'export const processor = {}',
               loader: 'ts',
