@@ -16,7 +16,7 @@
     "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-select": "^2.0.0",
-    "@theguild/components": "8.0.0-alpha-20241120035725-2b8cadd078ebc2ace612021973b3e50944386052",
+    "@theguild/components": "8.0.0-alpha-20241205144621-2f6170e406a6235f71ab4756e1dd369735420a88",
     "clsx": "^2.0.0",
     "graphql": "^16.9.0",
     "lodash.uniqwith": "^4.5.0",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@theguild/tailwind-config": "0.6.0",
+    "@theguild/tailwind-config": "0.6.1",
     "@types/lodash.uniqwith": "4.5.9",
     "@types/node": "22.10.1",
     "@types/react": "18.3.13",

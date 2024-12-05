@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
-import { Banner, PRODUCTS } from '@theguild/components';
+import { Banner, GitHubIcon, PaperIcon, PencilIcon, PRODUCTS } from '@theguild/components';
 import { getDefaultMetadata, GuildLayout } from '@theguild/components/server';
 import '@theguild/components/style.css';
 
@@ -47,6 +47,19 @@ const RootLayout: FC<{
           { children: 'Rules', href: '/rules' },
           { children: 'Playground', href: '/play' },
         ],
+        developerMenu: [
+          {
+            href: '/docs',
+            icon: <PaperIcon />,
+            children: 'Documentation',
+          },
+          { href: 'https://the-guild.dev/blog', icon: <PencilIcon />, children: 'Blog' },
+          {
+            href: 'https://github.com/dimaMachina/graphql-eslint',
+            icon: <GitHubIcon />,
+            children: 'GitHub',
+          },
+        ]
       }}
     >
       {children}
