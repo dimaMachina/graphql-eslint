@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
-import { Banner, GitHubIcon, PaperIcon, PencilIcon, PRODUCTS, RightCornerIcon, TargetIcon } from '@theguild/components';
+import { Banner, GitHubIcon, PaperIcon, PencilIcon, PRODUCTS } from '@theguild/components';
 import { getDefaultMetadata, GuildLayout } from '@theguild/components/server';
 import '@theguild/components/style.css';
 
