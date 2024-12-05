@@ -3,7 +3,6 @@ import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import { parser } from '@graphql-eslint/eslint-plugin';
 import { ClientPage } from './page.client';
-import { QueryParamProvider } from './query-params-provider';
 
 export const metadata = {
   title: 'Playground',
@@ -55,25 +54,23 @@ const PlayPage: FC = () => {
       )}
     >
       <Suspense fallback="Loading...">
-        <QueryParamProvider>
-          <ClientPage
-            defaultOperation={DEFAULT_OPERATION}
-            defaultSchema={DEFAULT_SCHEMA}
-            headingClass={classes.heading}
-          >
-            <div>
-              <h3 className={classes.heading}>VERSIONING</h3>
-              <span className="flex justify-between text-sm">
-                <span>ESLint</span>
-                <span>{Linter.version}</span>
-              </span>
-              <span className="flex justify-between text-sm">
-                <span>GraphQL-ESLint</span>
-                <span>{parser.meta.version}</span>
-              </span>
-            </div>
-          </ClientPage>
-        </QueryParamProvider>
+        <ClientPage
+          defaultOperation={DEFAULT_OPERATION}
+          defaultSchema={DEFAULT_SCHEMA}
+          headingClass={classes.heading}
+        >
+          <div>
+            <h3 className={classes.heading}>VERSIONING</h3>
+            <span className="flex justify-between text-sm">
+              <span>ESLint</span>
+              <span>{Linter.version}</span>
+            </span>
+            <span className="flex justify-between text-sm">
+              <span>GraphQL-ESLint</span>
+              <span>{parser.meta.version}</span>
+            </span>
+          </div>
+        </ClientPage>
       </Suspense>
     </div>
   );

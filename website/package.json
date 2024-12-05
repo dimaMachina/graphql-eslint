@@ -19,19 +19,15 @@
     "@theguild/components": "8.0.0-alpha-20241205144621-2f6170e406a6235f71ab4756e1dd369735420a88",
     "clsx": "^2.0.0",
     "graphql": "^16.9.0",
-    "lodash.debounce": "^4.0.8",
     "lodash.uniqwith": "^4.5.0",
     "next": "15.0.3",
-    "next-query-params": "5.0.1",
     "next-sitemap": "4.2.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "use-query-params": "^2.2.1"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@theguild/tailwind-config": "0.6.1",
-    "@types/lodash.debounce": "4.0.9",
     "@types/lodash.uniqwith": "4.5.9",
     "@types/node": "22.10.1",
     "@types/react": "18.3.13",

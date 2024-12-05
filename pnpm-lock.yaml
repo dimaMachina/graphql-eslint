@@ -355,18 +355,12 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
-      lodash.debounce:
-        specifier: ^4.0.8
-        version: 4.0.8
       lodash.uniqwith:
         specifier: ^4.5.0
         version: 4.5.0
       next:
         specifier: 15.0.3
         version: 15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      next-query-params:
-        specifier: 5.0.1
-        version: 5.0.1(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(use-query-params@2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       next-sitemap:
         specifier: 4.2.3
         version: 4.2.3(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -376,9 +370,6 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
-      use-query-params:
-        specifier: ^2.2.1
-        version: 2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@svgr/webpack':
         specifier: ^8.1.0
@@ -386,9 +377,6 @@ importers:
       '@theguild/tailwind-config':
         specifier: 0.6.1
         version: 0.6.1(postcss-import@16.1.0(postcss@8.4.49))(postcss-lightningcss@1.0.1(postcss@8.4.49))(tailwindcss@3.4.15)
-      '@types/lodash.debounce':
-        specifier: 4.0.9
-        version: 4.0.9
       '@types/lodash.uniqwith':
         specifier: 4.5.9
         version: 4.5.9
@@ -2903,9 +2891,6 @@ packages:
 
   '@types/katex@0.16.7':
     resolution: {integrity: sha512-HMwFiRujE5PjrgwHQ25+bsLJgowjGjm5Z8FVSf0N6PwgJrwxH0QxzHYDcKsTfV3wva0vzrpqMTJS2jXPr5BMEQ==}
-
-  '@types/lodash.debounce@4.0.9':
-    resolution: {integrity: sha512-Ma5JcgTREwpLRwMM+XwBR7DaWe96nC38uCBDFKZWbNKD+osjVzdpnUSwBcqCptrp16sSOLBAUb50Car5I0TCsQ==}
 
   '@types/lodash.lowercase@4.3.9':
     resolution: {integrity: sha512-nLcYAb5Rz6SzOeoOWmT1hMDEicMAsRIunDLnCxaWSAjHTsx3Sf8aknbKFIQl+RMevZbGmw2j8qydKb9YcwMExg==}
@@ -5562,13 +5547,6 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  next-query-params@5.0.1:
-    resolution: {integrity: sha512-QFumNTpdc/MtT1IresYoMKkRWOaplutzKJoRl6Uv9mIOdc3jGyWD7yCHE79AiGYlRCyo+4oMVvkLYpdV2trFKA==}
-    peerDependencies:
-      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      use-query-params: ^2.0.0
-
   next-sitemap@4.2.3:
     resolution: {integrity: sha512-vjdCxeDuWDzldhCnyFCQipw5bfpl4HmZA7uoo3GAaYGjGgfL4Cxb1CiztPuWGmS+auYs7/8OekRS8C2cjdAsjQ==}
     engines: {node: '>=14.18'}
@@ -6418,9 +6396,6 @@ packages:
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
 
-  serialize-query-params@2.0.2:
-    resolution: {integrity: sha512-1chMo1dST4pFA9RDXAtF0Rbjaut4is7bzFbI1Z26IuMub68pNCILku85aYmeFhvnY//BXUPUhoRMjYcsT93J/Q==}
-
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
@@ -7059,19 +7034,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     peerDependenciesMeta:
       '@types/react':
-        optional: true
-
-  use-query-params@2.2.1:
-    resolution: {integrity: sha512-i6alcyLB8w9i3ZK3caNftdb+UnbfBRNPDnc89CNQWkGRmDrm/gfydHvMBfVsQJRq3NoHOM2dt/ceBWG2397v1Q==}
-    peerDependencies:
-      '@reach/router': ^1.2.1
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-      react-router-dom: '>=5'
-    peerDependenciesMeta:
-      '@reach/router':
-        optional: true
-      react-router-dom:
         optional: true
 
   use-sidecar@1.1.2:
@@ -10089,10 +10051,6 @@ snapshots:
   '@types/json5@0.0.29': {}
 
   '@types/katex@0.16.7': {}
-
-  '@types/lodash.debounce@4.0.9':
-    dependencies:
-      '@types/lodash': 4.17.13
 
   '@types/lodash.lowercase@4.3.9':
     dependencies:
@@ -13426,13 +13384,6 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-query-params@5.0.1(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(use-query-params@2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
-    dependencies:
-      next: 15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      tslib: 2.8.1
-      use-query-params: 2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
   next-sitemap@4.2.3(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       '@corex/deepmerge': 4.0.43
@@ -14409,8 +14360,6 @@ snapshots:
     dependencies:
       randombytes: 2.1.0
 
-  serialize-query-params@2.0.2: {}
-
   set-function-length@1.2.2:
     dependencies:
       define-data-property: 1.1.4
@@ -15167,12 +15116,6 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.13
-
-  use-query-params@2.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      serialize-query-params: 2.0.2
 
   use-sidecar@1.1.2(@types/react@18.3.13)(react@18.3.1):
     dependencies:

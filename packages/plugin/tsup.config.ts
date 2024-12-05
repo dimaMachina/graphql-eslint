@@ -15,7 +15,6 @@ const opts: Options = {
     VERSION: packageJson.version,
   },
   format: 'esm',
-  minifySyntax: true,
   outExtension: () => ({ js: '.js' }),
   esbuildOptions(options, _context) {
     options.define!.window = 'undefined';
@@ -82,7 +81,7 @@ export default defineConfig([
   {
     ...opts,
     entry: {
-      'index.browser': 'src/index.browser.ts',
+      'index.browser': 'src/index.ts',
     },
     outDir: 'dist',
     dts: false,
@@ -94,5 +93,18 @@ export default defineConfig([
     esbuildOptions(options, _context) {
       options.define!.window = 'true';
     },
+    esbuildPlugins: [
+      {
+        name: 'remove-processor',
+        setup(build) {
+          build.onLoad({ filter: /processor\.ts$/ }, _args => {
+            return {
+              contents: 'export const processor = {}',
+              loader: 'ts',
+            };
+          });
+        },
+      },
+    ],
   },
 ]);

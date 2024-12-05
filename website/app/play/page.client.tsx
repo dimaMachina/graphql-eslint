@@ -1,8 +1,7 @@
 'use client';
 
-import { FC, ReactNode, useRef } from 'react';
-import debounce from 'lodash.debounce';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { FC, ReactNode, useCallback } from 'react';
+import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ConfigName, configs, rules } from '@graphql-eslint/eslint-plugin';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
@@ -30,14 +29,28 @@ const operationsRulesOptions = Object.entries(rules)
 const schemaConfigsOptions = schemaConfigs.map(name => ({ key: name, name }));
 const operationsConfigsOptions = operationsConfigs.map(name => ({ key: name, name }));
 
-function useDebouncedQueryParams<TypeToEncode, TypeFromDecode = TypeToEncode>(
-  ...args: Parameters<typeof useQueryParam<TypeToEncode, TypeFromDecode>>
-): ReturnType<typeof useQueryParam<TypeToEncode, TypeFromDecode>> {
-  const [query, setQuery] = useQueryParam(...args);
-  const fn = useRef<typeof setQuery>();
-  fn.current ||= debounce(setQuery, 500);
+// Get a new searchParams string by merging the current
+// searchParams with a provided key/value pair
+const createQueryString = (searchParams: ReadonlyURLSearchParams, name: string, value: string) => {
+  const params = new URLSearchParams(searchParams.toString());
+  params.set(name, value);
 
-  return [query, fn.current];
+  return '?' + params.toString();
+};
+
+function useSetterSearchParams(
+  paramKey: string,
+  defaultValue = '',
+): [string, (value: string) => void] {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleChange = useCallback((value: string) => {
+    router.push(pathname + createQueryString(searchParams, paramKey, value));
+  }, []);
+
+  return [searchParams.get(paramKey) ?? defaultValue, handleChange];
 }
 
 export const ClientPage: FC<{
@@ -46,21 +59,15 @@ export const ClientPage: FC<{
   children: ReactNode;
   headingClass: string;
 }> = ({ defaultSchema, defaultOperation, children, headingClass }) => {
-  const [schemaConfig, setSchemaConfig] = useDebouncedQueryParams(
-    'sc',
-    withDefault(StringParam, 'schema-recommended'),
-  );
-  const [schemaRule, setSchemaRule] = useDebouncedQueryParams<string>('sr');
-  const [operationConfig, setOperationConfig] = useDebouncedQueryParams(
+  const [schemaConfig, setSchemaConfig] = useSetterSearchParams('sc', 'schema-recommended');
+  const [schemaRule, setSchemaRule] = useSetterSearchParams('sr');
+  const [operationConfig, setOperationConfig] = useSetterSearchParams(
     'oc',
-    withDefault(StringParam, 'operations-recommended'),
+    'operations-recommended',
   );
-  const [operationRule, setOperationRule] = useDebouncedQueryParams<string>('or');
-  const [schema, setSchema] = useDebouncedQueryParams('s', withDefault(StringParam, defaultSchema));
-  const [operation, setOperation] = useDebouncedQueryParams(
-    'o',
-    withDefault(StringParam, defaultOperation),
-  );
+  const [operationRule, setOperationRule] = useSetterSearchParams('or');
+  const [schema, setSchema] = useSetterSearchParams('s', defaultSchema);
+  const [operation, setOperation] = useSetterSearchParams('o', defaultOperation);
 
   return (
     <>
