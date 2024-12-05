@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { addBasePath } from 'next/dist/client/add-base-path';
 import {
   compileMdx,
   useMDXComponents as getDocsMDXComponents,
@@ -66,29 +65,6 @@ ${files.join('\n')}
 ${legacyConfig}`)}
       />
     );
-  },
-  async source({ src, type, ...props }) {
-    if (!src) {
-      throw new Error('Must provide `src` prop');
-    }
-    if (src.startsWith('/')) {
-      const filePath = path.join(process.cwd(), 'public', src);
-      try {
-        await fs.access(filePath);
-      } catch (error) {
-        const relativePath = path.relative(process.cwd(), filePath);
-        if ((error as any).code === 'ENOENT') {
-          throw new Error(`File doesn't exist: ${relativePath}`);
-        }
-        throw new Error(`Error checking file: ${relativePath}`);
-      }
-    }
-
-    let ext = path.extname(src).slice(1); // remove dot;
-    if (ext === 'mov') {
-      ext = 'quicktime';
-    }
-    return <source {...props} src={addBasePath(src)} type={type || `video/${ext}`} />;
   },
 });
 
