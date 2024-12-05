@@ -347,8 +347,8 @@ importers:
         specifier: ^2.0.0
         version: 2.1.2(@types/react@18.3.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@theguild/components':
-        specifier: 8.0.0-alpha-20241205144621-2f6170e406a6235f71ab4756e1dd369735420a88
-        version: 8.0.0-alpha-20241205144621-2f6170e406a6235f71ab4756e1dd369735420a88(@theguild/tailwind-config@0.6.1(postcss-import@16.1.0(postcss@8.4.49))(postcss-lightningcss@1.0.1(postcss@8.4.49))(tailwindcss@3.4.15))(@types/react@18.3.13)(acorn@8.14.0)(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
+        specifier: 8.0.0-alpha-20241205153040-941f0e69f61349bf789b5e08d108ea2196a2436a
+        version: 8.0.0-alpha-20241205153040-941f0e69f61349bf789b5e08d108ea2196a2436a(@theguild/tailwind-config@0.6.1(postcss-import@16.1.0(postcss@8.4.49))(postcss-lightningcss@1.0.1(postcss@8.4.49))(tailwindcss@3.4.15))(@types/react@18.3.13)(acorn@8.14.0)(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -2713,10 +2713,10 @@ packages:
   '@tanstack/virtual-core@3.10.9':
     resolution: {integrity: sha512-kBknKOKzmeR7lN+vSadaKWXaLS0SZZG+oqpQ/k80Q6g9REn6zRHS/ZYdrIzHnpHgy/eWs00SujveUN/GJT2qTw==}
 
-  '@theguild/components@8.0.0-alpha-20241205144621-2f6170e406a6235f71ab4756e1dd369735420a88':
-    resolution: {integrity: sha512-OJdVtD/0w2+AFPdq/PQ65dnvbDjHKrq7MUKbTYQddNMKrBbG4xvrdLpZNffaq5HrB8fjirPE4IjnPeAXKVWgFA==}
+  '@theguild/components@8.0.0-alpha-20241205153040-941f0e69f61349bf789b5e08d108ea2196a2436a':
+    resolution: {integrity: sha512-uxbzxIreMT/8H/MwT4RwVO5qRrrVHzJsqxpAULCy6TCLRo3zpjpPrRs4pVHAI9wk7FPUhAGwwDQvExbzEVzlTg==}
     peerDependencies:
-      '@theguild/tailwind-config': ^0.6.0
+      '@theguild/tailwind-config': ^0.6.1
       next: ^13 || ^14 || ^15.0.0
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -9798,7 +9798,7 @@ snapshots:
 
   '@tanstack/virtual-core@3.10.9': {}
 
-  '@theguild/components@8.0.0-alpha-20241205144621-2f6170e406a6235f71ab4756e1dd369735420a88(@theguild/tailwind-config@0.6.1(postcss-import@16.1.0(postcss@8.4.49))(postcss-lightningcss@1.0.1(postcss@8.4.49))(tailwindcss@3.4.15))(@types/react@18.3.13)(acorn@8.14.0)(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)':
+  '@theguild/components@8.0.0-alpha-20241205153040-941f0e69f61349bf789b5e08d108ea2196a2436a(@theguild/tailwind-config@0.6.1(postcss-import@16.1.0(postcss@8.4.49))(postcss-lightningcss@1.0.1(postcss@8.4.49))(tailwindcss@3.4.15))(@types/react@18.3.13)(acorn@8.14.0)(next@15.0.3(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)':
     dependencies:
       '@giscus/react': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@next/bundle-analyzer': 15.0.3
