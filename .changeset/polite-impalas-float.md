@@ -1,5 +1,5 @@
 ---
-'@graphql-eslint/eslint-plugin': patch
+'@graphql-eslint/eslint-plugin': minor
 ---
 
 - allow to config `naming-convention` for Relay fragment convention `<module_name>_<property_name>`
