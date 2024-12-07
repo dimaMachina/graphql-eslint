@@ -184,7 +184,14 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Incorrect',
-          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: [/(^fragment)|(fragment$)/i] } }],
+          usage: [
+            {
+              FragmentDefinition: {
+                style: 'PascalCase',
+                forbiddenPatterns: [/(^fragment)|(fragment$)/i],
+              },
+            },
+          ],
           code: /* GraphQL */ `
             fragment UserFragment on User {
               # ...
@@ -193,7 +200,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Incorrect',
-          usage: [{ 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }],
+          usage: [{ 'FieldDefinition[parent.name.value=Query]': { forbiddenPatterns: [/^get/i] } }],
           code: /* GraphQL */ `
             type Query {
               getUsers: [User!]!
@@ -211,7 +218,14 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct',
-          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: [/(^fragment)|(fragment$)/i] } }],
+          usage: [
+            {
+              FragmentDefinition: {
+                style: 'PascalCase',
+                forbiddenPatterns: [/(^fragment)|(fragment$)/i],
+              },
+            },
+          ],
           code: /* GraphQL */ `
             fragment UserFields on User {
               # ...
@@ -220,7 +234,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct',
-          usage: [{ 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }],
+          usage: [{ 'FieldDefinition[parent.name.value=Query]': { forbiddenPatterns: [/^get/i] } }],
           code: /* GraphQL */ `
             type Query {
               users: [User!]!
@@ -244,11 +258,11 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             {
               'FieldDefinition[gqlType.name.value=Boolean]': {
                 style: 'camelCase',
-                requiredPrefixes: ['is', 'has'],
+                requiredPattern: /^(is|has)/,
               },
               'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
                 style: 'camelCase',
-                requiredPrefixes: ['is', 'has'],
+                requiredPattern: /^(is|has)/,
               },
             },
           ],
@@ -266,7 +280,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             {
               'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': {
                 style: 'camelCase',
-                requiredSuffixes: ['SensitiveSecret'],
+                requiredPattern: /SensitiveSecret$/,
               },
             },
           ],
@@ -310,8 +324,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             DirectiveDefinition: 'camelCase',
             EnumValueDefinition: 'UPPER_CASE',
             'FieldDefinition[parent.name.value=Query]': {
-              forbiddenPrefixes: ['query', 'get'],
-              forbiddenSuffixes: ['Query'],
+              forbiddenPattern: [/^(query|get)/i, /query$/i],
             },
             'FieldDefinition[parent.name.value=Mutation]': {
               forbiddenPatterns: [/(^mutation)|(mutation$)/i],
@@ -338,8 +351,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             VariableDefinition: 'camelCase',
             OperationDefinition: {
               style: 'PascalCase',
-              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+              forbiddenPattern: [
+                /^(query|mutation|subscription|get)/i,
+                /(query|mutation|subscription)$/i,
+              ],
             },
             FragmentDefinition: {
               style: 'PascalCase',
