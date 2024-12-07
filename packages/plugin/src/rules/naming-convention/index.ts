@@ -451,6 +451,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
                 }
                 return originalString;
               });
+              if (name === nodeName) {
+                throw new Error(`contain the required pattern: ${requiredPattern}`);
+              }
             } catch (error) {
               return {
                 errorMessage: (error as Error).message,

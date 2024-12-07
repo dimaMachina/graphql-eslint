@@ -1993,6 +1993,31 @@ exports[`naming-convention > invalid > requiredPattern 1`] = `
         |             ^^^^^^^ Field "enabled" should contain the required pattern: /^(is|has)/
 `;
 
+exports[`naming-convention > invalid > requiredPattern for typeName in suffix 1`] = `
+#### ⌨️ Code
+
+      1 |         fragment UserProfileFields on MyUser {
+      2 |           id
+      3 |           name
+      4 |           email
+      5 |         }
+
+#### ⚙️ Options
+
+    {
+      "FragmentDefinition": {
+        "style": "PascalCase",
+        "requiredPattern": "/_(?<camelCase_typeName>.+?)$/"
+      }
+    }
+
+#### ❌ Error
+
+    > 1 |         fragment UserProfileFields on MyUser {
+        |                  ^^^^^^^^^^^^^^^^^ Fragment "UserProfileFields" should contain the required pattern: /_(?<camelCase_typeName>.+?)$/
+      2 |           id
+`;
+
 exports[`naming-convention > invalid > schema-recommended config 1`] = `
 #### ⌨️ Code
 

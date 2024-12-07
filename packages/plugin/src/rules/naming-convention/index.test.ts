@@ -238,7 +238,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
     },
     {
-      name: 'requiredPattern for typeName',
+      name: 'requiredPattern for typeName in prefix',
       options: [
         {
           FragmentDefinition: {
@@ -249,6 +249,29 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
       code: /* GraphQL */ `
         fragment myUser_UserProfileFields on MyUser {
+          id
+          name
+          email
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'type MyUser',
+        },
+      },
+    },
+    {
+      name: 'requiredPattern for typeName in suffix',
+      options: [
+        {
+          FragmentDefinition: {
+            style: 'PascalCase',
+            requiredPattern: /_(?<snake_case_typeName>.+?)$/,
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        fragment UserProfileFields_my_user on MyUser {
           id
           name
           email
@@ -569,6 +592,30 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
           },
         },
       ],
+      errors: 1,
+    },
+    {
+      name: 'requiredPattern for typeName in suffix',
+      options: [
+        {
+          FragmentDefinition: {
+            style: 'PascalCase',
+            requiredPattern: /_(?<camelCase_typeName>.+?)$/,
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        fragment UserProfileFields on MyUser {
+          id
+          name
+          email
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'type MyUser',
+        },
+      },
       errors: 1,
     },
   ],
