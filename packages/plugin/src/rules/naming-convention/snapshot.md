@@ -1744,25 +1744,15 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
       "VariableDefinition": "camelCase",
       "OperationDefinition": {
         "style": "PascalCase",
-        "forbiddenPrefixes": [
-          "Query",
-          "Mutation",
-          "Subscription",
-          "Get"
-        ],
-        "forbiddenSuffixes": [
-          "Query",
-          "Mutation",
-          "Subscription"
+        "forbiddenPatterns": [
+          "/^(query|mutation|subscription|get)/i",
+          "/(query|mutation|subscription)$/i"
         ]
       },
       "FragmentDefinition": {
         "style": "PascalCase",
-        "forbiddenPrefixes": [
-          "Fragment"
-        ],
-        "forbiddenSuffixes": [
-          "Fragment"
+        "forbiddenPatterns": [
+          "/(^fragment)|(fragment$)/i"
         ]
       }
     }
@@ -1770,7 +1760,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 #### ❌ Error 1/9
 
     > 1 |         query TestQuery { test }
-        |               ^^^^^^^^^ Query "TestQuery" should not have "Query" suffix
+        |               ^^^^^^^^^ Query "TestQuery" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"
       2 |         query QueryTest { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1793,7 +1783,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       1 |         query TestQuery { test }
     > 2 |         query QueryTest { test }
-        |               ^^^^^^^^^ Query "QueryTest" should not have "Query" prefix
+        |               ^^^^^^^^^ Query "QueryTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"
       3 |         query GetQuery { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1816,7 +1806,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       2 |         query QueryTest { test }
     > 3 |         query GetQuery { test }
-        |               ^^^^^^^^ Query "GetQuery" should not have "Get" prefix
+        |               ^^^^^^^^ Query "GetQuery" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"
       4 |         query Test { test(CONTROLLED_BY_SCHEMA: 0) }
 
 #### 💡 Suggestion: Rename to \`Query\`
@@ -1839,7 +1829,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       5 |
     > 6 |         mutation TestMutation { test }
-        |                  ^^^^^^^^^^^^ Mutation "TestMutation" should not have "Mutation" suffix
+        |                  ^^^^^^^^^^^^ Mutation "TestMutation" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"
       7 |         mutation MutationTest { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1862,7 +1852,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       6 |         mutation TestMutation { test }
     > 7 |         mutation MutationTest { test }
-        |                  ^^^^^^^^^^^^ Mutation "MutationTest" should not have "Mutation" prefix
+        |                  ^^^^^^^^^^^^ Mutation "MutationTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"
       8 |
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1885,7 +1875,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
        8 |
     >  9 |         subscription TestSubscription { test }
-         |                      ^^^^^^^^^^^^^^^^ Subscription "TestSubscription" should not have "Subscription" suffix
+         |                      ^^^^^^^^^^^^^^^^ Subscription "TestSubscription" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"
       10 |         subscription SubscriptionTest { test }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1908,7 +1898,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
        9 |         subscription TestSubscription { test }
     > 10 |         subscription SubscriptionTest { test }
-         |                      ^^^^^^^^^^^^^^^^ Subscription "SubscriptionTest" should not have "Subscription" prefix
+         |                      ^^^^^^^^^^^^^^^^ Subscription "SubscriptionTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"
       11 |
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1931,7 +1921,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       11 |
     > 12 |         fragment TestFragment on Test { id }
-         |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not have "Fragment" suffix
+         |                  ^^^^^^^^^^^^ Fragment "TestFragment" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"
       13 |         fragment FragmentTest on Test { id }
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -1954,7 +1944,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
 
       12 |         fragment TestFragment on Test { id }
     > 13 |         fragment FragmentTest on Test { id }
-         |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not have "Fragment" prefix
+         |                  ^^^^^^^^^^^^ Fragment "FragmentTest" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"
 
 #### 💡 Suggestion: Rename to \`Test\`
 
@@ -2063,60 +2053,39 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
       "DirectiveDefinition": "camelCase",
       "EnumValueDefinition": "UPPER_CASE",
       "FieldDefinition[parent.name.value=Query]": {
-        "forbiddenPrefixes": [
-          "query",
-          "get"
-        ],
-        "forbiddenSuffixes": [
-          "Query"
+        "forbiddenPatterns": [
+          "/^(query|get)/i",
+          "/query$/i"
         ]
       },
       "FieldDefinition[parent.name.value=Mutation]": {
-        "forbiddenPrefixes": [
-          "mutation"
-        ],
-        "forbiddenSuffixes": [
-          "Mutation"
+        "forbiddenPatterns": [
+          "/(^mutation)|(mutation$)/i"
         ]
       },
       "FieldDefinition[parent.name.value=Subscription]": {
-        "forbiddenPrefixes": [
-          "subscription"
-        ],
-        "forbiddenSuffixes": [
-          "Subscription"
+        "forbiddenPatterns": [
+          "/(^subscription)|(subscription$)/i"
         ]
       },
       "EnumTypeDefinition,EnumTypeExtension": {
-        "forbiddenPrefixes": [
-          "Enum"
-        ],
-        "forbiddenSuffixes": [
-          "Enum"
+        "forbiddenPatterns": [
+          "/(^enum)|(enum$)/i"
         ]
       },
       "InterfaceTypeDefinition,InterfaceTypeExtension": {
-        "forbiddenPrefixes": [
-          "Interface"
-        ],
-        "forbiddenSuffixes": [
-          "Interface"
+        "forbiddenPatterns": [
+          "/(^interface)|(interface$)/i"
         ]
       },
       "UnionTypeDefinition,UnionTypeExtension": {
-        "forbiddenPrefixes": [
-          "Union"
-        ],
-        "forbiddenSuffixes": [
-          "Union"
+        "forbiddenPatterns": [
+          "/(^union)|(union$)/i"
         ]
       },
       "ObjectTypeDefinition,ObjectTypeExtension": {
-        "forbiddenPrefixes": [
-          "Type"
-        ],
-        "forbiddenSuffixes": [
-          "Type"
+        "forbiddenPatterns": [
+          "/(^type)|(type$)/i"
         ]
       }
     }
@@ -2125,7 +2094,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       1 |         type Query {
     > 2 |           fieldQuery: ID
-        |           ^^^^^^^^^^ Field "fieldQuery" should not have "Query" suffix
+        |           ^^^^^^^^^^ Field "fieldQuery" should not contain the forbidden pattern "/query$/i"
       3 |           queryField: ID
 
 #### 💡 Suggestion: Rename to \`field\`
@@ -2168,7 +2137,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       2 |           fieldQuery: ID
     > 3 |           queryField: ID
-        |           ^^^^^^^^^^ Field "queryField" should not have "query" prefix
+        |           ^^^^^^^^^^ Field "queryField" should not contain the forbidden pattern "/^(query|get)/i"
       4 |           getField: ID
 
 #### 💡 Suggestion: Rename to \`Field\`
@@ -2211,7 +2180,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       3 |           queryField: ID
     > 4 |           getField: ID
-        |           ^^^^^^^^ Field "getField" should not have "get" prefix
+        |           ^^^^^^^^ Field "getField" should not contain the forbidden pattern "/^(query|get)/i"
       5 |         }
 
 #### 💡 Suggestion: Rename to \`Field\`
@@ -2254,7 +2223,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       7 |         type Mutation {
     > 8 |           fieldMutation: ID
-        |           ^^^^^^^^^^^^^ Field "fieldMutation" should not have "Mutation" suffix
+        |           ^^^^^^^^^^^^^ Field "fieldMutation" should not contain the forbidden pattern "/(^mutation)|(mutation$)/i"
       9 |           mutationField: ID
 
 #### 💡 Suggestion: Rename to \`field\`
@@ -2297,7 +2266,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
        8 |           fieldMutation: ID
     >  9 |           mutationField: ID
-         |           ^^^^^^^^^^^^^ Field "mutationField" should not have "mutation" prefix
+         |           ^^^^^^^^^^^^^ Field "mutationField" should not contain the forbidden pattern "/(^mutation)|(mutation$)/i"
       10 |         }
 
 #### 💡 Suggestion: Rename to \`Field\`
@@ -2340,7 +2309,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       12 |         type Subscription {
     > 13 |           fieldSubscription: ID
-         |           ^^^^^^^^^^^^^^^^^ Field "fieldSubscription" should not have "Subscription" suffix
+         |           ^^^^^^^^^^^^^^^^^ Field "fieldSubscription" should not contain the forbidden pattern "/(^subscription)|(subscription$)/i"
       14 |           subscriptionField: ID
 
 #### 💡 Suggestion: Rename to \`field\`
@@ -2383,7 +2352,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       13 |           fieldSubscription: ID
     > 14 |           subscriptionField: ID
-         |           ^^^^^^^^^^^^^^^^^ Field "subscriptionField" should not have "subscription" prefix
+         |           ^^^^^^^^^^^^^^^^^ Field "subscriptionField" should not contain the forbidden pattern "/(^subscription)|(subscription$)/i"
       15 |         }
 
 #### 💡 Suggestion: Rename to \`Field\`
@@ -2426,7 +2395,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       16 |
     > 17 |         enum TestEnum
-         |              ^^^^^^^^ Enum "TestEnum" should not have "Enum" suffix
+         |              ^^^^^^^^ Enum "TestEnum" should not contain the forbidden pattern "/(^enum)|(enum$)/i"
       18 |         extend enum EnumTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2469,7 +2438,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       17 |         enum TestEnum
     > 18 |         extend enum EnumTest {
-         |                     ^^^^^^^^ Enum "EnumTest" should not have "Enum" prefix
+         |                     ^^^^^^^^ Enum "EnumTest" should not contain the forbidden pattern "/(^enum)|(enum$)/i"
       19 |           A
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2512,7 +2481,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       21 |
     > 22 |         interface TestInterface
-         |                   ^^^^^^^^^^^^^ Interface "TestInterface" should not have "Interface" suffix
+         |                   ^^^^^^^^^^^^^ Interface "TestInterface" should not contain the forbidden pattern "/(^interface)|(interface$)/i"
       23 |         extend interface InterfaceTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2555,7 +2524,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       22 |         interface TestInterface
     > 23 |         extend interface InterfaceTest {
-         |                          ^^^^^^^^^^^^^ Interface "InterfaceTest" should not have "Interface" prefix
+         |                          ^^^^^^^^^^^^^ Interface "InterfaceTest" should not contain the forbidden pattern "/(^interface)|(interface$)/i"
       24 |           id: ID
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2598,7 +2567,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       26 |
     > 27 |         union TestUnion
-         |               ^^^^^^^^^ Union "TestUnion" should not have "Union" suffix
+         |               ^^^^^^^^^ Union "TestUnion" should not contain the forbidden pattern "/(^union)|(union$)/i"
       28 |         extend union UnionTest = TestInterface
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2641,7 +2610,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       27 |         union TestUnion
     > 28 |         extend union UnionTest = TestInterface
-         |                      ^^^^^^^^^ Union "UnionTest" should not have "Union" prefix
+         |                      ^^^^^^^^^ Union "UnionTest" should not contain the forbidden pattern "/(^union)|(union$)/i"
       29 |
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2684,7 +2653,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       29 |
     > 30 |         type TestType
-         |              ^^^^^^^^ Type "TestType" should not have "Type" suffix
+         |              ^^^^^^^^ Type "TestType" should not contain the forbidden pattern "/(^type)|(type$)/i"
       31 |         extend type TypeTest {
 
 #### 💡 Suggestion: Rename to \`Test\`
@@ -2727,7 +2696,7 @@ exports[`naming-convention > invalid > schema-recommended config 1`] = `
 
       30 |         type TestType
     > 31 |         extend type TypeTest {
-         |                     ^^^^^^^^ Type "TypeTest" should not have "Type" prefix
+         |                     ^^^^^^^^ Type "TypeTest" should not contain the forbidden pattern "/(^type)|(type$)/i"
       32 |           id: ID
 
 #### 💡 Suggestion: Rename to \`Test\`

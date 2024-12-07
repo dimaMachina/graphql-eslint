@@ -324,7 +324,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             DirectiveDefinition: 'camelCase',
             EnumValueDefinition: 'UPPER_CASE',
             'FieldDefinition[parent.name.value=Query]': {
-              forbiddenPattern: [/^(query|get)/i, /query$/i],
+              forbiddenPatterns: [/^(query|get)/i, /query$/i],
             },
             'FieldDefinition[parent.name.value=Mutation]': {
               forbiddenPatterns: [/(^mutation)|(mutation$)/i],
@@ -351,7 +351,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             VariableDefinition: 'camelCase',
             OperationDefinition: {
               style: 'PascalCase',
-              forbiddenPattern: [
+              forbiddenPatterns: [
                 /^(query|mutation|subscription|get)/i,
                 /(query|mutation|subscription)$/i,
               ],

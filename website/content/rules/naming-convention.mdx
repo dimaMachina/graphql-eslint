@@ -35,7 +35,7 @@ type user {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: ['/(^fragment)|(fragment$)/i'] } }]
 
 fragment UserFragment on User {
   # ...
@@ -45,7 +45,7 @@ fragment UserFragment on User {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPatterns: ['/^get/i'] } }]
 
 type Query {
   getUsers: [User!]!
@@ -65,7 +65,7 @@ type User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: ['/(^fragment)|(fragment$)/i'] } }]
 
 fragment UserFields on User {
   # ...
@@ -75,7 +75,7 @@ fragment UserFields on User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPatterns: ['/^get/i'] } }]
 
 type Query {
   users: [User!]!
@@ -97,7 +97,7 @@ type Product {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.name.value=Boolean]': { style: 'camelCase', requiredPrefixes: ['is', 'has'] }, 'FieldDefinition[gqlType.gqlType.name.value=Boolean]': { style: 'camelCase', requiredPrefixes: ['is', 'has'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.name.value=Boolean]': { style: 'camelCase', requiredPattern: '/^(is|has)/' }, 'FieldDefinition[gqlType.gqlType.name.value=Boolean]': { style: 'camelCase', requiredPattern: '/^(is|has)/' } }]
 
 type Product {
   isBackordered: Boolean
@@ -109,7 +109,7 @@ type Product {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': { style: 'camelCase', requiredSuffixes: ['SensitiveSecret'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': { style: 'camelCase', requiredPattern: '/SensitiveSecret$/' } }]
 
 scalar SensitiveSecret
 
