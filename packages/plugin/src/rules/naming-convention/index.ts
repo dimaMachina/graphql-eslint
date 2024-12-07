@@ -440,7 +440,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
                     throw new Error('Invalid case style in `requiredPatterns` option');
                   }
                   if (isTypeName) {
-                      // @ts-expect-error
+                    // @ts-expect-error
                     if (value === convertCase(styleName as CaseStyle, n.typeInfo().gqlType.name)) {
                       return '';
                     }

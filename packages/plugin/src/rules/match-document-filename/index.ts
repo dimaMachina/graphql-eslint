@@ -31,7 +31,7 @@ const schemaOption = {
 const caseSchema = {
   enum: CASE_STYLES,
   description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
-}
+};
 
 const schema = {
   definitions: {
