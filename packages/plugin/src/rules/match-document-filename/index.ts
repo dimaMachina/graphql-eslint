@@ -28,18 +28,20 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 } as const;
 
+const caseSchema = {
+  enum: CASE_STYLES,
+  description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
+}
+
 const schema = {
   definitions: {
-    asString: {
-      enum: CASE_STYLES,
-      description: `One of: ${CASE_STYLES.map(t => `\`${t}\``).join(', ')}`,
-    },
+    asString: caseSchema,
     asObject: {
       type: 'object',
       additionalProperties: false,
       minProperties: 1,
       properties: {
-        style: { enum: CASE_STYLES },
+        style: caseSchema,
         suffix: { type: 'string' },
         prefix: { type: 'string' },
       },

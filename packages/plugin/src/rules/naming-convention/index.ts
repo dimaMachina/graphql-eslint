@@ -4,6 +4,7 @@ import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, GraphQLESLintRuleListener, ValueOf } from '../../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
+  CaseStyle,
   convertCase,
   displayNodeName,
   englishJoinWords,
@@ -47,22 +48,24 @@ const schemaOption = {
   oneOf: [{ $ref: '#/definitions/asString' }, { $ref: '#/definitions/asObject' }],
 } as const;
 
-const descriptionPrefixesSuffixes = (name: 'forbiddenPatterns' | 'requiredPatterns') =>
+const descriptionPrefixesSuffixes = (name: 'forbiddenPatterns' | 'requiredPattern', id: string) =>
   `> [!WARNING]
 >
-> This option is deprecated and will be removed in the next major release. Use [\`${name}\`](#${name.toLowerCase()}-array) instead.`;
+> This option is deprecated and will be removed in the next major release. Use [\`${name}\`](#${id}) instead.`;
+
+const caseSchema = {
+  enum: ALLOWED_STYLES,
+  description: `One of: ${ALLOWED_STYLES.map(t => `\`${t}\``).join(', ')}`,
+};
 
 const schema = {
   definitions: {
-    asString: {
-      enum: ALLOWED_STYLES,
-      description: `One of: ${ALLOWED_STYLES.map(t => `\`${t}\``).join(', ')}`,
-    },
+    asString: caseSchema,
     asObject: {
       type: 'object',
       additionalProperties: false,
       properties: {
-        style: { enum: ALLOWED_STYLES },
+        style: caseSchema,
         prefix: { type: 'string' },
         suffix: { type: 'string' },
         forbiddenPatterns: {
@@ -72,28 +75,25 @@ const schema = {
           },
           description: 'Should be of instance of `RegEx`',
         },
-        requiredPatterns: {
-          ...ARRAY_DEFAULT_OPTIONS,
-          items: {
-            type: 'object',
-          },
+        requiredPattern: {
+          type: 'object',
           description: 'Should be of instance of `RegEx`',
         },
         forbiddenPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('forbiddenPatterns'),
+          description: descriptionPrefixesSuffixes('forbiddenPatterns', 'forbiddenpatterns-array'),
         },
         forbiddenSuffixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('forbiddenPatterns'),
+          description: descriptionPrefixesSuffixes('forbiddenPatterns', 'forbiddenpatterns-array'),
         },
         requiredPrefixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('requiredPatterns'),
+          description: descriptionPrefixesSuffixes('requiredPattern', 'requiredpattern-object'),
         },
         requiredSuffixes: {
           ...ARRAY_DEFAULT_OPTIONS,
-          description: descriptionPrefixesSuffixes('requiredPatterns'),
+          description: descriptionPrefixesSuffixes('requiredPattern', 'requiredpattern-object'),
         },
         ignorePattern: {
           type: 'string',
@@ -152,7 +152,7 @@ type PropertySchema = {
   suffix?: string;
   prefix?: string;
   forbiddenPatterns?: RegExp[];
-  requiredPatterns?: RegExp[];
+  requiredPattern?: RegExp;
   forbiddenPrefixes?: string[];
   forbiddenSuffixes?: string[];
   requiredPrefixes?: string[];
@@ -378,7 +378,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         requiredPrefixes,
         requiredSuffixes,
         forbiddenPatterns,
-        requiredPatterns,
+        requiredPattern,
       } = normalisePropertyOption(selector);
       const nodeName = node.value;
       const error = getError();
@@ -401,7 +401,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         errorMessage: string;
         renameToNames: string[];
       } | void {
-        const name = nodeName.replace(/(^_+)|(_+$)/g, '');
+        let name = nodeName.replace(/(^_+)|(_+$)/g, '');
         if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
           if ('name' in n) {
             ignoredNodes.add(n.name);
@@ -427,11 +427,42 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             renameToNames: [name.replace(forbidden, '')],
           };
         }
-        if (requiredPatterns && !requiredPatterns.some(pattern => pattern.test(name))) {
-          return {
-            errorMessage: `contain the required pattern: ${englishJoinWords(requiredPatterns.map(re => re.source))}`,
-            renameToNames: [],
-          };
+        if (requiredPattern) {
+          if (requiredPattern.source.includes('(?<')) {
+            try {
+              name = name.replace(requiredPattern, (originalString, ...args) => {
+                const groups = args.at(-1);
+                for (const [key, value] of Object.entries(groups)) {
+                  const isTypeName = /_typeName$/.test(key);
+                  const styleName = isTypeName ? key.replace(/_typeName$/, '') : key;
+                  const caseRegex = StyleToRegex[styleName as AllowedStyle];
+                  if (!caseRegex) {
+                    throw new Error('Invalid case style in `requiredPatterns` option');
+                  }
+                  if (isTypeName) {
+                      // @ts-expect-error
+                    if (value === convertCase(styleName as CaseStyle, n.typeInfo().gqlType.name)) {
+                      return '';
+                    }
+                  } else if (value === convertCase(styleName as CaseStyle, value as string)) {
+                    return '';
+                  }
+                  throw new Error(`contain the required pattern: ${requiredPattern}`);
+                }
+                return originalString;
+              });
+            } catch (error) {
+              return {
+                errorMessage: (error as Error).message,
+                renameToNames: [],
+              };
+            }
+          } else if (!requiredPattern.test(name)) {
+            return {
+              errorMessage: `contain the required pattern: ${requiredPattern}`,
+              renameToNames: [],
+            };
+          }
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
         if (forbiddenPrefix) {

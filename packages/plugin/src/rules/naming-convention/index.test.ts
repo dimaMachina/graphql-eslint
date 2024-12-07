@@ -238,12 +238,17 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
     },
     {
-      name: 'custom case',
+      name: 'requiredPattern for typeName',
       options: [
-        { FragmentDefinition: { style: 'PascalCase', requiredPattern: /_(?<snake_case_typeName>.+?)$/ } },
+        {
+          FragmentDefinition: {
+            style: 'PascalCase',
+            requiredPattern: /^(?<camelCase_typeName>.+?)_/,
+          },
+        },
       ],
       code: /* GraphQL */ `
-        fragment UserProfileFields_user on User {
+        fragment myUser_UserProfileFields on MyUser {
           id
           name
           email
@@ -251,7 +256,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       `,
       parserOptions: {
         graphQLConfig: {
-          schema: 'type User',
+          schema: 'type MyUser',
         },
       },
     },
