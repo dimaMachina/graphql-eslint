@@ -488,15 +488,42 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       `,
       options: (rule.meta.docs!.configOptions as any).operations,
       errors: [
-        { message: 'Query "TestQuery" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"' },
-        { message: 'Query "QueryTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"' },
-        { message: 'Query "GetQuery" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"' },
-        { message: 'Mutation "TestMutation" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"' },
-        { message: 'Mutation "MutationTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"' },
-        { message: 'Subscription "TestSubscription" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"' },
-        { message: 'Subscription "SubscriptionTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"' },
-        { message: 'Fragment "TestFragment" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"' },
-        { message: 'Fragment "FragmentTest" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"' },
+        {
+          message:
+            'Query "TestQuery" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"',
+        },
+        {
+          message:
+            'Query "QueryTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Query "GetQuery" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Mutation "TestMutation" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"',
+        },
+        {
+          message:
+            'Mutation "MutationTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Subscription "TestSubscription" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"',
+        },
+        {
+          message:
+            'Subscription "SubscriptionTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Fragment "TestFragment" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"',
+        },
+        {
+          message:
+            'Fragment "FragmentTest" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"',
+        },
       ],
     },
     {
