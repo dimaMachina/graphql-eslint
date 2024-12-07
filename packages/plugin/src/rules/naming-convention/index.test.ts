@@ -238,48 +238,44 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       ],
     },
     {
-      name: 'requiredPattern for typeName in prefix',
+      name: 'requiredPattern with case style in prefix',
       options: [
         {
           FragmentDefinition: {
             style: 'PascalCase',
-            requiredPattern: /^(?<camelCase_typeName>.+?)_/,
+            requiredPattern: /^(?<camelCase>.+?)_/,
           },
         },
       ],
       code: /* GraphQL */ `
-        fragment myUser_UserProfileFields on MyUser {
+        fragment myUser_UserProfileFields on User {
           id
-          name
-          email
         }
       `,
       parserOptions: {
         graphQLConfig: {
-          schema: 'type MyUser',
+          schema: 'type User',
         },
       },
     },
     {
-      name: 'requiredPattern for typeName in suffix',
+      name: 'requiredPattern with case style in suffix',
       options: [
         {
           FragmentDefinition: {
             style: 'PascalCase',
-            requiredPattern: /_(?<snake_case_typeName>.+?)$/,
+            requiredPattern: /_(?<snake_case>.+?)$/,
           },
         },
       ],
       code: /* GraphQL */ `
-        fragment UserProfileFields_my_user on MyUser {
+        fragment UserProfileFields_my_user on User {
           id
-          name
-          email
         }
       `,
       parserOptions: {
         graphQLConfig: {
-          schema: 'type MyUser',
+          schema: 'type User',
         },
       },
     },
@@ -595,25 +591,23 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       errors: 1,
     },
     {
-      name: 'requiredPattern for typeName in suffix',
+      name: 'requiredPattern with case style in suffix',
       options: [
         {
           FragmentDefinition: {
             style: 'PascalCase',
-            requiredPattern: /_(?<camelCase_typeName>.+?)$/,
+            requiredPattern: /_(?<camelCase>.+?)$/,
           },
         },
       ],
       code: /* GraphQL */ `
-        fragment UserProfileFields on MyUser {
+        fragment UserProfileFields on User {
           id
-          name
-          email
         }
       `,
       parserOptions: {
         graphQLConfig: {
-          schema: 'type MyUser',
+          schema: 'type User',
         },
       },
       errors: 1,

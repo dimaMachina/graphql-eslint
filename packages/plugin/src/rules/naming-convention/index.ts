@@ -278,6 +278,27 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             }
           `,
         },
+        {
+          title: 'Correct (Relay fragment convention `<module_name>_<property_name>`)',
+          usage: [
+            {
+              FragmentDefinition: {
+                style: 'PascalCase',
+                requiredPattern: /_(?<camelCase>.+?)$/,
+              },
+            }
+          ],
+          code: /* GraphQL */ `
+            # schema
+            type User {
+              # ...
+            }
+            # operations
+            fragment UserFields_data on User {
+              # ...
+            }
+          `
+        }
       ],
       configOptions: {
         schema: [
@@ -401,7 +422,9 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         errorMessage: string;
         renameToNames: string[];
       } | void {
-        let name = nodeName.replace(/(^_+)|(_+$)/g, '');
+        let name = nodeName;
+        if (allowLeadingUnderscore) name = name.replace(/^_+/, '');
+        if (allowTrailingUnderscore) name = name.replace(/_+$/, '');
         if (ignorePattern && new RegExp(ignorePattern, 'u').test(name)) {
           if ('name' in n) {
             ignoredNodes.add(n.name);
@@ -420,31 +443,16 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             renameToNames: [name + suffix],
           };
         }
-        const forbidden = forbiddenPatterns?.find(pattern => pattern.test(name));
-        if (forbidden) {
-          return {
-            errorMessage: `not contain the forbidden pattern "${forbidden}"`,
-            renameToNames: [name.replace(forbidden, '')],
-          };
-        }
         if (requiredPattern) {
           if (requiredPattern.source.includes('(?<')) {
             try {
               name = name.replace(requiredPattern, (originalString, ...args) => {
                 const groups = args.at(-1);
-                for (const [key, value] of Object.entries(groups)) {
-                  const isTypeName = /_typeName$/.test(key);
-                  const styleName = isTypeName ? key.replace(/_typeName$/, '') : key;
-                  const caseRegex = StyleToRegex[styleName as AllowedStyle];
-                  if (!caseRegex) {
+                for (const [styleName, value] of Object.entries(groups)) {
+                  if (!(styleName in StyleToRegex)) {
                     throw new Error('Invalid case style in `requiredPatterns` option');
                   }
-                  if (isTypeName) {
-                    // @ts-expect-error
-                    if (value === convertCase(styleName as CaseStyle, n.typeInfo().gqlType.name)) {
-                      return '';
-                    }
-                  } else if (value === convertCase(styleName as CaseStyle, value as string)) {
+                  if (value === convertCase(styleName as CaseStyle, value as string)) {
                     return '';
                   }
                   throw new Error(`contain the required pattern: ${requiredPattern}`);
@@ -466,6 +474,13 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
               renameToNames: [],
             };
           }
+        }
+        const forbidden = forbiddenPatterns?.find(pattern => pattern.test(name));
+        if (forbidden) {
+          return {
+            errorMessage: `not contain the forbidden pattern "${forbidden}"`,
+            renameToNames: [name.replace(forbidden, '')],
+          };
         }
         const forbiddenPrefix = forbiddenPrefixes?.find(prefix => name.startsWith(prefix));
         if (forbiddenPrefix) {
