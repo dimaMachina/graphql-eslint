@@ -286,7 +286,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
                 style: 'PascalCase',
                 requiredPattern: /_(?<camelCase>.+?)$/,
               },
-            }
+            },
           ],
           code: /* GraphQL */ `
             # schema
@@ -297,8 +297,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             fragment UserFields_data on User {
               # ...
             }
-          `
-        }
+          `,
+        },
       ],
       configOptions: {
         schema: [
@@ -448,6 +448,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             try {
               name = name.replace(requiredPattern, (originalString, ...args) => {
                 const groups = args.at(-1);
+                // eslint-disable-next-line no-unreachable-loop -- expected
                 for (const [styleName, value] of Object.entries(groups)) {
                   if (!(styleName in StyleToRegex)) {
                     throw new Error('Invalid case style in `requiredPatterns` option');
