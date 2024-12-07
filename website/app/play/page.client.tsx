@@ -48,7 +48,7 @@ function useSetterSearchParams(
 
   const handleChange = useCallback((value: string) => {
     router.push(pathname + createQueryString(searchParams, paramKey, value));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
 
   return [searchParams.get(paramKey) ?? defaultValue, handleChange];
 }

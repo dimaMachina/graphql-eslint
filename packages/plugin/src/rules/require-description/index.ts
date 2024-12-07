@@ -1,4 +1,5 @@
 import { ASTKindToNode, Kind, TokenKind } from 'graphql';
+import { FromSchema } from 'json-schema-to-ts';
 import { getRootTypeNames } from '@graphql-tools/utils';
 import { GraphQLESTreeNode } from '../../estree-converter/index.js';
 import { GraphQLESLintRule, ValueOf } from '../../types.js';
@@ -26,6 +27,24 @@ type AllowedKind = (typeof ALLOWED_KINDS)[number];
 type AllowedKindToNode = Pick<ASTKindToNode, AllowedKind>;
 type SelectorNode = GraphQLESTreeNode<ValueOf<AllowedKindToNode>>;
 
+const entries: Record<AllowedKind, { type: 'boolean'; description: string }> = Object.create(null);
+
+for (const kind of [...ALLOWED_KINDS].sort()) {
+  let description = `> [!NOTE]
+>
+> Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
+  if (kind === Kind.OPERATION_DEFINITION) {
+    description += [
+      '',
+      '',
+      '> [!WARNING]',
+      '>',
+      '> You must use only comment syntax `#` and not description syntax `"""` or `"`.',
+    ].join('\n');
+  }
+  entries[kind] = { type: 'boolean', description };
+}
+
 const schema = {
   type: 'array',
   minItems: 1,
@@ -49,37 +68,12 @@ const schema = {
         ...ARRAY_DEFAULT_OPTIONS,
         description: ['Ignore specific selectors', eslintSelectorsTip].join('\n'),
       },
-      ...Object.fromEntries(
-        [...ALLOWED_KINDS].sort().map(kind => {
-          let description = `> [!NOTE]
->
-> Read more about this kind on [spec.graphql.org](https://spec.graphql.org/October2021/#${kind}).`;
-          if (kind === Kind.OPERATION_DEFINITION) {
-            description += [
-              '',
-              '',
-              '> [!WARNING]',
-              '>',
-              '> You must use only comment syntax `#` and not description syntax `"""` or `"`.',
-            ].join('\n');
-          }
-          return [kind, { type: 'boolean', description }];
-        }),
-      ),
+      ...entries,
     },
   },
 } as const;
 
-// TODO try import { FromSchema } from 'json-schema-to-ts';
-export type RuleOptions = [
-  {
-    [key in AllowedKind]?: boolean;
-  } & {
-    types?: true;
-    rootField?: true;
-    ignoredSelectors?: string[];
-  },
-];
+export type RuleOptions = FromSchema<typeof schema>;
 
 export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {

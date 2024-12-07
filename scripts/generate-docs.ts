@@ -28,6 +28,9 @@ type Column = {
   align: 'center' | 'right';
 };
 
+// @ts-expect-error -- Extend RegExp with a custom toJSON method to print RegEx in examples
+RegExp.prototype.toJSON = RegExp.prototype.toString;
+
 function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]): string {
   const headerRow: string[] = [];
   const alignRow: ('-:' | '-' | ':-:')[] = [];
