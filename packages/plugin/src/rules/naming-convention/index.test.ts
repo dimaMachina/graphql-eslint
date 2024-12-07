@@ -237,6 +237,24 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         },
       ],
     },
+    {
+      name: 'custom case',
+      options: [
+        { FragmentDefinition: { style: 'PascalCase', requiredPattern: /_(?<snake_case_typeName>.+?)$/ } },
+      ],
+      code: /* GraphQL */ `
+        fragment UserProfileFields_user on User {
+          id
+          name
+          email
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'type User',
+        },
+      },
+    },
   ],
   invalid: [
     {
@@ -536,13 +554,13 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       errors: 2,
     },
     {
-      name: 'requiredPatterns',
+      name: 'requiredPattern',
       code: 'type Test { enabled: Boolean! }',
       options: [
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
             style: 'camelCase',
-            requiredPatterns: [/^(is|has)/],
+            requiredPattern: /^(is|has)/,
           },
         },
       ],

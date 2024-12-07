@@ -338,6 +338,8 @@ Properties of the `asObject` object:
 
 ### `style` (enum)
 
+One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
+
 This element must be one of the following enum values:
 
 - `camelCase`
@@ -362,18 +364,9 @@ Additional restrictions:
 - Minimum items: `1`
 - Unique items: `true`
 
-### `requiredPatterns` (array)
+### `requiredPattern` (object)
 
 Should be of instance of `RegEx`
-
-The object is an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-Additional restrictions:
-
-- Minimum items: `1`
-- Unique items: `true`
 
 ### `forbiddenPrefixes` (array)
 
@@ -408,7 +401,7 @@ Additional restrictions:
 > [!WARNING]
 >
 > This option is deprecated and will be removed in the next major release. Use
-> [`requiredPatterns`](#requiredpatterns-array) instead.
+> [`requiredPattern`](#requiredpattern-object) instead.
 
 The object is an array with all elements of the type `string`.
 
@@ -422,7 +415,7 @@ Additional restrictions:
 > [!WARNING]
 >
 > This option is deprecated and will be removed in the next major release. Use
-> [`requiredPatterns`](#requiredpatterns-array) instead.
+> [`requiredPattern`](#requiredpattern-object) instead.
 
 The object is an array with all elements of the type `string`.
 

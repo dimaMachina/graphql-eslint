@@ -1973,7 +1973,7 @@ exports[`naming-convention > invalid > operations-recommended config 1`] = `
     13 |         fragment Test on Test { id }
 `;
 
-exports[`naming-convention > invalid > requiredPatterns 1`] = `
+exports[`naming-convention > invalid > requiredPattern 1`] = `
 #### ⌨️ Code
 
       1 | type Test { enabled: Boolean! }
@@ -1983,16 +1983,14 @@ exports[`naming-convention > invalid > requiredPatterns 1`] = `
     {
       "FieldDefinition[gqlType.gqlType.name.value=Boolean]": {
         "style": "camelCase",
-        "requiredPatterns": [
-          "/^(is|has)/"
-        ]
+        "requiredPattern": "/^(is|has)/"
       }
     }
 
 #### ❌ Error
 
     > 1 | type Test { enabled: Boolean! }
-        |             ^^^^^^^ Field "enabled" should contain the required pattern: ^(is|has)
+        |             ^^^^^^^ Field "enabled" should contain the required pattern: /^(is|has)/
 `;
 
 exports[`naming-convention > invalid > schema-recommended config 1`] = `
