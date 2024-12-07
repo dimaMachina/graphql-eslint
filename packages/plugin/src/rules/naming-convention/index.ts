@@ -184,7 +184,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Incorrect',
-          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }],
+          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: [/(^fragment)|(fragment$)/i] } }],
           code: /* GraphQL */ `
             fragment UserFragment on User {
               # ...
@@ -211,7 +211,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
         {
           title: 'Correct',
-          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }],
+          usage: [{ FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: [/(^fragment)|(fragment$)/i] } }],
           code: /* GraphQL */ `
             fragment UserFields on User {
               # ...
@@ -314,28 +314,22 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
               forbiddenSuffixes: ['Query'],
             },
             'FieldDefinition[parent.name.value=Mutation]': {
-              forbiddenPrefixes: ['mutation'],
-              forbiddenSuffixes: ['Mutation'],
+              forbiddenPatterns: [/(^mutation)|(mutation$)/i],
             },
             'FieldDefinition[parent.name.value=Subscription]': {
-              forbiddenPrefixes: ['subscription'],
-              forbiddenSuffixes: ['Subscription'],
+              forbiddenPatterns: [/(^subscription)|(subscription$)/i],
             },
             'EnumTypeDefinition,EnumTypeExtension': {
-              forbiddenPrefixes: ['Enum'],
-              forbiddenSuffixes: ['Enum'],
+              forbiddenPatterns: [/(^enum)|(enum$)/i],
             },
             'InterfaceTypeDefinition,InterfaceTypeExtension': {
-              forbiddenPrefixes: ['Interface'],
-              forbiddenSuffixes: ['Interface'],
+              forbiddenPatterns: [/(^interface)|(interface$)/i],
             },
             'UnionTypeDefinition,UnionTypeExtension': {
-              forbiddenPrefixes: ['Union'],
-              forbiddenSuffixes: ['Union'],
+              forbiddenPatterns: [/(^union)|(union$)/i],
             },
             'ObjectTypeDefinition,ObjectTypeExtension': {
-              forbiddenPrefixes: ['Type'],
-              forbiddenSuffixes: ['Type'],
+              forbiddenPatterns: [/(^type)|(type$)/i],
             },
           },
         ],
@@ -349,8 +343,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             },
             FragmentDefinition: {
               style: 'PascalCase',
-              forbiddenPrefixes: ['Fragment'],
-              forbiddenSuffixes: ['Fragment'],
+              forbiddenPatterns: [/(^fragment)|(fragment$)/i],
             },
           },
         ],
