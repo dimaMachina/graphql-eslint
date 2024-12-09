@@ -1,3 +1,5 @@
+// @ts-check
+
 export const rule = {
   create(context) {
     return {
