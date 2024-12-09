@@ -19,10 +19,14 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('my-rule', rule, {
   valid: [
-    { code: 'query bar { foo }' }
+    {
+      name: 'should work',
+      code: 'query bar { foo }'
+    }
   ],
   invalid: [
     {
+      name: 'should fail',
       code: '{ foo }',
       errors: [{ message: 'Oops, name is required!' }]
     }
