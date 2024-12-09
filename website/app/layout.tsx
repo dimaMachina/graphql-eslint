@@ -59,7 +59,7 @@ const RootLayout: FC<{
             icon: <GitHubIcon />,
             children: 'GitHub',
           },
-        ]
+        ],
       }}
     >
       {children}

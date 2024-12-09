@@ -35,7 +35,7 @@ type user {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: ['/fragment$/i'] } }]
 
 fragment UserFragment on User {
   # ...
@@ -45,7 +45,7 @@ fragment UserFragment on User {
 ### Incorrect
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPatterns: ['/^get/i'] } }]
 
 type Query {
   getUsers: [User!]!
@@ -65,7 +65,7 @@ type User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenSuffixes: ['Fragment'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', forbiddenPatterns: ['/fragment$/i'] } }]
 
 fragment UserFields on User {
   # ...
@@ -75,7 +75,7 @@ fragment UserFields on User {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPrefixes: ['get'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[parent.name.value=Query]': { forbiddenPatterns: ['/^get/i'] } }]
 
 type Query {
   users: [User!]!
@@ -97,7 +97,7 @@ type Product {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.name.value=Boolean]': { style: 'camelCase', requiredPrefixes: ['is', 'has'] }, 'FieldDefinition[gqlType.gqlType.name.value=Boolean]': { style: 'camelCase', requiredPrefixes: ['is', 'has'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.name.value=Boolean]': { style: 'camelCase', requiredPattern: '/^(is|has)/' }, 'FieldDefinition[gqlType.gqlType.name.value=Boolean]': { style: 'camelCase', requiredPattern: '/^(is|has)/' } }]
 
 type Product {
   isBackordered: Boolean
@@ -109,12 +109,27 @@ type Product {
 ### Correct
 
 ```graphql
-# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': { style: 'camelCase', requiredSuffixes: ['SensitiveSecret'] } }]
+# eslint @graphql-eslint/naming-convention: ['error', { 'FieldDefinition[gqlType.gqlType.name.value=SensitiveSecret]': { style: 'camelCase', requiredPattern: '/SensitiveSecret$/' } }]
 
 scalar SensitiveSecret
 
 type Account {
   accountSensitiveSecret: SensitiveSecret!
+}
+```
+
+### Correct (Relay fragment convention `<module_name>_<property_name>`)
+
+```graphql
+# eslint @graphql-eslint/naming-convention: ['error', { FragmentDefinition: { style: 'PascalCase', requiredPattern: '/_(?<camelCase>.+?)$/' } }]
+
+# schema
+type User {
+  # ...
+}
+# operations
+fragment UserFields_data on User {
+  # ...
 }
 ```
 
@@ -338,6 +353,8 @@ Properties of the `asObject` object:
 
 ### `style` (enum)
 
+One of: `camelCase`, `PascalCase`, `snake_case`, `UPPER_CASE`
+
 This element must be one of the following enum values:
 
 - `camelCase`
@@ -362,18 +379,9 @@ Additional restrictions:
 - Minimum items: `1`
 - Unique items: `true`
 
-### `requiredPatterns` (array)
+### `requiredPattern` (object)
 
 Should be of instance of `RegEx`
-
-The object is an array with all elements of the type `object`.
-
-The array object has the following properties:
-
-Additional restrictions:
-
-- Minimum items: `1`
-- Unique items: `true`
 
 ### `forbiddenPrefixes` (array)
 
@@ -408,7 +416,7 @@ Additional restrictions:
 > [!WARNING]
 >
 > This option is deprecated and will be removed in the next major release. Use
-> [`requiredPatterns`](#requiredpatterns-array) instead.
+> [`requiredPattern`](#requiredpattern-object) instead.
 
 The object is an array with all elements of the type `string`.
 
@@ -422,7 +430,7 @@ Additional restrictions:
 > [!WARNING]
 >
 > This option is deprecated and will be removed in the next major release. Use
-> [`requiredPatterns`](#requiredpatterns-array) instead.
+> [`requiredPattern`](#requiredpattern-object) instead.
 
 The object is an array with all elements of the type `string`.
 

@@ -237,6 +237,48 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         },
       ],
     },
+    {
+      name: 'requiredPattern with case style in prefix',
+      options: [
+        {
+          FragmentDefinition: {
+            style: 'PascalCase',
+            requiredPattern: /^(?<camelCase>.+?)_/,
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        fragment myUser_UserProfileFields on User {
+          id
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'type User',
+        },
+      },
+    },
+    {
+      name: 'requiredPattern with case style in suffix',
+      options: [
+        {
+          FragmentDefinition: {
+            style: 'PascalCase',
+            requiredPattern: /_(?<snake_case>.+?)$/,
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        fragment UserProfileFields_my_user on User {
+          id
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'type User',
+        },
+      },
+    },
   ],
   invalid: [
     {
@@ -446,15 +488,42 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       `,
       options: (rule.meta.docs!.configOptions as any).operations,
       errors: [
-        { message: 'Query "TestQuery" should not have "Query" suffix' },
-        { message: 'Query "QueryTest" should not have "Query" prefix' },
-        { message: 'Query "GetQuery" should not have "Get" prefix' },
-        { message: 'Mutation "TestMutation" should not have "Mutation" suffix' },
-        { message: 'Mutation "MutationTest" should not have "Mutation" prefix' },
-        { message: 'Subscription "TestSubscription" should not have "Subscription" suffix' },
-        { message: 'Subscription "SubscriptionTest" should not have "Subscription" prefix' },
-        { message: 'Fragment "TestFragment" should not have "Fragment" suffix' },
-        { message: 'Fragment "FragmentTest" should not have "Fragment" prefix' },
+        {
+          message:
+            'Query "TestQuery" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"',
+        },
+        {
+          message:
+            'Query "QueryTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Query "GetQuery" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Mutation "TestMutation" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"',
+        },
+        {
+          message:
+            'Mutation "MutationTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Subscription "TestSubscription" should not contain the forbidden pattern "/(query|mutation|subscription)$/i"',
+        },
+        {
+          message:
+            'Subscription "SubscriptionTest" should not contain the forbidden pattern "/^(query|mutation|subscription|get)/i"',
+        },
+        {
+          message:
+            'Fragment "TestFragment" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"',
+        },
+        {
+          message:
+            'Fragment "FragmentTest" should not contain the forbidden pattern "/(^fragment)|(fragment$)/i"',
+        },
       ],
     },
     {
@@ -536,16 +605,38 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
       errors: 2,
     },
     {
-      name: 'requiredPatterns',
+      name: 'requiredPattern',
       code: 'type Test { enabled: Boolean! }',
       options: [
         {
           'FieldDefinition[gqlType.gqlType.name.value=Boolean]': {
             style: 'camelCase',
-            requiredPatterns: [/^(is|has)/],
+            requiredPattern: /^(is|has)/,
           },
         },
       ],
+      errors: 1,
+    },
+    {
+      name: 'requiredPattern with case style in suffix',
+      options: [
+        {
+          FragmentDefinition: {
+            style: 'PascalCase',
+            requiredPattern: /_(?<camelCase>.+?)$/,
+          },
+        },
+      ],
+      code: /* GraphQL */ `
+        fragment UserProfileFields on User {
+          id
+        }
+      `,
+      parserOptions: {
+        graphQLConfig: {
+          schema: 'type User',
+        },
+      },
       errors: 1,
     },
   ],
