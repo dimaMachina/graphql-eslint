@@ -3,7 +3,7 @@
 /** @type {import("@graphql-eslint/eslint-plugin").GraphQLESLintRule} */
 export const rule = {
   meta: {
-    schema: []
+    schema: [],
   },
   create(context) {
     return {
