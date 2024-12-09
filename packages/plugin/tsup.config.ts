@@ -81,7 +81,7 @@ export default defineConfig([
   {
     ...opts,
     entry: {
-      'browser': 'src/index.ts',
+      browser: 'src/index.ts',
     },
     outDir: 'dist',
     dts: false,
