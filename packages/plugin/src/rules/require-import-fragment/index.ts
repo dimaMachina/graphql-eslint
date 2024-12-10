@@ -11,7 +11,7 @@ export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description: 'Require fragments to be imported via an import expression.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [

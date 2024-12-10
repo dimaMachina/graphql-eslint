@@ -33,7 +33,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description:
         'Limit the complexity of the GraphQL operations solely by their depth. Based on [graphql-depth-limit](https://npmjs.com/package/graphql-depth-limit).',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,

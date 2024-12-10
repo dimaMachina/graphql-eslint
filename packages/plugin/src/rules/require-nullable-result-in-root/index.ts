@@ -10,7 +10,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: 'Require nullable fields in root types.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,

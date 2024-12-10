@@ -14,7 +14,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description:
         'Enforces users to avoid using the type name in a field name while defining your schema.',
       recommended: true,

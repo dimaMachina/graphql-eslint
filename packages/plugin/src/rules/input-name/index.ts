@@ -62,7 +62,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     docs: {
       description:
         'Require mutation argument to be always called "input" and input type to be called Mutation name + "Input".\nUsing the same name for all input parameters will make your schemas easier to consume and more predictable. Using the same name as mutation for InputType will make it easier to find mutations that InputType belongs to.',
-      category: 'Schema',
+      category: 'schema',
       url: 'https://the-guild.dev/graphql/eslint/rules/input-name',
       examples: [
         {

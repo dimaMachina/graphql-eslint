@@ -118,7 +118,7 @@ export const rule: GraphQLESLintRule = {
     },
     docs: {
       description: 'Requires all types to be reachable at some level by root level fields.',
-      category: 'Schema',
+      category: 'schema',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,
       examples: [

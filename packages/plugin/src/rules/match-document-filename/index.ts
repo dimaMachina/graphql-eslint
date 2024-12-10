@@ -70,7 +70,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description:
         'This rule allows you to enforce that the file name should match the operation name.',
       url: 'https://the-guild.dev/graphql/eslint/rules/match-document-filename',

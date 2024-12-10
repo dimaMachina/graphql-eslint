@@ -30,7 +30,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
   meta: {
     type: 'problem',
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: [
         'Set of rules to follow Relay specification for Arguments.',
         '',

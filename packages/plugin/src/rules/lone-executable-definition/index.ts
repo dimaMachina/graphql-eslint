@@ -37,7 +37,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description:
         'Require queries, mutations, subscriptions or fragments to be located in separate files.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,

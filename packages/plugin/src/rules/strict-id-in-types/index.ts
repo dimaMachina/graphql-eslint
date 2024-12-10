@@ -54,7 +54,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     docs: {
       description:
         'Requires output types to have one unique identifier unless they do not have a logical one. Exceptions can be used to ignore output types that do not have unique identifiers.',
-      category: 'Schema',
+      category: 'schema',
       recommended: true,
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,

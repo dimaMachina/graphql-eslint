@@ -9,7 +9,7 @@ export const rule: GraphQLESLintRule = {
     hasSuggestions: true,
     docs: {
       url: 'https://the-guild.dev/graphql/eslint/rules/unique-enum-value-names',
-      category: 'Schema',
+      category: 'schema',
       recommended: true,
       description: `A GraphQL enum type is only valid if all its values are uniquely named.
 > This rule disallows case-insensitive enum values duplicates too.`,

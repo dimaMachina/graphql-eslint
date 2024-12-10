@@ -10,7 +10,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description:
         'Avoid scalar result type on mutation type to make sure to return a valid state.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
