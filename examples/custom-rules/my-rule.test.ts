@@ -9,6 +9,7 @@ const ruleTester = new RuleTester({
       graphQLConfig: {
         // Optionally, your schema, your rule could have access to it
         // schema: '...',
+        //
         // Optionally, your operations, your rule could have access to them
         // documents: '...'
       },
