@@ -10,7 +10,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description:
         'Require name for your GraphQL operations. This is useful since most GraphQL client libraries are using the operation name for caching purposes.',
       recommended: true,
@@ -58,6 +58,7 @@ export const rule: GraphQLESLintRule = {
           suggest: [
             {
               desc: `Rename to \`${suggestedName}\``,
+              // @ts-expect-error -- fixme
               fix(fixer) {
                 const sourceCode = context.getSourceCode();
                 const hasQueryKeyword =

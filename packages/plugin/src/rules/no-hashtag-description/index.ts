@@ -17,7 +17,7 @@ export const rule: GraphQLESLintRule = {
     docs: {
       description:
         'Requires to use `"""` or `"` for adding a GraphQL description instead of `#`.\nAllows to use hashtag for comments, as long as it\'s not attached to an AST definition.',
-      category: 'Schema',
+      category: 'schema',
       url: 'https://the-guild.dev/graphql/eslint/rules/no-hashtag-description',
       examples: [
         {
@@ -97,9 +97,10 @@ export const rule: GraphQLESLintRule = {
                 },
                 suggest: ['"""', '"'].map(descriptionSyntax => ({
                   desc: `Replace with \`${descriptionSyntax}\` description syntax`,
+                  // @ts-expect-error -- fixme
                   fix: fixer =>
                     fixer.replaceTextRange(
-                      [token.start, token.end] as [number, number],
+                      [token.start, token.end],
                       [descriptionSyntax, value.trim(), descriptionSyntax].join(''),
                     ),
                 })),

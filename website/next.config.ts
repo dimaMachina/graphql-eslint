@@ -26,10 +26,6 @@ export default withGuildDocs({
       esquery: require.resolve('esquery'),
       // fixes for @eslint/eslintrc TypeError: __webpack_require__(...).pathToFileURL is not a function
       eslint: require.resolve('eslint').replace(/api\.js$/, `linter${path.sep}index.js`),
-      '@graphql-eslint/eslint-plugin': require
-        .resolve('@graphql-eslint/eslint-plugin')
-        .replace(`cjs${path.sep}index.js`, 'browser.js'),
-
       // fixes Cannot use GraphQLNonNull "Boolean!" from another module or realm.
       'graphql/utilities/valueFromASTUntyped.js': require.resolve(
         'graphql/utilities/valueFromASTUntyped',

@@ -1,8 +1,11 @@
-import { AST, Linter, Rule } from 'eslint';
-import * as ESTree from 'estree';
+import {
+  // AST,
+  Linter,
+  Rule,
+} from 'eslint';
+// import * as ESTree from 'estree';
 import { ASTKindToNode, GraphQLSchema } from 'graphql';
 import { IGraphQLConfig } from 'graphql-config';
-import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESTreeNode } from './estree-converter/index.js';
 import { SiblingOperations } from './siblings.js';
 
@@ -24,28 +27,27 @@ export type GraphQLESLintParseResult = Linter.ESLintParseResult & {
   services: ParserServices;
 };
 
-type Location = AST.SourceLocation | ESTree.Position;
+// type Location = AST.SourceLocation | ESTree.Position;
 
-type ReportDescriptorLocation = { loc: Location } | { node: { loc: Location } };
+type ReportDescriptorLocation = any; // { loc: Location } | { node: { loc: Location } };
 export type ReportDescriptor = ReportDescriptorLocation &
   Rule.ReportDescriptorMessage &
   Rule.ReportDescriptorOptions;
 
 export type GraphQLESLintRuleContext<Options = any[]> = Omit<
   Rule.RuleContext,
-  'options' | 'parserServices' | 'report'
+  'options' | 'report'
 > & {
   options: Options;
-  parserServices: ParserServices;
   report(descriptor: ReportDescriptor): void;
 };
 
-export type CategoryType = 'Operations' | 'Schema';
+export type CategoryType = 'schema' | 'operations' | 'schema-and-operations';
 
 type RuleMetaDataDocs = Required<Rule.RuleMetaData>['docs'];
 
 export type RuleDocsInfo<T> = Omit<RuleMetaDataDocs, 'category' | 'suggestion'> & {
-  category: CategoryType | CategoryType[];
+  category?: string;
   requiresSchema?: true;
   requiresSiblings?: true;
   examples?: {
@@ -67,9 +69,8 @@ export type GraphQLESLintRuleListener<WithTypeInfo extends boolean = false> = Re
 };
 
 export type GraphQLESLintRule<Options = [], WithTypeInfo extends boolean = false> = {
-  meta: Omit<Rule.RuleMetaData, 'docs' | 'schema'> & {
+  meta?: Omit<Rule.RuleMetaData, 'docs'> & {
     docs?: RuleDocsInfo<Options>;
-    schema: Readonly<JSONSchema> | [];
   };
   create(context: GraphQLESLintRuleContext<Options>): GraphQLESLintRuleListener<WithTypeInfo>;
 };

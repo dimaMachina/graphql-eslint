@@ -11,9 +11,10 @@
     "pnpm": ">=9.0.6"
   },
   "scripts": {
-    "build": "turbo run build --filter=!website && attw --pack packages/plugin/dist",
+    "build": "turbo run build --filter=!website && attw --pack packages/plugin/dist --exclude-entrypoints programmatic",
     "ci:lint": "pnpm lint --output-file eslint_report.json --format json",
     "create-rule": "tsx scripts/create-rule.ts",
+    "dev": "turbo run dev --filter=!website",
     "generate:configs": "tsx scripts/generate-configs.ts",
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --cache .",
     "lint:prettier": "prettier --ignore-path .gitignore --ignore-path .prettierignore --cache --check .",
@@ -28,7 +29,6 @@
     "@arethetypeswrong/cli": "^0.17.0",
     "@changesets/changelog-github": "0.5.0",
     "@changesets/cli": "2.27.10",
-    "@graphql-tools/utils": "10.6.2",
     "@theguild/eslint-config": "0.13.2",
     "@theguild/prettier-config": "3.0.0",
     "@types/dedent": "0.7.2",

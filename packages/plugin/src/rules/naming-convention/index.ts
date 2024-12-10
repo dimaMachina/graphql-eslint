@@ -169,7 +169,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     type: 'suggestion',
     docs: {
       description: 'Require names to follow specified conventions.',
-      category: ['Schema', 'Operations'],
+      category: 'schema-and-operations',
       recommended: true,
       url: 'https://the-guild.dev/graphql/eslint/rules/naming-convention',
       examples: [
@@ -365,6 +365,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       },
     },
     hasSuggestions: true,
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -387,7 +388,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         message,
         suggest: suggestedNames.map(suggestedName => ({
           desc: `Rename to \`${suggestedName}\``,
-          fix: fixer => fixer.replaceText(node as any, suggestedName),
+          // @ts-expect-error -- fixme
+          fix: fixer => fixer.replaceText(node, suggestedName),
         })),
       });
     }

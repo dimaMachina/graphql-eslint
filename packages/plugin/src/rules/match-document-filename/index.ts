@@ -70,7 +70,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description:
         'This rule allows you to enforce that the file name should match the operation name.',
       url: 'https://the-guild.dev/graphql/eslint/rules/match-document-filename',
@@ -179,6 +179,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         'File extension "{{ fileExtension }}" don\'t match extension "{{ expectedFileExtension }}"',
       [MATCH_STYLE]: 'Unexpected filename "{{ filename }}". Rename it to "{{ expectedFilename }}"',
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {

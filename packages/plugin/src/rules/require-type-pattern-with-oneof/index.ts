@@ -9,7 +9,7 @@ export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: 'Enforce types with `@oneOf` directive have `error` and `ok` fields.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [

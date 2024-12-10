@@ -78,7 +78,7 @@ export type RuleOptions = FromSchema<typeof schema>;
 export const rule: GraphQLESLintRule<RuleOptions> = {
   meta: {
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: 'Enforce descriptions in type definitions and operations.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [
@@ -171,6 +171,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     messages: {
       [RULE_ID]: 'Description is required for {{ nodeName }}',
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {

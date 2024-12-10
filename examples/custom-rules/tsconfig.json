@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "node16",
+    "declaration": false,
+    "noEmit": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": ["ESNext", "dom"],
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["dist"]
+}

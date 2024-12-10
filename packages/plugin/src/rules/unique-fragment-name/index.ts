@@ -35,7 +35,6 @@ export const checkNode = (
           .map(f => `\t${relative(CWD, f.filePath.replace(VIRTUAL_DOCUMENT_REGEX, ''))}`)
           .join('\n'),
       },
-      // @ts-expect-error name will exist
       node: node.name,
     });
   }
@@ -45,7 +44,7 @@ export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description: 'Enforce unique fragment names across your project.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSiblings: true,

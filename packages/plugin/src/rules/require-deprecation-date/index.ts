@@ -32,7 +32,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description:
         'Require deletion date on `@deprecated` directive. Suggest removing deprecated things after deprecated date.',
       url: 'https://the-guild.dev/graphql/eslint/rules/require-deprecation-date',
@@ -132,6 +132,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             suggest: [
               {
                 desc: `Remove \`${nodeName}\``,
+                // @ts-expect-error -- fixme
                 fix: fixer => fixer.remove(parent),
               },
             ],

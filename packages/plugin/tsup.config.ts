@@ -81,10 +81,10 @@ export default defineConfig([
   {
     ...opts,
     entry: {
-      browser: 'src/index.ts',
+      programmatic: 'src/index.ts',
     },
     outDir: 'dist',
-    dts: false,
+    dts: true,
     bundle: true,
     env: {
       ...opts.env,

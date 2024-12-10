@@ -50,10 +50,11 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
       ],
       description: 'Require all comments to follow the same style (either block or inline).',
-      category: 'Schema',
+      category: 'schema',
       url: 'https://the-guild.dev/graphql/eslint/rules/description-style',
       recommended: true,
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -71,6 +72,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           suggest: [
             {
               desc: `Change to ${isBlock ? 'block' : 'inline'} style description`,
+              // @ts-expect-error -- fixme
               fix(fixer) {
                 const sourceCode = context.getSourceCode();
                 const originalText = sourceCode.getText(node as any);

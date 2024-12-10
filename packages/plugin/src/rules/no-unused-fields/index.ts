@@ -146,7 +146,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     },
     docs: {
       description: 'Requires all fields to be used at some level by siblings operations.',
-      category: 'Schema',
+      category: 'schema',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSiblings: true,
       requiresSchema: true,
@@ -236,6 +236,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           suggest: [
             {
               desc: `Remove \`${fieldName}\` field`,
+              // @ts-expect-error -- fixme
               fix(fixer) {
                 const sourceCode = context.getSourceCode() as any;
                 const tokenBefore = sourceCode.getTokenBefore(node);

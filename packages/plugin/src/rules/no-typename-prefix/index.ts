@@ -14,7 +14,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description:
         'Enforces users to avoid using the type name in a field name while defining your schema.',
       recommended: true,
@@ -71,9 +71,10 @@ export const rule: GraphQLESLintRule = {
               suggest: [
                 {
                   desc: `Remove \`${fieldName.slice(0, typeName.length)}\` prefix`,
+                  // @ts-expect-error -- fixme
                   fix: fixer =>
                     fixer.replaceText(
-                      field.name as any,
+                      field.name,
                       fieldName.replace(new RegExp(`^${typeName}`, 'i'), ''),
                     ),
                 },

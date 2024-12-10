@@ -11,7 +11,7 @@ export const rule: GraphQLESLintRule = {
   meta: {
     type: 'suggestion',
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description: 'Require fragments to be imported via an import expression.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       examples: [
@@ -113,6 +113,7 @@ export const rule: GraphQLESLintRule = {
           suggest: suggestedFilePaths.map(suggestedPath => ({
             messageId: SUGGESTION_ID,
             data: { fragmentName },
+            // @ts-expect-error -- fixme
             fix: fixer =>
               fixer.insertTextBeforeRange(
                 [0, 0],

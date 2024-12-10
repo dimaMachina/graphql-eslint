@@ -6,13 +6,17 @@
   "author": "Dimitri POSTOLOV <dmytropostolov@gmail.com>",
   "private": true,
   "scripts": {
-    "lint": "eslint --cache ."
+    "lint": "eslint --cache .",
+    "test": "vitest --globals",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "graphql": "16.9.0"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "workspace:*",
-    "eslint": "9.16.0"
+    "eslint": "9.16.0",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
   }
 }

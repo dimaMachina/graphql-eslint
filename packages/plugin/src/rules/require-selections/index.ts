@@ -18,6 +18,7 @@ import { GraphQLESLintRule, OmitRecursively, ReportDescriptor } from '../../type
 import {
   ARRAY_DEFAULT_OPTIONS,
   englishJoinWords,
+  pluralize,
   requireGraphQLOperations,
   requireGraphQLSchema,
 } from '../../utils.js';
@@ -57,7 +58,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description: 'Enforce selecting specific fields when they are available on the GraphQL type.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,
@@ -114,6 +115,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
       [RULE_ID]:
         "Field{{ pluralSuffix }} {{ fieldName }} must be selected when it's available on a type.\nInclude it in your selection set{{ addition }}.",
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -251,19 +253,18 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         const fieldName = englishJoinWords(
           idNames.map(name => `\`${(parent.alias || parent.name).value}.${name}\``),
         );
-        const pluralSuffix = idNames.length > 1 ? 's' : '';
         const addition =
           checkedFragmentSpreads.size === 0
             ? ''
-            : ` or add to used fragment${
-                checkedFragmentSpreads.size > 1 ? 's' : ''
-              } ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
+            : ` or add to used fragment${pluralize(
+                checkedFragmentSpreads.size,
+              )} ${englishJoinWords([...checkedFragmentSpreads].map(name => `\`${name}\``))}`;
 
         const problem: ReportDescriptor = {
           loc,
           messageId: RULE_ID,
           data: {
-            pluralSuffix,
+            pluralSuffix: pluralize(idNames.length),
             fieldName,
             addition,
           },
@@ -273,6 +274,7 @@ export const rule: GraphQLESLintRule<RuleOptions, true> = {
         if ('type' in node) {
           problem.suggest = idNames.map(idName => ({
             desc: `Add \`${idName}\` selection`,
+            // @ts-expect-error -- fixme
             fix: fixer => {
               let insertNode = (node as any).selections[0];
               insertNode =

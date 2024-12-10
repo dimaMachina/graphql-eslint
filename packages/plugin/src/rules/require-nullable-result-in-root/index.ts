@@ -10,7 +10,7 @@ export const rule: GraphQLESLintRule = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: 'Require nullable fields in root types.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,
@@ -73,6 +73,7 @@ export const rule: GraphQLESLintRule = {
             suggest: [
               {
                 desc: `Make ${resultType} nullable`,
+                // @ts-expect-error -- fixme
                 fix(fixer) {
                   const text = sourceCode.getText(field.gqlType as any);
 

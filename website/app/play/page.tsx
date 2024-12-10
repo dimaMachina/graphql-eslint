@@ -1,7 +1,7 @@
 import { FC, Suspense } from 'react';
 import { clsx } from 'clsx';
 import { Linter } from 'eslint';
-import { parser } from '@graphql-eslint/eslint-plugin';
+import { parser } from '@graphql-eslint/eslint-plugin/programmatic';
 import { ClientPage } from './page.client';
 
 export const metadata = {

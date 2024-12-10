@@ -2,7 +2,7 @@
 
 import { FC, ReactNode, useCallback } from 'react';
 import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { ConfigName, configs, rules } from '@graphql-eslint/eslint-plugin';
+import { ConfigName, configs, rules } from '@graphql-eslint/eslint-plugin/programmatic';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
@@ -18,11 +18,11 @@ const operationsConfigs: ReadonlyArray<ConfigName> = [
 ] as const;
 
 const schemaRulesOptions = Object.entries(rules)
-  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
+  .filter(([, rule]) => asArray(rule.meta!.docs!.category).includes('Schema'))
   .map(([ruleId]) => ({ key: ruleId, name: ruleId }))
   .sort(({ key: a }, { key: b }) => a.localeCompare(b));
 const operationsRulesOptions = Object.entries(rules)
-  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Operations'))
+  .filter(([, rule]) => asArray(rule.meta!.docs!.category).includes('Operations'))
   .map(([ruleId]) => ({ key: ruleId, name: ruleId }))
   .sort(({ key: a }, { key: b }) => a.localeCompare(b));
 

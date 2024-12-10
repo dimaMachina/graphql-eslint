@@ -33,7 +33,6 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
     return readFileSync(resolve(__dirname, `../../plugin/__tests__/mocks/${path}`), 'utf8');
   }
 
-  // @ts-expect-error -- fix later
   run<Options, WithTypeInfo extends boolean = false>(
     ruleId: string,
     rule: GraphQLESLintRule<Options, WithTypeInfo>,
@@ -81,7 +80,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
           }
         }
       }
-      if (rule.meta.fixable) {
+      if (rule.meta?.fixable) {
         const pluginName = 'rule-to-test';
         const { fixed, output } = linter.verifyAndFix(
           code,

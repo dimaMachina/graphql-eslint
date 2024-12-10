@@ -30,7 +30,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: 'Disallow using root types `mutation` and/or `subscription`.',
       url: 'https://the-guild.dev/graphql/eslint/rules/no-root-type',
       requiresSchema: true,
@@ -56,6 +56,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ],
       configOptions: [{ disallow: ['mutation', 'subscription'] }],
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -85,7 +86,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           suggest: [
             {
               desc: `Remove \`${typeName}\` type`,
-              fix: fixer => fixer.remove(node.parent as any),
+              // @ts-expect-error -- fixme
+              fix: fixer => fixer.remove(node.parent),
             },
           ],
         });

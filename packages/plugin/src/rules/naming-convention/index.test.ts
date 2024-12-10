@@ -466,7 +466,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
           id: ID
         }
       `,
-      options: (rule.meta.docs!.configOptions as any).schema,
+      options: (rule.meta!.docs!.configOptions as any).schema,
       errors: 15,
     },
     {
@@ -486,7 +486,7 @@ ruleTester.run<RuleOptions>('naming-convention', rule, {
         fragment TestFragment on Test { id }
         fragment FragmentTest on Test { id }
       `,
-      options: (rule.meta.docs!.configOptions as any).operations,
+      options: (rule.meta!.docs!.configOptions as any).operations,
       errors: [
         {
           message:

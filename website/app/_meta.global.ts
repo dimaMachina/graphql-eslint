@@ -1,4 +1,4 @@
-import { rules } from '@graphql-eslint/eslint-plugin';
+import { rules } from '@graphql-eslint/eslint-plugin/programmatic';
 
 const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entries(rules)
   .sort(([a], [b]) => a.localeCompare(b))
@@ -10,9 +10,9 @@ const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entrie
     (acc, [ruleId, curr]) => {
       // @ts-expect-error -- fixme
       const { category } = curr.meta.docs;
-      if (category === 'Schema') {
+      if (category === 'schema') {
         acc.schemaRules.push(ruleId);
-      } else if (category === 'Operations') {
+      } else if (category === 'operations') {
         acc.operationsRules.push(ruleId);
       } else {
         // @ts-expect-error -- fixme
