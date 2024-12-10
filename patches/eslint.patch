@@ -45,7 +45,7 @@ index 756490e1df3d97ef47cc42f120ecda8813ec9f73..00a7146fe0be6574528cc053f69e454b
              }
 -
 +            // used by @theguild/eslint-rule-tester
-+            if (!process.cwd().includes('/examples/')) item.assertMessages(item, messages)
++            if (!process.cwd().includes('examples')) item.assertMessages(item, messages)
              assertASTDidntChange(result.beforeAST, result.afterAST);
          }
  

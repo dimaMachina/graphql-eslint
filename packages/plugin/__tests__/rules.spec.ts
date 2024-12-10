@@ -21,7 +21,6 @@ export function getESLintWithConfig(
           } satisfies ParserOptionsForTests,
         },
         plugins: {
-          // @ts-expect-error -- TODO fixme
           '@graphql-eslint': { rules },
         },
         rules: config.rules,
