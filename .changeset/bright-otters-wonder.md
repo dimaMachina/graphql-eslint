@@ -2,7 +2,7 @@
 '@graphql-eslint/eslint-plugin': patch
 ---
 
-fix type error:
+fix TypeScript error
 
 ```
 Type 'RuleContext' is not assignable to type 'GraphQLESLintRuleContext<[]>'.
