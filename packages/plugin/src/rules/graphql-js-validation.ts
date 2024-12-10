@@ -1,4 +1,4 @@
-import { AST } from 'eslint';
+import { AST, Rule } from "eslint";
 import {
   ASTVisitor,
   DirectiveNode,
@@ -46,7 +46,6 @@ import {
 } from 'graphql/validation/index.js';
 import { validateSDL } from 'graphql/validation/validate.js';
 import { SDLValidationRule } from 'graphql/validation/ValidationContext.js';
-import { JSONSchema } from 'json-schema-to-ts';
 import { GraphQLESLintRule, GraphQLESLintRuleContext, RuleDocsInfo } from '../types.js';
 import {
   ARRAY_DEFAULT_OPTIONS,
@@ -197,7 +196,7 @@ const validationToRule = (
     ruleId: string;
     rule: GraphQLJSRule;
     getDocumentNode?: GetDocumentNode;
-    schema?: JSONSchema | [];
+    schema?: Rule.RuleMetaData['schema'];
     hasDidYouMeanSuggestions?: boolean;
   },
   docs: RuleDocsInfo<any>,

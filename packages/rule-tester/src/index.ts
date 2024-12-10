@@ -80,7 +80,7 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
           }
         }
       }
-      if (rule.meta.fixable) {
+      if (rule.meta?.fixable) {
         const pluginName = 'rule-to-test';
         const { fixed, output } = linter.verifyAndFix(
           code,

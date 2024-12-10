@@ -28,9 +28,6 @@ importers:
       '@changesets/cli':
         specifier: 2.27.10
         version: 2.27.10
-      '@graphql-tools/utils':
-        specifier: 10.6.2
-        version: 10.6.2(graphql@16.9.0)
       '@theguild/eslint-config':
         specifier: 0.13.2
         version: 0.13.2(eslint@9.16.0(patch_hash=ev7ndsq3rvzgmf6ig6be3zznqa)(jiti@2.4.1))(typescript@5.7.2)
@@ -343,6 +340,9 @@ importers:
       '@graphql-eslint/eslint-plugin':
         specifier: workspace:*
         version: link:../packages/plugin/dist
+      '@graphql-tools/utils':
+        specifier: 10.6.2
+        version: 10.6.2(graphql@16.9.0)
       '@monaco-editor/react':
         specifier: ^4.6.0
         version: 4.6.0(monaco-editor@0.52.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
