@@ -30,7 +30,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Schema',
+      category: 'schema',
       description: 'Disallow using root types `mutation` and/or `subscription`.',
       url: 'https://the-guild.dev/graphql/eslint/rules/no-root-type',
       requiresSchema: true,

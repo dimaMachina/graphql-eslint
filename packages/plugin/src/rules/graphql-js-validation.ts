@@ -246,7 +246,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: ExecutableDefinitionsRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document is only valid for execution if all definitions are either operation or fragment definitions.',
       requiresSchema: true,
@@ -259,7 +259,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       hasDidYouMeanSuggestions: true,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document is only valid if all fields selected are defined by the parent type, or are an allowed meta field such as `__typename`.',
       requiresSchema: true,
@@ -271,7 +271,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: FragmentsOnCompositeTypesRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'Fragments use a type condition to determine if they apply, since fragments can only be spread into a composite type (object, interface, or union), the type condition must also be a composite type.',
       requiresSchema: true,
@@ -284,7 +284,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       hasDidYouMeanSuggestions: true,
     },
     {
-      category: ['Schema', 'Operations'],
+      category: 'schema-and-operations',
       description:
         'A GraphQL field is only valid if all supplied arguments are defined by that field.',
       requiresSchema: true,
@@ -326,7 +326,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       },
     },
     {
-      category: ['Schema', 'Operations'],
+      category: "schema-and-operations",
       description:
         'A GraphQL document is only valid if all `@directive`s are known by the schema and legally positioned.',
       requiresSchema: true,
@@ -352,7 +352,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       getDocumentNode: handleMissingFragments,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document is only valid if all `...Fragment` fragment spreads refer to fragments defined in the same document.',
       requiresSchema: true,
@@ -412,7 +412,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       hasDidYouMeanSuggestions: true,
     },
     {
-      category: ['Schema', 'Operations'],
+      category: 'schema-and-operations',
       description:
         'A GraphQL document is only valid if referenced types (specifically variable definitions and fragment conditions) are defined by the type schema.',
       requiresSchema: true,
@@ -424,7 +424,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: LoneAnonymousOperationRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document that contains an anonymous operation (the `query` short-hand) is only valid if it contains only that one operation definition.',
       requiresSchema: true,
@@ -436,7 +436,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: LoneSchemaDefinitionRule,
     },
     {
-      category: 'Schema',
+      category: 'schema',
       description: 'A GraphQL document is only valid if it contains only one schema definition.',
     },
   ),
@@ -446,7 +446,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: NoFragmentCyclesRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL fragment is only valid when it does not have cycles in fragments usage.',
       requiresSchema: true,
@@ -459,7 +459,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       getDocumentNode: handleMissingFragments,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL operation is only valid if all variables encountered, both directly and via fragment spreads, are defined by that operation.',
       requiresSchema: true,
@@ -512,7 +512,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       },
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document is only valid if all fragment definitions are spread within operations, or spread within other fragments spread within operations.',
       requiresSchema: true,
@@ -526,7 +526,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       getDocumentNode: handleMissingFragments,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL operation is only valid if all variables defined by an operation are used, either directly or within a spread fragment.',
       requiresSchema: true,
@@ -539,7 +539,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: OverlappingFieldsCanBeMergedRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A selection set is only valid if all fields (including spreading any fragments) either correspond to distinct response names or can be merged without ambiguity.',
       requiresSchema: true,
@@ -551,7 +551,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: PossibleFragmentSpreadsRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A fragment spread is only valid if the type condition could ever possibly be true: if there is a non-empty intersection of the possible parent types, and possible types which pass the type condition.',
       requiresSchema: true,
@@ -564,7 +564,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       hasDidYouMeanSuggestions: true,
     },
     {
-      category: 'Schema',
+      category: 'schema',
       description: 'A type extension is only valid if the type is defined and has the same kind.',
       recommended: true,
       requiresSchema: true,
@@ -576,7 +576,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: ProvidedRequiredArgumentsRule,
     },
     {
-      category: ['Schema', 'Operations'],
+      category: 'schema-and-operations',
       description:
         'A field or directive is only valid if all required (non-null without a default value) field arguments have been provided.',
       requiresSchema: true,
@@ -589,7 +589,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       hasDidYouMeanSuggestions: true,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document is valid only if all leaf fields (fields without sub selections) are of scalar or enum types.',
       requiresSchema: true,
@@ -601,7 +601,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: SingleFieldSubscriptionsRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description: 'A GraphQL subscription is valid only if it contains a single root field.',
       requiresSchema: true,
     },
@@ -612,7 +612,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueArgumentNamesRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL field or directive is only valid if all supplied arguments are uniquely named.',
       requiresSchema: true,
@@ -624,7 +624,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueDirectiveNamesRule,
     },
     {
-      category: 'Schema',
+      category: 'schema',
       description: 'A GraphQL document is only valid if all defined directives have unique names.',
     },
   ),
@@ -634,7 +634,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueDirectivesPerLocationRule,
     },
     {
-      category: ['Schema', 'Operations'],
+      category: "schema-and-operations",
       description:
         'A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.',
       requiresSchema: true,
@@ -646,7 +646,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueFieldDefinitionNamesRule,
     },
     {
-      category: 'Schema',
+      category: 'schema',
       description: 'A GraphQL complex type is only valid if all its fields are uniquely named.',
     },
   ),
@@ -656,7 +656,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueInputFieldNamesRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL input object value is only valid if all supplied fields are uniquely named.',
     },
@@ -667,7 +667,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueOperationTypesRule,
     },
     {
-      category: 'Schema',
+      category: 'schema',
       description: 'A GraphQL document is only valid if it has only one type per operation.',
     },
   ),
@@ -677,7 +677,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueTypeNamesRule,
     },
     {
-      category: 'Schema',
+      category: 'schema',
       description: 'A GraphQL document is only valid if all defined types have unique names.',
     },
   ),
@@ -687,7 +687,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueVariableNamesRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description: 'A GraphQL operation is only valid if all its variables are uniquely named.',
       requiresSchema: true,
     },
@@ -699,7 +699,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       hasDidYouMeanSuggestions: true,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL document is only valid if all value literals are of the type expected at their position.',
       requiresSchema: true,
@@ -711,7 +711,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: VariablesAreInputTypesRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description:
         'A GraphQL operation is only valid if all the variables it defines are of input types (scalar, enum, or input object).',
       requiresSchema: true,
@@ -723,7 +723,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: VariablesInAllowedPositionRule,
     },
     {
-      category: 'Operations',
+      category: 'operations',
       description: 'Variables passed to field arguments conform to type.',
       requiresSchema: true,
     },

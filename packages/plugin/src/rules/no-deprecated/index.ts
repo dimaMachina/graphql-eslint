@@ -10,7 +10,7 @@ export const rule: GraphQLESLintRule<[], true> = {
     type: 'suggestion',
     hasSuggestions: true,
     docs: {
-      category: 'Operations',
+      category: 'operations',
       description: 'Enforce that deprecated fields or enum values are not in use by operations.',
       url: `https://the-guild.dev/graphql/eslint/rules/${RULE_ID}`,
       requiresSchema: true,

@@ -10,9 +10,9 @@ const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entrie
     (acc, [ruleId, curr]) => {
       // @ts-expect-error -- fixme
       const { category } = curr.meta.docs;
-      if (category === 'Schema') {
+      if (category === 'schema') {
         acc.schemaRules.push(ruleId);
-      } else if (category === 'Operations') {
+      } else if (category === 'operations') {
         acc.operationsRules.push(ruleId);
       } else {
         // @ts-expect-error -- fixme

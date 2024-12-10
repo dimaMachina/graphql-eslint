@@ -33,7 +33,6 @@ export class RuleTester<ParserOptions> extends ESLintRuleTester {
     return readFileSync(resolve(__dirname, `../../plugin/__tests__/mocks/${path}`), 'utf8');
   }
 
-  // @ts-expect-error -- fix later
   run<Options, WithTypeInfo extends boolean = false>(
     ruleId: string,
     rule: GraphQLESLintRule<Options, WithTypeInfo>,

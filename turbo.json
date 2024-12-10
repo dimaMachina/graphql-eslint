@@ -10,13 +10,13 @@
     "dev": {
       "dependsOn": [
         // Run `dev` in workspaces I depend on first
-        "^dev"
+        "^build"
       ],
       // Never cache anything (including logs) emitted by a `dev` task
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "typecheck": {
+      "outputs": ["dist/**"],
       "dependsOn": [
         // Run `build` in workspaces I depend on first
         "^build"
