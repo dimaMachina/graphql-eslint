@@ -56,6 +56,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ],
       configOptions: [{ disallow: ['mutation', 'subscription'] }],
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -85,7 +86,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           suggest: [
             {
               desc: `Remove \`${typeName}\` type`,
-              fix: fixer => fixer.remove(node.parent as any),
+              // @ts-expect-error -- fixme
+              fix: fixer => fixer.remove(node.parent),
             },
           ],
         });

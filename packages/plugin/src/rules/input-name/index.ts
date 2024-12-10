@@ -122,7 +122,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             suggest: [
               {
                 desc: 'Rename to `input`',
-                fix: fixer => fixer.replaceText(node as any, 'input'),
+                // @ts-expect-error -- fixme
+                fix: fixer => fixer.replaceText(node, 'input'),
               },
             ],
           });
@@ -159,7 +160,8 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
               suggest: [
                 {
                   desc: `Rename to \`${mutationName}\``,
-                  fix: fixer => fixer.replaceText(node as any, mutationName),
+                  // @ts-expect-error -- fixme
+                  fix: fixer => fixer.replaceText(node, mutationName),
                 },
               ],
             });

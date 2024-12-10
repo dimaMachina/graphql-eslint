@@ -77,6 +77,7 @@ export const rule: GraphQLESLintRule = {
           suggest: [
             {
               desc: `Remove \`${fieldName}\` ${parent.type.toLowerCase()}`,
+              // @ts-expect-error -- fixme
               fix(fixer) {
                 return fixer.remove(
                   (parent.type === Kind.VARIABLE ? parent.parent : parent) as any,

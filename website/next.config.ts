@@ -28,7 +28,7 @@ export default withGuildDocs({
       eslint: require.resolve('eslint').replace(/api\.js$/, `linter${path.sep}index.js`),
       '@graphql-eslint/eslint-plugin': require
         .resolve('@graphql-eslint/eslint-plugin')
-        .replace(`cjs${path.sep}index.js`, 'browser.js'),
+        .replace(`cjs${path.sep}index.js`, 'programmatic.js'),
 
       // fixes Cannot use GraphQLNonNull "Boolean!" from another module or realm.
       'graphql/utilities/valueFromASTUntyped.js': require.resolve(

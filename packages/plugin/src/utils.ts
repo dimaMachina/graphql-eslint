@@ -199,3 +199,7 @@ export const eslintSelectorsTip = `> [!TIP]
 >
 > These fields are defined by ESLint [\`selectors\`](https://eslint.org/docs/developer-guide/selectors).
 > Paste or drop code into the editor in [ASTExplorer](https://astexplorer.net) and inspect the generated AST to compose your selector.`;
+
+export function pluralize(size: number) {
+  return size > 1 ? 's' : '';
+}

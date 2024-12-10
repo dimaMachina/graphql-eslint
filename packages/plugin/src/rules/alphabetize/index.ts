@@ -314,6 +314,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
             currNode: displayNodeName(currNode),
             prevNode: prevName ? displayNodeName(prevNode) : lowerCase(prevNode.kind),
           },
+          // @ts-expect-error -- fixme
           *fix(fixer) {
             const prevRange = getRangeWithComments(prevNode);
             const currRange = getRangeWithComments(currNode);

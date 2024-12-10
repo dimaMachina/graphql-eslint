@@ -66,6 +66,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     messages: {
       [RULE_ID]: '{{name}} should be in a separate file.',
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {

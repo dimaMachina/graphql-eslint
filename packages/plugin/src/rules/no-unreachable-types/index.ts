@@ -175,7 +175,8 @@ export const rule: GraphQLESLintRule = {
             suggest: [
               {
                 desc: `Remove \`${typeName}\``,
-                fix: fixer => fixer.remove(node.parent as any),
+                // @ts-expect-error -- fixme
+                fix: fixer => fixer.remove(node.parent),
               },
             ],
           });

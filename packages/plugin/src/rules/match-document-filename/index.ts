@@ -175,10 +175,10 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       ],
     },
     messages: {
-      [MATCH_EXTENSION]:
-        'File extension "{{ fileExtension }}" don\'t match extension "{{ expectedFileExtension }}"',
+      [MATCH_EXTENSION]: `File extension "{{ fileExtension }}" don't match extension "{{ expectedFileExtension }}"`,
       [MATCH_STYLE]: 'Unexpected filename "{{ filename }}". Rename it to "{{ expectedFilename }}"',
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {

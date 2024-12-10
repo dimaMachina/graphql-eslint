@@ -71,9 +71,10 @@ export const rule: GraphQLESLintRule = {
               suggest: [
                 {
                   desc: `Remove \`${fieldName.slice(0, typeName.length)}\` prefix`,
+                  // @ts-expect-error -- fixme
                   fix: fixer =>
                     fixer.replaceText(
-                      field.name as any,
+                      field.name,
                       fieldName.replace(new RegExp(`^${typeName}`, 'i'), ''),
                     ),
                 },

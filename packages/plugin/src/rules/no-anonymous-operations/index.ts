@@ -58,6 +58,7 @@ export const rule: GraphQLESLintRule = {
           suggest: [
             {
               desc: `Rename to \`${suggestedName}\``,
+              // @ts-expect-error -- fixme
               fix(fixer) {
                 const sourceCode = context.getSourceCode();
                 const hasQueryKeyword =

@@ -97,9 +97,10 @@ export const rule: GraphQLESLintRule = {
                 },
                 suggest: ['"""', '"'].map(descriptionSyntax => ({
                   desc: `Replace with \`${descriptionSyntax}\` description syntax`,
+                  // @ts-expect-error -- fixme
                   fix: fixer =>
                     fixer.replaceTextRange(
-                      [token.start, token.end] as [number, number],
+                      [token.start, token.end],
                       [descriptionSyntax, value.trim(), descriptionSyntax].join(''),
                     ),
                 })),

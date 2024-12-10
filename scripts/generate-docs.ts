@@ -53,7 +53,7 @@ function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]
 const MARKDOWN_LINK_RE = /\[(.*?)]\(.*\)/;
 
 function getCategories(category: string): string[] {
-  return category === 'schema-and-operations' ? ['schema', 'operations'] : [category]
+  return category === 'schema-and-operations' ? ['schema', 'operations'] : [category];
 }
 
 async function generateDocs(): Promise<void> {
@@ -74,7 +74,7 @@ async function generateDocs(): Promise<void> {
     if (deprecated) {
       blocks.push('- ❗ DEPRECATED ❗');
     }
-    const categories = getCategories(docs.category)
+    const categories = getCategories(docs.category);
     if (docs.recommended) {
       const configNames = categories.map(
         category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`,
