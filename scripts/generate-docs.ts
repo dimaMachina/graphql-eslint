@@ -5,7 +5,6 @@ import dedent from 'dedent';
 // @ts-expect-error -- ignore types
 import md from 'json-schema-to-markdown';
 import prettier from 'prettier';
-import { asArray } from '@graphql-tools/utils';
 import { rules } from '../packages/plugin/src/index.js';
 
 const BR = '';
@@ -53,6 +52,10 @@ function printMarkdownTable(columns: (Column | string)[], dataSource: string[][]
 
 const MARKDOWN_LINK_RE = /\[(.*?)]\(.*\)/;
 
+function getCategories(category: string): string[] {
+  return category === 'schema-and-operations' ? ['schema', 'operations'] : [category]
+}
+
 async function generateDocs(): Promise<void> {
   const prettierConfigMd = await prettier.resolveConfig('./README.md');
 
@@ -71,7 +74,7 @@ async function generateDocs(): Promise<void> {
     if (deprecated) {
       blocks.push('- ❗ DEPRECATED ❗');
     }
-    const categories = asArray(docs.category);
+    const categories = getCategories(docs.category)
     if (docs.recommended) {
       const configNames = categories.map(
         category => `"plugin:@graphql-eslint/${category.toLowerCase()}-recommended"`,
@@ -179,11 +182,11 @@ async function generateDocs(): Promise<void> {
       } else if (!docs.isDisabledForAllConfig) {
         config = docs.recommended ? 'recommended' : 'all';
       }
-      const categoryIcons = asArray(docs.category).map(item => {
-        if (item === 'Schema') {
+      const categoryIcons = getCategories(docs.category).map(item => {
+        if (item === 'schema') {
           return Icon.SCHEMA;
         }
-        if (item === 'Operations') {
+        if (item === 'operations') {
           return Icon.OPERATIONS;
         }
         return '';
