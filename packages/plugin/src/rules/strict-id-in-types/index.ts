@@ -6,6 +6,7 @@ import {
   ARRAY_DEFAULT_OPTIONS,
   displayNodeName,
   englishJoinWords,
+  pluralize,
   requireGraphQLSchema,
 } from '../../utils.js';
 
@@ -120,6 +121,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         },
       ],
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -172,13 +174,11 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
         // Some clients allow multiple fields to be used. If more people need this,
         // we can extend this rule later.
         if (validIds?.length !== 1) {
-          const pluralNamesSuffix = options.acceptedIdNames.length > 1 ? 's' : '';
-          const pluralTypesSuffix = options.acceptedIdTypes.length > 1 ? 's' : '';
           context.report({
             node: node.name,
             message: `${displayNodeName(node)} must have exactly one non-nullable unique identifier.
-Accepted name${pluralNamesSuffix}: ${englishJoinWords(options.acceptedIdNames)}.
-Accepted type${pluralTypesSuffix}: ${englishJoinWords(options.acceptedIdTypes)}.`,
+Accepted name${pluralize(options.acceptedIdNames.length)}: ${englishJoinWords(options.acceptedIdNames)}.
+Accepted type${pluralize(options.acceptedIdTypes.length)}: ${englishJoinWords(options.acceptedIdTypes)}.`,
           });
         }
       },

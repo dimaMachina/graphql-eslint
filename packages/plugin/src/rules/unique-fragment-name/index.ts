@@ -35,7 +35,6 @@ export const checkNode = (
           .map(f => `\t${relative(CWD, f.filePath.replace(VIRTUAL_DOCUMENT_REGEX, ''))}`)
           .join('\n'),
       },
-      // @ts-expect-error name will exist
       node: node.name,
     });
   }

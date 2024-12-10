@@ -1,4 +1,4 @@
-import { AST, Rule } from "eslint";
+import { AST, Rule } from 'eslint';
 import {
   ASTVisitor,
   DirectiveNode,
@@ -108,6 +108,7 @@ function validateDocument({
               const { name } = match.groups!;
               return {
                 desc: `Rename to \`${name}\``,
+                // @ts-expect-error -- fixme
                 fix: fixer => fixer.replaceText(token!, name),
               };
             })
@@ -325,7 +326,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       },
     },
     {
-      category: "schema-and-operations",
+      category: 'schema-and-operations',
       description:
         'A GraphQL document is only valid if all `@directive`s are known by the schema and legally positioned.',
       requiresSchema: true,
@@ -633,7 +634,7 @@ export const GRAPHQL_JS_VALIDATIONS: Record<string, GraphQLESLintRule> = Object.
       rule: UniqueDirectivesPerLocationRule,
     },
     {
-      category: "schema-and-operations",
+      category: 'schema-and-operations',
       description:
         'A GraphQL document is only valid if all non-repeatable directives at a given location are uniquely named.',
       requiresSchema: true,

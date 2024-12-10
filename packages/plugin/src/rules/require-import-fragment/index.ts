@@ -113,6 +113,7 @@ export const rule: GraphQLESLintRule = {
           suggest: suggestedFilePaths.map(suggestedPath => ({
             messageId: SUGGESTION_ID,
             data: { fragmentName },
+            // @ts-expect-error -- fixme
             fix: fixer =>
               fixer.insertTextBeforeRange(
                 [0, 0],

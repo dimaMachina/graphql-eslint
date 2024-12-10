@@ -57,7 +57,8 @@ export const rule: GraphQLESLintRule = {
             suggest: [
               {
                 desc: `Remove \`${enumName}\` enum value`,
-                fix: fixer => fixer.remove(duplicate as any),
+                // @ts-expect-error -- fixme
+                fix: fixer => fixer.remove(duplicate),
               },
             ],
           });

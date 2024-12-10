@@ -171,6 +171,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
     messages: {
       [RULE_ID]: 'Description is required for {{ nodeName }}',
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {

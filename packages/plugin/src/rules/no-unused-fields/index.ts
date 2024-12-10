@@ -236,6 +236,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
           suggest: [
             {
               desc: `Remove \`${fieldName}\` field`,
+              // @ts-expect-error -- fixme
               fix(fixer) {
                 const sourceCode = context.getSourceCode() as any;
                 const tokenBefore = sourceCode.getTokenBefore(node);

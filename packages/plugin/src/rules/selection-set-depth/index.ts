@@ -82,6 +82,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
       recommended: true,
       configOptions: [{ maxDepth: 7 }],
     },
+    // @ts-expect-error -- fixme
     schema,
   },
   create(context) {
@@ -130,6 +131,7 @@ export const rule: GraphQLESLintRule<RuleOptions> = {
                   suggest: [
                     {
                       desc: 'Remove selections',
+                      // @ts-expect-error -- fixme
                       fix(fixer) {
                         const sourceCode = context.getSourceCode();
                         const foundNode = sourceCode.getNodeByRangeIndex(token.range[0]) as any;

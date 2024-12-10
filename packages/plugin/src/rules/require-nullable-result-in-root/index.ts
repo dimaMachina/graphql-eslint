@@ -73,6 +73,7 @@ export const rule: GraphQLESLintRule = {
             suggest: [
               {
                 desc: `Make ${resultType} nullable`,
+                // @ts-expect-error -- fixme
                 fix(fixer) {
                   const text = sourceCode.getText(field.gqlType as any);
 
