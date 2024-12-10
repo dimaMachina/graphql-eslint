@@ -1,4 +1,4 @@
-import { rules } from '@graphql-eslint/eslint-plugin';
+import { rules } from '@graphql-eslint/eslint-plugin/programmatic';
 
 const { schemaRules, operationsRules, schemaAndOperationsRules } = Object.entries(rules)
   .sort(([a], [b]) => a.localeCompare(b))

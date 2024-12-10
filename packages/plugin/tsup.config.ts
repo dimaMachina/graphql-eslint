@@ -84,7 +84,7 @@ export default defineConfig([
       programmatic: 'src/index.ts',
     },
     outDir: 'dist',
-    dts: false,
+    dts: true,
     bundle: true,
     env: {
       ...opts.env,

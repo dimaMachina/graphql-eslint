@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import { Linter } from 'eslint';
 import uniqWith from 'lodash.uniqwith';
-import { parser, rules } from '@graphql-eslint/eslint-plugin';
+import { parser, rules } from '@graphql-eslint/eslint-plugin/programmatic';
 import Editor, { OnMount } from '@monaco-editor/react';
 import { Anchor, Callout, InformationCircleIcon, useTheme } from '@theguild/components';
 

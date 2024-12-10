@@ -2,7 +2,7 @@
 
 import { FC, ReactNode, useCallback } from 'react';
 import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { ConfigName, configs, rules } from '@graphql-eslint/eslint-plugin';
+import { ConfigName, configs, rules } from '@graphql-eslint/eslint-plugin/programmatic';
 import { asArray } from '@graphql-tools/utils';
 import { GraphQLEditor } from './graphql-editor';
 import { Select } from './select';
