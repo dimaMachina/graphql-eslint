@@ -37,7 +37,6 @@ export function GraphQLEditor({
     {
       files: ['*.graphql'],
       plugins: {
-        // @ts-expect-error -- fixme
         '@graphql-eslint': { rules },
       },
       languageOptions: {

@@ -18,11 +18,11 @@ const operationsConfigs: ReadonlyArray<ConfigName> = [
 ] as const;
 
 const schemaRulesOptions = Object.entries(rules)
-  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Schema'))
+  .filter(([, rule]) => asArray(rule.meta!.docs!.category).includes('Schema'))
   .map(([ruleId]) => ({ key: ruleId, name: ruleId }))
   .sort(({ key: a }, { key: b }) => a.localeCompare(b));
 const operationsRulesOptions = Object.entries(rules)
-  .filter(([, rule]) => asArray(rule.meta.docs!.category).includes('Operations'))
+  .filter(([, rule]) => asArray(rule.meta!.docs!.category).includes('Operations'))
   .map(([ruleId]) => ({ key: ruleId, name: ruleId }))
   .sort(({ key: a }, { key: b }) => a.localeCompare(b));
 
