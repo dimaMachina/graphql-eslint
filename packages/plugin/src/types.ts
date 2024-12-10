@@ -1,6 +1,8 @@
 import {
   // AST,
-  Linter, Rule } from 'eslint';
+  Linter,
+  Rule,
+} from 'eslint';
 // import * as ESTree from 'estree';
 import { ASTKindToNode, GraphQLSchema } from 'graphql';
 import { IGraphQLConfig } from 'graphql-config';
